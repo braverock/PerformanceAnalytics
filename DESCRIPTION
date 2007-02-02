@@ -1,0 +1,9 @@
+Package: PortfolioAnalytics
+Type: Package
+Title: Econometric tools for examining performance of portfolios, instruments, and non-normal distributions.
+Version: 1.0
+Date: 2007-02-01
+Author: Peter Carl, Brian G. Peterson
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: More about what it does (maybe more than one line)
+License: GPL
