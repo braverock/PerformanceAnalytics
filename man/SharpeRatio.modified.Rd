@@ -1,5 +1,6 @@
 \name{SharpeRatio.modified}
 \alias{SharpeRatio.modified}
+\alias{modSharpe}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
@@ -27,7 +28,7 @@ SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

@@ -32,6 +32,14 @@ function (R, rf = 0, p=0.95, scale=1)
     #return((mean(x) - rf)/sd(x))
 }
 
+`modSharpe` <-
+function (R, rf = 0, p=0.95, scale=1)
+{ # @author Brian G. Peterson
+
+    # wrapper for SharpeRatio.modified
+    return(SharpeRatio.modified(R, rf, p, scale))
+}
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
@@ -40,8 +48,12 @@ function (R, rf = 0, p=0.95, scale=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: SharpeRatio.modified.R,v 1.2 2007-02-05 19:08:22 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################
