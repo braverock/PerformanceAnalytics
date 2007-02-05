@@ -1,4 +1,4 @@
-Package: PortfolioAnalytics
+Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for examining performance of portfolios, instruments, and non-normal distributions.
 Version: 1.0

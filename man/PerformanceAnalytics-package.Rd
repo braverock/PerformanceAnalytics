@@ -1,6 +1,6 @@
-\name{PortfolioAnalytics-package}
-\alias{PortfolioAnalytics-package}
-\alias{PortfolioAnalytics}
+\name{PerformanceAnalytics-package}
+\alias{PerformanceAnalytics-package}
+\alias{PerformanceAnalytics}
 \docType{package}
 \title{
 What the package does (short line)
@@ -12,7 +12,7 @@ More about what it does (maybe more than one line)
 }
 \details{
 \tabular{ll}{
-Package: \tab PortfolioAnalytics\cr
+Package: \tab PerformanceAnalytics\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2007-02-01\cr
