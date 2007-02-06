@@ -1,7 +1,9 @@
 `findDrawdowns` <-
 function (R)
-{ # @author Sankalp Upadhyay
-  # @author modified for drawdowns by Peter Carl
+{ # @author Peter Carl
+
+    # modified with permission from function by Sankalp Upadhyay
+    # <sankalp.upadhyay [at] gmail [dot] com>
 
     # DESCRIPTION:
     # Find the drawdowns in a timeseries.
@@ -63,8 +65,12 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: findDrawdowns.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: findDrawdowns.R,v 1.2 2007-02-06 11:58:42 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################

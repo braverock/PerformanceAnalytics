@@ -3,6 +3,9 @@ function (runs) {
     # sortDrawdowns(findDrawdowns(caduceus.ts@Data[,1]))
     # gives the drawdowns in order of worst to best
 
+    # modified with permission from function by Sankalp Upadhyay
+    # <sankalp.upadhyay [at] gmail [dot] com>
+
     for (i in 1:length(runs$return)) {
         for (j in 1:(length(runs$return)-1)) {
             if (runs$return[j] > runs$return[j+1]) {
@@ -32,8 +35,12 @@ function (runs) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: sortDrawdowns.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: sortDrawdowns.R,v 1.2 2007-02-06 11:58:42 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################
