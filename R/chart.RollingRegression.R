@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (R, Rb, n, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+function (R, Rb, n, rf = 0, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -19,6 +19,7 @@ function (R, Rb, n, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attr
     # @todo: These should be excess returns
     x = checkDataMatrix(R)
     y = checkDataMatrix(Rb)
+    rf = checkDataVector(rf)
 
     xcolname = colnames(x)
     colnames = colnames(y)
@@ -27,7 +28,10 @@ function (R, Rb, n, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attr
     rows = nrow(x)
     rownames = rownames(x)
 
-    data = as.data.frame(cbind(x[,1],y),row.names = rownames)
+    x.excess = x - rf
+    y.excess = y - rf
+
+    data = as.data.frame(cbind(x.excess[,1],y.excess),row.names = rownames)
 
     if(attribute == "Beta")
         slot = 2
@@ -72,10 +76,13 @@ function (R, Rb, n, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attr
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.3 2007-02-07 14:58:36 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
