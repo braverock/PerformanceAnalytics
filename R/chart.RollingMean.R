@@ -47,8 +47,12 @@ function (R, n=12, xaxis = TRUE, ylim = NULL, main = paste("Rolling ",n,"-Month 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: chart.RollingMean.R,v 1.2 2007-02-07 13:24:49 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged files to version control
+# Bug 890
+#
 ###############################################################################

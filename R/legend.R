@@ -425,8 +425,12 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: legend.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: legend.R,v 1.2 2007-02-07 13:24:49 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged files to version control
+# Bug 890
+#
 ###############################################################################

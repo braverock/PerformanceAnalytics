@@ -27,12 +27,16 @@ function (R, Rb, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ActivePremium.R,v 1.2 2007-02-07 13:20:52 brian Exp $
+# $Id: ActivePremium.R,v 1.3 2007-02-07 13:24:49 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:20:52  brian
+# - change Ri to Rb for benchmark asset to standardize parameters
+# - change indexReturns.vec to benchmarkReturns.vec for consistency
+#
 # Revision 1.1  2007/02/02 19:06:14  brian
-# - Initial Revision of packaged foles to version control
+# - Initial Revision of packaged files to version control
 # Bug 890
 #
 ###############################################################################
