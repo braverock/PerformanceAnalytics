@@ -10,11 +10,11 @@ Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), outp
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{L}{ ~~Describe \code{L} here~~ }
-  \item{method}{ ~~Describe \code{method} here~~ }
-  \item{output}{ ~~Describe \code{output} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{method}{ one of: simple, interp, binomial, blackscholes }
+  \item{output}{ one of: point (in time), or full (distribution of Omega) }
+  \item{rf}{ risk free rate, in same period as your returns }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -28,7 +28,7 @@ Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), outp
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

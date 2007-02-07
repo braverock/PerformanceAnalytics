@@ -10,9 +10,9 @@ StdDev.annualized(R, rf = 0, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{rf}{ risk free rate, in same period as your returns }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

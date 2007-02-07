@@ -10,9 +10,9 @@ chart.Boxplot(R, horizontal = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{horizontal}{ ~~Describe \code{horizontal} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -24,8 +24,8 @@ chart.Boxplot(R, horizontal = TRUE, ...)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

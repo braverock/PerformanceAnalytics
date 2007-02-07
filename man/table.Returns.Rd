@@ -10,7 +10,7 @@ table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{column}{ ~~Describe \code{column} here~~ }
   \item{digits}{ ~~Describe \code{digits} here~~ }
   \item{as.perc}{ ~~Describe \code{as.perc} here~~ }
@@ -25,8 +25,8 @@ table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

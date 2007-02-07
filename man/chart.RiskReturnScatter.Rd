@@ -10,8 +10,8 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ ~~Describe \code{main} here~~ }
   \item{add.names}{ ~~Describe \code{add.names} here~~ }
   \item{xlab}{ ~~Describe \code{xlab} here~~ }
@@ -19,13 +19,13 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{method}{ ~~Describe \code{method} here~~ }
   \item{add.sharpe}{ ~~Describe \code{add.sharpe} here~~ }
   \item{add.boxplots}{ ~~Describe \code{add.boxplots} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
   \item{darken}{ ~~Describe \code{darken} here~~ }
   \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
   \item{xlim}{ ~~Describe \code{xlim} here~~ }
   \item{ylim}{ ~~Describe \code{ylim} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -37,8 +37,8 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

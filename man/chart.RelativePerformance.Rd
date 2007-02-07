@@ -10,14 +10,14 @@ chart.RelativePerformance(R, Rb, main = "Relative Performance", xaxis = TRUE, co
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{Rb}{ ~~Describe \code{Rb} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
   \item{main}{ ~~Describe \code{main} here~~ }
   \item{xaxis}{ ~~Describe \code{xaxis} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
   \item{ylog}{ ~~Describe \code{ylog} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -29,8 +29,8 @@ chart.RelativePerformance(R, Rb, main = "Relative Performance", xaxis = TRUE, co
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

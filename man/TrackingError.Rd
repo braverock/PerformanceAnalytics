@@ -6,13 +6,13 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-TrackingError(R, Ri, scale = 12)
+TrackingError(R, Rb, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -26,7 +26,7 @@ TrackingError(R, Ri, scale = 12)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -37,11 +37,11 @@ TrackingError(R, Ri, scale = 12)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (R, Ri, scale = 12)
+function (R, Rb, scale = 12)
 { # @author Peter Carl
 
     # DESCRIPTION
-    # TrackingError = sqrt(sum(assetReturns.vec - indexReturns.vec)^2 /
+    # TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 /
     #                   (length(assetReturns.vec) - 1)) * sqrt(scale)
 
     # Inputs:
@@ -49,9 +49,9 @@ function (R, Ri, scale = 12)
 
     # FUNCTION
     assetReturns.vec = checkDataVector(R)
-    indexReturns.vec = checkDataVector(Ri)
+    benchmarkReturns.vec = checkDataVector(Rb)
 
-    TrackingError = sqrt(sum(assetReturns.vec - indexReturns.vec)^2 / (length(assetReturns.vec) - 1)) * sqrt(scale)
+    TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 / (length(assetReturns.vec) - 1)) * sqrt(scale)
 
     TrackingError
 

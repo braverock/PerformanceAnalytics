@@ -10,11 +10,11 @@ rollingStat(R, period = 3, trim = TRUE, FUN, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{period}{ ~~Describe \code{period} here~~ }
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{FUN}{ ~~Describe \code{FUN} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

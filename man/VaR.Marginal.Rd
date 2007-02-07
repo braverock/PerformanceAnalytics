@@ -10,8 +10,8 @@ VaR.Marginal(R, p = 0.99, modified = TRUE, weightingvector)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{p}{ ~~Describe \code{p} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ ~~Describe \code{modified} here~~ }
   \item{weightingvector}{ ~~Describe \code{weightingvector} here~~ }
 }

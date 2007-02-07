@@ -10,7 +10,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{reference.grid}{ ~~Describe \code{reference.grid} here~~ }
   \item{xaxis}{ ~~Describe \code{xaxis} here~~ }
   \item{type}{ ~~Describe \code{type} here~~ }
@@ -27,12 +27,12 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
   \item{period.areas}{ ~~Describe \code{period.areas} here~~ }
   \item{event.color}{ ~~Describe \code{event.color} here~~ }
   \item{period.color}{ ~~Describe \code{period.color} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{pch}{ ~~Describe \code{pch} here~~ }
   \item{darken}{ ~~Describe \code{darken} here~~ }
   \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
   \item{ylog}{ ~~Describe \code{ylog} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -44,8 +44,8 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

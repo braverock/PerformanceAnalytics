@@ -12,8 +12,8 @@ table.CAPM(x, y, scale = 12, rf = 0, digits = 4)
 \arguments{
   \item{x}{ ~~Describe \code{x} here~~ }
   \item{y}{ ~~Describe \code{y} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{digits}{ ~~Describe \code{digits} here~~ }
 }
 \details{
@@ -26,8 +26,8 @@ table.CAPM(x, y, scale = 12, rf = 0, digits = 4)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~
@@ -88,22 +88,22 @@ function (x, y, scale = 12, rf = 0, digits = 4)
     # for each column in the matrix, do the following:
     for(column in 1:columns) {
 
-    indexReturns.vec = as.vector(indexes.matrix[,column])
-    indexReturns.vec.length = length(indexReturns.vec)
-    indexReturns.vec = indexReturns.vec[!is.na(indexReturns.vec)]
-    indexReturns.vec.na = indexReturns.vec.length - length(indexReturns.vec)
+    benchmarkReturns.vec = as.vector(indexes.matrix[,column])
+    benchmarkReturns.vec.length = length(benchmarkReturns.vec)
+    benchmarkReturns.vec = benchmarkReturns.vec[!is.na(benchmarkReturns.vec)]
+    benchmarkReturns.vec.na = benchmarkReturns.vec.length - length(benchmarkReturns.vec)
 
         # make these excess returns, too
-        indexExcessRet.vec = indexReturns.vec - rf
+        indexExcessRet.vec = benchmarkReturns.vec - rf
 
         # a few calculations
         model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
 
         alpha = coef(model.lm)[[1]]
         beta = coef(model.lm)[[2]]
-        htest = cor.test(assetReturns.vec, indexReturns.vec)
-        ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(indexReturns.vec, scale = scale))
-        TrackingError = sqrt(sum(assetReturns.vec - indexReturns.vec)^2/(length(assetReturns.vec)-1)) * sqrt(scale)
+        htest = cor.test(assetReturns.vec, benchmarkReturns.vec)
+        ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(benchmarkReturns.vec, scale = scale))
+        TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2/(length(assetReturns.vec)-1)) * sqrt(scale)
         treynorRatio = (Return.annualized(assetReturns.vec, scale = scale) - rf*scale)/beta
 
     z = c(

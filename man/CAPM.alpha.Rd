@@ -12,7 +12,7 @@ CAPM.alpha(x, y, rf = 0)
 \arguments{
   \item{x}{ ~~Describe \code{x} here~~ }
   \item{y}{ ~~Describe \code{y} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{rf}{ risk free rate, in same period as your returns }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -25,7 +25,7 @@ CAPM.alpha(x, y, rf = 0)
   ...
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~
@@ -56,14 +56,14 @@ function (x, y, rf = 0)
     # FUNCTION:
 
     assetReturns.vec = checkDataVector(x)
-    indexReturns.vec = checkDataVector(y)
+    benchmarkReturns.vec = checkDataVector(y)
 
-    if (length(assetReturns.vec) != length(indexReturns.vec))
+    if (length(assetReturns.vec) != length(benchmarkReturns.vec))
         stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
 
     # Make these excess returns
     assetExcessRet.vec = assetReturns.vec - rf
-    indexExcessRet.vec = indexReturns.vec - rf
+    indexExcessRet.vec = benchmarkReturns.vec - rf
 
     # regress
     model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)

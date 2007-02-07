@@ -10,8 +10,8 @@ Return.cumulative(R, geometric = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{geometric}{ ~~Describe \code{geometric} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

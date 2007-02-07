@@ -10,13 +10,13 @@ chart.Correlation.color(R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{new}{ ~~Describe \code{new} here~~ }
   \item{nrgcols}{ ~~Describe \code{nrgcols} here~~ }
   \item{labels}{ ~~Describe \code{labels} here~~ }
   \item{labcols}{ ~~Describe \code{labcols} here~~ }
   \item{title}{ ~~Describe \code{title} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -28,8 +28,8 @@ chart.Correlation.color(R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

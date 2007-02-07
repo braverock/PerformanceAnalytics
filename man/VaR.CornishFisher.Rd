@@ -13,8 +13,8 @@ VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{p}{ ~~Describe \code{p} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ ~~Describe \code{modified} here~~ }
   \item{column}{ ~~Describe \code{column} here~~ }
 }

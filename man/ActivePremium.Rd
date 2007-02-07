@@ -6,13 +6,13 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-ActivePremium(R, Ri, scale = 12)
+ActivePremium(R, Rb, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
+  \item{R}{ return vector of the portfolio }
+  \item{Rb}{ return vector of the benchmark asset }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -26,7 +26,7 @@ ActivePremium(R, Ri, scale = 12)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -37,21 +37,21 @@ ActivePremium(R, Ri, scale = 12)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (R, Ri, scale = 12)
+function (R, Rb, scale = 12)
 { # @author Peter Carl
 
     # DESCRIPTION
     # ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) -
-    #                  Return.annualized(indexReturns.vec, scale = scale) )
+    #                  Return.annualized(benchmarkReturns.vec, scale = scale) )
 
     # Inputs:
     # Outputs:
 
     # FUNCTION
     assetReturns.vec = checkDataVector(R)
-    indexReturns.vec = checkDataVector(Ri)
+    benchmarkReturns.vec = checkDataVector(Rb)
 
-    ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(indexReturns.vec, scale = scale))
+    ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(benchmarkReturns.vec, scale = scale))
 
     ActivePremium
 

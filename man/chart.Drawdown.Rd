@@ -10,10 +10,10 @@ chart.Drawdown(R, legend.loc = NULL, colorset = (1:12), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -25,8 +25,8 @@ chart.Drawdown(R, legend.loc = NULL, colorset = (1:12), ...)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

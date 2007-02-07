@@ -10,9 +10,9 @@ CoKurtosis(Ri, Ra, na.rm = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{Ra}{ ~~Describe \code{Ra} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
+  \item{Ri}{ return vector of initial portfolio }
+  \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

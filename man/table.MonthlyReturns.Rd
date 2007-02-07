@@ -10,7 +10,7 @@ table.MonthlyReturns(R, ci = 0.95, firstcolumn = 1, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{ci}{ ~~Describe \code{ci} here~~ }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
   \item{digits}{ ~~Describe \code{digits} here~~ }
@@ -25,8 +25,8 @@ table.MonthlyReturns(R, ci = 0.95, firstcolumn = 1, digits = 4)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

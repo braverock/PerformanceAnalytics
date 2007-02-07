@@ -10,7 +10,7 @@ sortDrawdowns(runs)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{runs}{ ~~Describe \code{runs} here~~ }
+  \item{runs}{ pass in runs array from findDrawdowns to be sorted }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -24,7 +24,7 @@ sortDrawdowns(runs)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

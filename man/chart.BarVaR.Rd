@@ -10,7 +10,7 @@ chart.BarVaR(R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ ~~Describe \code{n} here~~ }
   \item{risk.line}{ ~~Describe \code{risk.line} here~~ }
   \item{method}{ ~~Describe \code{method} here~~ }
@@ -23,9 +23,9 @@ chart.BarVaR(R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid 
   \item{xlim}{ ~~Describe \code{xlim} here~~ }
   \item{ylim}{ ~~Describe \code{ylim} here~~ }
   \item{lwd}{ ~~Describe \code{lwd} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
-  \item{p}{ ~~Describe \code{p} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{p}{ confidence level for calculation, default p=.99 }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -37,8 +37,8 @@ chart.BarVaR(R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid 
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

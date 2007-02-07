@@ -18,12 +18,12 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
   \item{xlab}{ ~~Describe \code{xlab} here~~ }
   \item{xlim}{ ~~Describe \code{xlim} here~~ }
   \item{ylim}{ ~~Describe \code{ylim} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
   \item{darken}{ ~~Describe \code{darken} here~~ }
   \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
   \item{ylog}{ ~~Describe \code{ylog} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -35,8 +35,8 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

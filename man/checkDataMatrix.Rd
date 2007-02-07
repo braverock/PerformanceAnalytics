@@ -11,8 +11,8 @@ checkDataMatrix(x, na.rm = FALSE, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ ~~Describe \code{x} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

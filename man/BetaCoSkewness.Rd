@@ -12,9 +12,9 @@ BetaCoSkewness(Ri, Ra, na.rm = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{Ra}{ ~~Describe \code{Ra} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
+  \item{Ri}{ return vector of initial portfolio }
+  \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -26,13 +26,19 @@ BetaCoSkewness(Ri, Ra, na.rm = FALSE)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
+\references{
+Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
+
+}
 \author{ ~~who you are~~ }
 \note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{CoSkewness}}
+    \code{\link{skewness}}
+}
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

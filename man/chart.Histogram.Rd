@@ -10,8 +10,8 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ ~~Describe \code{main} here~~ }
   \item{add.names}{ ~~Describe \code{add.names} here~~ }
   \item{xlab}{ ~~Describe \code{xlab} here~~ }
@@ -21,10 +21,10 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
   \item{add.fit}{ ~~Describe \code{add.fit} here~~ }
   \item{density.col}{ ~~Describe \code{density.col} here~~ }
   \item{fit.col}{ ~~Describe \code{fit.col} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{lwd}{ ~~Describe \code{lwd} here~~ }
   \item{xlim}{ ~~Describe \code{xlim} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -36,8 +36,8 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

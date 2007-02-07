@@ -10,9 +10,9 @@ Return.annualized(R, geometric = TRUE, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{geometric}{ ~~Describe \code{geometric} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -26,7 +26,7 @@ Return.annualized(R, geometric = TRUE, scale = 12)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

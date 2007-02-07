@@ -10,11 +10,11 @@ table.RollingPeriods(R, firstcolumn = 1, periods = subset(c(3, 6, 9, 12, 18, 24,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
   \item{periods}{ ~~Describe \code{periods} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{FUNCS}{ ~~Describe \code{FUNCS} here~~ }
   \item{digits}{ ~~Describe \code{digits} here~~ }
 }
@@ -28,8 +28,8 @@ table.RollingPeriods(R, firstcolumn = 1, periods = subset(c(3, 6, 9, 12, 18, 24,
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

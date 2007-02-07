@@ -10,13 +10,13 @@ chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
   \item{xlab}{ ~~Describe \code{xlab} here~~ }
   \item{ylab}{ ~~Describe \code{ylab} here~~ }
   \item{main}{ ~~Describe \code{main} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -28,8 +28,8 @@ chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

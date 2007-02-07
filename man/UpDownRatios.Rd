@@ -10,11 +10,11 @@ UpDownRatios(R, Rb, method = "capture", side = "up", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{Rb}{ ~~Describe \code{Rb} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
   \item{method}{ ~~Describe \code{method} here~~ }
   \item{side}{ ~~Describe \code{side} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

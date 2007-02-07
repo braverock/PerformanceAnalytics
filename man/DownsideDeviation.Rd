@@ -10,8 +10,8 @@ DownsideDeviation(R, MAR = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{MAR}{ ~~Describe \code{MAR} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -24,8 +24,8 @@ DownsideDeviation(R, MAR = 0)
   ...
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\author{ Peter Carl }
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

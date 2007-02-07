@@ -10,10 +10,10 @@ statsTable(R, metrics = c("mean", "sd"), metricsNames = c("Average Return", "Sta
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{metrics}{ ~~Describe \code{metrics} here~~ }
   \item{metricsNames}{ ~~Describe \code{metricsNames} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

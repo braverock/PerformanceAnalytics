@@ -10,13 +10,13 @@ table.DownsideRisk(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = 0.1/
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{ci}{ ~~Describe \code{ci} here~~ }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
-  \item{scale}{ ~~Describe \code{scale} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
-  \item{MAR}{ ~~Describe \code{MAR} here~~ }
-  \item{p}{ ~~Describe \code{p} here~~ }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{rf}{ risk free rate, in same period as your returns }
+  \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
+  \item{p}{ confidence level for calculation, default p=.99 }
   \item{digits}{ ~~Describe \code{digits} here~~ }
 }
 \details{
@@ -29,8 +29,8 @@ table.DownsideRisk(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = 0.1/
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

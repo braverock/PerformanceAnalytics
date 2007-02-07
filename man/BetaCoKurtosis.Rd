@@ -5,17 +5,18 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+Beta CoKurtosis is the beta of an asset to the kurtosis of an initial portfolio.  Used to determine diversification potential.
+Also called "systematic kurtosis" or "systematic cokurtosis" by several papers.
 }
 \usage{
 BetaCoKurtosis(Ri, Ra, na.rm = FALSE, method = c("moment", "excess", "fisher"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{Ra}{ ~~Describe \code{Ra} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
-  \item{method}{ ~~Describe \code{method} here~~ }
+  \item{Ri}{ return vector of initial portfolio }
+  \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{method}{ method to use when computing \code{\link{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -27,13 +28,18 @@ BetaCoKurtosis(Ri, Ra, na.rm = FALSE, method = c("moment", "excess", "fisher"))
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{
+Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre
+}
+\author{ Brian G. Peterson }
 \note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{CoKurtosis}}
+    \code{\link{kurtosis}}
+}
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

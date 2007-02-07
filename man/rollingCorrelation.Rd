@@ -14,8 +14,8 @@ rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
   \item{y}{ ~~Describe \code{y} here~~ }
   \item{n}{ ~~Describe \code{n} here~~ }
   \item{trim}{ ~~Describe \code{trim} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~

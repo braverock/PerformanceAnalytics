@@ -10,7 +10,7 @@ VaR.Beyond(R, periods = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{periods}{ ~~Describe \code{periods} here~~ }
 }
 \details{

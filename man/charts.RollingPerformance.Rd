@@ -10,13 +10,13 @@ charts.RollingPerformance(R, n = 12, rf = 0, main = NULL, trim = TRUE, event.lab
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ ~~Describe \code{n} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ ~~Describe \code{main} here~~ }
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{event.labels}{ ~~Describe \code{event.labels} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -28,8 +28,8 @@ charts.RollingPerformance(R, n = 12, rf = 0, main = NULL, trim = TRUE, event.lab
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{ ~~further notes~~ 
 
  ~Make other sections like Warning with \section{Warning }{....} ~

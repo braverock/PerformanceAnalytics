@@ -6,13 +6,12 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-moment.third(Ri, na.rm = FALSE)
+moment.third(R, na.rm = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ ~~Describe \code{Ri} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
-}
+  \item{R}{ return vector of the portfolio }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 \details{
   ~~ If necessary, more details than the description above ~~
 }
@@ -25,7 +24,7 @@ moment.third(Ri, na.rm = FALSE)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -36,7 +35,7 @@ moment.third(Ri, na.rm = FALSE)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function(Ri,na.rm=FALSE)
+function(R,na.rm=FALSE)
 { # @author Brian G. Peterson
 
     # Description:
@@ -51,15 +50,15 @@ function(Ri,na.rm=FALSE)
 
     # Setup
 
-    Ri = as.vector(Ri)
+    R = as.vector(R)
 
     if(na.rm) {
-        Ri <- Ri[!is.na(Ri)]
+        R <- R[!is.na(R)]
     }
 
     # FUNCTION:
 
-    S = (mean((Ri-mean(Ri)^3)))^(1/3)
+    S = (mean((R-mean(R)^3)))^(1/3)
 
     result = S
 

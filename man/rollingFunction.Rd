@@ -10,15 +10,15 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ ~~Describe \code{n} here~~ }
   \item{trim}{ ~~Describe \code{trim} here~~ }
-  \item{na.rm}{ ~~Describe \code{na.rm} here~~ }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
   \item{digits}{ ~~Describe \code{digits} here~~ }
-  \item{rf}{ ~~Describe \code{rf} here~~ }
+  \item{rf}{ risk free rate, in same period as your returns }
   \item{FUN}{ ~~Describe \code{FUN} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
