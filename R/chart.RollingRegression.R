@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (R, Rb, n, rf = 0, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+function (R, Rb, n = 12, rf = 0, attribute = "Beta", main = paste("Rolling ",n,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -19,7 +19,7 @@ function (R, Rb, n, rf = 0, attribute = "Beta", main = paste("Rolling ",n,"-Mont
     # @todo: These should be excess returns
     x = checkDataMatrix(R)
     y = checkDataMatrix(Rb)
-    rf = checkDataVector(rf)
+    #rf = checkDataMatrix(rf)
 
     xcolname = colnames(x)
     colnames = colnames(y)
@@ -76,10 +76,13 @@ function (R, Rb, n, rf = 0, attribute = "Beta", main = paste("Rolling ",n,"-Mont
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.3 2007-02-07 14:58:36 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.4 2007-02-07 15:45:33 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/07 14:58:36  peter
+# - added rf and calculation of excess returns
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
