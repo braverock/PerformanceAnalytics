@@ -18,14 +18,14 @@ function (x, y, rf = 0)
     # FUNCTION:
 
     assetReturns.vec = checkDataVector(x)
-    indexReturns.vec = checkDataVector(y)
+    benchmarkReturns.vec = checkDataVector(y)
 
-    if (length(assetReturns.vec) != length(indexReturns.vec))
+    if (length(assetReturns.vec) != length(benchmarkReturns.vec))
         stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
 
     # Make these excess returns
     assetExcessRet.vec = assetReturns.vec - rf
-    indexExcessRet.vec = indexReturns.vec - rf
+    indexExcessRet.vec = benchmarkReturns.vec - rf
 
     # regress
     model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
@@ -43,8 +43,12 @@ function (x, y, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.alpha.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: CAPM.alpha.R,v 1.2 2007-02-07 13:20:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################

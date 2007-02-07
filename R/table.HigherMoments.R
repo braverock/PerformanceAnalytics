@@ -45,21 +45,21 @@ function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
     # for each column in the matrix, do the following:
     for(column in 1:columns) {
 
-    indexReturns.vec = as.vector(indexes.mat[,column])
-    indexReturns.vec.length = length(indexReturns.vec)
-    indexReturns.vec = indexReturns.vec[!is.na(indexReturns.vec)]
-    indexReturns.vec.na = indexReturns.vec.length - length(indexReturns.vec)
+    benchmarkReturns.vec = as.vector(indexes.mat[,column])
+    benchmarkReturns.vec.length = length(benchmarkReturns.vec)
+    benchmarkReturns.vec = benchmarkReturns.vec[!is.na(benchmarkReturns.vec)]
+    benchmarkReturns.vec.na = benchmarkReturns.vec.length - length(benchmarkReturns.vec)
 
         # make these excess returns, too
-        indexExcessRet.vec = indexReturns.vec - rf
+        indexExcessRet.vec = benchmarkReturns.vec - rf
 
         # a few calculations
 
-    z = c(CoSkewness(assetReturns.vec, indexReturns.vec, na.rm=FALSE),
-            CoKurtosis(assetReturns.vec, indexReturns.vec, na.rm=FALSE),
-            BetaCoVariance(assetReturns.vec, indexReturns.vec, na.rm=FALSE),
-            BetaCoSkewness(assetReturns.vec, indexReturns.vec, na.rm=FALSE),
-            BetaCoKurtosis(assetReturns.vec, indexReturns.vec, na.rm=FALSE, method=method),
+    z = c(CoSkewness(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
+            CoKurtosis(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
+            BetaCoVariance(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
+            BetaCoSkewness(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
+            BetaCoKurtosis(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE, method=method),
             )
     znames = c(
             "CoSkewness",
@@ -93,8 +93,12 @@ function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: table.HigherMoments.R,v 1.2 2007-02-07 13:20:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################

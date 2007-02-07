@@ -48,22 +48,22 @@ function (x, y, scale = 12, rf = 0, digits = 4)
     # for each column in the matrix, do the following:
     for(column in 1:columns) {
 
-    indexReturns.vec = as.vector(indexes.matrix[,column])
-    indexReturns.vec.length = length(indexReturns.vec)
-    indexReturns.vec = indexReturns.vec[!is.na(indexReturns.vec)]
-    indexReturns.vec.na = indexReturns.vec.length - length(indexReturns.vec)
+    benchmarkReturns.vec = as.vector(indexes.matrix[,column])
+    benchmarkReturns.vec.length = length(benchmarkReturns.vec)
+    benchmarkReturns.vec = benchmarkReturns.vec[!is.na(benchmarkReturns.vec)]
+    benchmarkReturns.vec.na = benchmarkReturns.vec.length - length(benchmarkReturns.vec)
 
         # make these excess returns, too
-        indexExcessRet.vec = indexReturns.vec - rf
+        indexExcessRet.vec = benchmarkReturns.vec - rf
 
         # a few calculations
         model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
 
         alpha = coef(model.lm)[[1]]
         beta = coef(model.lm)[[2]]
-        htest = cor.test(assetReturns.vec, indexReturns.vec)
-        ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(indexReturns.vec, scale = scale))
-        TrackingError = sqrt(sum(assetReturns.vec - indexReturns.vec)^2/(length(assetReturns.vec)-1)) * sqrt(scale)
+        htest = cor.test(assetReturns.vec, benchmarkReturns.vec)
+        ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(benchmarkReturns.vec, scale = scale))
+        TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2/(length(assetReturns.vec)-1)) * sqrt(scale)
         treynorRatio = (Return.annualized(assetReturns.vec, scale = scale) - rf*scale)/beta
 
     z = c(
@@ -126,8 +126,12 @@ function (x, y, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.1 2007-02-02 19:06:15 brian Exp $
+# $Id: table.CAPM.R,v 1.2 2007-02-07 13:20:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/02 19:06:15  brian
+# - Initial Revision of packaged foles to version control
+# Bug 890
+#
 ###############################################################################
