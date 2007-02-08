@@ -1,14 +1,14 @@
 `CAPM.beta` <-
-function (x, y, rf = 0, digits = 4)
+function (R, Rb, rf = 0, digits = 4)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This is a wrapper for calculating a CAPM beta.
 
     # Inputs:
-    # x: vector of returns for the asset being tested
-    # y: vector of returns for the benchmark the asset is being gauged against
-    # x and y are assumed to be matching periods and NO TEST IS MADE TO CHECK
+    # R: vector of returns for the asset being tested
+    # Rb: vector of returns for the benchmark the asset is being gauged against
+    # R and Rb are assumed to be matching periods and NO TEST IS MADE TO CHECK
     # rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
 
@@ -17,8 +17,8 @@ function (x, y, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    assetReturns.vec = checkDataVector(x)
-    benchmarkReturns.vec = checkDataVector(y)
+    assetReturns.vec = checkDataVector(R)
+    benchmarkReturns.vec = checkDataVector(Rb)
 
     if (length(assetReturns.vec) != length(benchmarkReturns.vec))
         stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
@@ -43,10 +43,13 @@ function (x, y, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.3 2007-02-07 13:24:49 brian Exp $
+# $Id: CAPM.beta.R,v 1.4 2007-02-08 21:43:39 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.2  2007/02/07 13:20:52  brian
 # - change Ri to Rb for benchmark asset to standardize parameters
 # - change indexReturns.vec to benchmarkReturns.vec for consistency
