@@ -22,7 +22,7 @@ function(R,na.rm=FALSE)
 
     # FUNCTION:
 
-    K = (mean((R-mean(R)^4)))^(1/4)
+    K = (sum((R-mean(R))^4))^(1/4)
 
     result = K
     # Return Value:
@@ -37,10 +37,13 @@ function(R,na.rm=FALSE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: moment.fourth.R,v 1.3 2007-02-07 13:24:49 brian Exp $
+# $Id: moment.fourth.R,v 1.4 2007-02-08 21:38:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.2  2007/02/07 12:32:46  brian
 # - rename parameter Ri to R for consistency with other functions
 #
