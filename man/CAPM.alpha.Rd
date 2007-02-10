@@ -1,7 +1,7 @@
 \name{CAPM.alpha}
 \alias{CAPM.alpha}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate CAPM alpha }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
@@ -10,8 +10,8 @@ CAPM.alpha(R, Rb, rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{x} here~~ }
-  \item{Rb}{ ~~Describe \code{y} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
 }
 \details{
@@ -26,10 +26,7 @@ CAPM.alpha(R, Rb, rf = 0)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

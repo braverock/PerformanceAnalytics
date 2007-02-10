@@ -27,14 +27,12 @@ Maintainer: Brian G. Peterson <brian@braverock.com>
 }
 
 \references{
-~~ Literature or other references for background information ~~
+Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley 2004.
+Tsay, R. \emph{anaysis of Financial Time Series}. Wiley 2001.
+Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006.
 }
 
 \keyword{ package }
-\seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
-}
+\seealso{}
 \examples{
-~~ simple examples of the most important functions ~~
 }

@@ -6,7 +6,7 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-chart.RollingRegression(R, Rb, n, attribute = "Beta", main = paste("Rolling ", n, "-Month ", attribute, sep = ""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+chart.RollingRegression(R, Rb, n = 12, rf = 0, attribute = "Beta", main = paste("Rolling ", n, "-Month ", attribute, sep = ""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,7 +32,7 @@ chart.RollingRegression(R, Rb, n, attribute = "Beta", main = paste("Rolling ", n
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

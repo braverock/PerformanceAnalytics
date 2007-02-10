@@ -3,7 +3,7 @@
 \alias{BetaCoS}
 \alias{SystematicSkewness}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ systematic skewness of an asset to an initial portfolio }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
@@ -31,10 +31,7 @@ Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: A
 
 }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{
     \code{\link{CoSkewness}}
     \code{\link{skewness}}

@@ -1,17 +1,17 @@
-\name{moment.third}
-\alias{moment.third}
+\name{chart.RegressionDiagnostics}
+\alias{chart.RegressionDiagnostics}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-moment.third(R, na.rm = FALSE)
+chart.RegressionDiagnostics(R, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ return vector of the portfolio }
-  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -23,8 +23,8 @@ moment.third(R, na.rm = FALSE)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
@@ -33,35 +33,22 @@ moment.third(R, na.rm = FALSE)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function(R,na.rm=FALSE)
-{ # @author Brian G. Peterson
+function (R, Rb)
+{ # @author Peter Carl
 
-    # Description:
-    # The third mathematical moment of the return function.
-    # Favre and Renaldo use this as separate from skewness in developing a
-    # four-moment CAPM model
-    #
-    # as defined in:
-    # Favre, L. and Renaldo, A., October 2003
-    # How to Price Hedge Funds: From Two- to Four-Moment CAPM
-    # UBS and Edhec Business School
+x = checkDataMatrix(R)
+y = checkDataMatrix(Rb)
 
-    # Setup
+par(mfrow = c(3, 2), cex = 0.7)
 
-    R = as.vector(R)
+chart.Histogram(x)
+chart.QQPlot(x)
+chart.Histogram(y)
+chart.QQPlot(y)
 
-    if(na.rm) {
-        R <- R[!is.na(R)]
-    }
+chart.Boxplot(as.data.frame(cbind(x,y)))
+plot(x~y)
 
-    # FUNCTION:
-
-    S = (mean((R-mean(R)^3)))^(1/3)
-
-    result = S
-
-    # Return Value:
-    result
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
@@ -70,3 +57,4 @@ function(R,na.rm=FALSE)
 \keyword{ multivariate }
 \keyword{ distribution }
 \keyword{ models }
+\keyword{ hplot }

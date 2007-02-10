@@ -30,10 +30,7 @@ VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

@@ -1,17 +1,17 @@
 \name{CAPM.beta}
 \alias{CAPM.beta}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate CAPM beta }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-CAPM.beta(x, y, rf = 0, digits = 4)
+CAPM.beta(R, Rb, rf = 0, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{Rb}{ ~~Describe \code{Rb} here~~ }
+  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{digits}{ ~~Describe \code{digits} here~~ }
 }
@@ -27,10 +27,7 @@ CAPM.beta(x, y, rf = 0, digits = 4)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

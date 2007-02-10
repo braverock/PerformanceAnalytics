@@ -14,7 +14,7 @@ SharpeRatio(R, rf = 0)
   \item{rf}{ risk free rate, in same period as your returns }
 }
 \details{
-The Sharpe ratio is simply the return per unit of risk (represented by variance).  The higher the Sharpe ratio, the better the combined performance of "risk" and return.
+The Sharpe ratio is simply the return per unit of risk (represented by variance).  The higher the Sharpe Ratio, the better the combined performance of "risk" and return.
 
 William Sharpe now recommends Information Ratio preferentially to the original Sharpe Ratio.
 

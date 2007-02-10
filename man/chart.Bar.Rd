@@ -27,10 +27,7 @@ chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

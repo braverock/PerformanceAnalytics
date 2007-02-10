@@ -29,10 +29,7 @@ rollingRegression(formula, data, width, ...)
 }
 \references{ http://www.mail-archive.com/r-help@stat.math.ethz.ch/msg19544.html }
 \author{ Douglas Bates }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\note{}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

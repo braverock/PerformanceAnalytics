@@ -1,9 +1,9 @@
 \name{SemiDeviation}
 \alias{SemiDeviation}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ deviation below the mean of the retuirn distribution }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+Semideviation is the portion of the return stream below the mean return.
 }
 \usage{
 SemiDeviation(R)
@@ -13,43 +13,22 @@ SemiDeviation(R)
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+Semidiviation is one popular alternative downside risk measure that may be used in place of standard deviation or variance.
+
+This function is implemented as a wrapper of DownsideDeviation with MAR=mean(R).
+
+In many functions like Markowitz optimization, semideviation may be substituted directly, and the covariance matrix may be constructed from semideviation rather than from variance.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+vector of returns below the mean return
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{}
+\author{ Peter Carl }
+\note{}
+\seealso{
+    \code{\link{DownsideDeviation}}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    # This function should is just a wrapper of DownsideDeviation with
-    # MAR = mean(x)
-    # see below
-
-    # FUNCTION:
-
-    x = checkDataVector(R)
-
-    return(DownsideDeviation(R, MAR=mean(R)))
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

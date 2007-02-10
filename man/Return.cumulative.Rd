@@ -1,7 +1,7 @@
 \name{Return.cumulative}
 \alias{Return.cumulative}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate a compounded (geometric) cumulative return }
 \description{
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
@@ -25,7 +25,7 @@ Return.cumulative(R, geometric = TRUE)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
