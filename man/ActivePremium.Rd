@@ -1,9 +1,11 @@
 \name{ActivePremium}
 \alias{ActivePremium}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Active Premium }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The return on an investment's annualized return minus the benchmark's annualized return.
+
+Active Premium = Investment's annualized return - Benchmark's annualized return
 }
 \usage{
 ActivePremium(R, Rb, scale = 12)
@@ -14,48 +16,19 @@ ActivePremium(R, Rb, scale = 12)
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+ActivePremium (numeric)
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
+Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Peter Carl }
+\note{}
+\seealso{
+    \code{\link{InformationRatio}}
+    \code{\link{TrackingError}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, scale = 12)
-{ # @author Peter Carl
-
-    # DESCRIPTION
-    # ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) -
-    #                  Return.annualized(benchmarkReturns.vec, scale = scale) )
-
-    # Inputs:
-    # Outputs:
-
-    # FUNCTION
-    assetReturns.vec = checkDataVector(R)
-    benchmarkReturns.vec = checkDataVector(Rb)
-
-    ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(benchmarkReturns.vec, scale = scale))
-
-    ActivePremium
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

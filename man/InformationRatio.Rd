@@ -3,7 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The Active Premium divided by the Tracking Error.
+
+InformationRatio = ActivePremium/TrackingError
+
+This relates the degree to which an investment has beaten the benchmark to the consistency with which the investment has beaten the benchmark.
 }
 \usage{
 InformationRatio(R, Rb, scale = 12)
@@ -15,49 +19,21 @@ InformationRatio(R, Rb, scale = 12)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+information ratio (number)
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
+Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, scale = 12)
-{ # @author Peter Carl
-
-    # DESCRIPTION
-    # InformationRatio = ActivePremium/TrackingError
-
-    # Inputs:
-    # Outputs:
-
-    # FUNCTION
-    assetReturns.vec = checkDataVector(R)
-    benchmarkReturns.vec = checkDataVector(Rb)
-
-    ActivePremium = ActivePremium(assetReturns.vec,benchmarkReturns.vec, scale = scale)
-    TrackingError = TrackingError(assetReturns.vec,benchmarkReturns.vec, scale = scale)
-
-    InformationRatio = ActivePremium/TrackingError
-
-    InformationRatio
-  }
+\author{ Peter Carl }
+\note{
 }
+\seealso{
+    \code{\link{TrackingError}}
+    \code{\link{ActivePremium}}
+}
+\examples{}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }

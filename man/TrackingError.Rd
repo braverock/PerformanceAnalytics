@@ -1,9 +1,9 @@
 \name{TrackingError}
 \alias{TrackingError}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Calculate Tracking Error of returns against a benchmark }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+A measure of the unexplained portion of performance relative to a benchmark.
 }
 \usage{
 TrackingError(R, Rb, scale = 12)
@@ -15,47 +15,25 @@ TrackingError(R, Rb, scale = 12)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+Tracking error is calculated by taking the square root of the average of the squared deviations between the investment's returns and the benchmark's returns, then multiplying the result by the square root of the scale of the returns.
+
+\eqn{TrackingError=\sqrt{\sum\frac{(R-R_{b})^{2}}{len(R)\sqrt{scale}}}}{TrackingError = sqrt(sum(assetReturns - benchmarkReturns)^2 /
+                (length(assetReturns) - 1)) * sqrt(scale)}
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+Tracking Error (number)
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
+Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Peter Carl }
+\note{
+}
+\seealso{
+    \code{\link{InformationRatio}}
+    \code{\link{TrackingError}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, scale = 12)
-{ # @author Peter Carl
-
-    # DESCRIPTION
-    # TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 /
-    #                   (length(assetReturns.vec) - 1)) * sqrt(scale)
-
-    # Inputs:
-    # Outputs:
-
-    # FUNCTION
-    assetReturns.vec = checkDataVector(R)
-    benchmarkReturns.vec = checkDataVector(Rb)
-
-    TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 / (length(assetReturns.vec) - 1)) * sqrt(scale)
-
-    TrackingError
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
