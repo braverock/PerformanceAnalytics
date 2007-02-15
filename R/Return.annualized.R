@@ -8,8 +8,8 @@ function (R, geometric = TRUE, scale = 12)
     # @todo: This function could be used for calculating geometric or simple
     # returns
 
-    # n = periods under analysis
-    # f = number of periods in a year (daily f = 252, monthly f = 12,
+    # R = periods under analysis
+    # scale = number of periods in a year (daily f = 252, monthly f = 12,
     # quarterly f = 4)
 
     # arithmetic average: ra = (f/n) * sum(ri)
@@ -19,12 +19,12 @@ function (R, geometric = TRUE, scale = 12)
 
     # FUNCTION:
 
-    x = checkDataVector(R)
-    y = x[!is.na(x)]
-    n = length(y)
+    R = checkDataVector(R)
+    R = R[!is.na(R)]
+    n = length(R)
     # currently only uses geometric return to annualize returns
     #return(prod(1 + x)^(scale/length(x)) - 1)
-    return(prod(1 + x, na.rm = TRUE)^(scale/n) - 1)
+    return(prod(1 + R, na.rm = TRUE)^(scale/n) - 1)
 }
 
 ###############################################################################
@@ -35,10 +35,13 @@ function (R, geometric = TRUE, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: Return.annualized.R,v 1.3 2007-02-15 01:14:43 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
