@@ -65,8 +65,7 @@ cycles.dates = list(
     c("07/81","11/82"),
     c("07/90","03/91"),
     c("03/01","11/01"))
-
-# Event lists - FOR BEST RESULTS, KEEP THESE IN ORDER
+# Event lists - FOR BEST RESULTS, KEEP THESE DATES IN ORDER
 risk.dates = c(
     "10/87",
     "02/94",
@@ -75,7 +74,6 @@ risk.dates = c(
     "10/98",
     "07/00",
     "09/01")
-
 risk.labels = c(
     "Black Monday",
     "Bond Crash",
@@ -84,11 +82,12 @@ risk.labels = c(
     "LTCM",
     "Tech Bubble",
     "Sept 11")
-
-Return.cumulative = cumprod.column(1+SP500)
-
-chart.TimeSeries(Return.cumulative, col = colorset, legend.loc = legend.loc, period.areas = cycles.dates, period.colors = "paleyellow", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", ...)
-
+data(edhec)
+x=edhec[,"Funds.of.Funds",drop=F]
+Return.cumulative = cumprod.column(1+x) - 1
+chart.TimeSeries(Return.cumulative)
+chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
