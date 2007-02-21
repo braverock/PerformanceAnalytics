@@ -1,82 +1,34 @@
 \name{chart.CumReturns}
 \alias{chart.CumReturns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Cumulates and graphs a set of periodic returns  }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  A wrapper function that cumulates the returns given and draws a line graph of the results as a "wealth index".
 }
 \usage{
-chart.CumReturns(R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), ...)
+chart.CumReturns(R, wealth.index = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{wealth.index}{ ~~Describe \code{wealth.index} here~~ }
-  \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
-  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+A timeseries line chart of the cumulative return series
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\note{ 
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}} }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), ...)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    # A wrapper function that cumulates the returns given and draws a line graph
-    # of the results as a "wealth index".
-
-    # Inputs:
-    # R = a matrix, data frame, or timeSeries of returns
-    # wealth.index = if true, shows the "value of $1", starting the cumulation
-    #    of returns at 1 rather than zero
-    # legend.loc: use this to locate the legend, e.g., "topright"
-    # colorset: use the name of any of the palattes above
-
-    # Outputs:
-    # A timeseries line chart of the cumulative return series
-
-    # FUNCTION:
-
-    # Transform input data to a matrix
-    x = checkDataMatrix(R)
-
-#     # Get dimensions and labels
-#     columns = ncol(x)
-#     rows = nrow(x)
-#     columnnames = colnames(x)
-#     rownames = rownames(x)
-
-    # Calculate the cumulative return
-    if(!wealth.index)
-        Return.cumulative = cumprod.column(1+x) - 1
-    else
-        Return.cumulative = cumprod.column(1+x)
-
-    # Chart the cumulative returns series
-    chart.TimeSeries(Return.cumulative, col = colorset, legend.loc = legend.loc, ...)
-
-  }
+data(edhec)
+chart.CumReturns(edhec[,"Funds.of.Funds",drop=F],main="Cumulative Returns")
+chart.CumReturns(edhec[,"Funds.of.Funds",drop=F],wealth.index=T, main="Value of \$1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
