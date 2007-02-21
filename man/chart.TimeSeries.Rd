@@ -1,9 +1,9 @@
 \name{chart.TimeSeries}
 \alias{chart.TimeSeries}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Creates a time series chart with some extensions. }
 \description{
-Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{plot} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline. 
+Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{plot} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
 }
 \usage{
 chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE, legend.loc = NULL, ylog = FALSE, ...)
@@ -23,15 +23,15 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
   \item{xlim}{ set the x-axis limit, same as in \code{plot} }
   \item{ylim}{ set the y-axis limit, same as in \code{plot} }
   \item{event.lines}{ If not null, vertical lines will be drawn to indicate that an event happened during that time period.  \code{event.lines} should be a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as date.format.  This function matches the re-formatted row names (dates) with the events.list, so to get a match the formatting needs to be correct. }
-  \item{event.labels}{ if not null and event.lines is not null, this will apply a list of text labels (e.g., \code{c("This Event", "That Event")} to the vertical lines drawn. }
-  \item{period.areas}{ ~~Describe \code{period.areas} here~~ }
-  \item{event.color}{ ~~Describe \code{event.color} here~~ }
-  \item{period.color}{ ~~Describe \code{period.color} here~~ }
+  \item{event.labels}{ if not null and event.lines is not null, this will apply a list of text labels (e.g., \code{c("This Event", "That Event")} to the vertical lines drawn.  See the example below. }
+  \item{period.areas}{ these are shaded areas described by start and end dates in the same format as the date.format.  This is provided as a list of pairs, e.g., \code{list(c("10/26","11/27"), c("08/29","03/33"))} See the examples below. }
+  \item{event.color}{ draws the event described in \code{event.labels} in the color specified }
+  \item{period.color}{ draws the shaded region described by \code{period.areas} in the color specified }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{pch}{ symbols to use, see also \code{plot} }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
-  \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
-  \item{ylog}{ ~~Describe \code{ylog} here~~ }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
+  \item{ylog}{ set the y-axis to log, similar to \code{plot} }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
