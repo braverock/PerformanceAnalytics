@@ -6,7 +6,7 @@
 Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{plot} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
 }
 \usage{
-chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE, legend.loc = NULL, ylog = FALSE, ...)
+chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab = "Value", xlab = "Date", date.format = "\%m/\%y", xlim = NA, ylim = NA, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE, legend.loc = NULL, ylog = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -19,7 +19,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{ylab}{ set the y-axis label, same as in \code{plot} }
   \item{xlab}{ set the x-axis label, same as in \code{plot} }
-  \item{date.format}{ re-format the dates for the xaxis; the default is "%m/%y" }
+  \item{date.format}{ re-format the dates for the xaxis; the default is "\%m/\%y" }
   \item{xlim}{ set the x-axis limit, same as in \code{plot} }
   \item{ylim}{ set the y-axis limit, same as in \code{plot} }
   \item{event.lines}{ If not null, vertical lines will be drawn to indicate that an event happened during that time period.  \code{event.lines} should be a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as date.format.  This function matches the re-formatted row names (dates) with the events.list, so to get a match the formatting needs to be correct. }

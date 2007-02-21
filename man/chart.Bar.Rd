@@ -6,7 +6,7 @@
 A wrapper to create a chart of periodic returns in a bar chart.  This is a difficult enough graph to read that it doesn't get much use.  Still, it is useful for viewing a single set of data.
 }
 \usage{
-chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
+chart.Bar(R, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
