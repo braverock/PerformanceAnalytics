@@ -45,9 +45,6 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
 \note{ }
 \seealso{ See Also \code{\link{plot}} }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
 
 # These are start and end dates, formatted the same way as the default axis labels
 cycles.dates = list(

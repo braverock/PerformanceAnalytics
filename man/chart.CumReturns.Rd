@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Cumulates and graphs a set of periodic returns  }
 \description{
-  A wrapper function that cumulates the returns given and draws a line graph of the results as a "wealth index".
+  Chart that cumulates the periodic returns given and draws a line graph of the results as a "wealth index".
 }
 \usage{
 chart.CumReturns(R, wealth.index = FALSE, ...)
