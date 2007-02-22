@@ -1,10 +1,9 @@
 \name{TreynorRatio}
 \alias{TreynorRatio}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate Treynor Ratio of excess return over CAPM beta }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+The Treynor ratio is similar to the Sharpe Ratio, except it uses beta as the volatility measure (to divide the investment's excess return over the beta). }
 \usage{
 TreynorRatio(R, Rb, rf = 0, scale = 12, ...)
 }
@@ -16,45 +15,18 @@ TreynorRatio(R, Rb, rf = 0, scale = 12, ...)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+Treynor ratio
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Peter Carl }
+\seealso{
+   \code{\link{SharpeRatio}}
+   \code{\link{SortinoRatio}}
+   \code{\link{CAPM.beta}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, rf = 0, scale = 12, ...)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    #
-
-    # FUNCTION:
-
-    x = checkDataVector(R)
-    y = checkDataVector(Rb)
-
-    beta = CAPM.beta(R, Rb, rf = rf)
-    treynorRatio = (Return.annualized(x, scale = scale) - rf*scale)/beta
-    treynorRatio
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

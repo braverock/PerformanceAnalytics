@@ -1,9 +1,9 @@
 \name{CoKurtosis}
 \alias{CoKurtosis}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate the co-moment for kurtosis of two assets }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  CoKurtosis is the product of the fourth higher moments of two assets.
 }
 \usage{
 CoKurtosis(Ri, Ra, na.rm = FALSE)
@@ -15,66 +15,22 @@ CoKurtosis(Ri, Ra, na.rm = FALSE)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+value of cokurtosis of Ri and Ra
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\references{
+Martellini L., Vaissie M., Ziemann V. October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+Martellini L. and Ziemann V. 2005. Marginal Impacts on Portfolio Distributions. Working Paper, Edhec Risk and Asset Management Research Centre
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Brian G. Peterson }
+\note{}
+\seealso{
+    \code{\link{BetaCoKurtosis}}
+    \code{\link{kurtosis}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function(Ri, Ra, na.rm=FALSE)
-{ # @author Brian G. Peterson
-
-    # Description:
-    # CoKurtosis is the product of the fourth higher moments of two assets,
-    # as defined in
-    # Martellini L. and Ziemann V., 2005,
-    # Marginal Impacts on Portfolio Distributions,
-    # Working Paper, Edhec Risk and Asset Management Research Centre
-    # and in:
-    # Martellini L., Vaissie M., Ziemann V., October 2005,
-    # Investing in Hedge Funds:
-    #   Adding Value through Active Style Allocation Decisions
-    # Edhec Risk and Asset Management Research Centre
-
-    # Ri = return vector of initial portfolio
-    # Ra = return vector of asset being considered for addition to portfolio
-
-    # Setup
-
-    Ri = as.vector(Ri)
-    Ra = as.vector(Ra)
-
-    if(na.rm) {
-        Ri <- Ri[!is.na(Ri)]
-        Ra <- Ra[!is.na(Ra)]
-    }
-
-    # FUNCTION:
-
-    # CoKurtosis of two assets
-    CoK = mean((Ri - mean(Ri))*((Ra-mean(Ra))^3))
-
-    result = CoK
-
-    # Return Value:
-    result
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,9 +1,9 @@
 \name{CoSkewness}
 \alias{CoSkewness}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate the co-moment for skewness of two assets }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+CoSkewness is the product of the third higher moments of two assets.
 }
 \usage{
 CoSkewness(Ri, Ra, na.rm = FALSE)
@@ -18,63 +18,20 @@ CoSkewness(Ri, Ra, na.rm = FALSE)
   ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+value of coskewness of Ri and Ra
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\references{
+Martellini L., Vaissie M., Ziemann V. October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+Martellini L. and Ziemann V. 2005. Marginal Impacts on Portfolio Distributions. Working Paper, Edhec Risk and Asset Management Research Centre
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Brian G. Peterson }
+\note{}
+\seealso{
+    \code{\link{BetaCoSkewness}}
+    \code{\link{skewness}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function(Ri, Ra, na.rm=FALSE)
-{ # @author Brian G. Peterson
-
-    # Description:
-    # CoSkewness is the product of the third higher moments of two assets,
-    # as defined in
-    # Martellini L. and Ziemann V., 2005,
-    # Marginal Impacts on Portfolio Distributions,
-    # Working Paper, Edhec Risk and Asset Management Research Centre
-    # and in:
-    # Martellini L., Vaissie M., Ziemann V., October 2005,
-    # Investing in Hedge Funds:
-    #   Adding Value through Active Style Allocation Decisions
-    # Edhec Risk and Asset Management Research Centre
-
-    # Ri = return vector of initial portfolio
-    # Ra = return vector of asset being considered for addition to portfolio
-
-    # Setup
-
-    Ri = as.vector(Ri)
-    Ra = as.vector(Ra)
-
-    if(na.rm) {
-        Ri <- Ri[!is.na(Ri)]
-        Ra <- Ra[!is.na(Ra)]
-    }
-
-    # FUNCTION:
-
-    # CoSkewness of two assets
-    CoS = mean((Ri - mean(Ri))*((Ra-mean(Ra))^2))
-
-    result = CoS
-
-    # Return Value:
-    result
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
