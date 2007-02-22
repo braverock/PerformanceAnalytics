@@ -1,7 +1,7 @@
 \name{SharpeRatio.annualized}
 \alias{SharpeRatio.annualized}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Annualized Sharpe Ratio }
+\title{ calculate annualized Sharpe Ratio }
 \description{
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviation to represent risk.
 }

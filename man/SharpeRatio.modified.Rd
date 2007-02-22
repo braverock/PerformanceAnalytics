@@ -2,9 +2,13 @@
 \alias{SharpeRatio.modified}
 \alias{modSharpe}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate a modified Sharpe Ratio of Return/modVaR }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The Sharpe ratio is simply the return per unit of risk (represented by variability).  The higher the Sharpe ratio, the better the combined performance of "risk" and return.
+
+The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviation to represent risk.
+
+A number of papers now recommend using a "modified Sharpe" ratio using a Modified Cornish-Fisher VaR as the measure of Risk.
 }
 \usage{
 SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
@@ -20,54 +24,16 @@ SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
   ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\author{ Brian G. Peterson }
 \note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{VaR.CornishFisher}}
+    \code{\link{SharpeRatio}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, rf = 0, p=0.95, scale=1)
-{ # @author Brian G. Peterson
-
-    # DESCRIPTION:
-    # The Sharpe ratio is simply the return per unit of risk (represented by
-    # variability).  The higher the Sharpe ratio, the better the combined
-    # performance of "risk" and return.
-
-    # The Sharpe Ratio is a risk-adjusted measure of return that uses
-    # standard deviation to represent risk.
-
-    # A number of papers now recommend using a "modified Sharpe" ratio
-    # using a Modified Cornish-Fisher VaR as the measure of Risk.
-
-    # Inputs:
-    # R: in this case, the function anticipates having a return stream as input,
-    #    rather than prices.
-    #
-    # rf: the risk free rate MUST be in the same periodicity as the data going in.
-    #
-    # p: probability at which to calculate the modified VaR (defaults to 95\%)
-
-    # Outputs:
-    # This function returns a modified Sharpe ratio for the same periodicity of the
-    # data being input (e.g., monthly data -> monthly SR)
-
-    # FUNCTION:
-
-    x = checkDataVector(R)
-    return( (mean(x, na.rm = TRUE) - rf)*scale/(VaR.CornishFisher(x, p)*sqrt(scale)) )
-    #return((mean(x) - rf)/sd(x))
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

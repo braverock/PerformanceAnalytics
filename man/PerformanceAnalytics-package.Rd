@@ -12,24 +12,24 @@ Library of econometric functions for performance and risk analysis. This library
 \tabular{ll}{
 Package: \tab PerformanceAnalytics\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2007-02-01\cr
+Version: \tab 0.9\cr
+Date: \tab 2007-02-22\cr
 License: \tab GPL\cr
 }
 ~~ An overview of how to use the package, including the most important ~~
 ~~ functions ~~
 }
 \author{
-Peter Carl
-Brian G. Peterson
+Peter Carl \cr
+Brian G. Peterson \cr
 
 Maintainer: Brian G. Peterson <brian@braverock.com>
 }
 
 \references{
-Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley 2004.
-Tsay, R. \emph{anaysis of Financial Time Series}. Wiley 2001.
-Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006.
+Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley 2004. \cr
+Tsay, R. \emph{Analysis of Financial Time Series}. Wiley 2001. \cr
+Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }
 
 \keyword{ package }

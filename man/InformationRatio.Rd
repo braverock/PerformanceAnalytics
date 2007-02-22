@@ -1,7 +1,7 @@
 \name{InformationRatio}
 \alias{InformationRatio}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ InformationRatio = ActivePremium/TrackingError }
 \description{
 The Active Premium divided by the Tracking Error.
 
