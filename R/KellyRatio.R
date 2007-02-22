@@ -17,10 +17,10 @@ function (R, rf = 0, method = "half")
 
     # FUNCTION:
 
-    x = checkDataVector(R)
-    leverage =  mean((R, na.rm = TRUE) - rf)/std(R)^2
+    R = checkDataVector(R)
+    leverage =  (mean(R, na.rm = TRUE) - rf)/std(R)^2
 
-    if (method="half") {
+    if (method == "half") {
         leverage = leverage/2
     }
     return(leverage)
@@ -34,8 +34,11 @@ function (R, rf = 0, method = "half")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: KellyRatio.R,v 1.1 2007-02-21 17:25:19 brian Exp $
+# $Id: KellyRatio.R,v 1.2 2007-02-22 18:24:48 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/02/21 17:25:19  brian
+# - Initial Revision of Kelly Ratio calculation
+#
 ###############################################################################
