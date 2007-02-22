@@ -1,9 +1,9 @@
 \name{cumprod.column}
 \alias{cumprod.column}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ wrapper to caclulate cumprod on all columns in a matrix }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+wrapper to caclulate cumprod on all columns in a matrix
 }
 \usage{
 cumprod.column(R, na.rm = TRUE, ...)
@@ -14,44 +14,14 @@ cumprod.column(R, na.rm = TRUE, ...)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+transformed matrix of cumprods
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\author{ Peter Carl }
+\seealso{
+    \code{\link{cummax.column}}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, na.rm = TRUE, ...)
-{ # @author Peter Carl
-
-    # if we do this, then cumulating a set of monthly returns is easy
-    x = checkDataMatrix(R)
-
-    if (na.rm) {
-        result = apply(na.omit(x), MARGIN = 2, FUN = cumprod,
-            ...)
-    }
-    else {
-        result = apply(x, MARGIN = 2, FUN = cumprod, ...)
-    }
-    result
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
