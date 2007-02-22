@@ -1,9 +1,10 @@
 \name{VaR.CornishFisher}
 \alias{VaR.CornishFisher}
-\alias{modifiedVaR}
 \alias{VaR.traditional}
 \alias{VaR.mean}
 \alias{VaR.multicolumn}
+\alias{modifiedVaR}
+\alias{VaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
 These functions calculate both traditional mean-VaR and modified Cornish-Fisher VaR
@@ -34,8 +35,8 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk optimization
 The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but incorrectly handled the confidence level,exponents for each moment, and scale.
 }
 \seealso{
-    \code{\link{VaR.Marginal.Rd}}
-    \code{\link{VaR.Beyond.Rd}}
+    \code{\link{VaR.Marginal}}
+    \code{\link{VaR.Beyond}}
 }
 \examples{
 }
