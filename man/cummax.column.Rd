@@ -1,7 +1,7 @@
 \name{cummax.column}
 \alias{cummax.column}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ wrapper to caclulate cummax on all columns in a matrix }
+\title{ wrapper to calculate cummax on all columns in a matrix }
 \description{
 wrapper to caclulate cummax on all columns in a matrix
 }

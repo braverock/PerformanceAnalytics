@@ -1,9 +1,10 @@
 \name{moment.third}
 \alias{moment.third}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate the third mathematical moment of the return function }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The third mathematical moment of the return function.
+Favre and Renaldo use this as separate from skewness in developing a four-moment CAPM model.
 }
 \usage{
 moment.third(R, na.rm = FALSE)
@@ -13,56 +14,17 @@ moment.third(R, na.rm = FALSE)
   \item{R}{ return vector of the portfolio }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+third moment of the return series
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\references{
+Favre, L. and Renaldo, A., October 2003. How to Price Hedge Funds: From Two- to Four-Moment CAPM. UBS and Edhec Business School.
+}
+\author{ Brian G. Peterson }
+\seealso{
+    \code{\link{moment.fourth}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function(R,na.rm=FALSE)
-{ # @author Brian G. Peterson
-
-    # Description:
-    # The third mathematical moment of the return function.
-    # Favre and Renaldo use this as separate from skewness in developing a
-    # four-moment CAPM model
-    #
-    # as defined in:
-    # Favre, L. and Renaldo, A., October 2003
-    # How to Price Hedge Funds: From Two- to Four-Moment CAPM
-    # UBS and Edhec Business School
-
-    # Setup
-
-    R = as.vector(R)
-
-    if(na.rm) {
-        R <- R[!is.na(R)]
-    }
-
-    # FUNCTION:
-
-    S = (mean((R-mean(R)^3)))^(1/3)
-
-    result = S
-
-    # Return Value:
-    result
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,7 +1,7 @@
 \name{cumprod.column}
 \alias{cumprod.column}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ wrapper to caclulate cumprod on all columns in a matrix }
+\title{ wrapper to calculate cumprod on all columns in a matrix }
 \description{
 wrapper to caclulate cumprod on all columns in a matrix
 }

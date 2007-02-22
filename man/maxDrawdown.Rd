@@ -1,9 +1,9 @@
 \name{maxDrawdown}
 \alias{maxDrawdown}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ caclulate the maximum drawdown from peak equity }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+To find the maximum drawdown in a return series, we need to first calculate the cumulative returns and the maximum cumulative return to that point.  Any time the cumulative returns dips below the maximum cumulative returns, it's a drawdown.  Drawdowns are measured as a percentage of that maximum cumulative return, in effect, measured from peak equity.
 }
 \usage{
 maxDrawdown(R)
@@ -12,51 +12,20 @@ maxDrawdown(R)
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+maximum drawdown
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Peter Carl }
+\seealso{
+    \code{\link{findDrawdowns}}
+    \code{\link{sortDrawdowns}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    # To find the maximum drawdown in a return series, we need to first
-    # calculate the cumulative returns and the maximum cumulative return to
-    # that point.  Any time the cumulative returns dips below the maximum
-    # cumulative returns, it's a drawdown.  Drawdowns are measured as a
-    # percentage of that maximum cumulative return, in effect, measured from
-    # peak equity.
-
-    # FUNCTION:
-
-    x = checkDataVector(R)
-
-    Return.cumulative = cumprod(1+x)
-    maxCumulativeReturn = cummax(Return.cumulative)
-    drawdown = Return.cumulative/maxCumulativeReturn - 1
-    # if you want to see the drawdown series, plot(drawdown,type="l")
-    return(min(drawdown))
-
-  }
+data(edhec)
+R=edhec[,"Funds.of.Funds",drop=F]
+maxDrawdown(R)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,9 +1,10 @@
 \name{sortDrawdowns}
 \alias{sortDrawdowns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ order list of drawdowns from worst to best }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+sortDrawdowns(findDrawdowns(R))
+Gives the drawdowns in order of worst to best
 }
 \usage{
 sortDrawdowns(runs)
@@ -12,50 +13,27 @@ sortDrawdowns(runs)
 \arguments{
   \item{runs}{ pass in runs array from findDrawdowns to be sorted }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+  sorted list
+  \item{return }{depth of drawdown}
+  \item{from }{starting period}
+  \item{to }{ending period}
+  \item{length }{length in periods}
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\references{}
+\author{
+Peter Carl
+modified with permission from function by Sankalp Upadhyay
+}
+\seealso{
+    \code{\link{findDrawdowns}}
+    \code{\link{maxDrawdown}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (runs) {
-    # sortDrawdowns(findDrawdowns(caduceus.ts@Data[,1]))
-    # gives the drawdowns in order of worst to best
-
-    for (i in 1:length(runs$return)) {
-        for (j in 1:(length(runs$return)-1)) {
-            if (runs$return[j] > runs$return[j+1]) {
-                tempRet = runs$return[j]
-                tempFor = runs$from[j]
-                tempTo = runs$to[j]
-                tempLen = runs$length[j]
-                runs$return[j] = runs$return[j+1]
-                runs$from[j] = runs$from[j+1]
-                runs$to[j] = runs$to[j+1]
-                runs$length[j] = runs$length[j+1]
-                runs$return[j+1] = tempRet
-                runs$from[j+1] = tempFor
-                runs$to[j+1] = tempTo
-                runs$length[j+1] = tempLen
-            }
-        }
-    }
-    runs
-  }
+data(edhec)
+R=edhec[,"Funds.of.Funds",drop=FALSE]
+findDrawdowns(R)
+sortDrawdowns(findDrawdowns(R))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

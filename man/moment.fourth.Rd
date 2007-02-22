@@ -1,9 +1,10 @@
 \name{moment.fourth}
 \alias{moment.fourth}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate the fourth mathematical moment of the return function }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+The fourth mathematical moment of the return function.
+Favre and Renaldo use this as separate from kurtosis in developing a four-moment CAPM model.
 }
 \usage{
 moment.fourth(R, na.rm = FALSE)
@@ -23,10 +24,13 @@ moment.fourth(R, na.rm = FALSE)
   \item{comp2 }{Description of 'comp2'}
   ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\references{
+Favre, L. and Renaldo, A., October 2003. How to Price Hedge Funds: From Two- to Four-Moment CAPM. UBS and Edhec Business School.
+}
+\author{ Brian G. Peterson }
+\seealso{
+    \code{\link{moment.third}}
+}
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
@@ -34,19 +38,17 @@ moment.fourth(R, na.rm = FALSE)
 
 ## The function is currently defined as
 function(R,na.rm=FALSE)
-{ # @author Brian G. Peterson
+{ # @author
 
-    # Description:
-    # The fourth mathematical moment of the return function.
-    # Favre and Renaldo use this as separate from kurtosis in developing a
-    # four-moment CAPM model
+Description:
+
     #
-    # as defined in:
-    # Favre, L. and Renaldo, A., October 2003
-    # How to Price Hedge Funds: From Two- to Four-Moment CAPM
-    # UBS and Edhec Business School
+as defined in:
+Favre, L. and Renaldo, A., October 2003
+How to Price Hedge Funds: From Two- to Four-Moment CAPM
+UBS and Edhec Business School
 
-    # Setup
+Setup
 
     R = as.vector(R)
 
@@ -54,12 +56,12 @@ function(R,na.rm=FALSE)
         R <- R[!is.na(R)]
     }
 
-    # FUNCTION:
+FUNCTION:
 
     K = (mean((R-mean(R)^4)))^(1/4)
 
     result = K
-    # Return Value:
+Return Value:
     result
   }
 }
