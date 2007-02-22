@@ -1,4 +1,4 @@
-charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = F, ...)
+charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = F, main = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,15 +32,18 @@ charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = F, ...)
     layout(matrix(c(1,2,3)),height=c(1.3,1,1.3),width=1)
 
     par(mar=c(1,4,4,2))
+    if(is.null(main)){
+         main = paste("Rolling ",n,"-Month Regression",sep="")
+    }
 
-    chart.RollingRegression(asset, benchmark, n = n, rf = rf, darken = darken , xaxis = F, main = paste("Rolling ",n,"-Month Regression",sep=""), ylab = "Beta")
+chart.RollingRegression(asset, benchmark, n = n, rf = rf, darken = darken , xaxis = F, main = main, ylab = "Beta", ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(asset, benchmark, n = n, rf = rf, darken = darken, attribute = "Alpha", main = "", ylab = "Alpha", xaxis = F)
+    chart.RollingRegression(asset, benchmark, n = n, rf = rf, darken = darken, attribute = "Alpha", main = "", ylab = "Alpha", xaxis = F, ...)
 
     par(mar=c(5,4,0,2))
 
-    chart.RollingRegression(asset, benchmark, n = n, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared")
+    chart.RollingRegression(asset, benchmark, n = n, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", ...)
 
 }
