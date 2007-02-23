@@ -1,9 +1,10 @@
 \name{StdDev.annualized}
 \alias{StdDev.annualized}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate an annualized Standard Deviation }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+To annualize standard deviation, we multiply by the square root of the number of observations per year.
+Note that any annualized number should be viewed with suspicion if the number of observations is small.
 }
 \usage{
 StdDev.annualized(R, rf = 0, scale = 12)
@@ -14,40 +15,15 @@ StdDev.annualized(R, rf = 0, scale = 12)
   \item{rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+annualized standard deviation
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{}
+\author{ Peter Carl}
+\seealso{
+    \code{\link{StdDev}}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, rf = 0, scale = 12)
-{ # @author Peter Carl
-
-    # To annualize standard deviation, we multiply by the square root of the
-    # number of observations per year.
-
-    x = checkDataVector(R)
-
-    # return(sqrt(scale)*sqrt(var(x - rf)))
-    return(sqrt(scale)*sqrt(var(x, na.rm = TRUE)))
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

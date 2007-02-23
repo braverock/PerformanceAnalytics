@@ -1,7 +1,7 @@
 \name{SemiDeviation}
 \alias{SemiDeviation}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ deviation below the mean of the retuirn distribution }
+\title{ deviation below the mean of the return distribution }
 \description{
 Semideviation is the portion of the return stream below the mean return.
 }
