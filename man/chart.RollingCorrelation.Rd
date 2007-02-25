@@ -16,7 +16,7 @@ chart.RollingCorrelation(R, Rb, n = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{xaxis}{ if true, draws the x axis }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

@@ -12,7 +12,7 @@ rollingStat(R, period = 3, trim = TRUE, FUN, ...)
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{period}{ ~~Describe \code{period} here~~ }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{FUN}{ ~~Describe \code{FUN} here~~ }
   \item{\dots}{ any other passthru parameters }
 }

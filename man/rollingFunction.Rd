@@ -12,7 +12,7 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ ~~Describe \code{n} here~~ }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{digits}{ number of digits to round results to }

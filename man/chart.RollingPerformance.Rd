@@ -19,7 +19,7 @@ chart.RollingPerformance(R, n = 12, xaxis = TRUE, legend.loc = NULL, colorset = 
      \tab (e.g., rolling \code{\link{CAPM.beta}} won't work, but \code{\link{Return.annualized}} will)
   }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }
 }

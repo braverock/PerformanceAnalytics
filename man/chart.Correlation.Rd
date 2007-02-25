@@ -20,7 +20,7 @@ correlation chart
 \references{ }
 \author{ Peter Carl }
 \note{
-based on plot at  \link{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+based on plot at  http://addictedtor.free.fr/graphiques/sources/source_137.R
 }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{

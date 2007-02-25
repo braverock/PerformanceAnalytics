@@ -13,7 +13,7 @@ rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
   \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
   \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
   \item{n}{ ~~Describe \code{n} here~~ }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }
 }

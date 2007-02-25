@@ -14,7 +14,7 @@ charts.RollingPerformance(R, n = 12, rf = 0, main = NULL, trim = TRUE, event.lab
   \item{n}{ number of periods to apply rolling function over }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, same as in \code{plot} }
-  \item{trim}{ ~~Describe \code{trim} here~~ }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
   \item{\dots}{ any other passthru parameters }
 }
