@@ -38,7 +38,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
         }
     }
     colnames(resultingtable) = columnnames
-    ans = round(resultingtable, digits)
+    ans = base::round(resultingtable, digits)
     ans
 }
 
@@ -50,10 +50,13 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.3 2007-02-22 22:14:46 brian Exp $
+# $Id: table.AnnualizedReturns.R,v 1.4 2007-02-25 18:23:40 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/22 22:14:46  brian
+# - standardize use of 'digits' as a parameter to round()
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

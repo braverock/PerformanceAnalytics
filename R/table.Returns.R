@@ -85,7 +85,7 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
             multiplier = 1
 
         target.df=target.df*multiplier
-        target.df = round(target.df, digits)
+        target.df = base::round(target.df, digits)
 
         if(column == 1)
             result.df = target.df
@@ -113,10 +113,13 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Returns.R,v 1.3 2007-02-22 22:14:46 brian Exp $
+# $Id: table.Returns.R,v 1.4 2007-02-25 18:23:40 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/22 22:14:46  brian
+# - standardize use of 'digits' as a parameter to round()
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

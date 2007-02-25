@@ -99,7 +99,7 @@ function (x, y, scale = 12, rf = 0, digits = 4)
         }
     }
     colnames(result.df) = columnnames
-    result.df = round(result.df, digits)
+    result.df = base::round(result.df, digits)
     result.df
 
     #  For example:
@@ -126,10 +126,13 @@ function (x, y, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.3 2007-02-07 13:24:49 brian Exp $
+# $Id: table.CAPM.R,v 1.4 2007-02-25 18:23:40 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.2  2007/02/07 13:20:52  brian
 # - change Ri to Rb for benchmark asset to standardize parameters
 # - change indexReturns.vec to benchmarkReturns.vec for consistency
