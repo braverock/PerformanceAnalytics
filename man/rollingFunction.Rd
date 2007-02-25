@@ -14,7 +14,7 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
   \item{n}{ ~~Describe \code{n} here~~ }
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
+  \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{digits}{ number of digits to round results to }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{FUN}{ ~~Describe \code{FUN} here~~ }
