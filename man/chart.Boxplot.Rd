@@ -1,9 +1,9 @@
 \name{chart.Boxplot}
 \alias{chart.Boxplot}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ box whiskers plot wrapper, with sensible defaults }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+A wrapper to create box and whiskers plot, but with some sensible defaults useful for comparing distributions.
 }
 \usage{
 chart.Boxplot(R, horizontal = TRUE, ...)
@@ -11,7 +11,7 @@ chart.Boxplot(R, horizontal = TRUE, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{horizontal}{ ~~Describe \code{horizontal} here~~ }
+  \item{horizontal}{ TRUE/FALSE plot horizontal (TRUE) or vertical (FALSE)  }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
@@ -26,7 +26,7 @@ chart.Boxplot(R, horizontal = TRUE, ...)
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -41,8 +41,7 @@ function (R, horizontal = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
-    # A wrapper to create box and whiskers plot, but with some sensible defaults
-    # useful for comparing distributions.
+    # A wrapper to create box and whiskers plot, but with some sensible defaults useful for comparing distributions.
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which
     # gives the number of lines of margin to be specified on the four sides

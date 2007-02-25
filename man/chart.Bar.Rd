@@ -1,7 +1,7 @@
 \name{chart.Bar}
 \alias{chart.Bar}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ wrapper for barchart of returns }
 \description{
 A wrapper to create a chart of periodic returns in a bar chart.  This is a difficult enough graph to read that it doesn't get much use.  Still, it is useful for viewing a single set of data.
 }
