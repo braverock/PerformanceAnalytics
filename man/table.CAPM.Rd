@@ -17,7 +17,7 @@ table.CAPM(x, y, scale = 12, rf = 0, digits = 4)
   \item{digits}{ number of digits to round results to }
 }
 \value{ For example: \cr
-\code{> table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))} \cr
+\code{table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))} \cr
                     S&P500TR       \cr
 Alpha                 0.0065       \cr
 Beta                  0.2909       \cr
@@ -33,12 +33,12 @@ Treynor Ratio         0.3959       \cr
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{CAPM.alpha}
-    \code{\link{CAPM.beta}
-    \code{\link{TrackingError}
-    \code{\link{ActivePremium}
-    \code{\link{InformationRatio}
-    \code{\link{TreynorRatio}
+    \code{\link{CAPM.alpha}}
+    \code{\link{CAPM.beta}}
+    \code{\link{TrackingError}}
+    \code{\link{ActivePremium}}
+    \code{\link{InformationRatio}}
+    \code{\link{TreynorRatio}}
 }
 \examples{
 table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))
