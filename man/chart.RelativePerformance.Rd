@@ -12,10 +12,10 @@ chart.RelativePerformance(R, Rb, main = "Relative Performance", xaxis = TRUE, co
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
-  \item{main}{ ~~Describe \code{main} here~~ }
-  \item{xaxis}{ ~~Describe \code{xaxis} here~~ }
+  \item{main}{ set the chart title, same as in \code{plot} }
+  \item{xaxis}{ if true, draws the x axis }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ ~~Describe \code{ylog} here~~ }
   \item{\dots}{ any other passthru parameters }
 }

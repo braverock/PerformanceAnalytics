@@ -13,9 +13,9 @@ chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
-  \item{xlab}{ ~~Describe \code{xlab} here~~ }
-  \item{ylab}{ ~~Describe \code{ylab} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
+  \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }
+  \item{ylab}{ set the y-axis label, as in \code{\link{plot}} }
+  \item{main}{ set the chart title, same as in \code{plot} }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

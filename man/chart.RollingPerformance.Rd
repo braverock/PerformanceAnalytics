@@ -11,11 +11,13 @@ chart.RollingPerformance(R, n = 12, xaxis = TRUE, legend.loc = NULL, colorset = 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{n}{ ~~Describe \code{n} here~~ }
-  \item{xaxis}{ ~~Describe \code{xaxis} here~~ }
-  \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
+  \item{n}{ number of periods to apply rolling function over }
+  \item{xaxis}{ if true, draws the x axis }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{FUN}{ ~~Describe \code{FUN} here~~ }
+  \item{FUN}{ any function that can be evaluated using a single set of returns \cr
+     \tab (e.g., rolling \code{\link{CAPM.beta}} won't work, but \code{\link{Return.annualized}} will)
+  }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
@@ -33,7 +35,7 @@ chart.RollingPerformance(R, n = 12, xaxis = TRUE, legend.loc = NULL, colorset = 
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

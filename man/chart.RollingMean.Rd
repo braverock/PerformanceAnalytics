@@ -1,9 +1,9 @@
 \name{chart.RollingMean}
 \alias{chart.RollingMean}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ chart the rolling mean return }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+A wrapper to create a rolling mean return chart with 95\% confidence bands.
 }
 \usage{
 chart.RollingMean(R, n = 12, xaxis = TRUE, ylim = NULL, main = paste("Rolling ", n, "-Month Mean Return", sep = ""), trim = FALSE, ...)
@@ -11,10 +11,10 @@ chart.RollingMean(R, n = 12, xaxis = TRUE, ylim = NULL, main = paste("Rolling ",
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{n}{ ~~Describe \code{n} here~~ }
-  \item{xaxis}{ ~~Describe \code{xaxis} here~~ }
-  \item{ylim}{ ~~Describe \code{ylim} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
+  \item{n}{ number of periods to apply rolling function over }
+  \item{xaxis}{ if true, draws the x axis }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{main}{ set the chart title, same as in \code{plot} }
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{\dots}{ any other passthru parameters }
 }
@@ -22,15 +22,11 @@ chart.RollingMean(R, n = 12, xaxis = TRUE, ylim = NULL, main = paste("Rolling ",
   ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+A timeseries line charts of the rolling mean, with error bars
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }

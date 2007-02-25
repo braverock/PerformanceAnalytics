@@ -3,7 +3,9 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate CAPM beta }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+CAPM Beta is the beta of an asset to the variance and covariance of an initial portfolio.  Used to determine diversification potential. also called "systematic beta" by several papers.
+
+This function uses a linear intercept model to achieve the same results as the symbolic model used by \code{\link{BetaCoVariance}}
 }
 \usage{
 CAPM.beta(R, Rb, rf = 0, digits = 4)
@@ -13,63 +15,23 @@ CAPM.beta(R, Rb, rf = 0, digits = 4)
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+systematic beta of an asset to the index
 }
-\references{ ~put references to the literature/web site here ~ }
+\references{
+Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
+}
 \author{ Peter Carl }
 \note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{BetaCoVariance}}
+    \code{\link{CAPM.alpha}}
+ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, rf = 0, digits = 4)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    # This is a wrapper for calculating a CAPM beta.
-
-    # Inputs:
-    # R: vector of returns for the asset being tested
-    # Rb: vector of returns for the benchmark the asset is being gauged against
-    # x and y are assumed to be matching periods and NO TEST IS MADE TO CHECK
-    # rf: risk free rate in the same periodicity as the returns.  May be a vector
-    #     of the same length as x and y.
-
-    # Output:
-    #
-
-    # FUNCTION:
-
-    assetReturns.vec = checkDataVector(x)
-    benchmarkReturns.vec = checkDataVector(y)
-
-    if (length(assetReturns.vec) != length(benchmarkReturns.vec))
-        stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
-
-    # Make these excess returns
-    assetExcessRet.vec = assetReturns.vec - rf
-    indexExcessRet.vec = benchmarkReturns.vec - rf
-
-    # regress
-    model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
-
-#    alpha = coef(model.lm)[[1]]
-    beta = coef(model.lm)[[2]]
-    beta
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

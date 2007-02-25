@@ -27,11 +27,7 @@ Systematic Beta \beta_{a,b}
 Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of R_{a}on R_{b} and that this slope can be used to determine the risk premium or excess expected return (see Eq. 7.9 and 7.10, p. 230-231)
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+systematic beta of the asset to the benchmark
 }
 \references{
 Favre, L. and Renaldo, A.. How to Price Hedge Funds: From Two- to Four-Moment CAPM. October 2003. UBS and Edhec Business School. Equation [5] p 10

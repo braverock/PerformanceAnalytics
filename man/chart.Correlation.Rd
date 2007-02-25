@@ -10,8 +10,8 @@ chart.Correlation(x, y, histogram = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ ~~Describe \code{x} here~~ }
-  \item{y}{ ~~Describe \code{y} here~~ }
+  \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
+  \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
   \item{histogram}{ ~~Describe \code{histogram} here~~ }
 }
 \details{
