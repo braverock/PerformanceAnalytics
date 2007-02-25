@@ -12,7 +12,7 @@ table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{column}{ ~~Describe \code{column} here~~ }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
   \item{as.perc}{ ~~Describe \code{as.perc} here~~ }
 }
 \details{
@@ -124,7 +124,7 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
             multiplier = 1
 
         target.df=target.df*multiplier
-        target.df = round(target.df, digits = digits)
+        target.df = base::round(target.df, digits = digits)
 
         if(column == 1)
             result.df = target.df

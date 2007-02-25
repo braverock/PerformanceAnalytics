@@ -15,7 +15,7 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
   \item{trim}{ ~~Describe \code{trim} here~~ }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{FUN}{ ~~Describe \code{FUN} here~~ }
   \item{\dots}{ any other passthru parameters }
@@ -114,7 +114,7 @@ function (R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, 
         }
     }
     colnames(resultingtable) = columnnames
-    result = round(resultingtable, digits)
+    result = base::round(resultingtable, digits)
     result
 
     # Examples:

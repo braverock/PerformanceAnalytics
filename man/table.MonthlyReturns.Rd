@@ -13,7 +13,7 @@ table.MonthlyReturns(R, ci = 0.95, firstcolumn = 1, digits = 4)
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{ci}{ ~~Describe \code{ci} here~~ }
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -84,7 +84,7 @@ function (R, ci = 0.95, firstcolumn = 1, digits = 4)
        as.numeric(quantile(x, prob = 0.75, na.rm = TRUE)), max(x), sqrt(var(x)/length(x)),
        cl.vals(x, ci)[1], cl.vals(x, ci)[2], var(x), sqrt(var(x)),
        skewness(x), kurtosis(x))
-    z = round(as.numeric(z),digits = digits)
+    z = base::round(as.numeric(z),digits = digits)
     znames = c("Observations", "NAs", "Minimum", "Quartile 1", "Median", "Arithmetic Mean",
        "Geometric Mean", "Quartile 3", "Maximum", "SE Mean", paste("LCL Mean (",ci,")",sep=""),
        paste("UCL Mean (",ci,")",sep=""), "Variance", "Stdev", "Skewness", "Kurtosis")

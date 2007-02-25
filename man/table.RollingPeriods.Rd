@@ -16,7 +16,7 @@ table.RollingPeriods(R, firstcolumn = 1, periods = subset(c(3, 6, 9, 12, 18, 24,
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{FUNCS}{ ~~Describe \code{FUNCS} here~~ }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -87,7 +87,7 @@ function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,
         }
     }
     colnames(resultingtable) = columnnames
-    ans = round(resultingtable, digits)
+    ans = base::round(resultingtable, digits)
     ans
 
     # An example:

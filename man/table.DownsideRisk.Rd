@@ -17,7 +17,7 @@ table.DownsideRisk(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = 0.1/
   \item{rf}{ risk free rate, in same period as your returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
   \item{p}{ confidence level for calculation, default p=.99 }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -103,7 +103,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
         }
     }
     colnames(resultingtable) = columnnames
-    ans = round(resultingtable, digits)
+    ans = base::round(resultingtable, digits)
     ans
 
     #  For example:

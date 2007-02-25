@@ -14,7 +14,7 @@ table.HigherMoments(x, y, scale = 12, rf = 0, digits = 4, method = "moment")
   \item{y}{ ~~Describe \code{y} here~~ }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
   \item{method}{ ~~Describe \code{method} here~~ }
 }
 \details{
@@ -118,7 +118,7 @@ function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
         }
     }
     colnames(result.df) = columnnames
-    result.df = round(result.df, digits)
+    result.df = base::round(result.df, digits)
     result.df
 
     #  For example:

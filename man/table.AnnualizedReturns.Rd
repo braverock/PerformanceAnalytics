@@ -15,7 +15,7 @@ table.AnnualizedReturns(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digit
   \item{firstcolumn}{ ~~Describe \code{firstcolumn} here~~ }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{digits}{ ~~Describe \code{digits} here~~ }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -79,7 +79,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
         }
     }
     colnames(resultingtable) = columnnames
-    ans = round(resultingtable, digits = digits)
+    ans = base::round(resultingtable, digits = digits)
     ans
   }
 }
