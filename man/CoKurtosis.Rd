@@ -15,12 +15,13 @@ CoKurtosis(Ri, Ra, na.rm = FALSE)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
+    \eqn{CoK_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}})^{3})}{\code{CoS=sum((Ra-mean(Ra))(Rb-mean(Rb)^3))}}
 }
 \value{
 value of cokurtosis of Ri and Ra
 }
 \references{
-Martellini L., Vaissie M., Ziemann V. October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
+Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. October 2005. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
 
 Martellini L. and Ziemann V. 2005. Marginal Impacts on Portfolio Distributions. Working Paper, Edhec Risk and Asset Management Research Centre
 }

@@ -27,8 +27,9 @@ Maintainer: Brian G. Peterson <brian@braverock.com>
 }
 
 \references{
-Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley 2004. \cr
-Tsay, R. \emph{Analysis of Financial Time Series}. Wiley 2001. \cr
+Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
+Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
+Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }
 

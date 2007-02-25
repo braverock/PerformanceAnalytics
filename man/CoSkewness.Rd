@@ -15,7 +15,7 @@ CoSkewness(Ri, Ra, na.rm = FALSE)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+    \eqn{CoS_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}})^{2})}{\code{CoS=sum((Ra-mean(Ra))(Rb-mean(Rb)^2))}}
 }
 \value{
 value of coskewness of Ri and Ra
