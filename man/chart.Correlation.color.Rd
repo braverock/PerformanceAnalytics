@@ -12,10 +12,10 @@ chart.Correlation.color(R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{new}{ ~~Describe \code{new} here~~ }
-  \item{nrgcols}{ ~~Describe \code{nrgcols} here~~ }
-  \item{labels}{ ~~Describe \code{labels} here~~ }
-  \item{labcols}{ ~~Describe \code{labcols} here~~ }
-  \item{title}{ ~~Describe \code{title} here~~ }
+  \item{nrgcols}{ number or regularly spaced columns }
+  \item{labels}{ TRUE/FALSE use labels or not }
+  \item{labcols}{ labels to use }
+  \item{title}{ title for the plot }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

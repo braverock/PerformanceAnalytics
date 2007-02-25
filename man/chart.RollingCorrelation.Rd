@@ -1,9 +1,9 @@
 \name{chart.RollingCorrelation}
 \alias{chart.RollingCorrelation}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ chart rolling correlation fo multiple assets }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+A wrapper to create a chart of rolling correlation metrics in a line chart
 }
 \usage{
 chart.RollingCorrelation(R, Rb, n = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), trim = FALSE, ...)
@@ -31,40 +31,12 @@ chart.RollingCorrelation(R, Rb, n = 12, xaxis = TRUE, legend.loc = NULL, colorse
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, Rb, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), trim = FALSE, ...)
-{ # @author Peter Carl
-
-    # DESCRIPTION:
-    # A wrapper to create a chart of rolling performance metrics in a line chart
-
-    # Inputs:
-    # R: a matrix, data frame, or timeSeries of returns
-    # FUN: any function that can be evaluated using a single set of returns
-    #   (e.g., rolling beta won't work, but Return.annualizeds will)
-
-    # Outputs:
-    # A timeseries line chart of the calculated series
-
-    # FUNCTION:
-
-    # Transform input data to a matrix
-    x = checkDataMatrix(R)
-    y = checkDataMatrix(Rb)
-
-    chart.TimeSeries(rollingCorrelation(x = x, y = y, n = n, trim = trim), xaxis = xaxis, col = colorset, legend.loc = legend.loc, ylim = c(-1,1), ...)
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

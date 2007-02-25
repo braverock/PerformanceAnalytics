@@ -1,7 +1,7 @@
 \name{charts.RollingPerformance}
 \alias{charts.RollingPerformance}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ rolling performance chart }
 \description{
 A wrapper to create a rolling annualized returns chart, rolling annualized standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
@@ -23,10 +23,6 @@ A stack of three related timeseries line charts
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
 \seealso{
     \code{\link{chart.RollingPerformance}}
 }

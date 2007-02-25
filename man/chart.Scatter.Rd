@@ -19,7 +19,7 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
+  \item{symbolset}{ from \code{pch} in \code{\link{plot}},  submit a set of symbols to be used in the same order as the data sets submitted }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ ~~Describe \code{ylog} here~~ }

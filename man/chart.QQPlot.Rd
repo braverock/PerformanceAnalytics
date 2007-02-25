@@ -12,7 +12,7 @@ chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
+  \item{symbolset}{ from \code{pch} in \code{\link{plot}},  submit a set of symbols to be used in the same order as the data sets submitted }
   \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, as in \code{\link{plot}} }
   \item{main}{ set the chart title, same as in \code{plot} }

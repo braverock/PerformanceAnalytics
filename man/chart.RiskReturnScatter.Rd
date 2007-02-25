@@ -24,7 +24,7 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{add.sharpe}{ this draws a Sharpe ratio line that indicates Sharpe ratio levels of \code{c(1,2,3)}.  Lines are drawn with a y-intercept of the risk free rate and the slope of the appropriate Sharpe ratio level.  Lines should be removed where not appropriate (e.g., sharpe.ratio = NULL). }
   \item{add.boxplots}{ TRUE/FALSE adds a boxplot summary of the data on the axis }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
+  \item{symbolset}{ from \code{pch} in \code{\link{plot}},  submit a set of symbols to be used in the same order as the data sets submitted }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
