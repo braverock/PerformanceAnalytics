@@ -10,7 +10,7 @@ table.MonthlyReturns(R, ci = 0.95, firstcolumn = 1, digits = 4)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{ci}{ confidence interval, defaults to 95% }
+  \item{ci}{ confidence interval, defaults to 95\% }
   \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{digits}{ number of digits to round results to }
 }
