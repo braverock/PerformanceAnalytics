@@ -1,5 +1,5 @@
 `table.CAPM` <-
-function (x, y, scale = 12, rf = 0, digits = 4)
+function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -10,8 +10,8 @@ function (x, y, scale = 12, rf = 0, digits = 4)
     # model, or CAPM.
 
     # Inputs:
-    # x: a vector of returns to test, e.g., the asset to be examined
-    # y: a matrix, data.frame, or timeSeries of benchmarks to test the asset
+    # Ra: a vector of returns to test, e.g., the asset to be examined
+    # Rb: a matrix, data.frame, or timeSeries of benchmarks to test the asset
     #     against.
 
     # This is irritating, but if you want to pass in a sub-set of a timeSeries,
@@ -32,14 +32,14 @@ function (x, y, scale = 12, rf = 0, digits = 4)
     # Prepare the data
     # target.vec is the vector of data we want correlations for; we'll get it
     # from x
-    assetReturns.vec = checkDataVector(x)
+    assetReturns.vec = checkDataVector(Ra)
 
     # Make these excess returns
     assetExcessRet.vec = assetReturns.vec - rf
 
     # data.matrix is a vector or matrix of data we want correlations against;
     # we'll take it from y
-    indexes.matrix = checkDataMatrix(y)
+    indexes.matrix = checkDataMatrix(Rb)
     columns=ncol(indexes.matrix)
     columnnames = colnames(indexes.matrix)
     if (is.null(columnnames))
@@ -126,10 +126,13 @@ function (x, y, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.4 2007-02-25 18:23:40 brian Exp $
+# $Id: table.CAPM.R,v 1.5 2007-02-26 22:04:36 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

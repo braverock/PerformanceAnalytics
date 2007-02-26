@@ -11,9 +11,9 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
     # what data format it has to work with.
 
     # Inputs:
-    # x: the data provided.
+    # R: the data provided.
     # na.rm: default behavior is to remove NA's
-    # quiet: if true, it will throw warnings when errors are noticed
+    # quiet: if false, it will throw warnings when errors are noticed
 
     # Outputs:
     # Produces a numeric vector or an NA and any associated warnings.
@@ -48,9 +48,9 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
     # Third, we'll check to see if we have any character data
     if (!is.numeric(x)){
         if(!quiet)
-            warning("The data is not numeric.")
+            warning("The data does not appear to be numeric.")
         # Try to coerce the data
-        x = as.numeric(x)
+        # x = as.numeric(x)
     }
 
     # Fourth, we'll see if we have more than one data point.
@@ -74,10 +74,13 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataVector.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: checkDataVector.R,v 1.3 2007-02-26 22:04:36 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890

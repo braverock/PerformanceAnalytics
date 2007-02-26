@@ -1,5 +1,5 @@
 `checkDataMatrix` <-
-function (x, na.rm = FALSE, ...)
+function (R, na.rm = FALSE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -11,7 +11,7 @@ function (x, na.rm = FALSE, ...)
     # what data format it has to work with.
 
     # Inputs:
-    # x: a matrix, data.frame or timeSeries object of data to be checked and
+    # R: a matrix, data.frame or timeSeries object of data to be checked and
     # transformed if necessary.
     # na.rm: removes rows of data with NA's in any column.  This is useful
     # for calculating correlations, etc., that require complete data.  Note
@@ -22,31 +22,31 @@ function (x, na.rm = FALSE, ...)
     # Produces a matrix object with named rows and columns.
 
     # FUNCTION:
-    if (class(x) == "numeric") {
+    if (class(R) == "numeric") {
         # Note that column and row labels will be blank.
-        y = as.matrix(x)
+        R = as.matrix(R)
     }
 
-    if (class(x) == "matrix") {
-        y = x
+    if (class(R) == "matrix") {
+        R = R
     }
 
-    if (class(x) == "data.frame") {
-        y = as.matrix(x)
+    if (class(R) == "data.frame") {
+        R = as.matrix(R)
     }
 
-    if (class(x) == "timeSeries") {
+    if (class(R) == "timeSeries") {
         # timeSeries objects keep the data in a matrix and append a set of
         # meta-data.  We just need the information stored in the 'Data' slot.
         #y = x@Data
-        y = seriesData(x)
+        R = seriesData(R)
     }
 
     if (na.rm) {
-        #y = na.contiguous(y)
-        y = na.omit(y)
+        #y = na.contiguous(R)
+        R = na.omit(R)
     }
-    return(y)
+    return(R)
 
 }
 
@@ -58,10 +58,13 @@ function (x, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataMatrix.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: checkDataMatrix.R,v 1.3 2007-02-26 22:04:36 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890

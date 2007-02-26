@@ -1,6 +1,6 @@
 `table.RollingPeriods` <-
-function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48) 
-< length(as.matrix(R[,1]))), scale = 12, rf = 0, FUNCS=c("mean","sd"), digits = digits)
+function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
+< length(as.matrix(R[,1]))), scale = 12, rf = 0, FUNCS=c("mean","sd"), digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -46,7 +46,7 @@ function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,
         }
     }
     colnames(resultingtable) = columnnames
-    ans = base::round(resultingtable, digits = digits)
+    ans = base::round(resultingtable, digits)
     ans
 
     # An example:
@@ -84,10 +84,13 @@ function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.RollingPeriods.R,v 1.3 2007-02-25 18:23:40 brian Exp $
+# $Id: table.RollingPeriods.R,v 1.4 2007-02-26 22:04:36 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
