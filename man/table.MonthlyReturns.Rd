@@ -15,23 +15,19 @@ table.MonthlyReturns(R, ci = 0.95, firstcolumn = 1, digits = 4)
   \item{digits}{ number of digits to round results to }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+Data frame of columns named to the columns of the data passed in, and rows names for the calculated statistics calculated.
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
+\note{ 
 
- ~Make other sections like Warning with \section{Warning }{....} ~
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{  }
 \examples{
+data(edhec)
+table.MonthlyReturns(edhec[,1:3])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
