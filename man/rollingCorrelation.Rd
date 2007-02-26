@@ -1,9 +1,9 @@
 \name{rollingCorrelation}
 \alias{rollingCorrelation}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ rolling training period covariance/correlation }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+This is a wrapper for providing n-period trailing correlations for the data provided.
 }
 \usage{
 rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
@@ -12,7 +12,7 @@ rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
 \arguments{
   \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
   \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
-  \item{n}{ ~~Describe \code{n} here~~ }
+  \item{n}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }
@@ -21,103 +21,23 @@ rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
   ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+A data.table of n-period trailing correlations for each column in y.
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{
+Inspired by rollFun() written by Diethelm Wurtz.
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+Assumes that x and y are sequenced exactly the same and are regular.
+
+Currently assumes that BOTH x and y are provided
+
+@todo: Allow _either_ a matrix or data frame for 'x' _or_ give both 'x' and 'y' \code{\link{cov()}}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{cov()}}
+}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, y, n, trim = TRUE, na.rm = FALSE, ...)
-{# @author Peter Carl
-
-    # DESCRIPTION:
-    # This is a wrapper for providing n-period trailing correlations for the
-    # data provided.  Inspired by rollFun() written by Diethelm Wurtz.
-
-    # Specifically, we're wrapping the basic function cor(), which has:
-    # function (x, y = NULL, use = "all.obs", method = c("pearson",
-    #     "kendall", "spearman"))
-
-    # Inputs:
-    # Assumes an input of regular period returns.
-    #    x: a numeric vector, matrix, data frame, or timeSeries.
-    #       The resulting data frame will contain columns of cor(x,y)
-    #       for each period.
-    #
-    #    y: 'NULL' (default) or a vector, matrix, data frame or timeSeries
-    #       with compatible dimensions to 'x'.
-    #
-    #    Currently assumes that BOTH x and y are provided
-    #    @todo: Make it so we can _either_ give a matrix or data frame
-    #    for 'x' _or_ give both 'x' and 'y' (as in cov())
-    #
-    # Assumes that x and y are sequenced exactly the same and are regular.
-
-    # Outputs:
-    # A data.table of n-period trailing correlations for each column in y.
-
-    # FUNCTION:
-
-    # target.vec is the vector of data we want correlations for; we'll get it
-    # from x
-    target.vec = checkDataVector(x)
-    xrows = nrow(x)
-    rownames = rownames(x)
-
-    # data.matrix is a vector or matrix of data we want correlations against;
-    # we'll take it from y
-    data.matrix = checkDataMatrix(y)
-    columns=ncol(y)
-    columnnames = colnames(y)
-
-    if (!trim) {
-        result.df = as.data.frame(matrix(data = NA, nrow = (n-1), ncol = columns, byrow = FALSE, dimnames = NULL))
-        colnames(result.df) = columnnames
-    }
-    #  For each period (or row):
-    for(row in n:xrows) {
-        values = vector('numeric', 0)
-        # Get the subset of returns on which to calulate correlation
-        trailing.data = data.matrix[(row-n+1):row,]
-        trailing.vec = target.vec[(row-n+1):row]
-
-        # Calculate correlation
-        values = cor(trailing.vec,trailing.data,...)
-
-        if(row == n && trim) {
-            result.df = data.frame(Value = values, row.names = rownames[n])
-        }
-
-        else {
-            nextrow = data.frame(Value = values, row.names = rownames[row])
-            colnames(nextrow) = columnnames
-            result.df = rbind(result.df, nextrow)
-        }
-    }
-
-    if (!trim) {
-        rownames(result.df) = rownames
-    }
-    else
-        rownames(result.df) = rownames(n:xrows)
-
-    colnames(result.df) = columnnames
-
-    result.df
-
     # Example:
     # > head(rollingCorrelation(manager.ts@Data[,1],edhec.ts@Data,n=12))
     #            Convertible Arbitrage CTA Global Distressed Securities
@@ -148,8 +68,6 @@ function (x, y, n, trim = TRUE, na.rm = FALSE, ...)
     # 2004-02-27        0.6862517      0.7605837   -0.28807086
     # 2004-03-31        0.5921739      0.6766063   -0.24154960
     # 2004-04-30        0.5073817      0.5257858   -0.04663322
-
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
