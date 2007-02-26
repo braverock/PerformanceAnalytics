@@ -6,7 +6,7 @@
 Econometric tools for performance and risk analysis.
 }
 \description{
-Library of econometric functions for performance and risk analysis. This library aims to aid practitioners and researchers in utilizing the latest research in analysis of non-normal return streams.  In general, this library is most tested on return (rather than price) data on a monthly scale, but most functions will work with daily or irregular return data as well.
+Library of econometric functions for performance and risk analysis of financial portfolios. This library aims to aid practitioners and researchers in using the latest research in analysis of both normal and non-normal return streams.  In general, this library is most tested on return (rather than price) data on a monthly scale, but most functions will work with daily or irregular return data as well.
 }
 \details{
 \tabular{ll}{
