@@ -24,7 +24,7 @@ maximum drawdown
 }
 \examples{
 data(edhec)
-R=edhec[,"Funds.of.Funds",drop=F]
+R=edhec[,"Funds.of.Funds",drop=FALSE]
 maxDrawdown(R)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

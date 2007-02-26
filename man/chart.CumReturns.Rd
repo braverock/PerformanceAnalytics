@@ -22,13 +22,13 @@ A timeseries line chart of the cumulative return series
 }
 \references{ }
 \author{ Peter Carl }
-\note{ 
+\note{
 }
 \seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}} }
 \examples{
 data(edhec)
-chart.CumReturns(edhec[,"Funds.of.Funds",drop=F],main="Cumulative Returns")
-chart.CumReturns(edhec[,"Funds.of.Funds",drop=F],wealth.index=T, main="Value of \$1")
+chart.CumReturns(edhec[,"Funds.of.Funds",drop=FALSE],main="Cumulative Returns")
+chart.CumReturns(edhec[,"Funds.of.Funds",drop=FALSE],wealth.index=TRUE, main="Value of \$1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

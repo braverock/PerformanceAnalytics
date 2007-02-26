@@ -30,9 +30,9 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 \seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}}, \code{\link{VaR}}, \code{\link{VaR.CornishFisher}} }
 \examples{
 data(edhec)
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=F], main="Monthly Returns")
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=F], main="Monthly Returns", method="VaR")
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=F], main="Monthly Returns", method="StdDev", n=36)
+chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns")
+chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns", method="VaR")
+chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns", method="StdDev", n=36)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

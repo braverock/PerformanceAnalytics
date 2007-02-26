@@ -80,7 +80,7 @@ risk.labels = c(
     "Tech Bubble",
     "Sept 11")
 data(edhec)
-x=edhec[,"Funds.of.Funds",drop=F]
+x=edhec[,"Funds.of.Funds",drop=FALSE]
 Return.cumulative = cumprod.column(1+x) - 1
 chart.TimeSeries(Return.cumulative)
 chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)

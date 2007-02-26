@@ -36,7 +36,7 @@ modified with permission from function by Sankalp Upadhyay
 }
 \examples{
 data(edhec)
-R=edhec[,"Funds.of.Funds",drop=F]
+R=edhec[,"Funds.of.Funds",drop=FALSE]
 findDrawdowns(R)
 sortDrawdowns(findDrawdowns(R))
 }
