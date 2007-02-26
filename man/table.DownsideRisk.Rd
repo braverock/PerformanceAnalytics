@@ -36,6 +36,8 @@ A table of estimates of downside risk measures
     \code{\link{StdDev}}
 }
 \examples{
+data(edhec)
+table.DownsideRisk(edhec)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

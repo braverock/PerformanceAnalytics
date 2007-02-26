@@ -25,6 +25,8 @@ A table of estimates of rolling period return measures
 \author{ Peter Carl }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
+data(edhec)
+table.RollingPeriods(edhec[,10:13], FUN="SharpeRatio",periods=c(12,24,36))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
