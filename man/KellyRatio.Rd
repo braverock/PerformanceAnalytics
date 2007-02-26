@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate Kelly criterion ratio (leverage or bet size) for a strategy }
 \description{
-Calculate Kelly criterion ratio (leverage or bet size) for a strategy.
+Kelly criterion ratio (leverage or bet size) for a strategy.
 }
 \usage{
 KellyRatio(R, rf = 0, method="half")
@@ -15,9 +15,9 @@ KellyRatio(R, rf = 0, method="half")
   \item{method}{ method=half will use the half-Kelly, this is the default}
 }
 \details{
-The Kelly Criterion was identified by Bell Labs scientist
+The Kelly Criterion was identified by Bell Labs scientist John Kelly, and applied to blackjack and stock strategy sizing by Ed Thorpe.
 
-can be basically stated as
+The Kelly ratio can be simply stated as
 
 bet size is the ratio of edge over odds
 
