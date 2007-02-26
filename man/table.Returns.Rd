@@ -1,9 +1,12 @@
 \name{table.Returns}
 \alias{table.Returns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Monthly and Calendar year Return table }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+Returns a table of returns formatted with years in rows, months in columns, and a total column in the last column, e.g., \cr
+
+\tab   Jan   Feb   Mar   Apr  May   Jun   Jul   Aug   Sep   Oct   Nov   Dec \cr
+2003 -1.05 -3.16 -1.07  7.99 8.97  1.49 -2.03 -0.79  4.32 -0.89 -1.21  3.05
 }
 \usage{
 table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
@@ -11,42 +14,21 @@ table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{column}{ ~~Describe \code{column} here~~ }
+  \item{column}{ defaults to first column in a multi-column matrix, but you can pass a specific column to format }
   \item{digits}{ number of digits to round results to }
-  \item{as.perc}{ ~~Describe \code{as.perc} here~~ }
-}
-\details{
-  ~~ If necessary, more details than the description above ~~
+  \item{as.perc}{ TRUE/FALSE  if TRUE, multiply simple returns by 100 to get \% }
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+table of returns
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\note{
+This function assumes monthly returns, and does not currently have handling for other scales.
 }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, column = 1, digits = 1, as.perc = TRUE)
-{# @author Peter Carl
-
-    # DESCRIPTION:
-
-    # Monthly and Calendar year Return table
-
-    # Inputs:
-    # R: assumes an input of ***monthly*** returns, such as:
+    # assumes an input of ***monthly*** returns, such as:
     # > head(monthlyReturns.ts)
     #             Actual S&P500TR
     # 2002-12-31  0.0395  -0.0588
@@ -76,73 +58,12 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
     # 2005 11.68
     # 2006  2.10
 
-    # FUNCTION:
-
-    ri = checkDataMatrix(R)
-
-    columns = ncol(ri)
-    columnnames = colnames(ri)
-    rownames = rownames(ri)
-
-    # get the start and end years from the object of monthly returns
-    firstyear = as.numeric(format(strptime(rownames(ri)[1],"\%Y-\%m-\%d"), "\%Y"))
-    lastyear = as.numeric(format(strptime(rownames(ri)[length(ri[,1])],"\%Y-\%m-\%d"), "\%Y"))
-
-    # create vectors for year and month labels
-    year = format(strptime(rownames(ri), "\%Y-\%m-\%d"), "\%Y")
-    month = format(strptime(rownames(ri), "\%Y-\%m-\%d"), "\%b")
-
-    # create an empty target data frame, labeled correctly
-    monthlabels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-    rowlabels = (firstyear:lastyear)
-
-    # for the column specified, do the following:
-    for(column in 1:columns){
-        target.df = as.data.frame(matrix(data = as.numeric(NA), length(rowlabels), length(monthlabels), dimnames = list(rowlabels, monthlabels)))
-
-        # for the length of the monthly return data vector
-        #   figure out the month and year of the data point and
-        #   put it into the matrix
-        for (i in 1:length(ri[,1])) {
-            target.df[year[i],month[i]] = ri[i,column]
-        }
-
-        # calculate calendar year returns
-        #    first, create a target data.frame
-        yearcol=as.data.frame(matrix(data = as.numeric(NA), length(rowlabels), 1, dimnames = list(rowlabels, columnnames[column])))
-
-        #    next, calculate the cumulative return for each year
-        for (i in 1:length(yearcol[,1])) yearcol[i,columnnames[column]] = prod(1 + na.omit(as.numeric(target.df[i,])))-1
-
-        #Now, append the results to the other data.frame
-        target.df=cbind(target.df,yearcol)
-
-        # are we going to show these numbers as a percentage? or raw?
-        if(as.perc)
-            multiplier = 100
-        else
-            multiplier = 1
-
-        target.df=target.df*multiplier
-        target.df = base::round(target.df, digits = digits)
-
-        if(column == 1)
-            result.df = target.df
-        else {
-            result.df = cbind(result.df,target.df[,13])
-
-        }
-
-    }
-    colnames(result.df) = c(monthlabels,columnnames)
-    result.df
 
     # To plot the result to a graphics object:
     # require(gplot)
     # textplot(target.df, halign = "center", valign="center",cex=.8)
     # strangely, textplot won't fill in trailing zeros
 
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
