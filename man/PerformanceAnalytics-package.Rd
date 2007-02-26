@@ -23,7 +23,7 @@ License: \tab GPL\cr
 Peter Carl \cr
 Brian G. Peterson \cr
 
-Maintainer: Brian G. Peterson <brian@braverock.com>
+Maintainer: Brian G. Peterson <brian@braverock.com> \url{http://braverock.com/brian/}
 }
 
 \references{

@@ -40,7 +40,7 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
 \author{ Peter Carl }
 \note{
 Code inspired by a chart on:
-http://zoonek2.free.fr/UNIX/48_R/03.html
+\url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{

@@ -1,11 +1,9 @@
 \name{rollingRegression}
 \alias{rollingRegression}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Rolling Regression on Returns }
 \description{
-This code was posted by Douglas Bates to the R-help mailing list in response to a question posted by Ajay Shah.
-For the full discussion, see:
-http://www.mail-archive.com/r-help@stat.math.ethz.ch/msg19544.html
+calculates rolling regression statistics on a return stream.
 }
 \usage{
 rollingRegression(formula, data, width, ...)
@@ -17,19 +15,16 @@ rollingRegression(formula, data, width, ...)
   \item{width}{ ~~Describe \code{width} here~~ }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
 }
-\references{ http://www.mail-archive.com/r-help@stat.math.ethz.ch/msg19544.html }
+\references{ \url{http://www.mail-archive.com/r-help@stat.math.ethz.ch/msg19544.html} }
 \author{ Douglas Bates }
-\note{}
+\note{
+This code was posted by Douglas Bates to the R-help mailing list in response to a question posted by Ajay Shah.
+For the full discussion, see:
+\url{http://www.mail-archive.com/r-help@stat.math.ethz.ch/msg19544.html}
+
+}
 \seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 ##---- Should be DIRECTLY executable !! ----

@@ -12,7 +12,7 @@ chart.Correlation(x, y, histogram = TRUE)
 \arguments{
   \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
   \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
-  \item{histogram}{ ~~Describe \code{histogram} here~~ }
+  \item{histogram}{ TRUE/FALSE whether or not to display a histogram }
 }
 \value{
 correlation chart
@@ -20,9 +20,11 @@ correlation chart
 \references{ }
 \author{ Peter Carl }
 \note{
-based on plot at  http://addictedtor.free.fr/graphiques/sources/source_137.R
+based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{table.Correlation}}
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
