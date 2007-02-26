@@ -29,7 +29,7 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 
     # Calculate drawdown level
     Return.cumulative = cumprod.column(1+x)
-    maxCumulativeReturn = cumMax.column(Return.cumulative)
+    maxCumulativeReturn = cummax.column(Return.cumulative)
     drawdown = Return.cumulative/maxCumulativeReturn - 1
 
     # Chart the drawdown level
@@ -45,10 +45,13 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Drawdown.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.Drawdown.R,v 1.3 2007-02-26 13:50:57 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
