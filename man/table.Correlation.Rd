@@ -6,12 +6,12 @@
 This is a wrapper for calculating correlation and significance against each column of the data provided.
 }
 \usage{
-table.Correlation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
+table.Correlation(Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
-  \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
+  \item{Ra}{ a vector of returns to test, e.g., the asset to be examined }
+  \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against. }
   \item{n}{ ~~Describe \code{n} here~~ }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
@@ -38,14 +38,12 @@ Short Selling           -0.2585501 0.1170322982 -0.60433520 0.1691977
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\note{}
+\seealso{}
 \examples{
-table.Correlation(manager.ts@Data[,1],edhec.ts@Data,conf.level=.99)
-ctable = table.Correlation(manager.ts@Data[,1],edhec.ts@Data,conf.level=.99)
+data(edhec)
+table.Correlation(Ra=edhec[,"Equity.Market.Neutral"],Rb=subset(edhec,select="Funds.of.Funds"),conf.level=.99)
+ctable = table.Correlation(Ra=edhec[,"Equity.Market.Neutral"],Rb=subset(edhec,select="Funds.of.Funds"),conf.level=.99)
 dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

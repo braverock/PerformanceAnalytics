@@ -20,7 +20,10 @@ StdDev(R)
 \value{
 standard deviation
 }
-\references{ ~put references to the literature/web site here ~ }
+\note{
+This function is really just a wrapper.  It exists because there are several examples for R, S-Plus, and other languages that call standard deviation StdDev, std, or sd.  This makes things a little easier to port and reuse.
+}
+\references{}
 \author{ Brian G. Peterson }
 \seealso{
     \code{\link{StdDev.annualized}}

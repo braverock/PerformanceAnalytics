@@ -12,7 +12,7 @@ checkDataVector(R, na.rm = TRUE, quiet = TRUE, ...)
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{quiet}{ if true, it will throw warnings when errors are noticed }
+  \item{quiet}{ TRUE/FALSE if FALSE, it will throw warnings when errors are noticed, default TRUE }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

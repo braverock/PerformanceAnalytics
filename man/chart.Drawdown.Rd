@@ -26,7 +26,7 @@ Any time the cumulative returns dips below the maximum cumulative returns, it's 
 \seealso{ \code{\link{plot}}, \code{\link{chart.TimeSeries}}  }
 \examples{
 data(edhec)
-chart.Drawdown(edhec[,c(1,2),drop=FALSE], main="Drawdown from Peak Equity Attained", legend.loc="bottomleft")
+chart.Drawdown(edhec[,c(1,2)], main="Drawdown from Peak Equity Attained", legend.loc="bottomleft")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
