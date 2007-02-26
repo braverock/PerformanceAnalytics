@@ -42,7 +42,7 @@ function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = T
                 legend.txt = "Std Dev"
         }
         if(method == "VaR"){
-            risk = as.matrix(rollingFunction(as.data.frame(x[,1]), n = n, trim = FALSE, FUN = "VaR", p = p, modified = FALSE))
+            risk = as.matrix(rollingFunction(as.data.frame(x[,1]), n = n, trim = FALSE, FUN = "VaR.CornishFisher", p = p, modified = FALSE))
             symmetric = TRUE
             if(n>0)
                 legend.txt = paste("Rolling ",n,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
@@ -87,10 +87,13 @@ function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = T
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.BarVaR.R,v 1.3 2007-02-26 13:32:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
