@@ -31,7 +31,3 @@ chart.Drawdown(edhec[,c(1,2),drop=F], main="Drawdown from Peak Equity Attained",
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
-\keyword{ chart }
-\keyword{ timeseries }
-\keyword{ drawdown }
-\keyword{ plot }

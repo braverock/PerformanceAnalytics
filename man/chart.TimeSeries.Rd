@@ -92,4 +92,3 @@ chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomr
 \keyword{ distribution }
 \keyword{ models }
 \keyword{ hplot }
-\keyword{ plot }
