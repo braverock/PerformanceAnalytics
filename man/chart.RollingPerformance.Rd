@@ -31,6 +31,8 @@ A timeseries line chart of the calculated series
 \seealso{
     \code{\link{charts.RollingPerformance}}, ~~~ }
 \examples{
+data(edhec)
+chart.RollingPerformance(edhec[,1:3], n=24)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

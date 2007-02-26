@@ -33,9 +33,12 @@ Draws a graph of type "scatter" with some sensible defaults.
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ \code{\link{plot}} }
 \examples{
+data(edhec)
+chart.Scatter(edhec[,1],edhec[,2])
 }
+
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
