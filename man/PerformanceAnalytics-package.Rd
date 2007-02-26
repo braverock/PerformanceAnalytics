@@ -12,8 +12,8 @@ Library of econometric functions for performance and risk analysis of financial 
 \tabular{ll}{
 Package: \tab PerformanceAnalytics\cr
 Type: \tab Package\cr
-Version: \tab 0.9\cr
-Date: \tab 2007-02-22\cr
+Version: \tab 0.9.1\cr
+Date: \tab 2007-02-26\cr
 License: \tab GPL\cr
 }
 ~~ An overview of how to use the package, including the most important ~~
