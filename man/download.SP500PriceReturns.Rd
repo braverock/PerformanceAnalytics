@@ -1,22 +1,22 @@
 \name{download.SP500PriceReturns}
 \alias{download.SP500PriceReturns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ download S&P Prices }
+\title{ download S&P Returns }
 \description{
-downloads daily S&P 500 \emph{returns} using get.hist.quote for "^gspc"
+downloads S&P 500 prices and calculates \emph{returns} using get.hist.quote for "^gspc"
 }
 \usage{
-download.SP500PriceReturns(start = "1998-01-01", end = NULL, scale=c("m","d"), method=c("simple","compound"))
+download.SP500PriceReturns(start = "1998-01-01", end = NULL, compression=c("m","d"), method=c("simple","compound"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{start}{start date in YYYY-mm-dd format, default "1998-01-01"}
   \item{end}{end date in YYYY-mm-dd format}
-  \item{scale}{"m" for monthly returns and "d" for daily returns, default monthly}
+  \item{compression}{"m" for monthly returns and "d" for daily returns, default monthly}
   \item{method}{"simple" or "compound" as a passthru to \code{\link{CalculateReturns}}}
 }
 \value{
-matrix of simpleor compound returns on the S&P 500 at the scale specified
+matrix of simplei or compound returns on the S&P 500 at the timescale specified
 }
 \details{
 }
