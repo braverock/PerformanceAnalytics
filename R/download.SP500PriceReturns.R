@@ -1,3 +1,4 @@
+`download.SP500PriceReturns` <-
 function(start = "1998-01-01", end = NULL)
 { # @ author Peter Carl
 
