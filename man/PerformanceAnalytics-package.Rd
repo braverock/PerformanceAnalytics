@@ -16,8 +16,7 @@ Version: \tab 0.9.1\cr
 Date: \tab 2007-02-26\cr
 License: \tab GPL\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+
 }
 \author{
 Peter Carl \cr

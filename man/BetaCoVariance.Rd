@@ -20,11 +20,11 @@ BetaCoVariance(Ri, Ra, na.rm = FALSE)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
-Systematic Beta \beta_{a,b}
+Systematic Beta \eqn{\beta_{a,b}}{BCoV(a,b)}
 
 \eqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{a}-\bar{R_{a}})^{2}}}{BetaCoV=cov(a,b)/var(b)}
 
-Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of R_{a}on R_{b} and that this slope can be used to determine the risk premium or excess expected return (see Eq. 7.9 and 7.10, p. 230-231)
+Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of \eqn{R_{a}}{Ra}on \eqn{R_{b}}{Rb} and that this slope can be used to determine the risk premium or excess expected return (see Ruppert Eq. 7.9 and 7.10, p. 230-231)
 }
 \value{
 systematic beta of the asset to the benchmark

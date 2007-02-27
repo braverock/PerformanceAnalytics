@@ -26,13 +26,13 @@ A data.table of n-period trailing correlations for each column in y.
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
 \note{
-Inspired by rollFun() written by Diethelm Wurtz.
+Inspired by \code{\link{fMultivar::rollFun}} written by Diethelm Wurtz.
 
 Assumes that x and y are sequenced exactly the same and are regular.
 
 Currently assumes that BOTH x and y are provided
 
-@todo: Allow _either_ a matrix or data frame for 'x' _or_ give both 'x' and 'y' \code{\link{cov()}}
+@todo: Allow \emph{either} a matrix or data frame for 'x' \emph{or} give both 'x' and 'y' \code{\link{cov()}}
 }
 \seealso{
     \code{\link{cov()}}
