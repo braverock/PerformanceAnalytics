@@ -1,11 +1,11 @@
 `download.RiskFree` <-
-function(start = "1998-01-01", end = NULL)
+function(start = "1998-01-01", end = NULL, compression = "m")
 { # @ author Peter Carl
 
     #  Download returns of the risk free asset
 
     # Required inputs are just start and stop dates.
-    # Outputs a table of estimates of ***Monthly*** risk-free returns
+    # Outputs a table of estimates of risk-free returns
 
     # FUNCTION:
 
@@ -16,7 +16,7 @@ function(start = "1998-01-01", end = NULL)
     # from finance.yahoo.com
 
     # @todo: Compression attribute can be made configurable for different granularity
-    x = get.hist.quote("^irx", start = start, end = end, quote = "Close", compression = "m")
+    x = get.hist.quote("^irx", start = start, end = end, quote = "Close", compression = compression)
 
     # Yahoo returns yield data as an annualized percentage; 
     rf = as.data.frame(x/100/12)

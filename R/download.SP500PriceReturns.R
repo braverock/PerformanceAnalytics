@@ -1,11 +1,11 @@
 `download.SP500PriceReturns` <-
-function(start = "1998-01-01", end = NULL)
+function(start = "1998-01-01", end = NULL, compression = "m")
 { # @ author Peter Carl
 
     #  Download returns of the "market" asset.
 
     # Required inputs are just start and stop dates.
-    # Outputs a table of ***Monthly*** log returns
+    # Outputs a table of log returns
 
     # FUNCTION:
 
@@ -17,7 +17,7 @@ function(start = "1998-01-01", end = NULL)
 
     # @todo: Offer a menu of "market" assets
     # @todo: Compression attribute can be made configurable for different granularity
-    x = get.hist.quote("^gspc", start = start, end = end, quote = "Close", compression = "m")
+    x = get.hist.quote("^gspc", start = start, end = end, quote = "Close", compression = compression)
     # @todo: make the data type returned selectable (e.g., df, ts, zoo, matrix)
     # @todo: offer simple or log returns as method
 
