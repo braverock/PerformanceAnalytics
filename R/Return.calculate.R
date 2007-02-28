@@ -13,6 +13,7 @@ function(Prices, method="simple")
 
     prices = checkDataMatrix(Prices)
     prices.colnames = colnames(Prices)
+    prices.rownames=rownames(prices)
 
     prices.nrows = dim(prices)[1]
     prices.ncols = dim(prices)[2]
@@ -29,9 +30,8 @@ function(Prices, method="simple")
     if(method=="compound") {
         Returns = diff(log(prices))
     }
-    prices.rownames=rownames(prices)
 
-    Returns = as.data.frame(Returns, row.names=prices.rownames[2:N])
+    Returns = as.data.frame(Returns, row.names=prices.rownames[2:prices.nrows])
     colnames(Returns) = colnames(Prices)
 
     Returns
