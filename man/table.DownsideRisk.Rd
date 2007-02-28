@@ -37,7 +37,7 @@ A table of estimates of downside risk measures
 }
 \examples{
 data(edhec)
-table.DownsideRisk(edhec)
+table.DownsideRisk(edhec,rf=.04/12)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
