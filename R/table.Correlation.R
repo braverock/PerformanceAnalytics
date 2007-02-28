@@ -31,7 +31,8 @@ function (Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
         values = vector('numeric', 0)
 
         # Calculate correlation and significance
-        htest = cor.test(Ra, Rb[,column], ...)
+#         htest = cor.test(Ra, Rb[,column], ...)
+        htest = cor.test(target.vec, data.matrix[,column], ...)
         values = cbind(htest$estimate, htest$p.value,htest$conf.int[1],htest$conf.int[2])
 
         if(column == 1) {
@@ -65,10 +66,13 @@ function (Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Correlation.R,v 1.3 2007-02-26 22:04:36 brian Exp $
+# $Id: table.Correlation.R,v 1.4 2007-02-28 03:59:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/26 22:04:36  brian
+# - changes in functions to pass "R CMD check" for package
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
