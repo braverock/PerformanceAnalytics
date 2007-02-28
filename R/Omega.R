@@ -58,7 +58,7 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 
     if(method == "interp") {
     #
-
+        require("Hmisc")
         a = min(x)
         b = max(x)
 
@@ -89,10 +89,13 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.3 2007-02-28 03:35:49 peter Exp $
+# $Id: Omega.R,v 1.4 2007-02-28 03:47:07 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/28 03:35:49  peter
+# - fixed defaults to eliminate warnings
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
