@@ -4,27 +4,15 @@
 \alias{VaR.mean}
 \alias{VaR.multicolumn}
 \alias{modifiedVaR}
-\alias{VaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
 These functions calculate both traditional mean-VaR and modified Cornish-Fisher VaR
 }
 \usage{
 VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
-}
-\usage{
 modifiedVaR(R, p = 0.99, modified = TRUE, column = 1)
-}
-\usage{
-VaR(R, p = 0.99, modified = FALSE, column = 1)
-}
-\usage{
-VaR.mean(R, p = 0.99, modified = FALSE, column = 1)
-}
-\usage{
 VaR.traditional(R, p = 0.99, modified = FALSE, column = 1)
-}
-\usage{
+VaR.mean(R, p = 0.99, modified = FALSE, column = 1)
 VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -33,6 +21,7 @@ VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ TRUE/FALSE default TRUE, use Cornish Fisher Expansion to take higher moments into account }
   \item{column}{ calculate VaR for what column? }
+  \item{firstcolumn}{ for \code{\link{VaR.multicolumn}} start with what column in multicolumn data, default 1 }
 }
 \details{
 The limitations of mean Value-at-Risk are well covered in the literature. Laurent Favre and Jose-Antonio Galeano published a paper in the Fall 2002, volume 5 of the Journal of Alternative Investment, "Mean-Modified Value-at-Risk optimization With Hedge Funds", that proposed a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as "Modified VaR" or "Modified Cornish-Fisher VaR"
@@ -52,6 +41,7 @@ The prototype of this function was completed by Diethelm Wuertz.  It calculated 
 \seealso{
     \code{\link{VaR.Marginal}}
     \code{\link{VaR.Beyond}}
+    \code{\link{CVaR}}
 }
 \examples{
 }
