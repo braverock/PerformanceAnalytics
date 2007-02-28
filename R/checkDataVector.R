@@ -54,12 +54,12 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
         # x = as.numeric(x)
     }
 
-    # Fourth, we'll see if we have more than one data point.
-    if (NROW(x) <= 1) {
-        if(!quiet)
-            warning("Only one row provided.  Returning NA.")
-        return(NA)
-    }
+#     # Fourth, we'll see if we have more than one data point.
+#     if (NROW(x) <= 1) {
+#         if(!quiet)
+#             warning("Only one row provided.  Returning NA.")
+#         return(NA)
+#     }
 
     # @todo: Add check for stopifnot(is.atomic(y))???
 
@@ -75,10 +75,14 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataVector.R,v 1.4 2007-02-28 02:09:03 peter Exp $
+# $Id: checkDataVector.R,v 1.5 2007-02-28 02:47:34 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/28 02:09:03  peter
+# - added checkDataMatrix() at the beginning to ensure that whatever object is entered would
+# be coerced into a matrix before the vector checking
+#
 # Revision 1.3  2007/02/26 22:04:36  brian
 # - changes in functions to pass "R CMD check" for package
 #
