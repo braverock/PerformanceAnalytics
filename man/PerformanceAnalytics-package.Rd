@@ -16,6 +16,17 @@ Version: \tab 0.9.1\cr
 Date: \tab 2007-02-26\cr
 License: \tab GPL\cr
 }
+We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in R, so that we could access that functionality using a function with defaults and naming consistent with common usage in the finance literature.
+
+Performance Analysis
+
+Risk Analysis
+
+Summarry Tabular Data
+
+Charts and Graphs
+
+Wrapper and Utility Functions
 
 }
 \author{
