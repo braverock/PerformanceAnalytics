@@ -32,16 +32,20 @@ paste("Downside Deviation (0\%)", sep=""), "Maximum Drawdown" )
 Here's how it's working right now:
 > statsTable(monthlyReturns.ts,metrics=c("VaR.CornishFisher","mean"),
 metricsNames=c("modVaR","mean"),p=.95)
+\preformatted{
            Actual   S&P500TR
 modVaR 0.04186461 0.06261451
 mean   0.00945000 0.01013684
+}
 
-Passing in attributes doesn't quite work.  The issue is apparent in:
+Passing in attributes doesn't quite work corrently.  The issue is apparent in:
 > statsTable(monthlyReturns.ts,metrics=c("VaR.CornishFisher", "VaR.CornishFisher"),
   metricsNames=c("Modified VaR","Traditional VaR"), modified=c(TRUE,FALSE))
+\preformatted{
                     Actual   S&P500TR
 Modified VaR    0.06340849 0.09334976
 Traditional VaR 0.06340849 0.09334976
+}
 Warning messages:
 1: the condition has length > 1 and only the first element will be used in: if (modified)
 2: the condition has length > 1 and only the first element will be used in: if (modified)
@@ -51,8 +55,8 @@ Warning messages:
 \value{
 A table with calculated metrics for each column
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

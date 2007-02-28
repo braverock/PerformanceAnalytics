@@ -19,10 +19,12 @@ Return.annualized(R, geometric = TRUE, scale = 12)
 \value{
 annualized return
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
+\references{ }
+\author{ Peter Carl }
 \note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{Return.cumulative}},
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

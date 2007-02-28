@@ -23,7 +23,7 @@ systematic skewness of asset to an initial portfolio
 Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. Edhec Risk and Asset Management Research Centre. Equation [5] p. 10
 
 }
-\author{ ~~who you are~~ }
+\author{ Brian G. Peterson }
 \note{}
 \seealso{
     \code{\link{CoSkewness}}

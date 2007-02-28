@@ -13,19 +13,14 @@ Return.cumulative(R, geometric = TRUE)
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
 cumulative simple or geometric return
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\references{ }
+\author{ Peter Carl }
+\seealso{
+   \code{\link{Return.annualized}}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

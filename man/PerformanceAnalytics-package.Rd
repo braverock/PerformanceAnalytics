@@ -22,7 +22,7 @@ Performance Analysis
 
 Risk Analysis
 
-Summarry Tabular Data
+Summary Tabular Data
 
 Charts and Graphs
 
