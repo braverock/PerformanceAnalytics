@@ -14,7 +14,7 @@ VaR.Beyond(R, periods = 1)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{periods}{ ~~Describe \code{periods} here~~ }
+  \item{periods}{ number of periods to calculate predicted loss beyond the VaR for, default 1 }
 }
 \details{
 }
