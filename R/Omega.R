@@ -62,7 +62,7 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
         a = min(x)
         b = max(x)
 
-        xcdf = ecdf(x)
+        xcdf = Ecdf(x)
         f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
         if(output == "full") {
@@ -89,10 +89,13 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.4 2007-02-28 03:47:07 peter Exp $
+# $Id: Omega.R,v 1.5 2007-02-28 13:48:48 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/28 03:47:07  peter
+# - added require("Hmisc")
+#
 # Revision 1.3  2007/02/28 03:35:49  peter
 # - fixed defaults to eliminate warnings
 #
