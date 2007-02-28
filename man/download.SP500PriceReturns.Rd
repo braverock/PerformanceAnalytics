@@ -1,9 +1,9 @@
 \name{download.SP500PriceReturns}
 \alias{download.SP500PriceReturns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ download S&P Prices and calculate S&P returns }
+\title{ download S \& P Prices and calculate S \& P returns }
 \description{
-This function downloads daily/monthly S&P 500 \emph{prices} using \code{\link{get.hist.quote}} for "^gspc" and calculate S&P \emph{returns} using \code{\link{CalculateReturns}}.
+This function downloads daily/monthly S \& P 500 \emph{prices} using \code{\link{get.hist.quote}} for "\^gspc" and calculate S \& P \emph{returns} using \code{\link{CalculateReturns}}.
 }
 \usage{
 download.SP500PriceReturns(start = "1998-01-01", end = NULL, compression=c("m","d"), method=c("simple","compound"))
@@ -16,7 +16,7 @@ download.SP500PriceReturns(start = "1998-01-01", end = NULL, compression=c("m","
   \item{method}{"simple" or "compound" as a passthru to \code{\link{CalculateReturns}}, default simple}
 }
 \value{
-matrix of simple or compound returns on the S&P 500 at the daily/monthly scale specified
+matrix of simple or compound returns on the S \& P 500 at the daily/monthly scale specified
 }
 \details{
 }

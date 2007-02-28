@@ -1,9 +1,9 @@
 \name{download.RiskFree}
 \alias{download.RiskFree}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ download S&P Prices and calculate S&P returns }
+\title{ download 13-week US Treasury Bill Prices and calculate 13-week US Treasury Bill returns }
 \description{
-This function downloads daily/monthly 13-week US Treasury Bill  \emph{prices} as the risk free asset using \code{\link{get.hist.quote}} for "^irx^" and calculate \emph{returns} using \code{\link{CalculateReturns}}.
+This function downloads daily/monthly 13-week US Treasury Bill  \emph{prices} as the risk free asset using \code{\link{get.hist.quote}} for "\^irx\^" and calculate \emph{returns} using \code{\link{CalculateReturns}} as a good proxy for the Risk Free Rate.
 }
 \usage{
 download.RiskFree(start = "1998-01-01", end = NULL, compression=c("m","d"), method=c("simple","compound"))
