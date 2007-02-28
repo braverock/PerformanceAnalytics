@@ -20,22 +20,14 @@ chart.RollingCorrelation(R, Rb, n = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+chart rolling period correlations of one or more assets
 }
 \references{ }
 \author{ Peter Carl }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\note{}
+\seealso{}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

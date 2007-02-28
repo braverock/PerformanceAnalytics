@@ -19,11 +19,7 @@ Sortino contends that risk should be measured in terms of not meeting the invest
 Choosing the MAR carefully is very important, especially when comparing disparate investment choices.  If the MAR is too low, it will not adequately capture the risks that concern the investor, and if the MAR is too high, it will unfavorably portray what may otherwise be a sound investment.  When comparing multiple investments, some papers recommend using the risk free rate as the MAR.  Practitioners may wish to choose one MAR for consistency, several standardized MAR values for reporting a range of scenarios, or a MAR customized to the objective of the investor.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+Sortino ratio
 }
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.

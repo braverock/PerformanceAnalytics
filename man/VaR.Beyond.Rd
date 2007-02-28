@@ -17,14 +17,9 @@ VaR.Beyond(R, periods = 1)
   \item{periods}{ ~~Describe \code{periods} here~~ }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+estimated Value of single period loss Beyond traditional mean-VaR
 }
 \references{
 Gaussel, N., Legras, J., Longin, F., and Rabemananjara, R. "Beyond the VaR Horizon" 2001, Quants Review No. 37

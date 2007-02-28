@@ -32,14 +32,9 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+scatter chart with Return on one axis and some Risk measure on the other axis
 }
 \references{ }
 \author{ Peter Carl }

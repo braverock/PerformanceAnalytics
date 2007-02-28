@@ -27,14 +27,9 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+chart of histogram of returns
 }
 \references{ }
 \author{ Peter Carl }
@@ -42,7 +37,7 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
 Code inspired by a chart on:
 \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
