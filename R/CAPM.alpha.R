@@ -19,13 +19,14 @@ function (R, Rb, rf = 0)
 
     assetReturns.vec = checkDataVector(R)
     benchmarkReturns.vec = checkDataVector(Rb)
+    rf.vec = checkDataVector(rf)
 
     if (length(assetReturns.vec) != length(benchmarkReturns.vec))
         stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
 
     # Make these excess returns
-    assetExcessRet.vec = assetReturns.vec - rf
-    indexExcessRet.vec = benchmarkReturns.vec - rf
+    assetExcessRet.vec = assetReturns.vec - rf.vec
+    indexExcessRet.vec = benchmarkReturns.vec - rf.vec
 
     # regress
     model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
@@ -43,10 +44,13 @@ function (R, Rb, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.alpha.R,v 1.4 2007-02-08 21:43:39 brian Exp $
+# $Id: CAPM.alpha.R,v 1.5 2007-02-28 03:23:41 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/08 21:43:39  brian
+# - standardize parameters to R and Rb for consistency with other functions
+#
 # Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
