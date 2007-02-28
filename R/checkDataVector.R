@@ -20,7 +20,8 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
 
     # FUNCTION:
 
-    x = as.vector(R)
+    y = checkDataMatrix(R)
+    x = as.vector(y)
 
     # First, we'll check to see if we have more than one column.
     if (NCOL(x) > 1) {
@@ -74,10 +75,13 @@ function (R, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataVector.R,v 1.3 2007-02-26 22:04:36 brian Exp $
+# $Id: checkDataVector.R,v 1.4 2007-02-28 02:09:03 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/26 22:04:36  brian
+# - changes in functions to pass "R CMD check" for package
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
