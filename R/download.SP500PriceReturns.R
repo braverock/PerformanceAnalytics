@@ -1,5 +1,5 @@
 `download.SP500PriceReturns` <-
-function(start = "1998-01-01", end = NULL, compression = "m")
+function(start = "1998-01-01", end = NULL, compression = c("m","d"))
 { # @ author Peter Carl
 
     #  Download returns of the "market" asset.
@@ -21,7 +21,7 @@ function(start = "1998-01-01", end = NULL, compression = "m")
     # @todo: make the data type returned selectable (e.g., df, ts, zoo, matrix)
     # @todo: offer simple or log returns as method
 
-    # Yahoo returns yield data as price series, so we need to calculate returns 
+    # Yahoo returns yield data as price series, so we need to calculate returns
     market.returns = CalculateReturns(x, method="simple")
 
     colnames(market.returns)="SP500"
