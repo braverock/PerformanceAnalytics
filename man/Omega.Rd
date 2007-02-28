@@ -54,7 +54,7 @@ Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
 }
 \examples{
 data(edhec)
-for(i in 1:13) { print(omega(edhec[,i])) }
+for(i in 1:13) { print(Omega(edhec[,i])) }
 Omega(edhec[,13],method="interp",output="point")
 Omega(edhec[,13],method="interp",output="full")
 }
