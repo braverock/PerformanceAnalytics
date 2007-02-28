@@ -42,8 +42,14 @@ Short Selling           -0.2585501 0.1170322982 -0.60433520 0.1691977
 \seealso{}
 \examples{
 data(edhec)
-table.Correlation(Ra=edhec[,"Equity.Market.Neutral"],Rb=subset(edhec,select="Funds.of.Funds"),conf.level=.99)
-ctable = table.Correlation(Ra=edhec[,"Equity.Market.Neutral"],Rb=subset(edhec,select="Funds.of.Funds"),conf.level=.99)
+data(edhec)
+edhec.length = dim(edhec)[1]
+start = rownames(edhec[1,])
+start
+end = rownames(edhec[edhec.length,])
+sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
+table.Correlation(sp500,edhec)
+ctable = table.Correlation(sp500,edhec, conf.level=.99)
 dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
