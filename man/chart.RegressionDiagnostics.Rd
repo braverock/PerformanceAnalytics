@@ -13,7 +13,6 @@ chart.RegressionDiagnostics(R, Rb)
   \item{Rb}{ return vector of the benchmark asset }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
 chart of regression stats to help you validate the regression outputs
@@ -21,8 +20,9 @@ chart of regression stats to help you validate the regression outputs
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{chart.Histogram}}
-    \code{\link{chart.QQPlot}}
+    \code{\link{charts.RegressionDiagnostics}} \cr
+    \code{\link{chart.Histogram}} \cr
+    \code{\link{chart.QQPlot}}    \cr
     \code{\link{chart.Boxplot}}
 }
 \examples{

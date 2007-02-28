@@ -13,7 +13,7 @@ chart.BarVaR(R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid 
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with n=0 are calculated from the start of the timeseries }
   \item{risk.line}{ if risk.line is set to \code{FALSE}, then this function just draws the underlying bar chart }
-  \item{method}{ can be specified as \code{StdDev}, \code{VaR}, or \code{ModifiedVaR} here~~ }
+  \item{method}{ can be specified as \code{StdDev}, \code{VaR}, or \code{ModifiedVaR} }
   \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
   \item{\dots}{ any other passthru parameters }
 }

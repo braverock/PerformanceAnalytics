@@ -29,7 +29,7 @@ Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. 
 }
 \author{ Peter Carl }
 \note{}
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

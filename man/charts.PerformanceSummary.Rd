@@ -23,6 +23,8 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", n = 0,
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
   \item{\dots}{ any other passthru parameters }
 }
+\details{
+}
 \value{
 A stack of three related timeseries charts.
 }
@@ -31,7 +33,11 @@ A stack of three related timeseries charts.
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{chart.CumReturns}}
+    \code{\link{chart.BarVaR}}
+    \code{\link{chart.Drawdown}}
+}
 \examples{
 data(edhec)
 charts.PerformanceSummary(edhec[,c("Funds.of.Funds","Long.Short.Equity")])

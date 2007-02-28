@@ -26,7 +26,10 @@ correlation chart
 \note{
 based on chart by Sandrine Dudoit, sandrine@stat.berkeley.edu, from "SMA" library
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+    \code{\link{table.Correlation}}
+    \code{\link{chart.Correlation}}
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

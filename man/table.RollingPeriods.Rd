@@ -23,7 +23,7 @@ A table of estimates of rolling period return measures
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 data(edhec)
 table.RollingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR.CornishFisher"),periods=c(12,24,36))

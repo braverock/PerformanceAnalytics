@@ -21,7 +21,6 @@ SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
 This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)

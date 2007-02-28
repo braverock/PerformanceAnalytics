@@ -42,7 +42,7 @@ scatter chart with Return on one axis and some Risk measure on the other axis
 Code inspired by a chart on:
 \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

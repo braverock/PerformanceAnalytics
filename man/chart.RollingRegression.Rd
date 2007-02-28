@@ -21,7 +21,6 @@ chart.RollingRegression(R, Rb, n = 12, rf = 0, attribute = "Beta", main = paste(
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
 A timeseries line chart of the calculated series
@@ -31,7 +30,9 @@ A timeseries line chart of the calculated series
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+   \code{\link{charts.RollingRegression}}
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

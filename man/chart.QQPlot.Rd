@@ -18,15 +18,12 @@ chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
 QQ Plot
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

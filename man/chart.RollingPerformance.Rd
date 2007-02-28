@@ -28,7 +28,8 @@ A timeseries line chart of the calculated series
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{charts.RollingPerformance}}, ~~~ }
+    \code{\link{charts.RollingPerformance}}
+}
 \examples{
 data(edhec)
 chart.RollingPerformance(edhec[,1:3], n=24)

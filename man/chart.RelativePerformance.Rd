@@ -24,7 +24,7 @@ chart of relative returns
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ }
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

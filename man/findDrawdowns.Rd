@@ -26,9 +26,7 @@ findDrawdowns(R)
 Peter Carl
 modified with permission from function by Sankalp Upadhyay
 }
-\note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
+\note{
 }
 \seealso{
     \code{\link{sortDrawdowns}}

@@ -26,9 +26,11 @@ results over a rolling period
 \references{ }
 \author{ Peter Carl }
 \note{
-Inspired by rollFun() written by Diethelm Wurtz.  We've extended the idea to all the columns provided.
+Inspired by \code{\link{rollFun}} written by Diethelm Wurtz.  We've extended the idea to all the columns provided.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{
+   \code{\link{rollFun}}
+}
 \examples{
     # Examples:
     # > rollingFunction(gg.ts[,1],n=3,FUN="Return.annualized")

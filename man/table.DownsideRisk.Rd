@@ -20,7 +20,6 @@ table.DownsideRisk(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = 0.1/
   \item{digits}{ number of digits to round results to }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
 A table of estimates of downside risk measures

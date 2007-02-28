@@ -51,6 +51,7 @@ Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
 }
 \author{ Peter Carl }
 \seealso{
+   \code{\link{Ecdf}}
 }
 \examples{
 data(edhec)
