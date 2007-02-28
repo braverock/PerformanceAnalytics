@@ -29,6 +29,13 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
     \code{\link{TrackingError}}
 }
 \examples{
+data(edhec)
+edhec.length = dim(edhec)[1]
+start = rownames(edhec[1,])
+start
+end = rownames(edhec[edhec.length,])
+sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
+ActivePremium(edhec[,"Long.Short.Equity"],sp500)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
