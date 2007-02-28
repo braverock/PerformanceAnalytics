@@ -1,5 +1,5 @@
 `Omega` <-
-function (R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0)
+function (R, L = 0, method = "simple", output = "point", rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -89,10 +89,13 @@ function (R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: Omega.R,v 1.3 2007-02-28 03:35:49 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
