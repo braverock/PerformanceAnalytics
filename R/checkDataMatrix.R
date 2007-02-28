@@ -35,6 +35,10 @@ function (R, na.rm = FALSE, ...)
         R = as.matrix(R)
     }
 
+    if (class(R) == "zoo") {
+        R = as.matrix(R)
+    }
+
     if (class(R) == "timeSeries") {
         # timeSeries objects keep the data in a matrix and append a set of
         # meta-data.  We just need the information stored in the 'Data' slot.
@@ -58,10 +62,13 @@ function (R, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataMatrix.R,v 1.3 2007-02-26 22:04:36 brian Exp $
+# $Id: checkDataMatrix.R,v 1.4 2007-02-28 04:42:11 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/26 22:04:36  brian
+# - changes in functions to pass "R CMD check" for package
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

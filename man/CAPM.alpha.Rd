@@ -26,6 +26,16 @@ CAPM alpha
     \code{\link{CAPM.beta}}
 }
 \examples{
+data(edhec)
+edhec.length = dim(edhec)[1]
+start = rownames(edhec[1,])
+start
+end = rownames(edhec[edhec.length,])
+rf = download.RiskFree(start = start, end = end)
+sp500 = download.SP500PriceReturns(start = "1996-12-31", end = end)
+
+CAPM.alpha(edhec[,"Funds.of.Funds"], sp500, rf = rf)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
