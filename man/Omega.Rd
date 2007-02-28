@@ -41,7 +41,7 @@ with exp(-rf) calculating the present values of the two, where rf is the per-per
 
 The first three methods implemented here focus on that observation. The first method takes the simplification described above.  The second uses the Black-Scholes option pricing as implemented in fOptions.  The third uses the binomial pricing model from fOptions.  The second and third methods are not implemented here.
 
-The fourth method, "interp", creates a linear interpolation of the cdf of returns, calculates Omega as a vector, and finally interpolates a function for Omega as a function of L.
+The fourth method, "interp", creates a linear interpolation of the cdf of returns, calculates Omega as a vector, and finally interpolates a function for Omega as a function of L.  This method requires library \code{Hmisc}, which can be found on CRAN.
 }
 \value{
 }
@@ -53,6 +53,10 @@ Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
 \seealso{
 }
 \examples{
+data(edhec)
+for(i in 1:13) { print(omega(edhec[,i])) }
+omega(edhec[,13],method="interp",output="point")
+omega(edhec[,13],method="interp",output="full")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
