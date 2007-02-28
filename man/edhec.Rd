@@ -10,6 +10,8 @@ The EDHEC Risk and Asset Management Research Centre plays a noted role in furthe
 
 To further assist financial institutions and investors implement the latest research advances in order to meet the challenges of the changing asset management landscape, the centre has spawned two consultancies and an executive education arm. Clients of these derivative activities include many of the leading organisations throughout Europe.
 
+see \url{http://www.edhec-risk.com/about_us}
+
 Data used in PerformanceAnalytics and related publications with the kind permission of the EDHEC Risk and Asset Management Research Center.
 }
 \usage{edhec}
