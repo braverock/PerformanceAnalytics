@@ -62,7 +62,7 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
         a = min(x)
         b = max(x)
 
-        xcdf = Ecdf(x)
+        xcdf = Ecdf(x, pl=FALSE)
         f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
         if(output == "full") {
@@ -89,10 +89,13 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.6 2007-02-28 13:55:23 brian Exp $
+# $Id: Omega.R,v 1.7 2007-02-28 16:12:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/02/28 13:55:23  brian
+# - comment require for Hmisc, as it is included when the main PerformanceAnalytics package loads
+#
 # Revision 1.5  2007/02/28 13:48:48  brian
 # - change ecdf to Ecdf to cover the change in the name of the Hmisc function in R 2.4.x
 #
