@@ -24,6 +24,10 @@ vector or matrix of simple or compound returns
 }
 \seealso{ }
 \examples{
+require(tseries)
+prices = get.hist.quote("^gspc", start = "1999-01-01", end = "2007-01-01", quote = "Close", compression = "m")
+returns = CalculateReturns(prices, method="simple")
+colnames(returns)="SP500"
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
