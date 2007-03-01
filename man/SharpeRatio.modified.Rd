@@ -25,7 +25,9 @@ SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
 \value{
 This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)
 }
-\references{ ~put references to the literature/web site here ~ }
+\references{
+Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
+}
 \author{ Brian G. Peterson }
 \note{}
 \seealso{

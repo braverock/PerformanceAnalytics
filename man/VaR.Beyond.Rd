@@ -25,7 +25,7 @@ estimated Value of single period loss Beyond traditional mean-VaR
 Gaussel, N., Legras, J., Longin, F., and Rabemananjara, R. "Beyond the VaR Horizon" 2001, Quants Review No. 37
 }
 \author{
-Peter Carl
+Peter Carl \cr
 Brian G. Peterson
 }
 \seealso{

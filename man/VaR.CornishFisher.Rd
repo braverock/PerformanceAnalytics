@@ -32,11 +32,11 @@ Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally d
 VaR measure
 }
 \references{
-Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk optimization With Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
+Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
 }
 \author{ Brian G. Peterson }
 \note{
-The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but incorrectly handled the confidence level,exponents for each moment, and scale.
+The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but did not handle the confidence level,exponents for each moment, and scale.
 }
 \seealso{
     \code{\link{VaR.Marginal}}

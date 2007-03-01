@@ -19,7 +19,7 @@ Downside deviation, similar to semi deviation, eliminates positive returns when 
 
 To calculate it, we take the returns that are less than the target (or Minimum Acceptable Returns (MAR)) returns and take the differences of those to the target.  We sum the squares and divide by the total number of returns to get a below-target semi-variance.
 
-This is also useful for calculating semi-deviation by setting
+This is also useful for calculating semi-deviation or semivariance by setting
 
 MAR = mean(x)
 }
