@@ -30,7 +30,7 @@ Omega has a value of 1 at the mean of the distribution.
 
 Omega is sub-additive.  The ratio is dimensionless.
 
-Kazemi, Schneeweis, and Gupta (2003), in "Omega as a Performance Measure" shows that Omega can be written as:
+Kazemi, Schneeweis, and Gupta (2003), in "Omega as a Performance Measure" show that Omega can be written as:
   Omega(L) = C(L)/P(L)
 where C(L) is essentially the price of a European call option written on the investment and P(L) is essentially the price of a European put option written on the investment.  The maturity for both options is one period (e.g., one month) and L is the strike price of both options.
 
@@ -46,7 +46,7 @@ The fourth method, "interp", creates a linear interpolation of the cdf of return
 \value{
 }
 \references{
-Keating and Shadwick. 2002.
+Keating, J. and Shadwick, W.F. The Omega Function. working paper. Finance Development Center, London. 2002.
 Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
 }
 \author{ Peter Carl }
