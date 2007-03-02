@@ -17,7 +17,6 @@ Date: \tab 2007-03-01\cr
 License: \tab GPL\cr
 }
 
-We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in R, so that we could access it with defaults and naming consistent with common usage in the finance literature.  To introduce the capabilities of this package, we group the functions into
 We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in R, so that we could access that functionality using a function with defaults and naming consistent with common usage in the finance literature.  The following sections on Performance Analysis, Risk Analysis (with a separate treatment of VaR), Summary Tables of related statistics, Charts and Graphs, a variety of Wrappers and Utility functions, and some thoughts on work yet to be done.
 }
 
@@ -36,6 +35,9 @@ Performance measurement starts with returns.  Proprietary traders will object, c
 Returns and risk can then be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}.
 
 Add more on basic metrics here.
+When discussing performance analysis and attribution at an abstract level, terms such as "return" and "risk" are deliberately vague because they help to disguise some (typically unnecessary) complexity.  Basic measures of performance tend to treat returns as independent observations adhering to the statistical assumptions of iid.  In this case, the entirety of R's base is applicable to such analysis.  The most obvious of these is the arithmetic and geometric mean, provided as \code{\link{mean}} and \code{\link{mean.geometric}}.  Other statistical measures are at hand for describing the data series: the range of returns (\code{\link{minimum}}, \code{\link{maximum}}, and \code{\link{range}}), number of observations (\code{link{nobs}}, number of NA's, c("Observations", "NAs", "Minimum", "Quartile 1", "Median", "Arithmetic Mean",
+       "Geometric Mean", "Quartile 3", "Maximum", "SE Mean", paste("LCL Mean (",ci,")",sep=""),
+              paste("UCL Mean (",ci,")",sep=""), "Variance", Stdev, Skewness, Kurtosis
 
 \code{\link{KellyRatio}}
 
@@ -50,7 +52,7 @@ skewness
 kurtosis
 
 rolling period analysis
-
+performance attribution?
 }
 
 \section{Summary Tabular Data}{
