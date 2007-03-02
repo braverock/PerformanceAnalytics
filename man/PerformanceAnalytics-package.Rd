@@ -180,8 +180,6 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }
-
-\keyword{ package }
 \seealso{
     CRAN task view on Empirical Finance \url{http://cran.r-project.org/src/contrib/Views/Econometrics.html}
 
@@ -190,5 +188,4 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
     Collection of R charts and graphs \url{http://addictedtor.free.fr/}
 
 }
-\examples{
-}
+\keyword{ package }
