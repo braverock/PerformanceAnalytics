@@ -23,7 +23,7 @@ We created this library to include functionality that has been appearing in the 
 
 \section{Performance Analysis}{
 
-How did that fund do last year? If it made 15\%, is that good?  To most people, performance seems like a simple subject with clear absolutes: did it make money?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking? Does it fit in my portfolio?  Do I have too much?  Too little?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.
+How did that fund do last year? If it made 15\%, is that good?  To most people, performance seems like a simple subject with clear absolutes: did it make money?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking? Does it fit in my portfolio?  Do I have too much?  Too little?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the relation to the rest of the portfolio.
 
 The literature around the subject of performance analysis seems to have exploded with the popularity of the hedge fund.  Simpler tools that seemed appropriate in a relative investment world seem inappropriate for an absolute return world.
 
@@ -43,6 +43,11 @@ Add more on basic metrics here.
 broader discussion of MPT and CAPM
 \code{\link{CAPM.alpha}}
 \code{\link{CAPM.beta}}
+
+tests for normal
+variance appears below under Risk
+skewness
+kurtosis
 
 rolling period analysis
 
@@ -80,11 +85,9 @@ There are also a number of charts or groups of charts that remain unfinished or 
 It should not go without saying that we have been inspired by other peoples' work, some of which is on display at \url{http://addictedtor.free.fr/}.  Particular inspiration came from Dirk Eddelbuettel and John Bollinger for their work at \url{http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65}.
 }
 
-\section{Distribution Analysis}{
-tests for normal
-variance appears below under Risk
-skewness
-kurtosis
+\section{Diversification}{
+discuss how to analyse whether an instrument is a good diversifier for a portfolio
+
 co-moments
 
 systematic moments as indicators of diversification potential
