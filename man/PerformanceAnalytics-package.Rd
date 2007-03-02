@@ -141,13 +141,23 @@ When you are anlyzing relative or absolute performance of investments, you need 
 
 \section{Further Work}{
 We have attempted to standardize function parameters and variable names, but more work exists to be done here.
-In some cases, there are separate functions for single column and multicolumn data, which could be combined into a single function for ease of use and clarity.
+
+In some cases, there are separate functions for single column and multicolumn data, which should be combined into a single function for ease of use and clarity.
+
 There are functions included in this package that would benefit from more complex examples.
+
 There is also an opportunity to extend several of the co-moments and risk measures to use multivariate estimates of the higher moments, which should produce more robust estimates of the moments of a portfolio of multiple diverse assets.
+
 Any comments or suggestions to this end are very welcome.
+
 Optimization
+
+Performance Attribution
+
 Factor Analysis
+
 Hedge Selection and Analysis
+
 Shock/Scenario Analysis
 
 Suggestions Welcome
@@ -172,6 +182,13 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
 }
 
 \keyword{ package }
-\seealso{}
+\seealso{
+    CRAN task view on Empirical Finance \url{http://cran.r-project.org/src/contrib/Views/Econometrics.html}
+
+    Grant Farnsworth's Econometrics in R \url{http://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
+
+    Collection of R charts and graphs \url{http://addictedtor.free.fr/}
+
+}
 \examples{
 }
