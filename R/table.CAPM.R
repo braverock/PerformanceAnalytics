@@ -14,13 +14,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     # Rb: a matrix, data.frame, or timeSeries of benchmarks to test the asset
     #     against.
 
-    # This is irritating, but if you want to pass in a sub-set of a timeSeries,
-    # you need to use
-    # > seriesData(monthlyReturns.ts[,2])
-    # rather than
-    # > monthlyReturns.ts@Data[,2]
-    # since the latter will strip the column names.
-
     # Assumes inputs are monthly returns, do not contain NA's, and are
     # lined up correctly.
 
@@ -105,20 +98,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     result.df = base::round(result.df, digits)
     result.df
 
-    #  For example:
-    # > CAPMSummary(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))
-    #                     S&P500TR
-    # Alpha                 0.0065
-    # Beta                  0.2909
-    # R-squared             0.0987
-    # Annualized Alpha      0.0809
-    # Correlation           0.3142
-    # Correlation p-value   0.0547
-    # Tracking Error        0.0149
-    # Active Premium       -0.0083
-    # Information Ratio    -0.5606
-    # Treynor Ratio         0.3959
-
 }
 
 ###############################################################################
@@ -129,10 +108,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.6 2007-02-28 03:22:39 peter Exp $
+# $Id: table.CAPM.R,v 1.7 2007-03-02 17:41:48 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/02/28 03:22:39  peter
+# - added checkDataVector function to rf
+#
 # Revision 1.5  2007/02/26 22:04:36  brian
 # - changes in functions to pass "R CMD check" for package
 #
