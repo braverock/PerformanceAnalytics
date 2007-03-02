@@ -56,19 +56,18 @@ rolling period analysis
 \section{Summary Tabular Data}{
 Return statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic numbers. Usually these are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
 
-A number of other tables constructed for comparison of related groupings of statistics are included.  When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the prticise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
-
-We have aggregated statistics discussed elsewhere in this summary into the following tables:
+A number of other tables constructed for comparison of related groupings of statistics discussed elsewhere in this summary:
   \itemize{
-     \item{ \code{\link{table.MonthlyReturns}} }    { provides a statistical summary of the monthly returns themselves}
-     \item{ \code{\link{table.AnnualizedReturns}} } { calculates aggregate returns and risk (usually used in graphics discussed below) }
-     \item{ \code{\link{table.CAPM}} }              { a collection of statistics offered by practitioners of Modern Portfolio Theory }
-     \item{ \code{\link{table.HigherMoments}} }     { a table of metrics for evaluating diversification potential by comparing higher moments of distributions }
-     \item{ \code{\link{table.DownsideRisk}} }      { statistics for those wanting to compare the extent of observed losses }
-     \item{ \code{\link{table.Correlation}} }       { a table arranged for comparing correlations }
-     \item{ \code{\link{table.RollingPeriods}} }    { calculates statistics over varying periods of time }
+     \item{ \code{\link{table.MonthlyReturns}} }     provides a statistical summary of the monthly returns themselves
+     \item{ \code{\link{table.AnnualizedReturns}} }  calculates aggregate returns and risk (usually used in graphics discussed below)
+     \item{ \code{\link{table.CAPM}} }               a collection of statistics offered by practitioners of Modern Portfolio Theory
+     \item{ \code{\link{table.HigherMoments}} }      a table of metrics for evaluating diversification potential by comparing higher moments of distributions
+     \item{ \code{\link{table.DownsideRisk}} }       statistics for those wanting to compare the extent of observed losses
+     \item{ \code{\link{table.Correlation}} }        a table arranged for comparing correlations
+     \item{ \code{\link{table.RollingPeriods}} }     calculates statistics over varying periods of time
   }
 
+When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the precise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
 }
 
 \section{Charts and Graphs}{
