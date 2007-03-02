@@ -16,7 +16,8 @@ table.CAPM(Ra, Rb, scale = 12, rf = 0, digits = 4)
   \item{rf}{ risk free rate, in same period as your returns }
   \item{digits}{ number of digits to round results to }
 }
-\value{ For example: \cr
+\details{ This table will show statistics pertaining to an asset against a set of benchmarks, but cannot \(yet\) be used to show statistics for a set of assets against a benchmark. }
+\value{ A data frame with columns named for the columns in \code{Rb} and rows containing statistics.  For example: \cr
 \code{table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))} \cr
                     S&P500TR       \cr
 Alpha                 0.0065       \cr
