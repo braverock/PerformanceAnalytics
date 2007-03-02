@@ -21,12 +21,12 @@ VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ TRUE/FALSE default TRUE, use Cornish Fisher Expansion to take higher moments into account }
   \item{column}{ calculate VaR for what column? }
-  \item{firstcolumn}{ for \code{\link{VaR.multicolumn}} start with what column in multicolumn data, default 1 }
+  \item{firstcolumn}{ for \code{\link{VaR.multicolumn}} start with which column in multicolumn data, default 1 }
 }
 \details{
-The limitations of mean Value-at-Risk are well covered in the literature. Laurent Favre and Jose-Antonio Galeano published a paper in the Fall 2002, volume 5 of the Journal of Alternative Investment, "Mean-Modified Value-at-Risk optimization With Hedge Funds", that proposed a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as "Modified VaR" or "Modified Cornish-Fisher VaR"
+The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Laurent Favre and Jose-Antonio Galeano published a paper in the Fall 2002, volume 5 of the Journal of Alternative Investment, "Mean-Modified Value-at-Risk optimization With Hedge Funds", that proposed a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as "Modified VaR" or "Modified Cornish-Fisher VaR"
 
-Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the VaR.mean and VaR.traditional functions are wrappers for the VaR.CornishFisher function.
+Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function.
 }
 \value{
 VaR measure
