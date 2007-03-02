@@ -23,11 +23,11 @@ We created this library to include functionality that has been appearing in the 
 
 \section{Performance Analysis}{
 
-How did that fund do last year\? If it made 15\%, is that good\?  To most people, performance seems like a simple subject with clear absolutes: did it make money\?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking\? Does it fit in my portfolio?  Do I have too much\?  Too little\?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.
+How did that fund do last year? If it made 15\%, is that good?  To most people, performance seems like a simple subject with clear absolutes: did it make money?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking? Does it fit in my portfolio?  Do I have too much?  Too little?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.
 
 The literature around the subject of performance analysis seems to have exploded with the popularity of the hedge fund.  Simpler tools that seemed appropriate in a relative investment world seem inappropriate for an absolute return world.
 
-Performance measurement is the first step down a longer road.  Risk measurement, which is nearly inseparable from performance assessment, has been on a long march to become multi-dimensional while remaining conceptually accessible (How much could I lose\?).  Portfolio construction and risk budgeting are two sides of the same coin (How do I maximize my expected gain and avoid going broke\?).  But first we have to answer the question: Is this something I might want in my portfolio\?
+Performance measurement is the first step down a longer road.  Risk measurement, which is nearly inseparable from performance assessment, has been on a long march to become multi-dimensional while remaining conceptually accessible (How much could I lose?).  Portfolio construction and risk budgeting are two sides of the same coin (How do I maximize my expected gain and avoid going broke?).  But first we have to answer the question: Is this something I might want in my portfolio?
 
 With the rise of the investor class during the last decades, the increasing availability of complicated investment strategies to retail investors, and the broad availability of financial data, an engaging debate about performance analysis and evaluation is as important as ever.  There won't be one \emph{right} answer, a silver bullet, delivered in these metrics and charts.  What there will be is an accretion of evidence, organized to \emph{assist} a decision maker in answering a specific question that is pertinant to the decision at hand.  Using such tools to uncover information and ask better questions will, in turn, create a more informed investor.
 
@@ -37,6 +37,13 @@ Returns and risk can then be annualized as a way to simplify comparison over lon
 
 Add more on basic metrics here.
 
+\code{\link{ActivePremium}} \code{\link{InformationRatio}} \code{\link{TrackingError}}
+\code{\link{KellyRatio}}
+
+broader discussion of MPT and CAPM
+\code{\link{CAPM.alpha}}
+\code{\link{CAPM.beta}}
+
 rolling period analysis
 
 }
@@ -44,18 +51,23 @@ rolling period analysis
 \section{Summary Tabular Data}{
 Return statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic numbers. Usually these are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
 
-A number of other tables constructed for comparison are included.  When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the necessary statistics to help their decision, so we merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  We have aggregated the statistics touched on above into these tables that we have found useful so far:
-\itemize{\code{\link{table.MonthlyReturns}}, which provides a statistical summary of the monthly returns themselves;}
-\itemize{\code{\link{table.AnnualizedReturns}}, which calculates aggregate returns and risk (usually used in graphics discussed below); }
-\itemize{\code{\link{table.CAPM}}, a collection of statistics offered by practitioners of Modern Portfolio Theory; }
-\itemize{\code{\link{table.HigherMoments}}, a table of metrics for evaluating diversification potential by comparing higher moments of distributions;  }
-\itemize{\code{\link{table.DownsideRisk}}, statistics for those wanting to compare the extent of observed losses; }
-\itemize{\code{\link{table.Correlation}}, a table arranged for comparing correlations; and }
-\itemize{\code{\link{table.RollingPeriods}}, which calculates statistics over varying periods of time.  }
+A number of other tables constructed for comparison of related groupings of statistics are included.  When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the prticise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
+
+We have aggregated statistics discussed elsewhere in this summary into the following tables:
+  \itemize{
+     \item{ \code{\link{table.MonthlyReturns}} }    { provides a statistical summary of the monthly returns themselves}
+     \item{ \code{\link{table.AnnualizedReturns}} } { calculates aggregate returns and risk (usually used in graphics discussed below) }
+     \item{ \code{\link{table.CAPM}} }              { a collection of statistics offered by practitioners of Modern Portfolio Theory }
+     \item{ \code{\link{table.HigherMoments}} }     { a table of metrics for evaluating diversification potential by comparing higher moments of distributions }
+     \item{ \code{\link{table.DownsideRisk}} }      { statistics for those wanting to compare the extent of observed losses }
+     \item{ \code{\link{table.Correlation}} }       { a table arranged for comparing correlations }
+     \item{ \code{\link{table.RollingPeriods}} }    { calculates statistics over varying periods of time }
+  }
+
 }
 
 \section{Charts and Graphs}{
-Alternatively, graphs and charts can help to organize the information visually, again for a particular purpose.  The cumulative returns or wealth index is usually the first thing displayed, even though they rarely convey much information.  See \code{\link{chart.CumReturns}}.  Individual period returns may be helpful for identifying problematic periods, such as in \code{\link{chart.Bar}}.  Risk measures can be helpful when overlayed on the period returns, to display the bounds at which losses may be expected.  See \code{\link{chart.BarVaR}} and the following section.  More information can be conveyed when such charts are displayed together, as in \code{\link{chart.PerformanceSummary}}, which pairs the performance data with detail on downside risk (see \code{\link{chart.Drawdown}}).
+Graphs and charts can also help to organize the information visually.  The cumulative returns or wealth index is usually the first thing displayed, even though they rarely convey much information.  See \code{\link{chart.CumReturns}}.  Individual period returns may be helpful for identifying problematic periods, such as in \code{\link{chart.Bar}}.  Risk measures can be helpful when overlayed on the period returns, to display the bounds at which losses may be expected.  See \code{\link{chart.BarVaR}} and the following section on Risk Analysis.  More information can be conveyed when such charts are displayed together, as in \code{\link{chart.PerformanceSummary}}, which combines the performance data with detail on downside risk (see \code{\link{chart.Drawdown}}).
 
 Two-dimensional charts can also be useful while remaining easy to understand.  \code{\link{chart.Scatter}} is a utility scatter chart with some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.  Overlaying Sharpe ratio lines or boxplots helps to add information about relative performance along those dimensions. The relative performance through time of two assets can be plotted with \code{\link{chart.RelativePerformance}}.  This plot displays the ratio of the cumulative performance at each point in time and makes periods of under- or out-performance easy to see.  The value of the chart is less important than the slope of the line.  If the slope is positive, the first asset is outperforming the second, and vice versa.  Affectionately known as the Canto chart, it was used effectively in Canto (2005).
 
@@ -74,12 +86,8 @@ variance appears below under Risk
 skewness
 kurtosis
 co-moments
-\code{\link{ActivePremium}} \code{\link{InformationRatio}} \code{\link{TrackingError}}
-\code{\link{KellyRatio}}
 
 systematic moments as indicators of diversification potential
-\code{\link{CAPM.alpha}}
-\code{\link{CAPM.beta}}
 }
 
 \section{Risk Analysis}{
