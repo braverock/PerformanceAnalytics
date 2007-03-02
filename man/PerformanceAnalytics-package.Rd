@@ -173,7 +173,7 @@ Maintainer: Brian G. Peterson <brian@braverock.com> \url{http://braverock.com/br
 \references{
 Lhabitant F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
 Litterman R. Gumerlock R., et. al. \emph{The Practice of Risk Management: Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998. \cr
-Murrel, Paul. \emph{R Graphics}. Chapman and Hall. 2006.
+Murrel, Paul. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
