@@ -15,12 +15,13 @@ chart.Boxplot(R, horizontal = TRUE, ...)
   \item{\dots}{ any other passthru parameters }
 }
 \value{
-bot plot of returns
+Creates a box plot of returns with some defaults.
 }
 \references{ }
 \author{ Peter Carl }
 \seealso{ }
 \examples{
+chart.Boxplot(edhec)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

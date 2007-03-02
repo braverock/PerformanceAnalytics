@@ -15,10 +15,10 @@ chart.CumReturns(R, wealth.index = FALSE, ...)
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-
+Cumulates the return series and displays either as a wealth index or as cumulative returns.
 }
 \value{
-A timeseries line chart of the cumulative return series
+A timeseries line chart of the cumulative return series.
 }
 \references{ }
 \author{ Peter Carl }

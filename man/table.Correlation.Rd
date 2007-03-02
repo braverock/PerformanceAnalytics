@@ -18,7 +18,7 @@ table.Correlation(Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
   \item{\dots}{ any other passthru parameters }
 }
 \value{
-Calculates and presents correlation and significance against each column of the data provided.
+A dataframe with correlation and significance against each column of the data provided as \code{Rb}.
 }
 \references{ }
 \author{ Peter Carl }

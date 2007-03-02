@@ -22,7 +22,7 @@ table.DownsideRisk(R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = 0.1/
 \details{
 }
 \value{
-A table of estimates of downside risk measures
+A dataframe organized as a table of estimates of downside risk measures for comparison across multiple instruments or funds.
 }
 \references{ }
 \author{ Peter Carl }
@@ -36,7 +36,7 @@ A table of estimates of downside risk measures
 }
 \examples{
 data(edhec)
-table.DownsideRisk(edhec,rf=.04/12)
+table.DownsideRisk(edhec,rf=.04/12, MAR =.05/12, p=.95)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
