@@ -37,12 +37,12 @@ Returns and risk can then be annualized as a way to simplify comparison over lon
 
 Add more on basic metrics here.
 
-\code{\link{ActivePremium}} \code{\link{InformationRatio}} \code{\link{TrackingError}}
 \code{\link{KellyRatio}}
 
 broader discussion of MPT and CAPM
 \code{\link{CAPM.alpha}}
 \code{\link{CAPM.beta}}
+\code{\link{ActivePremium}} \code{\link{InformationRatio}} \code{\link{TrackingError}}
 
 tests for normal
 variance appears below under Risk
@@ -110,7 +110,7 @@ Any risk measure should be viewed with suspicion if there are not a large number
 }
 
 \section{Value at Risk - VaR}{
-In the early 90's, academic literature started referring to "value at risk", typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what people are generally referring to as "VaR" and what we have implemented as \code{\link{VaR.traditional}}.  See "Return to RiskMetrics: Evolution of a Standard"\url{http://www.riskmetrics.com/r2rovv.html}, \code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link{VaR}} function.  Paremetric traditional VaR does a better job of accounting for the tails of the distribution by more heavily weighting the tails below the risk quantile.  It is still insufficient if the assets have a distribution that varys widely from normality.
+In the early 90's, academic literature started referring to "value at risk", typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what people are generally referring to as "VaR" and what we have implemented as \code{\link{VaR.traditional}}.  See "Return to RiskMetrics: Evolution of a Standard"\url{http://www.riskmetrics.com/r2rovv.html}, \code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link{VaR}} function.  Parametric traditional VaR does a better job of accounting for the tails of the distribution by more precisely estimating the tails below the risk quantile.  It is still insufficient if the assets have a distribution that varys widely from normality.
 
 The R package \code{VaR} contains methods for simulating and estimating lognormal \code{\link{VaR.norm}} and generalized Pareto \code{\link{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size.  There is also a \code{\link{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses.  The VaR package also provides plots for its functions.
 
