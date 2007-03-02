@@ -17,10 +17,44 @@ Date: \tab 2007-03-01\cr
 License: \tab GPL\cr
 }
 
+We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in R, so that we could access it with defaults and naming consistent with common usage in the finance literature.  To introduce the capabilities of this package, we group the functions into 
 We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in R, so that we could access that functionality using a function with defaults and naming consistent with common usage in the finance literature.  The following sections on Performance Analysis, Risk Analysis (with a separate treatment of VaR), Summary Tables of related statistics, Charts and Graphs, a vaiety of Utility Functions, and some thoughts on work yet to be done.
 }
 
 \section{Performance Analysis}{
+
+How did that fund do last year? If it made 15\%, is that good?  To most people, performance seems like a simple subject with clear absolutes: did it make money?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking? Does it fit in my portfolio?  Do I have too much?  Too little?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.  
+
+The literature around the subject of performance analysis seems to have exploded with the popularity of the hedge fund.  Simpler tools that seemed appropriate in a relative investment world seem inappropriate for an absolute return world.  
+
+Performance measurement is the first step down a longer road.  Risk measurement, which is nearly inseparable from performance assessment, has been on a long march to become multi-dimensional while remaining conceptually accessible (How much could I lose?).  Portfolio construction and risk budgeting are two sides of the same coin (How do I maximize my expected gain\avoid going broke?).  But first we have to answer the question: Is this something I might want in my portfolio?
+
+With the rise of the investor class during the last decades, and the increasing availability of complicated investment strategies to retail investors, and the broad availability of financial data, an engaging debate about performance analysis and evaluation is as important as ever.  There won't be one \emph{right} answer, a silver bullet, delivered in these metrics and charts.  What there will be is an accretion of evidence, organized to \emph{assist} a decision maker in answering a specific question that is pertinant to the decision at hand.  Using such tools to uncover information and ask better questions will, in turn, create a more informed investor.
+
+Performance measurement starts with returns.  Proprietary traders will object, complaining that \"You can't eat returns,\" and will prefer to look at numbers with currency signs.  To some extent, they have a point - the normalization inherent in calculating returns can be deceiving.  Most of the recent work in financial econometrics, however, is focused on returns rather than prices.  This "price per unit of investment" standardization is important for two reasons - it helps the decision maker to compare opportunities, and it has some useful statistical qualities.  As a result, this module will focus on returns.  See \code{\link{CreateReturns}} for converting net asset values or prices into returns, either discrete or continuous. 
+
+Returns and risk can then be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}. 
+
+\section{Summary Tabular Data}{
+Return statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic numbers. Usually these are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
+
+A number of other tables constructed for comparison are included.  When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the necessary statistics to help their decision, so we merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  We have aggregated the statistics touched on above into these tables that we have found useful so far: 
+\itemize{\code{\link{table.MonthlyReturns}}, which provides a statistical summary of the monthly returns themselves;}
+\itemize{\code{\link{table.AnnualizedReturns}}, which calculates aggregate returns and risk (usually used in graphics discussed below); }
+\itemize{\code{\link{table.CAPM}}, a collection of statistics offered by practitioners of Modern Portfolio Theory; }
+\itemize{\code{\link{table.HigherMoments}}, a table of metrics for comparing higher moments of distributions, including the four-moment CAPM;  }
+\itemize{\code{\link{table.DownsideRisk}}, statistics for those wanting to compare the extent of observed losses; }
+\itemize{\code{\link{table.Correlation}}, a table arranged for comparing correlations; and } 
+\itemize{\code{\link{table.RollingPeriods}}, which calculates statistics over varying periods of time.  }
+}
+
+\section{Charts and Graphs}{
+Alternatively, graphs and charts can help to organize the information visually, again for a particular purpose.  The cumulative returns or wealth index is usually the first thing displayed, even though they rarely convey much information.  See \code{\link{chart.CumReturns}}.  Individual period returns may be helpful for identifying problematic periods, such as in \code{\link{chart.Bar}}.  Risk measures can be helpful when overlayed on the period returns, to display the bounds at which losses may be expected.  See \code{\link{chart.BarVaR}} and the following section.  More information can be conveyed when such charts are displayed together, as in \code{\link{chart.PerformanceSummary}}, which pairs the performance data with detail on downside risk (see \code{\link{chart.Drawdown}}).  
+
+Two-dimensional charts can also be useful while remaining easy to understand.  \code{\link{chart.Scatter}} is a utility scatter chart with some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.  Overlaying Sharpe ratio lines or boxplots helps to add information about relative performance along those dimensions.  Of course, 
+
+Rolling performance is typically used as a way to assess stability of a return stream.  Although perhaps not stati
+
 Distribution analysis
 tests for normal
 variance appears below under Risk
@@ -71,13 +105,6 @@ Marginal VaR
 Which measure to use will depend greatly on the portfolio and instruments being analyzed.  If there is any generalization to be made on VaR measures, this author will agree with Bali and Gokcan (2004) who conclude that "the VaR estimations based on the generalized Pareto distribution and the Cornish-Fisher approximation perform best".
 }
 
-\section{Summary Tabular Data}{
-
-}
-
-\section{Charts and Graphs}{
-
-}
 
 \section{Wrapper and Utility Functions}{
 R is a very powerful envoronment for manipulating data.  It can also be quite confusing to a user more accustomed to Excel or even MatLAB.  As such, we have written some wrapper functions that may aid you in coercing data into the correct forms or finding data that you need to use regularly.  To simplify the management of multiple-source data stored in R in multiple data formats, we have provided \code{\link{checkDataMatrix}} and \code{\link{checkDataVector}}.  These functions will attempt to coerce data in an of R's multitude of mostly funcible data classes into the class required for a particular analysis.  In general, the use of these data-coercion functions has been hidden inside the business functions provided.  They may also save you time and trouble in your own code and functions outside of the functionality provided by the PerformanceAnalytics libary.
@@ -96,6 +123,10 @@ When you are anlyzing relative or absolute performance of investments, you need 
 We have attempted to standardize function parameters and variable names, but more work exists to be done here.
 In some cases, there are separate functions for single column and multicolumn data, which could be combined into a single function for ease of use and clarity.
 There are functions included in this package that would benefit from more complex examples.
+<<<<<<< PerformanceAnalytics-package.Rd
+There is also an opportunity to extend several of the co-moments and risk measures to use multivariate estimates of the higher moments, which should produce more robust estimates of the moments of a portfolio of multiple diverse assets.  
+Any comments or suggestions to this end are very welcome.
+=======
 There is also an opportunity to extend several of the co-moments and risk measures to use multivariate estimates of the higher moments, which should produce more robust estimates of the moments of a portfolio of multiple diverse assets.
 Optimization
 Factor Analysis
@@ -105,6 +136,7 @@ Shock/Scenario Analysis
 Suggestions Welcome
 
 If you've implemented anything in the list above, please consider donating it for inclusion in a later version of this package.
+>>>>>>> 1.18
 }
 
 \author{
