@@ -23,11 +23,11 @@ We created this library to include functionality that has been appearing in the 
 
 \section{Performance Analysis}{
 
-How did that fund do last year? If it made 15\%, is that good?  To most people, performance seems like a simple subject with clear absolutes: did it make money?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking? Does it fit in my portfolio?  Do I have too much?  Too little?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.
+How did that fund do last year\? If it made 15\%, is that good\?  To most people, performance seems like a simple subject with clear absolutes: did it make money\?  But scratch the surface a bit and nagging questions appear: Am I paying too much for what I'm getting?  What risks am I taking\? Does it fit in my portfolio?  Do I have too much\?  Too little\?  The answer to the initial question, we find out, depends.  It depends on the substitutes available, the risks taken, the liquidity of the vehicle, the potential for ruin, the rest of the portfolio.
 
 The literature around the subject of performance analysis seems to have exploded with the popularity of the hedge fund.  Simpler tools that seemed appropriate in a relative investment world seem inappropriate for an absolute return world.
 
-Performance measurement is the first step down a longer road.  Risk measurement, which is nearly inseparable from performance assessment, has been on a long march to become multi-dimensional while remaining conceptually accessible (How much could I lose?).  Portfolio construction and risk budgeting are two sides of the same coin (How do I maximize my expected gain\avoid going broke?).  But first we have to answer the question: Is this something I might want in my portfolio?
+Performance measurement is the first step down a longer road.  Risk measurement, which is nearly inseparable from performance assessment, has been on a long march to become multi-dimensional while remaining conceptually accessible (How much could I lose\?).  Portfolio construction and risk budgeting are two sides of the same coin (How do I maximize my expected gain and avoid going broke\?).  But first we have to answer the question: Is this something I might want in my portfolio\?
 
 With the rise of the investor class during the last decades, the increasing availability of complicated investment strategies to retail investors, and the broad availability of financial data, an engaging debate about performance analysis and evaluation is as important as ever.  There won't be one \emph{right} answer, a silver bullet, delivered in these metrics and charts.  What there will be is an accretion of evidence, organized to \emph{assist} a decision maker in answering a specific question that is pertinant to the decision at hand.  Using such tools to uncover information and ask better questions will, in turn, create a more informed investor.
 
@@ -36,6 +36,10 @@ Performance measurement starts with returns.  Proprietary traders will object, c
 Returns and risk can then be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}.
 
 Add more on basic metrics here.
+
+rolling period analysis
+
+}
 
 \section{Summary Tabular Data}{
 Return statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic numbers. Usually these are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
@@ -59,11 +63,12 @@ For distributional analysis, a few graphics may be useful.  \code{\link{chart.Bo
 
 Rolling performance is typically used as a way to assess stability of a return stream.  Although perhaps it doesn't get much credence in the financial literature as it derives from work in digital signal processing, practitioners find it a useful way to examine and segment performance and risk periods.  See \code{\link{chart.RollingPerformance}}, which is a way to display different metrics over rolling time periods.  \code{\link{chart.RollingMean}} is a specific example of a rolling mean and one standard deviation bands.  A group of related metrics is offered in \code{\link{charts.RollingPerformance}}.  These charts use utility functions such as \code{\link{rollingFunction}} and \code{\link{rollingStat}}.  \code{\link{chart.RollingCorrelation}} shows how correlations change over rolling periods.  \code{\link{chart.RollingRegression}} displays the coefficients of a linear model fitted over rolling periods.  A group of charts in \code{\link{charts.RollingRegression}} displays alpha, beta, and R-squared estimates in three aligned charts in a single device.
 
-There are also a number of charts or groups of charts that remain unfinished or were experimental and may be modified or removed in the future.  \code{\link{charts.RegressionDiagnostics}}, \code{\link{chart.Correlation}}, and \code{\link{chart.Correlation.color}} are examples.  The latter two are slight modifications of code from the package MASS and the base.  See their documentation for more information.
+There are also a number of charts or groups of charts that remain unfinished or were experimental and may be modified or removed in the future.  \code{\link{charts.RegressionDiagnostics}}, \code{\link{chart.Correlation}}, and \code{\link{chart.Correlation.color}} are examples.  The latter two are slight modifications of code from the package\code{MASS} and the R \code{base}.  See their documentation for more information.
 
-It should not go without saying that we have been inspired by other peoples' work, some of which is on display at \link{http://addictedtor.free.fr/}.  Particular inspiration came from Dirk Eddelbuettel and John Bollenger for their work at \link{http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65}.
+It should not go without saying that we have been inspired by other peoples' work, some of which is on display at \url{http://addictedtor.free.fr/}.  Particular inspiration came from Dirk Eddelbuettel and John Bollinger for their work at \url{http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65}.
+}
 
-Distribution analysis
+\section{Distribution Analysis}{
 tests for normal
 variance appears below under Risk
 skewness
@@ -75,10 +80,6 @@ co-moments
 systematic moments as indicators of diversification potential
 \code{\link{CAPM.alpha}}
 \code{\link{CAPM.beta}}
-
-rolling period analysis
-
-
 }
 
 \section{Risk Analysis}{
