@@ -6,7 +6,7 @@
 Econometric tools for performance and risk analysis.
 }
 \description{
-Library of econometric functions for performance and risk analysis of financial portfolios. This library aims to aid practitioners and researchers in using the latest research in analysis of both normal and non-normal return streams.  In general, this library is most tested on return (rather than price) data on a monthly scale. Many functions will work with daily or irregular return data as well.  See function \code{\link{CalculateReturns} for calculating returns from prices, and be aware that the \code{\link{aggregate}} function has methods for \code{tseries} and \code{zoo} classes to rationally coerce irregular data into regular data of the correct periodicity.
+Library of econometric functions for performance and risk analysis of financial portfolios. This library aims to aid practitioners and researchers in using the latest research in analysis of both normal and non-normal return streams.  In general, this library is most tested on return (rather than price) data on a monthly scale. Many functions will work with daily or irregular return data as well.  See function \code{\link{CalculateReturns}} for calculating returns from prices, and be aware that the \code{\link{aggregate}} function has methods for \code{tseries} and \code{zoo} classes to rationally coerce irregular data into regular data of the correct periodicity.
 }
 \details{
 \tabular{ll}{
@@ -35,6 +35,8 @@ Performance measurement starts with returns.  Proprietary traders will object, c
 
 Returns and risk can then be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}. 
 
+Add more on basic metrics here.
+
 \section{Summary Tabular Data}{
 Return statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic numbers. Usually these are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
 
@@ -42,7 +44,7 @@ A number of other tables constructed for comparison are included.  When we start
 \itemize{\code{\link{table.MonthlyReturns}}, which provides a statistical summary of the monthly returns themselves;}
 \itemize{\code{\link{table.AnnualizedReturns}}, which calculates aggregate returns and risk (usually used in graphics discussed below); }
 \itemize{\code{\link{table.CAPM}}, a collection of statistics offered by practitioners of Modern Portfolio Theory; }
-\itemize{\code{\link{table.HigherMoments}}, a table of metrics for comparing higher moments of distributions, including the four-moment CAPM;  }
+\itemize{\code{\link{table.HigherMoments}}, a table of metrics for evaluating diversification potential by comparing higher moments of distributions;  }
 \itemize{\code{\link{table.DownsideRisk}}, statistics for those wanting to compare the extent of observed losses; }
 \itemize{\code{\link{table.Correlation}}, a table arranged for comparing correlations; and } 
 \itemize{\code{\link{table.RollingPeriods}}, which calculates statistics over varying periods of time.  }
@@ -51,9 +53,17 @@ A number of other tables constructed for comparison are included.  When we start
 \section{Charts and Graphs}{
 Alternatively, graphs and charts can help to organize the information visually, again for a particular purpose.  The cumulative returns or wealth index is usually the first thing displayed, even though they rarely convey much information.  See \code{\link{chart.CumReturns}}.  Individual period returns may be helpful for identifying problematic periods, such as in \code{\link{chart.Bar}}.  Risk measures can be helpful when overlayed on the period returns, to display the bounds at which losses may be expected.  See \code{\link{chart.BarVaR}} and the following section.  More information can be conveyed when such charts are displayed together, as in \code{\link{chart.PerformanceSummary}}, which pairs the performance data with detail on downside risk (see \code{\link{chart.Drawdown}}).  
 
+The relative performance through time of two assets can be plotted with \code{\link{chart.RelativePerformance}}.  This plot displays the ratio of the cumulative performance at each point in time and makes periods of under- or out-performance easy to see.  The value of the chart is less important than the slope of the line.  If the slope is positive, the first asset is outperforming the second, and vice versa.  Affectionately known as the Canto chart, it was used effectively in Canto (2005).  
+
 Two-dimensional charts can also be useful while remaining easy to understand.  \code{\link{chart.Scatter}} is a utility scatter chart with some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.  Overlaying Sharpe ratio lines or boxplots helps to add information about relative performance along those dimensions.  Of course, 
 
-Rolling performance is typically used as a way to assess stability of a return stream.  Although perhaps not stati
+For distributional analysis, a few graphics may be useful.  \code{\link{chart.Boxplot}} is an example of a graphic that is difficult to create in Excel and is under-utilized as a result.  A boxplot of returns is, however, a very useful way to instantly observe the shape of hundreds or thousands of return and in a way that makes them easy to compare to one another.  \code{\link{chart.Histogram}} and \code{\link{chart.QQPlot}} are two charts from the FinMetrics packages with only small modifications. 
+
+Rolling performance is typically used as a way to assess stability of a return stream.  Although perhaps it doesn't get much credence in the financial literature as it derives from work in digital signal processing, practitioners find it a useful way to examine and segment performance and risk periods.  See \code{\link{chart.RollingPerformance}}, which is a way to display different metrics over rolling time periods.  \code{\link{chart.RollingMean}} is a specific example of a rolling mean and one standard deviation bands.  A group of related metrics is offered in \code{\link{charts.RollingPerformance}}.  These charts use utility functions such as \code{\link{rollingFunction}} and \code{\link{rollingStat}}.  \code{\link{chart.RollingCorrelation}} shows how correlations change over rolling periods.  \code{\link{chart.RollingRegression}} displays the coefficients of a linear model fitted over rolling periods.  A group of charts in \code{\link{charts.RollingRegression}} displays alpha, beta, and R-squared estimates in three aligned charts in a single device.
+
+There are also a number of charts or groups of charts that remain unfinished or were experimental and may be modified or removed in the future.  \code{\link{charts.RegressionDiagnostics}}, \code{\link{chart.Correlation}}, and \code{\link{chart.Correlation.color}} are examples.  The latter two are slight modifications of code from the package MASS and the base.  See their documentation for more information.  
+
+It should not go without saying that we have been inspired by other peoples' work, some of which is on display at \link{http://addictedtor.free.fr/}.  Particular inspiration came from Dirk Eddelbuettel and John Bollenger for their work at \link{http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65}.  
 
 Distribution analysis
 tests for normal
