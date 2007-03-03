@@ -21,6 +21,7 @@ Creates a box plot of returns with some defaults.
 \author{ Peter Carl }
 \seealso{ }
 \examples{
+data(edhec)
 chart.Boxplot(edhec)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

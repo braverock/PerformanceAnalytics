@@ -27,6 +27,7 @@ This function defaults to the first column as the returns to be formatted, but t
 }
 \seealso{ }
 \examples{
+data(edhec)
 table.Returns(edhec)
 t(table.Returns(edhec))
 table.Returns(edhec[,c(13,2,4)])
