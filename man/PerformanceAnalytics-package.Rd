@@ -53,7 +53,7 @@ We have also included a function to compute the \code{\link{KellyRatio}}.  The K
 
 Spearman rank correlation?
 
-A brief discussion of ranking methods (summarize), followed by the paper that references that fact that relative rankings across multiple methodologies may be positively correlated with each other and with expected returns.
+ \code{\link{InformationRatio}}, \code{\link{KellyRatio}}, \code{\link{SharpeRatio}}, \code{\link{SortinoRatio}}, and other methods discussed here are all methods of rank-ordering relative performance. Alexander and Dimitriu(2004) in "The Art of Investing in Hedge Funds" show that relative rankings across multiple pricing methodologies may be positively correlated with each other and with expected returns.  This is quite an important finding because it shows that multiple methods of predicting returns and risk which have underlying measures and factors that are not directly correlated to another measure or factor will still produce widely similar quantile rankings, so that the \dQuote{buckets} of target instruments will have significant overlap.  This observation specifically supports the point made early in this document regarding \dQuote{accretion of the evidence}.
 
 tests for normal
 variance appears below under Risk
