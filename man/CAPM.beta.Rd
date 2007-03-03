@@ -23,6 +23,7 @@ CAPM.beta(R, Rb, rf = 0, digits = 4)
 systematic beta of an asset to the index
 }
 \references{
+Sharpe, W.F. Capital Asset Prices: A theory of market equilibrium under conditions of risk. \emph{Journal of finance}, vol 19, 1964, 425-442. \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
 }
 \author{ Peter Carl }
@@ -30,7 +31,8 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 \seealso{
     \code{\link{BetaCoVariance}}
     \code{\link{CAPM.alpha}}
- }
+    \code{\link{CAPM.utils}}
+}
 \examples{
 data(edhec)
 edhec.length = dim(edhec)[1]

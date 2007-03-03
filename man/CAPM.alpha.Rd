@@ -19,11 +19,15 @@ CAPM.alpha(R, Rb, rf = 0)
 \value{
 CAPM alpha
 }
-\references{ ~put references to the literature/web site here ~ }
+\references{
+Sharpe, W.F. Capital Asset Prices: A theory of market equilibrium under conditions of risk. \emph{Journal of finance}, vol 19, 1964, 425-442. \cr
+Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
+}
 \author{ Peter Carl }
 \note{}
 \seealso{
     \code{\link{CAPM.beta}}
+    \code{\link{CAPM.utils}}
 }
 \examples{
 data(edhec)
