@@ -7,7 +7,6 @@
 }
 \usage{
 chart.Drawdown(R, legend.loc = NULL, colorset = (1:12), ...)
-chart.Drawdown(R)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

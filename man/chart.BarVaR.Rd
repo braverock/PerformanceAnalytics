@@ -12,9 +12,19 @@ chart.BarVaR(R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid 
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{n}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with n=0 are calculated from the start of the timeseries }
-  \item{risk.line}{ if risk.line is set to \code{FALSE}, then this function just draws the underlying bar chart }
   \item{method}{ can be specified as \code{StdDev}, \code{VaR}, or \code{ModifiedVaR} }
   \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
+  \item{risk.line}{ if risk.line is set to \code{FALSE}, then this function just draws the underlying bar chart }
+  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
+  \item{xaxis}{ if true, draws the x axis }
+  \item{main}{ set the chart title, same as in \code{\link{plot}} }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
+  \item{date.format}{ re-format the dates for the xaxis; the default is "\%m/\%y" }
+  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
@@ -27,7 +37,12 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 \author{ Peter Carl }
 \note{
 }
-\seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}}, \code{\link{VaR}}, \code{\link{VaR.CornishFisher}} }
+\seealso{
+   \code{\link{chart.TimeSeries}}
+   \code{\link{plot}}
+   \code{\link[fPortfolio]{VaR}}
+   \code{\link{VaR.CornishFisher}}
+}
 \examples{
 data(edhec)
 chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns")

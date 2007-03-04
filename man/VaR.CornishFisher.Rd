@@ -10,9 +10,9 @@ These functions calculate both traditional mean-VaR and modified Cornish-Fisher 
 }
 \usage{
 VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
-modifiedVaR(R, p = 0.99, modified = TRUE, column = 1)
-VaR.traditional(R, p = 0.99, modified = FALSE, column = 1)
-VaR.mean(R, p = 0.99, modified = FALSE, column = 1)
+modifiedVaR(R, p = 0.99, column = 1)
+VaR.traditional(R, p = 0.99, column = 1)
+VaR.mean(R, p = 0.99, column = 1)
 VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -43,7 +43,7 @@ The prototype of this function was completed by Diethelm Wuertz.  It calculated 
 \seealso{
     \code{\link{VaR.Marginal}}
     \code{\link{VaR.Beyond}}
-    \code{\link{CVaR}}
+    \code{\link[fPortfolio]{CVaR}}
     \code{\link{SharpeRatio.modified}}
 }
 \examples{

@@ -26,10 +26,10 @@ results over a rolling period
 \references{ }
 \author{ Peter Carl }
 \note{
-Inspired by \code{\link{rollFun}} written by Diethelm Wurtz.  We've extended the idea to all the columns provided.
+Inspired by \code{\link[fMultivar]{rollFun}} written by Diethelm Wurtz.  We've extended the idea to all the columns provided.
 }
 \seealso{
-   \code{\link{rollFun}}
+   \code{\link[fMultivar]{rollFun}}
 }
 \examples{
     # Examples:

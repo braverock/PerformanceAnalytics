@@ -35,7 +35,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
             DownsideDeviation(x,MAR=rf),
             DownsideDeviation(x,MAR=0),
             maxDrawdown(x),
-            VaR.CornishFisher(x, p=p, modified = FALSE),
+            VaR.traditional(x, p=p),
             VaR.Beyond(x, p=p),
             VaR.CornishFisher(x, p=p)
             )
@@ -83,10 +83,13 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.3 2007-02-25 18:23:40 brian Exp $
+# $Id: table.DownsideRisk.R,v 1.4 2007-03-04 20:59:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

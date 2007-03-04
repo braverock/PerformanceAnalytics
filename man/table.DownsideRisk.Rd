@@ -31,7 +31,7 @@ A dataframe organized as a table of estimates of downside risk measures for comp
     \code{\link{maxDrawdown}}
     \code{\link{VaR.CornishFisher}}
     \code{\link{VaR.Beyond}}
-    \code{\link{VaR}}
+    \code{\link{VaR.traditional}}
     \code{\link{StdDev}}
 }
 \examples{

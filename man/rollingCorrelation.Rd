@@ -37,7 +37,7 @@ A data.table of n-period trailing correlations for each column in y.
 \references{ }
 \author{ Peter Carl }
 \note{
-Inspired by fMultivar \code{\link{rollFun}} written by Diethelm Wurtz.
+Inspired by fMultivar \code{\link[fMultivar]{rollFun}} written by Diethelm Wurtz.
 
 Assumes that x and y are sequenced exactly the same and are regular.
 

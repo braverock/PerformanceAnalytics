@@ -1,12 +1,12 @@
 `CalculateReturns` <-
-function(Prices, method="simple")
+function(Prices, method = c("simple", "compound"))
 { # @ author Peter Carl
 
     #  Calculate returns from a price stream
 
     # Required inputs
 
-    # Prices: 
+    # Prices:
     # method: "simple", "compound"
 
     # FUNCTION:

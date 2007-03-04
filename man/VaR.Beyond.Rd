@@ -31,7 +31,7 @@ Brian G. Peterson
 \seealso{
     \code{\link{VaR.CornishFisher}}
     \code{\link{VaR.traditional}}
-    \code{\link{CVaR}}
+    \code{\link[fPortfolio]{CVaR}}
 }
 \examples{
 }

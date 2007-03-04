@@ -71,7 +71,7 @@ function(R, p=0.99, modified = TRUE, column=1)
 ###############################################################################
 
 `modifiedVaR` <-
-function(R, p=0.99, column=1, modified=TRUE)
+function(R, p=0.99, column=1)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -80,14 +80,14 @@ function(R, p=0.99, column=1, modified=TRUE)
     # because this measure is often referred to as modifiedVaR
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, modified, column = column)
+    VaR.CornishFisher(R = R, p = p, column = column, modified=TRUE)
 
 }
 
 ###############################################################################
 
 `VaR.mean` <-
-function(R, p=0.99, column=1, modified=FALSE)
+function(R, p=0.99, column=1)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -98,14 +98,14 @@ function(R, p=0.99, column=1, modified=FALSE)
     # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, modified, column = column)
+    VaR.CornishFisher(R = R, p = p, column = column , modified=FALSE)
 
 }
 
 ###############################################################################
 
 `VaR.traditional` <-
-function(R, p=0.99, column=1, modified=FALSE)
+function(R, p=0.99, column=1)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -116,7 +116,7 @@ function(R, p=0.99, column=1, modified=FALSE)
     # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, modified, column = column)
+    VaR.CornishFisher(R = R, p = p, column = column, modified=FALSE)
 
 }
 
@@ -182,10 +182,13 @@ function(R, p=0.99, modified = TRUE,firstcolumn=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.3 2007-03-04 20:59:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890

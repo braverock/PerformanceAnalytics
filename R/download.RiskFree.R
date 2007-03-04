@@ -9,9 +9,6 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"))
 
     # FUNCTION:
 
-    # Requires the tseries library
-    require(tseries)
-
     # Download the risk free data, in this case, the 13-WEEK TREASURY BILL (^IRX)
     # from finance.yahoo.com
 

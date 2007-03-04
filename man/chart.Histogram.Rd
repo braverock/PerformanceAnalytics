@@ -12,18 +12,18 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{main}{ set the chart title, same as in \code{plot} }
   \item{add.names}{ ~~Describe \code{add.names} here~~ }
-  \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }
-  \item{ylab}{ set the y-axis label, as in \code{\link{plot}} }
   \item{border.col}{ ~~Describe \code{border.col} here~~ }
   \item{add.density}{ ~~Describe \code{add.density} here~~ }
   \item{add.fit}{ ~~Describe \code{add.fit} here~~ }
   \item{density.col}{ ~~Describe \code{density.col} here~~ }
   \item{fit.col}{ ~~Describe \code{fit.col} here~~ }
-  \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{lwd}{ ~~Describe \code{lwd} here~~ }
+  \item{main}{ set the chart title, same as in \code{\link{plot}} }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
+  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

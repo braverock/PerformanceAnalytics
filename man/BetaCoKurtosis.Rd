@@ -16,7 +16,7 @@ BetaCoKurtosis(Ri, Ra, na.rm = FALSE, method = c("moment", "excess", "fisher"))
   \item{Ri}{ return vector of initial portfolio }
   \item{Ra}{ return vector of asset being considered for addition to portfolio }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{method}{ method to use when computing \code{\link{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
+  \item{method}{ method to use when computing \code{\link[fBasics]{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
 }
 \details{
 }

@@ -1,5 +1,5 @@
 `checkDataMatrix` <-
-function (R, na.rm = FALSE, ...)
+function (R, na.rm = FALSE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -62,10 +62,13 @@ function (R, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataMatrix.R,v 1.4 2007-02-28 04:42:11 peter Exp $
+# $Id: checkDataMatrix.R,v 1.5 2007-03-04 20:59:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/28 04:42:11  peter
+# - minor changes
+#
 # Revision 1.3  2007/02/26 22:04:36  brian
 # - changes in functions to pass "R CMD check" for package
 #
