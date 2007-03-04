@@ -23,6 +23,7 @@ table of returns
 \author{ Peter Carl }
 \note{
 This function assumes monthly returns, and does not currently have handling for other scales.
+
 This function defaults to the first column as the returns to be formatted, but the function will format the column specified.
 }
 \seealso{ }
