@@ -7,7 +7,6 @@ Downside deviation is an alternative measure of dounside risk.
 }
 \usage{
 DownsideDeviation(R, MAR = 0)
-SemiDeviation(R)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
