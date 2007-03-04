@@ -1,4 +1,4 @@
-charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = F, main = NULL, ...)
+charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = FALSE, main = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -9,7 +9,7 @@ charts.RollingRegression = function (R, Rb, n = 12, rf = 0, darken = F, main = N
     # R: a matrix, data frame, or timeSeries, usually a set of monthly returns.
     #   The first column is assumed to be the returns of interest, the next
     #   columns are assumed to be relevant benchmarks for comparison.
-    # Rb: a matrix, data frame, or timeSeries that is a set of returns of the 
+    # Rb: a matrix, data frame, or timeSeries that is a set of returns of the
     #   same scale and periodicity as R.
     # rf: the risk free rate.  Remember to set this to the same periodicity
     #   as the data being passed in.
