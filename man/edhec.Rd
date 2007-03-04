@@ -24,5 +24,17 @@ About EDHEC Alternative Indexes. December 16, 2003. EDHEC-Risk.
 Vaissie Mathieu. A Detailed Analysis of the Construction Methods and Management Principles of Hedge Fund Indices. October 2003. EDHEC.
 \url{http://www.edhec-risk.com/site_edhecrisk/public/indexes/EDHEC_Publications/RISKReview1072705188065793513}
 }
+\examples{
+data(edhec)
+
+#preview the data
+head(edhec)
+
+#summary period statistics
+summary(edhec)
+
+#cumulative index returns
+tail(cumprod.column(1+edhec),1)
+}
 \keyword{datasets}
 \keyword{ ts }
