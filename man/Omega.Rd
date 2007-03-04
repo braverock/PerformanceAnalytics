@@ -54,10 +54,13 @@ Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
    \code{\link{Ecdf}}
 }
 \examples{
-data(edhec)
-for(i in 1:13) { print(Omega(edhec[,i])) }
-Omega(edhec[,13],method="interp",output="point")
-Omega(edhec[,13],method="interp",output="full")
+    data(edhec)
+
+    for(i in 1:13) { print(Omega(edhec[,i], method="simple")) }
+
+    Omega(edhec[,13],method="interp",output="point")
+
+    Omega(edhec[,13],method="interp",output="full")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
