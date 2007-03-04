@@ -7,10 +7,13 @@
 }
 \usage{
 chart.Drawdown(R, legend.loc = NULL, colorset = (1:12), ...)
+chart.Drawdown(R)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
@@ -21,7 +24,7 @@ Any time the cumulative returns dips below the maximum cumulative returns, it's 
 }
 \references{ }
 \author{ Peter Carl }
-\note{ 
+\note{
 }
 \seealso{ \code{\link{plot}}, \code{\link{chart.TimeSeries}}  }
 \examples{
