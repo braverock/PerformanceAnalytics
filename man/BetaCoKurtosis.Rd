@@ -30,7 +30,7 @@ Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: A
 \note{}
 \seealso{
     \code{\link{CoKurtosis}}
-    \code{\link{kurtosis}}
+    \code{\link[fBasics]{kurtosis}}
 }
 \examples{
 }

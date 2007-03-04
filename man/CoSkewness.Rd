@@ -29,7 +29,7 @@ Martellini L. and Ziemann V. 2005. Marginal Impacts on Portfolio Distributions. 
 \note{}
 \seealso{
     \code{\link{BetaCoSkewness}}
-    \code{\link{skewness}}
+    \code{\link[fBasics]{skewness}}
 }
 \examples{
 }

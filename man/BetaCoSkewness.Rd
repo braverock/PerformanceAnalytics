@@ -27,7 +27,7 @@ Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: A
 \note{}
 \seealso{
     \code{\link{CoSkewness}}
-    \code{\link{skewness}}
+    \code{\link[fBasics]{skewness}}
 }
 \examples{
 }

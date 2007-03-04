@@ -29,7 +29,7 @@ Martellini L. and Ziemann V. 2005. Marginal Impacts on Portfolio Distributions. 
 \note{}
 \seealso{
     \code{\link{BetaCoKurtosis}}
-    \code{\link{kurtosis}}
+    \code{\link[fBasics]{kurtosis}}
 }
 \examples{
 }
