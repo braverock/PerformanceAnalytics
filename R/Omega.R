@@ -1,5 +1,5 @@
 `Omega` <-
-function (R, L = 0, method = "simple", output = "point", rf = 0)
+function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -50,35 +50,44 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 
     x = checkDataVector(R)
 
-    if(method == "simple") {
-        numerator = exp(-rf) * mean(max(x - L, 0))
-        denominator = exp(-rf) * mean(max(L - x, 0))
-        omega = numerator/denominator
-    }
+    switch(method,
+        simple = {
+            numerator = exp(-rf) * mean(max(x - L, 0))
+            denominator = exp(-rf) * mean(max(L - x, 0))
+            omega = numerator/denominator
+        },
+        binomial = {
+            warning("binomial method not yet implemented, using interp")
+            method = "interp"
+        },
+        blackscholes = {
+            warning("blackscholes method not yet implemented, using interp")
+            method = "interp"
+        },
+        interp = {
 
-    if(method == "interp") {
-    #
-        # require("Hmisc")
-        a = min(x)
-        b = max(x)
+            # require("Hmisc")
+            a = min(x)
+            b = max(x)
 
-        xcdf = Ecdf(x, pl=FALSE)
-        f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
+            xcdf = Ecdf(x, pl=FALSE)
+            f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
-        if(output == "full") {
-            omega = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x))
+            if(output == "full") {
+                omega = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x))
+            }
+            else {
+            # returns only the point value for L
+                # to get a point measure for omega, have to interpolate
+                omegafull = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x)) # ????????
+                g <- approxfun(xcdf$x,omegafull,method="linear",ties="ordered")
+                omega = g(L)
+            }
         }
-        else {
-        # returns only the point value for L
-            # to get a point measure for omega, have to interpolate
-            omegafull = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x)) # ????????
-            g <- approxfun(xcdf$x,omegafull,method="linear",ties="ordered")
-            omega = g(L)
-        }
-    }
+    ) # end method switch
+
     result = omega
     result
-
 }
 
 ###############################################################################
@@ -89,10 +98,13 @@ function (R, L = 0, method = "simple", output = "point", rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.7 2007-02-28 16:12:46 brian Exp $
+# $Id: Omega.R,v 1.8 2007-03-04 18:37:09 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/02/28 16:12:46  brian
+# - set plot=FALSE in Ecdf function
+#
 # Revision 1.6  2007/02/28 13:55:23  brian
 # - comment require for Hmisc, as it is included when the main PerformanceAnalytics package loads
 #
