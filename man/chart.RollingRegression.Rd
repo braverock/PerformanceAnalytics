@@ -1,4 +1,4 @@
-:\name{chart.RollingRegression}
+\name{chart.RollingRegression}
 \alias{chart.RollingRegression}
 \alias{charts.RollingRegression}
 %- Also NEED an '\alias' for EACH other topic documented here.
