@@ -95,3 +95,35 @@ function (x, ci = 0.95)
     ucl = mean(x) - se.mean * t.val
     ucl
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: mean.utils.R,v 1.5 2007-03-05 04:51:36 brian Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+#
+# revision 1.4
+# date: 2007-03-04 22:48:18 -0600;  brian;
+# - change first parameter to x for R generic method consistency
+# - fix capitalization errors in documentation
+#
+# revision 1.3
+# date: 2007-03-04 22:04:24 -0600;  peter;
+# - fixed bug omitting length()
+#
+# revision 1.2
+# date: 2007-03-04 21:25:04 -0600;  peter;
+# - added defaults for ci
+#
+# revision 1.1
+# date: 2007-03-04 20:54:35 -0600;  peter;
+# - added set of minor utility functions
+#
+###############################################################################
