@@ -55,8 +55,8 @@ function (R, ci = 0.95)
 
     # FUNCTION:
     x = checkDataVector(R)
-
-    if (length(x) <= 1)
+    n = length(x)
+    if (n <= 1)
         return(NA)
     se.mean = sqrt(var(x)/n)
     t.val = qt((1 - ci)/2, n - 1)
@@ -81,8 +81,8 @@ function (R, ci = 0.95)
 
     # FUNCTION:
     x = checkDataVector(R)
-
-    if (length(x) <= 1)
+    n = length(x)
+    if (n <= 1)
         return(NA)
     se.mean = sqrt(var(x)/n)
     t.val = qt((1 - ci)/2, n - 1)
