@@ -41,7 +41,14 @@ Most inputs are the same as "\code{\link{plot}}" and are principally included so
 }
 \examples{
 data(edhec)
-# chart.RollingRegression(R=edhec[,10:12],Rb=edhec[,13])
+edhec.length = dim(edhec)[1]
+start = rownames(edhec[1,])
+start
+end = rownames(edhec[edhec.length,])
+sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
+rf = download.RiskFree(start=start, end=end)
+
+chart.RollingRegression(edhec[,"Long.Short.Equity",drop=FALSE],sp500,rf=rf)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
