@@ -24,7 +24,7 @@ mean.LCL(x,  ci = 0.95)
 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{x}{ a vector, matrix, data frame, or timeSeries to calculate the modified mean statistic over }
   \item{ci}{ the confidence interval to use }
 }
 
