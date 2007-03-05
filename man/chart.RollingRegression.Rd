@@ -37,7 +37,7 @@ A timeseries line chart of the calculated series
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
 \seealso{
-   \code{\link{charts.RegressionDiagnostics}}
+   \code{\link{chart.RegressionDiagnostics}}
 }
 \examples{
 data(edhec)

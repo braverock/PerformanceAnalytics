@@ -20,7 +20,8 @@ chart of regression stats to help you validate the regression outputs
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{charts.RegressionDiagnostics}} \cr
+    \code{\link{charts.RollingRegression}} \cr
+    \code{\link{chart.RollingRegression}} \cr
     \code{\link{chart.Histogram}} \cr
     \code{\link{chart.QQPlot}}    \cr
     \code{\link{chart.Boxplot}}
