@@ -1,4 +1,4 @@
-\name{chart.RollingRegression}
+:\name{chart.RollingRegression}
 \alias{chart.RollingRegression}
 \alias{charts.RollingRegression}
 %- Also NEED an '\alias' for EACH other topic documented here.
@@ -40,6 +40,8 @@ Most inputs are the same as "\code{\link{plot}}" and are principally included so
    \code{\link{charts.RegressionDiagnostics}}
 }
 \examples{
+data(edhec)
+chart.RollingRegression(edhec[,11:13])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
