@@ -1,33 +1,46 @@
 \name{mean.utils}
 \alias{mean.utils}
 \alias{mean.geometric}
-\alias{mean.ucl}
-\alias{mean.lcl}
+\alias{mean.UCL}
+\alias{mean.LCL}
 \alias{mean.stderr}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate attributes relative to the mean of the return series given }
 \description{
-The Treynor ratio is similar to the Sharpe Ratio, except it uses beta as the volatility measure (to divide the investment's excess return over the beta). }
-\usage{
-mean.geometric(R)
-mean.stderr(R)
-mean.ucl(R, ci)
-mean.lcl(R, ci)
+    \tabular{ll}{
+        \code{\link{mean.geometric}} \tab geometric mean \cr
+        \code{\link{mean.stderr}} \tab standard error of the mean (S.E. mean) \cr
+        \code{\link{mean.LCL}} \tab lower confidence level (LCL) of the mean \cr
+        \code{\link{mean.UCL}} \tab upper confidence level (UCL) of the mean \cr
+    }
 }
+
+\usage{
+mean.geometric(x)
+mean.stderr(x)
+mean.UCL(x,  ci = 0.95)
+mean.LCL(x,  ci = 0.95)
+}
+
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{ci}{ the confidence interval to use }
 }
+
 \value{
 value for the function called
 }
+
 \references{
 }
+
 \author{ Peter Carl }
 \seealso{
    \code{\link{sd}}
+   \code{\link{mean}}
 }
+
 \examples{
 data(edhec)
 mean.geometric(edhec[,"Funds.of.Funds"])

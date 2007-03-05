@@ -1,5 +1,11 @@
+# collection of mean-related statistics
+#
+# NOTE: we would prefer that the first argument be R for returns,
+#       but the package check complains about mismatch of the
+#       first parameter with R command mean()
+
 `mean.geometric` <-
-function (R)
+function (x)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -12,14 +18,14 @@ function (R)
     # Returns the geometric return
 
     # FUNCTION:
-    x = checkDataVector(R)
+    x = checkDataVector(x)
     mean.geometric = exp(mean(log(1+x)))-1
     mean.geometric
 
 }
 
 `mean.stderr` <-
-function (R)
+function (x)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -32,14 +38,14 @@ function (R)
     # Returns the standard error of the mean for the return
 
     # FUNCTION:
-    x = checkDataVector(R)
+    x = checkDataVector(x)
     stderr = sqrt(var(x)/length(x))
     stderr
 
 }
 
 `mean.LCL` <-
-function (R, ci = 0.95)
+function (x, ci = 0.95)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -54,7 +60,7 @@ function (R, ci = 0.95)
     # for the confidence interval given
 
     # FUNCTION:
-    x = checkDataVector(R)
+    x = checkDataVector(x)
     n = length(x)
     if (n <= 1)
         return(NA)
@@ -65,7 +71,7 @@ function (R, ci = 0.95)
 }
 
 `mean.UCL` <-
-function (R, ci = 0.95)
+function (x, ci = 0.95)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -80,7 +86,7 @@ function (R, ci = 0.95)
     # for the confidence interval given
 
     # FUNCTION:
-    x = checkDataVector(R)
+    x = checkDataVector(x)
     n = length(x)
     if (n <= 1)
         return(NA)
