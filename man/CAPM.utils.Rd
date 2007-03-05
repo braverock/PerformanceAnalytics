@@ -36,13 +36,13 @@ Probably the most complete criticism of CAPM in actual practice (as opposed to s
 
 Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions and deficiencies.
 
-\code{{CAPM.RiskPremium}} is the premium returned to the investor over the risk free asset
+\code{CAPM.RiskPremium} is the premium returned to the investor over the risk free asset
 
-\code{{CAPM.CML}} calculates the expected return of the asset against the benchmark Capital Market Line
+\code{CAPM.CML} calculates the expected return of the asset against the benchmark Capital Market Line
 
-\code{{CAPM.CML.slope}} calculates the slope of the Capital Market Line for looking at how a particular asset compares to the CML
+\code{CAPM.CML.slope} calculates the slope of the Capital Market Line for looking at how a particular asset compares to the CML
 
-\code{{CAPM.SML.slope}} calcuates the slope of the Security Market Line for looking at how a particular asset compares to the SML created by the benchmark
+\code{CAPM.SML.slope} calculates the slope of the Security Market Line for looking at how a particular asset compares to the SML created by the benchmark
 
 }
 \references{
