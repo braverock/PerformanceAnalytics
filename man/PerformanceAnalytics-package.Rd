@@ -171,6 +171,12 @@ If you've implemented anything in the list above, please consider donating it fo
 \section{Acknowledgements}{
 Data series \code{\link{edhec}} used in \code{PerformanceAnalytics} and related publications with the kind permission of the EDHEC Risk and Asset Management Research Center. \cr
 \url{http://www.edhec-risk.com/indexes/pure_style}
+
+Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission.
+
+Thanks to Joe Byers and Dirk Eddelbuettel for comments on early versions of these functions.
+
+Thanks to the R-SIG-Finance community without whom this library would not be possible.
 }
 
 \author{
