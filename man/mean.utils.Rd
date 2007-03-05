@@ -5,7 +5,7 @@
 \alias{mean.LCL}
 \alias{mean.stderr}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ calculate attributes relative to the mean of the return series given }
+\title{ calculate attributes relative to the mean of the observation series given }
 \description{
     \tabular{ll}{
         \code{\link{mean.geometric}} \tab geometric mean \cr
@@ -24,7 +24,7 @@ mean.LCL(x,  ci = 0.95)
 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ a vector, matrix, data frame, or timeSeries to calculate the modified mean statistic over }
+  \item{x}{ a vector, matrix, data frame, or time series to calculate the modified mean statistic over }
   \item{ci}{ the confidence interval to use }
 }
 
