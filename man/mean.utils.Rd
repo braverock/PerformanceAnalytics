@@ -18,7 +18,7 @@ mean.lcl(R, ci)
 \arguments{
   \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{ci}{ the confidence interval to use }
-\}
+}
 \value{
 value for the function called
 }
