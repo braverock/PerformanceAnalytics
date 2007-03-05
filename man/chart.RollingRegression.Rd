@@ -49,6 +49,7 @@ sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
 rf = download.RiskFree(start=start, end=end)
 
 chart.RollingRegression(edhec[,"Long.Short.Equity",drop=FALSE],sp500,rf=rf)
+chart.RollingRegression(edhec[,"Long.Short.Equity",drop=FALSE],sp500,rf=rf)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
