@@ -39,7 +39,7 @@ function (R)
 }
 
 `mean.LCL` <-
-function (R, ci)
+function (R, ci = 0.95)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -65,7 +65,7 @@ function (R, ci)
 }
 
 `mean.UCL` <-
-function (R, ci)
+function (R, ci = 0.95)
 {# @author Peter Carl
 
     # DESCRIPTION
