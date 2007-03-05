@@ -35,7 +35,10 @@ Performance measurement starts with returns.  Proprietary traders will object, c
 
 Returns and risk may be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}.
 
-Basic measures of performance tend to treat returns as independent observations.  In this case, the entirety of R's base is applicable to such analysis. Some basic statistics we have collected in \code{\link{table.MonthlyReturns}} include:
+Basic measures of performance tend to treat returns as independent observations.  In this case, the entirety of R's base is applicable to such analysis.
+
+Some basic statistics we have collected in \code{\link{table.MonthlyReturns}} include:
+\cr
 \tabular{ll}{
 \code{\link{mean}}  \tab  arithmetic mean \cr
 \code{\link{mean.geometric}} \tab geometric mean \cr
