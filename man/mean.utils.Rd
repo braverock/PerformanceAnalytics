@@ -5,7 +5,7 @@
 \alias{mean.LCL}
 \alias{mean.stderr}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ calculate attributes relative to the mean of the observation series given }
+\title{ calculate attributes relative to the mean of the observation series given, including geometric, stderr, LCL and UCL }
 \description{
     \tabular{ll}{
         \code{\link{mean.geometric}} \tab geometric mean \cr
