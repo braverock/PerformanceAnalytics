@@ -41,7 +41,7 @@ Most inputs are the same as "\code{\link{plot}}" and are principally included so
 }
 \examples{
 data(edhec)
-chart.RollingRegression(edhec[,11:13])
+# chart.RollingRegression(R=edhec[,10:12],Rb=edhec[,13])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
