@@ -15,7 +15,7 @@ CoKurtosis(Ri, Ra, na.rm = FALSE)
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
-    \eqn{CoK_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}})^{3})}{\code{CoS=sum((Ra-mean(Ra))(Rb-mean(Rb)^3))}}
+    \eqn{CoK_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{i}-\bar{R_{i}})^{3})}{\code{CoS=sum((Ra-mean(Ra))(Ri-mean(Ri)^3))}}
 }
 \value{
 value of cokurtosis of Ri and Ra
