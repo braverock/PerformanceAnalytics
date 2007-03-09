@@ -1,4 +1,4 @@
-`checkDataMatrix` <-
+`checkDataZoo` <-
 function (R, na.rm = FALSE, ...)
 { # @author Peter Carl
 
@@ -60,9 +60,12 @@ function (R, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataZoo.R,v 1.1 2007-03-09 22:41:03 peter Exp $
+# $Id: checkDataZoo.R,v 1.2 2007-03-09 22:45:09 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/03/09 22:41:03  peter
+# - added coersion function to deliver zoo object
+#
 #
 ###############################################################################
