@@ -48,6 +48,9 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     # Re-format the dates for the xaxis
     rownames = format(strptime(rownames,format = "%Y-%m-%d"), date.format)
 
+    logaxis = ""
+    if(ylog) {logaxis = "y"}
+
     # Set color for key elements, easy to darken for the printer
     if(darken)
         elementcolor = "darkgray" #better for the printer
@@ -61,7 +64,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     if(is.na(ylim[1])){
         ylim = range(y[!is.na(y)])
     }
-    plot.window(xlim, ylim, xaxs = "r")
+    plot.window(xlim, ylim, xaxs = "r", log = logaxis)
     dimensions = par("usr")
 
     # Draw any areas in the background
@@ -159,10 +162,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.TimeSeries.R,v 1.3 2007-03-09 03:08:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
