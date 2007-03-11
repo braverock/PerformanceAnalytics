@@ -13,24 +13,7 @@ function(R, p=0.99, modified = TRUE, weightingvector)
     #
     # @returns data frame with total VaR of the portfolio plus Marginal VaR for each component
 
-    # Setup
-    # data type conditionals
-    if (class(R) == "numeric") {
-        R = as.matrix(R)
-    }
-    if (class(R) == "matrix") {
-        R = R
-    }
-    if (class(R) == "data.frame") {
-        R = R
-    }
-    if (class(R) == "timeSeries") {
-        R = R@Data
-    }
-    if (class(R) == "vector") {
-        R = array(R=R)
-    }
-    class(R)
+    R = checkDataMatrix(R)
 
     if (ncol(weightingvector) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
 
@@ -80,10 +63,13 @@ function(R, p=0.99, modified = TRUE, weightingvector)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: VaR.Marginal.R,v 1.3 2007-03-11 17:05:53 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890

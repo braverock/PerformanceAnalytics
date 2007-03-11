@@ -27,13 +27,7 @@ function (R, periods = 1)
 
     } else { #multi-column data
 
-        if (class(R) == "timeSeries") {
-            R = R@Data
-        }
-        if (class(R) == "vector") {
-            R = array(R=R)
-        }
-        class(R)
+        R = checkDataMatrix(R)
 
         columns = ncol(R)
         columnnames=colnames(R)
@@ -70,10 +64,13 @@ function (R, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: VaR.Beyond.R,v 1.3 2007-03-11 17:05:53 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
