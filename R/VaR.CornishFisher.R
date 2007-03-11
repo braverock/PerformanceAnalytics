@@ -49,7 +49,7 @@ function(R, p=0.99, modified = TRUE, column=1)
     }
     class(R)
 
-    r = as.vector(y)
+    r = checkDataVector(y)
     if (!is.numeric(r)) stop("The selected column is not numeric")
 
     if (modified) {
@@ -152,7 +152,7 @@ function(R, p=0.99, modified = TRUE,firstcolumn=1)
     columnnames=colnames(R)
 
     for(column in firstcolumn:columns) {
-        r = as.vector(R[,column])
+        r = checkDataVector(R[,column])
         if (!is.numeric(r)) stop("The selected column is not numeric")
         VaR = VaR.CornishFisher(r,p,modified)
 
@@ -182,10 +182,13 @@ function(R, p=0.99, modified = TRUE,firstcolumn=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.3 2007-03-04 20:59:27 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.4 2007-03-11 16:58:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/04 20:59:27  brian
+# - minor changes to pass R CMD check
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

@@ -19,8 +19,8 @@ function( Ra, Ri, na.rm=FALSE, method=c("moment", "excess", "fisher") )
 
     # Setup
 
-    Ri = as.vector(Ri)
-    Ra = as.vector(Ra)
+    Ri = checkDataVector(Ri)
+    Ra = checkDataVector(Ra)
 
     if(na.rm) {
         Ri <- Ri[!is.na(Ri)]
@@ -68,10 +68,15 @@ function( Ri, Ra, na.rm=FALSE, method=c("moment", "excess", "fisher") )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: BetaCoKurtosis.R,v 1.3 2007-03-11 16:53:19 brian Exp $
+# $Id: BetaCoKurtosis.R,v 1.4 2007-03-11 16:58:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/11 16:53:19  brian
+# - add equations and text to documentation
+# - standardize on Ra as the Return of the Asset
+# - standardize on Ra as first argument where that wasn't previously true
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

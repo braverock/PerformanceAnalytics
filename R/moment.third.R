@@ -14,7 +14,7 @@ function(R,na.rm=FALSE)
 
     # Setup
 
-    R = as.vector(R)
+    R = checkDataVector(R)
 
     if(na.rm) {
         R <- R[!is.na(R)]
@@ -38,10 +38,13 @@ function(R,na.rm=FALSE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: moment.third.R,v 1.4 2007-02-08 21:38:52 brian Exp $
+# $Id: moment.third.R,v 1.5 2007-03-11 16:58:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/08 21:38:52  brian
+# - correct pervasive calculation error in co-moments
+#
 # Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
