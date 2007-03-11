@@ -11,12 +11,12 @@ Beta covariance is the beta of an asset to the variance and covariance of an ini
 This function uses a symbolic representation to achieve the same result as the linear intercept model used by \code{\link{CAPM.beta}}
 }
 \usage{
-BetaCoVariance(Ri, Ra, na.rm = FALSE)
+BetaCoVariance(Ra, Ri, na.rm = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ return vector of initial portfolio }
   \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{Ri}{ return vector of initial portfolio }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{

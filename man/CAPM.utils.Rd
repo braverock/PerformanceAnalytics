@@ -12,13 +12,13 @@ These utility functions provide values for various measures proposed in the CAPM
 }
 \usage{
 CAPM.CML.slope(Rb, rf = 0 )
-CAPM.CML(R, Rb, rf = 0)
-CAPM.RiskPremium(R, rf = 0)
+CAPM.CML(Ra, Rb, rf = 0)
+CAPM.RiskPremium(Ra, rf = 0)
 CAPM.SML.slope(Rb, rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
 }
@@ -37,6 +37,8 @@ Probably the most complete criticism of CAPM in actual practice (as opposed to s
 Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions and deficiencies.
 
 \code{CAPM.RiskPremium} is the premium returned to the investor over the risk free asset
+
+\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-rf)}
 
 \code{CAPM.CML} calculates the expected return of the asset against the benchmark Capital Market Line
 

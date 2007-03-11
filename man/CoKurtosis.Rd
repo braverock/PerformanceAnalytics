@@ -6,16 +6,16 @@
   CoKurtosis is the product of the fourth higher moments of two assets.
 }
 \usage{
-CoKurtosis(Ri, Ra, na.rm = FALSE)
+CoKurtosis( Ra, Ri, na.rm = FALSE )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ return vector of initial portfolio }
   \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{Ri}{ return vector of initial portfolio }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
 }
 \details{
-    \eqn{CoK_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{i}-\bar{R_{i}})^{3})}{\code{CoS=sum((Ra-mean(Ra))(Ri-mean(Ri)^3))}}
+    \deqn{CoK_{a,b}=\sum((R_{a}-\bar{R_{a}})(R_{i}-\bar{R_{i}})^{3})}{\code{CoS=sum((Ra-mean(Ra))(Ri-mean(Ri)^3))}}
 }
 \value{
 value of cokurtosis of Ri and Ra

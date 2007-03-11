@@ -8,16 +8,20 @@ CAPM Beta is the beta of an asset to the variance and covariance of an initial p
 This function uses a linear intercept model to achieve the same results as the symbolic model used by \code{\link{BetaCoVariance}}
 }
 \usage{
-CAPM.beta(R, Rb, rf = 0, digits = 4)
+CAPM.beta(Ra, Rb, rf = 0, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{digits}{ number of digits to round results to }
 }
 \details{
+ \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{a}-\bar{R_{a}})^{2}}}}{cov(Ra,Rb)/var(Ra)}
+
+Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of \eqn{R_{a}}{Ra} on \eqn{R_{b}}{Rb} and that this slope can be used to determine the risk premium or excess expected return (see Eq. 7.9 and 7.10, p. 230-231)
+
 }
 \value{
 systematic beta of an asset to the index

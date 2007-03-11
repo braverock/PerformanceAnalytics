@@ -1,5 +1,5 @@
 `CoSkewness` <-
-function(Ri, Ra, na.rm=FALSE)
+function(Ra, Ri, na.rm=FALSE)
 { # @author Brian G. Peterson
 
     # Description:
@@ -19,8 +19,8 @@ function(Ri, Ra, na.rm=FALSE)
 
     # Setup
 
-    Ri = as.vector(Ri)
-    Ra = as.vector(Ra)
+    Ri = checkDataVector(Ri)
+    Ra = checkDataVector(Ra)
 
     if(na.rm) {
         Ri <- Ri[!is.na(Ri)]
@@ -46,10 +46,13 @@ function(Ri, Ra, na.rm=FALSE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoSkewness.R,v 1.3 2007-02-08 21:38:52 brian Exp $
+# $Id: CoSkewness.R,v 1.4 2007-03-11 16:53:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/08 21:38:52  brian
+# - correct pervasive calculation error in co-moments
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

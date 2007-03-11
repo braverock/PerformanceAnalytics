@@ -10,11 +10,11 @@ InformationRatio = ActivePremium/TrackingError
 This relates the degree to which an investment has beaten the benchmark to the consistency with which the investment has beaten the benchmark.
 }
 \usage{
-InformationRatio(R, Rb, scale = 12)
+InformationRatio(Ra, Rb, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }

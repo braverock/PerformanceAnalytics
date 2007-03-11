@@ -8,11 +8,11 @@ The return on an investment's annualized return minus the benchmark's annualized
 Active Premium = Investment's annualized return - Benchmark's annualized return
 }
 \usage{
-ActivePremium(R, Rb, scale = 12)
+ActivePremium(Ra, Rb, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ return vector of the portfolio }
+  \item{Ra}{ return vector of the portfolio }
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
@@ -27,6 +27,7 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 \seealso{
     \code{\link{InformationRatio}}
     \code{\link{TrackingError}}
+    \code{\link{Return.annualized}}
 }
 \examples{
 data(edhec)

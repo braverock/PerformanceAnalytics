@@ -6,19 +6,19 @@
 A measure of the unexplained portion of performance relative to a benchmark.
 }
 \usage{
-TrackingError(R, Rb, scale = 12)
+TrackingError(Ra, Rb, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
 Tracking error is calculated by taking the square root of the average of the squared deviations between the investment's returns and the benchmark's returns, then multiplying the result by the square root of the scale of the returns.
 
-\eqn{TrackingError=\sqrt{\sum\frac{(R-R_{b})^{2}}{len(R)\sqrt{scale}}}}{TrackingError = sqrt(sum(assetReturns - benchmarkReturns)^2 /
-                (length(assetReturns) - 1)) * sqrt(scale)}
+\deqn{TrackingError=\sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}}
+     {TrackingError = sqrt(sum(Ra - Rb)^2 / (length(Ra) - 1)) * sqrt(scale)}
 }
 \value{
 Tracking Error (number)

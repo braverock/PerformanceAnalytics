@@ -1,5 +1,5 @@
 `CAPM.alpha` <-
-function (R, Rb, rf = 0)
+function (Ra, Rb, rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -17,7 +17,7 @@ function (R, Rb, rf = 0)
 
     # FUNCTION:
 
-    assetReturns.vec = checkDataVector(R)
+    assetReturns.vec = checkDataVector(Ra)
     benchmarkReturns.vec = checkDataVector(Rb)
     rf.vec = checkDataVector(rf)
 
@@ -44,10 +44,13 @@ function (R, Rb, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.alpha.R,v 1.5 2007-02-28 03:23:41 peter Exp $
+# $Id: CAPM.alpha.R,v 1.6 2007-03-11 16:53:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/02/28 03:23:41  peter
+# - added checkDataVector to rf
+#
 # Revision 1.4  2007/02/08 21:43:39  brian
 # - standardize parameters to R and Rb for consistency with other functions
 #

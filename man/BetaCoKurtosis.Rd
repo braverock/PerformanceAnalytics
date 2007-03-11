@@ -9,16 +9,17 @@ Beta CoKurtosis is the beta of an asset to the kurtosis of an initial portfolio.
 Also called "systematic kurtosis" or "systematic cokurtosis" by several papers.
 }
 \usage{
-BetaCoKurtosis(Ri, Ra, na.rm = FALSE, method = c("moment", "excess", "fisher"))
+BetaCoKurtosis( Ra, Ri, na.rm = FALSE, method = c("moment", "excess", "fisher"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ri}{ return vector of initial portfolio }
   \item{Ra}{ return vector of asset being considered for addition to portfolio }
+  \item{Ri}{ return vector of initial portfolio }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{method}{ method to use when computing \code{\link[fBasics]{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
 }
 \details{
+\deqn{K_{a,b}=\frac{CoK_{a,b}}{S_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}})^{3})}{\sum(R_{a}-\bar{R_{a}})^{4}}{BCoK(Ra,Rb)=CoK(Ra,Rb)/kurtosis(Ra)}}
 }
 \value{
 systematic kurtosis of two assets
