@@ -1,5 +1,5 @@
 `Return.annualized` <-
-function (R, geometric = TRUE, scale = 12)
+function (R, scale = 12, geometric = TRUE, )
 { # @author Peter Carl
 
     # Description:
@@ -24,7 +24,7 @@ function (R, geometric = TRUE, scale = 12)
     n = length(R)
     # currently only uses geometric return to annualize returns
     #return(prod(1 + x)^(scale/length(x)) - 1)
-    return(prod(1 + R, na.rm = TRUE)^(scale/n) - 1)
+    return(prod(1 + R)^(scale/n) - 1)
 }
 
 ###############################################################################
@@ -35,10 +35,13 @@ function (R, geometric = TRUE, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.3 2007-02-15 01:14:43 brian Exp $
+# $Id: Return.annualized.R,v 1.4 2007-03-11 19:18:50 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/15 01:14:43  brian
+# - standardize parameter variaable names
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
