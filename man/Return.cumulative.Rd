@@ -16,7 +16,15 @@ Return.cumulative(R, geometric = TRUE)
 \value{
 cumulative simple or geometric return
 }
-\references{ }
+\details{
+product of all the individual period returns
+
+\deqn{(1+r_{1})(1+r_{2})(1+r_{3})\ldots(1+r_{n})-1=prod(1+R)-1}{prod(1+R)-1}
+
+}
+\references{
+Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 6
+}
 \author{ Peter Carl }
 \seealso{
    \code{\link{Return.annualized}}
