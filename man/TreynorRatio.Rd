@@ -5,11 +5,11 @@
 \description{
 The Treynor ratio is similar to the Sharpe Ratio, except it uses beta as the volatility measure (to divide the investment's excess return over the beta). }
 \usage{
-TreynorRatio(R, Rb, rf = 0, scale = 12, ...)
+TreynorRatio(Ra, Rb, rf = 0, scale = 12, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
@@ -17,6 +17,10 @@ TreynorRatio(R, Rb, rf = 0, scale = 12, ...)
 }
 \value{
 Treynor ratio
+}
+\details{
+Equation:
+\deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}
 }
 \references{
 }

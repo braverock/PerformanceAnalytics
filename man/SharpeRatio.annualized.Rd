@@ -6,11 +6,11 @@
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviation to represent risk.
 }
 \usage{
-SharpeRatio.annualized(R, rf = 0, scale = 12)
+SharpeRatio.annualized(Ra, rf = 0, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
@@ -18,6 +18,8 @@ SharpeRatio.annualized(R, rf = 0, scale = 12)
 The Sharpe ratio is simply the return per unit of risk (represented by variance).  The higher the Sharpe ratio, the better the combined performance of "risk" and return.
 
 This function annualizes the number based on the scale parameter.
+
+\deqn{\frac{\sqrt[n]{prod(1+R_{a})^{scale}}-1}{\sqrt{scale}\cdot\sqrt{\sigma}}}
 
 Using an annualized Sharpe Ratio is useful for comparison of multiple return streams.  The annualized Sharpe ratio is computed by dividing the annualized mean monthly excess return by the annualized monthly standard deviation of excess return.
 

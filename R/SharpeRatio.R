@@ -1,5 +1,5 @@
 `SharpeRatio` <-
-function (R, rf = 0)
+function (Ra, rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -21,8 +21,8 @@ function (R, rf = 0)
 
     # FUNCTION:
 
-    R = checkDataVector(R)
-    return((mean(R) - rf)/sd(R))
+    Ra = checkDataVector(Ra)
+    return((mean(Ra) - rf)/sd(Ra))
 
 }
 
@@ -34,10 +34,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.R,v 1.3 2007-03-04 01:05:24 brian Exp $
+# $Id: SharpeRatio.R,v 1.4 2007-03-12 15:34:43 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/04 01:05:24  brian
+# - simplify code because NA's are taken care of in checkDataVector
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
