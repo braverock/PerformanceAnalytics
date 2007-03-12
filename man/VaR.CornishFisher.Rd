@@ -24,17 +24,52 @@ VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
   \item{firstcolumn}{ for \code{\link{VaR.multicolumn}} start with which column in multicolumn data, default 1 }
 }
 \details{
-The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Laurent Favre and Jose-Antonio Galeano published a paper in the Fall 2002, volume 5 of the Journal of Alternative Investment, "Mean-Modified Value-at-Risk optimization With Hedge Funds", that proposed a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as "Modified VaR" or "Modified Cornish-Fisher VaR".
+In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.
 
-Favre and Galeano utilize modified VaR in a modified Sharpe Ratio as the return/risk measure for their portfolio optimization analysis, see \code{\link{SharpeRatio.modified}} for more information.
+In a set of returns for which sufficently long history exists, the per-period Value at risk is simply the correct quantile of the period losses \eqn{\mu}  with variance \eqn{\sigma}  is denoted by:
+
+\deqn{VaR=\mu_{q_{.99}}}
+where \eqn{q_{.99}} is the 99\% quantile of the distribution.
+
+This method is also sometimes called \dQuote{historical VaR}, as it is by definition \emph{ex post} analysis of the return distribution.
+
+J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. Parametric maen-VaR does a better job of accounting for the tails of the distribution by more precisely estimating the tails below the risk quantile.
+
+When you don't have a sufficiently long set of returns to use non-parmetric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. The most common estimate is a normally distributed \eqn{R\sim N(\mu,\sigma^{2})} return series. In this case, estimation of VaR requires the mean return and the variance of the returns. In the most common case, parametric VaR is calculated by
+
+\deqn{\sigma=variance(R)}
+
+\deqn{VaR=\mu+\sigma\cdot q_{.99}}
+
+where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
+
+See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html}, \code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link[fPortfolio]{VaR}} function. Less commonly a covariance matrix of multiple risk factors may be applied.
+
+Other forms of parametric mean-VaR estimation utilize a different distribution for the variance estimate to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses.
+
+The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Favre and Galeano(2002) a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
+
+\deqn{z_{c} = q_{p}=qnorm(p)}
+
+\deqn{S= skewness(R)}
+
+\deqn{K = kurtosis(R)}
+
+\deqn{z_{cf}=z_{c}+\frac{(z{}_{c}^{2}-1)S}{6}+\frac{(z{}_{c}^{3}-3z_{c})K}{24}+\frac{(2z{}_{c}^{3}-5z_{c})S^{2}}{36}}
+
+\deqn{modVaR =\bar{R}- z_{cf}\sqrt{\sigma}}
 
 Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function.
+
+Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the return/risk measure for their portfolio optimization analysis, see \code{\link{SharpeRatio.modified}} for more information.
 }
 \value{
 VaR measure
 }
 \references{
 Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
+
+Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida, Working paper, 1999.
 }
 \author{ Brian G. Peterson }
 \note{
