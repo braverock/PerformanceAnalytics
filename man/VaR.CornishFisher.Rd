@@ -33,19 +33,19 @@ where \eqn{q_{.99}} is the 99\% quantile of the distribution.
 
 This method is also sometimes called \dQuote{historical VaR}, as it is by definition \emph{ex post} analysis of the return distribution.
 
-J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. Parametric maen-VaR does a better job of accounting for the tails of the distribution by more precisely estimating the tails below the risk quantile.
+When you don't have a sufficiently long set of returns to use non-parmetric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
 
-When you don't have a sufficiently long set of returns to use non-parmetric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. The most common estimate is a normally distributed \eqn{R\sim N(\mu,\sigma^{2})} return series. In this case, estimation of VaR requires the mean return and the variance of the returns. In the most common case, parametric VaR is calculated by
+Parametric mean-VaR does a better job of accounting for the tails of the distribution by more precisely estimating shape of the distribution the tails at the risk quantile. The most common estimate is a normally distributed \eqn{R\sim N(\mu,\sigma^{2})} return series. In this case, estimation of VaR requires the mean return \eqn{\bar{R}} and the variance of the returns \eqn{\sigma}. In the most common case, parametric VaR is thus calculated by
 
 \deqn{\sigma=variance(R)}
 
-\deqn{VaR=\mu+\sigma\cdot q_{.99}}
+\deqn{VaR=\bar{R}+\sigma\cdot q_{.99}}
 
 where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
 
-See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html}, \code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link[fPortfolio]{VaR}} function. Less commonly a covariance matrix of multiple risk factors may be applied.
+\code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link[fPortfolio]{VaR}} function.
 
-Other forms of parametric mean-VaR estimation utilize a different distribution for the variance estimate to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses.
+Other forms of parametric mean-VaR estimation utilize a different distribution for the variance estimate to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses. Less commonly a covariance matrix of multiple risk factors may be applied.
 
 The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Favre and Galeano(2002) a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
 
