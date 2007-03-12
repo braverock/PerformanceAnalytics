@@ -5,14 +5,15 @@
 \description{
 To annualize standard deviation, we multiply by the square root of the number of observations per year.
 Note that any annualized number should be viewed with suspicion if the number of observations is small.
+
+\deqn{\sqrt{scale}\cdot\sqrt{\sigma}}
 }
 \usage{
-StdDev.annualized(R, rf = 0, scale = 12)
+StdDev.annualized(Ra, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \value{

@@ -1,8 +1,8 @@
 `StdDev` <-
-function(R)
+function(Ra)
 { # @author Brian G. Peterson
 
-    r = checkDataVector(R)
+    r = checkDataVector(Ra)
 
     # DESCRIPTION:
     # Standard deviation of Monthly Returns:
@@ -15,9 +15,9 @@ function(R)
 ###############################################################################
 
 `std` <-
-function(r) {
+function(Ra) {
     # NOTE: std function is listed in the doc for fBasics, but not implemented
-    return(StdDev(R))
+    return(StdDev(Ra))
 }
 
 ###############################################################################
@@ -28,10 +28,13 @@ function(r) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.R,v 1.3 2007-02-07 13:24:49 brian Exp $
+# $Id: StdDev.R,v 1.4 2007-03-12 15:45:50 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.2  2007/02/05 19:03:04  brian
 # - add std wrapper function
 #
