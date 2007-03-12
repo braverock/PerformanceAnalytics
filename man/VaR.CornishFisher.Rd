@@ -76,10 +76,16 @@ Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida
 The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but did not handle the confidence level,exponents for each moment, and scale.
 }
 \seealso{
-    \code{\link{VaR.Marginal}}
-    \code{\link{VaR.Beyond}}
-    \code{\link[fPortfolio]{CVaR}}
+    \code{\link{VaR.Marginal}} \cr
+    \code{\link{VaR.Beyond}}  \cr
+    \code{\link[fPortfolio]{CVaR}} \cr
     \code{\link{SharpeRatio.modified}}
+    \code{\link[fBasics]{skewness}} \cr
+    \code{\link[fBasics]{kurtosis}} \cr
+    \code{\link[fPortfolio]{VaR}} \cr
+    \code{\link[VaR]{VaR.gpd}} \cr
+    \code{\link[VaR]{VaR.norm}} \cr
+    \code{\link[VaR]{VaR.backtest}}
 }
 \examples{
 }
