@@ -47,7 +47,7 @@ where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R 
 
 Other forms of parametric mean-VaR estimation utilize a different distribution for the variance estimate to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses. Less commonly a covariance matrix of multiple risk factors may be applied.
 
-The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Favre and Galeano(2002) a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
+The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Favre and Galeano(2002) provide a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account through the use of a Cornish Fisher expansion, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
 
 \deqn{z_{c} = q_{p}=qnorm(p)}
 
@@ -55,11 +55,11 @@ The limitations of mean Value-at-Risk are well covered in the literature. The li
 
 \deqn{K = kurtosis(R)}
 
-\deqn{z_{cf}=z_{c}+\frac{(z{}_{c}^{2}-1)S}{6}+\frac{(z{}_{c}^{3}-3z_{c})K}{24}+\frac{(2z{}_{c}^{3}-5z_{c})S^{2}}{36}}
+\deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}
 
 \deqn{modVaR =\bar{R}- z_{cf}\sqrt{\sigma}}
 
-Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function.
+Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.
 
 Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the return/risk measure for their portfolio optimization analysis, see \code{\link{SharpeRatio.modified}} for more information.
 }
@@ -76,16 +76,16 @@ Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida
 The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but did not handle the confidence level,exponents for each moment, and scale.
 }
 \seealso{
-    \code{\link{VaR.Marginal}} \cr
     \code{\link{VaR.Beyond}}  \cr
-    \code{\link[fPortfolio]{CVaR}} \cr
-    \code{\link{SharpeRatio.modified}}
+    \code{\link{VaR.Marginal}} \cr
+    \code{\link{SharpeRatio.modified}} \cr
     \code{\link[fBasics]{skewness}} \cr
     \code{\link[fBasics]{kurtosis}} \cr
     \code{\link[fPortfolio]{VaR}} \cr
     \code{\link[VaR]{VaR.gpd}} \cr
     \code{\link[VaR]{VaR.norm}} \cr
-    \code{\link[VaR]{VaR.backtest}}
+    \code{\link[VaR]{VaR.backtest}} \cr
+    \code{\link[fPortfolio]{CVaR}} \cr
 }
 \examples{
 }
