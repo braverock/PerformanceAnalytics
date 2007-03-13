@@ -25,20 +25,18 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
     # Calculate
 
     for(column in 1:columns) {
-        column.Return.calc = rollapply(na.omit(x[,column]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
+        # the drop=F flag is essential for when the zoo object only has one column
+        column.Return.calc = rollapply(na.omit(x[,column,drop=F]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
         if(column == 1)
             Return.calc = column.Return.calc
         else
             Return.calc = merge(Return.calc,column.Return.calc)
     }
-    if(columns == 1) 
-        Return.calc = as.matrix(Return.calc)
+
     colnames(Return.calc) = columnnames
 
     chart.TimeSeries(Return.calc, xaxis = xaxis, colorset = colorset, legend.loc = legend.loc, type = type, pch = pch, lty = lty, bg = bg, cex = cex, lwd = lwd, xlim = xlim, ylim = ylim, main = main, sub = sub, xlab = xlab, ylab = ylab, ann = ann, panel.first = panel.first, panel.last = panel.last, asp = asp, ylog = ylog, event.lines = event.lines, event.labels = event.labels, period.areas = period.areas, event.color = event.color, period.color = period.color, darken = darken, date.format = date.format )
 
-# rollapply(data, width, FUN, ..., by = 1, ascending = TRUE, by.column = TRUE,
-#       na.pad = FALSE, align = c("center", "left", "right"))
 }
 
 ###############################################################################
@@ -49,10 +47,13 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.4 2007-03-13 04:21:55 peter Exp $
+# $Id: chart.RollingPerformance.R,v 1.5 2007-03-13 18:08:20 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/13 04:21:55  peter
+# - adjusted parameter inputs
+#
 # Revision 1.3  2007/03/13 04:06:47  peter
 # - modified to deal with unequal time periods
 # - uses new checkData function
