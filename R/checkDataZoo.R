@@ -20,21 +20,23 @@ function (R, na.rm = FALSE, ...)
     # Produces a "zoo" timeseries object with named rows and columns.
 
     # FUNCTION:
+
     if (class(R) != "zoo") {
 
         if (class(R) == "numeric") {
             # Note that column and row labels will be blank.
             R = as.matrix(R)
+            # assume no rownames?
         }
-    
+
 #         if (class(R) == "matrix") {
             # Do nothing
 #         }
-    
+
 #         if (class(R) == "data.frame") {
 #             R = as.matrix(R)
 #         }
-    
+
         if (class(R) == "timeSeries") {
             # timeSeries objects keep the data in a matrix and append a set of
             # meta-data.  We just need the information stored in the 'Data' slot.
@@ -42,8 +44,29 @@ function (R, na.rm = FALSE, ...)
             R = seriesData(R)
         }
 
-        R = zoo(R, order.by = rownames(R))
+        if(is.null(ncol(R))) 
+            stop("No columns in the data provided.")
+        if(is.null(nrow(R)))
+            stop("No rows in the data provided.")
+
+        if(is.null(colnames(R))) {
+            columns = ncol(R)
+            warning("No column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
+            columnnames = for(column in 1:columns) {paste("Column.",column,sep="")}
+            colnames(R) = columnnames
+        }
+
+        if(is.null(rownames(R))){
+            #rows = nrow(R)
+            warning("No row names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
+            #rowname = 1:rows # @todo: make these 'dates' so that they get ordered correctly
+            #rownames(R) = as.Date(rowname)
+            R = zoo(R)
+        }
+        else
+            R = zoo(R, order.by = rownames(R))
     }
+
     if (na.rm) {
         #y = na.contiguous(R)
         R = na.omit(R)
@@ -60,10 +83,13 @@ function (R, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkDataZoo.R,v 1.2 2007-03-09 22:45:09 peter Exp $
+# $Id: checkDataZoo.R,v 1.3 2007-03-13 01:13:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/03/09 22:45:09  peter
+# - fixed function name
+#
 # Revision 1.1  2007/03/09 22:41:03  peter
 # - added coersion function to deliver zoo object
 #
