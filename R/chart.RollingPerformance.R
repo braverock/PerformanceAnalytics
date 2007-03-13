@@ -1,5 +1,5 @@
 `chart.RollingPerformance` <-
-function (R, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", rf = 0, trim = FALSE, na.rm = TRUE, ...)
+function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex = 1, lwd = 1, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = NULL, ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -16,10 +16,29 @@ function (R, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Re
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkDataMatrix(R)
+    x = checkData(R, method = "zoo")
 
-    chart.TimeSeries(rollingFunction(x, n = n, trim = trim, FUN = FUN, na.rm = na.rm), xaxis = xaxis, col = colorset, legend.loc = legend.loc, ...)
+    # Get dimensions and labels
+    columns = ncol(x)
+    columnnames = colnames(x)
 
+    # Calculate
+
+    for(column in 1:columns) {
+        column.Return.calc = rollapply(na.omit(x[,column]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
+        if(column == 1)
+            Return.calc = column.Return.calc
+        else
+            Return.calc = merge(Return.calc,column.Return.calc)
+    }
+    if(columns == 1) 
+        Return.calc = as.matrix(Return.calc)
+    colnames(Return.calc) = columnnames
+
+    chart.TimeSeries(Return.calc, xaxis = xaxis, col = colorset, legend.loc = legend.loc, type = type, pch = pch, lty = lty, bg = bg, cex = cex, lwd = lwd, xlim = xlim, ylim = ylim, main = main, sub = sub, xlab = xlab, ylab = ylab, ann = ann, panel.first = panel.first, panel.last = panel.last, asp = asp, ylog = ylog )
+
+# rollapply(data, width, FUN, ..., by = 1, ascending = TRUE, by.column = TRUE,
+#       na.pad = FALSE, align = c("center", "left", "right"))
 }
 
 ###############################################################################
@@ -30,10 +49,13 @@ function (R, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Re
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.RollingPerformance.R,v 1.3 2007-03-13 04:06:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
