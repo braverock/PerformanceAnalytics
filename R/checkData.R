@@ -136,4 +136,6 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: 
+# $Id: checkData.R,v 1.2 2007-03-13 03:44:24 peter Exp $
+###############################################################################
+# $Log: not supported by cvs2svn $
