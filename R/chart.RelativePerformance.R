@@ -15,21 +15,33 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkDataMatrix(R)
-    y = checkDataMatrix(Rb)
-    n = ncol(y)
+    Ra = checkData(R, method="zoo")
+    Rb = checkData(Rb, method = "zoo")
 
-    cumulativex = cumprod.column(1+x)
-    cumulativey = cumprod.column(1+y)
+    # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
 
-    # Assumes that the first column is the one we want to compare to everything
-    # in y.
-    results = cumulativex[,1]/cumulativey[,1:n]
+    # Calculate
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            cumulative.a = cumprod(1+na.omit(Ra[,column.a,drop=F]))
+            cumulative.b = cumprod(1+na.omit(Rb[,column.b,drop=F]))
+            column.calc = cumulative.a/cumulative.b
+            colnames(column.calc) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = "/")
+            if(column.a == 1 & column.b == 1)
+                Result.calc = column.calc
+            else
+                Result.calc = merge(Result.calc,column.calc)
+        }
+    }
 
     # Removes the first color in the colorset to keep consistant with other graphics
     colorset = colorset[-1]
 
-    chart.TimeSeries(results, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ylog = ylog, ...)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ylog = ylog, ...)
 
 }
 
@@ -41,10 +53,13 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.RelativePerformance.R,v 1.3 2007-03-13 21:54:11 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
