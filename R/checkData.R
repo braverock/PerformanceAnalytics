@@ -43,6 +43,8 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
     }
     else {
         columnnames = "Column.1"
+        if(!quiet)
+            warning("No row names or column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
     }
 
     # Coerce a matrix.
@@ -136,6 +138,10 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.2 2007-03-13 03:44:24 peter Exp $
+# $Id: checkData.R,v 1.3 2007-03-13 03:56:28 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/03/13 03:44:24  peter
+# - added log
+#
+###############################################################################
