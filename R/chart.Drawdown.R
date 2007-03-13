@@ -25,16 +25,17 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkDataZoo(R)
+    x = checkData(R, method="zoo")
 
     # Calculate drawdown level
 #     Return.cumulative = cumprod.column(1+x)
 #     maxCumulativeReturn = cummax.column(Return.cumulative)
 #     drawdown = Return.cumulative/maxCumulativeReturn - 1
+
     # Get dimensions and labels
     columns = ncol(x)
     columnnames = colnames(x)
-#
+
     for(column in 1:columns) {
         Return.cumulative = cumprod(1+na.omit(x[,column])) 
         maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
@@ -45,6 +46,9 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
         else
             drawdown = merge(drawdown,column.drawdown)
     }
+
+    if(columns == 1) 
+        drawdown = as.matrix(drawdown)
 
     colnames(drawdown) = columnnames
 
@@ -61,10 +65,14 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Drawdown.R,v 1.4 2007-03-10 19:46:35 peter Exp $
+# $Id: chart.Drawdown.R,v 1.5 2007-03-13 03:57:37 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/10 19:46:35  peter
+# - handles unequal periods
+# - correctly calculates when first period is negative
+#
 # Revision 1.3  2007/02/26 13:50:57  brian
 # - change cumMax.column to cummax.column to reflect change in function name to pass "R CMD check"
 #
