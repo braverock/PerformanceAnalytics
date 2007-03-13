@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
+function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab=NULL, xlab="Date", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -37,7 +37,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     # FUNCTION:
 
     # Make sure that we have a matrix to work with
-    y = checkDataMatrix(R)
+    y = checkData(R, method = "matrix")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -48,8 +48,18 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     # Re-format the dates for the xaxis
     rownames = format(strptime(rownames,format = "%Y-%m-%d"), date.format)
 
+    # If the Y-axis is ln
     logaxis = ""
-    if(ylog) {logaxis = "y"}
+    if(ylog) {
+        logaxis = "y"
+    }
+
+    if(is.null(ylab)) {
+        if(ylog) 
+            ylab = "ln(Value)"
+        else
+            ylab = "Value"
+    }
 
     # Set color for key elements, easy to darken for the printer
     if(darken)
@@ -59,9 +69,9 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 
     plot.new()
 
-    if(is.na(xlim[1]))
+    if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
-    if(is.na(ylim[1])){
+    if(is.null(ylim[1])){
         ylim = range(y[!is.na(y)])
     }
     plot.window(xlim, ylim, xaxs = "r", log = logaxis)
@@ -162,10 +172,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.3 2007-03-09 03:08:48 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.4 2007-03-13 04:01:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/09 03:08:48  peter
+# - fixed y-axis so that ylog could be passed in as a parameter
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
