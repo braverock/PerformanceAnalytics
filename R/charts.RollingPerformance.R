@@ -1,5 +1,5 @@
 `charts.RollingPerformance` <-
-function (R, n=12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
+function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,23 +12,18 @@ function (R, n=12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
     #   columns are assumed to be relevant benchmarks for comparison.
     # rf: this is the risk free rate.  Remember to set this to the same
     #   periodicity as the data being passed in.
-    # method: Used to select the risk parameter to use in the chart.BarVaR.  May
-    #   be any of:
-    #     modVaR - uses CF modified VaR
-    #     VaR - uses traditional Value at Risk
-    #     StdDev - monthly standard deviation of trailing 12 month returns
     #
 
     # Outputs:
     # A stack of three related timeseries line charts
 
     # FUNCTION:
-    x = checkDataMatrix(R)
+    x = checkData(R, method = "matrix")
     colnames = colnames(x)
     ncols = ncol(x)
 
     if(is.null(main))
-        main = paste(colnames[1]," Rolling ",n,"-Month Performance",sep="")
+        main = paste(colnames[1]," Rolling ",width,"-Month Performance",sep="")
 
     # First, we lay out the graphic as a three row, one column format
     plot.new()
@@ -48,15 +43,15 @@ function (R, n=12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
 
 
     # The first row is the annualized returns
-    chart.RollingPerformance(R, n=n, main = main, xaxis = FALSE, ylab = "Annualized Return", trim = trim, FUN = "Return.annualized", legend.loc = legend.loc, , event.labels = event.labels, ...)
+    chart.RollingPerformance(R, width = width, main = main, xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, ...)
 
     # The second row is the annualized standard deviation
     par(mar=c(1,4,0,2))
-    chart.RollingPerformance(R, n=n, main = "", xaxis = FALSE, ylab = "Annualized Standard Deviation", trim = trim, FUN = "StdDev.annualized", event.labels= NULL, ...)
+    chart.RollingPerformance(R, width = width, main = "", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, ...)
 
     # The third row is the annualized SR
     par(mar=c(5,4,0,2))
-    chart.RollingPerformance(R, n=n, main = "", ylab = "Annualized Sharpe Ratio", trim = trim, rf = rf, FUN = "SharpeRatio.annualized", event.labels= NULL, ...)
+    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", rf = rf, FUN = "SharpeRatio.annualized", event.labels= NULL, ...)
 
 }
 
@@ -68,10 +63,13 @@ function (R, n=12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: charts.RollingPerformance.R,v 1.3 2007-03-13 04:23:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
