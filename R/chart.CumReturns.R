@@ -19,7 +19,7 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkDataZoo(R)
+    x = checkData(R, method = "zoo")
     
     # Get dimensions and labels
     columns = ncol(x)
@@ -37,7 +37,8 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), ...)
         else
             Return.cumulative = merge(Return.cumulative,column.Return.cumulative)
     }
-
+    if(columns == 1) 
+        Return.cumulative = as.matrix(Return.cumulative)
     colnames(Return.cumulative) = columnnames
 
     # Chart the cumulative returns series
@@ -53,10 +54,13 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.3 2007-03-10 05:08:04 peter Exp $
+# $Id: chart.CumReturns.R,v 1.4 2007-03-13 03:59:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/10 05:08:04  peter
+# - revised function to take zoo objects and plot unequal time periods
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
