@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (R, Rb, width = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -30,8 +30,8 @@ function (R, Rb, width = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), 
     columnnames.b = colnames(Rb)
 
     # @todo: make an excess return function and use it here
-    Ra.excess = Ra - rf
-    Rb.excess = Rb - rf
+    Ra.excess = Return.excess(Ra, rf)
+    Rb.excess = Return.excess(Rb, rf)
 
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
@@ -68,10 +68,16 @@ function (R, Rb, width = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.6 2007-03-14 04:53:47 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.7 2007-03-14 22:54:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/14 04:53:47  peter
+# - uses checkData function
+# - uses zoo rollapply function
+# - takes multiple assets and multiple benchmarks
+# - handles unequal lengths of timeseries data
+#
 # Revision 1.5  2007/03/04 18:38:19  brian
 # - update function definition to agree with usage using enumerated argument
 #
