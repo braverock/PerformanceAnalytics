@@ -1,5 +1,5 @@
 `SemiDeviation` <-
-function (R)
+function (Ra)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -9,17 +9,17 @@ function (R)
 
     # FUNCTION:
 
-    x = checkDataVector(R)
+    Ra = checkDataVector(Ra)
 
-    return(DownsideDeviation(R, MAR=mean(R)))
+    return(DownsideDeviation(Ra, MAR=mean(Ra)))
 }
 
 `SemiVariance` <-
-function (R)
+function (Ra)
 {
-    x = checkDataVector(R)
+    Ra = checkDataVector(Ra)
 
-    return(DownsideDeviation(R, MAR=mean(R)))
+    return(DownsideDeviation(Ra, MAR=mean(Ra)))
 }
 
 ###############################################################################
@@ -30,10 +30,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SemiDeviation.R,v 1.3 2007-03-01 03:26:59 brian Exp $
+# $Id: SemiDeviation.R,v 1.4 2007-03-14 00:54:06 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/01 03:26:59  brian
+# - add function and documentation for DownsideDeviation wrapper SemiVariance
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
