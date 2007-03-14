@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (R, Rb, n = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main = paste("Rolling ",n,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+function (R, Rb, width = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -8,63 +8,55 @@ function (R, Rb, n = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
     # Rb: a matrix, data frame, or timeSeries of returns for a benchmark
+    # rf: limited to a point estimate
 
     # Outputs:
     # A timeseries line chart of the calculated series
+
+    # R-Squared could deliver adjusted R-Squared if we wanted
 
     # FUNCTION:
 
     # Transform input data to a data frame
 
-    # @todo: These should be excess returns
-    x = checkDataMatrix(R)
-    y = checkDataMatrix(Rb)
+    Ra = checkData(R, method = "zoo")
+    Rb = checkData(Rb, method = "zoo")
     #rf = checkDataMatrix(rf)
 
-    xcolname = colnames(x)
-    colnames = colnames(y)
+    # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
 
-    columns = ncol(y)
-    rows = nrow(x)
-    rownames = rownames(x)
+    # @todo: make an excess return function and use it here
+    Ra.excess = Ra - rf
+    Rb.excess = Rb - rf
 
-    x.excess = x - rf
-    y.excess = y - rf
-
-    data = as.data.frame(cbind(x.excess[,1],y.excess),row.names = rownames)
-
-    if(attribute == "Beta")
-        slot = 2
-    if(attribute == "Alpha")
-        slot = 1
-    if(attribute == "R-Squared")
-        slot = 2
-
-    for(column in 2:(columns+1)) {
-        result = rollingRegression(data[,1]~data[,column], data = data, width = n)
-        if(column == 2) {
-            if(attribute == "Beta")
-                betas.df = data.frame(result$coefficients[2,],row.names = rownames[n:rows])
+    # Calculate
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            merged.assets = merge(Ra.excess[,column.a,drop=F], Rb.excess[,column.b,drop=F])
             if(attribute == "Alpha")
-                betas.df = data.frame(result$coefficients[1,],row.names = rownames[n:rows])
-            if(attribute == "R-Squared")
-                betas.df = data.frame(result$r.squared,row.names = rownames[n:rows])
-        }
-        else {
+                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) lm(x[,1,drop=F]~x[,2,drop=F])$coefficients[1], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
             if(attribute == "Beta")
-                nextcolumn = as.data.frame(result$coefficients[2,])
-            if(attribute == "Alpha")
-                nextcolumn = as.data.frame(result$coefficients[1,])
+                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) lm(x[,1,drop=F]~x[,2,drop=F])$coefficients[2], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
             if(attribute == "R-Squared")
-                nextcolumn = as.data.frame(result$r.squared)
-            betas.df = cbind(betas.df, nextcolumn)
-        }
+                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) summary(lm(x[,1,drop=F]~x[,2,drop=F]))$r.squared, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
 
+            # some backflips to name the single column zoo object
+            column.result = as.matrix(column.result)
+            colnames(column.result) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+            column.result = zoo(column.result, order.by = rownames(column.result))
+
+            if(column.a == 1 & column.b == 1)
+                Result.calc = column.result
+            else
+                Result.calc = merge(Result.calc, column.result)
+        }
     }
 
-    colnames(betas.df) = colnames
-
-    chart.TimeSeries(betas.df, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ...)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ...)
 
 }
 
@@ -76,10 +68,13 @@ function (R, Rb, n = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.5 2007-03-04 18:38:19 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.6 2007-03-14 04:53:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/04 18:38:19  brian
+# - update function definition to agree with usage using enumerated argument
+#
 # Revision 1.4  2007/02/07 15:45:33  peter
 # - repaired graphic parameter passing
 # - rf needs a data check and testing
