@@ -1,14 +1,12 @@
 `chart.RollingCorrelation` <-
-function (R, Rb, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), trim = FALSE, ...)
+function (R, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # A wrapper to create a chart of rolling performance metrics in a line chart
 
     # Inputs:
-    # R: a matrix, data frame, or timeSeries of returns
-    # FUN: any function that can be evaluated using a single set of returns
-    #   (e.g., rolling beta won't work, but Return.annualizeds will)
+
 
     # Outputs:
     # A timeseries line chart of the calculated series
@@ -16,10 +14,34 @@ function (R, Rb, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), trim 
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkDataMatrix(R)
-    y = checkDataMatrix(Rb)
+    Ra = checkData(R, method = "zoo")
+    Rb = checkData(Rb, method = "zoo")
 
-    chart.TimeSeries(rollingCorrelation(x = x, y = y, n = n, trim = trim), xaxis = xaxis, col = colorset, legend.loc = legend.loc, ylim = c(-1,1), ...)
+        # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
+
+    # Calculate
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            merged.assets = merge(Ra[,column.a,drop=F], Rb[,column.b,drop=F])
+            column.calc = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) cor(x[,1,drop=F], x[,2,drop=F]), by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+
+            # some backflips to name the single column zoo object
+            column.calc = as.matrix(column.calc)
+            colnames(column.calc) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
+            column.calc = zoo(column.calc, order.by = rownames(column.calc))
+
+            if(column.a == 1 & column.b == 1)
+                Result.calc = column.calc
+            else
+                Result.calc = merge(Result.calc, column.calc)
+        }
+    }
+
+    chart.TimeSeries(Result.calc, xaxis = xaxis, col = colorset, legend.loc = legend.loc, ylim = c(-1,1), ...)
 
 }
 
@@ -31,10 +53,13 @@ function (R, Rb, n=12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), trim 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingCorrelation.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.RollingCorrelation.R,v 1.3 2007-03-14 03:12:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
