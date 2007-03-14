@@ -10,7 +10,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{xaxis}{ if true, draws the x axis }
   \item{type}{ set the chart type, same as in \code{\link{plot}} }

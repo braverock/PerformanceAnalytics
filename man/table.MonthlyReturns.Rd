@@ -9,7 +9,7 @@ table.MonthlyReturns(R, ci = 0.95, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{ci}{ confidence interval, defaults to 95\% }
   \item{digits}{ number of digits to round results to }
 }

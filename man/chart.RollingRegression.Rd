@@ -14,7 +14,7 @@ charts.RollingRegression(R, Rb, n = 12, rf = 0, darken = FALSE, main = NULL, ...
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{n}{ number of periods to apply rolling function over }

@@ -6,12 +6,12 @@
 A wrapper to create a rolling annualized returns chart, rolling annualized standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
 \usage{
-charts.RollingPerformance(R, n = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
+charts.RollingPerformance(R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
-  \item{n}{ number of periods to apply rolling function over }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{width}{ number of periods to apply rolling function over }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }

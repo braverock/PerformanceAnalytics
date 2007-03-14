@@ -12,7 +12,7 @@ findDrawdowns(R)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
 \value{
   unordered list

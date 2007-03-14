@@ -10,7 +10,7 @@ chart.Correlation.color(R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{new}{ ~~Describe \code{new} here~~ }
   \item{nrgcols}{ number or regularly spaced columns }
   \item{labels}{ TRUE/FALSE use labels or not }

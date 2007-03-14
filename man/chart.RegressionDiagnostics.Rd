@@ -9,7 +9,7 @@ chart.RegressionDiagnostics(R, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
 }
 \details{

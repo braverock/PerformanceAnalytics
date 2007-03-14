@@ -10,7 +10,7 @@ checkDataVector(R, na.rm = TRUE, quiet = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{quiet}{ TRUE/FALSE if FALSE, it will throw warnings when errors are noticed, default TRUE }
   \item{\dots}{ any other passthru parameters }

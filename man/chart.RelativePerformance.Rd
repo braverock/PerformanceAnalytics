@@ -10,7 +10,7 @@ chart.RelativePerformance(R, Rb, main = "Relative Performance", xaxis = TRUE, co
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{xaxis}{ if true, draws the x axis }

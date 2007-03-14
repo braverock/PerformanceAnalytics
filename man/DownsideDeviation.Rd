@@ -6,11 +6,11 @@
 Downside deviation is an alternative measure of dounside risk.
 }
 \usage{
-DownsideDeviation(R, MAR = 0)
+DownsideDeviation(Ra, MAR = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
 }
 \details{

@@ -10,7 +10,7 @@ rollingStat(R, period = 3, trim = TRUE, FUN, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{period}{ the number of periods over which to calculate the statistic. Setting the period to 0 calculates the statistic "from inception" or using all of the data passed in }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{FUN}{ function to apply over e.g., FUN = "mean" or FUN = "Return.cumulative" }

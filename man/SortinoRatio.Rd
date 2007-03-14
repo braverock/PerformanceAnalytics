@@ -6,11 +6,11 @@
 Sortino proposed an improvement on the Sharpe Ratio to better account for skill and excess performance by using only downside semivariance as the measure of risk.
 }
 \usage{
-SortinoRatio(R, MAR = 0)
+SortinoRatio(Ra, MAR = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
 }
 \details{

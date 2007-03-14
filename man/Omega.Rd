@@ -10,7 +10,7 @@ Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), outp
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{L}{ L is the loss threshold that can be specified as zero, return from a benchmark index, or an absolute rate of return - any specified level }
   \item{method}{ one of: simple, interp, binomial, blackscholes }
   \item{output}{ one of: point (in time), or full (distribution of Omega) }

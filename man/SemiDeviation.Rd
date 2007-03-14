@@ -7,12 +7,12 @@
 Semideviation is the portion of the return stream below the mean return.
 }
 \usage{
-SemiDeviation(R)
-SemiVariance(R)
+SemiDeviation(Ra)
+SemiVariance(Ra)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
 \details{
 Semidiviation or SemiVariance is a popular alternative downside risk measure that may be used in place of standard deviation or variance.

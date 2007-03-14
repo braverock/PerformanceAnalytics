@@ -11,16 +11,21 @@ The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviati
 A number of papers now recommend using a "modified Sharpe" ratio using a Modified Cornish-Fisher VaR as the measure of Risk.
 }
 \usage{
-SharpeRatio.modified(R, rf = 0, p = 0.95, scale = 1)
+SharpeRatio.modified(Ra, rf = 0, p = 0.95, scale = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
+\deqn{modSharpe=\frac{\overline{(R_{a}-R_{f})}}{modVaR_{R_{a},p}}}{modSharpe=mean(Ra-rf)/(modVaR(Ra,p))}
+
+or for an annualized measure:
+
+\deqn{modSharpe=\frac{\sqrt[n]{prod(1+(R_{a}-R_{f}))^{scale}}-1}{\sqrt{scale}\cdot modVaR_{R_{a},p}}}{modSharpe=Return.annualized(Ra,rf)/(modVaR(Ra,p)*sqrt(scale))}
 }
 \value{
 This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)

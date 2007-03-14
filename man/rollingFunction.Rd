@@ -10,7 +10,7 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{n}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }

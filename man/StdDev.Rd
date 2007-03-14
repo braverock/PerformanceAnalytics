@@ -6,11 +6,7 @@
 \description{
 Standard Deviation of Monthly Returns
 
-\eqn{
-\sigma=variance(Ra)
-
-std=\sqrt{\sigma}
-}{std = sqrt(var(R))}
+\eqn{\sigma = variance(R_{a})  \cr std=\sqrt{\sigma} \cr}{std = sqrt(var(Ra))}
 
 May be annualized using \code{\link{StdDev.annualized}}
 }
@@ -19,7 +15,7 @@ StdDev(Ra)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
 \value{
 standard deviation

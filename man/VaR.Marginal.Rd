@@ -10,7 +10,7 @@ VaR.Marginal(R, p = 0.99, modified = TRUE, weightingvector)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns or the components }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns or the components }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ TRUE/FALSE whether to use Cornish-Fisher VaR }
   \item{weightingvector}{ vector of weights for each element in the portfolio }

@@ -10,7 +10,7 @@ chart.Histogram(R, rf = 0, main = NULL, add.names = TRUE, xlab = "Returns", ylab
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{add.names}{ ~~Describe \code{add.names} here~~ }
   \item{border.col}{ ~~Describe \code{border.col} here~~ }

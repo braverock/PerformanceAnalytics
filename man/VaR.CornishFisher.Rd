@@ -17,7 +17,7 @@ VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ TRUE/FALSE default TRUE, use Cornish Fisher Expansion to take higher moments into account }
   \item{column}{ calculate VaR for what column? }

@@ -10,7 +10,7 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{add.names}{ plots the row name with the data point.  default TRUE. Can be removed by setting it to NULL }

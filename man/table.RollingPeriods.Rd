@@ -10,7 +10,7 @@ table.RollingPeriods(R, firstcolumn = 1, periods = subset(c(3, 6, 9, 12, 18, 24,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{periods}{ number of periods to use as rolling window(s), subset of \code{c(3, 6, 9, 12, 18, 24, 36, 48)} }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }

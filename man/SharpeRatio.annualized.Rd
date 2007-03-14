@@ -10,7 +10,7 @@ SharpeRatio.annualized(Ra, rf = 0, scale = 12)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, or timeSeries of returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
