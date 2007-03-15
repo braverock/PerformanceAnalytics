@@ -26,6 +26,13 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
     # FUNCTION:
     asset = checkDataMatrix(R)
     benchmark = checkDataMatrix(Rb)
+    columns.a = ncol(asset)
+    columns.b = ncol(benchmark)
+
+    if(columns.a > 1 | columns.b > 1)
+        legend.loc = "topleft"
+    else
+        legend.loc = NULL
 
     plot.new()
 
@@ -36,7 +43,7 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
          main = paste("Rolling ",width,"-Month Regression",sep="")
     }
 
-    chart.RollingRegression(asset, benchmark, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = F, main = main, ylab = "Alpha", legend.loc="topleft", ...)
+    chart.RollingRegression(asset, benchmark, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = F, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
 
     par(mar=c(1,4,0,2))
 
