@@ -36,13 +36,13 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
-            merged.assets = merge(Ra.excess[,column.a,drop=F], Rb.excess[,column.b,drop=F])
+            merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             if(attribute == "Alpha")
-                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) lm(x[,1,drop=F]~x[,2,drop=F])$coefficients[1], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+                column.result = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) lm(x[,1,drop=FALSE]~x[,2,drop=FALSE])$coefficients[1], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
             if(attribute == "Beta")
-                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) lm(x[,1,drop=F]~x[,2,drop=F])$coefficients[2], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+                column.result = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) lm(x[,1,drop=FALSE]~x[,2,drop=FALSE])$coefficients[2], by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
             if(attribute == "R-Squared")
-                column.result = rollapply(na.omit(merged.assets[,,drop=F]), width = width, FUN= function(x) summary(lm(x[,1,drop=F]~x[,2,drop=F]))$r.squared, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+                column.result = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) summary(lm(x[,1,drop=FALSE]~x[,2,drop=FALSE]))$r.squared, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
 
             # some backflips to name the single column zoo object
             column.result = as.matrix(column.result)
@@ -68,10 +68,13 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.7 2007-03-14 22:54:13 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.8 2007-03-15 01:15:03 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/14 22:54:13  peter
+# - fixed rf calc
+#
 # Revision 1.6  2007/03/14 04:53:47  peter
 # - uses checkData function
 # - uses zoo rollapply function

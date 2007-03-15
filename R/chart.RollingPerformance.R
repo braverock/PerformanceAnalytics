@@ -47,12 +47,15 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.6 2007-03-14 00:54:06 brian Exp $
+# $Id: chart.RollingPerformance.R,v 1.7 2007-03-15 01:15:03 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.5  2007/03/13 18:08:20  peter
-# - now handles single column zoo objects when naming columns using drop=F
+# - now handles single column zoo objects when naming columns using drop=FALSE
 #
 # Revision 1.4  2007/03/13 04:21:55  peter
 # - adjusted parameter inputs

@@ -27,8 +27,8 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
-            cumulative.a = cumprod(1+na.omit(Ra[,column.a,drop=F]))
-            cumulative.b = cumprod(1+na.omit(Rb[,column.b,drop=F]))
+            cumulative.a = cumprod(1+na.omit(Ra[,column.a,drop=FALSE]))
+            cumulative.b = cumprod(1+na.omit(Rb[,column.b,drop=FALSE]))
             column.calc = cumulative.a/cumulative.b
             colnames(column.calc) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = "/")
             if(column.a == 1 & column.b == 1)
@@ -53,10 +53,15 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.3 2007-03-13 21:54:11 peter Exp $
+# $Id: chart.RelativePerformance.R,v 1.4 2007-03-15 01:15:03 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/13 21:54:11  peter
+# - multiple assets can be compared to multiple benchmarks
+# - uses dataCheck function
+# - allows uneven timeseries
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
