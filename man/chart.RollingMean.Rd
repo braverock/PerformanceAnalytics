@@ -25,6 +25,8 @@ A timeseries line charts of the rolling mean, with error bars
 \author{ Peter Carl }
 \seealso{}
 \examples{
+data(edhec)
+chart.RollingMean(edhec[, 9, drop = FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
