@@ -24,37 +24,42 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
     # and labels.  If there are not column labels, we provide them.  Row labels
     # we leave to the coersion functions.
 
-    R = as.matrix(R)
-
-    # Test for rows and columns
-    if(is.null(ncol(R))) 
-        stop("There don't seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
-
-    if(is.null(nrow(R)))
-        stop("No rows in the data provided.")
-
-    # Test for rownames and column names
-    if(is.null(colnames(R))) {
-        columns = ncol(R)
-        if(!quiet)
-            warning("No column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
-        columnnames = for(column in 1:columns) {paste("Column.",column,sep="")}
-        colnames(R) = columnnames
-    }
-
-    if(is.null(rownames(R)))
-        if(!quiet)
-            warning("No row names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
-
-    # Coerce a zoo object from the matrix.
-    # We fill in column names where needed, and let the coersion
-    # function fill in rownames if they are missing.
-    if (method == "zoo") {
+    if(!is.zoo(R)){
+        R = as.matrix(R)
+    
+        # Test for rows and columns
+        if(is.null(ncol(R))) 
+            stop("There don't seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
+    
+        if(is.null(nrow(R)))
+            stop("No rows in the data provided.")
+    
+        # Test for rownames and column names
+        if(is.null(colnames(R))) {
+            columns = ncol(R)
+            if(!quiet)
+                warning("No column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
+            columnnames = for(column in 1:columns) {paste("Column.",column,sep="")}
+            colnames(R) = columnnames
+        }
+    
         if(is.null(rownames(R)))
-            R = zoo(R)
-        else
-            R = zoo(R, order.by = rownames(R))
+            if(!quiet)
+                warning("No row names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
+    
+        # Coerce a zoo object from the matrix.
+        # We fill in column names where needed, and let the coersion
+        # function fill in rownames if they are missing.
+        if (method == "zoo") {
+            if(is.null(rownames(R)))
+                R = zoo(R)
+            else
+                R = zoo(R, order.by = rownames(R))
+        }
     }
+
+    if (method == "matrix")
+        R = as.matrix(R)
 
     # Now follows the tests specific to vectors
     if (method == "vector"){
@@ -114,9 +119,12 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.4 2007-03-13 17:58:46 peter Exp $
+# $Id: checkData.R,v 1.5 2007-03-16 03:22:13 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/13 17:58:46  peter
+# - simplified to use as.matrix for all data types entered
+#
 # Revision 1.3  2007/03/13 03:56:28  peter
 # - added warning for vector
 #
