@@ -37,16 +37,13 @@ start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
 edhec.zoo = zoo(edhec, order.by = rownames(edhec))
-rf.zoo = download.RiskFree(start = start, end = end)
 sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
 
 # Now we have to align it as "monthly" data
 time(edhec.zoo) = as.yearmon(time(edhec.zoo))
 time(sp500.zoo) = as.yearmon(time(sp500.zoo))
-time(rf.zoo) = as.yearmon(time(rf.zoo))
 data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
 time(data.zoo) = as.Date(time(data.zoo),format="%b %Y")
-time(rf.zoo) = as.Date(time(rf.zoo),format="%b %Y")
 
 ActivePremium(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE])
 }
