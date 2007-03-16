@@ -25,7 +25,7 @@ function (R, rf)
         rf = checkData(rf, method = "zoo")
 
     ## arithmetic on zoo objects intersects them first
-    R.excess = R - rf
+    R.excess = R[,1,drop = FALSE] - rf
 
     # RESULTS:
     return(R.excess)

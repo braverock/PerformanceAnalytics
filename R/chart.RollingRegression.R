@@ -8,7 +8,7 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
     # Rb: a matrix, data frame, or timeSeries of returns for a benchmark
-    # rf: limited to a point estimate
+    # rf: 
 
     # Outputs:
     # A timeseries line chart of the calculated series
@@ -68,10 +68,13 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.8 2007-03-15 01:15:03 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.9 2007-03-16 03:20:51 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/03/15 01:15:03  brian
+# - replace drop=F with drop=FALSE for R CMD check compatibility
+#
 # Revision 1.7  2007/03/14 22:54:13  peter
 # - fixed rf calc
 #
