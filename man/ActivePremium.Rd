@@ -30,13 +30,25 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
     \code{\link{Return.annualized}}
 }
 \examples{
+# First we load the data
 data(edhec)
 edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
-sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
-ActivePremium(edhec[,"Long.Short.Equity"],sp500)
+edhec.zoo = zoo(edhec, order.by = rownames(edhec))
+rf.zoo = download.RiskFree(start = start, end = end)
+sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
+
+# Now we have to align it as "monthly" data
+time(edhec.zoo) = as.yearmon(time(edhec.zoo))
+time(sp500.zoo) = as.yearmon(time(sp500.zoo))
+time(rf.zoo) = as.yearmon(time(rf.zoo))
+data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
+time(data.zoo) = as.Date(time(data.zoo),format="%b %Y")
+time(rf.zoo) = as.Date(time(rf.zoo),format="%b %Y")
+
+ActivePremium(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

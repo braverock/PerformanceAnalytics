@@ -30,15 +30,25 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
     \code{\link{CAPM.utils}}
 }
 \examples{
+# First we load the data
 data(edhec)
 edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start = start, end = end)
-sp500 = download.SP500PriceReturns(start = "1996-12-31", end = end)
+edhec.zoo = zoo(edhec, order.by = rownames(edhec))
+rf.zoo = download.RiskFree(start = start, end = end)
+sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
 
-CAPM.alpha(edhec[,"Funds.of.Funds"], sp500, rf = rf)
+# Now we have to align it as "monthly" data
+time(edhec.zoo) = as.yearmon(time(edhec.zoo))
+time(sp500.zoo) = as.yearmon(time(sp500.zoo))
+time(rf.zoo) = as.yearmon(time(rf.zoo))
+data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
+time(data.zoo) = as.Date(time(data.zoo),format="%b %Y")
+time(rf.zoo) = as.Date(time(rf.zoo),format="%b %Y")
+
+CAPM.alpha(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE], rf = rf.zoo)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
