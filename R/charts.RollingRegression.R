@@ -53,3 +53,18 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
     chart.RollingRegression(R, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", ...)
 
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: charts.RollingRegression.R,v 1.7 2007-03-16 14:00:21 peter Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+#
+###############################################################################
