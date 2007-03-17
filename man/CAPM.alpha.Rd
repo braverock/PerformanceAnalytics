@@ -45,8 +45,8 @@ time(edhec.zoo) = as.yearmon(time(edhec.zoo))
 time(sp500.zoo) = as.yearmon(time(sp500.zoo))
 time(rf.zoo) = as.yearmon(time(rf.zoo))
 data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
-time(data.zoo) = as.Date(time(data.zoo),format="%b %Y")
-time(rf.zoo) = as.Date(time(rf.zoo),format="%b %Y")
+time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
+time(rf.zoo) = as.Date(time(rf.zoo),format="\%b \%Y")
 
 CAPM.alpha(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE], rf = rf.zoo)
 

@@ -40,7 +40,7 @@ sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
 time(edhec.zoo) = as.yearmon(time(edhec.zoo))
 time(sp500.zoo) = as.yearmon(time(sp500.zoo))
 data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
-time(data.zoo) = as.Date(time(data.zoo),format="%b %Y")
+time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
 
 # Finally, plot it
 chart.RelativePerformance(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", lwd=2)

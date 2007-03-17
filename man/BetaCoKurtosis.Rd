@@ -33,8 +33,7 @@ Martellini L., Vaissie M., Ziemann V., October 2005. Investing in Hedge Funds: A
     \code{\link{CoKurtosis}}
     \code{\link[fBasics]{kurtosis}}
 }
-\examples{
-}
+\examples{}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
