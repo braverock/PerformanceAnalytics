@@ -33,9 +33,9 @@ where \eqn{q_{.99}} is the 99\% quantile of the distribution.
 
 This method is also sometimes called \dQuote{historical VaR}, as it is by definition \emph{ex post} analysis of the return distribution.
 
-When you don't have a sufficiently long set of returns to use non-parmetric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
+When you don't have a sufficiently long set of returns to use non-parametric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
 
-Parametric mean-VaR does a better job of accounting for the tails of the distribution by more precisely estimating shape of the distribution the tails at the risk quantile. The most common estimate is a normally distributed \eqn{R\sim N(\mu,\sigma^{2})} return series. In this case, estimation of VaR requires the mean return \eqn{\bar{R}} and the variance of the returns \eqn{\sigma}. In the most common case, parametric VaR is thus calculated by
+Parametric mean-VaR does a better job of accounting for the tails of the distribution by more precisely estimating shape of the distribution tails of the risk quantile. The most common estimate is a normally distributed \eqn{R\sim N(\mu,\sigma^{2})} return series. In this case, estimation of VaR requires the mean return \eqn{\bar{R}} and the variance of the returns \eqn{\sigma}. In the most common case, parametric VaR is thus calculated by
 
 \deqn{\sigma=variance(R)}
 
