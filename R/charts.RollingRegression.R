@@ -62,12 +62,33 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.8 2007-03-17 00:42:41 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.9 2007-03-17 01:16:45 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/03/17 00:42:41  brian
+# - correct use of F instead of FALSE to pass R CMD check
+#
 # Revision 1.7  2007/03/16 14:00:21  peter
 # - added cvs footer
 #
+# Revision 1.6 2007-03-15 22:21:38 peter
+# - removed data checks
 #
+# Revision 1.5 2007-03-14 19:45:38 peter
+# - made legend conditional on having more than one data series
+#
+# Revision 1.4 2007-03-14 00:02:48 peter
+# - switched order of top two charts
+# - added legend to top chart
+# - made inputs consistent with lower level functions
+#
+# Revision 1.3 2007-03-04 12:38:19 brian
+# - update function definition to agree with usage using enumerated argument
+#
+# Revision 1.2 2007-02-22 13:11:36 peter
+# - fixed parameter passing and title
+#
+# Revision 1.1 2007-02-07 09:53:20 peter
+# - added function to the package
 ###############################################################################
