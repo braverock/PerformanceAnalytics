@@ -29,7 +29,7 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
             merged.columns = merge(Ra[, column.a, drop = FALSE], Rb[, column.b, drop = FALSE])
             cumulative = cumprod(1+na.omit(merged.columns))
-            column.calc = cumulative[,1,drop=F]/cumulative[,2,drop=F]
+            column.calc = cumulative[,1,drop=FALSE]/cumulative[,2,drop=F]
             colnames(column.calc) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = "/")
             if(column.a == 1 & column.b == 1)
                 Result.calc = column.calc
@@ -50,10 +50,14 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.5 2007-03-17 00:25:16 peter Exp $
+# $Id: chart.RelativePerformance.R,v 1.6 2007-03-17 01:24:04 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/17 00:25:16  peter
+# - uses checkData
+# - corrected calculation
+#
 # Revision 1.4  2007/03/15 01:15:03  brian
 # - replace drop=F with drop=FALSE for R CMD check compatibility
 #
