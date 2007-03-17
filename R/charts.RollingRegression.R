@@ -42,11 +42,11 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
          main = paste("Rolling ",width,"-Month Regression",sep="")
     }
 
-    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = F, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
+    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = F, ...)
+    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, ...)
 
     par(mar=c(5,4,0,2))
 
@@ -62,9 +62,12 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.7 2007-03-16 14:00:21 peter Exp $
+# $Id: charts.RollingRegression.R,v 1.8 2007-03-17 00:42:41 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/16 14:00:21  peter
+# - added cvs footer
+#
 #
 ###############################################################################
