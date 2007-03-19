@@ -31,26 +31,7 @@ function(R, p=0.99, modified = TRUE, column=1)
     }
     zc = qnorm(p)
 
-    # data type conditionals
-    if (class(R) == "numeric") {
-        y = as.matrix(R)
-    }
-    if (class(R) == "matrix") {
-        y = R[, column]
-    }
-    if (class(R) == "data.frame") {
-        y = R[, column]
-    }
-    if (class(R) == "timeSeries") {
-        y = R@Data[, column]
-    }
-    if (class(R) == "vector") {
-        y = array(R=R)
-    }
-    class(R)
-
-    r = checkDataVector(y)
-    if (!is.numeric(r)) stop("The selected column is not numeric")
+    r = checkData(R, method="vector")
 
     if (modified) {
         s = skewness(r) #skewness of the distribution
@@ -182,10 +163,13 @@ function(R, p=0.99, modified = TRUE,firstcolumn=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.4 2007-03-11 16:58:07 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.5 2007-03-19 21:55:57 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/11 16:58:07  brian
+# - replace as.vector() with checkDataVector()
+#
 # Revision 1.3  2007/03/04 20:59:27  brian
 # - minor changes to pass R CMD check
 #
