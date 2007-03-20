@@ -30,33 +30,33 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
         if(method == "StdDev"){
             symmetric = TRUE
             if(width > 0){
-                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "sd")
+                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "sd")
                 legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "sd")
+                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "sd")
                 legend.txt = "Std Dev"
             }
         }
         else if(method == "VaR"){
             symmetric = TRUE
             if(width > 0) {
-                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
                 legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
                 legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
             }
         }
         else if(method == "ModifiedVaR"){
             symmetric = FALSE
             if(width > 0) {
-                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
                 legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
                 legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
             }
         }
@@ -92,10 +92,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.4 2007-03-20 03:27:00 peter Exp $
+# $Id: chart.BarVaR.R,v 1.5 2007-03-20 10:44:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/20 03:27:00  peter
+# - uses apply.rolling and apply.fromstart to calculate risk lines
+#
 # Revision 1.3  2007/02/26 13:32:37  brian
 # - change method VaR to pass "R CMD check"
 #

@@ -12,7 +12,7 @@ function (R, FUN = "mean" , gap = 1, ...)
     # gap: the number of data points required for the calculation to start
 
     # Outputs:
-    # A timeseries in a zoo object of the calculation results 
+    # A timeseries in a zoo object of the calculation results
 
     # FUNCTION:
 
@@ -30,7 +30,7 @@ function (R, FUN = "mean" , gap = 1, ...)
         column.Return.calc=zoo(NA, order.by = time(R))
         for(i in gap:length(time(R))) {
             data.zoo = window(R,start = as.Date(start(R)), end = as.Date(time(R[i])))
-            column.Return.calc[i]=apply(as.matrix(data.zoo[,,drop=F]), FUN = FUN, ..., MARGIN = 2)
+            column.Return.calc[i]=apply(as.matrix(data.zoo[,,drop=FALSE]), FUN = FUN, ..., MARGIN = 2)
         }
         if(column == 1)
             Return.calc = column.Return.calc
