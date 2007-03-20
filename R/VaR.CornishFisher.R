@@ -1,5 +1,5 @@
 `VaR.CornishFisher` <-
-function(R, p=0.99, modified = TRUE, column=1)
+function(R, p=0.99, modified = TRUE)
 {   # @author Brian G. Peterson (completed/debugged fn)
     # @author Diethelm Wuertz (prototype function)
 
@@ -52,7 +52,7 @@ function(R, p=0.99, modified = TRUE, column=1)
 ###############################################################################
 
 `modifiedVaR` <-
-function(R, p=0.99, column=1)
+function(R, p=0.99)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -61,14 +61,14 @@ function(R, p=0.99, column=1)
     # because this measure is often referred to as modifiedVaR
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, column = column, modified=TRUE)
+    VaR.CornishFisher(R = R, p = p, modified=TRUE)
 
 }
 
 ###############################################################################
 
 `VaR.mean` <-
-function(R, p=0.99, column=1)
+function(R, p=0.99)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -79,7 +79,7 @@ function(R, p=0.99, column=1)
     # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, column = column , modified=FALSE)
+    VaR.CornishFisher(R = R, p = p, modified=FALSE)
 
 }
 
@@ -97,44 +97,27 @@ function(R, p=0.99, column=1)
     # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
 
     # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, column = column, modified=FALSE)
+    VaR.CornishFisher(R = R, p = p, modified=FALSE)
 
 }
 
 ###############################################################################
 
 `VaR.multicolumn` <-
-function(R, p=0.99, modified = TRUE,firstcolumn=1)
+function(R, p=0.99, modified = TRUE)
 {   # @author Brian G. Peterson
 
     # Description:
 
     #Wrapper function to handle multi-column VaR calculations
 
-    # data type conditionals
-    if (class(R) == "numeric") {
-        R = as.matrix(R)
-    }
-    if (class(R) == "matrix") {
-        R = R
-    }
-    if (class(R) == "data.frame") {
-        R = R
-    }
-    if (class(R) == "timeSeries") {
-        R = R@Data
-    }
-    if (class(R) == "vector") {
-        R = array(R=R)
-    }
-    class(R)
+    r = checkData(R, method = "matrix")
 
     columns = ncol(R)
     columnnames=colnames(R)
 
-    for(column in firstcolumn:columns) {
-        r = checkDataVector(R[,column])
-        if (!is.numeric(r)) stop("The selected column is not numeric")
+    for(column in 1:columns) {
+
         VaR = VaR.CornishFisher(r,p,modified)
 
         #result = VaR
@@ -163,10 +146,13 @@ function(R, p=0.99, modified = TRUE,firstcolumn=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.5 2007-03-19 21:55:57 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.6 2007-03-20 03:26:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/19 21:55:57  peter
+# - replaced data checking with checkData function
+#
 # Revision 1.4  2007/03/11 16:58:07  brian
 # - replace as.vector() with checkDataVector()
 #
