@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99,...)
+function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99,...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -9,16 +9,16 @@ function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = T
 
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
-    # n: periods specified for rolling-period calculations
+    # width: periods specified for rolling-period calculations
 
     # Outputs:
     # A timeseries bar chart of the data series
-    # VaR and Std Dev with n=0 are calculated from the start of the timeseries
+    # Metrics with width=0 are calculated from the start of the timeseries
 
     # FUNCTION:
 
-    # Transform input data to a matrix
-    x = checkDataMatrix(R)
+    # Transform input data to a timeseries object
+    x = checkData(R, method = "zoo")
 
     # Set up dimensions and labels
     columns = ncol(x)
@@ -26,44 +26,49 @@ function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = T
     columnnames = colnames(x)
     rownames = rownames(x)
 
-    # Assume we're passed in a series of monthly returns.  First, we'll
-    # calculate VaR or modified VaR
-    #risk = as.matrix(rollingFunction(y, n = n, trim = FALSE, FUN = "VaR.CornishFisher"))
-
     if(risk.line){
         if(method == "StdDev"){
-            # @todo: fix this nasty coersion
-            #risk = as.matrix(rollingFunction(as.data.frame(y[,1]), n = n, trim = FALSE, FUN = "stdev"))
-            risk = as.matrix(rollingFunction(as.data.frame(x[,1]), n = n, trim = FALSE, FUN = "sd"))
             symmetric = TRUE
-            if(n>0)
-                legend.txt = paste("Rolling ",n,"-month Std Dev",sep="")
-            else
+            if(width > 0){
+                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "sd")
+                legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+            }
+            else {
+                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "sd")
                 legend.txt = "Std Dev"
+            }
         }
-        if(method == "VaR"){
-            risk = as.matrix(rollingFunction(as.data.frame(x[,1]), n = n, trim = FALSE, FUN = "VaR.CornishFisher", p = p, modified = FALSE))
+        else if(method == "VaR"){
             symmetric = TRUE
-            if(n>0)
-                legend.txt = paste("Rolling ",n,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
-            else
+            if(width > 0) {
+                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
+            }
+            else {
+                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
                 legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
+            }
         }
-        if(method == "ModifiedVaR"){
-            risk = as.matrix(rollingFunction(as.data.frame(x[,1]), n = n, trim = FALSE, FUN = "VaR.CornishFisher", p = p))
+        else if(method == "ModifiedVaR"){
             symmetric = FALSE
-            if(n>0)
-                legend.txt = paste("Rolling ",n,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
-            else
+            if(width > 0) {
+                risk = apply.rolling(x[,1,drop=F], width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
+            }
+            else {
+                risk = apply.fromstart(x[,1,drop=F], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
                 legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
+            }
         }
+        else
+            stop("Did not recognize the method, which should be one of \"StdDev\", \"VaR\", or \"ModifiedVaR\".")
     }
     else {
         risk = 0
         legend.txt = ""
     }
     if(is.na(ylim[1])){
-        ylim = range(c(x[!is.na(x[,1]),1],risk[!is.na(risk)],-risk[!is.na(risk)]))
+        ylim = range(c(na.omit(as.vector(x)), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
     }
 
     chart.TimeSeries(x[,1], type = "h", col = colorset, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
@@ -87,10 +92,13 @@ function (R, n = 0, risk.line = TRUE, method = "ModifiedVaR", reference.grid = T
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.3 2007-02-26 13:32:37 brian Exp $
+# $Id: chart.BarVaR.R,v 1.4 2007-03-20 03:27:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/26 13:32:37  brian
+# - change method VaR to pass "R CMD check"
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
