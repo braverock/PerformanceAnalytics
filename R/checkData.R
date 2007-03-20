@@ -35,7 +35,7 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
             stop("No rows in the data provided.")
     
         # Test for rownames and column names
-        if(is.null(colnames(R))) {
+        if(method != "vector" & is.null(colnames(R))) {
             columns = ncol(R)
             if(!quiet)
                 warning("No column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
@@ -43,7 +43,7 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
             colnames(R) = columnnames
         }
     
-        if(is.null(rownames(R)))
+        if(method != "vector" & is.null(rownames(R)))
             if(!quiet)
                 warning("No row names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
     
@@ -119,9 +119,12 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.5 2007-03-16 03:22:13 peter Exp $
+# $Id: checkData.R,v 1.6 2007-03-20 03:29:53 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/16 03:22:13  peter
+# - doesn't re-zoo a zoo object, since that might change it's index format
+#
 # Revision 1.4  2007/03/13 17:58:46  peter
 # - simplified to use as.matrix for all data types entered
 #
