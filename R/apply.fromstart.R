@@ -44,3 +44,22 @@ function (R, FUN = "mean" , gap = 1, ...)
     return(Return.calc)
 
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: apply.fromstart.R,v 1.3 2007-03-20 10:48:29 brian Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+# Revision 1.2 2007-03-20 05:44:46  brian
+# - change F to FALSE to pass R CMD check
+#
+# Revision 1.1  2007/03/20 03:28:56  peter
+# - uses zoo functions to apply functions to expanding windows
+###############################################################################
