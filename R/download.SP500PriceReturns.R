@@ -33,9 +33,25 @@ function(start = "1998-01-01", end = NULL, compression = "m", method = "compound
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.SP500PriceReturns.R,v 1.6 2007-03-16 14:03:42 peter Exp $
+# $Id: download.SP500PriceReturns.R,v 1.7 2007-03-20 14:31:05 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/16 14:03:42  peter
+# - added cvs footer
 #
+# Revision 1.5 2007-03-04 08:59 brian
+# - minor changes to pass R CMD check
+#
+# Revision 1.4 2007-02-27 15:38 brian
+# - change compression param to an enumerated type
+#
+# Revision 1.3 2007-02-27 10:33 peter
+# - added compression as attribute
+#
+# Revision 1.2 2007-02-27 10:01  peter
+# - modifications to return calculation function
+#
+# Revision 1.1 2007-02-27 09:19 peter
+# - added function wrapper for downloading and calculating S&P500 price returns
 ###############################################################################
