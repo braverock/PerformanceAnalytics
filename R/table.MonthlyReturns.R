@@ -14,7 +14,7 @@ function (R, ci = 0.95, digits = 4)
 
     # FUNCTION:
 
-    y = checkDataMatrix(R)
+    y = checkData(R, method = "matrix")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -36,19 +36,46 @@ function (R, ci = 0.95, digits = 4)
     }
 # for each column, do the following:
     for(column in 1:columns) {
-    x = as.vector(y[,column])
-    x.length = length(x)
-    x = x[!is.na(x)]
-    x.na = x.length - length(x)
-    z = c(length(x), x.na, min(x), as.numeric(quantile(x,
-       prob = 0.25, na.rm = TRUE)),  median(x), mean(x), exp(mean(log(1+x)))-1,
-       as.numeric(quantile(x, prob = 0.75, na.rm = TRUE)), max(x), sqrt(var(x)/length(x)),
-       cl.vals(x, ci)[1], cl.vals(x, ci)[2], var(x), sqrt(var(x)),
-       skewness(x), kurtosis(x))
-    z = base::round(as.numeric(z),digits)
-    znames = c("Observations", "NAs", "Minimum", "Quartile 1", "Median", "Arithmetic Mean",
-       "Geometric Mean", "Quartile 3", "Maximum", "SE Mean", paste("LCL Mean (",ci,")",sep=""),
-       paste("UCL Mean (",ci,")",sep=""), "Variance", "Stdev", "Skewness", "Kurtosis")
+        x = as.vector(y[,column])
+        x.length = length(x)
+        x = x[!is.na(x)]
+        x.na = x.length - length(x)
+        z = c(
+            length(x), 
+            x.na, min(x), 
+            as.numeric(quantile(x, prob = 0.25, na.rm = TRUE)), 
+            median(x), 
+            mean(x), 
+            exp(mean(log(1+x)))-1,
+            as.numeric(quantile(x, prob = 0.75, na.rm = TRUE)), 
+            max(x), 
+            sqrt(var(x)/length(x)),
+            cl.vals(x, ci)[1], 
+            cl.vals(x, ci)[2], 
+            var(x), 
+            sqrt(var(x)),
+            skewness(x), 
+            kurtosis(x)
+            )
+        z = base::round(as.numeric(z),digits)
+        znames = c(
+            "Observations", 
+            "NAs", 
+            "Minimum", 
+            "Quartile 1", 
+            "Median", 
+            "Arithmetic Mean",
+            "Geometric Mean", 
+            "Quartile 3", 
+            "Maximum", 
+            "SE Mean", 
+            paste("LCL Mean (",ci,")",sep=""),
+            paste("UCL Mean (",ci,")",sep=""), 
+            "Variance", 
+            "Stdev", 
+            "Skewness", 
+            "Kurtosis"
+            )
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
         }
@@ -70,10 +97,13 @@ function (R, ci = 0.95, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.MonthlyReturns.R,v 1.5 2007-03-05 03:19:26 peter Exp $
+# $Id: table.MonthlyReturns.R,v 1.6 2007-03-20 13:47:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/05 03:19:26  peter
+# - removed firstcolumn as an attribute
+#
 # Revision 1.4  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
