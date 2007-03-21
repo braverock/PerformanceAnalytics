@@ -35,7 +35,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
     if(is.null(main))
         main = paste(colnames[1]," Performance")
 
-    if(ylog = TRUE)
+    if(ylog)
         wealth.index = TRUE
 
     # First, we lay out the graphic as a three row, one column format
@@ -75,10 +75,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.4 2007-03-21 21:40:48 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.5 2007-03-21 21:44:21 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/21 21:40:48  peter
+# - added error handling for ylog passing in top chart
+#
 # Revision 1.3  2007/03/20 13:48:07  peter
 # - changed "n" attribute to "width" in chart.BarVaR call
 #
