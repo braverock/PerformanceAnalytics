@@ -40,28 +40,28 @@ function (R)
                 sofar = drawdowns[i]
                 dmin = i
             }
-            to = i
+            to = i + 1 ###
         }
         else {
     # @todo: add trough date, time to trough, recovery time
             draw[index] = sofar
             begin[index] = from
             trough[index] = dmin
-            end[index] = to +1
+            end[index] = to
             #cat(sofar, from, to)
             from = i 
             sofar = drawdowns[i]
-            to = i
-            dmin = i +1
+            to = i + 1 ###
+            dmin = i
             index = index + 1
             priorSign = thisSign
         }
     }
     draw[index] = sofar
     begin[index] = from
-    trough[index] = dmin +1
-    end[index] = to + 1
-    list(return=draw, from=begin, trough = trough, to=end, length=end-begin, peaktotrough = trough-begin, recovery = end-trough)
+    trough[index] = dmin
+    end[index] = to
+    list(return=draw, from=begin, trough = trough, to=end, length=(end-begin+1), peaktotrough = (trough-begin+1), recovery = (end-trough))
 
 }
 
@@ -73,10 +73,14 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: findDrawdowns.R,v 1.4 2007-03-21 14:07:38 peter Exp $
+# $Id: findDrawdowns.R,v 1.5 2007-03-21 16:34:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/21 14:07:38  peter
+# - added trough date, periods to trough, periods to recovery
+# - changed to use dataCheck
+#
 # Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
