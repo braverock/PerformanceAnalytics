@@ -20,13 +20,13 @@ function (R, top = 5)
 
     ndrawdowns = length(x$from)
     if (ndrawdowns < top){
-        warning(paste("Only ",ndrawdowns," available in the data.",sep="")
+        warning(paste("Only ",ndrawdowns," available in the data.",sep=""))
         top = ndrawdowns
     }
 
-    result = data.frame(time(R)[x$from[1:top]], time(R)[x$to[1:top]], x$return[1:top], x$length[1:top])
+    result = data.frame(time(R)[x$from[1:top]], time(R)[x$trough[1:top]], time(R)[x$to[1:top]], x$return[1:top], x$length[1:top], x$peaktotrough[1:top], x$recovery[1:top])
 
-    colnames(result) = c("From", "To", "Return", "Length")
+    colnames(result) = c("From", "Trough", "To", "Depth", "Length", "To Trough", "Recovery")
 
     result
 }
@@ -39,10 +39,13 @@ function (R, top = 5)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Drawdowns.R,v 1.2 2007-03-21 04:20:11 peter Exp $
+# $Id: table.Drawdowns.R,v 1.3 2007-03-21 14:07:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/03/21 04:20:11  peter
+# - added error trap where top exceeds # drawdowns
+#
 # Revision 1.1  2007/03/21 04:13:43  peter
 # - initial addition of function to cvs
 #
