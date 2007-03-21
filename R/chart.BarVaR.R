@@ -68,7 +68,7 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
         legend.txt = ""
     }
     if(is.na(ylim[1])){
-        ylim = range(c(na.omit(as.vector(x)), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
+        ylim = range(c(na.omit(as.vector(x[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
     }
 
     chart.TimeSeries(x[,1], type = "h", col = colorset, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
@@ -92,10 +92,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.5 2007-03-20 10:44:46 brian Exp $
+# $Id: chart.BarVaR.R,v 1.6 2007-03-21 20:49:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/20 10:44:46  brian
+# - change F to FALSE to pass R CMD check
+#
 # Revision 1.4  2007/03/20 03:27:00  peter
 # - uses apply.rolling and apply.fromstart to calculate risk lines
 #
