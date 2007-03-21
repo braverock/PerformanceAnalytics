@@ -49,7 +49,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = "Cumulative Returns", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, ...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = "Cumulative Returns", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, ...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -75,10 +75,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.5 2007-03-21 21:44:21 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.6 2007-03-21 21:46:54 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/21 21:44:21  peter
+# - fixed conditional test
+#
 # Revision 1.4  2007/03/21 21:40:48  peter
 # - added error handling for ylog passing in top chart
 #
