@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ...)
+function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = F, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -23,7 +23,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
     # A stack of three related timeseries line charts
 
     # FUNCTION:
-    x = checkDataMatrix(R, na.rm = TRUE)
+    x = checkData(R, method = "zoo")
     colnames = colnames(x)
     ncols = ncol(x)
 
@@ -34,6 +34,9 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 
     if(is.null(main))
         main = paste(colnames[1]," Performance")
+
+    if(ylog = TRUE)
+        wealth.index = TRUE
 
     # First, we lay out the graphic as a three row, one column format
     plot.new()
@@ -46,16 +49,16 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = "Cumulative Returns", legend.loc = legend.loc, event.labels = event.labels, ...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = "Cumulative Returns", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, ...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
 #    chart.BarVaR(as.matrix(R[,1]), main = "", xaxis = FALSE, ylab = "Monthly Return", method = method)
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", method = method, event.labels = NULL, ...)
+    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", method = method, event.labels = NULL, ylog = FALSE,...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    chart.Drawdown(x, main = "", ylab = "From Peak", event.labels = NULL, ...)
+    chart.Drawdown(x, main = "", ylab = "From Peak", event.labels = NULL, ylog = FALSE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
     # Unfortunately, the textplot function doesn't provide a lot of control over
@@ -72,10 +75,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.3 2007-03-20 13:48:07 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.4 2007-03-21 21:40:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/20 13:48:07  peter
+# - changed "n" attribute to "width" in chart.BarVaR call
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
