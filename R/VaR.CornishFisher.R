@@ -31,19 +31,34 @@ function(R, p=0.99, modified = TRUE)
     }
     zc = qnorm(p)
 
-    r = checkData(R, method="vector")
+    R = checkData(R, method="matrix")
+    columns = ncol(R)
+    columnnames=colnames(R)
+    # FUNCTION:
+    for(column in 1:columns) {
+        r = as.vector(R[,column])
+        if (!is.numeric(r)) stop("The selected column is not numeric")
 
-    if (modified) {
-        s = skewness(r) #skewness of the distribution
-        k = kurtosis(r) #(excess) kurtosis
-        Zcf = zc + (((zc^2-1)*s)/6) + (((zc^3-3*zc)*k)/24) + (((2*zc^3)-(5*zc)*s^2)/36)
-        VaR = mean(r) - (Zcf * sqrt(var(r)))
-    } else {
-        # should probably add risk-free-rate skew here?
-        VaR = mean(r) - (zc * sqrt(var(r)))
-    }
+        if (modified) {
+            s = skewness(r) #skewness of the distribution
+            k = kurtosis(r) #(excess) kurtosis
+            Zcf = zc + (((zc^2-1)*s)/6) + (((zc^3-3*zc)*k)/24) + (((2*zc^3)-(5*zc)*s^2)/36)
+            VaR = mean(r) - (Zcf * sqrt(var(r)))
+        } else {
+            # should probably add risk-free-rate skew here?
+            VaR = mean(r) - (zc * sqrt(var(r)))
+        }
+        VaR=array(VaR)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(VaR=VaR)
+        } else {
+            VaR=data.frame(VaR=VaR)
+            result=cbind(result,VaR)
+        }
+    } #end columns loop
 
-    result = VaR
+    colnames(result)<-columnnames
 
     # Return Value:
     result
@@ -146,10 +161,13 @@ function(R, p=0.99, modified = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.6 2007-03-20 03:26:12 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.7 2007-03-22 11:54:23 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/20 03:26:12  peter
+# - removed firstcolumn
+#
 # Revision 1.5  2007/03/19 21:55:57  peter
 # - replaced data checking with checkData function
 #
