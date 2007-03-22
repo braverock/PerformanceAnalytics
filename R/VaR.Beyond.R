@@ -17,40 +17,29 @@ function (R, periods = 1)
 
     # Assumes an input of regular period returns.
 
+    # SETUP:
+    R = checkData(R, method = "matrix")
 
+    columns = ncol(R)
+    columnnames=colnames(R)
     # FUNCTION:
-    if (class(R) == "numeric") {  #single column data
+    for(column in 1:columns) {
+        r = as.vector(R[,column])
+        if (!is.numeric(r)) stop("The selected column is not numeric")
 
-        BVaR = VaR.traditional(R) * periods^(1/(mean(R)-1))
+        BVaR = VaR(r) * periods^(1/(mean(r)-1))
 
-        result = BVaR
+        BVaR=array(BVaR)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(BVaR=BVaR)
+        } else {
+            BVaR=data.frame(BVaR=BVaR)
+            result=cbind(result,BVaR)
+        }
+    } #end columns loop
 
-    } else { #multi-column data
-
-        R = checkDataMatrix(R)
-
-        columns = ncol(R)
-        columnnames=colnames(R)
-
-        for(column in 1:columns) {
-            r = as.vector(R[,column])
-            if (!is.numeric(r)) stop("The selected column is not numeric")
-
-            BVaR = VaR(r) * periods^(1/(mean(r)-1))
-
-            BVaR=array(BVaR)
-            if (column==1) {
-                #create data.frame
-                result=data.frame(BVaR=BVaR)
-            } else {
-                BVaR=data.frame(BVaR=BVaR)
-                result=cbind(result,BVaR)
-            }
-        } #end columns loop
-
-        colnames(result)<-columnnames
-
-    } # end data type conditionals
+    colnames(result)<-columnnames
 
     # Return Value:
     result
@@ -64,10 +53,13 @@ function (R, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.3 2007-03-11 17:05:53 brian Exp $
+# $Id: VaR.Beyond.R,v 1.4 2007-03-22 11:48:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/11 17:05:53  brian
+# - change to use checkDataMatrix
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
