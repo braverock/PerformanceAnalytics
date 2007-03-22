@@ -1,5 +1,5 @@
 `table.DownsideRisk` <-
-function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
+function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -13,7 +13,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
 
     #FUNCTION:
 
-    y = checkDataMatrix(R)
+    y = checkData(R, method="matrix")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -22,35 +22,35 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
     rownames = rownames(y)
 
     # for each column, do the following:
-    for(column in firstcolumn:columns) {
-    x = as.vector(y[,column])
-    x.length = length(x)
-    x = x[!is.na(x)]
-    x.na = x.length - length(x)
-    z = c(
-            DownsideDeviation(x,MAR=mean(x)),
-            sd(subset(x,x>0)),
-            sd(subset(x,x<0)),
-            DownsideDeviation(x,MAR=MAR),
-            DownsideDeviation(x,MAR=rf),
-            DownsideDeviation(x,MAR=0),
-            maxDrawdown(x),
-            VaR.traditional(x, p=p),
-            VaR.Beyond(x, p=p),
-            VaR.CornishFisher(x, p=p)
-            )
-    znames = c(
-            "Semi Deviation",
-            "Gain Deviation",
-            "Loss Deviation",
-            paste("Downside Deviation (MAR=",MAR*scale*100,"%)", sep=""),
-            paste("Downside Deviation (rf=",rf*scale*100,"%)", sep=""),
-            paste("Downside Deviation (0%)", sep=""),
-            "Maximum Drawdown",
-            paste("VaR (",p*100,"%)",sep=""),
-            "Beyond VaR",
-            paste("Modified VaR (",p*100,"%)",sep="")
-            )
+    for(column in 1:columns) {
+        x = as.vector(y[,column])
+        x.length = length(x)
+        x = x[!is.na(x)]
+        x.na = x.length - length(x)
+        z = c(
+                DownsideDeviation(x,MAR=mean(x)),
+                sd(subset(x,x>0)),
+                sd(subset(x,x<0)),
+                DownsideDeviation(x,MAR=MAR),
+                DownsideDeviation(x,MAR=rf),
+                DownsideDeviation(x,MAR=0),
+                maxDrawdown(x),
+                VaR.traditional(x, p=p),
+                VaR.Beyond(x, p=p),
+                VaR.CornishFisher(x, p=p)
+                )
+        znames = c(
+                "Semi Deviation",
+                "Gain Deviation",
+                "Loss Deviation",
+                paste("Downside Deviation (MAR=",MAR*scale*100,"%)", sep=""),
+                paste("Downside Deviation (rf=",rf*scale*100,"%)", sep=""),
+                paste("Downside Deviation (0%)", sep=""),
+                "Maximum Drawdown",
+                paste("VaR (",p*100,"%)",sep=""),
+                "Beyond VaR",
+                paste("Modified VaR (",p*100,"%)",sep="")
+                )
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
         }
@@ -83,10 +83,13 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, MAR = .1/12, p= 0.9
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.4 2007-03-04 20:59:27 brian Exp $
+# $Id: table.DownsideRisk.R,v 1.5 2007-03-22 14:39:45 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/04 20:59:27  brian
+# - minor changes to pass R CMD check
+#
 # Revision 1.3  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
