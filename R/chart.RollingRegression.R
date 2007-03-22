@@ -46,7 +46,7 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
 
             # some backflips to name the single column zoo object
             column.result = as.matrix(column.result)
-            colnames(column.result) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+            colnames(column.result) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
             column.result = zoo(column.result, order.by = rownames(column.result))
 
             if(column.a == 1 & column.b == 1)
@@ -68,10 +68,13 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.9 2007-03-16 03:20:51 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.10 2007-03-22 11:47:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/03/16 03:20:51  peter
+# - minor changes
+#
 # Revision 1.8  2007/03/15 01:15:03  brian
 # - replace drop=F with drop=FALSE for R CMD check compatibility
 #
