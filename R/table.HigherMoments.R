@@ -1,5 +1,5 @@
 `table.HigherMoments` <-
-function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
+function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -25,65 +25,58 @@ function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
     # A table of parameters from a linear regression of excess returns
 
     # FUNCTION:
+    Ra = checkData(Ra, method = "zoo")
+    Rb = checkData(Rb, method = "zoo")
+    #rf = checkDataMatrix(rf)
 
-    # Prepare the data
-    # target.vec is the vector of data we want correlations for; we'll get it
-    # from x
-    assetReturns.vec = checkDataVector(x)
+    # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
 
-    # Make these excess returns
-    assetExcessRet.vec = assetReturns.vec - rf
+    # @todo: make an excess return function and use it here
+    Ra.excess = Return.excess(Ra, rf)
+    Rb.excess = Return.excess(Rb, rf)
 
-    # data.matrix is a vector or matrix of data we want correlations against;
-    # we'll take it from y
-    indexes.mat = checkDataMatrix(y)
-    columns=ncol(indexes.mat)
-    columnnames = colnames(indexes.mat)
-    if (is.null(columnnames))
-        stop("Column names are missing.  If you want to pass in a sub-set of a timeSeries, you need to use seriesData(monthlyReturns.ts[,2]) to preserve the column names.")
+    # Calculate
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
+            merged.assets = na.omit(merged.assets) # leaves the overlapping period
 
-    # for each column in the matrix, do the following:
-    for(column in 1:columns) {
+            z = c(
+                    CoSkewness(merged.assets[,1], merged.assets[,2]),
+                    CoKurtosis(merged.assets[,1], merged.assets[,2]),
+                    BetaCoVariance(merged.assets[,1], merged.assets[,2]),
+                    BetaCoSkewness(merged.assets[,1], merged.assets[,2]),
+                    BetaCoKurtosis(merged.assets[,1], merged.assets[,2])
+                    )
 
-    benchmarkReturns.vec = as.vector(indexes.mat[,column])
-    benchmarkReturns.vec.length = length(benchmarkReturns.vec)
-    benchmarkReturns.vec = benchmarkReturns.vec[!is.na(benchmarkReturns.vec)]
-    benchmarkReturns.vec.na = benchmarkReturns.vec.length - length(benchmarkReturns.vec)
+            znames = c(
+                    "CoSkewness",
+                    "CoKurtosis",
+                    "Beta CoVariance",
+                    "Beta CoSkewness",
+                    "Beta CoKurtosis"
+                    )
 
-        # make these excess returns, too
-        indexExcessRet.vec = benchmarkReturns.vec - rf
-
-        # a few calculations
-
-    z = c(CoSkewness(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
-            CoKurtosis(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
-            BetaCoVariance(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
-            BetaCoSkewness(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE),
-            BetaCoKurtosis(assetReturns.vec, benchmarkReturns.vec, na.rm=FALSE, method=method),
-            )
-    znames = c(
-            "CoSkewness",
-            "CoKurtosis",
-            "Beta CoVariance",
-            "Beta CoSkewness",
-            "Beta CoKurtosis",
-            )
-        if(column == 1) {
-            result.df = data.frame(Value = z, row.names = znames)
-        }
-        else {
-            nextcolumn = data.frame(Value = z, row.names = znames)
-            result.df = cbind(result.df, nextcolumn)
+            if(column.a == 1 & column.b == 1) {
+                result.df = data.frame(Value = z, row.names = znames)
+                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
+            }
+            else {
+                nextcolumn = data.frame(Value = z, row.names = znames)
+                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
+                result.df = cbind(result.df, nextcolumn)
+            }
         }
     }
-    colnames(result.df) = columnnames
+
     result.df = base::round(result.df, digits)
     result.df
-
-    #  For example:
-
-
 }
+
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
@@ -93,10 +86,13 @@ function (x, y, scale = 12, rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.4 2007-02-25 18:23:40 brian Exp $
+# $Id: table.HigherMoments.R,v 1.5 2007-03-22 11:40:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
