@@ -1,5 +1,5 @@
 `table.AnnualizedReturns` <-
-function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
+function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -13,7 +13,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    y = checkDataMatrix(R)
+    y = checkData(R, method = "matrix")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -22,7 +22,7 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
     rownames = rownames(y)
 
     # for each column, do the following:
-    for(column in firstcolumn:columns) {
+    for(column in 1:columns) {
     x = as.vector(y[,column])
     x.length = length(x)
     x = x[!is.na(x)]
@@ -50,10 +50,13 @@ function (R, ci = 0.95, firstcolumn = 1, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.4 2007-02-25 18:23:40 brian Exp $
+# $Id: table.AnnualizedReturns.R,v 1.5 2007-03-22 14:44:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.3  2007/02/22 22:14:46  brian
 # - standardize use of 'digits' as a parameter to round()
 #
