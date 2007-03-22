@@ -1,6 +1,6 @@
 `table.RollingPeriods` <-
-function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
-< length(as.matrix(R[,1]))), scale = 12, rf = 0, FUNCS=c("mean","sd"), digits = 4)
+function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
+< length(as.matrix(R[,1]))), scale = 12, rf = 0, FUNCS=c("mean","sd"), digits = 4, ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -14,28 +14,35 @@ function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,
 
     # FUNCTION:
 
-    y = checkDataMatrix(R)
+    R = checkData(R, method = "zoo")
 
     # Set up dimensions and labels
-    columns = ncol(y)
-    rows = nrow(y)
-    columnnames = colnames(y)
-    rownames = rownames(y)
+    columns = ncol(R)
+    columnnames = colnames(R)
 
     # for each column in the matrix, do the following:
-    for(column in firstcolumn:columns) {
+    for(column in 1:columns) {
         valueNames = vector('character', 0)
         values = vector('numeric', 0)
-    x = checkDataVector(y[,column])
-#REMOVE NA's from x
-    for(FUNC in FUNCS) {
+        column.data = na.omit(R[,column,drop=FALSE])
+
+        # Find the last data point in the column
+        end.index = length(column.data)
+
+        for(FUNC in FUNCS) {
             for(period in periods) {
-           subperiod = as.vector(x[(length(x) - period + 1):length(x)])
-        values = c(values,rollingStat(subperiod, period = period, FUN = FUNC))
+                window.data = zoo(NA)
+
+                start.index = (length(column.data) - period + 1)
+
+                window.data = window(column.data, start = time(column.data)[start.index], end = time(column.data)[end.index])
+
+                values = c(values, apply(as.matrix(window.data), FUN = FUNC, ..., MARGIN = 2))
+
                 valueNames = c(valueNames,paste("Last",period,"month",FUNC,sep=" "))
             }
         }
-
+    
         if(column == 1) {
             resultingtable = data.frame(Value = values, row.names = valueNames)
         }
@@ -84,10 +91,13 @@ function (R, firstcolumn = 1, periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.RollingPeriods.R,v 1.4 2007-02-26 22:04:36 brian Exp $
+# $Id: table.RollingPeriods.R,v 1.5 2007-03-22 21:53:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/26 22:04:36  brian
+# - changes in functions to pass "R CMD check" for package
+#
 # Revision 1.3  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
