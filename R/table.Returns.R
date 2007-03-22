@@ -39,7 +39,7 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
 
     # FUNCTION:
 
-    ri = checkDataMatrix(R)
+    ri = checkData(R, method = "matrix")
 
     columns = ncol(ri)
     columnnames = colnames(ri)
@@ -113,10 +113,13 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Returns.R,v 1.4 2007-02-25 18:23:40 brian Exp $
+# $Id: table.Returns.R,v 1.5 2007-03-22 14:03:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.3  2007/02/22 22:14:46  brian
 # - standardize use of 'digits' as a parameter to round()
 #
