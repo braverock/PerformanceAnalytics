@@ -43,7 +43,7 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             merged.assets = na.omit(merged.assets) # leaves the overlapping period
-            model.lm = lm(as.vector(merged.assets[,1]) ~ as.vector(merged.assets[,2]))
+            model.lm = lm(merged.assets[,1] ~ merged.assets[,2])
     
             alpha = coef(model.lm)[[1]]
             beta = coef(model.lm)[[2]]
@@ -80,11 +80,11 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     
             if(column.a == 1 & column.b == 1) {
                 result.df = data.frame(Value = z, row.names = znames)
-                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " vs ")
             }
             else {
                 nextcolumn = data.frame(Value = z, row.names = znames)
-                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " vs ")
                 result.df = cbind(result.df, nextcolumn)
             }
         }
@@ -102,10 +102,15 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.8 2007-03-22 01:03:16 peter Exp $
+# $Id: table.CAPM.R,v 1.9 2007-03-22 01:24:17 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/03/22 01:03:16  peter
+# - handles uneven periods of data
+# - handles matrixes of assets and benchmarks
+# - uses checkData
+#
 # Revision 1.7  2007/03/02 17:41:48  brian
 # - remove redundant comments
 #
