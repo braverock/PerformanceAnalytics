@@ -34,6 +34,13 @@ Brian G. Peterson
     \code{\link[fPortfolio]{CVaR}}
 }
 \examples{
+    data(edhec)
+
+    # first do normal Beyond VaR calc
+    VaR.Beyond(edhec)
+
+    # now use modified Cornish fisher calc to take non-normal distribution into account
+    VaR.Beyond(edhec,modified=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

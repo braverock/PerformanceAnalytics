@@ -2,7 +2,6 @@
 \alias{VaR.CornishFisher}
 \alias{VaR.traditional}
 \alias{VaR.mean}
-\alias{VaR.multicolumn}
 \alias{modifiedVaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
@@ -13,15 +12,12 @@ VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
 modifiedVaR(R, p = 0.99, column = 1)
 VaR.traditional(R, p = 0.99, column = 1)
 VaR.mean(R, p = 0.99, column = 1)
-VaR.multicolumn(R, p = 0.99, modified = TRUE, firstcolumn = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{modified}{ TRUE/FALSE default TRUE, use Cornish Fisher Expansion to take higher moments into account }
-  \item{column}{ calculate VaR for what column? }
-  \item{firstcolumn}{ for \code{\link{VaR.multicolumn}} start with which column in multicolumn data, default 1 }
 }
 \details{
 In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.
@@ -88,6 +84,17 @@ The prototype of this function was completed by Diethelm Wuertz.  It calculated 
     \code{\link[fPortfolio]{CVaR}} \cr
 }
 \examples{
+    data(edhec)
+
+    # first do normal VaR calc
+    VaR.traditional(edhec, p=.95)
+
+    # now use modified Cornish Fisher calc to take non-normal distribution into account
+    VaR.CornishFisher(edhec, p=.95)
+
+    # now use default p=.99
+    VaR.CornishFisher(edhec)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
