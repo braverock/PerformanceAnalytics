@@ -27,7 +27,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
     # FUNCTION:
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
-    #rf = checkDataMatrix(rf)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -35,7 +34,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
 
-    # @todo: make an excess return function and use it here
     Ra.excess = Return.excess(Ra, rf)
     Rb.excess = Return.excess(Rb, rf)
 
@@ -86,10 +84,14 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.5 2007-03-22 11:40:08 peter Exp $
+# $Id: table.HigherMoments.R,v 1.6 2007-03-22 13:49:42 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 11:40:08  peter
+# - handles multiple assets and benchmarks
+# - uses checkData
+#
 # Revision 1.4  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
