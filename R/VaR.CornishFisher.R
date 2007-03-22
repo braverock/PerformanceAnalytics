@@ -101,7 +101,7 @@ function(R, p=0.99)
 ###############################################################################
 
 `VaR.traditional` <-
-function(R, p=0.99, column=1)
+function(R, p=0.99)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -124,10 +124,13 @@ function(R, p=0.99, column=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.8 2007-03-22 12:15:25 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.9 2007-03-22 14:24:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/03/22 12:15:25  brian
+# - remove VaR.multicolumn, obsolete
+#
 # Revision 1.7  2007/03/22 11:54:23  brian
 # - added handlnig for multicolumn data
 #
