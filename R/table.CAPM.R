@@ -80,11 +80,11 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     
             if(column.a == 1 & column.b == 1) {
                 result.df = data.frame(Value = z, row.names = znames)
-                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " vs ")
+                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
             }
             else {
                 nextcolumn = data.frame(Value = z, row.names = znames)
-                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " vs ")
+                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
                 result.df = cbind(result.df, nextcolumn)
             }
         }
@@ -102,10 +102,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.9 2007-03-22 01:24:17 peter Exp $
+# $Id: table.CAPM.R,v 1.10 2007-03-22 11:34:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/03/22 01:24:17  peter
+# - shortened col labels
+#
 # Revision 1.8  2007/03/22 01:03:16  peter
 # - handles uneven periods of data
 # - handles matrixes of assets and benchmarks
