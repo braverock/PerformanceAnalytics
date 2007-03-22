@@ -22,82 +22,76 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    # Prepare the data
-    # target.vec is the vector of data we want correlations for; we'll get it
-    # from x
-    assetReturns.vec = checkDataVector(Ra)
-    rf.vec = checkDataVector(rf)
+    # Transform input data to a data frame
 
-    # Make these excess returns
-    assetExcessRet.vec = assetReturns.vec - rf.vec
+    Ra = checkData(Ra, method = "zoo")
+    Rb = checkData(Rb, method = "zoo")
+    #rf = checkDataMatrix(rf)
 
-    # data.matrix is a vector or matrix of data we want correlations against;
-    # we'll take it from y
-    indexes.matrix = checkDataMatrix(Rb)
-    columns=ncol(indexes.matrix)
-    columnnames = colnames(indexes.matrix)
-    if (is.null(columnnames))
-        stop("Column names are missing.  If you want to pass in a sub-set of a timeSeries, you need to use seriesData(monthlyReturns.ts[,2]) to preserve the column names.")
+    # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
 
-    # for each column in the matrix, do the following:
-    for(column in 1:columns) {
+    # @todo: make an excess return function and use it here
+    Ra.excess = Return.excess(Ra, rf)
+    Rb.excess = Return.excess(Rb, rf)
 
-        benchmarkReturns.vec = as.vector(indexes.matrix[,column])
-        benchmarkReturns.vec.length = length(benchmarkReturns.vec)
-        benchmarkReturns.vec = benchmarkReturns.vec[!is.na(benchmarkReturns.vec)]
-        benchmarkReturns.vec.na = benchmarkReturns.vec.length - length(benchmarkReturns.vec)
-
-        # make these excess returns, too
-        indexExcessRet.vec = benchmarkReturns.vec - rf.vec
-
-        # a few calculations
-        model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
-
-        alpha = coef(model.lm)[[1]]
-        beta = coef(model.lm)[[2]]
-        htest = cor.test(assetReturns.vec, benchmarkReturns.vec)
-        ActivePremium = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(benchmarkReturns.vec, scale = scale))
-        TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2/(length(assetReturns.vec)-1)) * sqrt(scale)
-        treynorRatio = (Return.annualized(assetReturns.vec, scale = scale) - Return.annualized(rf.vec,scale=scale))/beta
-
-    z = c(
-            alpha,
-            beta,
-            summary(model.lm)$r.squared,
-            ((1+alpha)^scale - 1),
-            htest$estimate,
-            htest$p.value,
-            TrackingError,
-            ActivePremium,
-            ActivePremium/TrackingError,
-            treynorRatio
-            )
-
-    znames = c(
-            "Alpha",
-            "Beta",
-            "R-squared",
-            "Annualized Alpha",
-            "Correlation",
-            "Correlation p-value",
-            "Tracking Error",
-            "Active Premium",
-            "Information Ratio",
-            "Treynor Ratio"
-            )
-
-        if(column == 1) {
-            result.df = data.frame(Value = z, row.names = znames)
-        }
-        else {
-            nextcolumn = data.frame(Value = z, row.names = znames)
-            result.df = cbind(result.df, nextcolumn)
+    # Calculate
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
+            merged.assets = na.omit(merged.assets) # leaves the overlapping period
+            model.lm = lm(as.vector(merged.assets[,1]) ~ as.vector(merged.assets[,2]))
+    
+            alpha = coef(model.lm)[[1]]
+            beta = coef(model.lm)[[2]]
+            htest = cor.test(merged.assets[,1], merged.assets[,2])
+            active.premium = (Return.annualized(merged.assets[,1], scale = scale) - Return.annualized(merged.assets[,2], scale = scale))
+            tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
+            treynor.ratio = Return.annualized(merged.assets[,1], scale = scale)/beta
+    
+            z = c(
+                    alpha,
+                    beta,
+                    summary(model.lm)$r.squared,
+                    ((1+alpha)^scale - 1),
+                    htest$estimate,
+                    htest$p.value,
+                    tracking.error,
+                    active.premium,
+                    active.premium/tracking.error,
+                    treynor.ratio
+                    )
+        
+            znames = c(
+                    "Alpha",
+                    "Beta",
+                    "R-squared",
+                    "Annualized Alpha",
+                    "Correlation",
+                    "Correlation p-value",
+                    "Tracking Error",
+                    "Active Premium",
+                    "Information Ratio",
+                    "Treynor Ratio"
+                    )
+    
+            if(column.a == 1 & column.b == 1) {
+                result.df = data.frame(Value = z, row.names = znames)
+                colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+            }
+            else {
+                nextcolumn = data.frame(Value = z, row.names = znames)
+                colnames(nextcolumn) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to the ")
+                result.df = cbind(result.df, nextcolumn)
+            }
         }
     }
-    colnames(result.df) = columnnames
+
     result.df = base::round(result.df, digits)
     result.df
-
 }
 
 ###############################################################################
@@ -108,10 +102,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.7 2007-03-02 17:41:48 brian Exp $
+# $Id: table.CAPM.R,v 1.8 2007-03-22 01:03:16 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/02 17:41:48  brian
+# - remove redundant comments
+#
 # Revision 1.6  2007/02/28 03:22:39  peter
 # - added checkDataVector function to rf
 #
