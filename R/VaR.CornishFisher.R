@@ -117,43 +117,6 @@ function(R, p=0.99, column=1)
 }
 
 ###############################################################################
-
-`VaR.multicolumn` <-
-function(R, p=0.99, modified = TRUE)
-{   # @author Brian G. Peterson
-
-    # Description:
-
-    #Wrapper function to handle multi-column VaR calculations
-
-    r = checkData(R, method = "matrix")
-
-    columns = ncol(R)
-    columnnames=colnames(R)
-
-    for(column in 1:columns) {
-
-        VaR = VaR.CornishFisher(r,p,modified)
-
-        #result = VaR
-
-        VaR=array(VaR)
-        if (column==firstcolumn) {
-            #create data.frame
-            result=data.frame(VaR=VaR)
-        } else {
-            VaR=data.frame(VaR=VaR)
-            result=cbind(result,VaR)
-        }
-    } #end columns loop
-
-    colnames(result)<-columnnames
-
-    # Return Value:
-    result
-}
-
-###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
@@ -161,10 +124,13 @@ function(R, p=0.99, modified = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.7 2007-03-22 11:54:23 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.8 2007-03-22 12:15:25 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/22 11:54:23  brian
+# - added handlnig for multicolumn data
+#
 # Revision 1.6  2007/03/20 03:26:12  peter
 # - removed firstcolumn
 #
