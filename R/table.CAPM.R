@@ -22,11 +22,10 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    # Transform input data to a data frame
+    # Transform input data
 
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
-    #rf = checkDataMatrix(rf)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -34,7 +33,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
 
-    # @todo: make an excess return function and use it here
     Ra.excess = Return.excess(Ra, rf)
     Rb.excess = Return.excess(Rb, rf)
 
@@ -102,10 +100,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.10 2007-03-22 11:34:12 peter Exp $
+# $Id: table.CAPM.R,v 1.11 2007-03-22 13:48:51 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/03/22 11:34:12  peter
+# - changed the colname label connector from "vs" to "to"
+#
 # Revision 1.9  2007/03/22 01:24:17  peter
 # - shortened col labels
 #
