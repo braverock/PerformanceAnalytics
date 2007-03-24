@@ -1,5 +1,5 @@
 `VaR.Beyond` <-
-function (R, periods = 1, modified=FALSE)
+function (R, p=.95, modified=FALSE, periods = 1)
 {# @author Peter Carl
  # @author Brian G. Peterson (R-algorithm/testing)
 
@@ -27,7 +27,7 @@ function (R, periods = 1, modified=FALSE)
         r = as.vector(R[,column])
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
-        BVaR = VaR.CornishFisher(r, modified=modified) * periods^(1/(mean(r)-1))
+        BVaR = VaR.CornishFisher(r, p=p, modified=modified) * periods^(1/(mean(r)-1))
 
         BVaR=array(BVaR)
         if (column==1) {
@@ -53,10 +53,13 @@ function (R, periods = 1, modified=FALSE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.5 2007-03-22 11:52:48 brian Exp $
+# $Id: VaR.Beyond.R,v 1.6 2007-03-24 13:45:38 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 11:52:48  brian
+# - allow use of modified VaR calculation as an option
+#
 # Revision 1.4  2007/03/22 11:48:16  brian
 # - change to use CheckData
 # - remove obsolete separate handling for single-column data
