@@ -118,7 +118,7 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, 
 `checkDataMatrix` <-
 function (x, na.rm = FALSE, quiet = TRUE, ...)
 {
-    checkData((x, method = "matrix", na.rm = na.rm, quiet = quiet, ...))
+    checkData(x, method = "matrix", na.rm = na.rm, quiet = quiet, ...))
 }
 
 ###############################################################################
@@ -126,15 +126,15 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 `checkDataVector` <-
 function (x, na.rm = FALSE, quiet = TRUE, ...)
 {
-    checkData((x, method = "vector", na.rm = na.rm, quiet = quiet, ...))
+    checkData(x, method = "vector", na.rm = na.rm, quiet = quiet, ...))
 }
 
 ###############################################################################
 
-`checkDataVector` <-
+`checkDataZoo` <-
 function (x, na.rm = FALSE, quiet = TRUE, ...)
 {
-    checkData((x, method = "zoo", na.rm = na.rm, quiet = quiet, ...))
+    checkData(x, method = "zoo", na.rm = na.rm, quiet = quiet, ...))
 }
 
 ###############################################################################
@@ -145,9 +145,13 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.7 2007-03-24 13:24:27 brian Exp $
+# $Id: checkData.R,v 1.8 2007-03-24 13:28:07 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/24 13:24:27  brian
+# - add wrappers for deprecated checkDataMatrix checkDataVector checkDataZoo
+# - replaces files checkDataMatrix.R  checkDataVector.R  checkDataZoo.R
+#
 # Revision 1.6  2007/03/20 03:29:53  peter
 # - shut off rowname and columnname warnings when method == "vector"
 #
