@@ -1,5 +1,5 @@
 `checkData` <-
-function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
+function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -11,7 +11,7 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
     # what data format it has to work with.
 
     # Inputs:
-    # R: a matrix, data.frame or timeSeries object of data to be checked and
+    # x: a matrix, data.frame or timeSeries object of data to be checked and
     # transformed if necessary.
 
 
@@ -20,65 +20,67 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 
     # FUNCTION:
 
+    method = method[1] # grab the first value if this is still a vector, to avoid varnings
+
     # For matrixes and zoo objects, we test to see if there are rows, columns
     # and labels.  If there are not column labels, we provide them.  Row labels
     # we leave to the coersion functions.
 
-    if(!is.zoo(R)){
-        R = as.matrix(R)
-    
+    if(!is.zoo(x)){
+        x = as.matrix(x)
+
         # Test for rows and columns
-        if(is.null(ncol(R))) 
+        if(is.null(ncol(x)))
             stop("There don't seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
-    
-        if(is.null(nrow(R)))
+
+        if(is.null(nrow(x)))
             stop("No rows in the data provided.")
-    
+
         # Test for rownames and column names
-        if(method != "vector" & is.null(colnames(R))) {
-            columns = ncol(R)
+        if(method != "vector" & is.null(colnames(x))) {
+            columns = ncol(x)
             if(!quiet)
                 warning("No column names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
             columnnames = for(column in 1:columns) {paste("Column.",column,sep="")}
-            colnames(R) = columnnames
+            colnames(x) = columnnames
         }
-    
-        if(method != "vector" & is.null(rownames(R)))
+
+        if(method != "vector" & is.null(rownames(x)))
             if(!quiet)
                 warning("No row names in the data provided. To pass in names from a data.frame, you should use the form 'data[rows, columns, drop = FALSE]'.")
-    
+
         # Coerce a zoo object from the matrix.
         # We fill in column names where needed, and let the coersion
         # function fill in rownames if they are missing.
         if (method == "zoo") {
-            if(is.null(rownames(R)))
-                R = zoo(R)
+            if(is.null(rownames(x)))
+                x = zoo(x)
             else
-                R = zoo(R, order.by = rownames(R))
+                x = zoo(x, order.by = rownames(x))
         }
     }
 
     if (method == "matrix")
-        R = as.matrix(R)
+        x = as.matrix(x)
 
     # Now follows the tests specific to vectors
     if (method == "vector"){
-    
+
         # First, we'll check to see if we have more than one column.
-        if (NCOL(R) > 1) {
+        if (NCOL(x) > 1) {
             if(!quiet)
                 warning("The data provided is not a vector or univariate time series.  Used only the first column")
-            R = R[,1]
+            x = x[,1]
         }
-    
+
         # Second, we'll hunt for NA's and remove them if required
-        if (any(is.na(R))) {
+        if (any(is.na(x))) {
             if(na.rm) {
                 # Try to remove any NA's
-                R = R[!is.na(R)]
+                x = x[!is.na(x)]
                 if(!quiet){
                     warning("The following slots have NAs.")
-                    warning(paste(R@na.removed," "))
+                    warning(paste(x@na.removed," "))
                 }
             }
             else {
@@ -86,29 +88,53 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
                     warning("Data contains NA's.")
             }
         }
-    
+
         # Third, we'll check to see if we have any character data
-        if (!is.numeric(R)){
+        if (!is.numeric(x)){
             if(!quiet)
                 warning("The data does not appear to be numeric.")
             # Try to coerce the data
             # x = as.numeric(x)
         }
-    
+
         # Fourth, we'll see if we have more than one data point.
-        if (NROW(R) <= 1) {
+        if (NROW(x) <= 1) {
             if(!quiet)
                 warning("Only one row provided.")
         }
-    
+
         # @todo: Add check for stopifnot(is.atomic(y))???
 
-        R = as.vector(R)
+        x = as.vector(x)
     }
-    
-    # RESULTS
-    return(R)
 
+    # RESULTS
+    return(x)
+
+}
+
+###############################################################################
+
+`checkDataMatrix` <-
+function (x, na.rm = FALSE, quiet = TRUE, ...)
+{
+    checkData((x, method = "matrix", na.rm = na.rm, quiet = quiet, ...))
+}
+
+###############################################################################
+
+`checkDataVector` <-
+function (x, na.rm = FALSE, quiet = TRUE, ...)
+{
+    checkData((x, method = "vector", na.rm = na.rm, quiet = quiet, ...))
+}
+
+###############################################################################
+
+`checkDataVector` <-
+function (x, na.rm = FALSE, quiet = TRUE, ...)
+{
+    checkData((x, method = "zoo", na.rm = na.rm, quiet = quiet, ...))
 }
 
 ###############################################################################
@@ -119,9 +145,12 @@ function (R, method = "zoo", na.rm = FALSE, quiet = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.6 2007-03-20 03:29:53 peter Exp $
+# $Id: checkData.R,v 1.7 2007-03-24 13:24:27 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/20 03:29:53  peter
+# - shut off rowname and columnname warnings when method == "vector"
+#
 # Revision 1.5  2007/03/16 03:22:13  peter
 # - doesn't re-zoo a zoo object, since that might change it's index format
 #
