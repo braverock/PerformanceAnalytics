@@ -4,7 +4,7 @@
 \title{ wrapper to apply functions over a rolling period }
 \description{
 This is a wrapper for providing n-period trailing calculations for the data and functions provided.
-    }
+}
 \usage{
 rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, FUN = "mean", ...)
 }
@@ -23,6 +23,41 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
 \value{
 results over a rolling period
 }
+\details{
+Examples:
+\preformatted{
+> rollingFunction(gg.ts[,1],n=3,FUN="Return.annualized")
+                    Manager
+2002-02-28           0.0306
+2002-03-31           0.0521
+2002-04-30           0.0387
+...
+
+> rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="Return.annualized")
+                    Manager
+2001-12-31               NA
+2002-01-31               NA
+2002-02-28           0.0306
+2002-03-31           0.0521
+2002-04-30           0.0387
+...
+> rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized")
+                    Manager
+2001-12-31               NA
+2002-01-31               NA
+2002-02-28           1.5302
+2002-03-31           4.3768
+2002-04-30           6.9640
+...
+> rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized",rf=.03/12)
+                    Manager
+2001-12-31               NA
+2002-01-31               NA
+2002-02-28           0.0298
+2002-03-31           1.8587
+2002-04-30           1.5598}
+
+}
 \references{ }
 \author{ Peter Carl }
 \note{
@@ -32,36 +67,6 @@ Inspired by \code{\link[fMultivar]{rollFun}} written by Diethelm Wurtz.  We've e
    \code{\link[fMultivar]{rollFun}}
 }
 \examples{
-    # Examples:
-    # > rollingFunction(gg.ts[,1],n=3,FUN="Return.annualized")
-    #                     Manager
-    # 2002-02-28           0.0306
-    # 2002-03-31           0.0521
-    # 2002-04-30           0.0387
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="Return.annualized")
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           0.0306
-    # 2002-03-31           0.0521
-    # 2002-04-30           0.0387
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized")
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           1.5302
-    # 2002-03-31           4.3768
-    # 2002-04-30           6.9640
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized",rf=.03/12)
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           0.0298
-    # 2002-03-31           1.8587
-    # 2002-04-30           1.5598
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
