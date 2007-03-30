@@ -36,7 +36,7 @@ function(R, p=0.99, modified = TRUE)
     columnnames=colnames(R)
     # FUNCTION:
     for(column in 1:columns) {
-        r = as.vector(R[,column])
+        r = as.vector(na.omit(R[,column]))
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
         if (modified) {
@@ -58,7 +58,12 @@ function(R, p=0.99, modified = TRUE)
         }
     } #end columns loop
 
-    colnames(result)<-columnnames
+    if(ncol(result) == 1) {
+        # some backflips to name the single column zoo object
+        result = as.numeric(result)
+    }
+    else
+        colnames(result) = columnnames
 
     # Return Value:
     result
@@ -124,10 +129,13 @@ function(R, p=0.99)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.9 2007-03-22 14:24:15 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.10 2007-03-30 14:31:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/03/22 14:24:15  peter
+# - removed column attribute
+#
 # Revision 1.8  2007/03/22 12:15:25  brian
 # - remove VaR.multicolumn, obsolete
 #
