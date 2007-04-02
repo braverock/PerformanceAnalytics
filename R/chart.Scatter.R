@@ -1,5 +1,5 @@
 `chart.Scatter` <-
-function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = (1:12), symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
+function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -23,11 +23,11 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     # so that some sensible defaults could be set.
 
     # Output:
-    # Draws a timeseries graph of type "line" with some sensible defaults.
+    # Draws a scatter chart with some sensible defaults.
 
     # FUNCTION:
-    x = checkDataVector(x)
-    y = checkDataVector(y)
+    x = checkData(x, method = "vector")
+    y = checkData(y, method = "vector")
 
     # Set color for key elements, easy to darken for the printer
     if(darken)
@@ -35,7 +35,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     else
         elementcolor = "lightgray" #better for the screen
 
-
+    # Add fit line
 
     plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, ...)
 
@@ -51,10 +51,13 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.Scatter.R,v 1.3 2007-04-02 21:58:42 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
