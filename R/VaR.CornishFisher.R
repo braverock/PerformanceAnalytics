@@ -122,6 +122,24 @@ function(R, p=0.99)
 }
 
 ###############################################################################
+
+`VaR` <-
+function(R, p=0.99)
+{   # @author Brian G. Peterson
+
+    # Description:
+
+    # This is a wrapper function for modified VaR which assumes a normal
+    # distribution by discounting influence from skewness or kurtosis.
+
+    # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
+
+    # FUNCTION:
+    VaR.CornishFisher(R = R, p = p, modified=FALSE)
+
+}
+
+###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
@@ -129,10 +147,14 @@ function(R, p=0.99)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.10 2007-03-30 14:31:26 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.11 2007-04-02 21:49:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/03/30 14:31:26  peter
+# - when a single column is submitted, result is now a "numeric" rather than a
+#   "list" object
+#
 # Revision 1.9  2007/03/22 14:24:15  peter
 # - removed column attribute
 #
