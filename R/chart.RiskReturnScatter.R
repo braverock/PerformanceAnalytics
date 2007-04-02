@@ -31,7 +31,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
-    x = checkDataMatrix(R)
+    x = checkData(R, method = "matrix")
 
     columns = ncol(x)
     rows = nrow(x)
@@ -139,10 +139,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.3 2007-04-02 21:53:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
