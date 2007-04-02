@@ -19,6 +19,7 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 
     # Transform input data to a timeseries object
     x = checkData(R, method = "zoo")
+    x = na.omit(x)
 
     # Set up dimensions and labels
     columns = ncol(x)
@@ -92,10 +93,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.6 2007-03-21 20:49:04 peter Exp $
+# $Id: chart.BarVaR.R,v 1.7 2007-04-02 21:52:46 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/21 20:49:04  peter
+# - fixed issue with ylim when passed a matrix-like object
+#
 # Revision 1.5  2007/03/20 10:44:46  brian
 # - change F to FALSE to pass R CMD check
 #
