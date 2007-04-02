@@ -1,5 +1,5 @@
 `table.Returns` <-
-function (R, column = 1, digits = 1, as.perc = TRUE)
+function (R, digits = 1, as.perc = TRUE)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -47,7 +47,7 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
 
     # get the start and end years from the object of monthly returns
     firstyear = as.numeric(format(strptime(rownames(ri)[1],"%Y-%m-%d"), "%Y"))
-    lastyear = as.numeric(format(strptime(rownames(ri)[length(ri[,1])],"%Y-%m-%d"), "%Y"))
+    lastyear = as.numeric(format(strptime(rownames(ri)[length(ri[,1])], "%Y-%m-%d"), "%Y"))
 
     # create vectors for year and month labels
     year = format(strptime(rownames(ri), "%Y-%m-%d"), "%Y")
@@ -113,10 +113,13 @@ function (R, column = 1, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Returns.R,v 1.5 2007-03-22 14:03:25 peter Exp $
+# $Id: table.Returns.R,v 1.6 2007-04-02 21:55:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 14:03:25  peter
+# - uses checkData
+#
 # Revision 1.4  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
