@@ -147,10 +147,13 @@ function(R, p=0.99)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.11 2007-04-02 21:49:22 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.12 2007-04-04 00:23:01 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/04/02 21:49:22  peter
+# - minor modification
+#
 # Revision 1.10  2007/03/30 14:31:26  peter
 # - when a single column is submitted, result is now a "numeric" rather than a
 #   "list" object
@@ -162,7 +165,7 @@ function(R, p=0.99)
 # - remove VaR.multicolumn, obsolete
 #
 # Revision 1.7  2007/03/22 11:54:23  brian
-# - added handlnig for multicolumn data
+# - added handling for multicolumn data
 #
 # Revision 1.6  2007/03/20 03:26:12  peter
 # - removed firstcolumn

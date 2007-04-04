@@ -30,7 +30,8 @@ function( Ra, Ri, na.rm=FALSE)
     # FUNCTION:
 
     # CoKurtosis of two assets
-    CoK = sum((Ri - mean(Ri))*((Ra-mean(Ra))^3))
+    CoK = sum((Ra - mean(Ra))*((Ri-mean(Ri))^3))
+    # should this use %*% to get the Kroneker product?
 
     result = CoK
 
@@ -46,10 +47,15 @@ function( Ra, Ri, na.rm=FALSE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoKurtosis.R,v 1.4 2007-03-11 16:53:19 brian Exp $
+# $Id: CoKurtosis.R,v 1.5 2007-04-04 00:23:01 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/11 16:53:19  brian
+# - add equations and text to documentation
+# - standardize on Ra as the Return of the Asset
+# - standardize on Ra as first argument where that wasn't previously true
+#
 # Revision 1.3  2007/02/08 21:38:52  brian
 # - correct pervasive calculation error in co-moments
 #
