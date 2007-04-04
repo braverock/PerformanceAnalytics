@@ -19,17 +19,19 @@ table.CAPM(Ra, Rb, scale = 12, rf = 0, digits = 4)
 \details{ This table will show statistics pertaining to an asset against a set of benchmarks, but cannot \(yet\) be used to show statistics for a set of assets against a benchmark. }
 \value{ A data frame with columns named for the columns in \code{Rb} and rows containing statistics.  For example: \cr
 \code{table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))} \cr
-                    S&P500TR       \cr
-Alpha                 0.0065       \cr
-Beta                  0.2909       \cr
-R-squared             0.0987       \cr
-Annualized Alpha      0.0809       \cr
-Correlation           0.3142       \cr
-Correlation p-value   0.0547       \cr
-Tracking Error        0.0149       \cr
-Active Premium       -0.0083       \cr
-Information Ratio    -0.5606       \cr
-Treynor Ratio         0.3959       \cr
+\preformatted{
+                    S&P500TR
+Alpha                 0.0065
+Beta                  0.2909
+R-squared             0.0987
+Annualized Alpha      0.0809
+Correlation           0.3142
+Correlation p-value   0.0547
+Tracking Error        0.0149
+Active Premium       -0.0083
+Information Ratio    -0.5606
+Treynor Ratio         0.3959}
+
 }
 \references{ }
 \author{ Peter Carl }
