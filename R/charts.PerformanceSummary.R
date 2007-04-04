@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = F, ...)
+function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = F, gap = 12, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -54,7 +54,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
 #    chart.BarVaR(as.matrix(R[,1]), main = "", xaxis = FALSE, ylab = "Monthly Return", method = method)
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", method = method, event.labels = NULL, ylog = FALSE,...)
+    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", method = method, event.labels = NULL, ylog = FALSE, gap = gap, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
@@ -75,10 +75,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.7 2007-03-22 13:48:11 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.8 2007-04-04 02:46:34 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/22 13:48:11  peter
+# - removed yaxis label in favor of default
+#
 # Revision 1.6  2007/03/21 21:46:54  peter
 # - passing in wealth.index to top chart
 #
