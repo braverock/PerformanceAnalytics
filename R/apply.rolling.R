@@ -33,7 +33,14 @@ function (R, width = 12, FUN = "mean", na.pad = TRUE, ...)
             Return.calc = merge(Return.calc,column.Return.calc)
     }
 
-    colnames(Return.calc) = columnnames
+    if(ncol(Return.calc) == 1) {
+        # some backflips to name the single column zoo object
+        Return.calc = as.matrix(Return.calc)
+        colnames(Return.calc) = columnnames
+        Return.calc = zoo(Return.calc, order.by = rownames(Return.calc))
+    }
+    else
+        colnames(Return.calc) = columnnames
 
     return(Return.calc)
 
@@ -47,8 +54,11 @@ function (R, width = 12, FUN = "mean", na.pad = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: apply.rolling.R,v 1.1 2007-03-20 03:28:20 peter Exp $
+# $Id: apply.rolling.R,v 1.2 2007-04-04 02:45:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/03/20 03:28:20  peter
+# - uses zoo functions to apply functions to rolling windows
+#
 ###############################################################################
