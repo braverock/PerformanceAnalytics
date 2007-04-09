@@ -25,15 +25,26 @@ A dataframe with correlation and significance against each column of the data pr
 \note{}
 \seealso{}
 \examples{
-data(edhec)
+# First we load the data
 data(edhec)
 edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
-sp500 = download.SP500PriceReturns(start="1996-12-31",end=end)
-table.Correlation(sp500,edhec)
-ctable = table.Correlation(sp500,edhec, conf.level=.99)
+edhec.zoo = zoo(edhec, order.by = rownames(edhec))
+rf.zoo = download.RiskFree(start = start, end = end)
+sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
+
+# Now we have to align it as "monthly" data
+time(edhec.zoo) = as.yearmon(time(edhec.zoo))
+time(sp500.zoo) = as.yearmon(time(sp500.zoo))
+time(rf.zoo) = as.yearmon(time(rf.zoo))
+data.zoo = merge(edhec.zoo,sp500.zoo)
+time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
+time(rf.zoo) = as.Date(time(rf.zoo),format="\%b \%Y")
+
+table.Correlation(data.zoo[,14,drop=FALSE],data.zoo[,1:13])
+ctable = table.Correlation(data.zoo[,14,drop=FALSE],data.zoo[,1:13], conf.level=.99)
 dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
