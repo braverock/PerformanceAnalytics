@@ -59,6 +59,14 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, 
                 x = zoo(x, order.by = rownames(x))
         }
     }
+    else {
+        if(is.null(ncol(x)) & dim(as.matrix(x))[2] == 1) {
+            #warning("If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
+            x = as.matrix(x)
+            colnames(x) = "Column"
+            x = zoo(x, order.by = rownames(x))
+        }
+    }
 
     if (method == "matrix")
         x = as.matrix(x)
@@ -145,9 +153,12 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.9 2007-03-24 13:30:19 brian Exp $
+# $Id: checkData.R,v 1.10 2007-04-09 03:18:29 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/03/24 13:30:19  brian
+# - remove spurious parentheses added by editor
+#
 # Revision 1.8  2007/03/24 13:28:07  brian
 # - fix cut and paste error in checkDataZoo wrapper
 #
