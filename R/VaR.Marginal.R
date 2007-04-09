@@ -23,7 +23,7 @@ function(R, p=0.99, modified = TRUE, weightingvector)
     # Function
 
     # first, get the numbers for the whole portfolio
-    portfolioR   = pfolioReturn(R,weightingvector)
+    portfolioR   = pfolioReturn(R,as.vector(weightingvector))
     portfolioVaR = VaR.CornishFisher(portfolioR,p,modified)
     pVaR = array (portfolioVaR)
     result=data.frame(pVaR=pVaR)
@@ -34,7 +34,7 @@ function(R, p=0.99, modified = TRUE, weightingvector)
         weightfactor = sum(weightingvector)/sum(weightingvector[,-column])  # if we do need it
         # weightfactor = 1  # if we don't need it
 
-        subportfolioR   = pfolioReturn(R[ ,-column],weightingvector[ ,-column]*weightfactor)
+        subportfolioR   = pfolioReturn(R[ ,-column],as.vector(weightingvector[ ,-column]*weightfactor))
         subportfolioVaR = VaR.CornishFisher(subportfolioR,p,modified)
 
         marginalVaR = subportfolioVaR - portfolioVaR
@@ -63,10 +63,13 @@ function(R, p=0.99, modified = TRUE, weightingvector)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.3 2007-03-11 17:05:53 brian Exp $
+# $Id: VaR.Marginal.R,v 1.4 2007-04-09 12:31:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/11 17:05:53  brian
+# - change to use checkDataMatrix
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

@@ -1,5 +1,5 @@
 `checkData` <-
-function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, ...)
+function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -124,7 +124,7 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, 
 ###############################################################################
 
 `checkDataMatrix` <-
-function (x, na.rm = FALSE, quiet = TRUE, ...)
+function (x, na.rm = TRUE, quiet = TRUE, ...)
 {
     checkData(x, method = "matrix", na.rm = na.rm, quiet = quiet, ...)
 }
@@ -132,7 +132,7 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 ###############################################################################
 
 `checkDataVector` <-
-function (x, na.rm = FALSE, quiet = TRUE, ...)
+function (x, na.rm = TRUE, quiet = TRUE, ...)
 {
     checkData(x, method = "vector", na.rm = na.rm, quiet = quiet, ...)
 }
@@ -140,7 +140,7 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 ###############################################################################
 
 `checkDataZoo` <-
-function (x, na.rm = FALSE, quiet = TRUE, ...)
+function (x, na.rm = TRUE, quiet = TRUE, ...)
 {
     checkData(x, method = "zoo", na.rm = na.rm, quiet = quiet, ...)
 }
@@ -153,9 +153,12 @@ function (x, na.rm = FALSE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.10 2007-04-09 03:18:29 peter Exp $
+# $Id: checkData.R,v 1.11 2007-04-09 12:31:27 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/04/09 03:18:29  peter
+# - forces column name in single column object
+#
 # Revision 1.9  2007/03/24 13:30:19  brian
 # - remove spurious parentheses added by editor
 #

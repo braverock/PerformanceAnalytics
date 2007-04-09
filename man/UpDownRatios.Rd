@@ -48,9 +48,9 @@ data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
 time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
 
 # Up Capture:
-UpDownRatios(data.zoo[,1, drop=F], data.zoo[,2, drop=F])
+UpDownRatios(data.zoo[,1, drop=FALSE], data.zoo[,2, drop=FALSE])
 # Down Capture:
-UpDownRatios(data.zoo[,1, drop=F], data.zoo[,2, drop=F], side="down")
+UpDownRatios(data.zoo[,1, drop=FALSE], data.zoo[,2, drop=FALSE], side="down")
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

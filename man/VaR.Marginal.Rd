@@ -33,7 +33,7 @@ Different papers call this different things.  In the Denton and Jayaraman paper 
 \examples{
     data(edhec)
     # construct a weighting vector for an equally weighted portfolio
-    eqweight=rep(1/length (edhec), length(edhec))
+    eqweight=t(rep(1/length(edhec), length(edhec)))
     VaR.Marginal(R=edhec,p=0.99,weightingvector=eqweight)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

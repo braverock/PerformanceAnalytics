@@ -69,7 +69,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
     if(add.boxplots){
         original.layout <- par()
-        layout( matrix( c(2,1,0,3), 2, 2, byrow=T ),
+        layout( matrix( c(2,1,0,3), 2, 2, byrow=TRUE ),
                 c(1,6), c(4,1),
             )
         par(mar=c(1,1,5,2))
@@ -139,10 +139,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.3 2007-04-02 21:53:25 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.4 2007-04-09 12:31:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/04/02 21:53:25  peter
+# - changed to checkData function
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

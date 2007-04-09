@@ -9,8 +9,8 @@
 This function was created to make the different kinds of data classes at least emph{seem} more fungible.  It allows the user to pass in a data object without being concerned that the function requires a matrix, data.frame, or timeSeries object.  By using this, the function "knows" what data format it has to work with.
 }
 \usage{
-checkData(x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = FALSE, ...)
-checkDataMatrix(R, na.rm = FALSE, quiet = TRUE, ...)
+checkData(x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, ...)
+checkDataMatrix(R, na.rm = TRUE, quiet = TRUE, ...)
 checkDataVector(R, na.rm = TRUE, quiet = TRUE, ...)
 checkDataZoo(R, na.rm = TRUE, quiet = TRUE, ...)
 }
@@ -29,6 +29,9 @@ checkDataVector returns a vector
 checkDataZoo returns a zoo object
 
 checkData will make a reasonable assumption, or return the object requested by method
+}
+\details{
+The \code{checkData} function grew out of three older functions: \code{checkDataMatrix},\code{checkDataVector}, and \code{checkDataZoo}.  All three of these functions are provided as wrappers to \code{checkData} for backwards compatibility and for clarity inside existing code.  It is worth noting that the older checkData* functions set \code{na.rm=TRUE} by default.  The user is free to specify a value for this parameter to change the behavior.
 }
 \author{ Peter Carl }
 \examples{

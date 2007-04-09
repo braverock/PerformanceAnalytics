@@ -16,8 +16,8 @@ We created this library to include functionality that has been appearing in the 
     \tabular{rl}{
         Package: \tab PerformanceAnalytics\cr
         Type: \tab Package\cr
-        Version: \tab 0.9.3\cr
-        Date: \tab 2007-03-05\cr
+        Version: \tab 0.9.4\cr
+        Date: \tab 2007-04-01\cr
         License: \tab GPL\cr
     }
 
@@ -74,7 +74,7 @@ We have covered multiple methods of performance \emph{analysis} in this summary 
 \section{Summary Tabular Data}{
 Summary statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic return numbers. Usually these statistics are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
 
-When we started this project, we debated whether or not such tables would be broadly useful or not.  No reader is likely to think that we captured the precise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
+When we started this project, we debated whether or such tables would be broadly useful or not.  No reader is likely to think that we captured the precise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
 
 Other tables for comparison of related groupings of statistics discussed elsewhere in this summary:
   \tabular{rl}{
@@ -83,6 +83,7 @@ Other tables for comparison of related groupings of statistics discussed elsewhe
      \code{\link{table.CAPM}} \tab  a collection of statistics offered by practitioners of Modern Portfolio Theory  \cr
      \code{\link{table.HigherMoments}} \tab  metrics for evaluating diversification potential by comparing higher moments \cr
      \code{\link{table.DownsideRisk}} \tab  statistics for those wanting to compare the extent of observed losses  \cr
+     \code{\link{table.Drawdowns}} \tab  data on the length and depth of the worst drawdowns  \cr
      \code{\link{table.Correlation}} \tab a table arranged for comparing correlations  \cr
      \code{\link{table.RollingPeriods}} \tab calculates statistics over varying periods of time  \cr
   }
@@ -140,9 +141,9 @@ Which VaR measure to use will depend greatly on the portfolio and instruments be
 }
 
 \section{Wrapper and Utility Functions}{
-\R is a very powerful environment for manipulating data.  It can also be quite confusing to a user more accustomed to Excel or even MatLAB.  As such, we have written some wrapper functions that may aid you in coercing data into the correct forms or finding data that you need to use regularly.  To simplify the management of multiple-source data stored in \R in multiple data formats, we have provided \code{\link{checkDataMatrix}} and \code{\link{checkDataVector}}.  These functions will attempt to coerce data in and out of R's multitude of mostly fungible data classes into the class required for a particular analysis.  In general, the use of these data-coercion functions has been hidden inside the business functions provided.  They may also save you time and trouble in your own code and functions outside of the functionality provided by the PerformanceAnalytics library.
+\R is a very powerful environment for manipulating data.  It can also be quite confusing to a user more accustomed to Excel or even MatLAB.  As such, we have written some wrapper functions that may aid you in coercing data into the correct forms or finding data that you need to use regularly.  To simplify the management of multiple-source data stored in \R in multiple data formats, we have provided \code{\link{checkData}}.  This function will attempt to coerce data in and out of \R's multitude of mostly fungible data classes into the class required for a particular analysis.  In general, the use of the data-coercion function has been hidden inside the business functions provided.  \code{\link{checkData}} may also save you time and trouble in your own code and functions outside of the functionality provided by the \code{PerformanceAnalytics} library.
 
-When you are analyzing relative or absolute performance of investments, you need to analyze returns, but much data is available only as prices.  We have provided the simple wrapper function \code{\link{CalculateReturns}} to address this by taking a stream of prices and calculating simple or compounded returns from the price vector. The excellent \code{tseries} library includes the function \code{\link[tseries]{get.hist.quote}} for retrieving market data from online sources.  Many of the functions in PerformanceAnalytics require either a benchmark or a risk free rate, and many practitioners will not have access to a formal database of returns.  To facilitate the examples and provide an example of how to retrieve and coerce the data, we have provided functions for S&P 500 returns in the \code{\link{download.SP500PriceReturns}} and the 13-day US Treasury Bill in \code{\link{download.RiskFree}}.
+When you are analyzing relative or absolute performance of investments, you need to analyze returns, but much data is available only as prices.  We have provided the simple wrapper function \code{\link{CalculateReturns}} to address this by taking a stream of prices and calculating simple or compounded returns from the price vector. The excellent \code{tseries} library includes the function \code{\link[tseries]{get.hist.quote}} for retrieving market data from online sources.  Many of the functions in PerformanceAnalytics require either a benchmark or a risk free rate, and many practitioners will not have access to a formal database of historical returns.  To facilitate the examples and provide an example of how to retrieve and coerce the data, we have provided functions for S&P 500 returns in the \code{\link{download.SP500PriceReturns}} and the 13-day US Treasury Bill in \code{\link{download.RiskFree}}.
 
 We also provide wrappers for cumulative maxima of the returns in a multicolumn series in \code{\link{cummax.column}} and for the cumulative product (compound return) in \code{\link{cumprod.column}}.
 
@@ -161,8 +162,6 @@ Hedge Selection and Analysis
 Shock/Scenario Analysis
 
 We have attempted to standardize function parameters and variable names, but more work exists to be done here.
-
-In some cases, there are separate functions for single column and multicolumn data, which should be combined into a single function for ease of use and clarity.
 
 There are functions included in this package that would benefit from more complex examples.
 

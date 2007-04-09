@@ -26,7 +26,7 @@ annualized standard deviation
 }
 \examples{
 data(edhec)
-head(edhec[,6,drop=F])
+head(edhec[,6,drop=FALSE])
 StdDev.annualized(edhec[,6])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

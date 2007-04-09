@@ -5,7 +5,7 @@
 #       first parameter with R command mean()
 
 `mean.geometric` <-
-function (x)
+function (x, ...)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -25,7 +25,7 @@ function (x)
 }
 
 `mean.stderr` <-
-function (x)
+function (x, ...)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -104,10 +104,13 @@ function (x, ci = 0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: mean.utils.R,v 1.5 2007-03-05 04:51:36 brian Exp $
+# $Id: mean.utils.R,v 1.6 2007-04-09 12:31:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/05 04:51:36  brian
+# - add copyright and CVS block
+#
 #
 # revision 1.4
 # date: 2007-03-04 22:48:18 -0600;  brian;
