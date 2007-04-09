@@ -11,7 +11,7 @@ function (Ra, MAR = 0)
     # MAR   minimum acceptable return
     # Function:
 
-    Ra = checkDataVector(Ra)
+    Ra = checkData(Ra, method = "vector")
 
     result = mean (Ra - MAR) / DownsideDeviation(Ra, MAR)
 
@@ -27,10 +27,13 @@ function (Ra, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SortinoRatio.R,v 1.3 2007-03-14 00:54:06 brian Exp $
+# $Id: SortinoRatio.R,v 1.4 2007-04-09 03:31:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
