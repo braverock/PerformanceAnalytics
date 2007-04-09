@@ -27,6 +27,8 @@ Kelly criterion says: f should equal the expected excess return of the strategy 
 
 \deqn{leverage=\frac{(\overline{R}_{s}-R_{f})}{StdDev(R)^{2}}}{leverage = (mean(R)-rf)/StdDev(R)^2}
 
+As a performance metric, the Kelly Ratio calculated retrospectively on a particular investment will give you a measure of the edge that investment has over the risk free rate.  It may be use as a stack ranking method to compare investments in a manner similar to the various ratios related to the Sharpe ratio.
+
 }
 \value{
 Kelly Ratio or Bet/Leverage Size
@@ -42,6 +44,13 @@ Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in Blackjack, Sports 
 \seealso{
 }
 \examples{
+    data(edhec)
+
+    start = rownames(edhec[1,])
+    end = rownames(edhec[edhec.length,])
+    rf.zoo = download.RiskFree(start = start, end = end)
+
+    for (i in 1:ncol(edhec)) {print(colnames(edhec)[i]); print(KellyRatio(edhec[,i],rf=rf.zoo))}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
