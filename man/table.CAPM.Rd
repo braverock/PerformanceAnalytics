@@ -17,20 +17,7 @@ table.CAPM(Ra, Rb, scale = 12, rf = 0, digits = 4)
   \item{digits}{ number of digits to round results to }
 }
 \details{ This table will show statistics pertaining to an asset against a set of benchmarks, but cannot \(yet\) be used to show statistics for a set of assets against a benchmark. }
-\value{ A data frame with columns named for the columns in \code{Rb} and rows containing statistics.  For example: \cr
-\code{table.CAPM(monthlyReturns.ts@Data[, 1],seriesData(monthlyReturns.ts[, 2]))} \cr
-\preformatted{
-                    S&P500TR
-Alpha                 0.0065
-Beta                  0.2909
-R-squared             0.0987
-Annualized Alpha      0.0809
-Correlation           0.3142
-Correlation p-value   0.0547
-Tracking Error        0.0149
-Active Premium       -0.0083
-Information Ratio    -0.5606
-Treynor Ratio         0.3959}
+\value{ A data frame with columns named for the columns in \code{Rb} and rows containing statistics.
 
 }
 \references{ }
@@ -44,15 +31,25 @@ Treynor Ratio         0.3959}
     \code{\link{TreynorRatio}}
 }
 \examples{
+# First we load the data
 data(edhec)
 edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start = start, end = end)
-sp500 = download.SP500PriceReturns(start = "1996-12-31", end = end)
+edhec.zoo = zoo(edhec, order.by = rownames(edhec))
+rf.zoo = download.RiskFree(start = start, end = end)
+sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
 
-table.CAPM(edhec[,"Funds.of.Funds"], sp500, rf = rf)
+# Now we have to align it as "monthly" data
+time(edhec.zoo) = as.yearmon(time(edhec.zoo))
+time(sp500.zoo) = as.yearmon(time(sp500.zoo))
+time(rf.zoo) = as.yearmon(time(rf.zoo))
+data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
+time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
+time(rf.zoo) = as.Date(time(rf.zoo),format="\%b \%Y")
+
+table.CAPM(data.zoo[,1,drop=FALSE], data.zoo[,2,drop=FALSE], rf = rf.zoo)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
