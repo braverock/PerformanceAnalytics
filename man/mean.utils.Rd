@@ -16,8 +16,8 @@
 }
 
 \usage{
-mean.geometric(x)
-mean.stderr(x)
+mean.geometric(x, ...)
+mean.stderr(x, ...)
 mean.UCL(x,  ci = 0.95)
 mean.LCL(x,  ci = 0.95)
 }
@@ -31,10 +31,6 @@ mean.LCL(x,  ci = 0.95)
 \value{
 value for the function called
 }
-
-\references{
-}
-
 \author{ Peter Carl }
 \seealso{
    \code{\link{sd}}

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ wrapper to calculate cumprod on all columns in a matrix }
 \description{
-wrapper to caclulate cumprod on all columns in a matrix
+wrapper to calculate cumprod on all columns in a matrix
 }
 \usage{
 cumprod.column(R, na.rm = TRUE, ...)
@@ -20,8 +20,7 @@ transformed matrix of cumprods
 \author{ Peter Carl }
 \seealso{
     \code{\link{cummax.column}}
-}
-\examples{
+    \code{\link{cumprod}}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
