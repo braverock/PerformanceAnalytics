@@ -45,9 +45,10 @@ Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in Blackjack, Sports 
 }
 \examples{
     data(edhec)
-
+                                                                                                                                                              edhec.length = dim(edhec)[1]
     start = rownames(edhec[1,])
     end = rownames(edhec[edhec.length,])
+
     rf.zoo = download.RiskFree(start = start, end = end)
 
     for (i in 1:ncol(edhec)) {print(colnames(edhec)[i]); print(KellyRatio(edhec[,i],rf=rf.zoo))}
