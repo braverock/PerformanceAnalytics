@@ -21,8 +21,9 @@ function (Ra, rf = 0)
 
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
-    return((mean(Ra) - rf)/sd(Ra))
+    Ra = checkData(Ra, method = "zoo")
+    Ra.excess = Return.excess(Ra, rf)
+    return(mean(Ra.excess)/sd(Ra))
 
 }
 
@@ -34,10 +35,14 @@ function (Ra, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.R,v 1.4 2007-03-12 15:34:43 brian Exp $
+# $Id: SharpeRatio.R,v 1.5 2007-04-09 03:45:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/12 15:34:43  brian
+# - add equations to documentation
+# - standardize on Ra for Returns of asset
+#
 # Revision 1.3  2007/03/04 01:05:24  brian
 # - simplify code because NA's are taken care of in checkDataVector
 #
