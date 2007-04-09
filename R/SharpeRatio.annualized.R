@@ -17,9 +17,9 @@ function (Ra, rf = 0, scale = 12)
 
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
-
-    return((Return.annualized(R=(Ra-rf), scale = scale))/StdDev.annualized(Ra, rf = rf, scale = scale))
+    Ra = checkData(Ra, method="zoo")
+    Ra.excess = Return.excess(Ra, rf)
+    return((Return.annualized(Ra.excess, scale = scale))/StdDev.annualized(Ra, scale = scale))
 
 }
 
@@ -31,10 +31,13 @@ function (Ra, rf = 0, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.4 2007-03-14 00:54:06 brian Exp $
+# $Id: SharpeRatio.annualized.R,v 1.5 2007-04-09 03:33:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.3  2007/03/12 15:34:43  brian
 # - add equations to documentation
 # - standardize on Ra for Returns of asset

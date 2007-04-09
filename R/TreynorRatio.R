@@ -7,11 +7,12 @@ function (Ra, Rb, rf = 0, scale = 12, ...)
 
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
-    Rb = checkDataVector(Rb)
+    Ra = checkData(Ra, method = "vector")
+    Rb = checkData(Rb, method = "vector")
 
     beta = CAPM.beta(Ra, Rb, rf = rf)
-    treynorRatio = (Return.annualized(R=(Ra-rf), scale = scale))/beta
+    Re = Return.excess(Ra, rf)
+    treynorRatio = (Return.annualized(Re, scale = scale))/beta
     treynorRatio
 
 }
@@ -24,10 +25,13 @@ function (Ra, Rb, rf = 0, scale = 12, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TreynorRatio.R,v 1.4 2007-03-14 00:54:06 brian Exp $
+# $Id: TreynorRatio.R,v 1.5 2007-04-09 03:31:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.3  2007/03/12 15:34:43  brian
 # - add equations to documentation
 # - standardize on Ra for Returns of asset
