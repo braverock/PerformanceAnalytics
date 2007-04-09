@@ -40,6 +40,17 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
     \code{\link{SharpeRatio}}
 }
 \examples{
+data(edhec)
+head(edhec[, 6, drop = FALSE])
+edhec.length = dim(edhec)[1]
+start = rownames(edhec[1,])
+start
+end = rownames(edhec[edhec.length,])
+rf = download.RiskFree(start=start, end=end)
+
+SharpeRatio.modified(edhec[, 6, drop = FALSE])
+SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = .04/12)
+SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = rf)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

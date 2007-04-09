@@ -32,7 +32,8 @@ A timeseries line chart of the calculated series
 }
 \examples{
 data(edhec)
-chart.RollingPerformance(edhec[,1:3], n=24)
+chart.RollingPerformance(edhec[, 1:3], width = 24)
+chart.RollingPerformance(edhec[, 1:3], width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -33,6 +33,10 @@ vector of returns below the mean return
     \code{\link{DownsideDeviation}}
 }
 \examples{
+data(edhec)
+head(edhec[,7,drop=FALSE])
+sd(edhec[,7])
+SemiDeviation(edhec[,7])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

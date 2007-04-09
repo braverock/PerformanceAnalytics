@@ -25,6 +25,9 @@ annualized standard deviation
     \code{\link{StdDev}}
 }
 \examples{
+data(edhec)
+head(edhec[,6,drop=F])
+StdDev.annualized(edhec[,6])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

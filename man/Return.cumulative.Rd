@@ -30,6 +30,10 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}.
    \code{\link{Return.annualized}}
 }
 \examples{
+data(edhec)
+head(edhec[,13,drop=FALSE])
+Return.cumulative(edhec[,13])
+Return.cumulative(edhec[,13], geometric = FALSE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

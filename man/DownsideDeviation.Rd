@@ -30,6 +30,12 @@ Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. 
 \note{}
 \seealso{ }
 \examples{
+data(edhec)
+head(edhec[,6,drop=FALSE])
+sd(edhec[,6])
+DownsideDeviation(edhec[,6])
+DownsideDeviation(edhec[,6], MAR = .04/12)
+DownsideDeviation(edhec[,6], MAR = mean(edhec[,6]))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

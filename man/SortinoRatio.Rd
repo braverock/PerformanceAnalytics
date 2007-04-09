@@ -35,6 +35,9 @@ Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. 
 
 }
 \examples{
+data(edhec)
+head(edhec[,6, drop = FALSE])
+SortinoRatio(edhec[, 6])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

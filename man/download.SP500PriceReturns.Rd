@@ -30,6 +30,9 @@ matrix of simple or compound returns on the S \& P 500 at the daily/monthly scal
    \code{\link[tseries]{get.hist.quote}}
 }
 \examples{
+sp500 = download.SP500PriceReturns(start = "1996-12-31", end = "2007-01-01")
+class(sp500)
+head(sp500)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
