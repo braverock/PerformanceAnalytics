@@ -24,7 +24,7 @@ function (R, p=.95, modified=FALSE, periods = 1)
     columnnames=colnames(R)
     # FUNCTION:
     for(column in 1:columns) {
-        r = as.vector(R[,column])
+        r = R[,column,drop=FALSE]
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
         BVaR = VaR.CornishFisher(r, p=p, modified=modified) * periods^(1/(mean(r)-1))
@@ -39,7 +39,12 @@ function (R, p=.95, modified=FALSE, periods = 1)
         }
     } #end columns loop
 
-    colnames(result)<-columnnames
+    if(ncol(result) == 1) {
+        # some backflips to name the single column zoo object
+        result = as.numeric(result)
+    }
+    else
+        colnames(result) = columnnames
 
     # Return Value:
     result
@@ -53,10 +58,13 @@ function (R, p=.95, modified=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.6 2007-03-24 13:45:38 brian Exp $
+# $Id: VaR.Beyond.R,v 1.7 2007-04-10 00:39:56 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/24 13:45:38  brian
+# - add default confidence of p=.95
+#
 # Revision 1.5  2007/03/22 11:52:48  brian
 # - allow use of modified VaR calculation as an option
 #
