@@ -23,7 +23,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 
     # for each column, do the following:
     for(column in 1:columns) {
-        x = as.vector(y[,column])
+        x = y[,column]
         x.length = length(x)
         x = x[!is.na(x)]
         x.na = x.length - length(x)
@@ -83,10 +83,13 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.5 2007-03-22 14:39:45 peter Exp $
+# $Id: table.DownsideRisk.R,v 1.6 2007-04-10 01:43:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 14:39:45  peter
+# - uses checkData
+#
 # Revision 1.4  2007/03/04 20:59:27  brian
 # - minor changes to pass R CMD check
 #
