@@ -19,7 +19,7 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 
     # Transform input data to a timeseries object
     x = checkData(R, method = "zoo")
-    x = na.omit(x)
+    #x = na.omit(x)
 
     # Set up dimensions and labels
     columns = ncol(x)
@@ -31,33 +31,33 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
         if(method == "StdDev"){
             symmetric = TRUE
             if(width > 0){
-                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "sd")
+                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd")
                 legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "sd")
+                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "sd")
                 legend.txt = "Std Dev"
             }
         }
         else if(method == "VaR"){
             symmetric = TRUE
             if(width > 0) {
-                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
                 legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
                 legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
             }
         }
         else if(method == "ModifiedVaR"){
             symmetric = FALSE
             if(width > 0) {
-                risk = apply.rolling(x[,1,drop=FALSE], width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
                 legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
             }
             else {
-                risk = apply.fromstart(x[,1,drop=FALSE], gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
                 legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
             }
         }
@@ -93,10 +93,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.7 2007-04-02 21:52:46 peter Exp $
+# $Id: chart.BarVaR.R,v 1.8 2007-04-13 22:45:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/04/02 21:52:46  peter
+# - added removal of NA's
+#
 # Revision 1.6  2007/03/21 20:49:04  peter
 # - fixed issue with ylim when passed a matrix-like object
 #
