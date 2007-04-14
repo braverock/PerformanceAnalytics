@@ -13,6 +13,7 @@ table.RollingPeriods(R, periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48), c(3, 6,
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{periods}{ number of periods to use as rolling window(s), subset of \code{c(3, 6, 9, 12, 18, 24, 36, 48)} }
   \item{rf}{ risk free rate, in same period as your returns }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{FUNCS}{ list of functions to apply the rolling period to }
   \item{digits}{ number of digits to round results to }
 }
