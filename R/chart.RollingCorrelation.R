@@ -1,23 +1,17 @@
 `chart.RollingCorrelation` <-
-function (R, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)
+function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
-    # A wrapper to create a chart of rolling performance metrics in a line chart
-
-    # Inputs:
-
-
-    # Outputs:
-    # A timeseries line chart of the calculated series
+    # A wrapper to create a chart of rolling correlation metrics in a line chart
 
     # FUNCTION:
 
     # Transform input data to a matrix
-    Ra = checkData(R, method = "zoo")
+    Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
 
-        # Get dimensions and labels
+    # Get dimensions and labels
     columns.a = ncol(Ra)
     columns.b = ncol(Rb)
     columnnames.a = colnames(Ra)
@@ -53,10 +47,13 @@ function (R, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingCorrelation.R,v 1.4 2007-03-15 01:15:03 brian Exp $
+# $Id: chart.RollingCorrelation.R,v 1.5 2007-04-14 15:42:35 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/15 01:15:03  brian
+# - replace drop=F with drop=FALSE for R CMD check compatibility
+#
 # Revision 1.3  2007/03/14 03:12:44  peter
 # - uses checkData function
 # - handles uneven lengths of timeseries data
