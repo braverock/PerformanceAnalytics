@@ -58,38 +58,6 @@ function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...
     colnames(resultingtable) = columnnames
     result = base::round(resultingtable, digits)
     result
-
-    # Examples:
-    # > rollingFunction(gg.ts[,1],n=3,FUN="Return.annualized")
-    #                     Manager
-    # 2002-02-28           0.0306
-    # 2002-03-31           0.0521
-    # 2002-04-30           0.0387
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="Return.annualized")
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           0.0306
-    # 2002-03-31           0.0521
-    # 2002-04-30           0.0387
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized")
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           1.5302
-    # 2002-03-31           4.3768
-    # 2002-04-30           6.9640
-    # ...
-    # > rollingFunction(gg.ts[,1],n=3,trim=FALSE,FUN="SharpeRatio.annualized",rf=.03/12)
-    #                     Manager
-    # 2001-12-31               NA
-    # 2002-01-31               NA
-    # 2002-02-28           0.0298
-    # 2002-03-31           1.8587
-    # 2002-04-30           1.5598
-    # ...
 }
 
 ###############################################################################
@@ -100,10 +68,13 @@ function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingFunction.R,v 1.4 2007-04-14 13:08:43 brian Exp $
+# $Id: rollingFunction.R,v 1.5 2007-04-14 13:09:51 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/04/14 13:08:43  brian
+# - remove deprecated firstcolumn argument
+#
 # Revision 1.3  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
