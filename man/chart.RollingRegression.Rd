@@ -9,15 +9,15 @@ A wrapper to create a chart of relative regression performance through time
 A group of charts in \code{charts.RollingRegression} displays alpha, beta, and R-squared estimates in three aligned charts in a single device.
 }
 \usage{
-chart.RollingRegression(R, Rb, n = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main = paste("Rolling ", n, "-Month ", attribute, sep = ""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
-charts.RollingRegression(R, Rb, n = 12, rf = 0, darken = FALSE, main = NULL, ...)
+chart.RollingRegression(Ra, Rb, width = 12, rf = 0, attribute = c("Beta","Alpha","R-Squared"), main = paste("Rolling ", n, "-Month ", attribute, sep = ""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ...)
+charts.RollingRegression(Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{n}{ number of periods to apply rolling function over }
+  \item{width}{ number of periods to apply rolling function window over }
   \item{attribute}{ one of "Beta","Alpha","R-Squared" for which attribute to show }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{xaxis}{ if true, draws the x axis }
@@ -27,6 +27,12 @@ charts.RollingRegression(R, Rb, n = 12, rf = 0, darken = FALSE, main = NULL, ...
   \item{\dots}{ any other passthru parameters }
 }
 \details{
+The atribute parameter is probably the most confusing.  In mathematical terms, the different choices yeild the following:
+
+Alpha - shows the y-intercept\cr
+Beta - shows the slope of the regression line\cr
+R-Squared - shows the degree of fit of the regression to the data\cr
+
 }
 \value{
 A timeseries line chart of the calculated series
