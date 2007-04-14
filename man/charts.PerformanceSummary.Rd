@@ -13,7 +13,7 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", width 
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
-  \item{main}{ set the chart title, same as in \code{plot} }
+  \item{main}{ set the chart title, as in \code{plot} }
   \item{method}{ Used to select the risk parameter to use in the chart.BarVaR.
     May be any of: \cr
     modifiedVaR - uses Cornish-Fisher modified VaR \cr
@@ -22,8 +22,9 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", width 
   }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
   \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
-  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{width}{ number of periods to apply rolling function window over }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
+  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
