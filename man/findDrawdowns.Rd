@@ -35,7 +35,7 @@ modified with permission from function by Sankalp Upadhyay
 \seealso{
     \code{\link{sortDrawdowns}}
     \code{\link{maxDrawdown}}
-    \code{\link{chart.Drawdowns}}
+    \code{\link{chart.Drawdown}}
 }
 \examples{
 data(edhec)
