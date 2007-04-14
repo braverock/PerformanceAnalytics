@@ -1,25 +1,29 @@
 \name{findDrawdowns}
 \alias{findDrawdowns}
+\alias{Drawdowns}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Find the drawdowns in a timeseries. }
+\title{ Find the drawdowns and drawdown levels in a timeseries. }
 \description{
-Find the starting period, the ending period, and the amount and length of the drawdown.
+\code{findDrawdowns} will find the starting period, the ending period, and the amount and length of the drawdown.
 
 Often used with \code{\link{sortDrawdowns}} to get the largest drawdowns.
+
+\code{Drawdowns} will calculate the drawdown levels as percentages, for use in \code{\link{chart.Drawdowns}}.
 }
 \usage{
 findDrawdowns(R)
+Drawdowns(R)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
 \value{
-  unordered list
-  \item{return }{depth of drawdown}
-  \item{from }{starting period}
-  \item{to }{ending period}
-  \item{length }{length in periods}
+  unordered list \cr
+  \item{return }{depth of drawdown} \cr
+  \item{from }{starting period} \cr
+  \item{to }{ending period} \cr
+  \item{length }{length in periods} \cr
 }
 \references{}
 \author{
@@ -31,6 +35,7 @@ modified with permission from function by Sankalp Upadhyay
 \seealso{
     \code{\link{sortDrawdowns}}
     \code{\link{maxDrawdown}}
+    \code{\link{chart.Drawdowns}}
 }
 \examples{
 data(edhec)
