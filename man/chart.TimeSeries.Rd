@@ -31,7 +31,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
   \item{pch}{ symbols to use, see also \code{\link{plot}} }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{ylog}{ set the y-axis to log, similar to \code{\link{plot}} }
+  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

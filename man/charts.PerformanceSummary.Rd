@@ -6,7 +6,8 @@
 For a set of returns, create a wealth index chart, bars for monthly performance, and underwater chart for drawdown.
 }
 \usage{
-charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", n = 0, event.labels = NULL, ...)
+charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0,
+                          event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,12 +16,14 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", n = 0,
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{method}{ Used to select the risk parameter to use in the chart.BarVaR.
     May be any of: \cr
-    modVaR - uses CF modified VaR \cr
+    modifiedVaR - uses Cornish-Fisher modified VaR \cr
     VaR - uses traditional Value at Risk \cr
     StdDev - monthly standard deviation of trailing 12 month returns
   }
-  \item{n}{ number of periods to apply rolling function over }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
+  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
+  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
