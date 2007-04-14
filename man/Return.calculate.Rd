@@ -6,23 +6,21 @@
 calculate simple or compound returns from prices
 }
 \usage{
-CalculateReturns(Prices, method=c("simple","compound"))
+CalculateReturns(prices, method=c("compound","simple"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Prices}{vector or matrix of prices}
-  \item{method}{calculate "simple" or "compound" returns}
+  \item{prices}{ data object containing ordered price observations }
+  \item{method}{ calculate "simple" or "compound" returns, default compound }
 }
 \value{
 vector or matrix of simple or compound returns
 }
-\details{
-}
 \references{ }
 \author{ Peter Carl }
-\note{
+\seealso{
+    \code{\link{Return.cumulative}}
 }
-\seealso{ }
 \examples{
 require(tseries)
 prices = get.hist.quote("^gspc", start = "1999-01-01", end = "2007-01-01", quote = "Close", compression = "m")

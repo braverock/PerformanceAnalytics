@@ -9,14 +9,17 @@ BeyondVaR is described in theoretical detail in the paper:
 Gaussel, N., Legras, J., Longin, F., and Rabemananjara, R. "Beyond the VaR Horizon" 2001, Quants Review No. 37
 }
 \usage{
-VaR.Beyond(R, periods = 1)
+VaR.Beyond(R, p=.95, modified=FALSE, periods = 1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{p}{ confidence level for calculation, default p=.99 }
+  \item{modified}{ TRUE/FALSE default FALSE, use Cornish Fisher Expansion to take higher moments into account }
   \item{periods}{ number of periods to calculate predicted loss beyond the VaR for, default 1 }
 }
 \details{
+We believe that the extension of Cornish-Fisher VaR as an option in the Beyond VaR calculation is unique to this library.
 }
 \value{
 estimated Value of single period loss Beyond traditional mean-VaR
