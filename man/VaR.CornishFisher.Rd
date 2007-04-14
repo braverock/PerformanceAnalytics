@@ -2,6 +2,7 @@
 \alias{VaR.CornishFisher}
 \alias{VaR.traditional}
 \alias{VaR.mean}
+\alias{VaR}
 \alias{modifiedVaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
@@ -12,6 +13,7 @@ VaR.CornishFisher(R, p = 0.99, modified = TRUE)
 modifiedVaR(R, p = 0.99)
 VaR.traditional(R, p = 0.99)
 VaR.mean(R, p = 0.99)
+VaR(R, p = 0.99)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
