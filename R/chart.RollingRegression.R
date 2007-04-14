@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
+function (R, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -8,7 +8,7 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
     # Rb: a matrix, data frame, or timeSeries of returns for a benchmark
-    # rf: 
+    # rf:
 
     # Outputs:
     # A timeseries line chart of the calculated series
@@ -18,10 +18,10 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
     # FUNCTION:
 
     # Transform input data to a data frame
-
     Ra = checkData(R, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
     #rf = checkDataMatrix(rf)
+    attribute=attribute[1]
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -68,10 +68,13 @@ function (R, Rb, width = 12, rf = 0, attribute = "Beta", main = paste("Rolling "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.10 2007-03-22 11:47:40 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.11 2007-04-14 15:00:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/03/22 11:47:40  peter
+# - changed legend label separator to "to"
+#
 # Revision 1.9  2007/03/16 03:20:51  peter
 # - minor changes
 #
