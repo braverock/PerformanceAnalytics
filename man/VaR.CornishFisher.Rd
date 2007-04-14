@@ -8,10 +8,10 @@
 These functions calculate both traditional mean-VaR and modified Cornish-Fisher VaR
 }
 \usage{
-VaR.CornishFisher(R, p = 0.99, modified = TRUE, column = 1)
-modifiedVaR(R, p = 0.99, column = 1)
-VaR.traditional(R, p = 0.99, column = 1)
-VaR.mean(R, p = 0.99, column = 1)
+VaR.CornishFisher(R, p = 0.99, modified = TRUE)
+modifiedVaR(R, p = 0.99)
+VaR.traditional(R, p = 0.99)
+VaR.mean(R, p = 0.99)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
