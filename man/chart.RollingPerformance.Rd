@@ -6,20 +6,19 @@
 A wrapper to create a chart of rolling performance metrics in a line chart
 }
 \usage{
-chart.RollingPerformance(R, n = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", rf = 0, trim = FALSE, na.rm = TRUE, ...)
+chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex = 1, lwd = 1, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = NULL, ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", darken = FALSE , date.format = "%m/%y", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{n}{ number of periods to apply rolling function over }
+  \item{width}{ number of periods to apply rolling function window over }
   \item{xaxis}{ if true, draws the x axis }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{FUN}{ any function that can be evaluated using a single set of returns (e.g., rolling \code{\link{CAPM.beta}} won't work, but \code{\link{Return.annualized}} will)
-  }
+  \item{FUN}{ any function that can be evaluated using a single set of returns (e.g., rolling \code{\link{CAPM.beta}} won't work, but \code{\link{Return.annualized}} will) }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
-  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

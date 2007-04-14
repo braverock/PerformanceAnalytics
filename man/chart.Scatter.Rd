@@ -6,7 +6,7 @@
 Draws a scatter chart.  This is another chart "primitive", since it only contains a set of sensible defaults.  This function is intended to be used in a wrapper that is written for a particular purpose. This is just a handy way to standardize the formatting of multiple charts.
 }
 \usage{
-chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, ylim = NA, colorset = (1:12), symbolset = 1, darken = FALSE, legend.loc = NULL, ylog = FALSE, ...)
+chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE, legend.loc = NULL, ylog = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

@@ -6,16 +6,16 @@
 A wrapper to create a rolling mean return chart with 95\% confidence bands.
 }
 \usage{
-chart.RollingMean(R, n = 12, xaxis = TRUE, ylim = NULL, main = paste("Rolling ", n, "-Month Mean Return", sep = ""), trim = FALSE, ...)
+chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{n}{ number of periods to apply rolling function over }
+  \item{width}{ number of periods to apply rolling function window over }
   \item{xaxis}{ if true, draws the x axis }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{main}{ set the chart title, same as in \code{plot} }
-  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
+  \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
