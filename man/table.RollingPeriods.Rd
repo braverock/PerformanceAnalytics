@@ -11,7 +11,6 @@ table.RollingPeriods(R, periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48), c(3, 6,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{periods}{ number of periods to use as rolling window(s), subset of \code{c(3, 6, 9, 12, 18, 24, 36, 48)} }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{FUNCS}{ list of functions to apply the rolling period to }
