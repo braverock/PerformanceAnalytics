@@ -14,12 +14,11 @@ Returns a table of returns formatted with years in rows, months in columns, and 
 
 }
 \usage{
-table.Returns(R, column = 1, digits = 1, as.perc = TRUE)
+table.Returns(R, digits = 1, as.perc = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{column}{ defaults to first column in a multi-column matrix, but you can pass a specific column to format }
   \item{digits}{ number of digits to round results to for presentation }
   \item{as.perc}{ TRUE/FALSE  if TRUE, multiply simple returns by 100 to get \% }
 }

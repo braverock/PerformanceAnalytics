@@ -6,7 +6,7 @@
 This is a wrapper for providing n-period trailing calculations for the data and functions provided.
 }
 \usage{
-rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, FUN = "mean", ...)
+rollingFunction(R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,6 @@ rollingFunction(R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf
   \item{n}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{firstcolumn}{ first column to use from multicolumn input data R }
   \item{digits}{ number of digits to round results to }
   \item{rf}{ risk free rate, in same period as your returns }
   \item{FUN}{ function to apply rolling period over }
