@@ -1,5 +1,5 @@
 `chart.RelativePerformance` <-
-function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, ...)
+function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -15,7 +15,7 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
     # FUNCTION:
 
     # Transform input data to a matrix
-    Ra = checkData(R, method="zoo")
+    Ra = checkData(Ra, method="zoo")
     Rb = checkData(Rb, method = "zoo")
 
     # Get dimensions and labels
@@ -50,10 +50,13 @@ function (R, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12),
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.7 2007-03-20 10:44:46 brian Exp $
+# $Id: chart.RelativePerformance.R,v 1.8 2007-04-14 13:24:54 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/20 10:44:46  brian
+# - change F to FALSE to pass R CMD check
+#
 # Revision 1.6  2007/03/17 01:24:04  brian
 # - drop=FALSE to pass R CMD check
 #
