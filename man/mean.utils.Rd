@@ -26,10 +26,11 @@ mean.LCL(x,  ci = 0.95)
 \arguments{
   \item{x}{ a vector, matrix, data frame, or time series to calculate the modified mean statistic over }
   \item{ci}{ the confidence interval to use }
+  \item{\dots}{ any other passthru parameters }
 }
 
 \value{
-value for the function called
+numeric value for the mean function called
 }
 \author{ Peter Carl }
 \seealso{
