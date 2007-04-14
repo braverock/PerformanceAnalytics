@@ -1,24 +1,16 @@
 `chart.RollingRegression` <-
-function (R, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
+function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # A wrapper to create a chart of relative returns through time
-
-    # Inputs:
-    # R: a matrix, data frame, or timeSeries of returns
-    # Rb: a matrix, data frame, or timeSeries of returns for a benchmark
-    # rf:
-
-    # Outputs:
-    # A timeseries line chart of the calculated series
 
     # R-Squared could deliver adjusted R-Squared if we wanted
 
     # FUNCTION:
 
     # Transform input data to a data frame
-    Ra = checkData(R, method = "zoo")
+    Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
     #rf = checkDataMatrix(rf)
     attribute=attribute[1]
@@ -68,10 +60,13 @@ function (R, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.11 2007-04-14 15:00:08 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.12 2007-04-14 15:01:03 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/04/14 15:00:08  brian
+# - make 'attribute' an enumerated argument
+#
 # Revision 1.10  2007/03/22 11:47:40  peter
 # - changed legend label separator to "to"
 #

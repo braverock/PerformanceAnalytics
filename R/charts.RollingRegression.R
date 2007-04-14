@@ -1,4 +1,4 @@
-charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, ...)
+charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -6,7 +6,7 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
     # how the attributes change through time.
 
     # Inputs:
-    # R: a matrix, data frame, or timeSeries, usually a set of monthly returns.
+    # Ra: a matrix, data frame, or timeSeries, usually a set of monthly returns.
     #   The first column is assumed to be the returns of interest, the next
     #   columns are assumed to be relevant benchmarks for comparison.
     # Rb: a matrix, data frame, or timeSeries that is a set of returns of the
@@ -25,7 +25,7 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
 
     # FUNCTION:
 
-    columns.a = ncol(R)
+    columns.a = ncol(Ra)
     columns.b = ncol(Rb)
 
     if(columns.a > 1 | columns.b > 1)
@@ -42,15 +42,15 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
          main = paste("Rolling ",width,"-Month Regression",sep="")
     }
 
-    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(R, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, ...)
 
     par(mar=c(5,4,0,2))
 
-    chart.RollingRegression(R, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", ...)
 
 }
 
@@ -62,7 +62,7 @@ charts.RollingRegression = function (R, Rb, width = 12, rf = 0, darken = FALSE, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.9 2007-03-17 01:16:45 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.10 2007-04-14 15:01:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
