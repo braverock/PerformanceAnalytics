@@ -14,7 +14,6 @@ chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
   \item{width}{ number of periods to apply rolling function window over }
   \item{xaxis}{ if true, draws the x axis }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{main}{ set the chart title, same as in \code{plot} }
   \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
   \item{\dots}{ any other passthru parameters }
 }
