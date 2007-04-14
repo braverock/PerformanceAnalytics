@@ -16,6 +16,7 @@ table.RollingPeriods(R, periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48), c(3, 6,
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{FUNCS}{ list of functions to apply the rolling period to }
   \item{digits}{ number of digits to round results to }
+  \item{\dots}{ any other passthru parameters }
 }
 \value{
 A table of estimates of rolling period return measures
