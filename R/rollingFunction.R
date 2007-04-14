@@ -1,27 +1,13 @@
 `rollingFunction` <-
-function (R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, FUN = "mean", ...)
+function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
     # This is a wrapper for providing n-period trailing calculations for the
     # data and functions provided.
 
-    # Inputs:
-    # R: a matrix, data frame, or timeSeries of regular period returns.
-    # n: the number of periods over which a function is to be calculated. Use
-    #     the value zero (0) to roll the statistic from inception
-    # FUN: the function to apply to the data
-    # trim:
-    # na.rm:
-    # firstcolumn:
-    # digits: number of decimal places to round the display to.
-
-    # Outputs:
-    # A data.table of n-period trailing calculations for each column
-    # in x.
-
-    # Inspired by rollFun() written by Diethelm Wurtz.  We've extended the idea
-    # to all the columns provided.
+    # Inspired by rollFun() written by Diethelm Wurtz.
+    # We've extended the idea to all the columns provided, and added data checks.
 
     # FUNCTION:
 
@@ -39,10 +25,10 @@ function (R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, 
         stop("Data set is too short. Select a shorter evaluation period or provide a longer time period.  Also, check the data for NA's.")
 
     # for each column, do the following:
-    for(column in firstcolumn:columns) {
+    for(column in 1:columns) {
         valueNames = vector('character', 0)
         values = vector('numeric', 0)
-    x = checkDataVector(data.mat[,column])
+        x = checkDataVector(data.mat[,column])
 
         if(n == 0) {
             period = 0
@@ -114,10 +100,13 @@ function (R, n, trim = TRUE, na.rm = TRUE, firstcolumn = 1, digits = 4, rf = 0, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingFunction.R,v 1.3 2007-02-25 18:23:40 brian Exp $
+# $Id: rollingFunction.R,v 1.4 2007-04-14 13:08:43 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/02/25 18:23:40  brian
+# - change call to round() to call base::round() to fix conflict with newest fCalendar
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
