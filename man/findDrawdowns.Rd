@@ -8,7 +8,7 @@
 
 Often used with \code{\link{sortDrawdowns}} to get the largest drawdowns.
 
-\code{Drawdowns} will calculate the drawdown levels as percentages, for use in \code{\link{chart.Drawdowns}}.
+\code{Drawdowns} will calculate the drawdown levels as percentages, for use in \code{\link{chart.Drawdown}}.
 }
 \usage{
 findDrawdowns(R)
@@ -28,9 +28,8 @@ Drawdowns(R)
 \references{}
 \author{
 Peter Carl
-modified with permission from function by Sankalp Upadhyay
-}
-\note{
+
+\code{findDrawdowns} modified with permission from function by Sankalp Upadhyay
 }
 \seealso{
     \code{\link{sortDrawdowns}}
