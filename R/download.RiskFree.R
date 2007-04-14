@@ -9,10 +9,10 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"))
 
     # FUNCTION:
 
+
     # Download the risk free data, in this case, the 13-WEEK TREASURY BILL (^IRX)
     # from finance.yahoo.com
-
-    # @todo: Compression attribute can be made configurable for different granularity
+    compression = compression[1]
     x = get.hist.quote("^irx", start = start, end = end, quote = "Close", compression = compression)
 
     # Yahoo returns yield data as an annualized percentage;
@@ -29,10 +29,13 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.RiskFree.R,v 1.6 2007-03-20 11:27:32 brian Exp $
+# $Id: download.RiskFree.R,v 1.7 2007-04-14 13:55:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/20 11:27:32  brian
+# - add copyright, license, and CVS Log
+#
 # Revision 1.5 2007-03-16 peter
 # - now delivers a zoo object instead of a data.frame
 #

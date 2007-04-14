@@ -1,11 +1,12 @@
 `download.SP500PriceReturns` <-
-function(start = "1998-01-01", end = NULL, compression = "m", method = "compound")
+function(start = "1998-01-01", end = NULL, compression = c("m","d"), method = c("compound","simple"))
 { # @ author Peter Carl
 
     #  Download returns of the "market" asset.
 
     # Required inputs are just start and stop dates.
     # Outputs a table of log returns
+    # @todo: Offer a menu of "market" assets
 
     # FUNCTION:
 
@@ -13,7 +14,8 @@ function(start = "1998-01-01", end = NULL, compression = "m", method = "compound
     # from finance.yahoo.com
 
     # Method can be either "simple" or "compound", default is "compound"
-    # @todo: Offer a menu of "market" assets
+    method = method[1]
+    compression = compression[1]
 
     x = get.hist.quote("^gspc", start = start, end = end, quote = "Close", compression = compression)
     # @todo: make the data type returned selectable (e.g., df, ts, zoo, matrix)
@@ -33,10 +35,13 @@ function(start = "1998-01-01", end = NULL, compression = "m", method = "compound
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.SP500PriceReturns.R,v 1.7 2007-03-20 14:31:05 brian Exp $
+# $Id: download.SP500PriceReturns.R,v 1.8 2007-04-14 13:55:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/20 14:31:05  brian
+# - restored CVS revision log data
+#
 # Revision 1.6  2007/03/16 14:03:42  peter
 # - added cvs footer
 #
