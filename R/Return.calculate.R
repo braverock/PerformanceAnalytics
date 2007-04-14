@@ -1,17 +1,18 @@
 `CalculateReturns` <-
-function(Prices, method = "compound")
+function(prices, method = c("compound","simple"))
 { # @ author Peter Carl
 
     #  Calculate returns from a price stream
 
     # Required inputs
 
-    # Prices:
+    # Prices: data object containing ordered price observations
     # method: "simple", "compound"
 
     # FUNCTION:
 
-    prices = checkData(Prices, method = "zoo")
+    method = method[1]
+    prices = checkData(prices, method = "zoo")
 
     if(method=="simple")
         Returns = prices/lag(prices,-1) - 1
@@ -32,10 +33,13 @@ function(Prices, method = "compound")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.7 2007-03-20 14:34:22 brian Exp $
+# $Id: Return.calculate.R,v 1.8 2007-04-14 19:12:28 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/20 14:34:22  brian
+# - restored CVS revision log data
+#
 # Revision 1.6  2007/03/16 14:01:14  peter
 # - added cvs footer
 #
