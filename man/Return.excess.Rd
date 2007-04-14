@@ -21,13 +21,13 @@ mean excess return
 \details{
 Mean of the period return minus the period risk free rate
 
-\deqn{\overline{(R_{a}-R_{f})}}}{mean(Ra-rf)}
+\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-rf)}
 
 OR
 
 mean of the period returns minus a single numberic risk free rate
 
-\deqn{\overline{R_{a}}-R_{f}} }{mean(Ra)-rf}
+\deqn{\overline{R_{a}}-R_{f}}{mean(Ra)-rf}
 
 }
 \references{
@@ -36,12 +36,14 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}.
 \author{ Peter Carl }
 \examples{
 data(edhec)
+edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 end = rownames(edhec[edhec.length,])
+
 rf.zoo = download.RiskFree(start = start, end = end)
 
-Return.excess(edhec[,13],rf-zoo)
-Return.excess(edhec[,9],rf-zoo)
+Return.excess(edhec[,13],rf.zoo)
+Return.excess(edhec[,9],rf.zoo)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
