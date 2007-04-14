@@ -6,7 +6,12 @@
 A table of estimates of rolling period return measures
 }
 \usage{
-table.RollingPeriods(R, periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48), c(3, 6, 9, 12, 18, 24, 36, 48) < length(as.matrix(R[, 1]))), scale = 12, rf = 0, FUNCS = c("mean", "sd"), digits = 4)
+table.RollingPeriods(R,
+                     periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48),c(3, 6, 9, 12, 18, 24, 36, 48) < length(as.matrix(R[,1]))),
+                     scale = 12, rf = 0,
+                     FUNCS = c("mean", "sd"),
+                     digits = 4,
+                     ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
