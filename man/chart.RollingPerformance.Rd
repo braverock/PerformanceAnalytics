@@ -12,13 +12,28 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ number of periods to apply rolling function window over }
-  \item{xaxis}{ if true, draws the x axis }
-  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{FUN}{ any function that can be evaluated using a single set of returns (e.g., rolling \code{\link{CAPM.beta}} won't work, but \code{\link{Return.annualized}} will) }
-  \item{rf}{ risk free rate, in same period as your returns }
-  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
+  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{date.format}{ re-format the dates for the xaxis; the default is "\%m/\%y" }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
+  \item{main}{ set the chart title, same as in \code{\link{plot}} }
+  \item{event.lines}{ If not null, vertical lines will be drawn to indicate that an event happened during that time period.  \code{event.lines} should be a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as date.format.  This function matches the re-formatted row names (dates) with the events.list, so to get a match the formatting needs to be correct. }
+  \item{event.labels}{ if not null and event.lines is not null, this will apply a list of text labels (e.g., \code{c("This Event", "That Event")} to the vertical lines drawn }
+  \item{event.color}{ draws the event described in \code{event.labels} in the color specified }
+  \item{period.areas}{ these are shaded areas described by start and end dates in the same format as the date.format.  This is provided as a list of pairs, e.g., \code{list(c("10/26","11/27"), c("08/29","03/33"))} See the examples below. }
+  \item{period.color}{ draws the shaded region described by \code{period.areas} in the color specified }
+  \item{type}{ set the chart type, same as in \code{\link{plot}} }
+  \item{xaxis}{ if true, draws the x axis }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
+  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{pch}{ symbols to use, see also \code{\link{plot}} }
+  \item{lty}{ set the line type, same as in \code{\link{plot}} }
+  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
+  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{colorset}{ color palette to use, set by default to rational choices }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
