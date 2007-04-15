@@ -4,7 +4,7 @@
 \alias{checkDataVector}
 \alias{checkDataZoo}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ check input data type and format to normalize to a vector }
+\title{ check input data type and format and coerce to the desired output type }
 \description{
 This function was created to make the different kinds of data classes at least emph{seem} more fungible.  It allows the user to pass in a data object without being concerned that the function requires a matrix, data.frame, or timeSeries object.  By using this, the function "knows" what data format it has to work with.
 }
