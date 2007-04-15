@@ -20,10 +20,10 @@ Drawdowns(R)
 }
 \value{
   unordered list \cr
-  \item{return }{depth of drawdown} \cr
-  \item{from }{starting period} \cr
-  \item{to }{ending period} \cr
-  \item{length }{length in periods} \cr
+  \item{return }{depth of drawdown}
+  \item{from }{starting period}
+  \item{to }{ending period}
+  \item{length }{length in periods}
 }
 \references{}
 \author{
