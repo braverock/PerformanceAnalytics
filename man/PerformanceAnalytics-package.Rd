@@ -17,8 +17,9 @@ We created this library to include functionality that has been appearing in the 
         Package: \tab PerformanceAnalytics\cr
         Type: \tab Package\cr
         Version: \tab 0.9.4\cr
-        Date: \tab 2007-04-01\cr
+        Date: \tab 2007-04-15\cr
         License: \tab GPL\cr
+        Copyright: \tab (c) 2004-2007 Peter Carl and Brian G. Peterson
     }
 
 In general, this library is most tested on return (rather than price) data on a monthly scale. Many functions will work with daily or irregular return data as well.  See function \code{\link{CalculateReturns}} for calculating returns from prices, and be aware that the \code{\link{aggregate}} function has methods for \code{tseries} and \code{zoo} timeseries data classes to rationally coerce irregular data into regular data of the correct periodicity.
@@ -31,7 +32,9 @@ Performance measurement is the first step down a longer road.  When discussing p
 
 With the the increasing availability of complicated alternative investment strategies to both retail and institutional investors, and the broad availability of financial data, an engaging debate about performance analysis and evaluation is as important as ever.  There won't be one \emph{right} answer delivered in these metrics and charts.  What there will be is an accretion of evidence, organized to \emph{assist} a decision maker in answering a specific question that is pertinent to the decision at hand.  Using such tools to uncover information and ask better questions will, in turn, create a more informed investor.
 
-Performance measurement starts with returns.  Proprietary traders will object, complaining that \dQuote{You can't eat returns,} and will prefer to look at numbers with currency signs.  To some extent, they have a point - the normalization inherent in calculating returns can be deceiving.  Most of the recent work in financial econometrics, however, is focused on returns rather than prices.  This \dQuote{price per unit of investment} standardization is important for two reasons - first, it helps the decision maker to compare opportunities, and second, it has some useful statistical qualities.  As a result, the \code{PerformanceAnalytics} library focuses on returns.  See \code{\link{CalculateReturns}} for converting net asset values or prices into returns, either discrete or continuous. See \code{\link[fPortfolio]{pfolioReturn}} in package \code{fPortfolio} for calculating returns from a portfolio of instruments with a combination of historical returns and a weighting vector.
+Performance measurement starts with returns.  Proprietary traders will object, complaining that \dQuote{You can't eat returns,} and will prefer to look at numbers with currency signs.  To some extent, they have a point - the normalization inherent in calculating returns can be deceiving.  Most of the recent work in financial econometrics, however, is focused on returns rather than prices.  This \dQuote{price per unit of investment} standardization is important for two reasons - first, it helps the decision maker to compare opportunities, and second, it has some useful statistical qualities.  As a result, the \code{PerformanceAnalytics} library focuses on returns.  See \code{\link{CalculateReturns}} for converting net asset values or prices into returns, either discrete or continuous.  Many papers and theories refer to \dQuote{excess returns}: we have implemented the most common methods of calculating excess returns in function \code{\link{Return.excess}}.
+
+See \code{\link[fPortfolio]{pfolioReturn}} in package \code{fPortfolio} for calculating returns from a portfolio of instruments with a combination of historical returns and a weighting vector.  See package \code{portfolio} for a more sophisticated class-based collection of positions into a historical portfolio, allowing you to track changes in the composition of a portfolio over time.
 
 Returns and risk may be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}.
 
@@ -145,7 +148,7 @@ Which VaR measure to use will depend greatly on the portfolio and instruments be
 
 When you are analyzing relative or absolute performance of investments, you need to analyze returns, but much data is available only as prices.  We have provided the simple wrapper function \code{\link{CalculateReturns}} to address this by taking a stream of prices and calculating simple or compounded returns from the price vector. The excellent \code{tseries} library includes the function \code{\link[tseries]{get.hist.quote}} for retrieving market data from online sources.  Many of the functions in PerformanceAnalytics require either a benchmark or a risk free rate, and many practitioners will not have access to a formal database of historical returns.  To facilitate the examples and provide an example of how to retrieve and coerce the data, we have provided functions for S&P 500 returns in the \code{\link{download.SP500PriceReturns}} and the 13-day US Treasury Bill in \code{\link{download.RiskFree}}.
 
-We also provide wrappers for cumulative maxima of the returns in a multicolumn series in \code{\link{cummax.column}} and for the cumulative product (compound return) in \code{\link{cumprod.column}}.
+We also provide wrappers for cumulative maxima of the returns in a multicolumn series in \code{\link{cummax.column}} and for the cumulative product (compound return) in \code{\link{cumprod.column}}.   \R's built-in \code{\link{apply}} function in enormously powerful, but is can be tricky to use with timeseries data, so we have providded wrapper functions to \code{\link{apply.fromstart}} and \code{\link{apply.rolling}} to make handling of \dQuote{from inception} and \dQuote{rolling window} calculations easier.
 
 }
 
