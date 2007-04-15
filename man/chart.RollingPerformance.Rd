@@ -34,6 +34,16 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
   \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{bg}{ ~~Describe~~ }
+  \item{cex}{ ~~Describe~~ }
+  \item{log}{ ~~Describe~~ }
+  \item{sub}{ ~~Describe~~ }
+  \item{ann}{ ~~Describe~~ }
+  \item{axes}{ ~~Describe~~ }
+  \item{frame.plot}{ ~~Describe~~ }
+  \item{panel.first}{ ~~Describe~~ }
+  \item{panel.last}{ ~~Describe~~ }
+  \item{asp}{ ~~Describe~~ }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
