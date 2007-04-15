@@ -29,6 +29,8 @@ mean of the period returns minus a single numberic risk free rate
 
 \deqn{\overline{R_{a}}-R_{f}}{mean(Ra)-rf}
 
+Note that while we have, in keeping with common academic usage, assumed that the second parameter will be a risk free rate, you may also use any other timeseries as the second argument.  A common alteration would be to use a benchmark to produce excess returns over a specific benchmark, as demonstrated in the examples below.
+
 }
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 47-52
@@ -42,8 +44,12 @@ end = rownames(edhec[edhec.length,])
 
 rf.zoo = download.RiskFree(start = start, end = end)
 
-Return.excess(edhec[,13],rf.zoo)
-Return.excess(edhec[,9],rf.zoo)
+Return.excess(edhec[,"Funds.of.Funds"],rf.zoo)
+Return.excess(edhec[,"Long.Short.Equity"],rf.zoo)
+
+sp.zoo = download.SP500PriceReturns(start = start, end = end)
+Return.excess(edhec[,"Funds.of.Funds"],sp.zoo)
+Return.excess(edhec[,"Long.Short.Equity"],sp.zoo)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
