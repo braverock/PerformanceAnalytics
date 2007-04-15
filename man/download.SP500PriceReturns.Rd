@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ download S \& P Prices and calculate S \& P returns }
 \description{
-This function downloads daily/monthly S \& P 500 \emph{prices} using \code{\link[tseries]{get.hist.quote}} for "\^gspc" and calculate S \& P \emph{returns} using \code{\link{CalculateReturns}}.
+This function downloads daily/monthly S \& P 500 \emph{prices} using \code{\link[tseries]{get.hist.quote}} for "\^gspc" and calculate S \& P \emph{returns} using \code{\link{CalculateReturns}}
 }
 \usage{
 download.SP500PriceReturns(start = "1998-01-01", end = NULL, compression=c("m","d"), method=c("compound","simple"))
@@ -18,15 +18,10 @@ download.SP500PriceReturns(start = "1998-01-01", end = NULL, compression=c("m","
 \value{
 matrix of simple or compound returns on the S \& P 500 at the daily/monthly scale specified
 }
-\details{
-}
-\references{ }
 \author{ Peter Carl }
-\note{
-}
 \seealso{
-   \code{\link{CalculateReturns}}
-   \code{\link{download.RiskFree}}
+   \code{\link{CalculateReturns}} \cr
+   \code{\link{download.RiskFree}} \cr
    \code{\link[tseries]{get.hist.quote}}
 }
 \examples{
