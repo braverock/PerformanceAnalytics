@@ -6,13 +6,12 @@
 This is a wrapper for calculating correlation and significance against each column of the data provided.
 }
 \usage{
-table.Correlation(Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
+table.Correlation(Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector of returns to test, e.g., the asset to be examined }
   \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against. }
-  \item{n}{ ~~Describe \code{n} here~~ }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }

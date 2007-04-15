@@ -1,5 +1,5 @@
 `table.Correlation` <-
-function (Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
+function (Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -59,10 +59,15 @@ function (Ra, Rb, n, trim = TRUE, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Correlation.R,v 1.5 2007-03-22 12:38:50 peter Exp $
+# $Id: table.Correlation.R,v 1.6 2007-04-15 14:45:26 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 12:38:50  peter
+# - handles multiple assets and benchmarks
+# - uses checkData
+# - manages unequal time periods
+#
 # Revision 1.4  2007/02/28 03:59:50  peter
 # - repaired broken data check
 #
