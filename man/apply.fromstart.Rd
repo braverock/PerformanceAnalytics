@@ -5,7 +5,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate a function over an expanding window always starting from the beginning of the series }
 \description{
-A function to calculate a function over an expanding window from the start of the timeseries.  This wrapper allows easy calculation of \dQuote{from inception} statiustics.
+A function to calculate a function over an expanding window from the start of the timeseries.  This wrapper allows easy calculation of \dQuote{from inception} statistics.
 }
 \usage{
 apply.fromstart(R, FUN = "mean" , gap = 1, ...)
