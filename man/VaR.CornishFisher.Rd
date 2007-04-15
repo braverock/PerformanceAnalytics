@@ -71,7 +71,7 @@ Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida
 }
 \author{ Brian G. Peterson }
 \note{
-The prototype of this function was completed by Diethelm Wuertz.  It calculated the Taylor expansion, but did not handle the confidence level,exponents for each moment, and scale.
+The prototype of the Cornish Fisher VaR function was completed by Diethelm Wuertz.  All corrections to the calculation and error handling ar the fault of Brian Peterson.
 }
 \seealso{
     \code{\link{VaR.Beyond}}  \cr
@@ -83,7 +83,7 @@ The prototype of this function was completed by Diethelm Wuertz.  It calculated 
     \code{\link[VaR]{VaR.gpd}} \cr
     \code{\link[VaR]{VaR.norm}} \cr
     \code{\link[VaR]{VaR.backtest}} \cr
-    \code{\link[fPortfolio]{CVaR}} \cr
+    \code{\link[fPortfolio]{CVaR}}
 }
 \examples{
     data(edhec)
