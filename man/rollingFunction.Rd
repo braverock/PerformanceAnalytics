@@ -6,12 +6,12 @@
 This is a wrapper for providing n-period trailing calculations for the data and functions provided.
 }
 \usage{
-rollingFunction(R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
+rollingFunction(R, width, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{n}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
+  \item{width}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{digits}{ number of digits to round results to }

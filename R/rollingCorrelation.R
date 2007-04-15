@@ -1,5 +1,5 @@
 `rollingCorrelation` <-
-function (x, y, n, trim = TRUE, na.rm = FALSE, ...)
+function (Ra, Rj, width, trim = TRUE, na.rm = FALSE, ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -30,28 +30,26 @@ function (x, y, n, trim = TRUE, na.rm = FALSE, ...)
 
     # FUNCTION:
 
-    # target.vec is the vector of data we want correlations for; we'll get it
-    # from x
-    target.vec = checkDataVector(x)
-    xrows = nrow(x)
-    rownames = rownames(x)
+    # target.vec is the vector of data we want correlations for;
+    target.vec = checkDataVector(Ra)
+    xrows = nrow(Ra)
+    rownames = rownames(Ra)
 
     # data.matrix is a vector or matrix of data we want correlations against;
-    # we'll take it from y
-    data.matrix = checkDataMatrix(y)
-    columns=ncol(y)
-    columnnames = colnames(y)
+    data.matrix = checkDataMatrix(Rj)
+    columns=ncol(Rj)
+    columnnames = colnames(Rj)
 
     if (!trim) {
-        result.df = as.data.frame(matrix(data = NA, nrow = (n-1), ncol = columns, byrow = FALSE, dimnames = NULL))
+        result.df = as.data.frame(matrix(data = NA, nrow = (width-1), ncol = columns, byrow = FALSE, dimnames = NULL))
         colnames(result.df) = columnnames
     }
     #  For each period (or row):
-    for(row in n:xrows) {
+    for(row in width:xrows) {
         values = vector('numeric', 0)
         # Get the subset of returns on which to calulate correlation
-        trailing.data = data.matrix[(row-n+1):row,]
-        trailing.vec = target.vec[(row-n+1):row]
+        trailing.data = data.matrix[(row-width+1):row,]
+        trailing.vec = target.vec[(row-width+1):row]
 
         # Calculate correlation
         values = cor(trailing.vec,trailing.data,...)
@@ -118,10 +116,13 @@ function (x, y, n, trim = TRUE, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingCorrelation.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: rollingCorrelation.R,v 1.3 2007-04-15 00:51:42 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890

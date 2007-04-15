@@ -6,13 +6,13 @@
 This is a wrapper for providing n-period trailing correlations for the data provided.
 }
 \usage{
-rollingCorrelation(x, y, n, trim = TRUE, na.rm = FALSE, ...)
+rollingCorrelation(Ra, Rj, width, trim = TRUE, na.rm = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
-  \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
-  \item{n}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rj}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{width}{ the number of periods over which a function is to be calculated. Use the value zero (0) to roll the statistic from inception }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
   \item{\dots}{ any other passthru parameters }
@@ -39,11 +39,11 @@ A data.table of n-period trailing correlations for each column in y.
 \note{
 Inspired by fMultivar \code{\link[fMultivar]{rollFun}} written by Diethelm Wurtz.
 
-Assumes that x and y are sequenced exactly the same and are regular.
+Assumes that Ra and Rj are sequenced exactly the same and are regular.
 
-Currently assumes that BOTH x and y are provided
+Currently assumes that BOTH Ra and Rj are provided
 
-@todo: Allow \emph{either} a matrix or data frame for 'x' \emph{or} give both 'x' and 'y' \code{\link{cov}}
+@todo: Allow \emph{either} a matrix or data frame for 'Ra' \emph{or} give both 'Ra' and 'Rj' like \code{\link{cov}}
 }
 \seealso{
     \code{\link{cov}}

@@ -1,5 +1,5 @@
 `rollingFunction` <-
-function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
+function (R, width, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -30,21 +30,21 @@ function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...
         values = vector('numeric', 0)
         x = checkDataVector(data.mat[,column])
 
-        if(n == 0) {
+        if(width == 0) {
             period = 0
-            n = 12
+            width = 12
         }
         else
-            period = n
+            period = width
 
-        for(row in n:rows) {
+        for(row in width:rows) {
             subperiod = x[1:row]
             values = c(values,rollingStat(subperiod, period = period, FUN = FUN, ...))
             valueNames = c(valueNames,rownames[row])
         }
         if (!trim) {
-            values = c(rep(NA, (n - 1)), values)
-            valueNames = c(rownames[1:n-1],valueNames)
+            values = c(rep(NA, (width - 1)), values)
+            valueNames = c(rownames[1:width-1],valueNames)
         }
         if(column == 1) {
             resultingtable = data.frame(Value = values, row.names = valueNames)
@@ -68,10 +68,13 @@ function (R, n, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean", ...
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingFunction.R,v 1.5 2007-04-14 13:09:51 brian Exp $
+# $Id: rollingFunction.R,v 1.6 2007-04-15 00:51:42 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/04/14 13:09:51  brian
+# - remove excess comments that no longer apply
+#
 # Revision 1.4  2007/04/14 13:08:43  brian
 # - remove deprecated firstcolumn argument
 #
