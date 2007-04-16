@@ -45,7 +45,7 @@ function (x, ...)
 }
 
 `mean.LCL` <-
-function (x, ci = 0.95)
+function (x, ci = 0.95, ...)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -71,7 +71,7 @@ function (x, ci = 0.95)
 }
 
 `mean.UCL` <-
-function (x, ci = 0.95)
+function (x, ci = 0.95, ...)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -104,10 +104,13 @@ function (x, ci = 0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: mean.utils.R,v 1.6 2007-04-09 12:31:27 brian Exp $
+# $Id: mean.utils.R,v 1.7 2007-04-16 01:59:09 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/04/09 12:31:27  brian
+# - syntax and usage changes to pass R CMD check
+#
 # Revision 1.5  2007/03/05 04:51:36  brian
 # - add copyright and CVS block
 #

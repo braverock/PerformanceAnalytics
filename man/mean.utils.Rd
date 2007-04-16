@@ -18,8 +18,8 @@
 \usage{
 mean.geometric(x, ...)
 mean.stderr(x, ...)
-mean.UCL(x,  ci = 0.95)
-mean.LCL(x,  ci = 0.95)
+mean.UCL(x,  ci = 0.95, ...)
+mean.LCL(x,  ci = 0.95, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.
