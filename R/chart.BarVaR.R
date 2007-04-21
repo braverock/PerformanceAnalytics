@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99,...)
+function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -26,6 +26,9 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
     rows = nrow(x)
     columnnames = colnames(x)
     rownames = rownames(x)
+
+    if (!all)
+        columns = 1
 
     if(risk.line){
         for(column in 1:columns) {
@@ -82,17 +85,17 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 
     if(risk.line){
         if (symmetric){
-            for(column in 1:columns) {
-                lines(1:rows, risk[,column], col = colorset[column], lwd = 1, type = "l", lty="13")
+            for(column in columns:1) {
+                lines(1:rows, risk[,column], col = colorset[column], lwd = 1, type = "l", lty=lty)
             }
         }
-        for(column in 1:columns) {
-            lines(1:rows, -risk[,column], col = colorset[column], lwd = 1, type = "l", lty="13")
+        for(column in columns:1) {
+            lines(1:rows, -risk[,column], col = colorset[column], lwd = 1, type = "l", lty=lty)
         }
     }
 
     if(legend.txt != "")
-        legend("bottomleft", inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty="13", bty = "n", legend = legend.txt)
+        legend("bottomleft", inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt)
 
 }
 
@@ -104,10 +107,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.9 2007-04-21 01:06:01 peter Exp $
+# $Id: chart.BarVaR.R,v 1.10 2007-04-21 14:07:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/04/21 01:06:01  peter
+# - creates risk lines for each column of data
+#
 # Revision 1.8  2007/04/13 22:45:18  peter
 # - changed how na.omit is applied
 #
