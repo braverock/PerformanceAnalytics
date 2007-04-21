@@ -28,41 +28,47 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
     rownames = rownames(x)
 
     if(risk.line){
-        if(method == "StdDev"){
-            symmetric = TRUE
-            if(width > 0){
-                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd")
-                legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+        for(column in 1:columns) {
+            if(method == "StdDev"){
+                symmetric = TRUE
+                if(width > 0){
+                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "sd")
+                    legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+                }
+                else {
+                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "sd")
+                    legend.txt = "Std Dev"
+                }
             }
-            else {
-                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "sd")
-                legend.txt = "Std Dev"
+            else if(method == "VaR"){
+                symmetric = TRUE
+                if(width > 0) {
+                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                    legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
+                }
+                else {
+                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                    legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
+                }
             }
-        }
-        else if(method == "VaR"){
-            symmetric = TRUE
-            if(width > 0) {
-                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
+            else if(method == "ModifiedVaR"){
+                symmetric = FALSE
+                if(width > 0) {
+                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                    legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
+                }
+                else {
+                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                    legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
+                }
             }
-            else {
-                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
-            }
-        }
-        else if(method == "ModifiedVaR"){
-            symmetric = FALSE
-            if(width > 0) {
-                risk = apply.rolling(na.omit(x[,1,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
-            }
-            else {
-                risk = apply.fromstart(na.omit(x[,1,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
-            }
-        }
+            else
+                stop("Did not recognize the method, which should be one of \"StdDev\", \"VaR\", or \"ModifiedVaR\".")
+        if(column == 1)
+            risk = column.risk
         else
-            stop("Did not recognize the method, which should be one of \"StdDev\", \"VaR\", or \"ModifiedVaR\".")
+            risk = merge(risk,column.risk)
+        }
     }
     else {
         risk = 0
@@ -72,16 +78,21 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
         ylim = range(c(na.omit(as.vector(x[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
     }
 
-    chart.TimeSeries(x[,1], type = "h", col = colorset, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
+    chart.TimeSeries(x[,1, drop=FALSE], type = "h", col = colorset, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
 
     if(risk.line){
-        if (symmetric)
-            lines(1:rows, risk, col = colorset[1], lwd = 1, type = "l", lty="13")
-        lines(1:rows, -risk, col = colorset[1], lwd = 1, type = "l", lty="13")
+        if (symmetric){
+            for(column in 1:columns) {
+                lines(1:rows, risk[,column], col = colorset[column], lwd = 1, type = "l", lty="13")
+            }
+        }
+        for(column in 1:columns) {
+            lines(1:rows, -risk[,column], col = colorset[column], lwd = 1, type = "l", lty="13")
+        }
     }
 
     if(legend.txt != "")
-        legend("bottomleft", inset = 0.02, text.col = colorset[1], col = colorset[1], cex = .8, border.col = "grey", lwd = 1, lty="13", bty = "n", legend = legend.txt)
+        legend("bottomleft", inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty="13", bty = "n", legend = legend.txt)
 
 }
 
@@ -93,10 +104,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.8 2007-04-13 22:45:18 peter Exp $
+# $Id: chart.BarVaR.R,v 1.9 2007-04-21 01:06:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/04/13 22:45:18  peter
+# - changed how na.omit is applied
+#
 # Revision 1.7  2007/04/02 21:52:46  peter
 # - added removal of NA's
 #
