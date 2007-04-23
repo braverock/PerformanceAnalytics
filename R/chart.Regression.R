@@ -1,0 +1,128 @@
+`chart.MultiScatter` <-
+function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, ...)
+{ # @author Peter Carl
+
+    # DESCRIPTION:
+    # Draws a scatter chart.  This is another chart "primitive", since it
+    # only contains a set of sensible defaults.  This function is
+    # intended to be used in a wrapper that is written for a particular purpose.
+    # This is just a handy way to standardize the formatting of multiple charts.
+
+    # Inputs:
+    # x and y = assumes that data is a regular time series, not irregular.  Can take
+    # any type of object, whether a matrix, data frame, or timeSeries.
+    # legend.loc = use this to locate the legend, e.g., "topright"
+    # colorset = use the name of any of the palattes above
+    # reference.grid = if true, draws a grid aligned with the points on the
+    #    x and y axes.
+    # darken = if true, draws the chart elements in "darkgray" rather than
+    #    "gray".  Makes it easier to print for some printers.
+
+
+    # All other inputs are the same as "plot" and are principally included
+    # so that some sensible defaults could be set.
+
+    # Output:
+    # Draws a scatter chart with some sensible defaults.
+
+    # FUNCTION:
+
+
+    # Transform input data to a data frame
+    Ra = checkData(Ra, method = "zoo")
+    Rb = checkData(Rb, method = "zoo")
+
+    if(excess.returns){
+        Ra = Return.excess(Ra, Rf)
+        Rb = Return.excess(Rb, Rf)
+    }
+
+    # Get dimensions and labels
+    columns.a = ncol(Ra)
+    columns.b = ncol(Rb)
+    columnnames.a = colnames(Ra)
+    columnnames.b = colnames(Rb)
+    legendnames = NULL
+
+    if(is.na(xlim[1]))
+        xlim = range(as.vector(na.omit(Rb)))
+    if(is.na(ylim[1]))
+        ylim = range(as.vector(na.omit(Ra)))
+    if(is.null(xlab)){
+        if(excess.returns)
+            xlab = "Excess Return of Benchmarks"
+        else
+            xlab = "Return of Benchmarks"
+    }
+    if(is.null(ylab)){
+        if(excess.returns)
+            ylab = "Excess Return of Assets"
+        else
+            ylab = "Return of Assets"
+    }
+
+    if(darken)
+        elementcolor = "darkgray" #better for the printer
+    else
+        elementcolor = "lightgray" #better for the screen
+
+    # Calculate
+    color.tic = 0
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+    color.tic = color.tic + 1
+        for(column.b in 1:columns.b) { # against each asset passed in as Rb
+            merged.assets = merge(Ra[,column.a,drop=FALSE], Rb[,column.b,drop=FALSE])
+            merged.assets.df = as.data.frame(na.omit(merged.assets))
+
+
+            if(column.a == 1 & column.b == 1){
+                plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, ...)
+            }
+            else {
+                plot.xy(merged.assets.df[,c(2,1)], type="p", col = colorset[color.tic], pch = symbolset[color.tic], ...)
+
+            }
+            if(linear.fit){
+                abline(lm( merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
+            }
+            if(loess.fit){
+                #r.loess = 0
+                r.loess <- loess(merged.assets.df[,2] ~ merged.assets.df[,1])
+                lines(r.loess$x, r.loess$fitted, col = colorset[color.tic])
+                #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
+            }
+            legendnames= c(legendnames, paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to "))
+            if (column.b != columns.b)
+                color.tic = color.tic + 1
+        }
+    if(reference.grid) {
+        grid(col = elementcolor)
+        abline(h = 0, col = elementcolor)
+        abline(v = 0, col = elementcolor)
+    }
+
+    box(col = elementcolor)
+
+    if(!is.null(legend.loc)){
+        # There's no good place to put this automatically, except under the graph.
+        # That requires a different solution, but here's the quick fix
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, pch = symbolset, cex = .8, border.col = elementcolor, lwd = 1, bg = "white", legend = legendnames)
+    }
+
+    }
+}
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: chart.Regression.R,v 1.1 2007-04-23 14:35:22 peter Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+#
+###############################################################################
