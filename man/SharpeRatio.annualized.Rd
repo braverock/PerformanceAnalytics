@@ -35,10 +35,10 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 \note{
 }
 \seealso{
-    \code{\link{SharpeRatio}}
-    \code{\link{InformationRatio}}
-    \code{\link{TrackingError}}
-    \code{\link{ActivePremium}}
+    \code{\link{SharpeRatio}} \cr
+    \code{\link{InformationRatio}} \cr
+    \code{\link{TrackingError}} \cr
+    \code{\link{ActivePremium}} \cr
     \code{\link{SortinoRatio}}
 }
 \examples{

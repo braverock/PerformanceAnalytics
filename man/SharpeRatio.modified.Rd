@@ -36,7 +36,7 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 \author{ Brian G. Peterson }
 \note{}
 \seealso{
-    \code{\link{VaR.CornishFisher}}
+    \code{\link{VaR.CornishFisher}} \cr
     \code{\link{SharpeRatio}}
 }
 \examples{
