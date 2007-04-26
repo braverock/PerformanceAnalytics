@@ -15,7 +15,7 @@ SemiVariance(Ra)
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
 \details{
-Semidiviation or SemiVariance is a popular alternative downside risk measure that may be used in place of standard deviation or variance.
+SemiDeviation or SemiVariance is a popular alternative downside risk measure that may be used in place of standard deviation or variance.
 
 This function is implemented as a wrapper of DownsideDeviation with MAR=mean(R).
 
