@@ -32,9 +32,13 @@ Peter Carl
 \code{findDrawdowns} modified with permission from function by Sankalp Upadhyay
 }
 \seealso{
-    \code{\link{sortDrawdowns}}
-    \code{\link{maxDrawdown}}
-    \code{\link{chart.Drawdown}}
+    \code{\link{sortDrawdowns}} \cr
+    \code{\link{maxDrawdown}} \cr
+    \code{\link{sortDrawdowns}} \cr
+    \code{\link{table.Drawdowns}} \cr
+    \code{\link{table.DownsideRisk}} \cr
+    \code{\link{chart.Drawdown}} \cr
+
 }
 \examples{
 data(edhec)

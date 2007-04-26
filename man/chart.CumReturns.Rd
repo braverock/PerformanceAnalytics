@@ -26,7 +26,10 @@ A timeseries line chart of the cumulative return series.
 \author{ Peter Carl }
 \note{
 }
-\seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}} }
+\seealso{
+    \code{\link{chart.TimeSeries}} \cr
+    \code{\link{plot}}
+}
 \examples{
 data(edhec)
 chart.CumReturns(edhec[,"Funds.of.Funds"],main="Cumulative Returns")

@@ -19,8 +19,11 @@ maximum drawdown
 }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{findDrawdowns}}
-    \code{\link{sortDrawdowns}}
+    \code{\link{findDrawdowns}} \cr
+    \code{\link{sortDrawdowns}} \cr
+    \code{\link{table.Drawdowns}} \cr
+    \code{\link{table.DownsideRisk}} \cr
+    \code{\link{chart.Drawdown}} \cr
 }
 \examples{
 data(edhec)

@@ -34,7 +34,8 @@ A data.frame organized as a table of drawdown statistics.
     \code{\link{maxDrawdown}}   \cr
     \code{\link{findDrawdowns}} \cr
     \code{\link{sortDrawdowns}} \cr
-    \code{\link{chart.Drawdown}}
+    \code{\link{chart.Drawdown}} \cr
+    \code{\link{table.DownsideRisk}}
 }
 \examples{
 data(edhec)

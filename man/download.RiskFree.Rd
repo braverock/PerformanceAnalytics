@@ -24,8 +24,8 @@ matrix of simple or compound returns on the 13-week US Treasury Bill at the dail
 \note{
 }
 \seealso{
-   \code{\link{CalculateReturns}}
-   \code{\link{download.SP500PriceReturns}}
+   \code{\link{CalculateReturns}} \cr
+   \code{\link{download.SP500PriceReturns}} \cr
    \code{\link[tseries]{get.hist.quote}}
 }
 \examples{

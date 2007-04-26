@@ -43,7 +43,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lw
 \references{ }
 \author{ Peter Carl }
 \note{ }
-\seealso{ See Also \code{\link{plot}} }
+\seealso{ \code{\link{plot}} }
 \examples{
 
 # These are start and end dates, formatted the same way as the default axis labels

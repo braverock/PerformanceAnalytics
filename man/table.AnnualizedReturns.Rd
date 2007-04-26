@@ -22,8 +22,8 @@ A table of estimates of annualized returns and risk measures
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{Return.annualized}}
-    \code{\link{StdDev.annualized}}
+    \code{\link{Return.annualized}} \cr
+    \code{\link{StdDev.annualized}} \cr
     \code{\link{SharpeRatio.annualized}}
 }
 \examples{

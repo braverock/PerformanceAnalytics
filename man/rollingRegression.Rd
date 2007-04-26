@@ -26,7 +26,7 @@ For the full discussion, see:
 
 }
 \seealso{
-    \code{\link{lm}}
+    \code{\link{lm}} \cr
     \code{\link{apply}}
 }
 \examples{

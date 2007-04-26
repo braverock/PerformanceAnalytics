@@ -19,7 +19,7 @@ transformed matrix of cummaxs
 }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{cumprod.column}}
+    \code{\link{cumprod.column}} \cr
     \code{\link{cummax}}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

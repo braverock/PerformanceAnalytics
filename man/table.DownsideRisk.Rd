@@ -26,11 +26,11 @@ A dataframe organized as a table of estimates of downside risk measures for comp
 \references{ }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{DownsideDeviation}}
-    \code{\link{maxDrawdown}}
-    \code{\link{VaR.CornishFisher}}
-    \code{\link{VaR.Beyond}}
-    \code{\link{VaR.traditional}}
+    \code{\link{DownsideDeviation}}  \cr
+    \code{\link{maxDrawdown}}  \cr
+    \code{\link{VaR.CornishFisher}}  \cr
+    \code{\link{VaR.Beyond}}  \cr
+    \code{\link{VaR.traditional}}  \cr
     \code{\link{StdDev}}
 }
 \examples{

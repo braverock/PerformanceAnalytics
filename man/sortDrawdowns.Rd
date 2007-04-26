@@ -22,12 +22,17 @@ sortDrawdowns(runs)
 }
 \references{}
 \author{
-Peter Carl
-modified with permission from function by Sankalp Upadhyay
+Peter Carl \cr
+modified with permission from prototype function by Sankalp Upadhyay
 }
 \seealso{
-    \code{\link{findDrawdowns}}
-    \code{\link{maxDrawdown}}
+    \code{\link{DownsideDeviation}}  \cr
+    \code{\link{maxDrawdown}}   \cr
+    \code{\link{findDrawdowns}} \cr
+    \code{\link{sortDrawdowns}} \cr
+    \code{\link{chart.Drawdown}} \cr
+    \code{\link{table.Drawdowns}} \cr
+    \code{\link{table.DownsideRisk}}
 }
 \examples{
 data(edhec)

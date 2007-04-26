@@ -23,7 +23,9 @@ QQ Plot
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ }
+\seealso{
+  \code{\link[stats]{qqplot}}
+}
 \examples{
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

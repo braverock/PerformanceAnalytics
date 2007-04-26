@@ -38,8 +38,8 @@ A stack of three related timeseries charts.
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
 \seealso{
-    \code{\link{chart.CumReturns}}
-    \code{\link{chart.BarVaR}}
+    \code{\link{chart.CumReturns}} \cr
+    \code{\link{chart.BarVaR}} \cr
     \code{\link{chart.Drawdown}}
 }
 \examples{

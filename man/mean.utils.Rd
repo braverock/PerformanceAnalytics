@@ -34,7 +34,7 @@ numeric value for the mean function called
 }
 \author{ Peter Carl }
 \seealso{
-   \code{\link{sd}}
+   \code{\link{sd}} \cd
    \code{\link{mean}}
 }
 

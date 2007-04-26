@@ -25,7 +25,17 @@ Any time the cumulative returns dips below the maximum cumulative returns, it's 
 \author{ Peter Carl }
 \note{
 }
-\seealso{ \code{\link{plot}}, \code{\link{chart.TimeSeries}}  }
+\seealso{
+
+    \code{\link{plot}} \cr
+    \code{\link{chart.TimeSeries}} \cr
+    \code{\link{findDrawdowns}} \cr
+    \code{\link{sortDrawdowns}} \cr
+    \code{\link{maxDrawdown}} \cr
+    \code{\link{table.Drawdowns}} \cr
+    \code{\link{table.DownsideRisk}}
+
+}
 \examples{
 data(edhec)
 chart.Drawdown(edhec[,c(1,2)], main="Drawdown from Peak Equity Attained", legend.loc="bottomleft")
