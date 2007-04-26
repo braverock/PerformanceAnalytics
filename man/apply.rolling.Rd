@@ -24,7 +24,7 @@ A timeseries in a zoo object of the calculation results
 }
 \author{ Peter Carl }
 \seealso{
-    \code{\link{apply}}
+    \code{\link{apply}} \cr
     \code{\link[zoo]{rollapply}}
 }
 \examples{

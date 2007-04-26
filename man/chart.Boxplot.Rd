@@ -19,7 +19,9 @@ Creates a box plot of returns with some defaults.
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ }
+\seealso{
+    \code{\link[graphics]{boxplot}}
+}
 \examples{
 data(edhec)
 chart.Boxplot(edhec)

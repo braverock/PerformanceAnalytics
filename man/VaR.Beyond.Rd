@@ -32,8 +32,8 @@ Peter Carl \cr
 Brian G. Peterson
 }
 \seealso{
-    \code{\link{VaR.CornishFisher}}
-    \code{\link{VaR.traditional}}
+    \code{\link{VaR.CornishFisher}} \cr
+    \code{\link{VaR.traditional}} \cr
     \code{\link[fPortfolio]{CVaR}}
 }
 \examples{

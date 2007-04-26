@@ -23,7 +23,7 @@ correlation chart
 based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
 }
 \seealso{
-    \code{\link{table.Correlation}}
+    \code{\link{table.Correlation}} \cr
     \code{\link{chart.Correlation.color}}
 }
 \examples{

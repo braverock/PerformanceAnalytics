@@ -27,7 +27,7 @@ correlation chart
 based on chart by Sandrine Dudoit, sandrine@stat.berkeley.edu, from "SMA" library
 }
 \seealso{
-    \code{\link{table.Correlation}}
+    \code{\link{table.Correlation}} \cr
     \code{\link{chart.Correlation}}
 }
 \examples{

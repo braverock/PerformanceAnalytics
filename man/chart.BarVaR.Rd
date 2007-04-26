@@ -39,9 +39,9 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 \note{
 }
 \seealso{
-   \code{\link{chart.TimeSeries}}
-   \code{\link{plot}}
-   \code{\link[fPortfolio]{VaR}}
+   \code{\link{chart.TimeSeries}} \cr
+   \code{\link{plot}} \cr
+   \code{\link[fPortfolio]{VaR}} \cr
    \code{\link{VaR.CornishFisher}}
 }
 \examples{

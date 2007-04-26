@@ -24,7 +24,10 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 \references{ }
 \author{ Peter Carl }
 \note{}
-\seealso{ See Also \code{\link{chart.TimeSeries}}, \code{\link{plot}} }
+\seealso{
+    \code{\link{chart.TimeSeries}} \cr
+    \code{\link{plot}}
+}
 \examples{
 data(edhec)
 chart.Bar(edhec[,"Funds.of.Funds"], main="Monthly Returns")
