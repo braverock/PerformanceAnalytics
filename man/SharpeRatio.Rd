@@ -18,7 +18,7 @@ The Sharpe ratio is simply the return per unit of risk (represented by variance)
 
 \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma}}}
 
-William Sharpe now recommends Information Ratio preferentially to the original Sharpe Ratio.
+William Sharpe now recommends \code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
 
 }
 \value{
@@ -31,11 +31,11 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 \note{
 }
 \seealso{
-    \code{\link{SharpeRatio.annualized}}
-    \code{\link{InformationRatio}}
-    \code{\link{TrackingError}}
-    \code{\link{ActivePremium}}
-    \code{\link{SortinoRatio}}
+    \code{\link{SharpeRatio.annualized}}  \cr
+    \code{\link{InformationRatio}} \cr
+    \code{\link{TrackingError}} \cr
+    \code{\link{ActivePremium}} \cr
+    \code{\link{SortinoRatio}} \cr
 }
 \examples{
 data(edhec)

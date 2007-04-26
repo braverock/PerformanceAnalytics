@@ -19,6 +19,7 @@ InformationRatio(Ra, Rb, scale = 12)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
+William Sharpe now recommends \code{InformationRatio} preferentially to the original \code{\link{SharpeRatio}}.
 }
 \value{
 information ratio (number)
@@ -30,8 +31,9 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 \note{
 }
 \seealso{
-    \code{\link{TrackingError}}
-    \code{\link{ActivePremium}}
+    \code{\link{TrackingError}} \cr
+    \code{\link{ActivePremium}} \cr
+    \code{\link{SharpeRatio}}
 }
 \examples{
 data(edhec)
