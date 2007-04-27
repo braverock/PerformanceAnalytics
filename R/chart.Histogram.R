@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab = "Frequency", border.col = "white", box.col = "white", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), lwd = 2, xlim = NULL, darken = FALSE, ...)
+function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab = "Frequency", border.col = "white", box.col = "white", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), lwd = 2, xlim = NULL, darken = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -35,7 +35,9 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
     else
         elementcolor = "lightgray" #better for the screen
 
-    xlim = c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
+    b = c(-VaR.CornishFisher(x),-VaR.traditional(x))
+    b.labels = c("ModVaR","VaR")
+    xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), b)
 
     hist(x = x, probability = TRUE, xlim = xlim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
 
@@ -63,6 +65,12 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
             add.rug = {
                 rug(x, col = elementcolor)
             },
+            add.risk = {
+                h = rep(.2*par("usr")[3] + .8*par("usr")[4], length(b))
+                points(b, h, type='h', col='red',lwd=3)
+                points(b, h, col='red', lwd=3)
+                text(b, h, b.labels, pos=3)
+            },
             add.qqplot = {
                 op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
                 qqnorm(x, xlab="", ylab="", main="", axes=F, pch=".")
@@ -82,10 +90,15 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.4 2007-04-27 03:08:22 peter Exp $
+# $Id: chart.Histogram.R,v 1.5 2007-04-27 03:25:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/04/27 03:08:22  peter
+# - added switch
+# - added qqchart
+# - added rug
+#
 # Revision 1.3  2007/04/15 12:56:04  brian
 # - add breaks as an explicit parameter
 #
