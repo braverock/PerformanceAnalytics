@@ -55,39 +55,66 @@ legend(x, y = NULL, legend, fill = NULL, col = par("col"), lty, lwd, pch, angle 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{ ~~Describe \code{x} here~~ }
-  \item{y}{ ~~Describe \code{y} here~~ }
-  \item{legend}{ ~~Describe \code{legend} here~~ }
-  \item{fill}{ ~~Describe \code{fill} here~~ }
-  \item{col}{ ~~Describe \code{col} here~~ }
-  \item{lty}{ ~~Describe \code{lty} here~~ }
-  \item{lwd}{ ~~Describe \code{lwd} here~~ }
-  \item{pch}{ ~~Describe \code{pch} here~~ }
-  \item{angle}{ ~~Describe \code{angle} here~~ }
-  \item{density}{ ~~Describe \code{density} here~~ }
-  \item{bty}{ ~~Describe \code{bty} here~~ }
-  \item{bg}{ ~~Describe \code{bg} here~~ }
-  \item{pt.bg}{ ~~Describe \code{pt.bg} here~~ }
-  \item{cex}{ ~~Describe \code{cex} here~~ }
-  \item{pt.cex}{ ~~Describe \code{pt.cex} here~~ }
-  \item{pt.lwd}{ ~~Describe \code{pt.lwd} here~~ }
-  \item{xjust}{ ~~Describe \code{xjust} here~~ }
-  \item{yjust}{ ~~Describe \code{yjust} here~~ }
-  \item{x.intersp}{ ~~Describe \code{x.intersp} here~~ }
-  \item{y.intersp}{ ~~Describe \code{y.intersp} here~~ }
-  \item{adj}{ ~~Describe \code{adj} here~~ }
-  \item{text.width}{ ~~Describe \code{text.width} here~~ }
-  \item{text.col}{ ~~Describe \code{text.col} here~~ }
-  \item{merge}{ ~~Describe \code{merge} here~~ }
-  \item{trace}{ ~~Describe \code{trace} here~~ }
-  \item{plot}{ ~~Describe \code{plot} here~~ }
-  \item{ncol}{ ~~Describe \code{ncol} here~~ }
-  \item{horiz}{ ~~Describe \code{horiz} here~~ }
-  \item{title}{ ~~Describe \code{title} here~~ }
-  \item{inset}{ ~~Describe \code{inset} here~~ }
-  \item{border.col}{ ~~Describe \code{border.col} here~~ }
-  \item{border.lwd}{ ~~Describe \code{border.lwd} here~~ }
-  \item{border.lty}{ ~~Describe \code{border.lty} here~~ }
+  \item{x, y}{the x and y co-ordinates to be used to position the legend.
+    They can be specified by keyword or in any way which is accepted by
+    \code{\link{xy.coords}}: See Details.}
+  \item{legend}{a character or \link{expression} vector.
+    of length \eqn{\ge 1}{>= 1} to appear in the legend.  Other
+    objects will be coerced by \code{\link{as.graphicsAnnot}}.}
+  \item{fill}{if specified, this argument will cause boxes filled
+    with the specified colors (or shaded in the specified colors)
+    to appear beside the legend text.}
+  \item{col}{the color of points or lines appearing in the legend.}
+  \item{lty, lwd}{the line types and widths for lines appearing in the
+    legend.  One of these two \emph{must} be specified for line drawing.}
+  \item{pch}{the plotting symbols appearing in the legend, either as
+    vector of 1-character strings, or one (multi character)
+    string.  \emph{Must} be specified for symbol drawing.}
+  \item{angle}{angle of shading lines.}
+  \item{density}{the density of shading lines, if numeric and
+    positive. If \code{NULL} or negative or \code{NA} color filling
+    is assumed.}
+  \item{bty}{the type of box to be drawn around the legend.  The allowed
+    values are \code{"o"} (the default) and \code{"n"}.}
+  \item{bg}{the background color for the legend box.  (Note that this is
+    only used if \code{bty != "n"}.)}
+  \item{box.lty, box.lwd}{the line type and width for the legend box.}
+  \item{pt.bg}{the background color for the \code{\link{points}},
+    corresponding to its argument \code{bg}.}
+  \item{cex}{character expansion factor \bold{relative} to current
+    \code{par("cex")}.}
+  \item{pt.cex}{expansion factor(s) for the points.}
+  \item{pt.lwd}{line width for the points, defaults to the one for
+    lines, or if that is not set, to \code{par("lwd")}.}
+  \item{xjust}{how the legend is to be justified relative to the legend
+    x location.  A value of 0 means left justified, 0.5 means centered
+    and 1 means right justified.}
+  \item{yjust}{the same as \code{xjust} for the legend y location.}
+  \item{x.intersp}{character interspacing factor for horizontal (x) spacing.}
+  \item{y.intersp}{the same for vertical (y) line distances.}
+  \item{adj}{numeric of length 1 or 2; the string adjustment for legend
+    text.  Useful for y-adjustment when \code{labels} are
+    \link{plotmath} expressions.}
+  \item{text.width}{the width of the legend text in x (\code{"user"})
+    coordinates.  (Should be positive even for a reversed x axis.)
+    Defaults to the proper value computed by \code{\link{strwidth}(legend)}.}
+  \item{text.col}{the color used for the legend text.}
+  \item{merge}{logical; if \code{TRUE}, \dQuote{merge} points and lines but
+    not filled boxes.  Defaults to \code{TRUE} if there are points and lines.}
+  \item{trace}{logical; if \code{TRUE}, shows how \code{legend} does all
+    its magical computations.}
+  \item{plot}{logical.  If \code{FALSE}, nothing is plotted but the
+    sizes are returned.}
+  \item{ncol}{the number of columns in which to set the legend items
+    (default is 1, a vertical legend).}
+  \item{horiz}{logical; if \code{TRUE}, set the legend horizontally
+    rather than vertically (specifying \code{horiz} overrides the \code{ncol}
+    specification).}
+  \item{title}{a character string or length-one expression giving a
+    title to be placed at the top of the legend.  Other objects will be
+    coerced by \code{\link{as.graphicsAnnot}}.}
+  \item{inset}{inset distance(s) from the margins as a fraction of the
+    plot region when legend is placed by keyword.}
 }
 \details{
 All items ending in .labels or .dates contain labels or dates that would be appropriate for specific asset classes or economic cycles.
