@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, rf = 0, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab = "Frequency", border.col = "white", add.density = TRUE, add.fit = TRUE, density.col = "black", fit.col = "darkgray", colorset = "gray", lwd = 2, xlim = NULL, ...)
+function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab = "Frequency", border.col = "white", box.col = "white", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), lwd = 2, xlim = NULL, darken = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -13,6 +13,12 @@ function(R, rf = 0, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns"
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
+# IDEAS
+# add other fits, e.g., cauchy
+# add VaR, ModifiedVaR, as vertical lines
+# color the axes
+# differentiate mean and zero normal fits?
+
     y = checkDataMatrix(R)
     x = checkDataVector(y[,1])
 
@@ -24,24 +30,47 @@ function(R, rf = 0, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns"
         main = columnnames[1]
     }
 
+    if(darken)
+        elementcolor = "darkgray" #better for the printer
+    else
+        elementcolor = "lightgray" #better for the screen
+
     xlim = c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
 
-    hist(x = x, probability = TRUE, xlim = xlim, col = colorset, border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
+    hist(x = x, probability = TRUE, xlim = xlim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
 
-    # Show Density Estimate:
-    if(add.density){
-        den = density(x)
-        lines(den, col = density.col, lwd = lwd)
-        #plot(den, xlab = xlab, ylab = ylab, xlim = xlim, lty = 3, lwd = 2, main = "Manager Returns", col = density.col)
-    }
+    box(col=box.col)
 
-    # Add Normal Fit:
-    if(add.fit){
-        s = seq(xlim[1], xlim[2], length = 500)
-        lines(s, dnorm(s, mean(x), stdev(x)), col = fit.col, lwd = lwd)
-        # @todo: add other fits
-        #lines(s, dcauchy(s,mean(x), stdev(x)))
-    }
+    for (method in methods) {
+        switch(method, 
+            add.density = {
+                # Show density estimate
+                den = density(x)
+                lines(den, col = colorset[2], lwd = lwd)
+            },
+            add.normal = {
+                s = seq(xlim[1], xlim[2], length = 500)
+                lines(s, dnorm(s, mean(x), stdev(x)), col = colorset[3], lwd = lwd)
+            },
+            add.centered = {
+                s = seq(xlim[1], xlim[2], length = 500)
+                lines(s, dnorm(s, 0, stdev(x)), col = colorset[3], lwd = lwd)
+            },
+            add.cauchy = {
+                s = quantile(x)
+                lines(s, dcauchy(s,location = 0, scale = 1, log = FALSE), col = colorset[4])
+            },
+            add.rug = {
+                rug(x, col = elementcolor)
+            },
+            add.qqplot = {
+                op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
+                qqnorm(x, xlab="", ylab="", main="", axes=F, pch=".")
+                qqline(x, col="red")
+                box()
+            }
+        ) # end switch
+    } # end for
 
 }
 
@@ -53,10 +82,13 @@ function(R, rf = 0, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.3 2007-04-15 12:56:04 brian Exp $
+# $Id: chart.Histogram.R,v 1.4 2007-04-27 03:08:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/04/15 12:56:04  brian
+# - add breaks as an explicit parameter
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
