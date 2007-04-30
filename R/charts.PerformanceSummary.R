@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, ...)
+function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -23,6 +23,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
     # A stack of three related timeseries line charts
 
     # FUNCTION:
+    begin = begin[1]
     x = checkData(R, method = "zoo")
     colnames = colnames(x)
     ncols = ncol(x)
@@ -49,7 +50,7 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, ...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, ...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -75,10 +76,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.9 2007-04-09 12:31:27 brian Exp $
+# $Id: charts.PerformanceSummary.R,v 1.10 2007-04-30 12:56:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/04/09 12:31:27  brian
+# - syntax and usage changes to pass R CMD check
+#
 # Revision 1.8  2007/04/04 02:46:34  peter
 # - added gap parameter for chart.BarVaR
 #
