@@ -73,7 +73,7 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
             },
             add.qqplot = {
                 op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
-                qqnorm(x, xlab="", ylab="", main="", axes=F, pch=".")
+                qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".")
                 qqline(x, col="red")
                 box()
             }
@@ -90,10 +90,13 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.5 2007-04-27 03:25:00 peter Exp $
+# $Id: chart.Histogram.R,v 1.6 2007-04-30 12:51:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/04/27 03:25:00  peter
+# - added risk lines
+#
 # Revision 1.4  2007/04/27 03:08:22  peter
 # - added switch
 # - added qqchart
