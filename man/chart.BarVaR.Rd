@@ -6,7 +6,7 @@
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-chart.BarVaR(R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = "\%m/\%y", xlim = NA, ylim = NA, lwd = 1, colorset = (1:12), p = 0.99, ...)
+function(R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset = (1:12), p = 0.99, lty = "13", all = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,6 +25,8 @@ chart.BarVaR(R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", re
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
+  \item{lty}{ set the line type, same as in \code{\link{plot}} }
+  \item{all}{ if TRUE, calculates risk lines for each column given in R.  If FALSE, only calculates the risk line for the first column }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{\dots}{ any other passthru parameters }
 }
