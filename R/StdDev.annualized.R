@@ -1,14 +1,37 @@
+`sd.multiperiod` <-
+function (x, na.rm=FALSE, periods = 12, ...)
+{
+    #scale standard deviation by multiplying by the square root of the number of periods to scale by
+	return(sqrt(periods)*sd(x, na.rm=na.rm))
+}
+
+`sd.annualized` <-
+function (x, na.rm=FALSE, periods = 12, ...)
+{
+	sd.multiperiod(x, na.rm=na.rm, periods = scale)
+}
+
 `StdDev.annualized` <-
-function (Ra, scale = 12)
-{ # @author Peter Carl
+function (Ra, na.rm=FALSE, scale = 12)
+{   # wrapper function for backwards compatibility
+	sd.multiperiod(x, na.rm=na.rm, periods = scale)
+}
 
-    # To annualize standard deviation, we multiply by the square root of the
-    # number of observations per year.
+###############################################################################
+# sd function wrappers for backwards compatibility
+`StdDev` <-
+function(Ra)
+{ # @author Brian G. Peterson
+    result = sd(Ra))
 
-    Ra = checkDataVector(Ra)
+    # Return Value:
+    result
+}
 
-    # return(sqrt(scale)*sqrt(var(x - rf)))
-    return(sqrt(scale)*sqrt(var(Ra)))
+`std` <-
+function(Ra) {
+    # NOTE: std function is listed in the doc for fBasics, but not implemented
+    return(sd(Ra))
 }
 
 ###############################################################################
@@ -19,10 +42,14 @@ function (Ra, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.4 2007-03-12 15:45:50 brian Exp $
+# $Id: StdDev.annualized.R,v 1.5 2007-05-15 11:57:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/12 15:45:50  brian
+# - add equations to documentation
+# - standardize on Ra for Returns of asset
+#
 # Revision 1.3  2007/02/15 01:14:43  brian
 # - standardize parameter variaable names
 #
