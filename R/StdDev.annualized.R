@@ -21,11 +21,8 @@ function (Ra, na.rm=FALSE, scale = 12)
 # sd function wrappers for backwards compatibility
 `StdDev` <-
 function(Ra)
-{ # @author Brian G. Peterson
-    result = sd(Ra))
-
-    # Return Value:
-    result
+{ # wrapper for backwards compatibility
+    return(sd(Ra))
 }
 
 `std` <-
@@ -42,10 +39,15 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.5 2007-05-15 11:57:52 brian Exp $
+# $Id: StdDev.annualized.R,v 1.6 2007-05-15 20:02:01 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/05/15 11:57:52  brian
+# - standardize usage to match common R usage
+# - define sd.annualized and sd.multiperiod as generic extensions of R core sd fn
+# - move StdDev and std wrappers to this file
+#
 # Revision 1.4  2007/03/12 15:45:50  brian
 # - add equations to documentation
 # - standardize on Ra for Returns of asset
