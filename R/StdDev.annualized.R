@@ -14,7 +14,7 @@ function (x, na.rm=FALSE, periods = 12, ...)
 `StdDev.annualized` <-
 function (Ra, na.rm=FALSE, scale = 12)
 {   # wrapper function for backwards compatibility
-	sd.multiperiod(x, na.rm=na.rm, periods = scale)
+	sd.multiperiod(Ra, na.rm=na.rm, periods = scale)
 }
 
 ###############################################################################
@@ -39,10 +39,13 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.6 2007-05-15 20:02:01 brian Exp $
+# $Id: StdDev.annualized.R,v 1.7 2007-06-04 14:32:33 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/05/15 20:02:01  brian
+# - fix syntax error (extra paren)
+#
 # Revision 1.5  2007/05/15 11:57:52  brian
 # - standardize usage to match common R usage
 # - define sd.annualized and sd.multiperiod as generic extensions of R core sd fn
