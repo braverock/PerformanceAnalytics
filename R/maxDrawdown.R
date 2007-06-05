@@ -14,9 +14,11 @@ function (R)
 
     x = checkDataVector(R)
 
-    Return.cumulative = cumprod(1+x)
-    maxCumulativeReturn = cummax(Return.cumulative)
+
+    Return.cumulative = cumprod(1+na.omit(x)) 
+    maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
     drawdown = Return.cumulative/maxCumulativeReturn - 1
+
     # if you want to see the drawdown series, plot(drawdown,type="l")
     return(min(drawdown))
 
@@ -30,10 +32,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: maxDrawdown.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: maxDrawdown.R,v 1.3 2007-06-05 13:10:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
