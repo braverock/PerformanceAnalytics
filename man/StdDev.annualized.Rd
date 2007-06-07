@@ -37,7 +37,7 @@ standard deviation value, scaled for multiple periods
 \references{}
 \author{ Brian G. Peterson }
 \seealso{
-    \code{\link{sd}}
+    \code{\link[stats]{sd}}
 }
 \examples{
     data(edhec)

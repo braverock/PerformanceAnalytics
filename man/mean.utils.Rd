@@ -34,8 +34,8 @@ numeric value for the mean function called
 }
 \author{ Peter Carl }
 \seealso{
-   \code{\link{sd}} \cd
-   \code{\link{mean}}
+   \code{\link[stats]{sd}} \cr
+   \code{\link[base]{mean}}
 }
 
 \examples{
