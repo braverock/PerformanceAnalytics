@@ -1,6 +1,7 @@
 `sd.multiperiod` <-
 function (x, na.rm=FALSE, periods = 12, ...)
 {
+    x = checkData (x,na.rm=na.rm, ...=...)
     #scale standard deviation by multiplying by the square root of the number of periods to scale by
 	return(sqrt(periods)*sd(x, na.rm=na.rm))
 }
@@ -8,13 +9,13 @@ function (x, na.rm=FALSE, periods = 12, ...)
 `sd.annualized` <-
 function (x, na.rm=FALSE, periods = 12, ...)
 {
-	sd.multiperiod(x, na.rm=na.rm, periods = scale)
+	sd.multiperiod(x, na.rm=na.rm, periods = periods, ...=...)
 }
 
 `StdDev.annualized` <-
-function (Ra, na.rm=FALSE, scale = 12)
+function (Ra, na.rm=FALSE, scale = 12, ...)
 {   # wrapper function for backwards compatibility
-	sd.multiperiod(Ra, na.rm=na.rm, periods = scale)
+	sd.multiperiod(Ra, na.rm=na.rm, periods = scale, ...=...)
 }
 
 ###############################################################################
@@ -39,10 +40,13 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.7 2007-06-04 14:32:33 peter Exp $
+# $Id: StdDev.annualized.R,v 1.8 2007-06-07 23:02:20 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/06/04 14:32:33  peter
+# - fixed x and Ra replacement error
+#
 # Revision 1.6  2007/05/15 20:02:01  brian
 # - fix syntax error (extra paren)
 #
