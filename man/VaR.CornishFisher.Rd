@@ -22,7 +22,7 @@ VaR(R, p = 0.99)
   \item{modified}{ TRUE/FALSE default TRUE, use Cornish Fisher Expansion to take higher moments into account }
 }
 \details{
-In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.
+In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to utilize a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{quantile}} for an arbitrary historical distribution or \code{\link{qnorm}} for an idealized normal distribution. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric historical VaR estimate.
 
 In a set of returns for which sufficently long history exists, the per-period Value at risk is simply the correct quantile of the period losses \eqn{\mu}  with variance \eqn{\sigma}  is denoted by:
 
