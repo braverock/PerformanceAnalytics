@@ -19,9 +19,9 @@ We created this library to include functionality that has been appearing in the 
         Version: \tab 0.9.4\cr
         Date: \tab 2007-04-15\cr
         License: \tab GPL\cr
-        Copyright: \tab (c) 2004-2007 Peter Carl and Brian G. Peterson
+        Copyright: \tab (c) 2004-2007 Brian G. Peterson and Peter Carl\cr
+        URL: \tab \url{http://braverock.com/R/}
     }
-
 In general, this library is most tested on return (rather than price) data on a monthly scale. Many functions will work with daily or irregular return data as well.  See function \code{\link{CalculateReturns}} for calculating returns from prices, and be aware that the \code{\link{aggregate}} function has methods for \code{tseries} and \code{zoo} timeseries data classes to rationally coerce irregular data into regular data of the correct periodicity.
 
 In this summary, we attempt to provide an overview of the capabilities provided by \code{PerformanceAnalytics} and pointers to other literature and resources in \R needed for performance and risk analysis.  We hope that this summary and the accompanying package and documentation partially fill a hole in the tools available to a financial engineer or analyst.
@@ -36,7 +36,7 @@ Performance measurement starts with returns.  Proprietary traders will object, c
 
 See \code{\link[fPortfolio]{pfolioReturn}} in package \code{fPortfolio} for calculating returns from a portfolio of instruments with a combination of historical returns and a weighting vector.  See package \code{portfolio} for a more sophisticated class-based collection of positions into a historical portfolio, allowing you to track changes in the composition of a portfolio over time.
 
-Returns and risk may be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}}, and \code{\link{SharpeRatio.annualized}}.
+Returns and risk may be annualized as a way to simplify comparison over longer time periods.  Although it requires a bit of estimating, such aggregation is popular because it offers a reference point for easy comparison.  Examples are in \code{\link{Return.annualized}}, \code{\link{sd.annualized}}, and \code{\link{SharpeRatio.annualized}}.
 
 Basic measures of performance tend to treat returns as independent observations.  In this case, the entirety of R's base is applicable to such analysis.
 
@@ -59,7 +59,7 @@ Some basic statistics we have collected in \code{\link{table.MonthlyReturns}} in
 \emph{Modern Portfolio Theory (MPT)} \cr
 Modern Portfolio Theory is the collection of tools and techniques by which a risk-averse investor may construct an optimal portfolio.  It was pioneered by Markowitz's ground breaking 1952 paper \cite{Portfolio Selection}.  It also encompasses CAPM, below, the efficient market hypothesis, and all forms of quantitative portfolio construction and optimization.
 
-\emph{The Capital Asset Pricing Model (CAPM)}, initially developed by \cite{William Sharpe in 1964}, provides a justification for passive or index investing by positing that assets that are not on the efficient frontier will either rise or lower in price until they are on the efficient frontier of the market portfolio. The \code{\link{CAPM.RiskPremium}} on an investment is the measure of how much the asset's performance differs from the risk free rate.  Negative Risk Premium generally indicates that the investment is a bad investment, and the money should be allocated to the risk free asset or to a different asset with a higher risk premium.  \code{\link{CAPM.alpha}} is the degree to which the assets returns are not due to the return that could be captured from the market. Conversely, \code{\link{CAPM.beta}} describes the portions of the returns of the asset that could be directly attributed to the returns of a passive investment in the benchmark asset. The Capital Market Line \code{\link{CAPM.CML}} relates the excess expected return on an efficient market portfolio to its risk (represented in CAPM by \code{\link{StdDev}}).  The slope of the CML, \code{\link{CAPM.CML.slope}}, is the Sharpe Ratio for the market portfolio. The Security Market Line is constructed by calculating the line of \code{\link{CAPM.RiskPremium}} over \code{\link{CAPM.beta}}.  For the benchmark asset this will be 1 over the risk premium of the benchmark asset. The slope of the SML, primarily for plotting purposes, is given by \code{\link{CAPM.SML.slope}}. CAPM is a market equilibrium model or a general equilibrium theory of the relation of prices to risk, but it is usually applied to partial equilibrium portfolios, which can create (sometimes serious) problems in valuation.
+\emph{The Capital Asset Pricing Model (CAPM)}, initially developed by \cite{William Sharpe in 1964}, provides a justification for passive or index investing by positing that assets that are not on the efficient frontier will either rise or lower in price until they are on the efficient frontier of the market portfolio. The \code{\link{CAPM.RiskPremium}} on an investment is the measure of how much the asset's performance differs from the risk free rate.  Negative Risk Premium generally indicates that the investment is a bad investment, and the money should be allocated to the risk free asset or to a different asset with a higher risk premium.  \code{\link{CAPM.alpha}} is the degree to which the assets returns are not due to the return that could be captured from the market. Conversely, \code{\link{CAPM.beta}} describes the portions of the returns of the asset that could be directly attributed to the returns of a passive investment in the benchmark asset. The Capital Market Line \code{\link{CAPM.CML}} relates the excess expected return on an efficient market portfolio to its risk (represented in CAPM by \code{\link[stats]{sd}} ).  The slope of the CML, \code{\link{CAPM.CML.slope}}, is the Sharpe Ratio for the market portfolio. The Security Market Line is constructed by calculating the line of \code{\link{CAPM.RiskPremium}} over \code{\link{CAPM.beta}}.  For the benchmark asset this will be 1 over the risk premium of the benchmark asset. The slope of the SML, primarily for plotting purposes, is given by \code{\link{CAPM.SML.slope}}. CAPM is a market equilibrium model or a general equilibrium theory of the relation of prices to risk, but it is usually applied to partial equilibrium portfolios, which can create (sometimes serious) problems in valuation.
 
 The performance premium provided by an investment over a passive strategy (the benchmark) is provided by \code{\link{ActivePremium}}, which is the investment's annualized return minus the benchmark's annualized return. A closely related measure is the \code{\link{TrackingError}}, which  measures the unexplained portion of the investment's performance relative to a benchmark. The \code{\link{InformationRatio}} of an Investment in a MPT or CAPM framework is the Active Premium divided by the Tracking Error.  Information Ratio may be used to rank investments in a relative fashion.
 
@@ -112,7 +112,7 @@ We have been greatly inspired by other peoples' work, some of which is on displa
 \section{Risk Analysis}{
 Many methods have been proposed to measure, monitor, and control the risks of a diversified portfolio. Perhaps a few definitions are in order on how different risks are generally classified. \emph{Market Risk} is the risk to the portfolio from a decline in the market price of instruments in the portfolio.  \emph{Liquidity Risk} is the risk that the holder of an instrument will find that a position is illiquid, and will incur extra costs in unwinding the position resulting in a less favorable price for the instrument. In  extreme cases of liquidity risk, the seller may be unable to find a buyer for the instrument at all, making the value unknowable or zero.  \emph{Credit Risk} is also sometimes called \emph{Default Risk}, or the risk that promised payments on a loan or bond will not be made, or that a convertible instrument will not be converted in a timely manner or at all.  There are also additional \emph{Counterparty Risks} in manual or over the counter markets, and in many complex derivatives.  Tools have evolved to measure all these different components of risk.  Processes must be put into place inside a firm to monitor the changing risks in a portfolio, and to control the magnitude of risks.  For an extensive treatment of these topics, see Litterman, Gumerlock, et. al.(1998).
 
-The simplest risk measure in common use is volatility, usually modeled quantitatively with a univariate standard deviation on a portfolio.  See \code{\link{StdDev}}.  Volatility or Standard Deviation is an appropriate risk measure when the distribution of returns is normal or resembles a random walk, and may be annualized using \code{\link{StdDev.annualized}}.  Many assets, including hedge funds, commodities, options, and even most common stocks over a sufficiently long period, do not follow a normal distribution.  For such common but non-normally distributed assets, a more sophisticated approach than standard deviation/volatility is required to adequately model the risk.
+The simplest risk measure in common use is volatility, usually modeled quantitatively with a univariate standard deviation on a portfolio.  See \code{\link[stats]{sd}} .  Volatility or Standard Deviation is an appropriate risk measure when the distribution of returns is normal or resembles a random walk, and may be annualized using \code{\link{sd.annualized}}, or the equivalent function \code{\link{sd.multiperiod}} for scaling to an arbitrary number of periods.  Many assets, including hedge funds, commodities, options, and even most common stocks over a sufficiently long period, do not follow a normal distribution.  For such common but non-normally distributed assets, a more sophisticated approach than standard deviation/volatility is required to adequately model the risk.
 
 Markowitz, in his Nobel acceptance speech and in several papers, proposed that \code{\link{SemiVariance}} would be a better measure of risk than variance.  See \cite{Zin, Markowitz, Zhao(2006)} \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=910640}.  This measure is also called \code{\link{SemiDeviation}}.  The more general case of downside deviation is implemented in the function \code{\link{DownsideDeviation}}, as proposed by \cite{Sortino and Price(1994)}, where the minimum acceptable return (MAR) is a parameter to the function.  It is interesting to note that variance and mean return can produce a smoothly elliptical efficient frontier for portfolio optimization utilizing \code{\link[quadprog]{solve.QP}} or \code{\link[tseries]{portfolio.optim}} or \code{\link[fPortfolio]{MarkowitzPortfolio}}. Use of semivariance or many other risk measures will not necessarily create a smooth ellipse, causing significant additional difficulties for the portfolio manager trying to build an optimal portfolio.  We'll leave a more complete treatment and implementation of portfolio optimization techniques for another time.
 
@@ -190,7 +190,7 @@ Thanks to the R-SIG-Finance community without whom this library would not be pos
 Brian G. Peterson \cr
 Peter Carl \cr
 
-Maintainer: Brian G. Peterson \email{brian@braverock.com} \url{http://braverock.com/brian/R/}
+Maintainer: Brian G. Peterson \email{brian@braverock.com}
 }
 
 \references{
@@ -206,11 +206,11 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
 }
 
 \seealso{
-    CRAN task view on Empirical Finance \url{http://cran.r-project.org/src/contrib/Views/Econometrics.html}
+    CRAN task view on Empirical Finance \cr \url{http://cran.r-project.org/src/contrib/Views/Econometrics.html}
 
-    Grant Farnsworth's Econometrics in R \url{http://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
+    Grant Farnsworth's Econometrics in R \cr \url{http://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
 
-    Collection of R charts and graphs \url{http://addictedtor.free.fr/graphiques/}
+    Collection of R charts and graphs \cr \url{http://addictedtor.free.fr/graphiques/}
 
 }
 
