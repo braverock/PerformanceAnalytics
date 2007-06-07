@@ -44,17 +44,19 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
     box(col=box.col)
 
     for (method in methods) {
-        switch(method, 
+        switch(method,
             add.density = {
                 # Show density estimate
                 den = density(x)
                 lines(den, col = colorset[2], lwd = lwd)
             },
             add.normal = {
+                # Show normal distribution around the mean
                 s = seq(xlim[1], xlim[2], length = 500)
                 lines(s, dnorm(s, mean(x), stdev(x)), col = colorset[3], lwd = lwd)
             },
             add.centered = {
+                # Show normal distribution around 0
                 s = seq(xlim[1], xlim[2], length = 500)
                 lines(s, dnorm(s, 0, stdev(x)), col = colorset[3], lwd = lwd)
             },
@@ -90,10 +92,13 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.6 2007-04-30 12:51:38 peter Exp $
+# $Id: chart.Histogram.R,v 1.7 2007-06-07 23:42:00 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/04/30 12:51:38  peter
+# - fixed F instead of FALSE error
+#
 # Revision 1.5  2007/04/27 03:25:00  peter
 # - added risk lines
 #
