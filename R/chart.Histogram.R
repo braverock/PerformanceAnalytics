@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab = "Frequency", border.col = "white", box.col = "white", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), lwd = 2, xlim = NULL, darken = FALSE, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, darken = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -92,10 +92,13 @@ function(R, breaks="FD", main = NULL, add.names = TRUE, xlab = "Returns", ylab =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.7 2007-06-07 23:42:00 brian Exp $
+# $Id: chart.Histogram.R,v 1.8 2007-06-17 21:42:34 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/06/07 23:42:00  brian
+# - add comments
+#
 # Revision 1.6  2007/04/30 12:51:38  peter
 # - fixed F instead of FALSE error
 #

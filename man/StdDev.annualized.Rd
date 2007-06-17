@@ -22,14 +22,16 @@ Note that any multiperiod or annualized number should be viewed with suspicion i
 \usage{
 sd.multiperiod(x, na.rm=FALSE, periods = 12, ...)
 sd.annualized(x, na.rm=FALSE, periods = 12, ...)
-StdDev.annualized(Ra, na.rm=FALSE, scale = 12)
+StdDev.annualized(Ra, na.rm=FALSE, scale = 12, ...)
 StdDev(Ra)
 std(Ra)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x, Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{periods,scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
+  \item{\dots}{ any other passthru parameters }
 }
 \value{
 standard deviation value, scaled for multiple periods
