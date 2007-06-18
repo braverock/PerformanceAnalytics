@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), ...)
+function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -76,10 +76,13 @@ function (R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0, event.label
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.10 2007-04-30 12:56:05 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.11 2007-06-18 03:35:22 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/04/30 12:56:05  peter
+# - changed 'method' to 'begin'
+#
 # Revision 1.9  2007/04/09 12:31:27  brian
 # - syntax and usage changes to pass R CMD check
 #
