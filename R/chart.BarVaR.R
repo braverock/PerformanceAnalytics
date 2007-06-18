@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
+function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -26,47 +26,48 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
     rows = nrow(x)
     columnnames = colnames(x)
     rownames = rownames(x)
+    method = method[1] # grab the first value if this is still a vector, to avoid varnings
 
     if (!all)
         columns = 1
 
     if(risk.line){
         for(column in 1:columns) {
-            if(method == "StdDev"){
-                symmetric = TRUE
-                if(width > 0){
-                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "sd")
-                    legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+            switch(method,
+                StdDev = {
+                    symmetric = TRUE
+                    if(width > 0){
+                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "sd")
+                        legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+                    }
+                    else {
+                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "sd")
+                        legend.txt = "Std Dev"
+                    }
+                },
+                VaR = {
+                    symmetric = TRUE
+                    if(width > 0) {
+                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                        legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
+                    }
+                    else {
+                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
+                        legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
+                    }
+                },
+                ModifiedVaR = {
+                    symmetric = FALSE
+                    if(width > 0) {
+                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                        legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
+                    }
+                    else {
+                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
+                        legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
+                    }
                 }
-                else {
-                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "sd")
-                    legend.txt = "Std Dev"
-                }
-            }
-            else if(method == "VaR"){
-                symmetric = TRUE
-                if(width > 0) {
-                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                    legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
-                }
-                else {
-                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                    legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
-                }
-            }
-            else if(method == "ModifiedVaR"){
-                symmetric = FALSE
-                if(width > 0) {
-                    column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                    legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
-                }
-                else {
-                    column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                    legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
-                }
-            }
-            else
-                stop("Did not recognize the method, which should be one of \"StdDev\", \"VaR\", or \"ModifiedVaR\".")
+            ) # end switch
         if(column == 1)
             risk = column.risk
         else
@@ -107,10 +108,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", refer
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.10 2007-04-21 14:07:25 peter Exp $
+# $Id: chart.BarVaR.R,v 1.11 2007-06-18 03:33:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/04/21 14:07:25  peter
+# - added 'all' flag: when F only draws first column
+#
 # Revision 1.9  2007/04/21 01:06:01  peter
 # - creates risk lines for each column of data
 #
