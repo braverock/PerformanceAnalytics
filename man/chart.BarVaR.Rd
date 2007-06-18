@@ -1,14 +1,16 @@
 \name{chart.BarVaR}
 \alias{chart.BarVaR}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Periodic returns in a bar chart with risk metric overlay }
 \description{
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-function(R, width = 0, gap = 1, risk.line = TRUE, method = "ModifiedVaR", reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset = (1:12), p = 0.99, lty = "13", all = FALSE, ...)
+chart.BarVaR(R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"),
+             reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date",
+             date.format = "\%m/\%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12),
+             p=.99, lty = "13", all = FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with width=0 are calculated from the start of the timeseries }

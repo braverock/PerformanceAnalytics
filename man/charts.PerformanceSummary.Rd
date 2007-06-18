@@ -6,8 +6,9 @@
 For a set of returns, create a wealth index chart, bars for monthly performance, and underwater chart for drawdown.
 }
 \usage{
-charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", width = 0,
-                          event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, ...)
+charts.PerformanceSummary(R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"),
+                          width = 0, event.labels = NULL, ylog = FALSE,
+                          wealth.index = FALSE, gap = 12, begin = c("first", "axis"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,10 +16,20 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = "ModifiedVaR", width 
   \item{rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, as in \code{plot} }
   \item{method}{ Used to select the risk parameter to use in the chart.BarVaR.
-    May be any of: \cr
-    modifiedVaR - uses Cornish-Fisher modified VaR \cr
-    VaR - uses traditional Value at Risk \cr
-    StdDev - monthly standard deviation of trailing 12 month returns
+    May be any of:
+    \itemize{
+        \item modifiedVaR - uses Cornish-Fisher modified VaR,
+        \item VaR - uses traditional Value at Risk,
+        \item StdDev - monthly standard deviation of trailing 12 month returns.
+    }
+  }
+  \item{begin}{
+    Align shorter series to:
+    \itemize{
+        \item first - prior value of the first column given for the reference or longer series or,
+        \item axis  - the initial value (1 or zero) of the axis.
+    }
+    passthru to \code{\link{chart.CumReturns}}
   }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
   \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }

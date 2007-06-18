@@ -6,7 +6,7 @@
   Chart that cumulates the periodic returns given and draws a line graph of the results as a "wealth index".
 }
 \usage{
-function(R, wealth.index = FALSE, legend.loc = NULL, colorset =(1:12), begin = c("axis", "first"), ...)
+chart.CumReturns(R, wealth.index = FALSE, legend.loc = NULL, colorset =(1:12), begin = c("first","axis"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,13 @@ function(R, wealth.index = FALSE, legend.loc = NULL, colorset =(1:12), begin = c
   \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{begin}{ sets the beginning of shorter timeseries to either start at the axis, or start at the first (usually a reference) series given }
+  \item{begin}{
+    Align shorter series to:
+    \itemize{
+        \item first - prior value of the first column given for the reference or longer series or,
+        \item axis  - the initial value (1 or zero) of the axis.
+    }
+  }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
