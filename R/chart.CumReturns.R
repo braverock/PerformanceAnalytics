@@ -1,5 +1,5 @@
 `chart.CumReturns` <-
-function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin = c("axis", "first"), ...)
+function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -22,7 +22,7 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
     # Transform input data to a matrix
     begin = begin[1]
     x = checkData(R, method = "zoo")
-    
+
     # Get dimensions and labels
     columns = ncol(x)
     columnnames = colnames(x)
@@ -75,7 +75,7 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
         else
             Return.cumulative = merge(Return.cumulative,column.Return.cumulative)
     }
-    if(columns == 1) 
+    if(columns == 1)
         Return.cumulative = as.matrix(Return.cumulative)
     colnames(Return.cumulative) = columnnames
 
@@ -92,10 +92,13 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.6 2007-04-25 20:06:28 peter Exp $
+# $Id: chart.CumReturns.R,v 1.7 2007-06-18 03:34:33 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/04/25 20:06:28  peter
+# - changed the 'method' tag to 'begin'
+#
 # Revision 1.5  2007/04/20 13:47:53  peter
 # - added attribute 'method' with values of 'axis' and 'first' to indicate
 #   where to attach shorter data lengths for comparison
