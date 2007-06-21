@@ -1,0 +1,866 @@
+%% LyX 1.4.3 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{noweb}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{Rd}
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\title{Overview of PerformanceAnalytics' Charts and Tables}
+
+
+\author{Peter Carl and Brian Peterson}
+
+\maketitle
+
+\section{Introduction}
+
+\code{\link{PerformanceAnalytics}} is a library of functions
+designed for evaluating the performance and risk characteristics of
+financial assets or funds. In particular, we have focused on functions
+that have appeared in the academic literature over the past several
+years, but had no functional equivalent in \R. 
+
+Our goal for \code{\link{PerformanceAnalytics}} is to make it
+simple for someone to ask and answer questions about performance and
+risk as part of a broader investment decision-making process. There
+is no magic bullet here -- there won't be one \emph{right} answer
+delivered in these metrics and charts. Investments must be made in
+context of investment objectives. But what this library aspires to
+do is \emph{help} the decision-maker accrete evidence organized to
+answer a specific question that is pertinent to the decision at hand.
+Our hope is that using such tools to uncover information and ask better
+questions will, in turn, create a more informed investor and help
+them ask better quality decisions.
+
+This vignette provides a demonstration of some of the capabilities
+of \code{\link{PerformanceAnalytics}}. We focus on the graphs and tables, but 
+comment on some other metrics along the way. These examples are not
+intended to be complete, but they should provide an indication of
+the kinds of analysis that can be done. Other examples are available
+in the help pages of the functions described in the main page of 
+\code{\link{PerformanceAnalytics}}.
+
+
+\section{Set up PerformanceAnalytics}
+
+These examples assume the reader has basic knowledge of \R ~and
+understands how to install \R, read and manipulate data, and create
+basic calculations. For further assistance, please see \code{\link{http://cran.r-project.org/doc/manuals/R-intro.pdf}}
+and other available materials at \code{\link{http://cran.r-project.org}}.
+This section will begin with installation, discuss the example data
+set, and provide an overview of charts attributes that will be used
+in the examples that follow.
+
+
+\subsection{Install PerformanceAnalytics}
+
+As of version 0.9.4, \code{\link{PerformanceAnalytics}} is available
+via CRAN. \R~ users with connectivity can simply type: \code{install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}.
+A number of packages are required, including \code{Hmisc}, \code{zoo},
+and the various Rmetrics packages such as \code{fBasics}, \code{fCalendar},
+and \code{fExtremes}. After installing \code{\link{PerformanceAnalytics}},
+load it into your active \R~ session using \code{library(\char`\"{}PerformanceAnalytics\char`\"{})}. 
+
+<<LoadLibrary,echo=F,results=hide>>=
+library('PerformanceAnalytics')
+#source("PerformanceAnalytics/R/charts.PerformanceSummary.R")
+@
+
+
+\subsection{Load and review data}
+
+%
+\begin{figure}
+
+\caption{First Lines of the managers.df Object }
+
+\label{fig:First-Lines-of}
+
+<<LoadData,echo=T>>=
+#data(managers.df)
+managers.df=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
+head(managers.df)
+@
+\end{figure}
+
+
+First we load the data used in all of the examples that follow. As
+you can see in Figure \ref{fig:First-Lines-of}, \code{managers.df}
+is a data frame that contains columns of monthly returns for six hypothetical
+asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
+fund index, the S\&P 500 total returns, and total return series for
+the US Treasury 10-year bond and 3-month bill. Monthly returns for
+all series end in December 2006 and begin at different periods starting
+from January 1996. Similar data could be constructed using \code{mymanagers.df=read.csv(\char`\"{}/path/to/file/mymanagers.csv\char`\"{},
+row.names=1)}, where the first column contains dates in the YYYY-MM-DD
+format.
+
+A quick sidenote: this library is applicable to return (rather than
+price) data, and has been tested mostly on a monthly scale. Many library
+functions will work with regular data at different scales (e.g., daily,
+weekly, etc.) or irregular return data as well. See function \code{\link{CalculateReturns}}
+for calculating returns from prices, and be aware that the \code{zoo}
+library's \code{\link{aggregate}} function has methods for \code{tseries}
+and \code{zoo} timeseries data classes to rationally coerce irregular
+data into regular data of the correct periodicity.
+
+With the data object in hand, we will group together columns of interest
+make the examples easier to follow. As shown in Figure \ref{fig:Assess-and-Organize},
+we first confirm the dimensions of the object and the overall length
+of the timeseries.
+
+%
+\begin{figure}
+
+\caption{Assess and Organize the Data}
+
+\label{fig:Assess-and-Organize}
+
+\begin{center}
+
+<<CalcDataDimensions,echo=T>>=
+dim(managers.df)
+managers.length = dim(managers.df)[1]
+colnames(managers.df)
+manager.col = 1
+peers.cols = c(2,3,4,5,6)
+indexes.cols = c(7,8)
+Rf.col = 10
+#factors.cols = NA
+trailing12.rows = ((managers.length - 11):managers.length)
+trailing12.rows
+trailing36.rows = ((managers.length - 35):managers.length)
+trailing60.rows = ((managers.length - 59):managers.length)
+#assume contiguous NAs - this may not be the way to do it na.contiguous()?
+frInception.rows = (length(managers.df[,1]) - length(managers.df[,1][!is.na(managers.df[,1])]) + 1):length(managers.df[,1])
+
+@
+
+\end{center}
+\end{figure}
+
+
+Next, we group the columns together. The first column, HAM1, contains
+the subject of our analysis in the examples below. Columns two through
+six contain returns of other managers using a similar investing style
+that might be considered substitutes -- a {}``peer group,'' of sorts.
+Columns seven and eight contain key indexes. The EDHEC Long/Short
+Equity index is a {}``peer index,'' the S\&P 500 Total Return index
+is an {}``asset-class index''. We combine those into a set of {}``indexes''
+for later analysis. Column nine we skip for the time being; column
+10 we use as the risk free rate for each month.
+
+Then we do the same thing for the rows of interest. We calculate the
+row numbers that represent different trailing periods and keep those
+handy for doing comparative analyses.
+
+
+\subsection{Create charts and tables for presentation}
+
+Graphs and charts help to organize information visually. Our goals
+in creating these functions were to simplify the process of creating
+well-formatted charts that are frequently used for portfolio analysis
+and to create print-quality graphics that may be used in documents
+for broader consumption. \R's graphics capabilities are substantial,
+but the simplicity of the output of \R's default graphics functions
+such as \code{\link{plot}} does not always compare well against
+graphics delivered with commercial asset or portfolio analysis software
+from places such as MorningStar or PerTrac.
+
+
+\subsubsection*{Color Palettes}
+
+We have set up some specific color palattes designed to create readable
+line and bar graphs with specific objectives. We use this approach
+(rather than generating them on the fly) for two reasons: first, there
+are fewer dependencies on libraries that don't need to be called dynamically;
+and second, to guarantee the color used for the n-th column of data.
+Figure \ref{fig:Examples-of-Color} shows some examples of the different
+palates.
+
+The first category of colorsets are designed to provide focus to the
+data graphed as the first element, and include \code{redfocus},
+\code{bluefocus}, and \code{greenfocus}. These palettes are
+best used when there is an important data set for the viewer to focus
+on. The other data provide some context, so they are graphed in diminishing
+values of gray. These were generated with \code{RColorBrewer},
+using the 8 level \char`\"{}grays\char`\"{} palette and replacing
+the darkest gray with the focus color. To coordinate these colorsets
+with the equal-weighted colors below, replace the highlight color
+with the first color of the equal weighted palette from below. This
+will coordinate charts with different purposes.
+
+The second category is sets of equal-weighted colors. These colorsets
+are useful for when all of the data should be observed and distinguishable
+on a line graph. The different numbers in the name indicate the number
+of colors generated (six colors is probably the maximum for a readable
+linegraph, but we provide as many as twelve). Examples include \code{rainbow12equal}
+through \code{rainbow4equal}, in steps of two. These colorsets
+were generated with \code{rainbow(12, s = 0.6, v = 0.75)}. The
+\code{rich12equal} and other corresponding colorsets were generated
+with with package \code{gplots} function \code{rich.colors(12)}.
+Similarly \code{tim12equal} and similar colorsets were generated
+with with package \code{fields} function \code{tim.colors(12)},
+which is said to emulate the Matlab colorset. The \code{dark8equal},
+\code{dark6equal}, \code{set8equal}, and \code{set6equal}
+colorsets were created with package \code{RColorBrewer}, e.g., 
+\code{brewer.pal(8,\char`\"{}Dark2\char`\"{})}. A third
+category is a set of monochrome colorsets, including \code{greenmono}
+, \code{bluemono}, \code{redmono}, and \code{gray8mono} and
+\code{gray6mono}. 
+
+To see what these lists contain, just type the name.
+
+<<ShowColors,echo=T>>=
+tim12equal
+@
+
+These are just lists of strings that contain the RGB codes of each
+color. You can easily create your own if you have a particular palate
+that you like to use. Alternatively, you can use the \R~ default colors.
+For more information, see:
+
+\code{\link{HTTP://research.stowers-institute.org/efg/R/Color/Chart/index.htm}}
+
+
+%
+\begin{figure}
+
+\caption{Examples of Color Palates}
+
+\label{fig:Examples-of-Color}
+
+\begin{center}
+
+<<ShowPalates,echo=F,fig=T>>=
+layout(rbind(c(1,2),c(3,4)))
+chart.CumReturns(managers.df[,c(manager.col,peers.cols)],
+lwd=2,legend.loc="topleft", main="default")
+chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+legend.loc="topleft",colorset=redfocus, main = "redfocus")
+chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+legend.loc="topleft",colorset=rainbow6equal, main="rainbow6equal")
+chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+legend.loc="topleft",colorset=tim6equal, main = "tim6equal")
+@
+
+\end{center}
+\end{figure}
+
+
+
+\subsubsection*{Symbols}
+
+Similarly, there are a few sets of symbols for scatter charts . These
+include \code{opensymbols}, \code{closedsymbols}, \code{fillsymbols},
+\code{linesymbols}, and \code{allsymbols}.
+
+
+\subsubsection*{Legend locations}
+
+In the single charts the legend can be moved around on the plot. There
+are nine locations that can be specified by keyword: \char`\"{}bottomright\char`\"{},
+\char`\"{}bottom\char`\"{}, \char`\"{}bottomleft\char`\"{}, \char`\"{}left\char`\"{},
+\char`\"{}topleft\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}topright\char`\"{},
+\char`\"{}right\char`\"{} and \char`\"{}center\char`\"{}. This places
+the legend on the inside of the plot frame at the given location.
+Further information can be found in \code{\link{xy.coord}}.
+Most compound charts have fixed legend locations.
+
+
+\subsubsection*{Other Parameters}
+
+We have tried to leave access to all of the extensive list of parameters
+available in \R's traditional graphics. For more information, see
+\code{\link{plot.default}} and \code{\link{par}}. In the
+example above, we passed \code{\link{lwd}} the value of 2, which
+affects the line width. We might also alter the line type or other
+parameter.
+
+
+\section{Review performance}
+
+With that, we are ready to analyze the sample data set. This section
+starts with a set of charts that provide a performance overview, some
+tables for presenting the data and basic statistics, and then discusses
+ways to compare distributions, relative performance, and downside
+risk.
+
+
+\subsection{Create performance charts}
+
+%
+\begin{figure}
+
+\caption{Draw a Performance Summary Chart}
+
+\label{fig:Draw-a-Performance}
+
+\begin{center}
+
+<<Graph1,echo=T,fig=T>>=
+charts.PerformanceSummary(managers.df[,c(manager.col,indexes.cols)], colorset=rich6equal, lwd=2, ylog=TRUE)
+@
+
+\end{center}
+\end{figure}
+
+
+Figure \ref{fig:Draw-a-Performance} shows a three-panel performance
+summary chart and the code used to generate it. The top chart is a
+normal cumulative return or wealth index chart that shows the cumulative
+returns through time for each column. For data with later starting
+times, set the parameter \code{begin = \char`\"{}axis\char`\"{}},
+which starts the wealth index of all columns at 1, or \code{begin =
+\char`\"{}first\char`\"{}}, which
+starts the wealth index of each column at the wealth index value attained
+by the first column of data specified. The second of these settings,
+which is the default, allows the reader to see how the two indexes
+would compare had they started at the same time regardless of the
+starting period. In addition, the y-axis can be set to a logarithmic
+value so that growth can be compared over long periods. This chart
+can be generated independently using \code{chart.CumReturns}.
+
+The second chart shows the individual monthly returns overlaid with
+a rolling measure of tail risk referred to as Cornish Fisher Value-at-Risk
+(VaR) or Modified VaR. Alternative risk measures, including standard
+deviation (specified as \code{\char`\"{}StdDev\char`\"{}}) and traditional
+Value-at-Risk (\code{\char`\"{}VaR\char`\"{}}), can be specified
+using the \code{method} parameter. Note that \code{StdDev} and
+\code{VaR} are symmetric calculations, so a high and low measure
+will be plotted. \code{ModifiedVaR}, on the other hand, is asymmetric
+and only a lower bound is drawn. These risk calculations are made
+on a rolling basis from inception, or can be calculated on a rolling
+window by setting \code{width} to a value of the number of periods.
+These calculations should help the reader to identify events or periods
+when estimates of tail risk may have changed suddenly, or to help
+evaluate whether the assumptions underlying the calculation seem to
+hold . The risk calculations can be generated for all of the columns
+provided by using the \code{all} parameter. When set to \code{TRUE},
+the function calculates risk lines for each column given and may help
+the reader assess relative risk levels through time. This chart can
+be generated using \code{chart.BarVaR}.
+
+The third chart in the series is a drawdown or underwater chart, which
+shows the level of losses from the last value of peak equity attained.
+Any time the cumulative returns dips below the maximum cumulative
+returns, it's a drawdown. This chart helps the reader assess the synchronicity
+of the loss periods and their comparative severity. As you might expect,
+this chart can also be created using \code{chart.Drawdown}.
+
+
+\subsection{Create a monthly returns table}
+
+Summary statistics are then the necessary aggregation and reduction
+of (potentially thousands) of periodic return numbers. Usually these
+statistics are most palatable when organized into a table of related
+statistics, assembled for a particular purpose. A common offering
+of past returns organized by month and accumulated by calendar year
+is usually presented as a table, such as in \code{\link{table.Returns}}. 
+
+%
+\begin{figure}
+
+\caption{Create a Table of Calendar Returns}
+
+\label{fig:Calendar-Returns}
+
+\begin{center}
+
+<<CalendarReturns,echo=T>>=
+t(table.Returns(managers.df[,c(manager.col,indexes.cols)]))
+@
+
+\end{center}
+\end{figure}
+
+
+Figure \ref{fig:Calendar-Returns} shows a table of returns formatted
+with years in rows, months in columns, and a total column in the last
+column. For additional columns, the annual returns will be appended
+as columns. Adding benchmarks or peers alongside the annualized data
+is helpful for comparing returns across calendar years. Because there
+are a number of columns in the example, we make the output easier
+to read by using the \code{t} function to transpose the resulting
+data frame. 
+
+
+\subsection{Calculate monthly statistics}
+
+Likewise, the monthly returns statistics table in Figure \ref{fig:Statistics-Table}
+was created as a way to display a set of related measures together
+for comparison across a set of instruments or funds. In this example,
+we are looking at performance {}``from inception'' for most of the
+managers, so careful consideration needs to be given to missing data
+or unequal time series when interpreting the results. Most people
+will prefer to see such statistics for common or similar periods.
+Each of the individual functions can be called individually, as well.
+
+%
+\begin{figure}
+
+\caption{Create a Table of Statistics}
+
+\label{fig:Statistics-Table}
+
+\begin{center}
+
+<<MonthlyReturnStats,echo=T>>=
+table.MonthlyReturns(managers.df[,c(manager.col,peers.cols)])
+@
+
+\end{center}
+\end{figure}
+
+
+When we started this project, we debated whether or not such tables
+would be broadly useful or not. No reader is likely to think that
+we captured the precise statistics to help their decision. We merely
+offer these as a starting point for creating your own. Add, subtract,
+do whatever seems useful to you. If you think that your work may be
+useful to others, please consider sharing it so that we may include
+it in a future version of this library.
+
+
+\subsection{Compare distributions}
+
+For distributional analysis, a few graphics may be useful. The result
+of \code{\link{chart.Boxplot}}, shown in Figure \ref{fig:Create-a-Boxplot},
+is an example of a graphic that is difficult to create in Excel and
+is under-utilized as a result. A boxplot of returns is, however, a
+very useful way to observe the shape of large collections of asset
+returns in a manner that makes them easy to compare to one another. 
+
+%
+\begin{figure}
+
+\caption{Create a Boxplot}
+
+\label{fig:Create-a-Boxplot}
+
+\begin{center}
+
+<<Graph10,echo=T,fig=T>>=
+chart.Boxplot(managers.df[ trailing36.rows, c(manager.col, peers.cols, indexes.cols)], main = "Trailing 36-Month Returns")
+@
+
+\end{center}
+\end{figure}
+
+
+It is often valuable when evaluating an investment to know whether
+the instrument that you are examining follows a normal distribution.
+One of the first methods to determine how close the asset is to a
+normal or log-normal distribution is to visually look at your data.
+Both \code{\link{chart.QQPlot}} and \code{\link{chart.Histogram}}
+will quickly give you a feel for whether or not you are looking at
+a normally distributed return history. Figure \ref{fig:Create-a-Histogram}
+shows a histogram generated for HAM1 with different display options.
+
+%
+\begin{figure}
+
+\caption{Create a Histogram of Returns}
+
+\label{fig:Create-a-Histogram}
+
+\begin{center}
+
+<<Graph13,echo=T,fig=T>>=
+layout(rbind(c(1,2),c(3,4)))
+chart.Histogram(managers.df[,1,drop=F], main = "Plain", methods = NULL)
+chart.Histogram(managers.df[,1,drop=F], main = "Density", breaks=40, 
+methods = c("add.density", "add.normal"))
+chart.Histogram(managers.df[,1,drop=F], main = "Skew and Kurt", methods = c
+("add.centered", "add.rug"))
+chart.Histogram(managers.df[,1,drop=F], main = "Risk Measures", methods = c
+("add.risk"))
+@
+
+\end{center}
+\end{figure}
+
+
+Look back at the results generated by \code{\link{table.MonthlyReturns}}.
+Differences between \code{\link{var}} and \code{\link{SemiVariance}}
+will help you identify \code{\link{[}fBasics]{skewness}} in
+the returns. Skewness measures the degree of asymmetry in the return
+distribution. Positive skewness indicates that more of the returns
+are positive, negative skewness indicates that more of the returns
+are negative. An investor should in most cases prefer a positively
+skewed asset to a similar (style, industry, region) asset that has
+a negative skewness. Kurtosis measures the concentration of the returns
+in any given part of the distribution (as you should see visually
+in a histogram). The \code{\link{[}fBasics]{kurtosis}} function
+will by default return what is referred to as \dQuote{excess kurtosis},
+where zero is a normal distribution, other methods of calculating
+kurtosis than \code{method=\char`\"{}excess\char`\"{}} will set
+the normal distribution at a value of 3. In general a rational investor
+should prefer an asset with a low to negative excess kurtosis, as
+this will indicate more predictable returns. If you find yourself
+needing to analyze the distribution of complex or non-smooth asset
+distributions, the \code{nortest} package has several advanced
+statistical tests for analyzing the normality of a distribution.
+
+
+
+
+\subsection{Show relative return and risk}
+
+Returns and risk may be annualized as a way to simplify comparison
+over longer time periods. Although it requires a bit of estimating,
+such aggregation is popular because it offers a reference point for
+easy comparison, such as in Figure \ref{fig:Show-Relative-Risk}.
+Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}},
+and \code{\link{SharpeRatio.annualized}}. 
+
+%
+\begin{figure}
+
+\caption{Show Relative Risk and Return}
+
+\label{fig:Show-Relative-Risk}
+
+\begin{center}
+
+<<Graph3,echo=T,fig=T>>=
+chart.RiskReturnScatter(managers.df[trailing36.rows,1:8], rf=.03/12, main = "Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange", "green"))
+@
+
+\end{center}
+\end{figure}
+
+
+\code{\link{chart.Scatter}} is a utility scatter chart with
+some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.
+Different risk parameters may be used. The parameter \code{method}
+may be any of \code{\char`\"{}modVaR\char`\"{}}, \code{\char`\"{}VaR\char`\"{}},
+or \code{\char`\"{}StdDev\char`\"{}}. 
+
+Additional information can be overlaid, as well. If \code{add.sharpe}
+is set to a value, say \code{c(1,2,3)}, the function overlays Sharpe
+ratio line that indicates Sharpe ratio levels of one through three.
+Lines are drawn with a y-intercept of the risk free rate (\code{rf})
+and the slope of the appropriate Sharpe ratio level. Lines should
+be removed where not appropriate (e.g., \code{sharpe.ratio = NULL}).
+With a large number of assets (or columns), the names may get in the
+way. To remove them, set \code{add.names=NULL}. A box plot may
+be added to the margins to help identify the relative performance
+quartile by setting \code{add.boxplots=TRUE}.
+
+
+\subsection{Examine performance consistency}
+
+Rolling performance is typically used as a way to assess stability
+of a return stream. Although perhaps it doesn't get much credence
+in the financial literature because of it's roots in digital signal
+processing, many practitioners find rolling performance to be a useful
+way to examine and segment performance and risk periods. See \code{\link{chart.RollingPerformance}},
+which is a way to display different metrics over rolling time periods.
+
+Figure \ref{fig:Examine-Rolling-Performance} shows three panels,
+the first for rolling returns, the second for rolling standard deviation,
+and the third for rolling Sharpe ratio. These three panels each call
+\code{\link{chart.RollingPerformance}} with a different \code{FUN}
+argument, allowing any function to be viewed over a rolling window.
+
+%
+\begin{figure}
+
+\caption{Examine Rolling Performance}
+
+\label{fig:Examine-Rolling-Performance}
+
+\begin{center}
+
+<<Graph5,echo=T,fig=T>>=
+charts.RollingPerformance(managers.df[, c(manager.col, peers.cols, indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange", "green"), lwd = 2)
+@
+
+\end{center}
+\end{figure}
+
+
+
+\subsection{Display relative performance}
+
+The function \code{\link{chart.RelativePerformance}} shows the ratio of the
+cumulative performance for two assets at each point in time and
+makes periods of under- or out-performance easy to see. The value
+of the chart is less important than the slope of the line. If the
+slope is positive, the first asset (numerator) is outperforming the second, and
+vice versa. Figure \ref{fig:Examine-Relative-Performance} shows the
+returns of the manager in question relative to each member of the
+peer group and the peer group index. 
+
+%
+\begin{figure}
+
+\caption{Examine Relative Performance of Assets}
+
+\label{fig:Examine-Relative-Performance}
+
+\begin{center}
+
+<<Graph6,echo=T,fig=T>>=
+chart.RelativePerformance(managers.df[ , manager.col, drop = FALSE], managers.df[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc = "topleft")
+@
+
+\end{center}
+\end{figure}
+
+
+Looking at the data another way, we use the same chart to assess the
+peers individually against the asset class index. Figure \ref{fig:Examine-Performance-Relative2}
+shows the peer group members' returns relative to the S\&P 500. Several
+questions might arise: Who beats the S\&P? Can they do it consistently?
+Are there cycles when they under-perform or outperform as a group?
+Which manager has outperformed the most?
+
+%
+\begin{figure}
+
+\caption{Examine Performance Relative to a Benchmark}
+
+\label{fig:Examine-Performance-Relative2}
+
+\begin{center}
+
+<<Graph6a,echo=T,fig=T>>=
+chart.RelativePerformance(managers.df[ , c(manager.col, peers.cols) ], managers.df[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc = "topleft")
+@
+
+\end{center}
+\end{figure}
+
+
+
+\subsection{Measure relative performance to a benchmark}
+
+Identifying and using a benchmark can help us assess and explain how well we are
+meeting our investment objectives, in terms of a widely held substitute.
+A benchmark can help us explain how the portfolios are managed,
+assess the risk taken and the return desired, and check that
+the objectives were respected. Benchmarks are used to get better control of the
+investment management process and to suggest ways to improve selection.
+
+Modern Portfolio Theory is a collection of tools and techniques
+by which a risk-averse investor may construct an optimal portfolio.
+It encompasses the Capital Asset Pricing Model (CAPM), the efficient
+market hypothesis, and all forms of quantitative portfolio construction
+and optimization. CAPM provides a justification for passive or index
+investing by positing that assets that are not on the efficient frontier
+will either rise or lower in price until they are on the efficient
+frontier of the market portfolio. 
+
+%
+\begin{figure}
+
+\caption{Create a Table of CAPM-Related Measures}
+
+\label{fig:CAPM-Table}
+
+<<tableCAPM,echo=T>>=
+table.CAPM(managers.df[trailing36.rows, c(manager.col, peers.cols)], managers.df[ trailing36.rows, 8, drop=FALSE], rf = managers.df[ trailing36.rows, Rf.col])
+@
+\end{figure}
+
+
+The performance premium provided by an investment over a passive strategy
+(the benchmark) is provided by \code{\link{ActivePremium}},
+which is the investment's annualized return minus the benchmark's
+annualized return. A closely related measure is the \code{\link{TrackingError}},
+which measures the unexplained portion of the investment's performance
+relative to a benchmark. The \code{\link{InformationRatio}}
+of an Investment in a MPT or CAPM framework is the \code{ActivePremium}
+divided by the \code{TrackingError}. \code{InformationRatio}
+may be used to rank investments in a relative fashion.
+
+The code in Figure \ref{fig:CAPM-Table} creates a table of CAPM-related
+statistics that we can review and compare across managers. Note that
+we focus on the trailing-36 month period. There are, in addition to
+those listed, a wide variety of other CAPM-related metrics available.
+The \code{\link{CAPM.RiskPremium}} on an investment is the measure
+of how much the asset's performance differs from the risk free rate.
+Negative Risk Premium generally indicates that the investment is a
+bad investment, and the money should be allocated to the risk free
+asset or to a different asset with a higher risk premium. \code{\link{CAPM.alpha}}
+is the degree to which the assets returns are not due to the return
+that could be captured from the market. Conversely, \code{\link{CAPM.beta}}
+describes the portions of the returns of the asset that could be directly
+attributed to the returns of a passive investment in the benchmark
+asset. The Capital Market Line \code{\link{CAPM.CML}} relates
+the excess expected return on an efficient market portfolio to its
+risk (represented in CAPM by \code{\link{StdDev}}). The slope
+of the CML, \code{\link{CAPM.CML.slope}}, is the Sharpe Ratio
+for the market portfolio. The Security Market Line is constructed
+by calculating the line of \code{\link{CAPM.RiskPremium}} over
+\code{\link{CAPM.beta}}. For the benchmark asset this will be
+1 over the risk premium of the benchmark asset. The slope of the SML,
+primarily for plotting purposes, is given by \code{\link{CAPM.SML.slope}}.
+CAPM is a market equilibrium model or a general equilibrium theory
+of the relation of prices to risk, but it is usually applied to partial
+equilibrium portfolios which can create (sometimes serious) problems
+in valuation. 
+
+<<Graph7,echo=T,fig=T>>=
+#source("chart.MultiScatter.R")
+#chart.MultiScatter(Ra=managers.df[,1,drop=F],Rb=managers.df[,8,drop=F],linear.fit=T,Rf=managers.df[,10],excess.returns=T)
+@
+
+In a similar fashion to the rolling performance we displayed earlier,
+we can look at the stability of a linear model's parameters through
+time. Figure \ref{fig:Rolling-Regression} shows a three panel chart
+for the alpha, beta, and r-squared measures through time across a
+rolling window. Each chart calls \code{\link{chart.RollingRegression}}
+with a different \code{method} parameter.
+
+%
+\begin{figure}
+
+\caption{Create a Rolling Regression}
+
+\label{fig:Rolling-Regression}
+
+\begin{center}
+
+<<Graph8,echo=T,fig=T>>=
+#source("PerformanceAnalytics/R/Return.excess.R")
+charts.RollingRegression(managers.df[, c(manager.col, peers.cols), drop = FALSE], managers.df[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd = 2)
+@
+
+\end{center}
+\end{figure}
+
+
+Likewise, we can assess whether the correlation between two time series
+is constant through time. Figure \ref{fig:Rolling-Correlation} shows
+the rolling 12-month correlation between each of the peer group and
+the S\&P500. To look at the relationships over time and take a snapshot
+of the statistical relevance of the measure, use \code{\link{table.Correlation}},
+as shown in Figure \ref{fig:Calculate-Correlations}.
+
+%
+\begin{figure}
+
+\caption{Chart the Rolling Correlation}
+
+\label{fig:Rolling-Correlation}
+
+\begin{center}
+
+<<Graph9,echo=T,fig=T>>=
+chart.RollingCorrelation(managers.df[,c(manager.col, peers.cols)], managers.df[, 8, drop = FALSE], colorset = tim8equal, lwd = 2, main = "12-Month Rolling Correlation")
+@
+
+\end{center}
+\end{figure}
+
+
+%
+\begin{figure}
+
+\caption{Calculate Correlations}
+
+\label{fig:Calculate-Correlations}
+
+<<tableCorr,echo=T>>=
+table.Correlation(managers.df[, c(manager.col, peers.cols)], managers.df[, 8, drop = F])
+@
+\end{figure}
+
+
+
+\subsection{Calculate Downside Risk}
+
+Many assets, including hedge funds, commodities, options, and even
+most common stocks over a sufficiently long period, do not follow
+a normal distribution. For such common but non-normally distributed
+assets, a more sophisticated approach than standard deviation/volatility
+is required to adequately model the risk.
+
+Markowitz, in his Nobel acceptance speech and in several papers, proposed
+that \code{\link{SemiVariance}} would be a better measure of
+risk than variance.
+This measure is also called \code{\link{SemiDeviation}}. The
+more general case of downside deviation is implemented in the function
+\code{\link{DownsideDeviation}}, as proposed by Sortino and Price (1994),
+where the minimum acceptable return (MAR) is a parameter to the function.
+It is interesting to note that variance and mean return can produce
+a smoothly elliptical efficient frontier for portfolio optimization
+utilizing \code{\link{[}quadprog]{solve.QP}} or \code{\link{[}tseries]{portfolio.optim}}
+or \code{\link{[}fPortfolio]{MarkowitzPortfolio}}. Use of semivariance
+or many other risk measures will not necessarily create a smooth ellipse,
+causing significant additional difficulties for the portfolio manager
+trying to build an optimal portfolio. We'll leave a more complete
+treatment and implementation of portfolio optimization techniques
+for another time.
+
+%
+\begin{figure}
+
+\caption{Create a Table of Downside Statistics}
+
+\label{fig:Downside-Table}
+
+\begin{center}
+
+<<tableDownside,echo=T>>=
+table.DownsideRisk(managers.df[,1:6],rf=.03/12)
+@
+
+\end{center}
+\end{figure}
+
+
+Another very widely used downside risk measures is analysis of drawdowns,
+or loss from peak value achieved. The simplest method is to check
+the \code{\link{maxDrawdown}}, as this will tell you the worst
+cumulative loss ever sustained by the asset. If you want to look at
+all the drawdowns, you can use \code{\link{table.Drawdowns}}
+to find and sort them in order from worst/major to smallest/minor,
+as shown in Figure \ref{fig:Drawdowns-Table}. 
+
+%
+\begin{figure}
+
+\caption{Create a Table of Sorted Drawdowns}
+
+\label{fig:Drawdowns-Table}
+
+<<tableDrawdowns,echo=T>>=
+table.Drawdowns(managers.df[,1,drop=F])
+@
+\end{figure}
+
+
+The \code{\link{UpDownRatios}} function will give you some insight
+into the impacts of the skewness and kurtosis of the returns, and
+letting you know how length and magnitude of up or down moves compare
+to each other. Or, as mentioned above, you can also plot drawdowns
+with \code{\link{chart.Drawdown}}.
+
+
+
+
+\section{Conclusion}
+
+With that short overview of a few of the capabilities provided by
+\code{PerformanceAnalytics},
+we hope that the accompanying package and documentation will partially
+fill a hole in the tools available to a financial engineer or analyst.
+If you think there's an important gap or possible improvement to be
+made, please don't hesitate to contact us.
+\end{document}
