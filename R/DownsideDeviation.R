@@ -17,10 +17,7 @@ function (Ra, MAR = 0)
     x = checkDataVector(Ra)
 
     y = subset(x,x < MAR)
-    return(sqrt(sum((y - MAR)^2)/(length(y)-1)))
-    #return(sqrt(sum((y - MAR)^2)/(length(y))))
-    # @todo verify which calculation is correct
-
+    return(sqrt(sum((y - MAR)^2)/(length(y))))
 }
 
 ###############################################################################
@@ -31,10 +28,13 @@ function (Ra, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.3 2007-03-14 00:54:06 brian Exp $
+# $Id: DownsideDeviation.R,v 1.4 2007-06-21 21:24:39 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
