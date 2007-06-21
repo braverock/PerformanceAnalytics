@@ -24,7 +24,10 @@ MAR = mean(x)
 }
 \value{}
 \references{
-Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
+Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr
+
+Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July 19, 2001. Available at SSRN: \url{http://ssrn.com/abstract=277352}
+
 }
 \author{ Peter Carl }
 \note{}
