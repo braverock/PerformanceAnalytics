@@ -14,7 +14,7 @@ SortinoRatio(Ra, MAR = 0)
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
 }
 \details{
-Sortino contends that risk should be measured in terms of not meeting the investment goal.  This gives rise to the notion of "Minimum Acceptable Return" or MAR.  All of Sortino's proposed measures include the MAR, and are more sensitive to downside or extreme risks than measures that use volatility(standard deviation of returns) as the measure of risk.
+Sortino contends that risk should be measured in terms of not meeting the investment goal.  This gives rise to the notion of \dQuote{Minimum Acceptable Return} or MAR.  All of Sortino's proposed measures include the MAR, and are more sensitive to downside or extreme risks than measures that use volatility(standard deviation of returns) as the measure of risk.
 
 Choosing the MAR carefully is very important, especially when comparing disparate investment choices.  If the MAR is too low, it will not adequately capture the risks that concern the investor, and if the MAR is too high, it will unfavorably portray what may otherwise be a sound investment.  When comparing multiple investments, some papers recommend using the risk free rate as the MAR.  Practitioners may wish to choose one MAR for consistency, several standardized MAR values for reporting a range of scenarios, or a MAR customized to the objective of the investor.
 
