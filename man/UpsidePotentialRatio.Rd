@@ -3,27 +3,27 @@
 \alias{UPR}
 \title{ calculate Upside Potential Ratio of upside performance over downside risk }
 \description{
-Sortino proposed an improvement on the Sharpe Ratio to better account for skill and excess performance by using only downside semivariance as the measure of risk.  That measure is the \code{\link{SortinoRatio}}
+Sortino proposed an improvement on the Sharpe Ratio to better account for skill and excess performance by using only downside semivariance as the measure of risk.  That measure is the \code{\link{SortinoRatio}}. This function, Upside Potential Ratio, was a further improvement, extending the measurement of only upside on the numerator, and only downside of the denominator of the ratio equation.
 }
 \usage{
 UpsidePotentialRatio(Ra, MAR = 0)
+
 UPR(Ra, MAR = 0)
+
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
 }
 \details{
 
-Sortino contends that risk should be measured in terms of not meeting the investment goal.  This gives rise to the notion of "Minimum Acceptable Return" or MAR.  All of Sortino's proposed measures include the MAR, and are more sensitive to downside or extreme risks than measures that use volatility(standard deviation of returns) as the measure of risk.
+Sortino contends that risk should be measured in terms of not meeting the investment goal.  This gives rise to the notion of \dQuote{Minimum Acceptable Return} or MAR.  All of Sortino's proposed measures include the MAR, and are more sensitive to downside or extreme risks than measures that use volatility(standard deviation of returns) as the measure of risk.
 
 Choosing the MAR carefully is very important, especially when comparing disparate investment choices.  If the MAR is too low, it will not adequately capture the risks that concern the investor, and if the MAR is too high, it will unfavorably portray what may otherwise be a sound investment.  When comparing multiple investments, some papers recommend using the risk free rate as the MAR.  Practitioners may wish to choose one MAR for consistency, several standardized MAR values for reporting a range of scenarios, or a MAR customized to the objective of the investor.
 
 \deqn{
-
-    UPR=\frac{\sum^{n}_{t=1}(R_{t} - MAR)}{\delta_{MAR}}
- }
+    UPR=\frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }
+}
  where \eqn{\delta_{MAR}} is the \code{\link{DownsideDeviation}}.
 
  The numerator in \code{UpsidePotentialRatio} only uses returns that exceed the MAR, and the denominator (in \code{\link{DownsideDeviation}}) only uses returns that fall short of the MAR.  Sortino contends that this is a more accurate and balanced protrayal of return potential, wherase \code{\link{SortinoRatio}} can reward managers most at the peak of a cycle, without adequately penalizing them for past mediocre performance.
