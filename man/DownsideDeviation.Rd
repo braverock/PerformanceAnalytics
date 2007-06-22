@@ -16,7 +16,11 @@ DownsideDeviation(Ra, MAR = 0)
 \details{
 Downside deviation, similar to semi deviation, eliminates positive returns when calculating risk.  Instead of using the mean return or zero, it uses the Minimum Acceptable Return as proposed by Sharpe (which may be the mean historical return or zero).
 
-To calculate it, we take the returns that are less than the target (or Minimum Acceptable Returns (MAR)) returns and take the differences of those to the target.  We sum the squares and divide by the total number of returns to get a below-target semi-variance.
+To calculate it, we take the subset of returns that are less than the target (or Minimum Acceptable Returns (MAR)) returns and take the differences of those to the target.  We sum the squares and divide by the total number of returns to get a below-target semi-variance.
+
+\deqn{
+DownsideDeviation(R , MAR)= \delta_{MAR} = \sqrt{ \frac{\sum^{n}_{t=1}(R_{t} - MAR)^{2}}{n} }
+}
 
 This is also useful for calculating semi-deviation or semivariance by setting
 
