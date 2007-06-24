@@ -1,5 +1,5 @@
 `VaR.Beyond` <-
-function (R, p=.95, modified=FALSE, periods = 1)
+function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 {# @author Peter Carl
  # @author Brian G. Peterson (R-algorithm/testing)
 
@@ -27,7 +27,13 @@ function (R, p=.95, modified=FALSE, periods = 1)
         r = R[,column,drop=FALSE]
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
-        BVaR = VaR.CornishFisher(r, p=p, modified=modified) * periods^(1/(mean(r)-1))
+        VaR = VaR.CornishFisher(r, p=p, modified=modified)
+        if(add){
+            aVaR=VaR
+        } else {
+            aVaR=0
+        }
+        BVaR = aVaR + (VaR * (-1/(mean(r)-1)))
 
         BVaR=array(BVaR)
         if (column==1) {
@@ -58,10 +64,13 @@ function (R, p=.95, modified=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.7 2007-04-10 00:39:56 peter Exp $
+# $Id: VaR.Beyond.R,v 1.8 2007-06-24 14:05:38 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/04/10 00:39:56  peter
+# - fixed to provide numeric when single column is passed in
+#
 # Revision 1.6  2007/03/24 13:45:38  brian
 # - add default confidence of p=.95
 #
