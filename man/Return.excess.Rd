@@ -25,7 +25,7 @@ Mean of the period return minus the period risk free rate
 
 OR
 
-mean of the period returns minus a single numberic risk free rate
+mean of the period returns minus a single numeric risk free rate
 
 \deqn{\overline{R_{a}}-R_{f}}{mean(Ra)-rf}
 
