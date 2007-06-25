@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
+function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -27,6 +27,8 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR
     columnnames = colnames(x)
     rownames = rownames(x)
     method = method[1] # grab the first value if this is still a vector, to avoid varnings
+
+    risk = zoo(0)
 
     if (!all)
         columns = 1
@@ -69,7 +71,7 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR
                 }
             ) # end switch
         if(column == 1)
-            risk = column.risk
+            risk = merge(x[,1],column.risk)
         else
             risk = merge(risk,column.risk)
         }
@@ -86,12 +88,12 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR
 
     if(risk.line){
         if (symmetric){
-            for(column in columns:1) {
-                lines(1:rows, risk[,column], col = colorset[column], lwd = 1, type = "l", lty=lty)
+            for(column in (columns+1):2) {
+                lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty)
             }
         }
-        for(column in columns:1) {
-            lines(1:rows, -risk[,column], col = colorset[column], lwd = 1, type = "l", lty=lty)
+        for(column in (columns+1):2) {
+            lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty)
         }
     }
 
@@ -108,10 +110,13 @@ function (R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.11 2007-06-18 03:33:07 brian Exp $
+# $Id: chart.BarVaR.R,v 1.12 2007-06-25 04:15:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/06/18 03:33:07  brian
+# - use switch for method argument, more efficient
+#
 # Revision 1.10  2007/04/21 14:07:25  peter
 # - added 'all' flag: when F only draws first column
 #
