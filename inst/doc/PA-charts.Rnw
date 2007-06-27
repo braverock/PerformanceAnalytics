@@ -100,8 +100,8 @@ library('PerformanceAnalytics')
 \label{fig:First-Lines-of}
 
 <<LoadData,echo=T>>=
-#data(managers.df)
-managers.df=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
+data(managers.df)
+#managers.df=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
 head(managers.df)
 @
 \end{figure}
