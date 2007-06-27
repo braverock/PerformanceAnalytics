@@ -1,5 +1,33 @@
-%% LyX 1.4.3 created this file.  For more info, see http://www.lyx.org/.
-%% Do not edit unless you really know what you are doing.
+\DeclareGraphicsExtensions{.pdf,.eps}
+%% need no \usepackage{Sweave}
+
+\author{Peter Carl\\Guidance Capital Management \And
+        Brian G. Peterson\\Diamond Consulting}
+\Plainauthor{Peter Carl, Brian Peterson}
+
+\title{\pkg{PerformanceAnalytics} Charts and Tables Overview}
+\Plaintitle{PerformanceAnalytics Charts and Tables Overview}
+
+\Keywords{returns, performance, risk, benchmark, portfolio}
+
+\Abstract{
+  This vignette gives a brief overview of (some of) the graphics and display wrapper
+  functionality contained in \pkg{PerformanceAnalytics} including most of the
+  charts and tables . For a more complete overview of the package's functionality
+  and extensibility see the manual pages.  We develop the examples using data
+  for six (hypothetical) managers, a peer index, and an asset class index.
+}
+
+\begin{document}
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{PerformanceAnalytics Charts and Tables Reference}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+
+
 \documentclass[12pt,letterpaper,english]{article}
 \usepackage{times}
 \usepackage[T1]{fontenc}
@@ -17,18 +45,12 @@
 \makeatother
 \begin{document}
 
-\title{Overview of PerformanceAnalytics' Charts and Tables}
-
-
-\author{Peter Carl and Brian Peterson}
 
 \maketitle
 \begin{abstract}
 In this vignette, we focus on the graphs and tables available in
-\code{\link{PerformanceAnalytics}}, and comment about some other measures. We
-develop the examples using data for six (hypothetical) managers, a peer index,
-and an asset class index.
-\end{abstract} 
+\code{\link{PerformanceAnalytics}}, and comment about some other measures.
+\end{abstract}
 
 \tableofcontents
 
@@ -38,7 +60,7 @@ and an asset class index.
 designed for evaluating the performance and risk characteristics of
 financial assets or funds. In particular, we have focused on functions
 that have appeared in the academic literature over the past several
-years, but had no functional equivalent in \R. 
+years, but had no functional equivalent in \R.
 
 Our goal for \code{\link{PerformanceAnalytics}} is to make it
 simple for someone to ask and answer questions about performance and
@@ -53,11 +75,11 @@ questions will, in turn, create a more informed investor and help
 them ask better quality decisions.
 
 This vignette provides a demonstration of some of the capabilities
-of \code{\link{PerformanceAnalytics}}. We focus on the graphs and tables, but 
+of \code{\link{PerformanceAnalytics}}. We focus on the graphs and tables, but
 comment on some other metrics along the way. These examples are not
 intended to be complete, but they should provide an indication of
 the kinds of analysis that can be done. Other examples are available
-in the help pages of the functions described in the main page of 
+in the help pages of the functions described in the main page of
 \code{\link{PerformanceAnalytics}}.
 
 
@@ -75,14 +97,14 @@ in the examples that follow.
 \subsection{Install PerformanceAnalytics}
 
 As of version 0.9.4, \code{\link{PerformanceAnalytics}} is available
-via CRAN, but you will need version 0.9.5 or later to replicate the examples 
+via CRAN, but you will need version 0.9.5 or later to replicate the examples
 that follow.  \R~ users with connectivity can simply type:
 \code{install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}.  Or, if you
 already have an earlier version installed, see \code{update.packages}.
 A number of packages are required, including \code{Hmisc}, \code{zoo},
 and the various Rmetrics packages such as \code{fBasics}, \code{fCalendar},
 and \code{fExtremes}. After installing \code{\link{PerformanceAnalytics}},
-load it into your active \R~ session using \code{library(\char`\"{}PerformanceAnalytics\char`\"{})}. 
+load it into your active \R~ session using \code{library(\char`\"{}PerformanceAnalytics\char`\"{})}.
 
 <<LoadLibrary,echo=F,results=hide>>=
 library('PerformanceAnalytics')
@@ -226,11 +248,11 @@ Similarly \code{tim12equal} and similar colorsets were generated
 with with package \code{fields} function \code{tim.colors(12)},
 a function said to emulate the Matlab colorset. The \code{dark8equal},
 \code{dark6equal}, \code{set8equal}, and \code{set6equal}
-colorsets were created with package \code{RColorBrewer}, e.g., 
+colorsets were created with package \code{RColorBrewer}, e.g.,
 \code{brewer.pal(8,\char`\"{}Dark2\char`\"{})}. A third
 category is a set of monochrome colorsets, including \code{greenmono}
 , \code{bluemono}, \code{redmono}, and \code{gray8mono} and
-\code{gray6mono}. 
+\code{gray6mono}.
 
 To see what these lists contain, just type the name.
 
@@ -379,7 +401,7 @@ of (potentially thousands) of periodic return numbers. Usually these
 statistics are most palatable when organized into a table of related
 statistics, assembled for a particular purpose. A common offering
 of past returns organized by month and accumulated by calendar year
-is usually presented as a table, such as in \code{\link{table.Returns}}. 
+is usually presented as a table, such as in \code{\link{table.Returns}}.
 
 %
 \begin{figure}
@@ -405,7 +427,7 @@ as columns. Adding benchmarks or peers alongside the annualized data
 is helpful for comparing returns across calendar years. Because there
 are a number of columns in the example, we make the output easier
 to read by using the \code{t} function to transpose the resulting
-data frame. 
+data frame.
 
 
 \subsection{Calculate monthly statistics}
@@ -452,7 +474,7 @@ of \code{\link{chart.Boxplot}}, shown in Figure \ref{fig:Create-a-Boxplot},
 is an example of a graphic that is difficult to create in Excel and
 is under-utilized as a result. A boxplot of returns is, however, a
 very useful way to observe the shape of large collections of asset
-returns in a manner that makes them easy to compare to one another. 
+returns in a manner that makes them easy to compare to one another.
 
 %
 \begin{figure}
@@ -492,7 +514,7 @@ shows a histogram generated for HAM1 with different display options.
 <<Graph13,echo=T,fig=T>>=
 layout(rbind(c(1,2),c(3,4)))
 chart.Histogram(managers.df[,1,drop=F], main = "Plain", methods = NULL)
-chart.Histogram(managers.df[,1,drop=F], main = "Density", breaks=40, 
+chart.Histogram(managers.df[,1,drop=F], main = "Density", breaks=40,
 methods = c("add.density", "add.normal"))
 chart.Histogram(managers.df[,1,drop=F], main = "Skew and Kurt", methods = c
 ("add.centered", "add.rug"))
@@ -535,7 +557,7 @@ over longer time periods. Although it requires a bit of estimating,
 such aggregation is popular because it offers a reference point for
 easy comparison, such as in Figure \ref{fig:Show-Relative-Risk}.
 Examples are in \code{\link{Return.annualized}}, \code{\link{StdDev.annualized}},
-and \code{\link{SharpeRatio.annualized}}. 
+and \code{\link{SharpeRatio.annualized}}.
 
 %
 \begin{figure}
@@ -558,7 +580,7 @@ chart.RiskReturnScatter(managers.df[trailing36.rows,1:8], rf=.03/12, main = "Tra
 some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.
 Different risk parameters may be used. The parameter \code{method}
 may be any of \code{\char`\"{}modVaR\char`\"{}}, \code{\char`\"{}VaR\char`\"{}},
-or \code{\char`\"{}StdDev\char`\"{}}. 
+or \code{\char`\"{}StdDev\char`\"{}}.
 
 Additional information can be overlaid, as well. If \code{add.sharpe}
 is set to a value, say \code{c(1,2,3)}, the function overlays Sharpe
@@ -614,7 +636,7 @@ of the chart is less important than the slope of the line. If the
 slope is positive, the first asset (numerator) is outperforming the second, and
 vice versa. Figure \ref{fig:Examine-Relative-Performance} shows the
 returns of the manager in question relative to each member of the
-peer group and the peer group index. 
+peer group and the peer group index.
 
 %
 \begin{figure}
@@ -674,7 +696,7 @@ market hypothesis, and all forms of quantitative portfolio construction
 and optimization. CAPM provides a justification for passive or index
 investing by positing that assets that are not on the efficient frontier
 will either rise or lower in price until they are on the efficient
-frontier of the market portfolio. 
+frontier of the market portfolio.
 
 %
 \begin{figure}
@@ -726,7 +748,7 @@ primarily for plotting purposes, is given by \code{\link{CAPM.SML.slope}}.
 CAPM is a market equilibrium model or a general equilibrium theory
 of the relation of prices to risk, but it is usually applied to partial
 equilibrium portfolios which can create (sometimes serious) problems
-in valuation. 
+in valuation.
 
 <<Graph7,echo=T,fig=T>>=
 #source("chart.MultiScatter.R")
@@ -845,7 +867,7 @@ the \code{\link{maxDrawdown}}, as this will tell you the worst
 cumulative loss ever sustained by the asset. If you want to look at
 all the drawdowns, you can use \code{\link{table.Drawdowns}}
 to find and sort them in order from worst/major to smallest/minor,
-as shown in Figure \ref{fig:Drawdowns-Table}. 
+as shown in Figure \ref{fig:Drawdowns-Table}.
 
 %
 \begin{figure}
