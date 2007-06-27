@@ -6,7 +6,7 @@
 Marginal VaR is the difference between the VaR of the portfolio without the asset in question and the entire portfolio.  This function calculates Marginal VaR for all instruments in the portfolio.
 }
 \usage{
-VaR.Marginal(R, p = 0.99, modified = TRUE, weightingvector)
+VaR.Marginal(R, p = 0.99, modified = TRUE, weightingvector=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
