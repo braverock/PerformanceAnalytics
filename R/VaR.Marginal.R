@@ -1,5 +1,5 @@
 `VaR.Marginal` <-
-function(R, p=0.99, modified = TRUE, weightingvector)
+function(R, p=0.99, modified=TRUE, weightingvector=NULL)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -14,6 +14,10 @@ function(R, p=0.99, modified = TRUE, weightingvector)
     # @returns data frame with total VaR of the portfolio plus Marginal VaR for each component
 
     R = checkDataMatrix(R)
+
+    if (is.null(weightingvector)) {
+        weightingvector = t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+    }
 
     if (ncol(weightingvector) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
 
@@ -63,10 +67,13 @@ function(R, p=0.99, modified = TRUE, weightingvector)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.4 2007-04-09 12:31:27 brian Exp $
+# $Id: VaR.Marginal.R,v 1.5 2007-06-27 19:21:02 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/04/09 12:31:27  brian
+# - syntax and usage changes to pass R CMD check
+#
 # Revision 1.3  2007/03/11 17:05:53  brian
 # - change to use checkDataMatrix
 #
