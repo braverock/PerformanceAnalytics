@@ -23,6 +23,14 @@
 \author{Peter Carl and Brian Peterson}
 
 \maketitle
+\begin{abstract}
+In this vignette, we focus on the graphs and tables available in
+\code{\link{PerformanceAnalytics}}, and comment about some other measures. We
+develop the examples using data for six (hypothetical) managers, a peer index,
+and an asset class index.
+\end{abstract} 
+
+\tableofcontents
 
 \section{Introduction}
 
@@ -67,7 +75,10 @@ in the examples that follow.
 \subsection{Install PerformanceAnalytics}
 
 As of version 0.9.4, \code{\link{PerformanceAnalytics}} is available
-via CRAN. \R~ users with connectivity can simply type: \code{install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}.
+via CRAN, but you will need version 0.9.5 or later to replicate the examples 
+that follow.  \R~ users with connectivity can simply type:
+\code{install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}.  Or, if you
+already have an earlier version installed, see \code{update.packages}.
 A number of packages are required, including \code{Hmisc}, \code{zoo},
 and the various Rmetrics packages such as \code{fBasics}, \code{fCalendar},
 and \code{fExtremes}. After installing \code{\link{PerformanceAnalytics}},
@@ -116,7 +127,7 @@ library's \code{\link{aggregate}} function has methods for \code{tseries}
 and \code{zoo} timeseries data classes to rationally coerce irregular
 data into regular data of the correct periodicity.
 
-With the data object in hand, we will group together columns of interest
+With the data object in hand, we group together columns of interest
 make the examples easier to follow. As shown in Figure \ref{fig:Assess-and-Organize},
 we first confirm the dimensions of the object and the overall length
 of the timeseries.
@@ -213,7 +224,7 @@ were generated with \code{rainbow(12, s = 0.6, v = 0.75)}. The
 with with package \code{gplots} function \code{rich.colors(12)}.
 Similarly \code{tim12equal} and similar colorsets were generated
 with with package \code{fields} function \code{tim.colors(12)},
-which is said to emulate the Matlab colorset. The \code{dark8equal},
+a function said to emulate the Matlab colorset. The \code{dark8equal},
 \code{dark6equal}, \code{set8equal}, and \code{set6equal}
 colorsets were created with package \code{RColorBrewer}, e.g., 
 \code{brewer.pal(8,\char`\"{}Dark2\char`\"{})}. A third
@@ -263,7 +274,7 @@ legend.loc="topleft",colorset=tim6equal, main = "tim6equal")
 
 \subsubsection*{Symbols}
 
-Similarly, there are a few sets of symbols for scatter charts . These
+Similarly, there are a few sets of grouped symbols for scatter charts . These
 include \code{opensymbols}, \code{closedsymbols}, \code{fillsymbols},
 \code{linesymbols}, and \code{allsymbols}.
 
@@ -290,7 +301,7 @@ affects the line width. We might also alter the line type or other
 parameter.
 
 
-\section{Review performance}
+\section{Create Charts and Tables}
 
 With that, we are ready to analyze the sample data set. This section
 starts with a set of charts that provide a performance overview, some
@@ -556,9 +567,9 @@ Lines are drawn with a y-intercept of the risk free rate (\code{rf})
 and the slope of the appropriate Sharpe ratio level. Lines should
 be removed where not appropriate (e.g., \code{sharpe.ratio = NULL}).
 With a large number of assets (or columns), the names may get in the
-way. To remove them, set \code{add.names=NULL}. A box plot may
+way. To remove them, set \code{add.names = NULL}. A box plot may
 be added to the margins to help identify the relative performance
-quartile by setting \code{add.boxplots=TRUE}.
+quartile by setting \code{add.boxplots = TRUE}.
 
 
 \subsection{Examine performance consistency}
@@ -673,7 +684,9 @@ frontier of the market portfolio.
 \label{fig:CAPM-Table}
 
 <<tableCAPM,echo=T>>=
-table.CAPM(managers.df[trailing36.rows, c(manager.col, peers.cols)], managers.df[ trailing36.rows, 8, drop=FALSE], rf = managers.df[ trailing36.rows, Rf.col])
+table.CAPM(managers.df[trailing36.rows, c(manager.col, peers.cols)],
+managers.df[ trailing36.rows, 8, drop=FALSE],
+rf = managers.df[ trailing36.rows, Rf.col])
 @
 \end{figure}
 
@@ -777,7 +790,8 @@ chart.RollingCorrelation(managers.df[,c(manager.col, peers.cols)], managers.df[,
 \label{fig:Calculate-Correlations}
 
 <<tableCorr,echo=T>>=
-table.Correlation(managers.df[, c(manager.col, peers.cols)], managers.df[, 8, drop = F])
+table.Correlation(managers.df[, c(manager.col, peers.cols)], managers.df[, 8,
+drop = F], legend.loc = "lowerleft")
 @
 \end{figure}
 
@@ -846,7 +860,7 @@ table.Drawdowns(managers.df[,1,drop=F])
 \end{figure}
 
 
-The \code{\link{UpDownRatios}} function will give you some insight
+The \code{\link{UpDownRatios}} function may give you some insight
 into the impacts of the skewness and kurtosis of the returns, and
 letting you know how length and magnitude of up or down moves compare
 to each other. Or, as mentioned above, you can also plot drawdowns
