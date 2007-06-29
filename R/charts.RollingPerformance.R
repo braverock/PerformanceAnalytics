@@ -26,7 +26,7 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
         main = paste(colnames[1]," Rolling ",width,"-Month Performance",sep="")
 
     # First, we lay out the graphic as a three row, one column format
-    plot.new()
+#    plot.new()
     layout(matrix(c(1,2,3)),height=c(1,0.75,1),width=1)
     # to see the resulting layout, use layout.show(3)
 
@@ -63,10 +63,15 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.3 2007-03-13 04:23:04 peter Exp $
+# $Id: charts.RollingPerformance.R,v 1.4 2007-06-29 15:53:16 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/13 04:23:04  peter
+# - changed to checkData function
+# - modified parameters to fit RollingPerformance changes
+# - now takes unequal time periods
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
