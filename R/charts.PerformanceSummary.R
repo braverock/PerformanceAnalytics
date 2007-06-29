@@ -40,7 +40,7 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
         wealth.index = TRUE
 
     # First, we lay out the graphic as a three row, one column format
-    plot.new()
+#    plot.new()
     layout(matrix(c(1,2,3)),height=c(2,1,1.3),width=1)
     # to see the resulting layout, use layout.show(3)
 
@@ -76,10 +76,13 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.11 2007-06-18 03:35:22 brian Exp $
+# $Id: charts.PerformanceSummary.R,v 1.12 2007-06-29 15:52:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/06/18 03:35:22  brian
+# - make method argument a list
+#
 # Revision 1.10  2007/04/30 12:56:05  peter
 # - changed 'method' to 'begin'
 #
