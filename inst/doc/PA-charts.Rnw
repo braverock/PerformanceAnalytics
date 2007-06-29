@@ -1,25 +1,16 @@
-\DeclareGraphicsExtensions{.pdf,.eps}
-%% need no \usepackage{Sweave}
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
 
-\author{Peter Carl\\Guidance Capital Management \And
-        Brian G. Peterson\\Diamond Consulting}
-\Plainauthor{Peter Carl, Brian Peterson}
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
 
-\title{\pkg{PerformanceAnalytics} Charts and Tables Overview}
-\Plaintitle{PerformanceAnalytics Charts and Tables Overview}
+\usepackage{babel}
+\usepackage{noweb}
+\usepackage{Rd}
 
-\Keywords{returns, performance, risk, benchmark, portfolio}
-
-\Abstract{
-  This vignette gives a brief overview of (some of) the graphics and display wrapper
-  functionality contained in \pkg{PerformanceAnalytics} including most of the
-  charts and tables . For a more complete overview of the package's functionality
-  and extensibility see the manual pages.  We develop the examples using data
-  for six (hypothetical) managers, a peer index, and an asset class index.
-}
-
-\begin{document}
-
+\usepackage{Sweave}
 \SweaveOpts{engine=R,eps=FALSE}
 %\VignetteIndexEntry{PerformanceAnalytics Charts and Tables Reference}
 %\VignetteDepends{PerformanceAnalytics}
@@ -28,28 +19,32 @@
 
 
 
-\documentclass[12pt,letterpaper,english]{article}
-\usepackage{times}
-\usepackage[T1]{fontenc}
-\IfFileExists{url.sty}{\usepackage{url}}
-                      {\newcommand{\url}{\texttt}}
+%%%%%%%%%%%%%%%%%%%%%% End Setup Lines 
 
-\makeatletter
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
-\usepackage{noweb}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-\usepackage{Rd}
-
-\usepackage{babel}
-\makeatother
 \begin{document}
 
+%\author{Peter Carl\\Guidance Capital Management \And Brian G. Peterson\\Diamond Consulting}
+% \plainauthor{Peter Carl, Brian Peterson}
+\author {Peter Carl \& Brian G. Peterson}
 
+\title{\pkg{PerformanceAnalytics} Charts and Tables Overview}
+% \plaintitle{PerformanceAnalytics Charts and Tables Overview}
+
+% \keywords{returns, performance, risk, benchmark, portfolio}
+
+
+
+
+\makeatletter
+\makeatother
 \maketitle
+
 \begin{abstract}
-In this vignette, we focus on the graphs and tables available in
-\code{\link{PerformanceAnalytics}}, and comment about some other measures.
+  This vignette gives a brief overview of (some of) the graphics and display wrapper
+  functionality contained in \pkg{PerformanceAnalytics} including most of the
+  charts and tables . For a more complete overview of the package's functionality
+  and extensibility see the manual pages.  We develop the examples using data
+  for six (hypothetical) managers, a peer index, and an asset class index.
 \end{abstract}
 
 \tableofcontents
