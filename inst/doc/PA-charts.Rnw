@@ -117,26 +117,26 @@ library('PerformanceAnalytics')
 %
 \begin{figure}
 
-\caption{First Lines of the managers.df Object }
+\caption{First Lines of the managers Object }
 
 \label{fig:First-Lines-of}
 
 <<LoadData,echo=T>>=
-data(managers.df)
-#managers.df=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
-head(managers.df)
+data(managers)
+#managers=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
+head(managers)
 @
 \end{figure}
 
 
 First we load the data used in all of the examples that follow. As
-you can see in Figure \ref{fig:First-Lines-of}, \code{managers.df}
+you can see in Figure \ref{fig:First-Lines-of}, \code{managers}
 is a data frame that contains columns of monthly returns for six hypothetical
 asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
 fund index, the S\&P 500 total returns, and total return series for
 the US Treasury 10-year bond and 3-month bill. Monthly returns for
 all series end in December 2006 and begin at different periods starting
-from January 1996. Similar data could be constructed using \code{mymanagers.df=read.csv(\char`\"{}/path/to/file/mymanagers.csv\char`\"{},
+from January 1996. Similar data could be constructed using \code{mymanagers=read.csv(\char`\"{}/path/to/file/mymanagers.csv\char`\"{},
 row.names=1)}, where the first column contains dates in the YYYY-MM-DD
 format.
 
@@ -164,9 +164,9 @@ of the timeseries.
 \begin{center}
 
 <<CalcDataDimensions,echo=T>>=
-dim(managers.df)
-managers.length = dim(managers.df)[1]
-colnames(managers.df)
+dim(managers)
+managers.length = dim(managers)[1]
+colnames(managers)
 manager.col = 1
 peers.cols = c(2,3,4,5,6)
 indexes.cols = c(7,8)
@@ -177,7 +177,7 @@ trailing12.rows
 trailing36.rows = ((managers.length - 35):managers.length)
 trailing60.rows = ((managers.length - 59):managers.length)
 #assume contiguous NAs - this may not be the way to do it na.contiguous()?
-frInception.rows = (length(managers.df[,1]) - length(managers.df[,1][!is.na(managers.df[,1])]) + 1):length(managers.df[,1])
+frInception.rows = (length(managers[,1]) - length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
 
 @
 
@@ -279,13 +279,13 @@ For more information, see:
 
 <<ShowPalates,echo=F,fig=T>>=
 layout(rbind(c(1,2),c(3,4)))
-chart.CumReturns(managers.df[,c(manager.col,peers.cols)],
+chart.CumReturns(managers[,c(manager.col,peers.cols)],
 lwd=2,legend.loc="topleft", main="default")
-chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+chart.CumReturns(managers[,c(manager.col,peers.cols)],lwd=2,
 legend.loc="topleft",colorset=redfocus, main = "redfocus")
-chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+chart.CumReturns(managers[,c(manager.col,peers.cols)],lwd=2,
 legend.loc="topleft",colorset=rainbow6equal, main="rainbow6equal")
-chart.CumReturns(managers.df[,c(manager.col,peers.cols)],lwd=2,
+chart.CumReturns(managers[,c(manager.col,peers.cols)],lwd=2,
 legend.loc="topleft",colorset=tim6equal, main = "tim6equal")
 @
 
@@ -344,7 +344,7 @@ risk.
 \begin{center}
 
 <<Graph1,echo=T,fig=T>>=
-charts.PerformanceSummary(managers.df[,c(manager.col,indexes.cols)], colorset=rich6equal, lwd=2, ylog=TRUE)
+charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)], colorset=rich6equal, lwd=2, ylog=TRUE)
 @
 
 \end{center}
@@ -413,7 +413,7 @@ is usually presented as a table, such as in \code{\link{table.Returns}}.
 \begin{center}
 
 <<CalendarReturns,echo=T>>=
-t(table.Returns(managers.df[,c(manager.col,indexes.cols)]))
+t(table.Returns(managers[,c(manager.col,indexes.cols)]))
 @
 
 \end{center}
@@ -451,7 +451,7 @@ Each of the individual functions can be called individually, as well.
 \begin{center}
 
 <<MonthlyReturnStats,echo=T>>=
-table.MonthlyReturns(managers.df[,c(manager.col,peers.cols)])
+table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
 @
 
 \end{center}
@@ -486,7 +486,7 @@ returns in a manner that makes them easy to compare to one another.
 \begin{center}
 
 <<Graph10,echo=T,fig=T>>=
-chart.Boxplot(managers.df[ trailing36.rows, c(manager.col, peers.cols, indexes.cols)], main = "Trailing 36-Month Returns")
+chart.Boxplot(managers[ trailing36.rows, c(manager.col, peers.cols, indexes.cols)], main = "Trailing 36-Month Returns")
 @
 
 \end{center}
@@ -513,12 +513,12 @@ shows a histogram generated for HAM1 with different display options.
 
 <<Graph13,echo=T,fig=T>>=
 layout(rbind(c(1,2),c(3,4)))
-chart.Histogram(managers.df[,1,drop=F], main = "Plain", methods = NULL)
-chart.Histogram(managers.df[,1,drop=F], main = "Density", breaks=40,
+chart.Histogram(managers[,1,drop=F], main = "Plain", methods = NULL)
+chart.Histogram(managers[,1,drop=F], main = "Density", breaks=40,
 methods = c("add.density", "add.normal"))
-chart.Histogram(managers.df[,1,drop=F], main = "Skew and Kurt", methods = c
+chart.Histogram(managers[,1,drop=F], main = "Skew and Kurt", methods = c
 ("add.centered", "add.rug"))
-chart.Histogram(managers.df[,1,drop=F], main = "Risk Measures", methods = c
+chart.Histogram(managers[,1,drop=F], main = "Risk Measures", methods = c
 ("add.risk"))
 @
 
@@ -569,7 +569,7 @@ and \code{\link{SharpeRatio.annualized}}.
 \begin{center}
 
 <<Graph3,echo=T,fig=T>>=
-chart.RiskReturnScatter(managers.df[trailing36.rows,1:8], rf=.03/12, main = "Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange", "green"))
+chart.RiskReturnScatter(managers[trailing36.rows,1:8], rf=.03/12, main = "Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange", "green"))
 @
 
 \end{center}
@@ -619,7 +619,7 @@ argument, allowing any function to be viewed over a rolling window.
 \begin{center}
 
 <<Graph5,echo=T,fig=T>>=
-charts.RollingPerformance(managers.df[, c(manager.col, peers.cols, indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange", "green"), lwd = 2)
+charts.RollingPerformance(managers[, c(manager.col, peers.cols, indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange", "green"), lwd = 2)
 @
 
 \end{center}
@@ -648,7 +648,7 @@ peer group and the peer group index.
 \begin{center}
 
 <<Graph6,echo=T,fig=T>>=
-chart.RelativePerformance(managers.df[ , manager.col, drop = FALSE], managers.df[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc = "topleft")
+chart.RelativePerformance(managers[ , manager.col, drop = FALSE], managers[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc = "topleft")
 @
 
 \end{center}
@@ -672,7 +672,7 @@ Which manager has outperformed the most?
 \begin{center}
 
 <<Graph6a,echo=T,fig=T>>=
-chart.RelativePerformance(managers.df[ , c(manager.col, peers.cols) ], managers.df[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc = "topleft")
+chart.RelativePerformance(managers[ , c(manager.col, peers.cols) ], managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc = "topleft")
 @
 
 \end{center}
@@ -706,9 +706,9 @@ frontier of the market portfolio.
 \label{fig:CAPM-Table}
 
 <<tableCAPM,echo=T>>=
-table.CAPM(managers.df[trailing36.rows, c(manager.col, peers.cols)],
-managers.df[ trailing36.rows, 8, drop=FALSE],
-rf = managers.df[ trailing36.rows, Rf.col])
+table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
+managers[ trailing36.rows, 8, drop=FALSE],
+rf = managers[ trailing36.rows, Rf.col])
 @
 \end{figure}
 
@@ -752,7 +752,7 @@ in valuation.
 
 <<Graph7,echo=T,fig=T>>=
 #source("chart.MultiScatter.R")
-#chart.MultiScatter(Ra=managers.df[,1,drop=F],Rb=managers.df[,8,drop=F],linear.fit=T,Rf=managers.df[,10],excess.returns=T)
+#chart.MultiScatter(Ra=managers[,1,drop=F],Rb=managers[,8,drop=F],linear.fit=T,Rf=managers[,10],excess.returns=T)
 @
 
 In a similar fashion to the rolling performance we displayed earlier,
@@ -773,7 +773,7 @@ with a different \code{method} parameter.
 
 <<Graph8,echo=T,fig=T>>=
 #source("PerformanceAnalytics/R/Return.excess.R")
-charts.RollingRegression(managers.df[, c(manager.col, peers.cols), drop = FALSE], managers.df[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd = 2)
+charts.RollingRegression(managers[, c(manager.col, peers.cols), drop = FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd = 2)
 @
 
 \end{center}
@@ -797,7 +797,7 @@ as shown in Figure \ref{fig:Calculate-Correlations}.
 \begin{center}
 
 <<Graph9,echo=T,fig=T>>=
-chart.RollingCorrelation(managers.df[,c(manager.col, peers.cols)], managers.df[, 8, drop = FALSE], colorset = tim8equal, lwd = 2, main = "12-Month Rolling Correlation")
+chart.RollingCorrelation(managers[,c(manager.col, peers.cols)], managers[, 8, drop = FALSE], colorset = tim8equal, lwd = 2, main = "12-Month Rolling Correlation")
 @
 
 \end{center}
@@ -812,7 +812,7 @@ chart.RollingCorrelation(managers.df[,c(manager.col, peers.cols)], managers.df[,
 \label{fig:Calculate-Correlations}
 
 <<tableCorr,echo=T>>=
-table.Correlation(managers.df[, c(manager.col, peers.cols)], managers.df[, 8,
+table.Correlation(managers[, c(manager.col, peers.cols)], managers[, 8,
 drop = F], legend.loc = "lowerleft")
 @
 \end{figure}
@@ -854,7 +854,7 @@ for another time.
 \begin{center}
 
 <<tableDownside,echo=T>>=
-table.DownsideRisk(managers.df[,1:6],rf=.03/12)
+table.DownsideRisk(managers[,1:6],rf=.03/12)
 @
 
 \end{center}
@@ -877,7 +877,7 @@ as shown in Figure \ref{fig:Drawdowns-Table}.
 \label{fig:Drawdowns-Table}
 
 <<tableDrawdowns,echo=T>>=
-table.Drawdowns(managers.df[,1,drop=F])
+table.Drawdowns(managers[,1,drop=F])
 @
 \end{figure}
 
