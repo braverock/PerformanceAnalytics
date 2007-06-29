@@ -5,7 +5,7 @@
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-chart.BarVaR(R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"),
+chart.BarVaR(R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"),
              reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date",
              date.format = "\%m/\%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12),
              p=.99, lty = "13", all = FALSE, ...)
@@ -14,10 +14,10 @@ chart.BarVaR(R, width = 0, gap = 1, risk.line = TRUE, method = c("ModifiedVaR","
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with width=0 are calculated from the start of the timeseries }
-  \item{method}{ can be specified as \code{StdDev}, \code{VaR}, or \code{ModifiedVaR} }
+  \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
+  \item{method}{ one of \emph{StdDev}, \emph{VaR}, or \emph{ModifiedVaR}, default ModifiedVaR }
   \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
   \item{risk.line}{ if risk.line is set to \code{FALSE}, then this function just draws the underlying bar chart }
-  \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{xaxis}{ if true, draws the x axis }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
