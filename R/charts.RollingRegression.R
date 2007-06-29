@@ -33,7 +33,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
     else
         legend.loc = NULL
 
-    plot.new()
+#    plot.new()
 
     layout(matrix(c(1,2,3)),height=c(1.3,1,1.3),width=1)
 
@@ -62,10 +62,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.10 2007-04-14 15:01:55 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.11 2007-06-29 15:54:03 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/04/14 15:01:55  brian
+# - standardize Ra as first argument for asset returns
+#
 # Revision 1.8  2007/03/17 00:42:41  brian
 # - correct use of F instead of FALSE to pass R CMD check
 #
