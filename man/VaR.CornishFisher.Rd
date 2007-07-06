@@ -39,7 +39,7 @@ Parametric mean-VaR does a better job of accounting for the tails of the distrib
 
 \deqn{\sigma=variance(R)}
 
-\deqn{VaR=\bar{R} - \sigma\cdot q_{.99}}
+\deqn{VaR=\bar{R} -  q_{.99} \cdot \sqrt{\sigma}}
 
 where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
 
