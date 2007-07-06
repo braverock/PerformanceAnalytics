@@ -29,6 +29,8 @@ In a set of returns for which sufficently long history exists, the per-period Va
 \deqn{VaR=\mu_{q_{.99}}}
 where \eqn{q_{.99}} is the 99\% quantile of the distribution.
 
+\code{fPortfolio} has implemented historical mean-VaR as the \code{\link[fPortfolio]{VaR}} function.
+
 This method is also sometimes called \dQuote{historical VaR}, as it is by definition \emph{ex post} analysis of the return distribution.
 
 When you don't have a sufficiently long set of returns to use non-parametric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
@@ -37,11 +39,9 @@ Parametric mean-VaR does a better job of accounting for the tails of the distrib
 
 \deqn{\sigma=variance(R)}
 
-\deqn{VaR=\bar{R}+\sigma\cdot q_{.99}}
+\deqn{VaR=\bar{R} - \sigma\cdot q_{.99}}
 
 where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
-
-\code{fPortfolio} has also implemented traditional mean-VaR as the \code{\link[fPortfolio]{VaR}} function.
 
 Other forms of parametric mean-VaR estimation utilize a different distribution for the distribution of losses \eqn{\mu} to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses. Less commonly a covariance matrix of multiple risk factors may be applied.
 
@@ -55,7 +55,7 @@ The limitations of mean Value-at-Risk are well covered in the literature. The li
 
 \deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}
 
-\deqn{modVaR =\bar{R}- z_{cf}\sqrt{\sigma}}
+\deqn{modVaR =\bar{R} - z_{cf}\sqrt{\sigma}}
 
 Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.
 
