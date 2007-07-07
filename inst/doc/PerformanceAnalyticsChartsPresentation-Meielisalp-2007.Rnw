@@ -1,0 +1,505 @@
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.1 2007-07-07 01:23:42 brian Exp $
+
+\documentclass{beamer}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{PerformanceAnalytics Charts and Tables Presentation - Meielisalp - 2007}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+% This file is a solution template for:
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 20min.
+% - Style is ornate.
+
+
+
+% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+%
+% In principle, this file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+%
+% However, this file is supposed to be a template to be modified
+% for your own needs. For this reason, if you use this file as a
+% template and not specifically distribute it as part of a another
+% package/program, I grant the extra permission to freely copy and
+% modify this file as you see fit and even to delete this copyright
+% notice.
+
+
+\mode<presentation>
+{
+%   \usetheme{CambridgeUS}
+  % or ...
+
+%   \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{noweb}
+\usepackage{subfigure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+%\usepackage{Rd}
+
+\usepackage[english]{babel}
+\makeatother
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[PerformanceAnalytics] % (optional, use only with long paper titles)
+{Overview of PerformanceAnalytics' \\ Charts and Tables}
+
+% \subtitle
+% {Include Only If Paper Has a Subtitle}
+
+\author[Brian Peterson] % (optional, use only with lots of authors)
+{Brian~G.~Peterson}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Diamond] % (optional, but mostly needed)
+{
+%   \inst{1}%
+  Diamond Management \& Technology Consultants \\
+  Chicago, IL
+%   \and
+%   \inst{2}%
+%   Department of Theoretical Philosophy\\
+%   University of Elsewhere}
+% - Use the \inst command only if there are several affiliations.
+% - Keep it simple, no one is interested in your street address.
+}
+
+\date[July 2007] % (optional, should be abbreviation of conference name)
+{R/Rmetrics User and Developer Workshop, 2007}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Overview of PerformanceAnalytics' Charts and Tables}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{document}
+%\right] \right\rbrace \right\rangle \right( \begin{document}
+% this has to be after \begin{document} to work
+\setkeys{Gin}{width=2.5in}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+<<LoadLibrary,echo=F,results=hide>>=
+library('PerformanceAnalytics')
+@
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+
+% Structuring a talk is a difficult task and the following structure
+% may not be suitable. Here are some rules that apply for this
+% solution:
+
+% - Exactly two or three sections (other than the summary).
+% - At *most* three subsections per section.
+% - Talk about 30s to 2min per frame. So there should be between about
+%   15 and 30 frames, all told.
+
+% - A conference audience is likely to know very little of what you
+%   are going to talk about. So *simplify*!
+% - In a 20min talk, getting the main ideas across is hard
+%   enough. Leave out details, even if it means being less precise than
+%   you think necessary.
+% - If you omit details that are vital to the proof/implementation,
+%   just say so once. Everybody will be happy with that.
+
+\section{Introduction}
+
+%\subsection{Objectives}
+
+\begin{frame}
+  \frametitle{Overview}
+  % - A title should summarize the slide in an understandable fashion
+  %   for anyone how does not follow everything on the slide itself.
+
+  \begin{itemize}
+    \item
+    Utilize charts and tables to display and analyze data:
+      \begin{itemize}
+        \item
+          asset returns
+        \item
+          compare an asset to other similar assets
+        \item
+          compare an asset to one or more benchmarks
+      \end{itemize}
+    \item
+    Utilize common performance and risk measures to aid the investment decision
+    \item
+    Examples developed using data for six (hypothetical) managers, a peer index, and an asset class index
+  \end{itemize}
+\end{frame}
+
+
+
+\section{Set Up PerformanceAnalytics}
+
+\begin{frame}[fragile]
+  \frametitle{Install PerformanceAnalytics.}
+  \begin{itemize}
+      \item
+        As of version 0.9.4, PerformanceAnalytics is available in CRAN
+      \item
+        Version 0.9.5 was released at the beginning of July
+      \item
+        Install with: \linebreak \texttt{>
+        install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}
+      \item
+        Required packages include \texttt{Hmisc}, \texttt{zoo}, and Rmetrics packages such as \texttt{fExtremes}.
+      \item
+        Load the library into your active R session
+  using: \linebreak \texttt{> library(\char`\"{}PerformanceAnalytics\char`\"{})}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Load and Review Data.}
+        % The noweb code must be flush left
+        \begin{figure}
+        \begin{scriptsize}
+<<LoadData,echo=T>>=
+data(managers)
+head(managers)
+@
+        \end{scriptsize}
+        \end{figure}
+
+\end{frame}
+
+
+\section{Review Performance}
+
+%\subsection{Review Performance}
+
+\begin{frame}[fragile]
+  \frametitle{Set Up Data for Analysis.}
+  \begin{figure}
+
+  \begin{center}
+     \begin{scriptsize}
+<<CalcDataDimensions,echo=T>>=
+dim(managers)
+managers.length = dim(managers)[1]
+colnames(managers)
+manager.col = 1
+peers.cols = c(2,3,4,5,6)
+indexes.cols = c(7,8)
+Rf.col = 10
+#factors.cols = NA
+trailing12.rows = ((managers.length - 11):managers.length)
+trailing12.rows
+trailing36.rows = ((managers.length - 35):managers.length)
+trailing60.rows = ((managers.length - 59):managers.length)
+#assume contiguous NAs - this may not be the way to do it na.contiguous()?
+frInception.rows = (length(managers[,1]) -
+length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
+@
+     \end{scriptsize}
+  \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Draw a Performance Summary Chart.}
+  \begin{figure}
+
+\centering
+\begin{scriptsize}
+<<Graph1,echo=T,fig=T>>=
+charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)],
+colorset=rich6equal, lwd=2, ylog=TRUE)
+@
+\end{scriptsize}
+
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Show Calendar Performance.}
+  \begin{figure}
+    \begin{scriptsize}
+
+<<CalendarReturns,echo=T>>=
+t(table.Returns(managers[,c(manager.col,indexes.cols)]))
+@
+
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Statistics.}
+  \begin{scriptsize}
+<<MonthlyReturnStats,echo=T>>=
+table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+@
+  \end{scriptsize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare Distributions.}
+  \begin{scriptsize}
+  \begin{figure}
+  \centering
+<<Graph10,echo=T,fig=T>>=
+chart.Boxplot(managers[ trailing36.rows, c(manager.col, peers.cols,
+indexes.cols)], main = "Trailing 36-Month Returns")
+@
+  \end{figure}
+  \end{scriptsize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare Distributions.}
+  \begin{figure}
+  \begin{tiny}
+<<Graph13,echo=T,fig=T>>=
+layout(rbind(c(1,2),c(3,4)))
+chart.Histogram(managers[,1,drop=F], main = "Plain", methods = NULL)
+chart.Histogram(managers[,1,drop=F], main = "Density", breaks=40,
+methods = c("add.density", "add.normal"))
+chart.Histogram(managers[,1,drop=F], main = "Skew and Kurt", methods = c
+("add.centered", "add.rug"))
+chart.Histogram(managers[,1,drop=F], main = "Risk Measures", methods = c
+("add.risk"))
+@
+  \end{tiny}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Show Relative Return and Risk.}
+  \begin{figure}
+  \centering
+  \begin{scriptsize}
+<<Graph3,echo=T,fig=T>>=
+chart.RiskReturnScatter(managers[trailing36.rows,1:8], rf=.03/12, main =
+"Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange",
+"green"))
+@
+  \end{scriptsize}
+
+  \end{figure}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Statistics.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+<<MonthlyReturnStats,echo=T>>=
+table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+@
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Examine Performance Consistency.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph5,echo=T,fig=T>>=
+charts.RollingPerformance(managers[, c(manager.col, peers.cols,
+indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
+"green"), lwd = 2)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Display Relative Performance.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph6,echo=T,fig=T>>=
+chart.RelativePerformance(managers[ , manager.col, drop = FALSE],
+managers[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc
+= "topleft")
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare to a Benchmark.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph6a,echo=T,fig=T>>=
+chart.RelativePerformance(managers[ , c(manager.col, peers.cols) ],
+managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc =
+"topleft")
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Compare to a Benchmark.}
+\begin{figure}
+\centering
+\begin{tiny}
+<<tableCAPM,echo=T>>=
+table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
+managers[ trailing36.rows, 8, drop=FALSE], rf = managers[ trailing36.rows,
+Rf.col])
+@
+\end{tiny}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Compare to a Benchmark.}
+\begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph8,echo=T,fig=T>>=
+#source("PerformanceAnalytics/R/Return.excess.R")
+charts.RollingRegression(managers[, c(manager.col, peers.cols), drop =
+FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
+2)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Downside Risk.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<tableDownside,echo=T>>=
+table.DownsideRisk(managers[,1:6],rf=.03/12)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+
+\section{Summary}
+
+\begin{frame}[fragile]
+  \frametitle<presentation>{Summary}
+
+  % Keep the summary *very short*.
+  \begin{itemize}
+  \item
+    Performance and Risk analysis are greatly facilitated by the use of charts and tables.
+  \item
+    The display of your infomation is in many cases as important as the analysis.
+  \item
+    The observer should have gained a working knowledge of how specific visual techniques may be utilized to aid investment decision making.
+  \end{itemize}
+
+  % The following outlook is optional.
+  \vskip0pt plus.5fill
+  \begin{itemize}
+  \item
+    Further Work
+    \begin{itemize}
+    \item
+      Additional parameterization to make charts more useful.
+    \item
+      Pertrac or Morningstar-style sample reports.
+    \item
+      Functions and graphics for more complicated topics such as factor analysis and optimization.
+    \end{itemize}
+  \end{itemize}
+  \begin{figure}
+    \centering
+      \subfigure
+          {
+            \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
+          }
+      \hfill
+      \subfigure
+          {
+            \includegraphics[totalheight=0.15\textheight,width=.15\textwidth]{Rlogo.jpg}
+          }
+  \end{figure}
+\end{frame}
+
+\end{document}
+
+
