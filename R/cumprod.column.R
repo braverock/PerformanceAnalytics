@@ -1,9 +1,9 @@
 `cumprod.column` <-
-function (R, na.rm = TRUE, ...)
+function (x, na.rm = TRUE, ...)
 { # @author Peter Carl
 
     # if we do this, then cumulating a set of monthly returns is easy
-    x = checkDataMatrix(R)
+    x = checkDataMatrix(x)
 
     if (na.rm) {
         result = apply(na.omit(x), MARGIN = 2, FUN = cumprod,
@@ -23,10 +23,13 @@ function (R, na.rm = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: cumprod.column.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: cumprod.column.R,v 1.3 2007-07-09 13:42:06 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
