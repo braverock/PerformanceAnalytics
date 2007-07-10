@@ -1,8 +1,10 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.1 2007-07-07 01:23:42 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.2 2007-07-10 16:20:30 brian Exp $
 
 \documentclass{beamer}
 
-\usepackage{Sweave}
+%\usepackage{Sweave}
+\usepackage{/usr/lib/R/share/texmf/Sweave}
+
 \SweaveOpts{engine=R,eps=FALSE}
 %\VignetteIndexEntry{PerformanceAnalytics Charts and Tables Presentation - Meielisalp - 2007}
 %\VignetteDepends{PerformanceAnalytics}
@@ -421,6 +423,33 @@ Rf.col])
 \end{figure}
 \end{frame}
 
+\begin{frame}
+  \frametitle{table.CAPM underlying techniques}
+  % - A title should summarize the slide in an understandable fashion
+  %   for anyone how does not follow everything on the slide itself.
+
+  \begin{itemize}
+    \item
+    Return.annualized --- Annualized return using \\
+     \begin{equation}
+        prod(1+R_{a})^{\frac{scale}{n}}-1=\sqrt[n]{prod(1+R_{a})^{scale}}-1
+     \end{equation}
+    \item
+    TreynorRatio --- ratio of asset's Excess Return to Beta $\beta$ of the benchmark
+    \begin{equation}
+        \frac{(\overline{R_{a}-R_{f}})}{\beta_{a,b}}
+    \end{equation}
+    \item
+    ActivePremium --- investment's annualized return minus the benchmark's annualized return
+    \item
+    Tracking Error --- A measure of the unexplained portion of performance relative to a benchmark, given by \\
+    \begin{equation}
+        TrackingError = \sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}
+    \end{equation}
+    \item
+    InformationRatio --- ActivePremium/TrackingError
+  \end{itemize}
+\end{frame}
 
 \begin{frame}[fragile]
 \frametitle{Compare to a Benchmark.}
