@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.3 2007-07-10 16:47:32 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.4 2007-07-10 21:46:42 brian Exp $
 
 \documentclass{beamer}
 
@@ -409,11 +409,8 @@ Rf.col])
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
   \frametitle{table.CAPM underlying techniques}
-  % - A title should summarize the slide in an understandable fashion
-  %   for anyone how does not follow everything on the slide itself.
-
   \begin{itemize}
     \item
     Return.annualized --- Annualized return using \\
@@ -470,7 +467,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
 \end{figure}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}[shrink=10]
   \frametitle{Risk/Reward Ratios in \emph{PerformanceAnalytics}}
 
   \begin{itemize}
