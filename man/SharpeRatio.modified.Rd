@@ -21,7 +21,7 @@ SharpeRatio.modified(Ra, rf = 0, p = 0.95, scale = 1)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \details{
-\deqn{modSharpe=\frac{\overline{(R_{a}-R_{f})}}{modVaR_{R_{a},p}}}{modSharpe=mean(Ra-rf)/(modVaR(Ra,p))}
+\deqn{modSharpe=\frac{(\overline{R_{a}-R_{f}})}{modVaR_{R_{a},p}}}{modSharpe=mean(Ra-rf)/(modVaR(Ra,p))}
 
 or for an annualized measure:
 
