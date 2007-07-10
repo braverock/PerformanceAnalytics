@@ -1,7 +1,8 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.2 2007-07-10 16:20:30 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.3 2007-07-10 16:47:32 brian Exp $
 
 \documentclass{beamer}
 
+% need full path to find these .sty files outside of R environment
 %\usepackage{Sweave}
 \usepackage{/usr/lib/R/share/texmf/Sweave}
 
@@ -19,18 +20,11 @@
 
 
 
-% Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+% Beamer Presentation Template Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+% Contents Copyright 2007 Peter Carl and Brian G. Peterson
 %
-% In principle, this file can be redistributed and/or modified under
+% This file can be redistributed and/or modified under
 % the terms of the GNU Public License, version 2.
-%
-% However, this file is supposed to be a template to be modified
-% for your own needs. For this reason, if you use this file as a
-% template and not specifically distribute it as part of a another
-% package/program, I grant the extra permission to freely copy and
-% modify this file as you see fit and even to delete this copyright
-% notice.
-
 
 \mode<presentation>
 {
@@ -47,7 +41,6 @@
 \usepackage{subfigure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-%\usepackage{Rd}
 
 \usepackage[english]{babel}
 \makeatother
@@ -75,15 +68,8 @@
 
 \institute[Diamond] % (optional, but mostly needed)
 {
-%   \inst{1}%
   Diamond Management \& Technology Consultants \\
   Chicago, IL
-%   \and
-%   \inst{2}%
-%   Department of Theoretical Philosophy\\
-%   University of Elsewhere}
-% - Use the \inst command only if there are several affiliations.
-% - Keep it simple, no one is interested in your street address.
 }
 
 \date[July 2007] % (optional, should be abbreviation of conference name)
@@ -423,7 +409,7 @@ Rf.col])
 \end{figure}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{table.CAPM underlying techniques}
   % - A title should summarize the slide in an understandable fashion
   %   for anyone how does not follow everything on the slide itself.
@@ -484,21 +470,54 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
 \end{figure}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Risk/Reward Ratios in \emph{PerformanceAnalytics}}
 
+  \begin{itemize}
+    \item
+    SharpeRatio --- return per unit of risk represented by variance, may also be annualized by \\
+    \begin{equation}
+        \frac{\sqrt[n]{prod(1+R_{a})^{scale}}-1}{\sqrt{scale}\cdot\sqrt{\sigma}}
+    \end{equation}
+    \item
+    Sortino Ratio --- improvement on Sharpe Ration utilizing downside semivariance as the measure of risk \\
+    \begin{equation}
+        \frac{\overline{(R_{a} - MAR)}}{\delta_{MAR}}
+    \end{equation}
+    \item
+    TreynorRatio --- ratio of asset's Excess Return to Beta $\beta$ of the benchmark
+    \begin{equation}
+        \frac{(\overline{R_{a}-R_{f}})}{\beta_{a,b}}
+    \end{equation}
+    \item
+    Calmar and Sterling Ratios --- ratio of annualized return over the absolute value of the maximum drawdown
+    \item
+    Sortino's Upside Potential Ratio --- upside semdiviation from MAR over downside semidiviation from MAR
+    \begin{equation}
+        \frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }
+    \end{equation}
+    \item
+    Favre's modified Sharpe Ratio --- ratio of excess return over Cornish-Fisher VaR
+    \begin{equation}
+        \frac{\overline{(R_{a}-R_{f})}}{modVaR_{R_{a},p}}
+    \end{equation}
+    \item
+    \emph{NOTE}: The newest measures such as modified Sharpe and Sortino's UPR are far more reliable than older measures, but everyone still seems to look at older measures.
+  \end{itemize}
+\end{frame}
 
 \section{Summary}
 
 \begin{frame}[fragile]
   \frametitle<presentation>{Summary}
 
-  % Keep the summary *very short*.
   \begin{itemize}
-  \item
-    Performance and Risk analysis are greatly facilitated by the use of charts and tables.
-  \item
-    The display of your infomation is in many cases as important as the analysis.
-  \item
-    The observer should have gained a working knowledge of how specific visual techniques may be utilized to aid investment decision making.
+    \item
+        Performance and Risk analysis are greatly facilitated by the use of charts and tables.
+    \item
+        The display of your infomation is in many cases as important as the analysis.
+    \item
+        The observer should have gained a working knowledge of how specific visual techniques may be utilized to aid investment decision making.
   \end{itemize}
 
   % The following outlook is optional.
@@ -508,7 +527,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
     Further Work
     \begin{itemize}
     \item
-      Additional parameterization to make charts more useful.
+      Additional parameterization to make charts and tables more useful.
     \item
       Pertrac or Morningstar-style sample reports.
     \item
