@@ -1,5 +1,5 @@
 `cumprod.column` <-
-function (x, na.rm = TRUE, ...)
+function (x)
 { # @author Peter Carl
 
     # if we do this, then cumulating a set of monthly returns is easy
@@ -23,10 +23,13 @@ function (x, na.rm = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: cumprod.column.R,v 1.3 2007-07-09 13:42:06 brian Exp $
+# $Id: cumprod.column.R,v 1.4 2007-07-10 09:06:54 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/07/09 13:42:06  brian
+# - update to pass R CMD check
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

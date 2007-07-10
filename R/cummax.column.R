@@ -1,6 +1,15 @@
 `cummax.column` <-
-function (x, na.rm = TRUE, ...)
+function (x)
 { # @author Peter Carl
+
+    # NOTE: a prior version of this function included na.rm as a parameter
+    # this was removed because the cumulative functions are now generic functions
+    # in R.
+    # Conversation with Kurt Hornik (who consulted Brian Ripley) indicated that
+    # the best handling of NA's in these functions might be to do specific
+    # replacement such that the returned column series would have the same length
+    # as the input series.  For now, I've simply removed the offending parameters,
+    # but left the code here and this note to remind us to revisit the decision.
 
     # to get to drawdown calculations, we need cummax.column
     x = checkDataMatrix(x)
@@ -23,10 +32,13 @@ function (x, na.rm = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: cummax.column.R,v 1.4 2007-07-09 13:42:06 brian Exp $
+# $Id: cummax.column.R,v 1.5 2007-07-10 09:06:54 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/07/09 13:42:06  brian
+# - update to pass R CMD check
+#
 # Revision 1.3  2007/02/22 18:26:26  brian
 # - update function name for consistency
 #

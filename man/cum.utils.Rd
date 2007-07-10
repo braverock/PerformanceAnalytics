@@ -1,4 +1,4 @@
-\name{cum.uils}
+\name{cum.utils}
 \alias{cumprod.column}
 \alias{cummax.column}
 
@@ -11,16 +11,16 @@ calculate cumulative values for the observation series given, including multicol
         \code{\link{cumprod.column}} \tab cumulative product by column, useful for compound returns \cr
     }
 
+A prior version of thesefunctions included specific NA handling.  This was removed due to a conflict with the general cumulative functions in the R core.  Please be aware that you may have issues with series of different lengths, and may need to explicitly handle NAs as a result.
+
 }
 \usage{
-cumprod.column(x, na.rm = TRUE, ...)
-cummax.column(x, na.rm = TRUE, ...)
+cumprod.column(x)
+cummax.column(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ a vector, matrix, data frame, timeSeries or zoo object of observations }
-  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{\dots}{ any other passthru parameters }
 }
 \value{
 transformed matrix of cumprod's  or cummax's
