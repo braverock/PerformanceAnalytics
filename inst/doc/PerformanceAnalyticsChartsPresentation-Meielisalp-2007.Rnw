@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.4 2007-07-10 21:46:42 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.5 2007-07-11 15:23:58 brian Exp $
 
 \documentclass{beamer}
 
@@ -12,13 +12,8 @@
 %\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
 %\VignettePackage{PerformanceAnalytics}
 
-% This file is a solution template for:
-
 % - Talk at a conference/colloquium.
-% - Talk length is about 20min.
-% - Style is ornate.
-
-
+% - Talk length is about 60min.
 
 % Beamer Presentation Template Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
 % Contents Copyright 2007 Peter Carl and Brian G. Peterson
@@ -69,7 +64,8 @@
 \institute[Diamond] % (optional, but mostly needed)
 {
   Diamond Management \& Technology Consultants \\
-  Chicago, IL
+  Chicago, IL \\
+  brian@braverock.com
 }
 
 \date[July 2007] % (optional, should be abbreviation of conference name)
@@ -125,24 +121,6 @@ library('PerformanceAnalytics')
   \tableofcontents
   % You might wish to add the option [pausesections]
 \end{frame}
-
-
-% Structuring a talk is a difficult task and the following structure
-% may not be suitable. Here are some rules that apply for this
-% solution:
-
-% - Exactly two or three sections (other than the summary).
-% - At *most* three subsections per section.
-% - Talk about 30s to 2min per frame. So there should be between about
-%   15 and 30 frames, all told.
-
-% - A conference audience is likely to know very little of what you
-%   are going to talk about. So *simplify*!
-% - In a 20min talk, getting the main ideas across is hard
-%   enough. Leave out details, even if it means being less precise than
-%   you think necessary.
-% - If you omit details that are vital to the proof/implementation,
-%   just say so once. Everybody will be happy with that.
 
 \section{Introduction}
 
@@ -467,6 +445,51 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
 \end{figure}
 \end{frame}
 
+\begin{frame}
+    \frametitle{Semivariance and Downside Deviation}
+    \begin{itemize}
+        \item
+        Downside Deviation as proposed by Sharpe is a generalization of semivariance which calculates bases on the deviation below a Minimumn Acceptable Return(MAR)
+        \begin{equation}
+            \delta_{MAR} = \sqrt{ \frac{\sum^{n}_{t=1}(R_{t} - MAR)^{2}}{n} }
+        \end{equation}
+        \item
+        Downside Deviation may be used to calculate semideviation by setting MAR=mean(R) or may also be used with MAR=0
+        \item
+        Downside Deviation (and its special cases semideviation and semivariance) is useful in several performance to risk ratios, and in several portfolio optimization problems.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=10]
+    \frametitle{Value at Risk}
+    \begin{itemize}
+        \item
+        Value at Risk (VaR) has become a required standard risk measure recognized by Basel II and MiFID
+        \item
+        traditional mean-VaR may be derived historically, or estimated parametrically using \\
+           \begin{equation}
+                z_{c} = q_{p}=qnorm(p)
+            \end{equation}
+            \begin{equation}
+                VaR=\bar{R} -  z_{c} \cdot \sqrt{\sigma}
+            \end{equation}
+        \item
+        even with robust covariance matrix or Monte Carlo simulation, mean-VaR is not reliable for non-normal asset distributions
+        \item
+        for non-normal assets, VaR estimates calculated using GPD (as in VaR.GPD) or Cornish Fisher perform best
+        \item
+        modified Cornish Fisher VaR takes higher moments of the distribution into account: \\
+           \begin{equation}
+                z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}
+            \end{equation}
+            \begin{equation}
+                modVaR =\bar{R} - z_{cf}\sqrt{\sigma}
+            \end{equation}
+        \item
+        modified VaR also meets the definition of a coherent risk measure per Artzner,et.al.(1997)
+    \end{itemize}
+\end{frame}
+
 \begin{frame}[shrink=10]
   \frametitle{Risk/Reward Ratios in \emph{PerformanceAnalytics}}
 
@@ -477,19 +500,14 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
         \frac{\sqrt[n]{prod(1+R_{a})^{scale}}-1}{\sqrt{scale}\cdot\sqrt{\sigma}}
     \end{equation}
     \item
-    Sortino Ratio --- improvement on Sharpe Ration utilizing downside semivariance as the measure of risk \\
+    Sortino Ratio --- improvement on Sharpe Ration utilizing downside deviation as the measure of risk \\
     \begin{equation}
-        \frac{\overline{(R_{a} - MAR)}}{\delta_{MAR}}
+        \frac{(\overline{R_{a} - MAR})}{\delta_{MAR}}
     \end{equation}
     \item
-    TreynorRatio --- ratio of asset's Excess Return to Beta $\beta$ of the benchmark
-    \begin{equation}
-        \frac{(\overline{R_{a}-R_{f}})}{\beta_{a,b}}
-    \end{equation}
+    Calmar and Sterling Ratios --- ratio of annualized return (Eq. 1) over the absolute value of the maximum drawdown
     \item
-    Calmar and Sterling Ratios --- ratio of annualized return over the absolute value of the maximum drawdown
-    \item
-    Sortino's Upside Potential Ratio --- upside semdiviation from MAR over downside semidiviation from MAR
+    Sortino's Upside Potential Ratio --- upside semdiviation from MAR over downside deviation from MAR
     \begin{equation}
         \frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }
     \end{equation}
@@ -546,5 +564,3 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
 \end{frame}
 
 \end{document}
-
-
