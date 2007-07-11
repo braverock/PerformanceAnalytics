@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.5 2007-07-11 15:23:58 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.6 2007-07-11 15:34:03 brian Exp $
 
 \documentclass{beamer}
 
@@ -128,8 +128,6 @@ library('PerformanceAnalytics')
 
 \begin{frame}
   \frametitle{Overview}
-  % - A title should summarize the slide in an understandable fashion
-  %   for anyone how does not follow everything on the slide itself.
 
   \begin{itemize}
     \item
@@ -146,6 +144,8 @@ library('PerformanceAnalytics')
     Utilize common performance and risk measures to aid the investment decision
     \item
     Examples developed using data for six (hypothetical) managers, a peer index, and an asset class index
+    \item
+    Hypothetical manager data developed from real manager timeseries using \emph{accuracy} and \emph{perturb} packages to perturb data maintaining the statistical distribution properties of the original data.
   \end{itemize}
 \end{frame}
 
@@ -514,7 +514,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
     \item
     Favre's modified Sharpe Ratio --- ratio of excess return over Cornish-Fisher VaR
     \begin{equation}
-        \frac{\overline{(R_{a}-R_{f})}}{modVaR_{R_{a},p}}
+        \frac{(\overline{R_{a}-R_{f}})}{modVaR_{R_{a},p}}
     \end{equation}
     \item
     \emph{NOTE}: The newest measures such as modified Sharpe and Sortino's UPR are far more reliable than older measures, but everyone still seems to look at older measures.
