@@ -16,7 +16,7 @@ SharpeRatio(Ra, rf = 0)
 \details{
 The Sharpe ratio is simply the return per unit of risk (represented by variance).  The higher the Sharpe Ratio, the better the combined performance of "risk" and return.
 
-\deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma}}}
+\deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}}
 
 William Sharpe now recommends \code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
 
