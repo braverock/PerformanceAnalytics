@@ -19,7 +19,7 @@ function (x)
     #        ...)
     #}
     #else {
-        result = apply(x, MARGIN = 2, FUN = cumprod, ...)
+        result = apply(x, MARGIN = 2, FUN = cumprod)
     #}
     result
 }
@@ -32,10 +32,13 @@ function (x)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: cumprod.column.R,v 1.5 2007-07-10 09:13:28 brian Exp $
+# $Id: cumprod.column.R,v 1.6 2007-07-14 17:24:14 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/07/10 09:13:28  brian
+# - comment out old na.rm handling to pass R CMD check
+#
 # Revision 1.4  2007/07/10 09:06:54  brian
 # - change parameters to x only, for reconciliation with R core
 #
