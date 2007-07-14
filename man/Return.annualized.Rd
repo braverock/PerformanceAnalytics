@@ -23,9 +23,12 @@ Annualized returns are useful for comparing two assets.  To do so, you must scal
 
 where scale is the number of periods in a year, and n is the total number of periods for which you have observations.
 
- @todo: add ability to calculate simple annualized returns to current geometric-only calculation
+For simple returns (geometric=FALSE), the formula is:
+
+    \deqn{\overline{R_{a}}} \cdot scale}
 
 }
+
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 6
 }
