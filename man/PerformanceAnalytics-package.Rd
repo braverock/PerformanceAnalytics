@@ -181,7 +181,7 @@ Data series \code{\link{edhec}} used in \code{PerformanceAnalytics} and related 
 
 Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission.
 
-Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions.
+Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions, and to Khanh Nguyen for careful testing and detailed problem reports.
 
 Thanks to the R-SIG-Finance community without whom this library would not be possible.
 }
