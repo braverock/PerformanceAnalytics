@@ -14,16 +14,16 @@ function (R)
 
     x = checkData(R, method="vector") # matrix?
 
-    cumulativeReturn = cumprod(1+x)
-    maxCumulativeReturn = cummax(cumulativeReturn)
-    drawdowns = cumulativeReturn/maxCumulativeReturn - 1
+    Return.cumulative = cumprod(1+na.omit(x)) 
+    maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
+    drawdowns = Return.cumulative/maxCumulativeReturn - 1
     # if you want to see the drawdown series, plot(drawdown,type="l")
 
     draw = c()
     begin = c()
     end = c()
-    length = c()
-    trough = c()
+    length = c(0)
+    trough = c(0)
     index = 1
     if (drawdowns[1] >= 0)
         priorSign = 1
@@ -33,7 +33,7 @@ function (R)
     sofar = drawdowns[1]
     to = 1
     dmin = 1
-    for (i in 2:length(drawdowns)) {
+    for (i in 1:length(drawdowns)) { #2:length()
         thisSign <- ifelse(drawdowns[i] < 0, 0, 1)
         if (thisSign == priorSign) {
             if(drawdowns[i]< sofar) {
@@ -43,7 +43,6 @@ function (R)
             to = i + 1 ###
         }
         else {
-    # @todo: add trough date, time to trough, recovery time
             draw[index] = sofar
             begin[index] = from
             trough[index] = dmin
@@ -73,10 +72,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: findDrawdowns.R,v 1.5 2007-03-21 16:34:48 peter Exp $
+# $Id: findDrawdowns.R,v 1.6 2007-07-26 03:34:46 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/21 16:34:48  peter
+# - fixed period calculations
+#
 # Revision 1.4  2007/03/21 14:07:38  peter
 # - added trough date, periods to trough, periods to recovery
 # - changed to use dataCheck
