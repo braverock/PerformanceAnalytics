@@ -11,9 +11,8 @@ These functions calculate both traditional mean-VaR and modified Cornish-Fisher 
 \usage{
 VaR.CornishFisher(R, p = 0.99, modified = TRUE)
 modifiedVaR(R, p = 0.99)
-VaR.traditional(R, p = 0.99)
-VaR.mean(R, p = 0.99)
-VaR(R, p = 0.99)
+VaR.traditional(R, p = 0.95)
+VaR.mean(R, p = 0.95)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -53,7 +52,7 @@ The limitations of mean Value-at-Risk are well covered in the literature. The li
 
 \deqn{K = kurtosis(R)}
 
-\deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}
+\deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}-\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}
 
 \deqn{modVaR =\bar{R} - z_{cf}\sqrt{\sigma}}
 

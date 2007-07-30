@@ -42,8 +42,12 @@ function(R, p=0.99, modified = TRUE)
         if (modified) {
             s = skewness(r) #skewness of the distribution
             k = kurtosis(r) #(excess) kurtosis
-            Zcf = zc + (((zc^2-1)*s)/6) + (((zc^3-3*zc)*k)/24) + (((2*zc^3)-(5*zc)*s^2)/36)
+            Zcf = zc + (((zc^2-1)*s)/6) + (((zc^3-3*zc)*k)/24) - (((2*zc^3)-(5*zc)*s^2)/36)
             VaR = mean(r) - (Zcf * sqrt(var(r)))
+            if (VaR<0){
+                warning(c("Cornish-Fisher Expansion produces unreliable result for column: ",column))
+                VaR=NULL
+            }
         } else {
             # should probably add risk-free-rate skew here?
             VaR = mean(r) - (zc * sqrt(var(r)))
@@ -88,7 +92,7 @@ function(R, p=0.99)
 ###############################################################################
 
 `VaR.mean` <-
-function(R, p=0.99)
+function(R, p=0.95)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -106,25 +110,7 @@ function(R, p=0.99)
 ###############################################################################
 
 `VaR.traditional` <-
-function(R, p=0.99)
-{   # @author Brian G. Peterson
-
-    # Description:
-
-    # This is a wrapper function for modified VaR which assumes a normal
-    # distribution by discounting influence from skewness or kurtosis.
-
-    # Wrapper should be used with metrics related to VaR, such as Beyond VaR.
-
-    # FUNCTION:
-    VaR.CornishFisher(R = R, p = p, modified=FALSE)
-
-}
-
-###############################################################################
-
-`VaR` <-
-function(R, p=0.99)
+function(R, p=0.95)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -147,10 +133,13 @@ function(R, p=0.99)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.12 2007-04-04 00:23:01 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.13 2007-07-30 19:06:59 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/04/04 00:23:01  brian
+# - typos and minor comment updates
+#
 # Revision 1.11  2007/04/02 21:49:22  peter
 # - minor modification
 #
