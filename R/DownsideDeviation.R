@@ -1,5 +1,5 @@
 `DownsideDeviation` <-
-function (Ra, MAR = 0)
+function (Ra, MAR = 0, method=c("full","subset"))
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,12 +12,17 @@ function (Ra, MAR = 0)
     # This is also useful for calculating semi-deviation by setting
     # MAR = mean(x)
 
+    method = method[1] # grab the first value if this is still a vector, to avoid varnings
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
-
+    Ra = checkData(Ra, method="vector")
     r = subset(Ra,Ra < MAR)
-    return(sqrt(sum((r - MAR)^2)/(length(Ra))))
+
+    switch(method,
+        full   = {len = length(Ra)},
+        subset = {len = length(R)}
+    ) # end switch
+    return(sqrt(sum((r - MAR)^2)/len))
 }
 
 ###############################################################################
@@ -28,10 +33,13 @@ function (Ra, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.5 2007-06-21 21:36:08 brian Exp $
+# $Id: DownsideDeviation.R,v 1.6 2007-08-03 14:58:26 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/06/21 21:36:08  brian
+# - fixed to use length of entire series, per Platinga, van der Meer, Sortino 2001
+#
 # Revision 1.4  2007/06/21 21:24:39  brian
 # - update to use length rather than length-1 after reviewing several original Sortino papers
 #
