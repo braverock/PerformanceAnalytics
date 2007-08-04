@@ -21,7 +21,7 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"), method = c(
     # @todo: make the data type returned selectable (e.g., df, ts, zoo, matrix)
 
     # Yahoo returns yield data as price series, so we need to calculate returns
-    market.returns = CalculateReturns(x, method = method)
+    market.returns = Return.calculate(x, method = method)
 
     colnames(market.returns)="SP500"
     market.returns
@@ -35,10 +35,14 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"), method = c(
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.SP500PriceReturns.R,v 1.8 2007-04-14 13:55:46 brian Exp $
+# $Id: download.SP500PriceReturns.R,v 1.9 2007-08-04 15:15:53 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/04/14 13:55:46  brian
+# - standardize enumerated arguments,
+# - assign default value to a string string if no value passed in to avoid warnings
+#
 # Revision 1.7  2007/03/20 14:31:05  brian
 # - restored CVS revision log data
 #
