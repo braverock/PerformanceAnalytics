@@ -1,4 +1,4 @@
-`CalculateReturns` <-
+`Return.calculate` <-
 function(prices, method = c("compound","simple"))
 { # @ author Peter Carl
 
@@ -25,6 +25,11 @@ function(prices, method = c("compound","simple"))
 
 }
 
+`CalculateReturns` <-
+function(prices, method = c("compound","simple"))
+{ # @ author Peter Carl
+    Return.calculate(prices=prices, method=method)
+}
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
@@ -33,10 +38,13 @@ function(prices, method = c("compound","simple"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.8 2007-04-14 19:12:28 brian Exp $
+# $Id: Return.calculate.R,v 1.9 2007-08-04 15:06:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/04/14 19:12:28  brian
+# -lowercase first parameter prices
+#
 # Revision 1.7  2007/03/20 14:34:22  brian
 # - restored CVS revision log data
 #

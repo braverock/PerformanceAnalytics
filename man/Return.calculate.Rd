@@ -1,11 +1,13 @@
-\name{CalculateReturns}
+\name{Return.calculate}
 \alias{CalculateReturns}
+\alias{Return.calculate}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate simple or compound returns from prices }
 \description{
 calculate simple or compound returns from prices
 }
 \usage{
+Return.calculate(prices, method=c("compound","simple"))
 CalculateReturns(prices, method=c("compound","simple"))
 }
 %- maybe also 'usage' for other objects documented here.
@@ -24,7 +26,7 @@ vector or matrix of simple or compound returns
 \examples{
 require(tseries)
 prices = get.hist.quote("^gspc", start = "1999-01-01", end = "2007-01-01", quote = "Close", compression = "m")
-returns = CalculateReturns(prices, method="simple")
+returns =Return.calculate(prices, method="simple")
 colnames(returns)="SP500"
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
