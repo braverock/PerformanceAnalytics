@@ -1,0 +1,595 @@
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.1 2007-08-07 12:32:27 brian Exp $
+
+\documentclass{beamer}
+
+% need full path to find these .sty files outside of R environment
+%\usepackage{Sweave}
+\usepackage{/usr/lib/R/share/texmf/Sweave}
+
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{PerformanceAnalytics Data Mining Presentation - UseR - 2007}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 60min.
+
+% Beamer Presentation Template Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+% Contents Copyright 2007 Peter Carl and Brian G. Peterson
+%
+% This file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+
+\mode<presentation>
+{
+%   \usetheme{CambridgeUS}
+  % or ...
+
+%   \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{noweb}
+\usepackage{subfigure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage[english]{babel}
+\makeatother
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+
+
+\title[PerformanceAnalytics] % (optional, use only with long paper titles)
+{Data Mining of Financial Data using PerformanceAnalytics}
+
+% \subtitle
+% {Include Only If Paper Has a Subtitle}
+
+\author[Brian Peterson & Peter Carl] % (optional, use only with lots of authors)
+{Brian~G.~Peterson & Peter~Carl}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[Braverock] % (optional, but mostly needed)
+{
+  Diamond Management \& Technology Consultants \\
+  Chicago, IL \\
+  brian@braverock.com\\
+  \\
+  Guidance Capital\\
+  Chicago, IL\\
+  peter@braverock.com
+} %the formatting of our companies is likely to be all screwed up
+
+\date[July 2007] % (optional, should be abbreviation of conference name)
+{UseR! International User and Developer Conference, Ames, Iowa, 8-10 Aug 2007}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{Data Mining using PerformanceAnalytics}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+\AtBeginSubsection[]
+{
+  \begin{frame}<beamer>
+    \frametitle{Outline}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{document}
+%\right] \right\rbrace \right\rangle \right( \begin{document}
+% this has to be after \begin{document} to work
+\setkeys{Gin}{width=2.5in}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+<<LoadLibrary,echo=F,results=hide>>=
+library('PerformanceAnalytics')
+data(managers)
+data(edhec)
+@
+
+<<CalcDataDimensions,echo=F>>=
+managers.length = dim(managers)[1]
+manager.col = 1
+peers.cols = c(2,3,4,5,6)
+indexes.cols = c(7,8)
+Rf.col = 10
+trailing12.rows = ((managers.length - 11):managers.length)
+trailing36.rows = ((managers.length - 35):managers.length)
+trailing60.rows = ((managers.length - 59):managers.length)
+#assume contiguous NAs - this may not be the way to do it na.contiguous()?
+frInception.rows = (length(managers[,1]) -
+length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
+@
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+\section{Introduction}
+
+%\subsection{Objectives}
+
+\begin{frame}
+  \frametitle{Overview}
+
+  \begin{itemize}
+    \item
+    Exploratory Data Analysis in Finance often starts with visual examination of the data to:
+      \begin{itemize}
+        \item
+          examine properties of asset returns
+        \item
+          compare an asset to other similar assets
+        \item
+          compare an asset to one or more benchmarks
+      \end{itemize}
+    \item
+    Application of performance and risk measures can build a set of statistics for comparing possible investments
+    \item
+    Examples developed using data for six (hypothetical) managers, a peer index, and an asset class index
+    \item
+    Hypothetical manager data developed from real manager timeseries using \emph{accuracy} and \emph{perturb} packages to perturb data maintaining the statistical distribution properties of the original data.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Draw a Performance Summary Chart.}
+  \begin{figure}
+
+\centering
+\begin{scriptsize}
+<<Graph1,echo=T,fig=T>>=
+charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)],
+colorset=rich6equal, lwd=2, ylog=TRUE)
+@
+\end{scriptsize}
+
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Show Calendar Performance.}
+  \begin{figure}
+    \begin{scriptsize}
+
+<<CalendarReturns,echo=T>>=
+t(table.Returns( managers[,c(manager.col,indexes.cols)]) )
+@
+
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Statistics.}
+  \begin{scriptsize}
+<<MonthlyReturnStats,echo=T>>=
+table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+@
+  \end{scriptsize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare Distributions.}
+  \begin{scriptsize}
+  \begin{figure}
+  \centering
+<<Graph10,echo=T,fig=T>>=
+chart.Boxplot(managers[ trailing36.rows, c(manager.col, peers.cols,
+indexes.cols)], main = "Trailing 36-Month Returns")
+@
+  \end{figure}
+  \end{scriptsize}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare Distributions.}
+  \begin{figure}
+  \begin{tiny}
+<<Graph13,echo=T,fig=T>>=
+layout(rbind(c(1,2),c(3,4)))
+chart.Histogram(managers[,1,drop=F], main = "Plain", methods = NULL)
+chart.Histogram(managers[,1,drop=F], main = "Density", breaks=40,
+methods = c("add.density", "add.normal"))
+chart.Histogram(managers[,1,drop=F], main = "Skew and Kurt", methods = c
+("add.centered", "add.rug"))
+chart.Histogram(managers[,1,drop=F], main = "Risk Measures", methods = c
+("add.risk"))
+@
+  \end{tiny}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Show Relative Return and Risk.}
+  \begin{figure}
+  \centering
+  \begin{scriptsize}
+<<Graph3,echo=T,fig=T>>=
+chart.RiskReturnScatter(managers[trailing36.rows,1:8], rf=.03/12, main =
+"Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange",
+"green"))
+@
+  \end{scriptsize}
+
+  \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Statistics.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+<<MonthlyReturnStats,echo=T>>=
+table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+@
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Examine Performance Consistency.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph5,echo=T,fig=T>>=
+charts.RollingPerformance(managers[, c(manager.col, peers.cols,
+indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
+"green"), lwd = 2)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Display Relative Performance.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph6,echo=T,fig=T>>=
+chart.RelativePerformance(managers[ , manager.col, drop = FALSE],
+managers[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc
+= "topleft")
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Compare to a Benchmark.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph6a,echo=T,fig=T>>=
+chart.RelativePerformance(managers[ , c(manager.col, peers.cols) ],
+managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc =
+"topleft")
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+\frametitle{Compare to a Benchmark.}
+\begin{figure}
+\centering
+\begin{tiny}
+<<tableCAPM,echo=T>>=
+table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
+managers[ trailing36.rows, 8, drop=FALSE], rf = managers[ trailing36.rows,
+Rf.col])
+@
+\end{tiny}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{table.CAPM underlying techniques}
+  \begin{itemize}
+    \item
+    Return.annualized --- Annualized return using \\
+     \begin{equation}
+        prod(1+R_{a})^{\frac{scale}{n}}-1=\sqrt[n]{prod(1+R_{a})^{scale}}-1
+     \end{equation}
+    \item
+    TreynorRatio --- ratio of asset's Excess Return to Beta $\beta$ of the benchmark
+    \begin{equation}
+        \frac{(\overline{R_{a}-R_{f}})}{\beta_{a,b}}
+    \end{equation}
+    \item
+    ActivePremium --- investment's annualized return minus the benchmark's annualized return
+    \item
+    Tracking Error --- A measure of the unexplained portion of performance relative to a benchmark, given by \\
+    \begin{equation}
+        TrackingError = \sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}
+    \end{equation}
+    \item
+    InformationRatio --- ActivePremium/TrackingError
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Compare to a Benchmark.}
+\begin{figure}
+\centering
+\begin{scriptsize}
+
+<<Graph8,echo=T,fig=T>>=
+charts.RollingRegression(managers[, c(manager.col, peers.cols), drop =
+FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
+2)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+
+
+\begin{frame}[fragile]
+  \frametitle{Calculate Downside Risk.}
+  \begin{figure}
+\centering
+\begin{scriptsize}
+
+<<tableDownside,echo=T>>=
+table.DownsideRisk(managers[,1:6],rf=.03/12)
+@
+
+\end{scriptsize}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Semivariance and Downside Deviation}
+    \begin{itemize}
+        \item
+        Downside Deviation as proposed by Sharpe is a generalization of semivariance which calculates bases on the deviation below a Minimumn Acceptable Return(MAR)
+        \begin{equation}
+            \delta_{MAR} = \sqrt{ \frac{\sum^{n}_{t=1}(R_{t} - MAR)^{2}}{n} }
+        \end{equation}
+        \item
+        Downside Deviation may be used to calculate semideviation by setting MAR=mean(R) or may also be used with MAR=0
+        \item
+        Downside Deviation (and its special cases semideviation and semivariance) is useful in several performance to risk ratios, and in several portfolio optimization problems.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=10]
+    \frametitle{Value at Risk}
+    \begin{itemize}
+        \item
+        Value at Risk (VaR) has become a required standard risk measure recognized by Basel II and MiFID
+        \item
+        traditional mean-VaR may be derived historically, or estimated parametrically using \\
+           \begin{equation}
+                z_{c} = q_{p}=qnorm(p)
+            \end{equation}
+            \begin{equation}
+                VaR=\bar{R} -  z_{c} \cdot \sqrt{\sigma}
+            \end{equation}
+        \item
+        even with robust covariance matrix or Monte Carlo simulation, mean-VaR is not reliable for non-normal asset distributions
+        \item
+        for non-normal assets, VaR estimates calculated using GPD (as in VaR.GPD) or Cornish Fisher perform best
+        \item
+        modified Cornish Fisher VaR takes higher moments of the distribution into account: \\
+           \begin{equation}
+                z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}
+            \end{equation}
+            \begin{equation}
+                modVaR =\bar{R} - z_{cf}\sqrt{\sigma}
+            \end{equation}
+        \item
+        modified VaR also meets the definition of a coherent risk measure per Artzner,et.al.(1997)
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[shrink=10]
+  \frametitle{Risk/Reward Ratios in \emph{PerformanceAnalytics}}
+
+  \begin{itemize}
+    \item
+    SharpeRatio --- return per unit of risk represented by variance, may also be annualized by \\
+    \begin{equation}
+        \frac{\sqrt[n]{prod(1+R_{a})^{scale}}-1}{\sqrt{scale}\cdot\sqrt{\sigma}}
+    \end{equation}
+    \item
+    Sortino Ratio --- improvement on Sharpe Ration utilizing downside deviation as the measure of risk \\
+    \begin{equation}
+        \frac{(\overline{R_{a} - MAR})}{\delta_{MAR}}
+    \end{equation}
+    \item
+    Calmar and Sterling Ratios --- ratio of annualized return (Eq. 1) over the absolute value of the maximum drawdown
+    \item
+    Sortino's Upside Potential Ratio --- upside semdiviation from MAR over downside deviation from MAR
+    \begin{equation}
+        \frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }
+    \end{equation}
+    \item
+    Favre's modified Sharpe Ratio --- ratio of excess return over Cornish-Fisher VaR
+    \begin{equation}
+        \frac{(\overline{R_{a}-R_{f}})}{modVaR_{R_{a},p}}
+    \end{equation}
+    \item
+    \emph{NOTE}: The newest measures such as modified Sharpe and Sortino's UPR are far more reliable than older measures, but everyone still seems to look at older measures.
+  \end{itemize}
+\end{frame}
+
+\section{Summary}
+
+\begin{frame}[fragile]
+  \frametitle<presentation>{Summary}
+
+  \begin{itemize}
+    \item
+        Performance and Risk analysis are greatly facilitated by the use of charts and tables.
+    \item
+        The display of your infomation is in many cases as important as the analysis.
+    \item
+        The observer should have gained a working knowledge of how specific visual techniques may be utilized to aid investment decision making.
+  \end{itemize}
+
+  % The following outlook is optional.
+  \vskip0pt plus.5fill
+  \begin{itemize}
+  \item
+    Further Work
+    \begin{itemize}
+    \item
+      Additional parameterization to make charts and tables more useful.
+    \item
+      Pertrac or Morningstar-style sample reports.
+    \item
+      Functions and graphics for more complicated topics such as factor analysis and optimization.
+    \end{itemize}
+  \end{itemize}
+  \begin{figure}
+    \centering
+      \subfigure
+          {
+            \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
+          }
+      \hfill
+      \subfigure
+          {
+            \includegraphics[totalheight=0.15\textheight,width=.15\textwidth]{Rlogo.jpg}
+          }
+  \end{figure}
+\end{frame}
+
+\section{Appendix}
+
+\subsection{Set Up PerformanceAnalytics}
+
+\begin{frame}[fragile]
+  \frametitle{Install PerformanceAnalytics.}
+  \begin{itemize}
+      \item
+        As of version 0.9.4, PerformanceAnalytics is available in CRAN
+      \item
+        Version 0.9.5 was released at the beginning of July
+      \item
+        Install with: \linebreak \texttt{>
+        install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}
+      \item
+        Required packages include \texttt{Hmisc}, \texttt{zoo}, and Rmetrics packages such as \texttt{fExtremes}.
+      \item
+        Load the library into your active R session
+  using: \linebreak \texttt{> library(\char`\"{}PerformanceAnalytics\char`\"{})}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Load and Review Data.}
+        % The noweb code must be flush left
+        \begin{figure}
+        \begin{scriptsize}
+<<LoadData,echo=T>>=
+data(managers)
+head(managers)
+@
+        \end{scriptsize}
+        \end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Set Up Data for Analysis.}
+  \begin{figure}
+
+  \begin{center}
+     \begin{scriptsize}
+<<CalcDataDimensions,echo=T>>=
+dim(managers)
+managers.length = dim(managers)[1]
+colnames(managers)
+manager.col = 1
+peers.cols = c(2,3,4,5,6)
+indexes.cols = c(7,8)
+Rf.col = 10
+#factors.cols = NA
+trailing12.rows = ((managers.length - 11):managers.length)
+trailing12.rows
+trailing36.rows = ((managers.length - 35):managers.length)
+trailing60.rows = ((managers.length - 59):managers.length)
+#assume contiguous NAs - this may not be the way to do it na.contiguous()?
+frInception.rows = (length(managers[,1]) -
+length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
+@
+     \end{scriptsize}
+  \end{center}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Draw a Performance Summary Chart.}
+  \begin{figure}
+
+\centering
+\begin{scriptsize}
+<<Graph1,echo=T,fig=T>>=
+charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)],
+colorset=rich6equal, lwd=2, ylog=TRUE)
+@
+\end{scriptsize}
+
+\end{figure}
+
+\end{frame}
+
+\end{document}
