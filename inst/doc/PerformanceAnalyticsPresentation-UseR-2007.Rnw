@@ -1,12 +1,12 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.1 2007-08-07 12:32:27 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.2 2007-08-08 04:59:52 peter Exp $
 
-\documentclass{beamer}
+\documentclass[10pt,usletter]{beamer}
 
 % need full path to find these .sty files outside of R environment
 %\usepackage{Sweave}
 \usepackage{/usr/lib/R/share/texmf/Sweave}
 
-\SweaveOpts{engine=R,eps=FALSE}
+\SweaveOpts{engine=R,eps=TRUE}
 %\VignetteIndexEntry{PerformanceAnalytics Data Mining Presentation - UseR - 2007}
 %\VignetteDepends{PerformanceAnalytics}
 %\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
@@ -23,7 +23,7 @@
 
 \mode<presentation>
 {
-%   \usetheme{CambridgeUS}
+   \usetheme{default}
   % or ...
 
 %   \setbeamercovered{transparent}
@@ -50,23 +50,25 @@
 
 
 \title[PerformanceAnalytics] % (optional, use only with long paper titles)
-{Data Mining of Financial Data using PerformanceAnalytics}
+{Exploratory Data Analysis in Finance Using PerformanceAnalytics}
 
 % \subtitle
 % {Include Only If Paper Has a Subtitle}
 
-\author[Brian Peterson & Peter Carl] % (optional, use only with lots of authors)
-{Brian~G.~Peterson & Peter~Carl}
+\author[Brian Peterson \& Peter Carl] % (optional, use only with lots of authors)
+{Brian~G.~Peterson \& Peter~Carl}
 % - Give the names in the same order as the appear in the paper.
 % - Use the \inst{?} command only if the authors have different
 %   affiliation.
 
 \institute[Braverock] % (optional, but mostly needed)
 {
+\inst{1}
   Diamond Management \& Technology Consultants \\
   Chicago, IL \\
-  brian@braverock.com\\
-  \\
+  brian@braverock.com
+  \and
+\inst{2}
   Guidance Capital\\
   Chicago, IL\\
   peter@braverock.com
@@ -95,13 +97,13 @@
 
 % Delete this, if you do not want the table of contents to pop up at
 % the beginning of each subsection:
-\AtBeginSubsection[]
-{
-  \begin{frame}<beamer>
-    \frametitle{Outline}
-    \tableofcontents[currentsection,currentsubsection]
-  \end{frame}
-}
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}<beamer>
+%     \frametitle{Outline}
+%     \tableofcontents[currentsection,currentsubsection]
+%   \end{frame}
+% }
 
 
 % If you wish to uncover everything in a step-wise fashion, uncomment
@@ -112,9 +114,11 @@
 %\right] \right\rbrace \right\rangle \right( \begin{document}
 % this has to be after \begin{document} to work
 \setkeys{Gin}{width=2.5in}
+
 \begin{frame}
-  \titlepage
+\titlepage
 \end{frame}
+
 
 <<LoadLibrary,echo=F,results=hide>>=
 library('PerformanceAnalytics')
@@ -142,7 +146,7 @@ length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
   % You might wish to add the option [pausesections]
 \end{frame}
 
-\section{Introduction}
+\section{Visualization}
 
 %\subsection{Objectives}
 
@@ -151,7 +155,7 @@ length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
 
   \begin{itemize}
     \item
-    Exploratory Data Analysis in Finance often starts with visual examination of the data to:
+    Exploratory data analysis with finance data often starts with visual examination to:
       \begin{itemize}
         \item
           examine properties of asset returns
@@ -163,9 +167,9 @@ length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
     \item
     Application of performance and risk measures can build a set of statistics for comparing possible investments
     \item
-    Examples developed using data for six (hypothetical) managers, a peer index, and an asset class index
+    Examples are developed using data for six (hypothetical) managers, a peer index, and an asset class index
     \item
-    Hypothetical manager data developed from real manager timeseries using \emph{accuracy} and \emph{perturb} packages to perturb data maintaining the statistical distribution properties of the original data.
+    Hypothetical manager data was developed from real manager timeseries using \emph{accuracy} and \emph{perturb} packages to disguise the data while maintaining some of the statistical properties of the original data.
   \end{itemize}
 \end{frame}
 
@@ -174,12 +178,12 @@ length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
   \begin{figure}
 
 \centering
-\begin{scriptsize}
+\begin{tiny}
 <<Graph1,echo=T,fig=T>>=
 charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)],
 colorset=rich6equal, lwd=2, ylog=TRUE)
 @
-\end{scriptsize}
+\end{tiny}
 
 \end{figure}
 
@@ -188,30 +192,30 @@ colorset=rich6equal, lwd=2, ylog=TRUE)
 \begin{frame}[fragile]
   \frametitle{Show Calendar Performance.}
   \begin{figure}
-    \begin{scriptsize}
+    \begin{tiny}
 
 <<CalendarReturns,echo=T>>=
 t(table.Returns( managers[,c(manager.col,indexes.cols)]) )
 @
 
-    \end{scriptsize}
+    \end{tiny}
   \end{figure}
 \end{frame}
 
 
 \begin{frame}[fragile]
   \frametitle{Calculate Statistics.}
-  \begin{scriptsize}
+  \begin{tiny}
 <<MonthlyReturnStats,echo=T>>=
 table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
 @
-  \end{scriptsize}
+  \end{tiny}
 \end{frame}
 
 
 \begin{frame}[fragile]
   \frametitle{Compare Distributions.}
-  \begin{scriptsize}
+  \begin{tiny}
   \begin{figure}
   \centering
 <<Graph10,echo=T,fig=T>>=
@@ -219,7 +223,7 @@ chart.Boxplot(managers[ trailing36.rows, c(manager.col, peers.cols,
 indexes.cols)], main = "Trailing 36-Month Returns")
 @
   \end{figure}
-  \end{scriptsize}
+  \end{tiny}
 \end{frame}
 
 
@@ -246,36 +250,23 @@ chart.Histogram(managers[,1,drop=F], main = "Risk Measures", methods = c
   \frametitle{Show Relative Return and Risk.}
   \begin{figure}
   \centering
-  \begin{scriptsize}
+  \begin{tiny}
 <<Graph3,echo=T,fig=T>>=
 chart.RiskReturnScatter(managers[trailing36.rows,1:8], rf=.03/12, main =
 "Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange",
 "green"))
 @
-  \end{scriptsize}
+  \end{tiny}
 
   \end{figure}
 
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Calculate Statistics.}
-  \begin{figure}
-\centering
-\begin{scriptsize}
-<<MonthlyReturnStats,echo=T>>=
-table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
-@
-\end{scriptsize}
-\end{figure}
-\end{frame}
-
-
-\begin{frame}[fragile]
   \frametitle{Examine Performance Consistency.}
   \begin{figure}
 \centering
-\begin{scriptsize}
+\begin{tiny}
 
 <<Graph5,echo=T,fig=T>>=
 charts.RollingPerformance(managers[, c(manager.col, peers.cols,
@@ -283,7 +274,7 @@ indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
 "green"), lwd = 2)
 @
 
-\end{scriptsize}
+\end{tiny}
 \end{figure}
 \end{frame}
 
@@ -292,7 +283,7 @@ indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
   \frametitle{Display Relative Performance.}
   \begin{figure}
 \centering
-\begin{scriptsize}
+\begin{tiny}
 
 <<Graph6,echo=T,fig=T>>=
 chart.RelativePerformance(managers[ , manager.col, drop = FALSE],
@@ -300,7 +291,7 @@ managers[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc
 = "topleft")
 @
 
-\end{scriptsize}
+\end{tiny}
 \end{figure}
 \end{frame}
 
@@ -310,7 +301,7 @@ managers[ , c(peers.cols, 7)], colorset = tim8equal[-1], lwd = 2, legend.loc
   \frametitle{Compare to a Benchmark.}
   \begin{figure}
 \centering
-\begin{scriptsize}
+\begin{tiny}
 
 <<Graph6a,echo=T,fig=T>>=
 chart.RelativePerformance(managers[ , c(manager.col, peers.cols) ],
@@ -318,7 +309,7 @@ managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc =
 "topleft")
 @
 
-\end{scriptsize}
+\end{tiny}
 \end{figure}
 \end{frame}
 
@@ -335,6 +326,40 @@ Rf.col])
 @
 \end{tiny}
 \end{figure}
+\end{frame}
+
+\section{Methods}
+
+\begin{frame}[shrink=10]
+ \frametitle{Calculate Returns.}
+
+\begin{itemize}
+\item
+The single-period arithmetic return, or simple return, can be calculated as \\
+\begin{equation}
+    R_{t} = \frac{P_{t}}{P_{t-1}} - 1 = \frac{P_{t} - P_{t-1}}{P_{t-1}}
+\end{equation}
+
+\item
+Simple returns, cannot be added together. A multiple-period simple return is calculated as: \\
+\begin{equation}
+    R_{t} = \frac{P_{t}}{P_{t-k}} - 1 = \frac{P_{t} - P_{t-k}}{P_{t-k}}
+\end{equation}
+
+\item
+The natural logarithm of the simple return of an asset is referred to as the continuously compounded return, or \emph{log return}:\\
+\begin{equation}
+    r_{t} = ln(1+R_{t}) = ln \frac{P_{t}}{P_{t-1}} = p_{t} - p_{t-1}
+\end{equation}
+
+\item
+Calculating log returns from simple gross return, or vice versa: \\
+\begin{equation}
+    r_{t} = ln(1 + R_{t}), R_{t} = exp(r_{t}) - 1.
+\end{equation}
+\item
+\emph{Return.calculate} or \emph{CalculateReturns} (now depreciated) may be used to compute discrete and continuously compounded returns for data containing asset prices.
+\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -366,7 +391,7 @@ Rf.col])
 \frametitle{Compare to a Benchmark.}
 \begin{figure}
 \centering
-\begin{scriptsize}
+\begin{tiny}
 
 <<Graph8,echo=T,fig=T>>=
 charts.RollingRegression(managers[, c(manager.col, peers.cols), drop =
@@ -374,7 +399,7 @@ FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
 2)
 @
 
-\end{scriptsize}
+\end{tiny}
 \end{figure}
 \end{frame}
 
@@ -384,13 +409,13 @@ FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
   \frametitle{Calculate Downside Risk.}
   \begin{figure}
 \centering
-\begin{scriptsize}
+\begin{tiny}
 
 <<tableDownside,echo=T>>=
 table.DownsideRisk(managers[,1:6],rf=.03/12)
 @
 
-\end{scriptsize}
+\end{tiny}
 \end{figure}
 \end{frame}
 
@@ -415,7 +440,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
         \item
         Value at Risk (VaR) has become a required standard risk measure recognized by Basel II and MiFID
         \item
-        traditional mean-VaR may be derived historically, or estimated parametrically using \\
+        Traditional mean-VaR may be derived historically, or estimated parametrically using \\
            \begin{equation}
                 z_{c} = q_{p}=qnorm(p)
             \end{equation}
@@ -423,11 +448,11 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
                 VaR=\bar{R} -  z_{c} \cdot \sqrt{\sigma}
             \end{equation}
         \item
-        even with robust covariance matrix or Monte Carlo simulation, mean-VaR is not reliable for non-normal asset distributions
+        Even with robust covariance matrix or Monte Carlo simulation, mean-VaR is not reliable for non-normal asset distributions
         \item
-        for non-normal assets, VaR estimates calculated using GPD (as in VaR.GPD) or Cornish Fisher perform best
+        For non-normal assets, VaR estimates calculated using GPD (as in VaR.GPD) or Cornish Fisher perform best
         \item
-        modified Cornish Fisher VaR takes higher moments of the distribution into account: \\
+        Modified Cornish Fisher VaR takes higher moments of the distribution into account: \\
            \begin{equation}
                 z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}+\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}
             \end{equation}
@@ -435,7 +460,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
                 modVaR =\bar{R} - z_{cf}\sqrt{\sigma}
             \end{equation}
         \item
-        modified VaR also meets the definition of a coherent risk measure per Artzner,et.al.(1997)
+        Modified VaR also meets the definition of a coherent risk measure per Artzner,et.al.(1997)
     \end{itemize}
 \end{frame}
 
@@ -448,25 +473,30 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
     \begin{equation}
         \frac{\sqrt[n]{prod(1+R_{a})^{scale}}-1}{\sqrt{scale}\cdot\sqrt{\sigma}}
     \end{equation}
+
     \item
     Sortino Ratio --- improvement on Sharpe Ration utilizing downside deviation as the measure of risk \\
+
     \begin{equation}
         \frac{(\overline{R_{a} - MAR})}{\delta_{MAR}}
     \end{equation}
+
     \item
     Calmar and Sterling Ratios --- ratio of annualized return (Eq. 1) over the absolute value of the maximum drawdown
     \item
     Sortino's Upside Potential Ratio --- upside semdiviation from MAR over downside deviation from MAR
+
     \begin{equation}
         \frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }
     \end{equation}
+
     \item
     Favre's modified Sharpe Ratio --- ratio of excess return over Cornish-Fisher VaR
+
     \begin{equation}
         \frac{(\overline{R_{a}-R_{f}})}{modVaR_{R_{a},p}}
     \end{equation}
-    \item
-    \emph{NOTE}: The newest measures such as modified Sharpe and Sortino's UPR are far more reliable than older measures, but everyone still seems to look at older measures.
+
   \end{itemize}
 \end{frame}
 
@@ -477,11 +507,11 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
 
   \begin{itemize}
     \item
-        Performance and Risk analysis are greatly facilitated by the use of charts and tables.
+        Performance and risk analysis are greatly facilitated by the use of charts and tables.
     \item
         The display of your infomation is in many cases as important as the analysis.
     \item
-        The observer should have gained a working knowledge of how specific visual techniques may be utilized to aid investment decision making.
+        \emph{PerformanceAnalytics} contains several tool for measuring and visualizing data that may be used to aid investment decision making.
   \end{itemize}
 
   % The following outlook is optional.
@@ -502,19 +532,17 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
     \centering
       \subfigure
           {
-            \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
+%             \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
           }
       \hfill
       \subfigure
           {
-            \includegraphics[totalheight=0.15\textheight,width=.15\textwidth]{Rlogo.jpg}
+%             \includegraphics[totalheight=0.15\textheight,width=.15\textwidth]{Rlogo.jpg}
           }
   \end{figure}
 \end{frame}
 
-\section{Appendix}
-
-\subsection{Set Up PerformanceAnalytics}
+\section{Appendix: Set Up PerformanceAnalytics}
 
 \begin{frame}[fragile]
   \frametitle{Install PerformanceAnalytics.}
@@ -538,12 +566,12 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
   \frametitle{Load and Review Data.}
         % The noweb code must be flush left
         \begin{figure}
-        \begin{scriptsize}
+        \begin{tiny}
 <<LoadData,echo=T>>=
 data(managers)
 head(managers)
 @
-        \end{scriptsize}
+        \end{tiny}
         \end{figure}
 
 \end{frame}
@@ -553,7 +581,7 @@ head(managers)
   \begin{figure}
 
   \begin{center}
-     \begin{scriptsize}
+     \begin{tiny}
 <<CalcDataDimensions,echo=T>>=
 dim(managers)
 managers.length = dim(managers)[1]
@@ -571,7 +599,7 @@ trailing60.rows = ((managers.length - 59):managers.length)
 frInception.rows = (length(managers[,1]) -
 length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
 @
-     \end{scriptsize}
+     \end{tiny}
   \end{center}
   \end{figure}
 \end{frame}
@@ -581,15 +609,13 @@ length(managers[,1][!is.na(managers[,1])]) + 1):length(managers[,1])
   \begin{figure}
 
 \centering
-\begin{scriptsize}
+\begin{tiny}
 <<Graph1,echo=T,fig=T>>=
 charts.PerformanceSummary(managers[,c(manager.col,indexes.cols)],
 colorset=rich6equal, lwd=2, ylog=TRUE)
 @
-\end{scriptsize}
-
+\end{tiny}
 \end{figure}
-
 \end{frame}
 
 \end{document}
