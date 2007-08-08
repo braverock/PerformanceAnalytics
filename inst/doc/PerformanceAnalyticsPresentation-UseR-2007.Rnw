@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.2 2007-08-08 04:59:52 peter Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.3 2007-08-08 15:28:33 peter Exp $
 
 \documentclass[10pt,usletter]{beamer}
 
@@ -358,7 +358,7 @@ Calculating log returns from simple gross return, or vice versa: \\
     r_{t} = ln(1 + R_{t}), R_{t} = exp(r_{t}) - 1.
 \end{equation}
 \item
-\emph{Return.calculate} or \emph{CalculateReturns} (now depreciated) may be used to compute discrete and continuously compounded returns for data containing asset prices.
+\emph{Return.calculate} or \emph{CalculateReturns} (now deprecated) may be used to compute discrete and continuously compounded returns for data containing asset prices.
 \end{itemize}
 \end{frame}
 
@@ -475,7 +475,7 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
     \end{equation}
 
     \item
-    Sortino Ratio --- improvement on Sharpe Ration utilizing downside deviation as the measure of risk \\
+    Sortino Ratio --- improvement on Sharpe Ratio utilizing downside deviation as the measure of risk \\
 
     \begin{equation}
         \frac{(\overline{R_{a} - MAR})}{\delta_{MAR}}
