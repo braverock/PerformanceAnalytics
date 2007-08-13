@@ -42,14 +42,18 @@ edhec.length = dim(edhec)[1]
 start = rownames(edhec[1,])
 end = rownames(edhec[edhec.length,])
 
+edhec.zoo = zoo(edhec,order.by=rownames(edhec))
 rf.zoo = download.RiskFree(start = start, end = end)
-
-Return.excess(edhec[,"Funds.of.Funds"],rf.zoo)
-Return.excess(edhec[,"Long.Short.Equity"],rf.zoo)
-
 sp.zoo = download.SP500PriceReturns(start = start, end = end)
-Return.excess(edhec[,"Funds.of.Funds"],sp.zoo)
-Return.excess(edhec[,"Long.Short.Equity"],sp.zoo)
+
+time(edhec.zoo) = as.yearmon(time(edhec.zoo))
+time(sp.zoo) = as.yearmon(time(sp.zoo))
+time(rf.zoo) = as.yearmon(time(rf.zoo))
+
+Return.excess(edhec.zoo[,"Funds.of.Funds",drop=FALSE],rf.zoo)
+Return.excess(edhec.zoo[,"Long.Short.Equity",drop=FALSE],rf.zoo)
+Return.excess(edhec.zoo[,"Funds.of.Funds",drop=FALSE],sp.zoo)
+Return.excess(edhec.zoo[,"Long.Short.Equity",drop=FALSE],sp.zoo)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
