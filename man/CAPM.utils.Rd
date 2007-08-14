@@ -63,22 +63,22 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
     \code{\link{ActivePremium}}
 }
 \examples{
-data(edhec)
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
+data(managers)
+managers.length = dim(managers)[1]
+start = rownames(managers[1,])
 start
-end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start = start, end = end)
+end = rownames(managers[managers.length,])
+rf = managers[,10,drop=F] 
 
-Rb = edhec[,"Funds.of.Funds",drop=FALSE]
+Rb = managers[,"SP500.TR",drop=FALSE]
 
 CAPM.CML.slope(Rb, rf )
 
-CAPM.CML(edhec[,"Equity.Market.Neutral",drop=FALSE], Rb, rf)
+CAPM.CML(managers[,"HAM1",drop=FALSE], Rb, rf)
 
 CAPM.RiskPremium(Rb, rf)
 
-CAPM.RiskPremium(edhec[,"Equity.Market.Neutral",drop=FALSE], rf)
+CAPM.RiskPremium(managers[,"HAM1",drop=FALSE], rf)
 
 CAPM.SML.slope(Rb, rf)
 
