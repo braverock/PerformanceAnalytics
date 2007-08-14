@@ -38,17 +38,13 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
     \code{\link{SortinoRatio}} \cr
 }
 \examples{
-data(edhec)
-head(edhec[, 6, drop = FALSE])
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-start
-end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start=start, end=end)
+data(managers)
+Ra = managers[, 6, drop = FALSE]
+rf = managers[, 10, drop=FALSE]
 
-SharpeRatio(edhec[, 6, drop = FALSE])
-SharpeRatio(edhec[, 6, drop = FALSE], rf = .04/12)
-SharpeRatio(edhec[, 6, drop = FALSE], rf = rf)
+SharpeRatio(Ra)
+SharpeRatio(Ra, rf = .04/12)
+SharpeRatio(Ra, rf = rf)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
