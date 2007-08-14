@@ -39,8 +39,8 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 }
 \examples{
 data(managers)
-Ra = managers[, 6, drop = FALSE]
-rf = managers[, 10, drop=FALSE]
+Ra = managers[, 1, drop = FALSE]
+rf = managers[, 10, drop = FALSE]
 
 SharpeRatio(Ra)
 SharpeRatio(Ra, rf = .04/12)
