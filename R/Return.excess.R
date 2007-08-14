@@ -30,23 +30,25 @@ function (R, rf)
 
     # Get dimensions and labels
     columns.a = ncol(R)
-    columns.b = ncol(rf)
+#    columns.b = ncol(rf)
     columnnames.a = colnames(R)
-    columnnames.b = colnames(rf)
+#    columnnames.b = colnames(rf)
 
     for(column.a in 1:columns.a) { # for each asset passed in as R
-        for(column.b in 1:columns.b) { # against each asset passed in as Rf
-            R.excess = R[ , column.a, drop=FALSE] - rf[ , column.b, drop=FALSE]
-            if(column.a == 1 & column.b == 1) {
+#        for(column.b in 1:columns.b) { # against each asset passed in as Rf
+            R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
+            if(column.a == 1) { #& column.b == 1
                 result.zoo = R.excess
-                colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
+		colnames(result.zoo) = paste(columnnames.a[column.a])
+ #               colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
             }
             else {
 #                nextcolumn = data.frame(Value = z, row.names = znames)
-                colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
+		colnames(result.zoo) = paste(columnnames.a[column.a])
+#                 colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
                 result.zoo = merge (result.zoo, R.excess)
             }
-        }
+ #       }
     }
 
 
@@ -62,10 +64,13 @@ function (R, rf)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.5 2007-08-14 01:19:40 peter Exp $
+# $Id: Return.excess.R,v 1.6 2007-08-14 21:37:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/08/14 01:19:40  peter
+# - function handles multiple columns for both R and Rf
+#
 # Revision 1.4  2007/05/15 19:47:38  peter
 # - handles multiple column objects
 #
