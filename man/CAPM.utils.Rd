@@ -70,15 +70,15 @@ start
 end = rownames(edhec[edhec.length,])
 rf = download.RiskFree(start = start, end = end)
 
-Rb = edhec[,"Funds.of.Funds"]
+Rb = edhec[,"Funds.of.Funds",drop=FALSE]
 
 CAPM.CML.slope(Rb, rf )
 
-CAPM.CML(edhec[,"Equity.Market.Neutral"], Rb, rf)
+CAPM.CML(edhec[,"Equity.Market.Neutral",drop=FALSE], Rb, rf)
 
 CAPM.RiskPremium(Rb, rf)
 
-CAPM.RiskPremium(edhec[,"Equity.Market.Neutral"], rf)
+CAPM.RiskPremium(edhec[,"Equity.Market.Neutral",drop=FALSE], rf)
 
 CAPM.SML.slope(Rb, rf)
 
