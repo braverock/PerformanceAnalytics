@@ -68,7 +68,7 @@ managers.length = dim(managers)[1]
 start = rownames(managers[1,])
 start
 end = rownames(managers[managers.length,])
-rf = managers[,10,drop=F] 
+rf = managers[,10,drop=FALSE] 
 
 Rb = managers[,"SP500.TR",drop=FALSE]
 
