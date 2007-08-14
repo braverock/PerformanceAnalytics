@@ -1,5 +1,5 @@
 `Return.excess` <-
-function (R, rf)
+function (R, rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -18,11 +18,16 @@ function (R, rf)
 
     # Transform input data to a timeseries (zoo) object
     R = checkData(R, method="zoo")
-
+    reference.name = ""
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to a zoo object.
-    if(!is.null(dim(rf)))
+    if(!is.null(dim(rf))){
         rf = checkData(rf, method = "zoo")
+	reference.name = paste(" > ",colnames(rf),sep="")
+    }
+    else {
+	reference.name = paste(" > ",base::round(rf, 4)*100,"%",sep="")
+    }
 
     ## arithmetic on zoo objects intersects them first
 #    R.excess = R[,1,drop = FALSE] - rf
@@ -39,12 +44,22 @@ function (R, rf)
             R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
             if(column.a == 1) { #& column.b == 1
                 result.zoo = R.excess
-		colnames(result.zoo) = paste(columnnames.a[column.a])
+		if(rf[1] == 0){
+		    colnames(result.zoo) = columnnames.a[column.a]
+		}
+		else {
+		    colnames(result.zoo) = paste(columnnames.a[column.a], reference.name, sep = "")
+		}
  #               colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
             }
             else {
 #                nextcolumn = data.frame(Value = z, row.names = znames)
-		colnames(result.zoo) = paste(columnnames.a[column.a])
+		if(rf == 0){
+		    colnames(result.zoo) = columnnames.a[column.a]
+		}
+		else {
+		    colnames(result.zoo) = paste(columnnames.a[column.a], reference.name, sep = "")
+		}
 #                 colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
                 result.zoo = merge (result.zoo, R.excess)
             }
@@ -64,10 +79,14 @@ function (R, rf)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.6 2007-08-14 21:37:05 peter Exp $
+# $Id: Return.excess.R,v 1.7 2007-08-14 23:20:07 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/08/14 21:37:05  peter
+# - removed support for multiple columns in Rf
+# - now works for numeric Rf
+#
 # Revision 1.5  2007/08/14 01:19:40  peter
 # - function handles multiple columns for both R and Rf
 #
