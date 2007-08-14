@@ -1,4 +1,4 @@
-`table.Returns` <-
+`table.CalendarReturns` <-
 function (R, digits = 1, as.perc = TRUE)
 {# @author Peter Carl
 
@@ -113,10 +113,13 @@ function (R, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.1 2007-08-11 16:57:05 peter Exp $
+# $Id: table.CalendarReturns.R,v 1.2 2007-08-14 21:43:29 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/08/11 16:57:05  peter
+# - replaces table.Returns.R
+#
 # Revision 1.6  2007/04/02 21:55:35  peter
 # - removed column parameter
 #
