@@ -15,9 +15,9 @@ function (Rb, rf = 0 )
 function (Ra, Rb, rf = 0)
 { #@author Brian G. Peterson
 
-    Ra = checkData(Ra, method="vector")
-    Rb = checkData(Rb, method="vector")
-    rf = checkData(rf, method="vector")
+    Ra = checkData(Ra, method="zoo")
+    Rb = checkData(Rb, method="zoo")
+    rf = checkData(rf, method="zoo")
 
     if (length(Ra) != length(Rb))
         stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
@@ -58,10 +58,13 @@ function (Rb, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.3 2007-08-14 20:53:27 peter Exp $
+# $Id: CAPM.utils.R,v 1.4 2007-08-14 21:03:57 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/08/14 20:53:27  peter
+# - changed rf to mean(rf) in CAPM.CML
+#
 # Revision 1.2  2007/03/11 16:53:19  brian
 # - add equations and text to documentation
 # - standardize on Ra as the Return of the Asset
