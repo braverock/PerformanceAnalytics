@@ -37,16 +37,17 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     # FUNCTION:
 
     # Make sure that we have a matrix to work with
-    y = checkData(R, method = "matrix")
+    y = checkData(R, method = "zoo")
 
     # Set up dimensions and labels
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
-    rownames = rownames(y)
+    #rownames = rownames(y)
+    rownames = time(y)
 
     # Re-format the dates for the xaxis
-    rownames = format(strptime(rownames,format = "%Y-%m-%d"), date.format)
+    rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
 
     # If the Y-axis is ln
     logaxis = ""
@@ -72,7 +73,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
     if(is.null(ylim[1])){
-        ylim = range(y[!is.na(y)])
+        ylim = range(na.omit(y))
     }
     plot.window(xlim, ylim, xaxs = "r", log = logaxis)
     dimensions = par("usr")
@@ -172,10 +173,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.4 2007-03-13 04:01:40 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.5 2007-08-14 23:43:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/03/13 04:01:40  peter
+# - added new checkData function
+#
 # Revision 1.3  2007/03/09 03:08:48  peter
 # - fixed y-axis so that ylog could be passed in as a parameter
 #
