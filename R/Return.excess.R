@@ -26,10 +26,32 @@ function (R, rf)
 
     ## arithmetic on zoo objects intersects them first
 #    R.excess = R[,1,drop = FALSE] - rf
-    R.excess = R[drop = FALSE] - rf
+#    R.excess = R[drop = FALSE] - rf # this won't handle multiple columns correctly
+
+    # Get dimensions and labels
+    columns.a = ncol(R)
+    columns.b = ncol(rf)
+    columnnames.a = colnames(R)
+    columnnames.b = colnames(rf)
+
+    for(column.a in 1:columns.a) { # for each asset passed in as R
+        for(column.b in 1:columns.b) { # against each asset passed in as Rf
+            R.excess = R[ , column.a, drop=FALSE] - rf[ , column.b, drop=FALSE]
+            if(column.a == 1 & column.b == 1) {
+                result.zoo = R.excess
+                colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
+            }
+            else {
+#                nextcolumn = data.frame(Value = z, row.names = znames)
+                colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
+                result.zoo = merge (result.zoo, R.excess)
+            }
+        }
+    }
+
 
     # RESULTS:
-    return(R.excess)
+    return(result.zoo)
 }
 
 ###############################################################################
@@ -40,10 +62,13 @@ function (R, rf)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.4 2007-05-15 19:47:38 peter Exp $
+# $Id: Return.excess.R,v 1.5 2007-08-14 01:19:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/05/15 19:47:38  peter
+# - handles multiple column objects
+#
 # Revision 1.3  2007/03/16 13:59:20  peter
 # - added cvs footer
 #
