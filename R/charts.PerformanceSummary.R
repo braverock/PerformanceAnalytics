@@ -28,6 +28,20 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
     colnames = colnames(x)
     ncols = ncol(x)
 
+# This repeats a bit of code from chart.CumReturns, but it's intended
+# to align the start dates of all three charts.  Basically, it assumes
+# that the first column in the list is the column of interest, and 
+# starts everything from that start date
+
+    length.column.one = length(x[,1])
+# find the row number of the last NA in the first column
+    start.row = 1
+    start.index = 0
+    while(is.na(x[start.row,1])){
+        start.row = start.row + 1
+    }
+    x = x[start.row:length.column.one,]
+
     if(ncols > 1)
         legend.loc = "topleft"
     else
@@ -76,10 +90,13 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.12 2007-06-29 15:52:25 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.13 2007-08-15 00:04:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/06/29 15:52:25  peter
+# - removed plot.new() that was causing two page pdf files
+#
 # Revision 1.11  2007/06/18 03:35:22  brian
 # - make method argument a list
 #
