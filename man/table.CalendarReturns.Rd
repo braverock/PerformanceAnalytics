@@ -1,4 +1,5 @@
 \name{table.CalendarReturns}
+\alias{table.CalendarReturns}
 \alias{table.Returns}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Monthly and Calendar year Return table }
@@ -12,9 +13,11 @@ Returns a table of returns formatted with years in rows, months in columns, and 
 2005  2.00  1.28 -1.04 -0.18 1.64  1.91  4.24  1.92 -1.63  1.45 -0.35  0.00  11.68
 2006  2.10    NA    NA    NA   NA    NA    NA    NA    NA    NA    NA    NA   2.10}
 
+NOTE:  the older table.Returns function alias is deprecated, and may be removed in the future
 }
 \usage{
 table.CalendarReturns(R, digits = 1, as.perc = TRUE)
+table.Returns(R, digits = 1, as.perc = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

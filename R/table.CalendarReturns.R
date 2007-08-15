@@ -105,6 +105,13 @@ function (R, digits = 1, as.perc = TRUE)
 
 }
 
+`table.Returns` <-
+function (R, digits = 1, as.perc = TRUE)
+{
+    # deprecated wrapper function
+    table.CalendarReturns(R=R, digits = digits, as.perc = as.perc)
+}
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
@@ -113,10 +120,13 @@ function (R, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.2 2007-08-14 21:43:29 peter Exp $
+# $Id: table.CalendarReturns.R,v 1.3 2007-08-15 20:14:32 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/08/14 21:43:29  peter
+# - fixed the name of the function
+#
 # Revision 1.1  2007/08/11 16:57:05  peter
 # - replaces table.Returns.R
 #
