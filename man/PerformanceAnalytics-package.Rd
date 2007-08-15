@@ -75,7 +75,7 @@ We have covered multiple methods of performance \emph{analysis} in this summary 
 }
 
 \section{Summary Tabular Data}{
-Summary statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic return numbers. Usually these statistics are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.Returns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
+Summary statistics are then the necessary aggregation and reduction of these (potentially thousands) of periodic return numbers. Usually these statistics are most palatable when organized into a table of related statistics, assembled for a particular purpose.  A common offering of past returns organized by month and cumulated by calendar year is usually presented as a table, such as in \code{\link{table.CalendarReturns}}.  Adding benchmarks or peers alongside the annualized data is helpful for comparing returns in calendar years.
 
 When we started this project, we debated whether such tables would be broadly useful or not.  No reader is likely to think that we captured the precise statistics to help their decision. We merely offer these as a starting point for creating your own.  Add, subtract, do whatever seems useful to you.  If you think that your work may be useful to others, please consider sharing it so that we may include it in a future version of this library.
 
