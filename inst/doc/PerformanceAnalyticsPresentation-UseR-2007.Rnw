@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.3 2007-08-08 15:28:33 peter Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.4 2007-08-15 20:05:52 brian Exp $
 
 \documentclass[10pt,usletter]{beamer}
 
@@ -195,7 +195,7 @@ colorset=rich6equal, lwd=2, ylog=TRUE)
     \begin{tiny}
 
 <<CalendarReturns,echo=T>>=
-t(table.Returns( managers[,c(manager.col,indexes.cols)]) )
+t(table.CalendarReturns( managers[,c(manager.col,indexes.cols)]) )
 @
 
     \end{tiny}

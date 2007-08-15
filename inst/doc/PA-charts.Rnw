@@ -396,7 +396,7 @@ of (potentially thousands) of periodic return numbers. Usually these
 statistics are most palatable when organized into a table of related
 statistics, assembled for a particular purpose. A common offering
 of past returns organized by month and accumulated by calendar year
-is usually presented as a table, such as in \code{\link{table.Returns}}.
+is usually presented as a table, such as in \code{\link{table.CalendarReturns}}.
 
 %
 \begin{figure}
@@ -408,7 +408,7 @@ is usually presented as a table, such as in \code{\link{table.Returns}}.
 \begin{center}
 
 <<CalendarReturns,echo=T>>=
-t(table.Returns(managers[,c(manager.col,indexes.cols)]))
+t(table.CalendarReturns(managers[,c(manager.col,indexes.cols)]))
 @
 
 \end{center}
