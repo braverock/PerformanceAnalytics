@@ -31,7 +31,7 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, .
 
         # Test for rows and columns
         if(is.null(ncol(x)))
-            stop("There don't seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
+            stop("There don`t seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
 
         if(is.null(nrow(x)))
             stop("No rows in the data provided.")
@@ -153,9 +153,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.11 2007-04-09 12:31:27 brian Exp $
+# $Id: checkData.R,v 1.12 2007-08-15 20:09:47 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/04/09 12:31:27  brian
+# - syntax and usage changes to pass R CMD check
+#
 # Revision 1.10  2007/04/09 03:18:29  peter
 # - forces column name in single column object
 #
