@@ -20,7 +20,7 @@ function (Ra, Rb, rf = 0)
     rf = checkData(rf, method="zoo")
 
     if (length(Ra) != length(Rb))
-        stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
+        stop("Returns to be assessed have unequal time periods. Are there NAs in the data?")
 
     CML = mean(rf) + CAPM.CML.slope(Rb, rf)*mean(Ra)
 
@@ -58,10 +58,13 @@ function (Rb, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.4 2007-08-14 21:03:57 peter Exp $
+# $Id: CAPM.utils.R,v 1.5 2007-08-15 20:08:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/08/14 21:03:57  peter
+# - changed checkData to use zoo instead of vector
+#
 # Revision 1.3  2007/08/14 20:53:27  peter
 # - changed rf to mean(rf) in CAPM.CML
 #
