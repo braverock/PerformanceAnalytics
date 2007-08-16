@@ -19,7 +19,7 @@ function (Ra, scale = 12, geometric = TRUE )
 
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
+    Ra = checkData(Ra, method="vector")
     Ra = Ra[!is.na(Ra)]
     n = length(Ra)
     #do the correct thing for geometric or simple returns
@@ -40,10 +40,13 @@ function (Ra, scale = 12, geometric = TRUE )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.6 2007-07-14 17:26:36 brian Exp $
+# $Id: Return.annualized.R,v 1.7 2007-08-16 14:10:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/07/14 17:26:36  brian
+# - add handling for geometric=FALSE (simple returns)
+#
 # Revision 1.5  2007/03/14 00:54:06  brian
 # - updates to parameters for standardization
 #
