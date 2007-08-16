@@ -13,27 +13,25 @@ function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    y = checkData(R, method = "matrix")
+    y = checkData(R, method = "zoo")
+    if(!is.null(dim(rf)))
+        rf = checkData(rf, method = "zoo")
 
     # Set up dimensions and labels
     columns = ncol(y)
-    rows = nrow(y)
+    #rows = nrow(y)
     columnnames = colnames(y)
-    rownames = rownames(y)
+    #rownames = rownames(y)
 
     # for each column, do the following:
     for(column in 1:columns) {
-    x = as.vector(y[,column])
-    x.length = length(x)
-    x = x[!is.na(x)]
-    x.na = x.length - length(x)
-    z = c(Return.annualized(x, scale = scale), StdDev.annualized(x, scale = scale), SharpeRatio.annualized(x, scale = scale, rf = rf))
-    znames = c("Annualized Return", "Annualized Std Dev", paste("Annualized Sharpe (rf=",rf*scale*100,"%)", sep="") )
+        z = c(Return.annualized(y[,column,drop=FALSE], scale = scale), StdDev.annualized(y[,column,drop=FALSE], scale = scale), SharpeRatio.annualized(y[,column,drop=FALSE], scale = scale, rf = rf)) 
+        znames = c("Annualized Return", "Annualized Std Dev", paste("Annualized Sharpe (rf=",base::round(mean(rf),4)*scale*100,"%)", sep="") )
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
         }
         else {
-            nextcolumn = data.frame(Value = z, row.names = znames)
+            nextcolumn = data.frame(Value = z, row.names = znames) 
             resultingtable = cbind(resultingtable, nextcolumn)
         }
     }
@@ -50,10 +48,14 @@ function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.5 2007-03-22 14:44:48 peter Exp $
+# $Id: table.AnnualizedReturns.R,v 1.6 2007-08-16 14:41:09 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 14:44:48  peter
+# - uses checkData
+# - eliminated firstcolumn
+#
 # Revision 1.4  2007/02/25 18:23:40  brian
 # - change call to round() to call base::round() to fix conflict with newest fCalendar
 #
