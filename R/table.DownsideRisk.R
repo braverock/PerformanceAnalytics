@@ -14,7 +14,8 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
     #FUNCTION:
 
     y = checkData(R, method="matrix")
-
+    if(!is.null(dim(rf)))
+        rf = checkData(rf, method = "matrix")
     # Set up dimensions and labels
     columns = ncol(y)
     rows = nrow(y)
@@ -24,15 +25,23 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
     # for each column, do the following:
     for(column in 1:columns) {
         x = y[,column]
-        x.length = length(x)
-        x = x[!is.na(x)]
-        x.na = x.length - length(x)
+        # for each column, make sure that R and rf are for the same dates
+        if(!is.null(dim(rf))){ # if rf is a column
+            z = merge(x,rf)
+            zz = na.omit(z)
+            x = zz[,1,drop=FALSE]
+            rf.subset = zz[,2,drop=FALSE]
+        }
+        else { # unless rf is a single number
+            rf.subset = rf
+        }
+
         z = c(
                 DownsideDeviation(x,MAR=mean(x)),
                 sd(subset(x,x>0)),
                 sd(subset(x,x<0)),
                 DownsideDeviation(x,MAR=MAR),
-                DownsideDeviation(x,MAR=rf),
+                DownsideDeviation(x,MAR=rf.subset),
                 DownsideDeviation(x,MAR=0),
                 maxDrawdown(x),
                 VaR.traditional(x, p=p),
@@ -44,7 +53,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
                 "Gain Deviation",
                 "Loss Deviation",
                 paste("Downside Deviation (MAR=",MAR*scale*100,"%)", sep=""),
-                paste("Downside Deviation (rf=",rf*scale*100,"%)", sep=""),
+                paste("Downside Deviation (rf=",base::round(mean(rf.subset),4)*scale*100,"%)", sep=""),
                 paste("Downside Deviation (0%)", sep=""),
                 "Maximum Drawdown",
                 paste("VaR (",p*100,"%)",sep=""),
@@ -83,10 +92,13 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.6 2007-04-10 01:43:38 peter Exp $
+# $Id: table.DownsideRisk.R,v 1.7 2007-08-16 14:47:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/04/10 01:43:38  peter
+# - cleanup to prevent warning about names from checkData
+#
 # Revision 1.5  2007/03/22 14:39:45  peter
 # - uses checkData
 #
