@@ -18,6 +18,11 @@ CalculateReturns(prices, method=c("compound","simple"))
 \value{
 vector or matrix of simple or compound returns
 }
+\details{
+Two requirements should be made clear.  First, the function \code{Return.calculate} assumes regular price data.  In this case, we downloaded monthly close prices.  Prices can be for any time scale, such as daily, weekly, monthly or annual, as long as the data consists of regular observations.  Irregular observations require time period scaling to be comparable.  Fortunately, the \code{\link{aggregate.zoo}} in the \code{\link{zoo}} package supports supports management and conversion of irregular time series.
+
+Second, if corporate actions, dividends, or other adjustments such as time- or money-weighting are to be taken into account, those calculations must be made separately. This is a simple function that assumes fully adjusted close prices as input.  For the IBM timeseries in the example below, dividends and corporate actions are not contained in the "close" price series, so we end up with "price returns" instead of "total returns".  This can lead to significant underestimation of the return series over longer time periods.  To use adjusted returns, specify \code{quote="AdjClose"} in \code{\link{get.hist.quote}}, which is found in package \code{\link{tseries}}.
+}
 \references{ }
 \author{ Peter Carl }
 \seealso{
@@ -25,9 +30,9 @@ vector or matrix of simple or compound returns
 }
 \examples{
 require(tseries)
-prices = get.hist.quote("^gspc", start = "1999-01-01", end = "2007-01-01", quote = "Close", compression = "m")
-returns =Return.calculate(prices, method="simple")
-colnames(returns)="SP500"
+prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
+R.IBM = Return.calculate(prices, method="simple")
+chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
