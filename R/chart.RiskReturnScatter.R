@@ -31,7 +31,9 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
-    x = checkData(R, method = "matrix")
+    x = checkData(R, method = "zoo")
+    if(!is.null(dim(rf)))
+        rf = checkData(rf, method = "zoo")
 
     columns = ncol(x)
     rows = nrow(x)
@@ -139,10 +141,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.4 2007-04-09 12:31:27 brian Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.5 2007-08-16 14:29:16 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/04/09 12:31:27  brian
+# - syntax and usage changes to pass R CMD check
+#
 # Revision 1.3  2007/04/02 21:53:25  peter
 # - changed to checkData function
 #
