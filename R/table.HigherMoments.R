@@ -27,6 +27,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
     # FUNCTION:
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
+    if(!is.null(dim(rf)))
+        rf = checkData(rf, method = "zoo")
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -84,10 +86,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.6 2007-03-22 13:49:42 peter Exp $
+# $Id: table.HigherMoments.R,v 1.7 2007-08-16 14:48:43 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/22 13:49:42  peter
+# - cleaned up comments
+#
 # Revision 1.5  2007/03/22 11:40:08  peter
 # - handles multiple assets and benchmarks
 # - uses checkData
