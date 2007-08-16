@@ -4,7 +4,7 @@ function (filename=stop("Please specify a filename"), frequency=c("m","d","q","i
 
 # A simple wrapper with some defaults for read.zoo
 
-# format is a parameter that says how the data being read is formatted.  Although
+# format.in is a parameter that says how the data being read is formatted.  Although
 # the default is set to the ISO 8601 standard (which can also be set as "%F"),
 # most spreadsheets have less sensible date formats as defaults.
 
@@ -59,8 +59,12 @@ function (filename=stop("Please specify a filename"), frequency=c("m","d","q","i
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.read.R,v 1.1 2007-08-15 03:37:43 peter Exp $
+# $Id: Return.read.R,v 1.2 2007-08-16 14:11:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/08/15 03:37:43  peter
+# - first entry in CVS
+# - wrapper for read.zoo with a few case conditions for setting defaults
+#
 ###############################################################################
