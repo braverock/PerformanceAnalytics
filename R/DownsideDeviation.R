@@ -16,6 +16,10 @@ function (Ra, MAR = 0, method=c("full","subset"))
     # FUNCTION:
 
     Ra = checkData(Ra, method="vector")
+    if(!is.null(dim(MAR)))
+        MAR = mean(checkData(MAR, method = "vector"))
+    # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
+    # subset won't work with zoo objects
     r = subset(Ra,Ra < MAR)
 
     switch(method,
@@ -33,10 +37,15 @@ function (Ra, MAR = 0, method=c("full","subset"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.6 2007-08-03 14:58:26 brian Exp $
+# $Id: DownsideDeviation.R,v 1.7 2007-08-16 14:09:33 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/08/03 14:58:26  brian
+# - add use of length of full series or subset below MAR
+# - set proper values for SemiVariance(subset), and SemiDeviation(full)
+# - allow DownsideDeviation user to choose, default method="full"
+#
 # Revision 1.5  2007/06/21 21:36:08  brian
 # - fixed to use length of entire series, per Platinga, van der Meer, Sortino 2001
 #
