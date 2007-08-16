@@ -93,7 +93,7 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, .
             }
             else {
                 if(!quiet)
-                    warning("Data contains NA's.")
+                    warning("Data contains NA\'s.")
             }
         }
 
@@ -153,9 +153,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.13 2007-08-16 12:57:31 peter Exp $
+# $Id: checkData.R,v 1.14 2007-08-16 12:58:22 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2007/08/16 12:57:31  peter
+# - fix quote format for syntax highlighting
+#
 # Revision 1.12  2007/08/15 20:09:47  brian
 # - fix quote format for sntax highlighting
 #
