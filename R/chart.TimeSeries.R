@@ -73,7 +73,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
     if(is.null(ylim[1])){
-        ylim = range(na.omit(y))
+        ylim = range(y, na.rm=TRUE)
     }
     plot.window(xlim, ylim, xaxs = "r", log = logaxis)
     dimensions = par("usr")
@@ -173,10 +173,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.5 2007-08-14 23:43:50 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.6 2007-08-20 21:06:11 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/08/14 23:43:50  peter
+# - now uses zoo internally and handles yearmon and yearqtr formatting
+#
 # Revision 1.4  2007/03/13 04:01:40  peter
 # - added new checkData function
 #
