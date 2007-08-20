@@ -25,10 +25,17 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
     columns = ncol(x)
     rows = nrow(x)
     columnnames = colnames(x)
-    rownames = rownames(x)
+    rownames = time(x)
+
+    # Re-format the dates for the xaxis
+    rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
+
+    time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
+
     method = method[1] # grab the first value if this is still a vector, to avoid varnings
 
-    risk = zoo(0)
+    risk = zoo(0,order.by=time(x))
+    column.risk = zoo(0,order.by=time(x))
 
     if (!all)
         columns = 1
@@ -71,9 +78,9 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
                 }
             ) # end switch
         if(column == 1)
-            risk = merge(x[,1],column.risk)
+            risk = merge.zoo(x[,1],column.risk)
         else
-            risk = merge(risk,column.risk)
+            risk = merge.zoo(risk,column.risk)
         }
     }
     else {
@@ -110,10 +117,13 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.12 2007-06-25 04:15:59 peter Exp $
+# $Id: chart.BarVaR.R,v 1.13 2007-08-20 21:04:58 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/06/25 04:15:59  peter
+# - made gap default 12 (months)
+#
 # Revision 1.11  2007/06/18 03:33:07  brian
 # - use switch for method argument, more efficient
 #
