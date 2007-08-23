@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), ...)
+function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -43,7 +43,7 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
     x = x[start.row:length.column.one,]
 
     if(ncols > 1)
-        legend.loc = "topleft"
+        legend.loc = legend.loc
     else
         legend.loc = NULL
 
@@ -90,10 +90,14 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.13 2007-08-15 00:04:44 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.14 2007-08-23 02:12:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2007/08/15 00:04:44  peter
+# - aligns the three charts along the start date of the first column of
+# data
+#
 # Revision 1.12  2007/06/29 15:52:25  peter
 # - removed plot.new() that was causing two page pdf files
 #
