@@ -68,17 +68,18 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 rug(x, col = elementcolor)
             },
             add.risk = {
-                h = rep(.2*par("usr")[3] + .8*par("usr")[4], length(b))
-                points(b, h, type='h', col='red',lwd=3)
-                points(b, h, col='red', lwd=3)
-                text(b, h, b.labels, pos=3)
+                h = rep(.2*par("usr")[3] + 1*par("usr")[4], length(b))
+#                points(b, h, type='h', col='red',lwd=3)
+#                points(b, h, col='red', lwd=3)
+                abline(v = b, col = "darkgray", lty=2)
+                text(b, h, b.labels, offset = .2, pos = 2, cex = 0.8, srt=90)
             },
-            add.qqplot = {
-                op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
-                qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".")
-                qqline(x, col="red")
-                box()
-            }
+             add.qqplot = {
+                 op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
+                 qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".")
+                 qqline(x, col="red")
+                 box()
+             }
         ) # end switch
     } # end for
 
@@ -92,10 +93,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.8 2007-06-17 21:42:34 brian Exp $
+# $Id: chart.Histogram.R,v 1.9 2007-08-24 01:43:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/06/17 21:42:34  brian
+# - update /usage and /items to pass check
+#
 # Revision 1.7  2007/06/07 23:42:00  brian
 # - add comments
 #
