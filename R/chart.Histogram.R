@@ -108,7 +108,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
         abline(v = note.lines, col = note.color, lty = 2)
         if(!is.null(note.labels)) {
-            text(x = note.lines,y = ylim[2], label = note.labels, offset = .2, pos = 2, cex = 0.7, srt = 90, col = note.color)
+            text(note.lines, h, note.labels, offset = .2, pos = 2, cex = 0.8, srt = 90, col = note.color)
 
         }
     }
@@ -125,10 +125,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.11 2007-08-24 03:54:54 peter Exp $
+# $Id: chart.Histogram.R,v 1.12 2007-08-24 04:02:51 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/08/24 03:54:54  peter
+# - added arbitrary lines and labels
+# - labeling doesn't work yet
+#
 # Revision 1.10  2007/08/24 03:18:08  peter
 # - added cauchy fit
 #
