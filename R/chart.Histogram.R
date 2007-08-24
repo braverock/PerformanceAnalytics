@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -37,7 +37,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
     b = c(-VaR.CornishFisher(x),-VaR.traditional(x))
     b.labels = c("ModVaR","VaR")
-    xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), b)
+    xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
 
 # Need to add ylim calc up here to capture full cauchy density function, otherwise it won't plot
 # What else needs to be done up here before plotting the histogram?
@@ -102,6 +102,19 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         ) # end switch
     } # end for
 
+    # Draw and label arbitrary lines
+    if(!is.null(note.lines)) {
+        #number.note.labels = ((length(note.labels)-length(note.ind) + 1):length(note.labels))
+
+        abline(v = note.lines, col = note.color, lty = 2)
+        if(!is.null(note.labels)) {
+            text(x = note.lines,y = ylim[2], label = note.labels, offset = .2, pos = 2, cex = 0.7, srt = 90, col = note.color)
+
+        }
+    }
+#                 abline(v = b, col = "darkgray", lty=2)
+#                 text(b, h, b.labels, offset = .2, pos = 2, cex = 0.8, srt=90)
+
 }
 
 ###############################################################################
@@ -112,10 +125,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.10 2007-08-24 03:18:08 peter Exp $
+# $Id: chart.Histogram.R,v 1.11 2007-08-24 03:54:54 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/08/24 03:18:08  peter
+# - added cauchy fit
+#
 # Revision 1.9  2007/08/24 01:43:04  peter
 # - beautified format of vertical lines for add.risk
 #
