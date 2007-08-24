@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, darken = FALSE, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -14,7 +14,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
 # IDEAS
-# add other fits, e.g., cauchy
+# add other fits?
 # add VaR, ModifiedVaR, as vertical lines
 # color the axes
 # differentiate mean and zero normal fits?
@@ -39,7 +39,21 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     b.labels = c("ModVaR","VaR")
     xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), b)
 
-    hist(x = x, probability = TRUE, xlim = xlim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
+# Need to add ylim calc up here to capture full cauchy density function, otherwise it won't plot
+# What else needs to be done up here before plotting the histogram?
+    for (method in methods) {
+        switch(method,
+            add.cauchy = {
+                library(MASS)
+                fitted=fitdistr(x, 'cauchy')
+                xlab = paste("Cauchy(location=",round(fitted$estimate[[1]],2),", scale=",round(fitted$estimate[[2]],2),")")
+                s = quantile(x, probs=seq(0, 1, 0.005))
+                ylim=range(dcauchy(s,location = fitted$estimate[[1]], scale = fitted$estimate[[2]], log = FALSE))
+            }
+        )
+    }
+
+    hist(x = x, probability = TRUE, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
 
     box(col=box.col)
 
@@ -61,8 +75,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 lines(s, dnorm(s, 0, stdev(x)), col = colorset[3], lwd = lwd)
             },
             add.cauchy = {
-                s = quantile(x)
-                lines(s, dcauchy(s,location = 0, scale = 1, log = FALSE), col = colorset[4])
+                # First we have to fit the data to calculate the location and scale parameters (see ylim calc above)
+                # This uses a Maximum Likelihood method as shown on:
+                # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in 
+                # Free Statistics Software (v1.1.21-r4), Office for Research Development and 
+                # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
+
+                lines(s, dcauchy(s,location = fitted$estimate[[1]], scale = fitted$estimate[[2]], log = FALSE), col = colorset[4], lwd=lwd)
             },
             add.rug = {
                 rug(x, col = elementcolor)
@@ -93,10 +112,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.9 2007-08-24 01:43:04 peter Exp $
+# $Id: chart.Histogram.R,v 1.10 2007-08-24 03:18:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/08/24 01:43:04  peter
+# - beautified format of vertical lines for add.risk
+#
 # Revision 1.8  2007/06/17 21:42:34  brian
 # - update /usage and /items to pass check
 #
