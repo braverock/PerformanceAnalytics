@@ -1,9 +1,17 @@
 `sd.multiperiod` <-
 function (x, na.rm=TRUE, periods = 12, ...)
 {
-    x = checkData (x,na.rm=na.rm, method="vector", ...=...)
+    x = checkData (x,na.rm=na.rm, method="matrix", ...=...)
     #scale standard deviation by multiplying by the square root of the number of periods to scale by
-	return(sqrt(periods)*sd(x, na.rm=na.rm))
+    if (is.matrix(x))
+        apply(x, 2, sd.multiperiod, na.rm = na.rm, periods=periods, ...=...)
+    else if (is.vector(x))
+        sqrt(periods)*sd(x, na.rm=na.rm)
+    else if (is.data.frame(x))
+        sapply(x, sd.multiperiod, na.rm = na.rm,periods=periods, ...=...)
+    else sqrt(periods)*sd(x, na.rm=na.rm)
+
+	#return(sapply(x,sqrt(periods)*sd(x, na.rm=na.rm)))
 }
 
 `sd.annualized` <-
@@ -40,10 +48,14 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.9 2007-08-16 14:27:37 peter Exp $
+# $Id: StdDev.annualized.R,v 1.10 2007-08-25 22:55:49 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/08/16 14:27:37  peter
+# - added NA removal default
+# - modified checkData to return a vector
+#
 # Revision 1.8  2007/06/07 23:02:20  brian
 # - update passing of ... into functions
 # - fix scale/periods cut and paste error
