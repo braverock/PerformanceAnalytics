@@ -1,17 +1,14 @@
 `sd.multiperiod` <-
 function (x, na.rm=TRUE, periods = 12, ...)
 {
-    x = checkData (x,na.rm=na.rm, method="matrix", ...=...)
     #scale standard deviation by multiplying by the square root of the number of periods to scale by
-    if (is.matrix(x))
-        apply(x, 2, sd.multiperiod, na.rm = na.rm, periods=periods, ...=...)
-    else if (is.vector(x))
+    if (is.vector(x)) {
+        x = checkData (x,na.rm=na.rm, method="vector", ...=...)
         sqrt(periods)*sd(x, na.rm=na.rm)
-    else if (is.data.frame(x))
-        sapply(x, sd.multiperiod, na.rm = na.rm,periods=periods, ...=...)
-    else sqrt(periods)*sd(x, na.rm=na.rm)
-
-	#return(sapply(x,sqrt(periods)*sd(x, na.rm=na.rm)))
+    } else {
+        x = checkData (x,na.rm=na.rm, method="matrix", ...=...)
+        apply(x, 2, sd.multiperiod, na.rm = na.rm, periods=periods, ...=...)
+    }
 }
 
 `sd.annualized` <-
@@ -48,10 +45,14 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.10 2007-08-25 22:55:49 brian Exp $
+# $Id: StdDev.annualized.R,v 1.11 2007-08-26 09:54:28 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2007/08/25 22:55:49  brian
+# - modify to mimic class behavior of sd function
+#   should handle both single and multicolumn data smoothly now
+#
 # Revision 1.9  2007/08/16 14:27:37  peter
 # - added NA removal default
 # - modified checkData to return a vector
