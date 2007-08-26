@@ -1,9 +1,9 @@
 `sd.multiperiod` <-
 function (x, na.rm=TRUE, periods = 12, ...)
 {
-    #scale standard deviation by multiplying by the square root of the number of periods to scale by
     if (is.vector(x)) {
         x = checkData (x,na.rm=na.rm, method="vector", ...=...)
+        #scale standard deviation by multiplying by the square root of the number of periods to scale by
         sqrt(periods)*sd(x, na.rm=na.rm)
     } else {
         x = checkData (x,na.rm=na.rm, method="matrix", ...=...)
@@ -13,14 +13,14 @@ function (x, na.rm=TRUE, periods = 12, ...)
 
 `sd.annualized` <-
 function (x, na.rm=TRUE, periods = 12, ...)
-{
-	sd.multiperiod(x, na.rm=na.rm, periods = periods, ...=...)
+{   # wrapper function for backwards compatibility
+    sd.multiperiod(x, na.rm=na.rm, periods = periods, ...=...)
 }
 
 `StdDev.annualized` <-
 function (Ra, na.rm=TRUE, scale = 12, ...)
 {   # wrapper function for backwards compatibility
-	sd.multiperiod(Ra, na.rm=na.rm, periods = scale, ...=...)
+    sd.multiperiod(Ra, na.rm=na.rm, periods = scale, ...=...)
 }
 
 ###############################################################################
@@ -45,10 +45,13 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.11 2007-08-26 09:54:28 brian Exp $
+# $Id: StdDev.annualized.R,v 1.12 2007-08-26 10:01:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/08/26 09:54:28  brian
+# - simplify recursion to eliminate possibility of endless loop
+#
 # Revision 1.10  2007/08/25 22:55:49  brian
 # - modify to mimic class behavior of sd function
 #   should handle both single and multicolumn data smoothly now
