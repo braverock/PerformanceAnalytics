@@ -24,7 +24,7 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
     columnnames=colnames(R)
     # FUNCTION:
     for(column in 1:columns) {
-        r = R[,column,drop=FALSE]
+        r = na.omit(R[,column,drop=FALSE])
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
         VaR = VaR.CornishFisher(r, p=p, modified=modified)
@@ -49,9 +49,10 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
         # some backflips to name the single column zoo object
         result = as.numeric(result)
     }
-    else
+    else{
         colnames(result) = columnnames
-
+        rownames(result) = "Beyond VaR"
+    }
     # Return Value:
     result
 }
@@ -64,10 +65,13 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.8 2007-06-24 14:05:38 brian Exp $
+# $Id: VaR.Beyond.R,v 1.9 2007-08-28 14:56:49 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/06/24 14:05:38  brian
+# - add parameter 'add'
+#
 # Revision 1.7  2007/04/10 00:39:56  peter
 # - fixed to provide numeric when single column is passed in
 #
