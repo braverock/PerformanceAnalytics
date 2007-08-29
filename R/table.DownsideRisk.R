@@ -24,7 +24,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 
     # for each column, do the following:
     for(column in 1:columns) {
-        x = y[,column]
+        x = na.omit(y[,column])
         # for each column, make sure that R and rf are for the same dates
         if(!is.null(dim(rf))){ # if rf is a column
             z = merge(x,rf)
@@ -53,7 +53,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
                 "Gain Deviation",
                 "Loss Deviation",
                 paste("Downside Deviation (MAR=",MAR*scale*100,"%)", sep=""),
-                paste("Downside Deviation (rf=",base::round(mean(rf.subset),4)*scale*100,"%)", sep=""),
+                paste("Downside Deviation (rf=",base::round(mean(rf.subset*scale*100),2),"%)", sep=""),
                 paste("Downside Deviation (0%)", sep=""),
                 "Maximum Drawdown",
                 paste("VaR (",p*100,"%)",sep=""),
@@ -92,10 +92,14 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.7 2007-08-16 14:47:40 peter Exp $
+# $Id: table.DownsideRisk.R,v 1.8 2007-08-29 03:17:24 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/08/16 14:47:40  peter
+# - added subset handling for when rf is a time series rather than a point
+# est
+#
 # Revision 1.6  2007/04/10 01:43:38  peter
 # - cleanup to prevent warning about names from checkData
 #
