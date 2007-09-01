@@ -22,10 +22,10 @@ return series adjusted for first order autocorrelation
 The Geltner autocorrelation adjusted return series may be calculated via:
 
 \begin{equation}
- R_{G}=\frac{R_{t}-(R_{t-1}\cdot\psi)}{1-\psi}
+ R_{G}=\frac{R_{t}-(R_{t-1}\cdot\rho_{1})}{1-\rho_{1}}
 \end{equation}
 
-where $\psi$ is the first-order autocorrelation of the return series $R_{a}$ and $R_{t}$ is the return of $R_{a}$ at time $t$ and $R_{t-1}$ is the one-period lagged return.
+where $\rho_{1}$ is the first-order autocorrelation of the return series $R_{a}$ and $R_{t}$ is the return of $R_{a}$ at time $t$ and $R_{t-1}$ is the one-period lagged return.
 
 }
 \references{
