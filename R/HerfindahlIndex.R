@@ -12,7 +12,7 @@ function (Ra, ...)
         # clean the data and get rid of NAs
         Ra = checkData (Ra,na.rm=TRUE, method="vector", ...=...)
         # compute the simple acf
-        Racf=acf(Ra,plot=F)[[1]]
+        Racf=acf(Ra,plot=FALSE)[[1]]
         #break me, compute the squares
         Racf=Racf^2
         # get the subset of positive acf values
@@ -35,8 +35,11 @@ function (Ra, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: HerfindahlIndex.R,v 1.1 2007-08-31 22:12:53 brian Exp $
+# $Id: HerfindahlIndex.R,v 1.2 2007-09-01 03:06:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/08/31 22:12:53  brian
+# - initial revision of Herfindahl autocorrelation index
+#
 ###############################################################################
