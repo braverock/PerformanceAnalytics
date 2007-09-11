@@ -18,7 +18,7 @@ function (Ra, ...)
     for(column.a in 1:columns.a) { # for each asset passed in as R
         column.Ra = zoo(NULL)
         # clean the data and get rid of NAs
-        column.Ra = checkData (Ra[, column.a, drop = FALSE], na.rm = TRUE, method = "zoo", ...=...)
+        column.Ra = na.omit(checkData (Ra[, column.a, drop = FALSE], method = "zoo", ...=...))
         # compute the lagged return series
         lagRa = lag(column.Ra, k=-1)
         # compute the first order autocorrelation
@@ -48,7 +48,7 @@ function (Ra, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.Geltner.R,v 1.2 2007-09-11 02:52:02 peter Exp $
+# $Id: Return.Geltner.R,v 1.3 2007-09-11 03:03:45 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
