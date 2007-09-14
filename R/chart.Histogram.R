@@ -44,7 +44,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     for (method in methods) {
         switch(method,
             add.cauchy = {
-                library(MASS)
+#               requires library(MASS)
                 fitted=fitdistr(x, 'cauchy')
                 xlab = paste("Cauchy(location=",round(fitted$estimate[[1]],2),", scale=",round(fitted$estimate[[2]],2),")")
                 s = quantile(x, probs=seq(0, 1, 0.005))
@@ -125,10 +125,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.12 2007-08-24 04:02:51 peter Exp $
+# $Id: chart.Histogram.R,v 1.13 2007-09-14 02:04:56 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/08/24 04:02:51  peter
+# - labels now work for note.lines
+#
 # Revision 1.11  2007/08/24 03:54:54  peter
 # - added arbitrary lines and labels
 # - labeling doesn't work yet
