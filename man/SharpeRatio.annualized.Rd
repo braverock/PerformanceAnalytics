@@ -49,6 +49,7 @@ start = rownames(edhec[1,])
 start
 end = rownames(edhec[edhec.length,])
 rf = download.RiskFree(start=start, end=end)
+time(rf)=as.yearmon(time(rf))
 
 SharpeRatio.annualized(edhec[, 6, drop = FALSE])
 SharpeRatio.annualized(edhec[, 6, drop = FALSE], rf = .04/12)
