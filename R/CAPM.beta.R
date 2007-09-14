@@ -22,7 +22,7 @@ function (Ra, Rb, rf = 0, digits = 4)
     rf.vec = checkDataVector(rf)
 
     if (length(assetReturns.vec) != length(benchmarkReturns.vec))
-        stop("Returns to be assessed have unequal time periods. Are there NAs in the data?")
+        stop("Returns to be assessed have unequal time periods. Are there NA\'s in the data?")
 
     # Make these excess returns
     assetExcessRet.vec = assetReturns.vec - rf.vec
@@ -44,10 +44,13 @@ function (Ra, Rb, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.7 2007-08-30 12:19:17 brian Exp $
+# $Id: CAPM.beta.R,v 1.8 2007-09-14 02:03:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/08/30 12:19:17  brian
+# - change quoting to clean up syntax
+#
 # Revision 1.6  2007/03/11 16:53:19  brian
 # - add equations and text to documentation
 # - standardize on Ra as the Return of the Asset
