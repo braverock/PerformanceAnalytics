@@ -1,5 +1,5 @@
 \name{charts.PerformanceSummary}
-\alias{charts.PerformanceSummary}
+\alias{chart.PerformanceSummary}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Create combined wealth index, period performance, and drawdown chart }
 \description{
@@ -8,7 +8,8 @@ For a set of returns, create a wealth index chart, bars for monthly performance,
 \usage{
 charts.PerformanceSummary(R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"),
                           width = 0, event.labels = NULL, ylog = FALSE,
-                          wealth.index = FALSE, gap = 12, begin = c("first", "axis"), ...)
+                          wealth.index = FALSE, gap = 12, begin = c("first", "axis"), legend.loc = "topleft",
+                          ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -36,6 +37,7 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR"
   \item{width}{ number of periods to apply rolling function window over }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{legend.loc}{ sets the legend location in the top chart.  Can be set to NULL or nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
