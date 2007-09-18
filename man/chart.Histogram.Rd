@@ -6,7 +6,7 @@
 Create a histogram of returns, with optional curve fits for density and normal.  This is wrapper function for \code{\link[graphics]{hist}}, see the help for that function for additional arguments you may wish to pass in.
 }
 \usage{
-chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, darken = FALSE, ...)
+chart.Histogram(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c(NULL,"add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -34,12 +34,16 @@ chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequen
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
+  \item{ylim}{ set the y-axis limits, same as in \code{\link{plot}} }
   \item{border.col}{ color to use for the border }
   \item{box.col}{ color to use for the box }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{note.lines}{ draws a vertical line through the value given. }
+  \item{note.labels}{ adds a text label to vertical lines specified for note.lines. }
+  \item{note.color}{ specifies the color(s) of the vertical lines drawn. }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
@@ -67,7 +71,7 @@ Code inspired by a chart on:
 \examples{
     #first get some data
     data(edhec)
-    #default chart is too busy
+    #default chart was too busy
     chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE])
 
     # version with more breaks and the standard close fit density distribution
