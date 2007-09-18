@@ -1,5 +1,5 @@
 \name{charts.PerformanceSummary}
-\alias{chart.PerformanceSummary}
+\alias{charts.PerformanceSummary}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Create combined wealth index, period performance, and drawdown chart }
 \description{
