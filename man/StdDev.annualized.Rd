@@ -20,9 +20,9 @@ Note that any multiperiod or annualized number should be viewed with suspicion i
 
 }
 \usage{
-    sd.multiperiod(x, na.rm=FALSE, periods = 12, ...)
-    sd.annualized(x, na.rm=FALSE, periods = 12, ...)
-    StdDev.annualized(Ra, na.rm=FALSE, scale = 12, ...)
+    sd.multiperiod(x, na.rm=TRUE, periods = 12, ...)
+    sd.annualized(x, na.rm=TRUE, periods = 12, ...)
+    StdDev.annualized(Ra, na.rm=TRUE, scale = 12, ...)
     StdDev(Ra)
     std(Ra)
 }
