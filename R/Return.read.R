@@ -1,5 +1,5 @@
 `Return.read` <-
-function (filename=stop("Please specify a filename"), frequency=c("m","d","q","i","o"), format.in=c("ISO8601","excel","oo","gnumeric"), sep=",", header=TRUE, ...)
+function (filename=stop("Please specify a filename"), frequency = c("m","d","q","i","o"), format.in = c("ISO8601","excel","oo","gnumeric"), sep = ",", header = TRUE, check.names = FALSE, ...)
 { # @author Peter Carl
 
 # A simple wrapper with some defaults for read.zoo
@@ -46,7 +46,7 @@ function (filename=stop("Please specify a filename"), frequency=c("m","d","q","i
             FUN = NULL
         }
     )
-    result = read.zoo(filename, sep=sep, format=format, FUN=FUN, header=header, ...)
+    result = read.zoo(filename, sep=sep, format=format, FUN=FUN, header=header, check.names = check.names, ...)
 
     result
 
@@ -59,10 +59,13 @@ function (filename=stop("Please specify a filename"), frequency=c("m","d","q","i
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.read.R,v 1.2 2007-08-16 14:11:44 peter Exp $
+# $Id: Return.read.R,v 1.3 2007-09-24 02:32:31 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/08/16 14:11:44  peter
+# - clarified comments
+#
 # Revision 1.1  2007/08/15 03:37:43  peter
 # - first entry in CVS
 # - wrapper for read.zoo with a few case conditions for setting defaults
