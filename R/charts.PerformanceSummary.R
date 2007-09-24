@@ -48,7 +48,7 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
         legend.loc = NULL
 
     if(is.null(main))
-        main = paste(colnames[1]," Performance")
+        main = paste(colnames[1],"Performance", sep=" ")
 
     if(ylog)
         wealth.index = TRUE
@@ -90,10 +90,14 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.14 2007-08-23 02:12:04 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.15 2007-09-24 02:50:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2007/08/23 02:12:04  peter
+# - added legend.loc as parameter so that legend can be shut off or moved
+# in top chart
+#
 # Revision 1.13  2007/08/15 00:04:44  peter
 # - aligns the three charts along the start date of the first column of
 # data
