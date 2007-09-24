@@ -52,7 +52,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     if(method == "calc"){
         # Assume we're passed in a series of monthly returns.  First, we'll
         # annualized returns and risk
-        comparison = t(table.AnnualizedReturns(x, rf = rf))
+        comparison = t(table.AnnualizedReturns(x[,columns:1], rf = rf))
 
         returns = comparison[,1]
         risk = comparison[,2]
@@ -67,7 +67,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     if(is.null(xlim[1]))
         xlim = c(0, max(risk) + 0.02)
     if(is.null(ylim[1]))
-        ylim = c(0, max(returns) + 0.02)
+        ylim = c(min(c(0,returns)), max(returns) + 0.02)
 
     if(add.boxplots){
         original.layout <- par()
@@ -80,9 +80,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # Draw the principal scatterplot
     plot(returns ~ risk,
         xlab='', ylab='',
-        las = 1, xlim=xlim, ylim=ylim, cex.axis = .8, col = colorset, pch = symbolset, ...)
+        las = 1, xlim=xlim, ylim=ylim, cex.axis = .8, col = colorset[columns:1], pch = symbolset[columns:1], axes= FALSE, ...)
 #     abline(v = 0, col = elementcolor)
-#     abline(h = 0, col = elementcolor)
+    if(ylim[1] != 0){
+        abline(h = 0, col = elementcolor)
+    }
+    axis(1, cex.axis = 0.8, col = elementcolor)
+    axis(2, cex.axis = 0.8, col = elementcolor)
 
     if(!add.boxplots){
         title(ylab = ylab)
@@ -114,7 +118,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     }
 
     #title(sub='From Inception', line=1)
-    box()
+    box(col = elementcolor)
 
     if(add.boxplots){
         # Draw the Y-axis histogram
@@ -141,10 +145,14 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.5 2007-08-16 14:29:16 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.6 2007-09-24 02:49:34 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/08/16 14:29:16  peter
+# - modified checkData to return Zoo object
+# - added checkData to handle Rf as a time series rather than a point est
+#
 # Revision 1.4  2007/04/09 12:31:27  brian
 # - syntax and usage changes to pass R CMD check
 #
