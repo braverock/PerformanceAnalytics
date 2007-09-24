@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", box.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -19,12 +19,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # color the axes
 # differentiate mean and zero normal fits?
 
-    y = checkDataMatrix(R)
-    x = checkDataVector(y[,1])
+    y = checkData(R)
+    x = checkData(na.omit(y[,1]), method="vector")
 
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
+
+    rangedata = 0
 
     if(is.null(main)){
         main = columnnames[1]
@@ -41,8 +43,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
     b = c(-VaR.CornishFisher(x),-VaR.traditional(x))
     b.labels = c("ModVaR","VaR")
-    xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
-
+#     xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
+     rangedata = c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
 # Need to add ylim calc up here to capture full cauchy density function, otherwise it won't plot
 # What else needs to be done up here before plotting the histogram?
     for (method in methods) {
@@ -53,13 +55,26 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 xlab = paste("Cauchy(location=",round(fitted$estimate[[1]],2),", scale=",round(fitted$estimate[[2]],2),")")
                 s = quantile(x, probs=seq(0, 1, 0.005))
                 ylim=range(dcauchy(s,location = fitted$estimate[[1]], scale = fitted$estimate[[2]], log = FALSE))
+                probability = TRUE
+            },
+            add.normal = {
+                probability = TRUE
+            },
+            add.risk = {
+                rangedata = c(rangedata,b)
             }
         )
     }
+    if(!is.null(note.lines)) {
+        rangedata = c(rangedata,note.lines)
+    }
 
-    hist(x = x, probability = TRUE, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, ...)
+    xlim = range(rangedata)
+    hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
+    axis(1, cex.axis = 0.8, col = elementcolor)
+    axis(2, cex.axis = 0.8, col = elementcolor)
 
-    box(col=box.col)
+    box(col=elementcolor)
 
     for (method in methods) {
         switch(method,
@@ -99,9 +114,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             },
              add.qqplot = {
                  op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
-                 qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".")
-                 qqline(x, col="red")
-                 box()
+                 qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".",col=colorset[2])
+                 qqline(x, col=colorset[3])
+                 box(col=elementcolor)
              }
         ) # end switch
     } # end for
@@ -129,10 +144,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.14 2007-09-18 03:24:07 peter Exp $
+# $Id: chart.Histogram.R,v 1.15 2007-09-24 02:35:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2007/09/18 03:24:07  peter
+# - default for methods is now NULL
+#
 # Revision 1.13  2007/09/14 02:04:56  peter
 # - commented need for adding MASS as a dependency
 #
