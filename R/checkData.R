@@ -1,5 +1,5 @@
 `checkData` <-
-function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, ...)
+function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -70,6 +70,10 @@ function (x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, .
 
     if (method == "matrix")
         x = as.matrix(x)
+
+
+    if (method == "data.frame")
+        x = as.data.frame(x)
 
     # Now follows the tests specific to vectors
     if (method == "vector"){
@@ -153,9 +157,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.14 2007-08-16 12:58:22 peter Exp $
+# $Id: checkData.R,v 1.15 2007-09-25 04:29:09 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2007/08/16 12:58:22  peter
+# - fix quote format for sntax highlighting
+#
 # Revision 1.13  2007/08/16 12:57:31  peter
 # - fix quote format for syntax highlighting
 #
