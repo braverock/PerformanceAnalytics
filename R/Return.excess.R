@@ -19,6 +19,7 @@ function (R, rf = 0)
     # Transform input data to a timeseries (zoo) object
     R = checkData(R, method="zoo")
     reference.name = ""
+    result.zoo = zoo(NA)
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to a zoo object.
     if(!is.null(dim(rf))){
@@ -41,25 +42,26 @@ function (R, rf = 0)
 
     for(column.a in 1:columns.a) { # for each asset passed in as R
 #        for(column.b in 1:columns.b) { # against each asset passed in as Rf
+            R.excess = zoo(NA)
             R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
             if(column.a == 1) { #& column.b == 1
+                if(rf[1] == 0){
+                    colnames(R.excess) = columnnames.a[column.a]
+                }
+                else {
+                    colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
+                }
                 result.zoo = R.excess
-		if(rf[1] == 0){
-		    colnames(result.zoo) = columnnames.a[column.a]
-		}
-		else {
-		    colnames(result.zoo) = paste(columnnames.a[column.a], reference.name, sep = "")
-		}
  #               colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
             }
             else {
 #                nextcolumn = data.frame(Value = z, row.names = znames)
-		if(rf == 0){
-		    colnames(result.zoo) = columnnames.a[column.a]
-		}
-		else {
-		    colnames(result.zoo) = paste(columnnames.a[column.a], reference.name, sep = "")
-		}
+                if(rf[1] == 0){
+	                colnames(R.excess) = columnnames.a[column.a]
+                }
+                else {
+	                colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
+                }
 #                 colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
                 result.zoo = merge (result.zoo, R.excess)
             }
@@ -79,10 +81,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.7 2007-08-14 23:20:07 peter Exp $
+# $Id: Return.excess.R,v 1.8 2007-09-26 02:54:58 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/08/14 23:20:07  peter
+# - added conditional labeling to columns
+#
 # Revision 1.6  2007/08/14 21:37:05  peter
 # - removed support for multiple columns in Rf
 # - now works for numeric Rf
