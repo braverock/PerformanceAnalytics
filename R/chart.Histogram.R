@@ -69,7 +69,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         rangedata = c(rangedata,note.lines)
     }
 
-    xlim = range(rangedata)
+    if(is.null(xlim))
+        xlim = range(rangedata)
     hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
     axis(1, cex.axis = 0.8, col = elementcolor)
     axis(2, cex.axis = 0.8, col = elementcolor)
@@ -144,7 +145,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.15 2007-09-24 02:35:22 peter Exp $
+# $Id: chart.Histogram.R,v 1.16 2007-09-26 03:33:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
