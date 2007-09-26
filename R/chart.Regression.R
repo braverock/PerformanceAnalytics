@@ -1,5 +1,5 @@
 `chart.MultiScatter` <-
-function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, ...)
+function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, spline.fit = FALSE, span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = range(Ra, r.loess$y, na.rm = TRUE), evaluation = 50, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -31,7 +31,9 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
     # Transform input data to a data frame
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
-
+    if(!is.null(dim(Rf))){
+        Rf = checkData(Rf, method = "zoo")
+    }
     if(excess.returns){
         Ra = Return.excess(Ra, Rf)
         Rb = Return.excess(Rb, Rf)
@@ -76,21 +78,28 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 
 
             if(column.a == 1 & column.b == 1){
-                plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, ...)
+                plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, axes = FALSE, ...)
             }
             else {
-                plot.xy(merged.assets.df[,c(2,1)], type="p", col = colorset[color.tic], pch = symbolset[color.tic], ...)
+                plot.xy(merged.assets.df[,c(2,1)], type="p", col = colorset[color.tic], pch = symbolset[color.tic], axes = FALSE, ...)
 
             }
             if(linear.fit){
-                abline(lm( merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
+                abline(lm( merged.assets.df[,1] ~ merged.assets.df[,2]), col = colorset[color.tic])
             }
-            if(loess.fit){
+            if(loess.fit){ # see scatter.smooth
                 #r.loess = 0
-                r.loess <- loess(merged.assets.df[,2] ~ merged.assets.df[,1])
-                lines(r.loess$x, r.loess$fitted, col = colorset[color.tic])
+                r.loess = loess.smooth(merged.assets.df[,2], merged.assets.df[,1], span, degree, family, evaluation)
+                lines(r.loess, col = colorset[color.tic], lty = 2)
                 #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
             }
+            if(spline.fit){ 
+                # requires library(pspline)
+                r.spline = sm.spline(merged.assets.df[,2], merged.assets.df[,1], df=4)
+                lines(r.spline, col = colorset[color.tic], lty = 4)
+                #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
+            }
+
             legendnames= c(legendnames, paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to "))
             if (column.b != columns.b)
                 color.tic = color.tic + 1
@@ -100,7 +109,8 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
         abline(h = 0, col = elementcolor)
         abline(v = 0, col = elementcolor)
     }
-
+    axis(1, cex.axis = 0.8, col = elementcolor)
+    axis(2, cex.axis = 0.8, col = elementcolor)
     box(col = elementcolor)
 
     if(!is.null(legend.loc)){
@@ -120,9 +130,12 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.1 2007-04-23 14:35:22 peter Exp $
+# $Id: chart.Regression.R,v 1.2 2007-09-26 03:13:29 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/04/23 14:35:22  peter
+# - scatterplot to handle multiple columns of data
+#
 #
 ###############################################################################
