@@ -84,13 +84,13 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
     axis(1, cex.axis = 0.8, col = elementcolor)
     
 
-    if(names)
-        title(sub=ylab)
-    else
-        title(sub=ylab)
+#     if(names)
+#         title(sub=ylab)
+#     else
+#         title(sub=ylab)
     box(col=elementcolor)
 
-    abline(v=0, lty="dashed",col=elementcolor)
+    abline(v=0, lty="solid",col=elementcolor)
 
     #par(op)
 }
@@ -109,7 +109,7 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Boxplot.R,v 1.3 2007-09-25 04:28:42 peter Exp $
+# $Id: chart.Boxplot.R,v 1.4 2007-09-26 02:56:58 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
