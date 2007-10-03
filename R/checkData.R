@@ -62,9 +62,9 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
     else {
         if(is.null(ncol(x)) & dim(as.matrix(x))[2] == 1) {
             #warning("If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
-            x = as.matrix(x)
-            colnames(x) = "Column"
-            x = zoo(x, order.by = rownames(x))
+            y = as.matrix(x)
+            colnames(y) = "Column"
+            x = zoo(y, order.by = time(x))
         }
     }
 
@@ -157,9 +157,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.15 2007-09-25 04:29:09 peter Exp $
+# $Id: checkData.R,v 1.16 2007-10-03 02:43:06 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2007/09/25 04:29:09  peter
+# - added data.frame as method
+#
 # Revision 1.14  2007/08/16 12:58:22  peter
 # - fix quote format for sntax highlighting
 #
