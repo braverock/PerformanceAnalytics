@@ -47,6 +47,12 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     else
         elementcolor = "lightgray" #better for the screen
 
+    if(length(colorset) < columns)
+        colorset = rep(colorset, length.out = columns)
+
+    if(length(symbolset) < columns)
+        symbolset = rep(symbolset, length.out = columns)
+
     # @todo: add flags to use other risk measures
 
     if(method == "calc"){
@@ -103,7 +109,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
     # Label the data points
     if(add.names)
-        text(x = risk,y = returns, labels = row.names(comparison), adj = -0.1, cex = 0.8, col = colorset)
+        text(x = risk,y = returns, labels = row.names(comparison), adj = -0.1, cex = 0.8, col = colorset[columns:1])
 
     # Add a rug so that data points are easier to identify
     rug(side=1, risk, col = elementcolor)
@@ -145,10 +151,16 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.6 2007-09-24 02:49:34 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.7 2007-10-03 02:46:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/09/24 02:49:34  peter
+# - chart elements now consistent with time series charts
+# - prints columns backwards so that earlier columns printed on top of later
+# - return axis now unbounded below zero, although it will show zero
+# - zero return line drawn if min is not zero
+#
 # Revision 1.5  2007/08/16 14:29:16  peter
 # - modified checkData to return Zoo object
 # - added checkData to handle Rf as a time series rather than a point est
