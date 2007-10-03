@@ -1,5 +1,5 @@
 `charts.RollingPerformance` <-
-function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
+function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, legend.loc=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -36,12 +36,6 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 
     par(mar=c(1,4,4,2))
 
-    if(ncols > 1)
-        legend.loc = "topleft"
-    else
-        legend.loc = NULL
-
-
     # The first row is the annualized returns
     chart.RollingPerformance(R, width = width, main = main, xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, ...)
 
@@ -63,10 +57,13 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.4 2007-06-29 15:53:16 peter Exp $
+# $Id: charts.RollingPerformance.R,v 1.5 2007-10-03 02:44:46 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/06/29 15:53:16  peter
+# - removed plot.new() that was causing two page pdfs
+#
 # Revision 1.3  2007/03/13 04:23:04  peter
 # - changed to checkData function
 # - modified parameters to fit RollingPerformance changes

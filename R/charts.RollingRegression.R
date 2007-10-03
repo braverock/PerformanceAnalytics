@@ -1,4 +1,4 @@
-charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, ...)
+charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, legend.loc = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -28,10 +28,10 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
     columns.a = ncol(Ra)
     columns.b = ncol(Rb)
 
-    if(columns.a > 1 | columns.b > 1)
-        legend.loc = "topleft"
-    else
-        legend.loc = NULL
+#     if(columns.a > 1 | columns.b > 1)
+#         legend.loc = "topleft"
+#     else
+#         legend.loc = NULL
 
 #    plot.new()
 
@@ -62,10 +62,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.11 2007-06-29 15:54:03 peter Exp $
+# $Id: charts.RollingRegression.R,v 1.12 2007-10-03 02:44:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/06/29 15:54:03  peter
+# - removed plot.new() because it was causing two page pdfs
+#
 # Revision 1.10  2007/04/14 15:01:55  brian
 # - standardize Ra as first argument for asset returns
 #
