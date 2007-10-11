@@ -703,7 +703,7 @@ frontier of the market portfolio.
 <<tableCAPM,echo=T>>=
 table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
 managers[ trailing36.rows, 8, drop=FALSE],
-rf = managers[ trailing36.rows, Rf.col])
+rf = managers[ trailing36.rows, Rf.col, drop=FALSE])
 @
 \end{figure}
 
