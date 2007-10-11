@@ -24,7 +24,7 @@ function (Ra, MAR = 0, method=c("full","subset"))
 
     switch(method,
         full   = {len = length(Ra)},
-        subset = {len = length(R)}
+        subset = {len = length(r)} #previously length(R)
     ) # end switch
     return(sqrt(sum((r - MAR)^2)/len))
 }
@@ -37,10 +37,13 @@ function (Ra, MAR = 0, method=c("full","subset"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.7 2007-08-16 14:09:33 peter Exp $
+# $Id: DownsideDeviation.R,v 1.8 2007-10-11 03:22:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/08/16 14:09:33  peter
+# - added checkData for MAR in case it is a vector of Rf
+#
 # Revision 1.6  2007/08/03 14:58:26  brian
 # - add use of length of full series or subset below MAR
 # - set proper values for SemiVariance(subset), and SemiDeviation(full)
