@@ -37,9 +37,9 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
                 column.result = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) summary(lm(x[,1,drop=FALSE]~x[,2,drop=FALSE]))$r.squared, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
 
             # some backflips to name the single column zoo object
-            column.result = as.matrix(column.result)
-            colnames(column.result) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
-            column.result = zoo(column.result, order.by = rownames(column.result))
+            column.result.tmp = as.matrix(column.result)
+            colnames(column.result.tmp) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
+            column.result = zoo(column.result.tmp, order.by = time(column.result))
 
             if(column.a == 1 & column.b == 1)
                 Result.calc = column.result
@@ -60,10 +60,13 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.12 2007-04-14 15:01:03 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.13 2007-10-11 03:53:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/04/14 15:01:03  brian
+# - standardize Ra as first argument for asset returns
+#
 # Revision 1.11  2007/04/14 15:00:08  brian
 # - make 'attribute' an enumerated argument
 #
