@@ -41,7 +41,8 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
             columns = ncol(x)
             if(!quiet)
                 warning("No column names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
-            columnnames = for(column in 1:columns) {paste("Column.",column,sep="")}
+            columnnames = NULL
+            for(column in 1:columns) {columnnames = c(columnnames, paste("Column.",column,sep=""))}
             colnames(x) = columnnames
         }
 
@@ -157,9 +158,13 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.16 2007-10-03 02:43:06 peter Exp $
+# $Id: checkData.R,v 1.17 2007-10-18 13:56:53 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2007/10/03 02:43:06  peter
+# - single column zoo objects will have the time class and order preserved
+# - yearmon class should be ordered correctly as a result
+#
 # Revision 1.15  2007/09/25 04:29:09  peter
 # - added data.frame as method
 #
