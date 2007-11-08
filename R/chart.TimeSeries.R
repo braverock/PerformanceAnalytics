@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab=NULL, xlab="Date", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
+function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = "Title", ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -44,11 +44,11 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     rows = nrow(y)
     columnnames = colnames(y)
     #rownames = rownames(y)
-    rownames = time(y)
+    rownames = as.Date(time(y))
 
     # Re-format the dates for the xaxis
-    rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
-
+#     rownames = format(strptime(as.Date(rownames),format = date.format.in), date.format)
+    rownames = format(strptime(rownames,format = date.format.in), date.format)
     # If the Y-axis is ln
     logaxis = ""
     if(ylog) {
@@ -173,10 +173,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.6 2007-08-20 21:06:11 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.7 2007-11-08 05:04:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/08/20 21:06:11  peter
+# - using range function's na.rm flag to get correct NA behavior
+#
 # Revision 1.5  2007/08/14 23:43:50  peter
 # - now uses zoo internally and handles yearmon and yearqtr formatting
 #
