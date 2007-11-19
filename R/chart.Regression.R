@@ -1,5 +1,5 @@
 `chart.MultiScatter` <-
-function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, spline.fit = FALSE, span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = range(Ra, r.loess$y, na.rm = TRUE), evaluation = 50, ...)
+function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, spline.fit = FALSE, span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, cex= .8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -49,7 +49,7 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
     if(is.na(xlim[1]))
         xlim = range(as.vector(na.omit(Rb)))
     if(is.na(ylim[1]))
-        ylim = range(as.vector(na.omit(Ra)))
+        ylim = range(as.vector(na.omit(Ra))) #range(Ra, r.loess$y, na.rm = TRUE)
     if(is.null(xlab)){
         if(excess.returns)
             xlab = "Excess Return of Benchmarks"
@@ -78,10 +78,10 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 
 
             if(column.a == 1 & column.b == 1){
-                plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, axes = FALSE, ...)
+                plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, axes = FALSE, cex = cex, ...)
             }
             else {
-                plot.xy(merged.assets.df[,c(2,1)], type="p", col = colorset[color.tic], pch = symbolset[color.tic], axes = FALSE, ...)
+                plot.xy(merged.assets.df[,c(2,1)], type="p", col = colorset[color.tic], pch = symbolset[color.tic], cex = cex,  ...)
 
             }
             if(linear.fit){
@@ -109,14 +109,14 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
         abline(h = 0, col = elementcolor)
         abline(v = 0, col = elementcolor)
     }
-    axis(1, cex.axis = 0.8, col = elementcolor)
-    axis(2, cex.axis = 0.8, col = elementcolor)
+    axis(1, col = elementcolor, ...)
+    axis(2, col = elementcolor, ...)
     box(col = elementcolor)
 
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, pch = symbolset, cex = .8, border.col = elementcolor, lwd = 1, bg = "white", legend = legendnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, pch = symbolset, cex=cex, border.col = elementcolor, lwd = 1, bg = "white", legend = legendnames)
     }
 
     }
@@ -130,10 +130,14 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.2 2007-09-26 03:13:29 peter Exp $
+# $Id: chart.Regression.R,v 1.3 2007-11-19 03:38:07 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/09/26 03:13:29  peter
+# - added a spline fit
+# - switched the order of the lowess fit variables
+#
 # Revision 1.1  2007/04/23 14:35:22  peter
 # - scatterplot to handle multiple columns of data
 #
