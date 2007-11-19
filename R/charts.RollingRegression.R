@@ -1,4 +1,4 @@
-charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, legend.loc = NULL, ...)
+charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, legend.loc = NULL, event.labels=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -42,15 +42,15 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
          main = paste("Rolling ",width,"-Month Regression",sep="")
     }
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, event.labels = NULL, ...)
 
     par(mar=c(5,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", event.labels = NULL, ...)
 
 }
 
@@ -62,10 +62,14 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.12 2007-10-03 02:44:10 peter Exp $
+# $Id: charts.RollingRegression.R,v 1.13 2007-11-19 03:43:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/10/03 02:44:10  peter
+# - legend will be hidden by default
+# - legend location can be passed in through legend.loc parameter
+#
 # Revision 1.11  2007/06/29 15:54:03  peter
 # - removed plot.new() because it was causing two page pdfs
 #
