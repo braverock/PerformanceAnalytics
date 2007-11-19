@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -44,7 +44,10 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     b = c(-VaR.CornishFisher(x),-VaR.traditional(x))
     b.labels = c("ModVaR","VaR")
 #     xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
-     rangedata = c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
+    if(show.outliers)
+        rangedata = c(min(x),max(x))
+    else
+        rangedata =  c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
 # Need to add ylim calc up here to capture full cauchy density function, otherwise it won't plot
 # What else needs to be done up here before plotting the histogram?
     for (method in methods) {
@@ -81,7 +84,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         switch(method,
             add.density = {
                 # Show density estimate
-                den = density(x)
+                den = density(x, n=length(x))
                 lines(den, col = colorset[2], lwd = lwd)
             },
             add.normal = {
@@ -128,6 +131,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
         abline(v = note.lines, col = note.color, lty = 2)
         if(!is.null(note.labels)) {
+            h = rep(.2*par("usr")[3] + 1*par("usr")[4], length(b))
             text(note.lines, h, note.labels, offset = .2, pos = 2, cex = 0.8, srt = 90, col = note.color)
 
         }
@@ -145,10 +149,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.16 2007-09-26 03:33:12 peter Exp $
+# $Id: chart.Histogram.R,v 1.17 2007-11-19 03:40:46 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2007/09/26 03:33:12  peter
+# - no longer clobbers xlim when passed in from function
+#
 # Revision 1.14  2007/09/18 03:24:07  peter
 # - default for methods is now NULL
 #
