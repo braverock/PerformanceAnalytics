@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p=0.99, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -41,8 +41,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     else
         elementcolor = "lightgray" #better for the screen
 
-    b = c(-VaR.CornishFisher(x),-VaR.traditional(x))
-    b.labels = c("ModVaR","VaR")
+    b = c(-VaR.CornishFisher(x,p=p),-VaR.traditional(x,p=p))
+    b.labels = c(paste(p*100,"% ModVaR",sep=" "),paste(p*100,"% VaR",sep=""))
 #     xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
     if(show.outliers)
         rangedata = c(min(x),max(x))
@@ -149,10 +149,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.17 2007-11-19 03:40:46 peter Exp $
+# $Id: chart.Histogram.R,v 1.18 2007-11-20 21:19:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2007/11/19 03:40:46  peter
+# - smoothed out the density line for smaller data sets
+# - added parameter for showing all data points rather than center
+#
 # Revision 1.16  2007/09/26 03:33:12  peter
 # - no longer clobbers xlim when passed in from function
 #
