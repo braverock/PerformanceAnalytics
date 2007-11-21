@@ -39,7 +39,7 @@ function (R, colorset = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00",
 
         # Skew Student-T Quantile-Quantile Plot:
         y = qst(c(1:n)/(n+1))
-        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, ...)
+        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, main=main, ...)
         q.theo = qst(c(0.25,0.75))
     }
     if(distribution == "cauchy") {
@@ -49,7 +49,7 @@ function (R, colorset = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00",
 
         # Skew Student-T Quantile-Quantile Plot:
         y = qcauchy(c(1:n)/(n+1))
-        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, ...)
+        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, main=main, ...)
         q.theo = qcauchy(c(0.25,0.75))
     }
     if(distribution == "lnorm") {
@@ -59,7 +59,7 @@ function (R, colorset = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00",
 
         # Skew Student-T Quantile-Quantile Plot:
         y = qlnorm(c(1:n)/(n+1))
-        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, ...)
+        qqplot(y, x, xlab = xlab, ylab = ylab, axes=FALSE, main=main, ...)
         q.theo = qlnorm(c(0.25,0.75))
     }
 
@@ -84,7 +84,7 @@ function (R, colorset = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00",
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.QQPlot.R,v 1.4 2007-11-21 05:31:28 peter Exp $
+# $Id: chart.QQPlot.R,v 1.5 2007-11-21 05:32:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
