@@ -93,8 +93,10 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             }
         )
     }
-    ylim = c(0,max(yrange))
 
+    yrange = c(yrange, max(hist(x, plot = FALSE)$intensities))
+    ylim = c(0,ceiling(max(yrange)))
+    
     hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
     axis(1, cex.axis = 0.8, col = elementcolor)
     axis(2, cex.axis = 0.8, col = elementcolor)
@@ -168,7 +170,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.22 2007-11-22 05:18:46 peter Exp $
+# $Id: chart.Histogram.R,v 1.23 2007-11-22 05:32:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
