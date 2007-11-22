@@ -70,7 +70,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in 
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and 
                 # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
-                fit=fitdistr(x, 'cauchy')
+                fit = fitdistr(x, 'cauchy')
                 xlab = paste("Cauchy (location = ",round(fit$estimate[[1]],2),", scale = ",round(fit$estimate[[2]],2),")", sep="")
                 fitted.cauchy = dcauchy(s,location = fit$estimate[[1]], scale = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.cauchy))
@@ -79,8 +79,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             add.sst = {
 #               requires library(sn)
                 fit = st.mle(y=x)
-                fitted.sst = dst(s, location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log=F)
+                fitted.sst = dst(s, location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log = FALSE)
                 yrange=c(yrange,max(fitted.sst))
+                probability = TRUE
+            },
+            add.lnorm = {
+                fit = fitdistr(x,'log-normal')
+                fitted.lnorm = dlnorm(s, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]], log = FALSE)
+                yrange=c(yrange,max(fitted.lnorm))
                 probability = TRUE
             },
             add.normal = {
@@ -119,6 +125,10 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             add.centered = {
                 # Show normal distribution around 0
                 lines(s, fitted.centered, col = colorset[3], lwd = lwd)
+            },
+            add.lnorm = {
+                # Show normal distribution around the mean
+                lines(s, fitted.lnorm, col = colorset[4], lwd = lwd)
             },
             add.cauchy = {
                 lines(s, fitted.cauchy, col = colorset[4], lwd=lwd)
@@ -169,7 +179,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.20 2007-11-22 04:55:56 peter Exp $
+# $Id: chart.Histogram.R,v 1.21 2007-11-22 05:16:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
