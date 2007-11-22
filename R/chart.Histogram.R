@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, darken = FALSE, note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p=0.99, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor="gray", note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p=0.99, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,12 +12,6 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
-
-# IDEAS
-# add other fits?
-# add VaR, ModifiedVaR, as vertical lines
-# color the axes
-# differentiate mean and zero normal fits?
 
     y = checkData(R)
     x = checkData(na.omit(y[,1]), method="vector")
@@ -35,11 +29,6 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     if(is.null(methods) || methods[1]=="none"){
         methods = NULL
     }
-
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
 
     b = c(-VaR.CornishFisher(x,p=p),-VaR.traditional(x,p=p))
     b.labels = c(paste(p*100,"% ModVaR",sep=" "),paste(p*100,"% VaR",sep=""))
@@ -179,7 +168,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.21 2007-11-22 05:16:05 peter Exp $
+# $Id: chart.Histogram.R,v 1.22 2007-11-22 05:18:46 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
