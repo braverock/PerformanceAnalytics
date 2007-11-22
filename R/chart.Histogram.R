@@ -71,7 +71,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and 
                 # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
                 fit=fitdistr(x, 'cauchy')
-                xlab = paste("Cauchy(location=",round(fit$estimate[[1]],2),", scale=",round(fit$estimate[[2]],2),")")
+                xlab = paste("Cauchy (location = ",round(fit$estimate[[1]],2),", scale = ",round(fit$estimate[[2]],2),")", sep="")
                 fitted.cauchy = dcauchy(s,location = fit$estimate[[1]], scale = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.cauchy))
                 probability = TRUE
@@ -169,7 +169,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.19 2007-11-22 04:52:20 peter Exp $
+# $Id: chart.Histogram.R,v 1.20 2007-11-22 04:55:56 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
