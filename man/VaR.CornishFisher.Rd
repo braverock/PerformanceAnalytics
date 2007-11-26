@@ -38,23 +38,21 @@ Parametric mean-VaR does a better job of accounting for the tails of the distrib
 
 \deqn{\sigma=variance(R)}
 
-\deqn{VaR=\bar{R} -  q_{.99} \cdot \sqrt{\sigma}}
+\deqn{VaR=\bar{R} -  \sigma \cdot q_{c} }
 
-where \eqn{q_{.99}} is the 99\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
+where \eqn{q_{c}} is the $c$\% quantile of the distribution. Represented in \R by \code{qnorm(1-p)}
 
 Other forms of parametric mean-VaR estimation utilize a different distribution for the distribution of losses \eqn{\mu} to better account for the possible fat-tailed nature of downside risk. The package \code{VaR} contains methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}} and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size or on potentially fat-tailed distributions.  There is also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods to create a more robust estimate of the potential distribution of losses. Less commonly a covariance matrix of multiple risk factors may be applied.
 
-The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Favre and Galeano(2002) provide a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account through the use of a Cornish Fisher expansion, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
+The limitations of mean Value-at-Risk are well covered in the literature. The limitations of traditional mean-VaR are all related to the use of a symetrical distribution function.  Use of simulations, resampling, or Pareto distributions all help in making a more accurate prediction, but they are still flawed for assets with significantly non-normal (skewed or kurtotic) distributions. Zangari (1996) and Favre and Galeano(2002) provide a modified VaR calculation that takes the higher moments of non-normal distributions (skewness, kurtosis) into account through the use of a Cornish Fisher expansion, and collapses to standard (traditional) mean-VaR if the return stream follows a standard distribution. This measure is now widely cited and used in the literature, and is usually referred to as \dQuote{Modified VaR} or \dQuote{Modified Cornish-Fisher VaR}.They arrive at their modified VaR calculation in the following manner:
 
-\deqn{z_{c} = q_{p}=qnorm(p)}
+\deqn{z_{cf}=q_{c}+\frac{(q_{c}^{2}-1)S}{6}+\frac{(q_{c}^{3}-3q_{c})K}{24}-\frac{(2q_{c}^{3}-5q_{c})S^{2}}{36}}
 
-\deqn{S= skewness(R)}
+\deqn{modVaR =\bar{R} - \sigma \cdot z_{cf}}
 
-\deqn{K = kurtosis(R)}
+where $S$ is the skewness of $R$ and $K$ is the excess kurtosis of $R$.
 
-\deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}-\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}
 
-\deqn{modVaR =\bar{R} - z_{cf}\sqrt{\sigma}}
 
 Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.
 
@@ -64,13 +62,15 @@ Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the re
 VaR measure
 }
 \references{
+Zangari, Peter. A VaR Methodology for Portfolios that include Options. 1996. RiskMetrics Monitor, First Quarter, 4-12.
+
 Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
 
 Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida, Working paper, 1999.
 }
 \author{ Brian G. Peterson }
 \note{
-The prototype of the Cornish Fisher VaR function was completed by Diethelm Wuertz.  All corrections to the calculation and error handling ar the fault of Brian Peterson.
+The prototype of the Cornish Fisher VaR function was completed by Prof. Diethelm Wuertz.  All corrections to the calculation and error handling are the fault of Brian Peterson.
 }
 \seealso{
     \code{\link{VaR.Beyond}}  \cr
