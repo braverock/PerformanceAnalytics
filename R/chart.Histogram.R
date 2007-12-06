@@ -43,18 +43,27 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     yrange = 0
     if(is.null(xlim))
         xlim = range(rangedata)
-# Need to add ylim calc up here to capture full cauchy density function, otherwise it won't plot
-# What else needs to be done up here before plotting the histogram?
+
     s = seq(xlim[1], xlim[2], length = 500)
 
+    # Things to do before the plot is drawn
     for (method in methods) {
         switch(method,
             add.density = {
                 # Show density estimate
                 den = density(x, n=length(x))
             },
+            add.stable = {
+                if (!require("fBasics")) stop("fBasics package not available")
+                fit.stable = stableFit(x,doplot=F)
+                fitted.stable = dstable(s,alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
+                # look at documentation for pm
+                yrange=c(yrange,max(fitted.stable))
+                probability = TRUE
+            },
             add.cauchy = {
 #               requires library(MASS)
+                if (!require("MASS")) stop("MASS package not available")
                 # This uses a Maximum Likelihood method as shown on:
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in 
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and 
@@ -73,8 +82,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.lnorm = {
-                fit = fitdistr(x,'log-normal')
-                fitted.lnorm = dlnorm(s, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]], log = FALSE)
+                fit = fitdistr(1+x,'log-normal')
+                fitted.lnorm = dlnorm(1+s, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.lnorm))
                 probability = TRUE
             },
@@ -94,6 +103,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         )
     }
 
+    # Draw the plot
     yrange = c(yrange, max(hist(x, plot = FALSE)$intensities)*1.1)
     ylim = c(0,ceiling(max(yrange)))
     
@@ -103,6 +113,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
     box(col=elementcolor)
 
+    # Things to do after the plot is drawn
     for (method in methods) {
         switch(method,
             add.density = {
@@ -123,6 +134,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             },
             add.cauchy = {
                 lines(s, fitted.cauchy, col = colorset[4], lwd=lwd)
+            },
+            add.stable = {
+                lines(s, fitted.stable, col = colorset[4], lwd=lwd)
             },
             add.sst = { #requires package sn
                 lines(s, fitted.sst, col = colorset[4], lwd=lwd)
@@ -170,10 +184,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.24 2007-11-23 04:28:01 peter Exp $
+# $Id: chart.Histogram.R,v 1.25 2007-12-06 21:39:58 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.24  2007/11/23 04:28:01  peter
+# - added margin to histogram bars for ylim
+#
 # Revision 1.17  2007/11/19 03:40:46  peter
 # - smoothed out the density line for smaller data sets
 # - added parameter for showing all data points rather than center
