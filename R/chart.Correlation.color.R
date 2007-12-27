@@ -1,5 +1,5 @@
 `chart.Correlation.color` <-
-function (R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1, title = "", ...)
+function (R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1, title = "", use="pairwise.complete.obs", ...)
 { # @author Sandrine Dudoit, sandrine@stat.berkeley.edu, from "SMA" library
   # @author modified by Peter Carl
 
@@ -33,7 +33,7 @@ function (R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1, title = "", 
         res
     }
 
-    x = cor(R)
+    x = cor(R, use = use)
 
     n <- ncol(x)
     corr <- x
@@ -69,10 +69,13 @@ function (R, new = FALSE, nrgcols = 50, labels = TRUE, labcols = 1, title = "", 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Correlation.color.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: chart.Correlation.color.R,v 1.3 2007-12-27 18:45:24 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
