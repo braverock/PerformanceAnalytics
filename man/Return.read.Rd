@@ -6,7 +6,10 @@
   ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-Return.read(filename = stop("Please specify a filename"), frequency = c("m", "d", "q", "i", "o"), format.in = c("ISO8601", "excel", "oo", "gnumeric"), sep = ",", header = TRUE, ...)
+Return.read(filename = stop("Please specify a filename"),
+                 frequency = c("m", "d", "q", "i", "o"), format.in =
+                 c("ISO8601", "excel", "oo", "gnumeric"), sep = ",",
+                 header = TRUE, check.names = FALSE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,7 +32,7 @@ Return.read(filename = stop("Please specify a filename"), frequency = c("m", "d"
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
