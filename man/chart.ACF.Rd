@@ -1,5 +1,6 @@
 \name{chart.ACF}
 \alias{chart.ACF}
+\alias{chart.ACFplus}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
@@ -7,14 +8,16 @@
 }
 \usage{
 chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
+chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{maxlag}{ ~~Describe \code{maxlag} here~~ }
   \item{elementcolor}{ ~~Describe \code{elementcolor} here~~ }
   \item{main}{ ~~Describe \code{main} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
@@ -28,7 +31,7 @@ chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -39,18 +42,18 @@ chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (R, maxlag = NULL, elementcolor = "gray", main = NULL, 
-    ...) 
+function (R, maxlag = NULL, elementcolor = "gray", main = NULL,
+    ...)
 {
     R = checkData(R)
     data = checkData(R[, 1], method = "vector", na.rm = TRUE)
     columns = ncol(R)
     rows = nrow(R)
     columnnames = colnames(R)
-    if (is.null(main)) 
+    if (is.null(main))
         main = columnnames[1]
     num = length(data)
-    if (is.null(maxlag)) 
+    if (is.null(maxlag))
         maxlag = ceiling(10 + sqrt(num))
     ACF = acf(data, maxlag, plot = FALSE)$acf[-1]
     Lag = 1:length(ACF)/frequency(data)
@@ -58,7 +61,7 @@ function (R, maxlag = NULL, elementcolor = "gray", main = NULL,
     U = 2/sqrt(num)
     L = -U
     minu = min(minA, L) - 0.01
-    plot(Lag, ACF, type = "h", ylim = c(minu, 1), main = main, 
+    plot(Lag, ACF, type = "h", ylim = c(minu, 1), main = main,
         axes = FALSE, ...)
     box(col = elementcolor)
     axis(2, col = elementcolor, cex.axis = 0.8)
