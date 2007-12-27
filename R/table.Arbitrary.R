@@ -47,22 +47,29 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
 
     # FUNCTION:
 
-    y = checkDataMatrix(R)
+    y = checkData(R)
+
+    # Set up dimensions and labels
+    columns = ncol(y)
+    rows = nrow(y)
+    columnnames = colnames(y)
+    rownames = rownames(y)
 
     # for each column, do the following:
     for(column in 1:columns) {
 #     x = as.vector(y[,column])
-    x = as.matrix(y[,column])
-    x.length = length(x)
-    x = x[!is.na(x)]
-    x.na = x.length - length(x)
+        x = as.matrix(y[,column])
+#         x.length = length(x)
+#         x = x[!is.na(x)]
+#         x.na = x.length - length(x)
 
         # apply the calculations
         values = vector('numeric', 0)
-    for(metric in metrics) {
+
+        for(metric in metrics) {
 #        values = c(values,metric)
             # I'm not quite sure why this requires the as.matrix() coersion
-            newvalue = apply(as.matrix(x), MARGIN = 2, FUN = metric, ...)
+            newvalue = apply(x, MARGIN = 2, FUN = metric, ...)
             values = c(values,newvalue)
         }
 
@@ -87,10 +94,13 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Arbitrary.R,v 1.2 2007-02-07 13:24:49 brian Exp $
+# $Id: table.Arbitrary.R,v 1.3 2007-12-27 20:46:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/02/07 13:24:49  brian
+# - fix pervasive comment typo
+#
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
 # Bug 890
