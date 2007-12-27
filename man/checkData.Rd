@@ -9,7 +9,7 @@
 This function was created to make the different kinds of data classes at least emph{seem} more fungible.  It allows the user to pass in a data object without being concerned that the function requires a matrix, data.frame, or timeSeries object.  By using this, the function "knows" what data format it has to work with.
 }
 \usage{
-checkData(x, method = c("zoo","matrix","vector"), na.rm = FALSE, quiet = TRUE, ...)
+checkData(x, method = c("zoo", "matrix", "vector","data.frame"), na.rm = FALSE, quiet = TRUE, ...)
 checkDataMatrix(x, na.rm = TRUE, quiet = TRUE, ...)
 checkDataVector(x, na.rm = TRUE, quiet = TRUE, ...)
 checkDataZoo(x, na.rm = TRUE, quiet = TRUE, ...)

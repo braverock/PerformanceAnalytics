@@ -6,7 +6,8 @@
 A wrapper to create a rolling annualized returns chart, rolling annualized standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
 \usage{
-charts.RollingPerformance(R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, ...)
+charts.RollingPerformance(R, width = 12, rf = 0, main = NULL, trim = TRUE,
+                          event.labels = NULL, legend.loc = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

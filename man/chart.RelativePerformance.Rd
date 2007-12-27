@@ -6,7 +6,9 @@
 A wrapper to create a chart of relative returns through time
 }
 \usage{
-chart.RelativePerformance(Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, ...)
+chart.RelativePerformance(Ra, Rb, main = "Relative Performance", xaxis = TRUE,
+                 colorset = (1:12), legend.loc = NULL, ylog = FALSE,
+                 elementcolor = "darkgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

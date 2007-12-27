@@ -6,7 +6,12 @@
 A wrapper to create a QQPlot chart of relative returns through time
 }
 \usage{
-chart.QQPlot(R, colorset = (1:12), symbolset = 1, xlab = NULL, ylab = NULL, main = NULL, ...)
+chart.QQPlot(R, distribution = "norm", ylab = NULL,
+                 xlab = paste(distribution, "Quantiles"), main = NULL,
+                 las = par("las"), envelope = FALSE, labels = FALSE,
+                 col = c(1, 4), lwd = 2, pch = 1, cex = 1,
+                 line = c("quartiles", "robust", "none"),
+                 elementcolor = "lightgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
