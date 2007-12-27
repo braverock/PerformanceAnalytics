@@ -54,8 +54,8 @@ function (Ra, Rj, width, trim = TRUE, na.rm = FALSE, ...)
         # Calculate correlation
         values = cor(trailing.vec,trailing.data,...)
 
-        if(row == n && trim) {
-            result.df = data.frame(Value = values, row.names = rownames[n])
+        if(row == width && trim) {
+            result.df = data.frame(Value = values, row.names = rownames[width])
         }
 
         else {
@@ -116,10 +116,13 @@ function (Ra, Rj, width, trim = TRUE, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingCorrelation.R,v 1.3 2007-04-15 00:51:42 brian Exp $
+# $Id: rollingCorrelation.R,v 1.4 2007-12-27 21:51:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/04/15 00:51:42  brian
+# - standardize return and width parameters
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

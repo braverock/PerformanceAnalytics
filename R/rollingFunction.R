@@ -21,8 +21,8 @@ function (R, width, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean",
     rows = nrow(data.mat)
     rownames = rownames(data.mat)
 
-    if(rows < n)
-        stop("Data set is too short. Select a shorter evaluation period or provide a longer time period.  Also, check the data for NA's.")
+    if(rows < width)
+        stop("Data set is too short. Select a shorter evaluation period or provide a longer time period.  Also, check the data for NA\'s.")
 
     # for each column, do the following:
     for(column in 1:columns) {
@@ -68,10 +68,13 @@ function (R, width, trim = TRUE, na.rm = TRUE, digits = 4, rf = 0, FUN = "mean",
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: rollingFunction.R,v 1.6 2007-04-15 00:51:42 brian Exp $
+# $Id: rollingFunction.R,v 1.7 2007-12-27 21:50:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/04/15 00:51:42  brian
+# - standardize return and width parameters
+#
 # Revision 1.5  2007/04/14 13:09:51  brian
 # - remove excess comments that no longer apply
 #
