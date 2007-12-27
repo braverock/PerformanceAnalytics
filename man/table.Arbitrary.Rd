@@ -1,4 +1,5 @@
-\name{statsTable}
+\name{table.Arbitrary}
+\alias{table.Arbitrary}
 \alias{statsTable}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ wrapper function for combining arbitrary function list into a table }
@@ -8,6 +9,7 @@ This function creates a table of statistics from vectors of functions and labels
 Assumes an input of period returns.  Scale arguements can be used to specify the number of observations during a year (e.g., 12 = monthly returns).
 }
 \usage{
+table.Arbitrary(R, metrics = c("mean", "sd"), metricsNames = c("Average Return", "Standard Deviation"), ...)
 statsTable(R, metrics = c("mean", "sd"), metricsNames = c("Average Return", "Standard Deviation"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
