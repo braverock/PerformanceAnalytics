@@ -4,7 +4,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ ~~function to do ... ~~ }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Creates an ACF chart or a two-panel plot with the ACF and PACF set to some specific defaults.
 }
 \usage{
 chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
@@ -14,62 +14,36 @@ chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{maxlag}{ ~~Describe \code{maxlag} here~~ }
-  \item{elementcolor}{ ~~Describe \code{elementcolor} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
+  \item{maxlag}{ the number of lags to calculate for, optional }
+  \item{elementcolor}{ the color to use for chart elements, defaults to "gray" }
+  \item{main}{ title of the plot; uses the column name by default. }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-  ~~ If necessary, more details than the description above ~~
-}
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+    Returns a one- or two-panel chart.
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
+\author{ Peter Carl }
+\note{ 
+Inspired by the website: http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R
+"...here's an R function that will plot the ACF and PACF of a time series 
+at the same time on the SAME SCALE, and it leaves out the zero lag in the 
+ACF: acf2.R. If your time series is in x and you want the ACF and PACF of 
+x to lag 50, the call to the function is acf2(x,50). The number of lags 
+is optional, so acf2(x) will use a default number of lags [√n + 10, where 
+n is the number of observations]."
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+That description made a lot of sense, so it's implemented here for both the ACF alone and the ACF with the PACF.
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{  \code{\link{plot}} }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, maxlag = NULL, elementcolor = "gray", main = NULL,
-    ...)
-{
-    R = checkData(R)
-    data = checkData(R[, 1], method = "vector", na.rm = TRUE)
-    columns = ncol(R)
-    rows = nrow(R)
-    columnnames = colnames(R)
-    if (is.null(main))
-        main = columnnames[1]
-    num = length(data)
-    if (is.null(maxlag))
-        maxlag = ceiling(10 + sqrt(num))
-    ACF = acf(data, maxlag, plot = FALSE)$acf[-1]
-    Lag = 1:length(ACF)/frequency(data)
-    minA = min(ACF)
-    U = 2/sqrt(num)
-    L = -U
-    minu = min(minA, L) - 0.01
-    plot(Lag, ACF, type = "h", ylim = c(minu, 1), main = main,
-        axes = FALSE, ...)
-    box(col = elementcolor)
-    axis(2, col = elementcolor, cex.axis = 0.8)
-    axis(1, col = elementcolor, cex.axis = 0.8)
-    abline(h = c(0, L, U), lty = c(1, 2, 2), col = c(1, 4, 4))
-  }
+data(edhec)
+chart.ACFplus(edhec[,1,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ts }
+\keyword{ multivariate }
+\keyword{ distribution }
+\keyword{ models }
+\keyword{ hplot }
