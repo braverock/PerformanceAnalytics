@@ -167,7 +167,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         abline(v = note.lines, col = note.color, lty = 2)
         if(!is.null(note.labels)) {
             h = rep(.2*par("usr")[3] + 1*par("usr")[4], length(b))
-            text(note.lines, h, note.labels, offset = .2, pos = 2, cex = 0.8, srt = 90, col = note.color)
+            text(note.lines, h, note.labels, offset = .2, pos = 2, cex = 0.7, srt = 90, col = note.color)
 
         }
     }
@@ -184,7 +184,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.25 2007-12-06 21:39:58 peter Exp $
+# $Id: chart.Histogram.R,v 1.26 2007-12-27 18:42:16 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
