@@ -55,7 +55,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             },
             add.stable = {
                 if (!require("fBasics")) stop("fBasics package not available")
-                fit.stable = stableFit(x,doplot=F)
+                fit.stable = stableFit(x,doplot = FALSE)
                 fitted.stable = dstable(s,alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
                 # look at documentation for pm
                 yrange=c(yrange,max(fitted.stable))
@@ -184,7 +184,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.26 2007-12-27 18:42:16 peter Exp $
+# $Id: chart.Histogram.R,v 1.27 2007-12-27 20:11:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
