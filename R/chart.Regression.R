@@ -88,13 +88,13 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
               switch(s_fit,
                     linear = {
                         abline(lm( merged.assets.df[,1] ~ merged.assets.df[,2]), col = colorset[color.tic])
-                    }
+                    },
                     loess = { # see scatter.smooth
                         #r.loess = 0
                         r.loess = loess.smooth(merged.assets.df[,2], merged.assets.df[,1], span, degree, family, evaluation)
                         lines(r.loess, col = colorset[color.tic], lty = 2)
                         #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
-                    }
+                    },
                     # commented because it is similar to loess in default parameters
                     # spline = {
                     #    # requires library(pspline)
@@ -135,10 +135,13 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.5 2007-12-27 20:36:39 brian Exp $
+# $Id: chart.Regression.R,v 1.6 2007-12-27 20:41:43 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/12/27 20:36:39  brian
+# - change fit to use a list and a switch
+#
 # Revision 1.4  2007/12/27 19:03:42  brian
 # - change function name from chart.MultiScatter to chart.Regression in prep for public release
 #
