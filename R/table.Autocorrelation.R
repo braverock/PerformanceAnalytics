@@ -26,7 +26,7 @@ function (R, digits = 4)
     for(column in 1:columns) { # for each asset passed in as R
         y = checkData(R[,column], method="vector", na.rm = TRUE)
 
-        acflag6 = acf(y,plot=F,lag.max=6)[[1]][2:7]
+        acflag6 = acf(y,plot=FALSE,lag.max=6)[[1]][2:7]
         LjungBox =  Box.test(y,type="Ljung-Box",lag=6)
         values = c(acflag6, LjungBox$p.value)
         values = base::round(as.numeric(values),digits)
@@ -70,9 +70,12 @@ function (R, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Autocorrelation.R,v 1.1 2007-10-05 03:24:03 peter Exp $
+# $Id: table.Autocorrelation.R,v 1.2 2007-12-27 20:13:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2007/10/05 03:24:03  peter
+# - first commit of lag-6 autocorrelation coefficient with Q-stat p-value table
+#
 #
 ###############################################################################
