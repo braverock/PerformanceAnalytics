@@ -42,6 +42,7 @@ A zoo object containing a representation of the data in the file.
 
 \seealso{ \code{\link{read.zoo}}, \code{\link{read.table}}}
 \examples{
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
