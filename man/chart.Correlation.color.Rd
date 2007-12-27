@@ -6,7 +6,7 @@
 Another, simpler, visualization of a Correlation Matrix, probably better for larger sets of data.
 }
 \usage{
-chart.Correlation.color(R, nrgcols = 50, labels = TRUE, labcols = 1, title = "", ...)
+chart.Correlation.color(R, nrgcols = 50, labels = TRUE, labcols = 1, title ="", use = "pairwise.complete.obs", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,6 +15,10 @@ chart.Correlation.color(R, nrgcols = 50, labels = TRUE, labcols = 1, title = "",
   \item{labels}{ TRUE/FALSE use labels or not }
   \item{labcols}{ labels to use }
   \item{title}{ title for the plot }
+  \item{use}{ an optional character string giving a method for computing
+          covariances in the presence of missing values.  This must be
+          (an abbreviation of) one of the strings '"all.obs"',
+          '"complete.obs"' or '"pairwise.complete.obs"'. }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
