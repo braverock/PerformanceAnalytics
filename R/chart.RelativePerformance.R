@@ -1,5 +1,5 @@
 `chart.RelativePerformance` <-
-function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, ...)
+function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -37,9 +37,14 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
                 Result.calc = merge(Result.calc,column.calc)
         }
     }
-
-    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ylog = ylog, ...)
-
+columnnames = colnames(Result.calc)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, col = colorset, ylog = ylog, ...)
+    abline(h=1,col=elementcolor)
+    if(!is.null(legend.loc)){
+        # There's no good place to put this automatically, except under the graph.
+        # That requires a different solution, but here's the quick fix
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = .7, border.col = elementcolor, lwd = 2, bg = "white", legend = columnnames)
+    }
 }
 
 ###############################################################################
@@ -50,10 +55,13 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.8 2007-04-14 13:24:54 brian Exp $
+# $Id: chart.RelativePerformance.R,v 1.9 2007-12-27 18:43:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/04/14 13:24:54  brian
+# - standardize on Ra for returns of asset
+#
 # Revision 1.7  2007/03/20 10:44:46  brian
 # - change F to FALSE to pass R CMD check
 #
