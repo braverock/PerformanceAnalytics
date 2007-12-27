@@ -1,4 +1,4 @@
-`statsTable` <-
+`table.Arbitrary` <-
 function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard Deviation"), ...)
 { # @author Peter Carl
 
@@ -85,6 +85,20 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
     resultingtable
 
 }
+###############################################################################
+
+`statsTable` <-
+function(R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard Deviation"), ...)
+{   # @author Peter Carl
+
+    # Description:
+
+    # This is a wrapper function to keep backwards compatability
+
+    # FUNCTION:
+    table.Arbitrary(R, metrics=metrics, metricsNames=metricsNames, ...)
+
+}
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
@@ -94,10 +108,13 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Arbitrary.R,v 1.3 2007-12-27 20:46:47 peter Exp $
+# $Id: table.Arbitrary.R,v 1.4 2007-12-27 20:54:09 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/12/27 20:46:47  peter
+# - fixed bug to calculate number of columns
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #
