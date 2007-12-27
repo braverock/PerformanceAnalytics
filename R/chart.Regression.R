@@ -1,4 +1,4 @@
-`chart.MultiScatter` <-
+`chart.Regression` <-
 function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE , legend.loc = NULL, ylog = FALSE, loess.fit = FALSE, linear.fit = FALSE, spline.fit = FALSE, span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, cex= .8, ...)
 { # @author Peter Carl
 
@@ -93,7 +93,7 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
                 lines(r.loess, col = colorset[color.tic], lty = 2)
                 #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
             }
-            if(spline.fit){ 
+            if(spline.fit){
                 # requires library(pspline)
                 r.spline = sm.spline(merged.assets.df[,2], merged.assets.df[,1], df=4)
                 lines(r.spline, col = colorset[color.tic], lty = 4)
@@ -130,10 +130,13 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.3 2007-11-19 03:38:07 peter Exp $
+# $Id: chart.Regression.R,v 1.4 2007-12-27 19:03:42 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/11/19 03:38:07  peter
+# - allow cex to be passed through correctly
+#
 # Revision 1.2  2007/09/26 03:13:29  peter
 # - added a spline fit
 # - switched the order of the lowess fit variables
