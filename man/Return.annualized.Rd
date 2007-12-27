@@ -25,7 +25,7 @@ where scale is the number of periods in a year, and n is the total number of per
 
 For simple returns (geometric=FALSE), the formula is:
 
-    \deqn{\overline{R_{a}}} \cdot scale}
+    \deqn{\overline{R_{a}} \cdot scale}{mean(Ra)*scale}
 
 }
 
