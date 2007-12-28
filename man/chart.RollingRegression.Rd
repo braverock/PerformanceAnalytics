@@ -9,9 +9,11 @@ A wrapper to create a chart of relative regression performance through time
 A group of charts in \code{charts.RollingRegression} displays alpha, beta, and R-squared estimates in three aligned charts in a single device.
 }
 \usage{
-chart.RollingRegression(Ra, Rb, main = "Relative Performance", xaxis = TRUE,
-                 colorset = (1:12), legend.loc = NULL, ylog = FALSE,
-                 elementcolor = "darkgray", ...)
+chart.RollingRegression(Ra, Rb, width = 12, rf = 0,
+                 attribute = c("Beta","Alpha", "R-Squared"),
+                 main = paste("Rolling ", width,"-Month ", attribute, sep = ""),
+                 xaxis = TRUE, colorset = (1:12), legend.loc = NULL,
+                 na.pad = TRUE, ...)
 
 charts.RollingRegression(Ra, Rb, width = 12, rf = 0, darken = FALSE,
                  main = NULL, legend.loc = NULL, event.labels = NULL, ...)

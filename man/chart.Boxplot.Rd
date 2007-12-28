@@ -6,7 +6,7 @@
 A wrapper to create box and whiskers plot, but with some sensible defaults useful for comparing distributions.
 }
 \usage{
-chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, \"mean\", \"median\", \"variance\"), colorset = \"black\", symbol.color = \"red\", mean.symbol = 1, median.symbol = \"|\", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab = \"Return\", main = \"Return Distribution Comparison\", ...)
+chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison",...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
