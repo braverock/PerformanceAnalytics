@@ -45,7 +45,7 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -56,12 +56,12 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, 
-    main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, 
-    symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, 
-    fit = c("loess", "linear", "spline"), span = 2/3, degree = 1, 
-    family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, 
-    cex = 0.8, ...) 
+function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE,
+    main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12,
+    symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE,
+    fit = c("loess", "linear", "spline"), span = 2/3, degree = 1,
+    family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50,
+    cex = 0.8, ...)
 {
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
@@ -77,55 +77,55 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE,
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
     legendnames = NULL
-    if (is.na(xlim[1])) 
+    if (is.na(xlim[1]))
         xlim = range(as.vector(na.omit(Rb)))
-    if (is.na(ylim[1])) 
+    if (is.na(ylim[1]))
         ylim = range(as.vector(na.omit(Ra)))
     if (is.null(xlab)) {
-        if (excess.returns) 
+        if (excess.returns)
             xlab = "Excess Return of Benchmarks"
         else xlab = "Return of Benchmarks"
     }
     if (is.null(ylab)) {
-        if (excess.returns) 
+        if (excess.returns)
             ylab = "Excess Return of Assets"
         else ylab = "Return of Assets"
     }
-    if (darken) 
+    if (darken)
         elementcolor = "darkgray"
     else elementcolor = "lightgray"
     color.tic = 0
     for (column.a in 1:columns.a) {
         color.tic = color.tic + 1
         for (column.b in 1:columns.b) {
-            merged.assets = merge(Ra[, column.a, drop = FALSE], 
+            merged.assets = merge(Ra[, column.a, drop = FALSE],
                 Rb[, column.b, drop = FALSE])
             merged.assets.df = as.data.frame(na.omit(merged.assets))
             if (column.a == 1 & column.b == 1) {
-                plot(merged.assets.df[, 2], merged.assets.df[, 
-                  1], col = colorset[color.tic], pch = symbolset[color.tic], 
-                  xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, 
+                plot(merged.assets.df[, 2], merged.assets.df[,
+                  1], col = colorset[color.tic], pch = symbolset[color.tic],
+                  xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab,
                   main = main, axes = FALSE, cex = cex, ...)
             }
             else {
-                plot.xy(merged.assets.df[, c(2, 1)], type = "p", 
-                  col = colorset[color.tic], pch = symbolset[color.tic], 
+                plot.xy(merged.assets.df[, c(2, 1)], type = "p",
+                  col = colorset[color.tic], pch = symbolset[color.tic],
                   cex = cex, ...)
             }
             for (s_fit in fit) {
                 switch(s_fit, linear = {
-                  abline(lm(merged.assets.df[, 1] ~ merged.assets.df[, 
+                  abline(lm(merged.assets.df[, 1] ~ merged.assets.df[,
                     2]), col = colorset[color.tic])
                 }, loess = {
-                  r.loess = loess.smooth(merged.assets.df[, 2], 
-                    merged.assets.df[, 1], span, degree, family, 
+                  r.loess = loess.smooth(merged.assets.df[, 2],
+                    merged.assets.df[, 1], span, degree, family,
                     evaluation)
                   lines(r.loess, col = colorset[color.tic], lty = 2)
                 }, )
             }
-            legendnames = c(legendnames, paste(columnnames.a[column.a], 
+            legendnames = c(legendnames, paste(columnnames.a[column.a],
                 columnnames.b[column.b], sep = " to "))
-            if (column.b != columns.b) 
+            if (column.b != columns.b)
                 color.tic = color.tic + 1
         }
         if (reference.grid) {
@@ -137,8 +137,8 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE,
         axis(2, col = elementcolor, ...)
         box(col = elementcolor)
         if (!is.null(legend.loc)) {
-            legend(legend.loc, inset = 0.02, text.col = colorset, 
-                col = colorset, pch = symbolset, cex = cex, border.col = elementcolor, 
+            legend(legend.loc, inset = 0.02, text.col = colorset,
+                col = colorset, pch = symbolset, cex = cex, border.col = elementcolor,
                 lwd = 1, bg = "white", legend = legendnames)
         }
     }
@@ -146,5 +146,8 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE,
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ts }
+\keyword{ multivariate }
+\keyword{ distribution }
+\keyword{ models }
+\keyword{ hplot }

@@ -15,8 +15,8 @@ A prior version of thesefunctions included specific NA handling.  This was remov
 
 }
 \usage{
-cumprod.column(x)
-cummax.column(x)
+\method{cumprod}{column}(x)
+\method{cummax}{column}(x)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

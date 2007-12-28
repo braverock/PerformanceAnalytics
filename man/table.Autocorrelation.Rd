@@ -25,7 +25,7 @@ table.Autocorrelation(R, digits = 4)
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -36,7 +36,7 @@ table.Autocorrelation(R, digits = 4)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (R, digits = 4) 
+function (R, digits = 4)
 {
     R = checkData(R, method = "zoo")
     columns = ncol(R)
@@ -57,12 +57,14 @@ function (R, digits = 4)
             result.df = cbind(result.df, nextcol)
         }
     }
-    rownames(result.df) = c("rho1", "rho2", "rho3", "rho4", "rho5", 
+    rownames(result.df) = c("rho1", "rho2", "rho3", "rho4", "rho5",
         "rho6", "Q(6) p-value")
     result.df
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ts }
+\keyword{ multivariate }
+\keyword{ distribution }
+\keyword{ models }

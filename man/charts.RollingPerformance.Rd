@@ -17,6 +17,7 @@ charts.RollingPerformance(R, width = 12, rf = 0, main = NULL, trim = TRUE,
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

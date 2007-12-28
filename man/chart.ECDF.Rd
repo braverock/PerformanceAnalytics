@@ -34,7 +34,7 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
+\note{ ~~further notes~~
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
@@ -45,22 +45,22 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", 
-    colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, 
-    darken = FALSE, lty = c(1, 1), ...) 
+function (R, main = "Empirical CDF", xlab = "x", ylab = "F(x)",
+    colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL,
+    darken = FALSE, lty = c(1, 1), ...)
 {
     R = checkData(R, method = "vector", na.rm = TRUE)
-    if (darken) 
+    if (darken)
         elementcolor = "darkgray"
     else elementcolor = "lightgray"
     t = seq(-2.5, 2.5, length.out = 1000)
     p1 = pnorm(t, mean(R), sd(R))
     rx = sort(R)
     stepy = ((0:(length(R) - 1)) + 0.5)/length(R)
-    plot(rx, stepy, type = "s", col = colorset[1], xlab = xlab, 
-        ylab = ylab, main = main, axes = FALSE, lty = lty[1], 
+    plot(rx, stepy, type = "s", col = colorset[1], xlab = xlab,
+        ylab = ylab, main = main, axes = FALSE, lty = lty[1],
         lwd = lwd, ...)
-    lines(t, p1, lty = lty[2], col = colorset[2], lwd = lwd, 
+    lines(t, p1, lty = lty[2], col = colorset[2], lwd = lwd,
         ...)
     axis(1, cex.axis = 0.8, col = elementcolor)
     axis(2, cex.axis = 0.8, col = elementcolor)
@@ -69,5 +69,8 @@ function (R, main = "Empirical CDF", xlab = "x", ylab = "F(x)",
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ts }
+\keyword{ multivariate }
+\keyword{ distribution }
+\keyword{ models }
+\keyword{ hplot }

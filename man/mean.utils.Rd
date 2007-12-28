@@ -16,10 +16,10 @@
 }
 
 \usage{
-mean.geometric(x, ...)
-mean.stderr(x, ...)
-mean.UCL(x,  ci = 0.95, ...)
-mean.LCL(x,  ci = 0.95, ...)
+\method{mean}{geometric}(x, ...)
+\method{mean}{stderr}(x, ...)
+\method{mean}{UCL}(x,  ci = 0.95, ...)
+\method{mean}{LCL}(x,  ci = 0.95, ...)
 }
 
 %- maybe also 'usage' for other objects documented here.

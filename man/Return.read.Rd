@@ -14,10 +14,13 @@ Return.read(filename = stop("Please specify a filename"),
 %- maybe also 'usage' for other objects documented here.
 \arguments{
     \item{filename}{ the name of the file to be read }
-    \item{frequency}{ "d" sets as a daily timeseries using \code{\link{as.Date}},
-            "m" sets as monthly timeseries using \code{\link[zoo]{as.yearmon}},
-            "q" sets as a quarterly timeseries using \code{\link[zoo]{as.yearqtr}}, and
-            "i" sets as irregular timeseries using \code{\link{as.POSIXct}}
+    \item{frequency}{
+        \itemize{
+            \item "d" sets as a daily timeseries using \code{\link{as.Date}},
+            \item "m" sets as monthly timeseries using \code{\link[zoo]{as.yearmon}},
+            \item "q" sets as a quarterly timeseries using \code{\link[zoo]{as.yearqtr}}, and
+            \item "i" sets as irregular timeseries using \code{\link{as.POSIXct}}
+        }
     }
     \item{format.in}{ says how the data being read is formatted.  Although
         the default is set to the ISO 8601 standard (which can also be set as "\%F"),
@@ -27,19 +30,18 @@ Return.read(filename = stop("Please specify a filename"),
     \item{header}{ a logical value indicating whether the file contains the
             names of the variables as its first line.
     }
+    \item{check.names}{logical. If TRUE then the names of the variables in the data frame are checked to ensure that they are syntactically valid variable names. If necessary they are adjusted (by make.names) so that they are, and also to ensure that there are no duplicates. See \code{\link[utils]{read.table}} }
     \item{\dots}{ passes through any other parameters to \code{\link[zoo]{read.zoo}} }
 }
 
 \details{
 The parameter 'format.in' takes several values, including:
-
-excel: default date format for MS Excel spreadsheet csv format, which is "\%m/\%d/\%Y"
-
-oo: default date format for OpenOffice spreadsheet csv format, "\%m/\%d/\%y", although this may be operating system dependent
-
-gnumeric: default date format for Gnumeric spreadsheet, which is "\%d-\%b-\%Y"
-
-...: alternatively, any specific format may be passed in, such as "\%M/\%y"
+    \itemize{
+        \item excel: default date format for MS Excel spreadsheet csv format, which is "\%m/\%d/\%Y",
+        \item oo: default date format for OpenOffice spreadsheet csv format, "\%m/\%d/\%y", although this may be operating system dependent,
+        \item gnumeric: default date format for Gnumeric spreadsheet, which is "\%d-\%b-\%Y",
+        \item ...: alternatively, any specific format may be passed in, such as "\%M/\%y"
+    }
 }
 
 \value{
