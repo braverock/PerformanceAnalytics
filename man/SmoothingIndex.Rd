@@ -25,7 +25,7 @@ Chan, Nicholas, Mila Getmansky, Shane M. Haas, and Andrew W. Lo. 2005. Systemic 
   and Hedge Funds. NBER Working Paper Series (11200).
 Getmansky, Mila, Andrew W. Lo, and Igor Makarov. 2004. An Econometric Model of Serial
   Correlation and Illiquidity in Hedge Fund Returns. Journal of Financial Economics (74):
-  529–609.
+  529-609.
 }
 \author{ Peter Carl }
 \examples{
