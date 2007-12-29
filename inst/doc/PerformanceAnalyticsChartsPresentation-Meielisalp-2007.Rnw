@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.7 2007-08-15 20:05:52 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.8 2007-12-29 21:17:25 brian Exp $
 
 \documentclass{beamer}
 
@@ -379,9 +379,7 @@ managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc =
 \centering
 \begin{tiny}
 <<tableCAPM,echo=T>>=
-table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
-managers[ trailing36.rows, 8, drop=FALSE], rf = managers[ trailing36.rows,
-Rf.col])
+table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)], managers[ trailing36.rows, 8, drop=FALSE], rf = managers[ trailing36.rows, Rf.col, drop=F])
 @
 \end{tiny}
 \end{figure}
