@@ -14,7 +14,7 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
-  \item{colorset}{ color palette to use, defaults to c("black", "#005AFF"), where first value is used to color the step function and the second color is used for the fitted normal  }
+  \item{colorset}{ color palette to use, defaults to c("black", "\#005AFF"), where first value is used to color the step function and the second color is used for the fitted normal  }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
