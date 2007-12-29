@@ -1,71 +1,47 @@
 \name{chart.ECDF}
 \alias{chart.ECDF}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ Create an ECDF overlaid with a CDF }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+   Creates an emperical cumulative distribution function (ECDF) overlaid with a cumulative distribution function (CDF)
 }
 \usage{
 chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, darken = FALSE, lty = c(1, 1), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
-  \item{xlab}{ ~~Describe \code{xlab} here~~ }
-  \item{ylab}{ ~~Describe \code{ylab} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
-  \item{lwd}{ ~~Describe \code{lwd} here~~ }
-  \item{xlim}{ ~~Describe \code{xlim} here~~ }
-  \item{ylim}{ ~~Describe \code{ylim} here~~ }
-  \item{darken}{ ~~Describe \code{darken} here~~ }
-  \item{lty}{ ~~Describe \code{lty} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{R}{ a matrix, data.frame, or timeSeries of returns }
+  \item{main}{ set the chart title, same as in \code{\link{plot}} }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
+  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
+  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{lty}{ set the line type, same as in \code{\link{plot}} }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+  Inspired by a chart in Ruppert (2004) which is the most useful example of this type of chart we are aware of.
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+ECDF chart overlaid with a CDF
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
+\references{
+Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. Ch. 2 Fig. 2.5
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+\url{http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt}
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Peter Carl }
+\seealso{
+   \code{\link{plot}}
+}
 \examples{
+## ~~ Need Exampole
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, main = "Empirical CDF", xlab = "x", ylab = "F(x)",
-    colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL,
-    darken = FALSE, lty = c(1, 1), ...)
-{
-    R = checkData(R, method = "vector", na.rm = TRUE)
-    if (darken)
-        elementcolor = "darkgray"
-    else elementcolor = "lightgray"
-    t = seq(-2.5, 2.5, length.out = 1000)
-    p1 = pnorm(t, mean(R), sd(R))
-    rx = sort(R)
-    stepy = ((0:(length(R) - 1)) + 0.5)/length(R)
-    plot(rx, stepy, type = "s", col = colorset[1], xlab = xlab,
-        ylab = ylab, main = main, axes = FALSE, lty = lty[1],
-        lwd = lwd, ...)
-    lines(t, p1, lty = lty[2], col = colorset[2], lwd = lwd,
-        ...)
-    axis(1, cex.axis = 0.8, col = elementcolor)
-    axis(2, cex.axis = 0.8, col = elementcolor)
-    box(col = elementcolor)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
