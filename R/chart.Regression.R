@@ -94,7 +94,7 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
                         r.loess = loess.smooth(merged.assets.df[,2], merged.assets.df[,1], span, degree, family, evaluation)
                         lines(r.loess, col = colorset[color.tic], lty = 2)
                         #lines(loess(merged.assets.df[,2] ~ merged.assets.df[,1]), col = colorset[color.tic])
-                    },
+                    }#,
                     # commented because it is similar to loess in default parameters
                     # spline = {
                     #    # requires library(pspline)
@@ -135,10 +135,13 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.6 2007-12-27 20:41:43 brian Exp $
+# $Id: chart.Regression.R,v 1.7 2007-12-29 15:38:06 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/12/27 20:41:43  brian
+# - fix switch syntax error
+#
 # Revision 1.5  2007/12/27 20:36:39  brian
 # - change fit to use a list and a switch
 #
