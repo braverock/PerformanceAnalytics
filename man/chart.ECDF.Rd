@@ -1,7 +1,7 @@
 \name{chart.ECDF}
 \alias{chart.ECDF}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Create an ECDF overlaid with a CDF }
+\title{ Create an ECDF overlaid with a Normal CDF }
 \description{
    Creates an emperical cumulative distribution function (ECDF) overlaid with a cumulative distribution function (CDF)
 }
@@ -10,23 +10,24 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a matrix, data.frame, or timeSeries of returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
-  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
-  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{colorset}{ color palette to use, defaults to c("black", "#005AFF"), where first value is used to color the step function and the second color is used for the fitted normal  }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }
-  \item{\dots}{ any other passthru parameters }
+  \item{\dots}{ any other passthru parameters to \code{\link{plot}} }
 }
 \details{
-  Inspired by a chart in Ruppert (2004) which is the most useful example of this type of chart we are aware of.
+  The empirical cumulative distribution function (ECDF for short) calculates the fraction of observations less or equal to a given value.  The resulting plot is a step function of that fraction at each observation.  This function uses \code{ecdf} and overlays the CDF for a fitted normal function as well.  Inspired by a chart in Ruppert (2004).
+
 }
 \value{
-ECDF chart overlaid with a CDF
+  chart of an ECDF calculated from the data overlaid with a CDF
 }
 \references{
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. Ch. 2 Fig. 2.5
@@ -35,13 +36,14 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 }
 \author{ Peter Carl }
 \seealso{
-   \code{\link{plot}}
+   \code{\link{plot}}, \code{\link{ecdf}} 
+
 }
+
 \examples{
-## ~~ Need Exampole
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+data(edhec)
+chart.ECDF(edhec[,1])
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
