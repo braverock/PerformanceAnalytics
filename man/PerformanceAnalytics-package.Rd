@@ -16,10 +16,10 @@ We created this library to include functionality that has been appearing in the 
     \tabular{rl}{
         Package: \tab PerformanceAnalytics\cr
         Type: \tab Package\cr
-        Version: \tab 0.9.5\cr
-        Date: \tab 2007-06-29\cr
+        Version: \tab 0.9.6\cr
+        Date: \tab 2007-12-29\cr
         License: \tab GPL\cr
-        Copyright: \tab (c) 2004-2007 Brian G. Peterson and Peter Carl\cr
+        Copyright: \tab (c) 2004-2008 Brian G. Peterson and Peter Carl\cr
         URL: \tab \url{http://braverock.com/R/}
     }
 In general, this library is most tested on return (rather than price) data on a monthly scale. Many functions will work with daily or irregular return data as well.  See function \code{\link{CalculateReturns}} for calculating returns from prices, and be aware that the \code{\link{aggregate}} function has methods for \code{tseries} and \code{zoo} timeseries data classes to rationally coerce irregular data into regular data of the correct periodicity.
