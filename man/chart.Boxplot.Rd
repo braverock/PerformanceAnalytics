@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ box whiskers plot wrapper, with sensible defaults }
 \description{
-A wrapper to create box and whiskers plot, but with some sensible defaults useful for comparing distributions.
+A wrapper to create box and whiskers plot with some sensible defaults useful for comparing distributions.
 }
 \usage{
 chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison",...)
@@ -29,10 +29,10 @@ chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(
   \item{\dots}{ any other passthru parameters }
 }
 \value{
-Creates a box plot of returns with some defaults.
+box plot of returns
 }
-\references{ Tufte, Edward R.  \emph{The Visual Display of Quantitative Information}. Graphics Press. 1983. p. 124-129
-
+\references{
+    Tufte, Edward R.  \emph{The Visual Display of Quantitative Information}. Graphics Press. 1983. p. 124-129
 }
 \details{
 We have also provided controls for all the symbols and lines in the chart.  One default, set by \code{as.Tufte=TRUE}, will strip chartjunk and draw a Boxplot per recommendations by Edward Tufte. It can also be useful when comparing several series to sort them in order of ascending or descending "mean", "median", "variance" by use of \code{sort.by} and \code{sort.ascending=TRUE}.
