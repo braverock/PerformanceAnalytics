@@ -1,29 +1,36 @@
 \name{table.Autocorrelation}
 \alias{table.Autocorrelation}
-\title{ table of autocorrelation coefficients and Q statistics }
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{ table for calculating the first six autocorrelation coefficients and significance }
 \description{
-    This is a wrapper for calculating the first six autocorrelation
-    coefficients and Q-statistic for significance against
-    each column of the data provided.
+  Produces data table of autocorrelation coefficients \rho and corresponding Q(6)-statistic for each column in R.
 }
 \usage{
 table.Autocorrelation(R, digits = 4)
 }
 \arguments{
-  \item{R}{ a vector, matrix, or timeSeries of returns to test, e.g., the asset to be examined }
-  \item{digits}{ number of digits to round results to }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{digits}{ number of digits to round results to for display }
+}
+\details{
+
 }
 \value{
-    A data table of autocorrelation coefficients \eqn{\rho}{rho} and corresponding
-    Q(6)-statistic for each column in R.
+data.frame with columns for the first six auto-correlation coefficients and the Q(6) test.
 }
-\references{  }
+\references{ 
+Lo, Andrew W. 2001. Risk Management for Hedge Funds: Introduction and Overview. SSRN
+  eLibrary.
+ }
 \author{ Peter Carl }
+\notes{
+To test returns for autocorrelation, Lo (2001) suggests the use of the Ljung-Box test, a significance test for the auto-correlation coefficients.  Ljung and Box (1978) provide a refinement of the Q-statistic proposed by Box and Pierce (1970) that offers a better fit the the $\chi^2$ test for small sample sizes. \code{\link{Box.test}} provides both.
+}
+\seealso{ \code{\link{Box.test}}, \code{\link{acf}} }
 \examples{
-## ~~ Need Example
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+data(managers)
+t(table.Autocorrelation(managers))
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
