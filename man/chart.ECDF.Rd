@@ -6,7 +6,7 @@
    Creates an emperical cumulative distribution function (ECDF) overlaid with a cumulative distribution function (CDF)
 }
 \usage{
-chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, darken = FALSE, lty = c(1, 1), ...)
+chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("black", "\#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, darken = FALSE, lty = c(1, 1), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
