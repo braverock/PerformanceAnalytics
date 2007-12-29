@@ -1,9 +1,9 @@
 \name{chart.Boxplot}
 \alias{chart.Boxplot}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ box whiskers plot wrapper, with sensible defaults }
+\title{ box whiskers plot wrapper }
 \description{
-A wrapper to create box and whiskers plot with some sensible defaults useful for comparing distributions.
+A wrapper to create box and whiskers plot with some defaults useful for comparing distributions.
 }
 \usage{
 chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison",...)
