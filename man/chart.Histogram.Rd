@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ histogram of returns }
 \description{
-Create a histogram of returns, with optional curve fits for density and normal.  This is wrapper function for \code{\link[graphics]{hist}}, see the help for that function for additional arguments you may wish to pass in.
+Create a histogram of returns, with optional curve fits for density and normal.  This is a wrapper function for \code{\link[graphics]{hist}}, see the help for that function for additional arguments you may wish to pass in.
 }
 \usage{
 chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor = "gray", note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p = 0.99, ...)
