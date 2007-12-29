@@ -65,8 +65,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 #               requires library(MASS)
                 if (!require("MASS")) stop("MASS package not available")
                 # This uses a Maximum Likelihood method as shown on:
-                # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in 
-                # Free Statistics Software (v1.1.21-r4), Office for Research Development and 
+                # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in
+                # Free Statistics Software (v1.1.21-r4), Office for Research Development and
                 # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
                 fit = fitdistr(x, 'cauchy')
                 xlab = paste("Cauchy (location = ",round(fit$estimate[[1]],2),", scale = ",round(fit$estimate[[2]],2),")", sep="")
@@ -106,7 +106,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     # Draw the plot
     yrange = c(yrange, max(hist(x, plot = FALSE)$intensities)*1.1)
     ylim = c(0,ceiling(max(yrange)))
-    
+
     hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
     axis(1, cex.axis = 0.8, col = elementcolor)
     axis(2, cex.axis = 0.8, col = elementcolor)
@@ -184,10 +184,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.27 2007-12-27 20:11:19 peter Exp $
+# $Id: chart.Histogram.R,v 1.28 2007-12-29 19:25:09 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.27  2007/12/27 20:11:19  peter
+# - fixed F for FALSE in function call
+#
 # Revision 1.24  2007/11/23 04:28:01  peter
 # - added margin to histogram bars for ylim
 #

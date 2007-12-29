@@ -43,7 +43,7 @@ function(R, p=0.99, modified = TRUE)
             s = skewness(r) #skewness of the distribution
             k = kurtosis(r) #(excess) kurtosis
             Zcf = zc + (((zc^2-1)*s)/6) + (((zc^3-3*zc)*k)/24) - (((2*zc^3)-(5*zc)*s^2)/36)
-            VaR = -mean(r) - (Zcf * sd(r))
+            VaR = mean(r) - (Zcf * sd(r))
             if (eval(VaR<0)){ #eval added to get around Sweave bitching
                 warning(c("Cornish-Fisher Expansion produces unreliable result (inverse risk) for column: ",column," : ",VaR))
                 # set VaR to 0, since inverse risk is unreasonable
@@ -138,7 +138,7 @@ function(R, p=0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.15 2007-11-20 23:13:39 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.16 2007-12-29 19:25:09 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
