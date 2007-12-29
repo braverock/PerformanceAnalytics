@@ -10,28 +10,28 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ ~~Describe \code{Ra} here~~ }
-  \item{Rb}{ ~~Describe \code{Rb} here~~ }
-  \item{Rf}{ ~~Describe \code{Rf} here~~ }
+  \item{Ra}{ a vector of returns to test, e.g., the asset to be examined }
+  \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against. }
+  \item{Rf}{ risk free rate, in same period as your returns }
   \item{excess.returns}{ ~~Describe \code{excess.returns} here~~ }
-  \item{reference.grid}{ ~~Describe \code{reference.grid} here~~ }
-  \item{main}{ ~~Describe \code{main} here~~ }
-  \item{ylab}{ ~~Describe \code{ylab} here~~ }
-  \item{xlab}{ ~~Describe \code{xlab} here~~ }
-  \item{xlim}{ ~~Describe \code{xlim} here~~ }
-  \item{colorset}{ ~~Describe \code{colorset} here~~ }
-  \item{symbolset}{ ~~Describe \code{symbolset} here~~ }
-  \item{darken}{ ~~Describe \code{darken} here~~ }
-  \item{legend.loc}{ ~~Describe \code{legend.loc} here~~ }
-  \item{ylog}{ ~~Describe \code{ylog} here~~ }
+  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
+  \item{main}{ set the chart title, same as in \code{\link{plot}} }
+  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
+  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
+  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{symbolset}{ symbol set to use, set by default to rational choices }
+  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
+  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
   \item{fit}{ ~~Describe \code{fit} here~~ }
   \item{span}{ ~~Describe \code{span} here~~ }
   \item{degree}{ ~~Describe \code{degree} here~~ }
   \item{family}{ ~~Describe \code{family} here~~ }
-  \item{ylim}{ ~~Describe \code{ylim} here~~ }
   \item{evaluation}{ ~~Describe \code{evaluation} here~~ }
   \item{cex}{ ~~Describe \code{cex} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
   ~~ If necessary, more details than the description above ~~
