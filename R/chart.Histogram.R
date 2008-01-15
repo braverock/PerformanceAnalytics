@@ -104,7 +104,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     }
 
     # Draw the plot
-    yrange = c(yrange, max(hist(x, plot = FALSE)$intensities)*1.1)
+    yrange = c(yrange, max(hist(x, breaks = breaks, plot = FALSE)$density)*1.1)
     ylim = c(0,ceiling(max(yrange)))
 
     hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
@@ -184,10 +184,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.28 2007-12-29 19:25:09 brian Exp $
+# $Id: chart.Histogram.R,v 1.29 2008-01-15 20:22:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.28  2007/12/29 19:25:09  brian
+# - minor changes to pass R CMD check
+#
 # Revision 1.27  2007/12/27 20:11:19  peter
 # - fixed F for FALSE in function call
 #
