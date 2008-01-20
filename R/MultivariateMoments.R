@@ -10,110 +10,136 @@
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
 # Kindly contact the authors for permission to use these functions
 ###############################################################################
-# $Id: MultivariateMoments.R,v 1.1 2008-01-20 06:30:08 brian Exp $
+# $Id: MultivariateMoments.R,v 1.2 2008-01-20 12:07:24 kris Exp $
 ###############################################################################
 
 
-                   StdDevfun = function(w, sigma){
-                       return(  StdDevR)
-                   }
+M3.MM = function(R){
+   cAssets = ncol(R); T = nrow(R);
+   mu = apply(R,2,'mean');
+   M3 = matrix(rep(0,cAssets^3),nrow=cAssets,ncol=cAssets^2)
+   for(t in c(1:T))
+   {
+       centret = as.numeric(matrix(R[t,]-mu,nrow=cAssets,ncol=1))
+        M3 = M3 + ( centret%*%t(centret) )%x%t(centret)
+   }
+   return( 1/T*M3 );
+}
 
-                   SRfun = function(w, sigma, meanR ){
-                       return( meanR / StdDevfun(w,sigma)   )
-                   }
+M4.MM = function(R){
+   cAssets = ncol(R); T = nrow(R);   
+   mu = apply(R,2,'mean');
+   M4 = matrix(rep(0,cAssets^4),nrow=cAssets,ncol=cAssets^3);
+   for(t in c(1:T))
+   {
+       centret = as.numeric(matrix(R[t,]-mu,nrow=cAssets,ncol=1))
+       M4 = M4 + ( centret%*%t(centret) )%x%t(centret)%x%t(centret)
+   }
+   return( 1/T*M4 );
+}
 
-                   GVaRfun = function(w, sigma, meanR, p ){
-                      return ( meanR - qnorm(p)*StdDevR )
-                   }
+mean.MM = function(w,mu){
+   return( t(w)%*%mu )
+}
 
-                   SR.GVaRfun = function(w, sigma, meanR, p ){
-                       return(  meanR / GVaRfun(w,sigma,meanR,p)    )
-                   }
+StdDev.MM = function(w, sigma){
+        return(   sqrt(t(w)%*%sigma%*%w)  )
+}
 
-                   mVaRfun = function(w, sigma, meanR, p, M3, M4 ){
-                      pm4 = t(w)%*%M4%*%(w%x%w%x%w) ; pm3 = t(w)%*%M3%*%(w%x%w) ; pm2 =  t(w)%*%sigma%*%w ;
-                      skew = pm3 / pm2^(3/2);
-                      exkurt = pm4 / pm2^(2) - 3;
-                      z = qnorm(p);
-                      h = z + (1/6)*(z^2 -1)*skew
-                      h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2;
-                      return ( meanR - h*sqrt( pm2  ) )
-                   }
+skewness.MM=function(w,sigma,M3){
+        return( ( t(w)%*%M3%*%(w%x%w) )/ (StdDev.MM(w,sigma))^3         )
+}
 
-                   SR.mVaRfun = function(w, sigma, meanR, p, M3, M4) {
-                      return( meanR / mVaRfun(w, sigma, meanR, p, M3, M4 )    )
-                   }
+kurtosis.MM=function(w,sigma,M4){
+        return(  ( t(w)%*%M4%*%(w%x%w%x%w) )/ (StdDev.MM(w,sigma))^4    )
+}
 
-                   GESfun = function(w, StdDevR, meanR, p){
-                      return ( -meanR + dnorm(qnorm(p))*StdDevR/p )
-                   }
+SR.StdDev.MM = function(w, mu , sigma ){
+         return( mean.MM(w,mu) / StdDev.MM(w,sigma)   )
+}
 
-                   SR.GESfun = function(w, StdDevR, meanR,  p){
-                       return( meanR / GESfun(w, StdDevR, meanR, p)  )
-                   }
+GVaR.MM = function(w, mu, sigma, p ){
+         return ( -mean.MM(w,mu) - qnorm(1-p)*StdDev.MM(w,sigma)  )
+}
 
-                   Ipower = function(power,h){
-                     fullprod = 1;
-                     if( (power%%2)==0 ) #even number: number mod is zero
-                     {
-                        pstar = power/2;
-                        for(j in c(1:pstar)){
-                           fullprod = fullprod*(2*j)  }
-                        I = fullprod*dnorm(h);
+SR.GVaR.MM = function(w, mu, sigma, p ){
+          return(  mean.MM(w,mu) / GVaR.MM(w,mu,sigma,p)    )
+}
 
-                        for(i in c(1:pstar) )
-                        {
-                           prod = 1;
-                           for(j in c(1:i) ){
+mVaR.MM = function(w, mu, sigma, M3, M4, p ){
+          skew = skewness.MM(w,sigma,M3);
+          exkurt = kurtosis.MM(w,sigma,M4) - 3;
+          z = qnorm(1-p);
+          h = z + (1/6)*(z^2 -1)*skew
+          h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2;
+          return ( -mean.MM(w,mu) - h*StdDev.MM(w,sigma)  )
+}
+
+SR.mVaR.MM = function(w, mu, sigma, M3, M4, p) {
+          return( mean.MM(w,mu) / mVaR.MM(w, mu, sigma, M3, M4, p )     )
+}
+
+GES.MM = function(w, mu, sigma , p){
+         return ( -mean.MM(w,mu) + dnorm(qnorm(1-p))*StdDev.MM(w,sigma)/(1-p) )
+}
+
+SR.GES.MM = function(w, mu , sigma , p){
+                       return( mean.MM(w,mu) / GES.MM(w, mu, sigma , p)  )
+}
+
+Ipower = function(power,h){
+          fullprod = 1;
+          if( (power%%2)==0 ) #even number: number mod is zero
+          {
+                  pstar = power/2;
+                  for(j in c(1:pstar)){
+                        fullprod = fullprod*(2*j)  }
+                   I = fullprod*dnorm(h);
+
+                   for(i in c(1:pstar) )
+                   {
+                         prod = 1;
+                         for(j in c(1:i) ){
                               prod = prod*(2*j)  }
-                           I = I + (fullprod/prod)*(h^(2*i))*dnorm(h)
-                        }
-                     }else{
-                        pstar = (power-1)/2
-                        for(j in c(0:pstar) ) {
+                         I = I + (fullprod/prod)*(h^(2*i))*dnorm(h)
+                    }
+          }else{
+                    pstar = (power-1)/2
+                    for(j in c(0:pstar) ) {
                              fullprod = fullprod*( (2*j)+1 ) }
-                        I = -fullprod*pnorm(h);
-                        for(i in c(0:pstar) ){
+                    I = -fullprod*pnorm(h);
+                    for(i in c(0:pstar) ){
                            prod = 1;
                            for(j in c(0:i) ){
                               prod = prod*( (2*j) + 1 )}
-                          I = I + (fullprod/prod)*(h^(  (2*i) + 1))*dnorm(h) }
-                       }
-                       return(I)
-                     }
+                           I = I + (fullprod/prod)*(h^(  (2*i) + 1))*dnorm(h) }
+          }
+          return(I)
+}
 
-                     mESfun = function(w, sigma, mu, p){
-                       pm4 = t(w)%*%M4%*%(w%x%w%x%w) ; pm3 = t(w)%*%M3%*%(w%x%w) ; pm2 =  t(w)%*%sigma%*%w ;
-                       skew = pm3 / pm2^(3/2);
-                       exkurt = pm4 / pm2^(2) - 3; z = qnorm(p);
-                       h = z + (1/6)*(z^2 -1)*skew
-                       h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2;
+mES.MM = function(w, mu, sigma, M3 , M4 , p){
+          skew = skewness.MM(w,sigma,M3);
+          exkurt = kurtosis.MM(w,sigma,M4) - 3;
+          z = qnorm(1-p);
+          h = z + (1/6)*(z^2 -1)*skew
+          h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2;
 
-                       E = dnorm(h)
-                       E = E + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
-                       E = E +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
-                       E = E + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
-                       E = E/p
+          E = dnorm(h)
+          E = E + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
+          E = E +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
+          E = E + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
+          E = E/(1-p)
 
-                       return (- (t(w)%*%mu) - sqrt(pm2)*min(-E,h) )
-                   }
+          return (- mean.MM(w,mu) - StdDev.MM(w,sigma)*min(-E,h) )
+}
 
-                   NegSR.mESfun = function(w, sigma, mu, p){
-                       pm4 = t(w)%*%M4%*%(w%x%w%x%w) ; pm3 = t(w)%*%M3%*%(w%x%w) ; pm2 =  t(w)%*%sigma%*%w ;
-                       skew = pm3 / pm2^(3/2);
-                       exkurt = pm4 / pm2^(2) - 3; z = qnorm(p);
-                       h = z + (1/6)*(z^2 -1)*skew
-                       h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2;
-
-                       E = dnorm(h)
-                       E = E + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
-                       E = E +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
-                       E = E + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
-                       E = E/p
-                       mES = - (t(w)%*%mu) - sqrt(pm2)*min(-E,h)
-                       return ( - (t(w)%*%mu) / mES )
-                   }
+SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
+   return( mean.MM(w,mu) / mES.MM(w, mu, sigma, M3 , M4 , p)  )
+}
 
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008/01/20 06:30:08  brian
+# - Initial Revision
+#
 ###############################################################################
