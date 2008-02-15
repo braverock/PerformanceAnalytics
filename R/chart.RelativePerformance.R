@@ -1,5 +1,5 @@
 `chart.RelativePerformance` <-
-function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", ...)
+function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -38,12 +38,12 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
         }
     }
 columnnames = colnames(Result.calc)
-    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, col = colorset, ylog = ylog, ...)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, col = colorset, ylog = ylog, lty = lty, ...)
     abline(h=1,col=elementcolor)
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = .7, border.col = elementcolor, lwd = 2, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = elementcolor, lty = lty, lwd = 2, bg = "white", legend = columnnames)
     }
 }
 
@@ -55,10 +55,13 @@ columnnames = colnames(Result.calc)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.9 2007-12-27 18:43:15 peter Exp $
+# $Id: chart.RelativePerformance.R,v 1.10 2008-02-15 04:22:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/12/27 18:43:15  peter
+# - added solid reference line
+#
 # Revision 1.8  2007/04/14 13:24:54  brian
 # - standardize on Ra for returns of asset
 #
