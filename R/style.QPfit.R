@@ -1,5 +1,5 @@
 `style.QPfit` <-
-function(R.fund, R.style, all=F, ...) 
+function(R.fund, R.style, model=F, ...) 
 {
 # INPUTS
 # R.fund   Vector of a fund return time series
@@ -52,8 +52,8 @@ function(R.fund, R.style, all=F, ...)
     R.style = checkData(R.style, method="matrix")
 
     # @todo: Missing data is not allowed, use = "pairwise.complete.obs" ?
-
-    style.cols <- dim(R.style)[2]
+    style.rows = dim(R.style)[1]
+    style.cols = dim(R.style)[2]
 
     # Calculate D and d
     Dmat = cov(R.style)
@@ -63,24 +63,24 @@ function(R.fund, R.style, all=F, ...)
     # vector b0.  First we tackle Amat.  The first constraint listed above is 
     # SUM[w_i] = 1.  The left side of the constraint is expressed as a vector 
     # of 1's:
-    a1 <- rep(1, style.cols)
+    a1 = rep(1, style.cols)
 
     # In b0, which represents the right side of the equation, this vector is 
     # paired with the value '1'.
 
     # The second constraint sets the lower bound of the weights to zero.  First
     # we set up an identity matrix.  
-    a2 <- matrix(0, style.cols, style.cols)
-    diag(a2) <- 1
+    a2 = matrix(0, style.cols, style.cols)
+    diag(a2) = 1
 
     # It's paired in b0 with a vector of lower bounds set to zeros:
-    w.min <- rep(0, style.cols)
+    w.min = rep(0, style.cols)
 
     # Construct A from the two components a1 and a2
-    Amat <- t(rbind(a1, a2))
+    Amat = t(rbind(a1, a2))
 
     # Construct b_0
-    b0 <- c(1, w.min)
+    b0 = c(1, w.min)
 
 
     # This is where 'meq' comes in.  The ?solve.QP page says:
@@ -97,10 +97,21 @@ function(R.fund, R.style, all=F, ...)
     # so each weight is constrainted to be greater than or equal to zero.
     optimal <- solve.QP(Dmat, dvec, Amat, bvec=b0, meq=1)
 
-    if(all)
+    weights = as.matrix(optimal$solution)
+    rownames(weights) = colnames(R.style)
+    colnames(weights) = colnames(R.fund)[1]
+
+    # Calculate metrics for the quality of the fit
+    R.fitted = rowSums(R.style*matrix(rep(t(weights),style.rows),byrow=T,ncol=style.cols))
+    R.nonfactor = R.fund - R.fitted
+print(cor(R.fund, R.fitted)^2)
+    R.squared = 1 - (var(R.nonfactor)/var(R.fund))
+    adj.R.squared = 1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1)
+
+    if(model) 
         result = optimal
-    else
-        result = optimal$solution
+    else 
+        result = list(weights = weights, R.squared = R.squared, adj.R.squared = adj.R.squared )
 
     # @todo: retain the labels on the weights
     # @todo: add other values to output, e.g., 
