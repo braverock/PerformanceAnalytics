@@ -1,5 +1,5 @@
 `chart.Style` <-
-function (R.fund, R.style, method = "constrained", main = NULL, colorset = "darkgray", legend.loc = NULL, ylim = c(0,1), las = 3, horiz = FALSE, cex = 1, ...)
+function (R.fund, R.style, method = "constrained", main = NULL, colorset = "darkgray", legend.loc = NULL, ylim = NULL, las = 3, horiz = FALSE, cex = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -17,10 +17,12 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
     result = style.fit(R.fund, R.style, method = method)
     weights = t(result$weights)
 
-#     column.result = zoo(column.result.tmp, order.by = time(column.result))
-
     if(is.null(main))
         main = paste(colnames(R.fund)[1] ," Style Weights", sep="")
+
+    if(is.null(ylim))
+        if(method == "constrained") ylim = c(0,1)
+        else ylim = NULL
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which
     # gives the number of lines of margin to be specified on the four sides
@@ -42,9 +44,13 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.1 2008-02-23 05:32:37 peter Exp $
+# $Id: chart.Style.R,v 1.2 2008-02-23 05:35:56 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008/02/23 05:32:37  peter
+# - simple bar chart of a fund's exposures to a set of factors, as determined
+# by style.fit
+#
 #
 ###############################################################################
