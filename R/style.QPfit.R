@@ -48,7 +48,7 @@ function(R.fund, R.style, model=F, ...)
     if(!require("quadprog", quietly=TRUE))
         stop("package", sQuote("quadprog"), "is needed.  Stopping")
 
-    R.fund = checkData(R.fund, method="matrix")
+    R.fund = checkData(R.fund[,1,drop=FALSE], method="matrix")
     R.style = checkData(R.style, method="matrix")
 
     # @todo: Missing data is not allowed, use = "pairwise.complete.obs" ?
@@ -97,16 +97,19 @@ function(R.fund, R.style, model=F, ...)
     # so each weight is constrainted to be greater than or equal to zero.
     optimal <- solve.QP(Dmat, dvec, Amat, bvec=b0, meq=1)
 
-    weights = as.matrix(optimal$solution)
+    weights = as.data.frame(optimal$solution)
     rownames(weights) = colnames(R.style)
     colnames(weights) = colnames(R.fund)[1]
 
     # Calculate metrics for the quality of the fit
     R.fitted = rowSums(R.style*matrix(rep(t(weights),style.rows),byrow=T,ncol=style.cols))
     R.nonfactor = R.fund - R.fitted
-print(cor(R.fund, R.fitted)^2)
-    R.squared = 1 - (var(R.nonfactor)/var(R.fund))
-    adj.R.squared = 1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1)
+
+    R.squared = as.data.frame(1 - (var(R.nonfactor)/var(R.fund)))
+    adj.R.squared = as.data.frame(1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1))
+
+    rownames(R.squared) = "R-squared"
+    rownames(adj.R.squared) = "Adj R-squared"
 
     if(model) 
         result = optimal
@@ -118,6 +121,7 @@ print(cor(R.fund, R.fitted)^2)
     #    result <- list(weights = optimal$solution, R.squared = , tracking.error = )
 
     return(result)
+
 
     # EXAMPLE:
     # > head(R.fund)
