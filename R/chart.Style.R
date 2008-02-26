@@ -30,7 +30,7 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 
 
 #     @todo: deal with horiz = TRUE; set las, mar, and ylim correctly
-    if(dim(result$weights)[1] == 1){
+    if(dim(result$weights)[2] == 1){
         if(las > 1)
             par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
         barplot(t(weights), main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
@@ -51,10 +51,14 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.3 2008-02-26 04:39:40 peter Exp $
+# $Id: chart.Style.R,v 1.4 2008-02-26 04:49:06 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2008/02/26 04:39:40  peter
+# - moved legend and margin control into chart.StackedBar
+# - handles multiple columns
+#
 # Revision 1.2  2008/02/23 05:35:56  peter
 # - set ylim more sensibly depending on method
 #
