@@ -12,16 +12,19 @@
 # legend("center",legend=colnames(x),fill=gray.colors(11,start=0,end=1),cex=.7,ncol=3, box.col="black")
 # gray.colors(w.columns,start=0,end=1)
 `chart.StackedBar` <- 
-function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, legend.loc="under", ... ) 
+function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, cex = 1, las=3, legend.loc="under", ... ) 
 {
 
-    w = checkData(w)
+    w = checkData(w,method="matrix")
     w.columns = ncol(w)
 
     if(!is.null(legend.loc)){
         if(legend.loc == "under"){
-            layout(rbind(1,2), height=c(3,1), width=1)
-            par(mar=c(1,4,4,2))
+            layout(rbind(1,2), height=c(5,1), width=1)
+            if(las > 1)
+                par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+            else
+                par(mar=c(1,4,4,2)+.1)
             legend.tmp = NULL
         }
         else
@@ -30,16 +33,18 @@ function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, legen
     else
         legend.tmp = NULL
 
-    barplot(w,col=colorset,space=space, main=main, legend.loc = legend.tmp, ...)
 
-    if(!is.null(legend.loc) | legend.loc =="under"){
-        par(mar=c(2,4,2,2))
+
+    barplot(w,col=colorset,space=space, main=main, legend.loc = legend.tmp, las = las, cex = cex, ...)
+
+    if(!is.null(legend.loc) & legend.loc =="under"){
+        par(mar=c(2,2,1,1)+.1)
         plot.new()
         if(w.columns <4)
             ncol= w.columns
         else
             ncol = 4
-        legend("center",legend=colnames(w),fill=colorset,cex=legend.cex,ncol=ncol, box.col="black")
+        legend("center",legend=rownames(w),fill=colorset,cex=legend.cex,ncol=ncol, box.col="black")
     }
 }
 
@@ -51,8 +56,11 @@ function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, legen
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.1 2008-02-23 05:54:37 peter Exp $
+# $Id: chart.StackedBar.R,v 1.2 2008-02-26 04:38:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008/02/23 05:54:37  peter
+# - primitive for weight displays and other charts
+#
 ###############################################################################
