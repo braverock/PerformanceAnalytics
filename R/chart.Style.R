@@ -1,5 +1,5 @@
 `chart.Style` <-
-function (R.fund, R.style, method = "constrained", main = NULL, colorset = "darkgray", legend.loc = NULL, ylim = NULL, las = 3, horiz = FALSE, cex = 1, ...)
+function (R.fund, R.style, method = "constrained", main = NULL, colorset = "darkgray", ylim = NULL, las = 3, horiz = FALSE, cex = 1, legend.loc="under", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -10,12 +10,12 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
     # FUNCTION:
 
     # Transform input data to a data frame
-    R.fund = checkData(R.fund[,1,drop=FALSE], method = "zoo")
+    R.fund = checkData(R.fund, method = "zoo")
     R.style = checkData(R.style, method = "zoo")
 
     # Calculate
     result = style.fit(R.fund, R.style, method = method)
-    weights = t(result$weights)
+    weights = as.matrix(result$weights)
 
     if(is.null(main))
         main = paste(colnames(R.fund)[1] ," Style Weights", sep="")
@@ -27,12 +27,19 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
     # mar: a numerical vector of the form c(bottom, left, top, right) which
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
-    if(las > 1)
-        par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+
 
 #     @todo: deal with horiz = TRUE; set las, mar, and ylim correctly
-
-    barplot(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
+    if(dim(result$weights)[1] == 1){
+        if(las > 1)
+            par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+        barplot(t(weights), main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
+    }
+    else {
+#         if(las > 1)
+#             par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+        chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
+    }
 
 }
 
@@ -44,10 +51,13 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.2 2008-02-23 05:35:56 peter Exp $
+# $Id: chart.Style.R,v 1.3 2008-02-26 04:39:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008/02/23 05:35:56  peter
+# - set ylim more sensibly depending on method
+#
 # Revision 1.1  2008/02/23 05:32:37  peter
 # - simple bar chart of a fund's exposures to a set of factors, as determined
 # by style.fit
