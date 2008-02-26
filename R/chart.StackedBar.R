@@ -17,12 +17,13 @@ function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, cex =
 
     w = checkData(w,method="matrix")
     w.columns = ncol(w)
+    w.rows = nrow(w)
 
     if(!is.null(legend.loc)){
         if(legend.loc == "under"){
             layout(rbind(1,2), height=c(5,1), width=1)
             if(las > 1)
-                par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+                par(mar=c(max(stringDims(colnames(w))$width)/2, 4, 4, 2)+.1, cex = cex)
             else
                 par(mar=c(1,4,4,2)+.1)
             legend.tmp = NULL
@@ -35,13 +36,13 @@ function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, cex =
 
 
 
-    barplot(w,col=colorset,space=space, main=main, legend.loc = legend.tmp, las = las, cex = cex, ...)
+    barplot(w,col=colorset,space=space, main=main, legend.loc = legend.tmp, las = las, ...)
 
     if(!is.null(legend.loc) & legend.loc =="under"){
         par(mar=c(2,2,1,1)+.1)
         plot.new()
-        if(w.columns <4)
-            ncol= w.columns
+        if(w.rows <4)
+            ncol= w.rows
         else
             ncol = 4
         legend("center",legend=rownames(w),fill=colorset,cex=legend.cex,ncol=ncol, box.col="black")
@@ -56,10 +57,15 @@ function (w, colorset=1:ncol(w), main = NULL, space = 0, legend.cex = 0.7, cex =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.2 2008-02-26 04:38:53 peter Exp $
+# $Id: chart.StackedBar.R,v 1.3 2008-02-26 04:56:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008/02/26 04:38:53  peter
+# - now handles multiple columns for fund
+# - legend "under" draws correctly
+# - bottom margin fits to text with cex=1
+#
 # Revision 1.1  2008/02/23 05:54:37  peter
 # - primitive for weight displays and other charts
 #
