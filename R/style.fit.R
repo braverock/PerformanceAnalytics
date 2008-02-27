@@ -1,5 +1,5 @@
 `style.fit` <-
-function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "normalized"), ...) 
+function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...) 
 {
 # INPUTS
 # R.fund   Vector of a fund return time series
@@ -63,7 +63,7 @@ function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "n
 
     for(fund.col in 1:fund.cols){
         if(method == "constrained"){
-            column.result = style.QPfit(R.fund = R.fund[,fund.col,drop=FALSE], R.style = R.style)
+            column.result = style.QPfit(R.fund = R.fund[,fund.col,drop=FALSE], R.style = R.style, leverage = leverage)
             if(fund.col == 1){
                 result.weights = column.result$weights
                 result.R2 = column.result$R.squared
