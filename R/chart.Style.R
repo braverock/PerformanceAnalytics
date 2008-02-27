@@ -1,5 +1,5 @@
 `chart.Style` <-
-function (R.fund, R.style, method = "constrained", main = NULL, colorset = "darkgray", ylim = NULL, las = 3, horiz = FALSE, cex = 1, legend.loc="under", ...)
+function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainbow(ncol(R.style)), ylim = NULL, las = 3, horiz = FALSE, cex.names = 1, legend.loc="under", leverage = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -14,14 +14,14 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
     R.style = checkData(R.style, method = "zoo")
 
     # Calculate
-    result = style.fit(R.fund, R.style, method = method)
+    result = style.fit(R.fund, R.style, method = method, leverage = leverage)
     weights = as.matrix(result$weights)
 
     if(is.null(main))
         main = paste(colnames(R.fund)[1] ," Style Weights", sep="")
 
     if(is.null(ylim))
-        if(method == "constrained") ylim = c(0,1)
+        if(method == "constrained" & leverage == FALSE) ylim = c(0,1)
         else ylim = NULL
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which
@@ -30,15 +30,16 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 
 
 #     @todo: deal with horiz = TRUE; set las, mar, and ylim correctly
+#   move this into chart.StackedBar.  
     if(dim(result$weights)[2] == 1){
         if(las > 1)
-            par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
+            par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)*cex.names+.1, cex = cex)
         barplot(t(weights), main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
     }
     else {
 #         if(las > 1)
-#             par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)+.1, cex = cex)
-        chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
+#             par(mar=c(max(stringDims(colnames(R.fund))$width)/2, 4, 4, 2)+.1, cex = cex)
+        chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, cex.names = cex.names, ...)
     }
 
 }
@@ -51,10 +52,13 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = "dark
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.4 2008-02-26 04:49:06 peter Exp $
+# $Id: chart.Style.R,v 1.5 2008-02-27 04:05:32 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008/02/26 04:49:06  peter
+# - handles single column fits better
+#
 # Revision 1.3  2008/02/26 04:39:40  peter
 # - moved legend and margin control into chart.StackedBar
 # - handles multiple columns
