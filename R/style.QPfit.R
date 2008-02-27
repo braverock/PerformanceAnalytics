@@ -1,5 +1,5 @@
 `style.QPfit` <-
-function(R.fund, R.style, model=F, ...) 
+function(R.fund, R.style, model=F, leverage = FALSE, ...) 
 {
 # INPUTS
 # R.fund   Vector of a fund return time series
@@ -56,14 +56,17 @@ function(R.fund, R.style, model=F, ...)
     style.cols = dim(R.style)[2]
 
     # Calculate D and d
-    Dmat = cov(R.style)
-    dvec = cov(R.fund, R.style)
+    Dmat = cov(R.style, use = "pairwise.complete.obs")
+    dvec = cov(R.fund, R.style, use = "pairwise.complete.obs")
 
     # To specify A' b >= b_0, we create an nxn matrix Amat and the constraints 
-    # vector b0.  First we tackle Amat.  The first constraint listed above is 
+    # vector b0.  First we tackle Amat.  
+
+    # If we do not allow leverage, the first constraint listed above is 
     # SUM[w_i] = 1.  The left side of the constraint is expressed as a vector 
     # of 1's:
-    a1 = rep(1, style.cols)
+    if(!leverage)
+        a1 = rep(1, style.cols)
 
     # In b0, which represents the right side of the equation, this vector is 
     # paired with the value '1'.
@@ -77,11 +80,15 @@ function(R.fund, R.style, model=F, ...)
     w.min = rep(0, style.cols)
 
     # Construct A from the two components a1 and a2
-    Amat = t(rbind(a1, a2))
-
     # Construct b_0
-    b0 = c(1, w.min)
-
+    if(!leverage){
+        Amat = t(rbind(a1, a2))
+        b0 = c(1, w.min)
+    }
+    else {
+        Amat = t(a2)
+        b0 = w.min
+    }
 
     # This is where 'meq' comes in.  The ?solve.QP page says:
     #     meq: the first 'meq' constraints are treated as equality
@@ -105,7 +112,7 @@ function(R.fund, R.style, model=F, ...)
     R.fitted = rowSums(R.style*matrix(rep(t(weights),style.rows),byrow=T,ncol=style.cols))
     R.nonfactor = R.fund - R.fitted
 
-    R.squared = as.data.frame(1 - (var(R.nonfactor)/var(R.fund)))
+    R.squared = as.data.frame(1 - (var(R.nonfactor, na.rm=TRUE)/var(R.fund, na.rm=TRUE)))
     adj.R.squared = as.data.frame(1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1))
 
     rownames(R.squared) = "R-squared"
