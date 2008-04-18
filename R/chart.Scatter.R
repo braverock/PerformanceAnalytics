@@ -1,5 +1,5 @@
 `chart.Scatter` <-
-function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, ...)
+function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -37,7 +37,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 
     # Add fit line
 
-    plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, ...)
+    plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, cex.axis = cex.axis, ...)
 
     if(reference.grid) {
         grid(col = elementcolor)
@@ -54,10 +54,13 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.4 2007-04-25 20:07:12 peter Exp $
+# $Id: chart.Scatter.R,v 1.5 2008-04-18 03:51:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/04/25 20:07:12  peter
+# - added x-y axes
+#
 # Revision 1.3  2007/04/02 21:58:42  peter
 # - changed colorset default
 # - changed to use checkData
