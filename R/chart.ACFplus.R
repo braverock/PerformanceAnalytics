@@ -36,6 +36,8 @@ function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     L = -U
     minu = min(minA, minP, L) - .01
 
+    op <- par(no.readonly=TRUE)
+
     layout(rbind(1,2))
 #     par(mfrow = c(2,1), mar = c(3,3,2,0.8), oma = c(1,1.2,1,1), mgp = c(1.5,0.6,0))
     # mar: a numerical vector of the form c(bottom, left, top, right) which
@@ -57,5 +59,6 @@ function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     axis(2, col = elementcolor, cex.axis = 0.8)
     abline(h=c(0,L,U), lty=c(1,2,2), col=c(1,4,4))
 
+    par(op)
 #    return(cbind(ACF, PACF)) 
 }
