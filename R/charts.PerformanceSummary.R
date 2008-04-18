@@ -53,6 +53,8 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
     if(ylog)
         wealth.index = TRUE
 
+    op <- par(no.readonly=TRUE)
+
     # First, we lay out the graphic as a three row, one column format
 #    plot.new()
     layout(matrix(c(1,2,3)),height=c(2,1,1.3),width=1)
@@ -80,6 +82,7 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
     # formatting.  Also, it requires the gplots package.
     #par(mar=c(0,0,0,0))
     #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
+    par(op)
 }
 
 ###############################################################################
@@ -90,10 +93,13 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.15 2007-09-24 02:50:28 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.16 2008-04-18 03:51:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2007/09/24 02:50:28  peter
+# - cleaned up spacing in title
+#
 # Revision 1.14  2007/08/23 02:12:04  peter
 # - added legend.loc as parameter so that legend can be shut off or moved
 # in top chart
