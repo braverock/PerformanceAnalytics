@@ -1,5 +1,5 @@
 `chart.RiskReturnScatter` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, ...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, cex.axis=0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -86,17 +86,17 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # Draw the principal scatterplot
     plot(returns ~ risk,
         xlab='', ylab='',
-        las = 1, xlim=xlim, ylim=ylim, cex.axis = .8, col = colorset[columns:1], pch = symbolset[columns:1], axes= FALSE, ...)
+        las = 1, xlim=xlim, ylim=ylim, col = colorset[columns:1], pch = symbolset[columns:1], axes= FALSE, ...)
 #     abline(v = 0, col = elementcolor)
     if(ylim[1] != 0){
         abline(h = 0, col = elementcolor)
     }
-    axis(1, cex.axis = 0.8, col = elementcolor)
-    axis(2, cex.axis = 0.8, col = elementcolor)
+    axis(1, cex.axis = cex.axis, col = elementcolor)
+    axis(2, cex.axis = cex.axis, col = elementcolor)
 
     if(!add.boxplots){
-        title(ylab = ylab)
-        title(xlab = xlab)
+        title(ylab = ylab, cex.lab = cex.lab)
+        title(xlab = xlab, cex.lab = cex.lab)
     }
 
     # Add Sharpe ratio lines
@@ -109,13 +109,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
     # Label the data points
     if(add.names)
-        text(x = risk,y = returns, labels = row.names(comparison), adj = -0.1, cex = 0.8, col = colorset[columns:1])
+        text(x = risk,y = returns, labels = row.names(comparison), adj = -0.2, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
 
     # Add a rug so that data points are easier to identify
     rug(side=1, risk, col = elementcolor)
     rug(side=2, returns, col = elementcolor)
 
-    title(main = main)
+    title(main = main, cex.main = cex.main)
 
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
@@ -130,12 +130,12 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         # Draw the Y-axis histogram
         par(mar=c(1,2,5,1))
         boxplot(returns, axes = FALSE, ylim = ylim)
-        title(ylab = ylab, line = 0)
+        title(ylab = ylab, line = 0, cex.lab = cex.lab)
 
         # Draw the X-axis histogram
         par(mar=c(5,1,1,2))
         boxplot(risk, horizontal = TRUE, axes = FALSE, ylim=xlim)
-        title(xlab = xlab, line = 1)
+        title(xlab = xlab, line = 1, cex.lab = cex.lab)
 
         #par(original.layout)
     }
@@ -151,10 +151,14 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.7 2007-10-03 02:46:18 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.8 2008-04-18 03:41:42 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/10/03 02:46:18  peter
+# - colors and symbol sets now stretched to match the number of columns
+# - name text colors prints backwards to match the order of the dots
+#
 # Revision 1.6  2007/09/24 02:49:34  peter
 # - chart elements now consistent with time series charts
 # - prints columns backwards so that earlier columns printed on top of later
