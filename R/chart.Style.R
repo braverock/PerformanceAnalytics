@@ -24,23 +24,7 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainb
         if(method == "constrained" & leverage == FALSE) ylim = c(0,1)
         else ylim = NULL
 
-    # mar: a numerical vector of the form c(bottom, left, top, right) which
-    # gives the number of lines of margin to be specified on the four sides
-    # of the plot. The default is c(5, 4, 4, 2) + 0.1
-
-
-#     @todo: deal with horiz = TRUE; set las, mar, and ylim correctly
-#   move this into chart.StackedBar.  
-    if(dim(result$weights)[2] == 1){
-        if(las > 1)
-            par(mar=c(max(stringDims(colnames(R.style))$width)/2, 4, 4, 2)*cex.names+.1, cex = cex)
-        barplot(t(weights), main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, ...)
-    }
-    else {
-#         if(las > 1)
-#             par(mar=c(max(stringDims(colnames(R.fund))$width)/2, 4, 4, 2)+.1, cex = cex)
-        chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, cex.names = cex.names, ...)
-    }
+    chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, cex.names = cex.names, ...)
 
 }
 
@@ -52,10 +36,14 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainb
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.5 2008-02-27 04:05:32 peter Exp $
+# $Id: chart.Style.R,v 1.6 2008-04-18 03:58:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008/02/27 04:05:32  peter
+# - added 'leverage' tag to eliminate sum to one constraint
+# - added cex.names for controlling size of xaxis labels
+#
 # Revision 1.4  2008/02/26 04:49:06  peter
 # - handles single column fits better
 #
