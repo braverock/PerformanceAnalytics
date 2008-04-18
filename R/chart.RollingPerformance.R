@@ -1,5 +1,5 @@
 `chart.RollingPerformance` <-
-function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex = 1, lwd = 1, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = NULL, ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", darken = FALSE , date.format = "%m/%y", ...)
+function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 1, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = NULL, ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", darken = FALSE , date.format = "%m/%y", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -35,7 +35,7 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 
     colnames(Return.calc) = columnnames
 
-    chart.TimeSeries(Return.calc, xaxis = xaxis, colorset = colorset, legend.loc = legend.loc, type = type, pch = pch, lty = lty, bg = bg, cex = cex, lwd = lwd, xlim = xlim, ylim = ylim, main = main, sub = sub, xlab = xlab, ylab = ylab, ann = ann, panel.first = panel.first, panel.last = panel.last, asp = asp, ylog = ylog, event.lines = event.lines, event.labels = event.labels, period.areas = period.areas, event.color = event.color, period.color = period.color, darken = darken, date.format = date.format )
+    chart.TimeSeries(Return.calc, xaxis = xaxis, colorset = colorset, legend.loc = legend.loc, type = type, pch = pch, lty = lty, bg = bg, cex.axis=cex.axis, cex.legend = cex.legend, cex.labels = cex.labels, lwd = lwd, xlim = xlim, ylim = ylim, main = main, sub = sub, xlab = xlab, ylab = ylab, ann = ann, panel.first = panel.first, panel.last = panel.last, asp = asp, ylog = ylog, event.lines = event.lines, event.labels = event.labels, period.areas = period.areas, event.color = event.color, period.color = period.color, darken = darken, date.format = date.format )
 
 }
 
@@ -47,10 +47,13 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.7 2007-03-15 01:15:03 brian Exp $
+# $Id: chart.RollingPerformance.R,v 1.8 2008-04-18 03:47:34 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/03/15 01:15:03  brian
+# - replace drop=F with drop=FALSE for R CMD check compatibility
+#
 # Revision 1.6  2007/03/14 00:54:06  brian
 # - updates to parameters for standardization
 #
