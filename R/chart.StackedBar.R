@@ -1,19 +1,9 @@
-    # mar: a numerical vector of the form c(bottom, left, top, right) which
-    # gives the number of lines of margin to be specified on the four sides
-    # of the plot. The default is c(5, 4, 4, 2) + 0.1
-
-    # The first row is the cumulative returns line plot
-# x = resultmatrix.byobjfun[["SR.modVaR.inception"]]
-# layout(rbind(1,2), height=c(3,1), width=1)
-# par(mar=c(1,4,4,2))
-# barplot(x,col=gray.colors(11,start=0,end=1),space=0, main="SR modVaR From Inception Weights")
-# par(mar=c(2,4,2,2))
-# plot.new()
-# legend("center",legend=colnames(x),fill=gray.colors(11,start=0,end=1),cex=.7,ncol=3, box.col="black")
-# gray.colors(w.columns,start=0,end=1)
 `chart.StackedBar` <- 
-function (w, colorset = NULL, main = NULL, space = 0, legend.cex = 0.7, cex = 1, las=3, legend.loc="under", cex.names = 1, ... ) 
+function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.7, las=3, legend.loc="under", cex.names = 1, beside = FALSE, ylim = NULL, horiz=FALSE, element.color = "darkgray", unstacked = F, ... ) 
 {
+
+    # @todo: Set axis color to element.color
+    # @todo: Set border color to element.color
 
     w = checkData(w,method="matrix")
     w.columns = ncol(w)
@@ -22,33 +12,42 @@ function (w, colorset = NULL, main = NULL, space = 0, legend.cex = 0.7, cex = 1,
     if(is.null(colorset))
         colorset=1:nrow(w)
 
-    if(!is.null(legend.loc)){
-        if(legend.loc == "under"){
-            layout(rbind(1,2), height=c(5,1), width=1)
-            if(las > 1)
-                par(mar=c(max(stringDims(colnames(w))$width)/2, 4, 4, 2)*cex.names +.1, cex = cex)
-            else
-                par(mar=c(1,4,4,2)+.1)
-            legend.tmp = NULL
-        }
-        else
-            legend.tmp = legend.loc
+    if(unstacked & dim(w)[2] == 1){ # only one column is being passed into 'w', so we'll unstack the bars
+        if(las > 1) # set the bottom border to accomodate labels
+            # mar: a numerical vector of the form c(bottom, left, top, right) which
+            # gives the number of lines of margin to be specified on the four sides
+            # of the plot. The default is c(5, 4, 4, 2) + 0.1
+            par(mar=c(max(stringDims(rownames(w))$width)/2, 4, 4, 2)*cex.names+.1) #requires Hmisc
+        barplot(t(w), main = main, col = colorset[1], ylim = ylim, las = las, horiz = FALSE, beside=FALSE, cex.names = cex.names, space = space, ...)
     }
-    else
-        legend.tmp = NULL
 
+    else { # multiple columns being passed into 'w', so we'll stack the bars and put a legend underneith
 
+        if(!is.null(legend.loc) ){
+            if(legend.loc =="under") # put the legend under the chart
+                layout(rbind(1,2), height=c(6,1), width=1)
+            else
+                legend.tmp = NULL # @todo: this area may be used for other locations later
+        }
 
-    barplot(w,col=colorset,space=space, main=main, legend.loc = legend.tmp, las = las, cex.names = cex.names, ...)
-
-    if(!is.null(legend.loc) & legend.loc =="under"){
-        par(mar=c(2,2,1,1)+.1)
-        plot.new()
-        if(w.rows <4)
-            ncol= w.rows
+        if(las > 1) # set the bottom margin to accomodate names
+            par(mar=c(max(stringDims(colnames(w))$width)/2, 4, 4, 2)*cex.names +.1)
         else
-            ncol = 4
-        legend("center",legend=rownames(w),fill=colorset,cex=legend.cex,ncol=ncol, box.col="black")
+            par(mar=c(1,4,4,2)+.1)
+
+        barplot(w,col=colorset,space=space, main=main, las = las, cex.names = cex.names, beside = beside, ylim = ylim, ...)
+
+        if(!is.null(legend.loc)){
+            if(legend.loc =="under"){ # draw the legend under the chart
+                par(mar=c(0,2,0,1)+.1) # set the margins of the second panel
+                plot.new()
+                if(w.rows <4)
+                    ncol= w.rows
+                else
+                    ncol = 4
+                legend("center", legend=rownames(w), cex = legend.cex, fill=colorset, ncol=ncol, box.col=element.color)
+            } # if legend.loc is null, then do nothing
+        }
     }
 }
 
@@ -60,10 +59,13 @@ function (w, colorset = NULL, main = NULL, space = 0, legend.cex = 0.7, cex = 1,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.4 2008-02-27 04:01:10 peter Exp $
+# $Id: chart.StackedBar.R,v 1.5 2008-04-18 03:56:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008/02/27 04:01:10  peter
+# - added cex.names for sizing xaxis tags
+#
 # Revision 1.3  2008/02/26 04:56:59  peter
 # - fixed label calculation to handle correct dimension
 #
