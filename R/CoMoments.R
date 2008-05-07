@@ -84,7 +84,7 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
 #         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
 #         out=out/ (StdDev(R2)^(p1+p2)) #
 
-        out=out/ (sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2))
+        out=out/ ((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))
     }
     return(out);
 }
@@ -132,10 +132,13 @@ BetaCoKurtosis <- function(R1,R2)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.3 2008-05-07 22:05:36 brian Exp $
+# $Id: CoMoments.R,v 1.4 2008-05-07 22:54:04 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2008-05-07 22:05:36  brian
+# - replace with centeredmoment function that is multi-column aware via apply
+#
 # Revision 1.2  2008-05-07 21:30:10  peter
 # - repair to centeredcomoment normalization suggested by Kris in 2008-01-23 email
 #
