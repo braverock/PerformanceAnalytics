@@ -1,16 +1,17 @@
 ###############################################################################
-# Functions for use in optimizer.R file to perform multivariate matrix
-# calculations on portfolios of assets.  Replaces old univariate code.
+# Functions to perform multivariate matrix
+# calculations on portfolios of assets.
 #
-# I've modified these from the file localsearch.R to minimize the number of
+# I've modified these to minimize the number of
 # times the same calculation or statistic is run, and to minimize duplication
 # of code from function to function.  This should make things more
-# efficient when running against very large numbers of portfolios.
+# efficient when running against very large numbers of instruments or portfolios.
 #
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
-# Kindly contact the authors for permission to use these functions
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
 ###############################################################################
-# $Id: MultivariateMoments.R,v 1.2 2008-01-20 12:07:24 kris Exp $
+# $Id: MultivariateMoments.R,v 1.3 2008-05-07 21:38:24 brian Exp $
 ###############################################################################
 
 
@@ -27,7 +28,7 @@ M3.MM = function(R){
 }
 
 M4.MM = function(R){
-   cAssets = ncol(R); T = nrow(R);   
+   cAssets = ncol(R); T = nrow(R);
    mu = apply(R,2,'mean');
    M4 = matrix(rep(0,cAssets^4),nrow=cAssets,ncol=cAssets^3);
    for(t in c(1:T))
@@ -138,7 +139,20 @@ SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
 }
 
 ###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson and Kris Boudt
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: MultivariateMoments.R,v 1.3 2008-05-07 21:38:24 brian Exp $
+#
+###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-01-20 12:07:24  kris
+# Changed function definitions in optim_functions.R and updated the function calls in optimizer.R to these functions
+#
 # Revision 1.1  2008/01/20 06:30:08  brian
 # - Initial Revision
 #
