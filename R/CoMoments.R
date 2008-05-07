@@ -26,6 +26,7 @@ function (R,...)
 
     # Get dimensions and labels
     columns.a = ncol(R)
+    rows.a = nrow(R)
 
     if(columns.a==1){
        R.centered = zoo(NA);
@@ -36,7 +37,7 @@ function (R,...)
        R.mean = apply(R,2,'mean', na.rm=TRUE)
        # returns a vector holding the mean return for each asset
     
-       R.centered = R - R.mean
+       R.centered = R - matrix( rep(R.mean,rows.a), ncol= columns.a, byrow=T)
        # return the matrix of centered returns
    }
 
@@ -79,7 +80,10 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
     out = mean( na.omit( Return.centered(R1)^p1 * Return.centered(R2)^p2))
 
     if(normalize) {
-        out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) )
+#         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
+#         out=out/ (StdDev(R2)^(p1+p2)) # 
+
+        out=out/ (sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2))
     }
     return(out);
 }
@@ -127,10 +131,13 @@ BetaCoKurtosis <- function(R1,R2)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.1 2008-01-23 10:17:17 kris Exp $
+# $Id: CoMoments.R,v 1.2 2008-05-07 21:30:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008/01/23 10:17:17  kris
+# Make a clear separation between function applicable to univariate and multivariate series
+#
 # Revision 1.10  2008/01/18 02:56:46  peter
 # - added comments for use of centeredcomoment function
 #
