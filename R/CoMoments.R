@@ -36,7 +36,7 @@ function (R,...)
     }else{
        R.mean = apply(R,2,'mean', na.rm=TRUE)
        # returns a vector holding the mean return for each asset
-    
+
        R.centered = R - matrix( rep(R.mean,rows.a), ncol= columns.a, byrow=T)
        # return the matrix of centered returns
    }
@@ -64,10 +64,11 @@ function (R, ...)
 
 ###############################################################################
 
+
 centeredmoment = function(R,power)
 {# @author Kris Boudt, Peter Carl
     R = checkData(R)
-    out = mean(na.omit(Return.centered(R)^power))
+    out =  apply(Return.centered(R)^power,2,FUN=mean, na.rm=TRUE)
     return(out);
 }
 
@@ -81,7 +82,7 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
 
     if(normalize) {
 #         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
-#         out=out/ (StdDev(R2)^(p1+p2)) # 
+#         out=out/ (StdDev(R2)^(p1+p2)) #
 
         out=out/ (sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2))
     }
@@ -131,10 +132,13 @@ BetaCoKurtosis <- function(R1,R2)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.2 2008-05-07 21:30:10 peter Exp $
+# $Id: CoMoments.R,v 1.3 2008-05-07 22:05:36 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-05-07 21:30:10  peter
+# - repair to centeredcomoment normalization suggested by Kris in 2008-01-23 email
+#
 # Revision 1.1  2008/01/23 10:17:17  kris
 # Make a clear separation between function applicable to univariate and multivariate series
 #
