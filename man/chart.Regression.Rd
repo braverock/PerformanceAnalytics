@@ -6,7 +6,7 @@
   Uses a scatterplot to display the relationship of a set of returns to a market benchmark.  Fits a linear model and overlays the resulting model.  Also overlays a Loess line for comparison.
 }
 \usage{
-chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, cex = .8, ...)
+chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50,  legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -31,6 +31,8 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{evaluation}{ passed to loess line fit, as in \code{\link{loess.smooth}} }
   \item{cex}{ set the cex size, same as in \code{\link{plot}} }
+  \item{legend.cex}{ set the legend size }
+  \item{lwd}{ set the line width for fits, same as in \code{\link{lines}} }
   \item{\dots}{ any other passthru parameters to \code{\link{plot}} }
 }
 \value{
