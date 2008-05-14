@@ -51,7 +51,7 @@ Internal functions and data objects to make graphs easier to read, and better fo
 Also contains common economic cycle dates and dates of serious market events per asset class.
 }
 \usage{
-legend(x, y = NULL, legend, fill = NULL, col = par("col"), lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"), pt.bg = NA, cex = 1, pt.cex = cex, pt.lwd = lwd, xjust = 0, yjust = 1, x.intersp = 1, y.intersp = 1, adj = c(0, 0.5), text.width = NULL, text.col = par("col"), merge = do.lines && has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE, title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid")
+legend(x, y = NULL, legend, fill = NULL, col = par("col"), lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"), pt.bg = NA, cex = 1, pt.cex = cex, pt.lwd = lwd, xjust = 0, yjust = 1, x.intersp = 1, y.intersp = 1, adj = c(0, 0.5), text.width = NULL, text.col = par("col"), merge = do.lines && has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE, title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid", box.col = NULL, box.lwd = 1, box.lty = "solid")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -78,6 +78,7 @@ legend(x, y = NULL, legend, fill = NULL, col = par("col"), lty, lwd, pch, angle 
   \item{bg}{the background color for the legend box.  (Note that this is
     only used if \code{bty != "n"}.)}
   \item{box.lty, box.lwd}{the line type and width for the legend box.}
+  \item{border.lty, border.lwd}{the line type and width for the legend border.}
   \item{pt.bg}{the background color for the \code{\link{points}},
     corresponding to its argument \code{bg}.}
   \item{cex}{character expansion factor \bold{relative} to current
