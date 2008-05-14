@@ -6,7 +6,7 @@
   Uses a scatterplot to display the relationship of a set of returns to a market benchmark.  Fits a linear model and overlays the resulting model.  Also overlays a Loess line for comparison.
 }
 \usage{
-chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "spline"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, cex = 0.8, ...)
+chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, cex = .8, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,7 +42,7 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
 \seealso{ \code{\link{plot}} }
 \examples{
 data(managers)
-chart.Regression(managers[, 1:2, drop = FALSE], managers[, 8, drop = FALSE], Rf = managers[, 10, drop = FALSE], excess.returns = TRUE, legend.loc = "topleft")
+chart.Regression(managers[, 1:2, drop = FALSE], managers[, 8, drop = FALSE], Rf = managers[, 10, drop = FALSE], excess.returns = TRUE, fit = c("loess", "linear"), legend.loc = "topleft")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
