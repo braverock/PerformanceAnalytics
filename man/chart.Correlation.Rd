@@ -6,12 +6,11 @@
 Visualization of a Correlation Matrix. On top the (absolute) value of the correlation plus the result of the cor.test as stars. On botttom, the bivariate scatterplots, with a fitted line
 }
 \usage{
-chart.Correlation(x, y, histogram = TRUE)
+chart.Correlation(x, histogram = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{ data for the x axis, can take matrix,vector, or timeseries }
-  \item{y}{ data for the y axis, can take matrix,vector, or timeseries }
   \item{histogram}{ TRUE/FALSE whether or not to display a histogram }
 }
 \value{
