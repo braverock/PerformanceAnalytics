@@ -67,15 +67,18 @@ function (R)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: findDrawdowns.R,v 1.6 2007-07-26 03:34:46 peter Exp $
+# $Id: findDrawdowns.R,v 1.7 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/07/26 03:34:46  peter
+# - fixed error when first period is negative
+#
 # Revision 1.5  2007/03/21 16:34:48  peter
 # - fixed period calculations
 #

@@ -92,15 +92,19 @@ function (R, ci = 0.95, digits = 4)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.MonthlyReturns.R,v 1.6 2007-03-20 13:47:12 peter Exp $
+# $Id: table.MonthlyReturns.R,v 1.7 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/03/20 13:47:12  peter
+# - changed to checkData
+# - cleaned up alignment
+#
 # Revision 1.5  2007/03/05 03:19:26  peter
 # - removed firstcolumn as an attribute
 #

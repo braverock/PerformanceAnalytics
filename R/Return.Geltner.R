@@ -43,15 +43,18 @@ function (Ra, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.Geltner.R,v 1.3 2007-09-11 03:03:45 peter Exp $
+# $Id: Return.Geltner.R,v 1.4 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/09/11 03:03:45  peter
+# - fixed na.omit for column zoo object
+#
 # Revision 1.1  2007/09/01 16:29:55  brian
 # - initial revision of Geltner Returns function
 # - seems to only work on rectangular multicolumn inputs

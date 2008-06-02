@@ -81,15 +81,18 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.7 2007-08-16 14:48:43 peter Exp $
+# $Id: table.HigherMoments.R,v 1.8 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/08/16 14:48:43  peter
+# - added checkData for rf
+#
 # Revision 1.6  2007/03/22 13:49:42  peter
 # - cleaned up comments
 #

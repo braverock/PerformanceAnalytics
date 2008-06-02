@@ -49,15 +49,18 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.5 2008-04-18 03:51:00 peter Exp $
+# $Id: chart.Scatter.R,v 1.6 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-04-18 03:51:00  peter
+# - added cex attributes
+#
 # Revision 1.4  2007/04/25 20:07:12  peter
 # - added x-y axes
 #

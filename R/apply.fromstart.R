@@ -48,15 +48,18 @@ function (R, FUN = "mean" , gap = 1, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: apply.fromstart.R,v 1.5 2008-06-02 15:25:09 peter Exp $
+# $Id: apply.fromstart.R,v 1.6 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-02 15:25:09  peter
+# - fixed multicolumn support
+#
 # Revision 1.4  2007/08/20 21:03:05  peter
 # - moved as.Date transformations
 #

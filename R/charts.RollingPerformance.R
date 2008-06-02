@@ -55,15 +55,18 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.6 2008-04-18 03:52:44 peter Exp $
+# $Id: charts.RollingPerformance.R,v 1.7 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-04-18 03:52:44  peter
+# - added par to reset layout to default
+#
 # Revision 1.5  2007/10/03 02:44:46  peter
 # - legend will be hidden by default
 # - legend location can be passed in through legend.loc parameter

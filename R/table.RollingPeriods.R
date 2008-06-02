@@ -86,15 +86,19 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.RollingPeriods.R,v 1.5 2007-03-22 21:53:00 peter Exp $
+# $Id: table.RollingPeriods.R,v 1.6 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/03/22 21:53:00  peter
+# - added checkData
+# - using zoo for window() calcs in period lengths
+#
 # Revision 1.4  2007/02/26 22:04:36  brian
 # - changes in functions to pass "R CMD check" for package
 #

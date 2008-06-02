@@ -29,15 +29,18 @@ function (Ra, rf = 0, method = "half")
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: KellyRatio.R,v 1.3 2007-03-14 00:54:06 brian Exp $
+# $Id: KellyRatio.R,v 1.4 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
+#
 # Revision 1.2  2007/02/22 18:24:48  brian
 # - fix syntaxt error in calc
 #

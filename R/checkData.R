@@ -153,14 +153,17 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.17 2007-10-18 13:56:53 peter Exp $
+# $Id: checkData.R,v 1.18 2008-06-02 16:05:19 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2007/10/18 13:56:53  peter
+# - fixed error labeling data without columnnames
+#
 # Revision 1.16  2007/10/03 02:43:06  peter
 # - single column zoo objects will have the time class and order preserved
 # - yearmon class should be ordered correctly as a result

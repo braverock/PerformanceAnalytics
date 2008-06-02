@@ -30,15 +30,18 @@ function (Ra, rf = 0)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.R,v 1.6 2007-07-12 21:45:09 brian Exp $
+# $Id: SharpeRatio.R,v 1.7 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/07/12 21:45:09  brian
+# -calculate stddev on excess return to account for a rf series, per Sharpe paper
+#
 # Revision 1.5  2007/04/09 03:45:04  peter
 # - uses checkData
 # - uses Return.excess

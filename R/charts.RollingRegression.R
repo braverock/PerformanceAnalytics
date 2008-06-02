@@ -60,15 +60,18 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.14 2008-04-18 03:53:19 peter Exp $
+# $Id: charts.RollingRegression.R,v 1.15 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2008-04-18 03:53:19  peter
+# - added par to reset layout to default
+#
 # Revision 1.13  2007/11/19 03:43:12  peter
 # - removed event.labels from lower charts
 #

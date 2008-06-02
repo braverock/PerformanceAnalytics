@@ -46,15 +46,19 @@ function (Ra, rf = 0, p=0.95, scale=1)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.5 2007-04-02 21:54:42 peter Exp $
+# $Id: SharpeRatio.modified.R,v 1.6 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/04/02 21:54:42  peter
+# - modified to use CheckData
+# - modified to use Return.excess
+#
 # Revision 1.4  2007/03/14 00:54:06  brian
 # - updates to parameters for standardization
 #

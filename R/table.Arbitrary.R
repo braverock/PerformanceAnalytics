@@ -97,15 +97,18 @@ function(R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard De
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Arbitrary.R,v 1.5 2007-12-27 20:59:35 peter Exp $
+# $Id: table.Arbitrary.R,v 1.6 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2007/12/27 20:59:35  peter
+# - cleaned out commented lines
+#
 # Revision 1.3  2007/12/27 20:46:47  peter
 # - fixed bug to calculate number of columns
 #

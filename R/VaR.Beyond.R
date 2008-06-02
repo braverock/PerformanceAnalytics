@@ -60,15 +60,19 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.9 2007-08-28 14:56:49 peter Exp $
+# $Id: VaR.Beyond.R,v 1.10 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2007/08/28 14:56:49  peter
+# - added na.omit to column processing
+# - added rowname when multiple columns are returned
+#
 # Revision 1.8  2007/06/24 14:05:38  brian
 # - add parameter 'add'
 #

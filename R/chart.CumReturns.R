@@ -87,15 +87,18 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.7 2007-06-18 03:34:33 brian Exp $
+# $Id: chart.CumReturns.R,v 1.8 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/06/18 03:34:33  brian
+# - reverse default order of 'begin' argument to match charts.PerformanceSummary
+#
 # Revision 1.6  2007/04/25 20:06:28  peter
 # - changed the 'method' tag to 'begin'
 #

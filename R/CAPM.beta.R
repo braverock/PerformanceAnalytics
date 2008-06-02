@@ -143,15 +143,19 @@ function (Ra, Rb, rf = 0, digits = 4)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.9 2008-04-18 03:27:19 peter Exp $
+# $Id: CAPM.beta.R,v 1.10 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008-04-18 03:27:19  peter
+# - converted checkData to use zoo
+# - added functions for conditional beta calcs: beta.bear, beta.bull, and timingRatio
+#
 # Revision 1.8  2007/09/14 02:03:25  peter
 # - altered error message to correct syntax matching in editor
 #

@@ -120,15 +120,18 @@ function (R, digits = 1, as.perc = TRUE)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.4 2007-09-02 01:51:18 peter Exp $
+# $Id: table.CalendarReturns.R,v 1.5 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/09/02 01:51:18  peter
+# - puts NAs where data is missing, rather than zeros
+#
 # Revision 1.3  2007/08/15 20:14:32  brian
 # - add notes on deprecated table.Returns, with wrapper to table.CalendarReturns
 #

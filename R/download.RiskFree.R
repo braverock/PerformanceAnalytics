@@ -24,15 +24,19 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"))
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.RiskFree.R,v 1.7 2007-04-14 13:55:46 brian Exp $
+# $Id: download.RiskFree.R,v 1.8 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2007/04/14 13:55:46  brian
+# - standardize enumerated arguments,
+# - assign default value to a string string if no value passed in to avoid warnings
+#
 # Revision 1.6  2007/03/20 11:27:32  brian
 # - add copyright, license, and CVS Log
 #

@@ -41,15 +41,18 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.3 2007-03-22 13:46:50 peter Exp $
+# $Id: chart.RollingMean.R,v 1.4 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/03/22 13:46:50  peter
+# - uses checkData
+#
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
 #

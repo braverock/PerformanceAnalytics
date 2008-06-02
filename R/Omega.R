@@ -93,15 +93,18 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.8 2007-03-04 18:37:09 brian Exp $
+# $Id: Omega.R,v 1.9 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/03/04 18:37:09  brian
+# - update to use switch on method, more efficient
+#
 # Revision 1.7  2007/02/28 16:12:46  brian
 # - set plot=FALSE in Ecdf function
 #

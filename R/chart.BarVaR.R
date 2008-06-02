@@ -112,15 +112,19 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.13 2007-08-20 21:04:58 peter Exp $
+# $Id: chart.BarVaR.R,v 1.14 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2007/08/20 21:04:58  peter
+# - added as.Date because merge.zoo is not behaving as expected when date
+#   formats are not consistent
+#
 # Revision 1.12  2007/06/25 04:15:59  peter
 # - made gap default 12 (months)
 #

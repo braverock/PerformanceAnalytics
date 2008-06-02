@@ -95,15 +95,18 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.11 2007-03-22 13:48:51 peter Exp $
+# $Id: table.CAPM.R,v 1.12 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2007/03/22 13:48:51  peter
+# - removed and edited comments
+#
 # Revision 1.10  2007/03/22 11:34:12  peter
 # - changed the colname label connector from "vs" to "to"
 #

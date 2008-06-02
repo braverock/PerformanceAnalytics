@@ -65,15 +65,18 @@ function (R, digits = 4)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Autocorrelation.R,v 1.2 2007-12-27 20:13:00 peter Exp $
+# $Id: table.Autocorrelation.R,v 1.3 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2007/12/27 20:13:00  peter
+# - fixed F for FALSE
+#
 # Revision 1.1  2007/10/05 03:24:03  peter
 # - first commit of lag-6 autocorrelation coefficient with Q-stat p-value table
 #

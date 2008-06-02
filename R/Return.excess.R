@@ -76,15 +76,18 @@ function (R, rf = 0)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.8 2007-09-26 02:54:58 peter Exp $
+# $Id: Return.excess.R,v 1.9 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2007/09/26 02:54:58  peter
+# - fixed labeling problem in multi-column asset results
+#
 # Revision 1.7  2007/08/14 23:20:07  peter
 # - added conditional labeling to columns
 #

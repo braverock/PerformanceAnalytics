@@ -54,15 +54,20 @@ function (filename=stop("Please specify a filename"), frequency = c("m","d","q",
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.read.R,v 1.3 2007-09-24 02:32:31 peter Exp $
+# $Id: Return.read.R,v 1.4 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2007/09/24 02:32:31  peter
+# - added check.names as a parameter
+# - set default so that names are not checked
+# - spaces will not be replaced by dots in column names by default
+#
 # Revision 1.2  2007/08/16 14:11:44  peter
 # - clarified comments
 #

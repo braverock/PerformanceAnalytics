@@ -146,15 +146,18 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.8 2008-04-18 03:41:42 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.9 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-04-18 03:41:42  peter
+# - added cex attributes for passing in formatting changes
+#
 # Revision 1.7  2007/10/03 02:46:18  peter
 # - colors and symbol sets now stretched to match the number of columns
 # - name text colors prints backwards to match the order of the dots

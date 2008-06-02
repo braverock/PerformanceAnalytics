@@ -170,15 +170,18 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.9 2008-02-15 04:21:20 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.10 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008/02/15 04:21:20  peter
+# - added parameters for legend management
+#
 # Revision 1.8  2007/11/19 03:42:14  peter
 # - title will no longer be set to default text, will use column name instead
 #

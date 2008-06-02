@@ -78,13 +78,18 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
 {# @author Kris Boudt, Peter Carl, and Brian G. Peterson
 
     R1 = checkData(R1); R2 = checkData(R2);
+
     out = mean( na.omit( Return.centered(R1)^p1 * Return.centered(R2)^p2))
 
     if(normalize) {
-#         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
-#         out=out/ (StdDev(R2)^(p1+p2)) #
+    #         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
+    #         out=out/ (StdDev(R2)^(p1+p2)) #
 
-        out=out/ ((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))
+        # TODO: should check to make sure dim R1 == dim R2
+        T=dim(R1)[1]
+        bias=T/(T-1)
+        # out=out/ ((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))   # not bias corrected
+        out=out*bias/ (((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))*bias)
     }
     return(out);
 }
@@ -127,15 +132,18 @@ BetaCoKurtosis <- function(R1,R2)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.4 2008-05-07 22:54:04 brian Exp $
+# $Id: CoMoments.R,v 1.5 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-05-07 22:54:04  brian
+# - add parens to denominator in centeredcomoment fn
+#
 # Revision 1.3  2008-05-07 22:05:36  brian
 # - replace with centeredmoment function that is multi-column aware via apply
 #

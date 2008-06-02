@@ -52,15 +52,19 @@ function (x, histogram = TRUE)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Correlation.R,v 1.4 2008-01-18 04:05:15 peter Exp $
+# $Id: chart.Correlation.R,v 1.5 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008/01/18 04:05:15  peter
+# - fixed missing values in density
+# - removed y as unnecessary parameter
+#
 # Revision 1.3  2007/12/27 18:44:36  peter
 # - added option for passing parameters to cor, including
 # "pairwise.complete.obs"

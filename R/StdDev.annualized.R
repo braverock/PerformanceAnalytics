@@ -40,15 +40,18 @@ function(Ra) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.12 2007-08-26 10:01:46 brian Exp $
+# $Id: StdDev.annualized.R,v 1.13 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2007/08/26 10:01:46  brian
+# - code comment and indentation cleanup, no functional change
+#
 # Revision 1.11  2007/08/26 09:54:28  brian
 # - simplify recursion to eliminate possibility of endless loop
 #

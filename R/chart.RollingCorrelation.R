@@ -42,15 +42,18 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingCorrelation.R,v 1.6 2007-10-11 03:56:12 peter Exp $
+# $Id: chart.RollingCorrelation.R,v 1.7 2008-06-02 16:05:19 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2007/10/11 03:56:12  peter
+# - fixed so that it will handle zoo objects with yearmon dates
+#
 # Revision 1.5  2007/04/14 15:42:35  brian
 # - standardize Ra as first argument for asset returns
 #
