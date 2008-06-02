@@ -29,7 +29,7 @@ function (R, FUN = "mean" , gap = 1, ...)
         # the drop=FALSE flag is essential for when the zoo object only has one column
         column.Return.calc=zoo(NA, order.by = as.Date(time(R)))
         for(i in gap:length(time(R))) {
-            data.zoo = window(R,start = start(R), end = time(R[i])) #rm as.Date
+            data.zoo = window(R[,column,drop=FALSE],start = start(R), end = time(R[i])) #rm as.Date
             column.Return.calc[i]=apply(as.matrix(data.zoo[,,drop=FALSE]), FUN = FUN, ..., MARGIN = 2)
         }
         if(column == 1)
@@ -53,10 +53,13 @@ function (R, FUN = "mean" , gap = 1, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: apply.fromstart.R,v 1.4 2007-08-20 21:03:05 peter Exp $
+# $Id: apply.fromstart.R,v 1.5 2008-06-02 15:25:09 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2007/08/20 21:03:05  peter
+# - moved as.Date transformations
+#
 # Revision 1.3  2007/03/20 10:48:29  brian
 # - add copyright, license, and CVS Log
 #
