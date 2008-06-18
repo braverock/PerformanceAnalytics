@@ -1,7 +1,11 @@
 \name{CAPM.beta}
+
 \alias{CAPM.beta}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ calculate CAPM beta }
+\alias{CAPM.beta.bear}
+\alias{CAPM.beta.bull}
+
+\title{ calculate CAPM beta and related measures }
+
 \description{
 CAPM Beta is the beta of an asset to the variance and covariance of an initial portfolio.  Used to determine diversification potential. also called "systematic beta" by several papers.
 
@@ -9,6 +13,9 @@ This function uses a linear intercept model to achieve the same results as the s
 }
 \usage{
 CAPM.beta(Ra, Rb, rf = 0, digits = 4)
+CAPM.beta.bear(Ra, Rb, rf = 0, digits = 4)
+CAPM.beta.bull(Ra, Rb, rf = 0, digits = 4)
+
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
