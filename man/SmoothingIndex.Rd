@@ -29,12 +29,12 @@ Getmansky, Mila, Andrew W. Lo, and Igor Makarov. 2004. An Econometric Model of S
 }
 \author{ Peter Carl }
 \examples{
-SmoothingIndex(managers[,8,drop=FALSE])
 data(managers)
 data(edhec)
 indexes=merge(managers[,8:10],edhec)
 indexes=na.omit(indexes)
 sapply(indexes,FUN=SmoothingIndex)
+SmoothingIndex(managers[,8,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
