@@ -1,5 +1,5 @@
 `SmoothingIndex` <-
-function (Ra, ...)
+function (Ra, neg.thetas = FALSE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -35,9 +35,13 @@ function (Ra, ...)
 
     # From the arima function above, MA2$coef contains two coefficients, and no intercept value.
     # The calculation below adjusts for that.
+    if(neg.thetas == FALSE)
+        coefMA2 = max(0,coef(MA2)) # enforces no negative thetas
+    else
+        coefMA2 = coef(MA2) # allows negative thetas
 
     # Dr. Stefan Albrecht, CFA points out, "I assume that you have to take:"
-thetas = c(ma0 = 1, coef(MA2)) / (1 + sum(coef(MA2)))
+    thetas = c(ma0 = 1, coefMA2) / (1 + sum(coefMA2))
 #
 #
 #     thetas = as.numeric((MA2$coef)/sum(MA2$coef))
