@@ -99,32 +99,50 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
 
 CoVariance<- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
-   return( centeredcomoment(R1,R2,p1=1,p2=1,normalize=F)   )
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=F)   )
 }
 
 BetaCoVariance <- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
    return( centeredcomoment(R1,R2,p1=1,p2=1,normalize=T)   )
 }
 
 
 CoSkewness <- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
    return( centeredcomoment(R1,R2,p1=1,p2=2,normalize=F)   )
 }
 
 BetaCoSkewness <- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
    return( centeredcomoment(R1,R2,p1=1,p2=2,normalize=T)   )
 }
 
 CoKurtosis <- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
    return( centeredcomoment(R1,R2,p1=1,p2=3,normalize=F)   )
 }
 
 BetaCoKurtosis <- function(R1,R2)
 {# @author Kris Boudt, Peter Carl
+    R1= checkData(R1)
+    R2= checkData(R2)
+    R = na.omit(merge(R1, R2)) # remove NA's
    return( centeredcomoment(R1,R2,p1=1,p2=3,normalize=T)   )
 }
 
@@ -137,10 +155,13 @@ BetaCoKurtosis <- function(R1,R2)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.5 2008-06-02 16:05:19 brian Exp $
+# $Id: CoMoments.R,v 1.6 2008-06-19 03:54:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.4  2008-05-07 22:54:04  brian
 # - add parens to denominator in centeredcomoment fn
 #
