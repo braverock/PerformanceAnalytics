@@ -34,7 +34,7 @@ Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order
 Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From Two- to
   Four-Moment CAPM. SSRN eLibrary.
 Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference for Moments of
-  Higher Order than the Variance. Journal of Finance 35(4):915–919.
+  Higher Order than the Variance. Journal of Finance 35(4):915-919.
 }
 \author{ Kris Boudt, Peter Carl }
 \note{ 
