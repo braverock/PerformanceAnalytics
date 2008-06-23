@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor="gray", note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p=0.99, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor="gray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p=0.99, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -44,7 +44,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     if(is.null(xlim))
         xlim = range(rangedata)
 
-    s = seq(xlim[1], xlim[2], length = 500)
+     s = seq(xlim[1], xlim[2], length = 500)
+#     s = seq(min(x, na.rm=TRUE), max(x, na.rm=TRUE), length = 500)
 
     # Things to do before the plot is drawn
     for (method in methods) {
@@ -52,6 +53,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             add.density = {
                 # Show density estimate
                 den = density(x, n=length(x))
+                yrange=c(yrange,max(den$y))
+                 probability = TRUE
             },
             add.stable = {
                 if (!require("fBasics")) stop("fBasics package not available")
@@ -75,6 +78,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.sst = {
+                if (!require("sn")) stop("sn package not available")
 #               requires library(sn)
                 fit = st.mle(y=x)
                 fitted.sst = dst(s, location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log = FALSE)
@@ -109,9 +113,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     yrange = c(yrange, maxyhist*1.1)
     ylim = c(0,ceiling(max(yrange)))
 
-    hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, cex.axis = 0.8, axes = FALSE, ...)
-    axis(1, cex.axis = 0.8, col = elementcolor)
-    axis(2, cex.axis = 0.8, col = elementcolor)
+    hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, axes = FALSE, ...)
+    axis(1, col = elementcolor)
+    axis(2, col = elementcolor)
 
     box(col=elementcolor)
 
@@ -168,8 +172,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
         abline(v = note.lines, col = note.color, lty = 2)
         if(!is.null(note.labels)) {
-            h = rep(.2*par("usr")[3] + 1*par("usr")[4], length(b))
-            text(note.lines, h, note.labels, offset = .2, pos = 2, cex = 0.7, srt = 90, col = note.color)
+            h = rep(.2*par("usr")[3] + 0.99*par("usr")[4], length(b))
+            text(note.lines, h, note.labels, offset = .2, pos = 2, cex = note.cex, srt = 90, col = note.color)
 
         }
     }
@@ -186,10 +190,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.31 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.Histogram.R,v 1.32 2008-06-23 02:35:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.31  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.30  2008/01/15 21:06:13  peter
 # - fixed ylim for probability T or F
 #
