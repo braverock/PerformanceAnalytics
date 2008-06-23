@@ -1,11 +1,5 @@
 # Compute co-moment matrices
 
-# for CoVarianceMatrix, use 'cov'
-
-
-# @FIX: mean(R) doesn't work with zoo objects
-# @FIX: is naming of these functions sensible?  or should they be renamed?
-
 `Return.centered` <-
 function (R,...)
 { # @author Peter Carl and Kris Boudt
@@ -37,7 +31,7 @@ function (R,...)
        R.mean = apply(R,2,'mean', na.rm=TRUE)
        # returns a vector holding the mean return for each asset
 
-       R.centered = R - matrix( rep(R.mean,rows.a), ncol= columns.a, byrow=T)
+       R.centered = R - matrix( rep(R.mean,rows.a), ncol= columns.a, byrow=TRUE)
        # return the matrix of centered returns
    }
 
@@ -74,22 +68,15 @@ centeredmoment = function(R,power)
 
 ###############################################################################
 
-centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
+centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 {# @author Kris Boudt, Peter Carl, and Brian G. Peterson
 
-    R1 = checkData(R1); R2 = checkData(R2);
+    Ra = checkData(Ra); Rb = checkData(Rb);
 
-    out = mean( na.omit( Return.centered(R1)^p1 * Return.centered(R2)^p2))
+    out = mean( na.omit( Return.centered(Ra)^p1 * Return.centered(Rb)^p2))
 
     if(normalize) {
-    #         out=out/ ( (sd(R1)^p1)*(sd(R2)^p2) ) # Ang's normalization
-    #         out=out/ (StdDev(R2)^(p1+p2)) #
-
-        # TODO: should check to make sure dim R1 == dim R2
-        T=dim(R1)[1]
-        bias=T/(T-1)
-        # out=out/ ((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))   # not bias corrected
-        out=out*bias/ (((sqrt(centeredmoment(R1,2))^(p1)) * (sqrt(centeredmoment(R2,2))^(p2)))*bias)
+        out=out/ as.numeric(centeredmoment(Rb,power=(p1+p2))) #
     }
     return(out);
 }
@@ -97,53 +84,57 @@ centeredcomoment = function(R1,R2,p1,p2,normalize=FALSE)
 
 ###############################################################################
 
-CoVariance<- function(R1,R2)
+CoVariance<- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=F)   )
+    R1= checkData(Ra)
+    R2= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=FALSE)   )
 }
 
-BetaCoVariance <- function(R1,R2)
+BetaCoVariance <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R1,R2,p1=1,p2=1,normalize=T)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=TRUE)   )
 }
 
 
-CoSkewness <- function(R1,R2)
+CoSkewness <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R1,R2,p1=1,p2=2,normalize=F)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=FALSE)   )
 }
 
-BetaCoSkewness <- function(R1,R2)
+BetaCoSkewness <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R1,R2,p1=1,p2=2,normalize=T)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+    # Kris notes: the output should be conditional on the value of the market skewness. 
+    if(skewness(as.vector(Rb)) > -0.05 && skewness(as.vector(Rb)) < 0.05 ){
+        warn("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
+    }
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=TRUE)   )
 }
 
-CoKurtosis <- function(R1,R2)
+CoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R1,R2,p1=1,p2=3,normalize=F)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=FALSE)   )
 }
 
-BetaCoKurtosis <- function(R1,R2)
+BetaCoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(R1)
-    R2= checkData(R2)
-    R = na.omit(merge(R1, R2)) # remove NA's
-   return( centeredcomoment(R1,R2,p1=1,p2=3,normalize=T)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+    R = na.omit(merge(Ra, Rb)) # remove NA's
+   return( centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=TRUE)   )
 }
 
 
@@ -155,10 +146,13 @@ BetaCoKurtosis <- function(R1,R2)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.6 2008-06-19 03:54:38 peter Exp $
+# $Id: CoMoments.R,v 1.7 2008-06-23 02:32:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-19 03:54:38  peter
+# - added data check and NA removal to comoment calcs
+#
 # Revision 1.5  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
