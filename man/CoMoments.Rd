@@ -10,14 +10,14 @@
 calculates coskewness and cokurtosis as the skewness and kurtosis of two assets with reference to one another.
 }
 \usage{
-CoVariance(R1,R2)
-CoSkewness(R1,R2)
-CoKurtosis(R1,R2)
+CoVariance(Ra,Rb)
+CoSkewness(Ra,Rb)
+CoKurtosis(Ra,Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R1}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{R2}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rb}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
 }
 \details{
 Ranaldo and Favre (2005) define coskewness and cokurtosis as the skewness and kurtosis of a given asset analysed with the skewness and kurtosis of the reference asset or portfolio.  Adding an asset to a portfolio, such as a hedge fund with a significant level of coskewness to the portfolio, can increase or decrease the resulting portfolio's skewness. Similarly, adding a hedge fund with a positive cokurtosis coefficient will add kurtosis to the portfolio.
@@ -27,9 +27,11 @@ The co-moments are useful for measuring the marginal contribution of each asset 
 Even outside of the optimization problem, measuring the co-moments should be a useful tool for evaluating whether or not an asset is likely to provide diversification potential to a portfolio, not only in terms of normal risk (i.e. volatility) but also the risk of assymetry (skewness) and extreme events (kurtosis). 
 }
 \value{
-
+    numeric value of the co-moment
 }
 \references{ 
+Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2007. Estimation and Decomposition
+  of Downside Risk for Portfolios with Non-Normal Returns. Working paper.
 Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk and Asset Management Research Centre working paper.
 Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From Two- to
   Four-Moment CAPM. SSRN eLibrary.
