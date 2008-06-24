@@ -13,8 +13,8 @@
 }
 \usage{
 BetaCoVariance(Ra, Rb)
-BetaCoSkewness(Rb, Rb)
-BetaCoKurtosis(Rb, Rb)
+BetaCoSkewness(Ra, Rb)
+BetaCoKurtosis(Ra, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
