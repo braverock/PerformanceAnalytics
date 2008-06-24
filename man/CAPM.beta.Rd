@@ -1,5 +1,8 @@
 \name{CAPM.beta}
 \alias{CAPM.beta}
+\alias{CAPM.beta.bull}
+\alias{CAPM.beta.bear}
+\alias{timing.ratio}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate CAPM beta }
 \description{
