@@ -3,11 +3,13 @@
 \alias{BetaCoVariance}
 \alias{BetaCoSkewness}
 \alias{BetaCoKurtosis}
+\alias{SystematicSkewness}
+\alias{SystematicKurtosis}
 
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Functions to calculate systematic or beta co-moments of return series }
 \description{
-    calculate higher co-moment betas
+    calculate higher co-moment betas, which are sometimes refered to as 'systematic' skewness or kurtosis
 }
 \usage{
 BetaCoVariance(Ra, Rb)
@@ -53,7 +55,7 @@ Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order
 \note{ 
 
 }
-\seealso{ \code{\link{CoMoments}} }
+\seealso{ \code{\link{Co-Moments}} }
 \examples{
 data(managers)
 
