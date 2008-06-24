@@ -16,11 +16,7 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{add.names}{ plots the row name with the data point.  default TRUE. Can be removed by setting it to NULL }
   \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, as in \code{\link{plot}} }
-  \item{method}{ Used to select the risk parameter to use in the chart.BarVaR.  May be any of: \cr
-    modVaR - uses CF modified VaR \cr
-    VaR - uses traditional Value at Risk \cr
-    StdDev - monthly standard deviation of trailing 12 month returns
-  }
+  \item{method}{ if set as "calc", then the function will calculate values from the set of returns passed in.  If method is set to "nocalc" then we assume that R is a column of return and a column of risk (e.g., annualized returns, annualized risk), in that order.  Other method cases may be set for different risk/return calculations.  }
   \item{add.sharpe}{ this draws a Sharpe ratio line that indicates Sharpe ratio levels of \code{c(1,2,3)}.  Lines are drawn with a y-intercept of the risk free rate and the slope of the appropriate Sharpe ratio level.  Lines should be removed where not appropriate (e.g., sharpe.ratio = NULL). }
   \item{add.boxplots}{ TRUE/FALSE adds a boxplot summary of the data on the axis }
   \item{colorset}{ color palette to use, set by default to rational choices }
