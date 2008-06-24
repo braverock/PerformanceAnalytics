@@ -33,7 +33,7 @@ Equation:
 \examples{
 # First we load the data
 data(managers)
-TreynorRatio(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
+TreynorRatio(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = .04/12)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
