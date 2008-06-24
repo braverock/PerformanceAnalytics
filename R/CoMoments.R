@@ -116,7 +116,7 @@ BetaCoSkewness <- function(Ra,Rb)
     R = na.omit(merge(Ra, Rb)) # remove NA's
     # Kris notes: the output should be conditional on the value of the market skewness. 
     if(skewness(as.vector(Rb)) > -0.05 && skewness(as.vector(Rb)) < 0.05 ){
-        warn("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
+        warning("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
     }
    return( centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=TRUE)   )
 }
@@ -146,7 +146,7 @@ BetaCoKurtosis <- function(Ra,Rb)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.7 2008-06-23 02:32:08 peter Exp $
+# $Id: CoMoments.R,v 1.8 2008-06-24 00:41:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
