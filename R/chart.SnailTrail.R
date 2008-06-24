@@ -1,5 +1,5 @@
 `chart.SnailTrail` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.labels = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = NULL, symbolset = 16, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, first = TRUE, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8,...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = NULL, symbolset = 16, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, first = TRUE, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8,...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -40,7 +40,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.labels = c("all", 
     rownames = rownames(x)
     maxrows = 0
 
-    add.labels = add.labels[1]
+    add.names = add.names[1]
 
     if(first) { # start the calculations with the start date of the first column
         length.column.one = length(x[,1])
@@ -119,17 +119,17 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.labels = c("all", 
         }
 
         # Label the data points
-        if(!is.null(add.labels))
-            if(add.labels == "lastonly"){
+        if(!is.null(add.names))
+            if(add.names == "lastonly"){
                 labels = rep("",n.rows)
                 labels[n.rows] = as.character(time(returns[n.rows,column]))
             }
-            else if(add.labels == "firstandlast"){
+            else if(add.names == "firstandlast"){
                 labels = rep("",n.rows)
                 labels[n.rows] = as.character(time(returns[n.rows,column]))
                 labels[(n.rows-m.rows+1)] = as.character(time(returns[(n.rows-m.rows+1),column]))
             }
-            else if(add.labels == "all") {
+            else if(add.names == "all") {
                 labels = time(returns)
             }
             else
@@ -175,7 +175,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.labels = c("all", 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.1 2008-06-24 00:37:50 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.2 2008-06-24 02:26:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
