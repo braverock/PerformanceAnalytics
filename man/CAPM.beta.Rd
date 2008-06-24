@@ -28,7 +28,7 @@ Ruppert(2004) reports that this equation will give the estimated slope of the li
 Two other functions apply the same notion of best fit to positive and negative market returns, separately.  The \code{CAPM.beta.bull} is a regression for only positive market returns, which can be used to understand the behavior of the asset or portfolio in positive or 'bull' markets.  Alternatively, \code{CAPM.beta.bear} provides the calculation on negative market returns.
 
 The \code{timing.ratio} can help assess whether the manager is a good timer of asset allocation decisions.  The ratio, which is calculated as
- \deqn{TimingRatio =\frac{\beta^{+}}{\beta^{-}}
+ \deqn{TimingRatio =\frac{\beta^{+}}{\beta^{-}}}
 is best when greater than one in a rising market and less than one in a falling market.
 
 }
@@ -48,7 +48,6 @@ Bacon, Carl. \emph{Practical portfolio performance measurement and attribution}.
     \code{\link{CAPM.utils}}
 }
 \examples{
-# First we load the data
 data(managers)
 CAPM.beta(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
 CAPM.beta.bull(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
