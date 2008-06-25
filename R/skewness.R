@@ -15,36 +15,61 @@ skewness <-
     # Method:
     method = match.arg(method)
 
-    # Warnings:
-    if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
-        warning("argument is not numeric or logical: returning NA")
-        return(as.numeric(NA))}
+    R=checkData(x,method="zoo")
 
-    x = checkData(x, method="vector")
+    columns = ncol(R)
+    columnnames=colnames(R)
+    # FUNCTION:
+    for(column in 1:columns) {
+        x = as.vector(na.omit(R[,column]))
+        #x = R[,column]
 
-    # Remove NAs:
-    if (na.rm) x = x[!is.na(x)]
+        if (!is.numeric(x)) stop("The selected column is not numeric")
 
-    # Skewness:
-    n = length(x)
-    if (is.integer(x)) x = as.numeric(x)
+        # Remove NAs:
+        if (na.rm) x = x[!is.na(x)]
 
-    # Selected Method:
-    if (method == "moment") {
-        skewness = sum((x-mean(x))^3/sqrt(var(x))^3)/length(x)
+        # Warnings:
+        if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
+            warning("argument is not numeric or logical: returning NA")
+            return(as.numeric(NA))}
+
+        # Skewness:
+        n = length(x)
+        if (is.integer(x)) x = as.numeric(x)
+
+        # Selected Method:
+        if (method == "moment") {
+            skewness = sum((x-mean(x))^3/sqrt(var(x))^3)/length(x)
+        }
+        if (method == "fisher") {
+            if (n < 3)
+                skewness = NA
+            else
+                skewness = ((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))
+        }
+
+        skewness=array(skewness)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(skewness=skewness)
+        } else {
+            skewness=data.frame(skewness=skewness)
+            result=cbind(result,skewness)
+        }
+
+    } #end columns loop
+
+    if(ncol(result) == 1) {
+        # some backflips to name the single column zoo object
+        result = as.numeric(result)
     }
-    if (method == "fisher") {
-        if (n < 3)
-            skewness = NA
-        else
-            skewness = ((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))
-    }
-
-    # Add Control Attribute:
-    attr(skewness, "method") <- method
+    else
+        colnames(result) = columnnames
 
     # Return Value:
-    skewness
+    result
+
 }
 
 ###############################################################################
@@ -55,7 +80,10 @@ skewness <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: skewness.R,v 1.1 2008-06-25 13:50:42 brian Exp $
+# $Id: skewness.R,v 1.2 2008-06-25 23:07:59 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008-06-25 13:50:42  brian
+# - initial commit of skewness and skewness functions and documentation ported from RMetrics package fUtilities
+#

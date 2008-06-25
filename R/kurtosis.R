@@ -15,35 +15,59 @@ kurtosis <-
     # Method:
     method = match.arg(method)
 
-    x=checkData(x)
+    R=checkData(x,method="zoo")
 
-    # Warnings:
-    if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
-        warning("argument is not numeric or logical: returning NA")
-        return(as.numeric(NA))}
+    columns = ncol(R)
+    columnnames=colnames(R)
+    # FUNCTION:
+    for(column in 1:columns) {
+        x = as.vector(na.omit(R[,column]))
+        #x = R[,column]
 
-    # Remove NAs:
-    if (na.rm) x = x[!is.na(x)]
+        if (!is.numeric(x)) stop("The selected column is not numeric")
 
-    # Kurtosis:
-    n = length(x)
-    if (is.integer(x)) x = as.numeric(x)
-    if (method == "excess") {
-        kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x) - 3
+        # Remove NAs:
+        if (na.rm) x = x[!is.na(x)]
+
+        # Warnings:
+        if (!is.numeric(x) && !is.complex(x) && !is.logical(x)) {
+            warning("argument is not numeric or logical: returning NA")
+            return(as.numeric(NA))}
+
+
+        # Kurtosis:
+        n = length(x)
+        if (is.integer(x)) x = as.numeric(x)
+        if (method == "excess") {
+            kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x) - 3
+        }
+        if (method == "moment") {
+            kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x)
+        }
+        if (method == "fisher") {
+            kurtosis = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 -
+                (3*(n-1))/(n+1)))/((n-2)*(n-3))
+        }
+        kurtosis=array(kurtosis)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(kurtosis=kurtosis)
+        } else {
+            kurtosis=data.frame(kurtosis=kurtosis)
+            result=cbind(result,kurtosis)
+        }
+    } #end columns loop
+
+    if(ncol(result) == 1) {
+        # some backflips to name the single column zoo object
+        result = as.numeric(result)
     }
-    if (method == "moment") {
-        kurtosis = sum((x-mean(x))^4/var(x)^2)/length(x)
-    }
-    if (method == "fisher") {
-        kurtosis = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 -
-            (3*(n-1))/(n+1)))/((n-2)*(n-3))
-    }
-
-    # Add Control Attribute:
-    attr(kurtosis, "method") <- method
+    else
+        colnames(result) = columnnames
 
     # Return Value:
-    kurtosis
+    result
+
 }
 
 ###############################################################################
@@ -54,7 +78,10 @@ kurtosis <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: kurtosis.R,v 1.1 2008-06-25 13:50:42 brian Exp $
+# $Id: kurtosis.R,v 1.2 2008-06-25 23:07:59 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008-06-25 13:50:42  brian
+# - initial commit of skewness and kurtosis functions and documentation ported from RMetrics package fUtilities
+#
