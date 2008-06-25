@@ -17,6 +17,8 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"), method = c(
     method = method[1]
     compression = compression[1]
 
+    stopifnot("package:tseries" %in% search() || require("tseries",quietly=TRUE))
+
     x = get.hist.quote("^gspc", start = start, end = end, quote = "Close", compression = compression)
     # @todo: make the data type returned selectable (e.g., df, ts, zoo, matrix)
 
@@ -35,10 +37,13 @@ function(start = "1998-01-01", end = NULL, compression = c("m","d"), method = c(
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: download.SP500PriceReturns.R,v 1.10 2008-06-02 16:05:19 brian Exp $
+# $Id: download.SP500PriceReturns.R,v 1.11 2008-06-25 03:36:02 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.9  2007/08/04 15:15:53  brian
 # - use Return.calculate() fn instead of deprecated CalculateReturns() fn
 #
