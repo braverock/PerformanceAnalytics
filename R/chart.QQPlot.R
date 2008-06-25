@@ -48,7 +48,7 @@ function(R, distribution="norm", ylab=NULL,
         abline(a, b, col=col[2], lwd=lwd)
         }
     if (line=="robust"){
-        if (!require("MASS")) stop("MASS package not available")
+        stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
         coef<-coefficients(rlm(ord.x~z))
         a<-coef[1]
         b<-coef[2]
@@ -133,10 +133,13 @@ function(R, distribution="norm", ylab=NULL,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.QQPlot.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.QQPlot.R,v 1.8 2008-06-25 03:33:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/12/06 21:38:56  peter
 # - replaced core code with John Fox's qq.plot internals
 # - makes error bands available
