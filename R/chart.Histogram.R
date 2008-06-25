@@ -57,7 +57,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                  probability = TRUE
             },
             add.stable = {
-                if (!require("fBasics")) stop("fBasics package not available")
+                stopifnot("package:fBasics" %in% search() || require("fBasics",quietly=TRUE))
                 fit.stable = stableFit(x,doplot = FALSE)
                 fitted.stable = dstable(s,alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
                 # look at documentation for pm
@@ -65,8 +65,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.cauchy = {
-#               requires library(MASS)
-                if (!require("MASS")) stop("MASS package not available")
+                # requires library(MASS)
+                stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
+
                 # This uses a Maximum Likelihood method as shown on:
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and
@@ -78,8 +79,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.sst = {
-                if (!require("sn")) stop("sn package not available")
 #               requires library(sn)
+                stopifnot("package:sn" %in% search() || require("sn",quietly=TRUE))
+
                 fit = st.mle(y=x)
                 fitted.sst = dst(s, location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log = FALSE)
                 yrange=c(yrange,max(fitted.sst))
@@ -190,10 +192,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.32 2008-06-23 02:35:10 peter Exp $
+# $Id: chart.Histogram.R,v 1.33 2008-06-25 03:31:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.32  2008-06-23 02:35:10  peter
+# - added note line text size attribute
+# - added check for 'sn' library
+#
 # Revision 1.31  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
