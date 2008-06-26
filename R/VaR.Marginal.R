@@ -27,6 +27,8 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
     # Function
 
     # first, get the numbers for the whole portfolio
+    stopifnot("package:fPortfolio" %in% search() || require("fPortfolio",quietly=TRUE))
+
     portfolioR   = pfolioReturn(R,as.vector(weightingvector))
     portfolioVaR = VaR.CornishFisher(portfolioR,p,modified)
     pVaR = array (portfolioVaR)
@@ -67,10 +69,13 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: VaR.Marginal.R,v 1.7 2008-06-26 01:42:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/06/27 19:21:02  brian
 # - add handling for NULL weightingvector (assume equal weight)
 #
