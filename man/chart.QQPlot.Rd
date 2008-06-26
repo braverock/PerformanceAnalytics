@@ -56,6 +56,7 @@ QQ Plot
   \code{\link{plot}}
 }
 \examples{
+library(MASS)
 data(managers)
 x = checkData(managers[,2, drop = FALSE], na.rm = TRUE, method = "vector")
 layout(rbind(c(1,2),c(3,4)))
