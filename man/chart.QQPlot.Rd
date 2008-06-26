@@ -70,6 +70,7 @@ library(sn)
 fit = st.mle(y=x)
 chart.QQPlot(x, main = "Skew T Distribution", envelope=0.95, distribution = 'st', location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log = FALSE)
 #Panel 4: Stable Parietian
+library(fBasics)
 fit.stable = stableFit(x,doplot=FALSE)
 chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, distribution = 'stable', alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
 
