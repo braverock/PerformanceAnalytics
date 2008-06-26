@@ -20,7 +20,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
     # Calculate
 
     x.mean = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "mean", na.pad = na.pad, align = "right")
-    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "stdev", na.pad = na.pad, align = "right")
+    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd", na.pad = na.pad, align = "right")
 
     # @todo: allow user to set confidence interval
     # @todo: add chart for StdDev w confidence bands: x.stdev +- 2* x.stdev/sqrt(2*n)
@@ -46,10 +46,13 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.4 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.RollingMean.R,v 1.5 2008-06-26 02:07:33 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.3  2007/03/22 13:46:50  peter
 # - uses checkData
 #
