@@ -1,5 +1,5 @@
 `chart.SnailTrail` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = NULL, symbolset = 16, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, first = TRUE, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8,...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = NULL, symbolset = 16, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8,...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -42,16 +42,16 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 
     add.names = add.names[1]
 
-    if(first) { # start the calculations with the start date of the first column
-        length.column.one = length(x[,1])
+    # start the calculations with the start date of the first column
+    length.column.one = length(x[,1])
     # find the row number of the last NA in the first column
-        start.row = 1
-        start.index = 0
-        while(is.na(x[start.row,1])){
-            start.row = start.row + 1
-        }
-        x = x[start.row:length.column.one,,drop=FALSE]
+    start.row = 1
+    start.index = 0
+    while(is.na(x[start.row,1])){
+        start.row = start.row + 1
     }
+    x = x[start.row:length.column.one,,drop=FALSE]
+
 
     # @todo: strip out basic elements to a scatter plot wrapper
     # Set color for key elements, easy to darken for the printer
@@ -175,10 +175,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.2 2008-06-24 02:26:59 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.3 2008-06-26 01:46:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-06-24 02:26:59  peter
+# - changed 'add.labels' to 'add.names' to be consistent with chart.RiskReturnScatter
+#
 # Revision 1.7  2007/10/03 02:46:18  peter
 # - colors and symbol sets now stretched to match the number of columns
 # - name text colors prints backwards to match the order of the dots
