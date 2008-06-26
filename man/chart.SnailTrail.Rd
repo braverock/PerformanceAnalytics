@@ -57,5 +57,4 @@ chart.SnailTrail(managers[,c("HAM2","SP500.TR"),drop=FALSE], width=36, stepsize=
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+\keyword{ ts }
