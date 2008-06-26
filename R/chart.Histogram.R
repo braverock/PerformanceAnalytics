@@ -36,7 +36,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     if(show.outliers)
         rangedata = c(min(x),max(x))
     else
-        rangedata =  c(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)))
+        rangedata =  c(qnorm(0.001, mean(x), sd(x)), qnorm(0.999, mean(x), sd(x)))
     if(!is.null(note.lines)) {
         rangedata = c(rangedata,note.lines)
     }
@@ -94,12 +94,12 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.normal = {
-                fitted.normal = dnorm(s, mean(x), stdev(x))
+                fitted.normal = dnorm(s, mean(x), sd(x))
                 yrange=c(yrange,max(fitted.normal))
                 probability = TRUE
             },
             add.centered = {
-                fitted.centered = dnorm(s, 0, stdev(x))
+                fitted.centered = dnorm(s, 0, sd(x))
                 yrange=c(yrange,max(fitted.centered))
                 probability = TRUE
             },
@@ -192,7 +192,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.33 2008-06-25 03:31:13 peter Exp $
+# $Id: chart.Histogram.R,v 1.34 2008-06-26 02:00:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
