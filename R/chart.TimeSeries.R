@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = .8,...)
+function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -125,7 +125,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 
         abline(v = event.ind, col = event.color)
         if(!is.null(event.labels)) {
-            text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = 0.7, srt=90, col = event.color)
+            text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = cex.labels, srt=90, col = event.color)
         }
     }
 
@@ -175,10 +175,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.10 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.TimeSeries.R,v 1.11 2008-06-28 13:55:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.9  2008/02/15 04:21:20  peter
 # - added parameters for legend management
 #
