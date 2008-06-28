@@ -23,6 +23,8 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
   \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
+  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

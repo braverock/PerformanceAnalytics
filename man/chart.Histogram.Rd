@@ -6,7 +6,7 @@
 Create a histogram of returns, with optional curve fits for density and normal.  This is a wrapper function for \code{\link[graphics]{hist}}, see the help for that function for additional arguments you may wish to pass in.
 }
 \usage{
-chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor = "gray", note.lines = NULL, note.labels = NULL, note.color = "darkgray", probability = FALSE, p = 0.99, ...)
+chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor = "gray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p = 0.99, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -45,6 +45,7 @@ chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequen
   \item{elementcolor}{ provides the color for drawing less-important chart elements, such as the box lines, axis lines, etc. replaces \code{darken} }
   \item{note.lines}{ draws a vertical line through the value given. }
   \item{note.labels}{ adds a text label to vertical lines specified for note.lines. }
+  \item{note.cex}{ The magnification to be used for note line labels relative to the current setting of 'cex'.  }
   \item{note.color}{ specifies the color(s) of the vertical lines drawn. }
   \item{\dots}{ any other passthru parameters }
 }

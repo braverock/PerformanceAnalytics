@@ -6,7 +6,7 @@
 A wrapper to create a scatter chart of annualized returns versus annualized risk (standard deviation) for comparing manager performance. Also puts a box plot into the margins to help identify the relative performance quartile.
 }
 \usage{
-chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1, 2, 3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE, legend.loc = NULL, xlim = NULL, ylim = NULL, ...)
+chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1, 2, 3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.axis=0.8, cex.legend = 0.8, cex.lab = 0.7,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,6 +25,9 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
+  \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
+  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{cex.lab}{ The magnification to be used for x and y labels relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

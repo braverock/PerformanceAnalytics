@@ -6,9 +6,7 @@
 A wrapper to create a chart of relative returns through time
 }
 \usage{
-chart.RelativePerformance(Ra, Rb, main = "Relative Performance", xaxis = TRUE,
-                 colorset = (1:12), legend.loc = NULL, ylog = FALSE,
-                 elementcolor = "darkgray", ...)
+function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=0.7, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,6 +18,8 @@ chart.RelativePerformance(Ra, Rb, main = "Relative Performance", xaxis = TRUE,
   \item{elementcolor}{ provides the color for drawing less-important chart elements, such as the box lines, axis lines, etc. replaces \code{darken} }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{cex.legend}{ the magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{lty}{ set the line type, same as in \code{\link{plot}} }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
