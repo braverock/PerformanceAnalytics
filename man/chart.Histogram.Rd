@@ -33,7 +33,7 @@ chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequen
   }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{probability}{logical; if TRUE, the histogram graphic is a representation of frequencies, the counts component of the result; if FALSE, probability densities, component density, are plotted (so that the histogram has a total area of one). Defaults to TRUE if and only if breaks are equidistant (and probability is not specified). see \code{\link[graphics]{hist}}}
-  \item{show.outliers}{logical; if TRUE, include the outliers in the boxplot }
+  \item{show.outliers}{logical; if TRUE (the default), the histogram will show all of the data points.  If FALSE, it will show only the first through the fourth quartile and will exclude outliers. }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
