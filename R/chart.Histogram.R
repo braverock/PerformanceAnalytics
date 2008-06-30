@@ -39,7 +39,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         rangedata = c(rangedata,note.lines)
     }
 
-    if("add.risk" %in% method){
+    if("add.risk" %in% methods){
         b = c(-VaR.CornishFisher(x,p=p),-VaR.traditional(x,p=p))
         b.labels = c(paste(p*100,"% ModVaR",sep=" "),paste(p*100,"% VaR",sep=""))
         rangedata = c(rangedata,b)
@@ -200,10 +200,15 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.35 2008-06-30 03:10:57 peter Exp $
+# $Id: chart.Histogram.R,v 1.36 2008-06-30 21:52:52 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.35  2008-06-30 03:10:57  peter
+# - VaR not calculated without 'add.risk' method
+# - x-axis correctly adjusted with 'add.risk' method
+# - chart reset correctly after 'qq.plot' method
+#
 # Revision 1.34  2008-06-26 02:00:01  peter
 # - changed 'stdev' to 'sd'
 #
