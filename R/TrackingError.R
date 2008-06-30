@@ -14,7 +14,7 @@ function (Ra, Rb, scale = 12)
     benchmarkReturns.vec = checkDataVector(Rb)
 
     #TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 / (length(assetReturns.vec) - 1)) * sqrt(scale)
-    TrackingError = sd(assetReturns.vec - benchmarkReturns.vec) *  sqrt(scale)
+    TrackingError = sd(assetReturns.vec - benchmarkReturns.vec) * sqrt(scale)
     TrackingError
 
 }
@@ -27,7 +27,7 @@ function (Ra, Rb, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TrackingError.R,v 1.7 2008-06-30 04:22:10 peter Exp $
+# $Id: TrackingError.R,v 1.8 2008-06-30 21:42:09 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
