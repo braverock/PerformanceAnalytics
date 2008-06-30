@@ -72,21 +72,16 @@ Code inspired by a chart on:
   \code{\link[graphics]{hist}}
 }
 \examples{
-    #first get some data
     data(edhec)
-    #default chart was too busy
     chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE])
 
     # version with more breaks and the standard close fit density distribution
     chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], breaks=40, methods = c("add.density", "add.rug") )
 
-    chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.centered") )
+    chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.density", "add.normal") )
 
     # version with just the histogram and normal distribution centered on 0
-    chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.centered") )
-
-    # version with histogram, normal, and close fit distribtuion
-    chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.centered", "add.density") )
+    chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.density", "add.centered") )
 
     # add a rug to the previous plot for more granularity on precisely where the distribution fell
     chart.Histogram(edhec[,'Equity.Market.Neutral',drop=FALSE], methods = c( "add.centered", "add.density", "add.rug") )
