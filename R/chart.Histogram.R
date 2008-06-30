@@ -30,8 +30,6 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
         methods = NULL
     }
 
-    b = c(-VaR.CornishFisher(x,p=p),-VaR.traditional(x,p=p))
-    b.labels = c(paste(p*100,"% ModVaR",sep=" "),paste(p*100,"% VaR",sep=""))
 #     xlim = range(qnorm(0.001, mean(x), stdev(x)), qnorm(0.999, mean(x), stdev(x)), note.lines, b)
     if(show.outliers)
         rangedata = c(min(x),max(x))
@@ -40,7 +38,15 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     if(!is.null(note.lines)) {
         rangedata = c(rangedata,note.lines)
     }
+
+    if("add.risk" %in% method){
+        b = c(-VaR.CornishFisher(x,p=p),-VaR.traditional(x,p=p))
+        b.labels = c(paste(p*100,"% ModVaR",sep=" "),paste(p*100,"% VaR",sep=""))
+        rangedata = c(rangedata,b)
+    }
+
     yrange = 0
+
     if(is.null(xlim))
         xlim = range(rangedata)
 
@@ -104,7 +110,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 probability = TRUE
             },
             add.risk = {
-                rangedata = c(rangedata,b)
+                #
             }
         )
     }
@@ -160,10 +166,12 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 text(b, h, b.labels, offset = .2, pos = 2, cex = 0.8, srt=90)
             },
              add.qqplot = {
-                 op <- par(fig=c(.02,.5,.5,.98), new=TRUE)
-                 qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".",col=colorset[2])
-                 qqline(x, col=colorset[3])
-                 box(col=elementcolor)
+                op <- par(no.readonly=TRUE)
+                op1 <- par(fig=c(.02,.5,.5,.98), new=TRUE)
+                qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".",col=colorset[2])
+                qqline(x, col=colorset[3])
+                box(col=elementcolor)
+                par(op)
              }
         ) # end switch
     } # end for
@@ -192,10 +200,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.34 2008-06-26 02:00:01 peter Exp $
+# $Id: chart.Histogram.R,v 1.35 2008-06-30 03:10:57 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.34  2008-06-26 02:00:01  peter
+# - changed 'stdev' to 'sd'
+#
 # Revision 1.32  2008-06-23 02:35:10  peter
 # - added note line text size attribute
 # - added check for 'sn' library
