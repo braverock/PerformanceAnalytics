@@ -1,5 +1,5 @@
 `chart.RiskReturnScatter` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, cex.axis=0.8, cex.main = 1, cex.lab = 1, ...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -120,7 +120,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = 0.8, border.col = elementcolor, pch = symbolset, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = elementcolor, pch = symbolset, bg = "white", legend = columnnames)
     }
 
     #title(sub='From Inception', line=1)
@@ -151,10 +151,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.9 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.10 2008-07-01 02:47:40 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.8  2008-04-18 03:41:42  peter
 # - added cex attributes for passing in formatting changes
 #
