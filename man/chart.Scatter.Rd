@@ -25,6 +25,7 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL,
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{cex.main}{ The magnification to be used for sizing the title relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
 \value{
