@@ -27,6 +27,7 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{cex.main}{ The magnification to be used for sizing the title relative to the current setting of 'cex'.  }
   \item{cex.lab}{ The magnification to be used for x and y labels relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
