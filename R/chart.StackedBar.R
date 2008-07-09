@@ -1,5 +1,5 @@
 `chart.StackedBar` <- 
-function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, legend.loc="under", cex.names = 1, beside = FALSE, ylim = NULL, horiz=FALSE, element.color = "darkgray", unstacked = F, ... ) 
+function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ... ) 
 {
 
     # @todo: Set axis color to element.color
@@ -12,6 +12,11 @@ function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, 
     if(is.null(colorset))
         colorset=1:w.columns
 
+    if(is.null(xlab))
+        minmargin = 3
+    else
+        minmargin = 5
+
     if(unstacked & dim(w)[1] == 1){ # only one row is being passed into 'w', so we'll unstack the bars
         if(las > 1) {# set the bottom border to accomodate labels
             # mar: a numerical vector of the form c(bottom, left, top, right) which
@@ -23,11 +28,13 @@ function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, 
             # a character by default, par("cin").  That gives a value that seems to work in most cases.
             # When that value is just plain too small, this calc provides a minimum value of "5", or
             # the usual default for the bottom margin.
-            bottommargin = max(c(5, strwidth(colnames(weights),units="in")/par("cin")[1]) * cex.names)
+            bottommargin = max(c(minmargin, strwidth(colnames(weights),units="in")/par("cin")[1]) * cex.names)
             par(mar = c(bottommargin, 4, 4, 2) +.1)
         }
 # par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)D
-        barplot(w, main = main, col = colorset[1], ylim = ylim, las = las, horiz = FALSE, beside=FALSE, cex.names = cex.names, space = space, ...)
+        barplot(w, col = colorset[1], las = las, horiz = FALSE, space = space, xlab = xlab, cex.names = cex.names, axes = FALSE, ...)
+        axis(2, col = element.color, las = las)
+
     }
 
     else { # multiple columns being passed into 'w', so we'll stack the bars and put a legend underneith
@@ -41,14 +48,20 @@ function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, 
 
         if(las > 1) {# set the bottom margin to accomodate names
             # See note above.
-            bottommargin = max(c(5,strwidth(rownames(weights),units="in")/par("cin")[1] * cex.names))
+            bottommargin = max(c(minmargin,strwidth(rownames(weights),units="in")/par("cin")[1] * cex.names))
             par(mar = c(bottommargin, 4, 4, 2) +.1)
 
             }
-        else
-            par(mar=c(5,4,4,2) +.1)
+        else{
+            if(is.null(xlab))
+                bottommargin = 3
+            else
+                bottommargin = 5
+            par(mar=c(bottommargin,4,4,2) +.1)
+        }
 
-        barplot(t(w),col=colorset,space=space, main=main, las = las, cex.names = cex.names, beside = beside, ylim = ylim, ...)
+        barplot(t(w),col=colorset,space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ...)
+        axis(2, col = element.color, las = las)
 
         if(!is.null(legend.loc)){
             if(legend.loc =="under"){ # draw the legend under the chart
@@ -58,7 +71,7 @@ function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, 
                     ncol= w.columns
                 else
                     ncol = 4
-                legend("center", legend=colnames(w), cex = legend.cex, fill=colorset, ncol=ncol, box.col=element.color)
+                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
             } # if legend.loc is null, then do nothing
         }
     }
@@ -72,7 +85,7 @@ function (w, colorset = NULL, main = NULL, space = .2, legend.cex = 0.8, las=3, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.6 2008-07-08 03:56:34 peter Exp $
+# $Id: chart.StackedBar.R,v 1.7 2008-07-09 01:47:12 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
