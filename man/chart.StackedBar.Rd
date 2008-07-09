@@ -29,13 +29,11 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 
   Plots a column chart or stacked column chart to the current device.
 }
 \references{ 
-     Chambers, J.M., Cleveland, W.S., Kleiner, B., and Tukey, P.A.
-     (1983), Graphical Methods for Data Analysis, Belmont, CA:
-     Wadsworth.
+     Cleveland, W.S. (1994), The Elements of Graphing Data, Summit, NJ:
+     Hobart Press.
 
-     Tufte, Edward R. (2006) Beautiful Evidence. The Graphics
-     Press, Cheshire, Connecticut. See http://www.edwardtufte.com for
-     this and other references.
+     Tufte, Edward R. (2001) The Visual Display of Quantitative Information, 2nd edition. The Graphics
+     Press, Cheshire, Connecticut. See http://www.edwardtufte.com for this and other references.
 }
 
 \author{ Peter Carl }
