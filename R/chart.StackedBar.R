@@ -32,7 +32,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
             bottommargin = max(c(minmargin, (.25+strwidth(colnames(weights),units="in"))/par("cin")[1]) * cex.names)
             par(mar = c(bottommargin, 4, 4, 2) +.1)
         }
-# par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)D
+# par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)
         barplot(w, col = colorset[1], las = las, horiz = FALSE, space = space, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las)
 
@@ -95,7 +95,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
                     ncol= w.columns
                 else
                     ncol = 4
-                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
+                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color, border.col = element.color)
 
             } # if legend.loc is null, then do nothing
         }
@@ -111,7 +111,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.9 2008-07-10 14:56:20 peter Exp $
+# $Id: chart.StackedBar.R,v 1.10 2008-07-10 15:03:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
