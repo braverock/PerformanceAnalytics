@@ -1,5 +1,5 @@
 `chart.StackedBar` <- 
-function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ... ) 
+function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ylim=NULL, ... ) 
 {
 
     # @todo: Set axis color to element.color
@@ -10,7 +10,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
     w.rows = nrow(w)
 
     if(is.null(colorset))
-        colorset=1:w.columns
+        colorset=1:w.rows
 
     if(is.null(xlab))
         minmargin = 3
@@ -28,7 +28,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
             # a character by default, par("cin").  That gives a value that seems to work in most cases.
             # When that value is just plain too small, this calc provides a minimum value of "5", or
             # the usual default for the bottom margin.
-            bottommargin = max(c(minmargin, strwidth(colnames(weights),units="in")/par("cin")[1]) * cex.names)
+            bottommargin = max(c(minmargin, (.25+strwidth(colnames(weights),units="in"))/par("cin")[1]) * cex.names)
             par(mar = c(bottommargin, 4, 4, 2) +.1)
         }
 # par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)D
@@ -48,7 +48,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 
         if(las > 1) {# set the bottom margin to accomodate names
             # See note above.
-            bottommargin = max(c(minmargin,strwidth(rownames(weights),units="in")/par("cin")[1] * cex.names))
+            bottommargin = max(c(minmargin,(.25+strwidth(rownames(weights),units="in"))/par("cin")[1] * cex.names))
             par(mar = c(bottommargin, 4, 4, 2) +.1)
 
             }
@@ -60,18 +60,33 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
             par(mar=c(bottommargin,4,4,2) +.1)
         }
 
-        barplot(t(w),col=colorset,space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ...)
+        positives = as.matrix(sapply(w,FUN='max',0))
+        rownames(positives) = rownames(w)
+        colnames(positives) = colnames(w)
+
+        negatives = as.matrix(sapply(w,FUN='min',0))
+        rownames(negatives) = rownames(w)
+        colnames(negatives) = colnames(w)
+
+        if(is.null(ylim)){
+            ymax=max(0,apply(positives,FUN=sum,MARGIN=2))
+            ymin=min(0,apply(negatives,FUN=sum,MARGIN=2))
+            ylim=c(ymin,ymax)
+        }
+
+        barplot(positives, col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
+        barplot(negatives, add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las)
 
         if(!is.null(legend.loc)){
             if(legend.loc =="under"){ # draw the legend under the chart
                 par(mar=c(0,2,0,1)+.1) # set the margins of the second panel
                 plot.new()
-                if(w.columns <4)
-                    ncol= w.columns
+                if(w.rows <4)
+                    ncol= w.rows
                 else
                     ncol = 4
-                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
+                legend("center", legend=rownames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
             } # if legend.loc is null, then do nothing
         }
     }
@@ -85,7 +100,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.7 2008-07-09 01:47:12 peter Exp $
+# $Id: chart.StackedBar.R,v 1.8 2008-07-10 04:12:36 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
