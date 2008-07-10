@@ -1,6 +1,7 @@
 `chart.StackedBar` <- 
 function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ylim=NULL, ... ) 
 {
+    # Data should be organized as columns for each category, rows for each period or observation
 
     # @todo: Set axis color to element.color
     # @todo: Set border color to element.color
@@ -10,7 +11,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
     w.rows = nrow(w)
 
     if(is.null(colorset))
-        colorset=1:w.rows
+        colorset=1:w.columns
 
     if(is.null(xlab))
         minmargin = 3
@@ -32,16 +33,18 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
             par(mar = c(bottommargin, 4, 4, 2) +.1)
         }
 # par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)D
-        barplot(w, col = colorset[1], las = las, horiz = FALSE, space = space, xlab = xlab, cex.names = cex.names, axes = FALSE, ...)
+        barplot(w, col = colorset[1], las = las, horiz = FALSE, space = space, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las)
 
     }
 
     else { # multiple columns being passed into 'w', so we'll stack the bars and put a legend underneith
-
+        op <- par(no.readonly=TRUE)
         if(!is.null(legend.loc) ){
-            if(legend.loc =="under") # put the legend under the chart
+            if(legend.loc =="under") {# put the legend under the chart
                 layout(rbind(1,2), height=c(6,1), width=1)
+
+            }
             else
                 par(mar=c(5,4,4,2)+.1) # @todo: this area may be used for other locations later
         }
@@ -59,36 +62,44 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
                 bottommargin = 5
             par(mar=c(bottommargin,4,4,2) +.1)
         }
+        # Brute force solution for plotting negative values in the bar charts:
+        positives = w
+        for(column in 1:ncol(w)){
+            for(row in 1:nrow(w)){ 
+                positives[row,column]=max(0,w[row,column])
+            }
+        }
 
-        positives = as.matrix(sapply(w,FUN='max',0))
-        rownames(positives) = rownames(w)
-        colnames(positives) = colnames(w)
-
-        negatives = as.matrix(sapply(w,FUN='min',0))
-        rownames(negatives) = rownames(w)
-        colnames(negatives) = colnames(w)
-
+        negatives = w
+        for(column in 1:ncol(w)){
+            for(row in 1:nrow(w)){ 
+                negatives[row,column]=min(0,w[row,column])
+            }
+        }
+        # Set ylim accordingly
         if(is.null(ylim)){
-            ymax=max(0,apply(positives,FUN=sum,MARGIN=2))
-            ymin=min(0,apply(negatives,FUN=sum,MARGIN=2))
+            ymax=max(0,apply(positives,FUN=sum,MARGIN=1))
+            ymin=min(0,apply(negatives,FUN=sum,MARGIN=1))
             ylim=c(ymin,ymax)
         }
 
-        barplot(positives, col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
-        barplot(negatives, add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
+        barplot(t(positives), col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
+        barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las)
 
         if(!is.null(legend.loc)){
             if(legend.loc =="under"){ # draw the legend under the chart
                 par(mar=c(0,2,0,1)+.1) # set the margins of the second panel
                 plot.new()
-                if(w.rows <4)
-                    ncol= w.rows
+                if(w.columns <4)
+                    ncol= w.columns
                 else
                     ncol = 4
-                legend("center", legend=rownames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
+                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color)
+
             } # if legend.loc is null, then do nothing
         }
+    par(op)
     }
 }
 
@@ -100,7 +111,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.8 2008-07-10 04:12:36 peter Exp $
+# $Id: chart.StackedBar.R,v 1.9 2008-07-10 14:56:20 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
