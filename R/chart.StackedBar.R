@@ -1,5 +1,5 @@
 `chart.StackedBar` <- 
-function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ylim=NULL, ... ) 
+function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.axis = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab=NULL, ylim=NULL, ... ) 
 {
     # Data should be organized as columns for each category, rows for each period or observation
 
@@ -29,7 +29,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
             # a character by default, par("cin").  That gives a value that seems to work in most cases.
             # When that value is just plain too small, this calc provides a minimum value of "5", or
             # the usual default for the bottom margin.
-            bottommargin = max(c(minmargin, (.25+strwidth(colnames(w),units="in"))/par("cin")[1])) * cex.names
+            bottommargin = max(c(minmargin, (strwidth(colnames(w),units="in"))/par("cin")[1])) * cex.names
 
             par(mar = c(bottommargin, 4, 4, 2) +.1)
         }
@@ -52,7 +52,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 
         if(las > 1) {# set the bottom margin to accomodate names
             # See note above.
-            bottommargin = max(c(minmargin,(.25+strwidth(rownames(w),units="in"))/par("cin")[1])) * cex.names
+            bottommargin = max(c(minmargin,(strwidth(rownames(w),units="in"))/par("cin")[1])) * cex.names
 
             par(mar = c(bottommargin, 4, 4, 2) +.1)
 
@@ -87,7 +87,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 
         barplot(t(positives), col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
         barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
-        axis(2, col = element.color, las = las)
+        axis(2, col = element.color, las = las, cex.axis = cex.axis)
 
         if(!is.null(legend.loc)){
             if(legend.loc =="under"){ # draw the legend under the chart
@@ -95,9 +95,12 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
                 plot.new()
                 if(w.columns <4)
                     ncol= w.columns
+#                 else if(w.columns/2 < 4)
+#                     ncol = w.columns/2
                 else
                     ncol = 4
-                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color, border.col = element.color)
+                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=3,
+ box.col=element.color, border.col = element.color)
 
             } # if legend.loc is null, then do nothing
         }
@@ -113,7 +116,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.11 2008-07-10 15:24:45 peter Exp $
+# $Id: chart.StackedBar.R,v 1.12 2008-07-11 02:42:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
