@@ -1,7 +1,7 @@
 \name{managers}
 \docType{data}
 \alias{managers}
-\title{Hypothetical Alternative Asset Manager Data and Fixed Income Benchmarks}
+\title{Hypothetical Alternative Asset Manager and Benchmark Data}
 \description{
 A data frame that contains columns of monthly returns for six hypothetical
 asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
