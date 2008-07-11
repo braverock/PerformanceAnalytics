@@ -1,5 +1,5 @@
 `chart.RollingStyle` <-
-function (R.fund, R.style, method = c("constrained","unconstrained","normalized"), width = 12, main = paste(colnames(R.fund)[1]," Rolling ", width ,"-Month Style Weights", sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = "under", na.pad = FALSE, space = 0, ...)
+function (R.fund, R.style, method = c("constrained","unconstrained","normalized"), leverage = FALSE, width = 12, main = paste(colnames(R.fund)[1]," Rolling ", width ,"-Month Style Weights", sep=""), space = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -24,11 +24,10 @@ function (R.fund, R.style, method = c("constrained","unconstrained","normalized"
 
     # Calculate
     merged.assets = na.omit(merge(R.fund, R.style))
-    result = rollapply(data = merged.assets, FUN= function(x) {t(style.fit(R.fund= x[,1,drop=FALSE], R.style = x[,-1,drop=FALSE], method = method)$weights)}, width = width, by = 1, by.column = FALSE, na.pad = FALSE, align = "right")
+    result = rollapply(data = merged.assets, FUN= function(x) {t(style.fit(R.fund = x[,1,drop=FALSE], R.style = x[,-1,drop=FALSE], method = method, leverage = leverage)$weights)}, width = width, by = 1, by.column = FALSE, na.pad = FALSE, align = "right")
 
     colnames(result) = columnnames.style
-
-    chart.StackedBar(t(result), main = main, legend.loc = legend.loc, col = colorset, space = space, ...)
+    chart.StackedBar(result, main = main, space = space, ...)
 
 }
 
@@ -40,10 +39,13 @@ function (R.fund, R.style, method = c("constrained","unconstrained","normalized"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingStyle.R,v 1.2 2008-04-18 03:59:52 peter Exp $
+# $Id: chart.RollingStyle.R,v 1.3 2008-07-11 03:22:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-04-18 03:59:52  peter
+# - added na.omit to avoid problems with missing data
+#
 # Revision 1.1  2008/02/23 05:55:21  peter
 # - chart demonstrating fund exposures through time
 #
