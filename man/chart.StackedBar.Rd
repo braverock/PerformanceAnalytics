@@ -6,7 +6,7 @@
    This creates a stacked column chart with time on the horizontal axis and values in categories.  This kind of chart is commonly used for showing portfolio 'weights' through time, although the function will plot any values by category.
 }
 \usage{
-chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = FALSE, xlab=NULL, ... ) 
+chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.axis = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab=NULL, ylim=NULL, ... )  
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -15,6 +15,7 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 
   \item{space}{ the amount of space (as a fraction of the average bar width) left before each bar, as in \code{\link{barplot}}. Default is 0.2. }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex', similar to \code{\link{plot}}. }
   \item{cex.names}{ The magnification to be used for sizing the bar labels relative to the current setting of 'cex', as in \code{\link{barplot}}. }
+  \item{cex.axis}{ The magnification to be used for sizing the axis text relative to the current setting of 'cex', similar to \code{\link{plot}}. }
   \item{las}{ sets the orientation of the axis labels, as described in \code{\link{par}}.  Defaults to '3'. }
   \item{legend.loc}{ places a legend into a location on the chart similar to \code{\link{chart.TimeSeries}}. The default, "under," is the only location currently implemented for this chart.  Use 'NULL' to remove the legend. }
   \item{element.color}{ provides the color for drawing less-important chart elements, such as the box lines, axis lines, etc. }
@@ -23,7 +24,11 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 
   \item{\dots}{ arguments to be passed to \code{\link{barplot}}. These can include further arguments (such as 'axes', 'asp' and 'main') and graphical parameters (see 'par') which are passed to 'plot.window()', 'title()' and 'axis'. }
 }
 \details{
-  This function is a wrapper for \code{\link{barplot}} but adds two additional capabilities.  First, it calculates and sets a bottom margin for long column names that are rotated vertically.  That doesn't always result in the prettiest chart, but it does ensure readable labels.  Second, it places a legend "under" the graph rather than within the bounds of the chart (which would obscure the data).  The legend is created from the column names.  The default is to create the legend when there's more than one row of data being presented.  If there is one row of data, the chart may be "unstacked" and the legend removed.
+  This function is a wrapper for \code{\link{barplot}} but adds three additional capabilities.  First, it calculates and sets a bottom margin for long column names that are rotated vertically.  That doesn't always result in the prettiest chart, but it does ensure readable labels.  
+
+  Second, it places a legend "under" the graph rather than within the bounds of the chart (which would obscure the data).  The legend is created from the column names.  The default is to create the legend when there's more than one row of data being presented.  If there is one row of data, the chart may be "unstacked" and the legend removed.
+
+  Third, it plots or stacks negative values from an origin of zero, similar to the behavior of \link{\code{barchart}} from the 'lattice' package.
 }
 \value{
   Plots a column chart or stacked column chart to the current device.
