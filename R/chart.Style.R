@@ -1,5 +1,5 @@
 `chart.Style` <-
-function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainbow(ncol(R.style)), ylim = NULL, las = 3, horiz = FALSE, cex.names = 1, legend.loc="under", leverage = FALSE, ...)
+function (R.fund, R.style, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, main = NULL, ylim = NULL, unstacked=TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,10 +12,11 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainb
     # Transform input data to a data frame
     R.fund = checkData(R.fund, method = "zoo")
     R.style = checkData(R.style, method = "zoo")
+    method = method[1]
 
     # Calculate
     result = style.fit(R.fund, R.style, method = method, leverage = leverage)
-    weights = as.matrix(result$weights)
+    weights = t(as.matrix(result$weights))
 
     if(is.null(main))
         main = paste(colnames(R.fund)[1] ," Style Weights", sep="")
@@ -24,7 +25,7 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainb
         if(method == "constrained" & leverage == FALSE) ylim = c(0,1)
         else ylim = NULL
 
-    chart.StackedBar(weights, main = main, legend.loc = legend.loc, col = colorset, ylim = ylim, las = las, horiz = horiz, cex.names = cex.names, ...)
+    chart.StackedBar(weights, main = main, ylim = ylim, unstacked = unstacked, ...)
 
 }
 
@@ -36,10 +37,13 @@ function (R.fund, R.style, method = "constrained", main = NULL, colorset = rainb
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.6 2008-04-18 03:58:04 peter Exp $
+# $Id: chart.Style.R,v 1.7 2008-07-11 03:24:52 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-04-18 03:58:04  peter
+# - reduced to a wrapper to chart.StackedBar
+#
 # Revision 1.5  2008/02/27 04:05:32  peter
 # - added 'leverage' tag to eliminate sum to one constraint
 # - added cex.names for controlling size of xaxis labels
