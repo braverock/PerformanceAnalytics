@@ -11,38 +11,10 @@ function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "n
 # @ todo: TE  Tracking error between the calc'd and actual fund
 # @ todo: Fp  Vector of calculated fund time series
 # @ todo: R^2  Coefficient of determination
-#
-# 
-# w_i   Style weights
-# V   Variance-covariance matrix of style index matrix
-# C   Vector of covariances between the style index and the fund
-# e   Vector of 1's
-# n   Number of style indexes
+
 # 
 # To implement style analysis as described in:
 # http://www.stanford.edu/~wfsharpe/art/sa/sa.htm
-# here's what we're trying to do:
-# min VAR(R.f - SUM[w_i * R.s_i]) = min VAR(F - w*S)
-#   s.t. SUM[w_i] = 1; w_i > 0
-# 
-# Remembering that VAR(aX + bY) = a^2 VAR(X) + b^2 VAR(Y) + 2ab COV(X,Y), 
-# we can refactor our problem as:
-# 
-# = VAR(R.f) + w'*V*w - 2*w'*COV(R.f,R.s)
-# 
-# drop VAR[R.f] as it isn't a function of weights, multiply by 1/2:
-# 
-# = min (1/2) w'*V*w - C'w
-#   s.t. w'*e = 1, w_i > 0
-# 
-# Now, map that to the inputs of solve.QP, which is specified as:
-# min(-d' b + 1/2 b' D b) with the constraints A' b >= b_0
-# 
-# so:
-# b is the weight vector,
-# D is the variance-covariance matrix of the styles
-# d is the covariance vector between the fund and the styles
-#
 
     method = method[1]
 
