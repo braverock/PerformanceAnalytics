@@ -28,7 +28,7 @@ where \eqn{R_i} represents the return on asset i, \eqn{F_j} represents each fact
 
 The "normalized" method reports the results of a multiple regression analysis similar to the first, but with one constraint: the coefficients are required to add to 1.  Coefficients may be negative, indicating short exposures.
 
-The "constrained" method includes the constraint that the coefficients sum to 1, but adds that the coefficients must lie between 0 and 1. These inequality constraints require a quadratic programming algorithm, and the implementation is discussed under \link{\code{style.QPfit}}.
+The "constrained" method includes the constraint that the coefficients sum to 1, but adds that the coefficients must lie between 0 and 1. These inequality constraints require a quadratic programming algorithm using \link{\code{solve.QP}} from the 'quadprog' package, and the implementation is discussed under \link{\code{style.QPfit}}.  If set to TRUE, "leverage" allows the sum of the coefficients to exceed 1. 
 
 The function then provides a graphical summary of the results.  The underlying function, \link{\code{style.fit}}, provides the outputs of the analysis and more information about fit, including an R-squared value.
 
@@ -39,7 +39,7 @@ Styles identified in this analysis may be interpreted as an average of potential
   Plots a column chart or stacked column chart of the resulting style weights to the current device.
 }
 \references{ 
-Sharpe, W. Asset Allocation: Management Style and Performance Measurement Journal of Portfolio Management, 1992, 7-19
+Sharpe, W. Asset Allocation: Management Style and Performance Measurement Journal of Portfolio Management, 1992, 7-19.  See http://www.stanford.edu/~wfsharpe/art/sa/sa.htm
  }
 \author{ Peter Carl }
 \note{ 
