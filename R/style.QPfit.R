@@ -1,5 +1,5 @@
 `style.QPfit` <-
-function(R.fund, R.style, model=F, leverage = FALSE, ...) 
+function(R.fund, R.style, model=FALSE, leverage = FALSE, ...) 
 {
 # INPUTS
 # R.fund   Vector of a fund return time series
@@ -113,15 +113,15 @@ function(R.fund, R.style, model=F, leverage = FALSE, ...)
     R.nonfactor = R.fund - R.fitted
 
     R.squared = as.data.frame(1 - (var(R.nonfactor, na.rm=TRUE)/var(R.fund, na.rm=TRUE)))
-    adj.R.squared = as.data.frame(1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1))
+#     adj.R.squared = as.data.frame(1 - (1 - R.squared)*(style.rows - 1)/(style.rows - style.cols - 1))
 
     rownames(R.squared) = "R-squared"
-    rownames(adj.R.squared) = "Adj R-squared"
+#     rownames(adj.R.squared) = "Adj R-squared"
 
     if(model) 
         result = optimal
     else 
-        result = list(weights = weights, R.squared = R.squared, adj.R.squared = adj.R.squared )
+        result = list(weights = weights, R.squared = R.squared) #, adj.R.squared = adj.R.squared )
 
     # @todo: retain the labels on the weights
     # @todo: add other values to output, e.g., 

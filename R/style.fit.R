@@ -1,5 +1,5 @@
 `style.fit` <-
-function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...) 
+function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...) 
 {
 # INPUTS
 # R.fund   Vector of a fund return time series
@@ -55,11 +55,11 @@ function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "n
             colnames(column.weights) = colnames(R.fund)[fund.col]
 
             R2 = as.data.frame(summary(column.result)$r.squared)
-            adjR2 = as.data.frame(summary(column.result)$adj.r.squared)
+#             adjR2 = as.data.frame(summary(column.result)$adj.r.squared)
             colnames(R2) = colnames(R.fund)[fund.col]
-            colnames(adjR2) = colnames(R.fund)[fund.col] 
+#             colnames(adjR2) = colnames(R.fund)[fund.col] 
             rownames(R2) = "R-squared"
-            rownames(adjR2) = "Adj R-squared"
+#             rownames(adjR2) = "Adj R-squared"
 
             if(method == "normalized") {
                 column.weights = column.weights/sum(column.weights)
@@ -67,17 +67,17 @@ function(R.fund, R.style, model=F, method = c("constrained", "unconstrained", "n
             if(fund.col == 1){
                 result.weights = column.weights
                 result.R2 = R2
-                result.adjR2 = adjR2
+#                 result.adjR2 = adjR2
             }
             else{
                 result.weights = cbind(result.weights, column.weights)
                 result.R2 = cbind(result.R2, R2)
-                result.adjR2 = cbind(result.adjR2, adjR2)
+#                 result.adjR2 = cbind(result.adjR2, adjR2)
             }
         }
         else stop("Method is mis-specified.  Select from \"constrained\", \"unconstrained\", or  \"normalized\"")
     }
-    result = list(weights = result.weights, R.squared = result.R2, adj.R.squared = result.adjR2 )
+    result = list(weights = result.weights, R.squared = result.R2) #, adj.R.squared = result.adjR2 )
 
     return(result)
 
