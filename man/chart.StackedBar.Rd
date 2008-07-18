@@ -60,7 +60,7 @@ chart.StackedBar(weights, legend.cex = 0.7, colorset=rainbow12equal)
 chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
 
 # for one row of data, use 'unstacked' for a better chart
-chart.StackedBar(weights[1,,drop=F], unstacked=T)
+chart.StackedBar(weights[1,,drop=F], unstacked=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
