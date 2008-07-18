@@ -1,10 +1,8 @@
 \name{Co-Moments}
+\alias{CoMoments}
 \alias{CoVariance}
 \alias{CoSkewness}
 \alias{CoKurtosis}
-
-
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Functions for calculating comoments of financial time series  }
 \description{
 calculates coskewness and cokurtosis as the skewness and kurtosis of two assets with reference to one another.
@@ -41,7 +39,7 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 \author{ Kris Boudt, Peter Carl }
 \note{ 
 }
-\seealso{ \code{\link{BetaCoSkewness}}, \code{\link{BetaCoKurtosis}}, \code{\link{BetaCo-Moments}} }
+\seealso{ \code{\link{BetaCoSkewness}}, \code{\link{BetaCoKurtosis}}, \code{\link{BetaCoMoments}} }
 \examples{
 data(managers)
 CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])

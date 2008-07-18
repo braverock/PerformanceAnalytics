@@ -56,7 +56,7 @@ skewness(x, na.rm = FALSE, method = c("moment", "fisher"), \dots)
 
 \seealso{
 
-    \code{link{kurtosis}}.
+    \code{\link{kurtosis}}.
 
 }
 

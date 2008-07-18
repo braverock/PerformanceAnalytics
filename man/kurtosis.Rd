@@ -65,7 +65,7 @@ kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
 
 \seealso{
 
-    \code{link{skewness}}.
+    \code{\link{skewness}}.
 
 }
 

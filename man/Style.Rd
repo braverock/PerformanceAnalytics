@@ -36,30 +36,30 @@ style.QPfit(R.fund, R.style, model = F, leverage = FALSE, ...)
 These functions calculate style weights using an asset class style model as described in detail in Sharpe (1992).  The use of quadratic programming to determine a fund's exposures to the changes in returns of major asset classes is usually refered to as "style analysis".
 
 The "unconstrained" method implements a simple factor model for style analysis, as in:
-\deqn{R_i = b_{i1}F_1+b_{i2}F_2+\dots+b_{in}F_n +e_i}
-where \eqn{R_i} represents the return on asset i, \eqn{F_j} represents each factor, and \eqn{e_i} represents the "non-factor" component of the return on i.  This is simply a multiple regression analysis with fund returns as the dependent variable and asset class returns as the independent variables.  The resulting slope coefficients are then interpreted as the fund's historic exposures to asset class returns.  In this case, coefficients do not sum to 1.
+\deqn{Ri = bi1*F1+bi2*F2+...+bin*Fn+ei}{R_i = b_{i1}F_1+b_{i2}F_2+\dots+b_{in}F_n +e_i}
+where \eqn{Ri}{R_i} represents the return on asset i, \eqn{Fj}{F_j} represents each factor, and \eqn{ei}{e_i} represents the "non-factor" component of the return on i.  This is simply a multiple regression analysis with fund returns as the dependent variable and asset class returns as the independent variables.  The resulting slope coefficients are then interpreted as the fund's historic exposures to asset class returns.  In this case, coefficients do not sum to 1.
 
 The "normalized" method reports the results of a multiple regression analysis similar to the first, but with one constraint: the coefficients are required to add to 1.  Coefficients may be negative, indicating short exposures. To enforce the constraint, coefficients are normalized.
 
 The "constrained" method includes the constraint that the coefficients sum to 1, but adds that the coefficients must lie between 0 and 1. These inequality constraints require a quadratic programming algorithm using \link{\code{solve.QP}} from the 'quadprog' package, and the implementation is discussed under \link{\code{style.QPfit}}.  If set to TRUE, "leverage" allows the sum of the coefficients to exceed 1. 
 
 According to Sharpe (1992), the calculation for the constrained case is represented as:
-\deqn{min VAR(R.f - \sum{w_i * R.s_i}) = min VAR(F - w*S)}
-\deqn{  s.t. \sum{w_i} = 1; w_i > 0}
+\deqn{min var(Rf - sum[wi * R.si]) = min var(F - w*S)}{min \sigma(R_f - \sum{w_i * R_s_i}) = min \sigma(F - w*S)}
+\deqn{s.t. sum[wi] = 1; wi > 0}{  s.t. \sum{w_i} = 1; w_i > 0}
 
 Remembering that:
 
-\deqn{VAR(aX + bY) = a^2 VAR(X) + b^2 VAR(Y) + 2ab COV(X,Y) = VAR(R.f) + w'*V*w - 2*w'*COV(R.f,R.s)}
+\deqn{\sigma(aX + bY) = a^2 \sigma(X) + b^2 \sigma(Y) + 2ab cov(X,Y) = \sigma(R.f) + w'*V*w - 2*w'*cov(R.f,R.s)}
 
-we can drop \eqn{VAR(R.f)} as it isn't a function of weights, multiply both sides by 1/2:
+we can drop \eqn{var(Rf)}{\sigma(R_f)} as it isn't a function of weights, multiply both sides by 1/2:
 
-\deqn{= min (1/2) w'*V*w - C'w}
-\deqn{  s.t. w'*e = 1, w_i > 0}
+\deqn{= min (1/2) w'*V*w - C'w}{= min (1/2) w'*V*w - C'w}
+\deqn{  s.t. w'*e = 1, w_i > 0}{  s.t. w'*e = 1, w_i > 0}
 
 Which allows us to use \link{\code{solve.QP}}, which is specified as:
-\deqn{min(-d' b + 1/2 b' D b)}
+\deqn{min(-d' b + 1/2 b' D b)}{min(-d' b + 1/2 b' D b)}
 and the constraints
-\deqn{ A' b >= b_0 }
+\deqn{ A' b >= b.0 }{ A' b >= b_0 }
 
 so:
 b is the weight vector,

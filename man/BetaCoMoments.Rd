@@ -55,7 +55,7 @@ Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order
 \note{ 
 
 }
-\seealso{ \code{\link{Co-Moments}} }
+\seealso{ \code{\link{CoMoments}} }
 \examples{
 data(managers)
 
