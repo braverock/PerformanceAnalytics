@@ -41,7 +41,11 @@ where \eqn{Ri}{R_i} represents the return on asset i, \eqn{Fj}{F_j} represents e
 
 The "normalized" method reports the results of a multiple regression analysis similar to the first, but with one constraint: the coefficients are required to add to 1.  Coefficients may be negative, indicating short exposures. To enforce the constraint, coefficients are normalized.
 
-The "constrained" method includes the constraint that the coefficients sum to 1, but adds that the coefficients must lie between 0 and 1. These inequality constraints require a quadratic programming algorithm using \link{\code{solve.QP}} from the 'quadprog' package, and the implementation is discussed under \link{\code{style.QPfit}}.  If set to TRUE, "leverage" allows the sum of the coefficients to exceed 1. 
+The "constrained" method includes the constraint that the coefficients sum to 1, but adds 
+that the coefficients must lie between 0 and 1. These inequality constraints require a 
+quadratic programming algorithm using \code{\link{solve.QP}} from the 'quadprog' package, 
+and the implementation is discussed under \code{\link{style.QPfit}}.  If set to TRUE, 
+"leverage" allows the sum of the coefficients to exceed 1. 
 
 According to Sharpe (1992), the calculation for the constrained case is represented as:
 \deqn{min var(Rf - sum[wi * R.si]) = min var(F - w*S)}{min \sigma(R_f - \sum{w_i * R_s_i}) = min \sigma(F - w*S)}
@@ -56,7 +60,7 @@ we can drop \eqn{var(Rf)}{\sigma(R_f)} as it isn't a function of weights, multip
 \deqn{= min (1/2) w'*V*w - C'w}{= min (1/2) w'*V*w - C'w}
 \deqn{  s.t. w'*e = 1, w_i > 0}{  s.t. w'*e = 1, w_i > 0}
 
-Which allows us to use \link{\code{solve.QP}}, which is specified as:
+Which allows us to use \code{\link{solve.QP}}, which is specified as:
 \deqn{min(-d' b + 1/2 b' D b)}{min(-d' b + 1/2 b' D b)}
 and the constraints
 \deqn{ A' b >= b.0 }{ A' b >= b_0 }
@@ -66,9 +70,13 @@ b is the weight vector,
 D is the variance-covariance matrix of the styles
 d is the covariance vector between the fund and the styles
 
-The chart functions then provide a graphical summary of the results.  The underlying function, \link{\code{style.fit}}, provides the outputs of the analysis and more information about fit, including an R-squared value.
+The chart functions then provide a graphical summary of the results.  The underlying 
+function, \code{\link{style.fit}}, provides the outputs of the analysis and more 
+information about fit, including an R-squared value.
 
-Styles identified in this analysis may be interpreted as an average of potentially changing exposures over the period covered.  The function \link{\code{chart.RollingStyle}} may be useful for examining the behavior of a manager's average exposures to asset classes over time, using a rolling-window analysis.
+Styles identified in this analysis may be interpreted as an average of potentially 
+changing exposures over the period covered.  The function \code{\link{chart.RollingStyle}} 
+may be useful for examining the behavior of a manager's average exposures to asset classes over time, using a rolling-window analysis.
 
 }
 \value{
