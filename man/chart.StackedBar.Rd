@@ -21,6 +21,7 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 
   \item{element.color}{ provides the color for drawing less-important chart elements, such as the box lines, axis lines, etc. }
   \item{unstacked}{ logical.  If set to 'TRUE' \emph{and} only one row of data is submitted in 'w', then the chart creates a normal column chart.  If more than one row is submitted, then this is ignored.  See examples below. }
   \item{xlab}{ the x-axis label, which defaults to 'NULL'. }
+  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{\dots}{ arguments to be passed to \code{\link{barplot}}. These can include further arguments (such as 'axes', 'asp' and 'main') and graphical parameters (see 'par') which are passed to 'plot.window()', 'title()' and 'axis'. }
 }
 \details{

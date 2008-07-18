@@ -27,14 +27,11 @@ chart.SnailTrail(R, rf = 0, main = "Annualized Return and Risk", add.names = c("
   \item{stepsize}{ the frequency with which to make the rolling calculation }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
-  \item{cex.axis}{ ~~Describe \code{cex.axis} here~~ }
-  \item{cex.main}{ ~~Describe \code{cex.main} here~~ }
-  \item{cex.lab}{ ~~Describe \code{cex.lab} here~~ }
-  \item{cex.text}{ ~~Describe \code{cex.text} here~~ }
+  \item{cex.lab}{ The magnification to be used for sizing the label relative to the current setting of 'cex', similar to \code{\link{plot}}. }
+  \item{cex.main}{ The magnification to be used for sizing the main chart relative to the current setting of 'cex', as in \code{\link{plot}}. }
+  \item{cex.axis}{ The magnification to be used for sizing the axis text relative to the current setting of 'cex', similar to \code{\link{plot}}. }
+  \item{cex.text}{ The magnification to be used for sizing the text relative to the current setting of 'cex', similar to \code{\link{plot}}. }
   \item{\dots}{ any other passthru parameters }
-}
-\details{
-  ~~ If necessary, more details than the description above ~~
 }
 \value{
   ~Describe the value returned
@@ -44,11 +41,7 @@ chart.SnailTrail(R, rf = 0, main = "Annualized Return and Risk", add.names = c("
   ...
 }
 \references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~ 
-
- ~Make other sections like Warning with \section{Warning }{....} ~
-}
+\author{ Peter Carl }
 \seealso{ \code{\link{chart.RiskReturnScatter}}}
 \examples{
 data(managers)

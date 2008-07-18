@@ -13,9 +13,9 @@ chart.Style(R.fund, R.style, method = c("constrained", "unconstrained", "normali
 
 chart.RollingStyle(R.fund, R.style, method = c("constrained","unconstrained","normalized"), leverage = FALSE, width = 12, main = paste(colnames(R.fund)[1]," Rolling ", width ,"-Month Style Weights", sep=""), space = 0, ...)
 
-style.fit(R.fund, R.style, model = F, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...)
+style.fit(R.fund, R.style, model = FALSE, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...)
 
-style.QPfit(R.fund, R.style, model = F, leverage = FALSE, ...)
+style.QPfit(R.fund, R.style, model = FALSE, leverage = FALSE, ...)
 
 }
 %- maybe also 'usage' for other objects documented here.
