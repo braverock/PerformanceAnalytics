@@ -28,7 +28,8 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 
 
   Second, it places a legend "under" the graph rather than within the bounds of the chart (which would obscure the data).  The legend is created from the column names.  The default is to create the legend when there's more than one row of data being presented.  If there is one row of data, the chart may be "unstacked" and the legend removed.
 
-  Third, it plots or stacks negative values from an origin of zero, similar to the behavior of \link{\code{barchart}} from the 'lattice' package.
+  Third, it plots or stacks negative values from an origin of zero, similar to the 
+behavior of \code{\link{barchart}} from the 'lattice' package.
 }
 \value{
   Plots a column chart or stacked column chart to the current device.
@@ -60,7 +61,7 @@ chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
 
 # for one row of data, use 'unstacked' for a better chart
 chart.StackedBar(weights[1,,drop=F], unstacked=T)
-
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ ts }
