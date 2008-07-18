@@ -109,7 +109,7 @@ function(R.fund, R.style, model=FALSE, leverage = FALSE, ...)
     colnames(weights) = colnames(R.fund)[1]
 
     # Calculate metrics for the quality of the fit
-    R.fitted = rowSums(R.style*matrix(rep(t(weights),style.rows),byrow=T,ncol=style.cols))
+    R.fitted = rowSums(R.style*matrix(rep(t(weights),style.rows),byrow=TRUE,ncol=style.cols))
     R.nonfactor = R.fund - R.fitted
 
     R.squared = as.data.frame(1 - (var(R.nonfactor, na.rm=TRUE)/var(R.fund, na.rm=TRUE)))
