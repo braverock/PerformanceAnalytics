@@ -43,7 +43,7 @@ The "normalized" method reports the results of a multiple regression analysis si
 
 The "constrained" method includes the constraint that the coefficients sum to 1, but adds 
 that the coefficients must lie between 0 and 1. These inequality constraints require a 
-quadratic programming algorithm using \code{\link{solve.QP}} from the 'quadprog' package, 
+quadratic programming algorithm using \code{\link[quadprog]{solve.QP}} from the 'quadprog' package, 
 and the implementation is discussed under \code{\link{style.QPfit}}.  If set to TRUE, 
 "leverage" allows the sum of the coefficients to exceed 1. 
 
@@ -60,7 +60,7 @@ we can drop \eqn{var(Rf)}{\sigma(R_f)} as it isn't a function of weights, multip
 \deqn{= min (1/2) w'*V*w - C'w}{= min (1/2) w'*V*w - C'w}
 \deqn{  s.t. w'*e = 1, w_i > 0}{  s.t. w'*e = 1, w_i > 0}
 
-Which allows us to use \code{\link{solve.QP}}, which is specified as:
+Which allows us to use \code{\link[quadprog]{solve.QP}}, which is specified as:
 \deqn{min(-d' b + 1/2 b' D b)}{min(-d' b + 1/2 b' D b)}
 and the constraints
 \deqn{ A' b >= b.0 }{ A' b >= b_0 }
