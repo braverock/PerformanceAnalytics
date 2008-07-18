@@ -23,8 +23,8 @@ chart.RollingStyle(R.fund, R.style, method = c("constrained","unconstrained","no
 This function calculates style weights from an asset class style model as described in detail in Sharpe (1992).  The use of quadratic programming to determine a fund's exposures to the changes in returns of major asset classes is usually refered to as "style analysis".
 
 The "unconstrained" method implements a simple factor model for style analysis
-\deqn{R_i = b_{i1}F_1+b_{i2}F_2+b_{in}F_n +e_i}
-where \eqn{R_i} represents the return on asset i, \eqn{F_j} represents each factor, and \eqn{e_i} represents the "non-factor" component of the return on i.  This is simply a multiple regression analysis with fund returns as the dependent variable and asset class returns as the independent variables.  The resulting slope coefficients are then interpreted as the fund's historic exposures to asset class returns.  In this case, coefficients do not sum to 1.
+\deqn{Ri = b.i1F1+b.i2F2+b.inFn +ei}{R_i = b_{i1}F_1+b_{i2}F_2+b_{in}F_n +e_i}
+where \eqn{Ri}{R_i} represents the return on asset i, \eqn{Fj}{F_j} represents each factor, and \eqn{ei}{e_i} represents the "non-factor" component of the return on i.  This is simply a multiple regression analysis with fund returns as the dependent variable and asset class returns as the independent variables.  The resulting slope coefficients are then interpreted as the fund's historic exposures to asset class returns.  In this case, coefficients do not sum to 1.
 
 The "normalized" method reports the results of a multiple regression analysis similar to the first, but with one constraint: the coefficients are required to add to 1.  Coefficients may be negative, indicating short exposures.
 

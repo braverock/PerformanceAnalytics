@@ -1,6 +1,6 @@
-\name{managers}
+\name{weights}
 \docType{data}
-\alias{managers}
+\alias{weights}
 \title{Selected Portfolio Weights Data}
 \description{
 A data frame that contains columns of monthly weights for a subset of the EDHEC hedge
