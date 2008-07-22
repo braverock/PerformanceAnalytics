@@ -86,7 +86,7 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
         }
         else stop("Method is mis-specified.  Select from \"constrained\", \"unconstrained\", or  \"normalized\"")
     }
-    result = list(weights = result.weights, R.squared = result.R2) #, adj.R.squared = result.adjR2 )
+    result = list(weights = result.weights, R.squared = result.R2, adj.R.squared = result.adjR2 )
 
     return(result)
 
