@@ -19,8 +19,8 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
     method = method[1]
 
     # Check to see if the required libraries are loaded
-    if(!require("quadprog", quietly=TRUE))
-        stop("package", sQuote("quadprog"), "is needed.  Stopping")
+#     if(!require("quadprog", quietly=TRUE))
+#         stop("package", sQuote("quadprog"), "is needed.  Stopping")
 
     R.fund = checkData(R.fund, method="data.frame")
     R.style = checkData(R.style, method="data.frame")
@@ -48,18 +48,27 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
             }
         }
         else if(method == "unconstrained" | method == "normalized"){
-            column.result = lm(R.fund[, fund.col] ~ ., data = R.style)
-            column.weights = as.data.frame(coef(column.result)[-1])
+            #      A formula has an implied intercept term.  See 'formula' for more details
+            #      of allowed formulae.
+
+            #      To remove the intercept term: 'y ~ x - 1' is a line through the
+            #      origin.  A model with no intercept can be also specified as 'y ~ x
+            #      + 0' or 'y ~ 0 + x'.
+
+            column.lm = lm(R.fund[, fund.col] ~ 0 + ., data = R.style)
+            column.result = column.lm # this will accomodate AIC steps later
+            column.weights = as.data.frame(coef(column.lm))
+#             column.weights = as.data.frame(coef(column.result)[-1])
 #             colnames(column.weights)= style.colnames[fund.col]
             rownames(column.weights) = colnames(R.style)
             colnames(column.weights) = colnames(R.fund)[fund.col]
 
             R2 = as.data.frame(summary(column.result)$r.squared)
-#             adjR2 = as.data.frame(summary(column.result)$adj.r.squared)
+            adjR2 = as.data.frame(summary(column.result)$adj.r.squared)
             colnames(R2) = colnames(R.fund)[fund.col]
-#             colnames(adjR2) = colnames(R.fund)[fund.col] 
+            colnames(adjR2) = colnames(R.fund)[fund.col] 
             rownames(R2) = "R-squared"
-#             rownames(adjR2) = "Adj R-squared"
+            rownames(adjR2) = "Adj R-squared"
 
             if(method == "normalized") {
                 column.weights = column.weights/sum(column.weights)
@@ -67,12 +76,12 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
             if(fund.col == 1){
                 result.weights = column.weights
                 result.R2 = R2
-#                 result.adjR2 = adjR2
+                result.adjR2 = adjR2
             }
             else{
                 result.weights = cbind(result.weights, column.weights)
                 result.R2 = cbind(result.R2, R2)
-#                 result.adjR2 = cbind(result.adjR2, adjR2)
+                result.adjR2 = cbind(result.adjR2, adjR2)
             }
         }
         else stop("Method is mis-specified.  Select from \"constrained\", \"unconstrained\", or  \"normalized\"")
