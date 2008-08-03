@@ -9,6 +9,8 @@ The Sharpe ratio is simply the return per unit of risk (represented by variabili
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviation to represent risk.
 
 A number of papers now recommend using a "modified Sharpe" ratio using a Modified Cornish-Fisher VaR as the measure of Risk.
+
+We have recently extended this concept to create multivariate modified Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR, Gaussian Expected Shortfall, and modified Expected Shortfall. See \code{\link{MultivariateRisk}}.
 }
 \usage{
 SharpeRatio.modified(Ra, rf = 0, p = 0.95, scale = 1)
@@ -38,7 +40,8 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 \note{}
 \seealso{
     \code{\link{VaR.CornishFisher}} \cr
-    \code{\link{SharpeRatio}}
+    \code{\link{SharpeRatio}} \cr
+    \code{\link{MultivariateRisk}}
 }
 \examples{
 data(edhec)
