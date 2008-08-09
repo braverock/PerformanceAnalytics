@@ -1,4 +1,51 @@
-Return.clean = function(R, alpha=.01 , trim=1e-3)
+`Return.clean` <-
+function(R, method = "boudt", ...) 
+{ # @author Peter Carl
+
+    # DESCRIPTION:
+    # A wrapper for selecting the method by which return data is 'cleaned'
+
+    # Inputs:
+    # R: a matrix, data frame, or timeSeries of returns
+
+    # Outputs:
+    # A timeseries of the 'cleaned' series
+
+    # FUNCTION:
+    method = method[1]
+
+    # Transform input data to a timeseries (zoo) object
+    R = checkData(R, method="zoo")
+
+    result.zoo = zoo(NA)
+
+    # Get dimensions and labels
+    columns = ncol(R)
+    columnnames = colnames(R)
+
+    for(column in 1:columns) { # for each asset passed in as R
+        R.clean = zoo(NA)
+
+        switch(method,
+            boudt = {
+                R.clean = clean.boudt(na.omit(R[ , column, drop=FALSE]))[[1]]
+            }
+        )
+
+        if(column == 1) { 
+            result.zoo = R.clean
+        }
+        else {
+            result.zoo = merge (result.zoo, R.clean)
+        }
+    }
+
+    # RESULTS:
+    return(result.zoo)
+}
+
+`clean.boudt` <-
+function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson
 
    # Function used to bound the effect of the most extreme returns on the downside
@@ -47,5 +94,8 @@ Return.clean = function(R, alpha=.01 , trim=1e-3)
               # print(c("Observation",as.character(date[t]),"is detected as outlier and cleaned") );
                cleaneddata[t,] = sqrt( max(empirical.threshold,qchisq(1-trim,N))/vd2t[t])*R[t,];
                outlierdate = c(outlierdate,date[t]) } }
+
+   cleaneddata = zoo(cleaneddata, order.by = as.Date(rownames(cleaneddata))) # modified to create a zoo object in the cleaneddata slot of the list
    return(list(cleaneddata,outlierdate))
+
 }
