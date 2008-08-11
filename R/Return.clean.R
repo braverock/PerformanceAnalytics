@@ -17,14 +17,14 @@ function(R, method = "boudt", ...)
     # Transform input data to a timeseries (zoo) object
     R = checkData(R, method="zoo")
 
-    result.zoo = zoo(NA)
+    result.zoo = zoo(NA, order.by=time(R))
 
     # Get dimensions and labels
     columns = ncol(R)
     columnnames = colnames(R)
 
     for(column in 1:columns) { # for each asset passed in as R
-        R.clean = zoo(NA)
+        R.clean = zoo(NA, order.by=time(R))
 
         switch(method,
             boudt = {
@@ -32,14 +32,15 @@ function(R, method = "boudt", ...)
             }
         )
 
-        if(column == 1) { 
-            result.zoo = R.clean
-        }
-        else {
+#         if(column == 1) { 
+#             result.zoo = R.clean
+#         }
+#         else {
             result.zoo = merge (result.zoo, R.clean)
-        }
+#         }
     }
 
+    result.zoo = result.zoo[,-1, drop=FALSE]
     # RESULTS:
     return(result.zoo)
 }
@@ -51,11 +52,11 @@ function(R, alpha=.01 , trim=1e-3)
    # Function used to bound the effect of the most extreme returns on the downside
    # risk prediction.
 
-   R=checkData(R,method="matrix")
+   R=checkData(R,method="zoo") # modified to create a zoo object in the cleaneddata slot of the list
 
    T=dim(R)[1]; date=c(1:T)
    N=dim(R)[2];
-   MCD = covMcd(R,alpha=1-alpha)
+   MCD = covMcd(as.matrix(R),alpha=1-alpha)
    mu = as.matrix(MCD$raw.center) #no reweighting
    sigma = MCD$raw.cov
    invSigma = solve(sigma);
@@ -95,7 +96,6 @@ function(R, alpha=.01 , trim=1e-3)
                cleaneddata[t,] = sqrt( max(empirical.threshold,qchisq(1-trim,N))/vd2t[t])*R[t,];
                outlierdate = c(outlierdate,date[t]) } }
 
-   cleaneddata = zoo(cleaneddata, order.by = as.Date(rownames(cleaneddata))) # modified to create a zoo object in the cleaneddata slot of the list
    return(list(cleaneddata,outlierdate))
 
 }
