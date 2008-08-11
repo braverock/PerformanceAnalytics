@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, ...)
+function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, show.clean = FALSE, show.horizontal = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,13 +32,26 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 
     time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
 
-    method = method[1] # grab the first value if this is still a vector, to avoid varnings
+    method = method[1] # grab the first value if this is still a vector, to avoid warnings
+    clean = clean[1]
 
     risk = zoo(0,order.by=time(x))
     column.risk = zoo(0,order.by=time(x))
 
     if (!all)
         columns = 1
+
+    bar.color = colorset[1]
+    if (show.clean){
+        colors = colorRamp(c(colorset[1],"white"))
+        bar.color = rgb(colors(.75),max=255)
+    }
+
+    x.orig = x
+
+    if(clean!="none"){
+        x = Return.clean(x, method=clean) # not handling NA's correctly
+    }
 
     if(risk.line){
         for(column in 1:columns) {
@@ -88,10 +101,14 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
         legend.txt = ""
     }
     if(is.na(ylim[1])){
-        ylim = range(c(na.omit(as.vector(x[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
+        ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
     }
 
-    chart.TimeSeries(x[,1, drop=FALSE], type = "h", col = colorset, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
+    chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
+
+    if(show.clean) {
+        lines(1:rows, x[,1, drop=FALSE], type="h", col=colorset[1], lwd = lwd, lend="butt")
+    }
 
     if(risk.line){
         if (symmetric){
@@ -101,6 +118,8 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
         }
         for(column in (columns+1):2) {
             lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty)
+            if(show.horizontal)
+                lines(1:rows, rep(-tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
         }
     }
 
@@ -117,10 +136,13 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.14 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.BarVaR.R,v 1.15 2008-08-11 14:06:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.13  2007/08/20 21:04:58  peter
 # - added as.Date because merge.zoo is not behaving as expected when date
 #   formats are not consistent
