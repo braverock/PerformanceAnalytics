@@ -1,5 +1,5 @@
 `Return.clean` <-
-function(R, method = "boudt", ...) 
+function(R, method = "boudt", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,7 +32,7 @@ function(R, method = "boudt", ...)
             }
         )
 
-#         if(column == 1) { 
+#         if(column == 1) {
 #             result.zoo = R.clean
 #         }
 #         else {
@@ -48,6 +48,9 @@ function(R, method = "boudt", ...)
 `clean.boudt` <-
 function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson
+
+   # set up by loading robustbase library
+   stopifnot("package:robustbase" %in% search() || require("robustbase",quietly=TRUE))
 
    # Function used to bound the effect of the most extreme returns on the downside
    # risk prediction.
