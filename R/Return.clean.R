@@ -102,3 +102,28 @@ function(R, alpha=.01 , trim=1e-3)
    return(list(cleaneddata,outlierdate))
 
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: Return.clean.R,v 1.5 2008-08-13 18:05:22 brian Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+# Revision 1.4 2008-08-12 17:56:13 brian
+# - add library check for package robustbase
+#
+# Revision 1.3 2008-08-11 08:58:42 peter
+# - moved prior functionality into 'clean.boudt'
+# - made Return.clean a wrapper focused on data handling, multiple methods
+#
+# Revision 1.2 2008-08-08 23:16:09 peter
+# - separated out the cleaning function and added column handling
+#
+# Revision 1.1 2008-08-07 16:39:33 brian
+# - initial revision of robust data cleaning function and documentation
