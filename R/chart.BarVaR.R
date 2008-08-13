@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","VaR","StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = "13", all = FALSE, show.clean = FALSE, show.horizontal = FALSE, ...)
+function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR","HistoricalVaR", "StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = 2, all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -26,16 +26,22 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
     rows = nrow(x)
     columnnames = colnames(x)
     rownames = time(x)
-
+    legend.txt = NULL
+    symmetric = NULL
+    risk.line=TRUE
     # Re-format the dates for the xaxis
     rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
 
     time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
-
-    method = method[1] # grab the first value if this is still a vector, to avoid warnings
+    if(methods[1]=="none"){
+        methods=NULL
+        risk.line=FALSE
+    }
+    if(length(methods)>1)
+        columns = 1 # if there's more than one method specified, then we'll ignore columns other than the first
     clean = clean[1]
 
-    risk = zoo(0,order.by=time(x))
+    risk = zoo(NA,order.by=time(x))
     column.risk = zoo(0,order.by=time(x))
 
     if (!all)
@@ -49,52 +55,71 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 
     x.orig = x
 
-    if(clean!="none"){
-        x = Return.clean(x, method=clean) # not handling NA's correctly
+    if(show.clean){
+        x = Return.clean(x, method=clean) 
     }
 
     if(risk.line){
         for(column in 1:columns) {
-            switch(method,
-                StdDev = {
-                    symmetric = TRUE
-                    if(width > 0){
-                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "sd")
-                        legend.txt = paste("Rolling ",width,"-month Std Dev",sep="")
+            for(method in methods) {
+                switch(method,
+                    StdDev = {
+                        symmetric = c(symmetric, TRUE)
+                        if(width > 0){
+                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "sd")
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-month Std Dev",sep=""))
+                        }
+                        else {
+                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "sd")
+                            if(column==1)
+                                legend.txt = c(legend.txt, "Std Dev")
+                        }
+                    },
+                    GaussianVaR = {
+                        symmetric = c(symmetric, TRUE)
+                        if(width > 0) {
+                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE, clean=clean)
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-Month Gaussian VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
+                        else {
+                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE, clean=clean)
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Gaussian VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
+                    },
+                    ModifiedVaR = {
+                        symmetric = c(symmetric, FALSE)
+                        if(width > 0) {
+                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE, clean=clean)
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
+                        else {
+                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE, clean=clean)
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Modified VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
+                    },
+                    HistoricalVaR = {
+                        symmetric = c(symmetric, FALSE)
+                        if(width > 0) {
+                            column.risk = -1* apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "quantile", probs = (1-p)) #hVaR = quantile(x,probs=.01)
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-Month Historical VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
+                        else {
+                            column.risk = -1* apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "quantile", probs = (1-p))
+                            if(column==1)
+                                legend.txt = c(legend.txt, paste("Historical VaR (1 Mo, ",p*100,"%)",sep=""))
+                        }
                     }
-                    else {
-                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "sd")
-                        legend.txt = "Std Dev"
-                    }
-                },
-                VaR = {
-                    symmetric = TRUE
-                    if(width > 0) {
-                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                        legend.txt = paste("Rolling ",width,"-Month VaR (1 Mo, ",p*100,"%)",sep="")
-                    }
-                    else {
-                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = FALSE)
-                        legend.txt = paste("Traditional VaR (1 Mo, ",p*100,"%)",sep="")
-                    }
-                },
-                ModifiedVaR = {
-                    symmetric = FALSE
-                    if(width > 0) {
-                        column.risk = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                        legend.txt = paste("Rolling ",width,"-Month Modified VaR (1 Mo, ",p*100,"%)",sep="")
-                    }
-                    else {
-                        column.risk = apply.fromstart(na.omit(x[,column,drop=FALSE]), gap = gap, FUN = "VaR.CornishFisher", p = p, modified = TRUE)
-                        legend.txt = paste("Modified VaR (1 Mo, ",p*100,"%)",sep="")
-                    }
-                }
-            ) # end switch
-        if(column == 1)
-            risk = merge.zoo(x[,1],column.risk)
-        else
-            risk = merge.zoo(risk,column.risk)
-        }
+                ) # end switch
+
+                risk = merge.zoo(risk,column.risk)
+            } # end method loop
+        } # end column loop
     }
     else {
         risk = 0
@@ -110,21 +135,28 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
         lines(1:rows, x[,1, drop=FALSE], type="h", col=colorset[1], lwd = lwd, lend="butt")
     }
 
+#     symmetric = symmetric[-1]
+# add risk.columns here, since we'll want multiple lines when we have multiple methods
+# if we have multiple methods, we'll want multiple lty's
+
     if(risk.line){
-        if (symmetric){
-            for(column in (columns+1):2) {
-                lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty)
+        risk.columns = ncol(risk)
+        if(length(lty)==1)
+            lty = rep(lty, risk.columns)
+        for(column in (risk.columns):2) {
+            if (show.symmetric && symmetric[column-1]){
+                lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
             }
         }
-        for(column in (columns+1):2) {
-            lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty)
+        for(column in (risk.columns):2) {
+            lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
             if(show.horizontal)
                 lines(1:rows, rep(-tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
         }
     }
 
-    if(legend.txt != "")
-        legend("bottomleft", inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt)
+    if(legend.txt[1] != "")
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt)
 
 }
 
@@ -136,10 +168,15 @@ function (R, width = 0, gap = 12, risk.line = TRUE, method = c("ModifiedVaR","Va
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.15 2008-08-11 14:06:15 peter Exp $
+# $Id: chart.BarVaR.R,v 1.16 2008-08-13 03:35:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2008-08-11 14:06:15  peter
+# - added parameter 'clean' to specify data cleaning method for risk estimation
+# - added parameter 'show.clean' to show cleaned returns overlaid on original data
+# - added parameter 'show.horizontal' to show exceedences to most recent risk value
+#
 # Revision 1.14  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
