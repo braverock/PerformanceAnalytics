@@ -1,5 +1,5 @@
 `VaR.CornishFisher` <-
-function(R, p=0.99, modified = TRUE)
+function(R, p=0.99, modified = TRUE, clean=c("none", "boudt"))
 {   # @author Brian G. Peterson (completed/debugged fn)
     # @author Diethelm Wuertz (prototype function)
 
@@ -34,6 +34,10 @@ function(R, p=0.99, modified = TRUE)
     R = checkData(R, method="matrix")
     columns = ncol(R)
     columnnames=colnames(R)
+    if(clean!="none"){
+        R = as.matrix(Return.clean(R, method=clean)) 
+    }
+
     # FUNCTION:
     for(column in 1:columns) {
         r = as.vector(na.omit(R[,column]))
@@ -140,10 +144,16 @@ function(R, p=0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.18 2008-06-24 21:55:28 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.19 2008-08-13 03:31:32 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2008-06-24 21:55:28  brian
+# - remove excess parenthesis in Zcf
+#   - report and patch credit to Enrique Bengoechea Bartolome
+# - fix sign for left tail assymetry
+#   - credit Kris Boudt
+#
 # Revision 1.17  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
