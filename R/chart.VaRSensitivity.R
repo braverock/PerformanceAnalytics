@@ -44,6 +44,12 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR"), clean=c
     xlim=c(min(p), max(p))
     if(is.null(main))
         main=paste("VaR Sensitivity of ", columnnames[1], sep="")
+    if(length(lwd) < risk.columns)
+        lwd = rep(lwd,risk.columns)
+    if(length(lty) < risk.columns)
+        lty = rep(lty,risk.columns)
+    if(length(pch) < risk.columns)
+        pch = rep(pch,risk.columns)
     plot.new()
     plot.window(xlim, ylim, xaxs = "r")
     if (reference.grid) {
