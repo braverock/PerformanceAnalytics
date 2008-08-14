@@ -3,6 +3,7 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR"), clean=c
 { # @author Peter Carl
 
     R = checkData(R)
+    columnnames = colnames(R)
     clean = clean[1]
     legend.txt = NULL
     if(length(methods) > 1){
