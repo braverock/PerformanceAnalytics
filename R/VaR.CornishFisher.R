@@ -34,7 +34,7 @@ function(R, p=0.99, modified = TRUE, clean=c("none", "boudt"))
     R = checkData(R, method="matrix")
     columns = ncol(R)
     columnnames=colnames(R)
-    if(clean!="none"){
+    if(clean[1]!="none"){
         R = as.matrix(Return.clean(R, method=clean)) 
     }
 
@@ -144,10 +144,13 @@ function(R, p=0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.19 2008-08-13 03:31:32 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.20 2008-08-15 21:42:21 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.19  2008-08-13 03:31:32  peter
+# - added 'clean' parameter for calling a data cleaning method prior to calculation
+#
 # Revision 1.18  2008-06-24 21:55:28  brian
 # - remove excess parenthesis in Zcf
 #   - report and patch credit to Enrique Bengoechea Bartolome
