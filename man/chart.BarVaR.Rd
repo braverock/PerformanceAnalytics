@@ -50,9 +50,26 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 }
 \examples{
 data(edhec)
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns")
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns", method="VaR")
-chart.BarVaR(edhec[,"Funds.of.Funds",drop=FALSE], main="Monthly Returns", method="StdDev", n=36)
+# plain
+chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
+
+# with risk line
+chart.BarVaR(managers[,1,drop=FALSE], methods="HistoricalVaR", main="... with Empirical VaR from Inception")
+
+# with lines for all managers in the sample
+chart.BarVaR(managers[,1:6], methods="GaussianVaR", all=T, lty=1, lwd=2, colorset= c("red", rep("gray", 5)), main="... with Gaussian VaR and Estimates for Peers")
+
+# with multiple methods
+chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), main="... with Multiple Methods")
+
+# cleaned up a bit
+chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), lwd=2, ypad=.01, main="... with Padding for Bottom Legend")
+
+# with 'cleaned' data for VaR estimates
+chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR"), lwd=2, ypad=.01, clean="boudt", main="... with Robust ModVaR Estimate")
+
+# Cornish Fisher VaR estimated with cleaned data, with horizontal line to show exceptions
+chart.BarVaR(managers[,1,drop=FALSE],methods="ModifiedVaR", lwd=2, ypad=.01, clean="boudt", show.horizontal=T, lty=2, main="... with Robust ModVaR and Line for Identifying Exceptions")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
