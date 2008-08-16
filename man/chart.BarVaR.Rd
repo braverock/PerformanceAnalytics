@@ -54,7 +54,7 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
    \code{\link{Return.clean}}
 }
 \examples{
-data(edhec)
+data(managers)
 # plain
 chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
 
