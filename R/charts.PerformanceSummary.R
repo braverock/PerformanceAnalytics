@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
+function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -71,7 +71,7 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
 #    chart.BarVaR(as.matrix(R[,1]), main = "", xaxis = FALSE, ylab = "Monthly Return", method = method)
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", method = method, event.labels = NULL, ylog=FALSE, gap = gap, ...)
+    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
@@ -93,10 +93,13 @@ function (R, rf = 0, main = NULL, method = c("ModifiedVaR","VaR","StdDev"), widt
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.17 2008-06-02 16:05:19 brian Exp $
+# $Id: charts.PerformanceSummary.R,v 1.18 2008-08-16 03:38:54 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.16  2008-04-18 03:51:44  peter
 # - added par to reset graphics layout to default
 #
