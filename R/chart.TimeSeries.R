@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
+function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -150,7 +150,11 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
     }
 
     # set up y-axis
-    axis(2, cex.axis = cex.axis, col=elementcolor, ylog=ylog)
+    if (yaxis)
+        if(yaxis.right)
+            axis(4, cex.axis = cex.axis, col=elementcolor, ylog=ylog)
+        else
+            axis(2, cex.axis = cex.axis, col=elementcolor, ylog=ylog)
     box(col = elementcolor)
 
     if(!is.null(legend.loc)){
@@ -175,10 +179,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.11 2008-06-28 13:55:25 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.12 2008-08-16 03:42:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2008-06-28 13:55:25  peter
+# - added cex.labels attribute
+#
 # Revision 1.10  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
