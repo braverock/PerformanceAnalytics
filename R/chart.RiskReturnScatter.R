@@ -109,7 +109,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
     # Label the data points
     if(add.names)
-        text(x = risk,y = returns, labels = row.names(comparison), adj = -0.2, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
+        text(x = risk,y = returns, labels = row.names(comparison), pos=4, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
 
     # Add a rug so that data points are easier to identify
     rug(side=1, risk, col = elementcolor)
@@ -151,10 +151,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.10 2008-07-01 02:47:40 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.11 2008-08-16 03:39:54 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-07-01 02:47:40  peter
+# - added cex.legend
+#
 # Revision 1.9  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
