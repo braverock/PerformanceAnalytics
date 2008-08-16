@@ -50,7 +50,7 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
    \code{\link{chart.TimeSeries}} \cr
    \code{\link{plot}} \cr
    \code{\link[fPortfolio]{VaR}} \cr
-   \code{\link{VaR.CornishFisher}}, 
+   \code{\link{VaR.CornishFisher}} \cr
    \code{\link{Return.clean}}
 }
 \examples{
@@ -62,7 +62,7 @@ chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
 chart.BarVaR(managers[,1,drop=FALSE], methods="HistoricalVaR", main="... with Empirical VaR from Inception")
 
 # with lines for all managers in the sample
-chart.BarVaR(managers[,1:6], methods="GaussianVaR", all=T, lty=1, lwd=2, colorset= c("red", rep("gray", 5)), main="... with Gaussian VaR and Estimates for Peers")
+chart.BarVaR(managers[,1:6], methods="GaussianVaR", all=TRUE, lty=1, lwd=2, colorset= c("red", rep("gray", 5)), main="... with Gaussian VaR and Estimates for Peers")
 
 # with multiple methods
 chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), main="... with Multiple Methods")
@@ -74,7 +74,7 @@ chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "
 chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR"), lwd=2, ypad=.01, clean="boudt", main="... with Robust ModVaR Estimate")
 
 # Cornish Fisher VaR estimated with cleaned data, with horizontal line to show exceptions
-chart.BarVaR(managers[,1,drop=FALSE],methods="ModifiedVaR", lwd=2, ypad=.01, clean="boudt", show.horizontal=T, lty=2, main="... with Robust ModVaR and Line for Identifying Exceptions")
+chart.BarVaR(managers[,1,drop=FALSE],methods="ModifiedVaR", lwd=2, ypad=.01, clean="boudt", show.horizontal=TRUE, lty=2, main="... with Robust ModVaR and Line for Identifying Exceptions")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
