@@ -8,7 +8,7 @@ A chart that shows rolling calculations of annualized return and annualized stan
 \usage{
 chart.SnailTrail(R, rf = 0, main = "Annualized Return and Risk",
                  add.names = c("all", "lastonly", "firstandlast",
-                 "none"), xlab = "Annualized Risk", ylab = "Annualized
+                 "none"), xlab = "Annualized Risk", ylab = "Annualized\n
                  Return", add.sharpe = c(1, 2, 3), colorset = 1:12,
                  symbolset = 16, darken = FALSE, legend.loc = NULL,
                  xlim = NULL, ylim = NULL, width = 12, stepsize = 12,
