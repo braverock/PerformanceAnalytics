@@ -12,9 +12,8 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","Gaussian
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with width=0 are calculated from the start of the timeseries }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
-  \item{method}{ one of \emph{StdDev}, \emph{VaR}, or \emph{ModifiedVaR}, default ModifiedVaR }
+  \item{methods}{ any of \emph{StdDev}, \emph{HistoricalVaR}, \emph{GaussianVaR}, or \emph{ModifiedVaR}, defaults to HistoricalVaR and ModifiedVaR }
   \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
-  \item{risk.line}{ if risk.line is set to \code{FALSE}, then this function just draws the underlying bar chart }
   \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{xaxis}{ if true, draws the x axis }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }

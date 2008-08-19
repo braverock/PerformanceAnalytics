@@ -39,7 +39,7 @@ Risk, forthcoming. }
 \seealso{ \code{\link{VaR.CornishFisher}} }
 \examples{
 data(managers)
-chart.VaRSensitivity(managers[,1,drop=F],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), colorset=bluefocus, lwd=2)
+chart.VaRSensitivity(managers[,1,drop=FALSE], methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), colorset=bluefocus, lwd=2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
