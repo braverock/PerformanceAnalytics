@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR","HistoricalVaR", "StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset =(1:12), p=.99, lty = 2, all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ...)
+function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR","HistoricalVaR", "StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 1, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ypad=0, legend.cex = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -30,15 +30,19 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     symmetric = NULL
     risk.line=TRUE
     # Re-format the dates for the xaxis
-    rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
+#     rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
 
     time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
     if(methods[1]=="none"){
         methods=NULL
         risk.line=FALSE
     }
-    if(length(methods)>1)
+
+    colors = colorRamp(c(colorset[1],"white"))
+    if(length(methods)>1){
         columns = 1 # if there's more than one method specified, then we'll ignore columns other than the first
+        colorset = c(colorset[1], rgb(colors(.25),max=255), rgb(colors(.5),max=255), rgb(colors(.75),max=255))
+    }
     clean = clean[1]
 
     risk = zoo(NA,order.by=time(x))
@@ -49,7 +53,6 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
 
     bar.color = colorset[1]
     if (show.clean){
-        colors = colorRamp(c(colorset[1],"white"))
         bar.color = rgb(colors(.75),max=255)
     }
 
@@ -127,6 +130,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     }
     if(is.na(ylim[1])){
         ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
+        ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
 
     chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, reference.grid = reference.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
@@ -156,7 +160,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     }
 
     if(legend.txt[1] != "")
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = .8, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt, horiz=TRUE)
 
 }
 
@@ -168,7 +172,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.16 2008-08-13 03:35:04 peter Exp $
+# $Id: chart.BarVaR.R,v 1.17 2008-08-19 03:27:17 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
