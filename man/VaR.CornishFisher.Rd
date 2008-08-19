@@ -9,8 +9,7 @@
 These functions calculate both traditional mean-VaR and modified Cornish-Fisher VaR
 }
 \usage{
-VaR.CornishFisher(R, p = 0.99, modified = TRUE)
-VaR.CornishFisher(R, p = 0.99, modified = TRUE, clean="boudt")
+VaR.CornishFisher(R, p = 0.99, modified = TRUE, clean=c("none","boudt"))
 modifiedVaR(R, p = 0.99)
 VaR.traditional(R, p = 0.95)
 VaR.mean(R, p = 0.95)
