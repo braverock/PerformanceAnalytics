@@ -35,7 +35,7 @@ charts.RollingRegression(Ra, Rb, width = 12, rf = 0, darken = FALSE,
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-The atribute parameter is probably the most confusing.  In mathematical terms, the different choices yeild the following:
+The attribute parameter is probably the most confusing.  In mathematical terms, the different choices yeild the following:
 
 Alpha - shows the y-intercept\cr
 Beta - shows the slope of the regression line\cr
