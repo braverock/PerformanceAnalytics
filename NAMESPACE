@@ -1,0 +1,5 @@
+# NAMESPACE file for PerformanceAnalytics
+
+# export all functions/variables that don't start with a .
+exportPattern("^[^\\.]")
+
