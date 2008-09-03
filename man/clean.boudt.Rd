@@ -1,19 +1,21 @@
-\name{Return.clean}
-\alias{Return.clean}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\name{clean.boudt}
+\alias{clean.boudt}
+%\alias{Return.clean}
+
 \title{ clean extreme observations in a time series to to provide more robust risk estimates }
 \description{
 Robustly clean a time series to reduce the magnitude, but not the number or direction, of observations that exceed the $1-\alpha\%$ risk threshold.
 }
 \usage{
-Return.clean(R, alpha = 0.01, trim = 0.001)
+clean.boudt(R, alpha = 0.01, trim = 0.001)
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{alpha}{ probability to filter at 1-alpha, defaults to .01 (99\%)}
   \item{trim}{ where to set the "extremeness" of the Mahalanobis distance }
 }
+
 \details{
 Many risk measures are calculated by using the first
 two (four) moments of the asset or portfolio return distribution.
@@ -106,17 +108,17 @@ Statistics and Its Applications, Volume B, pp. 283?297. Dordrecht-Reidel.
 }
 
 \author{
-Kris Boudt \n
+Kris Boudt,
 Brian G. Peterson
 }
 \note{
 This function and much of this text was originally written for Boudt, et. al, 2008
 }
 
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ \code{\link{Return.clean}} }
 
-\examples{
-}
+%\examples{
+%}
 
 \keyword{ ts }
 \keyword{ multivariate }
