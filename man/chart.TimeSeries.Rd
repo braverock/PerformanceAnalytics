@@ -6,13 +6,24 @@
 Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{\link{plot}} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
 }
 \usage{
-chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="\%Y-\%m-\%d", date.format = "\%m/\%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
+chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE,
+                  yaxis.right = FALSE, type = "l", lty = 1, lwd = 1,
+                  main = NULL, ylab = NULL, xlab = "Date",
+                  date.format.in = "\%Y-\%m-\%d", date.format = "\%m/\%y",
+                  xlim = NULL, ylim = NULL, event.lines = NULL,
+                  event.labels = NULL, period.areas = NULL, event.color
+                  = "darkgray", period.color = "lightgray", colorset =
+                  (1:12), pch = (1:12), darken = FALSE, legend.loc =
+                  NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,
+                  cex.labels = 0.8, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{xaxis}{ if true, draws the x axis }
+  \item{yaxis}{ if true, draws the y axis }
+  \item{yaxis.right}{ if true, draws the y axis on the right-hand side of the plot }
   \item{type}{ set the chart type, same as in \code{\link{plot}} }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
