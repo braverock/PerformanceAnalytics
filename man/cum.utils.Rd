@@ -11,7 +11,7 @@ calculate cumulative values for the observation series given, including multicol
         \code{\link{cumprod.column}} \tab cumulative product by column, useful for compound returns \cr
     }
 
-A prior version of thesefunctions included specific NA handling.  This was removed due to a conflict with the general cumulative functions in the R core.  Please be aware that you may have issues with series of different lengths, and may need to explicitly handle NAs as a result.
+A prior version of these functions included specific NA handling.  This was removed due to a conflict with the general cumulative functions in the R core.  Please be aware that you may have issues with series of different lengths, and may need to explicitly handle NAs as a result.
 
 }
 \usage{
