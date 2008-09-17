@@ -30,7 +30,7 @@ The CAPM provides a justification for passive or index investing by positing tha
 
 The CAPM Risk Premium on an investment is the measure of how much the asset's performance differs from the risk free rate.  Negative Risk Premium generally indicates that the investment is a bad investment, and the money should be allocated to the risk free asset or to a different asset with a higher risk premium.
 
-The Capital Market Line relates the excess expected return on an efficient market portfolio to it's Risk.  The slope of the CML is the Sharpe Ratio for the market portfolio. The Security Market line is constructed by calculating the line of Risk Premium over \code{\link{CAPM.beta}}.  For the benchmark asset this will be 1 over the risk premium of the benchmark asset.
+The Capital Market Line relates the excess expected return on an efficient market portfolio to it's Risk.  The slope of the CML is the Sharpe Ratio for the market portfolio. The Security Market line is constructed by calculating the line of Risk Premium over \code{\link{CAPM.beta}}.  For the benchmark asset this will be 1 over the risk premium of the benchmark asset.   The CML also describes the only path allowed by the CAPM to a portfolio that outperforms the efficient frontier: it describes the line of reward/risk that a leveraged portfolio will occupy.  So, according to CAPM, no portfolio constructed of the same assets can lie above the CML.
 
 Probably the most complete criticism of CAPM in actual practice (as opposed to structural or theory critiques) is that it posits a market equilibrium, but is most often used only in a partial equilibrium setting, for example by using the S\&P 500 as the benchmark asset.  A better method of using and testing the CAPM would be to use a general equilibrium model that took global assets from all asset classes into consideration.
 
@@ -68,7 +68,7 @@ managers.length = dim(managers)[1]
 start = rownames(managers[1,])
 start
 end = rownames(managers[managers.length,])
-rf = managers[,10,drop=FALSE] 
+rf = managers[,10,drop=FALSE]
 
 Rb = managers[,"SP500.TR",drop=FALSE]
 
