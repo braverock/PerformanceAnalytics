@@ -10,9 +10,11 @@
 \alias{SR.mES.MM}
 \alias{SR.mVaR.MM}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ ~~function to do ... ~~ }
+\title{ calculate common VaR and ES risk measures on a portfolio distribution }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+Functions to calculate Guassian and modified VaR and Expected Shortfall.
+
+Note that these functions generally expect the moments to be passed in directly; this was done to eliminate repetitive calculations in a portfolio optimization context.  We'll write "friendly" wrapper functions that take the return vector when we have time.
 }
 \usage{
 GVaR.MM (w, mu, sigma, p)
@@ -27,15 +29,17 @@ SR.StdDev.MM (w, mu, sigma)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{w}{ ~~Describe \code{w} here~~ }
-  \item{mu}{ ~~Describe \code{mu} here~~ }
-  \item{sigma}{ ~~Describe \code{sigma} here~~ }
+  \item{w}{ a vector of weights to be applied to each asset in trhe joint distribution }
+  \item{mu}{ mean or first centered moment of the distribution, normalley provided by  \code{\link{Return.centered}} }
+  \item{sigma}{ variance or second centered moment of the distribution }
   \item{M3}{ The third mathematical moment of the joint distribution, provided by  \code{\link{M3.MM}} }
-  \item{M4}{ The third mathematical moment of the joint distribution, provided by  \code{\link{M3.MM}} }
+  \item{M4}{ The fourth mathematical moment of the joint distribution, provided by  \code{\link{M4.MM}} }
   \item{p}{ confidence level for calculation, default p=.99 }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+These functions were first utilized in Boudt, Peterson, and Croux (2008), and have been subsequently used in our other research.
+
+  ~~ Additional Details will be added to documentation as soon as we have time to write them. ~~
 }
 \value{
   ~Describe the value returned
@@ -62,7 +66,8 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 
  ~Make other sections like Warning with \section{Warning }{....} ~
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\seealso{ 
+\code{\link{MultivariateMoments}}, \code{\link{centeredmoment}} }
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,

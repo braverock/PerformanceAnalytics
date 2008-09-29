@@ -49,9 +49,13 @@ The addition of a small fraction of a new asset to a portfolio leads to a decrea
     numeric value of the normalized co-moment
 }
 \references{ 
+
+Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and Decomposition
+  of Downside Risk for Portfolios with Non-Normal Returns. Journal of Risk. Winter.
+
 Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk and Asset Management Research Centre working paper.
 }
-\author{ Kris Boudt, Peter Carl }
+\author{ Kris Boudt, Peter Carl, Brian Peterson }
 \note{ 
 
 }

@@ -11,7 +11,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ functions to compute multivariate moments of a joint distribution }
 \description{
-  ~~ A concise (1-5 lines) description of what the function does. ~~
+When worknig with multivariate series, the joint distribution of the returns is to be prefered over the simple univariate distribution of the resulting return vector of a portfolio.  These functions are used internally by PerformanceAnalytics to calculate centered moments for a multivariate distribution as well as the standardized moments of a portfolio distribution.  They are exposed here for users who wish to use them directly, and we'll get more documentation written when we can.
 }
 \usage{
 M3.MM(R)
@@ -24,41 +24,36 @@ CoKurtosisMatrix(R, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ ~~Describe \code{R} here~~ }
-  \item{w}{ ~~Describe \code{w} here~~ }
-%  \item{mu}{ ~~Describe \code{mu} here~~ }
-  \item{sigma}{ ~~Describe \code{sigma} here~~ }
-  \item{M3}{ ~~Describe \code{M3} here~~ }
-  \item{M4}{ ~~Describe \code{M4} here~~ }
-  \item{\dots}{ ~~Describe \code{\dots} here~~ }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{w}{ a vector of weights to be applied to each asset in trhe joint distribution }
+%  \item{mu}{ mean or first centered moment of the distribution }
+  \item{sigma}{ variance or second centered moment of the distribution }
+  \item{M3}{ The third mathematical moment of the joint distribution, provided by  \code{\link{M3.MM}} }
+  \item{M4}{ The fourth mathematical moment of the joint distribution, provided by  \code{\link{M4.MM}} }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
-  ~~ If necessary, more details than the description above ~~
+  ~~ Additional Details will be added to documentation as soon as we have time to write them. ~~
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
 }
-\references{ ~put references to the literature/web site here ~ }
-\author{ ~~who you are~~ }
-\note{ ~~further notes~~
+\references{
+Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and Decomposition
+  of Downside Risk for Portfolios with Non-Normal Returns. Journal of Risk. Winter.
 
- ~Make other sections like Warning with \section{Warning }{....} ~
+Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk and Asset Management Research Centre working paper.
+
+Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From Two- to
+  Four-Moment CAPM. SSRN eLibrary.
+
+Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference for Moments of
+  Higher Order than the Variance. Journal of Finance 35(4):915-919.
+
 }
-\seealso{ ~~objects to See Also as \code{\link{help}}, ~~~ }
+\author{ Kris Boudt, Brian Peterson }
+\seealso{
+\code{\link{skewness}}, \code{\link{kurtosis}}, \code{\link{MultivariateRisk}}, \code{\link{centeredmoment}}}
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (R, ...)
-{
-    return(M3.MM(R))
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
