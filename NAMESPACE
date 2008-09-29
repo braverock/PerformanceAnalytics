@@ -1,5 +1,6 @@
 # NAMESPACE file for PerformanceAnalytics
 
+importFrom("utils", "packageDescription")
 # export all functions/variables that don't start with a .
 exportPattern("^[^\\.]")
 
