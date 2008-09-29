@@ -50,8 +50,6 @@ A timeseries line chart of the calculated series
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
-\seealso{}
-}
 \examples{
 # First we load the data
 data(edhec)
