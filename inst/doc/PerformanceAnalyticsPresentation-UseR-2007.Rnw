@@ -1,10 +1,10 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.5 2007-12-29 21:17:25 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.6 2008-09-30 01:14:44 brian Exp $
 
 \documentclass[10pt,usletter]{beamer}
 
-% need full path to find these .sty files outside of R environment
-%\usepackage{Sweave}
-\usepackage{/usr/lib/R/share/texmf/Sweave}
+% may need full path to find these .sty files outside of R environment
+\usepackage{Sweave}
+% \usepackage{/usr/lib/R/share/texmf/Sweave}
 
 \SweaveOpts{engine=R,eps=TRUE}
 %\VignetteIndexEntry{PerformanceAnalytics Data Mining Presentation - UseR - 2007}
