@@ -9,7 +9,7 @@ Downside deviation, semideviation, and semivariance are measures of downside ris
 }
 
 \usage{
-DownsideDeviation(Ra, MAR = 0, method=c("full","subset"))
+DownsideDeviation(Ra, MAR = 0, method=c("subset","full"))
 SemiDeviation(Ra)
 SemiVariance(Ra)
 }
@@ -17,7 +17,7 @@ SemiVariance(Ra)
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
-  \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series below the MAR as the denominator}
+  \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series below the MAR as the denominator, defaults to "subset"}
 }
 \details{
 Downside deviation, similar to semi deviation, eliminates positive returns when calculating risk.  Instead of using the mean return or zero, it uses the Minimum Acceptable Return as proposed by Sharpe (which may be the mean historical return or zero).
@@ -34,7 +34,7 @@ SemiDeviation or SemiVariance is a popular alternative downside risk measure tha
 
 In many functions like Markowitz optimization, semideviation may be substituted directly, and the covariance matrix may be constructed from semideviation or the vector of returns below the mean rather than from variance or the full vector of returns.
 
-In semideviation, by convention, the value of \eqn{n} is set to the full number of pobservations. In semivariance the the value of \eqn{n} is set to the subset of returns below the mean.  It should be noted that while this is the correct mathematical definition of semivariance, this result doesn't make any sense if you are also going to be using the time series of returns below the mean or below a MAR to construct a semi-covariance matrix for portfolio optimization.
+In semideviation, by convention, the value of \eqn{n} is set to the full number of observations. In semivariance the the value of \eqn{n} is set to the subset of returns below the mean.  It should be noted that while this is the correct mathematical definition of semivariance, this result doesn't make any sense if you are also going to be using the time series of returns below the mean or below a MAR to construct a semi-covariance matrix for portfolio optimization.
 
 Sortino recommends calculating downside deviation utilizing a continuous fitted distribution rather than the discrete distribution of observations.  This would have significant utility, especially in cases of a small number of observations. He recommends using a lognormal distribution, or a fitted distribution based on a relevant style index, to construct the returns below the MAR to increase the confidence in the final result.  Hopefully, in the future, we'll add a fitted option to this function, and would be happy to accept a contribution of this nature.
 
@@ -50,7 +50,7 @@ Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on R
 \url{http://en.wikipedia.org/wiki/Semivariance}
 
 }
-\author{ Peter Carl }
+\author{ Peter Carl, Brian G. Peterson }
 \note{}
 \seealso{ }
 \examples{

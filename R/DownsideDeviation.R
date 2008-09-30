@@ -1,5 +1,5 @@
 `DownsideDeviation` <-
-function (Ra, MAR = 0, method=c("full","subset"))
+function (Ra, MAR = 0, method=c("subset","full"))
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -37,10 +37,13 @@ function (Ra, MAR = 0, method=c("full","subset"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.9 2008-06-02 16:05:19 brian Exp $
+# $Id: DownsideDeviation.R,v 1.10 2008-09-30 21:17:24 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.8  2007/10/11 03:22:04  peter
 # - fixed "subset" to use r instead of R
 #
