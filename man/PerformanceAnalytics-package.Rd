@@ -16,8 +16,8 @@ We created this library to include functionality that has been appearing in the 
     \tabular{rl}{
         Package: \tab PerformanceAnalytics\cr
         Type: \tab Package\cr
-        Version: \tab 0.9.6\cr
-        Date: \tab 2007-12-29\cr
+        Version: \tab 0.9.7\cr
+        Date: \tab 2008-09-29\cr
         License: \tab GPL\cr
         Copyright: \tab (c) 2004-2008 Brian G. Peterson and Peter Carl\cr
         URL: \tab \url{http://braverock.com/R/}
