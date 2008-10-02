@@ -69,7 +69,10 @@ as outliers in step 2 by replacing these returns $r_t$ with
 $$r_t\sqrt{\max(d^2_{(\lfloor
 (1-\alpha)T)\rfloor},\chi^2_{n,0.999})/d^2_t}.$$ The cleaned return
 vector has the same orientation as the original return vector, but
-its magnitude is smaller.
+its magnitude is smaller. Khan(2007) calls this
+procedure of limiting the value of $d^2_t$ to a quantile of the
+$\chi^2_n$ distribution, ``multivariate Winsorization'.
+
 \end{enumerate}
 
 Note that the primary value of data cleaning lies in creating a more
@@ -97,7 +100,7 @@ Risk, forthcoming.
 
 Khan, J. A., S. Van Aelst, and R. H. Zamar (2007). Robust linear model
 selection based on least angle regression. Journal of the American Statistical
-Association 102 (1289-1299), 1289?1299.
+Association 102.
 
 Maronna, R. A., D. R. Martin, and V. J. Yohai (2006). Robust Statistics:
 Theory and Methods. Wiley.
