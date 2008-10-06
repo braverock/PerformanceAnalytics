@@ -49,17 +49,11 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
     # Re-format the dates for the xaxis
 #     rownames = format(strptime(as.Date(rownames),format = date.format.in), date.format)
     rownames = format(strptime(rownames,format = date.format.in), date.format)
+
     # If the Y-axis is ln
     logaxis = ""
     if(ylog) {
         logaxis = "y"
-    }
-
-    if(is.null(ylab)) {
-        if(ylog) 
-            ylab = "ln(Value)"
-        else
-            ylab = "Value"
     }
 
     # Set color for key elements, easy to darken for the printer
@@ -76,7 +70,25 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
         ylim = range(y, na.rm=TRUE)
     }
     plot.window(xlim, ylim, xaxs = "r", log = logaxis)
-    dimensions = par("usr")
+
+    # par("usr"): A vector of the form 'c(x1, x2, y1, y2)' giving the extremes
+    #           of the user coordinates of the plotting region.  When a
+    #           logarithmic scale is in use (i.e., 'par("xlog")' is true, see
+    #           below), then the x-limits will be '10 ^ par("usr")[1:2]'.
+    #           Similarly for the y-axis.
+
+    if(is.null(ylab)) {
+        if(ylog) 
+            ylab = "ln(Value)"
+
+        else 
+            ylab = "Value"
+    }
+
+    if(ylog)
+        dimensions=10^par("usr")
+    else
+        dimensions = par("usr")
 
     # Draw any areas in the background
     if(!is.null(period.areas)) {
@@ -123,7 +135,7 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
         }
         number.event.labels = ((length(event.labels)-length(event.ind) + 1):length(event.labels))
 
-        abline(v = event.ind, col = event.color)
+        abline(v = event.ind, col = event.color, lty = 2)
         if(!is.null(event.labels)) {
             text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = cex.labels, srt=90, col = event.color)
         }
@@ -179,10 +191,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.12 2008-08-16 03:42:26 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.13 2008-10-06 19:08:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2008-08-16 03:42:26  peter
+# - added yaxis.right parameter
+#
 # Revision 1.11  2008-06-28 13:55:25  peter
 # - added cex.labels attribute
 #
