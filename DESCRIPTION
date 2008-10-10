@@ -2,7 +2,7 @@ Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
 Version: 0.9.7.1
-Date: 2008-10-01
+Date: 2008-10-10
 Author: Peter Carl, Brian G. Peterson
 Maintainer: Brian G. Peterson <brian@braverock.com>
 Description: Library of econometric functions for performance and risk analysis. This library aims to aid practitioners and researchers in utilizing the latest research in analysis of non-normal return streams.  In general, this library is most tested on return (rather than price) data on a monthly scale, but most functions will work with daily or irregular return data as well.
