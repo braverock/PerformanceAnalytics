@@ -1,292 +1,376 @@
+2008-10-10 11:21  brian
+
+	* DESCRIPTION (1.24), man/PerformanceAnalytics-package.Rd (1.67):
+
+	- update date
+
+2008-10-10 11:17  brian
+
+	* man/PerformanceAnalytics-package.Rd (1.66):
+
+	- added sections on Style Analysis, Robust Data Cleaning, and Moments and Co-moments
+	- added references to new tables and graphs
+	- bump version to 0.9.7.1
+
+2008-10-06 14:08  peter
+
+	* R/chart.TimeSeries.R (1.13):
+
+	- fixed so that it will plot backgrounds when ylog=T
+
+2008-10-01 19:55  brian
+
+	* man/clean.boudt.Rd (1.3):
+
+	- add explicit reference to multivariate Winsorization
+
+2008-10-01 07:25  brian
+
+	* DESCRIPTION (1.23):
+
+	- bump version to 0.9.7.1
+
+2008-09-30 16:17  brian
+
+	* R/DownsideDeviation.R (1.10), R/UpsidePotentialRatio.R (1.3),
+	  man/DownsideDeviation.Rd (1.13), man/UpsidePotentialRatio.Rd
+	  (1.3):
+
+	- both DownsideDeviation and UpsidePotentialRatio now support "method argument to use full or subset of series
+	- use subset as default method
+	- updated documentation to reflect change
+
+2008-09-30 10:27  brian
+
+	* man/CoMoments.Rd (1.8):
+
+	- fix typo in code link
+
+2008-09-30 10:26  brian
+
+	* man/PerformanceAnalytics-package.Rd (1.65):
+
+	- update version to 0.9.7
+
+2008-09-30 05:28  tag v0_9_7-2008-09-29
+
+2008-09-30 05:28  brian
+
+	* man/chart.RollingRegression.Rd (1.25):
+
+	remove spurious bracket
+
+2008-09-29 20:14  brian
+
+	* inst/doc/:
+	  PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw (1.9),
+	  PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.6):
+
+	- remove hardcoded path for SWeave
+
+2008-09-29 13:29  brian
+
+	* man/chart.RollingRegression.Rd (1.24):
+
+	- fix LaTeX syntax error
+
+2008-09-29 13:24  brian
+
+	* ChangeLog (1.2):
+
+	- ChangeLog for PerfromanceAnalytics version 0.9.7
+
 2008-09-29 13:15  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.22):
 
 	- uodate version and date prior to release
 
 2008-09-29 11:59  peter
 
-	* NAMESPACE:
+	* NAMESPACE (1.2):
 
 	- added importFrom for packageDescription function needed for namespace check
 
 2008-09-29 09:26  brian
 
-	* man/: BetaCoMoments.Rd, CoMoments.Rd, MultivariateMoments.Rd,
-	  MultivariateRisk.MM.Rd, centeredmoments.Rd:
+	* man/: BetaCoMoments.Rd (1.7), CoMoments.Rd (1.7),
+	  MultivariateMoments.Rd (1.2), MultivariateRisk.MM.Rd (1.2),
+	  centeredmoments.Rd (1.2):
 
 	- update documentation prior to 0.9.7 release
 
 2008-09-29 08:47  brian
 
-	* R/Omega.R:
+	* R/Omega.R (1.11):
 
 	- fix to use pmax per patch submitted by Ryan Sheftel <at> Malbec Pertners
 
 2008-09-17 04:58  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.8):
 
 	- correct duplicated sections
 
 2008-09-16 19:37  brian
 
-	* man/cum.utils.Rd:
+	* man/cum.utils.Rd (1.4):
 
 	- fix typo
 
 2008-09-16 19:35  brian
 
-	* man/CAPM.utils.Rd:
+	* man/CAPM.utils.Rd (1.8):
 
 	- add more description on CML function and leveraged portfolios
 
 2008-09-16 19:33  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.7):
 
 	- add acknowledgements
 	- add note about extending the data set
 
 2008-09-03 20:17  peter
 
-	* R/zzz.R:
+	* R/zzz.R (1.2):
 
 	- creates onLoad message from DESCRIPTION file
 
 2008-09-03 20:15  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.21):
 
 	- added copyright
 
 2008-09-03 17:26  brian
 
-	* NAMESPACE:
+	* NAMESPACE (1.1):
 
 	- create default NAMESPACE file
 
 2008-09-03 16:36  peter
 
-	* R/utils.R:
+	* R/utils.R (1.2):
 
 	- removed in favor of zzz.R
 
 2008-09-03 16:35  peter
 
-	* R/zzz.R:
+	* R/zzz.R (1.1):
 
 	- added load message
 
 2008-09-03 16:27  peter
 
-	* R/utils.R:
+	* R/utils.R (1.1):
 
 	- added for startup message
 
 2008-09-03 15:11  brian
 
-	* man/clean.boudt.Rd:
+	* man/clean.boudt.Rd (1.2):
 
 	- fix LaTeX error
 
 2008-09-03 14:03  peter
 
-	* man/Return.clean.Rd:
+	* man/Return.clean.Rd (1.1):
 
 	- wrapper doc
 
 2008-09-03 13:51  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.25):
 
 	- fixed encoding issues
 
 2008-09-02 23:01  peter
 
-	* man/chart.SnailTrail.Rd:
+	* man/chart.SnailTrail.Rd (1.8):
 
 	- updated for codoc changes
 
 2008-09-02 23:01  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.24):
 
 	- updated for codoc problems
 
 2008-08-18 22:32  peter
 
-	* man/chart.SnailTrail.Rd:
+	* man/chart.SnailTrail.Rd (1.7):
 
 	- fixed line folding for ylab
 
 2008-08-18 22:27  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.17):
 
 	- fixed legend formatting issues
 
 2008-08-18 22:25  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.23):
 
 	- fixed spelling
 
 2008-08-18 22:24  peter
 
-	* man/: charts.PerformanceSummary.Rd, VaR.CornishFisher.Rd:
+	* man/: charts.PerformanceSummary.Rd (1.13), VaR.CornishFisher.Rd
+	  (1.29):
 
 	- fixed documentation issues
 
 2008-08-18 22:23  peter
 
-	* man/: chart.BarVaR.Rd, chart.SnailTrail.Rd,
-	  chart.VaRSensitivity.Rd:
+	* man/: chart.BarVaR.Rd (1.21), chart.SnailTrail.Rd (1.6),
+	  chart.VaRSensitivity.Rd (1.2):
 
 	- fixed codoc issues
 
 2008-08-16 07:52  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.20):
 
 	- fixed T to TRUE in examples
 
 2008-08-15 22:42  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.12):
 
 	- added yaxis.right parameter
 
 2008-08-15 22:41  peter
 
-	* R/table.AnnualizedReturns.R:
+	* R/table.AnnualizedReturns.R (1.8):
 
 	- fixed rounding in column name label
 
 2008-08-15 22:40  peter
 
-	* R/chart.SnailTrail.R:
+	* R/chart.SnailTrail.R (1.4):
 
 	- added default colorset
 
 2008-08-15 22:39  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.11):
 
 	- fixed point label adjustment
 
 2008-08-15 22:38  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.18):
 
 	- changed chart.BarVaR call from 'method' to 'methods'
 
 2008-08-15 22:11  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.19):
 
 	- fixed example
 
 2008-08-15 16:53  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.18):
 
 	- fixed codoc differences to new function additions
 
 2008-08-15 16:42  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.20):
 
 	- fixed warnings from 'clean' parameter comparison
 
 2008-08-15 16:40  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.17):
 
 	- added new examples
 
 2008-08-15 16:27  peter
 
-	* man/chart.VaRSensitivity.Rd:
+	* man/chart.VaRSensitivity.Rd (1.1):
 
 	- first draft of function documentation and example
 
 2008-08-15 16:04  peter
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.28):
 
 	- added "clean" parameter
 
 2008-08-14 11:28  peter
 
-	* R/chart.VaRSensitivity.R:
+	* R/chart.VaRSensitivity.R (1.3):
 
 	- fixed columnnames for title
 
 2008-08-14 11:22  peter
 
-	* R/chart.VaRSensitivity.R:
+	* R/chart.VaRSensitivity.R (1.2):
 
 	- filled in chart elements from single specification
 
 2008-08-14 11:18  peter
 
-	* R/chart.VaRSensitivity.R:
+	* R/chart.VaRSensitivity.R (1.1):
 
 	- first draft of sensitivity chart
 
 2008-08-13 13:05  brian
 
-	* R/Return.clean.R:
+	* R/Return.clean.R (1.5):
 
 	- add copyright, licence, and CVS log
 
 2008-08-12 22:35  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.16):
 
 	- calls 'clean' parameter in risk calculation to get rolling cleaned data
 	- handles multiple columns OR multiple methods
 
 2008-08-12 22:32  peter
 
-	* R/Return.read.R:
+	* R/Return.read.R (1.5):
 
 	- sets rownames for the resulting 'zoo' object
 
 2008-08-12 22:31  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.19):
 
 	- added 'clean' parameter for calling a data cleaning method prior to calculation
 
 2008-08-12 17:56  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.20):
 
 	- add suggests for robustbase
 
 2008-08-12 17:56  brian
 
-	* R/Return.clean.R:
+	* R/Return.clean.R (1.4):
 
 	- add library check for package robustbase
 
 2008-08-12 17:52  brian
 
-	* R/MultivariateMoments.R:
+	* R/MultivariateMoments.R (1.4):
 
 	- change mean.MM to multivariate_mean fn call to eliminate contention with R core mean fn
 
 2008-08-11 15:16  brian
 
-	* R/multivariate_moments.R:
+	* R/multivariate_moments.R (1.3):
 
 	- duplicate of MultivariateMoments.R
 
 2008-08-11 09:06  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.15):
 
 	- added parameter 'clean' to specify data cleaning method for risk estimation
 	- added parameter 'show.clean' to show cleaned returns overlaid on original data
@@ -294,273 +378,273 @@
 
 2008-08-11 08:58  peter
 
-	* R/Return.clean.R:
+	* R/Return.clean.R (1.3):
 
 	- moved prior functionality into 'clean.boudt'
 	- made Return.clean a wrapper focused on data handling, multiple methods
 
 2008-08-08 23:16  peter
 
-	* R/Return.clean.R:
+	* R/Return.clean.R (1.2):
 
 	- separated out the cleaning function and added column handling
 
 2008-08-07 16:39  brian
 
-	* R/Return.clean.R, man/clean.boudt.Rd:
+	* R/Return.clean.R (1.1), man/clean.boudt.Rd (1.1):
 
 	- initial revision of robust data cleaning function and documentation
 
 2008-08-03 18:50  brian
 
-	* man/: CoMoments.Rd, MultivariateMoments.Rd,
-	  MultivariateRisk.MM.Rd, SharpeRatio.modified.Rd,
-	  centeredmoments.Rd:
+	* man/: CoMoments.Rd (1.6), MultivariateMoments.Rd (1.1),
+	  MultivariateRisk.MM.Rd (1.1), SharpeRatio.modified.Rd (1.13),
+	  centeredmoments.Rd (1.1):
 
 	- initial revision of new files for multivariate moments
 	- update existing documentation to reference the new files
 
 2008-08-03 17:30  brian
 
-	* R/moment.fourth.R, R/moment.third.R, man/moment.fourth.Rd,
-	  man/moment.third.Rd:
+	* R/moment.fourth.R (1.7), R/moment.third.R (1.7),
+	  man/moment.fourth.Rd (1.6), man/moment.third.Rd (1.5):
 
 	- removed old mathematical moment files, replaced by MultivariateMoment files
 
 2008-07-22 07:58  peter
 
-	* R/style.fit.R:
+	* R/style.fit.R (1.6):
 
 	- fixed to return adjusted R-squared
 
 2008-07-22 07:43  peter
 
-	* R/style.fit.R:
+	* R/style.fit.R (1.5):
 
 	- correctly removed intercept values from regression fits
 	- added adjusted R-squared back
 
 2008-07-18 16:07  brian
 
-	* man/: Style.Rd, chart.Scatter.Rd, chart.SnailTrail.Rd,
-	  chart.StackedBar.Rd:
+	* man/: Style.Rd (1.11), chart.Scatter.Rd (1.11),
+	  chart.SnailTrail.Rd (1.5), chart.StackedBar.Rd (1.7):
 
 	- fix \item and \usage to pass R CMD check
 
 2008-07-18 15:59  peter
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.6):
 
 	- changed F to FALSE
 
 2008-07-18 15:54  peter
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.5):
 
 	- changed T to TRUE
 
 2008-07-18 15:47  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.7):
 
 	- changed T to TRUE
 
 2008-07-18 15:37  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.10):
 
 	- fixed [quadprog] links
 
 2008-07-18 15:32  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.9):
 
 	- changed F to FALSE
 
 2008-07-18 15:27  brian
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.8):
 
 	- fix \code{\link{}} again
 
 2008-07-18 15:24  brian
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.4):
 
 	- fix \code{\link{}}
 
 2008-07-18 15:23  brian
 
-	* man/chart.RollingStyle.Rd:
+	* man/chart.RollingStyle.Rd (1.4):
 
 	- removing, replaced by Style.Rd
 
 2008-07-18 15:22  brian
 
-	* man/chart.RollingStyle.Rd:
+	* man/chart.RollingStyle.Rd (1.3):
 
 	- syntax updates
 
 2008-07-18 15:17  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.7):
 
 	- fixed code link order issues
 
 2008-07-18 15:08  brian
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.6):
 
 	- fix incorrect \code{\link{}} ordering
 
 2008-07-18 15:01  brian
 
-	* man/: chart.RollingStyle.Rd, weights.Rd:
+	* man/: chart.RollingStyle.Rd (1.2), weights.Rd (1.2):
 
 	- fix links
 	- fix equations
 
 2008-07-18 14:57  brian
 
-	* man/: BetaCoMoments.Rd, CoMoments.Rd,
-	  PerformanceAnalytics-package.Rd, Style.Rd, kurtosis.Rd,
-	  skewness.Rd:
+	* man/: BetaCoMoments.Rd (1.6), CoMoments.Rd (1.5),
+	  PerformanceAnalytics-package.Rd (1.64), Style.Rd (1.5),
+	  kurtosis.Rd (1.2), skewness.Rd (1.2):
 
 	- fix missing/incorrect links
 	- update equations to conform to Rd standard
 
 2008-07-18 14:53  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.22):
 
 	- removed link to charts.RegressionDiagnostics
 
 2008-07-11 10:41  peter
 
-	* man/weights.Rd:
+	* man/weights.Rd (1.1):
 
 	- weights data documentation
 
 2008-07-11 10:36  peter
 
-	* man/managers.Rd:
+	* man/managers.Rd (1.3):
 
 	- changed title
 
 2008-07-11 10:33  peter
 
-	* data/weights.rda:
+	* data/weights.rda (1.1):
 
 	- random weights file used for examples in chart.StackedBar
 
 2008-07-11 10:27  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.4):
 
 	- added examples for other functions covered
 
 2008-07-11 10:24  peter
 
-	* R/: style.fit.R, style.QPfit.R:
+	* R/: style.fit.R (1.4), style.QPfit.R (1.6):
 
 	- removed Adjusted R.squared calculation as unnecessary
 
 2008-07-11 10:15  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.3):
 
 	- consolidated style function documentation to this file
 	- added details about the use of solve.QP
 
 2008-07-10 22:24  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.7):
 
 	- fixed error with alignment of results
 
 2008-07-10 22:23  peter
 
-	* R/style.fit.R:
+	* R/style.fit.R (1.3):
 
 	- deleted unnecessary comments
 
 2008-07-10 22:22  peter
 
-	* R/chart.RollingStyle.R:
+	* R/chart.RollingStyle.R (1.3):
 
 	- removed unnecessary function attributes
 
 2008-07-10 22:21  peter
 
-	* man/chart.RollingStyle.Rd:
+	* man/chart.RollingStyle.Rd (1.1):
 
 	- first draft of documentation
 
 2008-07-10 21:42  peter
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.3):
 
 	- added cex.axis
 
 2008-07-10 21:42  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.12):
 
 	- adjustments to margins again
 	- added cex.axis for sizing axis text
 
 2008-07-10 21:35  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.2):
 
 	- minor additions
 
 2008-07-10 21:16  peter
 
-	* man/Style.Rd:
+	* man/Style.Rd (1.1):
 
 	- first draft of function documentation
 
 2008-07-10 10:24  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.11):
 
 	- adjusted bottom margin
 
 2008-07-10 10:03  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.10):
 
 	- added legend border color
 
 2008-07-10 09:56  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.9):
 
 	- fixed orientation of data issue
 	- switched to brute force solution for plotting negative values using barplot
 
 2008-07-09 23:12  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.8):
 
 	- fixed to now use barplot to plot negative values correctly (origin = 0)
 
 2008-07-08 21:04  peter
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.2):
 
 	- fixed references
 
 2008-07-08 20:47  peter
 
-	* man/chart.StackedBar.Rd:
+	* man/chart.StackedBar.Rd (1.1):
 
 	- first draft of documentation
 
 2008-07-08 20:47  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.7):
 
 	- eliminated unnecessary attributes
 	- adjusted margins again
@@ -568,87 +652,87 @@
 
 2008-07-07 22:56  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.6):
 
 	- switched the orientation of w to better fit typical data structures
 	- improved? the calculation for label margins
 
 2008-06-30 22:19  peter
 
-	* man/chart.RiskReturnScatter.Rd:
+	* man/chart.RiskReturnScatter.Rd (1.13):
 
 	- added cex.main
 
 2008-06-30 22:14  peter
 
-	* man/chart.RelativePerformance.Rd:
+	* man/chart.RelativePerformance.Rd (1.13):
 
 	- fixed usage line
 
 2008-06-30 22:13  peter
 
-	* man/chart.Scatter.Rd:
+	* man/chart.Scatter.Rd (1.10):
 
 	- added cex.main
 
 2008-06-30 21:52  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.23):
 
 	- fixed default cex.label to match code
 
 2008-06-30 21:51  peter
 
-	* man/chart.Scatter.Rd:
+	* man/chart.Scatter.Rd (1.9):
 
 	- added cex.axis, cex.legend
 
 2008-06-30 21:49  peter
 
-	* man/chart.RiskReturnScatter.Rd:
+	* man/chart.RiskReturnScatter.Rd (1.12):
 
 	- fixed codoc errors
 
 2008-06-30 21:47  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.10):
 
 	- added cex.legend
 
 2008-06-30 16:52  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.36):
 
 	- changed 'method' to 'methods' in test
 
 2008-06-30 16:42  peter
 
-	* R/TrackingError.R:
+	* R/TrackingError.R (1.8):
 
 	- fixed bad encoding
 
 2008-06-29 23:22  peter
 
-	* R/TrackingError.R:
+	* R/TrackingError.R (1.7):
 
 	- altered calculation to be consistent with Grinold formulation.
 	- thanks to Arthur P.Steinmetz (OppenheimerFunds Inc.)
 
 2008-06-29 22:24  peter
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.19):
 
 	- modified 'show.outliers' description
 
 2008-06-29 22:13  peter
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.18):
 
 	- cleaned up example
 
 2008-06-29 22:10  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.35):
 
 	- VaR not calculated without 'add.risk' method
 	- x-axis correctly adjusted with 'add.risk' method
@@ -656,142 +740,145 @@
 
 2008-06-28 08:59  peter
 
-	* man/KellyRatio.Rd:
+	* man/KellyRatio.Rd (1.8):
 
 	- fixed example
 
 2008-06-28 08:56  peter
 
-	* man/: chart.Histogram.Rd, chart.RelativePerformance.Rd,
-	  chart.RiskReturnScatter.Rd, chart.RollingPerformance.Rd,
-	  chart.Scatter.Rd, chart.TimeSeries.Rd:
+	* man/: chart.Histogram.Rd (1.17), chart.RelativePerformance.Rd
+	  (1.12), chart.RiskReturnScatter.Rd (1.11),
+	  chart.RollingPerformance.Rd (1.16), chart.Scatter.Rd (1.8),
+	  chart.TimeSeries.Rd (1.22):
 
 	- fixed codoc problems
 
 2008-06-28 08:55  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.11):
 
 	- added cex.labels attribute
 
 2008-06-25 22:00  peter
 
-	* man/chart.SnailTrail.Rd:
+	* man/chart.SnailTrail.Rd (1.4):
 
 	- added keywords
 
 2008-06-25 21:07  peter
 
-	* R/chart.RollingMean.R:
+	* R/chart.RollingMean.R (1.5):
 
 	- changed 'stdev' to 'sd'
 
 2008-06-25 21:05  peter
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.16):
 
 	- loaded fBasics in example
 
 2008-06-25 21:03  peter
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.15):
 
 	- added reference to 'MASS' package in example
 
 2008-06-25 21:00  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.34):
 
 	- changed 'stdev' to 'sd'
 
 2008-06-25 20:46  peter
 
-	* R/chart.SnailTrail.R, man/chart.SnailTrail.Rd:
+	* R/chart.SnailTrail.R (1.3), man/chart.SnailTrail.Rd (1.3):
 
 	- removed 'first' attribute
 
 2008-06-25 20:42  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.19):
 
 	- added 'fPortfolio' to 'Suggests'
 
 2008-06-25 20:42  peter
 
-	* R/VaR.Marginal.R:
+	* R/VaR.Marginal.R (1.7):
 
 	- added package test for 'fPortfolio'
 
 2008-06-25 18:07  brian
 
-	* R/: kurtosis.R, skewness.R:
+	* R/: kurtosis.R (1.2), skewness.R (1.2):
 
 	- update functions to deal with multi-column zoo/xts data
 
 2008-06-25 16:56  brian
 
-	* man/: edhec.Rd, managers.Rd:
+	* man/: edhec.Rd (1.6), managers.Rd (1.2):
 
 	- add note about updating the data periodically
 
 2008-06-25 08:50  brian
 
-	* R/kurtosis.R, R/skewness.R, man/kurtosis.Rd, man/skewness.Rd:
+	* R/kurtosis.R (1.1), R/skewness.R (1.1), man/kurtosis.Rd (1.1),
+	  man/skewness.Rd (1.1):
 
 	- initial commit of skewness and kurtosis functions and documentation ported from RMetrics package fUtilities
 
 2008-06-24 22:51  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.18):
 
 	- moved Hmisc to 'Suggests'
 
 2008-06-24 22:50  peter
 
-	* R/Omega.R:
+	* R/Omega.R (1.10):
 
 	- added package test for Hmisc
 
 2008-06-24 22:48  peter
 
-	* R/chart.ECDF.R:
+	* R/chart.ECDF.R (1.2):
 
 	- added copyright and CVS log
 
 2008-06-24 22:35  peter
 
-	* R/: download.RiskFree.R, download.SP500PriceReturns.R:
+	* R/: download.RiskFree.R (1.9), download.SP500PriceReturns.R
+	  (1.11):
 
 	- added package test for 'tseries'
 
 2008-06-24 22:34  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.17):
 
 	- moved rarely used packages from Depends to Suggests
 
 2008-06-24 22:33  peter
 
-	* R/chart.QQPlot.R:
+	* R/chart.QQPlot.R (1.8):
 
 	- changed package test to load MASS quietly
 
 2008-06-24 22:31  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.33):
 
 	- changed package test to load quietly
 
 2008-06-24 21:07  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.16):
 
 	- moved packages to suggests
 	- added 'sn'
 
 2008-06-24 16:55  brian
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.18):
 
 	- remove excess parenthesis in Zcf
 	  - report and patch credit to Enrique Bengoechea Bartolome
@@ -800,153 +887,153 @@
 
 2008-06-23 22:22  peter
 
-	* man/chart.SnailTrail.Rd:
+	* man/chart.SnailTrail.Rd (1.2):
 
 	- cleaned up example
 
 2008-06-23 22:18  peter
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.14):
 
 	- fixed example
 
 2008-06-23 21:31  peter
 
-	* man/chart.RiskReturnScatter.Rd:
+	* man/chart.RiskReturnScatter.Rd (1.10):
 
 	- fixed description of 'method'
 
 2008-06-23 21:26  peter
 
-	* R/chart.SnailTrail.R:
+	* R/chart.SnailTrail.R (1.2):
 
 	- changed 'add.labels' to 'add.names' to be consistent with chart.RiskReturnScatter
 
 2008-06-23 21:02  peter
 
-	* man/chart.SnailTrail.Rd:
+	* man/chart.SnailTrail.Rd (1.1):
 
 	- created stub documentation
 
 2008-06-23 20:56  peter
 
-	* man/BetaCoMoments.Rd:
+	* man/BetaCoMoments.Rd (1.5):
 
 	- fixed notation
 
 2008-06-23 20:54  peter
 
-	* man/CAPM.beta.Rd:
+	* man/CAPM.beta.Rd (1.16):
 
 	- added aliases
 
 2008-06-23 20:52  peter
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.7):
 
 	- added neg.thetas = FALSE to usage
 
 2008-06-23 20:50  peter
 
-	* man/TreynorRatio.Rd:
+	* man/TreynorRatio.Rd (1.8):
 
 	- fixed example
 
 2008-06-23 20:08  peter
 
-	* man/BetaCoMoments.Rd:
+	* man/BetaCoMoments.Rd (1.4):
 
 	- added aliases
 
 2008-06-23 20:05  peter
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.6):
 
 	- improved descriptive text and cleaned up encoding, special chars
 
 2008-06-23 19:48  peter
 
-	* man/BetaCoMoments.Rd:
+	* man/BetaCoMoments.Rd (1.3):
 
 	- fixed file encoding problems
 
 2008-06-23 19:41  peter
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.8):
 
 	- changed 'warn' to 'warning'
 
 2008-06-23 19:39  peter
 
-	* man/CAPM.beta.Rd:
+	* man/CAPM.beta.Rd (1.15):
 
 	- fixed syntax error
 
 2008-06-23 19:37  peter
 
-	* R/chart.SnailTrail.R:
+	* R/chart.SnailTrail.R (1.1):
 
 
 	- added code for tracking changing risk and return through time on scatter
 
 2008-06-22 21:41  peter
 
-	* R/chart.RollingPerformance.R:
+	* R/chart.RollingPerformance.R (1.10):
 
 	- added ylimit to include zero
 
 2008-06-22 21:35  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.32):
 
 	- added note line text size attribute
 	- added check for 'sn' library
 
 2008-06-22 21:32  peter
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.7):
 
 	- renamed inputs to be consistent with package
 
 2008-06-22 21:05  peter
 
-	* man/BetaCoMoments.Rd:
+	* man/BetaCoMoments.Rd (1.2):
 
 	- addition of documentation for beta co-moment calculations
 
 2008-06-22 21:04  peter
 
-	* man/CoMoments.Rd:
+	* man/CoMoments.Rd (1.4):
 
 	- revision of the higher co-moment documentation
 
 2008-06-19 21:04  peter
 
-	* man/CoMoments.Rd:
+	* man/CoMoments.Rd (1.3):
 
 	- removed special chars
 
 2008-06-19 07:51  peter
 
-	* man/CoMoments.Rd:
+	* man/CoMoments.Rd (1.2):
 
 	- added documentation and detail on comoments
 
 2008-06-18 22:54  peter
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.6):
 
 	- added data check and NA removal to comoment calcs
 
 2008-06-18 22:15  peter
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.5):
 
 	- added detail to documentation
 
 2008-06-18 22:00  peter
 
-	* man/CAPM.beta.Rd:
+	* man/CAPM.beta.Rd (1.14):
 
 	- added conditional betas and timing ratio to documentation
 	- expanded examples
@@ -954,161 +1041,170 @@
 
 2008-06-18 17:24  brian
 
-	* man/CAPM.beta.Rd:
+	* man/CAPM.beta.Rd (1.13):
 
 	- add \alian and \usage for CAPM.beta.bear and CAPM.beta.bull functions
 
 2008-06-18 17:18  brian
 
-	* man/BetaCoMoments.Rd:
+	* man/BetaCoMoments.Rd (1.1):
 
 	- initial commit of documentation stubs for beta co-moments functions
 
 2008-06-18 17:12  brian
 
-	* man/CoMoments.Rd:
+	* man/CoMoments.Rd (1.1):
 
 	- initial commit of co-moments documentation
 
 2008-06-18 09:51  peter
 
-	* R/SmoothingIndex.R:
+	* R/SmoothingIndex.R (1.4):
 
 	- added a switch for removing negative autocorrelation
 
 2008-06-18 09:47  peter
 
-	* man/TreynorRatio.Rd:
+	* man/TreynorRatio.Rd (1.7):
 
 	- cleaned up example
 
 2008-06-18 09:46  peter
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.4):
 
 	- fixed bug in example
 
 2008-06-02 11:05  brian
 
-	* R/: ActivePremium.R, CAPM.alpha.R, CAPM.beta.R, CAPM.utils.R,
-	  CalmarRatio.R, CoMoments.R, DownsideDeviation.R, Drawdowns.R,
-	  InformationRatio.R, KellyRatio.R, Omega.R, Return.Geltner.R,
-	  Return.annualized.R, Return.calculate.R, Return.cumulative.R,
-	  Return.excess.R, Return.read.R, SemiDeviation.R, SharpeRatio.R,
-	  SharpeRatio.annualized.R, SharpeRatio.modified.R, SortinoRatio.R,
-	  StdDev.annualized.R, TrackingError.R, TreynorRatio.R,
-	  UpDownRatios.R, UpsidePotentialRatio.R, VaR.Beyond.R,
-	  VaR.CornishFisher.R, VaR.Marginal.R, apply.fromstart.R,
-	  apply.rolling.R, chart.Bar.R, chart.BarVaR.R, chart.Boxplot.R,
-	  chart.Correlation.R, chart.Correlation.color.R,
-	  chart.CumReturns.R, chart.Drawdown.R, chart.Histogram.R,
-	  chart.QQPlot.R, chart.Regression.R, chart.RelativePerformance.R,
-	  chart.RiskReturnScatter.R, chart.RollingCorrelation.R,
-	  chart.RollingMean.R, chart.RollingPerformance.R,
-	  chart.RollingRegression.R, chart.Scatter.R, chart.TimeSeries.R,
-	  charts.PerformanceSummary.R, charts.RollingPerformance.R,
-	  charts.RollingRegression.R, checkData.R, cummax.column.R,
-	  cumprod.column.R, download.RiskFree.R,
-	  download.SP500PriceReturns.R, findDrawdowns.R, legend.R,
-	  maxDrawdown.R, mean.utils.R, moment.fourth.R, moment.third.R,
-	  rollingRegression.R, rollingStat.R, sortDrawdowns.R,
-	  table.AnnualizedReturns.R, table.Arbitrary.R,
-	  table.Autocorrelation.R, table.CAPM.R, table.CalendarReturns.R,
-	  table.Correlation.R, table.DownsideRisk.R, table.Drawdowns.R,
-	  table.HigherMoments.R, table.MonthlyReturns.R,
-	  table.RollingPeriods.R:
+	* R/: ActivePremium.R (1.6), CAPM.alpha.R (1.7), CAPM.beta.R
+	  (1.10), CAPM.utils.R (1.6), CalmarRatio.R (1.2), CoMoments.R
+	  (1.5), DownsideDeviation.R (1.9), Drawdowns.R (1.2),
+	  InformationRatio.R (1.6), KellyRatio.R (1.4), Omega.R (1.9),
+	  Return.Geltner.R (1.4), Return.annualized.R (1.8),
+	  Return.calculate.R (1.10), Return.cumulative.R (1.4),
+	  Return.excess.R (1.9), Return.read.R (1.4), SemiDeviation.R
+	  (1.7), SharpeRatio.R (1.7), SharpeRatio.annualized.R (1.7),
+	  SharpeRatio.modified.R (1.6), SortinoRatio.R (1.5),
+	  StdDev.annualized.R (1.13), TrackingError.R (1.6), TreynorRatio.R
+	  (1.7), UpDownRatios.R (1.4), UpsidePotentialRatio.R (1.2),
+	  VaR.Beyond.R (1.10), VaR.CornishFisher.R (1.17), VaR.Marginal.R
+	  (1.6), apply.fromstart.R (1.6), apply.rolling.R (1.3),
+	  chart.Bar.R (1.4), chart.BarVaR.R (1.14), chart.Boxplot.R (1.5),
+	  chart.Correlation.R (1.5), chart.Correlation.color.R (1.5),
+	  chart.CumReturns.R (1.8), chart.Drawdown.R (1.6),
+	  chart.Histogram.R (1.31), chart.QQPlot.R (1.7),
+	  chart.Regression.R (1.9), chart.RelativePerformance.R (1.11),
+	  chart.RiskReturnScatter.R (1.9), chart.RollingCorrelation.R
+	  (1.7), chart.RollingMean.R (1.4), chart.RollingPerformance.R
+	  (1.9), chart.RollingRegression.R (1.14), chart.Scatter.R (1.6),
+	  chart.TimeSeries.R (1.10), charts.PerformanceSummary.R (1.17),
+	  charts.RollingPerformance.R (1.7), charts.RollingRegression.R
+	  (1.15), checkData.R (1.18), cummax.column.R (1.8),
+	  cumprod.column.R (1.7), download.RiskFree.R (1.8),
+	  download.SP500PriceReturns.R (1.10), findDrawdowns.R (1.7),
+	  legend.R (1.4), maxDrawdown.R (1.4), mean.utils.R (1.8),
+	  moment.fourth.R (1.6), moment.third.R (1.6), rollingRegression.R
+	  (1.2), rollingStat.R (1.3), sortDrawdowns.R (1.5),
+	  table.AnnualizedReturns.R (1.7), table.Arbitrary.R (1.6),
+	  table.Autocorrelation.R (1.3), table.CAPM.R (1.12),
+	  table.CalendarReturns.R (1.5), table.Correlation.R (1.7),
+	  table.DownsideRisk.R (1.9), table.Drawdowns.R (1.5),
+	  table.HigherMoments.R (1.8), table.MonthlyReturns.R (1.7),
+	  table.RollingPeriods.R (1.6):
 
 	- update copyright to 2004-2008
 
 2008-06-02 10:25  peter
 
-	* R/apply.fromstart.R:
+	* R/apply.fromstart.R (1.5):
 
 	- fixed multicolumn support
 
 2008-05-13 21:38  peter
 
-	* man/chart.Regression.Rd:
+	* man/chart.Regression.Rd (1.7):
 
 	- updated fit documentation
 
 2008-05-13 21:34  peter
 
-	* man/chart.Regression.Rd:
+	* man/chart.Regression.Rd (1.6):
 
 	- added missing attributes
 
 2008-05-13 21:31  peter
 
-	* man/chart.Regression.Rd:
+	* man/chart.Regression.Rd (1.5):
 
 	- cleaned up example
 
 2008-05-13 21:21  peter
 
-	* man/chart.Correlation.Rd:
+	* man/chart.Correlation.Rd (1.9):
 
 	- removed 'y' arguement from documentation
 
 2008-05-13 20:59  peter
 
-	* man/PerformanceAnalytics-internal.Rd:
+	* man/PerformanceAnalytics-internal.Rd (1.4):
 
 	- added missing attributes for box.lty, box.lwd
 
 2008-05-07 17:54  brian
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.4):
 
 	- add parens to denominator in centeredcomoment fn
 
 2008-05-07 17:05  brian
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.3):
 
 	- replace with centeredmoment function that is multi-column aware via apply
 
 2008-05-07 16:41  brian
 
-	* man/: BetaCoKurtosis.Rd, BetaCoSkewness.Rd, BetaCoVariance.Rd,
-	  CoKurtosis.Rd, CoSkewness.Rd:
+	* man/: BetaCoKurtosis.Rd (1.9), BetaCoSkewness.Rd (1.8),
+	  BetaCoVariance.Rd (1.8), CoKurtosis.Rd (1.8), CoSkewness.Rd
+	  (1.8):
 
 	- remove old (broken) univatiate function, replaced by functions in CoMoments.R
 
 2008-05-07 16:40  brian
 
-	* R/: BetaCoKurtosis.R, BetaCoSkewness.R, BetaCoVariance.R,
-	  CoKurtosis.R, CoSkewness.R:
+	* R/: BetaCoKurtosis.R (1.6), BetaCoSkewness.R (1.6),
+	  BetaCoVariance.R (1.6), CoKurtosis.R (1.6), CoSkewness.R (1.6):
 
 	- remove old (broken) CoMoment functions, replaced with CoMoments.R
 
 2008-05-07 16:38  brian
 
-	* R/MultivariateMoments.R:
+	* R/MultivariateMoments.R (1.3):
 
 	- update header, footer, and licencing to reflect moving into PerformanceAnalytics
 
 2008-05-07 16:30  peter
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.2):
 
 	- repair to centeredcomoment normalization suggested by Kris in 2008-01-23 email
 
 2008-04-17 22:59  peter
 
-	* R/chart.RollingStyle.R:
+	* R/chart.RollingStyle.R (1.2):
 
 	- added na.omit to avoid problems with missing data
 
 2008-04-17 22:58  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.6):
 
 	- reduced to a wrapper to chart.StackedBar
 
 2008-04-17 22:56  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.5):
 
 	- added a legend at the bottom
 	- added smarts for displaying single column or stacked
@@ -1116,37 +1212,38 @@
 
 2008-04-17 22:52  peter
 
-	* R/: charts.RollingPerformance.R, charts.RollingRegression.R:
+	* R/: charts.RollingPerformance.R (1.6), charts.RollingRegression.R
+	  (1.14):
 
 	- added par to reset layout to default
 
 2008-04-17 22:51  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.16):
 
 	- added par to reset graphics layout to default
 
 2008-04-17 22:51  peter
 
-	* R/chart.Scatter.R:
+	* R/chart.Scatter.R (1.5):
 
 	- added cex attributes
 
 2008-04-17 22:47  peter
 
-	* R/chart.RollingPerformance.R:
+	* R/chart.RollingPerformance.R (1.8):
 
 	- added cex attributes for formatting
 
 2008-04-17 22:41  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.8):
 
 	- added cex attributes for passing in formatting changes
 
 2008-04-17 22:38  peter
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.8):
 
 	- fixed x-axis
 	- added method for conditional beta lines
@@ -1154,64 +1251,64 @@
 
 2008-04-17 22:33  peter
 
-	* R/chart.ACFplus.R:
+	* R/chart.ACFplus.R (1.2):
 
 	- added par to reset graphics back to default layout
 
 2008-04-17 22:27  peter
 
-	* R/CAPM.beta.R:
+	* R/CAPM.beta.R (1.9):
 
 	- converted checkData to use zoo
 	- added functions for conditional beta calcs: beta.bear, beta.bull, and timingRatio
 
 2008-02-26 22:05  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.5):
 
 	- added 'leverage' tag to eliminate sum to one constraint
 	- added cex.names for controlling size of xaxis labels
 
 2008-02-26 22:04  peter
 
-	* R/style.fit.R:
+	* R/style.fit.R (1.2):
 
 	- added 'leverage' attribute to remove sum to one constraint
 
 2008-02-26 22:02  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.5):
 
 	- added 'leverage' tag for ignoring sum to one constraint
 
 2008-02-26 22:01  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.4):
 
 	- added cex.names for sizing xaxis tags
 
 2008-02-25 22:56  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.3):
 
 	- fixed label calculation to handle correct dimension
 
 2008-02-25 22:49  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.4):
 
 	- handles single column fits better
 
 2008-02-25 22:39  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.3):
 
 	- moved legend and margin control into chart.StackedBar
 	- handles multiple columns
 
 2008-02-25 22:38  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.2):
 
 	- now handles multiple columns for fund
 	- legend "under" draws correctly
@@ -1219,38 +1316,38 @@
 
 2008-02-22 23:55  peter
 
-	* R/chart.RollingStyle.R:
+	* R/chart.RollingStyle.R (1.1):
 
 	- chart demonstrating fund exposures through time
 
 2008-02-22 23:54  peter
 
-	* R/chart.StackedBar.R:
+	* R/chart.StackedBar.R (1.1):
 
 	- primitive for weight displays and other charts
 
 2008-02-22 23:35  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.2):
 
 	- set ylim more sensibly depending on method
 
 2008-02-22 23:32  peter
 
-	* R/chart.Style.R:
+	* R/chart.Style.R (1.1):
 
 	- simple bar chart of a fund's exposures to a set of factors, as determined
 	by style.fit
 
 2008-02-22 21:45  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.4):
 
 	- fixed output labels
 
 2008-02-22 21:29  peter
 
-	* R/style.fit.R:
+	* R/style.fit.R (1.1):
 
 	- first commit of a function that handles looping for multiple funds
 	- calculates weights and fit for three methods: constrained, unconstrained
@@ -1258,94 +1355,94 @@
 
 2008-02-22 16:07  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.3):
 
 	- added R-squared and adjusted R-squared calcs
 
 2008-02-21 21:47  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.2):
 
 	- added example to comments
 
 2008-02-21 21:41  peter
 
-	* R/style.QPfit.R:
+	* R/style.QPfit.R (1.1):
 
 	- first draft of a function for style fitting with constrained weights
 
 2008-02-14 22:22  peter
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.10):
 
 	- added lty parameters to plot and legend
 
 2008-02-14 22:21  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.9):
 
 	- added parameters for legend management
 
 2008-02-14 22:20  peter
 
-	* R/legend.R:
+	* R/legend.R (1.3):
 
 	- parameterized box color separately from background elements
 
 2008-01-23 04:17  kris
 
-	* R/CoMoments.R:
+	* R/CoMoments.R (1.1):
 
 	Make a clear separation between function applicable to univariate and multivariate series
 
 2008-01-20 06:07  kris
 
-	* R/: MultivariateMoments.R, multivariate_moments.R:
+	* R/: MultivariateMoments.R (1.2), multivariate_moments.R (1.2):
 
 	Changed function definitions in optim_functions.R and updated the function calls in optimizer.R to these functions
 
 2008-01-20 00:30  brian
 
-	* R/: MultivariateMoments.R, multivariate_moments.R:
+	* R/: MultivariateMoments.R (1.1), multivariate_moments.R (1.1):
 
 	- Initial Revision
 
 2008-01-17 22:05  peter
 
-	* R/chart.Correlation.R:
+	* R/chart.Correlation.R (1.4):
 
 	- fixed missing values in density
 	- removed y as unnecessary parameter
 
 2008-01-15 15:06  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.30):
 
 	- fixed ylim for probability T or F
 
 2008-01-15 14:22  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.29):
 
 	- fixed ylim setting calculation
 
 2008-01-03 07:53  brian
 
-	* man/chart.RegressionDiagnostics.Rd:
+	* man/chart.RegressionDiagnostics.Rd (1.6):
 
 	- renamed function charts.RegressionDiagnostics because it is a multipanel plot
 
 2007-12-29 15:18  brian
 
-	* ChangeLog:
+	* ChangeLog (1.1):
 
 	- Initial Revision of ChangeLog for PerformanceAnalytics package 0.9.6
 
 2007-12-29 15:17  brian
 
 	* inst/doc/:
-	  PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,
-	  PerformanceAnalyticsPresentation-UseR-2007.Rnw:
+	  PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw (1.8),
+	  PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.5):
 
 	- add drop=F in tableCAPM to pass R CMD build
 
@@ -1353,370 +1450,373 @@
 
 2007-12-29 14:33  brian
 
-	* DESCRIPTION, man/PerformanceAnalytics-package.Rd:
+	* DESCRIPTION (1.15), man/PerformanceAnalytics-package.Rd (1.63):
 
 	- bump version to 0.9.6
 
 2007-12-29 14:32  brian
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.13):
 
 	- fix LaTeX error for R CMD check
 
 2007-12-29 13:58  brian
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.12):
 
 	- minor update to reference wording
 
 2007-12-29 13:54  peter
 
-	* man/chart.QQPlot.Rd:
+	* man/chart.QQPlot.Rd (1.11):
 
 	- referenced car package and filled in documentation
 
 2007-12-29 13:34  brian
 
-	* man/chart.ECDF.Rd:
+	* man/chart.ECDF.Rd (1.7):
 
 	- minor change in escape char to pass R CMD check
 
 2007-12-29 13:33  peter
 
-	* man/chart.RollingPerformance.Rd:
+	* man/chart.RollingPerformance.Rd (1.15):
 
 	- documented missing parameters
 
 2007-12-29 13:25  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.21):
 
 	- added documentation for missing attributes
 
 2007-12-29 13:25  brian
 
-	* R/: VaR.CornishFisher.R, chart.Histogram.R:
+	* R/: VaR.CornishFisher.R (1.16), chart.Histogram.R (1.28):
 
 	- minor changes to pass R CMD check
 
 2007-12-29 13:24  brian
 
-	* man/: chart.ECDF.Rd, chart.Histogram.Rd,
-	  table.Autocorrelation.Rd:
+	* man/: chart.ECDF.Rd (1.6), chart.Histogram.Rd (1.16),
+	  table.Autocorrelation.Rd (1.5):
 
 	- minor updates to pass R CMD check
 
 2007-12-29 09:46  peter
 
-	* man/chart.ECDF.Rd:
+	* man/chart.ECDF.Rd (1.5):
 
 	- fixed latex issue
 
 2007-12-29 09:44  peter
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.3):
 
 	- fixed encoding issue
 
 2007-12-29 09:38  peter
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.7):
 
 	- fixed switch statement
 
 2007-12-29 08:53  peter
 
-	* man/chart.Boxplot.Rd:
+	* man/chart.Boxplot.Rd (1.13):
 
 	- minor edits to text
 
 2007-12-29 08:50  peter
 
-	* man/: chart.ECDF.Rd, SmoothingIndex.Rd:
+	* man/: chart.ECDF.Rd (1.4), SmoothingIndex.Rd (1.2):
 
 	- first draft of function documentation
 
 2007-12-29 08:46  peter
 
-	* man/table.Autocorrelation.Rd:
+	* man/table.Autocorrelation.Rd (1.4):
 
 	- first draft of documentation
 
 2007-12-29 08:43  peter
 
-	* man/chart.Regression.Rd:
+	* man/chart.Regression.Rd (1.4):
 
 	- first draft of documentation for the function
 
 2007-12-29 08:32  brian
 
-	* man/chart.Boxplot.Rd:
+	* man/chart.Boxplot.Rd (1.12):
 
 	- minor text updates
 
 2007-12-29 08:30  brian
 
-	* man/chart.Boxplot.Rd:
+	* man/chart.Boxplot.Rd (1.11):
 
 	- update \item descriptions with common parameters
 	- add description and references
 
 2007-12-29 08:01  brian
 
-	* man/table.Autocorrelation.Rd:
+	* man/table.Autocorrelation.Rd (1.3):
 
 	- update \item descriptions with common parameters
 	- add description and references
 
 2007-12-29 07:56  brian
 
-	* man/chart.ECDF.Rd:
+	* man/chart.ECDF.Rd (1.3):
 
 	- update \item descriptions with common parameters
 	- add description and references
 
 2007-12-29 07:43  brian
 
-	* man/chart.Regression.Rd:
+	* man/chart.Regression.Rd (1.3):
 
 	- update \item descriptions with common parameters
 
 2007-12-28 13:59  brian
 
-	* man/: Return.read.Rd, chart.ECDF.Rd, chart.Histogram.Rd,
-	  chart.QQPlot.Rd, chart.Regression.Rd,
-	  chart.RelativePerformance.Rd, chart.RollingRegression.Rd,
-	  chart.TimeSeries.Rd, charts.RollingPerformance.Rd, cum.utils.Rd,
-	  mean.utils.Rd, table.Autocorrelation.Rd:
+	* man/: Return.read.Rd (1.7), chart.ECDF.Rd (1.2),
+	  chart.Histogram.Rd (1.15), chart.QQPlot.Rd (1.10),
+	  chart.Regression.Rd (1.2), chart.RelativePerformance.Rd (1.11),
+	  chart.RollingRegression.Rd (1.21), chart.TimeSeries.Rd (1.20),
+	  charts.RollingPerformance.Rd (1.8), cum.utils.Rd (1.3),
+	  mean.utils.Rd (1.12), table.Autocorrelation.Rd (1.2):
 
 	- update \usage \item and \keyword to pass R CMD CHECK
 
 2007-12-28 11:51  brian
 
-	* man/: PerformanceAnalytics-package.Rd, Return.read.Rd,
-	  chart.Boxplot.Rd, chart.Histogram.Rd, chart.RollingRegression.Rd,
-	  chart.TimeSeries.Rd:
+	* man/: PerformanceAnalytics-package.Rd (1.62), Return.read.Rd
+	  (1.6), chart.Boxplot.Rd (1.10), chart.Histogram.Rd (1.14),
+	  chart.RollingRegression.Rd (1.20), chart.TimeSeries.Rd (1.19):
 
 	- usage and item changes to pass R CMD CHECK
 
 2007-12-27 16:25  peter
 
-	* man/chart.ACF.Rd:
+	* man/chart.ACF.Rd (1.4):
 
 	- added title
 	- fixed utf8 character
 
 2007-12-27 16:19  peter
 
-	* man/Return.read.Rd:
+	* man/Return.read.Rd (1.5):
 
 	- fixed closing brace
 
 2007-12-27 16:17  peter
 
-	* man/Return.read.Rd:
+	* man/Return.read.Rd (1.4):
 
 	- first draft of function documentation
 
 2007-12-27 16:14  brian
 
-	* man/: charts.RollingPerformance.Rd, checkData.Rd:
+	* man/: charts.RollingPerformance.Rd (1.7), checkData.Rd (1.6):
 
 	- fix usage to match current function
 
 2007-12-27 16:10  brian
 
-	* man/: chart.RollingRegression.Rd, chart.TimeSeries.Rd:
+	* man/: chart.RollingRegression.Rd (1.19), chart.TimeSeries.Rd
+	  (1.18):
 
 	- fix usage to match current function
 
 2007-12-27 16:07  brian
 
-	* man/: chart.QQPlot.Rd, chart.RelativePerformance.Rd:
+	* man/: chart.QQPlot.Rd (1.9), chart.RelativePerformance.Rd (1.10):
 
 	- fix usage to match current function
 
 2007-12-27 16:03  brian
 
-	* man/chart.Correlation.color.Rd:
+	* man/chart.Correlation.color.Rd (1.9):
 
 	- add usage and item for 'use' parameter
 
 2007-12-27 15:59  brian
 
-	* man/chart.Boxplot.Rd:
+	* man/chart.Boxplot.Rd (1.9):
 
 	- update item and usage to match current function
 
 2007-12-27 15:58  brian
 
-	* R/SmoothingIndex.R:
+	* R/SmoothingIndex.R (1.3):
 
 	- chnage ra to Ra to match usage in the rest of the package
 
 2007-12-27 15:53  peter
 
-	* R/rollingCorrelation.R, R/rollingFunction.R,
-	  man/rollingCorrelation.Rd, man/rollingFunction.Rd:
+	* R/rollingCorrelation.R (1.5), R/rollingFunction.R (1.8),
+	  man/rollingCorrelation.Rd (1.10), man/rollingFunction.Rd (1.13):
 
 	- deprecated, use rollapply instead
 
 2007-12-27 15:50  peter
 
-	* R/: rollingFunction.R, rollingCorrelation.R:
+	* R/: rollingFunction.R (1.7), rollingCorrelation.R (1.4):
 
 	- replaced 'n' with 'width'
 
 2007-12-27 15:46  brian
 
-	* man/Return.read.Rd:
+	* man/Return.read.Rd (1.3):
 
 	- fix usage for R CMD check
 
 2007-12-27 15:43  brian
 
-	* man/Return.annualized.Rd:
+	* man/Return.annualized.Rd (1.10):
 
 	- fix deqn LaTeX error
 
 2007-12-27 15:26  brian
 
-	* man/table.Arbitrary.Rd:
+	* man/table.Arbitrary.Rd (1.8):
 
 	- update documentation to reflect inability to pass different parameters to same function
 
 2007-12-27 15:20  peter
 
-	* man/chart.ACF.Rd:
+	* man/chart.ACF.Rd (1.3):
 
 	- completed first draft of function documentation
 
 2007-12-27 15:12  brian
 
-	* man/table.Arbitrary.Rd:
+	* man/table.Arbitrary.Rd (1.7):
 
 	- update usage and alias to reflect function name change from statsTable to table.Arbitrary
 
 2007-12-27 15:05  brian
 
-	* man/chart.ACFplus.Rd:
+	* man/chart.ACFplus.Rd (1.2):
 
 	- removed, added alias to this function in chart.ACF.Rd
 
 2007-12-27 15:04  brian
 
-	* man/chart.ACF.Rd:
+	* man/chart.ACF.Rd (1.2):
 
 	- add alias for chart.ACFplus and document standard items
 
 2007-12-27 14:59  peter
 
-	* R/table.Arbitrary.R:
+	* R/table.Arbitrary.R (1.5):
 
 	- cleaned out commented lines
 
 2007-12-27 14:55  brian
 
-	* man/: chart.ACF.Rd, chart.ACFplus.Rd, chart.ECDF.Rd,
-	  chart.Regression.Rd, table.Autocorrelation.Rd:
+	* man/: chart.ACF.Rd (1.1), chart.ACFplus.Rd (1.1), chart.ECDF.Rd
+	  (1.1), chart.Regression.Rd (1.1), table.Autocorrelation.Rd (1.1):
 
 	- initial commit of documentation stubs created with prompt() command
 
 2007-12-27 14:54  peter
 
-	* R/table.Arbitrary.R:
+	* R/table.Arbitrary.R (1.4):
 
 	- renamed function from statsTable
 	- added wrapper
 
 2007-12-27 14:46  peter
 
-	* R/table.Arbitrary.R:
+	* R/table.Arbitrary.R (1.3):
 
 	- fixed bug to calculate number of columns
 
 2007-12-27 14:41  brian
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.6):
 
 	- fix switch syntax error
 
 2007-12-27 14:36  brian
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.5):
 
 	- change fit to use a list and a switch
 
 2007-12-27 14:19  brian
 
-	* R/chart.Correlation.color.R, man/chart.Correlation.color.Rd:
+	* R/chart.Correlation.color.R (1.4), man/chart.Correlation.color.Rd
+	  (1.8):
 
 	- remove unused parameter 'new'
 
 2007-12-27 14:13  peter
 
-	* R/table.Autocorrelation.R:
+	* R/table.Autocorrelation.R (1.2):
 
 	- fixed F for FALSE
 
 2007-12-27 14:11  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.27):
 
 	- fixed F for FALSE in function call
 
 2007-12-27 13:51  brian
 
-	* man/SmoothingIndex.Rd:
+	* man/SmoothingIndex.Rd (1.1):
 
 	- initial commit of adaptation to Getmansky smotting index
 
 2007-12-27 13:03  brian
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.4):
 
 	- change function name from chart.MultiScatter to chart.Regression in prep for public release
 
 2007-12-27 12:45  peter
 
-	* R/chart.Correlation.color.R:
+	* R/chart.Correlation.color.R (1.3):
 
 	- added parameter for passing to cor
 
 2007-12-27 12:44  peter
 
-	* R/chart.Correlation.R:
+	* R/chart.Correlation.R (1.3):
 
 	- added option for passing parameters to cor, including
 	"pairwise.complete.obs"
 
 2007-12-27 12:43  peter
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.9):
 
 	- added solid reference line
 
 2007-12-27 12:42  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.26):
 
 	- shrank text labels for event lines
 
 2007-12-27 12:40  peter
 
-	* R/SmoothingIndex.R:
+	* R/SmoothingIndex.R (1.2):
 
 	- fixed theta calculations
 
 2007-12-06 15:39  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.25):
 
 	- added stable fit using fBasics functions
 
 2007-12-06 15:38  peter
 
-	* R/chart.QQPlot.R:
+	* R/chart.QQPlot.R (1.6):
 
 	- replaced core code with John Fox's qq.plot internals
 	- makes error bands available
@@ -1724,44 +1824,44 @@
 
 2007-11-26 16:49  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.27):
 
 	- update Zangari reference
 	- update equations to match other notation
 
 2007-11-22 22:28  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.24):
 
 	- added margin to histogram bars for ylim
 
 2007-11-21 23:32  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.23):
 
 	- fixed ylim to show height of histogram bars
 
 2007-11-21 23:18  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.22):
 
 	- added 'elementcolor' parameter
 
 2007-11-21 23:16  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.21):
 
 	- added log-normal fit, although requires positive numbers only
 
 2007-11-21 22:55  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.20):
 
 	- fixed xlab for add.cauchy
 
 2007-11-21 22:52  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.19):
 
 	- added fit for skew t
 	- fixed ylim for cauchy
@@ -1769,188 +1869,189 @@
 
 2007-11-20 23:32  peter
 
-	* R/chart.QQPlot.R:
+	* R/chart.QQPlot.R (1.5):
 
 	- fixed title
 
 2007-11-20 23:31  peter
 
-	* R/chart.QQPlot.R:
+	* R/chart.QQPlot.R (1.4):
 
 	- added fitting for norm, lnorm, cauchy, and sst distributions
 
 2007-11-20 17:13  brian
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.15):
 
 	- fix warnings for unreasonable results
 	- use negative mean to calculate for tail risk
 
 2007-11-20 15:19  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.18):
 
 	- added p attribute for passing in risk calculation parameter
 
 2007-11-19 15:06  peter
 
-	* R/chart.ECDF.R:
+	* R/chart.ECDF.R (1.1):
 
 	- plots a fitted ECDF line to the sorted data
 
 2007-11-18 21:43  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.13):
 
 	- removed event.labels from lower charts
 
 2007-11-18 21:42  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.8):
 
 	- title will no longer be set to default text, will use column name instead
 
 2007-11-18 21:40  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.17):
 
 	- smoothed out the density line for smaller data sets
 	- added parameter for showing all data points rather than center
 
 2007-11-18 21:38  peter
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.3):
 
 	- allow cex to be passed through correctly
 
 2007-11-18 08:28  peter
 
-	* R/chart.Bar.R:
+	* R/chart.Bar.R (1.3):
 
 	- squared off the bar ends
 
 2007-11-07 23:04  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.7):
 
 	- added support for other time formats
 
 2007-10-18 08:56  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.17):
 
 	- fixed error labeling data without columnnames
 
 2007-10-10 22:56  peter
 
-	* R/chart.RollingCorrelation.R:
+	* R/chart.RollingCorrelation.R (1.6):
 
 	- fixed so that it will handle zoo objects with yearmon dates
 
 2007-10-10 22:53  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.13):
 
 	- fixed bug for handling yearmon class dates in zoo object
 
 2007-10-10 22:33  peter
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.8):
 
 	- added drop=FALSE to Rf for table.CAPM
 
 2007-10-10 22:22  peter
 
-	* R/DownsideDeviation.R:
+	* R/DownsideDeviation.R (1.8):
 
 	- fixed "subset" to use r instead of R
 
 2007-10-10 22:21  peter
 
-	* R/SemiDeviation.R:
+	* R/SemiDeviation.R (1.6):
 
 	- fixed return so that method was being passed to DownsideDeviation
 
 2007-10-09 20:58  peter
 
-	* R/chart.ACF.R:
+	* R/chart.ACF.R (1.1):
 
 	- adding similar chart to chart.ACFplus, with stripped down ACF chart
 
 2007-10-04 22:24  peter
 
-	* R/table.Autocorrelation.R:
+	* R/table.Autocorrelation.R (1.1):
 
 	- first commit of lag-6 autocorrelation coefficient with Q-stat p-value table
 
 2007-10-02 21:46  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.7):
 
 	- colors and symbol sets now stretched to match the number of columns
 	- name text colors prints backwards to match the order of the dots
 
 2007-10-02 21:44  peter
 
-	* R/: charts.RollingRegression.R, charts.RollingPerformance.R:
+	* R/: charts.RollingRegression.R (1.12),
+	  charts.RollingPerformance.R (1.5):
 
 	- legend will be hidden by default
 	- legend location can be passed in through legend.loc parameter
 
 2007-10-02 21:43  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.16):
 
 	- single column zoo objects will have the time class and order preserved
 	- yearmon class should be ordered correctly as a result
 
 2007-09-26 22:03  peter
 
-	* R/chart.ACFplus.R:
+	* R/chart.ACFplus.R (1.1):
 
 	- first commit of ACF and PACF paired chart
 
 2007-09-25 22:33  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.16):
 
 	- no longer clobbers xlim when passed in from function
 
 2007-09-25 22:13  peter
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.2):
 
 	- added a spline fit
 	- switched the order of the lowess fit variables
 
 2007-09-25 21:59  peter
 
-	* R/chart.QQPlot.R:
+	* R/chart.QQPlot.R (1.3):
 
 	- changed chart elements to be consistent with other chart
 
 2007-09-25 21:56  peter
 
-	* R/chart.Boxplot.R:
+	* R/chart.Boxplot.R (1.4):
 
 	- changed zero line to solid
 	- removed subtitles
 
 2007-09-25 21:54  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.8):
 
 	- fixed labeling problem in multi-column asset results
 
 2007-09-24 23:29  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.15):
 
 	- added data.frame as method
 
 2007-09-24 23:28  peter
 
-	* R/chart.Boxplot.R:
+	* R/chart.Boxplot.R (1.3):
 
 	- added overplot of mean
 	- sort.by for mean, median, variance
@@ -1960,13 +2061,13 @@
 
 2007-09-23 21:50  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.15):
 
 	- cleaned up spacing in title
 
 2007-09-23 21:49  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.6):
 
 	- chart elements now consistent with time series charts
 	- prints columns backwards so that earlier columns printed on top of later
@@ -1975,14 +2076,14 @@
 
 2007-09-23 21:35  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.15):
 
 	- chart elements now set to similar defaults as time series charts
 	- xlim settings now conditioned on methods
 
 2007-09-23 21:32  peter
 
-	* R/Return.read.R:
+	* R/Return.read.R (1.3):
 
 	- added check.names as a parameter
 	- set default so that names are not checked
@@ -1990,143 +2091,143 @@
 
 2007-09-20 07:20  brian
 
-	* R/HerfindahlIndex.R:
+	* R/HerfindahlIndex.R (1.4):
 
 	- removed because of faulty work by EDHEC
 
 2007-09-17 23:05  peter
 
-	* man/HerfindahlIndex.Rd:
+	* man/HerfindahlIndex.Rd (1.3):
 
 	- removed because measure is of marginal utility
 
 2007-09-17 22:33  peter
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.13):
 
 	- added "none" to methods list
 
 2007-09-17 22:33  peter
 
-	* man/charts.PerformanceSummary.Rd:
+	* man/charts.PerformanceSummary.Rd (1.12):
 
 	- fixed typo
 
 2007-09-17 22:27  peter
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.12):
 
 	- changed function list to include NULL default
 
 2007-09-17 22:26  peter
 
-	* man/charts.PerformanceSummary.Rd:
+	* man/charts.PerformanceSummary.Rd (1.11):
 
 	- added new parameters to documentation
 
 2007-09-17 22:26  peter
 
-	* man/StdDev.annualized.Rd:
+	* man/StdDev.annualized.Rd (1.13):
 
 	- changed default for rm.na to TRUE to match function
 
 2007-09-17 22:25  peter
 
-	* man/Return.calculate.Rd:
+	* man/Return.calculate.Rd (1.6):
 
 	- fixed example
 
 2007-09-17 22:24  peter
 
-	* man/InformationRatio.Rd:
+	* man/InformationRatio.Rd (1.11):
 
 	- fixed example to use managers
 
 2007-09-17 22:24  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.14):
 
 	- default for methods is now NULL
 
 2007-09-13 21:04  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.13):
 
 	- commented need for adding MASS as a dependency
 
 2007-09-13 21:03  peter
 
-	* R/CAPM.beta.R:
+	* R/CAPM.beta.R (1.8):
 
 	- altered error message to correct syntax matching in editor
 
 2007-09-13 21:01  peter
 
-	* data/edhec.rda:
+	* data/edhec.rda (1.2):
 
 	- transformed to a zoo object
 
 2007-09-13 20:58  peter
 
-	* man/: ActivePremium.Rd, CAPM.alpha.Rd, CAPM.beta.Rd,
-	  InformationRatio.Rd, SharpeRatio.annualized.Rd, VaR.Marginal.Rd,
-	  chart.TimeSeries.Rd:
+	* man/: ActivePremium.Rd (1.9), CAPM.alpha.Rd (1.12), CAPM.beta.Rd
+	  (1.12), InformationRatio.Rd (1.10), SharpeRatio.annualized.Rd
+	  (1.9), VaR.Marginal.Rd (1.9), chart.TimeSeries.Rd (1.17):
 
 	- fixed example
 
 2007-09-10 22:03  peter
 
-	* R/Return.Geltner.R:
+	* R/Return.Geltner.R (1.3):
 
 	- fixed na.omit for column zoo object
 
 2007-09-10 21:52  peter
 
-	* R/Return.Geltner.R:
+	* R/Return.Geltner.R (1.2):
 
 	- removed the clever bits and calculate the hard way
 	- row and column names work
 
 2007-09-05 17:37  peter
 
-	* R/SmoothingIndex.R:
+	* R/SmoothingIndex.R (1.1):
 
 	- first draft of the so-called Herfindahl index based on an MA(2) fit
 
 2007-09-03 23:35  peter
 
-	* man/HerfindahlIndex.Rd:
+	* man/HerfindahlIndex.Rd (1.2):
 
 	- added commentary about interpretation
 	- added notes about appropriate reference
 
 2007-09-03 21:12  brian
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.14):
 
 	- add eval to if statement for Sweave pickiness
 
 2007-09-01 20:51  peter
 
-	* R/table.CalendarReturns.R:
+	* R/table.CalendarReturns.R (1.4):
 
 	- puts NAs where data is missing, rather than zeros
 
 2007-09-01 14:43  brian
 
-	* man/Return.Geltner.Rd:
+	* man/Return.Geltner.Rd (1.2):
 
 	- replace \psi with \rho to match common time series notation
 
 2007-09-01 14:05  brian
 
-	* man/Return.Geltner.Rd:
+	* man/Return.Geltner.Rd (1.1):
 
 	- initial revision of Geltner Returns documentation
 
 2007-09-01 11:29  brian
 
-	* R/Return.Geltner.R:
+	* R/Return.Geltner.R (1.1):
 
 	- initial revision of Geltner Returns function
 	- seems to only work on rectangular multicolumn inputs
@@ -2134,409 +2235,410 @@
 
 2007-08-31 23:05  brian
 
-	* R/HerfindahlIndex.R:
+	* R/HerfindahlIndex.R (1.3):
 
 	- remove squred returns, that was just a test
 	  nothing to see here, move along
 
 2007-08-31 22:06  brian
 
-	* R/HerfindahlIndex.R:
+	* R/HerfindahlIndex.R (1.2):
 
 	- change F to FALSE for R CMD check
 
 2007-08-31 17:42  brian
 
-	* man/HerfindahlIndex.Rd:
+	* man/HerfindahlIndex.Rd (1.1):
 
 	- initial revision of documentation for Herfindahl Autocorrelation Index
 
 2007-08-31 17:12  brian
 
-	* R/HerfindahlIndex.R:
+	* R/HerfindahlIndex.R (1.1):
 
 	- initial revision of Herfindahl autocorrelation index
 
 2007-08-30 07:19  brian
 
-	* R/CAPM.beta.R:
+	* R/CAPM.beta.R (1.7):
 
 	- change quoting to clean up syntax
 
 2007-08-30 07:18  brian
 
-	* R/TreynorRatio.R:
+	* R/TreynorRatio.R (1.6):
 
 	- add passing of dots
 
 2007-08-28 22:17  peter
 
-	* R/table.DownsideRisk.R:
+	* R/table.DownsideRisk.R (1.8):
 
 	- fixed NA removal problems
 	- fixed rounding issue with Rf labels in table
 
 2007-08-28 09:56  peter
 
-	* R/VaR.Beyond.R:
+	* R/VaR.Beyond.R (1.9):
 
 	- added na.omit to column processing
 	- added rowname when multiple columns are returned
 
 2007-08-27 09:30  peter
 
-	* data/managers.rda:
+	* data/managers.rda (1.5):
 
 	- converted to zoo object with yearmon formatted time slot
 
 2007-08-27 06:59  brian
 
-	* man/SharpeRatio.modified.Rd:
+	* man/SharpeRatio.modified.Rd (1.12):
 
 	- add note on scaling
 
 2007-08-26 05:01  brian
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.12):
 
 	- code comment and indentation cleanup, no functional change
 
 2007-08-26 04:54  brian
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.11):
 
 	- simplify recursion to eliminate possibility of endless loop
 
 2007-08-25 17:55  brian
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.10):
 
 	- modify to mimic class behavior of sd function
 	  should handle both single and multicolumn data smoothly now
 
 2007-08-23 23:02  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.12):
 
 	- labels now work for note.lines
 
 2007-08-23 22:54  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.11):
 
 	- added arbitrary lines and labels
 	- labeling doesn't work yet
 
 2007-08-23 22:18  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.10):
 
 	- added cauchy fit
 
 2007-08-23 20:43  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.9):
 
 	- beautified format of vertical lines for add.risk
 
 2007-08-22 21:12  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.14):
 
 	- added legend.loc as parameter so that legend can be shut off or moved
 	in top chart
 
 2007-08-20 16:06  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.6):
 
 	- using range function's na.rm flag to get correct NA behavior
 
 2007-08-20 16:04  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.13):
 
 	- added as.Date because merge.zoo is not behaving as expected when date
 	  formats are not consistent
 
 2007-08-20 16:03  peter
 
-	* R/apply.fromstart.R:
+	* R/apply.fromstart.R (1.4):
 
 	- moved as.Date transformations
 
 2007-08-16 09:58  peter
 
-	* man/chart.CumReturns.Rd:
+	* man/chart.CumReturns.Rd (1.13):
 
 	- fixed example by adding drop=FALSE
 
 2007-08-16 09:48  peter
 
-	* R/table.HigherMoments.R:
+	* R/table.HigherMoments.R (1.7):
 
 	- added checkData for rf
 
 2007-08-16 09:47  peter
 
-	* R/table.DownsideRisk.R:
+	* R/table.DownsideRisk.R (1.7):
 
 	- added subset handling for when rf is a time series rather than a point
 	est
 
 2007-08-16 09:41  peter
 
-	* R/table.AnnualizedReturns.R:
+	* R/table.AnnualizedReturns.R (1.6):
 
 	- NA removal now handled in individual calcs
 	- added checkData for rf
 
 2007-08-16 09:29  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.5):
 
 	- modified checkData to return Zoo object
 	- added checkData to handle Rf as a time series rather than a point est
 
 2007-08-16 09:27  peter
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.9):
 
 	- added NA removal default
 	- modified checkData to return a vector
 
 2007-08-16 09:12  peter
 
-	* R/SharpeRatio.annualized.R:
+	* R/SharpeRatio.annualized.R (1.6):
 
 	- added checkData for rf
 
 2007-08-16 09:11  peter
 
-	* R/Return.read.R:
+	* R/Return.read.R (1.2):
 
 	- clarified comments
 
 2007-08-16 09:10  peter
 
-	* R/Return.annualized.R:
+	* R/Return.annualized.R (1.7):
 
 	- updated checkData function
 
 2007-08-16 09:09  peter
 
-	* R/DownsideDeviation.R:
+	* R/DownsideDeviation.R (1.7):
 
 	- added checkData for MAR in case it is a vector of Rf
 
 2007-08-16 09:07  peter
 
-	* man/Return.calculate.Rd:
+	* man/Return.calculate.Rd (1.5):
 
 	- added commentary about using adjusted close prices
 	- added better example
 
 2007-08-16 07:58  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.14):
 
 	- fix quote format for sntax highlighting
 
 2007-08-16 07:57  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.13):
 
 	- fix quote format for syntax highlighting
 
 2007-08-15 15:18  brian
 
-	* man/Return.read.Rd:
+	* man/Return.read.Rd (1.2):
 
 	- fix keywords for R CMD check
 
 2007-08-15 15:15  brian
 
-	* R/table.Returns.R:
+	* R/table.Returns.R (1.7):
 
 	- remove deprecated table.Returns.R
 
 2007-08-15 15:14  brian
 
-	* R/table.CalendarReturns.R, man/table.CalendarReturns.Rd:
+	* R/table.CalendarReturns.R (1.3), man/table.CalendarReturns.Rd
+	  (1.2):
 
 	- add notes on deprecated table.Returns, with wrapper to table.CalendarReturns
 
 2007-08-15 15:10  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.61):
 
 	- change references to deprecated table.Returns to table.CalendarReturns
 
 2007-08-15 15:09  brian
 
-	* R/checkData.R:
+	* R/checkData.R (1.12):
 
 	- fix quote format for sntax highlighting
 
 2007-08-15 15:08  brian
 
-	* R/CAPM.utils.R:
+	* R/CAPM.utils.R (1.5):
 
 	- fix warning for quote formatting
 
 2007-08-15 15:05  brian
 
-	* inst/doc/: PA-charts.Rnw,
-	  PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,
-	  PerformanceAnalyticsPresentation-UseR-2007.Rnw:
+	* inst/doc/: PA-charts.Rnw (1.7),
+	  PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw (1.7),
+	  PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.4):
 
 	- change references to table.Returns to table.CalendarReturns
 
 2007-08-15 14:42  brian
 
-	* man/Return.read.Rd:
+	* man/Return.read.Rd (1.1):
 
 	- initial revision of Rd documentation created via prompt() fn
 
 2007-08-14 22:37  peter
 
-	* R/Return.read.R:
+	* R/Return.read.R (1.1):
 
 	- first entry in CVS
 	- wrapper for read.zoo with a few case conditions for setting defaults
 
 2007-08-14 19:04  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.13):
 
 	- aligns the three charts along the start date of the first column of
 	data
 
 2007-08-14 18:43  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.5):
 
 	- now uses zoo internally and handles yearmon and yearqtr formatting
 
 2007-08-14 18:20  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.7):
 
 	- added conditional labeling to columns
 
 2007-08-14 16:43  peter
 
-	* R/table.CalendarReturns.R:
+	* R/table.CalendarReturns.R (1.2):
 
 	- fixed the name of the function
 
 2007-08-14 16:37  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.6):
 
 	- removed support for multiple columns in Rf
 	- now works for numeric Rf
 
 2007-08-14 16:30  peter
 
-	* man/SharpeRatio.Rd:
+	* man/SharpeRatio.Rd (1.11):
 
 	- modification to the Ra selected in the example
 
 2007-08-14 16:17  peter
 
-	* man/SharpeRatio.Rd:
+	* man/SharpeRatio.Rd (1.10):
 
 	- fixed examples
 
 2007-08-14 16:03  peter
 
-	* R/CAPM.utils.R:
+	* R/CAPM.utils.R (1.4):
 
 	- changed checkData to use zoo instead of vector
 
 2007-08-14 15:53  peter
 
-	* R/CAPM.utils.R:
+	* R/CAPM.utils.R (1.3):
 
 	- changed rf to mean(rf) in CAPM.CML
 
 2007-08-14 15:31  peter
 
-	* man/CAPM.utils.Rd:
+	* man/CAPM.utils.Rd (1.7):
 
 	- changed drop=F to drop=FALSE
 
 2007-08-14 15:27  peter
 
-	* man/CAPM.utils.Rd:
+	* man/CAPM.utils.Rd (1.6):
 
 	- re-wrote examples to use managers data
 
 2007-08-14 15:19  peter
 
-	* man/CAPM.utils.Rd:
+	* man/CAPM.utils.Rd (1.5):
 
 	- fixed examples
 
 2007-08-13 20:19  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.5):
 
 	- function handles multiple columns for both R and Rf
 
 2007-08-13 15:17  peter
 
-	* man/Return.excess.Rd:
+	* man/Return.excess.Rd (1.5):
 
 	- fixed the example
 
 2007-08-11 11:57  peter
 
-	* R/table.CalendarReturns.R:
+	* R/table.CalendarReturns.R (1.1):
 
 	- replaces table.Returns.R
 
 2007-08-11 11:56  peter
 
-	* man/table.CalendarReturns.Rd:
+	* man/table.CalendarReturns.Rd (1.1):
 
 	- replaced table.Returns.Rd
 
 2007-08-11 11:55  peter
 
-	* man/table.Returns.Rd:
+	* man/table.Returns.Rd (1.12):
 
 	- removing from CVS in favor of table.CalendarReturns.Rd
 
 2007-08-08 10:28  peter
 
-	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw:
+	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.3):
 
 	- fixed typos
 
 2007-08-07 23:59  peter
 
-	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw:
+	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.2):
 
 	- aarrrgggghhhh
 	- added returns slide, fixed some formatting
 
 2007-08-07 07:32  brian
 
-	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw:
+	* inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw (1.1):
 
 	- Initial Revision of Presentation for UseR! 2007 Ames, Iowa
 
 2007-08-04 10:15  brian
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.9):
 
 	- use Return.calculate() fn instead of deprecated CalculateReturns() fn
 
 2007-08-04 10:06  brian
 
-	* R/Return.calculate.R, man/Return.calculate.Rd:
+	* R/Return.calculate.R (1.9), man/Return.calculate.Rd (1.4):
 
 	- change primary function name to Return.calculate
 	- provide alias to old fn name CalculateReturns
@@ -2544,7 +2646,7 @@
 
 2007-08-03 09:58  brian
 
-	* R/: DownsideDeviation.R, SemiDeviation.R:
+	* R/: DownsideDeviation.R (1.6), SemiDeviation.R (1.5):
 
 	- add use of length of full series or subset below MAR
 	- set proper values for SemiVariance(subset), and SemiDeviation(full)
@@ -2552,7 +2654,7 @@
 
 2007-08-03 09:56  brian
 
-	* man/: DownsideDeviation.Rd, SemiDeviation.Rd:
+	* man/: DownsideDeviation.Rd (1.12), SemiDeviation.Rd (1.9):
 
 	- remove SemiDeviation.Rd, replace with expanded discussion in
 	DownsideDeviation
@@ -2560,141 +2662,149 @@
 
 2007-07-30 14:06  brian
 
-	* R/VaR.CornishFisher.R, man/VaR.CornishFisher.Rd:
+	* R/VaR.CornishFisher.R (1.13), man/VaR.CornishFisher.Rd (1.26):
 
 	- fix typo in equation identified by Samantha Kumaran
 
 2007-07-25 22:34  peter
 
-	* R/findDrawdowns.R:
+	* R/findDrawdowns.R (1.6):
 
 	- fixed error when first period is negative
 
 2007-07-25 10:55  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.60):
 
 	- add Khanh Nguyen to thanks for his testing and bug reports
 
 2007-07-14 12:26  brian
 
-	* R/Return.annualized.R:
+	* R/Return.annualized.R (1.6):
 
 	- add handling for geometric=FALSE (simple returns)
 
 2007-07-14 12:25  brian
 
-	* man/Return.annualized.Rd:
+	* man/Return.annualized.Rd (1.9):
 
 	add formula for simple return annualization to docs
 
 2007-07-14 12:24  brian
 
-	* R/: cummax.column.R, cumprod.column.R:
+	* R/: cummax.column.R (1.7), cumprod.column.R (1.6):
 
 	- remove dots from apply to pass R CMD check
 
 2007-07-12 16:54  brian
 
-	* man/SharpeRatio.Rd:
+	* man/SharpeRatio.Rd (1.9):
 
 	- update to use sigma of excess returns per Sharpe(1994)
 
 2007-07-12 16:45  brian
 
-	* R/SharpeRatio.R:
+	* R/SharpeRatio.R (1.6):
 
 	-calculate stddev on excess return to account for a rf series, per Sharpe paper
 
 2007-07-11 10:34  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.6):
 
 	- minor formatting updates
 	- discussion of perturb/accuracy for data creation
 
 2007-07-11 10:32  brian
 
-	* man/SortinoRatio.Rd:
+	* man/SortinoRatio.Rd (1.10):
 
 	- fix formatting of \overline
 
 2007-07-11 10:23  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.5):
 
 	- add slides on Downside Deviation and VaR
 	- correct other minor errors and formatting
 
 2007-07-10 16:56  brian
 
-	* man/SharpeRatio.modified.Rd:
+	* man/SharpeRatio.modified.Rd (1.11):
 
 	- improve formatting of overline
 
 2007-07-10 16:46  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.4):
 
 	- fix size of busy ratios slide, using 'shrink', which beamer guide calls 'very evil'
 
 2007-07-10 11:47  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.3):
 
 	- add slide on reward/risk ratios: too much text, it runs off the bottom
 
 2007-07-10 11:20  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.2):
 
 	- add slide on complex measures included in table.CAPM
 
 2007-07-10 04:13  brian
 
-	* R/: cummax.column.R, cumprod.column.R:
+	* R/: cummax.column.R (1.6), cumprod.column.R (1.5):
 
 	- comment out old na.rm handling to pass R CMD check
 
 2007-07-10 04:06  brian
 
-	* R/cummax.column.R, R/cumprod.column.R, man/cum.utils.Rd:
+	* R/cummax.column.R (1.5), R/cumprod.column.R (1.4),
+	  man/cum.utils.Rd (1.2):
 
 	- change parameters to x only, for reconciliation with R core
 
 2007-07-09 08:42  brian
 
-	* R/: cummax.column.R, cumprod.column.R:
+	* R/: cummax.column.R (1.4), cumprod.column.R (1.3):
 
 	- update to pass R CMD check
 
 2007-07-09 08:41  brian
 
-	* man/: cum.utils.Rd, cummax.column.Rd, cumprod.column.Rd:
+	* man/: cum.utils.Rd (1.1), cummax.column.Rd (1.8),
+	  cumprod.column.Rd (1.8):
 
 	- remove separate cum*.column files and replace with generic cum.utils documentation
 
 2007-07-06 20:23  brian
 
 	*
-	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw:
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw
+	  (1.1):
 
 	- initial revision of noweb vignette for R/Rmetrics Meielisalp 2007 presentation
 
 2007-07-06 09:12  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.25):
 
 	- correct equation typo pointed out by Denis Musiyichuk <dmusiyichuk@bfinance.com>
 
 2007-07-06 08:40  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.24):
 
 	- correct equation typo pointed out by Denis Musiyichuk <dmusiyichuk@bfinance.com>
 
@@ -2702,31 +2812,31 @@
 
 2007-06-29 12:55  brian
 
-	* DESCRIPTION, man/PerformanceAnalytics-package.Rd:
+	* DESCRIPTION (1.14), man/PerformanceAnalytics-package.Rd (1.59):
 
 	- bump version to 0.9.5
 
 2007-06-29 10:54  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.11):
 
 	- removed plot.new() because it was causing two page pdfs
 
 2007-06-29 10:53  peter
 
-	* R/charts.RollingPerformance.R:
+	* R/charts.RollingPerformance.R (1.4):
 
 	- removed plot.new() that was causing two page pdfs
 
 2007-06-29 10:52  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.12):
 
 	- removed plot.new() that was causing two page pdf files
 
 2007-06-29 07:23  brian
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.6):
 
 	- rearranged preamble so things load in correct order
 	- fixed LaTeX errors to pass R CMD build
@@ -2734,179 +2844,181 @@
 
 2007-06-28 21:55  peter
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.5):
 
 	- changed data object name from manager.df to manager
 
 2007-06-28 21:51  peter
 
-	* data/managers.rda:
+	* data/managers.rda (1.4):
 
 	- changed name of the R object from managers.df to managers
 
 2007-06-28 21:27  brian
 
-	* man/managers.Rd:
+	* man/managers.Rd (1.1):
 
 	-initial revision of documentation for managers data set
 
 2007-06-28 19:21  brian
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.16):
 
 	- updates to clean up \usage for R CMD check
 
 2007-06-27 16:30  brian
 
-	* man/VaR.Marginal.Rd:
+	* man/VaR.Marginal.Rd (1.8):
 
 	-update for default NULL weightingvector
 
 2007-06-27 14:32  brian
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.4):
 
 	 - first cut at Sweave vignette comments and extra needed bits
 
 2007-06-27 14:21  brian
 
-	* R/VaR.Marginal.R:
+	* R/VaR.Marginal.R (1.5):
 
 	- add handling for NULL weightingvector (assume equal weight)
 
 2007-06-27 11:10  peter
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.3):
 
 	- modified to use data(managers.df) command rather than read.csv
 
 2007-06-26 22:55  peter
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.2):
 
 	- added table of contents
 
 2007-06-24 23:18  peter
 
-	* data/managers.csv:
+	* data/managers.csv (1.1):
 
 	- CSV version of managers data
 
 2007-06-24 23:18  peter
 
-	* data/managers.rda:
+	* data/managers.rda (1.3):
 
 	- jittered manager data
 
 2007-06-24 23:15  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.12):
 
 	- made gap default 12 (months)
 
 2007-06-24 09:06  brian
 
-	* man/: PerformanceAnalytics-package.Rd, Return.excess.Rd:
+	* man/: PerformanceAnalytics-package.Rd (1.58), Return.excess.Rd
+	  (1.4):
 
 	- fix typos
 
 2007-06-24 09:05  brian
 
-	* R/VaR.Beyond.R, man/VaR.Beyond.Rd:
+	* R/VaR.Beyond.R (1.8), man/VaR.Beyond.Rd (1.13):
 
 	- add parameter 'add'
 
 2007-06-23 09:50  brian
 
-	* man/DownsideDeviation.Rd:
+	* man/DownsideDeviation.Rd (1.11):
 
 	- add references
 	- add discussion of using fitted distribution rather than observed returns
 
 2007-06-23 07:33  brian
 
-	* man/CalmarRatio.Rd:
+	* man/CalmarRatio.Rd (1.2):
 
 	- add note on three year duration used in most cases
 
 2007-06-23 07:09  brian
 
-	* inst/doc/PerformanceAnalyticsVignette.lyx:
+	* inst/doc/PerformanceAnalyticsVignette.lyx (1.2):
 
 	- will be replaced by a noweb file
 
 2007-06-23 07:06  brian
 
-	* R/CalmarRatio.R, man/CalmarRatio.Rd:
+	* R/CalmarRatio.R (1.1), man/CalmarRatio.Rd (1.1):
 
 	- initial revision of Calmar and Sterling Ratio functions and docs
 	  originally requested by Khanh Nguyen <chaokhanh@yahoo.com>
 
 2007-06-23 05:43  brian
 
-	* man/StdDev.annualized.Rd:
+	* man/StdDev.annualized.Rd (1.12):
 
 	- minor text clarification
 
 2007-06-23 05:42  brian
 
-	* man/StdDev.annualized.Rd:
+	* man/StdDev.annualized.Rd (1.11):
 
 	- fix typos
 	- add text about the inverse square law
 
 2007-06-21 21:38  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.57):
 
 	- add UpsidePotentialRatio references to package introduction
 
 2007-06-21 21:31  brian
 
-	* man/SortinoRatio.Rd:
+	* man/SortinoRatio.Rd (1.9):
 
 	- fix quotes
 
 2007-06-21 21:30  brian
 
-	* man/UpsidePotentialRatio.Rd:
+	* man/UpsidePotentialRatio.Rd (1.2):
 
 	- update equation LaTeX to pass R CMD check
 
 2007-06-21 21:16  brian
 
-	* R/UpsidePotentialRatio.R, man/UpsidePotentialRatio.Rd:
+	* R/UpsidePotentialRatio.R (1.1), man/UpsidePotentialRatio.Rd
+	  (1.1):
 
 	- initial commit of functions and documentation for Sortino's Upside
 	Potential Ratio
 
 2007-06-21 20:01  brian
 
-	* man/: DownsideDeviation.Rd, SortinoRatio.Rd:
+	* man/: DownsideDeviation.Rd (1.10), SortinoRatio.Rd (1.8):
 
 	- add equations and additional text
 
 2007-06-21 16:41  brian
 
-	* man/DownsideDeviation.Rd:
+	* man/DownsideDeviation.Rd (1.9):
 
 	- add Platinga,van der Meer, Sortino 2001 reference
 
 2007-06-21 16:36  brian
 
-	* R/DownsideDeviation.R:
+	* R/DownsideDeviation.R (1.5):
 
 	- fixed to use length of entire series, per Platinga, van der Meer, Sortino 2001
 
 2007-06-21 16:24  brian
 
-	* R/DownsideDeviation.R:
+	* R/DownsideDeviation.R (1.4):
 
 	- update to use length rather than length-1 after reviewing several original Sortino papers
 
 2007-06-20 23:34  peter
 
-	* inst/doc/PA-charts.Rnw:
+	* inst/doc/PA-charts.Rnw (1.1):
 
 	- first complete draft of vignette in noweb format for easier editing
 	  within kile
@@ -2914,106 +3026,106 @@
 
 2007-06-17 22:36  brian
 
-	* man/: chart.BarVaR.Rd, chart.CumReturns.Rd,
-	  charts.PerformanceSummary.Rd:
+	* man/: chart.BarVaR.Rd (1.15), chart.CumReturns.Rd (1.12),
+	  charts.PerformanceSummary.Rd (1.10):
 
 	- update /usage and /item entries for clarity and to pass check
 
 2007-06-17 22:35  brian
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.11):
 
 	- make method argument a list
 
 2007-06-17 22:34  brian
 
-	* R/chart.CumReturns.R:
+	* R/chart.CumReturns.R (1.7):
 
 	- reverse default order of 'begin' argument to match charts.PerformanceSummary
 
 2007-06-17 22:33  brian
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.11):
 
 	- use switch for method argument, more efficient
 
 2007-06-17 16:42  brian
 
-	* R/chart.Histogram.R, man/StdDev.annualized.Rd,
-	  man/chart.Histogram.Rd:
+	* R/chart.Histogram.R (1.8), man/StdDev.annualized.Rd (1.10),
+	  man/chart.Histogram.Rd (1.11):
 
 	- update /usage and /items to pass check
 
 2007-06-07 18:45  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.13):
 
 	- add URL
 
 2007-06-07 18:45  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.23):
 
 	- add reference to quantile
 
 2007-06-07 18:44  brian
 
-	* man/: StdDev.annualized.Rd, mean.utils.Rd:
+	* man/: StdDev.annualized.Rd (1.9), mean.utils.Rd (1.11):
 
 	- fix broken \link's
 
 2007-06-07 18:43  brian
 
-	* man/PerformanceAnalytics-internal.Rd:
+	* man/PerformanceAnalytics-internal.Rd (1.3):
 
 	- remove defunct \links
 
 2007-06-07 18:42  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.56):
 
 	- format urls
 
 2007-06-07 18:42  brian
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.7):
 
 	- add comments
 
 2007-06-07 18:02  brian
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.8):
 
 	- update passing of ... into functions
 	- fix scale/periods cut and paste error
 
 2007-06-05 08:10  peter
 
-	* R/maxDrawdown.R:
+	* R/maxDrawdown.R (1.3):
 
 	- fixed calculation for negative value in first month
 
 2007-06-04 09:32  peter
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.7):
 
 	- fixed x and Ra replacement error
 
 2007-05-15 15:02  brian
 
-	* R/StdDev.annualized.R:
+	* R/StdDev.annualized.R (1.6):
 
 	- fix syntax error (extra paren)
 
 2007-05-15 14:47  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.4):
 
 	- handles multiple column objects
 
 2007-05-15 06:57  brian
 
-	* R/StdDev.annualized.R, man/StdDev.annualized.Rd:
+	* R/StdDev.annualized.R (1.5), man/StdDev.annualized.Rd (1.8):
 
 	- standardize usage to match common R usage
 	- define sd.annualized and sd.multiperiod as generic extensions of R core sd fn
@@ -3021,50 +3133,50 @@
 
 2007-05-15 06:51  brian
 
-	* man/StdDev.Rd, R/StdDev.R:
+	* man/StdDev.Rd (1.9), R/StdDev.R (1.5):
 
 	- removed, no longer relevant
 
 2007-05-01 07:56  peter
 
-	* man/: chart.BarVaR.Rd, chart.CumReturns.Rd:
+	* man/: chart.BarVaR.Rd (1.14), chart.CumReturns.Rd (1.11):
 
 	- added missing attributes
 
 2007-04-30 07:56  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.10):
 
 	- changed 'method' to 'begin'
 
 2007-04-30 07:51  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.6):
 
 	- fixed F instead of FALSE error
 
 2007-04-27 06:19  brian
 
-	* man/PerformanceAnalytics-internal.Rd:
+	* man/PerformanceAnalytics-internal.Rd (1.2):
 
 	- add \item descriptions from R SVN repository copy of legend.Rd at
 	  https://svn.r-project.org/R/trunk/src/library/graphics/man/legend.Rd
 
 2007-04-27 05:46  brian
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.10):
 
 	- add examples
 
 2007-04-26 22:25  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.5):
 
 	- added risk lines
 
 2007-04-26 22:08  peter
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.4):
 
 	- added switch
 	- added qqchart
@@ -3072,86 +3184,87 @@
 
 2007-04-26 08:22  brian
 
-	* man/: PerformanceAnalytics-package.Rd, chart.CumReturns.Rd,
-	  chart.Drawdown.Rd, chart.QQPlot.Rd, chart.TimeSeries.Rd,
-	  charts.PerformanceSummary.Rd, cummax.column.Rd,
-	  cumprod.column.Rd, download.RiskFree.Rd, edhec.Rd,
-	  findDrawdowns.Rd, maxDrawdown.Rd, mean.utils.Rd,
-	  rollingRegression.Rd, sortDrawdowns.Rd,
-	  table.AnnualizedReturns.Rd, table.CAPM.Rd, table.DownsideRisk.Rd,
-	  table.Drawdowns.Rd:
+	* man/: PerformanceAnalytics-package.Rd (1.55), chart.CumReturns.Rd
+	  (1.10), chart.Drawdown.Rd (1.10), chart.QQPlot.Rd (1.8),
+	  chart.TimeSeries.Rd (1.16), charts.PerformanceSummary.Rd (1.9),
+	  cummax.column.Rd (1.7), cumprod.column.Rd (1.7),
+	  download.RiskFree.Rd (1.5), edhec.Rd (1.5), findDrawdowns.Rd
+	  (1.12), maxDrawdown.Rd (1.7), mean.utils.Rd (1.10),
+	  rollingRegression.Rd (1.5), sortDrawdowns.Rd (1.6),
+	  table.AnnualizedReturns.Rd (1.8), table.CAPM.Rd (1.12),
+	  table.DownsideRisk.Rd (1.13), table.Drawdowns.Rd (1.2):
 
 	- update links
 	- fix typos
 
 2007-04-25 22:00  brian
 
-	* man/: VaR.Beyond.Rd, apply.rolling.Rd, chart.Bar.Rd,
-	  chart.BarVaR.Rd, chart.Boxplot.Rd, chart.Correlation.Rd,
-	  chart.Correlation.color.Rd:
+	* man/: VaR.Beyond.Rd (1.12), apply.rolling.Rd (1.2), chart.Bar.Rd
+	  (1.11), chart.BarVaR.Rd (1.13), chart.Boxplot.Rd (1.8),
+	  chart.Correlation.Rd (1.8), chart.Correlation.color.Rd (1.7):
 
 	- update links
 
 2007-04-25 21:12  brian
 
-	* man/: SharpeRatio.annualized.Rd, SharpeRatio.modified.Rd,
-	  SortinoRatio.Rd:
+	* man/: SharpeRatio.annualized.Rd (1.8), SharpeRatio.modified.Rd
+	  (1.10), SortinoRatio.Rd (1.7):
 
 	- update links
 	- fix typos
 
 2007-04-25 21:09  brian
 
-	* man/: InformationRatio.Rd, SharpeRatio.Rd:
+	* man/: InformationRatio.Rd (1.9), SharpeRatio.Rd (1.8):
 
 	- update links
 
 2007-04-25 21:06  brian
 
-	* man/SemiDeviation.Rd:
+	* man/SemiDeviation.Rd (1.8):
 
 	- fix typo
 
 2007-04-25 15:07  peter
 
-	* R/chart.Scatter.R:
+	* R/chart.Scatter.R (1.4):
 
 	- added x-y axes
 
 2007-04-25 15:06  peter
 
-	* R/chart.CumReturns.R:
+	* R/chart.CumReturns.R (1.6):
 
 	- changed the 'method' tag to 'begin'
 
 2007-04-23 09:35  peter
 
-	* R/chart.Regression.R:
+	* R/chart.Regression.R (1.1):
 
 	- scatterplot to handle multiple columns of data
 
 2007-04-22 07:54  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.54):
 
 	- minor grammatical fixes
 	- spell check
 
 2007-04-21 09:07  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.10):
 
 	- added 'all' flag: when F only draws first column
 
 2007-04-20 20:06  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.9):
 
 	- creates risk lines for each column of data
 
 2007-04-20 08:47  peter
 
-	* R/chart.CumReturns.R:
+	* R/chart.CumReturns.R (1.5):
 
 	- added attribute 'method' with values of 'axis' and 'first' to indicate
 	  where to attach shorter data lengths for comparison
@@ -3160,482 +3273,489 @@
 
 2007-04-15 21:25  brian
 
-	* man/PerformanceAnalytics-internal.Rd:
+	* man/PerformanceAnalytics-internal.Rd (1.1):
 
 	- Initial revision of Rd file for internal objects
 
 2007-04-15 20:59  brian
 
-	* R/mean.utils.R, man/mean.utils.Rd:
+	* R/mean.utils.R (1.7), man/mean.utils.Rd (1.9):
 
 	- add dots parameter to pass R CMD check
 
 2007-04-15 11:14  brian
 
-	* man/apply.rolling.Rd:
+	* man/apply.rolling.Rd (1.1):
 
 	- Initial Revision of documentation for apply.rolling function
 
 2007-04-15 11:01  brian
 
-	* man/checkData.Rd:
+	* man/checkData.Rd (1.5):
 
 	- fix title
 
 2007-04-15 10:47  brian
 
-	* man/chart.RollingPerformance.Rd:
+	* man/chart.RollingPerformance.Rd (1.14):
 
 	- add stubs for undocumented parameters
 
 2007-04-15 10:46  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.12):
 
 	- update date before release
 
 2007-04-15 09:45  brian
 
-	* R/table.Correlation.R, man/table.Correlation.Rd:
+	* R/table.Correlation.R (1.6), man/table.Correlation.Rd (1.11):
 
 	- remove unused parameter n
 
 2007-04-15 08:55  brian
 
-	* man/chart.RollingPerformance.Rd:
+	* man/chart.RollingPerformance.Rd (1.13):
 
 	- add documentation for many of the undocumented parameters to get closer to passing R CMD check
 
 2007-04-15 07:56  brian
 
-	* man/chart.Histogram.Rd:
+	* man/chart.Histogram.Rd (1.9):
 
 	- add details for undocumented parameters
 
 2007-04-15 07:56  brian
 
-	* R/chart.Histogram.R:
+	* R/chart.Histogram.R (1.3):
 
 	- add breaks as an explicit parameter
 
 2007-04-15 07:12  brian
 
-	* man/apply.fromstart.Rd:
+	* man/apply.fromstart.Rd (1.2):
 
 	- typo
 
 2007-04-15 07:07  brian
 
-	* man/apply.fromstart.Rd:
+	* man/apply.fromstart.Rd (1.1):
 
 	- Initial Revision of documentation for apply.fromstart function
 
 2007-04-15 06:08  brian
 
-	* man/download.SP500PriceReturns.Rd:
+	* man/download.SP500PriceReturns.Rd (1.8):
 
 	- remove unused sections
 
 2007-04-15 06:07  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.22):
 
 	- minor text revision
 
 2007-04-15 06:07  brian
 
-	* man/Return.excess.Rd:
+	* man/Return.excess.Rd (1.3):
 
 	- additional text and examples to demonstrate excess return over a benchmark
 
 2007-04-15 06:04  brian
 
-	* man/findDrawdowns.Rd:
+	* man/findDrawdowns.Rd (1.11):
 
 	- fix LaTeX errors in the unordered list in \value section
 
 2007-04-15 05:59  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.53):
 
 	- add additional text to discuss new functions apply.fromstart, apply.rolling, and Return.excess
 	- add reference to 'portfolio' package for tracking historical portfolios
 
 2007-04-14 19:51  brian
 
-	* R/rollingCorrelation.R, R/rollingFunction.R,
-	  man/rollingCorrelation.Rd, man/rollingFunction.Rd:
+	* R/rollingCorrelation.R (1.3), R/rollingFunction.R (1.6),
+	  man/rollingCorrelation.Rd (1.9), man/rollingFunction.Rd (1.12):
 
 	- standardize return and width parameters
 
 2007-04-14 18:55  brian
 
-	* man/Return.excess.Rd:
+	* man/Return.excess.Rd (1.2):
 
 	- fix LaTeX syntax errors
 
 2007-04-14 17:42  brian
 
-	* man/findDrawdowns.Rd:
+	* man/findDrawdowns.Rd (1.10):
 
 	- fix case of link
 
 2007-04-14 17:38  brian
 
-	* man/findDrawdowns.Rd:
+	* man/findDrawdowns.Rd (1.9):
 
 	- fix case of link
 
 2007-04-14 17:32  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.21):
 
 	- add alias for vanila VaR function
 
 2007-04-14 17:27  brian
 
-	* man/Return.excess.Rd:
+	* man/Return.excess.Rd (1.1):
 
 	- initial Revision of documentation and examples for Return.excess function
 
 2007-04-14 15:57  brian
 
-	* man/findDrawdowns.Rd:
+	* man/findDrawdowns.Rd (1.8):
 
 	- add \alias for similar function Drawdowns
 
 2007-04-14 14:12  brian
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.8):
 
 	-lowercase first parameter prices
 
 2007-04-14 14:12  brian
 
-	* man/: Return.calculate.Rd, VaR.Beyond.Rd:
+	* man/: Return.calculate.Rd (1.3), VaR.Beyond.Rd (1.11):
 
 	- adjust \usage to match code
 	- add \items for additional parameters
 
 2007-04-14 11:25  brian
 
-	* man/: chart.BarVaR.Rd, chart.RollingMean.Rd,
-	  chart.RollingPerformance.Rd:
+	* man/: chart.BarVaR.Rd (1.12), chart.RollingMean.Rd (1.9),
+	  chart.RollingPerformance.Rd (1.12):
 
 	- match \usage and parameter documentation to code
 
 2007-04-14 10:48  brian
 
-	* man/: chart.RollingCorrelation.Rd, chart.RollingMean.Rd,
-	  chart.RollingPerformance.Rd, chart.RollingRegression.Rd,
-	  chart.Scatter.Rd:
+	* man/: chart.RollingCorrelation.Rd (1.10), chart.RollingMean.Rd
+	  (1.8), chart.RollingPerformance.Rd (1.11),
+	  chart.RollingRegression.Rd (1.18), chart.Scatter.Rd (1.7):
 
 	- match \usage and parameter documentation to code
 
 2007-04-14 10:42  brian
 
-	* R/chart.RollingCorrelation.R:
+	* R/chart.RollingCorrelation.R (1.5):
 
 	- standardize Ra as first argument for asset returns
 
 2007-04-14 10:04  brian
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.17):
 
 	- standardize Ra as first argument for asset returns
 	- add more detail about how the 'attribute' arguments are computed
 
 2007-04-14 10:01  brian
 
-	* R/: chart.RollingRegression.R, charts.RollingRegression.R:
+	* R/: chart.RollingRegression.R (1.12), charts.RollingRegression.R
+	  (1.10):
 
 	- standardize Ra as first argument for asset returns
 
 2007-04-14 10:00  brian
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.11):
 
 	- make 'attribute' an enumerated argument
 
 2007-04-14 09:12  brian
 
-	* man/charts.PerformanceSummary.Rd:
+	* man/charts.PerformanceSummary.Rd (1.8):
 
 	- add documentation for width rolling window parameter
 
 2007-04-14 08:59  brian
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.15):
 
 	- adjust \usage to match code
 
 2007-04-14 08:57  brian
 
-	* man/download.SP500PriceReturns.Rd:
+	* man/download.SP500PriceReturns.Rd (1.7):
 
 	- make description for compounding method match code
 
 2007-04-14 08:55  brian
 
-	* R/: download.RiskFree.R, download.SP500PriceReturns.R:
+	* R/: download.RiskFree.R (1.7), download.SP500PriceReturns.R
+	  (1.8):
 
 	- standardize enumerated arguments,
 	- assign default value to a string string if no value passed in to avoid warnings
 
 2007-04-14 08:26  brian
 
-	* man/: chart.RelativePerformance.Rd, chart.Scatter.Rd,
-	  chart.TimeSeries.Rd, charts.PerformanceSummary.Rd:
+	* man/: chart.RelativePerformance.Rd (1.9), chart.Scatter.Rd (1.6),
+	  chart.TimeSeries.Rd (1.14), charts.PerformanceSummary.Rd (1.7):
 
 	- add/fix \item for ylog
 
 2007-04-14 08:26  brian
 
-	* man/table.RollingPeriods.Rd:
+	* man/table.RollingPeriods.Rd (1.13):
 
 	- fix usage to match code
 
 2007-04-14 08:24  brian
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.8):
 
 	- standardize on Ra for returns of asset
 
 2007-04-14 08:09  brian
 
-	* R/rollingFunction.R:
+	* R/rollingFunction.R (1.5):
 
 	- remove excess comments that no longer apply
 
 2007-04-14 08:08  brian
 
-	* R/rollingFunction.R:
+	* R/rollingFunction.R (1.4):
 
 	- remove deprecated firstcolumn argument
 
 2007-04-14 07:59  brian
 
-	* man/table.HigherMoments.Rd:
+	* man/table.HigherMoments.Rd (1.7):
 
 	- fix x/y Ra/Rb consusion and update \usade and \item definitions to match
 
 2007-04-14 07:47  brian
 
-	* man/table.RollingPeriods.Rd:
+	* man/table.RollingPeriods.Rd (1.12):
 
 	- add \dots argument \item
 
 2007-04-14 07:46  brian
 
-	* man/table.RollingPeriods.Rd:
+	* man/table.RollingPeriods.Rd (1.11):
 
 	- add scale argument \item
 
 2007-04-14 07:44  brian
 
-	* man/table.RollingPeriods.Rd:
+	* man/table.RollingPeriods.Rd (1.10):
 
 	- remove deprecated firstcolumn and column arguments from \item and \usage
 
 2007-04-14 07:38  brian
 
-	* man/: rollingFunction.Rd, table.AnnualizedReturns.Rd,
-	  table.DownsideRisk.Rd, table.Returns.Rd, table.RollingPeriods.Rd:
+	* man/: rollingFunction.Rd (1.11), table.AnnualizedReturns.Rd
+	  (1.7), table.DownsideRisk.Rd (1.12), table.Returns.Rd (1.11),
+	  table.RollingPeriods.Rd (1.9):
 
 	- remove deprecated firstcolumn and column arguments from \item and \usage
 
 2007-04-14 07:27  brian
 
-	* man/checkData.Rd:
+	* man/checkData.Rd (1.4):
 
 	- add \item{method} documentation
 	- standardize on "x" as first parameter
 
 2007-04-14 07:23  brian
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.8):
 
 	add \dots to parameter documentation
 
 2007-04-14 07:22  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.20):
 
 	- remove unused cloumn argument from \usage
 
 2007-04-13 20:02  peter
 
-	* data/managers.rda:
+	* data/managers.rda (1.2):
 
 	- fixed date formats
 
 2007-04-13 17:45  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.8):
 
 	- changed how na.omit is applied
 
 2007-04-11 09:12  peter
 
-	* inst/doc/PerformanceAnalyticsVignette.lyx:
+	* inst/doc/PerformanceAnalyticsVignette.lyx (1.1):
 
 	- added to CVS
 
 2007-04-09 20:45  peter
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.11):
 
 	- incremented date and version number
 
 2007-04-09 20:43  peter
 
-	* R/table.DownsideRisk.R:
+	* R/table.DownsideRisk.R (1.6):
 
 	- cleanup to prevent warning about names from checkData
 
 2007-04-09 19:39  peter
 
-	* R/VaR.Beyond.R:
+	* R/VaR.Beyond.R (1.7):
 
 	- fixed to provide numeric when single column is passed in
 
 2007-04-09 10:23  peter
 
-	* man/table.Correlation.Rd:
+	* man/table.Correlation.Rd (1.10):
 
 	- fixed example
 
 2007-04-09 10:09  peter
 
-	* man/table.CAPM.Rd:
+	* man/table.CAPM.Rd (1.11):
 
 	- fixed example
 
 2007-04-09 08:30  brian
 
-	* man/: VaR.Beyond.Rd, cummax.column.Rd, cumprod.column.Rd,
-	  mean.utils.Rd:
+	* man/: VaR.Beyond.Rd (1.10), cummax.column.Rd (1.6),
+	  cumprod.column.Rd (1.6), mean.utils.Rd (1.7):
 
 	- clean up documentation
 
 2007-04-09 07:59  brian
 
-	* man/KellyRatio.Rd:
+	* man/KellyRatio.Rd (1.7):
 
 	- fix syntaxt error in R CMD check example
 
 2007-04-09 07:54  brian
 
-	* man/: KellyRatio.Rd, Omega.Rd:
+	* man/: KellyRatio.Rd (1.6), Omega.Rd (1.14):
 
 	- add column names to the example so it will make more sense
 
 2007-04-09 07:31  brian
 
-	* R/VaR.Marginal.R, R/chart.RiskReturnScatter.R,
-	  R/charts.PerformanceSummary.R, R/checkData.R, R/mean.utils.R,
-	  man/PerformanceAnalytics-package.Rd, man/StdDev.annualized.Rd,
-	  man/UpDownRatios.Rd, man/VaR.Marginal.Rd, man/checkData.Rd:
+	* R/VaR.Marginal.R (1.4), R/chart.RiskReturnScatter.R (1.4),
+	  R/charts.PerformanceSummary.R (1.9), R/checkData.R (1.11),
+	  R/mean.utils.R (1.6), man/PerformanceAnalytics-package.Rd (1.52),
+	  man/StdDev.annualized.Rd (1.7), man/UpDownRatios.Rd (1.6),
+	  man/VaR.Marginal.Rd (1.7), man/checkData.Rd (1.3):
 
 	- syntax and usage changes to pass R CMD check
 
 2007-04-09 06:11  brian
 
-	* man/VaR.Marginal.Rd:
+	* man/VaR.Marginal.Rd (1.6):
 
 	- add examples
 
 2007-04-08 22:45  peter
 
-	* R/SharpeRatio.R:
+	* R/SharpeRatio.R (1.5):
 
 	- uses checkData
 	- uses Return.excess
 
 2007-04-08 22:31  peter
 
-	* R/SortinoRatio.R:
+	* R/SortinoRatio.R (1.4):
 
 	- uses checkData
 
 2007-04-08 22:31  peter
 
-	* R/: TreynorRatio.R, SharpeRatio.annualized.R:
+	* R/: TreynorRatio.R (1.5), SharpeRatio.annualized.R (1.5):
 
 	- uses checkData
 	- uses Return.excess
 
 2007-04-08 22:18  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.10):
 
 	- forces column name in single column object
 
 2007-04-08 22:16  peter
 
-	* man/: Return.cumulative.Rd, Return.annualized.Rd,
-	  DownsideDeviation.Rd:
+	* man/: Return.cumulative.Rd (1.8), Return.annualized.Rd (1.8),
+	  DownsideDeviation.Rd (1.8):
 
 	- added example
 
 2007-04-08 22:13  peter
 
-	* man/: TrackingError.Rd, StdDev.annualized.Rd, SortinoRatio.Rd,
-	  SharpeRatio.modified.Rd, SharpeRatio.annualized.Rd,
-	  SharpeRatio.Rd, SemiDeviation.Rd:
+	* man/: TrackingError.Rd (1.6), StdDev.annualized.Rd (1.6),
+	  SortinoRatio.Rd (1.6), SharpeRatio.modified.Rd (1.9),
+	  SharpeRatio.annualized.Rd (1.7), SharpeRatio.Rd (1.7),
+	  SemiDeviation.Rd (1.7):
 
 	- added example
 
 2007-04-08 22:09  peter
 
-	* man/: download.SP500PriceReturns.Rd, download.RiskFree.Rd,
-	  checkData.Rd, chart.RollingPerformance.Rd,
-	  chart.RiskReturnScatter.Rd, UpDownRatios.Rd, TreynorRatio.Rd:
+	* man/: download.SP500PriceReturns.Rd (1.6), download.RiskFree.Rd
+	  (1.4), checkData.Rd (1.2), chart.RollingPerformance.Rd (1.10),
+	  chart.RiskReturnScatter.Rd (1.9), UpDownRatios.Rd (1.5),
+	  TreynorRatio.Rd (1.6):
 
 	- added example
 
 2007-04-03 22:14  peter
 
-	* data/managers.rda:
+	* data/managers.rda (1.1):
 
 	- added Hypothetical Asset Manager 1 performance data
 
 2007-04-03 21:46  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.8):
 
 	- added gap parameter for chart.BarVaR
 
 2007-04-03 21:45  peter
 
-	* R/apply.rolling.R:
+	* R/apply.rolling.R (1.2):
 
 	- added some backflips to name the single column zoo object
 
 2007-04-03 19:23  brian
 
-	* man/table.CAPM.Rd:
+	* man/table.CAPM.Rd (1.10):
 
 	- change to preformatted example text
 
 2007-04-03 19:23  brian
 
-	* R/: ActivePremium.R, BetaCoKurtosis.R, CoKurtosis.R,
-	  CoSkewness.R, InformationRatio.R, TrackingError.R,
-	  VaR.CornishFisher.R, table.Drawdowns.R:
+	* R/: ActivePremium.R (1.5), BetaCoKurtosis.R (1.5), CoKurtosis.R
+	  (1.5), CoSkewness.R (1.5), InformationRatio.R (1.5),
+	  TrackingError.R (1.5), VaR.CornishFisher.R (1.12),
+	  table.Drawdowns.R (1.4):
 
 	- typos and minor comment updates
 
 2007-04-02 16:58  peter
 
-	* R/chart.Scatter.R:
+	* R/chart.Scatter.R (1.3):
 
 	- changed colorset default
 	- changed to use checkData
 
 2007-04-02 16:57  peter
 
-	* R/UpDownRatios.R:
+	* R/UpDownRatios.R (1.3):
 
 	- modified to use checkData functions
 	- uses zoo to align dates
@@ -3643,163 +3763,164 @@
 
 2007-04-02 16:55  peter
 
-	* R/table.Returns.R:
+	* R/table.Returns.R (1.6):
 
 	- removed column parameter
 
 2007-04-02 16:54  peter
 
-	* R/SharpeRatio.modified.R:
+	* R/SharpeRatio.modified.R (1.5):
 
 	- modified to use CheckData
 	- modified to use Return.excess
 
 2007-04-02 16:53  peter
 
-	* R/chart.RiskReturnScatter.R:
+	* R/chart.RiskReturnScatter.R (1.3):
 
 	- changed to checkData function
 
 2007-04-02 16:52  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.7):
 
 	- added removal of NA's
 
 2007-04-02 16:49  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.11):
 
 	- minor modification
 
 2007-03-30 09:31  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.10):
 
 	- when a single column is submitted, result is now a "numeric" rather than a
 	  "list" object
 
 2007-03-25 15:18  brian
 
-	* man/rollingFunction.Rd:
+	* man/rollingFunction.Rd (1.10):
 
 	- add some additional details
 
 2007-03-25 09:23  brian
 
-	* man/table.Drawdowns.Rd:
+	* man/table.Drawdowns.Rd (1.1):
 
 	- Initial Revision of documentation and examples for Drawdowns table
 
 2007-03-24 08:45  brian
 
-	* R/VaR.Beyond.R:
+	* R/VaR.Beyond.R (1.6):
 
 	- add default confidence of p=.95
 
 2007-03-24 08:30  brian
 
-	* R/checkData.R:
+	* R/checkData.R (1.9):
 
 	- remove spurious parentheses added by editor
 
 2007-03-24 08:28  brian
 
-	* R/checkData.R:
+	* R/checkData.R (1.8):
 
 	- fix cut and paste error in checkDataZoo wrapper
 
 2007-03-24 08:24  brian
 
-	* R/checkData.R:
+	* R/checkData.R (1.7):
 
 	- add wrappers for deprecated checkDataMatrix checkDataVector checkDataZoo
 	- replaces files checkDataMatrix.R  checkDataVector.R  checkDataZoo.R
 
 2007-03-24 08:23  brian
 
-	* R/: checkDataMatrix.R, checkDataVector.R, checkDataZoo.R:
+	* R/: checkDataMatrix.R (1.6), checkDataVector.R (1.6),
+	  checkDataZoo.R (1.4):
 
 	- remove original implementations of individual checkData* functions, deprecated
 	- replaced by wrappers in checkData.R
 
 2007-03-24 08:21  brian
 
-	* man/checkData.Rd:
+	* man/checkData.Rd (1.1):
 
 	- initial revision of consolidated checkData documentation
 
 2007-03-24 08:03  brian
 
-	* man/: checkDataMatrix.Rd, checkDataVector.Rd:
+	* man/: checkDataMatrix.Rd (1.8), checkDataVector.Rd (1.7):
 
 	- made obsolete by the addition of checkData
 
 2007-03-22 16:53  peter
 
-	* R/table.RollingPeriods.R:
+	* R/table.RollingPeriods.R (1.5):
 
 	- added checkData
 	- using zoo for window() calcs in period lengths
 
 2007-03-22 09:44  peter
 
-	* R/table.AnnualizedReturns.R:
+	* R/table.AnnualizedReturns.R (1.5):
 
 	- uses checkData
 	- eliminated firstcolumn
 
 2007-03-22 09:39  peter
 
-	* R/table.DownsideRisk.R:
+	* R/table.DownsideRisk.R (1.5):
 
 	- uses checkData
 
 2007-03-22 09:24  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.9):
 
 	- removed column attribute
 
 2007-03-22 09:03  peter
 
-	* R/table.Returns.R:
+	* R/table.Returns.R (1.5):
 
 	- uses checkData
 
 2007-03-22 08:49  peter
 
-	* R/table.HigherMoments.R:
+	* R/table.HigherMoments.R (1.6):
 
 	- cleaned up comments
 
 2007-03-22 08:48  peter
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.11):
 
 	- removed and edited comments
 
 2007-03-22 08:48  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.7):
 
 	- removed yaxis label in favor of default
 
 2007-03-22 08:46  peter
 
-	* R/chart.RollingMean.R:
+	* R/chart.RollingMean.R (1.3):
 
 	- uses checkData
 
 2007-03-22 08:22  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.19):
 
 	- add better description of distribution of losses mu
 
 2007-03-22 07:38  peter
 
-	* R/table.Correlation.R:
+	* R/table.Correlation.R (1.5):
 
 	- handles multiple assets and benchmarks
 	- uses checkData
@@ -3807,63 +3928,63 @@
 
 2007-03-22 07:16  brian
 
-	* man/: VaR.Beyond.Rd, VaR.CornishFisher.Rd:
+	* man/: VaR.Beyond.Rd (1.9), VaR.CornishFisher.Rd (1.18):
 
 	- add VaR examples
 
 2007-03-22 07:15  brian
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.8):
 
 	- remove VaR.multicolumn, obsolete
 
 2007-03-22 06:54  brian
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.7):
 
 	- added handlnig for multicolumn data
 
 2007-03-22 06:52  brian
 
-	* R/VaR.Beyond.R:
+	* R/VaR.Beyond.R (1.5):
 
 	- allow use of modified VaR calculation as an option
 
 2007-03-22 06:48  brian
 
-	* R/VaR.Beyond.R:
+	* R/VaR.Beyond.R (1.4):
 
 	- change to use CheckData
 	- remove obsolete separate handling for single-column data
 
 2007-03-22 06:47  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.10):
 
 	- changed legend label separator to "to"
 
 2007-03-22 06:40  peter
 
-	* R/table.HigherMoments.R:
+	* R/table.HigherMoments.R (1.5):
 
 	- handles multiple assets and benchmarks
 	- uses checkData
 
 2007-03-22 06:34  peter
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.10):
 
 	- changed the colname label connector from "vs" to "to"
 
 2007-03-21 20:24  peter
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.9):
 
 	- shortened col labels
 
 2007-03-21 20:03  peter
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.8):
 
 	- handles uneven periods of data
 	- handles matrixes of assets and benchmarks
@@ -3871,304 +3992,307 @@
 
 2007-03-21 16:46  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.6):
 
 	- passing in wealth.index to top chart
 
 2007-03-21 16:44  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.5):
 
 	- fixed conditional test
 
 2007-03-21 16:40  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.4):
 
 	- added error handling for ylog passing in top chart
 
 2007-03-21 15:49  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.6):
 
 	- fixed issue with ylim when passed a matrix-like object
 
 2007-03-21 11:34  peter
 
-	* R/findDrawdowns.R:
+	* R/findDrawdowns.R (1.5):
 
 	- fixed period calculations
 
 2007-03-21 09:09  peter
 
-	* R/Drawdowns.R:
+	* R/Drawdowns.R (1.1):
 
 	- separated function from the chart.Drawdowns.R
 
 2007-03-21 09:08  peter
 
-	* R/sortDrawdowns.R:
+	* R/sortDrawdowns.R (1.4):
 
 	- added sorts on new attributes in findDrawdowns.R
 
 2007-03-21 09:07  peter
 
-	* R/findDrawdowns.R:
+	* R/findDrawdowns.R (1.4):
 
 	- added trough date, periods to trough, periods to recovery
 	- changed to use dataCheck
 
 2007-03-21 09:07  peter
 
-	* R/table.Drawdowns.R:
+	* R/table.Drawdowns.R (1.3):
 
 	- added trough date, periods to trough, and periods to recovery
 
 2007-03-20 23:20  peter
 
-	* R/table.Drawdowns.R:
+	* R/table.Drawdowns.R (1.2):
 
 	- added error trap where top exceeds # drawdowns
 
 2007-03-20 23:13  peter
 
-	* R/table.Drawdowns.R:
+	* R/table.Drawdowns.R (1.1):
 
 	- initial addition of function to cvs
 
 2007-03-20 09:34  brian
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.7):
 
 	- restored CVS revision log data
 
 2007-03-20 09:31  brian
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.7):
 
 	- restored CVS revision log data
 
 2007-03-20 08:48  peter
 
-	* R/charts.PerformanceSummary.R:
+	* R/charts.PerformanceSummary.R (1.3):
 
 	- changed "n" attribute to "width" in chart.BarVaR call
 
 2007-03-20 08:47  peter
 
-	* R/table.MonthlyReturns.R:
+	* R/table.MonthlyReturns.R (1.6):
 
 	- changed to checkData
 	- cleaned up alignment
 
 2007-03-20 06:27  brian
 
-	* R/download.RiskFree.R:
+	* R/download.RiskFree.R (1.6):
 
 	- add copyright, license, and CVS Log
 
 2007-03-20 05:48  brian
 
-	* R/apply.fromstart.R:
+	* R/apply.fromstart.R (1.3):
 
 	- add copyright, license, and CVS Log
 
 2007-03-20 05:44  brian
 
-	* R/: apply.fromstart.R, chart.BarVaR.R,
-	  chart.RelativePerformance.R:
+	* R/: apply.fromstart.R (1.2), chart.BarVaR.R (1.5),
+	  chart.RelativePerformance.R (1.7):
 
 	- change F to FALSE to pass R CMD check
 
 2007-03-19 22:29  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.6):
 
 	- shut off rowname and columnname warnings when method == "vector"
 
 2007-03-19 22:28  peter
 
-	* R/apply.fromstart.R:
+	* R/apply.fromstart.R (1.1):
 
 	- uses zoo functions to apply functions to expanding windows
 
 2007-03-19 22:28  peter
 
-	* R/apply.rolling.R:
+	* R/apply.rolling.R (1.1):
 
 	- uses zoo functions to apply functions to rolling windows
 
 2007-03-19 22:27  peter
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.4):
 
 	- uses apply.rolling and apply.fromstart to calculate risk lines
 
 2007-03-19 22:26  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.6):
 
 	- removed firstcolumn
 
 2007-03-19 16:55  peter
 
-	* R/VaR.CornishFisher.R:
+	* R/VaR.CornishFisher.R (1.5):
 
 	- replaced data checking with checkData function
 
 2007-03-17 15:56  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.17):
 
 	- correct typos
 
 2007-03-16 20:24  brian
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.6):
 
 	- drop=FALSE to pass R CMD check
 
 2007-03-16 20:16  brian
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.9):
 
 	- restored CVS revision log data
 
 2007-03-16 19:42  brian
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.8):
 
 	- correct use of F instead of FALSE to pass R CMD check
 
 2007-03-16 19:42  brian
 
-	* man/: ActivePremium.Rd, BetaCoKurtosis.Rd, CAPM.alpha.Rd,
-	  CAPM.beta.Rd, chart.RelativePerformance.Rd,
-	  chart.RollingCorrelation.Rd, chart.RollingRegression.Rd:
+	* man/: ActivePremium.Rd (1.8), BetaCoKurtosis.Rd (1.8),
+	  CAPM.alpha.Rd (1.11), CAPM.beta.Rd (1.11),
+	  chart.RelativePerformance.Rd (1.8), chart.RollingCorrelation.Rd
+	  (1.9), chart.RollingRegression.Rd (1.16):
 
 	- correct LaTeX and example errors of the format="\%b \%Y" by escaping %
 
 2007-03-16 19:25  peter
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.5):
 
 	- uses checkData
 	- corrected calculation
 
 2007-03-16 10:27  peter
 
-	* man/ActivePremium.Rd:
+	* man/ActivePremium.Rd (1.7):
 
 	- fixed example
 
 2007-03-16 09:22  peter
 
-	* R/download.RiskFree.R:
+	* R/download.RiskFree.R (1.5):
 
 	- now delivers a zoo object instead of a data.frame
 
 2007-03-16 09:03  peter
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.6):
 
 	- added cvs footer
 
 2007-03-16 08:59  peter
 
-	* R/: Return.excess.R, charts.RollingRegression.R,
-	  Return.calculate.R:
+	* R/: Return.excess.R (1.3), charts.RollingRegression.R (1.7),
+	  Return.calculate.R (1.6):
 
 	- added cvs footer
 
 2007-03-16 08:47  peter
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.5):
 
 	- returns a zoo object rather than a data frame
 	- uses zoo functions to simplify calculations
 
 2007-03-15 22:59  peter
 
-	* man/ActivePremium.Rd:
+	* man/ActivePremium.Rd (1.6):
 
 	- fixed example
 
 2007-03-15 22:56  peter
 
-	* man/: CAPM.alpha.Rd, CAPM.beta.Rd:
+	* man/: CAPM.alpha.Rd (1.10), CAPM.beta.Rd (1.10):
 
 	- fixed example
 
 2007-03-15 22:53  peter
 
-	* man/chart.RollingMean.Rd:
+	* man/chart.RollingMean.Rd (1.7):
 
 	- added example
 
 2007-03-15 22:48  peter
 
-	* man/: chart.RollingCorrelation.Rd, chart.RelativePerformance.Rd:
+	* man/: chart.RollingCorrelation.Rd (1.8),
+	  chart.RelativePerformance.Rd (1.7):
 
 	- added example
 
 2007-03-15 22:41  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.15):
 
 	- fixed the example
 
 2007-03-15 22:22  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.5):
 
 	- doesn't re-zoo a zoo object, since that might change it's index format
 
 2007-03-15 22:21  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.6):
 
 	- removed data checks
 
 2007-03-15 22:20  peter
 
-	* R/: chart.RollingRegression.R, Return.excess.R:
+	* R/: chart.RollingRegression.R (1.9), Return.excess.R (1.2):
 
 	- minor changes
 
 2007-03-14 20:15  brian
 
-	* R/: chart.RelativePerformance.R, chart.RollingCorrelation.R,
-	  chart.RollingPerformance.R, chart.RollingRegression.R:
+	* R/: chart.RelativePerformance.R (1.4), chart.RollingCorrelation.R
+	  (1.4), chart.RollingPerformance.R (1.7),
+	  chart.RollingRegression.R (1.8):
 
 	- replace drop=F with drop=FALSE for R CMD check compatibility
 
 2007-03-14 19:45  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.5):
 
 	- made legend conditional on having more than one data series
 
 2007-03-14 19:39  peter
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.4):
 
 	- made "compound" default method
 
 2007-03-14 17:54  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.7):
 
 	- fixed rf calc
 
 2007-03-14 17:53  peter
 
-	* R/Return.excess.R:
+	* R/Return.excess.R (1.1):
 
 	- submitted function to cvs
 
 2007-03-14 00:02  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.4):
 
 	- switched order of top two charts
 	- added legend to top chart
@@ -4176,7 +4300,7 @@
 
 2007-03-13 23:53  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.6):
 
 	- uses checkData function
 	- uses zoo rollapply function
@@ -4185,7 +4309,7 @@
 
 2007-03-13 22:12  peter
 
-	* R/chart.RollingCorrelation.R:
+	* R/chart.RollingCorrelation.R (1.3):
 
 	- uses checkData function
 	- handles uneven lengths of timeseries data
@@ -4194,48 +4318,53 @@
 
 2007-03-13 19:54  brian
 
-	* man/: CAPM.alpha.Rd, CAPM.beta.Rd, CAPM.utils.Rd,
-	  DownsideDeviation.Rd, InformationRatio.Rd, KellyRatio.Rd,
-	  Omega.Rd, Return.annualized.Rd, Return.cumulative.Rd,
-	  SemiDeviation.Rd, SharpeRatio.Rd, SharpeRatio.annualized.Rd,
-	  SharpeRatio.modified.Rd, SortinoRatio.Rd, StdDev.Rd,
-	  StdDev.annualized.Rd, TrackingError.Rd, TreynorRatio.Rd,
-	  UpDownRatios.Rd, VaR.Beyond.Rd, VaR.CornishFisher.Rd,
-	  VaR.Marginal.Rd, chart.Bar.Rd, chart.BarVaR.Rd, chart.Boxplot.Rd,
-	  chart.Correlation.color.Rd, chart.CumReturns.Rd,
-	  chart.Drawdown.Rd, chart.Histogram.Rd, chart.QQPlot.Rd,
-	  chart.RegressionDiagnostics.Rd, chart.RelativePerformance.Rd,
-	  chart.RiskReturnScatter.Rd, chart.RollingCorrelation.Rd,
-	  chart.RollingMean.Rd, chart.RollingPerformance.Rd,
-	  chart.RollingRegression.Rd, chart.TimeSeries.Rd,
-	  charts.PerformanceSummary.Rd, charts.RollingPerformance.Rd,
-	  checkDataMatrix.Rd, checkDataVector.Rd, cummax.column.Rd,
-	  cumprod.column.Rd, findDrawdowns.Rd, maxDrawdown.Rd,
-	  rollingFunction.Rd, rollingStat.Rd, table.AnnualizedReturns.Rd,
-	  table.Arbitrary.Rd, table.DownsideRisk.Rd,
-	  table.MonthlyReturns.Rd, table.Returns.Rd,
-	  table.RollingPeriods.Rd:
+	* man/: CAPM.alpha.Rd (1.9), CAPM.beta.Rd (1.9), CAPM.utils.Rd
+	  (1.4), DownsideDeviation.Rd (1.7), InformationRatio.Rd (1.8),
+	  KellyRatio.Rd (1.5), Omega.Rd (1.13), Return.annualized.Rd (1.7),
+	  Return.cumulative.Rd (1.7), SemiDeviation.Rd (1.6),
+	  SharpeRatio.Rd (1.6), SharpeRatio.annualized.Rd (1.6),
+	  SharpeRatio.modified.Rd (1.8), SortinoRatio.Rd (1.5), StdDev.Rd
+	  (1.8), StdDev.annualized.Rd (1.5), TrackingError.Rd (1.5),
+	  TreynorRatio.Rd (1.5), UpDownRatios.Rd (1.4), VaR.Beyond.Rd
+	  (1.8), VaR.CornishFisher.Rd (1.16), VaR.Marginal.Rd (1.5),
+	  chart.Bar.Rd (1.10), chart.BarVaR.Rd (1.11), chart.Boxplot.Rd
+	  (1.7), chart.Correlation.color.Rd (1.6), chart.CumReturns.Rd
+	  (1.9), chart.Drawdown.Rd (1.9), chart.Histogram.Rd (1.8),
+	  chart.QQPlot.Rd (1.7), chart.RegressionDiagnostics.Rd (1.5),
+	  chart.RelativePerformance.Rd (1.6), chart.RiskReturnScatter.Rd
+	  (1.8), chart.RollingCorrelation.Rd (1.7), chart.RollingMean.Rd
+	  (1.6), chart.RollingPerformance.Rd (1.9),
+	  chart.RollingRegression.Rd (1.14), chart.TimeSeries.Rd (1.13),
+	  charts.PerformanceSummary.Rd (1.6), charts.RollingPerformance.Rd
+	  (1.6), checkDataMatrix.Rd (1.7), checkDataVector.Rd (1.6),
+	  cummax.column.Rd (1.5), cumprod.column.Rd (1.5), findDrawdowns.Rd
+	  (1.7), maxDrawdown.Rd (1.6), rollingFunction.Rd (1.9),
+	  rollingStat.Rd (1.6), table.AnnualizedReturns.Rd (1.6),
+	  table.Arbitrary.Rd (1.6), table.DownsideRisk.Rd (1.11),
+	  table.MonthlyReturns.Rd (1.9), table.Returns.Rd (1.10),
+	  table.RollingPeriods.Rd (1.8):
 
 	- updates to parameters, descriptions and text for standardization
 
 2007-03-13 19:54  brian
 
-	* R/: DownsideDeviation.R, KellyRatio.R, Return.annualized.R,
-	  SemiDeviation.R, SharpeRatio.annualized.R,
-	  SharpeRatio.modified.R, SortinoRatio.R, TreynorRatio.R,
-	  chart.RollingPerformance.R:
+	* R/: DownsideDeviation.R (1.3), KellyRatio.R (1.3),
+	  Return.annualized.R (1.5), SemiDeviation.R (1.4),
+	  SharpeRatio.annualized.R (1.4), SharpeRatio.modified.R (1.4),
+	  SortinoRatio.R (1.3), TreynorRatio.R (1.4),
+	  chart.RollingPerformance.R (1.6):
 
 	- updates to parameters for standardization
 
 2007-03-13 17:17  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.10):
 
 	- add fPortfolio as dependency for pfolioReturn
 
 2007-03-13 16:54  peter
 
-	* R/chart.RelativePerformance.R:
+	* R/chart.RelativePerformance.R (1.3):
 
 	- multiple assets can be compared to multiple benchmarks
 	- uses dataCheck function
@@ -4243,19 +4372,19 @@
 
 2007-03-13 13:08  peter
 
-	* R/chart.RollingPerformance.R:
+	* R/chart.RollingPerformance.R (1.5):
 
 	- now handles single column zoo objects when naming columns using drop=F
 
 2007-03-13 12:58  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.4):
 
 	- simplified to use as.matrix for all data types entered
 
 2007-03-12 23:23  peter
 
-	* R/charts.RollingPerformance.R:
+	* R/charts.RollingPerformance.R (1.3):
 
 	- changed to checkData function
 	- modified parameters to fit RollingPerformance changes
@@ -4263,13 +4392,13 @@
 
 2007-03-12 23:21  peter
 
-	* R/chart.RollingPerformance.R:
+	* R/chart.RollingPerformance.R (1.4):
 
 	- adjusted parameter inputs
 
 2007-03-12 23:06  peter
 
-	* R/chart.RollingPerformance.R:
+	* R/chart.RollingPerformance.R (1.3):
 
 	- modified to deal with unequal time periods
 	- uses new checkData function
@@ -4277,84 +4406,84 @@
 
 2007-03-12 23:01  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.4):
 
 	- added new checkData function
 
 2007-03-12 22:59  peter
 
-	* R/chart.CumReturns.R:
+	* R/chart.CumReturns.R (1.4):
 
 	- uses new checkData function
 
 2007-03-12 22:57  peter
 
-	* R/chart.Drawdown.R:
+	* R/chart.Drawdown.R (1.5):
 
 	- uses checkData function
 
 2007-03-12 22:56  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.3):
 
 	- added warning for vector
 
 2007-03-12 22:44  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.2):
 
 	- added log
 
 2007-03-12 22:41  peter
 
-	* R/checkData.R:
+	* R/checkData.R (1.1):
 
 	- combines checkData[Zoo,Matrix,Vector] functions into a single function
 
 2007-03-12 20:13  peter
 
-	* R/checkDataZoo.R:
+	* R/checkDataZoo.R (1.3):
 
 	- added tests for column and row names
 
 2007-03-12 10:45  brian
 
-	* R/StdDev.R, R/StdDev.annualized.R, man/StdDev.Rd,
-	  man/StdDev.annualized.Rd:
+	* R/StdDev.R (1.4), R/StdDev.annualized.R (1.4), man/StdDev.Rd
+	  (1.7), man/StdDev.annualized.Rd (1.4):
 
 	- add equations to documentation
 	- standardize on Ra for Returns of asset
 
 2007-03-12 10:34  brian
 
-	* R/SharpeRatio.R, R/SharpeRatio.annualized.R, R/TreynorRatio.R,
-	  man/SharpeRatio.Rd, man/SharpeRatio.annualized.Rd,
-	  man/TreynorRatio.Rd:
+	* R/SharpeRatio.R (1.4), R/SharpeRatio.annualized.R (1.3),
+	  R/TreynorRatio.R (1.3), man/SharpeRatio.Rd (1.5),
+	  man/SharpeRatio.annualized.Rd (1.5), man/TreynorRatio.Rd (1.4):
 
 	- add equations to documentation
 	- standardize on Ra for Returns of asset
 
 2007-03-12 08:56  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.15):
 
 	- minor updates and grammatical corrections
 
 2007-03-11 20:55  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.14):
 
 	- added more seealso links
 
 2007-03-11 20:46  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.13):
 
 	- rearranged text on parametric maen-VaR to read more smoothly.
 
 2007-03-11 20:30  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.12):
 
 	- add equations and text for all VaR functions covered by this Rd
 	  - nonparmetric
@@ -4363,7 +4492,7 @@
 
 2007-03-11 14:20  brian
 
-	* man/: Return.annualized.Rd, Return.cumulative.Rd:
+	* man/: Return.annualized.Rd (1.6), Return.cumulative.Rd (1.6):
 
 	- add equantions
 	- add reference
@@ -4371,7 +4500,7 @@
 
 2007-03-11 14:19  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.51):
 
 	- add discussion of motive to Charts section
 	- add Bacon reference
@@ -4379,33 +4508,36 @@
 
 2007-03-11 14:18  brian
 
-	* R/: Return.annualized.R, Return.cumulative.R:
+	* R/: Return.annualized.R (1.4), Return.cumulative.R (1.3):
 
 	- standardize variable naming
 
 2007-03-11 12:05  brian
 
-	* R/: VaR.Beyond.R, VaR.Marginal.R:
+	* R/: VaR.Beyond.R (1.3), VaR.Marginal.R (1.3):
 
 	- change to use checkDataMatrix
 
 2007-03-11 11:58  brian
 
-	* R/: BetaCoKurtosis.R, BetaCoSkewness.R, BetaCoVariance.R,
-	  VaR.CornishFisher.R, moment.fourth.R, moment.third.R:
+	* R/: BetaCoKurtosis.R (1.4), BetaCoSkewness.R (1.5),
+	  BetaCoVariance.R (1.5), VaR.CornishFisher.R (1.4),
+	  moment.fourth.R (1.5), moment.third.R (1.5):
 
 	- replace as.vector() with checkDataVector()
 
 2007-03-11 11:53  brian
 
-	* R/ActivePremium.R, R/BetaCoKurtosis.R, R/BetaCoSkewness.R,
-	  R/BetaCoVariance.R, R/CAPM.alpha.R, R/CAPM.beta.R,
-	  R/CAPM.utils.R, R/CoKurtosis.R, R/CoSkewness.R,
-	  R/InformationRatio.R, R/TrackingError.R, man/ActivePremium.Rd,
-	  man/BetaCoKurtosis.Rd, man/BetaCoSkewness.Rd,
-	  man/BetaCoVariance.Rd, man/CAPM.alpha.Rd, man/CAPM.beta.Rd,
-	  man/CAPM.utils.Rd, man/CoKurtosis.Rd, man/CoSkewness.Rd,
-	  man/InformationRatio.Rd, man/TrackingError.Rd:
+	* R/ActivePremium.R (1.4), R/BetaCoKurtosis.R (1.3),
+	  R/BetaCoSkewness.R (1.4), R/BetaCoVariance.R (1.4),
+	  R/CAPM.alpha.R (1.6), R/CAPM.beta.R (1.6), R/CAPM.utils.R (1.2),
+	  R/CoKurtosis.R (1.4), R/CoSkewness.R (1.4), R/InformationRatio.R
+	  (1.4), R/TrackingError.R (1.4), man/ActivePremium.Rd (1.5),
+	  man/BetaCoKurtosis.Rd (1.7), man/BetaCoSkewness.Rd (1.7),
+	  man/BetaCoVariance.Rd (1.7), man/CAPM.alpha.Rd (1.8),
+	  man/CAPM.beta.Rd (1.8), man/CAPM.utils.Rd (1.3),
+	  man/CoKurtosis.Rd (1.7), man/CoSkewness.Rd (1.7),
+	  man/InformationRatio.Rd (1.7), man/TrackingError.Rd (1.4):
 
 	- add equations and text to documentation
 	- standardize on Ra as the Return of the Asset
@@ -4413,62 +4545,62 @@
 
 2007-03-10 13:46  peter
 
-	* R/chart.Drawdown.R:
+	* R/chart.Drawdown.R (1.4):
 
 	- handles unequal periods
 	- correctly calculates when first period is negative
 
 2007-03-09 23:08  peter
 
-	* R/chart.CumReturns.R:
+	* R/chart.CumReturns.R (1.3):
 
 	- revised function to take zoo objects and plot unequal time periods
 
 2007-03-09 16:45  peter
 
-	* R/checkDataZoo.R:
+	* R/checkDataZoo.R (1.2):
 
 	- fixed function name
 
 2007-03-09 16:41  peter
 
-	* R/checkDataZoo.R:
+	* R/checkDataZoo.R (1.1):
 
 	- added coersion function to deliver zoo object
 
 2007-03-08 21:08  peter
 
-	* R/chart.TimeSeries.R:
+	* R/chart.TimeSeries.R (1.3):
 
 	- fixed y-axis so that ylog could be passed in as a parameter
 
 2007-03-07 16:15  brian
 
-	* man/: CoKurtosis.Rd, CoSkewness.Rd:
+	* man/: CoKurtosis.Rd (1.6), CoSkewness.Rd (1.6):
 
 	- bring equation in line with function params
 
 2007-03-07 08:47  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.50):
 
 	- minor updates to text
 
 2007-03-06 11:08  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.49):
 
 	- change attribution to Joe Wayne Byers, at his request
 
 2007-03-05 10:49  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.48):
 
 	- minor updates to improve PDF formatting
 
 2007-03-05 09:34  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.47):
 
 	- add acknowlegements
 
@@ -4476,201 +4608,205 @@
 
 2007-03-05 09:14  brian
 
-	* man/: PerformanceAnalytics-package.Rd,
-	  chart.RegressionDiagnostics.Rd, chart.RollingRegression.Rd:
+	* man/: PerformanceAnalytics-package.Rd (1.46),
+	  chart.RegressionDiagnostics.Rd (1.4), chart.RollingRegression.Rd
+	  (1.13):
 
 	- remove references to charts.RegressionDiagnostics
 
 2007-03-05 08:55  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.12):
 
 	- added charts.RollingRegression example
 
 2007-03-05 08:54  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.11):
 
 	- added example
 
 2007-03-05 06:31  brian
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.6):
 
 	- minor text updates
 
 2007-03-05 06:09  brian
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.5):
 
 	minor text changes
 
 2007-03-05 06:06  brian
 
-	* man/CAPM.utils.Rd:
+	* man/CAPM.utils.Rd (1.2):
 
 	- fix typos
 
 2007-03-04 23:02  brian
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.4):
 
 	- change first argument to the less-descriptive x rather than R
 	  for generic R method consistency
 
 2007-03-04 22:53  brian
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.10):
 
 	- add Rb parameter to example: still broken
 
 2007-03-04 22:51  brian
 
-	* R/mean.utils.R:
+	* R/mean.utils.R (1.5):
 
 	- add copyright and CVS block
 
 2007-03-04 22:48  brian
 
-	* R/mean.utils.R, man/mean.utils.Rd:
+	* R/mean.utils.R (1.4), man/mean.utils.Rd (1.3):
 
 	- change first parameter to x for R generic method consistency
 	- fix capitalization errors in documentation
 
 2007-03-04 22:45  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.45):
 
 	- minor wording and LaTeX changes
 
 2007-03-04 22:15  peter
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.9):
 
 	-fixed typo
 
 2007-03-04 22:08  peter
 
-	* man/: PerformanceAnalytics-package.Rd,
-	  chart.RollingRegression.Rd:
+	* man/: PerformanceAnalytics-package.Rd (1.44),
+	  chart.RollingRegression.Rd (1.8):
 
 	- minor changes to text
 
 2007-03-04 22:04  peter
 
-	* R/mean.utils.R:
+	* R/mean.utils.R (1.3):
 
 	- fixed bug omitting length()
 
 2007-03-04 21:51  peter
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.43):
 
 	- minor changes to text
 
 2007-03-04 21:41  peter
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.2):
 
 	- fixed typo
 
 2007-03-04 21:29  peter
 
-	* man/mean.utils.Rd:
+	* man/mean.utils.Rd (1.1):
 
 	- added documentation
 
 2007-03-04 21:25  peter
 
-	* R/mean.utils.R:
+	* R/mean.utils.R (1.2):
 
 	- added defaults for ci
 
 2007-03-04 21:19  peter
 
-	* R/table.MonthlyReturns.R:
+	* R/table.MonthlyReturns.R (1.5):
 
 	- removed firstcolumn as an attribute
 
 2007-03-04 21:18  peter
 
-	* man/table.MonthlyReturns.Rd:
+	* man/table.MonthlyReturns.Rd (1.8):
 
 	- removed firstcolumn attribute
 
 2007-03-04 20:54  peter
 
-	* R/mean.utils.R:
+	* R/mean.utils.R (1.1):
 
 	- added set of minor utility functions
 
 2007-03-04 15:00  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.9):
 
 	- update dependencies to include tseries
 
 2007-03-04 14:59  brian
 
-	* R/Return.calculate.R, R/VaR.CornishFisher.R, R/checkDataMatrix.R,
-	  R/download.RiskFree.R, R/download.SP500PriceReturns.R,
-	  R/table.DownsideRisk.R, man/BetaCoKurtosis.Rd, man/Omega.Rd,
-	  man/PerformanceAnalytics-package.Rd, man/VaR.Beyond.Rd,
-	  man/VaR.CornishFisher.Rd, man/chart.Bar.Rd, man/chart.BarVaR.Rd,
-	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
-	  man/chart.Histogram.Rd, man/chart.TimeSeries.Rd,
-	  man/checkDataMatrix.Rd, man/download.RiskFree.Rd,
-	  man/download.SP500PriceReturns.Rd, man/rollingCorrelation.Rd,
-	  man/rollingFunction.Rd, man/table.DownsideRisk.Rd,
-	  man/table.HigherMoments.Rd:
+	* R/Return.calculate.R (1.3), R/VaR.CornishFisher.R (1.3),
+	  R/checkDataMatrix.R (1.5), R/download.RiskFree.R (1.4),
+	  R/download.SP500PriceReturns.R (1.5), R/table.DownsideRisk.R
+	  (1.4), man/BetaCoKurtosis.Rd (1.6), man/Omega.Rd (1.12),
+	  man/PerformanceAnalytics-package.Rd (1.42), man/VaR.Beyond.Rd
+	  (1.7), man/VaR.CornishFisher.Rd (1.11), man/chart.Bar.Rd (1.9),
+	  man/chart.BarVaR.Rd (1.10), man/chart.CumReturns.Rd (1.8),
+	  man/chart.Drawdown.Rd (1.8), man/chart.Histogram.Rd (1.7),
+	  man/chart.TimeSeries.Rd (1.12), man/checkDataMatrix.Rd (1.6),
+	  man/download.RiskFree.Rd (1.3), man/download.SP500PriceReturns.Rd
+	  (1.5), man/rollingCorrelation.Rd (1.8), man/rollingFunction.Rd
+	  (1.8), man/table.DownsideRisk.Rd (1.10),
+	  man/table.HigherMoments.Rd (1.6):
 
 	- minor changes to pass R CMD check
 
 2007-03-04 12:41  brian
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.7):
 
 	- update usage, title, description, aliases
 
 2007-03-04 12:39  brian
 
-	* man/chart.Drawdown.Rd:
+	* man/chart.Drawdown.Rd (1.7):
 
 	- add missing item definitions
 
 2007-03-04 12:39  brian
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.11):
 
 	- update example to comply with method enumeration
 
 2007-03-04 12:38  brian
 
-	* man/DownsideDeviation.Rd:
+	* man/DownsideDeviation.Rd (1.6):
 
 	- update usage to remove compile warning
 
 2007-03-04 12:38  brian
 
-	* R/: chart.RollingRegression.R, charts.RollingRegression.R:
+	* R/: chart.RollingRegression.R (1.5), charts.RollingRegression.R
+	  (1.3):
 
 	- update function definition to agree with usage using enumerated argument
 
 2007-03-04 12:37  brian
 
-	* R/Omega.R:
+	* R/Omega.R (1.8):
 
 	- update to use switch on method, more efficient
 
 2007-03-04 10:08  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.8):
 
 	- increment version to 0.9.3
 
 2007-03-04 10:06  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.41):
 
 	- clean up summary paragraphs
 	- remove paragraph on "questions" to be re-addressed in the vignette
@@ -4678,32 +4814,32 @@
 
 2007-03-04 08:29  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.4):
 
 	- add examples
 
 2007-03-04 08:04  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.40):
 
 	- clean up section of basic performance statistics
 	- minor edits
 
 2007-03-04 08:03  brian
 
-	* man/table.Returns.Rd:
+	* man/table.Returns.Rd (1.9):
 
 	- re-insert sample table
 
 2007-03-03 19:37  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.39):
 
 	- esacape %'s in KellyRatio
 
 2007-03-03 19:09  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.38):
 
 	- add normal distribution discussion
 	- add diversification discussion
@@ -4713,50 +4849,50 @@
 
 2007-03-03 19:06  brian
 
-	* man/table.Returns.Rd:
+	* man/table.Returns.Rd (1.8):
 
 	- minor updates
 
 2007-03-03 19:06  brian
 
-	* man/: BetaCoKurtosis.Rd, BetaCoSkewness.Rd, CoKurtosis.Rd,
-	  CoSkewness.Rd:
+	* man/: BetaCoKurtosis.Rd (1.5), BetaCoSkewness.Rd (1.6),
+	  CoKurtosis.Rd (1.5), CoSkewness.Rd (1.5):
 
 	- update references and links to fBasics
 
 2007-03-03 19:05  brian
 
-	* R/SharpeRatio.R:
+	* R/SharpeRatio.R (1.3):
 
 	- simplify code because NA's are taken care of in checkDataVector
 
 2007-03-03 14:32  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.37):
 
 	- add first cut at discussion of relative performance ranking
 
 2007-03-03 13:53  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.36):
 
 	- minor grammatical change
 
 2007-03-03 13:49  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.35):
 
 	- spell check
 
 2007-03-03 13:24  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.34):
 
 	- change table listing to tabular format to fix latex error
 
 2007-03-03 12:26  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.33):
 
 	- add subsections on CAPM, MPT
 	- describe ActivePremium, TrackingError, InformationRatio
@@ -4765,135 +4901,135 @@
 
 2007-03-03 12:24  brian
 
-	* man/: CAPM.alpha.Rd, CAPM.beta.Rd:
+	* man/: CAPM.alpha.Rd (1.7), CAPM.beta.Rd (1.7):
 
 	- add references
 	- add link to CAPM.utils
 
 2007-03-03 12:10  brian
 
-	* R/CAPM.utils.R, man/CAPM.utils.Rd:
+	* R/CAPM.utils.R (1.1), man/CAPM.utils.Rd (1.1):
 
 	- Initial Revision of functions and documentation for CAPM utils on CML, SML, and RiskPremium
 
 2007-03-02 23:10  brian
 
-	* man/: chart.Boxplot.Rd, table.Returns.Rd:
+	* man/: chart.Boxplot.Rd (1.6), table.Returns.Rd (1.7):
 
 	- fix examples
 
 2007-03-02 16:59  peter
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.32):
 
 	- additions to returns section
 
 2007-03-02 16:56  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.31):
 
 	- add \cr in references
 
 2007-03-02 16:52  brian
 
-	* man/VaR.Marginal.Rd:
+	* man/VaR.Marginal.Rd (1.4):
 
 	- add more descriptive text and warning about nomenclature
 	- add reference
 
 2007-03-02 16:51  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.30):
 
 	- add Component, Incremental, and Marginal VaR
 	- clean up quotations and LaTeX errors
 
 2007-03-02 11:41  brian
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.7):
 
 	- remove redundant comments
 
 2007-03-02 10:00  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.29):
 
 	- minor text updates
 
 2007-03-02 09:03  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.28):
 
 	- rearrange tables and charts section
 
 2007-03-02 08:54  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.27):
 
 	- remove examples section from the overview
 	- move keyword to the end
 
 2007-03-02 08:52  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.10):
 
 	- add link and text to modifed Sharpe Ratio
 
 2007-03-02 08:47  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.26):
 
 	- add seealso entries
 
 2007-03-02 08:38  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.25):
 
 	- rearracge notes to separate diversification section
 
 2007-03-02 08:28  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.24):
 
 	- clean up LaTeX errors, especially around \itemize
 	- minor text revisions
 
 2007-03-02 07:55  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.23):
 
 	- correct some LaTeX errors
 	- add distribution analysis section
 
 2007-03-02 07:39  peter
 
-	* man/table.CAPM.Rd:
+	* man/table.CAPM.Rd (1.9):
 
 	- small modifications to text
 
 2007-03-02 07:38  peter
 
-	* man/: chart.Boxplot.Rd, chart.CumReturns.Rd,
-	  table.Correlation.Rd, table.DownsideRisk.Rd,
-	  table.MonthlyReturns.Rd, table.Returns.Rd:
+	* man/: chart.Boxplot.Rd (1.5), chart.CumReturns.Rd (1.7),
+	  table.Correlation.Rd (1.9), table.DownsideRisk.Rd (1.9),
+	  table.MonthlyReturns.Rd (1.7), table.Returns.Rd (1.6):
 
 	- added example
 
 2007-03-02 07:00  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.22):
 
 	- add reference for Murrel R Graphics
 
 2007-03-02 06:57  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.9):
 
 	- updated description to cover more detail on mean-VaR
 
 2007-03-02 06:56  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.21):
 
 	- add Cornish Fisher VaR
 	- notes for further work
@@ -4901,19 +5037,19 @@
 
 2007-03-02 06:47  peter
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.20):
 
 	- first draft of graphics and tables complete
 
 2007-03-01 22:49  peter
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.19):
 
 	- added performance analytics section
 
 2007-03-01 22:43  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.18):
 
 	- add drawdowns
 	- add Omega
@@ -4921,7 +5057,7 @@
 
 2007-03-01 17:50  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.17):
 
 	- additional text in Risk
 	- additional introductory text
@@ -4929,13 +5065,13 @@
 
 2007-03-01 17:50  brian
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.10):
 
 	-update references
 
 2007-03-01 10:16  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.16):
 
 	- updates to risk section
 	- separate VaR, because it got huge
@@ -4943,987 +5079,1038 @@
 
 2007-03-01 10:15  brian
 
-	* man/chart.RollingRegression.Rd:
+	* man/chart.RollingRegression.Rd (1.6):
 
 	- fix broken link
 
 2007-03-01 05:53  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.15):
 
 	- update Risk section
 
 2007-02-28 21:36  brian
 
-	* man/: DownsideDeviation.Rd, SharpeRatio.modified.Rd,
-	  VaR.Beyond.Rd, VaR.CornishFisher.Rd:
+	* man/: DownsideDeviation.Rd (1.5), SharpeRatio.modified.Rd (1.7),
+	  VaR.Beyond.Rd (1.6), VaR.CornishFisher.Rd (1.8):
 
 	- add additional links, references, and clarifications on risk measures
 
 2007-02-28 21:35  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.14):
 
 	- add more risk measure text
 
 2007-02-28 21:26  brian
 
-	* R/SemiDeviation.R, man/SemiDeviation.Rd:
+	* R/SemiDeviation.R (1.3), man/SemiDeviation.Rd (1.5):
 
 	- add function and documentation for DownsideDeviation wrapper SemiVariance
 
 2007-02-28 21:26  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.7):
 
 	-increment version to 0.9.2
 
 2007-02-28 21:26  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.13):
 
 	- add text about several wrapper and risk functions
 	- increment version to 0.9.2
 
 2007-02-28 15:33  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.3):
 
 	- add about_us link
 
 2007-02-28 15:24  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.2):
 
 	- update with more descriptive text about EDHEC and explicit "used with permission"
 
 2007-02-28 13:48  brian
 
-	* man/VaR.Beyond.Rd:
+	* man/VaR.Beyond.Rd (1.5):
 
 	- update \item for periods
 
 2007-02-28 13:42  brian
 
-	* man/: DownsideDeviation.Rd, Omega.Rd, SharpeRatio.modified.Rd,
-	  chart.BarVaR.Rd, chart.Correlation.Rd,
-	  chart.Correlation.color.Rd, chart.QQPlot.Rd,
-	  chart.RegressionDiagnostics.Rd, chart.RelativePerformance.Rd,
-	  chart.RiskReturnScatter.Rd, chart.RollingPerformance.Rd,
-	  chart.RollingRegression.Rd, charts.PerformanceSummary.Rd,
-	  findDrawdowns.Rd, rollingFunction.Rd, table.DownsideRisk.Rd,
-	  table.RollingPeriods.Rd:
+	* man/: DownsideDeviation.Rd (1.4), Omega.Rd (1.9),
+	  SharpeRatio.modified.Rd (1.6), chart.BarVaR.Rd (1.9),
+	  chart.Correlation.Rd (1.7), chart.Correlation.color.Rd (1.5),
+	  chart.QQPlot.Rd (1.6), chart.RegressionDiagnostics.Rd (1.3),
+	  chart.RelativePerformance.Rd (1.5), chart.RiskReturnScatter.Rd
+	  (1.7), chart.RollingPerformance.Rd (1.8),
+	  chart.RollingRegression.Rd (1.5), charts.PerformanceSummary.Rd
+	  (1.5), findDrawdowns.Rd (1.6), rollingFunction.Rd (1.7),
+	  table.DownsideRisk.Rd (1.8), table.RollingPeriods.Rd (1.7):
 
 	- clean up additional template boilerplate text
 	- add \seealso links where obviously appropriate
 
 2007-02-28 10:47  brian
 
-	* man/: BetaCoKurtosis.Rd, SortinoRatio.Rd, VaR.Beyond.Rd,
-	  chart.Histogram.Rd, chart.RiskReturnScatter.Rd,
-	  chart.RollingCorrelation.Rd, rollingStat.Rd:
+	* man/: BetaCoKurtosis.Rd (1.4), SortinoRatio.Rd (1.4),
+	  VaR.Beyond.Rd (1.4), chart.Histogram.Rd (1.6),
+	  chart.RiskReturnScatter.Rd (1.6), chart.RollingCorrelation.Rd
+	  (1.6), rollingStat.Rd (1.5):
 
 	- update documentation to fix \value{} sections
 
 2007-02-28 10:12  brian
 
-	* R/Omega.R:
+	* R/Omega.R (1.7):
 
 	- set plot=FALSE in Ecdf function
 
 2007-02-28 10:10  brian
 
-	* man/: BetaCoSkewness.Rd, PerformanceAnalytics-package.Rd,
-	  Return.annualized.Rd, Return.cumulative.Rd, table.Arbitrary.Rd:
+	* man/: BetaCoSkewness.Rd (1.5), PerformanceAnalytics-package.Rd
+	  (1.12), Return.annualized.Rd (1.5), Return.cumulative.Rd (1.5),
+	  table.Arbitrary.Rd (1.5):
 
 	- clean up unset \author information
 
 2007-02-28 09:09  brian
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.11):
 
 	- add some structure to documentation sections that need to be written
 
 2007-02-28 09:05  brian
 
-	* man/: download.RiskFree.Rd, download.SP500PriceReturns.Rd:
+	* man/: download.RiskFree.Rd (1.2), download.SP500PriceReturns.Rd
+	  (1.4):
 
 	- fix LaTeX errors in package check
 
 2007-02-28 07:55  brian
 
-	* R/Omega.R:
+	* R/Omega.R (1.6):
 
 	- comment require for Hmisc, as it is included when the main PerformanceAnalytics package loads
 
 2007-02-28 07:54  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.6):
 
 	- update version requirement to R 2.4.x
 	- add Hmisc as an explicit dependency, even though it is implicit in fExtremes
 
 2007-02-28 07:48  brian
 
-	* R/Omega.R:
+	* R/Omega.R (1.5):
 
 	- change ecdf to Ecdf to cover the change in the name of the Hmisc function in R 2.4.x
 
 2007-02-28 05:56  brian
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.8):
 
 	- add item description for loss threshold
 
 2007-02-27 22:49  peter
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.7):
 
 	- another example typo
 
 2007-02-27 22:46  peter
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.6):
 
 	- fixed example
 
 2007-02-27 22:42  peter
 
-	* R/checkDataMatrix.R, man/CAPM.alpha.Rd, man/CAPM.beta.Rd:
+	* R/checkDataMatrix.R (1.4), man/CAPM.alpha.Rd (1.6),
+	  man/CAPM.beta.Rd (1.6):
 
 	- minor changes
 
 2007-02-27 22:41  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.8):
 
 	- fixed conflict in example
 
 2007-02-27 22:39  peter
 
-	* man/Return.calculate.Rd:
+	* man/Return.calculate.Rd (1.2):
 
 	- added example
 
 2007-02-27 22:37  peter
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.2):
 
 	- fixed row labeling problem
 
 2007-02-27 22:12  peter
 
-	* man/ActivePremium.Rd:
+	* man/ActivePremium.Rd (1.4):
 
 	- added example
 
 2007-02-27 22:08  peter
 
-	* man/table.DownsideRisk.Rd:
+	* man/table.DownsideRisk.Rd (1.7):
 
 	- minor change to example
 
 2007-02-27 22:05  peter
 
-	* man/table.Correlation.Rd:
+	* man/table.Correlation.Rd (1.8):
 
 	- minor changes to documentation
 
 2007-02-27 22:03  peter
 
-	* man/table.Correlation.Rd:
+	* man/table.Correlation.Rd (1.7):
 
 	- added example
 
 2007-02-27 21:59  peter
 
-	* R/table.Correlation.R:
+	* R/table.Correlation.R (1.4):
 
 	- repaired broken data check
 
 2007-02-27 21:53  peter
 
-	* man/InformationRatio.Rd:
+	* man/InformationRatio.Rd (1.6):
 
 	- added examples
 
 2007-02-27 21:49  peter
 
-	* man/Omega.Rd:
+	* man/Omega.Rd (1.5):
 
 	- added example
 
 2007-02-27 21:47  peter
 
-	* R/Omega.R:
+	* R/Omega.R (1.4):
 
 	- added require("Hmisc")
 
 2007-02-27 21:39  brian
 
-	* man/rollingCorrelation.Rd:
+	* man/rollingCorrelation.Rd (1.7):
 
 	- fix links, references, author, and example documentation
 
 2007-02-27 21:38  brian
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.4):
 
 	- change compression param to an enumerated type
 
 2007-02-27 21:38  brian
 
-	* R/download.RiskFree.R:
+	* R/download.RiskFree.R (1.3):
 
 	- change compression param to an enumerated default
 
 2007-02-27 21:36  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.7):
 
 	- clean up usage for LaTeX formatting
 	- add missing \item
 
 2007-02-27 21:35  peter
 
-	* R/Omega.R:
+	* R/Omega.R (1.3):
 
 	- fixed defaults to eliminate warnings
 
 2007-02-27 21:27  peter
 
-	* man/table.CAPM.Rd:
+	* man/table.CAPM.Rd (1.8):
 
 	- added exampl
 
 2007-02-27 21:26  peter
 
-	* R/CAPM.beta.R:
+	* R/CAPM.beta.R (1.5):
 
 	- added checkDataVector for rf
 
 2007-02-27 21:23  peter
 
-	* R/CAPM.alpha.R:
+	* R/CAPM.alpha.R (1.5):
 
 	- added checkDataVector to rf
 
 2007-02-27 21:22  peter
 
-	* R/table.CAPM.R:
+	* R/table.CAPM.R (1.6):
 
 	- added checkDataVector function to rf
 
 2007-02-27 20:47  peter
 
-	* R/checkDataVector.R:
+	* R/checkDataVector.R (1.5):
 
 	- removed fourth test for scalars as unnecessary
 
 2007-02-27 20:09  peter
 
-	* R/checkDataVector.R:
+	* R/checkDataVector.R (1.4):
 
 	- added checkDataMatrix() at the beginning to ensure that whatever object is entered would
 	be coerced into a matrix before the vector checking
 
 2007-02-27 16:56  brian
 
-	* man/: download.RiskFree.Rd, download.SP500PriceReturns.Rd:
+	* man/: download.RiskFree.Rd (1.1), download.SP500PriceReturns.Rd
+	  (1.3):
 
 	- updates to documentation for new functions
 
 2007-02-27 16:44  peter
 
-	* man/download.SP500PriceReturns.Rd:
+	* man/download.SP500PriceReturns.Rd (1.2):
 
 	- minor changes to doc
 
 2007-02-27 16:39  brian
 
-	* man/: Return.calculate.Rd, download.SP500PriceReturns.Rd:
+	* man/: Return.calculate.Rd (1.1), download.SP500PriceReturns.Rd
+	  (1.1):
 
 	- Initial Revision of documentation for new functions
 
 2007-02-27 16:32  peter
 
-	* R/: download.RiskFree.R, download.SP500PriceReturns.R:
+	* R/: download.RiskFree.R (1.2), download.SP500PriceReturns.R
+	  (1.3):
 
 	- added compression as attribute
 
 2007-02-27 16:29  peter
 
-	* R/download.RiskFree.R:
+	* R/download.RiskFree.R (1.1):
 
 	- added function
 
 2007-02-27 16:01  peter
 
-	* R/Return.calculate.R:
+	* R/Return.calculate.R (1.1):
 
 	- added function to cvs
 
 2007-02-27 16:01  peter
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.2):
 
 	- modifications to return calculation function
 
 2007-02-27 15:19  peter
 
-	* R/download.SP500PriceReturns.R:
+	* R/download.SP500PriceReturns.R (1.1):
 
 	- added function wrapper for downloading and calculating S&P500 price returns
 
 2007-02-27 09:24  brian
 
-	* man/edhec.Rd:
+	* man/edhec.Rd (1.1):
 
 	- Initial Revision of doc for EDHEC data set
 
 2007-02-27 07:10  brian
 
-	* man/: BetaCoVariance.Rd, KellyRatio.Rd,
-	  PerformanceAnalytics-package.Rd, VaR.CornishFisher.Rd,
-	  chart.RollingPerformance.Rd, checkDataMatrix.Rd,
-	  checkDataVector.Rd, rollingCorrelation.Rd, table.Returns.Rd:
+	* man/: BetaCoVariance.Rd (1.6), KellyRatio.Rd (1.4),
+	  PerformanceAnalytics-package.Rd (1.10), VaR.CornishFisher.Rd
+	  (1.6), chart.RollingPerformance.Rd (1.7), checkDataMatrix.Rd
+	  (1.5), checkDataVector.Rd (1.5), rollingCorrelation.Rd (1.6),
+	  table.Returns.Rd (1.5):
 
 	- clean up LaTeX errors in ducumentation
 
 2007-02-26 16:05  brian
 
-	* man/: StdDev.Rd, chart.Bar.Rd, chart.BarVaR.Rd,
-	  chart.CumReturns.Rd, chart.Drawdown.Rd, chart.TimeSeries.Rd,
-	  checkDataMatrix.Rd, checkDataVector.Rd, findDrawdowns.Rd,
-	  maxDrawdown.Rd, sortDrawdowns.Rd, table.CAPM.Rd,
-	  table.Correlation.Rd:
+	* man/: StdDev.Rd (1.6), chart.Bar.Rd (1.8), chart.BarVaR.Rd (1.7),
+	  chart.CumReturns.Rd (1.6), chart.Drawdown.Rd (1.6),
+	  chart.TimeSeries.Rd (1.11), checkDataMatrix.Rd (1.4),
+	  checkDataVector.Rd (1.4), findDrawdowns.Rd (1.5), maxDrawdown.Rd
+	  (1.5), sortDrawdowns.Rd (1.5), table.CAPM.Rd (1.7),
+	  table.Correlation.Rd (1.6):
 
 	- changes in documentation and examples to pass "R CMD check"
 
 2007-02-26 16:04  brian
 
-	* R/: checkDataMatrix.R, checkDataVector.R, table.CAPM.R,
-	  table.Correlation.R, table.RollingPeriods.R:
+	* R/: checkDataMatrix.R (1.3), checkDataVector.R (1.3),
+	  table.CAPM.R (1.5), table.Correlation.R (1.3),
+	  table.RollingPeriods.R (1.4):
 
 	- changes in functions to pass "R CMD check" for package
 
 2007-02-26 08:48  brian
 
-	* man/: chart.BarVaR.Rd, chart.CumReturns.Rd, chart.Drawdown.Rd,
-	  chart.TimeSeries.Rd, findDrawdowns.Rd, maxDrawdown.Rd:
+	* man/: chart.BarVaR.Rd (1.6), chart.CumReturns.Rd (1.5),
+	  chart.Drawdown.Rd (1.5), chart.TimeSeries.Rd (1.10),
+	  findDrawdowns.Rd (1.4), maxDrawdown.Rd (1.4):
 
 	- fix T/F -> TRUE/FALSE for "R CMD check"
 
 2007-02-26 07:55  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.5):
 
 	- fixed example
 
 2007-02-26 07:50  brian
 
-	* R/chart.Drawdown.R:
+	* R/chart.Drawdown.R (1.3):
 
 	- change cumMax.column to cummax.column to reflect change in function name to pass "R CMD check"
 
 2007-02-26 07:32  brian
 
-	* R/chart.BarVaR.R:
+	* R/chart.BarVaR.R (1.3):
 
 	- change method VaR to pass "R CMD check"
 
 2007-02-26 07:12  brian
 
-	* man/: BetaCoSkewness.Rd, CAPM.alpha.Rd, Return.annualized.Rd,
-	  Return.cumulative.Rd, chart.Boxplot.Rd, chart.RollingMean.Rd,
-	  moment.fourth.Rd:
+	* man/: BetaCoSkewness.Rd (1.4), CAPM.alpha.Rd (1.5),
+	  Return.annualized.Rd (1.4), Return.cumulative.Rd (1.4),
+	  chart.Boxplot.Rd (1.4), chart.RollingMean.Rd (1.5),
+	  moment.fourth.Rd (1.5):
 
 	- clean up examples section to remove blockers to R CMD check
 
 2007-02-26 06:30  brian
 
-	* DESCRIPTION, man/PerformanceAnalytics-package.Rd:
+	* DESCRIPTION (1.5), man/PerformanceAnalytics-package.Rd (1.9):
 
 	- increment version to 0.9.1
 	- increment date
 
 2007-02-26 06:27  brian
 
-	* man/: UpDownRatios.Rd, rollingStat.Rd:
+	* man/: UpDownRatios.Rd (1.3), rollingStat.Rd (1.4):
 
 	- additional cleanup on parameters, titles, descriptions
 
 2007-02-26 06:15  brian
 
-	* man/: rollingCorrelation.Rd, rollingFunction.Rd,
-	  rollingRegression.Rd, table.Arbitrary.Rd, table.HigherMoments.Rd,
-	  table.RollingPeriods.Rd:
+	* man/: rollingCorrelation.Rd (1.5), rollingFunction.Rd (1.6),
+	  rollingRegression.Rd (1.4), table.Arbitrary.Rd (1.4),
+	  table.HigherMoments.Rd (1.5), table.RollingPeriods.Rd (1.6):
 
 	- further refinements of item, title, descriptions
 
 2007-02-25 23:29  peter
 
-	* man/: table.RollingPeriods.Rd, table.DownsideRisk.Rd:
+	* man/: table.RollingPeriods.Rd (1.5), table.DownsideRisk.Rd (1.6):
 
 	- added example
 
 2007-02-25 23:24  peter
 
-	* man/charts.PerformanceSummary.Rd:
+	* man/charts.PerformanceSummary.Rd (1.4):
 
 	- added example
 
 2007-02-25 23:09  peter
 
-	* man/: chart.Scatter.Rd, chart.RollingPerformance.Rd:
+	* man/: chart.Scatter.Rd (1.5), chart.RollingPerformance.Rd (1.6):
 
 	- added example
 
 2007-02-25 22:51  peter
 
-	* man/table.MonthlyReturns.Rd:
+	* man/table.MonthlyReturns.Rd (1.6):
 
 	- added example
 
 2007-02-25 22:40  peter
 
-	* man/PerformanceAnalytics-package.Rd:
+	* man/PerformanceAnalytics-package.Rd (1.8):
 
 	- minor edits
 
 2007-02-25 22:30  peter
 
-	* man/: table.AnnualizedReturns.Rd, table.DownsideRisk.Rd,
-	  table.MonthlyReturns.Rd:
+	* man/: table.AnnualizedReturns.Rd (1.5), table.DownsideRisk.Rd
+	  (1.5), table.MonthlyReturns.Rd (1.5):
 
 	- fixed termination in arguements section
 
 2007-02-25 22:28  peter
 
-	* man/: chart.Drawdown.Rd, chart.TimeSeries.Rd:
+	* man/: chart.Drawdown.Rd (1.4), chart.TimeSeries.Rd (1.9):
 
 	- fixed KEYWORDS
 
 2007-02-25 19:17  brian
 
-	* man/: KellyRatio.Rd, PerformanceAnalytics-package.Rd,
-	  chart.Correlation.Rd, chart.Histogram.Rd,
-	  chart.RiskReturnScatter.Rd, rollingRegression.Rd:
+	* man/: KellyRatio.Rd (1.3), PerformanceAnalytics-package.Rd (1.7),
+	  chart.Correlation.Rd (1.6), chart.Histogram.Rd (1.5),
+	  chart.RiskReturnScatter.Rd (1.5), rollingRegression.Rd (1.3):
 
 	- fix URL links
 
 2007-02-25 18:56  brian
 
-	* man/KellyRatio.Rd:
+	* man/KellyRatio.Rd (1.2):
 
 	- update description
 
 2007-02-25 18:43  brian
 
-	* man/table.Returns.Rd:
+	* man/table.Returns.Rd (1.4):
 
 	- add basic documentation
 
 2007-02-25 16:52  brian
 
-	* man/: chart.Correlation.Rd, chart.RollingCorrelation.Rd,
-	  chart.RollingMean.Rd, chart.RollingPerformance.Rd,
-	  charts.RollingPerformance.Rd, rollingCorrelation.Rd,
-	  rollingFunction.Rd, rollingStat.Rd, table.Correlation.Rd:
+	* man/: chart.Correlation.Rd (1.5), chart.RollingCorrelation.Rd
+	  (1.5), chart.RollingMean.Rd (1.4), chart.RollingPerformance.Rd
+	  (1.5), charts.RollingPerformance.Rd (1.5), rollingCorrelation.Rd
+	  (1.4), rollingFunction.Rd (1.5), rollingStat.Rd (1.3),
+	  table.Correlation.Rd (1.5):
 
 	- add description of \item 'trim'
 
 2007-02-25 16:13  brian
 
-	* man/: chart.Correlation.color.Rd, chart.QQPlot.Rd,
-	  chart.RiskReturnScatter.Rd, chart.RollingCorrelation.Rd,
-	  chart.RollingPerformance.Rd, chart.Scatter.Rd,
-	  charts.RollingPerformance.Rd:
+	* man/: chart.Correlation.color.Rd (1.4), chart.QQPlot.Rd (1.5),
+	  chart.RiskReturnScatter.Rd (1.4), chart.RollingCorrelation.Rd
+	  (1.4), chart.RollingPerformance.Rd (1.4), chart.Scatter.Rd (1.4),
+	  charts.RollingPerformance.Rd (1.4):
 
 	- update title,descripotion,seealso
 
 2007-02-25 15:19  brian
 
-	* man/: chart.Bar.Rd, chart.Boxplot.Rd, chart.Correlation.Rd,
-	  chart.Correlation.color.Rd, chart.Histogram.Rd, chart.QQPlot.Rd,
-	  chart.RegressionDiagnostics.Rd, chart.RelativePerformance.Rd:
+	* man/: chart.Bar.Rd (1.7), chart.Boxplot.Rd (1.3),
+	  chart.Correlation.Rd (1.4), chart.Correlation.color.Rd (1.3),
+	  chart.Histogram.Rd (1.4), chart.QQPlot.Rd (1.4),
+	  chart.RegressionDiagnostics.Rd (1.2),
+	  chart.RelativePerformance.Rd (1.4):
 
 	- update titles and descriptions
 
 2007-02-25 14:45  brian
 
-	* man/table.CAPM.Rd:
+	* man/table.CAPM.Rd (1.6):
 
 	- fix syntax errors in \code links
 
 2007-02-25 14:41  brian
 
-	* man/: rollingFunction.Rd, table.AnnualizedReturns.Rd,
-	  table.CAPM.Rd, table.Correlation.Rd, table.DownsideRisk.Rd,
-	  table.MonthlyReturns.Rd, table.RollingPeriods.Rd:
+	* man/: rollingFunction.Rd (1.4), table.AnnualizedReturns.Rd (1.4),
+	  table.CAPM.Rd (1.5), table.Correlation.Rd (1.4),
+	  table.DownsideRisk.Rd (1.4), table.MonthlyReturns.Rd (1.4),
+	  table.RollingPeriods.Rd (1.4):
 
 	- update \item descriptions, title, description
 
 2007-02-25 14:12  brian
 
-	* man/: BetaCoVariance.Rd, CAPM.beta.Rd, chart.Correlation.Rd,
-	  chart.Histogram.Rd, chart.QQPlot.Rd,
-	  chart.RelativePerformance.Rd, chart.RiskReturnScatter.Rd,
-	  chart.RollingCorrelation.Rd, chart.RollingMean.Rd,
-	  chart.RollingPerformance.Rd, chart.RollingRegression.Rd,
-	  chart.Scatter.Rd, chart.TimeSeries.Rd,
-	  charts.PerformanceSummary.Rd, charts.RollingPerformance.Rd,
-	  rollingCorrelation.Rd, table.CAPM.Rd, table.Correlation.Rd,
-	  table.HigherMoments.Rd:
+	* man/: BetaCoVariance.Rd (1.5), CAPM.beta.Rd (1.5),
+	  chart.Correlation.Rd (1.3), chart.Histogram.Rd (1.3),
+	  chart.QQPlot.Rd (1.3), chart.RelativePerformance.Rd (1.3),
+	  chart.RiskReturnScatter.Rd (1.3), chart.RollingCorrelation.Rd
+	  (1.3), chart.RollingMean.Rd (1.3), chart.RollingPerformance.Rd
+	  (1.3), chart.RollingRegression.Rd (1.4), chart.Scatter.Rd (1.3),
+	  chart.TimeSeries.Rd (1.8), charts.PerformanceSummary.Rd (1.3),
+	  charts.RollingPerformance.Rd (1.3), rollingCorrelation.Rd (1.3),
+	  table.CAPM.Rd (1.4), table.Correlation.Rd (1.3),
+	  table.HigherMoments.Rd (1.4):
 
 	- standardize \item descriptions
 
 2007-02-25 12:24  brian
 
-	* man/: rollingFunction.Rd, table.AnnualizedReturns.Rd,
-	  table.CAPM.Rd, table.DownsideRisk.Rd, table.HigherMoments.Rd,
-	  table.MonthlyReturns.Rd, table.Returns.Rd,
-	  table.RollingPeriods.Rd:
+	* man/: rollingFunction.Rd (1.3), table.AnnualizedReturns.Rd (1.3),
+	  table.CAPM.Rd (1.3), table.DownsideRisk.Rd (1.3),
+	  table.HigherMoments.Rd (1.3), table.MonthlyReturns.Rd (1.3),
+	  table.Returns.Rd (1.3), table.RollingPeriods.Rd (1.3):
 
 	- define item for digits
 
 2007-02-25 12:23  brian
 
-	* R/: rollingFunction.R, table.AnnualizedReturns.R, table.CAPM.R,
-	  table.DownsideRisk.R, table.HigherMoments.R,
-	  table.MonthlyReturns.R, table.Returns.R, table.RollingPeriods.R:
+	* R/: rollingFunction.R (1.3), table.AnnualizedReturns.R (1.4),
+	  table.CAPM.R (1.4), table.DownsideRisk.R (1.3),
+	  table.HigherMoments.R (1.4), table.MonthlyReturns.R (1.4),
+	  table.Returns.R (1.4), table.RollingPeriods.R (1.3):
 
 	- change call to round() to call base::round() to fix conflict with newest fCalendar
 
 2007-02-25 09:55  brian
 
-	* man/: BetaCoVariance.Rd, CoKurtosis.Rd, CoSkewness.Rd,
-	  PerformanceAnalytics-package.Rd:
+	* man/: BetaCoVariance.Rd (1.4), CoKurtosis.Rd (1.4), CoSkewness.Rd
+	  (1.4), PerformanceAnalytics-package.Rd (1.6):
 
 	- update equations and references
 
 2007-02-23 17:36  brian
 
-	* man/: InformationRatio.Rd, Omega.Rd, SemiDeviation.Rd, StdDev.Rd,
-	  StdDev.annualized.Rd:
+	* man/: InformationRatio.Rd (1.5), Omega.Rd (1.4), SemiDeviation.Rd
+	  (1.4), StdDev.Rd (1.5), StdDev.annualized.Rd (1.3):
 
 	- updated documentation files
 
 2007-02-22 16:14  brian
 
-	* R/: table.AnnualizedReturns.R, table.MonthlyReturns.R,
-	  table.Returns.R:
+	* R/: table.AnnualizedReturns.R (1.3), table.MonthlyReturns.R
+	  (1.3), table.Returns.R (1.3):
 
 	- standardize use of 'digits' as a parameter to round()
 
 2007-02-22 15:50  brian
 
-	* man/: InformationRatio.Rd, PerformanceAnalytics-package.Rd,
-	  SharpeRatio.annualized.Rd, SharpeRatio.modified.Rd:
+	* man/: InformationRatio.Rd (1.4), PerformanceAnalytics-package.Rd
+	  (1.5), SharpeRatio.annualized.Rd (1.4), SharpeRatio.modified.Rd
+	  (1.5):
 
 	- update documentation files
 
 2007-02-22 15:00  brian
 
-	* man/: cummax.column.Rd, cumprod.column.Rd, findDrawdowns.Rd,
-	  maxDrawdown.Rd, moment.fourth.Rd, moment.third.Rd,
-	  sortDrawdowns.Rd:
+	* man/: cummax.column.Rd (1.4), cumprod.column.Rd (1.4),
+	  findDrawdowns.Rd (1.3), maxDrawdown.Rd (1.3), moment.fourth.Rd
+	  (1.4), moment.third.Rd (1.4), sortDrawdowns.Rd (1.4):
 
 	- update documentation files
 
 2007-02-22 13:11  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.2):
 
 	- fixed parameter passing and title
 
 2007-02-22 12:27  brian
 
-	* man/chart.Bar.Rd:
+	* man/chart.Bar.Rd (1.6):
 
 	- fix syntax error in example
 
 2007-02-22 12:26  brian
 
-	* man/VaR.CornishFisher.Rd:
+	* man/VaR.CornishFisher.Rd (1.5):
 
 	- update aliases
 
 2007-02-22 12:26  brian
 
-	* R/cummax.column.R:
+	* R/cummax.column.R (1.3):
 
 	- update function name for consistency
 
 2007-02-22 12:25  brian
 
-	* R/BetaCoVariance.R:
+	* R/BetaCoVariance.R (1.3):
 
 	- add comments about symbolic notation
 
 2007-02-22 12:24  brian
 
-	* R/KellyRatio.R:
+	* R/KellyRatio.R (1.2):
 
 	- fix syntaxt error in calc
 
 2007-02-22 12:24  brian
 
-	* DESCRIPTION:
+	* DESCRIPTION (1.4):
 
 	- set version 0.9
 	- add dependencies
 
 2007-02-22 11:23  brian
 
-	* man/: CoKurtosis.Rd, CoSkewness.Rd, TreynorRatio.Rd,
-	  VaR.Beyond.Rd, VaR.CornishFisher.Rd, VaR.Marginal.Rd:
+	* man/: CoKurtosis.Rd (1.3), CoSkewness.Rd (1.3), TreynorRatio.Rd
+	  (1.3), VaR.Beyond.Rd (1.3), VaR.CornishFisher.Rd (1.4),
+	  VaR.Marginal.Rd (1.3):
 
 	- revise template help files to contain information
 
 2007-02-22 11:19  brian
 
-	* man/legend.Rd:
+	* man/legend.Rd (1.2):
 
 	- remove documentation for legend wrapper
 
 2007-02-22 10:53  brian
 
-	* man/: checkDataMatrix.Rd, checkDataVector.Rd, cummax.column.Rd,
-	  cumprod.column.Rd:
+	* man/: checkDataMatrix.Rd (1.3), checkDataVector.Rd (1.3),
+	  cummax.column.Rd (1.3), cumprod.column.Rd (1.3):
 
 	- revise template help to real documentation
 
 2007-02-21 11:25  brian
 
-	* R/KellyRatio.R, man/KellyRatio.Rd:
+	* R/KellyRatio.R (1.1), man/KellyRatio.Rd (1.1):
 
 	- Initial Revision of Kelly Ratio calculation
 
 2007-02-21 08:54  peter
 
-	* man/chart.Drawdown.Rd:
+	* man/chart.Drawdown.Rd (1.3):
 
 	- added attribute documentation and example
 
 2007-02-21 08:53  peter
 
-	* man/: chart.CumReturns.Rd, chart.TimeSeries.Rd:
+	* man/: chart.CumReturns.Rd (1.4), chart.TimeSeries.Rd (1.7):
 
 	- fixed documentation
 
 2007-02-20 23:06  peter
 
-	* man/chart.CumReturns.Rd:
+	* man/chart.CumReturns.Rd (1.3):
 
 	- added documentation and examples
 
 2007-02-20 22:56  peter
 
-	* man/chart.BarVaR.Rd:
+	* man/chart.BarVaR.Rd (1.4):
 
 	- added documentation and example
 
 2007-02-20 22:55  peter
 
-	* man/: chart.Bar.Rd, chart.TimeSeries.Rd:
+	* man/: chart.Bar.Rd (1.5), chart.TimeSeries.Rd (1.6):
 
 	- fixed date format problem with latex comment character
 
 2007-02-20 22:34  peter
 
-	* man/chart.Bar.Rd:
+	* man/chart.Bar.Rd (1.4):
 
 	- added documentation for attributes and an example
 
 2007-02-20 22:21  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.5):
 
 	- finished attribute documentation
 
 2007-02-17 10:43  brian
 
-	* data/edhec.R:
+	* data/edhec.R (1.2):
 
 	- removed.  incorrect first try at getting data to work
 
 2007-02-16 20:01  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.4):
 
 	- added an example
 
 2007-02-16 16:57  peter
 
-	* data/edhec.rda:
+	* data/edhec.rda (1.1):
 
 	- added edhec data in data.frame format
 
 2007-02-16 16:37  peter
 
-	* data/edhec.R:
+	* data/edhec.R (1.1):
 
 	- adding data.frame format
 
 2007-02-16 16:36  peter
 
-	* data/edhec.Rdata:
+	* data/edhec.Rdata (1.3):
 
 	- removing to replace with different file type and extension
 
 2007-02-16 16:10  peter
 
-	* data/edhec.Rdata:
+	* data/edhec.Rdata (1.2):
 
 	- tried df object
 
 2007-02-16 15:39  peter
 
-	* data/edhec.Rdata:
+	* data/edhec.Rdata (1.1):
 
 	- R binary file of EDHEC monthly returns
 
 2007-02-16 15:35  peter
 
-	* data/edhec.csv:
+	* data/edhec.csv (1.1):
 
 	- added reformatted EDHEC monthly data
 	- bug 890
 
 2007-02-16 15:12  peter
 
-	* man/chart.TimeSeries.Rd:
+	* man/chart.TimeSeries.Rd (1.3):
 
 	- moved comments from code, still needs example
 
 2007-02-14 19:14  brian
 
-	* R/: Return.annualized.R, StdDev.annualized.R:
+	* R/: Return.annualized.R (1.3), StdDev.annualized.R (1.3):
 
 	- standardize parameter variaable names
 
 2007-02-10 15:04  brian
 
-	* man/: BetaCoKurtosis.Rd, BetaCoSkewness.Rd, BetaCoVariance.Rd,
-	  CAPM.alpha.Rd, CAPM.beta.Rd, DownsideDeviation.Rd, Omega.Rd,
-	  PerformanceAnalytics-package.Rd, Return.annualized.Rd,
-	  Return.cumulative.Rd, SemiDeviation.Rd, SharpeRatio.Rd,
-	  SharpeRatio.modified.Rd, SortinoRatio.Rd, StdDev.Rd,
-	  VaR.CornishFisher.Rd, chart.Bar.Rd, chart.BarVaR.Rd,
-	  chart.RegressionDiagnostics.Rd, chart.RollingRegression.Rd,
-	  moment.fourth.Rd, moment.third.Rd, rollingRegression.Rd,
-	  sortDrawdowns.Rd, table.Arbitrary.Rd:
+	* man/: BetaCoKurtosis.Rd (1.3), BetaCoSkewness.Rd (1.3),
+	  BetaCoVariance.Rd (1.3), CAPM.alpha.Rd (1.4), CAPM.beta.Rd (1.4),
+	  DownsideDeviation.Rd (1.3), Omega.Rd (1.3),
+	  PerformanceAnalytics-package.Rd (1.4), Return.annualized.Rd
+	  (1.3), Return.cumulative.Rd (1.3), SemiDeviation.Rd (1.3),
+	  SharpeRatio.Rd (1.4), SharpeRatio.modified.Rd (1.4),
+	  SortinoRatio.Rd (1.3), StdDev.Rd (1.4), VaR.CornishFisher.Rd
+	  (1.3), chart.Bar.Rd (1.3), chart.BarVaR.Rd (1.3),
+	  chart.RegressionDiagnostics.Rd (1.1), chart.RollingRegression.Rd
+	  (1.3), moment.fourth.Rd (1.3), moment.third.Rd (1.3),
+	  rollingRegression.Rd (1.2), sortDrawdowns.Rd (1.3),
+	  table.Arbitrary.Rd (1.3):
 
 	- update documentation with more titles, details, authors, etc.
 
 2007-02-10 11:17  brian
 
-	* man/: ActivePremium.Rd, InformationRatio.Rd, SharpeRatio.Rd,
-	  SharpeRatio.annualized.Rd, TrackingError.Rd:
+	* man/: ActivePremium.Rd (1.3), InformationRatio.Rd (1.3),
+	  SharpeRatio.Rd (1.3), SharpeRatio.annualized.Rd (1.3),
+	  TrackingError.Rd (1.3):
 
 	- updated Sharpe related functions with author, citation, description, eqn
 
 2007-02-08 15:43  brian
 
-	* R/CAPM.alpha.R, R/CAPM.beta.R, man/CAPM.alpha.Rd,
-	  man/CAPM.beta.Rd:
+	* R/CAPM.alpha.R (1.4), R/CAPM.beta.R (1.4), man/CAPM.alpha.Rd
+	  (1.3), man/CAPM.beta.Rd (1.3):
 
 	- standardize parameters to R and Rb for consistency with other functions
 
 2007-02-08 15:38  brian
 
-	* R/: BetaCoSkewness.R, CoKurtosis.R, CoSkewness.R,
-	  moment.fourth.R, moment.third.R:
+	* R/: BetaCoSkewness.R (1.3), CoKurtosis.R (1.3), CoSkewness.R
+	  (1.3), moment.fourth.R (1.4), moment.third.R (1.4):
 
 	- correct pervasive calculation error in co-moments
 
 2007-02-07 12:58  brian
 
-	* R/rollingRegression.R, man/rollingRegression.Rd:
+	* R/rollingRegression.R (1.1), man/rollingRegression.Rd (1.1):
 
 	- add rollingRegression fn and .Rd to package
 
 2007-02-07 12:03  brian
 
-	* man/: ActivePremium.Rd, BetaCoKurtosis.Rd, BetaCoSkewness.Rd,
-	  BetaCoVariance.Rd, CAPM.alpha.Rd, CAPM.beta.Rd, CoKurtosis.Rd,
-	  CoSkewness.Rd, DownsideDeviation.Rd, InformationRatio.Rd,
-	  Omega.Rd, Return.annualized.Rd, Return.cumulative.Rd,
-	  SemiDeviation.Rd, SharpeRatio.Rd, SharpeRatio.annualized.Rd,
-	  SharpeRatio.modified.Rd, SortinoRatio.Rd, StdDev.Rd,
-	  StdDev.annualized.Rd, TrackingError.Rd, TreynorRatio.Rd,
-	  UpDownRatios.Rd, VaR.Beyond.Rd, VaR.CornishFisher.Rd,
-	  VaR.Marginal.Rd, chart.Bar.Rd, chart.BarVaR.Rd, chart.Boxplot.Rd,
-	  chart.Correlation.Rd, chart.Correlation.color.Rd,
-	  chart.CumReturns.Rd, chart.Drawdown.Rd, chart.Histogram.Rd,
-	  chart.QQPlot.Rd, chart.RelativePerformance.Rd,
-	  chart.RiskReturnScatter.Rd, chart.RollingCorrelation.Rd,
-	  chart.RollingMean.Rd, chart.RollingPerformance.Rd,
-	  chart.RollingRegression.Rd, chart.Scatter.Rd,
-	  chart.TimeSeries.Rd, charts.PerformanceSummary.Rd,
-	  charts.RollingPerformance.Rd, checkDataMatrix.Rd,
-	  checkDataVector.Rd, cummax.column.Rd, cumprod.column.Rd,
-	  findDrawdowns.Rd, maxDrawdown.Rd, moment.fourth.Rd,
-	  moment.third.Rd, rollingCorrelation.Rd, rollingFunction.Rd,
-	  rollingStat.Rd, sortDrawdowns.Rd, table.AnnualizedReturns.Rd,
-	  table.Arbitrary.Rd, table.CAPM.Rd, table.Correlation.Rd,
-	  table.DownsideRisk.Rd, table.HigherMoments.Rd,
-	  table.MonthlyReturns.Rd, table.Returns.Rd,
-	  table.RollingPeriods.Rd:
+	* man/: ActivePremium.Rd (1.2), BetaCoKurtosis.Rd (1.2),
+	  BetaCoSkewness.Rd (1.2), BetaCoVariance.Rd (1.2), CAPM.alpha.Rd
+	  (1.2), CAPM.beta.Rd (1.2), CoKurtosis.Rd (1.2), CoSkewness.Rd
+	  (1.2), DownsideDeviation.Rd (1.2), InformationRatio.Rd (1.2),
+	  Omega.Rd (1.2), Return.annualized.Rd (1.2), Return.cumulative.Rd
+	  (1.2), SemiDeviation.Rd (1.2), SharpeRatio.Rd (1.2),
+	  SharpeRatio.annualized.Rd (1.2), SharpeRatio.modified.Rd (1.3),
+	  SortinoRatio.Rd (1.2), StdDev.Rd (1.3), StdDev.annualized.Rd
+	  (1.2), TrackingError.Rd (1.2), TreynorRatio.Rd (1.2),
+	  UpDownRatios.Rd (1.2), VaR.Beyond.Rd (1.2), VaR.CornishFisher.Rd
+	  (1.2), VaR.Marginal.Rd (1.2), chart.Bar.Rd (1.2), chart.BarVaR.Rd
+	  (1.2), chart.Boxplot.Rd (1.2), chart.Correlation.Rd (1.2),
+	  chart.Correlation.color.Rd (1.2), chart.CumReturns.Rd (1.2),
+	  chart.Drawdown.Rd (1.2), chart.Histogram.Rd (1.2),
+	  chart.QQPlot.Rd (1.2), chart.RelativePerformance.Rd (1.2),
+	  chart.RiskReturnScatter.Rd (1.2), chart.RollingCorrelation.Rd
+	  (1.2), chart.RollingMean.Rd (1.2), chart.RollingPerformance.Rd
+	  (1.2), chart.RollingRegression.Rd (1.2), chart.Scatter.Rd (1.2),
+	  chart.TimeSeries.Rd (1.2), charts.PerformanceSummary.Rd (1.2),
+	  charts.RollingPerformance.Rd (1.2), checkDataMatrix.Rd (1.2),
+	  checkDataVector.Rd (1.2), cummax.column.Rd (1.2),
+	  cumprod.column.Rd (1.2), findDrawdowns.Rd (1.2), maxDrawdown.Rd
+	  (1.2), moment.fourth.Rd (1.2), moment.third.Rd (1.2),
+	  rollingCorrelation.Rd (1.2), rollingFunction.Rd (1.2),
+	  rollingStat.Rd (1.2), sortDrawdowns.Rd (1.2),
+	  table.AnnualizedReturns.Rd (1.2), table.Arbitrary.Rd (1.2),
+	  table.CAPM.Rd (1.2), table.Correlation.Rd (1.2),
+	  table.DownsideRisk.Rd (1.2), table.HigherMoments.Rd (1.2),
+	  table.MonthlyReturns.Rd (1.2), table.Returns.Rd (1.2),
+	  table.RollingPeriods.Rd (1.2):
 
 	- first pass through .Rd files for /item commonality
 
 2007-02-07 09:53  peter
 
-	* R/charts.RollingRegression.R:
+	* R/charts.RollingRegression.R (1.1):
 
 	- added function to the package
 
 2007-02-07 09:45  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.4):
 
 	- repaired graphic parameter passing
 	- rf needs a data check and testing
 
 2007-02-07 08:58  peter
 
-	* R/chart.RollingRegression.R:
+	* R/chart.RollingRegression.R (1.3):
 
 	- added rf and calculation of excess returns
 
 2007-02-07 07:24  brian
 
-	* R/: ActivePremium.R, BetaCoKurtosis.R, BetaCoSkewness.R,
-	  BetaCoVariance.R, CAPM.alpha.R, CAPM.beta.R, CoKurtosis.R,
-	  CoSkewness.R, DownsideDeviation.R, InformationRatio.R, Omega.R,
-	  Return.annualized.R, Return.cumulative.R, SemiDeviation.R,
-	  SharpeRatio.R, SharpeRatio.annualized.R, SharpeRatio.modified.R,
-	  SortinoRatio.R, StdDev.R, StdDev.annualized.R, TrackingError.R,
-	  TreynorRatio.R, UpDownRatios.R, VaR.Beyond.R,
-	  VaR.CornishFisher.R, VaR.Marginal.R, chart.Bar.R, chart.BarVaR.R,
-	  chart.Boxplot.R, chart.Correlation.R, chart.Correlation.color.R,
-	  chart.CumReturns.R, chart.Drawdown.R, chart.Histogram.R,
-	  chart.QQPlot.R, chart.RelativePerformance.R,
-	  chart.RiskReturnScatter.R, chart.RollingCorrelation.R,
-	  chart.RollingMean.R, chart.RollingPerformance.R,
-	  chart.RollingRegression.R, chart.Scatter.R, chart.TimeSeries.R,
-	  charts.PerformanceSummary.R, charts.RollingPerformance.R,
-	  checkDataMatrix.R, checkDataVector.R, cummax.column.R,
-	  cumprod.column.R, findDrawdowns.R, legend.R, maxDrawdown.R,
-	  moment.fourth.R, moment.third.R, rollingCorrelation.R,
-	  rollingFunction.R, rollingStat.R, sortDrawdowns.R,
-	  table.AnnualizedReturns.R, table.Arbitrary.R, table.CAPM.R,
-	  table.Correlation.R, table.DownsideRisk.R, table.HigherMoments.R,
-	  table.MonthlyReturns.R, table.Returns.R, table.RollingPeriods.R:
+	* R/: ActivePremium.R (1.3), BetaCoKurtosis.R (1.2),
+	  BetaCoSkewness.R (1.2), BetaCoVariance.R (1.2), CAPM.alpha.R
+	  (1.3), CAPM.beta.R (1.3), CoKurtosis.R (1.2), CoSkewness.R (1.2),
+	  DownsideDeviation.R (1.2), InformationRatio.R (1.3), Omega.R
+	  (1.2), Return.annualized.R (1.2), Return.cumulative.R (1.2),
+	  SemiDeviation.R (1.2), SharpeRatio.R (1.2),
+	  SharpeRatio.annualized.R (1.2), SharpeRatio.modified.R (1.3),
+	  SortinoRatio.R (1.2), StdDev.R (1.3), StdDev.annualized.R (1.2),
+	  TrackingError.R (1.3), TreynorRatio.R (1.2), UpDownRatios.R
+	  (1.2), VaR.Beyond.R (1.2), VaR.CornishFisher.R (1.2),
+	  VaR.Marginal.R (1.2), chart.Bar.R (1.2), chart.BarVaR.R (1.2),
+	  chart.Boxplot.R (1.2), chart.Correlation.R (1.2),
+	  chart.Correlation.color.R (1.2), chart.CumReturns.R (1.2),
+	  chart.Drawdown.R (1.2), chart.Histogram.R (1.2), chart.QQPlot.R
+	  (1.2), chart.RelativePerformance.R (1.2),
+	  chart.RiskReturnScatter.R (1.2), chart.RollingCorrelation.R
+	  (1.2), chart.RollingMean.R (1.2), chart.RollingPerformance.R
+	  (1.2), chart.RollingRegression.R (1.2), chart.Scatter.R (1.2),
+	  chart.TimeSeries.R (1.2), charts.PerformanceSummary.R (1.2),
+	  charts.RollingPerformance.R (1.2), checkDataMatrix.R (1.2),
+	  checkDataVector.R (1.2), cummax.column.R (1.2), cumprod.column.R
+	  (1.2), findDrawdowns.R (1.3), legend.R (1.2), maxDrawdown.R
+	  (1.2), moment.fourth.R (1.3), moment.third.R (1.3),
+	  rollingCorrelation.R (1.2), rollingFunction.R (1.2),
+	  rollingStat.R (1.2), sortDrawdowns.R (1.3),
+	  table.AnnualizedReturns.R (1.2), table.Arbitrary.R (1.2),
+	  table.CAPM.R (1.3), table.Correlation.R (1.2),
+	  table.DownsideRisk.R (1.2), table.HigherMoments.R (1.3),
+	  table.MonthlyReturns.R (1.2), table.Returns.R (1.2),
+	  table.RollingPeriods.R (1.2):
 
 	- fix pervasive comment typo
 
 2007-02-07 07:20  brian
 
-	* R/: ActivePremium.R, CAPM.alpha.R, CAPM.beta.R,
-	  InformationRatio.R, TrackingError.R, table.CAPM.R,
-	  table.HigherMoments.R:
+	* R/: ActivePremium.R (1.2), CAPM.alpha.R (1.2), CAPM.beta.R (1.2),
+	  InformationRatio.R (1.2), TrackingError.R (1.2), table.CAPM.R
+	  (1.2), table.HigherMoments.R (1.2):
 
 	- change Ri to Rb for benchmark asset to standardize parameters
 	- change indexReturns.vec to benchmarkReturns.vec for consistency
 
 2007-02-07 06:32  brian
 
-	* R/: moment.fourth.R, moment.third.R:
+	* R/: moment.fourth.R (1.2), moment.third.R (1.2):
 
 	- rename parameter Ri to R for consistency with other functions
 
 2007-02-06 06:01  brian
 
-	* DESCRIPTION, man/PerformanceAnalytics-package.Rd:
+	* DESCRIPTION (1.3), man/PerformanceAnalytics-package.Rd (1.3):
 
 	- add long description
 
 2007-02-06 05:58  brian
 
-	* R/: findDrawdowns.R, sortDrawdowns.R:
+	* R/: findDrawdowns.R (1.2), sortDrawdowns.R (1.2):
 
 	- standardize attribution for Drawdown runs
 
 2007-02-05 13:08  brian
 
-	* R/SharpeRatio.modified.R, man/SharpeRatio.modified.Rd:
+	* R/SharpeRatio.modified.R (1.2), man/SharpeRatio.modified.Rd
+	  (1.2):
 
 	- add modSharpe wrapper function
 
 2007-02-05 13:03  brian
 
-	* R/StdDev.R, man/StdDev.Rd:
+	* R/StdDev.R (1.2), man/StdDev.Rd (1.2):
 
 	- add std wrapper function
 
 2007-02-05 07:57  brian
 
-	* DESCRIPTION, man/PerformanceAnalytics-package.Rd:
+	* DESCRIPTION (1.2), man/PerformanceAnalytics-package.Rd (1.2):
 
 	- change package name to PerformanceAnalytics
 
 2007-02-02 13:06  brian
 
-	* R/ActivePremium.R, R/BetaCoKurtosis.R, R/BetaCoSkewness.R,
-	  R/BetaCoVariance.R, R/CAPM.alpha.R, R/CAPM.beta.R,
-	  R/CoKurtosis.R, R/CoSkewness.R, R/DownsideDeviation.R,
-	  R/InformationRatio.R, R/Omega.R, R/Return.annualized.R,
-	  R/Return.cumulative.R, R/SemiDeviation.R, R/SharpeRatio.R,
-	  R/SharpeRatio.annualized.R, R/SharpeRatio.modified.R,
-	  R/SortinoRatio.R, R/StdDev.R, R/StdDev.annualized.R,
-	  R/TrackingError.R, R/TreynorRatio.R, R/UpDownRatios.R,
-	  R/VaR.Beyond.R, R/VaR.CornishFisher.R, R/VaR.Marginal.R,
-	  R/chart.Bar.R, R/chart.BarVaR.R, R/chart.Boxplot.R,
-	  R/chart.Correlation.R, R/chart.Correlation.color.R,
-	  R/chart.CumReturns.R, R/chart.Drawdown.R, R/chart.Histogram.R,
-	  R/chart.QQPlot.R, R/chart.RelativePerformance.R,
-	  R/chart.RiskReturnScatter.R, R/chart.RollingCorrelation.R,
-	  R/chart.RollingMean.R, R/chart.RollingPerformance.R,
-	  R/chart.RollingRegression.R, R/chart.Scatter.R,
-	  R/chart.TimeSeries.R, R/charts.PerformanceSummary.R,
-	  R/charts.RollingPerformance.R, R/checkDataMatrix.R,
-	  R/checkDataVector.R, R/cummax.column.R, R/cumprod.column.R,
-	  R/findDrawdowns.R, R/legend.R, R/maxDrawdown.R,
-	  R/moment.fourth.R, R/moment.third.R, R/rollingCorrelation.R,
-	  R/rollingFunction.R, R/rollingStat.R, R/sortDrawdowns.R,
-	  R/table.AnnualizedReturns.R, R/table.Arbitrary.R, R/table.CAPM.R,
-	  R/table.Correlation.R, R/table.DownsideRisk.R,
-	  R/table.HigherMoments.R, R/table.MonthlyReturns.R,
-	  R/table.Returns.R, R/table.RollingPeriods.R,
-	  man/ActivePremium.Rd, man/BetaCoKurtosis.Rd,
-	  man/BetaCoSkewness.Rd, man/BetaCoVariance.Rd, man/CAPM.alpha.Rd,
-	  man/CAPM.beta.Rd, man/CoKurtosis.Rd, man/CoSkewness.Rd,
-	  man/DownsideDeviation.Rd, man/InformationRatio.Rd, man/Omega.Rd,
-	  man/PerformanceAnalytics-package.Rd, man/Return.annualized.Rd,
-	  man/Return.cumulative.Rd, man/SemiDeviation.Rd,
-	  man/SharpeRatio.Rd, man/SharpeRatio.annualized.Rd,
-	  man/SharpeRatio.modified.Rd, man/SortinoRatio.Rd, man/StdDev.Rd,
-	  man/StdDev.annualized.Rd, man/TrackingError.Rd,
-	  man/TreynorRatio.Rd, man/UpDownRatios.Rd, man/VaR.Beyond.Rd,
-	  man/VaR.CornishFisher.Rd, man/VaR.Marginal.Rd, man/chart.Bar.Rd,
-	  man/chart.BarVaR.Rd, man/chart.Boxplot.Rd,
-	  man/chart.Correlation.Rd, man/chart.Correlation.color.Rd,
-	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
-	  man/chart.Histogram.Rd, man/chart.QQPlot.Rd,
-	  man/chart.RelativePerformance.Rd, man/chart.RiskReturnScatter.Rd,
-	  man/chart.RollingCorrelation.Rd, man/chart.RollingMean.Rd,
-	  man/chart.RollingPerformance.Rd, man/chart.RollingRegression.Rd,
-	  man/chart.Scatter.Rd, man/chart.TimeSeries.Rd,
-	  man/charts.PerformanceSummary.Rd,
-	  man/charts.RollingPerformance.Rd, man/checkDataMatrix.Rd,
-	  man/checkDataVector.Rd, man/cummax.column.Rd,
-	  man/cumprod.column.Rd, man/findDrawdowns.Rd, man/legend.Rd,
-	  man/maxDrawdown.Rd, man/moment.fourth.Rd, man/moment.third.Rd,
-	  man/rollingCorrelation.Rd, man/rollingFunction.Rd,
-	  man/rollingStat.Rd, man/sortDrawdowns.Rd,
-	  man/table.AnnualizedReturns.Rd, man/table.Arbitrary.Rd,
-	  man/table.CAPM.Rd, man/table.Correlation.Rd,
-	  man/table.DownsideRisk.Rd, man/table.HigherMoments.Rd,
-	  man/table.MonthlyReturns.Rd, man/table.Returns.Rd,
-	  man/table.RollingPeriods.Rd, DESCRIPTION:
+	* R/ActivePremium.R (1.1), R/BetaCoKurtosis.R (1.1),
+	  R/BetaCoSkewness.R (1.1), R/BetaCoVariance.R (1.1),
+	  R/CAPM.alpha.R (1.1), R/CAPM.beta.R (1.1), R/CoKurtosis.R (1.1),
+	  R/CoSkewness.R (1.1), R/DownsideDeviation.R (1.1),
+	  R/InformationRatio.R (1.1), R/Omega.R (1.1),
+	  R/Return.annualized.R (1.1), R/Return.cumulative.R (1.1),
+	  R/SemiDeviation.R (1.1), R/SharpeRatio.R (1.1),
+	  R/SharpeRatio.annualized.R (1.1), R/SharpeRatio.modified.R (1.1),
+	  R/SortinoRatio.R (1.1), R/StdDev.R (1.1), R/StdDev.annualized.R
+	  (1.1), R/TrackingError.R (1.1), R/TreynorRatio.R (1.1),
+	  R/UpDownRatios.R (1.1), R/VaR.Beyond.R (1.1),
+	  R/VaR.CornishFisher.R (1.1), R/VaR.Marginal.R (1.1),
+	  R/chart.Bar.R (1.1), R/chart.BarVaR.R (1.1), R/chart.Boxplot.R
+	  (1.1), R/chart.Correlation.R (1.1), R/chart.Correlation.color.R
+	  (1.1), R/chart.CumReturns.R (1.1), R/chart.Drawdown.R (1.1),
+	  R/chart.Histogram.R (1.1), R/chart.QQPlot.R (1.1),
+	  R/chart.RelativePerformance.R (1.1), R/chart.RiskReturnScatter.R
+	  (1.1), R/chart.RollingCorrelation.R (1.1), R/chart.RollingMean.R
+	  (1.1), R/chart.RollingPerformance.R (1.1),
+	  R/chart.RollingRegression.R (1.1), R/chart.Scatter.R (1.1),
+	  R/chart.TimeSeries.R (1.1), R/charts.PerformanceSummary.R (1.1),
+	  R/charts.RollingPerformance.R (1.1), R/checkDataMatrix.R (1.1),
+	  R/checkDataVector.R (1.1), R/cummax.column.R (1.1),
+	  R/cumprod.column.R (1.1), R/findDrawdowns.R (1.1), R/legend.R
+	  (1.1), R/maxDrawdown.R (1.1), R/moment.fourth.R (1.1),
+	  R/moment.third.R (1.1), R/rollingCorrelation.R (1.1),
+	  R/rollingFunction.R (1.1), R/rollingStat.R (1.1),
+	  R/sortDrawdowns.R (1.1), R/table.AnnualizedReturns.R (1.1),
+	  R/table.Arbitrary.R (1.1), R/table.CAPM.R (1.1),
+	  R/table.Correlation.R (1.1), R/table.DownsideRisk.R (1.1),
+	  R/table.HigherMoments.R (1.1), R/table.MonthlyReturns.R (1.1),
+	  R/table.Returns.R (1.1), R/table.RollingPeriods.R (1.1),
+	  man/ActivePremium.Rd (1.1), man/BetaCoKurtosis.Rd (1.1),
+	  man/BetaCoSkewness.Rd (1.1), man/BetaCoVariance.Rd (1.1),
+	  man/CAPM.alpha.Rd (1.1), man/CAPM.beta.Rd (1.1),
+	  man/CoKurtosis.Rd (1.1), man/CoSkewness.Rd (1.1),
+	  man/DownsideDeviation.Rd (1.1), man/InformationRatio.Rd (1.1),
+	  man/Omega.Rd (1.1), man/PerformanceAnalytics-package.Rd (1.1),
+	  man/Return.annualized.Rd (1.1), man/Return.cumulative.Rd (1.1),
+	  man/SemiDeviation.Rd (1.1), man/SharpeRatio.Rd (1.1),
+	  man/SharpeRatio.annualized.Rd (1.1), man/SharpeRatio.modified.Rd
+	  (1.1), man/SortinoRatio.Rd (1.1), man/StdDev.Rd (1.1),
+	  man/StdDev.annualized.Rd (1.1), man/TrackingError.Rd (1.1),
+	  man/TreynorRatio.Rd (1.1), man/UpDownRatios.Rd (1.1),
+	  man/VaR.Beyond.Rd (1.1), man/VaR.CornishFisher.Rd (1.1),
+	  man/VaR.Marginal.Rd (1.1), man/chart.Bar.Rd (1.1),
+	  man/chart.BarVaR.Rd (1.1), man/chart.Boxplot.Rd (1.1),
+	  man/chart.Correlation.Rd (1.1), man/chart.Correlation.color.Rd
+	  (1.1), man/chart.CumReturns.Rd (1.1), man/chart.Drawdown.Rd
+	  (1.1), man/chart.Histogram.Rd (1.1), man/chart.QQPlot.Rd (1.1),
+	  man/chart.RelativePerformance.Rd (1.1),
+	  man/chart.RiskReturnScatter.Rd (1.1),
+	  man/chart.RollingCorrelation.Rd (1.1), man/chart.RollingMean.Rd
+	  (1.1), man/chart.RollingPerformance.Rd (1.1),
+	  man/chart.RollingRegression.Rd (1.1), man/chart.Scatter.Rd (1.1),
+	  man/chart.TimeSeries.Rd (1.1), man/charts.PerformanceSummary.Rd
+	  (1.1), man/charts.RollingPerformance.Rd (1.1),
+	  man/checkDataMatrix.Rd (1.1), man/checkDataVector.Rd (1.1),
+	  man/cummax.column.Rd (1.1), man/cumprod.column.Rd (1.1),
+	  man/findDrawdowns.Rd (1.1), man/legend.Rd (1.1),
+	  man/maxDrawdown.Rd (1.1), man/moment.fourth.Rd (1.1),
+	  man/moment.third.Rd (1.1), man/rollingCorrelation.Rd (1.1),
+	  man/rollingFunction.Rd (1.1), man/rollingStat.Rd (1.1),
+	  man/sortDrawdowns.Rd (1.1), man/table.AnnualizedReturns.Rd (1.1),
+	  man/table.Arbitrary.Rd (1.1), man/table.CAPM.Rd (1.1),
+	  man/table.Correlation.Rd (1.1), man/table.DownsideRisk.Rd (1.1),
+	  man/table.HigherMoments.Rd (1.1), man/table.MonthlyReturns.Rd
+	  (1.1), man/table.Returns.Rd (1.1), man/table.RollingPeriods.Rd
+	  (1.1), DESCRIPTION (1.1):
 
 	- Initial Revision of packaged foles to version control
 	Bug 890
