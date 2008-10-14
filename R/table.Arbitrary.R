@@ -47,7 +47,7 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
 
     # FUNCTION:
 
-    y = checkData(R, method = "matrix")
+    y = checkData(R, method = "zoo")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -102,10 +102,13 @@ function(R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard De
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Arbitrary.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: table.Arbitrary.R,v 1.7 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/12/27 20:59:35  peter
 # - cleaned out commented lines
 #

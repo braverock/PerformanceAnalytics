@@ -18,7 +18,7 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
     # Assumes an input of regular period returns.
 
     # SETUP:
-    R = checkData(R, method = "matrix")
+    R = checkData(R, method = "zoo")
 
     columns = ncol(R)
     columnnames=colnames(R)
@@ -65,10 +65,13 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.10 2008-06-02 16:05:19 brian Exp $
+# $Id: VaR.Beyond.R,v 1.11 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.9  2007/08/28 14:56:49  peter
 # - added na.omit to column processing
 # - added rowname when multiple columns are returned

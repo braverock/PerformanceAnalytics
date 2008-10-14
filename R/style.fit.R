@@ -22,8 +22,8 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
 #     if(!require("quadprog", quietly=TRUE))
 #         stop("package", sQuote("quadprog"), "is needed.  Stopping")
 
-    R.fund = checkData(R.fund, method="data.frame")
-    R.style = checkData(R.style, method="data.frame")
+    R.fund = checkData(R.fund, method= "zoo")
+    R.style = checkData(R.style, method= "zoo")
 
     # @todo: Missing data is not allowed, use = "pairwise.complete.obs" ?
     style.rows = dim(R.style)[1]

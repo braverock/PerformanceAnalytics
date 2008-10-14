@@ -6,7 +6,7 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
     # @todo: Set axis color to element.color
     # @todo: Set border color to element.color
 
-    w = checkData(w,method="matrix")
+    w = checkData(w,method = "zoo")
     w.columns = ncol(w)
     w.rows = nrow(w)
 
@@ -116,10 +116,14 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.12 2008-07-11 02:42:15 peter Exp $
+# $Id: chart.StackedBar.R,v 1.13 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2008-07-11 02:42:15  peter
+# - adjustments to margins again
+# - added cex.axis for sizing axis text
+#
 # Revision 1.5  2008-04-18 03:56:15  peter
 # - added a legend at the bottom
 # - added smarts for displaying single column or stacked

@@ -31,7 +31,7 @@ function(R, p=0.99, modified = TRUE, clean=c("none", "boudt"))
     }
     zc = qnorm(p)
 
-    R = checkData(R, method="matrix")
+    R = checkData(R, method = "zoo")
     columns = ncol(R)
     columnnames=colnames(R)
     if(clean[1]!="none"){
@@ -144,10 +144,13 @@ function(R, p=0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.20 2008-08-15 21:42:21 peter Exp $
+# $Id: VaR.CornishFisher.R,v 1.21 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2008-08-15 21:42:21  peter
+# - fixed warnings from 'clean' parameter comparison
+#
 # Revision 1.19  2008-08-13 03:31:32  peter
 # - added 'clean' parameter for calling a data cleaning method prior to calculation
 #

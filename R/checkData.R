@@ -131,7 +131,7 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
 `checkDataMatrix` <-
 function (x, na.rm = TRUE, quiet = TRUE, ...)
 {
-    checkData(x, method = "matrix", na.rm = na.rm, quiet = quiet, ...)
+    checkData(x, method = "zoo", na.rm = na.rm, quiet = quiet, ...)
 }
 
 ###############################################################################
@@ -158,9 +158,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.18 2008-06-02 16:05:19 brian Exp $
+# $Id: checkData.R,v 1.19 2008-10-14 14:37:29 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.17  2007/10/18 13:56:53  peter
 # - fixed error labeling data without columnnames
 #

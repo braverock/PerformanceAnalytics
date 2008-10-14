@@ -13,9 +13,9 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 
     #FUNCTION:
 
-    y = checkData(R, method="matrix")
+    y = checkData(R, method = "zoo")
     if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "matrix")
+        rf = checkData(rf, method = "zoo")
     # Set up dimensions and labels
     columns = ncol(y)
     rows = nrow(y)
@@ -92,10 +92,13 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.9 2008-06-02 16:05:19 brian Exp $
+# $Id: table.DownsideRisk.R,v 1.10 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.8  2007/08/29 03:17:24  peter
 # - fixed NA removal problems
 # - fixed rounding issue with Rf labels in table

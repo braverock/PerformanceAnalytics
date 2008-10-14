@@ -14,7 +14,7 @@ function (R, ci = 0.95, digits = 4)
 
     # FUNCTION:
 
-    y = checkData(R, method = "matrix")
+    y = checkData(R, method = "zoo")
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -97,10 +97,13 @@ function (R, ci = 0.95, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.MonthlyReturns.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: table.MonthlyReturns.R,v 1.8 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/03/20 13:47:12  peter
 # - changed to checkData
 # - cleaned up alignment

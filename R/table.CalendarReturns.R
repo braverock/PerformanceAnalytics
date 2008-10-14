@@ -39,7 +39,7 @@ function (R, digits = 1, as.perc = TRUE)
 
     # FUNCTION:
 
-    ri = checkData(R, method = "matrix")
+    ri = checkData(R, method = "zoo")
 
     columns = ncol(ri)
     columnnames = colnames(ri)
@@ -125,10 +125,13 @@ function (R, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.5 2008-06-02 16:05:19 brian Exp $
+# $Id: table.CalendarReturns.R,v 1.6 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.4  2007/09/02 01:51:18  peter
 # - puts NAs where data is missing, rather than zeros
 #

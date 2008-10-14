@@ -18,7 +18,7 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
     # A stack of three related timeseries line charts
 
     # FUNCTION:
-    x = checkData(R, method = "matrix")
+    x = checkData(R, method = "zoo")
     colnames = colnames(x)
     ncols = ncol(x)
 
@@ -60,10 +60,13 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: charts.RollingPerformance.R,v 1.8 2008-10-14 14:37:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2008-04-18 03:52:44  peter
 # - added par to reset layout to default
 #
