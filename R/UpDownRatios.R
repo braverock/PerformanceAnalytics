@@ -32,7 +32,7 @@ function(R, Rb, method = "capture", side = "up", ...)
 
     Ra = checkData(R, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
-    #rf = checkDataMatrix(rf)
+    # rf = checkData(rf, method = "zoo")
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -133,10 +133,13 @@ function(R, Rb, method = "capture", side = "up", ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpDownRatios.R,v 1.4 2008-06-02 16:05:19 brian Exp $
+# $Id: UpDownRatios.R,v 1.5 2008-10-16 18:45:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.3  2007/04/02 21:57:26  peter
 # - modified to use checkData functions
 # - uses zoo to align dates

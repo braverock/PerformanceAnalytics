@@ -13,7 +13,7 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
     #
     # @returns data frame with total VaR of the portfolio plus Marginal VaR for each component
 
-    R = checkDataMatrix(R)
+    R = checkData(R, method = "zoo")
 
     if (is.null(weightingvector)) {
         weightingvector = t(rep(1/dim(R)[[2]], dim(R)[[2]]))
@@ -69,10 +69,13 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.7 2008-06-26 01:42:08 peter Exp $
+# $Id: VaR.Marginal.R,v 1.8 2008-10-16 18:45:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-26 01:42:08  peter
+# - added package test for 'fPortfolio'
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
