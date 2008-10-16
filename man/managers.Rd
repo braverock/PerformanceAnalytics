@@ -27,7 +27,7 @@ head(managers)
 summary(managers)
 
 #cumulative returns
-tail(cumprod.column(1+managers),1)
+tail(cumprod(1+managers),1)
 }
 \keyword{datasets}
 \keyword{ ts }

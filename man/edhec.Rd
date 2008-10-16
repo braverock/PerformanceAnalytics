@@ -37,7 +37,7 @@ head(edhec)
 summary(edhec)
 
 #cumulative index returns
-tail(cumprod.column(1+edhec),1)
+tail(cumprod(1+edhec),1)
 }
 \keyword{datasets}
 \keyword{ ts }
