@@ -1,12 +1,12 @@
-Return.portfolio.multiweight <- function (R, weights, yeargrid, ...){
+Return.portfolio.multiweight <- function (R, weights, rebalancegrid, ...){
     result=data.frame()
 
     weights=checkData(weights,method="matrix")
 
     # loop:
-    for (row in 1:nrow(yeargrid)){
-        from =yeargrid[row,1]
-        to = yeargrid[row,2]
+    for (row in 1:nrow(rebalancegrid)){
+        from =rebalancegrid[row,1]
+        to = rebalancegrid[row,2]
         if(row==1){ startingwealth=1 }
         resultreturns=Return.portfolio(R[from:to,],weights=t(weights[row,]), startingwealth=startingwealth, ...=...)
         startingwealth=resultreturns[nrow(resultreturns),"portfolio.wealthindex"]
@@ -119,3 +119,16 @@ pfolioReturn <- function (x, weights=NULL, ...)
 
     Return.portfolio(R=x, weights=weights, ...=...)
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: Return.portfolio.R,v 1.2 2009-01-08 11:23:01 brian Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
