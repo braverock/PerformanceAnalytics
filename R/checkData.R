@@ -20,24 +20,25 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
 
     # FUNCTION:
 
+    # if (!require("xts")) stop("xts package not available")
+
     method = method[1] # grab the first value if this is still a vector, to avoid varnings
 
+    if(method != "vector"){
     # For matrixes and zoo objects, we test to see if there are rows, columns
     # and labels.  If there are not column labels, we provide them.  Row labels
     # we leave to the coersion functions.
 
-    if(!is.zoo(x)){
-        x = as.matrix(x)
-
         # Test for rows and columns
         if(is.null(ncol(x)))
-            stop("There don\'t seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form \'data.zoo[rows, columns, drop = FALSE]\'.")
+            warning("There don\'t seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form \'data.zoo[rows, columns, drop = FALSE]\'.")
+
 
         if(is.null(nrow(x)))
             stop("No rows in the data provided.")
 
         # Test for rownames and column names
-        if(method != "vector" & is.null(colnames(x))) {
+        if(is.null(colnames(x))) {
             columns = ncol(x)
             if(!quiet)
                 warning("No column names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
@@ -46,80 +47,78 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
             colnames(x) = columnnames
         }
 
-        if(method != "vector" & is.null(rownames(x)))
+        if(is.null(rownames(x)))
             if(!quiet)
                 warning("No row names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
 
-        # Coerce a zoo object from the matrix.
-        # We fill in column names where needed, and let the coersion
-        # function fill in rownames if they are missing.
-        if (method == "zoo") {
+        # First we check whether we have a zoo object
+        # eventually this will change with the xts code below
+        if(!inherits(x,what="zoo")){
+            x = as.matrix(x)
             if(is.null(rownames(x)))
                 x = zoo(x)
             else
                 x = zoo(x, order.by = rownames(x))
         }
     }
-    else {
-        if(is.null(ncol(x)) & dim(as.matrix(x))[2] == 1) {
-            #warning("If you are trying to pass in names from a zoo object with one column, you should use the form 'data.zoo[rows, columns, drop = FALSE]'.")
-            y = as.matrix(x)
-            colnames(y) = "Column"
-            x = zoo(y, order.by = time(x))
-        }
-    }
 
-    if (method == "matrix")
-        x = as.matrix(x)
+    switch(method,
+        vector = {
+            # First, we'll check to see if we have more than one column.
+            if (NCOL(x) > 1) {
+                if(!quiet)
+                    warning("The data provided is not a vector or univariate time series.  Used only the first column")
+                x = x[,1]
+            }
 
-
-    if (method == "data.frame")
-        x = as.data.frame(x)
-
-    # Now follows the tests specific to vectors
-    if (method == "vector"){
-
-        # First, we'll check to see if we have more than one column.
-        if (NCOL(x) > 1) {
-            if(!quiet)
-                warning("The data provided is not a vector or univariate time series.  Used only the first column")
-            x = x[,1]
-        }
-
-        # Second, we'll hunt for NA's and remove them if required
-        if (any(is.na(x))) {
-            if(na.rm) {
-                # Try to remove any NA's
-                x = na.omit(x)
-                if(!quiet){
-                    warning("The following slots have NAs.")
-                    warning(paste(x@na.removed," "))
+            # Second, we'll hunt for NA's and remove them if required
+            if (any(is.na(x))) {
+                if(na.rm) {
+                    # Try to remove any NA's
+                    x = na.omit(x)
+                    if(!quiet){
+                        warning("The following slots have NAs.")
+                        warning(paste(x@na.removed," "))
+                    }
+                }
+                else {
+                    if(!quiet)
+                        warning("Data contains NA\'s.")
                 }
             }
-            else {
+
+            # Third, we'll check to see if we have any character data
+            if (!is.numeric(x)){
                 if(!quiet)
-                    warning("Data contains NA\'s.")
+                    warning("The data does not appear to be numeric.")
+                # Try to coerce the data
+                # x = as.numeric(x)
             }
+
+            # Fourth, we'll see if we have more than one data point.
+            if (NROW(x) <= 1) {
+                if(!quiet)
+                    warning("Only one row provided.")
+            }
+
+            # @todo: Add check for stopifnot(is.atomic(y))???
+
+            x = as.vector(x)
+        },
+        data.frame = {
+            x = as.data.frame(x)
+        },
+        zoo = {
+            #try xts
+            if(xtsible(x)) x = xts(x)
+            # else
+            #possibly try date formats with warnings
+            #data was already coerced to zoo above
+        },
+        matrix = {
+            x = as.matrix(x)
         }
-
-        # Third, we'll check to see if we have any character data
-        if (!is.numeric(x)){
-            if(!quiet)
-                warning("The data does not appear to be numeric.")
-            # Try to coerce the data
-            # x = as.numeric(x)
-        }
-
-        # Fourth, we'll see if we have more than one data point.
-        if (NROW(x) <= 1) {
-            if(!quiet)
-                warning("Only one row provided.")
-        }
-
-        # @todo: Add check for stopifnot(is.atomic(y))???
-
-        x = as.vector(x)
-    }
+    ) # end switch
 
     # RESULTS
     return(x)
@@ -131,7 +130,7 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
 `checkDataMatrix` <-
 function (x, na.rm = TRUE, quiet = TRUE, ...)
 {
-    checkData(x, method = "zoo", na.rm = na.rm, quiet = quiet, ...)
+    checkData(x, method = "matrix", na.rm = na.rm, quiet = quiet, ...)
 }
 
 ###############################################################################
@@ -158,7 +157,7 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.19 2008-10-14 14:37:29 brian Exp $
+# $Id: checkData.R,v 1.20 2009-01-11 12:55:56 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
 # Revision 1.18  2008-06-02 16:05:19  brian
