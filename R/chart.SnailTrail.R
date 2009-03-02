@@ -43,14 +43,14 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     add.names = add.names[1]
 
     # start the calculations with the start date of the first column
-    length.column.one = length(x[,1])
+    length.column.one = length(na.omit(x[,1]))
     # find the row number of the last NA in the first column
     start.row = 1
     start.index = 0
     while(is.na(x[start.row,1])){
         start.row = start.row + 1
     }
-    x = x[start.row:length.column.one,,drop=FALSE]
+    x = x[start.row:(start.row+length.column.one-1),,drop=FALSE]
 
 
     # @todo: strip out basic elements to a scatter plot wrapper
@@ -175,10 +175,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.4 2008-08-16 03:40:32 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.5 2009-03-02 03:25:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-08-16 03:40:32  peter
+# - added default colorset
+#
 # Revision 1.3  2008-06-26 01:46:26  peter
 # - removed 'first' attribute
 #
