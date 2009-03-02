@@ -46,12 +46,12 @@ function (R, digits = 1, as.perc = TRUE)
     rownames = rownames(ri)
 
     # get the start and end years from the object of monthly returns
-    firstyear = as.numeric(format(strptime(rownames(ri)[1],"%Y-%m-%d"), "%Y"))
-    lastyear = as.numeric(format(strptime(rownames(ri)[length(ri[,1])], "%Y-%m-%d"), "%Y"))
+    firstyear = as.numeric(format(strptime(as.POSIXct(time(ri)[1]),"%Y-%m-%d"), "%Y"))
+    lastyear = as.numeric(format(strptime(as.POSIXct(time(ri)[length(ri[,1])]), "%Y-%m-%d"), "%Y"))
 
     # create vectors for year and month labels
-    year = format(strptime(rownames(ri), "%Y-%m-%d"), "%Y")
-    month = format(strptime(rownames(ri), "%Y-%m-%d"), "%b")
+    year = format(strptime(as.POSIXct(time(ri)), "%Y-%m-%d"), "%Y")
+    month = format(strptime(as.POSIXct(time(ri)), "%Y-%m-%d"), "%b")
 
     # create an empty target data frame, labeled correctly
     monthlabels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -125,10 +125,13 @@ function (R, digits = 1, as.perc = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.6 2008-10-14 14:37:29 brian Exp $
+# $Id: table.CalendarReturns.R,v 1.7 2009-03-02 03:22:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.5  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
