@@ -19,10 +19,11 @@ function (Ra, ...)
         column.Ra = zoo(NULL)
         # clean the data and get rid of NAs
         column.Ra = na.omit(checkData (Ra[, column.a, drop = FALSE], method = "zoo", ...=...))
+
         # compute the lagged return series
         lagRa = lag(column.Ra, k=-1)
         # compute the first order autocorrelation
-        f_acf = as.numeric(acf(column.Ra, plot = FALSE)[1][[1]])
+        f_acf = as.numeric(acf(as.numeric(column.Ra), plot = FALSE)[1][[1]])
         # now calculate and return the Geltner series
         column.geltner = (column.Ra-(lagRa*f_acf))/(1-f_acf)
 
@@ -48,10 +49,13 @@ function (Ra, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.Geltner.R,v 1.4 2008-06-02 16:05:19 brian Exp $
+# $Id: Return.Geltner.R,v 1.5 2009-03-02 03:21:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.3  2007/09/11 03:03:45  peter
 # - fixed na.omit for column zoo object
 #
