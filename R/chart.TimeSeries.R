@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
+function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -46,21 +46,17 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
     #rownames = rownames(y)
     rownames = as.Date(time(y))
 
+    time.scale = periodicity(y)$scale
+    ep = axTicksByTime(y,major.ticks, format.labels = date.format)
     # Re-format the dates for the xaxis
 #     rownames = format(strptime(as.Date(rownames),format = date.format.in), date.format)
-    rownames = format(strptime(rownames,format = date.format.in), date.format)
+#     rownames = format(strptime(rownames,format = date.format.in), date.format)
 
     # If the Y-axis is ln
     logaxis = ""
     if(ylog) {
         logaxis = "y"
     }
-
-    # Set color for key elements, easy to darken for the printer
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
 
     plot.new()
 
@@ -103,28 +99,32 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
     # indexes for each to improve placement.
     # @todo: measuring the length of data set and setting sensible ticks needs improvement
 
-    if(xlim[2]>=200)
-        tickspace=24
-    if(xlim[2]>=100)
-        tickspace=12
-    if(xlim[2]>=50)
-        tickspace=6
-    else
-        tickspace=4
-
-    lab.ind = seq(1, rows, by = tickspace/2)
-    grid.ind = seq(1, rows, by = tickspace)
+#     if(xlim[2]>=200)
+#         tickspace=24
+#     if(xlim[2]>=100)
+#         tickspace=12
+#     if(xlim[2]>=50)
+#         tickspace=6
+#     else
+#         tickspace=4
+# 
+#     lab.ind = seq(1, rows, by = tickspace/2)
+#     grid.ind = seq(1, rows, by = tickspace)
     # lab.ind = seq(1,rows,length=rows/divisor)
 
     # Draw the grid
-    if (reference.grid) {
-        grid(nx = NA, ny = NULL ,col = elementcolor)
-        #grid(col="darkgray")
-        abline(v=grid.ind, col = elementcolor, lty = "dotted")
+    if(auto.grid) {
+        abline(v=ep, col=grid.color, lty=grid.lty)
+        grid(NA, NULL, col = grid.color)
     }
+#     if (reference.grid) {
+#         grid(nx = NA, ny = NULL ,col = elementcolor)
+#         #grid(col="darkgray")
+#         abline(v=grid.ind, col = elementcolor, lty = "dotted")
+#     }
 
     # Draw a solid reference line at zero
-    abline(h = 0, col = elementcolor)
+    abline(h = 0, col = element.color)
 
     # Add event.lines before drawing the data
     # This only labels the dates it finds
@@ -155,8 +155,19 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
         lines(1:rows, y[,column], col = colorset[column], lwd = lwd[column], pch = pch[column], lty = lty[column], type = type, ...)
     }
 
+#     if (xaxis) {
+#         axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
+#         title(xlab = xlab)
+#         # use axis(..., las=3) for vertical labels.
+#     }
+
     if (xaxis) {
-        axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
+        if(minor.ticks)
+            axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB')
+        label.height = .25 + cex.axis * apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
+print(label.height)
+        axis(1, at=ep, labels=names(ep), las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+        #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
         title(xlab = xlab)
         # use axis(..., las=3) for vertical labels.
     }
@@ -164,15 +175,15 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
     # set up y-axis
     if (yaxis)
         if(yaxis.right)
-            axis(4, cex.axis = cex.axis, col=elementcolor, ylog=ylog)
+            axis(4, cex.axis = cex.axis, col=element.color, ylog=ylog)
         else
-            axis(2, cex.axis = cex.axis, col=elementcolor, ylog=ylog)
-    box(col = elementcolor)
+            axis(2, cex.axis = cex.axis, col=element.color, ylog=ylog)
+    box(col = element.color)
 
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = elementcolor, lty = lty, lwd = 2, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = element.color, lty = lty, lwd = 2, bg = "white", legend = columnnames)
     }
 
     # Add the other titles
@@ -191,10 +202,13 @@ function (R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FA
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.13 2008-10-06 19:08:50 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.14 2009-03-04 05:14:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2008-10-06 19:08:50  peter
+# - fixed so that it will plot backgrounds when ylog=T
+#
 # Revision 1.12  2008-08-16 03:42:26  peter
 # - added yaxis.right parameter
 #
