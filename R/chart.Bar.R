@@ -16,7 +16,7 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkData(R, method = "zoo")
+    x = checkData(R)
 
     chart.TimeSeries(x, type = "h", colorset = colorset, legend.loc = legend.loc, lend="butt",...)
 
@@ -30,10 +30,13 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Bar.R,v 1.5 2008-10-16 18:45:37 brian Exp $
+# $Id: chart.Bar.R,v 1.6 2009-03-06 03:06:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-10-16 18:45:37  brian
+# - use checkData with method="zoo" instead of checkDataMatrix
+#
 # Revision 1.4  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
