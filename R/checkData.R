@@ -1,5 +1,5 @@
 `checkData` <-
-function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, quiet = TRUE, ...)
+function (x, method = c("xts", "zoo","matrix","vector","data.frame"), na.rm = FALSE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -47,7 +47,7 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
             colnames(x) = columnnames
         }
 
-        if(is.null(rownames(x)))
+        if(!inherits(x,what="zoo") & is.null(rownames(x)))
             if(!quiet)
                 warning("No row names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
 
@@ -108,12 +108,15 @@ function (x, method = c("zoo","matrix","vector","data.frame"), na.rm = FALSE, qu
         data.frame = {
             x = as.data.frame(x)
         },
-        zoo = {
+        xts = {
             #try xts
             if(xtsible(x)) x = xts(x)
             # else
             #possibly try date formats with warnings
             #data was already coerced to zoo above
+        },
+        zoo = {
+            x = as.zoo(x)
         },
         matrix = {
             x = as.matrix(x)
@@ -157,9 +160,13 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.20 2009-01-11 12:55:56 brian Exp $
+# $Id: checkData.R,v 1.21 2009-03-11 03:42:06 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2009-01-11 12:55:56  brian
+# - convert 'zoo' method to use xts
+# - TODO add reclass capability
+#
 # Revision 1.18  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
