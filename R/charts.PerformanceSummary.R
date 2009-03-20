@@ -24,7 +24,7 @@ function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 
     # FUNCTION:
     begin = begin[1]
-    x = checkData(R, method = "zoo")
+    x = checkData(R)
     colnames = colnames(x)
     ncols = ncol(x)
 
@@ -93,10 +93,13 @@ function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.18 2008-08-16 03:38:54 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.19 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2008-08-16 03:38:54  peter
+# - changed chart.BarVaR call from 'method' to 'methods'
+#
 # Revision 1.17  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

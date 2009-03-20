@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 1, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
+function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.8, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -165,7 +165,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
         if(minor.ticks)
             axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB')
         label.height = .25 + cex.axis * apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
-print(label.height)
+
         axis(1, at=ep, labels=names(ep), las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
         #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
         title(xlab = xlab)
@@ -202,10 +202,13 @@ print(label.height)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.14 2009-03-04 05:14:05 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.15 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2009-03-04 05:14:05  peter
+# - added axTicksByTime from xts for nice xaxis
+#
 # Revision 1.13  2008-10-06 19:08:50  peter
 # - fixed so that it will plot backgrounds when ylog=T
 #

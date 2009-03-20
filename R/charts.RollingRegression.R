@@ -1,4 +1,4 @@
-charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE, main = NULL, legend.loc = NULL, event.labels=NULL, ...)
+charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, main = NULL, legend.loc = NULL, event.labels=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -44,15 +44,15 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
          main = paste("Rolling ",width,"-Month Regression",sep="")
     }
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken , attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, darken = darken, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, event.labels = NULL, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, event.labels = NULL, ...)
 
     par(mar=c(5,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "R-Squared", darken = darken, main = "", ylab = "R-Squared", event.labels = NULL, ...)
+    chart.RollingRegression(Ra, Rb, width = width, rf = rf, attribute = "R-Squared", main = "", ylab = "R-Squared", event.labels = NULL, ...)
 
     par(op)
 }
@@ -65,10 +65,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, rf = 0, darken = FALSE,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.15 2008-06-02 16:05:19 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.16 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.14  2008-04-18 03:53:19  peter
 # - added par to reset layout to default
 #

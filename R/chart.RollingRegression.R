@@ -10,8 +10,8 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
     # FUNCTION:
 
     # Transform input data to a data frame
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
     #rf = checkDataMatrix(rf)
     attribute=attribute[1]
 
@@ -37,9 +37,9 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
                 column.result = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) summary(lm(x[,1,drop=FALSE]~x[,2,drop=FALSE]))$r.squared, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
 
             # some backflips to name the single column zoo object
-            column.result.tmp = as.matrix(column.result)
+            column.result.tmp = xts(column.result)
             colnames(column.result.tmp) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
-            column.result = zoo(column.result.tmp, order.by = time(column.result))
+            column.result = xts(column.result.tmp, order.by = time(column.result))
 
             if(column.a == 1 & column.b == 1)
                 Result.calc = column.result
@@ -60,10 +60,13 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.14 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.15 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.13  2007/10/11 03:53:00  peter
 # - fixed bug for handling yearmon class dates in zoo object
 #

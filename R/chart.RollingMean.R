@@ -1,5 +1,5 @@
 `chart.RollingMean` <-
-function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
+function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,7 +12,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
     # A timeseries line charts of the rolling mean, with error bars
 
     # FUNCTION:
-    x = checkData(R, method = "zoo")
+    x = checkData(R)
 
     # Get dimensions and labels
     columnnames = colnames(x)
@@ -46,10 +46,13 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.5 2008-06-26 02:07:33 peter Exp $
+# $Id: chart.RollingMean.R,v 1.6 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-26 02:07:33  peter
+# - changed 'stdev' to 'sd'
+#
 # Revision 1.4  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

@@ -8,8 +8,8 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
     # FUNCTION:
 
     # Transform input data to a matrix
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -24,9 +24,9 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
             column.calc = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) cor(x[,1,drop=FALSE], x[,2,drop=FALSE]), by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
 
             # some backflips to name the single column zoo object
-            column.calc.tmp = as.matrix(column.calc)
+            column.calc.tmp = xts(column.calc)
             colnames(column.calc.tmp) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
-            column.calc = zoo(column.calc.tmp, order.by = time(column.calc))
+            column.calc = xts(column.calc.tmp, order.by = time(column.calc))
 
             if(column.a == 1 & column.b == 1)
                 Result.calc = column.calc
@@ -47,10 +47,13 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingCorrelation.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.RollingCorrelation.R,v 1.8 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/10/11 03:56:12  peter
 # - fixed so that it will handle zoo objects with yearmon dates
 #

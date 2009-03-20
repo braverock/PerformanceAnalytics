@@ -25,7 +25,7 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Transform input data to a matrix
-    x = checkData(R, method="zoo")
+    x = checkData(R)
 
     # Calculate drawdown level
 #     Return.cumulative = cumprod.column(1+x)
@@ -48,7 +48,7 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
     }
 
     if(columns == 1) 
-        drawdown = as.matrix(drawdown)
+        drawdown = as.xts(drawdown)
 
     colnames(drawdown) = columnnames
 
@@ -65,10 +65,13 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Drawdown.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.Drawdown.R,v 1.7 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/03/13 03:57:37  peter
 # - uses checkData function
 #

@@ -15,8 +15,8 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
     # FUNCTION:
 
     # Transform input data to a matrix
-    Ra = checkData(Ra, method="zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -55,10 +55,13 @@ columnnames = colnames(Result.calc)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RelativePerformance.R,v 1.11 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.RelativePerformance.R,v 1.12 2009-03-20 03:22:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.10  2008/02/15 04:22:13  peter
 # - added lty parameters to plot and legend
 #
