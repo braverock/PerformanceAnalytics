@@ -1,5 +1,5 @@
 `chart.SnailTrail` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8,...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8, element.color="darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -30,9 +30,9 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
-    x = checkData(R, method = "zoo")
+    x = checkData(R)
     if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
+        rf = checkData(rf)
 #     x = na.omit(x)
     columns = ncol(x)
     rows = nrow(x)
@@ -55,10 +55,6 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 
     # @todo: strip out basic elements to a scatter plot wrapper
     # Set color for key elements, easy to darken for the printer
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
 
     if(length(colorset) < columns)
         colorset = rep(colorset, length.out = columns)
@@ -139,10 +135,10 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 ###
 
     if(ylim[1] != 0){
-        abline(h = 0, col = elementcolor)
+        abline(h = 0, col = element.color)
     }
-    axis(1, cex.axis = cex.axis, col = elementcolor)
-    axis(2, cex.axis = cex.axis, col = elementcolor)
+    axis(1, cex.axis = cex.axis, col = element.color)
+    axis(2, cex.axis = cex.axis, col = element.color)
     title(ylab = ylab, cex.lab = cex.lab)
     title(xlab = xlab, cex.lab = cex.lab)
 
@@ -159,11 +155,11 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = 0.8, border.col = elementcolor, pch = symbolset, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = 0.8, border.col = element.color, pch = symbolset, bg = "white", legend = columnnames)
     }
 
     #title(sub='From Inception', line=1)
-    box(col = elementcolor)
+    box(col = element.color)
 
 }
 
@@ -175,10 +171,16 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.5 2009-03-02 03:25:47 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.6 2009-03-20 03:26:17 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-03-02 03:25:47  peter
+# - fixed condition when end-dates do not match
+# ----------------------------------------------------------------------
+# R/chart.SnailTrail.R CVS:
+# ----------------------------------------------------------------------
+#
 # Revision 1.4  2008-08-16 03:40:32  peter
 # - added default colorset
 #
