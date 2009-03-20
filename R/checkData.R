@@ -24,22 +24,22 @@ function (x, method = c("xts", "zoo","matrix","vector","data.frame"), na.rm = FA
 
     method = method[1] # grab the first value if this is still a vector, to avoid varnings
 
-    if(method != "vector"){
-    # For matrixes and zoo objects, we test to see if there are rows, columns
+    if(!is.vector(x) & !inherits(x, what="zoo")){
+    # For matrixes and data.frame objects, we test to see if there are rows, columns
     # and labels.  If there are not column labels, we provide them.  Row labels
     # we leave to the coersion functions.
 
         # Test for rows and columns
-        if(is.null(ncol(x)))
+        if(is.null(NCOL(x)) )
             warning("There don\'t seem to be any columns in the data provided.  If you are trying to pass in names from a zoo object with one column, you should use the form \'data.zoo[rows, columns, drop = FALSE]\'.")
 
 
-        if(is.null(nrow(x)))
+        if(is.null(NROW(x)))
             stop("No rows in the data provided.")
 
         # Test for rownames and column names
         if(is.null(colnames(x))) {
-            columns = ncol(x)
+            columns = NCOL(x)
             if(!quiet)
                 warning("No column names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
             columnnames = NULL
@@ -47,12 +47,13 @@ function (x, method = c("xts", "zoo","matrix","vector","data.frame"), na.rm = FA
             colnames(x) = columnnames
         }
 
-        if(!inherits(x,what="zoo") & is.null(rownames(x)))
+        if(is.null(rownames(x)))
             if(!quiet)
                 warning("No row names in the data provided. To pass in names from a data.frame, you should use the form \'data[rows, columns, drop = FALSE]\'.")
 
         # First we check whether we have a zoo object
         # eventually this will change with the xts code below
+### IS THIS BLOCK NECESSARY?
         if(!inherits(x,what="zoo")){
             x = as.matrix(x)
             if(is.null(rownames(x)))
@@ -160,9 +161,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.21 2009-03-11 03:42:06 peter Exp $
+# $Id: checkData.R,v 1.22 2009-03-20 20:48:48 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.21  2009-03-11 03:42:06  peter
+# - added switch for xts, set as default
+#
 # Revision 1.20  2009-01-11 12:55:56  brian
 # - convert 'zoo' method to use xts
 # - TODO add reclass capability
