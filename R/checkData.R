@@ -23,6 +23,9 @@ function (x, method = c("xts", "zoo","matrix","vector","data.frame"), na.rm = FA
     # if (!require("xts")) stop("xts package not available")
 
     method = method[1] # grab the first value if this is still a vector, to avoid varnings
+    if(is.vector(x)){
+        x = as.matrix(x)
+    }
 
     if(!is.vector(x) & !inherits(x, what="zoo")){
     # For matrixes and data.frame objects, we test to see if there are rows, columns
@@ -161,9 +164,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.22 2009-03-20 20:48:48 peter Exp $
+# $Id: checkData.R,v 1.23 2009-03-20 21:20:54 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.22  2009-03-20 20:48:48  peter
+# - fixes vector to zoo translation
+#
 # Revision 1.21  2009-03-11 03:42:06  peter
 # - added switch for xts, set as default
 #
