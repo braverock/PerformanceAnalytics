@@ -44,9 +44,9 @@ standard deviation value, scaled for multiple periods
 \examples{
     data(edhec)
     head(edhec[,6,drop=FALSE])
-    sd.annualized(edhec[,6])
+    sd.annualized(edhec[,6,drop=FALSE])
     # now for three periods:
-    sd.multiperiod(edhec[,6],scale=3)
+    sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
