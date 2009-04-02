@@ -36,3 +36,17 @@ function (Ra, Rb, digits = 4,...)
     result.df = base::round(result.df, digits)
     result.df
 }
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+#
+# This library is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: table.CaptureRatios.R,v 1.2 2009-04-02 03:06:37 peter Exp $
+#
+###############################################################################
+# $Log: not supported by cvs2svn $
+# 
+###############################################################################
