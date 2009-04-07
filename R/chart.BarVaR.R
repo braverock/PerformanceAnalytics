@@ -18,7 +18,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     # FUNCTION:
 
     # Transform input data to a timeseries object
-    x = checkData(R, method = "zoo")
+    x = checkData(R)
     #x = na.omit(x)
 
     # Set up dimensions and labels
@@ -45,8 +45,8 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     }
     clean = clean[1]
 
-    risk = zoo(NA,order.by=time(x))
-    column.risk = zoo(0,order.by=time(x))
+    risk = xts(NA,order.by=time(x))
+    column.risk = xts(0,order.by=time(x))
 
     if (!all)
         columns = 1
@@ -120,7 +120,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
                     }
                 ) # end switch
 
-                risk = merge.zoo(risk,column.risk)
+                risk = merge(risk,column.risk)
             } # end method loop
         } # end column loop
     }
@@ -172,10 +172,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.18 2009-03-20 03:22:53 peter Exp $
+# $Id: chart.BarVaR.R,v 1.19 2009-04-07 22:17:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.17  2008-08-19 03:27:17  peter
 # - fixed legend formatting issues
 #
