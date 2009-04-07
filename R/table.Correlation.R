@@ -1,5 +1,5 @@
 `table.Correlation` <-
-function (Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
+function (Ra, Rb, ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -15,8 +15,8 @@ function (Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
 
     # FUNCTION:
 
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -59,10 +59,13 @@ function (Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Correlation.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: table.Correlation.R,v 1.8 2009-04-07 22:33:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/04/15 14:45:26  brian
 # - remove unused parameter n
 #
