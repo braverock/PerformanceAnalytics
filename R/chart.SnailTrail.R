@@ -1,5 +1,5 @@
 `chart.SnailTrail` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = .9, cex.text = 0.8, element.color="darkgray", ...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, legend.cex = 0.8, element.color="darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -155,7 +155,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = 0.8, border.col = element.color, pch = symbolset, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, border.col = element.color, pch = symbolset, bg = "white", legend = columnnames)
     }
 
     #title(sub='From Inception', line=1)
@@ -171,10 +171,14 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.6 2009-03-20 03:26:17 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.7 2009-04-07 22:26:57 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-03-20 03:26:17  peter
+# - changed arguments for consistency
+# - uses xts internally
+#
 # Revision 1.5  2009-03-02 03:25:47  peter
 # - fixed condition when end-dates do not match
 # ----------------------------------------------------------------------
