@@ -1,5 +1,5 @@
 `chart.RiskReturnScatter` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, ...)
+function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -41,12 +41,6 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     rownames = rownames(x)
 
     # @todo: strip out basic elements to a scatter plot wrapper
-    # Set color for key elements, easy to darken for the printer
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
-
     if(length(colorset) < columns)
         colorset = rep(colorset, length.out = columns)
 
@@ -89,10 +83,10 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         las = 1, xlim=xlim, ylim=ylim, col = colorset[columns:1], pch = symbolset[columns:1], axes= FALSE, ...)
 #     abline(v = 0, col = elementcolor)
     if(ylim[1] != 0){
-        abline(h = 0, col = elementcolor)
+        abline(h = 0, col = element.color)
     }
-    axis(1, cex.axis = cex.axis, col = elementcolor)
-    axis(2, cex.axis = cex.axis, col = elementcolor)
+    axis(1, cex.axis = cex.axis, col = element.color)
+    axis(2, cex.axis = cex.axis, col = element.color)
 
     if(!add.boxplots){
         title(ylab = ylab, cex.lab = cex.lab)
@@ -112,19 +106,19 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         text(x = risk,y = returns, labels = row.names(comparison), pos=4, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
 
     # Add a rug so that data points are easier to identify
-    rug(side=1, risk, col = elementcolor)
-    rug(side=2, returns, col = elementcolor)
+    rug(side=1, risk, col = element.color)
+    rug(side=2, returns, col = element.color)
 
     title(main = main, cex.main = cex.main)
 
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.
         # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = elementcolor, pch = symbolset, bg = "white", legend = columnnames)
+        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = element.color, pch = symbolset, bg = "white", legend = columnnames)
     }
 
     #title(sub='From Inception', line=1)
-    box(col = elementcolor)
+    box(col = element.color)
 
     if(add.boxplots){
         # Draw the Y-axis histogram
@@ -151,10 +145,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.11 2008-08-16 03:39:54 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.12 2009-04-07 22:23:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2008-08-16 03:39:54  peter
+# - fixed point label adjustment
+#
 # Revision 1.10  2008-07-01 02:47:40  peter
 # - added cex.legend
 #
