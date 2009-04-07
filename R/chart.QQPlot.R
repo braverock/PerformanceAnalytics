@@ -2,8 +2,7 @@
 function(R, distribution="norm", ylab=NULL,
         xlab=paste(distribution, "Quantiles"), main=NULL, las=par("las"),
         envelope=FALSE, labels=FALSE, col=c(1,4), lwd=2, pch=1, cex=1,
-        line=c("quartiles", "robust", "none"), elementcolor = "lightgray", ...)
-#function (R, colorset = c("#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), symbolset = 1, xlab = NULL, ylab = NULL, main = NULL, darken = FALSE, distribution = "normal", line = TRUE, elementcolor = "lightgray", ...)
+        line=c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -39,7 +38,7 @@ function(R, distribution="norm", ylab=NULL,
     P <- ppoints(n)
     z <- q.function(P, ...)
     plot(z, ord.x, xlab=xlab, ylab=ylab, main=main, las=las, col=col[1], pch=pch,
-        cex=cex, axes=FALSE)
+        cex=cex, cex.main = cex.main, cex.lab = cex.lab, axes=FALSE, ...)
     if (line=="quartiles"){
         Q.x<-quantile(ord.x, c(.25,.75))
         Q.z<-q.function(c(.25,.75), ...)
@@ -118,10 +117,10 @@ function(R, distribution="norm", ylab=NULL,
 # 
 #     if(line) abline(int, slope, col = colorset[2], lwd = 2)
 
-    axis(1, cex.axis = 0.8, col = elementcolor)
-    axis(2, cex.axis = 0.8, col = elementcolor)
+    axis(1, cex.axis = cex.axis, col = element.color)
+    axis(2, cex.axis = cex.axis, col = element.color)
 
-    box(col=elementcolor)
+    box(col=element.color)
 
 }
 
@@ -133,10 +132,13 @@ function(R, distribution="norm", ylab=NULL,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.QQPlot.R,v 1.8 2008-06-25 03:33:13 peter Exp $
+# $Id: chart.QQPlot.R,v 1.9 2009-04-07 22:22:03 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-25 03:33:13  peter
+# - changed package test to load MASS quietly
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
