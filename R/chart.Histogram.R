@@ -1,5 +1,5 @@
 `chart.Histogram` <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor="gray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p=0.99, ...)
+function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, element.color="darkgray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p=0.99, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -121,11 +121,11 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     yrange = c(yrange, maxyhist*1.1)
     ylim = c(0,ceiling(max(yrange)))
 
-    hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, axes = FALSE, ...)
-    axis(1, col = elementcolor)
-    axis(2, col = elementcolor)
+    hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, axes = FALSE, cex.main = cex.main, cex.lab = cex.lab, ...)
+    axis(1, cex.axis = cex.axis, col = element.color)
+    axis(2, cex.axis = cex.axis, col = element.color)
 
-    box(col=elementcolor)
+    box(col=element.color)
 
     # Things to do after the plot is drawn
     for (method in methods) {
@@ -156,7 +156,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 lines(s, fitted.sst, col = colorset[4], lwd=lwd)
             },
             add.rug = {
-                rug(x, col = elementcolor)
+                rug(x, col = element.color)
             },
             add.risk = {
                 h = rep(.2*par("usr")[3] + 1*par("usr")[4], length(b))
@@ -170,7 +170,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 op1 <- par(fig=c(.02,.5,.5,.98), new=TRUE)
                 qqnorm(x, xlab="", ylab="", main="", axes=FALSE, pch=".",col=colorset[2])
                 qqline(x, col=colorset[3])
-                box(col=elementcolor)
+                box(col=element.color)
                 par(op)
              }
         ) # end switch
@@ -200,10 +200,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.36 2008-06-30 21:52:52 peter Exp $
+# $Id: chart.Histogram.R,v 1.37 2009-04-07 22:20:34 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.36  2008-06-30 21:52:52  peter
+# - changed 'method' to 'methods' in test
+#
 # Revision 1.35  2008-06-30 03:10:57  peter
 # - VaR not calculated without 'add.risk' method
 # - x-axis correctly adjusted with 'add.risk' method
