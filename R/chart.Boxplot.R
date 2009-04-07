@@ -1,5 +1,5 @@
 `chart.Boxplot` <-
-function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison",...)
+function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -34,11 +34,6 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 
     if(length(mean.symbol) < columns)
         mean.symbol = rep(mean.symbol, length.out = columns)
-
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
 
     means = sapply(R, mean, na.rm = TRUE)
 
@@ -75,22 +70,22 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 
     if(names){
         labels = columnnames
-        axis(2, cex.axis = 0.8, col = elementcolor, labels = labels[column.order], at = 1:columns, las = 1)
+        axis(2, cex.axis = 0.8, col = element.color, labels = labels[column.order], at = 1:columns, las = 1)
     }
     else{
         labels = ""
-        axis(2, cex.axis = 0.8, col = elementcolor, labels = labels[column.order], at = 1:columns, las = 1, tick = FALSE)
+        axis(2, cex.axis = 0.8, col = element.color, labels = labels[column.order], at = 1:columns, las = 1, tick = FALSE)
     }
-    axis(1, cex.axis = 0.8, col = elementcolor)
+    axis(1, cex.axis = 0.8, col = element.color)
     
 
 #     if(names)
 #         title(sub=ylab)
 #     else
 #         title(sub=ylab)
-    box(col=elementcolor)
+    box(col=element.color)
 
-    abline(v=0, lty="solid",col=elementcolor)
+    abline(v=0, lty="solid",col=element.color)
 
     #par(op)
 }
@@ -109,10 +104,13 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Boxplot.R,v 1.5 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.Boxplot.R,v 1.6 2009-04-07 22:18:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.4  2007/09/26 02:56:58  peter
 # - changed zero line to solid
 # - removed subtitles
