@@ -1,5 +1,5 @@
 `SmoothingIndex` <-
-function (Ra, neg.thetas = FALSE, ...)
+function (Ra, neg.thetas = FALSE, MAorder=2, ...)
 { # @author Peter Carl
 
     # Description:
@@ -21,7 +21,7 @@ function (Ra, neg.thetas = FALSE, ...)
     # to observed de-meaned returns...", so set parameter to FALSE
     # transform.pars: ibid, "we impose the additional restriction that the estimated MA(k)
     # process be invertible." so set the parameter to TRUE
-    MA2 = arima(ra, order=c(0,0,2), method="ML", transform.pars=TRUE, include.mean=FALSE)
+    MA2 = arima(ra, order=c(0,0,MAorder), method="ML", transform.pars=TRUE, include.mean=FALSE)
 
     # Page 555:
     #
