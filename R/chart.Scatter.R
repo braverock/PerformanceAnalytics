@@ -1,5 +1,5 @@
 `chart.Scatter` <-
-function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,...)
+function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -29,21 +29,20 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     x = checkData(x, method = "vector")
     y = checkData(y, method = "vector")
 
-    # Set color for key elements, easy to darken for the printer
-    if(darken)
-        elementcolor = "darkgray" #better for the printer
-    else
-        elementcolor = "lightgray" #better for the screen
-
-    # Add fit line
-
-    plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, cex.axis = cex.axis, ...)
+    # pass in: cex.axis = cex.axis, cex.main = cex.main, cex.lab = cex.lab
+    plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, ...)
 
     if(reference.grid) {
-        grid(col = elementcolor)
-        abline(h = 0, col = elementcolor)
-        abline(v = 0, col = elementcolor)
+        grid(col = element.color)
+        abline(h = 0, col = element.color)
+        abline(v = 0, col = element.color)
     }
+
+    rug(side=1, x, col = element.color)
+    rug(side=2, y, col = element.color)
+
+    box(col = element.color)
+
 }
 
 ###############################################################################
@@ -54,10 +53,13 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: chart.Scatter.R,v 1.7 2009-04-07 22:26:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2008-04-18 03:51:00  peter
 # - added cex attributes
 #
