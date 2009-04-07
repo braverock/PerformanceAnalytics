@@ -1,5 +1,5 @@
 `UpDownRatios` <-
-function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down"), ...)
+function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down"))
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -95,10 +95,13 @@ function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpDownRatios.R,v 1.6 2009-04-01 14:02:49 peter Exp $
+# $Id: UpDownRatios.R,v 1.7 2009-04-07 22:15:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-04-01 14:02:49  peter
+# - fixed number ratio and added percentage ratio
+#
 # Revision 1.5  2008-10-16 18:45:37  brian
 # - use checkData with method="zoo" instead of checkDataMatrix
 #
