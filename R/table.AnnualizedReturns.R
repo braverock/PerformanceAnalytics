@@ -1,5 +1,5 @@
 `table.AnnualizedReturns` <-
-function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
+function (R, scale = 12, rf = 0, geometric = TRUE, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -13,9 +13,9 @@ function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 
     # FUNCTION:
 
-    y = checkData(R, method = "zoo")
+    y = checkData(R)
     if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
+        rf = checkData(rf)
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -25,7 +25,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 
     # for each column, do the following:
     for(column in 1:columns) {
-        z = c(Return.annualized(y[,column,drop=FALSE], scale = scale), StdDev.annualized(y[,column,drop=FALSE], scale = scale), SharpeRatio.annualized(y[,column,drop=FALSE], scale = scale, rf = rf)) 
+        z = c(Return.annualized(y[,column,drop=FALSE], scale = scale, geometric = geometric), StdDev.annualized(y[,column,drop=FALSE], scale = scale), SharpeRatio.annualized(y[,column,drop=FALSE], scale = scale, rf = rf)) 
         znames = c("Annualized Return", "Annualized Std Dev", paste("Annualized Sharpe (rf=",base::round(mean(rf)*scale,4)*100,"%)", sep="") )
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
@@ -48,10 +48,13 @@ function (R, ci = 0.95, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.8 2008-08-16 03:41:14 peter Exp $
+# $Id: table.AnnualizedReturns.R,v 1.9 2009-04-14 02:50:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-08-16 03:41:14  peter
+# - fixed rounding in column name label
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
