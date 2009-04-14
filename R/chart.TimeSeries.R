@@ -37,7 +37,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     # FUNCTION:
 
     # Make sure that we have a matrix to work with
-    y = checkData(R, method = "zoo")
+    y = checkData(R)
 
     # Set up dimensions and labels
     columns = ncol(y)
@@ -50,7 +50,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
     # Re-format the dates for the xaxis
 #     rownames = format(strptime(as.Date(rownames),format = date.format.in), date.format)
-#     rownames = format(strptime(rownames,format = date.format.in), date.format)
+    rownames = format(strptime(rownames,format = date.format.in), date.format)
 
     # If the Y-axis is ln
     logaxis = ""
@@ -196,10 +196,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.16 2009-04-07 22:30:52 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.17 2009-04-14 02:49:41 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2009-04-07 22:30:52  peter
+# - added cex.* attributes for sizing text elements
+#
 # Revision 1.15  2009-03-20 03:22:53  peter
 # - added xts
 #
