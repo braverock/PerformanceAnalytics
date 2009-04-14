@@ -1,6 +1,6 @@
 `table.RollingPeriods` <-
 function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
-< length(as.matrix(R[,1]))), scale = 12, rf = 0, FUNCS=c("mean","sd"), digits = 4, ...)
+< length(as.matrix(R[,1]))), FUNCS=c("mean","sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -14,11 +14,29 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
 
     # FUNCTION:
 
-    R = checkData(R, method = "zoo")
+    R = checkData(R, method="zoo") # must be zoo for now, until window works w xts
 
     # Set up dimensions and labels
     columns = ncol(R)
     columnnames = colnames(R)
+    freq = periodicity(R)
+
+    switch(freq$scale,
+        minute = {freq.lab = "minute"},
+        hourly = {freq.lab = "hour"},
+        daily = {freq.lab = "day"},
+        weekly = {freq.lab = "week"},
+        monthly = {freq.lab = "month"},
+        quarterly = {freq.lab = "quarter"},
+        yearly = {freq.lab = "year"}
+    )
+
+    if(length(FUNCS) != length(funcs.names)) {
+        warn("The length of the names vector is unequal to the length of the functions vector, so using FUNCS for naming.")
+        funcs.names = NA
+    }
+    if(is.na(funcs.names[1]))
+        funcs.names = FUNCS
 
     # for each column in the matrix, do the following:
     for(column in 1:columns) {
@@ -30,6 +48,7 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
         end.index = length(column.data)
 
         for(FUNC in FUNCS) {
+            func.name = funcs.names[grep(FUNC, FUNCS)]
             for(period in periods) {
                 window.data = zoo(NA)
 
@@ -39,7 +58,7 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
 
                 values = c(values, apply(as.matrix(window.data), FUN = FUNC, ..., MARGIN = 2))
 
-                valueNames = c(valueNames,paste("Last",period,"month",FUNC,sep=" "))
+                valueNames = c(valueNames,paste("Last", period, freq.lab, func.name, sep=" "))
             }
         }
     
@@ -91,10 +110,13 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.RollingPeriods.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: table.RollingPeriods.R,v 1.7 2009-04-14 03:45:02 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/03/22 21:53:00  peter
 # - added checkData
 # - using zoo for window() calcs in period lengths
