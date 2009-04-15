@@ -24,7 +24,7 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 
     # for each column, do the following:
     for(column in 1:columns) {
-        x = na.omit(y[,column])
+        x = na.omit(y[,column,drop=FALSE])
         # for each column, make sure that R and rf are for the same dates
         if(!is.null(dim(rf))){ # if rf is a column
             z = merge(x,rf)
@@ -38,8 +38,8 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 
         z = c(
                 DownsideDeviation(x,MAR=mean(x)),
-                sd(subset(x,x>0)),
-                sd(subset(x,x<0)),
+                sd(subset(as.vector(x),as.vector(x)>0)),
+                sd(subset(as.vector(x),as.vector(x)<0)),
                 DownsideDeviation(x,MAR=MAR),
                 DownsideDeviation(x,MAR=rf.subset),
                 DownsideDeviation(x,MAR=0),
@@ -92,10 +92,13 @@ function (R, ci = 0.95, scale = 12, rf = 0, MAR = .1/12, p= 0.99, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.10 2008-10-14 14:37:29 brian Exp $
+# $Id: table.DownsideRisk.R,v 1.11 2009-04-15 21:50:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.9  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
