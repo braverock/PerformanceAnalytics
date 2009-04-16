@@ -5,7 +5,7 @@
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR","HistoricalVaR", "StdDev"), clean = c("none", "boudt"), reference.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "\%m/\%y", xlim = NA, ylim = NA, lwd = 1, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ypad=0, legend.cex = 0.8, ...)
+chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev"), clean = c("none", "boudt"), auto.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 2, colorset = 1:12, p = 0.99, lty = c(1, 2, 4, 5, 6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc = "bottomleft", ypad = 0, legend.cex = 0.8, ...)
 }
 
 \arguments{
@@ -14,7 +14,7 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","Gaussian
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{methods}{ any of \emph{StdDev}, \emph{HistoricalVaR}, \emph{GaussianVaR}, or \emph{ModifiedVaR}, defaults to HistoricalVaR and ModifiedVaR }
   \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
-  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
+  \item{auto.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{xaxis}{ if true, draws the x axis }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }

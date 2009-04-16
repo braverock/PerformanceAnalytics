@@ -6,7 +6,7 @@
 A wrapper to create box and whiskers plot with some defaults useful for comparing distributions.
 }
 \usage{
-chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, darken = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison",...)
+chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab = "Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,7 +25,7 @@ chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(
   \item{add.mean}{ logical. if TRUE, show a line for the mean of all distributions plotted}
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{element.color}{ specify the color of chart elements.  Default is "darkgray" }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

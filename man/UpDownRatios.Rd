@@ -10,7 +10,7 @@ UpDownRatios(Ra, Rb, method = c("capture", "number", "percent"), side = c("up", 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{method}{ "capture", "number", or "percentage" to indicate which measure to return }
   \item{side}{ "up" or "down" market statistics }

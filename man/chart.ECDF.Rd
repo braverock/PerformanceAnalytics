@@ -6,7 +6,7 @@
    Creates an emperical cumulative distribution function (ECDF) overlaid with a cumulative distribution function (CDF)
 }
 \usage{
-chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, darken = FALSE, lty = c(1, 1), ...)
+chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, lty = c(1, 1), element.color = "darkgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,7 +18,7 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers }
+  \item{element.color}{ specify the color of chart elements.  Default is "darkgray" }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }
   \item{\dots}{ any other passthru parameters to \code{\link{plot}} }
 }
