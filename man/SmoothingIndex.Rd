@@ -6,7 +6,7 @@
 Proposed by Getmansky et al to provide a normalized measure of "liquidity risk."
 }
 \usage{
-function(Ra, neg.thetas = FALSE, MAorder = 2, ...)
+SmoothingIndex(Ra, neg.thetas = FALSE, MAorder = 2, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
