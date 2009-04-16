@@ -6,13 +6,13 @@
 Proposed by Getmansky et al to provide a normalized measure of "liquidity risk."
 }
 \usage{
-SmoothingIndex(Ra, neg.thetas = FALSE, ...)
+function(Ra, neg.thetas = FALSE, MAorder = 2, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{neg.thetas}{ if FALSE, function removes negative coefficients (thetas) when calculating the index }
-  \item{\dots}{ any other passthru parameters }
+  \item{MAorder}{ specify the number of periods used to calculate the moving average, defaults to 2 }  \item{\dots}{ any other passthru parameters }
 }
 \value{
 a value ranging from 0 to 1 (enforced only when neg.thetas = FALSE)
@@ -20,7 +20,7 @@ a value ranging from 0 to 1 (enforced only when neg.thetas = FALSE)
 \details{
 To measure the effects of smoothing, Getmansky, Lo, et al (2004) define a "smoothing profile" as a vector of coefficients for an MLE fit on returns using a two-period moving-average process. 
 
-The moving-average process of order $k=2$ gives $R_t = \theta_{0} R_{t} + \theta_1 R_{t -1} + \theta_2 R_{t-2}$, under the constraint that the sum of the coefficients is equal to 1. In \R, the \code{arima} function allows us to create an MA(2) model using an "ARIMA(p,d,q)" model, where $p$ is the number of autoregressive terms (AR), $d$ is the degree of differencing, and $q$ is the number of lagged forecast errors (MA) in the prediction equation.  The \code{order} parameter allows us to specify the three components (p, d, q) as an argument, e.g., \code{order = c(0, 0, 2)}.  The \code{method} specifies how to fit the model, in this case using maximum likelihood estimation (MLE) in a fashion similar to the estimation of standard moving-average time series models, using:
+The moving-average process of order $k=2$ (specified using \code{MAorder}) gives $R_t = \theta_{0} R_{t} + \theta_1 R_{t -1} + \theta_2 R_{t-2}$, under the constraint that the sum of the coefficients is equal to 1. In \R, the \code{arima} function allows us to create an MA(2) model using an "ARIMA(p,d,q)" model, where $p$ is the number of autoregressive terms (AR), $d$ is the degree of differencing, and $q$ is the number of lagged forecast errors (MA) in the prediction equation.  The \code{order} parameter allows us to specify the three components (p, d, q) as an argument, e.g., \code{order = c(0, 0, 2)}.  The \code{method} specifies how to fit the model, in this case using maximum likelihood estimation (MLE) in a fashion similar to the estimation of standard moving-average time series models, using:
 
 \code{arima(ra, order=c(0,0,2), method="ML", transform.pars=TRUE, include.mean=FALSE)}
 
