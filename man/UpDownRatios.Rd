@@ -6,7 +6,7 @@
 Calculate metrics on how the asset in R performed in up and down markets, measured by periods when the benchmark asset was up or down.
 }
 \usage{
-UpDownRatios(R, Rb, method = "capture", side = "up", ...)
+UpDownRatios(Ra, Rb, method = c("capture", "number", "percent"), side = c("up", "down"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
