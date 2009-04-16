@@ -14,7 +14,6 @@ UpDownRatios(R, Rb, method = "capture", side = "up", ...)
   \item{Rb}{ return vector of the benchmark asset }
   \item{method}{ "capture", "number", or "percentage" to indicate which measure to return }
   \item{side}{ "up" or "down" market statistics }
-  \item{\dots}{ any other passthru parameters }
 }
 \details{
 This is a function designed to calculate several related metrics:
@@ -27,7 +26,7 @@ Up (Down) Percentage Ratio: this is a measure of the number of periods that the 
 
 }
 \value{
-A data.table of n-period trailing calculations for each column in x.
+A numeric value for each calculation.
 }
 \references{}
 \author{ Peter Carl }
