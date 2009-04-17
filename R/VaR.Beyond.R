@@ -33,7 +33,12 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
         } else {
             aVaR=0
         }
-        BVaR = aVaR + (VaR * (-1/(mean(r)-1)))
+#        BVaR = aVaR + (VaR * (-1/(mean(r)-1))) # old quick and dirty ES/CVaR method
+        if (modified==TRUE){
+            BVaR= aVaR + operES.CornishFisher(R,p)
+        } else {
+            BVaR= aVaR + ES.Gaussian(R,p)
+        }
 
         BVaR=array(BVaR)
         if (column==1) {
@@ -65,10 +70,13 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.11 2008-10-14 14:37:29 brian Exp $
+# $Id: VaR.Beyond.R,v 1.12 2009-04-17 15:23:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.10  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
