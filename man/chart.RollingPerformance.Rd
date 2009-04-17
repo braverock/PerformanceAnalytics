@@ -6,7 +6,7 @@
 A wrapper to create a chart of rolling performance metrics in a line chart
 }
 \usage{
-chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 1, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = NULL, ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", darken = FALSE , date.format = "\%m/\%y", ...)
+chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis = 0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 2, xlim = NULL, ylim = NULL, log = "", main = paste(width, "-Month Rolling Performance", sep = ""), sub = NULL, xlab = "Date", ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", element.color = "darkgray", date.format = "\%m/\%y", major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -32,7 +32,7 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{pch}{ symbols to use, see also \code{\link{plot}} }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{bg}{ same as in \code{\link{plot}} }
   \item{cex}{ set the y-axis limit, same as in \code{\link{plot}} }
@@ -47,6 +47,11 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
   \item{cex.labels}{ The magnification to be used for event line labels relative to the current setting of 'cex'.  }
+  \item{major.ticks}{ Should major tickmarks be drawn and labeled, default 'auto'}
+  \item{minor.ticks}{ Should minor tickmarks be drawn, default TRUE}
+  \item{grid.color}{ sets the color for the reference grid }
+  \item{grid.lty}{ defines the line type for the grid }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
   \item{\dots}{ any other passthru parameters to \code{\link[zoo]{rollapply}} }
 }
 \value{

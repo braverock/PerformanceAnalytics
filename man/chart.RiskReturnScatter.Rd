@@ -6,12 +6,14 @@
 A wrapper to create a scatter chart of annualized returns versus annualized risk (standard deviation) for comparing manager performance. Also puts a box plot into the margins to help identify the relative performance quartile.
 }
 \usage{
-chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, ...)
+chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = 12, add.sharpe = c(1, 2, 3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{rf}{ risk free rate, in same period as your returns }
+  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{add.names}{ plots the row name with the data point.  default TRUE. Can be removed by setting it to NULL }
   \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }
@@ -21,7 +23,7 @@ chart.RiskReturnScatter(R, rf = 0, main = "Annualized Return and Risk", add.name
   \item{add.boxplots}{ TRUE/FALSE adds a boxplot summary of the data on the axis }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ from \code{pch} in \code{\link{plot}},  submit a set of symbols to be used in the same order as the data sets submitted }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }

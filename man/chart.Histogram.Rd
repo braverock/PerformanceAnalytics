@@ -6,7 +6,7 @@
 Create a histogram of returns, with optional curve fits for density and normal.  This is a wrapper function for \code{\link[graphics]{hist}}, see the help for that function for additional arguments you may wish to pass in.
 }
 \usage{
-chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, elementcolor = "gray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p = 0.99, ...)
+chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, element.color = "darkgray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p = 0.99, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -42,13 +42,17 @@ chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns", ylab = "Frequen
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{elementcolor}{ provides the color for drawing less-important chart elements, such as the box lines, axis lines, etc. replaces \code{darken} }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" }
   \item{note.lines}{ draws a vertical line through the value given. }
   \item{note.labels}{ adds a text label to vertical lines specified for note.lines. }
   \item{note.cex}{ The magnification to be used for note line labels relative to the current setting of 'cex'.  }
   \item{note.color}{ specifies the color(s) of the vertical lines drawn. }
-  \item{\dots}{ any other passthru parameters }
-}
+  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
+  \item{cex.lab}{ The magnification to be used for x- and y-axis labels relative to the current setting of 'cex'.  }
+  \item{cex.main}{ The magnification to be used for the main title relative to the current setting of 'cex'.  }
+  \item{\dots}{ any other passthru parameters to \code{\link{plot}}}
+} 
 \details{
   The default for \code{breaks} is \code{"FD"}. Other names for which algorithms
   are supplied are \code{"Sturges"} (see

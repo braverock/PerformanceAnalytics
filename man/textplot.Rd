@@ -21,12 +21,7 @@ textplot(object, halign="center", valign="center", cex, ...)
          tab.width = 8, ...)
 \method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
          valign = c("center", "top", "bottom"), cex, ...)
-\method{textplot}{matrix}(object, halign = c("center", "left", "right"),
-         valign = c("center", "top", "bottom"), cex, cmar = 2,
-         rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
-         hadj = 1, vadj = 1, mar = c(1, 1, 4, 1) + 0.1,
-         col.data = par("col"), col.rownames = par("col"), 
-         col.colnames = par("col"), ...) 
+\method{textplot}{matrix}(object, halign = c("center", "left", "right"), valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1, vadj=NULL, row.valign = "center", heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"), col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10, wrap.rownames = 10, ...) 
 }
 \arguments{
   \item{object}{Object to be displayed.}
@@ -62,8 +57,13 @@ textplot(object, halign="center", valign="center", cex, ...)
     names, respectively.  Either may be specified as a scalar or a
     vector of appropriate length.}
   \item{tab.width}{Width of a single tab stop, in characters}
-  \item{\dots}{ Optional arguments passed to the text plotting command
-    or specialied object methods}
+  \item{max.cex}{Sets the largest text size as a ceiling} 
+  \item{row.valign}{ Sets the vertical alignment of the row as "top", "bottom", or (default) "center".}
+  \item{heading.valign}{ Sets the vertical alignment of the heading as "top", (default) "bottom", or "center".}
+  \item{wrap}{ If TRUE (default), will wrap column names and rownames }
+  \item{wrap.colnames}{ The number of characters after which column labels will be wrapped.  Default is 10. }
+  \item{wrap.rownames}{ The number of characters after which row headings will be wrapped.  Default is 10. } 
+  \item{\dots}{ Optional arguments passed to the text plotting command or specialized object methods}
 }
 \details{
   A new plot is created and the object is displayed
@@ -83,7 +83,7 @@ textplot(object, halign="center", valign="center", cex, ...)
 \seealso{ \code{\link{plot}}, \code{\link{text}}, 
           \code{\link[utils]{capture.output}, \code{\link[gplots]{textplot}} 
         }
-
+}
 \examples{
 \dontrun{
 ### simple examples

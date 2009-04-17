@@ -6,8 +6,8 @@
 A wrapper to create a rolling mean return chart with 95\% confidence bands.
 }
 \usage{
-chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
-}
+chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad =
+FALSE, lwd = c(2, 1, 1), ...) }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
@@ -15,6 +15,7 @@ chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, ...)
   \item{xaxis}{ if true, draws the x axis }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
+  \item{lwd}{ set the line width, same as in \code{\link{plot}}.  Specified in order of the main line and the two confidence bands. }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

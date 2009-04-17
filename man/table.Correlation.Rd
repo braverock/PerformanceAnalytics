@@ -6,15 +6,13 @@
 This is a wrapper for calculating correlation and significance against each column of the data provided.
 }
 \usage{
-table.Correlation(Ra, Rb, trim = TRUE, na.rm = FALSE, ...)
+table.Correlation(Ra, Rb, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector of returns to test, e.g., the asset to be examined }
   \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against. }
-  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
-  \item{na.rm}{ TRUE/FALSE Remove NA's from the returns? }
-  \item{\dots}{ any other passthru parameters }
+  \item{\dots}{ any other passthru parameters to \code{\link{cor.test}} }
 }
 \value{
 A dataframe with correlation and significance against each column of the data provided as \code{Rb}.
@@ -22,7 +20,7 @@ A dataframe with correlation and significance against each column of the data pr
 \references{ }
 \author{ Peter Carl }
 \note{}
-\seealso{}
+\seealso{\code{\link{cor.test}}}
 \examples{
 # First we load the data
 data(edhec)

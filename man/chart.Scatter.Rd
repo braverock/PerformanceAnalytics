@@ -3,10 +3,10 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ wrapper to draw scatter plot with sensible defaults }
 \description{
-Draws a scatter chart.  This is another chart "primitive", since it only contains a set of sensible defaults.  This function is intended to be used in a wrapper that is written for a particular purpose. This is just a handy way to standardize the formatting of multiple charts.
+Draws a scatter chart.  This is another chart "primitive", since it only contains a set of sensible defaults.
 }
 \usage{
-chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, darken = FALSE , legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,...)
+chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,11 +20,10 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL,
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{symbolset}{ from \code{pch} in \code{\link{plot}},  submit a set of symbols to be used in the same order as the data sets submitted }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
-  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" }
+  \item{cex.lab}{ The magnification to be used for x- and y-axis labels relative to the current setting of 'cex'}
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
-  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
+  \item{cex.main}{ The magnification to be used for the main title relative to the current setting of 'cex'.  }  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
 \value{

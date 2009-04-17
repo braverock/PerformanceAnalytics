@@ -5,7 +5,7 @@
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev"), clean = c("none", "boudt"), auto.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 2, colorset = 1:12, p = 0.99, lty = c(1, 2, 4, 5, 6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc = "bottomleft", ypad = 0, legend.cex = 0.8, ...)
+chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev"), clean = c("none", "boudt"), auto.grid = TRUE, xaxis = TRUE, main = "Title", ylab = "Value", xlab = "Date", date.format = '\%m/\%y', xlim = NA, ylim = NA, lwd = 2, colorset = 1:12, p = 0.99, lty = c(1, 2, 4, 5, 6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc = "bottomleft", ypad = 0, legend.cex = 0.8, ...)
 }
 
 \arguments{

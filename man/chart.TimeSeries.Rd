@@ -6,12 +6,14 @@
 Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{\link{plot}} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
 }
 \usage{
-chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 1, main = NULL, ylab = NULL, xlab = "Date", date.format.in = "\%Y-\%m-\%d", date.format = "\%m/\%y", xlim = NULL, ylim = NULL, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color  = "darkgray", period.color = "lightgray", colorset = (1:12), pch = (1:12), darken = FALSE, legend.loc =  NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8, cex.labels = 0.8, ...)
+chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab = NULL, xlab = "Date", date.format.in = "\%Y-\%m-\%d", date.format = "\%m/\%y", xlim = NULL, ylim = NULL, element.color = "darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
+  \item{auto.grid}{ if true, draws a grid aligned with the points on the x and y axes }
+  \item{grid.color}{ sets the color for the reference grid }
+  \item{grid.lty}{ defines the line type for the grid }
   \item{xaxis}{ if true, draws the x axis }
   \item{yaxis}{ if true, draws the y axis }
   \item{yaxis.right}{ if true, draws the y axis on the right-hand side of the plot }
@@ -31,14 +33,18 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.rig
   \item{period.color}{ draws the shaded region described by \code{period.areas} in the color specified }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{pch}{ symbols to use, see also \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers. }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
   \item{date.format.in}{ allows specification of other date formats in the data object, defaults to "\%Y-\%m-\%d" }
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
   \item{cex.labels}{ The magnification to be used for event line labels relative to the current setting of 'cex'.  }
+  \item{cex.lab}{ The magnification to be used for x- and y-axis labels relative to the current setting of 'cex'.  }
+  \item{major.ticks}{ Should major tickmarks be drawn and labeled, default 'auto'}
+  \item{minor.ticks}{ Should minor tickmarks be drawn, default TRUE}
   \item{\dots}{ any other passthru parameters }
+
 }
 \details{
   This function is intended to be used in a wrapper that is written for a particular purpose.
@@ -49,7 +55,7 @@ chart.TimeSeries(R, reference.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.rig
 \references{ }
 \author{ Peter Carl }
 \note{ }
-\seealso{ \code{\link{plot}}, \code{\link{par}} }
+\seealso{ \code{\link{plot}}, \code{\link{par}}, \code{\link[xts]{axTicksByTime}} }
 \examples{
 
 # These are start and end dates, formatted the same way as the default axis labels

@@ -6,7 +6,7 @@
   Uses a scatterplot to display the relationship of a set of returns to a market benchmark.  Fits a linear model and overlays the resulting model.  Also overlays a Loess line for comparison.
 }
 \usage{
-chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, darken = FALSE, legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50,  legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
+chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, legend.cex = 0.8, cex = 0.8, lwd = 2, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -21,7 +21,7 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{colorset}{ color palette to use }
   \item{symbolset}{ symbols to use, see also 'pch' in \code{\link{plot}} }
-  \item{darken}{ if true, draws the chart elements in "darkgray" rather than "gray".  Makes it easier to print for some printers }
+  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{ylog}{ Not used }
   \item{fit}{ for values of "loess", "linear", or "conditional", plots a line to fit the data.  Conditional lines are drawn separately for positive and negative benchmark returns.  "Quadratic" is not yet implemented. }

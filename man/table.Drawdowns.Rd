@@ -6,13 +6,13 @@
 Creates table showing statistics for the worst drawdowns.
 }
 \usage{
-table.Drawdowns(R, top= 5, ...)
+table.Drawdowns(R, top= 5, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{top}{ the number of drawdowns to include }
-  \item{\dots}{ any other passthru parameters }
+  \item{digits}{ number of digits to round results to }
 }
 \details{
 \preformatted{
