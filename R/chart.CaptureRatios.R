@@ -1,5 +1,5 @@
 `chart.CaptureRatios` <-
-function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", method = c("calc","nocalc"), colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, element.color="darkgray", benchmark.color = "darkgray",...)
+function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, element.color="darkgray", benchmark.color = "darkgray",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -8,14 +8,7 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
     # downside capture for comparing manager performance.
 
     # Inputs:
-    # R = usually a set of monthly return, but can also be a pre-calculated
-    #   return and risk measure (set method = "nocalc", see below).  If the input
-    #   is a set of monthly performance returns, this function will calculate
-    #   the appropriate metrics.
-    # method = If method is set to "nocalc" then we assume that R is a column of
-    #   return and a column of risk (e.g., annualized returns, annualized risk),
-    #   in that order.  Other method cases can be set for different risk/return
-    #   calculations.
+    # R = usually a set of monthly return.
     # add.names = plots the row name with the data point.  Can be removed with
     #   by setting it to NULL.
 
@@ -59,7 +52,7 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
     # Label the data points
     if(add.names){
         text(x = downside, y = upside, labels = rownames, pos=4, cex = 0.8, col = colorset[rows:1]) # adj = -0.1
-        text(x = 1, y = 1, labels = benchmarkname, pos=4, cex = 0.8, col = benchmark.color) # adj = -0.1
+        text(x = 1, y = 1, labels = benchmarkname, adj=c(-.1,-.5), cex = 0.8, col = benchmark.color) # adj = -0.1
     }
 
     # Add a rug so that data points are easier to identify
@@ -84,10 +77,13 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CaptureRatios.R,v 1.1 2009-04-02 03:04:45 peter Exp $
+# $Id: chart.CaptureRatios.R,v 1.2 2009-04-17 04:15:56 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2009-04-02 03:04:45  peter
+# - initial commit to cvs
+#
 # Revision 1.11  2008-08-16 03:39:54  peter
 # - fixed point label adjustment
 #
