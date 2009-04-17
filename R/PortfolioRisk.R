@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.1 2009-04-17 15:14:00 brian Exp $
+# $Id: PortfolioRisk.R,v 1.2 2009-04-17 15:23:47 brian Exp $
 ###############################################################################
 
 
@@ -38,7 +38,7 @@ VaR.Gaussian =  function(R,p)
    alpha = .setalphaprob(p)
    location = mean(R);
    m2 = centeredmoment(R,2)
-   out = - location - qnorm(p)*sqrt(m2)
+   out = - location - qnorm(alpha)*sqrt(m2)
    return(out)
 }
 
@@ -47,14 +47,14 @@ ES.Gaussian =  function(R,p)
    alpha = .setalphaprob(p)
    location = mean(R);
    m2 = centeredmoment(R,2)
-   out = - location + dnorm(qnorm(p))*sqrt(m2)/alpha
+   out = - location + dnorm(qnorm(alpha))*sqrt(m2)/alpha
    return(out)
 }
 
 VaR.CornishFisher =  function(R,p,r=2)
 {
    alpha = .setalphaprob(p)
-   z = qnorm(p)
+   z = qnorm(alpha)
    location = mean(R);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
@@ -72,7 +72,8 @@ VaR.CornishFisher =  function(R,p,r=2)
 ES.CornishFisher =  function(R,p,r=2)
 {
    alpha = .setalphaprob(p)
-   z = qnorm(p)
+   p = alpha
+   z = qnorm(alpha)
    location = mean(R);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
@@ -94,7 +95,8 @@ ES.CornishFisher =  function(R,p,r=2)
 operES.CornishFisher =  function(R,p,r=2)
 {
    alpha = .setalphaprob(p)
-   z = qnorm(p)
+   p = alpha
+   z = qnorm(alpha)
    location = mean(R);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
@@ -169,8 +171,8 @@ PortVaR.Gaussian =  function(p,w,mu,sigma)
    location = t(w)%*%mu
    pm2 = portm2(w,sigma)
    dpm2 = derportm2(w,sigma)
-   VaR = - location - qnorm(p)*sqrt(pm2)
-   derVaR = - as.vector(mu)- qnorm(p)*(0.5*as.vector(dpm2))/sqrt(pm2);
+   VaR = - location - qnorm(alpha)*sqrt(pm2)
+   derVaR = - as.vector(mu)- qnorm(alpha)*(0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = derVaR*as.vector(w)
    if( abs( sum(contrib)-VaR)>0.01*abs(VaR)) { print("error") } else {
    return(list( VaR  ,  contrib  , contrib/VaR) ) }
@@ -207,8 +209,8 @@ PortES.Gaussian =  function(p,w,mu,sigma)
    location = t(w)%*%mu
    pm2 = portm2(w,sigma)
    dpm2 = derportm2(w,sigma)
-   ES = - location + dnorm(qnorm(p))*sqrt(pm2)/alpha
-   derES = - as.vector(mu) + (1/p)*dnorm(qnorm(p))*(0.5*as.vector(dpm2))/sqrt(pm2);
+   ES = - location + dnorm(qnorm(alpha))*sqrt(pm2)/alpha
+   derES = - as.vector(mu) + (1/p)*dnorm(qnorm(alpha))*(0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = as.vector(w)*derES;
    if( abs( sum(contrib)-ES)>0.01*abs(ES)) { print("error") } else {
    return(list(  ES  ,  contrib ,  contrib/ES  )) }
@@ -218,7 +220,7 @@ PortVaR.CornishFisher =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
-   z = qnorm(p)
+   z = qnorm(alpha)
    location = t(w)%*%mu
    pm2 = portm2(w,sigma)
    dpm2 = as.vector( derportm2(w,sigma) )
@@ -238,7 +240,7 @@ PortVaR.CornishFisher =  function(p,w,mu,sigma,M3,M4)
 
    MVaR = - location - h*sqrt(pm2)
 
-   derGausVaR = - as.vector(mu)- qnorm(p)*(0.5*as.vector(dpm2))/sqrt(pm2);
+   derGausVaR = - as.vector(mu)- qnorm(alpha)*(0.5*as.vector(dpm2))/sqrt(pm2);
    derMVaR = derGausVaR + (0.5*dpm2/sqrt(pm2))*( -(1/6)*(z^2 -1)*skew  - (1/24)*(z^3 - 3*z)*exkurt + (1/36)*(2*z^3 - 5*z)*skew^2 )
    derMVaR = derMVaR + sqrt(pm2)*( -(1/6)*(z^2 -1)*derskew  - (1/24)*(z^3 - 3*z)*derexkurt + (1/36)*(2*z^3 - 5*z)*2*skew*derskew  )
    contrib = as.vector(w)*as.vector(derMVaR)
@@ -296,7 +298,7 @@ PortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
-   z = qnorm(p)
+   z = qnorm(alpha)
    location = t(w)%*%mu
    pm2 = portm2(w,sigma)
    dpm2 = as.vector( derportm2(w,sigma) )
@@ -343,7 +345,7 @@ operPortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
-   z = qnorm(p)
+   z = qnorm(alpha)
    location = t(w)%*%mu
    pm2 = portm2(w,sigma)
    dpm2 = as.vector( derportm2(w,sigma) )
@@ -430,8 +432,11 @@ realportVaR = function(R,w,p)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.1 2009-04-17 15:14:00 brian Exp $
+# $Id: PortfolioRisk.R,v 1.2 2009-04-17 15:23:47 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2009-04-17 15:14:00  brian
+# - Initial revision of VaR wrapper and portfolio risk functions
+#
 ###############################################################################
