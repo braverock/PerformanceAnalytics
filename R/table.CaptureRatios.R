@@ -1,5 +1,5 @@
 `table.CaptureRatios` <-
-function (Ra, Rb, digits = 4,...)
+function (Ra, Rb, digits = 4)
 {# @author Peter Carl
 
     # FUNCTION:
@@ -44,9 +44,12 @@ function (Ra, Rb, digits = 4,...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CaptureRatios.R,v 1.2 2009-04-02 03:06:37 peter Exp $
+# $Id: table.CaptureRatios.R,v 1.3 2009-04-17 04:10:23 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2009-04-02 03:06:37  peter
+# - added CVS log
+#
 # 
 ###############################################################################

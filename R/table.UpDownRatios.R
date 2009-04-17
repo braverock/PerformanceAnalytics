@@ -1,5 +1,5 @@
 `table.UpDownRatios` <-
-function (Ra, Rb, digits = 4,...)
+function (Ra, Rb, digits = 4)
 {# @author Peter Carl
 
     # FUNCTION:
