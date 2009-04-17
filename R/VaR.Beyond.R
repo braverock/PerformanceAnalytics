@@ -27,17 +27,20 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
         r = na.omit(R[,column,drop=FALSE])
         if (!is.numeric(r)) stop("The selected column is not numeric")
 
-        VaR = VaR.CornishFisher(r, p=p, modified=modified)
         if(add){
-            aVaR=VaR
+            if (modified==TRUE){
+                aVaR = VaR.CornishFisher(r, p=p)
+            } else {
+                aVaR = VaR.Gaussian(r,p)
+            }
         } else {
             aVaR=0
         }
 #        BVaR = aVaR + (VaR * (-1/(mean(r)-1))) # old quick and dirty ES/CVaR method
         if (modified==TRUE){
-            BVaR= aVaR + operES.CornishFisher(R,p)
+            BVaR= aVaR + operES.CornishFisher(r,p)
         } else {
-            BVaR= aVaR + ES.Gaussian(R,p)
+            BVaR= aVaR + ES.Gaussian(r,p)
         }
 
         BVaR=array(BVaR)
@@ -70,10 +73,14 @@ function (R, p=.95, modified=FALSE, add=FALSE, periods = 1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Beyond.R,v 1.12 2009-04-17 15:23:16 brian Exp $
+# $Id: VaR.Beyond.R,v 1.13 2009-04-17 15:36:57 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-04-17 15:23:16  brian
+# - update to use (Boudt,Peterson,Croux(2008)) versions of ES calcs for greater
+# accuracy
+#
 # Revision 1.11  2008-10-14 14:37:29  brian
 # - convert from matrix or data.frame to zoo in checkData call
 #
