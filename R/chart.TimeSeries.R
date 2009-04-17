@@ -1,13 +1,11 @@
 `chart.TimeSeries` <-
-function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.eventlabels = 0.8, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
+function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # Draws a line chart and labels the x-axis with the appropriate dates.
     # This is really a "primitive", since it constructs the elements of a plot
-    # to provide lines for each column of data provided.  This function is
-    # intended to be used in a wrapper that is written for a particular purpose.
-    # This is just a handy way to standardize the formatting of multiple charts.
+    # to provide lines for each column of data provided.  
 
     # Inputs:
     # R = assumes that data is a regular time series, not irregular.  Can take
@@ -17,8 +15,6 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     # colorset = use the name of any of the palattes above
     # reference.grid = if true, draws a grid aligned with the points on the
     #    x and y axes.
-    # darken = if true, draws the chart elements in "darkgray" rather than
-    #    "gray".  Makes it easier to print for some printers.
     # xaxis = if true, draws the x axis.
     # event.lines = if not null, will draw vertical lines indicating that an
     #    event happened during that time period.  event.lines should be a list
@@ -36,21 +32,18 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 
     # FUNCTION:
 
-    # Make sure that we have a matrix to work with
     y = checkData(R)
 
     # Set up dimensions and labels
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
-    #rownames = rownames(y)
+    # Needed for finding aligned dates for event lines and period areas
     rownames = as.Date(time(y))
+    rownames = format(strptime(rownames,format = date.format.in), date.format)
 
     time.scale = periodicity(y)$scale
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
-    # Re-format the dates for the xaxis
-#     rownames = format(strptime(as.Date(rownames),format = date.format.in), date.format)
-    rownames = format(strptime(rownames,format = date.format.in), date.format)
 
     # If the Y-axis is ln
     logaxis = ""
@@ -95,33 +88,11 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
         }
     }
 
-    # The default label and grid placement is ok, but not great.  We set up
-    # indexes for each to improve placement.
-    # @todo: measuring the length of data set and setting sensible ticks needs improvement
-
-#     if(xlim[2]>=200)
-#         tickspace=24
-#     if(xlim[2]>=100)
-#         tickspace=12
-#     if(xlim[2]>=50)
-#         tickspace=6
-#     else
-#         tickspace=4
-# 
-#     lab.ind = seq(1, rows, by = tickspace/2)
-#     grid.ind = seq(1, rows, by = tickspace)
-    # lab.ind = seq(1,rows,length=rows/divisor)
-
     # Draw the grid
     if(auto.grid) {
         abline(v=ep, col=grid.color, lty=grid.lty)
         grid(NA, NULL, col = grid.color)
     }
-#     if (reference.grid) {
-#         grid(nx = NA, ny = NULL ,col = elementcolor)
-#         #grid(col="darkgray")
-#         abline(v=grid.ind, col = elementcolor, lty = "dotted")
-#     }
 
     # Draw a solid reference line at zero
     abline(h = 0, col = element.color)
@@ -137,7 +108,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 
         abline(v = event.ind, col = event.color, lty = 2)
         if(!is.null(event.labels)) {
-            text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = cex.eventlabels, srt=90, col = event.color)
+            text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = cex.labels, srt=90, col = event.color)
         }
     }
 
@@ -196,10 +167,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.17 2009-04-14 02:49:41 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.18 2009-04-17 04:11:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2009-04-14 02:49:41  peter
+# - restored date formatting needed for matching event lines and areas
+#
 # Revision 1.16  2009-04-07 22:30:52  peter
 # - added cex.* attributes for sizing text elements
 #
