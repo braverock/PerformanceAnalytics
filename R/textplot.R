@@ -1,13 +1,5 @@
-
-
-
-
-
-
-
-
-# Original function from gplots package written by warnes
-# $Id: textplot.R,v 1.1 2009-03-02 03:04:32 peter Exp $
+# # Original function from gplots package written by warnes
+# $Id: textplot.R,v 1.2 2009-04-17 04:08:33 peter Exp $
 
 # Example using format.df as a pre-processor
 # > textplot(format.df(t(y), na.blanks=F,cdec=c(3,3,1)), row.valign="center", wrap.rownames=20, wrap.colnames=10, cex=1)
@@ -44,7 +36,7 @@ textplot.matrix <- function(object,
                             valign=c("center","top","bottom"),
                             cex, max.cex = 1.0, cmar=2, rmar=0.5,
                             show.rownames=TRUE, show.colnames=TRUE,
-                            hadj=1,
+                            hadj=1, vadj=NULL,
                             row.valign="center",
                             heading.valign = "bottom",
                             mar= c(0,0,0,0)+0.1, # original settings: c(1,1,4,1)+0.1,
