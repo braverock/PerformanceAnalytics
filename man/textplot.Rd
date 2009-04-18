@@ -4,12 +4,12 @@
 \alias{textplot.character}
 \alias{textplot.matrix}
 \alias{textplot.data.frame}
+\alias{replaceTabs}
 
 \title{Display text information in a graphics plot.}
 
 \description{
-  This function displays text output in a graphics window.  It is the
-  equivalent of 'print' except that the output is displayed as a plot.
+  This function displays text output in a graphics window.  It is the equivalent of 'print' except that the output is displayed as a plot.
 }
 \usage{
 textplot(object, halign="center", valign="center", cex, ...)
@@ -22,6 +22,7 @@ textplot(object, halign="center", valign="center", cex, ...)
 \method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
          valign = c("center", "top", "bottom"), cex, ...)
 \method{textplot}{matrix}(object, halign = c("center", "left", "right"), valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1, vadj=NULL, row.valign = "center", heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"), col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10, wrap.rownames = 10, ...) 
+replaceTabs(text, width=8)
 }
 \arguments{
   \item{object}{Object to be displayed.}
@@ -63,6 +64,8 @@ textplot(object, halign="center", valign="center", cex, ...)
   \item{wrap}{ If TRUE (default), will wrap column names and rownames }
   \item{wrap.colnames}{ The number of characters after which column labels will be wrapped.  Default is 10. }
   \item{wrap.rownames}{ The number of characters after which row headings will be wrapped.  Default is 10. } 
+  \item{text}{ in the function 'replaceTabs', the text string to be processed } 
+  \item{width}{ in the function 'replaceTabs', the number of spaces to replace tabs with } 
   \item{\dots}{ Optional arguments passed to the text plotting command or specialized object methods}
 }
 \details{
@@ -71,10 +74,11 @@ textplot(object, halign="center", valign="center", cex, ...)
   \code{halign} and \code{valign} parameters can be used to control the
   location of the string within the plotting region.
 
-  For matrixes and vectors a specialized textplot function is available,
-  which plots each of the cells individually, with column widths set
+  For matrixes and vectors a specialized textplot function is available, which plots each of the cells individually, with column widths set
   according to the sizes of the column elements.  If present, row and
   column labels will be displayed in a bold font.  
+
+  textplot also uses replaceTabs, a function to replace all tabs in a string with an appropriate number of spaces.  That function was also written by Gregory R. Warnes and included in the 'gplots' package.
 }
 \value{
   The character scaling factor (\code{cex}) used.
