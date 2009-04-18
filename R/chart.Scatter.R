@@ -30,7 +30,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     y = checkData(y, method = "vector")
 
     # pass in: cex.axis = cex.axis, cex.main = cex.main, cex.lab = cex.lab
-    plot(x~y, main = main, pch = symbolset, ylog = ylog, col=colorset, ...)
+    plot(x~y, main = main, pch = symbolset, col=colorset, ...)
 
     if(reference.grid) {
         grid(col = element.color)
@@ -53,10 +53,13 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.7 2009-04-07 22:26:18 peter Exp $
+# $Id: chart.Scatter.R,v 1.8 2009-04-18 02:56:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-04-07 22:26:18  peter
+# - added rug and other graphic features
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

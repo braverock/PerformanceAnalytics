@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR","HistoricalVaR", "StdDev"), clean = c("none", "boudt"), auto.grid = TRUE, xaxis = TRUE, main = "Title", ylab="Value", xlab="Date", date.format = "%m/%y", xlim = NA, ylim = NA, lwd = 2, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ypad=0, legend.cex = 0.8, ...)
+function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev"), clean = c("none", "boudt"),  ylim = NA, lwd = 2, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ypad=0, legend.cex = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -19,7 +19,6 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
 
     # Transform input data to a timeseries object
     x = checkData(R)
-    #x = na.omit(x)
 
     # Set up dimensions and labels
     columns = ncol(x)
@@ -29,8 +28,6 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
     legend.txt = NULL
     symmetric = NULL
     risk.line=TRUE
-    # Re-format the dates for the xaxis
-#     rownames = format(strptime(as.Date(rownames),format = "%Y-%m-%d"), date.format)
 
     time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
     if(methods[1]=="none"){
@@ -133,7 +130,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
 
-    chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, auto.grid = auto.grid, xaxis = xaxis, main = main, ylab = ylab, xlab = xlab, lwd = lwd, lend="butt", ...)
+    chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
 
     if(show.clean) {
         lines(1:rows, x[,1, drop=FALSE], type="h", col=colorset[1], lwd = lwd, lend="butt")
@@ -172,10 +169,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR","GaussianVaR
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.19 2009-04-07 22:17:28 peter Exp $
+# $Id: chart.BarVaR.R,v 1.20 2009-04-18 02:56:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.19  2009-04-07 22:17:28  peter
+# - changed to use xts internally
+#
 # Revision 1.18  2009-03-20 03:22:53  peter
 # - added xts
 #

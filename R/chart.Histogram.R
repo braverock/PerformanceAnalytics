@@ -62,14 +62,14 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
                 yrange=c(yrange,max(den$y))
                  probability = TRUE
             },
-            add.stable = {
-                stopifnot("package:fBasics" %in% search() || require("fBasics",quietly=TRUE))
-                fit.stable = stableFit(x,doplot = FALSE)
-                fitted.stable = dstable(s,alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
-                # look at documentation for pm
-                yrange=c(yrange,max(fitted.stable))
-                probability = TRUE
-            },
+#             add.stable = {
+#                 stopifnot("package:fBasics" %in% search() || require("fBasics",quietly=TRUE))
+#                 fit.stable = stableFit(x,doplot = FALSE)
+#                 fitted.stable = dstable(s,alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
+#                 # look at documentation for pm
+#                 yrange=c(yrange,max(fitted.stable))
+#                 probability = TRUE
+#             },
             add.cauchy = {
                 # requires library(MASS)
                 stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
@@ -149,9 +149,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
             add.cauchy = {
                 lines(s, fitted.cauchy, col = colorset[4], lwd=lwd)
             },
-            add.stable = {
-                lines(s, fitted.stable, col = colorset[4], lwd=lwd)
-            },
+#             add.stable = {
+#                 lines(s, fitted.stable, col = colorset[4], lwd=lwd)
+#             },
             add.sst = { #requires package sn
                 lines(s, fitted.sst, col = colorset[4], lwd=lwd)
             },
@@ -200,10 +200,13 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Histogram.R,v 1.37 2009-04-07 22:20:34 peter Exp $
+# $Id: chart.Histogram.R,v 1.38 2009-04-18 02:56:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.37  2009-04-07 22:20:34  peter
+# - changed to use element.color parameter
+#
 # Revision 1.36  2008-06-30 21:52:52  peter
 # - changed 'method' to 'methods' in test
 #

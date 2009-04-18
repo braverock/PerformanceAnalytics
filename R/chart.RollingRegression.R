@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), xaxis = TRUE, colorset = (1:12), legend.loc = NULL, na.pad = TRUE, ...)
+function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -48,7 +48,7 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
         }
     }
 
-    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, legend.loc = legend.loc, col = colorset, ...)
+    chart.TimeSeries(Result.calc, main = main, ...)
 
 }
 
@@ -60,10 +60,13 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.15 2009-03-20 03:22:53 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.16 2009-04-18 02:56:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.14  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

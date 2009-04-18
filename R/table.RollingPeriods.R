@@ -32,7 +32,7 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
     )
 
     if(length(FUNCS) != length(funcs.names)) {
-        warn("The length of the names vector is unequal to the length of the functions vector, so using FUNCS for naming.")
+        warning("The length of the names vector is unequal to the length of the functions vector, so using FUNCS for naming.")
         funcs.names = NA
     }
     if(is.na(funcs.names[1]))
@@ -110,10 +110,13 @@ function (R,  periods = subset(c(3,6,9,12,18,24,36,48), c(3,6,9,12,18,24,36,48)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.RollingPeriods.R,v 1.7 2009-04-14 03:45:02 peter Exp $
+# $Id: table.RollingPeriods.R,v 1.8 2009-04-18 02:56:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-04-14 03:45:02  peter
+# - smarter labeling of frequency scale
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
