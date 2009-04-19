@@ -114,7 +114,7 @@ function (x, method = c("xts", "zoo","matrix","vector","data.frame"), na.rm = FA
         },
         xts = {
             #try xts
-            if(xtsible(x)) x = xts(x)
+            if(xtsible(x)) x = xts(x, ...)
             # else
             #possibly try date formats with warnings
             #data was already coerced to zoo above
@@ -164,9 +164,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.23 2009-03-20 21:20:54 peter Exp $
+# $Id: checkData.R,v 1.24 2009-04-19 13:15:25 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.23  2009-03-20 21:20:54  peter
+# - makes vectors a single col matrix for naming again
+#
 # Revision 1.22  2009-03-20 20:48:48  peter
 # - fixes vector to zoo translation
 #
