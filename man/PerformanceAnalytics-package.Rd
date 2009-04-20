@@ -241,7 +241,7 @@ Maintainer: Brian G. Peterson \email{brian@braverock.com}
 }
 
 \references{
-Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004.
+Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. \cr
 Canto, Victor. \emph{Understanding Asset Allocation}. FT Prentice Hall. 2006. \cr
 Lhabitant, F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
 Litterman, R., Gumerlock R., et. al. \emph{The Practice of Risk Management: Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998. \cr
