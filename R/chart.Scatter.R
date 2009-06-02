@@ -15,9 +15,6 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     # colorset = use the name of any of the palattes above
     # reference.grid = if true, draws a grid aligned with the points on the
     #    x and y axes.
-    # darken = if true, draws the chart elements in "darkgray" rather than
-    #    "gray".  Makes it easier to print for some printers.
-
 
     # All other inputs are the same as "plot" and are principally included
     # so that some sensible defaults could be set.
@@ -26,7 +23,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     # Draws a scatter chart with some sensible defaults.
 
     # FUNCTION:
-    x = checkData(x, method = "vector")
+    x = checkData(x, method = "vector") ### ???
     y = checkData(y, method = "vector")
 
     # pass in: cex.axis = cex.axis, cex.main = cex.main, cex.lab = cex.lab
@@ -53,10 +50,13 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.8 2009-04-18 02:56:53 peter Exp $
+# $Id: chart.Scatter.R,v 1.9 2009-06-02 03:17:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-04-18 02:56:53  peter
+# - argument cleanup and codoc issues
+#
 # Revision 1.7  2009-04-07 22:26:18  peter
 # - added rug and other graphic features
 #
