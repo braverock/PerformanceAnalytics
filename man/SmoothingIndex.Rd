@@ -52,6 +52,7 @@ Getmansky, Mila, Andrew W. Lo, and Igor Makarov. 2004. An Econometric Model of S
   529-609.
 }
 \author{ Peter Carl }
+\section{Acknowledgments}{ Thanks to Dr. Stefan Albrecht, CFA, for invaluable input. }
 \examples{
 data(managers)
 data(edhec)
