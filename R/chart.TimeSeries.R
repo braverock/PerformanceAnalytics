@@ -1,5 +1,5 @@
 `chart.TimeSeries` <-
-function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
+function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", xaxis.labels = NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -130,8 +130,11 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
         if(minor.ticks)
             axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB')
         label.height = .25 + cex.axis * apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
-
-        axis(1, at=ep, labels=names(ep), las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+        if(is.null(xaxis.labels))
+            xaxis.labels = names(ep)
+        else
+            ep = 1:length(xaxis.labels)
+        axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
         #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
         title(xlab = xlab, cex = cex.lab)
         # use axis(..., las=3) for vertical labels.
@@ -167,10 +170,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.19 2009-04-18 02:56:53 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.20 2009-06-02 03:12:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.19  2009-04-18 02:56:53  peter
+# - argument cleanup and codoc issues
+#
 # Revision 1.18  2009-04-17 04:11:25  peter
 # - removed commented code
 # - parameter cleanup
