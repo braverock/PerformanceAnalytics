@@ -15,7 +15,7 @@ function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     # n is the number of observations]."
 
     R = checkData(R)
-    data = checkData(na.omit(R[,1]), method="vector")
+    data = checkData(R[,1, drop=FALSE], rm.na=TRUE, method="vector")
 
     columns = ncol(R)
     rows = nrow(R)
