@@ -37,7 +37,7 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
     # Draw the principal scatterplot
     plot(upside ~ downside,
         xlab='', ylab='',
-        las = 1, xlim=xlim, ylim=ylim, col = colorset[rows:1], pch = symbolset[rows:1], axes= FALSE, ...)
+        las = 1, xlim=xlim, ylim=ylim, col = colorset, pch = symbolset, axes= FALSE, ...)
     # Draw crosshairs and dot for benchmark and label it
     abline(v = 1, col = benchmark.color, lty=1)
     abline(h = 1, col = benchmark.color, lty=1)
@@ -51,7 +51,7 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 
     # Label the data points
     if(add.names){
-        text(x = downside, y = upside, labels = rownames, pos=4, cex = 0.8, col = colorset[rows:1]) # adj = -0.1
+        text(x = downside, y = upside, labels = rownames, pos=4, cex = 0.8, col = colorset) # adj = -0.1
         text(x = 1, y = 1, labels = benchmarkname, adj=c(-.1,-.5), cex = 0.8, col = benchmark.color) # adj = -0.1
     }
 
@@ -77,10 +77,14 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CaptureRatios.R,v 1.2 2009-04-17 04:15:56 peter Exp $
+# $Id: chart.CaptureRatios.R,v 1.3 2009-06-02 03:16:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2009-04-17 04:15:56  peter
+# - parameter cleanup
+# - adjusted placement of benchmark name label
+#
 # Revision 1.1  2009-04-02 03:04:45  peter
 # - initial commit to cvs
 #
