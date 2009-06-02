@@ -1,5 +1,5 @@
 `checkData` <-
-function (x, method = c("xts", "zoo","data.frame","matrix","vector"), quiet = TRUE, ...)
+function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm = TRUE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -31,6 +31,8 @@ function (x, method = c("xts", "zoo","data.frame","matrix","vector"), quiet = TR
                     warning("The data provided is not a vector or univariate time series.  Used only the first column")
                 x = x[,1]
             }
+            if (na.rm) 
+                x = na.omit(x)
             x = as.vector(x)
         },
         matrix = {
@@ -101,9 +103,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.25 2009-05-15 02:19:12 peter Exp $
+# $Id: checkData.R,v 1.26 2009-06-02 03:13:09 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.25  2009-05-15 02:19:12  peter
+# - rewrite to cover cases more carefully
+#
 # Revision 1.24  2009-04-19 13:15:25  brian
 # - pass dots into the xts call (e.g. for date formatting)
 #
