@@ -7,7 +7,7 @@ function (R)
 
     # FUNCTION:
 
-    x = checkData(R, method="zoo")
+    x = checkData(R)
 
     # Get dimensions and labels
     columns = ncol(x)
@@ -24,13 +24,14 @@ function (R)
             drawdown = merge(drawdown,column.drawdown)
     }
 
-    if(columns == 1) {# coersion required when only one column
-        drawdown = as.matrix(drawdown)
-        colnames(drawdown) = columnnames
-        drawdown = zoo(drawdown, order.by = rownames(drawdown))
-    }
-    else
-        colnames(drawdown) = columnnames
+#     if(columns == 1) {# coersion required when only one column
+#         drawdown = as.matrix(drawdown)
+#         colnames(drawdown) = columnnames
+#         drawdown = zoo(drawdown, order.by = rownames(drawdown))
+#     }
+#     else
+    drawdown=as.xts(drawdown)
+         colnames(drawdown) = columnnames
 
     return(drawdown)
 }
@@ -43,10 +44,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Drawdowns.R,v 1.2 2008-06-02 16:05:19 brian Exp $
+# $Id: Drawdowns.R,v 1.3 2009-06-02 03:14:49 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.1  2007/03/21 14:09:10  peter
 # - separated function from the chart.Drawdowns.R
 #
