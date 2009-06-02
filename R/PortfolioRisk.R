@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.2 2009-04-17 15:23:47 brian Exp $
+# $Id: PortfolioRisk.R,v 1.3 2009-06-02 01:01:13 brian Exp $
 ###############################################################################
 
 
@@ -36,7 +36,7 @@ VaR.Gaussian =  function(R,p)
 {
 
    alpha = .setalphaprob(p)
-   location = mean(R);
+   location = apply(R,2,mean);
    m2 = centeredmoment(R,2)
    out = - location - qnorm(alpha)*sqrt(m2)
    return(out)
@@ -45,17 +45,17 @@ VaR.Gaussian =  function(R,p)
 ES.Gaussian =  function(R,p)
 {
    alpha = .setalphaprob(p)
-   location = mean(R);
+   location = apply(R,2,mean);
    m2 = centeredmoment(R,2)
    out = - location + dnorm(qnorm(alpha))*sqrt(m2)/alpha
    return(out)
 }
 
-VaR.CornishFisher =  function(R,p,r=2)
+VaR.CornishFisher.new =  function(R,p,r=2)
 {
    alpha = .setalphaprob(p)
    z = qnorm(alpha)
-   location = mean(R);
+   location = apply(R,2,mean);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
    m4 = centeredmoment(R,4)
@@ -65,7 +65,7 @@ VaR.CornishFisher =  function(R,p,r=2)
    h = z + (1/6)*(z^2 -1)*skew
    if(r==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2; }
 
-   out = - location - h*sqrt(m2)
+   out = -location - h*sqrt(m2)
    return(out)
 }
 
@@ -74,7 +74,7 @@ ES.CornishFisher =  function(R,p,r=2)
    alpha = .setalphaprob(p)
    p = alpha
    z = qnorm(alpha)
-   location = mean(R);
+   location = apply(R,2,mean);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
    m4 = centeredmoment(R,4)
@@ -97,7 +97,7 @@ operES.CornishFisher =  function(R,p,r=2)
    alpha = .setalphaprob(p)
    p = alpha
    z = qnorm(alpha)
-   location = mean(R);
+   location = apply(R,2,mean);
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
    m4 = centeredmoment(R,4)
@@ -123,7 +123,7 @@ operES.CornishFisher =  function(R,p,r=2)
 
 portm2 = function(w,sigma)
 {
-   return(t(w)%*%sigma%*%w)
+   return(w%*%sigma%*%w) #t(w) for first item?
 }
 derportm2 = function(w,sigma)
 {
@@ -131,7 +131,7 @@ derportm2 = function(w,sigma)
 }
 portm3 = function(w,M3)
 {
-   return(t(w)%*%M3%*%(w%x%w))
+   return(w%*%M3%*%(w%x%w))  #t(w) for first item?
 }
 derportm3 = function(w,M3)
 {
@@ -432,10 +432,13 @@ realportVaR = function(R,w,p)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.2 2009-04-17 15:23:47 brian Exp $
+# $Id: PortfolioRisk.R,v 1.3 2009-06-02 01:01:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2009-04-17 15:23:47  brian
+# - better standardize use of p for probability and conversion to alpha number
+#
 # Revision 1.1  2009-04-17 15:14:00  brian
 # - Initial revision of VaR wrapper and portfolio risk functions
 #
