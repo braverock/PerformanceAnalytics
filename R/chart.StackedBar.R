@@ -1,14 +1,21 @@
 `chart.StackedBar` <- 
-function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.axis = 1, las=3, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab=NULL, ylim=NULL, ... ) 
+function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%m/%y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     # Data should be organized as columns for each category, rows for each period or observation
 
     # @todo: Set axis color to element.color
     # @todo: Set border color to element.color
 
-    w = checkData(w,method = "zoo")
+    w = checkData(w)
     w.columns = ncol(w)
     w.rows = nrow(w)
+
+    time.scale = periodicity(w)$scale
+    ep = axTicksByTime(w, major.ticks, format.labels = date.format)
+    ep1 = ep
+    posn = barplot(w, plot=FALSE)
+    for(i in 1:length(ep)) 
+        ep1[i] = posn[ep[i]]
 
     if(is.null(colorset))
         colorset=1:w.columns
@@ -35,35 +42,21 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
         }
 # par(mai=c(max(strwidth(colnames(w), units="in")), 0.82, 0.82, 0.42)*cex.names)
         barplot(w, col = colorset[1], las = las, horiz = FALSE, space = space, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
-        axis(2, col = element.color, las = las)
+        axis(2, col = element.color, las = las, cex.axis = cex.axis)
 
     }
 
     else { # multiple columns being passed into 'w', so we'll stack the bars and put a legend underneith
-        op <- par(no.readonly=TRUE)
+#         op <- par(no.readonly=TRUE)
         if(!is.null(legend.loc) ){
             if(legend.loc =="under") {# put the legend under the chart
+                op <- par(no.readonly=TRUE)
                 layout(rbind(1,2), height=c(6,1), width=1)
-
             }
-            else
-                par(mar=c(5,4,4,2)+.1) # @todo: this area may be used for other locations later
+#             else
+#                 par(mar=c(5,4,4,2)+.1) # @todo: this area may be used for other locations later
         }
 
-        if(las > 1) {# set the bottom margin to accomodate names
-            # See note above.
-            bottommargin = max(c(minmargin,(strwidth(rownames(w),units="in"))/par("cin")[1])) * cex.names
-
-            par(mar = c(bottommargin, 4, 4, 2) +.1)
-
-            }
-        else{
-            if(is.null(xlab))
-                bottommargin = 3
-            else
-                bottommargin = 5
-            par(mar=c(bottommargin,4,4,2) +.1)
-        }
         # Brute force solution for plotting negative values in the bar charts:
         positives = w
         for(column in 1:ncol(w)){
@@ -86,8 +79,23 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
         }
 
         barplot(t(positives), col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
-        barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, ylim=ylim, ...)
+        barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, axisnames = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las, cex.axis = cex.axis)
+        title(ylab = ylab, cex = cex.lab)
+        if (xaxis) {
+            if(minor.ticks)
+                axis(1, at=posn, labels=FALSE, col='#BBBBBB')
+            label.height = .25 + cex.axis * apply(t(names(ep1)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
+            if(is.null(xaxis.labels))
+                xaxis.labels = names(ep1)
+            else
+                ep1 = 1:length(xaxis.labels)
+            axis(1, at=ep1, labels=xaxis.labels, las=las, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+            #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
+            title(xlab = xlab, cex = cex.lab)
+            # use axis(..., las=3) for vertical labels.
+        }
+        box(col = element.color)
 
         if(!is.null(legend.loc)){
             if(legend.loc =="under"){ # draw the legend under the chart
@@ -99,12 +107,12 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
 #                     ncol = w.columns/2
                 else
                     ncol = 4
-                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=3,
+                legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol,
  box.col=element.color, border.col = element.color)
-
+                par(op)
             } # if legend.loc is null, then do nothing
         }
-    par(op)
+#     par(op)
     }
 }
 
@@ -116,10 +124,13 @@ function (w, colorset = NULL, space = 0.2, cex.legend = 0.8, cex.names = 1, cex.
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.13 2008-10-14 14:37:29 brian Exp $
+# $Id: chart.StackedBar.R,v 1.14 2009-06-20 03:18:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.12  2008-07-11 02:42:15  peter
 # - adjustments to margins again
 # - added cex.axis for sizing axis text
