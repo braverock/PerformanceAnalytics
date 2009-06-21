@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.3 2009-06-02 01:01:13 brian Exp $
+# $Id: PortfolioRisk.R,v 1.4 2009-06-21 15:07:38 brian Exp $
 ###############################################################################
 
 
@@ -34,12 +34,25 @@ pvalJB = function(R)
 
 VaR.Gaussian =  function(R,p)
 {
+    alpha = .setalphaprob(p)
 
-   alpha = .setalphaprob(p)
-   location = apply(R,2,mean);
-   m2 = centeredmoment(R,2)
-   out = - location - qnorm(alpha)*sqrt(m2)
-   return(out)
+    columns = ncol(R)
+    for(column in 1:columns) {
+        r = as.vector(na.omit(R[,column]))
+        if (!is.numeric(r)) stop("The selected column is not numeric") 
+        # location = apply(R,2,mean);
+        m2 = centeredmoment(r,2)
+        VaR = -mean(r) - qnorm(alpha)*sqrt(m2)
+        VaR=array(VaR)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(VaR=VaR)
+        } else {
+            VaR=data.frame(VaR=VaR)
+            result=cbind(result,VaR)
+        }
+    }
+    return(result)
 }
 
 ES.Gaussian =  function(R,p)
@@ -51,22 +64,38 @@ ES.Gaussian =  function(R,p)
    return(out)
 }
 
-VaR.CornishFisher.new =  function(R,p,r=2)
+VaR.CornishFisher =  function(R,p)
 {
    alpha = .setalphaprob(p)
    z = qnorm(alpha)
-   location = apply(R,2,mean);
-   m2 = centeredmoment(R,2)
-   m3 = centeredmoment(R,3)
-   m4 = centeredmoment(R,4)
-   skew = m3 / m2^(3/2);
-   exkurt = m4 / m2^(2) - 3;
+   columns = ncol(R)
+   for(column in 1:columns) {
+        r = as.vector(na.omit(R[,column]))
+        if (!is.numeric(r)) stop("The selected column is not numeric") 
+           
+        # location = apply(r,2,mean);
+        m2 = centeredmoment(r,2)
+        m3 = centeredmoment(r,3)
+        m4 = centeredmoment(r,4)
+        skew = m3 / m2^(3/2);
+        exkurt = m4 / m2^(2) - 3;
+        # skew=skewness(r)
+        # exkurt=kurtosis(r)
 
-   h = z + (1/6)*(z^2 -1)*skew
-   if(r==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2; }
+        h = z + (1/6)*(z^2 -1)*skew + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2
+        
 
-   out = -location - h*sqrt(m2)
-   return(out)
+        VaR = -mean(r) - h*sqrt(m2)
+        VaR=array(VaR)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(VaR=VaR)
+        } else {
+            VaR=data.frame(VaR=VaR)
+            result=cbind(result,VaR)
+        }
+   }
+   return(result)
 }
 
 ES.CornishFisher =  function(R,p,r=2)
@@ -432,10 +461,13 @@ realportVaR = function(R,w,p)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.3 2009-06-02 01:01:13 brian Exp $
+# $Id: PortfolioRisk.R,v 1.4 2009-06-21 15:07:38 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-06-02 01:01:13  brian
+# - temporarily move VaR.CornishFisher to VaR.CornishFisher.new
+#
 # Revision 1.2  2009-04-17 15:23:47  brian
 # - better standardize use of p for probability and conversion to alpha number
 #

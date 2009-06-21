@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.2 2009-06-19 20:59:35 brian Exp $
+# $Id: VaR.R,v 1.3 2009-06-21 15:07:38 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -44,29 +44,32 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
     if(clean[1]!="none"){
         R = as.matrix(Return.clean(R, method=clean))
     }
-
+    
     switch(portfolio_method,
         single = {
+            columns=colnames(R)
             switch(method,
                 modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
                 historical = { rVaR = apply(R, 2, quantile, probs=1-p) },
                 kernel = {}
-            )
+            ) # end sigle switch calc
             # convert from vector to columns
-            rVaR=t(rVaR) #transform so it has real rows and columns
+            colnames(rVaR)=columns
+            #rVaR=t(rVaR) #transform so it has real rows and columns
             # check for unreasonable results
-            ncoli<-ncol(rVaR)
-            for(column in 1:ncoli) {
-                if (rVaR[,column]>0) { #eval added previously o get around Sweave bitching
+            columns<-ncol(rVaR)
+            for(column in 1:columns) {
+                tmp=rVaR[,column]
+                if (eval(tmp > 0)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
-                    rVaR[,column] = NA
+                    rVaR[,column] <- NA
                 } else
-                if (-1>rVaR[,column]) { #eval added previously to get around Sweave bitching
+                if (eval(tmp < -1)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (risk over 100%) for column: ",column," : ",rVaR[,column]))
                     # set VaR to -1, since greater than 100% is unreasonable
-                    rVaR[,column] = -1
+                    rVaR[,column] <- -1
                 }
             } # end reasonableness checks
             return(rVaR)
@@ -245,10 +248,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.2 2009-06-19 20:59:35 brian Exp $
+# $Id: VaR.R,v 1.3 2009-06-21 15:07:38 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2009-06-19 20:59:35  brian
+# - worked out more of the switch logic,
+# - NOTE: still looping too many times
+#
 # Revision 1.1  2009-04-17 15:14:00  brian
 # - Initial revision of VaR wrapper and portfolio risk functions
 #
