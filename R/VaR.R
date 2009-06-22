@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.3 2009-06-21 15:07:38 brian Exp $
+# $Id: VaR.R,v 1.4 2009-06-22 16:35:11 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -33,7 +33,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
         } else {
-            weights = checkData(weights, method="xts", ...)
+            weights = checkData(weights, method="matrix", ...)
             if (ncol(weights) != ncol(R)) {
                 stop("number of columns in weighting timeseries not equal to number of columns in R")
             }
@@ -51,7 +51,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             switch(method,
                 modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
-                historical = { rVaR = apply(R, 2, quantile, probs=1-p) },
+                    historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
             ) # end sigle switch calc
             # convert from vector to columns
@@ -248,7 +248,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.3 2009-06-21 15:07:38 brian Exp $
+# $Id: VaR.R,v 1.4 2009-06-22 16:35:11 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
