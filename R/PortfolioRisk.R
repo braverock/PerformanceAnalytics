@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.4 2009-06-21 15:07:38 brian Exp $
+# $Id: PortfolioRisk.R,v 1.5 2009-06-24 23:59:16 brian Exp $
 ###############################################################################
 
 
@@ -193,7 +193,7 @@ Portsd =  function(w,sigma)
    return(list(  sqrt(pm2) , contrib , contrib/sqrt(pm2) )) }
 }
 
-PortVaR.Gaussian =  function(p,w,mu,sigma)
+VaR.Gaussian.portfolio =  function(p,w,mu,sigma)
 {
    alpha = .setalphaprob(p)
    p=alpha
@@ -212,7 +212,7 @@ kernel = function( x , h )
    return( apply( cbind( rep(0,length(x)) , 1-abs(x/h) ) , 1 , 'max' ) );
 }
 
-PortkernelVaR =  function( p, w , R)
+VaR.kernel.portfolio =  function( p, w , R)
 {
    alpha = .setalphaprob(p)
    T = dim(R)[1]; N = dim(R)[2];
@@ -231,7 +231,7 @@ PortkernelVaR =  function( p, w , R)
    return(list( VaR  ,  CVaR  , CVaR/VaR  ))
 }
 
-PortES.Gaussian =  function(p,w,mu,sigma)
+ES.Gaussian.portfolio =  function(p,w,mu,sigma)
 {
    alpha = .setalphaprob(p)
    p=alpha
@@ -245,7 +245,7 @@ PortES.Gaussian =  function(p,w,mu,sigma)
    return(list(  ES  ,  contrib ,  contrib/ES  )) }
 }
 
-PortVaR.CornishFisher =  function(p,w,mu,sigma,M3,M4)
+VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
@@ -274,7 +274,9 @@ PortVaR.CornishFisher =  function(p,w,mu,sigma,M3,M4)
    derMVaR = derMVaR + sqrt(pm2)*( -(1/6)*(z^2 -1)*derskew  - (1/24)*(z^3 - 3*z)*derexkurt + (1/36)*(2*z^3 - 5*z)*2*skew*derskew  )
    contrib = as.vector(w)*as.vector(derMVaR)
    if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { print("error") } else {
-   return(list(   MVaR  ,  contrib, contrib/MVaR  ) ) }
+   ret=(list(   MVaR  ,  contrib, contrib/MVaR  ) ) }
+   names(ret) = c("MVaR","contribution","contrib/MVaR")
+   return(ret)
 }
 
 
@@ -323,7 +325,7 @@ derIpower = function(power,h)
 }
 
 
-PortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
+ES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
@@ -366,11 +368,13 @@ PortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
    derMES = derMES + sqrt(pm2)*derE
    contrib = as.vector(w)*as.vector(derMES)
    if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } else {
-   return(list(   MES , contrib , contrib/MES) ) }
+   ret= list(   MES , contrib , contrib/MES) }
+   names(ret) = c("MES","contribution","contrib/MES")
+   return(ret)
 }
 
 
-operPortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
+operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
 {
    alpha = .setalphaprob(p)
    p=alpha
@@ -419,7 +423,7 @@ operPortES.CornishFisher =  function(p,w,mu,sigma,M3,M4)
    return(list( MES ,  contrib  , contrib/MES ) ) }
 }
 
-realportES = function(R,w,VaR)
+ES.historical.portfolio = function(R,w,VaR)
 {
     T = dim(R)[1]
     N = dim(R)[2]
@@ -441,7 +445,7 @@ realportES = function(R,w,VaR)
     return( list(-r_exceed/c_exceed,c_exceed,realizedcontrib) )
 }
 
-realportVaR = function(R,w,p)
+VaR.historical.portfolio = function(R,w,p)
 {
     portret = c();
     T = dim(R)[1]
@@ -461,10 +465,13 @@ realportVaR = function(R,w,p)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.4 2009-06-21 15:07:38 brian Exp $
+# $Id: PortfolioRisk.R,v 1.5 2009-06-24 23:59:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-06-21 15:07:38  brian
+# - wrapper functions now work for VaR
+#
 # Revision 1.3  2009-06-02 01:01:13  brian
 # - temporarily move VaR.CornishFisher to VaR.CornishFisher.new
 #

@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.4 2009-06-22 16:35:11 brian Exp $
+# $Id: VaR.R,v 1.5 2009-06-24 23:59:16 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -80,6 +80,8 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             #if (mu=NULL or sigma=NULL) {
             #     pfolioret = Return.portfolio(R, weights, wealth.index = FALSE, contribution=FALSE, method = c("simple"))
             #}
+            # for now, use as.vector
+            weights=as.vector(weights)
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
             if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
@@ -90,9 +92,9 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,M4) - 3 }
 
             switch(method,
-                modified = { return(VaR.CornishFisher.portfolio(R=R,p=p))},
-                gaussian = { return(VaR.Gaussian.portfolio(R=R,p=p)) },
-                historical = { return(VaR.historical.portfolio(R=R,p=p)) }
+                modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,M3,M4))},
+                gaussian = { return(VaR.Gaussian.portfolio(p,weights,mu,sigma,M3,M4)) },
+                historical = { return(VaR.historical.portfolio(p,weights,mu,sigma,M3,M4)) }
             )
 
         }, # end component portfolio switch
@@ -248,10 +250,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.4 2009-06-22 16:35:11 brian Exp $
+# $Id: VaR.R,v 1.5 2009-06-24 23:59:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-06-22 16:35:11  brian
+# - correct apply for historical VaR to pass na.rm=TRUE
+#
 # Revision 1.2  2009-06-19 20:59:35  brian
 # - worked out more of the switch logic,
 # - NOTE: still looping too many times
