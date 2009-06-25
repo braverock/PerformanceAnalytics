@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.5 2009-06-24 23:59:16 brian Exp $
+# $Id: PortfolioRisk.R,v 1.6 2009-06-25 13:27:31 brian Exp $
 ###############################################################################
 
 
@@ -212,7 +212,7 @@ kernel = function( x , h )
    return( apply( cbind( rep(0,length(x)) , 1-abs(x/h) ) , 1 , 'max' ) );
 }
 
-VaR.kernel.portfolio =  function( p, w , R)
+VaR.kernel.portfolio =  function( R, p, w )
 {
    alpha = .setalphaprob(p)
    T = dim(R)[1]; N = dim(R)[2];
@@ -228,7 +228,9 @@ VaR.kernel.portfolio =  function( p, w , R)
    CVaR = w*CVaR
    #print( sum(CVaR) ) ; print( sum( weights*portfolioreturn)  )
    CVaR = CVaR/sum(CVaR)*VaR
-   return(list( VaR  ,  CVaR  , CVaR/VaR  ))
+   ret= list( VaR  ,  CVaR  , CVaR/VaR  )
+   names(ret) = c("VaR","contribution","pct_contrib_VaR")
+   return(ret)
 }
 
 ES.Gaussian.portfolio =  function(p,w,mu,sigma)
@@ -241,8 +243,12 @@ ES.Gaussian.portfolio =  function(p,w,mu,sigma)
    ES = - location + dnorm(qnorm(alpha))*sqrt(pm2)/alpha
    derES = - as.vector(mu) + (1/p)*dnorm(qnorm(alpha))*(0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = as.vector(w)*derES;
-   if( abs( sum(contrib)-ES)>0.01*abs(ES)) { print("error") } else {
-   return(list(  ES  ,  contrib ,  contrib/ES  )) }
+   if( abs( sum(contrib)-ES)>0.01*abs(ES)) { print("error") } 
+   else {
+       ret = list(  ES  ,  contrib ,  contrib/ES  )
+       names(ret) = c("ES","contribution","pct_contrib_ES")
+       return(ret)
+   }
 }
 
 VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
@@ -273,10 +279,12 @@ VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    derMVaR = derGausVaR + (0.5*dpm2/sqrt(pm2))*( -(1/6)*(z^2 -1)*skew  - (1/24)*(z^3 - 3*z)*exkurt + (1/36)*(2*z^3 - 5*z)*skew^2 )
    derMVaR = derMVaR + sqrt(pm2)*( -(1/6)*(z^2 -1)*derskew  - (1/24)*(z^3 - 3*z)*derexkurt + (1/36)*(2*z^3 - 5*z)*2*skew*derskew  )
    contrib = as.vector(w)*as.vector(derMVaR)
-   if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { print("error") } else {
-   ret=(list(   MVaR  ,  contrib, contrib/MVaR  ) ) }
-   names(ret) = c("MVaR","contribution","contrib/MVaR")
-   return(ret)
+   if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { print("error") } 
+   else {
+       ret=(list(   MVaR  ,  contrib, contrib/MVaR  ) )
+       names(ret) = c("MVaR","contribution","pct_contrib_MVaR")
+       return(ret)
+   }
 }
 
 
@@ -367,10 +375,12 @@ ES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    derE = derE/alpha
    derMES = derMES + sqrt(pm2)*derE
    contrib = as.vector(w)*as.vector(derMES)
-   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } else {
-   ret= list(   MES , contrib , contrib/MES) }
-   names(ret) = c("MES","contribution","contrib/MES")
+   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } 
+   else {
+   ret= list(   MES , contrib , contrib/MES) 
+   names(ret) = c("MES","contribution","pct_contrib_MES")
    return(ret)
+   }
 }
 
 
@@ -419,12 +429,17 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
       derMES = derMES + sqrt(pm2)*derE }else{
       derMES = -mu - 0.5*(dpm2/sqrt(pm2))*h - sqrt(pm2)*derh ;  }
    contrib = as.vector(w)*as.vector(derMES)
-   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } else {
-   return(list( MES ,  contrib  , contrib/MES ) ) }
+   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } 
+   else {
+       ret= list(   MES , contrib , contrib/MES) 
+       names(ret) = c("MES","contribution","pct_contrib_MES")
+       return(ret)
+   }
 }
 
-ES.historical.portfolio = function(R,w,VaR)
+ES.historical.portfolio = function(R,p,w)
 {
+    VaR = VaR.historical.portfolio(R,p,w)
     T = dim(R)[1]
     N = dim(R)[2]
     c_exceed = 0;
@@ -445,7 +460,7 @@ ES.historical.portfolio = function(R,w,VaR)
     return( list(-r_exceed/c_exceed,c_exceed,realizedcontrib) )
 }
 
-VaR.historical.portfolio = function(R,w,p)
+VaR.historical.portfolio = function(R,p,w)
 {
     portret = c();
     T = dim(R)[1]
@@ -465,10 +480,14 @@ VaR.historical.portfolio = function(R,w,p)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.5 2009-06-24 23:59:16 brian Exp $
+# $Id: PortfolioRisk.R,v 1.6 2009-06-25 13:27:31 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-06-24 23:59:16  brian
+# - changes to make portfolio VaR work correctly
+# NOTE: weights is a vector, not time-varying
+#
 # Revision 1.4  2009-06-21 15:07:38  brian
 # - wrapper functions now work for VaR
 #
