@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.5 2009-06-24 23:59:16 brian Exp $
+# $Id: VaR.R,v 1.6 2009-06-26 20:47:16 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -51,7 +51,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             switch(method,
                 modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
-                    historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
+                historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
             ) # end sigle switch calc
             # convert from vector to columns
@@ -88,13 +88,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
             if (is.null(m3)) {m3 = M3.MM(R)}
             if (is.null(m4)) {m4 = M4.MM(R)}
-            if (is.null(skew)) { skew = skewness.MM(weights,sigma,M3) }
-            if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,M4) - 3 }
+            if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
+            if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
 
             switch(method,
-                modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,M3,M4))},
-                gaussian = { return(VaR.Gaussian.portfolio(p,weights,mu,sigma,M3,M4)) },
-                historical = { return(VaR.historical.portfolio(p,weights,mu,sigma,M3,M4)) }
+                modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},
+                gaussian = { return(VaR.Gaussian.portfolio(p,weights,mu,sigma)) },
+                historical = { return(VaR.historical.portfolio(R, p,weights),) },
+                kernel = { return(VaR.kernel.portfolio(R, p,weights),) }
             )
 
         }, # end component portfolio switch
@@ -250,7 +251,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.5 2009-06-24 23:59:16 brian Exp $
+# $Id: VaR.R,v 1.6 2009-06-26 20:47:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

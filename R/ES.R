@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: ES.R,v 1.1 2009-06-25 16:10:03 brian Exp $
+# $Id: ES.R,v 1.2 2009-06-26 20:47:16 brian Exp $
 ###############################################################################
 
 ES <-
@@ -49,13 +49,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
         single = {
             columns=colnames(R)
             switch(method,
-                modified = { rES = ES.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
-                gaussian = { rES = ES.Gaussian(R=R,p=p) },
+                modified = { rES = t(ES.CornishFisher(R=R,p=p)) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
+                gaussian = { rES = t(ES.Gaussian(R=R,p=p)) },
                 historical = { rES = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
             ) # end sigle switch calc
             # convert from vector to columns
-            colnames(rES)=columns
+            rownames(rES)=c("Expected Shortfall")
             #rES=t(rES) #transform so it has real rows and columns
             # check for unreasonable results
             columns<-ncol(rES)
@@ -88,11 +88,11 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
             if (is.null(m3)) {m3 = M3.MM(R)}
             if (is.null(m4)) {m4 = M4.MM(R)}
-            if (is.null(skew)) { skew = skewness.MM(weights,sigma,M3) }
-            if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,M4) - 3 }
+            if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
+            if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
 
             switch(method,
-                modified = { return(ES.CornishFisher.portfolio(p,weights,mu,sigma,M3,M4))},
+                modified = { return(ES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},
                 gaussian = { return(ES.Gaussian.portfolio(p,weights,mu,sigma)) },
                 historical = { return(ES.historical.portfolio(R, p,weights),) },
                 kernel = { return(ES.kernel.portfolio(R, p,weights),) }
@@ -115,8 +115,11 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.1 2009-06-25 16:10:03 brian Exp $
+# $Id: ES.R,v 1.2 2009-06-26 20:47:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2009-06-25 16:10:03  brian
+# - initial revision of ES wrapper function to call underlying Es functions for univariate and multivariate series
+#
 ###############################################################################
