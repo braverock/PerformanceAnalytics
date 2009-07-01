@@ -19,6 +19,7 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, methods = c("ModifiedVaR",
   \item{methods}{ Used to select the risk parameter to use in the chart.BarVaR.
     May be any of:
     \itemize{
+        \item None - does not add a line,
         \item ModifiedVaR - uses Cornish-Fisher modified VaR,
         \item GaussianVaR - uses traditional Value at Risk,
         \item HistoricalVaR - calculates historical Value at Risk,
