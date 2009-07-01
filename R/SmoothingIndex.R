@@ -1,5 +1,5 @@
 `SmoothingIndex` <-
-function (Ra, neg.thetas = FALSE, MAorder=2, ...)
+function (Ra, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -35,13 +35,16 @@ function (Ra, neg.thetas = FALSE, MAorder=2, ...)
 
     # From the arima function above, MA2$coef contains two coefficients, and no intercept value.
     # The calculation below adjusts for that.
+    coefMA2=0
     if(neg.thetas == FALSE)
-        coefMA2 = max(0,coef(MA2)) # enforces no negative thetas
+        for (i in 1:length(coef(MA2)))
+            coefMA2[i] = max(0,coef(MA2)[i])
+#         coefMA2 = max(0,coef(MA2)) # enforces no negative thetas
     else
         coefMA2 = coef(MA2) # allows negative thetas
 
     # Dr. Stefan Albrecht, CFA points out, "I assume that you have to take:"
-    thetas = c(ma0 = 1, coefMA2) / (1 + sum(coefMA2))
+    thetas = c(1, coefMA2) / (1 + sum(coefMA2))
 #
 #
 #     thetas = as.numeric((MA2$coef)/sum(MA2$coef))
@@ -68,6 +71,9 @@ function (Ra, neg.thetas = FALSE, MAorder=2, ...)
     # θj ∈ [0, 1], so ξ is not limited to that range either.  All we can say is that lower values
     # are "less liquid" and higher values are "more liquid" or mis-specified.
 
-    return(smoothing.index)
+    if(verbose)
+        return(list(SmoothingIndex = smoothing.index, Thetas = thetas))
+    else
+        return(smoothing.index)
 
 }
