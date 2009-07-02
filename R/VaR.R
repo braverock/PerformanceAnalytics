@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.6 2009-06-26 20:47:16 brian Exp $
+# $Id: VaR.R,v 1.7 2009-07-02 14:01:23 peter Exp $
 ###############################################################################
 
 VaR <-
@@ -16,6 +16,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
     method = method[1]
     portfolio_method = portfolio_method[1]
     R <- checkData(R, method="xts", ...)
+    columns=colnames(R)
 
     # check weights options
     if (is.null(weights) & portfolio_method != "single"){
@@ -47,14 +48,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
     
     switch(portfolio_method,
         single = {
-            columns=colnames(R)
             switch(method,
-                modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
+                modified = { rVaR = -1*VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
                 historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
             ) # end sigle switch calc
             # convert from vector to columns
+            rVaR=as.matrix(rVaR)
             colnames(rVaR)=columns
             #rVaR=t(rVaR) #transform so it has real rows and columns
             # check for unreasonable results
@@ -251,10 +252,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.6 2009-06-26 20:47:16 brian Exp $
+# $Id: VaR.R,v 1.7 2009-07-02 14:01:23 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-06-26 20:47:16  brian
+# - clean up naming confusion/standardization between VaR/ES wrappers
+#
 # Revision 1.4  2009-06-22 16:35:11  brian
 # - correct apply for historical VaR to pass na.rm=TRUE
 #
