@@ -63,7 +63,8 @@ function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm =
             if(!xtsible(x))
                 if(class(x) == "numeric"){
                     x= zoo(matrix(x, ncol=NCOL(x)))
-                    warning("The data cannot be converted into a time series.  Returning a 'zoo' object. ")
+                    if(!quiet)
+                        warning("The data cannot be converted into a time series.  Returning a 'zoo' object. ")
                 }
                 else
                     stop("The data cannot be converted into a time series.  If you are trying to pass in names from a data object with one column, you should use the form \'data[rows, columns, drop = FALSE]\'.  Rownames should have standard date formats, such as '1985-03-15'. ")
@@ -108,9 +109,12 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.27 2009-07-01 14:58:12 peter Exp $
+# $Id: checkData.R,v 1.28 2009-07-02 13:54:46 peter Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.27  2009-07-01 14:58:12  peter
+# - added support for vector to xts using zoo instead
+#
 # Revision 1.26  2009-06-02 03:13:09  peter
 # - added back rm.na for vectors
 #
