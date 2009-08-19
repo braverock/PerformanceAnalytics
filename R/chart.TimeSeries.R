@@ -1,6 +1,6 @@
 `chart.TimeSeries` <-
-function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = "%m/%y", xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", xaxis.labels = NULL, ...)
-{ # @author Peter Carl
+function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = NULL, xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", xaxis.labels = NULL, ...)
+{ # @author Peter Carl, Brian Peterson
 
     # DESCRIPTION:
     # Draws a line chart and labels the x-axis with the appropriate dates.
@@ -38,6 +38,20 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
+
+    if (is.null(date.format)){
+	freq = periodicity(y)
+
+	switch(freq$scale,
+	    minute = { date.format = "%H:%M"},
+	    hourly = {date.format = "%d %H"},
+	    daily = {date.format = "%Y-%m-%d"},
+	    weekly = {date.format = "%Y-%m-%d"},
+	    monthly = {date.format = "%b %y"},
+	    quarterly = {date.format = "%b %y"},
+	    yearly = {date.format = "%Y"}
+	)
+    }
     # Needed for finding aligned dates for event lines and period areas
     rownames = as.Date(time(y))
     rownames = format(strptime(rownames,format = date.format.in), date.format)
@@ -170,10 +184,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.20 2009-06-02 03:12:00 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.21 2009-08-19 14:02:45 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2009-06-02 03:12:00  peter
+# - added xaxis.labels to allow for non-date labeling of date axes
+#
 # Revision 1.19  2009-04-18 02:56:53  peter
 # - argument cleanup and codoc issues
 #
