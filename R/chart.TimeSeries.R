@@ -43,6 +43,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 	freq = periodicity(y)
 
 	switch(freq$scale,
+	    seconds = { date.format = "%H:%M"},
 	    minute = { date.format = "%H:%M"},
 	    hourly = {date.format = "%d %H"},
 	    daily = {date.format = "%Y-%m-%d"},
@@ -184,10 +185,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.21 2009-08-19 14:02:45 brian Exp $
+# $Id: chart.TimeSeries.R,v 1.22 2009-08-19 17:04:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.21  2009-08-19 14:02:45  brian
+# - add automatic date.format using periodicity of series to be charted
+#
 # Revision 1.20  2009-06-02 03:12:00  peter
 # - added xaxis.labels to allow for non-date labeling of date axes
 #
