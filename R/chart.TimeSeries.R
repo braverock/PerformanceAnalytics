@@ -71,7 +71,7 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
     if(is.null(ylim[1])){
-        ylim = range(y, na.rm=TRUE)
+        ylim = as.numeric(range(y, na.rm=TRUE))
     }
     plot.window(xlim, ylim, xaxs = "r", log = logaxis)
 
@@ -185,10 +185,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.22 2009-08-19 17:04:52 brian Exp $
+# $Id: chart.TimeSeries.R,v 1.23 2009-08-20 16:26:54 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.22  2009-08-19 17:04:52  brian
+# - add 'seconds' to periodicity switch, since xts supports those now
+#
 # Revision 1.21  2009-08-19 14:02:45  brian
 # - add automatic date.format using periodicity of series to be charted
 #
