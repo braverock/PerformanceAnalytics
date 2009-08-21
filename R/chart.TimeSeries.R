@@ -144,12 +144,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
     if (xaxis) {
         if(minor.ticks)
             axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB')
-        label.height = .25 + cex.axis * apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
+        label.height = cex.axis *(.5 + apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) ))
         if(is.null(xaxis.labels))
             xaxis.labels = names(ep)
         else
             ep = 1:length(xaxis.labels)
         axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+#         axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,2,0), cex.axis = cex.axis) 
         #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
         title(xlab = xlab, cex = cex.lab)
         # use axis(..., las=3) for vertical labels.
@@ -185,10 +186,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.23 2009-08-20 16:26:54 brian Exp $
+# $Id: chart.TimeSeries.R,v 1.24 2009-08-21 02:59:28 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.23  2009-08-20 16:26:54  brian
+# - add as.numeric on range for ylim to handle xts objects with mixed character/numeric columns, which are stored as character matrix
+#
 # Revision 1.22  2009-08-19 17:04:52  brian
 # - add 'seconds' to periodicity switch, since xts supports those now
 #
