@@ -5,15 +5,15 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.6 2009-06-25 13:27:31 brian Exp $
+# $Id: PortfolioRisk.R,v 1.7 2009-08-24 22:08:52 brian Exp $
 ###############################################################################
 
 
 .setalphaprob = function (p)
 {
-    if ( p >= 0.51 ) {
+    if ( 0.51 >= p ) {
         # looks like p was a percent like .99
-        alpha = 1-p
+        alpha <- 1-p
     } else {
         alpha = p
     }
@@ -42,7 +42,7 @@ VaR.Gaussian =  function(R,p)
         if (!is.numeric(r)) stop("The selected column is not numeric") 
         # location = apply(R,2,mean);
         m2 = centeredmoment(r,2)
-        VaR = -mean(r) - qnorm(alpha)*sqrt(m2)
+        VaR = - mean(r) - qnorm(alpha)*sqrt(m2)
         VaR=array(VaR)
         if (column==1) {
             #create data.frame
@@ -52,16 +52,31 @@ VaR.Gaussian =  function(R,p)
             result=cbind(result,VaR)
         }
     }
+    colnames(result)<-colnames(R)
     return(result)
 }
 
 ES.Gaussian =  function(R,p)
 {
    alpha = .setalphaprob(p)
-   location = apply(R,2,mean);
-   m2 = centeredmoment(R,2)
-   out = - location + dnorm(qnorm(alpha))*sqrt(m2)/alpha
-   return(out)
+    columns = ncol(R)
+    for(column in 1:columns) {
+        r = as.vector(na.omit(R[,column]))
+        if (!is.numeric(r)) stop("The selected column is not numeric") 
+        # location = apply(R,2,mean);
+	m2 = centeredmoment(r,2)
+	GES = - mean(r) + dnorm(qnorm(alpha))*sqrt(m2)/alpha
+        GES=array(GES)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(GES=GES)
+        } else {
+            GES=data.frame(GES=GES)
+            result=cbind(result,GES)
+        }
+    }
+    colnames(result)<-colnames(R)
+    return(result)
 }
 
 VaR.CornishFisher =  function(R,p)
@@ -85,7 +100,7 @@ VaR.CornishFisher =  function(R,p)
         h = z + (1/6)*(z^2 -1)*skew + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2
         
 
-        VaR = -mean(r) - h*sqrt(m2)
+        VaR = - mean(r) - h*sqrt(m2)
         VaR=array(VaR)
         if (column==1) {
             #create data.frame
@@ -95,53 +110,83 @@ VaR.CornishFisher =  function(R,p)
             result=cbind(result,VaR)
         }
    }
+   colnames(result)<-colnames(R)
    return(result)
 }
 
-ES.CornishFisher =  function(R,p,r=2)
+ES.CornishFisher =  function(R,p,c=2)
 {
    alpha = .setalphaprob(p)
    p = alpha
    z = qnorm(alpha)
-   location = apply(R,2,mean);
-   m2 = centeredmoment(R,2)
-   m3 = centeredmoment(R,3)
-   m4 = centeredmoment(R,4)
-   skew = m3 / m2^(3/2);
-   exkurt = m4 / m2^(2) - 3;
 
-   h = z + (1/6)*(z^2 -1)*skew
-   if(r==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
+   columns = ncol(R)
+   for(column in 1:columns) {
+        r = as.vector(na.omit(R[,column]))
+        if (!is.numeric(r)) stop("The selected column is not numeric") 
+	# location = apply(R,2,mean);
+	m2 = centeredmoment(r,2)
+	m3 = centeredmoment(r,3)
+	m4 = centeredmoment(r,4)
+	skew = m3 / m2^(3/2);
+	exkurt = m4 / m2^(2) - 3;
 
-   MES = dnorm(h)
-   MES = MES + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
-   MES = MES +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
-   MES = MES + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
-   MES = - location + (sqrt(m2)/p)*MES
-   return(MES)
+	h = z + (1/6)*(z^2 -1)*skew
+	if(c==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
+
+	MES = dnorm(h)
+	MES = MES + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
+	MES = MES +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
+	MES = MES + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
+	MES = - mean(r) + (sqrt(m2)/p)*MES
+        MES=array(MES)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(MES=MES)
+        } else {
+            MES=data.frame(MES=MES)
+            result=cbind(result,MES)
+        }
+    }
+    colnames(result)<-colnames(R)
+    return(result)
 }
 
-operES.CornishFisher =  function(R,p,r=2)
+operES.CornishFisher =  function(R,p,c=2)
 {
    alpha = .setalphaprob(p)
    p = alpha
    z = qnorm(alpha)
-   location = apply(R,2,mean);
-   m2 = centeredmoment(R,2)
-   m3 = centeredmoment(R,3)
-   m4 = centeredmoment(R,4)
-   skew = m3 / m2^(3/2);
-   exkurt = m4 / m2^(2) - 3;
+   columns = ncol(R)
+   for(column in 1:columns) {
+        r = as.vector(na.omit(R[,column]))
+        if (!is.numeric(r)) stop("The selected column is not numeric") 
+	#location = apply(R,2,mean);
+	m2 = centeredmoment(r,2)
+	m3 = centeredmoment(r,3)
+	m4 = centeredmoment(r,4)
+	skew = m3 / m2^(3/2);
+	exkurt = m4 / m2^(2) - 3;
 
-   h = z + (1/6)*(z^2 -1)*skew
-   if(r==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
+	h = z + (1/6)*(z^2 -1)*skew
+	if(c==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
 
-   MES = dnorm(h)
-   MES = MES + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
-   MES = MES +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
-   MES = MES + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
-   MES = - location - (sqrt(m2))*min( -MES/alpha , h )
-   return(MES)
+	MES = dnorm(h)
+	MES = MES + (1/24)*(   Ipower(4,h) - 6*Ipower(2,h) + 3*dnorm(h)   )*exkurt
+	MES = MES +  (1/6)*(   Ipower(3,h) - 3*Ipower(1,h)   )*skew;
+	MES = MES + (1/72)*(  Ipower(6,h) -15*Ipower(4,h)+ 45*Ipower(2,h) - 15*dnorm(h) )*(skew^2)
+	MES = - mean(r) - (sqrt(m2))*min( -MES/alpha , h )
+        MES=array(MES)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(MES=MES)
+        } else {
+            MES=data.frame(MES=MES)
+            result=cbind(result,MES)
+        }
+    }	
+    colnames(result)<-colnames(R)
+    return(result)
 }
 
 # Definition of statistics needed to compute Gaussian and modified VaR and ES for the return R of portfolios
@@ -480,10 +525,15 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.6 2009-06-25 13:27:31 brian Exp $
+# $Id: PortfolioRisk.R,v 1.7 2009-08-24 22:08:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-06-25 13:27:31  brian
+# - rationalize function arguments
+# - standardize function returns
+# - TODO: rationalize fn return for VaR/ES.historical.portfolio to match other portfolio methods
+#
 # Revision 1.5  2009-06-24 23:59:16  brian
 # - changes to make portfolio VaR work correctly
 # NOTE: weights is a vector, not time-varying

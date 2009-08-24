@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: VaR.R,v 1.7 2009-07-02 14:01:23 peter Exp $
+# $Id: VaR.R,v 1.8 2009-08-24 22:08:52 brian Exp $
 ###############################################################################
 
 VaR <-
-function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, ...)
+function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -49,7 +49,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
     switch(portfolio_method,
         single = {
             switch(method,
-                modified = { rVaR = -1*VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
+                modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
                 historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
@@ -62,17 +62,18 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             columns<-ncol(rVaR)
             for(column in 1:columns) {
                 tmp=rVaR[,column]
-                if (eval(tmp > 0)) { #eval added previously to get around Sweave bitching
+                if (eval(0 > tmp)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
                     rVaR[,column] <- NA
                 } else
-                if (eval(tmp < -1)) { #eval added previously to get around Sweave bitching
+                if (eval(1 < tmp)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (risk over 100%) for column: ",column," : ",rVaR[,column]))
-                    # set VaR to -1, since greater than 100% is unreasonable
-                    rVaR[,column] <- -1
+                    # set VaR to 1, since greater than 100% is unreasonable
+                    rVaR[,column] <- 1
                 }
             } # end reasonableness checks
+	    if(invert) rVaR <- -rVaR
             return(rVaR)
 
         }, # end single portfolio switch
@@ -252,10 +253,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.7 2009-07-02 14:01:23 peter Exp $
+# $Id: VaR.R,v 1.8 2009-08-24 22:08:52 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-07-02 14:01:23  peter
+# - forced returned value into matrix for naming
+# - made VaR.CornishFisher results negative
+#
 # Revision 1.6  2009-06-26 20:47:16  brian
 # - clean up naming confusion/standardization between VaR/ES wrappers
 #
