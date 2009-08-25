@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.8 2009-08-24 22:08:52 brian Exp $
+# $Id: VaR.R,v 1.9 2009-08-25 14:38:06 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -62,7 +62,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             columns<-ncol(rVaR)
             for(column in 1:columns) {
                 tmp=rVaR[,column]
-                if (eval(0 > tmp)) { #eval added previously to get around Sweave bitching
+                if (eval(0 < tmp)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
                     rVaR[,column] <- NA
@@ -84,6 +84,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             #}
             # for now, use as.vector
             weights=as.vector(weights)
+	    names(weights)<-colnames(R)
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
             if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
@@ -96,7 +97,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             switch(method,
                 modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},
                 gaussian = { return(VaR.Gaussian.portfolio(p,weights,mu,sigma)) },
-                historical = { return(VaR.historical.portfolio(R, p,weights),) },
+                historical = { return(VaR.historical.portfolio(R, p,weights)) },
                 kernel = { return(VaR.kernel.portfolio(R, p,weights),) }
             )
 
@@ -253,10 +254,16 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.8 2009-08-24 22:08:52 brian Exp $
+# $Id: VaR.R,v 1.9 2009-08-25 14:38:06 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-08-24 22:08:52  brian
+# - adjust to handle p values for correct results
+# - adjust ES to correctly handle probability
+# - add invert argument with default TRUE to match older behavior
+# - make sure all VaR/ES functions handle columns correctly
+#
 # Revision 1.7  2009-07-02 14:01:23  peter
 # - forced returned value into matrix for naming
 # - made VaR.CornishFisher results negative

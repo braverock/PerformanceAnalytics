@@ -5,20 +5,20 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.7 2009-08-24 22:08:52 brian Exp $
+# $Id: PortfolioRisk.R,v 1.8 2009-08-25 14:38:06 brian Exp $
 ###############################################################################
 
 
 .setalphaprob = function (p)
 {
-    if ( 0.51 >= p ) {
+    if ( p >= 0.51 ) {
         # looks like p was a percent like .99
         alpha <- 1-p
     } else {
         alpha = p
     }
 
-    return (p)
+    return (alpha)
 }
 
 pvalJB = function(R)
@@ -248,8 +248,15 @@ VaR.Gaussian.portfolio =  function(p,w,mu,sigma)
    VaR = - location - qnorm(alpha)*sqrt(pm2)
    derVaR = - as.vector(mu)- qnorm(alpha)*(0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = derVaR*as.vector(w)
-   if( abs( sum(contrib)-VaR)>0.01*abs(VaR)) { print("error") } else {
-   return(list( VaR  ,  contrib  , contrib/VaR) ) }
+   names(contrib) = names(w)
+   pct_contrib = contrib/VaR
+   names(pct_contrib) = names(w)
+   if( abs( sum(contrib)-VaR)>0.01*abs(VaR)) { stop("contribution does not add up") } else {
+      ret<-list( VaR  ,  contrib  , pct_contrib ) 
+      names(ret) = c("VaR","contribution","pct_contrib_VaR")
+   }
+   return(ret)
+
 }
 
 kernel = function( x , h )
@@ -273,7 +280,10 @@ VaR.kernel.portfolio =  function( R, p, w )
    CVaR = w*CVaR
    #print( sum(CVaR) ) ; print( sum( weights*portfolioreturn)  )
    CVaR = CVaR/sum(CVaR)*VaR
-   ret= list( VaR  ,  CVaR  , CVaR/VaR  )
+   pct_contrib = CVaR/VaR
+   colnames(CVaR)<-colnames(R)
+   colnames(pct_contrib)<-colnames(R)
+   ret= list( VaR  ,  CVaR  , pct_contrib  )
    names(ret) = c("VaR","contribution","pct_contrib_VaR")
    return(ret)
 }
@@ -324,9 +334,12 @@ VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    derMVaR = derGausVaR + (0.5*dpm2/sqrt(pm2))*( -(1/6)*(z^2 -1)*skew  - (1/24)*(z^3 - 3*z)*exkurt + (1/36)*(2*z^3 - 5*z)*skew^2 )
    derMVaR = derMVaR + sqrt(pm2)*( -(1/6)*(z^2 -1)*derskew  - (1/24)*(z^3 - 3*z)*derexkurt + (1/36)*(2*z^3 - 5*z)*2*skew*derskew  )
    contrib = as.vector(w)*as.vector(derMVaR)
+   pct_contrib = contrib/MVaR
+   names(contrib) <- names(w)
+   names(pct_contrib) <- names(w)
    if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { print("error") } 
    else {
-       ret=(list(   MVaR  ,  contrib, contrib/MVaR  ) )
+       ret=(list(   MVaR  ,  contrib, pct_contrib  ) )
        names(ret) = c("MVaR","contribution","pct_contrib_MVaR")
        return(ret)
    }
@@ -507,14 +520,15 @@ ES.historical.portfolio = function(R,p,w)
 
 VaR.historical.portfolio = function(R,p,w)
 {
+    alpha = .setalphaprob(p)
     portret = c();
     T = dim(R)[1]
     N = dim(R)[2]
     for( t in c(1:T) ){
        portret = c(portret,sum(w*as.numeric(R[t,])))
     }
-    VaR = sort(portret)[floor(alpha*T)]
-    return(-VaR)
+    hVaR = -1* sort(portret)[floor(alpha*T)]
+    return(hVaR)
 }
 
 ###############################################################################
@@ -525,10 +539,16 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.7 2009-08-24 22:08:52 brian Exp $
+# $Id: PortfolioRisk.R,v 1.8 2009-08-25 14:38:06 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-08-24 22:08:52  brian
+# - adjust to handle p values for correct results
+# - adjust ES to correctly handle probability
+# - add invert argument with default TRUE to match older behavior
+# - make sure all VaR/ES functions handle columns correctly
+#
 # Revision 1.6  2009-06-25 13:27:31  brian
 # - rationalize function arguments
 # - standardize function returns
