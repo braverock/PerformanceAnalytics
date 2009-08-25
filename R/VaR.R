@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.9 2009-08-25 14:38:06 brian Exp $
+# $Id: VaR.R,v 1.10 2009-08-25 14:48:33 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -52,7 +52,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
                 modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
                 historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
-                kernel = {}
+                kernel = { stop("no kernel method defined for non-component VaR")}
             ) # end sigle switch calc
             # convert from vector to columns
             rVaR=as.matrix(rVaR)
@@ -62,7 +62,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             columns<-ncol(rVaR)
             for(column in 1:columns) {
                 tmp=rVaR[,column]
-                if (eval(0 < tmp)) { #eval added previously to get around Sweave bitching
+                if (eval(tmp < 0)) { #eval added previously to get around Sweave bitching
                     warning(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
                     rVaR[,column] <- NA
@@ -254,10 +254,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.9 2009-08-25 14:38:06 brian Exp $
+# $Id: VaR.R,v 1.10 2009-08-25 14:48:33 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-08-25 14:38:06  brian
+# - update display logic and names in list return for Component VaR, test more cases
+#
 # Revision 1.8  2009-08-24 22:08:52  brian
 # - adjust to handle p values for correct results
 # - adjust ES to correctly handle probability
