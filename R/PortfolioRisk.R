@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.8 2009-08-25 14:38:06 brian Exp $
+# $Id: PortfolioRisk.R,v 1.9 2009-08-25 15:29:46 brian Exp $
 ###############################################################################
 
 
@@ -298,9 +298,12 @@ ES.Gaussian.portfolio =  function(p,w,mu,sigma)
    ES = - location + dnorm(qnorm(alpha))*sqrt(pm2)/alpha
    derES = - as.vector(mu) + (1/p)*dnorm(qnorm(alpha))*(0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = as.vector(w)*derES;
-   if( abs( sum(contrib)-ES)>0.01*abs(ES)) { print("error") } 
+   names(contrib) = names(w)
+   pct_contrib = contrib/ES
+   names(pct_contrib) = names(w)
+   if( abs( sum(contrib)-ES)>0.01*abs(ES)) { stop("contribution does not add up") } 
    else {
-       ret = list(  ES  ,  contrib ,  contrib/ES  )
+       ret = list(  ES  ,  contrib ,  pct_contrib  )
        names(ret) = c("ES","contribution","pct_contrib_ES")
        return(ret)
    }
@@ -337,7 +340,7 @@ VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    pct_contrib = contrib/MVaR
    names(contrib) <- names(w)
    names(pct_contrib) <- names(w)
-   if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { print("error") } 
+   if( abs( sum(contrib)-MVaR)>0.01*abs(MVaR)) { stop("contribution does not add up") } 
    else {
        ret=(list(   MVaR  ,  contrib, pct_contrib  ) )
        names(ret) = c("MVaR","contribution","pct_contrib_MVaR")
@@ -433,9 +436,12 @@ ES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    derE = derE/alpha
    derMES = derMES + sqrt(pm2)*derE
    contrib = as.vector(w)*as.vector(derMES)
-   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } 
+   names(contrib) = names(w)
+   pct_contrib = contrib/MES
+   names(pct_contrib) = names(w)
+   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { stop("contribution does not add up") } 
    else {
-   ret= list(   MES , contrib , contrib/MES) 
+   ret= list(   MES , contrib , pct_contrib) 
    names(ret) = c("MES","contribution","pct_contrib_MES")
    return(ret)
    }
@@ -487,9 +493,12 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
       derMES = derMES + sqrt(pm2)*derE }else{
       derMES = -mu - 0.5*(dpm2/sqrt(pm2))*h - sqrt(pm2)*derh ;  }
    contrib = as.vector(w)*as.vector(derMES)
-   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { print("error") } 
+   names(contrib) = names(w)
+   pct_contrib = contrib/MES
+   names(pct_contrib) = names(w)
+   if( abs( sum(contrib)-MES)>0.01*abs(MES)) { stop("contribution does not add up") } 
    else {
-       ret= list(   MES , contrib , contrib/MES) 
+       ret= list(   MES , contrib , pct_contrib) 
        names(ret) = c("MES","contribution","pct_contrib_MES")
        return(ret)
    }
@@ -507,7 +516,7 @@ ES.historical.portfolio = function(R,p,w)
     {
        rt = as.vector(R[t,])
        rp = sum(w*rt)
-       if(rp<=-VaR){
+       if(rp<= -VaR){
           c_exceed = c_exceed + 1;
           r_exceed = r_exceed + rp;
           for( i in c(1:N) ){
@@ -515,7 +524,10 @@ ES.historical.portfolio = function(R,p,w)
        }
     }
     realizedcontrib=as.numeric(realizedcontrib)/r_exceed ;
-    return( list(-r_exceed/c_exceed,c_exceed,realizedcontrib) )
+    names(realizedcontrib)<-names(w)
+    ret <- list(-r_exceed/c_exceed,c_exceed,realizedcontrib) 
+    names(ret) <- c("-r_exceed/c_exceed","c_exceed","realizedcontrib")
+    return(ret)
 }
 
 VaR.historical.portfolio = function(R,p,w)
@@ -539,10 +551,13 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.8 2009-08-25 14:38:06 brian Exp $
+# $Id: PortfolioRisk.R,v 1.9 2009-08-25 15:29:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-08-25 14:38:06  brian
+# - update display logic and names in list return for Component VaR, test more cases
+#
 # Revision 1.7  2009-08-24 22:08:52  brian
 # - adjust to handle p values for correct results
 # - adjust ES to correctly handle probability

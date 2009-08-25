@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: ES.R,v 1.3 2009-08-24 22:08:52 brian Exp $
+# $Id: ES.R,v 1.4 2009-08-25 15:29:46 brian Exp $
 ###############################################################################
 
 ES <-
-function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, ...)
+function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -49,7 +49,9 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
         single = {
             columns=colnames(R)
             switch(method,
-                modified = { rES = ES.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
+                modified = { if (operational) rES =  operES.CornishFisher(R=R,p=p)
+			     else rES = ES.CornishFisher(R=R,p=p) 
+			   }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
                 gaussian = { rES = ES.Gaussian(R=R,p=p) },
                 historical = { rES = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = {}
@@ -84,6 +86,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             #}
             # for now, use as.vector
             weights=as.vector(weights)
+	    names(weights)<-colnames(R)
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
             if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
@@ -94,15 +97,15 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
 
             switch(method,
-                modified = { return(ES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},
+                modified = { if (operational) return(operES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
+			     else return(ES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
+			   },
                 gaussian = { return(ES.Gaussian.portfolio(p,weights,mu,sigma)) },
-                historical = { return(ES.historical.portfolio(R, p,weights),) },
-                kernel = { return(ES.kernel.portfolio(R, p,weights),) }
+                historical = { return(ES.historical.portfolio(R, p,weights)) },
+                kernel = { return(ES.kernel.portfolio(R, p,weights)) }
             )
 
         }, # end component portfolio switch
-        marginal = {
-        },  # end marginal portfolio switch
     )
 
 } # end ES wrapper function
@@ -117,10 +120,16 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.3 2009-08-24 22:08:52 brian Exp $
+# $Id: ES.R,v 1.4 2009-08-25 15:29:46 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-08-24 22:08:52  brian
+# - adjust to handle p values for correct results
+# - adjust ES to correctly handle probability
+# - add invert argument with default TRUE to match older behavior
+# - make sure all VaR/ES functions handle columns correctly
+#
 # Revision 1.2  2009-06-26 20:47:16  brian
 # - clean up naming confusion/standardization between VaR/ES wrappers
 #
