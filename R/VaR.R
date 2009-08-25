@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.10 2009-08-25 14:48:33 brian Exp $
+# $Id: VaR.R,v 1.11 2009-08-25 15:21:07 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -98,7 +98,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
                 modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},
                 gaussian = { return(VaR.Gaussian.portfolio(p,weights,mu,sigma)) },
                 historical = { return(VaR.historical.portfolio(R, p,weights)) },
-                kernel = { return(VaR.kernel.portfolio(R, p,weights),) }
+                kernel = { return(VaR.kernel.portfolio(R, p,weights)) }
             )
 
         }, # end component portfolio switch
@@ -254,10 +254,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.10 2009-08-25 14:48:33 brian Exp $
+# $Id: VaR.R,v 1.11 2009-08-25 15:21:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-08-25 14:48:33  brian
+# - add additional warnings for unreasonable VaR results
+#
 # Revision 1.9  2009-08-25 14:38:06  brian
 # - update display logic and names in list return for Component VaR, test more cases
 #
