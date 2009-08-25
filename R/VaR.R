@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.11 2009-08-25 15:21:07 brian Exp $
+# $Id: VaR.R,v 1.12 2009-08-25 17:43:37 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -103,7 +103,10 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 
         }, # end component portfolio switch
         marginal = {
-        },  # end marginal portfolio switch
+#             weights=as.vector(weights)
+# 	    names(weights)<-colnames(R)
+	    return(VaR.Marginal(R,p,method,as.vector(weights)))
+	},  # end marginal portfolio switch
     )
 
 } # end VaR wrapper function
@@ -254,10 +257,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.11 2009-08-25 15:21:07 brian Exp $
+# $Id: VaR.R,v 1.12 2009-08-25 17:43:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-08-25 15:21:07  brian
+# - eliminate deprecated multi-argument return
+#
 # Revision 1.10  2009-08-25 14:48:33  brian
 # - add additional warnings for unreasonable VaR results
 #

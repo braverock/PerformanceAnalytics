@@ -45,7 +45,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     # contribution      if contribution is TRUE, add the weighted return contributed by the asset in this period
 
     # Setup:
-    R=checkData(R,method="zoo")
+    R=checkData(R,method="xts")
 
     # take only the first method
     method = method[1]
@@ -55,7 +55,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         weights = t(rep(1/ncol(R), ncol(R)))
     }
 
-    if (ncol(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
+    if (length(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
 
     #Function:
 
@@ -70,7 +70,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R))
         colnames(wealthindex.weighted)=colnames(wealthindex.assets)
         rownames(wealthindex.weighted)=rownames(wealthindex.assets)
-
+	weights=t(weights)
         # weight the results
         for (col in 1:ncol(weights)){
             wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
@@ -109,7 +109,8 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         # show the contribution to the returns in each period.
         result=cbind(weightedreturns,result)
     }
-
+    rownames(result)<-index(R)
+    result<-reclass(result, R)
     result
 } # end function Return.portfolio
 
@@ -128,7 +129,12 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.2 2009-01-08 11:23:01 brian Exp $
+# $Id: Return.portfolio.R,v 1.3 2009-08-25 17:43:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2009-01-08 11:23:01  brian
+# - remove obsolete comments
+# - change yeargrid to rebalancegrid
+# - add comment block
+#

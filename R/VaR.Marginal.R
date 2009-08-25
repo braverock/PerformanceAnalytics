@@ -1,5 +1,5 @@
 `VaR.Marginal` <-
-function(R, p=0.99, modified=TRUE, weightingvector=NULL)
+function(R, p=0.99, method=c("modified","gaussian","historical"), weightingvector=NULL)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -13,13 +13,15 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
     #
     # @returns data frame with total VaR of the portfolio plus Marginal VaR for each component
 
-    R = checkData(R, method = "zoo")
+    R = checkData(R, method = "xts")
 
     if (is.null(weightingvector)) {
         weightingvector = t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     }
+    
+    if(method==TRUE) method = "modified"
 
-    if (ncol(weightingvector) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
+    #if (ncol(weightingvector) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
 
     columns = ncol(R)
     columnnames=c("PortfolioVaR",colnames(R))
@@ -27,21 +29,19 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
     # Function
 
     # first, get the numbers for the whole portfolio
-    stopifnot("package:fPortfolio" %in% search() || require("fPortfolio",quietly=TRUE))
-
-    portfolioR   = pfolioReturn(R,as.vector(weightingvector))
-    portfolioVaR = VaR.CornishFisher(portfolioR,p,modified)
+    portfolioR   = Return.portfolio(R,as.vector(weightingvector))
+    portfolioVaR = VaR(portfolioR,p,method,portfolio_method="single")
     pVaR = array (portfolioVaR)
     result=data.frame(pVaR=pVaR)
 
     for(column in 1:columns) {
         # calculate a multiplication factor, because the results don't seem to make sense
         # unless the weighting vector always equals the same sum
-        weightfactor = sum(weightingvector)/sum(weightingvector[,-column])  # if we do need it
+        weightfactor = sum(weightingvector)/sum(t(weightingvector)[,-column])  # if we do need it
         # weightfactor = 1  # if we don't need it
 
-        subportfolioR   = pfolioReturn(R[ ,-column],as.vector(weightingvector[ ,-column]*weightfactor))
-        subportfolioVaR = VaR.CornishFisher(subportfolioR,p,modified)
+        subportfolioR   = Return.portfolio(R[ ,-column],as.vector(t(weightingvector)[ ,-column]*weightfactor))
+        subportfolioVaR = VaR(subportfolioR,p,method,portfolio_method="single")
 
         marginalVaR = subportfolioVaR - portfolioVaR
 
@@ -69,10 +69,13 @@ function(R, p=0.99, modified=TRUE, weightingvector=NULL)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.8 2008-10-16 18:45:37 brian Exp $
+# $Id: VaR.Marginal.R,v 1.9 2009-08-25 17:43:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-10-16 18:45:37  brian
+# - use checkData with method="zoo" instead of checkDataMatrix
+#
 # Revision 1.7  2008-06-26 01:42:08  peter
 # - added package test for 'fPortfolio'
 #
