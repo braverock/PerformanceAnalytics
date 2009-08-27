@@ -54,8 +54,8 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
     }
     clean = clean[1]
 
-    risk = xts(NA,order.by=time(x))
-    column.risk = xts(0,order.by=time(x))
+    risk = xts(rep(NA,length(time(x))),order.by=time(x))
+    column.risk = xts(rep(0,length(time(x))),order.by=time(x))
 
     if (!all)
         columns = 1
@@ -181,10 +181,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.22 2009-07-01 13:31:37 peter Exp $
+# $Id: chart.BarVaR.R,v 1.23 2009-08-27 18:34:55 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.22  2009-07-01 13:31:37  peter
+# - added sensitivity to data periodicity for labeling
+#
 # Revision 1.21  2009-06-30 10:23:49  brian
 # - modify to use VaR wrapper, reverse signs
 #
