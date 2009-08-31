@@ -41,15 +41,15 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 
     if (is.null(date.format)){
 	freq = periodicity(y)
-
+	yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
 	switch(freq$scale,
 	    seconds = { date.format = "%H:%M"},
 	    minute = { date.format = "%H:%M"},
 	    hourly = {date.format = "%d %H"},
-	    daily = {date.format = "%Y-%m-%d"},
-	    weekly = {date.format = "%Y-%m-%d"},
-	    monthly = {date.format = "%b %y"},
-	    quarterly = {date.format = "%b %y"},
+	    daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+	    weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+	    monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
+	    quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
 	    yearly = {date.format = "%Y"}
 	)
     }
@@ -186,10 +186,13 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R,v 1.24 2009-08-21 02:59:28 peter Exp $
+# $Id: chart.TimeSeries.R,v 1.25 2009-08-31 22:30:41 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.24  2009-08-21 02:59:28  peter
+# - tweaked the distance of the x-axis labels from the tick marks
+#
 # Revision 1.23  2009-08-20 16:26:54  brian
 # - add as.numeric on range for ylim to handle xts objects with mixed character/numeric columns, which are stored as character matrix
 #
