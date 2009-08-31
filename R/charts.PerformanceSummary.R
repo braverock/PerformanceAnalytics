@@ -70,8 +70,21 @@ function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
-#    chart.BarVaR(as.matrix(R[,1]), main = "", xaxis = FALSE, ylab = "Monthly Return", method = method)
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = "Monthly Return", methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, ...)
+
+    freq = periodicity(x)
+
+    switch(freq$scale,
+	seconds = { date.label = "Second"},
+	minute = { date.label = "Minute"},
+	hourly = {date.label = "Hourly"},
+	daily = {date.label = "Daily"},
+	weekly = {date.label = "Weekly"},
+	monthly = {date.label = "Monthly"},
+	quarterly = {date.label = "Quarterly"},
+	yearly = {date.label = "Annual"}
+    )
+
+    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
@@ -93,10 +106,13 @@ function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.19 2009-03-20 03:22:53 peter Exp $
+# $Id: charts.PerformanceSummary.R,v 1.20 2009-08-31 16:35:48 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.19  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.18  2008-08-16 03:38:54  peter
 # - changed chart.BarVaR call from 'method' to 'methods'
 #
