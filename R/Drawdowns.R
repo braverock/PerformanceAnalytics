@@ -13,10 +13,14 @@ function (R)
     columns = ncol(x)
     columnnames = colnames(x)
 
-    for(column in 1:columns) {
-        Return.cumulative = cumprod(1+na.omit(x[,column])) 
+    colDrawdown <- function(x) {
+        Return.cumulative = cumprod(1+x) 
         maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
         column.drawdown = Return.cumulative/maxCumulativeReturn - 1
+    }
+
+    for(column in 1:columns) {
+	column.drawdown <- na.skip(x[,column],FUN=colDrawdown)
 
         if(column == 1)
             drawdown = column.drawdown
@@ -24,14 +28,7 @@ function (R)
             drawdown = merge(drawdown,column.drawdown)
     }
 
-#     if(columns == 1) {# coersion required when only one column
-#         drawdown = as.matrix(drawdown)
-#         colnames(drawdown) = columnnames
-#         drawdown = zoo(drawdown, order.by = rownames(drawdown))
-#     }
-#     else
-    drawdown=as.xts(drawdown)
-         colnames(drawdown) = columnnames
+    colnames(drawdown) = columnnames
 
     return(drawdown)
 }
@@ -44,10 +41,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Drawdowns.R,v 1.3 2009-06-02 03:14:49 peter Exp $
+# $Id: Drawdowns.R,v 1.4 2009-08-31 20:51:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-06-02 03:14:49  peter
+# - converted internal to xts, removed zoo coersion
+#
 # Revision 1.2  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

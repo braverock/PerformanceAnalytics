@@ -65,11 +65,11 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
         }
         z=zoo(0)
         if(start.index > 1){
-            z = rbind(start.index,1+na.omit(x[,column]))
+            z = rbind(start.index,na.skip(x[,column],FUN = function(x) {1+x}))
         }
         else
-            z = 1+na.omit(x[,column])
-        column.Return.cumulative = (cumprod(z) - one)
+            z = na.skip(x[,column],FUN = function(x) {1+x})
+        column.Return.cumulative = na.skip(x[,column],FUN = function(x, one) {cumprod(x) - one},one=one)
         if(column == 1)
             Return.cumulative = column.Return.cumulative
         else
@@ -92,10 +92,13 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.9 2009-03-20 03:22:53 peter Exp $
+# $Id: chart.CumReturns.R,v 1.10 2009-08-31 20:51:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.8  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

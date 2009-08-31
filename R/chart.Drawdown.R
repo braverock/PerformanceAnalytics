@@ -24,33 +24,8 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 
     # FUNCTION:
 
-    # Transform input data to a matrix
-    x = checkData(R)
-
     # Calculate drawdown level
-#     Return.cumulative = cumprod.column(1+x)
-#     maxCumulativeReturn = cummax.column(Return.cumulative)
-#     drawdown = Return.cumulative/maxCumulativeReturn - 1
-
-    # Get dimensions and labels
-    columns = ncol(x)
-    columnnames = colnames(x)
-
-    for(column in 1:columns) {
-        Return.cumulative = cumprod(1+na.omit(x[,column])) 
-        maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
-        column.drawdown = Return.cumulative/maxCumulativeReturn - 1
-
-        if(column == 1)
-            drawdown = column.drawdown
-        else
-            drawdown = merge(drawdown,column.drawdown)
-    }
-
-    if(columns == 1) 
-        drawdown = as.xts(drawdown)
-
-    colnames(drawdown) = columnnames
+    drawdown = Drawdowns(R)
 
     # Chart the drawdown level
     chart.TimeSeries(drawdown, col = colorset, legend.loc = legend.loc, ...)
@@ -65,10 +40,13 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Drawdown.R,v 1.7 2009-03-20 03:22:53 peter Exp $
+# $Id: chart.Drawdown.R,v 1.8 2009-08-31 20:51:27 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
