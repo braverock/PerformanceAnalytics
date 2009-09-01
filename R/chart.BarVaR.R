@@ -68,7 +68,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
     x.orig = x
 
     if(show.clean){
-        x = Return.clean(x, method=clean) 
+        x = na.skip(x, Return.clean, method=clean) 
     }
 
     if(risk.line){
@@ -181,10 +181,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.24 2009-09-01 20:03:53 brian Exp $
+# $Id: chart.BarVaR.R,v 1.25 2009-09-01 21:40:47 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.24  2009-09-01 20:03:53  brian
+# - move legend location to "topleft"
+#
 # Revision 1.23  2009-08-27 18:34:55  peter
 # - fixed initialization
 #
