@@ -44,28 +44,24 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
         }
         x = x[start.row:length.column.one,]
 
-        reference.index = cumprod(1+na.omit(x[,1]))
+        reference.index = na.skip(x[,1],FUN=function(x) {cumprod(1+na.omit(x))})
     }
     for(column in 1:columns) {
         if(begin == "axis")
-            start.index = 1
+            start.index = TRUE
         else {
     # find the row number of the last NA in the target column
             start.row = 1
-            start.index = 0
             while(is.na(x[start.row,column])){
                 start.row = start.row + 1
             }
-            if(start.row == 1){
-                start.index = 0
-            }
-            else {
-                start.index = reference.index[(start.row-1)]
-            }
+            start.index=ifelse(start.row > 1,TRUE,FALSE)
+		
         }
-        z=zoo(0)
-        if(start.index > 1){
-            z = rbind(start.index,na.skip(x[,column],FUN = function(x) {1+x}))
+	
+        
+        if(start.index){
+            z = na.skip(x[,column],FUN = function(x,index=reference.index[(start.row - 1)]) {rbind(index,1+x)})
         }
         else{
             z = na.skip(x[,column],FUN = function(x) {1+x})
@@ -94,10 +90,13 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.11 2009-08-31 21:20:20 brian Exp $
+# $Id: chart.CumReturns.R,v 1.12 2009-09-01 20:05:44 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-08-31 21:20:20  brian
+# - fix return accumulation after adding na.skip
+#
 # Revision 1.10  2009-08-31 20:51:27  brian
 # - add new function na.skip to deal with non-contiguous NA's in data, may eventually go to xts
 # - fix components of charts.PerformanceSummary to use na.skip
