@@ -15,16 +15,16 @@ function(R, method = "boudt", ...)
     method = method[1]
 
     # Transform input data to a timeseries (zoo) object
-    R = checkData(R, method="zoo")
+    R = checkData(R, method="xts")
 
-    result.zoo = zoo(NA, order.by=time(R))
+    #result.zoo = zoo(NA, order.by=time(R))
 
     # Get dimensions and labels
     columns = ncol(R)
     columnnames = colnames(R)
 
     for(column in 1:columns) { # for each asset passed in as R
-        R.clean = zoo(NA, order.by=time(R))
+        #R.clean = zoo(NA, order.by=time(R))
 
         switch(method,
             boudt = {
@@ -32,17 +32,18 @@ function(R, method = "boudt", ...)
             }
         )
 
-#         if(column == 1) {
-#             result.zoo = R.clean
-#         }
-#         else {
-            result.zoo = merge (result.zoo, R.clean)
-#         }
+        if(column == 1) {
+            result = R.clean
+        }
+        else {
+            result = merge (result, R.clean)
+        }
     }
 
-    result.zoo = result.zoo[,-1, drop=FALSE]
+#     result = result[,-1, drop=FALSE]
+    result = result[, drop=FALSE]
     # RESULTS:
-    return(result.zoo)
+    return(result)
 }
 
 `clean.boudt` <-
@@ -111,10 +112,13 @@ function(R, alpha=.01 , trim=1e-3)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.clean.R,v 1.5 2008-08-13 18:05:22 brian Exp $
+# $Id: Return.clean.R,v 1.6 2009-09-01 21:40:07 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-08-13 18:05:22  brian
+# - add copyright, licence, and CVS log
+#
 # Revision 1.4 2008-08-12 17:56:13 brian
 # - add library check for package robustbase
 #
