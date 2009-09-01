@@ -61,6 +61,8 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 	
         
         if(start.index){
+	    # we need to "pin" the beginning of the shorter series to the (start date - 1 period) 
+	    # value of the reference index while preserving NA's in the shorter series 
             z = na.skip(x[,column],FUN = function(x,index=reference.index[(start.row - 1)]) {rbind(index,1+x)})
         }
         else{
@@ -90,10 +92,15 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.12 2009-09-01 20:05:44 brian Exp $
+# $Id: chart.CumReturns.R,v 1.13 2009-09-01 20:18:41 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-01 20:05:44  brian
+# - add na.skip to reference.index
+# - revise start.index handling to be more programatically efficient
+# - revise start.index handling for binding later-starting series to the "current" value of the first series
+#
 # Revision 1.11  2009-08-31 21:20:20  brian
 # - fix return accumulation after adding na.skip
 #
