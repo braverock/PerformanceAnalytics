@@ -1,5 +1,5 @@
 `Return.clean` <-
-function(R, method = c("none","boudt","geltner"), ...)
+function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,7 +32,7 @@ function(R, method = c("none","boudt","geltner"), ...)
 		R.clean = R[,column]
 	    },
 	    boudt = {
-                R.clean = clean.boudt(na.omit(R[ , column, drop=FALSE]))[[1]]
+                R.clean = clean.boudt(na.omit(R[ , column, drop=FALSE]),alpha=alpha,...)[[1]]
             },
 	    geltner = {
 		R.clean = Return.Geltner(R[,column])
@@ -118,10 +118,15 @@ function(R, alpha=.01 , trim=1e-3)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.clean.R,v 1.7 2009-09-02 12:23:39 brian Exp $
+# $Id: Return.clean.R,v 1.8 2009-09-02 14:11:12 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-09-02 12:23:39  brian
+# - convert to use xts internally
+# - add reclass
+# - add 'none' and 'geltner' as methods
+#
 # Revision 1.6  2009-09-01 21:40:07  brian
 # - change to use xts internally
 #
