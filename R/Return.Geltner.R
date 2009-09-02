@@ -16,7 +16,7 @@ function (Ra, ...)
 
     clean.geltner <- function(column.R) {
         # compute the lagged return series
-        lagR = lag(column.R, k=-1)
+        lagR = lag(column.R, k=1)
         # compute the first order autocorrelation
         f_acf = as.numeric(acf(as.numeric(column.R), plot = FALSE)[1][[1]])
         # now calculate and return the Geltner series
@@ -47,10 +47,14 @@ function (Ra, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.Geltner.R,v 1.6 2009-09-02 11:53:57 brian Exp $
+# $Id: Return.Geltner.R,v 1.7 2009-09-02 12:13:29 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-09-02 11:53:57  brian
+# - add na.skip functionality
+# - add reclass functionality to returned series
+#
 # Revision 1.5  2009-03-02 03:21:26  peter
 # - fix acf call to pass in numeric
 #
