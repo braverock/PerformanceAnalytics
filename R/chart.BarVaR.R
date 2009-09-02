@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES"), clean = c("none", "boudt"),  ylim = NA, lwd = 2, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="topleft", ypad=0, legend.cex = 0.8, ...)
+function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES"), clean = c("none", "boudt","geltner"),  ylim = NA, lwd = 2, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="topleft", ypad=0, legend.cex = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -181,10 +181,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.25 2009-09-01 21:40:47 brian Exp $
+# $Id: chart.BarVaR.R,v 1.26 2009-09-02 12:20:14 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.25  2009-09-01 21:40:47  brian
+# - add na.skip around call to Return.clean
+#
 # Revision 1.24  2009-09-01 20:03:53  brian
 # - move legend location to "topleft"
 #
