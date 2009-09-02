@@ -1,5 +1,5 @@
 `Return.clean` <-
-function(R, method = "boudt", ...)
+function(R, method = c("none","boudt","geltner"), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -14,7 +14,8 @@ function(R, method = "boudt", ...)
     # FUNCTION:
     method = method[1]
 
-    # Transform input data to a timeseries (zoo) object
+    # Transform input data to a timeseries (xts) object
+    orig = R
     R = checkData(R, method="xts")
 
     #result.zoo = zoo(NA, order.by=time(R))
@@ -27,22 +28,27 @@ function(R, method = "boudt", ...)
         #R.clean = zoo(NA, order.by=time(R))
 
         switch(method,
-            boudt = {
+            none = {
+		R.clean = R[,column]
+	    },
+	    boudt = {
                 R.clean = clean.boudt(na.omit(R[ , column, drop=FALSE]))[[1]]
-            }
+            },
+	    geltner = {
+		R.clean = Return.Geltner(R[,column])
+	    }
         )
 
         if(column == 1) {
             result = R.clean
         }
         else {
-            result = merge (result, R.clean)
+            result = cbind(result, R.clean)
         }
     }
 
-#     result = result[,-1, drop=FALSE]
-    result = result[, drop=FALSE]
     # RESULTS:
+    result=reclass(result,match.to=orig)
     return(result)
 }
 
@@ -112,10 +118,13 @@ function(R, alpha=.01 , trim=1e-3)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.clean.R,v 1.6 2009-09-01 21:40:07 brian Exp $
+# $Id: Return.clean.R,v 1.7 2009-09-02 12:23:39 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-09-01 21:40:07  brian
+# - change to use xts internally
+#
 # Revision 1.5  2008-08-13 18:05:22  brian
 # - add copyright, licence, and CVS log
 #
