@@ -12,16 +12,16 @@ function(prices, method = c("compound","simple"))
     # FUNCTION:
 
     method = method[1]
-    prices = checkData(prices, method = "zoo")
+    pr = checkData(prices, method = "xts")
 
     if(method=="simple")
-        Returns = prices/lag(prices,-1) - 1
+        Returns = pr/lag(prices,k=1) - 1
 
     if(method=="compound") {
-        Returns = diff(log(prices))
+        Returns = diff(log(pr))
     }
 
-    Returns
+    reclass(Returns,match.to=prices)
 
 }
 
@@ -38,10 +38,13 @@ function(prices, method = c("compound","simple"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.10 2008-06-02 16:05:19 brian Exp $
+# $Id: Return.calculate.R,v 1.11 2009-09-02 12:14:25 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.9  2007/08/04 15:06:19  brian
 # - change primary function name to Return.calculate
 # - provide alias to old fn name CalculateReturns
