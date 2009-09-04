@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: ES.R,v 1.4 2009-08-25 15:29:46 brian Exp $
+# $Id: ES.R,v 1.5 2009-09-04 20:45:49 brian Exp $
 ###############################################################################
 
 ES <-
@@ -53,14 +53,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 			     else rES = ES.CornishFisher(R=R,p=p) 
 			   }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
                 gaussian = { rES = ES.Gaussian(R=R,p=p) },
-                historical = { rES = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
-                kernel = {}
+                historical = { rES = ES.historical(R=R,p=p) }
             ) # end sigle switch calc
-            # convert from vector to columns
-	    #rES=t(rES)
-            #rownames(rES)=c("Expected Shortfall")
-            #rES=t(rES) #transform so it has real rows and columns
-            # check for unreasonable results
+            
+	    # convert from vector to columns
+            rES=as.matrix(rES)
+            colnames(rES)=columns
+	    
+	    # check for unreasonable results
             columns<-ncol(rES)
             for(column in 1:columns) {
                 tmp=rES[,column]
@@ -101,16 +101,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 			     else return(ES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
 			   },
                 gaussian = { return(ES.Gaussian.portfolio(p,weights,mu,sigma)) },
-                historical = { return(ES.historical.portfolio(R, p,weights)) },
-                kernel = { return(ES.kernel.portfolio(R, p,weights)) }
+                historical = { return(ES.historical.portfolio(R, p,weights)) }
             )
 
         }, # end component portfolio switch
     )
 
 } # end ES wrapper function
-
-
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
@@ -120,10 +117,13 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.4 2009-08-25 15:29:46 brian Exp $
+# $Id: ES.R,v 1.5 2009-09-04 20:45:49 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-08-25 15:29:46  brian
+# - clean up labeling, warnings, and returns for Expected Shortfall
+#
 # Revision 1.3  2009-08-24 22:08:52  brian
 # - adjust to handle p values for correct results
 # - adjust ES to correctly handle probability
