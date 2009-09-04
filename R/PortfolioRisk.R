@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.9 2009-08-25 15:29:46 brian Exp $
+# $Id: PortfolioRisk.R,v 1.10 2009-09-04 20:38:23 brian Exp $
 ###############################################################################
 
 
@@ -504,6 +504,26 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    }
 }
 
+ES.historical = function(R,p) {
+    alpha = .setalphaprob(p)
+    for(column in 1:columns) {
+	r = na.omit(as.vector(R[,column]))
+	q = quantile(r,probs=alpha)
+	exceedr = r[r<q]
+	hES = (-mean(exceedr))
+        hES=array(hES)
+        if (column==1) {
+            #create data.frame
+            result=data.frame(hES=hES)
+        } else {
+            hES=data.frame(hES=hES)
+            result=cbind(result,hES)
+        }
+    }	
+    colnames(result)<-colnames(R)
+    return(result)
+}
+
 ES.historical.portfolio = function(R,p,w)
 {
     VaR = VaR.historical.portfolio(R,p,w)
@@ -551,10 +571,13 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.9 2009-08-25 15:29:46 brian Exp $
+# $Id: PortfolioRisk.R,v 1.10 2009-09-04 20:38:23 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-08-25 15:29:46  brian
+# - clean up labeling, warnings, and returns for Expected Shortfall
+#
 # Revision 1.8  2009-08-25 14:38:06  brian
 # - update display logic and names in list return for Component VaR, test more cases
 #
