@@ -19,7 +19,8 @@ function (Ra, Rb, rf = 0, digits = 4)
 
     assetReturns = checkData(Ra)
     benchmarkReturns = checkData(Rb)
-    rf = checkData(rf)
+    if(!is.null(dim(rf)))
+        rf = checkData(rf)
 
 #     if (length(assetReturns) != length(benchmarkReturns))
 #         stop("Returns to be assessed have unequal time periods. Are there NA\'s in the data?")
@@ -148,10 +149,13 @@ function (Ra, Rb, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.10 2008-06-02 16:05:19 brian Exp $
+# $Id: CAPM.beta.R,v 1.11 2009-09-15 20:34:45 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.9  2008-04-18 03:27:19  peter
 # - converted checkData to use zoo
 # - added functions for conditional beta calcs: beta.bear, beta.bull, and timingRatio
