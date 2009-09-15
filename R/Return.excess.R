@@ -17,17 +17,17 @@ function (R, rf = 0)
     # FUNCTION:
 
     # Transform input data to a timeseries (zoo) object
-    R = checkData(R, method="zoo")
+    R = checkData(R)
     reference.name = ""
-    result.zoo = zoo(NA)
+    result = xts(rep(NA, length(time(R))), order.by=time(R))
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to a zoo object.
     if(!is.null(dim(rf))){
-        rf = checkData(rf, method = "zoo")
-	reference.name = paste(" > ",colnames(rf),sep="")
+        rf = checkData(rf)
+        reference.name = paste(" > ",colnames(rf),sep="")
     }
     else {
-	reference.name = paste(" > ",base::round(rf, 4)*100,"%",sep="")
+        reference.name = paste(" > ",base::round(rf, 4)*100,"%",sep="")
     }
 
     ## arithmetic on zoo objects intersects them first
@@ -42,7 +42,7 @@ function (R, rf = 0)
 
     for(column.a in 1:columns.a) { # for each asset passed in as R
 #        for(column.b in 1:columns.b) { # against each asset passed in as Rf
-            R.excess = zoo(NA)
+            R.excess = xts(rep(NA, length(time(R))), order.by=time(R))
             R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
             if(column.a == 1) { #& column.b == 1
                 if(rf[1] == 0){
@@ -51,7 +51,7 @@ function (R, rf = 0)
                 else {
                     colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
                 }
-                result.zoo = R.excess
+                result = R.excess
  #               colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
             }
             else {
@@ -63,14 +63,14 @@ function (R, rf = 0)
 	                colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
                 }
 #                 colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
-                result.zoo = merge (result.zoo, R.excess)
+                result = merge (result, R.excess)
             }
  #       }
     }
 
 
     # RESULTS:
-    return(result.zoo)
+    return(result)
 }
 
 ###############################################################################
@@ -81,10 +81,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.9 2008-06-02 16:05:19 brian Exp $
+# $Id: Return.excess.R,v 1.10 2009-09-15 20:35:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.8  2007/09/26 02:54:58  peter
 # - fixed labeling problem in multi-column asset results
 #
