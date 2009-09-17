@@ -1,5 +1,5 @@
 `charts.Bar` <-
-function (R,  space = 0, main = "Returns", ...)
+function (R,  space = 0, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -48,8 +48,10 @@ function (R,  space = 0, main = "Returns", ...)
         }
         if(i==columns)
             xaxis = TRUE
-        chart.TimeSeries(positives, type = "h", lend="butt", xaxis=xaxis, main="", ylab=colnames(R)[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, col="darkgreen", lwd=2, ...)
+        chart.TimeSeries(positives, type = "h", lend="butt", xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, col="darkgreen", lwd=2, ...)
         lines(1:length(R[,1]), negatives, type="h", lend="butt", col="darkred", lwd=2)
+        text(1, ymax, adj=c(0,1.2), cex = 0.8, labels = columnnames[i])
+
 #         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
         if(i==1)
             yaxis=FALSE
@@ -57,7 +59,7 @@ function (R,  space = 0, main = "Returns", ...)
 
     mtext(main,
         side = 3, outer = TRUE, 
-        font = 2, cex = 1.2, line=1)
+        font = 2, cex = cex.main, line=1)
     par(op)
     
 
@@ -71,10 +73,13 @@ function (R,  space = 0, main = "Returns", ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.Bar.R,v 1.1 2009-08-18 21:24:00 peter Exp $
+# $Id: charts.Bar.R,v 1.2 2009-09-17 03:15:37 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2009-08-18 21:24:00  peter
+# - multiple bar plots function
+#
 # Revision 1.2  2008-04-18 03:59:52  peter
 # - added na.omit to avoid problems with missing data
 #
