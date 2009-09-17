@@ -17,9 +17,9 @@ function (Ra, rf = 0, scale = 12)
 
     # FUNCTION:
 
-    Ra = checkData(Ra, method="zoo")
+    Ra = checkData(Ra)
     if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
+        rf = checkData(rf)
     Ra.excess = Return.excess(Ra, rf)
     return((Return.annualized(Ra.excess, scale = scale))/StdDev.annualized(Ra, scale = scale))
 
@@ -33,10 +33,13 @@ function (Ra, rf = 0, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: SharpeRatio.annualized.R,v 1.8 2009-09-17 03:01:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/08/16 14:12:40  peter
 # - added checkData for rf
 #
