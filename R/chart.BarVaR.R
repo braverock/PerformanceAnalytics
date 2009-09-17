@@ -117,12 +117,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                     HistoricalVaR = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "quantile", probs = (1-p)) #hVaR = quantile(x,probs=.01)
+                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="historical") #hVaR = quantile(x,probs=.01)
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "quantile", probs = (1-p))
+                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="historical")
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
                         }
@@ -156,12 +156,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                     HistoricalES = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "quantile", probs = (1-p)) #hES = quantile(x,probs=.01)
+                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="historical") #hES = quantile(x,probs=.01)
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "quantile", probs = (1-p))
+                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="historical")
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
                         }
@@ -220,10 +220,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.27 2009-09-04 20:42:58 brian Exp $
+# $Id: chart.BarVaR.R,v 1.28 2009-09-17 21:40:26 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.27  2009-09-04 20:42:58  brian
+# - add ES functions to as methods to chart.BarVaR, currently suffering from problems in apply.fromstart
+#
 # Revision 1.25  2009-09-01 21:40:47  brian
 # - add na.skip around call to Return.clean
 #
