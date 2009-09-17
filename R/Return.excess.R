@@ -17,9 +17,9 @@ function (R, rf = 0)
     # FUNCTION:
 
     # Transform input data to a timeseries (zoo) object
-    R = checkData(R)
+    R = checkData(R, method="zoo")
     reference.name = ""
-    result = xts(rep(NA, length(time(R))), order.by=time(R))
+    result = zoo(NA) #xts(rep(NA, length(time(R))), order.by=time(R))
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to a zoo object.
     if(!is.null(dim(rf))){
@@ -42,7 +42,7 @@ function (R, rf = 0)
 
     for(column.a in 1:columns.a) { # for each asset passed in as R
 #        for(column.b in 1:columns.b) { # against each asset passed in as Rf
-            R.excess = xts(rep(NA, length(time(R))), order.by=time(R))
+            R.excess = zoo(NA)# xts(rep(NA, length(time(R))), order.by=time(R))
             R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
             if(column.a == 1) { #& column.b == 1
                 if(rf[1] == 0){
@@ -81,10 +81,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.10 2009-09-15 20:35:50 peter Exp $
+# $Id: Return.excess.R,v 1.11 2009-09-17 03:00:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-09-15 20:35:50  peter
+# - converted to use xts internally
+#
 # Revision 1.9  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
