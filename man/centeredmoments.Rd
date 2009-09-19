@@ -35,6 +35,11 @@ Ipower (power, h)
 These functions were first utilized in Boudt, Peterson, and Croux (2008), and have been subsequently used in our other research.
 
   ~~ Additional Details will be added to documentation as soon as we have time to write them. ~~
+
+\code{Ipower} Computes the constant \deqn{\int_{-\infty}^{h} z^q \phi'(z)dz}  needed for the estimation of mES and 
+Component mES where where \eqn{\phi'(z)} is the derivative of the standard gaussian density function and \eqn{h} is typically modified VaR if you are computing mES or Gaussian VaR if you are computing Gaussian Expected Shortfall.
+
+%Ipower implements the formula: \dEqn{\int_{-\infty}^{h} z^q \phi'(z)dz}
 }
 \value{
 }
