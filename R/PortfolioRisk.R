@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.10 2009-09-04 20:38:23 brian Exp $
+# $Id: PortfolioRisk.R,v 1.11 2009-09-21 14:05:17 brian Exp $
 ###############################################################################
 
 
@@ -219,8 +219,6 @@ derportm4 = function(w,M4)
 {
    return(4*M4%*%(w%x%w%x%w))
 }
-
-precision = 4;
 
 Portmean = function(w,mu)
 {
@@ -571,10 +569,13 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.10 2009-09-04 20:38:23 brian Exp $
+# $Id: PortfolioRisk.R,v 1.11 2009-09-21 14:05:17 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-09-04 20:38:23  brian
+# - add historical ES function for completeness
+#
 # Revision 1.9  2009-08-25 15:29:46  brian
 # - clean up labeling, warnings, and returns for Expected Shortfall
 #
