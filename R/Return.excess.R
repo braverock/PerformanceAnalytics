@@ -67,7 +67,7 @@ function (R, rf = 0)
             }
  #       }
     }
-
+    result = reclass(result, R)
 
     # RESULTS:
     return(result)
@@ -81,10 +81,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.11 2009-09-17 03:00:38 peter Exp $
+# $Id: Return.excess.R,v 1.12 2009-09-22 02:47:21 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-09-17 03:00:38  peter
+# - reverting back to zoo until rollapply works for xts
+#
 # Revision 1.10  2009-09-15 20:35:50  peter
 # - converted to use xts internally
 #

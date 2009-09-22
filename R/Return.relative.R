@@ -3,7 +3,7 @@ function (Ra, Rb, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
-    # A wrapper to create a chart of relative returns through time
+    # Calculate relative returns through time
 
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
@@ -38,6 +38,7 @@ function (Ra, Rb, ...)
         }
     }
     columnnames = colnames(Result.calc)
+    Result.calc = reclass(Result.calc, Ra)
     return(Result.calc)
 }
 
@@ -49,10 +50,13 @@ function (Ra, Rb, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.relative.R,v 1.1 2008-10-30 02:18:39 peter Exp $
+# $Id: Return.relative.R,v 1.2 2009-09-22 02:44:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.1  2008-10-30 02:18:39  peter
+# - functionalizes the relative return calculation used in the charts
+#
 # Revision 1.11  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
