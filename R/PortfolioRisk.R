@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.11 2009-09-21 14:05:17 brian Exp $
+# $Id: PortfolioRisk.R,v 1.12 2009-09-22 18:07:13 brian Exp $
 ###############################################################################
 
 
@@ -504,7 +504,7 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
 
 ES.historical = function(R,p) {
     alpha = .setalphaprob(p)
-    for(column in 1:columns) {
+    for(column in 1:ncol(R)) {
 	r = na.omit(as.vector(R[,column]))
 	q = quantile(r,probs=alpha)
 	exceedr = r[r<q]
@@ -569,10 +569,13 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.11 2009-09-21 14:05:17 brian Exp $
+# $Id: PortfolioRisk.R,v 1.12 2009-09-22 18:07:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-09-21 14:05:17  brian
+# - remove precision global var, unnecessary
+#
 # Revision 1.10  2009-09-04 20:38:23  brian
 # - add historical ES function for completeness
 #
