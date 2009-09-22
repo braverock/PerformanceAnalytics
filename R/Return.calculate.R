@@ -15,7 +15,7 @@ function(prices, method = c("compound","simple"))
     pr = checkData(prices, method = "xts")
 
     if(method=="simple")
-        Returns = pr/lag(prices,k=1) - 1
+        Returns = pr/lag(pr,k=1) - 1
 
     if(method=="compound") {
         Returns = diff(log(pr))
@@ -38,10 +38,15 @@ function(prices, method = c("compound","simple"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.11 2009-09-02 12:14:25 brian Exp $
+# $Id: Return.calculate.R,v 1.12 2009-09-22 02:43:57 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-09-02 12:14:25  brian
+# - convert to xts internally
+# - use positive lag for lag.xts
+# - add reclass to returned series
+#
 # Revision 1.10  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
