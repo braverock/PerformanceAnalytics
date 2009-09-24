@@ -1,5 +1,5 @@
 `Omega` <-
-function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0)
+function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -47,48 +47,56 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     # for Omega as a function of L.
 
     # FUNCTION
+    method = method[1]
 
-    x = checkDataVector(R)
+    if (is.vector(R)) {
+        x = na.omit(R)
 
-    switch(method,
-        simple = {
-            numerator = exp(-rf) * mean(pmax(x - L, 0))
-            denominator = exp(-rf) * mean(pmax(L - x, 0))
-            omega = numerator/denominator
-        },
-        binomial = {
-            warning("binomial method not yet implemented, using interp")
-            method = "interp"
-        },
-        blackscholes = {
-            warning("blackscholes method not yet implemented, using interp")
-            method = "interp"
-        },
-        interp = {
+        switch(method,
+            simple = {
+                numerator = exp(-rf) * mean(pmax(x - L, 0))
+                denominator = exp(-rf) * mean(pmax(L - x, 0))
+                omega = numerator/denominator
+            },
+            binomial = {
+                warning("binomial method not yet implemented, using interp")
+                method = "interp"
+            },
+            blackscholes = {
+                warning("blackscholes method not yet implemented, using interp")
+                method = "interp"
+            },
+            interp = {
 
-            # require("Hmisc")
-            stopifnot("package:Hmisc" %in% search() || require("Hmisc",quietly=TRUE))
-            a = min(x)
-            b = max(x)
+                # require("Hmisc")
+                stopifnot("package:Hmisc" %in% search() || require("Hmisc",quietly=TRUE))
+                a = min(x)
+                b = max(x)
 
-            xcdf = Ecdf(x, pl=FALSE)
-            f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
+                xcdf = Ecdf(x, pl=FALSE)
+                f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
-            if(output == "full") {
-                omega = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x))
+                if(output == "full") {
+                    omega = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x))
+                }
+                else {
+                # returns only the point value for L
+                    # to get a point measure for omega, have to interpolate
+                    omegafull = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x)) # ????????
+                    g <- approxfun(xcdf$x,omegafull,method="linear",ties="ordered")
+                    omega = g(L)
+                }
             }
-            else {
-            # returns only the point value for L
-                # to get a point measure for omega, have to interpolate
-                omegafull = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x)) # ????????
-                g <- approxfun(xcdf$x,omegafull,method="linear",ties="ordered")
-                omega = g(L)
-            }
-        }
-    ) # end method switch
+        ) # end method switch
 
-    result = omega
-    result
+        result = omega
+        return(result)
+    }
+    else {
+        R = checkData(R, method = "matrix", ... = ...)
+        apply(R, 2, Omega, L = L, method = method, output = output, rf = rf,
+            ... = ...)
+    }
 }
 
 ###############################################################################
@@ -99,10 +107,13 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.11 2008-09-29 13:47:18 brian Exp $
+# $Id: Omega.R,v 1.12 2009-09-24 03:03:21 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2008-09-29 13:47:18  brian
+# - fix to use pmax per patch submitted by Ryan Sheftel <at> Malbec Pertners
+#
 # Revision 1.10  2008-06-25 03:50:37  peter
 # - added package test for Hmisc
 #
