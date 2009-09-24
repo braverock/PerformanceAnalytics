@@ -1,5 +1,5 @@
 `SemiDeviation` <-
-function (Ra)
+function (R)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -9,17 +9,27 @@ function (Ra)
 
     # FUNCTION:
 
-    Ra = checkDataVector(Ra)
-
-    return(DownsideDeviation(Ra, MAR=mean(Ra)), method="full")
+    if (is.vector(R)) {
+        R = na.omit(R)
+        return(DownsideDeviation(R, MAR=mean(R), method="full"))
+    }
+    else {
+        R = checkData(R, method = "matrix")
+        apply(R, 2, SemiDeviation)
+    }
 }
 
 `SemiVariance` <-
-function (Ra)
+function (R)
 {
-    Ra = checkDataVector(Ra)
-
-    return(DownsideDeviation(Ra, MAR=mean(Ra), method="subset"))
+    if (is.vector(R)) {
+        R = na.omit(R)
+        return(DownsideDeviation(R, MAR=mean(R), method="subset"))
+    }
+    else {
+        R = checkData(R, method = "matrix")
+        apply(R, 2, SemiDeviation)
+    }
 }
 
 ###############################################################################
@@ -30,10 +40,13 @@ function (Ra)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SemiDeviation.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: SemiDeviation.R,v 1.8 2009-09-24 03:14:01 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/10/11 03:21:42  peter
 # - fixed return so that method was being passed to DownsideDeviation
 #
