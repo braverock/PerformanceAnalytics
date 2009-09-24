@@ -1,5 +1,5 @@
 `DownsideDeviation` <-
-function (Ra, MAR = 0, method=c("subset","full"))
+function (R, MAR = 0, method=c("subset","full"))
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,21 +12,27 @@ function (Ra, MAR = 0, method=c("subset","full"))
     # This is also useful for calculating semi-deviation by setting
     # MAR = mean(x)
 
-    method = method[1] # grab the first value if this is still a vector, to avoid varnings
-    # FUNCTION:
+    method = method[1] 
 
-    Ra = checkData(Ra, method="vector")
-    if(!is.null(dim(MAR)))
-        MAR = mean(checkData(MAR, method = "vector"))
-    # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
-    # subset won't work with zoo objects
-    r = subset(Ra,Ra < MAR)
+    if (is.vector(R)) {
+        R = na.omit(R)
 
-    switch(method,
-        full   = {len = length(Ra)},
-        subset = {len = length(r)} #previously length(R)
-    ) # end switch
-    return(sqrt(sum((r - MAR)^2)/len))
+        if(!is.null(dim(MAR)))
+            MAR = mean(checkData(MAR, method = "vector"))
+        # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
+
+        r = subset(R, R < MAR)
+
+        switch(method,
+            full   = {len = length(R)},
+            subset = {len = length(r)} #previously length(R)
+        ) # end switch
+        return(sqrt(sum((r - MAR)^2)/len))
+    }
+    else {
+        R = checkData(R, method = "matrix")
+        apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
+    }
 }
 
 ###############################################################################
@@ -37,10 +43,15 @@ function (Ra, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.10 2008-09-30 21:17:24 brian Exp $
+# $Id: DownsideDeviation.R,v 1.11 2009-09-24 03:35:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2008-09-30 21:17:24  brian
+# - both DownsideDeviation and UpsidePotentialRatio now support "method argument to use full or subset of series
+# - use subset as default method
+# - updated documentation to reflect change
+#
 # Revision 1.9  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
