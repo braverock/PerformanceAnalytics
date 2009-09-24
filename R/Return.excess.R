@@ -18,16 +18,18 @@ function (R, rf = 0)
 
     # Transform input data to a timeseries (xts) object
     r = checkData(R)
-    reference.name = ""
 
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to an xts object.
     if(!is.null(dim(rf))){
         rf = checkData(rf)
         indexseries=index(cbind(r,rf))
+        columnname.rf=colnames(rf)
     }
     else {
         indexseries=index(r)
+        columnname.rf=rf
+        rf=xts(rep(rf, length(indexseries)),order.by=indexseries)
     }
 
     ## prototype
@@ -36,12 +38,11 @@ function (R, rf = 0)
     return.excess <- function (r,rf,order.by) 
     { # a function to be called by apply on the inner loop
         r.excess=xts(r,order.by=order.by)-as.xts(rf)
-#         
         return(r.excess)
     }
     
     r.excess=xts(apply(r, 2, FUN=return.excess, rf=rf, order.by=indexseries),order.by=indexseries)
-    colnames(r.excess) = paste(colnames(r), ">", colnames(rf))
+    colnames(r.excess) = paste(colnames(r), ">", columnname.rf)
     result = reclass(r.excess, r)
 
     # RESULTS:
@@ -56,10 +57,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.15 2009-09-24 17:46:31 peter Exp $
+# $Id: Return.excess.R,v 1.16 2009-09-24 18:00:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-09-24 17:46:31  peter
+# - fixed column renaming
+#
 # Revision 1.14  2009-09-24 17:39:22  peter
 # - fixed reclass
 # - added column renaming
