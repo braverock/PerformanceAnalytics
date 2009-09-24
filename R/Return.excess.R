@@ -36,12 +36,12 @@ function (R, rf = 0)
     return.excess <- function (r,rf,order.by) 
     { # a function to be called by apply on the inner loop
         r.excess=xts(r,order.by=order.by)-as.xts(rf)
-        colname(r.excess) = paste(colname(r), colname(rf), " > ")
+#         
         return(r.excess)
     }
     
     r.excess=xts(apply(r, 2, FUN=return.excess, rf=rf, order.by=indexseries),order.by=indexseries)
-
+    colnames(r.excess) = paste(colnames(r), ">", colnames(rf))
     result = reclass(r.excess, r)
 
     # RESULTS:
@@ -56,10 +56,14 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.14 2009-09-24 17:39:22 peter Exp $
+# $Id: Return.excess.R,v 1.15 2009-09-24 17:46:31 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2009-09-24 17:39:22  peter
+# - fixed reclass
+# - added column renaming
+#
 # Revision 1.13  2009-09-24 17:11:30  brian
 # - convert to use apply
 #
