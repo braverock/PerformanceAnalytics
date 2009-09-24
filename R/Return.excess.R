@@ -16,58 +16,32 @@ function (R, rf = 0)
 
     # FUNCTION:
 
-    # Transform input data to a timeseries (zoo) object
-    R = checkData(R, method="zoo")
+    # Transform input data to a timeseries (xts) object
+    r = checkData(R)
     reference.name = ""
-    result = zoo(NA) #xts(rep(NA, length(time(R))), order.by=time(R))
+
     # if the risk free rate is delivered as a timeseries, we'll check it
-    # and convert it to a zoo object.
+    # and convert it to an xts object.
     if(!is.null(dim(rf))){
         rf = checkData(rf)
-        reference.name = paste(" > ",colnames(rf),sep="")
+        indexseries=index(cbind(r,rf))
     }
     else {
-        reference.name = paste(" > ",base::round(rf, 4)*100,"%",sep="")
+        indexseries=index(r)
     }
 
-    ## arithmetic on zoo objects intersects them first
-#    R.excess = R[,1,drop = FALSE] - rf
-#    R.excess = R[drop = FALSE] - rf # this won't handle multiple columns correctly
-
-    # Get dimensions and labels
-    columns.a = ncol(R)
-#    columns.b = ncol(rf)
-    columnnames.a = colnames(R)
-#    columnnames.b = colnames(rf)
-
-    for(column.a in 1:columns.a) { # for each asset passed in as R
-#        for(column.b in 1:columns.b) { # against each asset passed in as Rf
-            R.excess = zoo(NA)# xts(rep(NA, length(time(R))), order.by=time(R))
-            R.excess = R[ , column.a, drop=FALSE] - rf #[ , column.b, drop=FALSE]
-            if(column.a == 1) { #& column.b == 1
-                if(rf[1] == 0){
-                    colnames(R.excess) = columnnames.a[column.a]
-                }
-                else {
-                    colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
-                }
-                result = R.excess
- #               colnames(result.zoo) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
-            }
-            else {
-#                nextcolumn = data.frame(Value = z, row.names = znames)
-                if(rf[1] == 0){
-	                colnames(R.excess) = columnnames.a[column.a]
-                }
-                else {
-	                colnames(R.excess) = paste(columnnames.a[column.a], reference.name, sep = "")
-                }
-#                 colnames(R.excess) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " > ")
-                result = merge (result, R.excess)
-            }
- #       }
+    ## prototype
+    ## xts(apply(managers[,1:6],2,FUN=function(R,Rf,order.by) {xts(R,order.by=order.by)-Rf}, Rf=xts(managers[,10,drop=F]),order.by=index(managers)),order.by=index(managers))
+    
+    return.excess <- function (r,rf,order.by) 
+    { # a function to be called by apply on the inner loop
+        r.excess=xts(r,order.by=order.by)-as.xts(rf)
+        return(r.excess)
     }
-    result = reclass(result, R)
+    
+     r.excess=xts(apply(r, 2, FUN=return.excess, rf=rf, order.by=indexseries),order.by=indexseries)
+
+    result = reclass(r.excess, R)
 
     # RESULTS:
     return(result)
@@ -81,10 +55,13 @@ function (R, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.12 2009-09-22 02:47:21 peter Exp $
+# $Id: Return.excess.R,v 1.13 2009-09-24 17:11:30 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-22 02:47:21  peter
+# - added reclass
+#
 # Revision 1.11  2009-09-17 03:00:38  peter
 # - reverting back to zoo until rollapply works for xts
 #
