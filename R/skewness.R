@@ -15,7 +15,7 @@ skewness <-
     # Method:
     method = match.arg(method)
 
-    R=checkData(x,method="zoo")
+    R=checkData(x,method="matrix")
 
     columns = ncol(R)
     columnnames=colnames(R)
@@ -80,10 +80,13 @@ skewness <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: skewness.R,v 1.2 2008-06-25 23:07:59 brian Exp $
+# $Id: skewness.R,v 1.3 2009-09-24 02:54:39 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.2  2008-06-25 23:07:59  brian
+# - update functions to deal with multi-column zoo/xts data
+#
 # Revision 1.1  2008-06-25 13:50:42  brian
 # - initial commit of skewness and skewness functions and documentation ported from RMetrics package fUtilities
 #
