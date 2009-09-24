@@ -18,10 +18,15 @@ function (x, ...)
     # Returns the geometric return
 
     # FUNCTION:
-    x = checkDataVector(x)
-    mean.geometric = exp(mean(log(1+x)))-1
-    mean.geometric
-
+    if (is.vector(x)) {
+        x = na.omit(x)
+        mean.geometric = exp(mean(log(1+x)))-1
+        return(mean.geometric)
+    }
+    else {
+        x = checkData(x, method = "matrix", ... = ...)
+        apply(x, 2, mean.geometric, ... = ...)
+    }
 }
 
 `mean.stderr` <-
@@ -38,10 +43,15 @@ function (x, ...)
     # Returns the standard error of the mean for the return
 
     # FUNCTION:
-    x = checkDataVector(x)
-    stderr = sqrt(var(x)/length(x))
-    stderr
-
+    if (is.vector(x)) {
+        x = na.omit(x)
+        stderr = sqrt(var(x)/length(x))
+        return(stderr)
+    }
+    else {
+        x = checkData(x, method = "matrix", ... = ...)
+        apply(x, 2, mean.stderr, ... = ...)
+    }
 }
 
 `mean.LCL` <-
@@ -60,14 +70,20 @@ function (x, ci = 0.95, ...)
     # for the confidence interval given
 
     # FUNCTION:
-    x = checkDataVector(x)
-    n = length(x)
-    if (n <= 1)
-        return(NA)
-    se.mean = sqrt(var(x)/n)
-    t.val = qt((1 - ci)/2, n - 1)
-    lcl = mean(x) + se.mean * t.val
-    lcl
+    if (is.vector(x)) {
+        x = na.omit(x)
+        n = length(x)
+        if (n <= 1)
+            return(NA)
+        se.mean = sqrt(var(x)/n)
+        t.val = qt((1 - ci)/2, n - 1)
+        lcl = mean(x) + se.mean * t.val
+        return(lcl)
+    }
+    else {
+        x = checkData(x, method = "matrix", ... = ...)
+        apply(x, 2, mean.LCL, ... = ...)
+    }
 }
 
 `mean.UCL` <-
@@ -86,14 +102,20 @@ function (x, ci = 0.95, ...)
     # for the confidence interval given
 
     # FUNCTION:
-    x = checkDataVector(x)
-    n = length(x)
-    if (n <= 1)
-        return(NA)
-    se.mean = sqrt(var(x)/n)
-    t.val = qt((1 - ci)/2, n - 1)
-    ucl = mean(x) - se.mean * t.val
-    ucl
+    if (is.vector(x)) {
+        x = na.omit(x)
+        n = length(x)
+        if (n <= 1)
+            return(NA)
+        se.mean = sqrt(var(x)/n)
+        t.val = qt((1 - ci)/2, n - 1)
+        ucl = mean(x) - se.mean * t.val
+        return(ucl)
+    }
+    else {
+        x = checkData(x, method = "matrix", ... = ...)
+        apply(x, 2, mean.UCL, ... = ...)
+    }
 }
 
 ###############################################################################
@@ -104,10 +126,13 @@ function (x, ci = 0.95, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: mean.utils.R,v 1.8 2008-06-02 16:05:19 brian Exp $
+# $Id: mean.utils.R,v 1.9 2009-09-24 02:35:41 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.7  2007/04/16 01:59:09  brian
 # - add dots parameter to pass R CMD check
 #
