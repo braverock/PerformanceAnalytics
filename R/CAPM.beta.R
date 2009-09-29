@@ -1,143 +1,167 @@
 `CAPM.beta` <-
-function (Ra, Rb, rf = 0, digits = 4)
+function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This is a wrapper for calculating a CAPM beta.
 
     # Inputs:
-    # R: vector of returns for the asset being tested
+    # Ra: vector of returns for the asset being tested
     # Rb: vector of returns for the benchmark the asset is being gauged against
-    # R and Rb are assumed to be matching periods and NO TEST IS MADE TO CHECK
     # rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
 
     # Output:
-    #
+    # 
 
     # FUNCTION:
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
-    assetReturns = checkData(Ra)
-    benchmarkReturns = checkData(Rb)
-    if(!is.null(dim(rf)))
-        rf = checkData(rf)
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
-#     if (length(assetReturns) != length(benchmarkReturns))
-#         stop("Returns to be assessed have unequal time periods. Are there NA\'s in the data?")
+    xRa = Return.excess(Ra, Rf)
+    xRb = Return.excess(Rb, Rf)
 
-    # Make these excess returns
-    assetExcessRet = Return.excess(assetReturns, rf)
-    indexExcessRet = Return.excess(benchmarkReturns, rf)
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    # The data object now needs to be coerced into a data.frame for lm
-    merged.z = na.omit(merge(assetExcessRet, indexExcessRet))
-    merged.df = as.data.frame(merged.z)
-    colnames(merged.df) = c("Asset.excess","Index.excess")
+    beta <-function (xRa, xRb)
+    {
+        merged = na.omit(merge(xRa, xRb))
+        model.lm = lm(merged[,1] ~ merged[,2], merged)
+        beta = coef(model.lm)[[2]]
+        beta
+    }
 
-    # regress
-    model.lm = lm(Asset.excess ~ Index.excess, merged.df)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
 
-#    alpha = coef(model.lm)[[1]]
-    beta = coef(model.lm)[[2]]
-    beta
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 `CAPM.beta.bull` <-
-function (Ra, Rb, rf = 0, digits = 4)
+function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This is a wrapper for calculating a conditional CAPM beta for up markets.
 
     # Inputs:
-    # R: vector of returns for the asset being tested
-    # Rb: vector of returns for the benchmark the asset is being gauged against
-    # R and Rb are assumed to be matching periods and NO TEST IS MADE TO CHECK
-    # rf: risk free rate in the same periodicity as the returns.  May be a vector
+    # Ra: time series of returns for the asset being tested
+    # Rb: time series of returns for the benchmark the asset is being gauged against
+    # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as x and y.
 
     # Output:
-    #
+    # Bear market beta
 
     # FUNCTION:
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
-    assetReturns = checkData(Ra)
-    benchmarkReturns = checkData(Rb)
-    rf = checkData(rf)
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
-#     if (length(assetReturns) != length(benchmarkReturns))
-#         stop("Returns to be assessed have unequal time periods. Are there NA\'s in the data?")
+    xRa = Return.excess(Ra, Rf)
+    xRb = Return.excess(Rb, Rf)
 
-    # Make these excess returns
-    assetExcessRet = Return.excess(assetReturns, rf)
-    indexExcessRet = Return.excess(benchmarkReturns, rf)
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    # The data object now needs to be coerced into a data.frame for lm
-    merged.z = na.omit(merge(assetExcessRet, indexExcessRet))
-    merged.df = as.data.frame(merged.z)
-    colnames(merged.df) = c("Asset.excess","Index.excess")
+    beta <-function (xRa, xRb)
+    {
+        merged = na.omit(merge(xRa, xRb))
+        merged = as.data.frame(merged)
+        colnames(merged) = c("xRa","xRb")
+        model.lm = lm(xRa ~ xRb, merged, subset= (xRb > 0))
+        beta = coef(model.lm)[[2]]
+        beta
+    }
 
-    # regress
-    model.lm = lm(Asset.excess ~ Index.excess, merged.df, subset= (Index.excess > 0))
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
 
-#    alpha = coef(model.lm)[[1]]
-    beta = coef(model.lm)[[2]]
-    beta
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 `CAPM.beta.bear` <-
-function (Ra, Rb, rf = 0, digits = 4)
+function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This is a wrapper for calculating a conditional CAPM beta for down markets 
 
     # Inputs:
-    # R: vector of returns for the asset being tested
-    # Rb: vector of returns for the benchmark the asset is being gauged against
-    # R and Rb are assumed to be matching periods and NO TEST IS MADE TO CHECK
-    # rf: risk free rate in the same periodicity as the returns.  May be a vector
-    #     of the same length as x and y.
+    # Ra: time series of returns for the asset being tested
+    # Rb: time series of returns for the benchmark the asset is being gauged against
+    # Rf: risk free rate in the same periodicity as the returns.  May be a time series
+    #     of the same length as Ra and Rb.
 
     # Output:
-    #
+    # Bear market beta
 
     # FUNCTION:
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
-    assetReturns = checkData(Ra)
-    benchmarkReturns = checkData(Rb)
-    rf = checkData(rf)
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
-#     if (length(assetReturns) != length(benchmarkReturns))
-#         stop("Returns to be assessed have unequal time periods. Are there NA\'s in the data?")
+    xRa = Return.excess(Ra, Rf)
+    xRb = Return.excess(Rb, Rf)
 
-    # Make these excess returns
-    assetExcessRet = Return.excess(assetReturns, rf)
-    indexExcessRet = Return.excess(benchmarkReturns, rf)
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    # The data object now needs to be coerced into a data.frame for lm
-    merged.z = na.omit(merge(assetExcessRet, indexExcessRet))
-    merged.df = as.data.frame(merged.z)
-    colnames(merged.df) = c("Asset.excess","Index.excess")
+    beta <-function (xRa, xRb)
+    {
+        merged = na.omit(merge(xRa, xRb))
+        merged = as.data.frame(merged)
+        colnames(merged) = c("xRa","xRb")
+        model.lm = lm(xRa ~ xRb, merged, subset= (xRb < 0))
+        beta = coef(model.lm)[[2]]
+        beta
+    }
 
-    # regress
-    model.lm = lm(Asset.excess ~ Index.excess, merged.df, subset= (Index.excess < 0))
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
 
-#    alpha = coef(model.lm)[[1]]
-    beta = coef(model.lm)[[2]]
-    beta
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 
 `timing.ratio` <-
-function (Ra, Rb, rf = 0, digits = 4)
+function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This function calculates the ratio of the two conditional CAPM betas (up and down).
 
-    beta.bull = CAPM.beta.bull(Ra, Rb, rf = rf)
-    beta.bear = CAPM.beta.bear(Ra, Rb, rf = rf)
+    beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf)
+    beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf)
     ratio = beta.bull/beta.bear
     ratio
 }
@@ -149,10 +173,13 @@ function (Ra, Rb, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.11 2009-09-15 20:34:45 peter Exp $
+# $Id: CAPM.beta.R,v 1.12 2009-09-29 14:29:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-09-15 20:34:45  peter
+# - fixed checkData for rf such that a single value can be passed
+#
 # Revision 1.10  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

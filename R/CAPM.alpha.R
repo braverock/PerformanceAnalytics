@@ -1,5 +1,5 @@
 `CAPM.alpha` <-
-function (Ra, Rb, rf = 0)
+function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -13,27 +13,40 @@ function (Ra, Rb, rf = 0)
     #     of the same length as R and y.
 
     # Output:
-    #
+    # CAPM alpha
 
     # FUNCTION:
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
-    assetReturns.vec = checkDataVector(Ra)
-    benchmarkReturns.vec = checkDataVector(Rb)
-    rf.vec = checkDataVector(rf)
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
-    if (length(assetReturns.vec) != length(benchmarkReturns.vec))
-        stop("Returns to be assessed have unequal time periods. Are there NA's in the data?")
+    xRa = Return.excess(Ra, Rf)
+    xRb = Return.excess(Rb, Rf)
 
-    # Make these excess returns
-    assetExcessRet.vec = assetReturns.vec - rf.vec
-    indexExcessRet.vec = benchmarkReturns.vec - rf.vec
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    # regress
-    model.lm = lm(assetExcessRet.vec ~ indexExcessRet.vec)
+    beta <-function (xRa, xRb)
+    {
+        merged = na.omit(merge(xRa, xRb))
+        model.lm = lm(merged[,1] ~ merged[,2], merged)
+        beta = coef(model.lm)[[1]]
+        beta
+    }
 
-    alpha = coef(model.lm)[[1]]
-#    beta = coef(model.lm)[[2]]
-    alpha
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 ###############################################################################
@@ -44,10 +57,13 @@ function (Ra, Rb, rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.alpha.R,v 1.7 2008-06-02 16:05:19 brian Exp $
+# $Id: CAPM.alpha.R,v 1.8 2009-09-29 14:30:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.6  2007/03/11 16:53:19  brian
 # - add equations and text to documentation
 # - standardize on Ra as the Return of the Asset
