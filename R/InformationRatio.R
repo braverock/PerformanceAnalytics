@@ -1,23 +1,50 @@
 `InformationRatio` <-
-function (Ra, Rb, scale = 12)
+function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 
     # DESCRIPTION
     # InformationRatio = ActivePremium/TrackingError
 
-    # Inputs:
-    # Outputs:
-
     # FUNCTION
-    assetReturns.vec = checkDataVector(Ra)
-    benchmarkReturns.vec = checkDataVector(Rb)
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
 
-    ActivePremium = ActivePremium(assetReturns.vec,benchmarkReturns.vec, scale = scale)
-    TrackingError = TrackingError(assetReturns.vec,benchmarkReturns.vec, scale = scale)
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
-    InformationRatio = ActivePremium/TrackingError
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    InformationRatio
+    if(is.na(scale)) {
+        freq = periodicity(Ra)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    }
+
+    ir <-function (Ra, Rb, scale)
+    {
+        ap = ActivePremium(Ra, Rb, scale = scale)
+        te = TrackingError(Ra, Rb, scale = scale)
+        IR = ap/te
+        return(IR)
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb, scale) ir(Ra[,n[1]], Rb[,n[2]], scale), Ra = Ra, Rb = Rb, scale = scale)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 ###############################################################################
@@ -28,10 +55,13 @@ function (Ra, Rb, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: InformationRatio.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: InformationRatio.R,v 1.7 2009-09-30 14:01:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/04/04 00:23:01  brian
 # - typos and minor comment updates
 #
