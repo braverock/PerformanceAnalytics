@@ -1,5 +1,5 @@
 `Return.annualized` <-
-function (Ra, scale = 12, geometric = TRUE )
+function (R, scale = NA, geometric = TRUE )
 { # @author Peter Carl
 
     # Description:
@@ -18,17 +18,34 @@ function (Ra, scale = 12, geometric = TRUE )
     # @todo: don't calculate for returns less than 1 year
 
     # FUNCTION:
-
-    Ra = checkData(Ra, method="vector")
-    Ra = Ra[!is.na(Ra)]
-    n = length(Ra)
-    #do the correct thing for geometric or simple returns
-    if (geometric) {
-        # geometric returns
-        return(prod(1 + Ra)^(scale/n) - 1)
-    } else {
-        # simple returns
-        return(mean(Ra)*scale)
+    if (is.vector(R)) {
+        R = na.omit(R)
+        n = length(R)
+        #do the correct thing for geometric or simple returns
+        if (geometric) {
+            # geometric returns
+            result = prod(1 + R)^(scale/n) - 1
+        } else {
+            # simple returns
+            result = mean(R) * scale
+        }
+        return(result)
+    }
+    else {
+        R = checkData(R, method = "xts")
+        if(is.na(scale)) {
+            freq = periodicity(R)
+            switch(freq$scale,
+                minute = {stop("Data periodicity too high")},
+                hourly = {stop("Data periodicity too high")},
+                daily = {scale = 252},
+                weekly = {scale = 52},
+                monthly = {scale = 12},
+                quarterly = {scale = 4},
+                yearly = {scale = 1}
+            )
+        }
+        apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
     }
 }
 
@@ -40,10 +57,13 @@ function (Ra, scale = 12, geometric = TRUE )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.8 2008-06-02 16:05:19 brian Exp $
+# $Id: Return.annualized.R,v 1.9 2009-09-30 01:42:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.7  2007/08/16 14:10:44  peter
 # - updated checkData function
 #
