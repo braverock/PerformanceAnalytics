@@ -1,5 +1,5 @@
 `TrackingError` <-
-function (Ra, Rb, scale = 12)
+function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -10,13 +10,43 @@ function (Ra, Rb, scale = 12)
     # Outputs:
 
     # FUNCTION
-    assetReturns.vec = checkDataVector(Ra)
-    benchmarkReturns.vec = checkDataVector(Rb)
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
 
-    #TrackingError = sqrt(sum(assetReturns.vec - benchmarkReturns.vec)^2 / (length(assetReturns.vec) - 1)) * sqrt(scale)
-    TrackingError = sd(assetReturns.vec - benchmarkReturns.vec) * sqrt(scale)
-    TrackingError
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
 
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    if(is.na(scale)) {
+        freq = periodicity(Ra)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    }
+
+    te <-function (Ra, Rb, scale)
+    {
+        TE = sd(Return.excess(Ra, Rb), na.rm=TRUE) * sqrt(scale)
+        return(TE)
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb, scale) te(Ra[,n[1]], Rb[,n[2]], scale), Ra = Ra, Rb = Rb, scale = scale)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 ###############################################################################
@@ -27,10 +57,13 @@ function (Ra, Rb, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TrackingError.R,v 1.8 2008-06-30 21:42:09 peter Exp $
+# $Id: TrackingError.R,v 1.9 2009-09-30 14:01:31 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-30 21:42:09  peter
+# - fixed bad encoding
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
