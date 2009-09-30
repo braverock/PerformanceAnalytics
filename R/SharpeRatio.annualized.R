@@ -1,5 +1,5 @@
 `SharpeRatio.annualized` <-
-function (Ra, rf = 0, scale = 12)
+function (R, Rf = 0, scale = NA)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -16,12 +16,32 @@ function (Ra, rf = 0, scale = 12)
     # rf: the risk free rate MUST be in the same periodicity as the data going in.
 
     # FUNCTION:
+    R = checkData(R)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
-    Ra = checkData(Ra)
-    if(!is.null(dim(rf)))
-        rf = checkData(rf)
-    Ra.excess = Return.excess(Ra, rf)
-    return((Return.annualized(Ra.excess, scale = scale))/StdDev.annualized(Ra, scale = scale))
+    if(is.na(scale)) {
+        freq = periodicity(R)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    }
+
+    sr <-function (R, Rf, scale)
+    {
+        xR = Return.excess(R, Rf)
+        SR = Return.annualized(xR, scale=scale)/StdDev.annualized(R, scale=scale)
+        SR
+    }
+
+    result = apply(R, 2, sr, Rf=Rf, scale=scale)
+    return (result)
 
 }
 
@@ -33,10 +53,13 @@ function (Ra, rf = 0, scale = 12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.8 2009-09-17 03:01:22 peter Exp $
+# $Id: SharpeRatio.annualized.R,v 1.9 2009-09-30 02:48:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-09-17 03:01:22  peter
+# - using xts internally
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
