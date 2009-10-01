@@ -12,7 +12,7 @@ function (R, scale = NA)
 
     # FUNCTION:
 
-    Ra = checkData(R)
+    R = checkData(R)
     if(is.na(scale)) {
         freq = periodicity(R)
         switch(freq$scale,
@@ -70,10 +70,13 @@ function (R, scale=NA, excess=.1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CalmarRatio.R,v 1.4 2009-10-01 01:52:13 peter Exp $
+# $Id: CalmarRatio.R,v 1.5 2009-10-01 01:53:07 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-10-01 01:52:13  peter
+# - changed Ra to R for consistency
+#
 # Revision 1.3  2009-10-01 01:45:17  peter
 # - added multi-column support
 # - added periodicity check for scale
