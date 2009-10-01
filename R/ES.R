@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: ES.R,v 1.5 2009-09-04 20:45:49 brian Exp $
+# $Id: ES.R,v 1.6 2009-10-01 19:10:40 brian Exp $
 ###############################################################################
 
 ES <-
@@ -75,7 +75,8 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
                     rES[,column] <- 1
                 }
             } # end reasonableness checks
-	    if(invert) rES <- -rES
+            if(invert) rES <- -rES
+            rownames(rES) <- "ES"
             return(rES)
 
         }, # end single portfolio switch
@@ -117,10 +118,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.5 2009-09-04 20:45:49 brian Exp $
+# $Id: ES.R,v 1.6 2009-10-01 19:10:40 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-09-04 20:45:49  brian
+# - make sure the non-portfolio case returns the same data type as VaR fn
+# - add correct historical ES calc
+#
 # Revision 1.4  2009-08-25 15:29:46  brian
 # - clean up labeling, warnings, and returns for Expected Shortfall
 #

@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: VaR.R,v 1.13 2009-09-24 16:01:58 brian Exp $
+# $Id: VaR.R,v 1.14 2009-10-01 19:10:40 brian Exp $
 ###############################################################################
 
 VaR <-
@@ -51,7 +51,7 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
             switch(method,
                 modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
                 gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
-                historical = { rVaR = t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
+                historical = { rVaR = -1* t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
                 kernel = { stop("no kernel method defined for non-component VaR")}
             ) # end sigle switch calc
             # convert from vector to columns
@@ -73,9 +73,9 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
                     rVaR[,column] <- 1
                 }
             } # end reasonableness checks
-	    if(invert) rVaR <- -rVaR
+            if(invert) rVaR <- -rVaR
+            rownames(rVaR)<-"VaR"
             return(rVaR)
-
         }, # end single portfolio switch
         component = {
             # @todo need to add another loop here for subsetting, I think, when weights is a timeseries
@@ -119,10 +119,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.13 2009-09-24 16:01:58 brian Exp $
+# $Id: VaR.R,v 1.14 2009-10-01 19:10:40 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-09-24 16:01:58  brian
+# - remove unneeded function params
+# - remove deprecated function
+#
 # Revision 1.12  2009-08-25 17:43:37  brian
 # - updates to support Marginal VaR
 # - use reclass() in Return.portfolio to return xts object
