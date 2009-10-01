@@ -70,7 +70,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R))
         colnames(wealthindex.weighted)=colnames(wealthindex.assets)
         rownames(wealthindex.weighted)=rownames(wealthindex.assets)
-	weights=t(weights)
+        weights=t(weights)
         # weight the results
         for (col in 1:ncol(weights)){
             wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
@@ -83,6 +83,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         colnames(weightedreturns)=colnames(wealthindex.assets)
         #browser()
         wealthindex=matrix(cumprod(startingwealth + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
+        wealthindex=reclass(wealthindex,match.to=R)
         # or, the equivalent
         #wealthindex=matrix(startingwealth+apply(weightedcumcont,1,sum),ncol=1)
 #   }
@@ -129,10 +130,14 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.3 2009-08-25 17:43:37 brian Exp $
+# $Id: Return.portfolio.R,v 1.4 2009-10-01 20:22:02 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-08-25 17:43:37  brian
+# - updates to support Marginal VaR
+# - use reclass() in Return.portfolio to return xts object
+#
 # Revision 1.2  2009-01-08 11:23:01  brian
 # - remove obsolete comments
 # - change yeargrid to rebalancegrid
