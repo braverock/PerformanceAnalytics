@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: ES.R,v 1.6 2009-10-01 19:10:40 brian Exp $
+# $Id: ES.R,v 1.7 2009-10-01 19:12:24 brian Exp $
 ###############################################################################
 
 ES <-
-function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
+function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -118,10 +118,14 @@ function (R , p=0.99, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.6 2009-10-01 19:10:40 brian Exp $
+# $Id: ES.R,v 1.7 2009-10-01 19:12:24 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-10-01 19:10:40  brian
+# - label rows
+# - invert historical VaR for consistency with other univariate measures
+#
 # Revision 1.5  2009-09-04 20:45:49  brian
 # - make sure the non-portfolio case returns the same data type as VaR fn
 # - add correct historical ES calc
