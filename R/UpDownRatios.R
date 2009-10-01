@@ -1,5 +1,5 @@
 `UpDownRatios` <-
-function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down"))
+function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down"))
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -30,28 +30,26 @@ function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down")
     Ra = checkData(Ra)
     Rb = checkData(Rb)
 
-    method = method[1]
-    side = side[1]
-
     Ra.ncols = NCOL(Ra) 
     Rb.ncols = NCOL(Rb)
 
-    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols) 
+    pairs = expand.grid(1:Ra.ncols, side, 1:Rb.ncols, method) 
+
     # @todo: expand.grid(1:3,c("up","down"),1:2)
     # deliver a list by benchmark with 'up' and 'down' statistics together
 
     udr <-function (Ra, Rb, method, side)
     {
-        merged.assets = na.omit(merge(as.xts(Ra), as.xts(Rb)))
+        merged.assets = na.omit(merge(Ra, Rb))
 
-        if(method == "capture" & side == "up") {
+        if(method == "Capture" & side == "Up") {
             UpRa = subset(merged.assets[,1], merged.assets[,2] > 0)
             UpRb = subset(merged.assets[,2], merged.assets[,2] > 0)
             cumRa = sum(UpRa)
             cumRb = sum(UpRb)
             result = cumRa/cumRb
         }
-        if(method == "capture" & side == "down") {
+        if(method == "Capture" & side == "Down") {
             DnRa = subset(merged.assets[,1], merged.assets[,2] <= 0)
             DnRb = subset(merged.assets[,2], merged.assets[,2] <= 0)
             cumRa = sum(DnRa)
@@ -59,23 +57,23 @@ function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down")
             result = cumRa/cumRb
         }
 
-        if(method == "number" & side == "up") {
+        if(method == "Number" & side == "Up") {
             UpRi = length(subset(merged.assets[,1], (merged.assets[,1] > 0) & (merged.assets[,2] > 0)))
             UpRb = length(subset(merged.assets[,2], merged.assets[,2] > 0))
             result = UpRi/UpRb
         }
-        if(method == "number" & side == "down") {
+        if(method == "Number" & side == "Down") {
             DnRi = length(subset(merged.assets[,1], (merged.assets[,1] < 0) & (merged.assets[,2] < 0)))
             DnRb = length(subset(merged.assets[,2], merged.assets[,2] < 0))
             result = DnRi/DnRb
         }
 
-        if(method == "percent" & side == "up") {
+        if(method == "Percent" & side == "Up") {
             UpRi = length(subset(merged.assets[,1], (merged.assets[,1] > merged.assets[,2]) & (merged.assets[,2] > 0)))
             UpRb = length(subset(merged.assets[,2], merged.assets[,2] > 0))
             result = UpRi/UpRb
         }
-        if(method == "percent" & side == "down") {
+        if(method == "Percent" & side == "Down") {
             DnRi = length(subset(merged.assets[,1], (merged.assets[,1] > merged.assets[,2]) & (merged.assets[,2] < 0)))
             DnRb = length(subset(merged.assets[,2], merged.assets[,2] < 0))
             result = DnRi/DnRb
@@ -83,14 +81,17 @@ function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down")
         return(result)
     }
 
-    result = apply(pairs, 1, FUN = function(n, Ra, Rb, method, side) udr(Ra[,n[1]], Rb[,n[2]], method, side), Ra = Ra, Rb = Rb, method = method, side = side)
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb, method, side) udr(Ra[,as.numeric(n[1])], Rb[,as.numeric(n[3])], method = n[4], side= n[2]), Ra = Ra, Rb = Rb)
 
     if(length(result) ==1)
         return(result)
     else {
-        dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        dim(result) = c(Ra.ncols, Rb.ncols*length(side)*length(method))
+
         rownames(result) = colnames(Ra)
+        n = expand.grid(side, colnames(Rb), method)
+        colnames = apply(n, 1, FUN = function(n) paste(n[2], n[1],n[3]))
+        colnames(result) = colnames
         return(t(result))
     }
 }
@@ -103,10 +104,13 @@ function(Ra, Rb, method = c("capture","number","percent"), side = c("up","down")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpDownRatios.R,v 1.8 2009-10-01 03:07:37 peter Exp $
+# $Id: UpDownRatios.R,v 1.9 2009-10-01 14:33:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-01 03:07:37  peter
+# - added multi-column support
+#
 # Revision 1.7  2009-04-07 22:15:25  peter
 # - removed unused dot dot dot
 #
