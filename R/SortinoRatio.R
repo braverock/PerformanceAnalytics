@@ -1,5 +1,5 @@
 `SortinoRatio` <-
-function (Ra, MAR = 0)
+function (R, MAR = 0)
 { # @author Brian G. Peterson
   # modified from function by Sankalp Upadhyay <sankalp.upadhyay [at] gmail [dot] com> with permission
 
@@ -10,13 +10,16 @@ function (Ra, MAR = 0)
     # R     return vector
     # MAR   minimum acceptable return
     # Function:
+    R = checkData(R)
 
-    Ra = checkData(Ra, method = "vector")
+    sr <-function (R, MAR)
+    {
+        SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR)
+        SR
+    }
 
-    result = mean (Ra - MAR) / DownsideDeviation(Ra, MAR)
-
-    #Return:
-    result
+    result = apply(R, MARGIN = 2, sr, MAR = MAR)
+    return (result)
 }
 
 ###############################################################################
@@ -27,10 +30,13 @@ function (Ra, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SortinoRatio.R,v 1.5 2008-06-02 16:05:19 brian Exp $
+# $Id: SortinoRatio.R,v 1.6 2009-10-01 01:46:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.4  2007/04/09 03:31:50  peter
 # - uses checkData
 #

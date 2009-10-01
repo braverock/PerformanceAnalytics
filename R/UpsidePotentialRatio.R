@@ -1,5 +1,5 @@
 `UpsidePotentialRatio` <-
-function (Ra, MAR = 0, method=c("subset","full"))
+function (R, MAR = 0, method=c("subset","full"))
 { # @author Brian G. Peterson
 
     # Description:
@@ -10,29 +10,31 @@ function (Ra, MAR = 0, method=c("subset","full"))
     # Ra    return vector
     # MAR   minimum acceptable return
 
-    method = method[1] # grab the first value if this is still a vector, to avoid varnings
-
     # Function:
 
-    Ra = checkData(Ra, method = "vector")
+    method = method[1] 
 
-    if(!is.null(dim(MAR)))
-        MAR = mean(checkData(MAR, method = "vector"))
-
-    r = subset(Ra,Ra > MAR)
-
-    switch(method,
-        full   = {len = length(Ra)},
-        subset = {len = length(r)} #previously length(R)
-    ) # end switch
-
-    return( ( sum(r - MAR)/len )/ DownsideDeviation(Ra, MAR=MAR , method=method) )
+    if (is.vector(R)) {
+        if(!is.null(dim(MAR)))
+            MAR = mean(checkData(MAR, method = "vector"), rm.na=TRUE)
+        r = subset(R, R > MAR)
+        switch(method,
+            full   = {len = length(R)},
+            subset = {len = length(r)} #previously length(R)
+        ) # end switch
+        result = (sum(r - MAR)/len)/DownsideDeviation(R, MAR=MAR , method=method)
+        return(result)
+    }
+    else {
+        R = checkData(R, method = "matrix")
+        apply(R, MARGIN = 2, UpsidePotentialRatio, MAR = MAR, method = method)
+    }
 }
 
 `UPR`<-
-function (Ra, MAR = 0, method=c("subset","full"))
+function (R, MAR = 0, method=c("subset","full"))
 { # @author Brian G. Peterson
-    UpsidePotentialRatio(Ra=Ra, MAR=MAR, method=method)
+    UpsidePotentialRatio(R=R, MAR=MAR, method=method)
 }
 
 ###############################################################################
@@ -43,10 +45,15 @@ function (Ra, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpsidePotentialRatio.R,v 1.3 2008-09-30 21:17:24 brian Exp $
+# $Id: UpsidePotentialRatio.R,v 1.4 2009-10-01 01:47:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2008-09-30 21:17:24  brian
+# - both DownsideDeviation and UpsidePotentialRatio now support "method argument to use full or subset of series
+# - use subset as default method
+# - updated documentation to reflect change
+#
 # Revision 1.2  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
