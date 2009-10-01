@@ -1,5 +1,5 @@
 `CalmarRatio` <-
-function (Ra, scale = NA)
+function (R, scale = NA)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -12,9 +12,9 @@ function (Ra, scale = NA)
 
     # FUNCTION:
 
-    Ra = checkData(Ra)
+    Ra = checkData(R)
     if(is.na(scale)) {
-        freq = periodicity(Ra)
+        freq = periodicity(R)
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -25,13 +25,13 @@ function (Ra, scale = NA)
             yearly = {scale = 1}
         )
     }
-    annualized_return = Return.annualized(Ra, scale=scale)
-    drawdown = abs(maxDrawdown(Ra))
+    annualized_return = Return.annualized(R, scale=scale)
+    drawdown = abs(maxDrawdown(R))
     return(annualized_return/drawdown)
 }
 
 `SterlingRatio` <-
-function (Ra, scale=NA, excess=.1)
+function (R, scale=NA, excess=.1)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -44,9 +44,9 @@ function (Ra, scale=NA, excess=.1)
 
     # FUNCTION:
 
-    Ra = checkData(Ra)
+    R = checkData(R)
     if(is.na(scale)) {
-        freq = periodicity(Ra)
+        freq = periodicity(R)
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -57,8 +57,8 @@ function (Ra, scale=NA, excess=.1)
             yearly = {scale = 1}
         )
     }
-    annualized_return = Return.annualized(Ra, scale=scale)
-    drawdown = abs(maxDrawdown(Ra)-excess)
+    annualized_return = Return.annualized(R, scale=scale)
+    drawdown = abs(maxDrawdown(R)-excess)
     return(annualized_return/drawdown)
 }
 
@@ -70,10 +70,14 @@ function (Ra, scale=NA, excess=.1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CalmarRatio.R,v 1.3 2009-10-01 01:45:17 peter Exp $
+# $Id: CalmarRatio.R,v 1.4 2009-10-01 01:52:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-10-01 01:45:17  peter
+# - added multi-column support
+# - added periodicity check for scale
+#
 # Revision 1.2  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
