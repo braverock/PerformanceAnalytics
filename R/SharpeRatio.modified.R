@@ -1,5 +1,5 @@
 `SharpeRatio.modified` <-
-function (Ra, rf = 0, p=0.95, scale=1)
+function (R, Rf = 0, p = 0.95, ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -27,20 +27,27 @@ function (Ra, rf = 0, p=0.95, scale=1)
 
     # FUNCTION:
 
-    Ra = checkData(Ra, method = "zoo")
-    if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
-    Re = Return.excess(Ra, rf)
-    return( mean(Re)/VaR.CornishFisher(Ra, p) )
+    R = checkData(R)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
+    srm <-function (R, Rf, p, ...)
+    {
+        xR = Return.excess(R, Rf)
+        SRM = mean(xR, na.rm=TRUE)/VaR(R, p, invert=FALSE, ...)
+        SRM
+    }
+
+    result = apply(R, 2, srm, Rf=Rf, p=p, ...)
+    return (result)
 }
 
 `modSharpe` <-
-function (Ra, rf = 0, p=0.95, scale=1)
+function (R, Rf = 0, p = 0.95, ...)
 { # @author Brian G. Peterson
 
     # wrapper for SharpeRatio.modified
-    return(SharpeRatio.modified(Ra, rf, p, scale ))
+    return(SharpeRatio.modified(R, Rf, p, ...))
 }
 
 ###############################################################################
@@ -51,10 +58,13 @@ function (Ra, rf = 0, p=0.95, scale=1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.6 2008-06-02 16:05:19 brian Exp $
+# $Id: SharpeRatio.modified.R,v 1.7 2009-10-01 02:41:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.5  2007/04/02 21:54:42  peter
 # - modified to use CheckData
 # - modified to use Return.excess
