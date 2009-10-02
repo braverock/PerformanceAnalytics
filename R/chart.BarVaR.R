@@ -1,5 +1,5 @@
 `chart.BarVaR` <-
-function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), clean = c("none", "boudt","geltner"),  ylim = NA, lwd = 2, colorset = 1:12, p=.99, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="topleft", ypad=0, legend.cex = 0.8, ...)
+function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), clean = c("none", "boudt","geltner"),  ylim = NA, lwd = 2, colorset = 1:12, p=.95, lty = c(1,2,4,5,6), all = FALSE, show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ypad=0, legend.cex = 0.8, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -203,7 +203,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
         for(column in (risk.columns):2) {
             lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
             if(show.horizontal)
-                lines(1:rows, rep(-tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
+                lines(1:rows, rep(tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
         }
     }
 
@@ -220,10 +220,13 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.28 2009-09-17 21:40:26 brian Exp $
+# $Id: chart.BarVaR.R,v 1.29 2009-10-02 18:51:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.28  2009-09-17 21:40:26  brian
+# - use wrappers for historical VaR/ES, do not pass clean for historical measures
+#
 # Revision 1.27  2009-09-04 20:42:58  brian
 # - add ES functions to as methods to chart.BarVaR, currently suffering from problems in apply.fromstart
 #
