@@ -1,5 +1,5 @@
 `chart.RiskReturnScatter` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = 12, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
+function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = 12, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,8 +32,8 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
     x = checkData(R, method = "zoo")
-    if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf, method = "zoo")
 
     columns = ncol(x)
     rows = nrow(x)
@@ -52,7 +52,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     if(method == "calc"){
         # Assume we're passed in a series of monthly returns.  First, we'll
         # annualized returns and risk
-        comparison = t(table.AnnualizedReturns(x[,columns:1], rf = rf, geometric = geometric, scale = scale))
+        comparison = t(table.AnnualizedReturns(x[,columns:1], Rf = Rf, geometric = geometric, scale = scale))
 
         returns = comparison[,1]
         risk = comparison[,2]
@@ -97,7 +97,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # @todo: Drawing Sharpe ratio lines currently throws warnings; change test statement
     if(!is.na(add.sharpe[1])) {
         for(line in add.sharpe) {
-        abline(a=(rf*12),b=add.sharpe[line],col="gray",lty=2)
+        abline(a=(Rf*12),b=add.sharpe[line],col="gray",lty=2)
         }
     }
 
@@ -145,10 +145,13 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.13 2009-04-17 04:14:12 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.14 2009-10-02 18:54:10 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-04-17 04:14:12  peter
+# - added parameters for geometry, scale
+#
 # Revision 1.12  2009-04-07 22:23:53  peter
 # - uses element.color parameter
 #

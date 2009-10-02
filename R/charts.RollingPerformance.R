@@ -1,5 +1,5 @@
 `charts.RollingPerformance` <-
-function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, legend.loc=NULL, ...)
+function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, legend.loc=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -10,7 +10,7 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
     # R: a matrix, data frame, or timeSeries, usually a set of monthly returns.
     #   The first column is assumed to be the returns of interest, the next
     #   columns are assumed to be relevant benchmarks for comparison.
-    # rf: this is the risk free rate.  Remember to set this to the same
+    # Rf: this is the risk free rate.  Remember to set this to the same
     #   periodicity as the data being passed in.
     #
 
@@ -47,7 +47,7 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 
     # The third row is the annualized SR
     par(mar=c(5,4,0,2))
-    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", rf = rf, FUN = "SharpeRatio.annualized", event.labels= NULL, ...)
+    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, ...)
 
     par(op)
 }
@@ -60,10 +60,13 @@ function (R, width = 12, rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.9 2009-03-20 03:22:53 peter Exp $
+# $Id: charts.RollingPerformance.R,v 1.10 2009-10-02 18:57:47 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.8  2008-10-14 14:37:29  brian
 # - convert from matrix or data.frame to zoo in checkData call
 #
