@@ -1,5 +1,5 @@
 `chart.Regression` <-
-function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
+function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -40,10 +40,10 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 
 
     # Transform input data to a data frame
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
     if(!is.null(dim(Rf))){
-        Rf = checkData(Rf, method = "zoo")
+        Rf = checkData(Rf)
     }
     if(excess.returns){
         Ra = Return.excess(Ra, Rf)
@@ -155,10 +155,13 @@ function (Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Tit
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.10 2009-04-07 22:22:53 peter Exp $
+# $Id: chart.Regression.R,v 1.11 2009-10-02 18:53:17 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-04-07 22:22:53  peter
+# - uses element.color parameter
+#
 # Revision 1.9  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
