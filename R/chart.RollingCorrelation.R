@@ -20,8 +20,10 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
-            merged.assets = merge(Ra[,column.a,drop=FALSE], Rb[,column.b,drop=FALSE])
-            column.calc = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) cor(x[,1,drop=FALSE], x[,2,drop=FALSE]), by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+#             merged.assets = na.omit(merge(Ra[,column.a,drop=FALSE], Rb[,column.b,drop=FALSE]))
+#             print(dim(merged.assets))
+#             column.calc = apply.rolling(merged.assets, width = width, FUN= function(x) {print(dim(x));cor(x[,1,drop=FALSE], x[,2,drop=FALSE])})#, by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+            column.calc = apply.rolling(Ra[,column.a,drop=FALSE], width = width, FUN= function(x,y) {z=merge(as.xts(x),as.xts(y));cor(z[,1], z[,2], use="pairwise.complete.obs")}, y=Rb[,column.b,drop=FALSE])
 
             # some backflips to name the single column zoo object
             column.calc.tmp = xts(column.calc)
@@ -47,10 +49,13 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingCorrelation.R,v 1.8 2009-03-20 03:22:53 peter Exp $
+# $Id: chart.RollingCorrelation.R,v 1.9 2009-10-02 21:28:17 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-03-20 03:22:53  peter
+# - added xts
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
