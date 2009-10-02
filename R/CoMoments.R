@@ -86,18 +86,58 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 
 CoVariance<- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
-    R1= checkData(Ra)
-    R2= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=FALSE)   )
+    Ra= checkData(Ra)
+    Rb= checkData(Rb)
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    covar <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        return(centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=FALSE))
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) covar(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 BetaCoVariance <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=TRUE)   )
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    bcovar <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        return(centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=TRUE))
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) bcovar(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 
@@ -105,36 +145,125 @@ CoSkewness <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=FALSE)   )
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    cosk <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        return(centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=FALSE))
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) cosk(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
-BetaCoSkewness <- function(Ra,Rb)
+BetaCoSkewness <- function(Ra, Rb, test=TRUE)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-    # Kris notes: the output should be conditional on the value of the market skewness. 
-    if(skewness(as.vector(Rb)) > -0.05 && skewness(as.vector(Rb)) < 0.05 ){
-        warning("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    bcosk <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        skew = skewness(Rb)
+        # Kris notes: the output should be conditional on the value of the market skewness. 
+        if(skew > -0.05 && skew < 0.05 ){
+            warning("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
+        }
+        if(test==TRUE)
+            if(skew < 0)
+                multiplier = -1
+            else
+                multiplier = 1
+        else
+            multiplier = 1
+
+        return(multiplier * centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=TRUE))
     }
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=TRUE)   )
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) bcosk(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 CoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=FALSE)   )
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    cokurt <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        return(centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=FALSE))
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) cokurt(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 BetaCoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
-    R = na.omit(merge(Ra, Rb)) # remove NA's
-   return( centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=TRUE)   )
+
+    Ra.ncols = NCOL(Ra) 
+    Rb.ncols = NCOL(Rb)
+
+    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+
+    bcosk <-function (Ra, Rb)
+    {
+        R = na.omit(merge(Ra, Rb)) # remove NA's
+        return(centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=TRUE))
+    }
+
+    result = apply(pairs, 1, FUN = function(n, Ra, Rb) bcosk(Ra[,n[1]], Rb[,n[2]]), Ra = Ra, Rb = Rb)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        dim(result) = c(Ra.ncols, Rb.ncols)
+        colnames(result) = colnames(Rb)
+        rownames(result) = colnames(Ra)
+        return(t(result))
+    }
 }
 
 
@@ -146,10 +275,13 @@ BetaCoKurtosis <- function(Ra,Rb)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.8 2008-06-24 00:41:18 peter Exp $
+# $Id: CoMoments.R,v 1.9 2009-10-02 18:47:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-24 00:41:18  peter
+# - changed 'warn' to 'warning'
+#
 # Revision 1.6  2008-06-19 03:54:38  peter
 # - added data check and NA removal to comoment calcs
 #
