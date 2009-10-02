@@ -3,8 +3,8 @@ function (x, scale = NA)
 {
     if (is.vector(x)) {
         #scale standard deviation by multiplying by the square root of the number of periods to scale by
-        sqrt(scale)*sd(x, na.rm=TRUE)
-    } else {
+        if(!xtsible(x) & is.na(scale))
+            stop("'x' needs to be timeBased or xtsible, or scale must be specified." )
         x = checkData (x)
         if(is.na(scale)) {
             freq = periodicity(x)
@@ -18,8 +18,9 @@ function (x, scale = NA)
                 yearly = {scale = 1}
             )
         }
+        sqrt(scale)*sd(x, na.rm=TRUE)
+    } else 
         apply(x, 2, sd.multiperiod, scale=scale)
-    }
 }
 
 `sd.annualized` <-
@@ -56,10 +57,13 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.15 2009-09-30 03:00:04 peter Exp $
+# $Id: StdDev.annualized.R,v 1.16 2009-10-02 18:36:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-09-30 03:00:04  peter
+# - added periodicity for setting scale
+#
 # Revision 1.14  2008-10-14 14:37:29  brian
 # - convert from matrix or data.frame to zoo in checkData call
 #
