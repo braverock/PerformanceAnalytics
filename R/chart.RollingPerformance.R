@@ -26,7 +26,7 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 
     for(column in 1:columns) {
         # the drop=FALSE flag is essential for when the zoo object only has one column
-        column.Return.calc = rollapply(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
+        column.Return.calc = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ...)#, na.pad = na.pad, align = "right")
         if(column == 1)
             Return.calc = xts(column.Return.calc)
         else
@@ -48,10 +48,13 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.12 2009-09-17 03:02:38 peter Exp $
+# $Id: chart.RollingPerformance.R,v 1.13 2009-10-02 19:04:48 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-17 03:02:38  peter
+# - added new attributes
+#
 # Revision 1.11  2009-03-20 03:22:53  peter
 # - added xts
 #
