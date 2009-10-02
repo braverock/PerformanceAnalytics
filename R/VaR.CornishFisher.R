@@ -1,5 +1,5 @@
 `VaR.CornishFisher` <-
-function(R, p=0.99, modified = TRUE, clean=c("none", "boudt"))
+function(R, p = 0.95, modified = TRUE, clean = c("none", "boudt"))
 {   # @author Brian G. Peterson (completed/debugged fn)
     # @author Diethelm Wuertz (prototype function)
 
@@ -144,10 +144,13 @@ function(R, p=0.95)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.CornishFisher.R,v 1.21 2008-10-14 14:37:29 brian Exp $
+# $Id: VaR.CornishFisher.R,v 1.22 2009-10-02 18:49:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.21  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.20  2008-08-15 21:42:21  peter
 # - fixed warnings from 'clean' parameter comparison
 #
