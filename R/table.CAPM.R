@@ -42,7 +42,6 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             merged.assets = na.omit(merged.assets) # leaves the overlapping period
             model.lm = lm(merged.assets[,1] ~ merged.assets[,2])
-    
             alpha = coef(model.lm)[[1]]
             beta = coef(model.lm)[[2]]
             htest = cor.test(merged.assets[,1], merged.assets[,2])
@@ -53,6 +52,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
             z = c(
                     alpha,
                     beta,
+                    CAPM.beta.bull(merged.assets[,1], merged.assets[,2]), #inefficient
+                    CAPM.beta.bear(merged.assets[,1], merged.assets[,2]), #inefficient
                     summary(model.lm)$r.squared,
                     ((1+alpha)^scale - 1),
                     htest$estimate,
@@ -66,6 +67,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
             znames = c(
                     "Alpha",
                     "Beta",
+                    "Beta+",
+                    "Beta-",
                     "R-squared",
                     "Annualized Alpha",
                     "Correlation",
@@ -100,10 +103,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.12 2008-06-02 16:05:19 brian Exp $
+# $Id: table.CAPM.R,v 1.13 2009-10-02 19:17:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.11  2007/03/22 13:48:51  peter
 # - removed and edited comments
 #
