@@ -5,34 +5,32 @@ function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
     # DESCRIPTION:
     # FUNCTION:
     R = checkData(R)
-    columns=NCOL(R)
+    R = na.omit(R)
+    rows=NROW(R)
     result = xts(, order.by = time(R))
+    dates=time(R)
 
-    for(column in 1:columns) {
-        Ri = na.omit(R[,column,drop=FALSE])
-        rows = length(Ri)
-        dates=time(Ri)
-        steps = seq(from = rows, to = gap, by = -by)
-        calcs = matrix()
+    calcs = matrix()
 
-        if(width == 0) { # from inception
-            gap = gap
-        }
-        else
-            gap = width
-
-        for(row in steps[order(steps)]) {
-            if (width == 0)  # from inception
-                r = Ri[1:row]
-            else
-                r = Ri[(row-width+1):row]
-            calc = apply(r, MARGIN = 2, FUN = FUN, ...=...)
-            calcs = rbind(calcs, calc)
-        }
-        calcs = xts(calcs[-1],order.by=dates[steps[order(steps)]])
-        result = merge(result, calcs)
+    if(width == 0) { # from inception
+        gap = gap
     }
-    colnames(result)=colnames(R)
+    else
+        gap = width
+    steps = seq(from = rows, to = gap, by = -by)
+    steps = steps[order(steps)]
+    for(row in steps) {
+        if (width == 0)  # from inception
+            r = R[1:row,]
+        else
+            r = R[(row-width+1):row,]
+        calc = apply(r, MARGIN = 2, FUN = FUN, ...=...)
+        calcs = rbind(calcs, calc)
+    }
+    calcs = xts(calcs[-1],order.by=dates[steps])
+    result = merge(result, calcs)
+# print(result)
+#     colnames(result)=colnames(R)
     result = reclass(result, R)
     return (result)
 }
@@ -45,10 +43,13 @@ function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: apply.rolling.R,v 1.4 2009-10-02 18:44:10 peter Exp $
+# $Id: apply.rolling.R,v 1.5 2009-10-02 21:27:39 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-10-02 18:44:10  peter
+# - revamped to provide xtsible windows
+#
 # Revision 1.3  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
