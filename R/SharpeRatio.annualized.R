@@ -48,15 +48,18 @@ function (R, Rf = 0, scale = NA)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.9 2009-09-30 02:48:05 peter Exp $
+# $Id: SharpeRatio.annualized.R,v 1.10 2009-10-02 18:37:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-09-30 02:48:05  peter
+# - added multi-column support
+#
 # Revision 1.8  2009-09-17 03:01:22  peter
 # - using xts internally
 #
