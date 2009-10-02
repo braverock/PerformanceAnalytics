@@ -1,5 +1,5 @@
 `chart.SnailTrail` <-
-function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, cex.legend = 0.8, element.color="darkgray", ...)
+function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, cex.legend = 0.8, element.color="darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -27,8 +27,8 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     #   by setting it to NULL.
 
     x = checkData(R)
-    if(!is.null(dim(rf)))
-        rf = checkData(rf)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
     columns = ncol(x)
     rows = nrow(x)
     columnnames = colnames(x)
@@ -58,16 +58,16 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
         symbolset = rep(symbolset, length.out = columns)
 
     plot.new()
-###
+
     for(column in 1:columns) {
         # Assume we're passed in a series of monthly returns.  First, we'll
         # annualized returns and risk
         y = x[,column,drop=FALSE]
         y = na.omit(y)
-#        y=x[,column,drop=FALSE]
-        returns.column = rollapply(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = Return.annualized, na.pad = FALSE, align = "right",by=stepsize)
+        y= as.zoo(y)
+        returns.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = Return.annualized, by=stepsize))#, na.pad = FALSE, align = "right")
     
-        risk.column = rollapply(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = StdDev.annualized, na.pad = FALSE, align = "right",by=stepsize)
+        risk.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = StdDev.annualized, by=stepsize))#, na.pad = FALSE, align = "right")
 
         maxrows = max(maxrows, length(returns.column))
 
@@ -122,7 +122,6 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
                 labels = NULL
             text(x = risk[,column,drop=FALSE],y = returns[,column,drop=FALSE], labels = labels, adj = -0.2, cex = cex.text, col = colortrail[maxrows:1])
     }
-###
 
     if(ylim[1] != 0){
         abline(h = 0, col = element.color)
@@ -136,7 +135,7 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     # @todo: Drawing Sharpe ratio lines currently throws warnings; change test statement
     if(!is.na(add.sharpe[1])) {
         for(line in add.sharpe) {
-        abline(a=(rf*12),b=add.sharpe[line],col="gray",lty=2)
+        abline(a=(Rf*12),b=add.sharpe[line],col="gray",lty=2)
         }
     }
 
@@ -156,15 +155,18 @@ function (R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.8 2009-04-17 04:13:16 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.9 2009-10-02 18:46:13 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-04-17 04:13:16  peter
+# - removed commented code
+#
 # Revision 1.7  2009-04-07 22:26:57  peter
 # - added element.color, cex.* attributes
 #
