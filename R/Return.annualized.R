@@ -19,20 +19,11 @@ function (R, scale = NA, geometric = TRUE )
 
     # FUNCTION:
     if (is.vector(R)) {
+        R = checkData (R)
         R = na.omit(R)
         n = length(R)
-        #do the correct thing for geometric or simple returns
-        if (geometric) {
-            # geometric returns
-            result = prod(1 + R)^(scale/n) - 1
-        } else {
-            # simple returns
-            result = mean(R) * scale
-        }
-        return(result)
-    }
-    else {
-        R = checkData(R, method = "xts")
+        if(!xtsible(R) & is.na(scale))
+            stop("'R' needs to be timeBased or xtsible, or scale must be specified." )
         if(is.na(scale)) {
             freq = periodicity(R)
             switch(freq$scale,
@@ -45,6 +36,18 @@ function (R, scale = NA, geometric = TRUE )
                 yearly = {scale = 1}
             )
         }
+        #do the correct thing for geometric or simple returns
+        if (geometric) {
+            # geometric returns
+            result = prod(1 + R)^(scale/n) - 1
+        } else {
+            # simple returns
+            result = mean(R) * scale
+        }
+        return(result)
+    }
+    else {
+        R = checkData(R, method = "xts")
         apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
     }
 }
@@ -52,15 +55,19 @@ function (R, scale = NA, geometric = TRUE )
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.9 2009-09-30 01:42:35 peter Exp $
+# $Id: Return.annualized.R,v 1.10 2009-10-02 18:38:42 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-09-30 01:42:35  peter
+# - added multi-column support
+# - detects scale from periodicity
+#
 # Revision 1.8  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
