@@ -11,13 +11,13 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
     # Inputs:
     # R = usually a set of monthly return, but can also be a pre-calculated
     #   return and risk measure (set method = "nocalc", see below).  If the input
-    #   is a set of monthly performance returns, this function will calculate
+    #   is a set of monthly peRformance returns, this function will calculate
     #   the appropriate return and risk summary according to the method flag.
     # method = If method is set to "nocalc" then we assume that R is a column of
     #   return and a column of risk (e.g., annualized returns, annualized risk),
     #   in that order.  Other method cases can be set for different risk/return
     #   calculations.
-    # rf = this is the risk free rate.  Remember to set this to the same
+    # Rf = this is the risk free rate.  Remember to set this to the same
     #   periodicity as the data being passed in.
     # add.sharpe = this draws a Sharpe ratio line that indicates Sharpe ratio
     #   levels.  Lines are drawn with a y-intercept of the risk free rate and
@@ -160,10 +160,13 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.9 2009-10-02 18:46:13 peter Exp $
+# $Id: chart.SnailTrail.R,v 1.10 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-02 18:46:13  peter
+# - modified to use apply.rolling to replace rollapply
+#
 # Revision 1.8  2009-04-17 04:13:16  peter
 # - removed commented code
 #

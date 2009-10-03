@@ -1,5 +1,5 @@
 `VaR.Marginal` <-
-function(R, p=0.99, method=c("modified","gaussian","historical"), weightingvector=NULL)
+function(R, p = 0.95, method=c("modified","gaussian","historical"), weightingvector=NULL)
 {   # @author Brian G. Peterson
 
     # Description:
@@ -69,10 +69,14 @@ function(R, p=0.99, method=c("modified","gaussian","historical"), weightingvecto
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.Marginal.R,v 1.9 2009-08-25 17:43:37 brian Exp $
+# $Id: VaR.Marginal.R,v 1.10 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-08-25 17:43:37  brian
+# - updates to support Marginal VaR
+# - use reclass() in Return.portfolio to return xts object
+#
 # Revision 1.8  2008-10-16 18:45:37  brian
 # - use checkData with method="zoo" instead of checkDataMatrix
 #

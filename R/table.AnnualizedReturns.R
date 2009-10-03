@@ -1,5 +1,5 @@
 `table.AnnualizedReturns` <-
-function (R, scale = 12, Rf = 0, geometric = TRUE, digits = 4)
+function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -48,10 +48,13 @@ function (R, scale = 12, Rf = 0, geometric = TRUE, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.10 2009-10-02 18:55:26 peter Exp $
+# $Id: table.AnnualizedReturns.R,v 1.11 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-02 18:55:26  peter
+# - changed parameter Rf to Rf
+#
 # Revision 1.9  2009-04-14 02:50:59  peter
 # - added geometric parameter to pass calculation method
 #
@@ -63,7 +66,7 @@ function (R, scale = 12, Rf = 0, geometric = TRUE, digits = 4)
 #
 # Revision 1.6  2007/08/16 14:41:09  peter
 # - NA removal now handled in individual calcs
-# - added checkData for rf
+# - added checkData for Rf
 #
 # Revision 1.5  2007/03/22 14:44:48  peter
 # - uses checkData

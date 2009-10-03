@@ -1,30 +1,35 @@
 \name{VaR}
+\Rdversion{1.1}
 \alias{VaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.
 }
 \usage{
-VaR(R , p=0.99, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, ...)
+VaR(R, p = 0.95, method = c("modified", "gaussian","historical", "kernel"),
+           clean = c("none", "boudt", "geltner"),
+                 portfolio_method = c("single", "component","marginal"),
+                 weights = NULL, mu = NULL, sigma = NULL,
+                 m3 = NULL, m4 = NULL, invert = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{method}{ one of "modified","gaussian","historical", "kernel", see Details. }
-  \item{clean} { method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt". }
+  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt". }
   \item{portfolio_method}{ one of "single","component","marginal" defining whether to do univariate, component, or marginal calc, see Details. }
   \item{weights}{ portfolio weighting vector, default NULL, see Details}
-  \item{mu}    { portfolio mu, default NULL, , see Details}
-  \item{sigma} { portfolio sigma matrix, default NULL, see Details}
-  \item{skew}  { portfolio skewness matrix, default NULL, see Details}
-  \item{exkurt}{ portfolio excess kurtosis matrix, default NULL, see Details}
-  \item{m1}    { portfolio m1 matrix, default NULL, see Details}
-  \item{m2}    { portfolio m2 matrix, default NULL, see Details}
-  \item{m3}    { portfolio m3 matrix, default NULL, see Details}
-  \item{m4}    { portfolio m4 matrix, default NULL, see Details}
+  \item{mu}{ portfolio mu, default NULL, , see Details}
+  \item{sigma}{ portfolio sigma matrix, default NULL, see Details}
+%  \item{skew}{ portfolio skewness matrix, default NULL, see Details}
+%  \item{exkurt}{ portfolio excess kurtosis matrix, default NULL, see Details}
+%  \item{m1}{ portfolio m1 matrix, default NULL, see Details}
+%  \item{m2}{ portfolio m2 matrix, default NULL, see Details}
+  \item{m3}{ portfolio m3 matrix, default NULL, see Details}
+  \item{m4}{ portfolio m4 matrix, default NULL, see Details}
   \item{invert}{ TRUE/FALSE whether to invert the VaR measure.  see Details. }
-  
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
 \section{Background}{
@@ -38,7 +43,7 @@ where \eqn{q_{.99}} is the 99\% quantile of the distribution.
 
 This method is also sometimes called \dQuote{historical VaR}, as it is by definition \emph{ex post} analysis of the return distribution, and may be accessed with \code{method="historical"}.
 
-When you don't have a sufficiently long set of returns to use non-parametric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR.traditional}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
+When you don't have a sufficiently long set of returns to use non-parametric or historical VaR, or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}}. See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
 
 Parametric mean-VaR does a better job of accounting for the tails of the distribution by more precisely estimating shape of the distribution tails of the risk quantile. The most common estimate is a normal (or Gaussian) distribution \eqn{R\sim N(\mu,\sigma^{2})} for the return series. In this case, estimation of VaR requires the mean return \eqn{\bar{R}}, the distribution of losses \eqn{\mu}, and the variance of the returns \eqn{\sigma}. In the most common case, parametric VaR is thus calculated by
 
@@ -58,7 +63,7 @@ The limitations of mean Value-at-Risk are well covered in the literature. The li
 
 where $S$ is the skewness of $R$ and $K$ is the excess kurtosis of $R$.
 
-Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR.mean}} and \code{\link{VaR.traditional}} functions are wrappers for the \code{VaR.CornishFisher} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.  This is the default method for the \code{VaR} function, and may be accessed by setting \code{method="modified"}.
+Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR}} and \code{\link{VaR}} functions are wrappers for the \code{VaR} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.  This is the default method for the \code{VaR} function, and may be accessed by setting \code{method="modified"}.
 
 Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the return/risk measure for their portfolio optimization analysis, see \code{\link{SharpeRatio.modified}} for more information.
 
@@ -87,7 +92,7 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 
 Uryasev S, Rockafellar R. Optimization of Conditional VaR. University of Florida, Working paper, 1999.
 
-Epperlein, E., Smillie, A. Cracking VaR with kernels. 2006. RISK 19 (8), 70–74.
+Epperlein, E., Smillie, A. Cracking VaR with kernels. 2006. RISK 19 (8), 70â74.
 
 Denton M. and Jayaraman, J.D. Incremental, Marginal, and Component VaR. Sunguard. 2004.
 
@@ -115,8 +120,10 @@ The prototype of the univariate Cornish Fisher VaR function was completed by Pro
     # now use modified Cornish Fisher calc to take non-normal distribution into account
     VaR(edhec, p=.95, method="modified")
 
-    # now use default p=.99
-    VaR(edhec)
+    # now use p=.99
+    VaR(edhec, p=.99)
+    # or the equivalent alpha=.01
+    VaR(edhec, p=.01)
 
     # now with outliers squished
     VaR(edhec, clean="boudt")

@@ -49,7 +49,7 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
     #
     #     thetas = as.numeric((MA2$coef)/sum(MA2$coef))
 
-        # This measure is well known in the industrial organization literature as the Herfindahl
+        # This measure is well known in the industrial organization literature as the HeRfindahl
         # index, a measure of the concentration of firms in a given industry where yj represents the
         # market share of firm j: Because theta_j A1⁄20; 1; x is also confined to the unit interval,
         # and is minimized when all the theta_j ’s are identical, which implies a value of 1=ðk þ 1Þ
@@ -57,7 +57,7 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
         # In the context of smoothed returns, a lower value of x implies more smoothing, and the upper bound
         # of 1 implies no smoothing, hence we shall refer to x as a ‘‘smoothing index’’.
 
-        smoothing.index = sum(thetas^2) # Calc'd as Herfindahl index would be, referred to as ξ, below
+        smoothing.index = sum(thetas^2) # Calc'd as HeRfindahl index would be, referred to as ξ, below
 
         # The interpretation of this is tricky:
 

@@ -19,11 +19,11 @@ function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard D
 
     # metrics = c(DownsideDeviation(x,MAR=mean(x)), sd(subset(x,x>0)),
     # sd(subset(x,x<0)), DownsideDeviation(x,MAR=MAR),
-    # DownsideDeviation(x,MAR=rf), DownsideDeviation(x,MAR=0),maxDrawdown(x))
+    # DownsideDeviation(x,MAR=Rf), DownsideDeviation(x,MAR=0),maxDrawdown(x))
 
     # metricsNames = c("Semi Deviation", "Gain Deviation", "Loss Deviation",
     # paste("Downside Deviation (MAR=",MAR*scale*100,"%)", sep=""),
-    # paste("Downside Deviation (rf=",rf*scale*100,"%)", sep=""),
+    # paste("Downside Deviation (Rf=",Rf*scale*100,"%)", sep=""),
     # paste("Downside Deviation (0%)", sep=""), "Maximum Drawdown" )
 
     # Here's how it's working right now:
@@ -102,10 +102,13 @@ function(R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard De
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Arbitrary.R,v 1.7 2008-10-14 14:37:29 brian Exp $
+# $Id: table.Arbitrary.R,v 1.8 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-10-14 14:37:29  brian
+# - convert from matrix or data.frame to zoo in checkData call
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

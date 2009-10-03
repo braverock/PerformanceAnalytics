@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: VaR.R,v 1.15 2009-10-01 19:12:24 brian Exp $
+# $Id: VaR.R,v 1.16 2009-10-03 18:23:55 brian Exp $
 ###############################################################################
 
 VaR <-
-function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, ...)
+function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt","geltner"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -119,10 +119,13 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: VaR.R,v 1.15 2009-10-01 19:12:24 brian Exp $
+# $Id: VaR.R,v 1.16 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-10-01 19:12:24  brian
+# - update probability to 95% by default
+#
 # Revision 1.14  2009-10-01 19:10:40  brian
 # - label rows
 # - invert historical VaR for consistency with other univariate measures

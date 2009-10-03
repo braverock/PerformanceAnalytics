@@ -60,10 +60,13 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.18 2009-10-03 05:01:09 peter Exp $
+# $Id: chart.RollingRegression.R,v 1.19 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2009-10-03 05:01:09  peter
+# - reversion to prior, still working, version
+#
 # Revision 1.16  2009-04-18 02:56:53  peter
 # - argument cleanup and codoc issues
 #
@@ -92,7 +95,7 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # - replace drop=F with drop=FALSE for R CMD check compatibility
 #
 # Revision 1.7  2007/03/14 22:54:13  peter
-# - fixed rf calc
+# - fixed Rf calc
 #
 # Revision 1.6  2007/03/14 04:53:47  peter
 # - uses checkData function
@@ -105,10 +108,10 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 #
 # Revision 1.4  2007/02/07 15:45:33  peter
 # - repaired graphic parameter passing
-# - rf needs a data check and testing
+# - Rf needs a data check and testing
 #
 # Revision 1.3  2007/02/07 14:58:36  peter
-# - added rf and calculation of excess returns
+# - added Rf and calculation of excess returns
 #
 # Revision 1.2  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo

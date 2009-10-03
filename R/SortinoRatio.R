@@ -4,7 +4,7 @@ function (R, MAR = 0)
   # modified from function by Sankalp Upadhyay <sankalp.upadhyay [at] gmail [dot] com> with permission
 
     # Description:
-    # Sortino proposed to better account for skill and excess performance
+    # Sortino proposed to better account for skill and excess peRformance
     # by using only downside semivariance as the measure of risk.
 
     # R     return vector
@@ -30,10 +30,13 @@ function (R, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SortinoRatio.R,v 1.6 2009-10-01 01:46:19 peter Exp $
+# $Id: SortinoRatio.R,v 1.7 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-10-01 01:46:19  peter
+# - added multi-column support
+#
 # Revision 1.5  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

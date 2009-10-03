@@ -3,7 +3,7 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 { # @author Peter Carl
 
     # DESCRIPTION:
-    # A wrapper to create a chart of rolling performance metrics in a line chart
+    # A wrapper to create a chart of rolling peRformance metrics in a line chart
 
     # Inputs:
     # R: a matrix, data frame, or timeSeries of returns
@@ -48,10 +48,13 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.13 2009-10-02 19:04:48 peter Exp $
+# $Id: chart.RollingPerformance.R,v 1.14 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-02 19:04:48  peter
+# - uses apply.rolling rather than rollapply
+#
 # Revision 1.12  2009-09-17 03:02:38  peter
 # - added new attributes
 #

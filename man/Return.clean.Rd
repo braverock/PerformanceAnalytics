@@ -6,13 +6,14 @@
 A function that provides access to multiple methods for cleaning outliers from return data.
 }
 \usage{
-Return.clean(R, method = "boudt", ...)
+Return.clean(R, method = c("none", "boudt", "geltner"), alpha = .01, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{method}{ currently only one method is supported, "boudt", which applies the function \code{\link{clean.boudt}} to R }
-  \item{...}{ parameters passed into the underlying cleaning function }
+  \item{method}{ one of "none", "boudt", which applies the function \code{\link{clean.boudt}} or "geltner" which applies the function \code{\link{Return.Geltner}}to R }
+  \item{alpha}{ the percentage of outliers you want to clean }
+  \item{\dots}{ additional parameters passed into the underlying cleaning function }
 }
 \details{
 This is a wrapper for offering multiple data cleaning methods for data objects containing returns.

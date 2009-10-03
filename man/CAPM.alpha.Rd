@@ -8,13 +8,13 @@ This is a wrapper for calculating a CAPM alpha.
 "Alpha" purports to be a measure of a manager's skill by measuring the portion of the managers returns that are not attributable to "Beta", or the performance relative to a benchmark.
 }
 \usage{
-CAPM.alpha(Ra, Rb, rf = 0)
+CAPM.alpha(Ra, Rb, Rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
 }
 \value{
 CAPM alpha

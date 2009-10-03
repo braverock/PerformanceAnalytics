@@ -12,7 +12,7 @@ function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down")
     #     periods that the investment was up (down) when the benchmark was up (down),
     #     divided by the number of periods that the Benchmark was up (down).
     #   Up (Down) Percent Ratio: this is a measure of the number of periods
-    #     that the investment outperformed the benchmark when the benchmark was
+    #     that the investment outpeRformed the benchmark when the benchmark was
     #     up (down), divided by the number of periods that the benchmark was up (down).
     #     Unlike the prior two metrics, in both cases a higher value is better.
 
@@ -104,10 +104,13 @@ function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpDownRatios.R,v 1.9 2009-10-01 14:33:00 peter Exp $
+# $Id: UpDownRatios.R,v 1.10 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-01 14:33:00  peter
+# - added multiple calc and row labeling
+#
 # Revision 1.8  2009-10-01 03:07:37  peter
 # - added multi-column support
 #

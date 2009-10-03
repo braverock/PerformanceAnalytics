@@ -5,7 +5,7 @@ function (Ra, Rf = 0)
     # DESCRIPTION:
     # The Sharpe ratio is simply the return per unit of risk (represented by
     # variability).  The higher the Sharpe ratio, the better the combined
-    # performance of "risk" and return.
+    # peRformance of "risk" and return.
 
     # The Sharpe Ratio is a risk-adjusted measure of return that uses
     # standard deviation to represent risk.
@@ -13,7 +13,7 @@ function (Ra, Rf = 0)
     # Inputs:
     # R: in this case, the function anticipates having a return stream as input,
     #    rather than prices.
-    # rf: the risk free rate MUST be in the same periodicity as the data going in.
+    # Rf: the risk free rate MUST be in the same periodicity as the data going in.
 
     # Outputs:
     # This function returns a Sharpe ratio for the same periodicity of the
@@ -45,15 +45,18 @@ function (Ra, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.R,v 1.8 2009-09-30 02:22:33 peter Exp $
+# $Id: SharpeRatio.R,v 1.9 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-09-30 02:22:33  peter
+# - added multi-column support
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
 # Revision 1.6  2007/07/12 21:45:09  brian
-# -calculate stddev on excess return to account for a rf series, per Sharpe paper
+# -calculate stddev on excess return to account for a Rf series, per Sharpe paper
 #
 # Revision 1.5  2007/04/09 03:45:04  peter
 # - uses checkData

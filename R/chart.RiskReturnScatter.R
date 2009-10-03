@@ -1,24 +1,24 @@
 `chart.RiskReturnScatter` <-
-function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = 12, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
+function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = NA, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
 
     # A wrapper to create a scatter chart of annualized returns versus
-    # annualized risk (standard deviation) for comparing manager performance.
+    # annualized risk (standard deviation) for comparing manager peRformance.
     # Also puts a box plot into the margins to help identify the relative
-    # performance quartile.
+    # peRformance quartile.
 
     # Inputs:
     # R = usually a set of monthly return, but can also be a pre-calculated
     #   return and risk measure (set method = "nocalc", see below).  If the input
-    #   is a set of monthly performance returns, this function will calculate
+    #   is a set of monthly peRformance returns, this function will calculate
     #   the appropriate return and risk summary according to the method flag.
     # method = If method is set to "nocalc" then we assume that R is a column of
     #   return and a column of risk (e.g., annualized returns, annualized risk),
     #   in that order.  Other method cases can be set for different risk/return
     #   calculations.
-    # rf = this is the risk free rate.  Remember to set this to the same
+    # Rf = this is the risk free rate.  Remember to set this to the same
     #   periodicity as the data being passed in.
     # add.sharpe = this draws a Sharpe ratio line that indicates Sharpe ratio
     #   levels.  Lines are drawn with a y-intercept of the risk free rate and
@@ -145,10 +145,13 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.14 2009-10-02 18:54:10 peter Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.15 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2009-10-02 18:54:10  peter
+# - changed parameter Rf to Rf
+#
 # Revision 1.13  2009-04-17 04:14:12  peter
 # - added parameters for geometry, scale
 #

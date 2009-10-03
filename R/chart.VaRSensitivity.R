@@ -1,5 +1,5 @@
 `chart.VaRSensitivity` <-
-function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR"), clean=c("none", "boudt"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)
+function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)
 { # @author Peter Carl
 
     R = checkData(R)

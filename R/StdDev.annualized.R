@@ -13,7 +13,7 @@ function (x, scale = NA)
                 hourly = {stop("Data periodicity too high")},
                 daily = {scale = 252},
                 weekly = {scale = 52},
-                monthly = {scale = 12},
+                monthly = {scale = NA},
                 quarterly = {scale = 4},
                 yearly = {scale = 1}
             )
@@ -30,23 +30,9 @@ function (x, scale = NA)
 }
 
 `StdDev.annualized` <-
-function (Ra, scale = NA)
+function (R, scale = NA)
 {   # wrapper function for backwards compatibility
-    sd.multiperiod(Ra, scale = scale)
-}
-
-###############################################################################
-# sd function wrappers for backwards compatibility
-`StdDev` <-
-function(Ra)
-{ # wrapper for backwards compatibility
-    return(sd(Ra))
-}
-
-`std` <-
-function(Ra) {
-    # NOTE: std function is listed in the doc for fBasics, but not implemented
-    return(sd(Ra))
+    sd.multiperiod(R, scale = scale)
 }
 
 ###############################################################################
@@ -57,10 +43,13 @@ function(Ra) {
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.16 2009-10-02 18:36:38 peter Exp $
+# $Id: StdDev.annualized.R,v 1.17 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2009-10-02 18:36:38  peter
+# - fixed scale testing
+#
 # Revision 1.15  2009-09-30 03:00:04  peter
 # - added periodicity for setting scale
 #

@@ -24,7 +24,7 @@ The idea here is to be able to pass in sets of metrics and values, like:
 
 metrics = c(DownsideDeviation(x,MAR=mean(x)), sd(subset(x,x>0)),
 sd(subset(x,x<0)), DownsideDeviation(x,MAR=MAR),
-DownsideDeviation(x,MAR=rf), DownsideDeviation(x,MAR=0),maxDrawdown(x))
+DownsideDeviation(x,MAR=Rf=0), DownsideDeviation(x,MAR=0),maxDrawdown(x))
 
 metricsNames = c("Semi Deviation", "Gain Deviation", "Loss Deviation",
 paste("Downside Deviation (MAR=",MAR*scale*100,"\%)", sep=""),
@@ -32,7 +32,7 @@ paste("Downside Deviation (rf=",rf*scale*100,"\%)", sep=""),
 paste("Downside Deviation (0\%)", sep=""), "Maximum Drawdown" )
 
 Here's how it's working right now:
-> table.Arbitrary(monthlyReturns.ts,metrics=c("VaR.CornishFisher","mean"),
+> table.Arbitrary(monthlyReturns.ts,metrics=c("VaR","mean"),
 metricsNames=c("modVaR","mean"),p=.95)
 \preformatted{
            Actual   S&P500TR
@@ -41,7 +41,7 @@ mean   0.00945000 0.01013684
 }
 
 Passing in two different sets of attributes to the same function doesn't quite work currently.  The issue is apparent in:
-> table.Arbitrary(edhec,metrics=c("VaR.CornishFisher", "VaR.CornishFisher"),
+> table.Arbitrary(edhec,metrics=c("VaR", "VaR"),
   metricsNames=c("Modified VaR","Traditional VaR"), modified=c(TRUE,FALSE))
 \preformatted{
                 Convertible.Arbitrage CTA.Global Distressed.Securities
@@ -58,8 +58,8 @@ Modified VaR          0.07510643     0.04123920     0.1071894     0.04525633
 Traditional VaR       0.07510643     0.04123920     0.1071894     0.04525633
 }
 
-In the case of this example, you would simply call VaR.traditional as the second function, like so:
-> table.Arbitrary(edhec,metrics=c("VaR.CornishFisher", "VaR.traditional"),metricsNames=c("Modified VaR","Traditional VaR"))
+In the case of this example, you would simply call VaR as the second function, like so:
+> table.Arbitrary(edhec,metrics=c("VaR", "VaR"),metricsNames=c("Modified VaR","Traditional VaR"))
 \preformatted{
                 Convertible.Arbitrage CTA.Global Distressed.Securities
 Modified VaR               0.04081599 0.04567670            0.10746831
@@ -83,7 +83,7 @@ A table with calculated metrics for each column
 \author{ Peter Carl }
 \examples{
 data(edhec)
-table.Arbitrary(edhec,metrics=c("VaR.CornishFisher", "VaR.traditional"),metricsNames=c("Modified VaR","Traditional VaR"))
+table.Arbitrary(edhec,metrics=c("VaR", "VaR"),metricsNames=c("Modified VaR","Traditional VaR"))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

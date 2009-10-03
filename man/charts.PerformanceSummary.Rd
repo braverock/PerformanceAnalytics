@@ -6,7 +6,7 @@
 For a set of returns, create a wealth index chart, bars for monthly performance, and underwater chart for drawdown.
 }
 \usage{
-charts.PerformanceSummary(R, rf = 0, main = NULL, methods = c("ModifiedVaR",
+charts.PerformanceSummary(R, Rf = 0, main = NULL, methods = c("ModifiedVaR",
                  "HistoricalVaR"), width = 0, event.labels = NULL, ylog
                  = FALSE, wealth.index = FALSE, gap = 12, begin =
                  c("first", "axis"), legend.loc = "topleft", ...)
@@ -14,7 +14,7 @@ charts.PerformanceSummary(R, rf = 0, main = NULL, methods = c("ModifiedVaR",
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, as in \code{plot} }
   \item{methods}{ Used to select the risk parameter to use in the chart.BarVaR.
     May be any of:

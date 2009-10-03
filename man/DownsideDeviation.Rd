@@ -9,13 +9,13 @@ Downside deviation, semideviation, and semivariance are measures of downside ris
 }
 
 \usage{
-DownsideDeviation(Ra, MAR = 0, method=c("subset","full"))
-SemiDeviation(Ra)
-SemiVariance(Ra)
+DownsideDeviation(R, MAR = 0, method=c("subset","full"))
+SemiDeviation(R)
+SemiVariance(R)
 }
 
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
   \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series below the MAR as the denominator, defaults to "subset"}
 }

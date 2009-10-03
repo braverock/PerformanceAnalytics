@@ -6,7 +6,7 @@
 Keating and Shadwick (2002) proposed Omega (referred to as Gamma in their original paper) as a way to capture all of the higher moments of the returns distribution.
 }
 \usage{
-Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0)
+Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), Rf = 0, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -14,7 +14,8 @@ Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), outp
   \item{L}{ L is the loss threshold that can be specified as zero, return from a benchmark index, or an absolute rate of return - any specified level }
   \item{method}{ one of: simple, interp, binomial, blackscholes }
   \item{output}{ one of: point (in time), or full (distribution of Omega) }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
+  \item{\dots}{ any other passthru parameters }
 }
 \details{
 Mathematically, Omega is:
@@ -35,9 +36,9 @@ Kazemi, Schneeweis, and Gupta (2003), in "Omega as a Performance Measure" show t
 where C(L) is essentially the price of a European call option written on the investment and P(L) is essentially the price of a European put option written on the investment.  The maturity for both options is one period (e.g., one month) and L is the strike price of both options.
 
 The numerator and the denominator can be expressed as:
-  exp(-rf) * E[max(x - L, 0)]
-  exp(-rf) * E[max(L - x, 0)]
-with exp(-rf) calculating the present values of the two, where rf is the per-period riskless rate.
+  exp(-Rf=0) * E[max(x - L, 0)]
+  exp(-Rf=0) * E[max(L - x, 0)]
+with exp(-Rf=0) calculating the present values of the two, where rf is the per-period riskless rate.
 
 The first three methods implemented here focus on that observation. The first method takes the simplification described above.  The second uses the Black-Scholes option pricing as implemented in fOptions.  The third uses the binomial pricing model from fOptions.  The second and third methods are not implemented here.
 

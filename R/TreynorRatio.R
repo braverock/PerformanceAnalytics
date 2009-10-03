@@ -26,7 +26,7 @@ function (Ra, Rb, Rf = 0, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -59,10 +59,14 @@ function (Ra, Rb, Rf = 0, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TreynorRatio.R,v 1.8 2009-10-01 01:47:21 peter Exp $
+# $Id: TreynorRatio.R,v 1.9 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-01 01:47:21  peter
+# - added multi-column support
+# - added periodicity for scaling
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

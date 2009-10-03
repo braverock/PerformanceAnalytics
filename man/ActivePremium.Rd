@@ -8,7 +8,7 @@ The return on an investment's annualized return minus the benchmark's annualized
 Active Premium = Investment's annualized return - Benchmark's annualized return
 }
 \usage{
-ActivePremium(Ra, Rb, scale = 12)
+ActivePremium(Ra, Rb, scale = NA)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

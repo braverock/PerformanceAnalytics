@@ -11,16 +11,16 @@ The Capital Asset Pricing Model, from which the popular \code{\link{SharpeRatio}
 These utility functions provide values for various measures proposed in the CAPM.
 }
 \usage{
-CAPM.CML.slope(Rb, rf = 0 )
-CAPM.CML(Ra, Rb, rf = 0)
-CAPM.RiskPremium(Ra, rf = 0)
-CAPM.SML.slope(Rb, rf = 0)
+CAPM.CML.slope(Rb, Rf = 0 )
+CAPM.CML(Ra, Rb, Rf = 0)
+CAPM.RiskPremium(Ra, Rf = 0)
+CAPM.SML.slope(Rb, Rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
 }
 \value{
 CAPM value for function called
@@ -38,7 +38,7 @@ Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions 
 
 \code{CAPM.RiskPremium} is the premium returned to the investor over the risk free asset
 
-\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-rf)}
+\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-Rf=0)}
 
 \code{CAPM.CML} calculates the expected return of the asset against the benchmark Capital Market Line
 
@@ -74,13 +74,13 @@ Rb = managers[,"SP500.TR",drop=FALSE]
 
 CAPM.CML.slope(Rb, rf )
 
-CAPM.CML(managers[,"HAM1",drop=FALSE], Rb, rf)
+CAPM.CML(managers[,"HAM1",drop=FALSE], Rb, Rf=0)
 
-CAPM.RiskPremium(Rb, rf)
+CAPM.RiskPremium(Rb, Rf=0)
 
-CAPM.RiskPremium(managers[,"HAM1",drop=FALSE], rf)
+CAPM.RiskPremium(managers[,"HAM1",drop=FALSE], Rf=0)
 
-CAPM.SML.slope(Rb, rf)
+CAPM.SML.slope(Rb, Rf=0)
 
 # should create plots like in Ruppert 7.1 7.2
 

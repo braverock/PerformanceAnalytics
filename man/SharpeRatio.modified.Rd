@@ -1,6 +1,5 @@
 \name{SharpeRatio.modified}
 \alias{SharpeRatio.modified}
-\alias{modSharpe}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate a modified Sharpe Ratio of Return/modVaR }
 \description{
@@ -13,25 +12,18 @@ A number of papers now recommend using a "modified Sharpe" ratio using a Modifie
 We have recently extended this concept to create multivariate modified Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR, Gaussian Expected Shortfall, and modified Expected Shortfall. See \code{\link{MultivariateRisk}}.
 }
 \usage{
-SharpeRatio.modified(Ra, rf = 0, p = 0.95, scale = 1)
+SharpeRatio.modified(R, Rf = 0, p = 0.95, method = c("VaR","ES"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{rf}{ risk free rate, in same period as your returns }
-  \item{p}{ confidence level for calculation, default p=.99 }
-  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
+  \item{p}{ confidence level for calculation, default p=.95 }
+  \item{method}{ one of "VaR" or "ES" to use as the denominator }
+  \item{\dots}{ any other passthru parameters }
 }
-\details{
-\deqn{modSharpe=\frac{(\overline{R_{a}-R_{f}})}{modVaR_{R_{a},p}}}{modSharpe=mean(Ra-rf)/(modVaR(Ra,p))}
-
-or for an annualized measure:
-
-\deqn{modSharpe=\frac{\sqrt[n]{prod(1+(R_{a}-R_{f}))^{scale}}-1}{\sqrt{scale}\cdot modVaR_{R_{a},p}}}{modSharpe=Return.annualized(Ra,rf)/(modVaR(Ra,p)*sqrt(scale))}
-}
-
 \value{
-This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR), or scaled to multiple periods according to the scale parameter
+This function returns a modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)
 }
 \references{
 Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
@@ -39,7 +31,7 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 \author{ Brian G. Peterson }
 \note{}
 \seealso{
-    \code{\link{VaR.CornishFisher}} \cr
+    \code{\link{VaR}} \cr
     \code{\link{SharpeRatio}} \cr
     \code{\link{MultivariateRisk}}
 }
@@ -54,7 +46,7 @@ rf = download.RiskFree(start=start, end=end)
 
 SharpeRatio.modified(edhec[, 6, drop = FALSE])
 SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = .04/12)
-SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = rf)
+SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = Rf=0)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

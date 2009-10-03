@@ -6,12 +6,12 @@
 A chart that shows rolling calculations of annualized return and annualized standard deviation have proceeded through time.  Lines and dots are darker for more recent time periods.
 }
 \usage{
-chart.SnailTrail(R, rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1, 2, 3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty = 1, lwd = 2, cex.axis = 0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, cex.legend = 0.8, element.color = "darkgray", ...)
+chart.SnailTrail(R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1, 2, 3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty = 1, lwd = 2, cex.axis = 0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, cex.legend = 0.8, element.color = "darkgray", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, same as in \code{plot} }
   \item{add.names}{ plots the row name with the data point.  default TRUE. Can be removed by setting it to NULL }
   \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }

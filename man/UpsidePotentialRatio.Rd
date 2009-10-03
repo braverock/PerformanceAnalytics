@@ -6,11 +6,11 @@
 Sortino proposed an improvement on the Sharpe Ratio to better account for skill and excess performance by using only downside semivariance as the measure of risk.  That measure is the \code{\link{SortinoRatio}}. This function, Upside Potential Ratio, was a further improvement, extending the measurement of only upside on the numerator, and only downside of the denominator of the ratio equation.
 }
 \usage{
-UpsidePotentialRatio(Ra, MAR = 0, method=c("subset","full"))
-UPR(Ra, MAR = 0, method=c("subset","full"))
+UpsidePotentialRatio(R, MAR = 0, method=c("subset","full"))
+UPR(R, MAR = 0, method=c("subset","full"))
 }
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
   \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series above(below) the MAR as the denominator, defaults to "subset"}
 }

@@ -18,7 +18,7 @@ function (Ra, Rb, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -52,10 +52,13 @@ function (Ra, Rb, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ActivePremium.R,v 1.7 2009-09-30 01:31:43 peter Exp $
+# $Id: ActivePremium.R,v 1.8 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-09-30 01:31:43  peter
+# - added multiple-column support
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

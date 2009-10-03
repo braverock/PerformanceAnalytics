@@ -20,7 +20,7 @@ function (R, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -52,7 +52,7 @@ function (R, scale=NA, excess=.1)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -70,10 +70,13 @@ function (R, scale=NA, excess=.1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CalmarRatio.R,v 1.5 2009-10-01 01:53:07 peter Exp $
+# $Id: CalmarRatio.R,v 1.6 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-10-01 01:53:07  peter
+# - missed one
+#
 # Revision 1.4  2009-10-01 01:52:13  peter
 # - changed Ra to R for consistency
 #

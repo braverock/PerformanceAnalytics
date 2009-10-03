@@ -5,7 +5,7 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
     # DESCRIPTION:
 
     # A wrapper to create a scatter chart of upside capture versus 
-    # downside capture for comparing manager performance.
+    # downside capture for comparing manager peRformance.
 
     # Inputs:
     # R = usually a set of monthly return.
@@ -77,10 +77,13 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CaptureRatios.R,v 1.3 2009-06-02 03:16:01 peter Exp $
+# $Id: chart.CaptureRatios.R,v 1.4 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-06-02 03:16:01  peter
+# - corrected order for coloring
+#
 # Revision 1.2  2009-04-17 04:15:56  peter
 # - parameter cleanup
 # - adjusted placement of benchmark name label

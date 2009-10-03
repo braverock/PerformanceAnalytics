@@ -1,5 +1,5 @@
 `table.HigherMoments` <-
-function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
+function (Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -27,8 +27,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
     # FUNCTION:
     Ra = checkData(Ra, method = "zoo")
     Rb = checkData(Rb, method = "zoo")
-    if(!is.null(dim(rf)))
-        rf = checkData(rf, method = "zoo")
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf, method = "zoo")
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -36,8 +36,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
 
-    Ra.excess = Return.excess(Ra, rf)
-    Rb.excess = Return.excess(Rb, rf)
+    Ra.excess = Return.excess(Ra, Rf)
+    Rb.excess = Return.excess(Rb, Rf)
 
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
@@ -86,12 +86,15 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.8 2008-06-02 16:05:19 brian Exp $
+# $Id: table.HigherMoments.R,v 1.9 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2008-06-02 16:05:19  brian
+# - update copyright to 2004-2008
+#
 # Revision 1.7  2007/08/16 14:48:43  peter
-# - added checkData for rf
+# - added checkData for Rf
 #
 # Revision 1.6  2007/03/22 13:49:42  peter
 # - cleaned up comments

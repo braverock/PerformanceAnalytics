@@ -8,7 +8,7 @@ function (Ra, Rb, Rf = 0)
     # Inputs:
     # Ra: vector of returns for the asset being tested
     # Rb: vector of returns for the benchmark the asset is being gauged against
-    # rf: risk free rate in the same periodicity as the returns.  May be a vector
+    # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
 
     # Output:
@@ -173,12 +173,15 @@ function (Ra, Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.12 2009-09-29 14:29:47 peter Exp $
+# $Id: CAPM.beta.R,v 1.13 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-29 14:29:47  peter
+# - rewrite of function using apply for multi-column support
+#
 # Revision 1.11  2009-09-15 20:34:45  peter
-# - fixed checkData for rf such that a single value can be passed
+# - fixed checkData for Rf such that a single value can be passed
 #
 # Revision 1.10  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
@@ -199,7 +202,7 @@ function (Ra, Rb, Rf = 0)
 # - standardize on Ra as first argument where that wasn't previously true
 #
 # Revision 1.5  2007/02/28 03:26:00  peter
-# - added checkDataVector for rf
+# - added checkDataVector for Rf
 #
 # Revision 1.4  2007/02/08 21:43:39  brian
 # - standardize parameters to R and Rb for consistency with other functions

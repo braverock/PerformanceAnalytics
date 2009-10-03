@@ -31,7 +31,7 @@ function (R, scale = NA, geometric = TRUE )
                 hourly = {stop("Data periodicity too high")},
                 daily = {scale = 252},
                 weekly = {scale = 52},
-                monthly = {scale = 12},
+                monthly = {scale = NA},
                 quarterly = {scale = 4},
                 yearly = {scale = 1}
             )
@@ -60,10 +60,14 @@ function (R, scale = NA, geometric = TRUE )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.10 2009-10-02 18:38:42 peter Exp $
+# $Id: Return.annualized.R,v 1.11 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-02 18:38:42  peter
+# - moved scale test
+# - revised copyright
+#
 # Revision 1.9  2009-09-30 01:42:35  peter
 # - added multi-column support
 # - detects scale from periodicity

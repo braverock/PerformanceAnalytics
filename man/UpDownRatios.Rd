@@ -6,14 +6,14 @@
 Calculate metrics on how the asset in R performed in up and down markets, measured by periods when the benchmark asset was up or down.
 }
 \usage{
-UpDownRatios(Ra, Rb, method = c("capture", "number", "percent"), side = c("up", "down"))
+UpDownRatios(Ra, Rb, method = c("Capture", "Number", "Percent"), side = c("Up", "Down"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
-  \item{method}{ "capture", "number", or "percentage" to indicate which measure to return }
-  \item{side}{ "up" or "down" market statistics }
+  \item{method}{ "Capture", "Number", or "Percent" to indicate which measure to return }
+  \item{side}{ "Up" or "Down" market statistics }
 }
 \details{
 This is a function designed to calculate several related metrics:

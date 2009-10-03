@@ -1,5 +1,5 @@
 `Omega` <-
-function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), rf = 0, ...)
+function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), Rf = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -31,9 +31,9 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     # one period (e.g., one month) and L is the strike price of both options.
 
     # The numerator and the denominator can be expressed as:
-    #   exp(-rf) * E[max(x - L, 0)]
-    #   exp(-rf) * E[max(L - x, 0)]
-    # with exp(-rf) calculating the present values of the two, where rf is
+    #   exp(-Rf) * E[max(x - L, 0)]
+    #   exp(-Rf) * E[max(L - x, 0)]
+    # with exp(-Rf) calculating the present values of the two, where Rf is
     # the per-period riskless rate.
 
     # The first three methods implemented here focus on that observation.
@@ -54,8 +54,8 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 
         switch(method,
             simple = {
-                numerator = exp(-rf) * mean(pmax(x - L, 0))
-                denominator = exp(-rf) * mean(pmax(L - x, 0))
+                numerator = exp(-Rf) * mean(pmax(x - L, 0))
+                denominator = exp(-Rf) * mean(pmax(L - x, 0))
                 omega = numerator/denominator
             },
             binomial = {
@@ -94,7 +94,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     }
     else {
         R = checkData(R, method = "matrix", ... = ...)
-        apply(R, 2, Omega, L = L, method = method, output = output, rf = rf,
+        apply(R, 2, Omega, L = L, method = method, output = output, Rf = Rf,
             ... = ...)
     }
 }
@@ -107,10 +107,13 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.12 2009-09-24 03:03:21 peter Exp $
+# $Id: Omega.R,v 1.13 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-24 03:03:21  peter
+# - added multicolumn support
+#
 # Revision 1.11  2008-09-29 13:47:18  brian
 # - fix to use pmax per patch submitted by Ryan Sheftel <at> Malbec Pertners
 #

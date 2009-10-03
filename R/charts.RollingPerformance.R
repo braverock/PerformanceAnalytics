@@ -60,10 +60,13 @@ function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.10 2009-10-02 18:57:47 peter Exp $
+# $Id: charts.RollingPerformance.R,v 1.11 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-02 18:57:47  peter
+# - changed parameter Rf to Rf
+#
 # Revision 1.9  2009-03-20 03:22:53  peter
 # - added xts
 #

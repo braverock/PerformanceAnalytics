@@ -1,4 +1,4 @@
-\name{BetaCo-Moments}
+\name{Beta Co-Moments}
 \alias{BetaCoMoments}
 \alias{BetaCoVariance}
 \alias{BetaCoSkewness}
@@ -13,13 +13,14 @@
 }
 \usage{
 BetaCoVariance(Ra, Rb)
-BetaCoSkewness(Ra, Rb)
+BetaCoSkewness(Ra, Rb, test = TRUE)
 BetaCoKurtosis(Ra, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, or secondary asset returns to compare against }
+  \item{test}{TRUE/FALSE, whether to make sure the return is in the same direction as the \code{\link{skewness}}}
 }
 \details{
 The co-moments do not allow the marginal impact of an asset on a portfolio to be directly measured.  Instead, Martellini and Zieman (2007) develop a framework that assesses the potential diversification of an asset relative to a portfolio. They use higher moment betas to estimate how much risk will be impacted by adding an asset to a portfolio may have, in terms of symetric risk (i.e., volatility), in asymmetry risk (i.e., skewness), and extreme risks (i.e. kurtosis). That allows them to show that adding an asset to a portfolio (or benchmark) will reduce the portfolio's variance to be reduced if the second-order beta of the asset with respect to the portfolio is less than one.  They develop the same concepts for the third and fourth order moments.  The authors offer these higher moment betas as a measure of the diversification potential of an asset.

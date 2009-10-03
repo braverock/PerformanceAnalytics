@@ -1,16 +1,16 @@
 `charts.PerformanceSummary` <-
-function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
+function (R, Rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
-    # A wrapper to create a wealth index chart, bars for monthly performance,
+    # A wrapper to create a wealth index chart, bars for monthly peRformance,
     # and underwater chart for drawdown.
 
     # Inputs:
     # R: a matrix, data frame, or timeSeries, usually a set of monthly returns.
     #   The first column is assumed to be the returns of interest, the next
     #   columns are assumed to be relevant benchmarks for comparison.
-    # rf: this is the risk free rate.  Remember to set this to the same
+    # Rf: this is the risk free rate.  Remember to set this to the same
     #   periodicity as the data being passed in.
     # method: Used to select the risk parameter to use in the chart.BarVaR.  May
     #   be any of:
@@ -106,10 +106,13 @@ function (R, rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.PerformanceSummary.R,v 1.20 2009-08-31 16:35:48 brian Exp $
+# $Id: charts.PerformanceSummary.R,v 1.21 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2009-08-31 16:35:48  brian
+# - add periodicity to label of chart.BarVaR
+#
 # Revision 1.19  2009-03-20 03:22:53  peter
 # - added xts
 #

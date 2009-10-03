@@ -10,7 +10,7 @@ InformationRatio = ActivePremium/TrackingError
 This relates the degree to which an investment has beaten the benchmark to the consistency with which the investment has beaten the benchmark.
 }
 \usage{
-InformationRatio(Ra, Rb, scale = 12)
+InformationRatio(Ra, Rb, scale = NA)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

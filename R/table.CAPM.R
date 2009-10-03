@@ -1,5 +1,5 @@
 `table.CAPM` <-
-function (Ra, Rb, scale = 12, rf = 0, digits = 4)
+function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -33,8 +33,8 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
 
-    Ra.excess = Return.excess(Ra, rf)
-    Rb.excess = Return.excess(Rb, rf)
+    Ra.excess = Return.excess(Ra, Rf)
+    Rb.excess = Return.excess(Rb, Rf)
 
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
@@ -103,10 +103,13 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.13 2009-10-02 19:17:08 peter Exp $
+# $Id: table.CAPM.R,v 1.14 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-02 19:17:08  peter
+# - added up and down market beta measures
+#
 # Revision 1.12  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
@@ -128,7 +131,7 @@ function (Ra, Rb, scale = 12, rf = 0, digits = 4)
 # - remove redundant comments
 #
 # Revision 1.6  2007/02/28 03:22:39  peter
-# - added checkDataVector function to rf
+# - added checkDataVector function to Rf
 #
 # Revision 1.5  2007/02/26 22:04:36  brian
 # - changes in functions to pass "R CMD check" for package

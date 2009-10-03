@@ -7,16 +7,16 @@ Summary of the higher moements and Co-Moments of the return distribution. Used t
 Also called "systematic" moments by several papers.
 }
 \usage{
-table.HigherMoments(Ra, Rb, scale = 12, rf = 0, digits = 4, method = "moment")
+table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
-  \item{rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, in same period as your returns }
   \item{digits}{ number of digits to round results to }
-  \item{method}{ method to use when computing \code{\link[fBasics]{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
+  \item{method}{ method to use when computing \code{\link{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
 }
 \value{
 table of summary statistics

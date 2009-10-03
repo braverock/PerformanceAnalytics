@@ -65,10 +65,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.17 2009-10-02 19:17:45 peter Exp $
+# $Id: charts.RollingRegression.R,v 1.18 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2009-10-02 19:17:45  peter
+# - changed parameter Rf to Rf
+#
 # Revision 1.16  2009-03-20 03:22:53  peter
 # - added xts
 #

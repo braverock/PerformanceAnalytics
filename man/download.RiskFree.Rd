@@ -30,8 +30,8 @@ matrix of simple or compound returns on the 13-week US Treasury Bill at the dail
 }
 \examples{
 rf = download.RiskFree(start = "1997-12-01", end = "2007-01-01")
-class(rf)
-head(rf)
+class(Rf=0)
+head(Rf=0)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

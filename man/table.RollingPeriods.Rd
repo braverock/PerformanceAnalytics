@@ -25,7 +25,7 @@ A table of estimates of rolling period return measures
 \seealso{ \code{\link{apply}} }
 \examples{
 data(edhec)
-table.RollingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR.CornishFisher"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
+table.RollingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

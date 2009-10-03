@@ -25,7 +25,7 @@ function (Ra, Rb, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -57,10 +57,14 @@ function (Ra, Rb, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TrackingError.R,v 1.9 2009-09-30 14:01:31 peter Exp $
+# $Id: TrackingError.R,v 1.10 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-09-30 14:01:31  peter
+# - added multi-column support
+# - added periodicity-based scaling
+#
 # Revision 1.8  2008-06-30 21:42:09  peter
 # - fixed bad encoding
 #

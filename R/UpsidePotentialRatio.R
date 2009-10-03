@@ -3,7 +3,7 @@ function (R, MAR = 0, method=c("subset","full"))
 { # @author Brian G. Peterson
 
     # Description:
-    # Sortino proposed to better account for skill and excess performance
+    # Sortino proposed to better account for skill and excess peRformance
     # by using only downside semivariance as the measure of risk.
     # UpsidePotentialRatio is an attempted improvement over the SortinoRatio
 
@@ -45,10 +45,13 @@ function (R, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpsidePotentialRatio.R,v 1.4 2009-10-01 01:47:53 peter Exp $
+# $Id: UpsidePotentialRatio.R,v 1.5 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-10-01 01:47:53  peter
+# - added multi-column support
+#
 # Revision 1.3  2008-09-30 21:17:24  brian
 # - both DownsideDeviation and UpsidePotentialRatio now support "method argument to use full or subset of series
 # - use subset as default method

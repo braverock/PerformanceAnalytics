@@ -72,10 +72,13 @@ function (Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.7 2009-09-30 02:22:59 peter Exp $
+# $Id: CAPM.utils.R,v 1.8 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-09-30 02:22:59  peter
+# - added multi-column support
+#
 # Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
@@ -86,7 +89,7 @@ function (Rb, Rf = 0)
 # - changed checkData to use zoo instead of vector
 #
 # Revision 1.3  2007/08/14 20:53:27  peter
-# - changed rf to mean(rf) in CAPM.CML
+# - changed Rf to mean(Rf) in CAPM.CML
 #
 # Revision 1.2  2007/03/11 16:53:19  brian
 # - add equations and text to documentation

@@ -1,5 +1,5 @@
 ###############################################################################
-# Functions to perform multivariate matrix
+# Functions to peRform multivariate matrix
 # calculations on portfolios of assets.
 #
 # I've modified these to minimize the number of
@@ -11,7 +11,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: MultivariateMoments.R,v 1.4 2008-08-12 22:52:22 brian Exp $
+# $Id: MultivariateMoments.R,v 1.5 2009-10-03 18:23:55 brian Exp $
 ###############################################################################
 
 
@@ -146,10 +146,13 @@ SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: MultivariateMoments.R,v 1.4 2008-08-12 22:52:22 brian Exp $
+# $Id: MultivariateMoments.R,v 1.5 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2008-08-12 22:52:22  brian
+# - change mean.MM to multivariate_mean fn call to eliminate contention with R core mean fn
+#
 # Revision 1.3  2008-05-07 21:38:24  brian
 # - update header, footer, and licencing to reflect moving into PerformanceAnalytics
 #

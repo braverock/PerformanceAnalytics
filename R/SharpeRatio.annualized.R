@@ -13,7 +13,7 @@ function (R, Rf = 0, scale = NA)
     # Inputs:
     # R: in this case, the function anticipates having a return stream as input,
     #     rather than prices.
-    # rf: the risk free rate MUST be in the same periodicity as the data going in.
+    # Rf: the risk free rate MUST be in the same periodicity as the data going in.
 
     # FUNCTION:
     R = checkData(R)
@@ -27,7 +27,7 @@ function (R, Rf = 0, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = 12},
+            monthly = {scale = NA},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -53,10 +53,13 @@ function (R, Rf = 0, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.10 2009-10-02 18:37:19 peter Exp $
+# $Id: SharpeRatio.annualized.R,v 1.11 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-02 18:37:19  peter
+# - updated copyright
+#
 # Revision 1.9  2009-09-30 02:48:05  peter
 # - added multi-column support
 #
@@ -67,7 +70,7 @@ function (R, Rf = 0, scale = NA)
 # - update copyright to 2004-2008
 #
 # Revision 1.6  2007/08/16 14:12:40  peter
-# - added checkData for rf
+# - added checkData for Rf
 #
 # Revision 1.5  2007/04/09 03:33:19  peter
 # - uses checkData

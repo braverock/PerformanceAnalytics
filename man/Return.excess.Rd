@@ -8,12 +8,12 @@ Calculates the returns of an asset in excess of the given "risk free rate" for t
 Ideally, your risk free rate will be for each period you have returns observations, but a single average return for the period will work too.
 }
 \usage{
-Return.excess(R, rf)
+Return.excess(R, Rf=0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{rf}{ risk free rate, in same period as your returns, or as a sinlge digit average }
+  \item{Rf}{ risk free rate, in same period as your returns, or as a sinlge digit average }
 }
 \value{
 mean excess return
@@ -21,13 +21,13 @@ mean excess return
 \details{
 Mean of the period return minus the period risk free rate
 
-\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-rf)}
+\deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-Rf=0)}
 
 OR
 
 mean of the period returns minus a single numeric risk free rate
 
-\deqn{\overline{R_{a}}-R_{f}}{mean(Ra)-rf}
+\deqn{\overline{R_{a}}-R_{f}}{mean(R)-rf}
 
 Note that while we have, in keeping with common academic usage, assumed that the second parameter will be a risk free rate, you may also use any other timeseries as the second argument.  A common alteration would be to use a benchmark to produce excess returns over a specific benchmark, as demonstrated in the examples below.
 

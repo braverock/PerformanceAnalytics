@@ -11,20 +11,19 @@ CAPM Beta is the beta of an asset to the variance and covariance of an initial p
 This function uses a linear intercept model to achieve the same results as the symbolic model used by \code{\link{BetaCoVariance}}
 }
 \usage{
-CAPM.beta(Ra, Rb, rf = 0, digits = 4)
-CAPM.beta.bull(Ra, Rb, rf = 0, digits = 4)
-CAPM.beta.bear(Ra, Rb, rf = 0, digits = 4)
-timing.ratio(Ra, Rb, rf = 0, digits = 4)
+CAPM.beta(Ra, Rb, Rf = 0)
+CAPM.beta.bull(Ra, Rb, Rf = 0)
+CAPM.beta.bear(Ra, Rb, Rf = 0)
+timing.ratio(Ra, Rb, Rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
-  \item{rf}{ risk free rate, in same period as your returns }
-  \item{digits}{ number of digits to round results to }
+  \item{Rf}{ risk free rate, in same period as your returns }
 }
 \details{
- \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{a}-\bar{R_{a}})^{2}}}{cov(Ra,Rb)/var(Ra)}
+ \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{a}-\bar{R_{a}})^{2}}}{cov(Ra,Rb)/var(R)}
 
 Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of \eqn{R_{a}}{Ra} on \eqn{R_{b}}{Rb} and that this slope can be used to determine the risk premium or excess expected return (see Eq. 7.9 and 7.10, p. 230-231).
 

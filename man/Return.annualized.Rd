@@ -6,11 +6,11 @@
  An average annualized return is convenient for comparing returns.
 }
 \usage{
-Return.annualized(Ra, scale = 12, geometric = TRUE)
+Return.annualized(R, scale = NA, geometric = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
@@ -25,7 +25,7 @@ where scale is the number of periods in a year, and n is the total number of per
 
 For simple returns (geometric=FALSE), the formula is:
 
-    \deqn{\overline{R_{a}} \cdot scale}{mean(Ra)*scale}
+    \deqn{\overline{R_{a}} \cdot scale}{mean(R)*scale}
 
 }
 

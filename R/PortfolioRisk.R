@@ -1,11 +1,11 @@
 ###############################################################################
-# Functions to perform component risk calculations on portfolios of assets.
+# Functions to peRform component risk calculations on portfolios of assets.
 #
 # Copyright (c) 2007-2009 Kris Boudt and Brian G. Peterson
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.12 2009-09-22 18:07:13 brian Exp $
+# $Id: PortfolioRisk.R,v 1.13 2009-10-03 18:23:55 brian Exp $
 ###############################################################################
 
 
@@ -569,10 +569,13 @@ VaR.historical.portfolio = function(R,p,w)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.12 2009-09-22 18:07:13 brian Exp $
+# $Id: PortfolioRisk.R,v 1.13 2009-10-03 18:23:55 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-22 18:07:13  brian
+# - add ncol in loop in ES.historical
+#
 # Revision 1.11  2009-09-21 14:05:17  brian
 # - remove precision global var, unnecessary
 #
