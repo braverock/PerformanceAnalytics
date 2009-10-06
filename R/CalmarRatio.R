@@ -27,7 +27,9 @@ function (R, scale = NA)
     }
     annualized_return = Return.annualized(R, scale=scale)
     drawdown = abs(maxDrawdown(R))
-    return(annualized_return/drawdown)
+    result = annualized_return/drawdown
+    rownames(result) = "Calmar Ratio"
+    return(result)
 }
 
 `SterlingRatio` <-
@@ -59,7 +61,9 @@ function (R, scale=NA, excess=.1)
     }
     annualized_return = Return.annualized(R, scale=scale)
     drawdown = abs(maxDrawdown(R)-excess)
-    return(annualized_return/drawdown)
+    result = annualized_return/drawdown
+    rownames(result) = paste("Sterling Ratio (Excess = ", round(excess*100,0), "%)", sep="")
+    return(result)
 }
 
 ###############################################################################
@@ -70,10 +74,15 @@ function (R, scale=NA, excess=.1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CalmarRatio.R,v 1.6 2009-10-03 18:23:55 brian Exp $
+# $Id: CalmarRatio.R,v 1.7 2009-10-06 03:00:31 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.5  2009-10-01 01:53:07  peter
 # - missed one
 #

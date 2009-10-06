@@ -27,7 +27,9 @@ function (R, MAR = 0, method=c("subset","full"))
     }
     else {
         R = checkData(R, method = "matrix")
-        apply(R, MARGIN = 2, UpsidePotentialRatio, MAR = MAR, method = method)
+        result = apply(R, MARGIN = 2, UpsidePotentialRatio, MAR = MAR, method = method)
+        rownames(result) = paste("Upside Potential (MAR = ",round(MAR*100,1),"%)", sep="")
+        return(result)
     }
 }
 
@@ -45,10 +47,15 @@ function (R, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: UpsidePotentialRatio.R,v 1.5 2009-10-03 18:23:55 brian Exp $
+# $Id: UpsidePotentialRatio.R,v 1.6 2009-10-06 02:54:52 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.4  2009-10-01 01:47:53  peter
 # - added multi-column support
 #

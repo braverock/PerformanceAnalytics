@@ -27,11 +27,14 @@ function (R, MAR = 0, method=c("subset","full"))
             full   = {len = length(R)},
             subset = {len = length(r)} #previously length(R)
         ) # end switch
-        return(sqrt(sum((r - MAR)^2)/len))
+        result = sqrt(sum((r - MAR)^2)/len)
+        return(result)
     }
     else {
         R = checkData(R, method = "matrix")
-        apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
+        result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
+        rownames(result) = paste("Downside Deviation (MAR = ", round(MAR*100,1),"%)", sep="")
+        return(result)
     }
 }
 
@@ -43,10 +46,13 @@ function (R, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.11 2009-09-24 03:35:59 peter Exp $
+# $Id: DownsideDeviation.R,v 1.12 2009-10-06 02:59:49 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-09-24 03:35:59  peter
+# - added multi-column support
+#
 # Revision 1.10  2008-09-30 21:17:24  brian
 # - both DownsideDeviation and UpsidePotentialRatio now support "method argument to use full or subset of series
 # - use subset as default method

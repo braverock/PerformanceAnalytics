@@ -42,7 +42,7 @@ function (Ra, Rb, Rf = 0)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Beta:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -94,7 +94,7 @@ function (Ra, Rb, Rf = 0)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Bull Beta:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -146,14 +146,14 @@ function (Ra, Rb, Rf = 0)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Bear Beta:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
 }
 
 
-`timing.ratio` <-
+`TimingRatio` <-
 function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
@@ -162,8 +162,10 @@ function (Ra, Rb, Rf = 0)
 
     beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf)
     beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf)
-    ratio = beta.bull/beta.bear
-    ratio
+    result = beta.bull/beta.bear
+    names = colnames(Rb)
+    rownames(result) = paste("Timing Ratio:", names)
+    return(result)
 }
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
@@ -173,10 +175,15 @@ function (Ra, Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.13 2009-10-03 18:23:55 brian Exp $
+# $Id: CAPM.beta.R,v 1.14 2009-10-06 03:01:04 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.12  2009-09-29 14:29:47  peter
 # - rewrite of function using apply for multi-column support
 #

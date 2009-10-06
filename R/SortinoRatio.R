@@ -19,6 +19,7 @@ function (R, MAR = 0)
     }
 
     result = apply(R, MARGIN = 2, sr, MAR = MAR)
+    rownames(result) = paste("Sortino Ratio (MAR = ", round(MAR,1),"%)", sep="")
     return (result)
 }
 
@@ -30,10 +31,15 @@ function (R, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SortinoRatio.R,v 1.7 2009-10-03 18:23:55 brian Exp $
+# $Id: SortinoRatio.R,v 1.8 2009-10-06 02:55:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.6  2009-10-01 01:46:19  peter
 # - added multi-column support
 #

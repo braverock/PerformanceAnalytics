@@ -5,10 +5,13 @@
 function (Rb, Rf = 0 )
 { #author Brian G. Peterson
 
-  #the Capital Market Line slope is a wrapper for the Sharpe Ratio on the benchmark asset
-  #
-  # Rb = Return vector of the benchmark or market portfolio
-  return(SharpeRatio(Rb,Rf))
+    #the Capital Market Line slope is a wrapper for the Sharpe Ratio on the benchmark asset
+    #
+    # Rb = Return vector of the benchmark or market portfolio
+    result = SharpeRatio(Rb,Rf)
+    names = colnames(Rb)
+    rownames(result) = paste("Capital Market Line Slope:", names)
+    return(result) 
 }
 
 `CAPM.CML` <-
@@ -37,7 +40,7 @@ function (Ra, Rb, Rf = 0)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Capital Market Line:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -53,6 +56,7 @@ function (Ra, Rf = 0)
 
     xRa = Return.excess(Ra, Rf)
     result = apply(xRa, 2, mean, na.rm=TRUE)
+    rownames(result) = paste("Risk Premium (Rf=", round(mean(Rf)*100,1),"%)", sep="")
     return (result)
 }
 
@@ -60,7 +64,9 @@ function (Ra, Rf = 0)
 function (Rb, Rf = 0)
 { #@author Brian G. Peterson
 
-    SML.slope = 1/CAPM.RiskPremium(Rb, Rf)
+    result = 1/CAPM.RiskPremium(Rb, Rf)
+    names = colnames(Rb)
+    rownames(result) = paste("Security Market Line:", names)
     return(SML.slope)
 }
 
@@ -72,10 +78,15 @@ function (Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.8 2009-10-03 18:23:55 brian Exp $
+# $Id: CAPM.utils.R,v 1.9 2009-10-06 03:00:52 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.7  2009-09-30 02:22:59  peter
 # - added multi-column support
 #

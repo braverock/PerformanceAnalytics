@@ -64,9 +64,10 @@ skewness <-
         # some backflips to name the single column zoo object
         result = as.numeric(result)
     }
-    else
+    else{
         colnames(result) = columnnames
-
+        rownames(result) = "Skewness"
+    }
     # Return Value:
     result
 
@@ -80,10 +81,13 @@ skewness <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: skewness.R,v 1.3 2009-09-24 02:54:39 peter Exp $
+# $Id: skewness.R,v 1.4 2009-10-06 02:53:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-09-24 02:54:39  peter
+# - changed checkData from zoo to matrix
+#
 # Revision 1.2  2008-06-25 23:07:59  brian
 # - update functions to deal with multi-column zoo/xts data
 #

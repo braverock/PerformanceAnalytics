@@ -106,7 +106,7 @@ CoVariance<- function(Ra,Rb)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Covariance:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -134,7 +134,7 @@ BetaCoVariance <- function(Ra,Rb)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Beta Covariance:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -163,7 +163,7 @@ CoSkewness <- function(Ra,Rb)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Coskewness:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -204,7 +204,7 @@ BetaCoSkewness <- function(Ra, Rb, test=TRUE)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Beta Coskewness:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -232,7 +232,7 @@ CoKurtosis <- function(Ra,Rb)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Cokurtosis:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -260,7 +260,7 @@ BetaCoKurtosis <- function(Ra,Rb)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Beta Cokurtosis:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -275,10 +275,13 @@ BetaCoKurtosis <- function(Ra,Rb)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.9 2009-10-02 18:47:35 peter Exp $
+# $Id: CoMoments.R,v 1.10 2009-10-06 03:00:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-02 18:47:35  peter
+# - all comoment and betacomoment functions support multiple column R
+#
 # Revision 1.8  2008-06-24 00:41:18  peter
 # - changed 'warn' to 'warning'
 #

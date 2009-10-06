@@ -45,7 +45,7 @@ function (Ra, Rb, Rf = 0, scale = NA)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Treynor Ratio:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -59,10 +59,15 @@ function (Ra, Rb, Rf = 0, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: TreynorRatio.R,v 1.9 2009-10-03 18:23:55 brian Exp $
+# $Id: TreynorRatio.R,v 1.10 2009-10-06 02:55:06 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.8  2009-10-01 01:47:21  peter
 # - added multi-column support
 # - added periodicity for scaling

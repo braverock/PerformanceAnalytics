@@ -41,7 +41,7 @@ function (Ra, Rb, scale = NA)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = colnames(Rb)
+        colnames(result) = paste("Information Ratio:", colnames(Rb))
         rownames(result) = colnames(Ra)
         return(t(result))
     }
@@ -55,10 +55,15 @@ function (Ra, Rb, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: InformationRatio.R,v 1.8 2009-10-03 18:23:55 brian Exp $
+# $Id: InformationRatio.R,v 1.9 2009-10-06 02:59:35 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.7  2009-09-30 14:01:47  peter
 # - added multi-column support
 #

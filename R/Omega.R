@@ -94,8 +94,10 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     }
     else {
         R = checkData(R, method = "matrix", ... = ...)
-        apply(R, 2, Omega, L = L, method = method, output = output, Rf = Rf,
+        result = apply(R, 2, Omega, L = L, method = method, output = output, Rf = Rf,
             ... = ...)
+        rownames(result) = paste("Omega (L = ", round(L*100,1),"%)", sep="")
+        return(result)
     }
 }
 
@@ -107,10 +109,15 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.13 2009-10-03 18:23:55 brian Exp $
+# $Id: Omega.R,v 1.14 2009-10-06 02:59:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.12  2009-09-24 03:03:21  peter
 # - added multicolumn support
 #

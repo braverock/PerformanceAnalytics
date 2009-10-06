@@ -20,7 +20,9 @@ function (R)
     }
     else {
         R = checkData(R, method = "matrix")
-        apply(R, 2, maxDrawdown)
+        result = apply(R, 2, maxDrawdown)
+        rownames(result) = "Worst Drawdown"
+        return(result)
     }
 }
 
@@ -32,10 +34,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: maxDrawdown.R,v 1.5 2009-09-24 02:05:53 peter Exp $
+# $Id: maxDrawdown.R,v 1.6 2009-10-06 02:54:06 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-09-24 02:05:53  peter
+# - added multicolumn support
+#
 # Revision 1.4  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

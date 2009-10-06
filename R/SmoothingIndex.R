@@ -79,6 +79,8 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
     }
     else {
         R = checkData(R, method = "matrix", ... = ...)
-        apply(R, 2, SmoothingIndex, neg.thetas = neg.thetas, MAorder = MAorder, verbose = verbose, ... = ...)
+        result = apply(R, 2, SmoothingIndex, neg.thetas = neg.thetas, MAorder = MAorder, verbose = verbose, ... = ...)
+        rownames(result) = "Smoothing Index"
+        return(result)
     }
 }

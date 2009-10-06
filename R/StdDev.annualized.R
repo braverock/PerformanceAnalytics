@@ -19,8 +19,11 @@ function (x, scale = NA)
             )
         }
         sqrt(scale)*sd(x, na.rm=TRUE)
-    } else 
-        apply(x, 2, sd.multiperiod, scale=scale)
+    } else { 
+        result = apply(x, 2, sd.multiperiod, scale=scale)
+        rownames(result) = "Standard Deviation"
+        return(result)
+    }
 }
 
 `sd.annualized` <-
@@ -43,10 +46,15 @@ function (R, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.17 2009-10-03 18:23:55 brian Exp $
+# $Id: StdDev.annualized.R,v 1.18 2009-10-06 02:55:38 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.16  2009-10-02 18:36:38  peter
 # - fixed scale testing
 #

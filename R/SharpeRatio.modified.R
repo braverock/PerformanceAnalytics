@@ -41,6 +41,7 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
     }
 
     result = apply(R, 2, srm, Rf=Rf, p=p, ...)
+    rownames(result) = "Modified Sharpe"
     return (result)
 }
 
@@ -52,10 +53,15 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.8 2009-10-03 18:23:55 brian Exp $
+# $Id: SharpeRatio.modified.R,v 1.9 2009-10-06 02:57:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.7  2009-10-01 02:41:35  peter
 # - added multi-column support
 # - substituted VaR wrapper and added dots to pass parameters

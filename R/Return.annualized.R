@@ -48,7 +48,9 @@ function (R, scale = NA, geometric = TRUE )
     }
     else {
         R = checkData(R, method = "xts")
-        apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
+        result = apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
+        rownames(result) = "Annualized Return"
+        return(result)
     }
 }
 
@@ -60,10 +62,15 @@ function (R, scale = NA, geometric = TRUE )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.11 2009-10-03 18:23:55 brian Exp $
+# $Id: Return.annualized.R,v 1.12 2009-10-06 02:58:00 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.10  2009-10-02 18:38:42  peter
 # - moved scale test
 # - revised copyright

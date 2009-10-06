@@ -15,7 +15,9 @@ function (R, geometric = TRUE)
     }
     else {
         R = checkData(R, method = "matrix")
-        apply(R, 2, Return.cumulative, geometric = geometric)
+        result = apply(R, 2, Return.cumulative, geometric = geometric)
+        rownames(result) = "Cumulative Return"
+        return(result)
     }
 }
 
@@ -27,10 +29,13 @@ function (R, geometric = TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.cumulative.R,v 1.5 2009-09-24 02:42:31 peter Exp $
+# $Id: Return.cumulative.R,v 1.6 2009-10-06 02:58:41 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.5  2009-09-24 02:42:31  peter
+# - added multicolumn support
+#
 # Revision 1.4  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
