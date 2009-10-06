@@ -13,7 +13,7 @@ function (x, scale = NA)
                 hourly = {stop("Data periodicity too high")},
                 daily = {scale = 252},
                 weekly = {scale = 52},
-                monthly = {scale = NA},
+                monthly = {scale = 12},
                 quarterly = {scale = 4},
                 yearly = {scale = 1}
             )
@@ -21,7 +21,9 @@ function (x, scale = NA)
         sqrt(scale)*sd(x, na.rm=TRUE)
     } else { 
         result = apply(x, 2, sd.multiperiod, scale=scale)
-        rownames(result) = "Standard Deviation"
+        dim(result) = c(1,NCOL(x))
+        colnames(result) = colnames(x)
+        rownames(result) = "Annualized Standard Deviation"
         return(result)
     }
 }
@@ -46,10 +48,13 @@ function (R, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: StdDev.annualized.R,v 1.18 2009-10-06 02:55:38 peter Exp $
+# $Id: StdDev.annualized.R,v 1.19 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.18  2009-10-06 02:55:38  peter
+# - added label to results
+#
 # Revision 1.17  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

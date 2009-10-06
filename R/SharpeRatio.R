@@ -34,7 +34,9 @@ function (Ra, Rf = 0)
     }
 
     result = apply(xRa, 2, sr)
-    rownames(result) = "Sharpe Ratio"
+    dim(result) = c(1,NCOL(Ra))
+    colnames(result) = colnames(Ra)
+    rownames(result) = paste("Sharpe Ratio (Rf=", round(mean(Rf)*scale*100,1), "%)", sep="")
     return (result)
 }
 
@@ -46,10 +48,13 @@ function (Ra, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.R,v 1.10 2009-10-06 02:56:39 peter Exp $
+# $Id: SharpeRatio.R,v 1.11 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-06 02:56:39  peter
+# - added label to results
+#
 # Revision 1.9  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

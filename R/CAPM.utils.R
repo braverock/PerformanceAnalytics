@@ -56,6 +56,8 @@ function (Ra, Rf = 0)
 
     xRa = Return.excess(Ra, Rf)
     result = apply(xRa, 2, mean, na.rm=TRUE)
+    dim(result) = c(1,NCOL(Ra))
+    colnames(result) = colnames(Ra)
     rownames(result) = paste("Risk Premium (Rf=", round(mean(Rf)*100,1),"%)", sep="")
     return (result)
 }
@@ -78,10 +80,13 @@ function (Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.9 2009-10-06 03:00:52 peter Exp $
+# $Id: CAPM.utils.R,v 1.10 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-06 03:00:52  peter
+# - added label to results
+#
 # Revision 1.8  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

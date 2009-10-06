@@ -19,6 +19,8 @@ function (R, MAR = 0)
     }
 
     result = apply(R, MARGIN = 2, sr, MAR = MAR)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
     rownames(result) = paste("Sortino Ratio (MAR = ", round(MAR,1),"%)", sep="")
     return (result)
 }
@@ -31,10 +33,13 @@ function (R, MAR = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SortinoRatio.R,v 1.8 2009-10-06 02:55:59 peter Exp $
+# $Id: SortinoRatio.R,v 1.9 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-06 02:55:59  peter
+# - added label to results
+#
 # Revision 1.7  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

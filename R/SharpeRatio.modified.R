@@ -41,6 +41,8 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
     }
 
     result = apply(R, 2, srm, Rf=Rf, p=p, ...)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
     rownames(result) = "Modified Sharpe"
     return (result)
 }
@@ -53,10 +55,13 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.9 2009-10-06 02:57:18 peter Exp $
+# $Id: SharpeRatio.modified.R,v 1.10 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-06 02:57:18  peter
+# - added label to results
+#
 # Revision 1.8  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

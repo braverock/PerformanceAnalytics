@@ -27,7 +27,7 @@ function (R, Rf = 0, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = NA},
+            monthly = {scale = 12},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -41,6 +41,8 @@ function (R, Rf = 0, scale = NA)
     }
 
     result = apply(R, 2, sr, Rf=Rf, scale=scale)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
     rownames(result) = paste("Annualized Sharpe Ratio (Rf=", round(mean(Rf)*scale*100,1), "%)", sep="")
     return (result)
 
@@ -54,10 +56,13 @@ function (R, Rf = 0, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.12 2009-10-06 02:56:53 peter Exp $
+# $Id: SharpeRatio.annualized.R,v 1.13 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-10-06 02:56:53  peter
+# - added label to results
+#
 # Revision 1.11  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

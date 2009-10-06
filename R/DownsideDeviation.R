@@ -33,6 +33,8 @@ function (R, MAR = 0, method=c("subset","full"))
     else {
         R = checkData(R, method = "matrix")
         result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
+        dim(result) = c(1,NCOL(R))
+        colnames(result) = colnames(R)
         rownames(result) = paste("Downside Deviation (MAR = ", round(MAR*100,1),"%)", sep="")
         return(result)
     }
@@ -46,10 +48,13 @@ function (R, MAR = 0, method=c("subset","full"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: DownsideDeviation.R,v 1.12 2009-10-06 02:59:49 peter Exp $
+# $Id: DownsideDeviation.R,v 1.13 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-10-06 02:59:49  peter
+# - added label to results
+#
 # Revision 1.11  2009-09-24 03:35:59  peter
 # - added multi-column support
 #

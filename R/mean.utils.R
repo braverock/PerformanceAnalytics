@@ -26,6 +26,8 @@ function (x, ...)
     else {
         x = checkData(x, method = "matrix", ... = ...)
         result = apply(x, 2, mean.geometric, ... = ...)
+        dim(result) = c(1,NCOL(x))
+        colnames(result) = colnames(x)
         rownames(result) = "Geometric Mean"
         return(result)
     }
@@ -53,6 +55,8 @@ function (x, ...)
     else {
         x = checkData(x, method = "matrix", ... = ...)
         result = apply(x, 2, mean.stderr, ... = ...)
+        result = matrix(result, nrow=1)
+        colnames(result) = colnames(x)
         rownames(result) = "Standard Error"
         return(result)
     }
@@ -87,6 +91,8 @@ function (x, ci = 0.95, ...)
     else {
         x = checkData(x, method = "matrix", ... = ...)
         result = apply(x, 2, mean.LCL, ... = ...)
+        result = matrix(result, nrow=1)
+        colnames(result) = colnames(x)
         rownames(result) = "Lower Confidence Level"
         return(result)
     }
@@ -121,6 +127,8 @@ function (x, ci = 0.95, ...)
     else {
         x = checkData(x, method = "matrix", ... = ...)
         result = apply(x, 2, mean.UCL, ... = ...)
+        result = matrix(result, nrow=1)
+        colnames(result) = colnames(x)
         rownames(result) = "Upper Confidence Level"
         return(result)
     }
@@ -134,7 +142,7 @@ function (x, ci = 0.95, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: mean.utils.R,v 1.10 2009-10-06 02:53:52 peter Exp $
+# $Id: mean.utils.R,v 1.11 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

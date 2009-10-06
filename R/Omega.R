@@ -96,6 +96,8 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
         R = checkData(R, method = "matrix", ... = ...)
         result = apply(R, 2, Omega, L = L, method = method, output = output, Rf = Rf,
             ... = ...)
+        dim(result) = c(1,NCOL(R))
+        colnames(result) = colnames(R)
         rownames(result) = paste("Omega (L = ", round(L*100,1),"%)", sep="")
         return(result)
     }
@@ -109,7 +111,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.14 2009-10-06 02:59:08 peter Exp $
+# $Id: Omega.R,v 1.15 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

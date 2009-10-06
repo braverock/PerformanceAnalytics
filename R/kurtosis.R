@@ -64,7 +64,7 @@ kurtosis <-
     }
     else{
         colnames(result) = columnnames
-        rownames(result) = "Kurtosis"
+        rownames(result) = "Excess Kurtosis"
     }
     # Return Value:
     result
@@ -79,10 +79,13 @@ kurtosis <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: kurtosis.R,v 1.4 2009-10-06 02:54:31 peter Exp $
+# $Id: kurtosis.R,v 1.5 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-10-06 02:54:31  peter
+# - added label to results
+#
 # Revision 1.3  2009-09-24 02:54:11  peter
 # - changed checkData from zoo to matrix
 #

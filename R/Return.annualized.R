@@ -31,7 +31,7 @@ function (R, scale = NA, geometric = TRUE )
                 hourly = {stop("Data periodicity too high")},
                 daily = {scale = 252},
                 weekly = {scale = 52},
-                monthly = {scale = NA},
+                monthly = {scale = 12},
                 quarterly = {scale = 4},
                 yearly = {scale = 1}
             )
@@ -44,11 +44,13 @@ function (R, scale = NA, geometric = TRUE )
             # simple returns
             result = mean(R) * scale
         }
-        return(result)
+        result
     }
     else {
         R = checkData(R, method = "xts")
         result = apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
+        dim(result) = c(1,NCOL(R))
+        colnames(result) = colnames(R)
         rownames(result) = "Annualized Return"
         return(result)
     }
@@ -62,10 +64,13 @@ function (R, scale = NA, geometric = TRUE )
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.annualized.R,v 1.12 2009-10-06 02:58:00 peter Exp $
+# $Id: Return.annualized.R,v 1.13 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-10-06 02:58:00  peter
+# - added label to results
+#
 # Revision 1.11  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

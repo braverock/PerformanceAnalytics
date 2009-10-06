@@ -27,6 +27,8 @@ function (R, Rf = 0, method = "half")
     }
 
     result = apply(R, 2, kr, Rf = Rf, method = method)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
     rownames(result) = "Kelly Ratio"
     return (result)
 }
@@ -39,7 +41,7 @@ function (R, Rf = 0, method = "half")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: KellyRatio.R,v 1.6 2009-10-06 02:59:22 peter Exp $
+# $Id: KellyRatio.R,v 1.7 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

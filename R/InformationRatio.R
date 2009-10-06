@@ -21,7 +21,7 @@ function (Ra, Rb, scale = NA)
             hourly = {stop("Data periodicity too high")},
             daily = {scale = 252},
             weekly = {scale = 52},
-            monthly = {scale = NA},
+            monthly = {scale = 12},
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
@@ -40,10 +40,10 @@ function (Ra, Rb, scale = NA)
     if(length(result) ==1)
         return(result)
     else {
-        dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = paste("Information Ratio:", colnames(Rb))
-        rownames(result) = colnames(Ra)
-        return(t(result))
+        result = matrix(result, ncol=Ra.ncols, nrow=Rb.ncols)
+        rownames(result) = paste("Information Ratio:", colnames(Rb))
+        colnames(result) = colnames(Ra)
+        return(result)
     }
 }
 
@@ -55,7 +55,7 @@ function (Ra, Rb, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: InformationRatio.R,v 1.9 2009-10-06 02:59:35 peter Exp $
+# $Id: InformationRatio.R,v 1.10 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

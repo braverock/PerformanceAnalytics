@@ -16,6 +16,8 @@ function (R)
     else {
         R = checkData(R, method = "matrix")
         result = apply(R, 2, SemiDeviation)
+        result = matrix(result, nrow=1)
+        colnames(result) = colnames(R)
         rownames(result) = "Semi-Deviation"
         return(result)
     }
@@ -31,6 +33,8 @@ function (R)
     else {
         R = checkData(R, method = "matrix")
         result = apply(R, 2, SemiDeviation)
+        dim(result) = c(1,NCOL(R))
+        colnames(result) = colnames(R)
         rownames(result) = "Semi-Variance"
         return(result)
     }
@@ -44,10 +48,13 @@ function (R)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SemiDeviation.R,v 1.9 2009-10-06 02:57:47 peter Exp $
+# $Id: SemiDeviation.R,v 1.10 2009-10-06 15:14:44 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-06 02:57:47  peter
+# - added label to results
+#
 # Revision 1.8  2009-09-24 03:14:01  peter
 # - added multi-column support
 #
