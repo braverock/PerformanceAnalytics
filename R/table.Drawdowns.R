@@ -14,7 +14,7 @@ function (R, top = 5, digits = 4)
 
     # FUNCTION:
 
-    R = checkData(R, method = "zoo")
+    R = checkData(R[,1,drop=FALSE])
     R = na.omit(R)
     x = sortDrawdowns(findDrawdowns(R))
 
@@ -39,10 +39,13 @@ function (R, top = 5, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Drawdowns.R,v 1.8 2009-04-17 04:09:52 peter Exp $
+# $Id: table.Drawdowns.R,v 1.9 2009-10-06 03:02:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-04-17 04:09:52  peter
+# - parameter cleanup
+#
 # Revision 1.7  2009-04-14 04:24:20  peter
 # - now subsets drawdowns less than zero
 # - digits for formatting WDD
