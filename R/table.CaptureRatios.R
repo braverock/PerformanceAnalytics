@@ -22,8 +22,8 @@ function (Ra, Rb, digits = 4)
             merged.assets = merge(Ra[,column.a,drop=FALSE], Rb[,1,drop=FALSE])
             merged.assets = na.omit(merged.assets) 
 
-            UpCapture = UpDownRatios(Ra=merged.assets[,1], Rb=merged.assets[,2], method="capture", side="up")
-            DnCapture = UpDownRatios(Ra=merged.assets[,1], Rb=merged.assets[,2], method="capture", side="down")
+            UpCapture = UpDownRatios(Ra=merged.assets[,1], Rb=merged.assets[,2], method="Capture", side="Up")
+            DnCapture = UpDownRatios(Ra=merged.assets[,1], Rb=merged.assets[,2], method="Capture", side="Down")
 
             row.df = cbind(UpCapture, DnCapture)
             rownames(row.df) = columnnames.a[column.a]
@@ -44,10 +44,13 @@ function (Ra, Rb, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CaptureRatios.R,v 1.3 2009-04-17 04:10:23 peter Exp $
+# $Id: table.CaptureRatios.R,v 1.4 2009-10-06 18:31:25 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-04-17 04:10:23  peter
+# - parameter cleanup
+#
 # Revision 1.2  2009-04-02 03:06:37  peter
 # - added CVS log
 #
