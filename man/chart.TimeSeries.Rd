@@ -6,7 +6,7 @@
 Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{\link{plot}} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
 }
 \usage{
-chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab = NULL, xlab = "Date", date.format.in = "\%Y-\%m-\%d", date.format = "\%m/\%y", xlim = NULL, ylim = NULL, element.color = "darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted", ...)
+chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab = NULL, xlab = "Date", date.format.in = "\%Y-\%m-\%d", date.format = NULL, xlim = NULL, ylim = NULL, element.color = "darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted", xaxis.labels = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -44,6 +44,7 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
   \item{cex.main}{ The magnification to be used for the chart title relative to the current setting of 'cex'.  }
   \item{major.ticks}{ Should major tickmarks be drawn and labeled, default 'auto'}
   \item{minor.ticks}{ Should minor tickmarks be drawn, default TRUE}
+  \item{xaxis.labels}{ Allows for non-date labeling of date axes, default is NULL }
   \item{\dots}{ any other passthru parameters }
 
 }
