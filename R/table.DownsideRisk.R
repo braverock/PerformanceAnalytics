@@ -22,6 +22,19 @@ function (R, ci = 0.95, scale = NA, Rf = 0, MAR = .1/12, p= 0.95, digits = 4)
     columnnames = colnames(y)
     rownames = rownames(y)
 
+    if(is.na(scale)) {
+        freq = periodicity(y)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    }
+
     # for each column, do the following:
     for(column in 1:columns) {
         x = na.omit(y[,column,drop=FALSE])
@@ -94,10 +107,15 @@ function (R, ci = 0.95, scale = NA, Rf = 0, MAR = .1/12, p= 0.95, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.DownsideRisk.R,v 1.12 2009-10-03 18:23:55 brian Exp $
+# $Id: table.DownsideRisk.R,v 1.13 2009-10-08 19:47:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.11  2009-04-15 21:50:10  peter
 # - fixed calculation using subset on zoo object
 # - passing in column using drop=FALSE to preserve names
