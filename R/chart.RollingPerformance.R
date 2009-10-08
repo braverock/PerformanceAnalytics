@@ -23,10 +23,11 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
     columnnames = colnames(x)
 
     # Calculate
-
+#     Return.calc = xts:::rollapply.xts(x, width = width, FUN = function(x, FUNCT=FUNCT, ... = ...) { if(class(na.action(na.omit(x)))=="omit") return(NA) else {FUN <- match.fun(FUNCT); FUN}}, FUNCT=FUNCT, ...=..., na.pad = na.pad, align = "right")
+#     print(Return.calc)
     for(column in 1:columns) {
         # the drop=FALSE flag is essential for when the zoo object only has one column
-        column.Return.calc = apply.rolling(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ...)#, na.pad = na.pad, align = "right")
+        column.Return.calc = xts:::rollapply.xts(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
         if(column == 1)
             Return.calc = xts(column.Return.calc)
         else
@@ -48,10 +49,15 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingPerformance.R,v 1.14 2009-10-03 18:23:55 brian Exp $
+# $Id: chart.RollingPerformance.R,v 1.15 2009-10-08 19:47:02 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.13  2009-10-02 19:04:48  peter
 # - uses apply.rolling rather than rollapply
 #
