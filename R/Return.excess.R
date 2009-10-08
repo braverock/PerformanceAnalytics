@@ -17,17 +17,17 @@ function (R, Rf = 0)
     # FUNCTION:
 
     # Transform input data to a timeseries (xts) object
-    r = checkData(R)
+    R = checkData(R)
 
     # if the risk free rate is delivered as a timeseries, we'll check it
     # and convert it to an xts object.
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
-        indexseries=index(cbind(r,Rf))
+        indexseries=index(cbind(R,Rf))
         columnname.Rf=colnames(Rf)
     }
     else {
-        indexseries=index(r)
+        indexseries=index(R)
         columnname.Rf=Rf
         Rf=xts(rep(Rf, length(indexseries)),order.by=indexseries)
     }
@@ -35,15 +35,14 @@ function (R, Rf = 0)
     ## prototype
     ## xts(apply(managers[,1:6],2,FUN=function(R,Rf,order.by) {xts(R,order.by=order.by)-Rf}, Rf=xts(managers[,10,drop=F]),order.by=index(managers)),order.by=index(managers))
     
-    return.excess <- function (r,Rf,order.by) 
+    return.excess <- function (R,Rf)
     { # a function to be called by apply on the inner loop
-        r.excess=xts(r,order.by=order.by)-as.xts(Rf)
-        return(r.excess)
+        xR = coredata(as.xts(R)-as.xts(Rf))
     }
     
-    r.excess=xts(apply(r, 2, FUN=return.excess, Rf=Rf, order.by=indexseries),order.by=indexseries)
-    colnames(r.excess) = paste(colnames(r), ">", columnname.Rf)
-    result = reclass(r.excess, r)
+    result = apply(R, MARGIN=2, FUN=return.excess, Rf=Rf)
+    colnames(result) = paste(colnames(R), ">", columnname.Rf)
+    result = reclass(result, R)
 
     # RESULTS:
     return(result)
@@ -57,10 +56,15 @@ function (R, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.excess.R,v 1.17 2009-10-03 18:23:55 brian Exp $
+# $Id: Return.excess.R,v 1.18 2009-10-08 17:35:18 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.17  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.16  2009-09-24 18:00:48  peter
 # - fixed to handle scalar Rf
 #
