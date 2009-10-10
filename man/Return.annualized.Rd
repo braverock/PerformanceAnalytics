@@ -33,7 +33,7 @@ For simple returns (geometric=FALSE), the formula is:
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 6
 }
 \author{ Peter Carl }
-\note{}
+\
 \seealso{
     \code{\link{Return.cumulative}},
 }

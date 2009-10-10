@@ -23,7 +23,7 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 }
 \references{ }
 \author{ Peter Carl }
-\note{}
+\
 \seealso{
     \code{\link{chart.TimeSeries}} \cr
     \code{\link{plot}}

@@ -30,7 +30,7 @@ Sortino ratio
 Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 }
 \author{ Brian G. Peterson }
-\note{}
+\
 \seealso{
     \code{\link{SharpeRatio}} \cr
     \code{\link{DownsideDeviation}} \cr

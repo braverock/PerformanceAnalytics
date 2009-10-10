@@ -19,7 +19,7 @@ A dataframe with correlation and significance against each column of the data pr
 }
 \references{ }
 \author{ Peter Carl }
-\note{}
+\
 \seealso{\code{\link{cor.test}}}
 \examples{
 # First we load the data

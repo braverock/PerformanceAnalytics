@@ -24,7 +24,7 @@ Sharpe, W.F. Capital Asset Prices: A theory of market equilibrium under conditio
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
 }
 \author{ Peter Carl }
-\note{}
+\
 \seealso{
     \code{\link{CAPM.beta}}
     \code{\link{CAPM.utils}}
