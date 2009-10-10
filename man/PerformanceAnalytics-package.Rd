@@ -221,19 +221,6 @@ Any comments, suggestions, or code patches are invited.
 If you've implemented anything in the list above, please consider donating it for inclusion in a later version of this package.
 }
 
-\section{Acknowledgments}{
-Data series \code{\link{edhec}} used in \code{PerformanceAnalytics} and related publications with the kind permission of the EDHEC Risk and Asset Management Research Center. \cr
-\url{http://www.edhec-risk.com/indexes/pure_style}
-
-Kris Boudt was instrumental in our research on component risk for portfolios with non-normal distributions, and is responsible for much of the code for multivariate moments and comoments.
-
-Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission.
-
-Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions, and to Khanh Nguyen and Ryan Sheftel for careful testing and detailed problem reports.
-
-Thanks to the R-SIG-Finance community without whom this package would not be possible.  We are indebted to the R-SIG-Finance community for many helpful suggestions, bugfixes, and requests.
-}
-
 \author{
 Brian G. Peterson \cr
 Peter Carl \cr
@@ -249,6 +236,7 @@ Litterman, R., Gumerlock R., et. al. \emph{The Practice of Risk Management: Impl
 Murrel, Paul. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer. 2005. \cr
+Shumway, R. and Stoffer, D. emph{Time Series Analysis and it's Applications, with R examples}, Springer, 2006.
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }
@@ -261,5 +249,21 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
     Collection of R charts and graphs \cr \url{http://addictedtor.free.fr/graphiques/}
 
 }
+
+\section{Acknowledgments}{
+Data series \code{\link{edhec}} used in \code{PerformanceAnalytics} and related publications with the kind permission of the EDHEC Risk and Asset Management Research Center. \cr
+\url{http://www.edhec-risk.com/indexes/pure_style}
+
+Kris Boudt was instrumental in our research on component risk for portfolios with non-normal distributions, and is responsible for much of the code for multivariate moments and comoments.
+
+Jeff Ryan, as the primary author of xts, is owed a huge debt (which he would be happy to collect over a pint) by the entire R finance community for creating xts, upon which much of PerformanceAnalytics depends.
+
+Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission. Stephan Albrecht provided detailed feedback on the Getmansky/Lo Smoothing Index.  Diethelm Wuertz provided prototypes of modified VaR and skewness and kurtosis functions (and is of course the maintainer of the RMetrics suite of pricing and optimization functions)
+
+Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions, and to Khanh Nguyen and Ryan Sheftel for careful testing and detailed problem reports.
+
+Thanks to the R-SIG-Finance community without whom this package would not be possible.  We are indebted to the R-SIG-Finance community for many helpful suggestions, bugfixes, and requests.
+}
+
 
 \keyword{ package }
