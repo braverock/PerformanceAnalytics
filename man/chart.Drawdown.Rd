@@ -23,8 +23,6 @@ Any time the cumulative returns dips below the maximum cumulative returns, it's 
 }
 \references{ }
 \author{ Peter Carl }
-\note{
-}
 \seealso{
 
     \code{\link{plot}} \cr

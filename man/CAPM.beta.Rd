@@ -41,7 +41,6 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 Bacon, Carl. \emph{Practical portfolio performance measurement and attribution}. Wiley. 2004. \cr
 }
 \author{ Peter Carl }
-\
 \seealso{
     \code{\link{BetaCoVariance}}
     \code{\link{CAPM.alpha}}

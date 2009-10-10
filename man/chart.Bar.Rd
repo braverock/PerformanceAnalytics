@@ -21,9 +21,7 @@ This is really a wrapper for chart.TimeSeries, so several other attributes can a
 \value{
 Creates a plot of time on the x-axis and vertical lines for each period to indicate value on the y-axis.
 }
-\references{ }
 \author{ Peter Carl }
-\
 \seealso{
     \code{\link{chart.TimeSeries}} \cr
     \code{\link{plot}}

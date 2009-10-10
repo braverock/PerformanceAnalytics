@@ -30,7 +30,6 @@ Many other measures have been proposed to do similar reward to risk ranking. It 
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004.
 }
 \author{ Brian G. Peterson }
-\
 \seealso{
     \code{\link{Return.annualized}},  \cr
     \code{\link{maxDrawdown}}, \cr

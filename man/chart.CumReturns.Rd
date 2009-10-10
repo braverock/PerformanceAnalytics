@@ -29,10 +29,8 @@ Cumulates the return series and displays either as a wealth index or as cumulati
 \value{
 A timeseries line chart of the cumulative return series.
 }
-\references{ }
+\references{ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. \cr }
 \author{ Peter Carl }
-\note{
-}
 \seealso{
     \code{\link{chart.TimeSeries}} \cr
     \code{\link{plot}}

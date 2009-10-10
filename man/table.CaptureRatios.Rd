@@ -21,7 +21,6 @@ This table will show statistics pertaining to an asset against a set of benchmar
   A data.table of calculations for each set of returns against each benchmark.
 }
 \author{ Peter Carl }
-
 \seealso{ \code{\link{UpDownRatios}}, \code{\link{chart.CaptureRatios}} }
 \examples{
 data(managers)

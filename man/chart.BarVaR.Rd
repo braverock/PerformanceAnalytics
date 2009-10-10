@@ -34,10 +34,7 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "Gaussia
 \value{
 Creates a plot of time on the x-axis and vertical lines for each period to indicate value on the y-axis.  Overlays a line to indicate the value of a risk metric calculated at that time period.
 }
-\references{ }
 \author{ Peter Carl }
-\note{
-}
 \seealso{
    \code{\link{chart.TimeSeries}} \cr
    \code{\link{plot}} \cr

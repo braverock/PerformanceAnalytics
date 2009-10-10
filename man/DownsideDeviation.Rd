@@ -51,7 +51,6 @@ Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on R
 
 }
 \author{ Peter Carl, Brian G. Peterson }
-\
 \seealso{ }
 \examples{
 data(edhec)

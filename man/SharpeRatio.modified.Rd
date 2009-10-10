@@ -29,7 +29,6 @@ This function returns a modified Sharpe ratio for the same periodicity of the da
 Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002, v 5.
 }
 \author{ Brian G. Peterson }
-\
 \seealso{
     \code{\link{VaR}} \cr
     \code{\link{SharpeRatio}} \cr

@@ -26,7 +26,6 @@ chart rolling period correlations of one or more assets
 }
 \references{ }
 \author{ Peter Carl }
-\
 \seealso{}
 \examples{
 # First we get the data
