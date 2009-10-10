@@ -125,15 +125,18 @@ pfolioReturn <- function (x, weights=NULL, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.4 2009-10-01 20:22:02 brian Exp $
+# $Id: Return.portfolio.R,v 1.5 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.4  2009-10-01 20:22:02  brian
+# - add reclass on wealthindex so Return.calculate (now using xts internally) doesn't blow up
+#
 # Revision 1.3  2009-08-25 17:43:37  brian
 # - updates to support Marginal VaR
 # - use reclass() in Return.portfolio to return xts object

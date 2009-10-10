@@ -104,14 +104,17 @@ function (x, na.rm = TRUE, quiet = TRUE, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: checkData.R,v 1.28 2009-07-02 13:54:46 peter Exp $
+# $Id: checkData.R,v 1.29 2009-10-10 12:40:08 brian Exp $
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.28  2009-07-02 13:54:46  peter
+# - made warning quiet
+#
 # Revision 1.27  2009-07-01 14:58:12  peter
 # - added support for vector to xts using zoo instead
 #

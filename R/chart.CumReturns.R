@@ -87,15 +87,18 @@ function (R, wealth.index = FALSE, legend.loc = NULL, colorset = (1:12), begin =
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.CumReturns.R,v 1.13 2009-09-01 20:18:41 brian Exp $
+# $Id: chart.CumReturns.R,v 1.14 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-09-01 20:18:41  brian
+# - add comments to describe the handling of na.skip for rbind'ing correct start value to shorter series
+#
 # Revision 1.12  2009-09-01 20:05:44  brian
 # - add na.skip to reference.index
 # - revise start.index handling to be more programatically efficient

@@ -54,15 +54,18 @@ function (Ra, Rb, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.Correlation.R,v 1.8 2009-04-07 22:33:00 peter Exp $
+# $Id: table.Correlation.R,v 1.9 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-04-07 22:33:00  peter
+# - changed checkData to use default xts
+#
 # Revision 1.7  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #

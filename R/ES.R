@@ -1,5 +1,5 @@
 ###############################################################################
-# $Id: ES.R,v 1.7 2009-10-01 19:12:24 brian Exp $
+# $Id: ES.R,v 1.8 2009-10-10 12:40:08 brian Exp $
 ###############################################################################
 
 ES <-
@@ -113,15 +113,18 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.7 2009-10-01 19:12:24 brian Exp $
+# $Id: ES.R,v 1.8 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-10-01 19:12:24  brian
+# - update probability to 95% by default
+#
 # Revision 1.6  2009-10-01 19:10:40  brian
 # - label rows
 # - invert historical VaR for consistency with other univariate measures

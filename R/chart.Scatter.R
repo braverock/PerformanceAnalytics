@@ -45,15 +45,18 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Scatter.R,v 1.9 2009-06-02 03:17:28 peter Exp $
+# $Id: chart.Scatter.R,v 1.10 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-06-02 03:17:28  peter
+# - cleaned out old comments
+#
 # Revision 1.8  2009-04-18 02:56:53  peter
 # - argument cleanup and codoc issues
 #

@@ -42,15 +42,18 @@ function (Ra, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.Geltner.R,v 1.7 2009-09-02 12:13:29 brian Exp $
+# $Id: Return.Geltner.R,v 1.8 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-09-02 12:13:29  brian
+# - fix for positive lag of lag.xts
+#
 # Revision 1.6  2009-09-02 11:53:57  brian
 # - add na.skip functionality
 # - add reclass functionality to returned series

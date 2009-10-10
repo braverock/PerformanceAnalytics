@@ -33,15 +33,18 @@ function(prices, method = c("compound","simple"))
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.12 2009-09-22 02:43:57 peter Exp $
+# $Id: Return.calculate.R,v 1.13 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-09-22 02:43:57  peter
+# - function now using cleaned data for 'simple' method
+#
 # Revision 1.11  2009-09-02 12:14:25  brian
 # - convert to xts internally
 # - use positive lag for lag.xts

@@ -34,15 +34,18 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.ECDF.R,v 1.3 2009-04-07 22:19:46 peter Exp $
+# $Id: chart.ECDF.R,v 1.4 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.3  2009-04-07 22:19:46  peter
+# - changed to use element.color parameter
+#
 # Revision 1.2  2008-06-25 03:48:00  peter
 # - added copyright and CVS log
 #

@@ -150,15 +150,19 @@ function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Regression.R,v 1.11 2009-10-02 18:53:17 peter Exp $
+# $Id: chart.Regression.R,v 1.12 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-10-02 18:53:17  peter
+# - changed checkData to use xts
+# - changed default Rf to 0
+#
 # Revision 1.10  2009-04-07 22:22:53  peter
 # - uses element.color parameter
 #

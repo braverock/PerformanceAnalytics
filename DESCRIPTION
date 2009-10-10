@@ -10,5 +10,5 @@ Depends: R (>= 2.4.0), zoo, xts
 Suggests: Hmisc, MASS, tseries, fBasics, fPortfolio, fExtremes, quadprog, sn, robustbase
 License: GPL
 URL: http://braverock.com/R/
-Copyright: (c) 2004-2008
+Copyright: (c) 2004-2009
 Contributors: Kris Boudt, Stefan Albrecht, Khahn Nygyen, Sankalp Upadhyay

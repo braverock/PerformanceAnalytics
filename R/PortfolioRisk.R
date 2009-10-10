@@ -5,7 +5,7 @@
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
-# $Id: PortfolioRisk.R,v 1.13 2009-10-03 18:23:55 brian Exp $
+# $Id: PortfolioRisk.R,v 1.14 2009-10-10 12:40:08 brian Exp $
 ###############################################################################
 
 
@@ -564,15 +564,20 @@ VaR.historical.portfolio = function(R,p,w)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: PortfolioRisk.R,v 1.13 2009-10-03 18:23:55 brian Exp $
+# $Id: PortfolioRisk.R,v 1.14 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-03 18:23:55  brian
+# - multiple Code-Doc mismatches cleaned up for R CMD check
+# - further rationalized use of R,Ra,Rf
+# - rationalized use of period/scale
+#
 # Revision 1.12  2009-09-22 18:07:13  brian
 # - add ncol in loop in ES.historical
 #

@@ -215,15 +215,19 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.BarVaR.R,v 1.29 2009-10-02 18:51:48 peter Exp $
+# $Id: chart.BarVaR.R,v 1.30 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.29  2009-10-02 18:51:48  peter
+# - changed default p to 0.95
+# - removed negative sign from risk calculation
+#
 # Revision 1.28  2009-09-17 21:40:26  brian
 # - use wrappers for historical VaR/ES, do not pass clean for historical measures
 #

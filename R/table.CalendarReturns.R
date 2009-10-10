@@ -120,15 +120,18 @@ function (R, digits = 1, as.perc = TRUE)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2008 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CalendarReturns.R,v 1.7 2009-03-02 03:22:13 peter Exp $
+# $Id: table.CalendarReturns.R,v 1.8 2009-10-10 12:40:08 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-03-02 03:22:13  peter
+# - fixed date formatting issues with yearmon, other date classes
+#
 # Revision 1.6  2008-10-14 14:37:29  brian
 # - convert from matrix or data.frame to zoo in checkData call
 #

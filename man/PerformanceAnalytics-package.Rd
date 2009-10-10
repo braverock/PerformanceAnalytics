@@ -19,7 +19,7 @@ We created this library to include functionality that has been appearing in the 
         Version: \tab 0.9.7.1\cr
         Date: \tab 2008-10-10\cr
         License: \tab GPL\cr
-        Copyright: \tab (c) 2004-2008 Brian G. Peterson and Peter Carl\cr
+        Copyright: \tab (c) 2004-2009 Brian G. Peterson and Peter Carl\cr
         URL: \tab \url{http://braverock.com/R/} \cr
         URL: \tab \url{http://cran.r-project.org/web/packages/PerformanceAnalytics/index.html}
     }
