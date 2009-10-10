@@ -63,8 +63,6 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
  }
 \author{ Kris Boudt, Brian Peterson }
 \note{ ~~further notes~~
-
- ~Make other sections like Warning with \section{Warning }{....} ~
 }
 \seealso{ 
 \code{\link{MultivariateMoments}}, \code{\link{centeredmoment}} }

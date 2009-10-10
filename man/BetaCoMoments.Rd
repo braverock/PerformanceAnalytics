@@ -26,21 +26,21 @@ BetaCoKurtosis(Ra, Rb)
 The co-moments do not allow the marginal impact of an asset on a portfolio to be directly measured.  Instead, Martellini and Zieman (2007) develop a framework that assesses the potential diversification of an asset relative to a portfolio. They use higher moment betas to estimate how much risk will be impacted by adding an asset to a portfolio may have, in terms of symetric risk (i.e., volatility), in asymmetry risk (i.e., skewness), and extreme risks (i.e. kurtosis). That allows them to show that adding an asset to a portfolio (or benchmark) will reduce the portfolio's variance to be reduced if the second-order beta of the asset with respect to the portfolio is less than one.  They develop the same concepts for the third and fourth order moments.  The authors offer these higher moment betas as a measure of the diversification potential of an asset.
 
 Higher moment betas are defined as proportional to the derivative of the covariance, coskewness and cokurtosis of the second, third and fourth portfolio moment with respect to the portfolio weights. The beta co-variance is calculated as:
-\begin{equation}
+\deqn{
     \beta^{(2)}_{a,b} = \frac{CoV(R_a,R_b)}{\mu^{(2)}(R_b)}
-\end{equation}
+}{BetaCoV(Ra,Rb) = CoV(Ra,Rb)/var(Rb)}
 Beta co-skewness is given as:
-\begin{equation}
+\deqn{
     \beta^{(3)}_{a,b} = \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)}
-\end{equation}
+}{BetaCoS(Ra,Rb) = CoS(Ra,Rb)/skewness(Rb)}
 Beta co-kurtosis is:
-\begin{equation}
+\deqn{
     \beta^{(4)}_{a,b} = \frac{CoK(R_a,R_b)}{\mu^{(4)}(R_b)}
-\end{equation}
-where the $n$-th centered moment is calculated as 
-\begin{equation}
+}{BetaCoK(Ra,Rb) = CoK(Ra,Rb)/kurtosis(Rb)}
+where the \eqn{n}-th centered moment is calculated as
+\deqn{
  \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack
-\end{equation}
+}{moment^n(R) = E[R-E(R)^n]}
 
 A beta is greater than 1 indicates that no diversification benefits should be expected from the introduction of that asset into the portfolio. Conversely, a that is less than 1 indicates that adding the new asset should reduce the resulting portfolio's volatility and kurtosis, and to an increase in skewness. More specifically, the lower the beta the higher the diversification effect on normal risk (i.e. volatility). Similarly, since extreme risks are generally characterised by negative skewness and positive kurtosis, the lower the , the higher the diversification effect on extreme risks (as reflected in Modified Value-at-Risk or ER).
 

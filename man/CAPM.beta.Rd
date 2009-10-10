@@ -2,7 +2,6 @@
 \alias{CAPM.beta}
 \alias{CAPM.beta.bull}
 \alias{CAPM.beta.bear}
-\alias{timing.ratio}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ calculate CAPM beta }
 \description{
@@ -14,7 +13,6 @@ This function uses a linear intercept model to achieve the same results as the s
 CAPM.beta(Ra, Rb, Rf = 0)
 CAPM.beta.bull(Ra, Rb, Rf = 0)
 CAPM.beta.bear(Ra, Rb, Rf = 0)
-timing.ratio(Ra, Rb, Rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

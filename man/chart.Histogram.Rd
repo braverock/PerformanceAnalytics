@@ -12,22 +12,22 @@ chart.Histogram(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{breaks}{how to calculate the breaks between the bars, one of:
-    \CR
-      a vector giving the breakpoints between histogram cells,
-      \CR a single number giving the number of cells for the histogram,
-      \CR a character string naming an algorithm to compute the number of cells (see Details),
-      \CR a function to compute the number of cells.
-\CR
+    \itemize{
+      \item{a vector giving the breakpoints between histogram cells}
+      \item{a single number giving the number of cells for the histogram}
+      \item{a character string naming an algorithm to compute the number of cells (see Details)}
+      \item{a function to compute the number of cells)}
+    }
     In the last three cases the number is a suggestion only.
     see \code{\link[graphics]{hist}} for details, default "FD"
   }
   \item{methods}{ what to graph, one or more of:
     \itemize{
-        \item{add.density}{ to display the density plot,}
-        \item{add.normal}{ to display a fitted normal distibution line over the mean,}
-        \item{add.centered}{ to display a fitted normal line over zero,}
-        \item{add.rug}{ to display a rug of the observations,}
-        \item{add.risk}{ to display common risk metrics,}
+        \item{add.density}{ to display the density plot}
+        \item{add.normal}{ to display a fitted normal distibution line over the mean}
+        \item{add.centered}{ to display a fitted normal line over zero}
+        \item{add.rug}{ to display a rug of the observations}
+        \item{add.risk}{ to display common risk metrics}
         \item{add.qqplot}{ to display a small qqplot in the upper corner of the histogram plot}
     }
   }
