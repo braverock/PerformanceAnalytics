@@ -11,15 +11,14 @@ chart.Histogram(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{breaks}{how to calculate the breaks between the bars, one of:
+  \item{breaks}{one of:
     \itemize{
-      \item{a vector giving the breakpoints between histogram cells}
-      \item{a single number giving the number of cells for the histogram}
-      \item{a character string naming an algorithm to compute the number of cells (see Details)}
-      \item{a function to compute the number of cells)}
+      \item a vector giving the breakpoints between histogram cells,
+      \item a single number giving the number of cells for the histogram,
+      \item a character string naming an algorithm to compute the number of cells (see \sQuote{Details}),
+      \item a function to compute the number of cells.
     }
-    In the last three cases the number is a suggestion only.
-    see \code{\link[graphics]{hist}} for details, default "FD"
+    In the last three cases the number is a suggestion only. see \code{\link[graphics]{hist}} for details, default "FD"
   }
   \item{methods}{ what to graph, one or more of:
     \itemize{
@@ -71,9 +70,9 @@ chart of histogram of returns
 \references{ }
 \author{ Peter Carl }
 \note{
-Code inspired by a chart on:
+Code inspired by a chart on: \cr
 \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
-}
+} 
 \seealso{
   \code{\link[graphics]{hist}}
 }
