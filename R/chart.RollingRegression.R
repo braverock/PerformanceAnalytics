@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), na.pad = TRUE, ...)
+function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -12,7 +12,7 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
     # Transform input data to a data frame
     Ra = checkData(Ra, method="zoo")
     Rb = checkData(Rb, method="zoo")
-    #rf = checkDataMatrix(rf)
+    #Rf = checkDataMatrix(Rf)
     attribute=attribute[1]
 
     # Get dimensions and labels
@@ -22,8 +22,8 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
     columnnames.b = colnames(Rb)
 
     # @todo: make an excess return function and use it here
-    Ra.excess = Return.excess(Ra, rf)
-    Rb.excess = Return.excess(Rb, rf)
+    Ra.excess = Return.excess(Ra, Rf)
+    Rb.excess = Return.excess(Rb, Rf)
 
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
@@ -60,10 +60,13 @@ function (Ra, Rb, width = 12, rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.20 2009-10-10 12:40:08 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.21 2009-10-11 12:19:03 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.19  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf
