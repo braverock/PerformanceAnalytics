@@ -38,14 +38,14 @@ A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to 
 QQ Plot
 }
 \references{
-  main code forked/borrowed/ported from the excellent: \\
-  Fox, John (2007) \emph{car: Companion to Applied Regression} \\
+  main code forked/borrowed/ported from the excellent: \cr
+  Fox, John (2007) \emph{car: Companion to Applied Regression} \cr
   \url{http://www.r-project.org}, \url{http://socserv.socsci.mcmaster.ca/jfox/}
- }
+}
 \author{ John Fox, ported by Peter Carl }
 \seealso{
-  \code{\link[stats]{qqplot}} \\
-  \code{\link[car]{qq.plot}}  \\
+  \code{\link[stats]{qqplot}} \cr
+  \code{\link[car]{qq.plot}}  \cr
   \code{\link{plot}}
 }
 \examples{

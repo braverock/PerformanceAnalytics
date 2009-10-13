@@ -5,7 +5,7 @@ importFrom("utils", "packageDescription")
 # exportPattern("^[^\\.]")
 
 
-export("ActivePremium","apply.fromstart","apply.rolling","BetaCoKurtosis","BetaCoSkewness","BetaCoVariance","CalculateReturns","CalmarRatio","CAPM.alpha","CAPM.beta","CAPM.beta.bear","CAPM.beta.bull","CAPM.CML","CAPM.CML.slope","CAPM.RiskPremium","CAPM.SML.slope","chart.ACF","chart.ACFplus","chart.Bar","chart.BarVaR","chart.Boxplot","chart.CaptureRatios","chart.Correlation","chart.Correlation.color","chart.CumReturns","chart.Drawdown","chart.ECDF","chart.Histogram","chart.QQPlot","chart.Regression","chart.RelativePerformance","chart.RiskReturnScatter","chart.RollingCorrelation","chart.RollingMean","chart.RollingPerformance","chart.RollingRegression","chart.RollingStyle","chart.Scatter","chart.SnailTrail","charts.PerformanceSummary","charts.RollingPerformance","charts.RollingRegression","chart.StackedBar","chart.Style","chart.TimeSeries","chart.VaRSensitivity","checkData","clean.boudt","CoKurtosis","CoKurtosisMatrix","CoSkewness","CoSkewnessMatrix","CoVariance","DownsideDeviation","Drawdowns","ES","findDrawdowns","InformationRatio","KellyRatio","kurtosis","maxDrawdown","mean.geometric","mean.LCL","mean.stderr","mean.UCL","Omega","pfolioReturn","Return.annualized","Return.calculate","Return.centered","Return.clean","Return.cumulative","Return.excess","Return.Geltner","Return.portfolio","Return.portfolio.multiweight","Return.read","Return.relative","sd.annualized","sd.multiperiod","SemiDeviation","SemiVariance","SharpeRatio","SharpeRatio.annualized","SharpeRatio.modified","skewness","SmoothingIndex","sortDrawdowns","SortinoRatio","SterlingRatio","style.fit","style.QPfit","table.AnnualizedReturns","table.Arbitrary","table.Autocorrelation","table.CalendarReturns","table.CAPM","table.CaptureRatios","table.Correlation","table.DownsideRisk","table.Drawdowns","table.HigherMoments","table.MonthlyReturns","table.Returns","table.UpDownRatios","textplot","timing.ratio","TrackingError","TreynorRatio","UpDownRatios","UPR","UpsidePotentialRatio","VaR")
+export("ActivePremium","apply.fromstart","apply.rolling","BetaCoKurtosis","BetaCoSkewness","BetaCoVariance","CalculateReturns","CalmarRatio","CAPM.alpha","CAPM.beta","CAPM.beta.bear","CAPM.beta.bull","CAPM.CML","CAPM.CML.slope","CAPM.RiskPremium","CAPM.SML.slope","chart.ACF","chart.ACFplus","chart.Bar","chart.BarVaR","chart.Boxplot","chart.CaptureRatios","chart.Correlation","chart.Correlation.color","chart.CumReturns","chart.Drawdown","chart.ECDF","chart.Histogram","chart.QQPlot","chart.Regression","chart.RelativePerformance","chart.RiskReturnScatter","chart.RollingCorrelation","chart.RollingMean","chart.RollingPerformance","chart.RollingRegression","chart.RollingStyle","chart.Scatter","chart.SnailTrail","charts.PerformanceSummary","charts.RollingPerformance","charts.RollingRegression","chart.StackedBar","chart.Style","chart.TimeSeries","chart.VaRSensitivity","checkData","clean.boudt","CoKurtosis","CoKurtosisMatrix","CoSkewness","CoSkewnessMatrix","CoVariance","DownsideDeviation","Drawdowns","ES","findDrawdowns","InformationRatio","KellyRatio","kurtosis","maxDrawdown","mean.geometric","mean.LCL","mean.stderr","mean.UCL","Omega","pfolioReturn","Return.annualized","Return.calculate","Return.centered","Return.clean","Return.cumulative","Return.excess","Return.Geltner","Return.portfolio","Return.portfolio.multiweight","Return.read","Return.relative","sd.annualized","sd.multiperiod","SemiDeviation","SemiVariance","SharpeRatio","SharpeRatio.annualized","SharpeRatio.modified","skewness","SmoothingIndex","sortDrawdowns","SortinoRatio","SterlingRatio","style.fit","style.QPfit","table.AnnualizedReturns","table.Arbitrary","table.Autocorrelation","table.CalendarReturns","table.CAPM","table.CaptureRatios","table.Correlation","table.DownsideRisk","table.Drawdowns","table.HigherMoments","table.MonthlyReturns","table.Returns","table.UpDownRatios","textplot","TrackingError","TreynorRatio","UpDownRatios","UPR","UpsidePotentialRatio","VaR")
 
 # # Export These
 # ActivePremium
@@ -161,7 +161,11 @@ export("ActivePremium","apply.fromstart","apply.rolling","BetaCoKurtosis","BetaC
 # risk.labels
 # set6equal
 # set8equal
-# 
+# tim10equal
+# tim12equal
+# tim6equal
+# tim8equal
+ 
 # # internal/obsolete functions, do not export
 # centeredcomoment
 # centeredmoment
@@ -214,10 +218,7 @@ export("ActivePremium","apply.fromstart","apply.rolling","BetaCoKurtosis","BetaC
 # textplot.data.frame
 # textplot.default
 # textplot.matrix
-# tim10equal
-# tim12equal
-# tim6equal
-# tim8equal
+# timing.ratio
 # VaR.Beyond
 # VaR.CornishFisher
 # VaR.CornishFisher.portfolio

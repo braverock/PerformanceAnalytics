@@ -27,7 +27,6 @@ chart of relative returns
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{ }
 \examples{
 # First we get the data
 data(edhec)

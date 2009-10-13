@@ -236,7 +236,7 @@ Litterman, R., Gumerlock R., et. al. \emph{The Practice of Risk Management: Impl
 Murrel, Paul. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer. 2005. \cr
-Shumway, R. and Stoffer, D. emph{Time Series Analysis and it's Applications, with R examples}, Springer, 2006.
+Shumway, R. and Stoffer, D. \emph{Time Series Analysis and it's Applications, with R examples}, Springer, 2006. \cr
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }

@@ -15,8 +15,10 @@ apply.rolling(R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ number of periods to apply rolling function window over }
+  \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
+  \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }
   \item{FUN}{any function that can be evaluated using a single set of returns (e.g., rolling beta won't work, but \code{\link{Return.annualized}} will)}
-  \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
+%   \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
   \item{by}{ calculate FUN for trailing width points at every by-th time point.}
   \item{\dots}{ any other passthru parameters }
 }

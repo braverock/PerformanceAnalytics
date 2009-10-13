@@ -40,7 +40,6 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
 }
 \references{ Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions and deficiencies. }
 \author{ Peter Carl }
-
 \seealso{ \code{\link{plot}} }
 \examples{
 data(managers)

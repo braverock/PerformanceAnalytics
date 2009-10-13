@@ -42,7 +42,10 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 \author{ Kris Boudt, Peter Carl, Brian Peterson }
 \note{
 }
-\seealso{ \code{\link{BetaCoSkewness}}, \code{\link{BetaCoKurtosis}}, \code{\link{BetaCoMoments}}, code{\link{MultivariateMoments}} }
+\seealso{ \code{\link{BetaCoSkewness}} \cr
+          \code{\link{BetaCoKurtosis}} \cr
+          \code{\link{BetaCoMoments}} \cr
+          \code{\link{MultivariateMoments}} }
 \examples{
 data(managers)
 CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])

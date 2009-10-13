@@ -23,7 +23,6 @@ A timeseries line charts of the rolling mean, with error bars
 }
 \references{ }
 \author{ Peter Carl }
-\seealso{}
 \examples{
 data(edhec)
 chart.RollingMean(edhec[, 9, drop = FALSE])
