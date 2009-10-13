@@ -80,7 +80,13 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
     else {
         R = checkData(R, method = "matrix", ... = ...)
         result = apply(R, 2, SmoothingIndex, neg.thetas = neg.thetas, MAorder = MAorder, verbose = verbose, ... = ...)
-        rownames(result) = "Smoothing Index"
-        return(result)
+        if(length(result) ==1)
+            return(result)
+        else {
+            dim(result) = c(1,NCOL(R))
+            colnames(result) = colnames(R)
+            rownames(result) = "Smoothing Index"
+            return(result)
+        }
     }
 }
