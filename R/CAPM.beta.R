@@ -30,7 +30,7 @@ function (Ra, Rb, Rf = 0)
 
     beta <-function (xRa, xRb)
     {
-        merged = na.omit(merge(xRa, xRb))
+        merged = as.data.frame(na.omit(merge(xRa, xRb)))
         model.lm = lm(merged[,1] ~ merged[,2], merged)
         beta = coef(model.lm)[[2]]
         beta
@@ -163,9 +163,14 @@ function (Ra, Rb, Rf = 0)
     beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf)
     beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf)
     result = beta.bull/beta.bear
-    names = colnames(Rb)
-    rownames(result) = paste("Timing Ratio:", names)
-    return(result)
+
+    if(length(result) ==1)
+        return(result)
+    else {
+        names = colnames(Rb)
+        rownames(result) = paste("Timing Ratio:", names)
+        return(result)
+    }
 }
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
@@ -175,10 +180,13 @@ function (Ra, Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.15 2009-10-10 12:40:08 brian Exp $
+# $Id: CAPM.beta.R,v 1.16 2009-10-13 14:26:55 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.14  2009-10-06 03:01:04  peter
 # - added label to results
 #
