@@ -29,15 +29,15 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    beta <-function (xRa, xRb)
+    alpha <-function (xRa, xRb)
     {
-        merged = na.omit(merge(xRa, xRb))
+        merged = as.data.frame(na.omit(merge(xRa, xRb)))
         model.lm = lm(merged[,1] ~ merged[,2], merged)
-        beta = coef(model.lm)[[1]]
-        beta
+        alpha = coef(model.lm)[[1]]
+        alpha
     }
 
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb) alpha(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
 
     if(length(result) ==1)
         return(result)
@@ -57,10 +57,13 @@ function (Ra, Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.alpha.R,v 1.11 2009-10-10 12:40:08 brian Exp $
+# $Id: CAPM.alpha.R,v 1.12 2009-10-13 14:26:05 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.10  2009-10-06 03:01:15  peter
 # - added label to results
 #
