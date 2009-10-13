@@ -11,4 +11,4 @@ Suggests: Hmisc, MASS, tseries, quadprog, sn, robustbase
 License: GPL
 URL: http://braverock.com/R/
 Copyright: (c) 2004-2009
-Contributors: Kris Boudt, Stefan Albrecht, Khahn Nygyen, Sankalp Upadhyay
+Contributors: A special thanks for contributions from Kris Boudt, Stefan Albrecht, Khahn Nygyen, Sankalp Upadhyay
