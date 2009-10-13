@@ -61,10 +61,11 @@ Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of Higher-Order
 \examples{
 data(managers)
 
-BetaCoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-BetaCoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-BetaCoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-
+BetaCoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
+BetaCoKurtosis(managers[,1:6], managers[,8:7])
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

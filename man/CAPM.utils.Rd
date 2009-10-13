@@ -63,24 +63,11 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 }
 \examples{
 data(managers)
-managers.length = dim(managers)[1]
-start = rownames(managers[1,])
-start
-end = rownames(managers[managers.length,])
-rf = managers[,10,drop=FALSE]
-
-Rb = managers[,"SP500.TR",drop=FALSE]
-
-CAPM.CML.slope(Rb, rf )
-
-CAPM.CML(managers[,"HAM1",drop=FALSE], Rb, Rf=0)
-
-CAPM.RiskPremium(Rb, Rf=0)
-
+CAPM.CML.slope(managers[,"SP500 TR",drop=FALSE], managers[,10,drop=FALSE])
+CAPM.CML(managers[,"HAM1",drop=FALSE], managers[,"SP500 TR",drop=FALSE], Rf=0)
+CAPM.RiskPremium(managers[,"SP500 TR",drop=FALSE], Rf=0)
 CAPM.RiskPremium(managers[,"HAM1",drop=FALSE], Rf=0)
-
-CAPM.SML.slope(Rb, Rf=0)
-
+CAPM.SML.slope(managers[,"SP500 TR",drop=FALSE], Rf=0)
 # should create plots like in Ruppert 7.1 7.2
 
 }
