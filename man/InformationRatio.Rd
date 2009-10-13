@@ -37,7 +37,9 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 }
 \examples{
 data(managers)
-InformationRatio(managers[,"HAM1",drop=FALSE], managers[, "SP500.TR", drop=FALSE])
+InformationRatio(managers[,"HAM1",drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+InformationRatio(managers[,1:6], managers[,8,drop=FALSE])
+InformationRatio(managers[,1:6], managers[,8:7])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

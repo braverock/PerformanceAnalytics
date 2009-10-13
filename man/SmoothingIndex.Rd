@@ -8,7 +8,6 @@ Proposed by Getmansky et al to provide a normalized measure of "liquidity risk."
 \usage{
 SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose=FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{neg.thetas}{ if FALSE, function removes negative coefficients (thetas) when calculating the index }
@@ -29,8 +28,7 @@ The moving-average process of order \eqn{k=2} (specified using \code{MAorder}) g
 \code{include.mean}: Getmansky, et al. (2004) p 555 "By applying the above procedure
 to observed de-meaned returns...", so we set that parameter to 'FALSE'.
 
-\code{transform.pars}: ibid, "we impose the additional restriction that the estimated MA(k)
-process be invertible," so we set the parameter to 'TRUE'.
+\code{transform.pars}: ibid, "we impose the additional restriction that the estimated MA(k) process be invertible," so we set the parameter to 'TRUE'.
 
 The coefficients, \eqn{\theta_{j}}, are then normalized to sum to interpreted as a "weighted average of the fund's true returns over the most recent \eqn{k + 1} periods, including the current period."
 
@@ -58,10 +56,9 @@ Getmansky, Mila, Andrew W. Lo, and Igor Makarov. 2004. An Econometric Model of S
 \examples{
 data(managers)
 data(edhec)
-indexes=merge(managers[,8:10],edhec)
-indexes=na.omit(indexes)
-sapply(indexes,FUN=SmoothingIndex)
-SmoothingIndex(managers[,8,drop=FALSE])
+SmoothingIndex(managers[,1,drop=FALSE])
+SmoothingIndex(managers[,1:8])
+SmoothingIndex(edhec)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

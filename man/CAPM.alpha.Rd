@@ -5,7 +5,7 @@
 \description{
 This is a wrapper for calculating a CAPM alpha.
 
-"Alpha" purports to be a measure of a manager's skill by measuring the portion of the managers returns that are not attributable to "Beta", or the performance relative to a benchmark.
+"Alpha" purports to be a measure of a manager's skill by measuring the portion of the managers returns that are not attributable to "Beta", or the portion of performance attributable to a benchmark.
 }
 \usage{
 CAPM.alpha(Ra, Rb, Rf = 0)
@@ -30,8 +30,13 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 }
 \examples{
 # First we load the data
-data(managers)
-CAPM.alpha(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
+    data(managers)
+    CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
+    CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12)
+    CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
+    CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

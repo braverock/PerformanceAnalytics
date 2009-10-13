@@ -31,25 +31,14 @@ A numeric value for each calculation.
 \references{}
 \author{ Peter Carl }
 \examples{
-# First we load the data
-data(edhec)
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-start
-end = rownames(edhec[edhec.length,])
-edhec.zoo = zoo(edhec, order.by = rownames(edhec))
-sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
-
-# Now we have to align it as "monthly" data
-time(edhec.zoo) = as.yearmon(time(edhec.zoo))
-time(sp500.zoo) = as.yearmon(time(sp500.zoo))
-data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
-time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
-
+data(managers)
+UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE])
+UpDownRatios(managers[,1:6, drop=FALSE], managers[,8, drop=FALSE])
+UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], method="Capture")
 # Up Capture:
-UpDownRatios(data.zoo[,1, drop=FALSE], data.zoo[,2, drop=FALSE])
+UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Up", method="Capture")
 # Down Capture:
-UpDownRatios(data.zoo[,1, drop=FALSE], data.zoo[,2, drop=FALSE], side="down")
+UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Down", method="Capture")
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

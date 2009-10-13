@@ -39,12 +39,10 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
 }
 \examples{
 data(managers)
-Ra = managers[, 1, drop = FALSE]
-rf = managers[, 10, drop = FALSE]
-
-SharpeRatio(R)
-SharpeRatio(Ra, rf = .04/12)
-SharpeRatio(Ra, rf = Rf=0)
+SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12) 
+SharpeRatio(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE])
+SharpeRatio(managers[,1:6], Rf=.035/12) 
+SharpeRatio(managers[,1:6], Rf = managers[,10,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

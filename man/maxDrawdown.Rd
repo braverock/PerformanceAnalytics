@@ -27,8 +27,9 @@ maximum drawdown
 }
 \examples{
 data(edhec)
-R=edhec[,"Funds.of.Funds"]
-maxDrawdown(R)
+maxDrawdown(edhec[,"Funds of Funds"])
+data(managers)
+maxDrawdown(managers)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -29,10 +29,11 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
     \code{\link{Return.annualized}}
 }
 \examples{
-    # First we load the data
     data(managers)
-
     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
+    ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
+    ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
+    ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

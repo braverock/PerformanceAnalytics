@@ -27,7 +27,7 @@ Ruppert(2004) reports that this equation will give the estimated slope of the li
 
 Two other functions apply the same notion of best fit to positive and negative market returns, separately.  The \code{CAPM.beta.bull} is a regression for only positive market returns, which can be used to understand the behavior of the asset or portfolio in positive or 'bull' markets.  Alternatively, \code{CAPM.beta.bear} provides the calculation on negative market returns.
 
-The \code{timing.ratio} can help assess whether the manager is a good timer of asset allocation decisions.  The ratio, which is calculated as
+The \code{TimingRatio} can help assess whether the manager is a good timer of asset allocation decisions.  The ratio, which is calculated as
  \deqn{TimingRatio =\frac{\beta^{+}}{\beta^{-}}}
 is best when greater than one in a rising market and less than one in a falling market.
 
@@ -48,11 +48,17 @@ Bacon, Carl. \emph{Practical portfolio performance measurement and attribution}.
 }
 \examples{
 data(managers)
-CAPM.beta(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
-CAPM.beta.bull(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
-CAPM.beta.bear(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
-timing.ratio(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = managers[, "US.3m.TR", drop=FALSE])
-chart.Regression(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE], Rf = managers[, "US.3m.TR", drop=FALSE], fit="conditional", main="Conditional Beta")
+    CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
+    CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12)
+    CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
+    CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
+    CAPM.beta(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf = managers[, "US 3m TR", drop=FALSE])
+    CAPM.beta.bull(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf = managers[, "US 3m TR", drop=FALSE])
+    CAPM.beta.bear(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf = managers[, "US 3m TR", drop=FALSE])
+    TimingRatio(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf = managers[, "US 3m TR", drop=FALSE])
+    chart.Regression(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf = managers[, "US 3m TR", drop=FALSE], fit="conditional", main="Conditional Beta")
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

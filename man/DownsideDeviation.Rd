@@ -53,15 +53,14 @@ Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on R
 \author{ Peter Carl, Brian G. Peterson }
 \seealso{ }
 \examples{
-data(edhec)
-head(edhec[,6,drop=FALSE])
-sd(edhec[,6])
-DownsideDeviation(edhec[,6])  # MAR 0\%
-DownsideDeviation(edhec[,6], MAR = .04/12) #MAR 4\%
-DownsideDeviation(edhec[,6], MAR = mean(edhec[,6])) #MAR = mean return, calculate semivariance
-
-SemiDeviation(edhec[,7])
-SemiVariance (edhec[,7]) #calculated using method="subset"
+data(managers)
+sd(managers[,1:6], na.rm=TRUE)
+DownsideDeviation(managers[,1:6])  # MAR 0\%
+DownsideDeviation(managers[,1:6], MAR = .04/12) #MAR 4\%
+SemiDeviation(managers[,1,drop=FALSE])
+SemiDeviation(managers[,1:6])
+SemiVariance (managers[,1,drop=FALSE])
+SemiVariance (managers[,1:6]) #calculated using method="subset"
 }
 
 \keyword{ ts }

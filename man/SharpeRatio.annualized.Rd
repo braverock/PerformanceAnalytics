@@ -8,7 +8,6 @@ The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviati
 \usage{
 SharpeRatio.annualized(R, Rf = 0, scale = NA)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
@@ -42,18 +41,11 @@ Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 
     \code{\link{SortinoRatio}}
 }
 \examples{
-data(edhec)
-head(edhec[, 6, drop = FALSE])
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-start
-end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start=start, end=end)
-time(Rf=0)=as.yearmon(time(Rf=0))
-
-SharpeRatio.annualized(edhec[, 6, drop = FALSE])
-SharpeRatio.annualized(edhec[, 6, drop = FALSE], rf = .04/12)
-SharpeRatio.annualized(edhec[, 6, drop = FALSE], rf = Rf=0)
+data(managers)
+SharpeRatio.annualized(managers[,1,drop=FALSE], Rf=.035/12) 
+SharpeRatio.annualized(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE])
+SharpeRatio.annualized(managers[,1:6], Rf=.035/12) 
+SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

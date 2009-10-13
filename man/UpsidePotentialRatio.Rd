@@ -50,7 +50,7 @@ Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on R
 \examples{
 data(edhec)
 UpsidePotentialRatio(edhec[, 6], MAR=.05/12) #5 percent/yr MAR
-
+UpsidePotentialRatio(edhec[, 1:6], MAR=0)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

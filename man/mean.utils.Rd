@@ -40,10 +40,10 @@ numeric value for the mean function called
 
 \examples{
 data(edhec)
-mean.geometric(edhec[,"Funds.of.Funds"])
-mean.stderr(edhec[,"Funds.of.Funds"])
-mean.UCL(edhec[,"Funds.of.Funds"])
-mean.LCL(edhec[,"Funds.of.Funds"])
+mean.geometric(edhec[,"Funds of Funds"])
+mean.stderr(edhec[,"Funds of Funds"])
+mean.UCL(edhec[,"Funds of Funds"])
+mean.LCL(edhec[,"Funds of Funds"])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -30,9 +30,14 @@ Equation:
    \code{\link{CAPM.beta}}
 }
 \examples{
-# First we load the data
 data(managers)
-TreynorRatio(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE], rf = .04/12)
+TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
+TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]) 
+TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12) 
+TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
+TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

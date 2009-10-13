@@ -37,7 +37,7 @@ standard deviation value, scaled for multiple periods
 }
 \examples{
     data(edhec)
-    head(edhec[,6,drop=FALSE])
+    sd.annualized(edhec)
     sd.annualized(edhec[,6,drop=FALSE])
     # now for three periods:
     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)

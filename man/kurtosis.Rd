@@ -1,30 +1,17 @@
 \name{kurtosis}
-
-
 \alias{kurtosis}
-
-
 \title{Kurtosis}
-
-
 \description{
-
     compute kurtosis of a univariate distribution
-
 }
 
 \details{
-    This function was ported from the RMetrics package fUtilities to eliminate a dependency on fUtiltiies being loaded every
-time.  This function is identical except for the addition of \code{\link{checkData}}.
-
+    This function was ported from the RMetrics package fUtilities to eliminate a dependency on fUtilties being loaded every time.  This function is identical except for the addition of \code{\link{checkData}} and additional labeling.
 }
-
 \author{Diethelm Wuertz}
-
 \usage{
 kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
 }
-
 \arguments{
 
     \item{na.rm}{
@@ -51,25 +38,14 @@ kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
         }
 
 }
-
-
 \value{
-
     \code{kurtosis}
-
     returns the value of the statistics, a numeric value. An
     attribute which reports the used method is added.
-
 }
-
-
 \seealso{
-
     \code{\link{skewness}}.
-
 }
-
-
 \examples{
 ## mean -
 ## var -
@@ -80,8 +56,9 @@ kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
 
 ## kurtosis -
    kurtosis(r)
+
+data(managers)
+kurtosis(managers[,1:8])
 }
-
-
 \keyword{univar}
 

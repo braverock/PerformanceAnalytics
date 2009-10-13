@@ -37,9 +37,11 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}.
     \code{\link{UpsidePotentialRatio}}
 }
 \examples{
-data(edhec)
-lapply(edhec,CalmarRatio)
-lapply(edhec,SterlingRatio)
+    data(edhec)
+    CalmarRatio(managers[,1,drop=FALSE])
+    CalmarRatio(managers[,1:6]) 
+    SterlingRatio(managers[,1,drop=FALSE])
+    SterlingRatio(managers[,1:6])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
