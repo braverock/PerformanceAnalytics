@@ -58,7 +58,7 @@ Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.
     data(edhec)
     Omega(edhec)
     Omega(edhec[,13],method="interp",output="point")
-    Omega(edhec[,13],method="interp",output="full")
+    ## Omega(edhec[,13],method="interp",output="full")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

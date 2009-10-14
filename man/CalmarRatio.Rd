@@ -37,7 +37,7 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}.
     \code{\link{UpsidePotentialRatio}}
 }
 \examples{
-    data(edhec)
+    data(managers)
     CalmarRatio(managers[,1,drop=FALSE])
     CalmarRatio(managers[,1:6]) 
     SterlingRatio(managers[,1,drop=FALSE])
