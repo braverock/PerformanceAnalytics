@@ -32,6 +32,8 @@ Second, if corporate actions, dividends, or other adjustments such as time- or m
 require(tseries)
 prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
 R.IBM = Return.calculate(prices, method="simple")
+R.IBM = as.xts(R.IBM)
+colnames(R.IBM)="IBM"
 chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
