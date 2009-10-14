@@ -47,8 +47,8 @@ Code inspired by a chart on:
 \seealso{ }
 \examples{
 data(edhec)
-chart.RiskReturnScatter(edhec, rf = .04/12)
-chart.RiskReturnScatter(edhec, rf = .04/12, add.boxplots = TRUE)
+chart.RiskReturnScatter(edhec, Rf = .04/12)
+chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

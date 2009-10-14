@@ -22,9 +22,6 @@ chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL, ...)
 This is a chart that is commonly used for event studies in econometrics, usually with recession dates, to demonstrate the path of a time series going into and coming out of an event.  The time axis is simply the number of periods prior and following the event, and each line represents a different event.  Note that if time periods are close enough together and the window shown is wide enough, the data will appear to repeat.  That can be confusing, but the function does not currently allow for different windows around each event.
 }
 \value{ Draws a timeseries plot of type "line" on a numbered x-axis, with a vertical dashed line indicating the alignment of the dates given. }
-\references{
-%% ~put references to the literature/web site here ~
-}
 \author{ Peter Carl }
 
 \seealso{
@@ -32,8 +29,6 @@ This is a chart that is commonly used for event studies in econometrics, usually
 }
 \examples{
 data(managers)
-#   time(managers) = as.Date(time(managers))
-#   time(R) = as.Date(time(R))
 R = Drawdowns(managers[,2,drop=F])
 n = table.Drawdowns(managers[,2,drop=F])                          
 chart.Events(Drawdowns(managers[,2,drop=F]), dates = n$Trough, prior=max(na.omit(n$"To Trough")), post=max(na.omit(n$Recovery)), lwd=2, colorset=redfocus, legend.loc=NULL, main = "Worst Drawdowns")

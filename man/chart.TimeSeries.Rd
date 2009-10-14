@@ -62,29 +62,29 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
 
 # These are start and end dates, formatted the same way as the default axis labels
 cycles.dates = list(
-    c("10/26","11/27"),
-    c("08/29","03/33"),
-    c("05/37","06/38"),
-    c("02/45","10/45"),
-    c("11/48","10/49"),
-    c("07/53","05/54"),
-    c("08/57","04/58"),
-    c("04/60","02/61"),
-    c("12/69","11/70"),
-    c("11/73","03/75"),
-    c("01/80","07/80"),
-    c("07/81","11/82"),
-    c("07/90","03/91"),
-    c("03/01","11/01"))
+    c("Oct 26","Nov 27"),
+    c("Aug 29","Mar 33"),
+    c("May 37","Jun 38"),
+    c("Feb 45","Oct 45"),
+    c("Nov 48","Oct 49"),
+    c("Jul 53","May 54"),
+    c("Aug 57","Apr 58"),
+    c("Apr 60","Feb 61"),
+    c("Dec 69","Nov 70"),
+    c("Nov 73","Mar 75"),
+    c("Jan 80","Jul 80"),
+    c("Jul 81","Nov 82"),
+    c("Jul 90","Mar 91"),
+    c("Mar 01","Nov 01"))
 # Event lists - FOR BEST RESULTS, KEEP THESE DATES IN ORDER
 risk.dates = c(
-    "10/87",
-    "02/94",
-    "07/97",
-    "08/98",
-    "10/98",
-    "07/00",
-    "09/01")
+    "Oct 87",
+    "Feb 94",
+    "Jul 97",
+    "Aug 98",
+    "Oct 98",
+    "Jul 00",
+    "Sep 01")
 risk.labels = c(
     "Black Monday",
     "Bond Crash",
@@ -95,7 +95,7 @@ risk.labels = c(
     "Sept 11")
 data(edhec)
 
-R=edhec[,"Funds.of.Funds",drop=FALSE]
+R=edhec[,"Funds of Funds",drop=FALSE]
 Return.cumulative = cumprod(1+R) - 1
 chart.TimeSeries(Return.cumulative)
 chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)

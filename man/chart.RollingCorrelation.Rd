@@ -24,28 +24,12 @@ chart.RollingCorrelation(Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, co
 \value{
 chart rolling period correlations of one or more assets
 }
-\references{ }
 \author{ Peter Carl }
 \seealso{}
 \examples{
 # First we get the data
-data(edhec)
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-start
-end = rownames(edhec[edhec.length,])
-
-edhec.zoo = zoo(edhec, order.by = rownames(edhec))
-sp500.zoo = download.SP500PriceReturns(start = "1996-12-31", end = end)
-
-# Then align the dates as "monthly" data
-time(edhec.zoo) = as.yearmon(time(edhec.zoo))
-time(sp500.zoo) = as.yearmon(time(sp500.zoo))
-data.zoo = merge(edhec.zoo[,9,drop=FALSE],sp500.zoo)
-time(data.zoo) = as.Date(time(data.zoo),format="\%b \%Y")
-
-# Finally, plot it
-chart.RollingCorrelation(data.zoo[, 1, drop=FALSE], data.zoo[, 2, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", lwd=2, width=24)
+data(managers)
+chart.RollingCorrelation(managers[, 1:6, drop=FALSE], managers[, 8, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", width=24, main = "Rolling 12-Month Correlation")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

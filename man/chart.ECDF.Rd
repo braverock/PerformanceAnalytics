@@ -42,7 +42,7 @@ Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. 
 
 \examples{
 data(edhec)
-chart.ECDF(edhec[,1])
+chart.ECDF(edhec[, 1, drop=FALSE])
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

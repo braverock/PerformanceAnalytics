@@ -37,8 +37,8 @@ A timeseries line chart of the cumulative return series.
 }
 \examples{
 data(edhec)
-chart.CumReturns(edhec[,"Funds.of.Funds",drop=FALSE],main="Cumulative Returns")
-chart.CumReturns(edhec[,"Funds.of.Funds",drop=FALSE],wealth.index=TRUE, main="Value of \$1")
+chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],main="Cumulative Returns")
+chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Value of \$1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

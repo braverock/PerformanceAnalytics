@@ -28,7 +28,7 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 }
 \examples{
 data(edhec)
-chart.Bar(edhec[,"Funds.of.Funds"], main="Monthly Returns")
+chart.Bar(edhec[,"Funds of Funds"], main="Monthly Returns")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

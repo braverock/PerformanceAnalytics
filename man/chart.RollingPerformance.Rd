@@ -51,7 +51,7 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{grid.color}{ sets the color for the reference grid }
   \item{grid.lty}{ defines the line type for the grid }
   \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
-  \item{\dots}{ any other passthru parameters to \code{\link[zoo]{rollapply}} }
+  \item{\dots}{ any other passthru parameters to \code{\link[xts]{rollapply.xts}} }
 }
 \value{
 A timeseries line chart of the calculated series
@@ -66,7 +66,8 @@ A timeseries line chart of the calculated series
 \examples{
 data(edhec)
 chart.RollingPerformance(edhec[, 1:3], width = 24)
-chart.RollingPerformance(edhec[, 1:3], width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft")
+chart.RollingPerformance(edhec[, 1:3], FUN = 'mean', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Mean Return")
+chart.RollingPerformance(edhec[, 1:3], FUN = 'SharpeRatio.annualized', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Sharpe Ratio")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
