@@ -23,10 +23,12 @@ chart.RelativePerformance(Ra, Rb, main = "Relative Performance", xaxis = TRUE, c
   \item{\dots}{ any other passthru parameters }
 }
 \details{
-To show under- and out-performance through diﬀerent periods of time, a time series view
+To show under- and out-performance through different periods of time, a time series view
 is more helpful. The value of the chart is less important than the slope of the line. If
-the slope is positive, the ﬁrst asset (numerator) is outperforming the second, and vice versa.  May be used to look at the returns of a fund relative to each member of the peer
-group and the peer group index. Alternatively, it might be used to assess the peers individually against an asset class or peer group index.
+the slope is positive, the first asset (numerator) is outperforming the second, and vice versa.
+May be used to look at the returns of a fund relative to each member of the peer
+group and the peer group index.
+Alternatively, it might be used to assess the peers individually against an asset class or peer group index.
 }
 \value{
 chart of relative returns

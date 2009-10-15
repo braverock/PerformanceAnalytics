@@ -6,7 +6,7 @@
 A wrapper to create a chart of rolling performance metrics in a line chart
 }
 \usage{
-chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 2, xlim = NULL, ylim = NULL, log = "", main = paste(width,"-Month Rolling Performance", sep=""), sub = NULL, xlab = "Date", ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", element.color = "darkgray", major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
+chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 2, xlim = NULL, ylim = NULL, log = "", main = NULL, sub = NULL, xlab = "Date", ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", element.color = "darkgray", major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

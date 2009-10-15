@@ -41,7 +41,19 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
     par(mar=c(1,4,4,2))
     if(is.null(main)){
-         main = paste("Rolling ",width,"-Month Regression",sep="")
+      freq = periodicity(Ra)
+
+      switch(freq$scale,
+          minute = {freq.lab = "minute"},
+          hourly = {freq.lab = "hour"},
+          daily = {freq.lab = "day"},
+          weekly = {freq.lab = "week"},
+          monthly = {freq.lab = "month"},
+          quarterly = {freq.lab = "quarter"},
+          yearly = {freq.lab = "year"}
+      )
+
+      main = paste("Rolling",width,freq.lab,"Regressions", sep=" ")
     }
 
     chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
@@ -65,10 +77,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.19 2009-10-10 12:40:08 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.20 2009-10-15 21:41:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.19  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.18  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

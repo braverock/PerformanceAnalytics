@@ -1,5 +1,5 @@
 `chart.RollingRegression` <-
-function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width ,"-Month ",attribute,sep=""), na.pad = TRUE, ...)
+function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -48,6 +48,21 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
         }
     }
 
+    if(is.null(main)){
+      freq = periodicity(Ra)
+
+      switch(freq$scale,
+          minute = {freq.lab = "minute"},
+          hourly = {freq.lab = "hour"},
+          daily = {freq.lab = "day"},
+          weekly = {freq.lab = "week"},
+          monthly = {freq.lab = "month"},
+          quarterly = {freq.lab = "quarter"},
+          yearly = {freq.lab = "year"}
+      )
+
+      main = paste("Rolling",freq.lab, attribute, sep=" ")
+    }
     chart.TimeSeries(Result.calc, main = main, ...)
 
 }
@@ -60,10 +75,13 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.21 2009-10-11 12:19:03 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.22 2009-10-15 21:41:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.21  2009-10-11 12:19:03  brian
+# - rf to Rf
+#
 # Revision 1.20  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #

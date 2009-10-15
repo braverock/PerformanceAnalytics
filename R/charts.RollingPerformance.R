@@ -22,9 +22,22 @@ function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
     colnames = colnames(x)
     ncols = ncol(x)
 
-    if(is.null(main))
-        main = paste(colnames[1]," Rolling ",width,"-Month Performance",sep="")
+    if(is.null(main)){
+      freq = periodicity(R)
 
+      switch(freq$scale,
+          minute = {freq.lab = "minute"},
+          hourly = {freq.lab = "hour"},
+          daily = {freq.lab = "day"},
+          weekly = {freq.lab = "week"},
+          monthly = {freq.lab = "month"},
+          quarterly = {freq.lab = "quarter"},
+          yearly = {freq.lab = "year"}
+      )
+
+      main = paste("Rolling",width,freq.lab, "Performance", sep=" ")
+    }
+    
     op <- par(no.readonly=TRUE)
 
     # First, we lay out the graphic as a three row, one column format
@@ -60,10 +73,13 @@ function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingPerformance.R,v 1.12 2009-10-10 12:40:08 brian Exp $
+# $Id: charts.RollingPerformance.R,v 1.13 2009-10-15 21:41:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.12  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.11  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

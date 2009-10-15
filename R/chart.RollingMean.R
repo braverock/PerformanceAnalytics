@@ -33,8 +33,23 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
     if(is.null(ylim[1]))
         ylim = range(result)
 
+
+    freq = periodicity(R)
+
+    switch(freq$scale,
+        minute = {freq.lab = "minute"},
+        hourly = {freq.lab = "hour"},
+        daily = {freq.lab = "day"},
+        weekly = {freq.lab = "week"},
+        monthly = {freq.lab = "month"},
+        quarterly = {freq.lab = "quarter"},
+        yearly = {freq.lab = "year"}
+    )
+
+    main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," Performance",sep="")
+
     # The first row is the annualized returns
-    chart.TimeSeries(result, ylim = ylim, xaxis = xaxis, ylab = "Return", lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main = paste(columnnames[1], " Rolling ",width,"-Month Mean Return",sep=""), ...)
+    chart.TimeSeries(result, ylim = ylim, xaxis = xaxis, ylab = "Return", lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main=main , ...)
 
 }
 
@@ -46,10 +61,13 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.7 2009-10-10 12:40:08 brian Exp $
+# $Id: chart.RollingMean.R,v 1.8 2009-10-15 21:41:13 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.6  2009-03-20 03:22:53  peter
 # - added xts
 #

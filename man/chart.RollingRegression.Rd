@@ -1,5 +1,6 @@
 \name{chart.RollingRegression}
 \alias{chart.RollingRegression}
+\alias{chart.RollingQuantileRegression}
 \alias{charts.RollingRegression}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ A wrapper to create charts of relative regression performance through time }
@@ -9,7 +10,8 @@ A wrapper to create a chart of relative regression performance through time
 A group of charts in \code{charts.RollingRegression} displays alpha, beta, and R-squared estimates in three aligned charts in a single device.
 }
 \usage{ 
-chart.RollingRegression(Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main = paste("Rolling ", width, "-Month ", attribute, sep = ""), na.pad = TRUE, ...)
+chart.RollingRegression(Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
+chart.RollingQuantileRegression(Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
 
 charts.RollingRegression(Ra, Rb, width = 12, Rf = 0, main = NULL, legend.loc = NULL, event.labels = NULL, ...)
 }
@@ -33,6 +35,8 @@ Alpha - shows the y-intercept\cr
 Beta - shows the slope of the regression line\cr
 R-Squared - shows the degree of fit of the regression to the data\cr
 
+\code{chart.RollingQuantileRegression} uses \code{\link[quantreg]{rq}} rather than
+\code{\link[stats]{lm}} for the regression, and may be more robust to outliers in the data.
 }
 \value{
 A timeseries line chart of the calculated series
@@ -42,7 +46,10 @@ A timeseries line chart of the calculated series
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.
 }
-\seealso{}
+\seealso{
+\code{\link[stats]{lm}} \cr
+\code{\link[quantreg]{rq}} \cr
+}
 \examples{
 # First we load the data
 data(managers)
