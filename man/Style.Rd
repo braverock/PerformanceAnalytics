@@ -11,7 +11,7 @@
 \usage{
 chart.Style(R.fund, R.style, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, main = NULL, ylim = NULL, unstacked=TRUE, ...)
 
-chart.RollingStyle(R.fund, R.style, method = c("constrained","unconstrained","normalized"), leverage = FALSE, width = 12, main = paste(colnames(R.fund)[1]," Rolling ", width ,"-Month Style Weights", sep=""), space = 0, ...)
+chart.RollingStyle(R.fund, R.style, method = c("constrained","unconstrained","normalized"), leverage = FALSE, width = 12, main = NULL, space = 0, ...)
 
 style.fit(R.fund, R.style, model = FALSE, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...)
 
