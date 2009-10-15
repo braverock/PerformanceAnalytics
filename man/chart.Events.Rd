@@ -29,9 +29,9 @@ This is a chart that is commonly used for event studies in econometrics, usually
 }
 \examples{
 data(managers)
-R = Drawdowns(managers[,2,drop=F])
-n = table.Drawdowns(managers[,2,drop=F])                          
-chart.Events(Drawdowns(managers[,2,drop=F]), dates = n$Trough, prior=max(na.omit(n$"To Trough")), post=max(na.omit(n$Recovery)), lwd=2, colorset=redfocus, legend.loc=NULL, main = "Worst Drawdowns")
+R = Drawdowns(managers[,2,drop=FALSE])
+n = table.Drawdowns(managers[,2,drop=FALSE])                          
+chart.Events(Drawdowns(managers[,2,drop=FALSE]), dates = n$Trough, prior=max(na.omit(n$"To Trough")), post=max(na.omit(n$Recovery)), lwd=2, colorset=redfocus, legend.loc=NULL, main = "Worst Drawdowns")
 }
 \keyword{ ts }
 \keyword{ hplot }

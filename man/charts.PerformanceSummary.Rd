@@ -59,7 +59,7 @@ Most inputs are the same as "\code{\link{plot}}" and are principally included so
 }
 \examples{
 data(edhec)
-charts.PerformanceSummary(edhec[,c("Funds.of.Funds","Long.Short.Equity")])
+charts.PerformanceSummary(edhec[,c(1,13)])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

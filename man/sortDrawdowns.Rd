@@ -36,9 +36,8 @@ modified with permission from prototype function by Sankalp Upadhyay
 }
 \examples{
 data(edhec)
-R=edhec[,"Funds.of.Funds"]
-findDrawdowns(R)
-sortDrawdowns(findDrawdowns(R))
+findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
+sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

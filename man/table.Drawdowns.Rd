@@ -29,8 +29,8 @@ A data.frame organized as a table of drawdown statistics.
 }
 \examples{
 data(edhec)
-table.Drawdowns(edhec[,"Long Short Equity",drop=FALSE])
-table.Drawdowns(edhec[,"Relative Value",drop=FALSE])
+table.Drawdowns(edhec[,1,drop=FALSE])
+table.Drawdowns(edhec[,12,drop=FALSE])
 data(managers)
 table.Drawdowns(managers[,8,drop=FALSE])
 }

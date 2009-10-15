@@ -1,4 +1,5 @@
-\name{table.RollingPeriods}
+\name{table.TrailingPeriods}
+\alias{table.TrailingPeriods}
 \alias{table.RollingPeriods}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Rolling Periods Summary: Statistics and Stylized Facts }
@@ -6,7 +7,10 @@
 A table of estimates of rolling period return measures
 }
 \usage{
-table.RollingPeriods(R, periods = subset(c(3, 6, 9, 12, 18, 24, 36, 48), c(3, 6, 9, 12, 18, 24, 36, 48) < length(as.matrix(R[, 1]))), FUNCS = c("mean", "sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)
+table.TrailingPeriods(R,  periods = subset(c(12,36,60), c(12,36,60)
+< length(as.matrix(R[,1]))), FUNCS=c("mean","sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)
+table.TrailingPeriodsRel(R, Rb, periods = subset(c(12,36,60), c(12,36,60)
+< length(as.matrix(R[,1]))), FUNCS=c("cor","CAPM.beta"), funcs.names = c("Correlation", "Beta"), digits = 4, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -25,7 +29,7 @@ A table of estimates of rolling period return measures
 \seealso{ \code{\link{apply}} }
 \examples{
 data(edhec)
-table.RollingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
+table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

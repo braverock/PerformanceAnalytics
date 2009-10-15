@@ -29,9 +29,11 @@ matrix of simple or compound returns on the 13-week US Treasury Bill at the dail
    \code{\link[tseries]{get.hist.quote}}
 }
 \examples{
+\dontrun{
 rf = download.RiskFree(start = "1997-12-01", end = "2007-01-01")
-class(Rf=0)
-head(Rf=0)
+class(rf)
+head(rf)
+}
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
