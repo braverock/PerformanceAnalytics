@@ -12,7 +12,7 @@ A number of papers now recommend using a "modified Sharpe" ratio using a Modifie
 We have recently extended this concept to create multivariate modified Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR, Gaussian Expected Shortfall, and modified Expected Shortfall. See \code{\link{MultivariateRisk}}.
 }
 \usage{
-SharpeRatio.modified(R, Rf = 0, p = 0.95, method = c("VaR","ES"), ...)
+SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("VaR","ES"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -36,16 +36,9 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 }
 \examples{
 data(edhec)
-head(edhec[, 6, drop = FALSE])
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-start
-end = rownames(edhec[edhec.length,])
-rf = download.RiskFree(start=start, end=end)
-
 SharpeRatio.modified(edhec[, 6, drop = FALSE])
-SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = .04/12)
-SharpeRatio.modified(edhec[, 6, drop = FALSE], rf = Rf=0)
+SharpeRatio.modified(edhec[, 6, drop = FALSE], Rf = .04/12)
+SharpeRatio.modified(edhec[, 6, drop = FALSE], FUN="ES")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
