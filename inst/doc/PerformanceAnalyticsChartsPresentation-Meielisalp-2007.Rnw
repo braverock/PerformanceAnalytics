@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.9 2008-09-30 01:14:44 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.10 2009-10-15 21:37:17 brian Exp $
 
 \documentclass{beamer}
 
@@ -297,7 +297,7 @@ chart.Histogram(managers[,1,drop=F], main = "Risk Measures", methods = c
   \centering
   \begin{scriptsize}
 <<Graph3,echo=T,fig=T>>=
-chart.RiskReturnScatter(managers[trailing36.rows,1:8], rf=.03/12, main =
+chart.RiskReturnScatter(managers[trailing36.rows,1:8], Rf=.03/12, main =
 "Trailing 36-Month Performance", colorset=c("red", rep("black",5), "orange",
 "green"))
 @
@@ -329,7 +329,7 @@ table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
 
 <<Graph5,echo=T,fig=T>>=
 charts.RollingPerformance(managers[, c(manager.col, peers.cols,
-indexes.cols)], rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
+indexes.cols)], Rf=.03/12, colorset = c("red", rep("darkgray",5), "orange",
 "green"), lwd = 2)
 @
 
@@ -379,7 +379,7 @@ managers[, 8, drop=F], colorset = rainbow8equal, lwd = 2, legend.loc =
 \centering
 \begin{tiny}
 <<tableCAPM,echo=T>>=
-table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)], managers[ trailing36.rows, 8, drop=FALSE], rf = managers[ trailing36.rows, Rf.col, drop=F])
+table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)], managers[ trailing36.rows, 8, drop=FALSE], Rf = managers[ trailing36.rows, Rf.col, drop=F])
 @
 \end{tiny}
 \end{figure}
@@ -419,7 +419,7 @@ table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)], managers[ trai
 <<Graph8,echo=T,fig=T>>=
 #source("PerformanceAnalytics/R/Return.excess.R")
 charts.RollingRegression(managers[, c(manager.col, peers.cols), drop =
-FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
+FALSE], managers[, 8, drop = FALSE], Rf = .03/12, colorset = redfocus, lwd =
 2)
 @
 
@@ -436,7 +436,7 @@ FALSE], managers[, 8, drop = FALSE], rf = .03/12, colorset = redfocus, lwd =
 \begin{scriptsize}
 
 <<tableDownside,echo=T>>=
-table.DownsideRisk(managers[,1:6],rf=.03/12)
+table.DownsideRisk(managers[,1:6],Rf=.03/12)
 @
 
 \end{scriptsize}
@@ -549,10 +549,10 @@ table.DownsideRisk(managers[,1:6],rf=.03/12)
   \end{itemize}
   \begin{figure}
     \centering
-      \subfigure
-          {
-            \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
-          }
+%       \subfigure
+%           {
+%             \includegraphics[totalheight=0.1\textheight,width=.36\textwidth]{Diamond_Logo_Tag.jpg}
+%           }
       \hfill
       \subfigure
           {
