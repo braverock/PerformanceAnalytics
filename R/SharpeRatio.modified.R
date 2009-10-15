@@ -1,5 +1,5 @@
 `SharpeRatio.modified` <-
-function (R, Rf = 0, p = 0.95, FUN=c("VaR","ES"), ...)
+function (R, Rf = 0, p = 0.95, FUNCT=c("VaR","ES"), ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -25,7 +25,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("VaR","ES"), ...)
     # This function returns a modified Sharpe ratio for the same periodicity of the
     # data being input (e.g., monthly data -> monthly SR)
 
-    # @todo: loop over FUN and type
+    # @todo: loop over FUNCT and type
     # @todo: annualize using multiperiod VaR and ES calcs
 
     # FUNCTION:
@@ -34,20 +34,20 @@ function (R, Rf = 0, p = 0.95, FUN=c("VaR","ES"), ...)
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
 
-    FUN=FUN[1] # use the first method passed in
+    FUNCT=FUNCT[1] # use the first method passed in
 
-    srm <-function (R, Rf, p, FUN, ...)
+    srm <-function (R, Rf, p, FUNCT, ...)
     {
         xR = Return.excess(R, Rf)
-        FUN <- match.fun(FUN)
-        SRM = mean(xR, na.rm=TRUE)/FUN(R, p, invert=FALSE, ...)
+        FUNCT <- match.fun(FUNCT)
+        SRM = mean(xR, na.rm=TRUE)/FUNCT(R, p, invert=FALSE, ...)
         SRM
     }
 
-    result = apply(R, 2, srm, Rf=Rf, p=p, FUN=FUN, ...)
+    result = apply(R, 2, srm, Rf=Rf, p=p, FUNCT=FUNCT, ...)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
-    rownames(result) = paste("Modified Sharpe: ", FUN, " (p=", round(p*100,1),"%)", sep="")
+    rownames(result) = paste("Modified Sharpe: ", FUNCT, " (p=", round(p*100,1),"%)", sep="")
     return (result)
 }
 
@@ -59,7 +59,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("VaR","ES"), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.13 2009-10-15 15:23:27 peter Exp $
+# $Id: SharpeRatio.modified.R,v 1.14 2009-10-15 15:45:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
