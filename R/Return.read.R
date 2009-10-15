@@ -1,5 +1,5 @@
 `Return.read` <-
-function (filename=stop("Please specify a filename"), frequency = c("m","d","q","i","o"), format.in = c("ISO8601","excel","oo","gnumeric"), sep = ",", header = TRUE, check.names = FALSE, ...)
+function (filename=stop("Please specify a filename"), frequency = c("d","m","q","i","o"), format.in = c("ISO8601","excel","oo","gnumeric"), sep = ",", header = TRUE, check.names = FALSE, ...)
 { # @author Peter Carl
 
 # A simple wrapper with some defaults for read.zoo
@@ -61,10 +61,13 @@ function (filename=stop("Please specify a filename"), frequency = c("m","d","q",
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.read.R,v 1.8 2009-10-10 12:40:08 brian Exp $
+# $Id: Return.read.R,v 1.9 2009-10-15 02:47:31 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.7  2009-03-20 03:23:40  peter
 # - now returns an xts object by default
 #
