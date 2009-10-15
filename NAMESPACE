@@ -91,6 +91,8 @@ export(
     table.HigherMoments,
     table.MonthlyReturns,
     table.Returns,
+    table.TrailingPeriods,
+    table.TrailingPeriodsRel,
     table.UpDownRatios
 )
 
