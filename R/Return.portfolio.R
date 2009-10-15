@@ -32,7 +32,7 @@ Return.rebalancing <- function (R, weights, ...)
 
 # ------------------------------------------------------------------------------
 # Return.portfolio
-Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("compound","simple"))
+Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("compound","simple"), ...)
 {   # @author Brian G. Peterson
 
     # Function to calculate weighted portfolio returns
@@ -67,6 +67,9 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     } else{
         weights=checkData(weights,method="matrix") # do this to make sure we have columns, and not just a vector
 #         if (length(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
+    }
+    if (nrow(weights)>1){
+        stop("Use Return.rebalancing for multiple weighting periods.  This function is for portfolios with a single set of weights.")
     }
     
 
@@ -130,10 +133,14 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.8 2009-10-15 14:49:00 brian Exp $
+# $Id: Return.portfolio.R,v 1.9 2009-10-15 18:17:15 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-15 14:49:00  brian
+# - update Return.rebalancing to properly accumulate wealth
+# - add rbind workaround provided by Jeff
+#
 # Revision 1.7  2009-10-15 12:26:37  brian
 # - revert change of calc of weighed cumulative returns,
 #   use more efficient apply since wealthindex.assets is already tied to structure of weights
