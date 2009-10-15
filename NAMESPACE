@@ -42,7 +42,7 @@ export(
     mean.stderr,
     mean.UCL,
     Omega,
-    pfolioReturn,
+#    pfolioReturn,
     Return.annualized,
     Return.calculate,
     Return.centered,
@@ -51,7 +51,7 @@ export(
     Return.excess,
     Return.Geltner,
     Return.portfolio,
-#    Return.portfolio.multiweight,
+    Return.rebalancing,
     Return.read,
     Return.relative,
     sd.annualized,
@@ -337,7 +337,7 @@ S3method(textplot, matrix)
 # tim12equal
 # tim6equal
 # tim8equal
- 
+
 # # internal/obsolete functions, do not export
 # centeredcomoment
 # centeredmoment
