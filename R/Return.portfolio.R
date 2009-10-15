@@ -1,4 +1,5 @@
-Return.rebalancing <- function (R, weights, ...){
+Return.rebalancing <- function (R, weights, ...)
+{   # @author Brian G. Peterson
 
     if (is.vector(weights)){
         stop("Use Return.portfolio for single weighting vector.  This function is for building portfolios over rebalancing periods.")
@@ -17,26 +18,21 @@ Return.rebalancing <- function (R, weights, ...){
         if(row==1){
             startingwealth=1
         }
-        resultreturns=Return.portfolio(R[paste(from,to,sep="/"),],weights=weights[row,], startingwealth=startingwealth, ...=...)
-        startingwealth=resultreturns[nrow(resultreturns),"portfolio.wealthindex"]
-        # the [,-1] takes out the weighted returns, which you don't care
-        # about for contribution, although you may care about it for
-        # graphing, and want to pull it into another var
+        resultreturns=Return.portfolio(R[paste(from,to,sep="/"),],weights=weights[row,], ...=...)
         if(row==1){
             result = resultreturns
         } else {
             result = rbind(result,resultreturns)
         }
+        startingwealth=last(cumprod(1+result)*startingwealth)
     }
     result<-reclass(result, R)
     result
 }
 
 # ------------------------------------------------------------------------------
-# Return.portfolio - replaces RMetrics pfolioReturn fn
-# move this function and the pfolioReturn wrapper into Performanceanalytics and remove from this file
-
-Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE, method = c("compound","simple"), startingwealth=1)
+# Return.portfolio
+Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("compound","simple"))
 {   # @author Brian G. Peterson
 
     # Function to calculate weighted portfolio returns
@@ -66,10 +62,11 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     if (is.null(weights)){
         # set up an equal weighted portfolio
         weights = t(rep(1/ncol(R), ncol(R)))
+        warning("weighting vector is null, calulating an equal weighted portfolio")
         colnames(weights)<-colnames(R)
     } else{
         weights=checkData(weights,method="matrix") # do this to make sure we have columns, and not just a vector
-        if (length(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
+#         if (length(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
     }
     
 
@@ -77,9 +74,9 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
 
 
         # construct the wealth index of unweighted assets
-        wealthindex.assets=cumprod(startingwealth+R)
+        wealthindex.assets=cumprod(1+R[,colnames(weights)])
 
-        wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R))
+        wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R[,colnames(weights)]))
         colnames(wealthindex.weighted)=colnames(wealthindex.assets)
         rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
         # weight the results
@@ -89,19 +86,17 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         wealthindex=apply(wealthindex.weighted,1,sum)
 
         # weighted cumulative returns
-        weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-startingwealth)* weights)},weights=weights))
+        weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
         weightedreturns=diff(rbind(0,weightedcumcont))
         colnames(weightedreturns)=colnames(wealthindex.assets)
         #browser()
-        wealthindex=matrix(cumprod(startingwealth + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
+        wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
         wealthindex=reclass(wealthindex,match.to=R)
 
     if(method=="simple"){
         weightedreturns=Return.calculate(wealthindex,method="simple")
+        weightedreturns[1,]=wealthindex[1,]-1
     }
-
-        # uncomment this to test
-        #browser()
 
     if (!wealth.index){
         result=as.matrix(apply(weightedreturns,1,sum),ncol=1)
@@ -115,7 +110,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         # show the contribution to the returns in each period.
         result=cbind(weightedreturns,result)
     }
-    rownames(result)<-index(R)
+    rownames(result)<-NULL # avoid a weird problem with rbind, per Jeff
     result<-reclass(result, R)
     result
 } # end function Return.portfolio
@@ -135,10 +130,14 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.7 2009-10-15 12:26:37 brian Exp $
+# $Id: Return.portfolio.R,v 1.8 2009-10-15 14:49:00 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-10-15 12:26:37  brian
+# - revert change of calc of weighed cumulative returns,
+#   use more efficient apply since wealthindex.assets is already tied to structure of weights
+#
 # Revision 1.6  2009-10-14 21:59:24  brian
 # - add xts-based weights handling
 # - handle column names out of order for assets and weights
