@@ -107,6 +107,7 @@ export(
     chart.CumReturns,
     chart.Drawdown,
     chart.ECDF,
+    chart.Events,
     chart.Histogram,
     chart.QQPlot,
     chart.Regression,
