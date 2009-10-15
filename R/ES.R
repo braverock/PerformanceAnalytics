@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: ES.R,v 1.8 2009-10-10 12:40:08 brian Exp $
+# $Id: ES.R,v 1.9 2009-10-15 21:42:30 brian Exp $
 ###############################################################################
 
 ES <-
-function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, skew=NULL, exkurt=NULL, m1=NULL, m2=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
+function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -90,12 +90,12 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 	    names(weights)<-colnames(R)
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
-            if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
-            if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
+            # if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
+            # if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
             if (is.null(m3)) {m3 = M3.MM(R)}
             if (is.null(m4)) {m4 = M4.MM(R)}
-            if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
-            if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
+            # if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
+            # if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
 
             switch(method,
                 modified = { if (operational) return(operES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
@@ -118,10 +118,13 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.8 2009-10-10 12:40:08 brian Exp $
+# $Id: ES.R,v 1.9 2009-10-15 21:42:30 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.7  2009-10-01 19:12:24  brian
 # - update probability to 95% by default
 #

@@ -1,4 +1,5 @@
 \name{ES}
+\encoding{latin1}
 \Rdversion{1.1}
 \alias{ES}
 \alias{CVaR}
@@ -7,10 +8,9 @@
 calculates Expected Shortfall(ES) (or Conditional Value-at-Risk(CVaR) for univariate and component, using a variety of analytical methods.
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+Calculates Expected Shortfall(ES) (also known as) Conditional Value at Risk(CVaR) for univariate, component, and marginal cases using a variety of analytical methods.}
 \usage{
-ES(R, p = 0.99, method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, skew = NULL, exkurt = NULL, m1 = NULL, m2 = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE, ...)
+ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -29,13 +29,12 @@ ES(R, p = 0.99, method = c("modified", "gaussian", "historical", "kernel"), clea
   \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is the coskewness matrix of the returns series, default NULL, see Details}
   \item{m4}{If multivariate, m4 is the excess kurtosis of the series. Otherwise m4 is the cokurtosis matrix of the return series, default NULL, see Details}
   \item{invert}{ TRUE/FALSE whether to invert the VaR measure.  see Details. }
-%  \item{operational}{TRUE/FALSE, default TRUE,  see Details. }  
+  \item{operational}{TRUE/FALSE, default TRUE,  see Details. }
   \item{\dots}{ any other passthru parameters }
 
 }
 \section{Background}{
-This function provides several estimation methods for the Expected Shortfall (ES) (also called Conditional Value at Risk (CVaR)) of a return series 
-and the Component ES of a portfolio. At a preset probability level denoted  \eqn{c}, which typically is between 1 and 5 per cent, 
+This function provides several estimation methods for the Expected Shortfall (ES) (also called Conditional Value at Risk (CVaR)) of a return series and the Component ES of a portfolio. At a preset probability level denoted  \eqn{c}, which typically is between 1 and 5 per cent, 
 the ES of a return series is the negative value of the expected value of the return when the return is less than its  \eqn{c}-quantile.  
 Unlike value-at-risk, conditional value-at-risk has all the properties a risk measure should have to be coherent and is a convex function of the portfolio weights (Pflug, 2000).  
 With a sufficiently large data set, you may choose to estimate ES with the sample average of 
@@ -86,7 +85,7 @@ estimation problems, this might not always be the case. Set Operational = TRUE t
 case where the modified ES is smaller than modified VaR.
 }
 
-\section{Component VaR}{
+\section{Component ES}{
 By setting \code{portfolio_method="component"} you may calculate the ES contribution of each element of the portfolio.  
 The return from the function in this case will be a list with three components: the univariate portfolio ES, 
 the scalar contribution of each component to the portfolio ES (these will sum to the portfolio ES), 
@@ -96,29 +95,29 @@ Both the numerical and percentage component contributions to ES may contain both
 A negative contribution to Component ES indicates a portfolio risk diversifier.  
 Increasing the position weight will reduce overall portoflio ES.
 
-If a weighting vector is not passed in via \code{weights}, the function will assume an equal weighted (neutral) portfolio.  
+If a weighting vector is not passed in via \code{weights}, the function will assume an equal weighted (neutral) portfolio.
 
-Multiple risk decomposition approaches have been suggested in the literature. 
+Multiple risk decomposition approaches have been suggested in the literature.
 A \enc{na�ve}{naive} approach is to set the risk contribution equal to the stand-alone risk.
 This approach is overly simplistic and neglects important diversification effects of the units being exposed differently to the underlying risk factors.
 An alternative approach is to measure the ES contribution as the weight of the position in the portfolio times the partial derivative of the portfolio ES with respect to the component weight.
 \deqn{C_i \mbox{ES} = w_i \frac{ \partial \mbox{ES} }{\partial w_i}.}{C[i]ES = w[i]*(dES/dw[i]).}
-Because the portfolio ES is linear in position size, we have that by Euler's theorem the portfolio VaR is the sum of these risk contributions. 
+Because the portfolio ES is linear in position size, we have that by Euler's theorem the portfolio VaR is the sum of these risk contributions.
 \enc{Scaillet}{Scaillet} (2002) shows that for
 ES, this mathematical decomposition of portfolio risk has a
 financial meaning. It equals the negative value of the asset's
 expected contribution to the portfolio return when the portfolio
-return is les or equal to the negative portfolio VaR:
+return is less or equal to the negative portfolio VaR:
 \deqn{C_i \mbox{ES} = = -E\left[ w_i r_{i} | r_{p} \leq - \mbox{VaR}\right]}{C[i]ES = -E( w[i]r[i]|rp<=-VaR ) }
 
 For the decomposition of Gaussian ES, the estimated mean and covariance matrix are needed. For the decomposition of modified ES,
 also estimates of the coskewness and cokurtosis matrices are needed. If \eqn{r} denotes the \eqn{Nx1} return vector and \eqn{mu} is
 the mean vector, then the \eqn{N \times N^2} co-skewness matrix is
-\deqn{ m3 = E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\right]}{m3 = E[ (r - mu)(r - mu)' %x%  (r - \mu)']}
+\deqn{ m3 = E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\right]}{m3 = E[ (r - mu)(r - mu)' \%x\%  (r - \mu)']}
 The \eqn{N \times N^3} co-kurtosis matrix is
 \deqn{ m_{4} =
 E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
-\right] }{E[ (r - \mu)(r - \mu)' %x% (r - \mu)'%x% (r - \mu)']} where \eqn{\otimes}{%x%} stands for the Kronecker product. The matrices can be estimated through the functions
+\right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']} where \eqn{\otimes}{\%x\%} stands for the Kronecker product. The matrices can be estimated through the functions
 \code{skewness.MM} and \code{kurtosis.MM}. More efficient estimators were proposed by Martellini and Ziemann (2007) and will be implemented in the future.
 
 As discussed among others in Cont, Deguest and Scandolo (2007), it is important that the estimation of the ES measure
@@ -128,7 +127,7 @@ are winsorized if they are detected as being outliers. For more information, see
 }
 
 \value{
-VaR measure
+ES measure
 }
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008. Estimation and decomposition of downside risk for portfolios with non-normal returns. 2008. The Journal of Risk, vol. 11, 79-103.
@@ -164,25 +163,25 @@ The option to \code{invert} the ES measure should appease both academics and pra
 \examples{
     data(edhec)
 
-    # first do normal VaR calc
-    VaR(edhec, p=.95, method="historical")
+    # first do normal ES calc
+    ES(edhec, p=.95, method="historical")
 
     # now use Gaussian
-    VaR(edhec, p=.95, method="gaussian")
+    ES(edhec, p=.95, method="gaussian")
 
     # now use modified Cornish Fisher calc to take non-normal distribution into account
-    VaR(edhec, p=.95, method="modified")
+    ES(edhec, p=.95, method="modified")
 
     # now use p=.99
-    VaR(edhec, p=.99)
+    ES(edhec, p=.99)
     # or the equivalent alpha=.01
-    VaR(edhec, p=.01)
+    ES(edhec, p=.01)
 
     # now with outliers squished
-    VaR(edhec, clean="boudt")
+    ES(edhec, clean="boudt")
 
-    # add Component VaR for the equal weighted portfolio
-    VaR(edhec, clean="boudt", portfolio_method="component")
+    # add Component ES for the equal weighted portfolio
+    ES(edhec, clean="boudt", portfolio_method="component")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -1,6 +1,8 @@
 \name{VaR}
+\encoding{latin1}
 \Rdversion{1.1}
 \alias{VaR}
+\alias{VaR.CornishFisher}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.
@@ -126,17 +128,18 @@ return equals the negative portfolio VaR:
 For the decomposition of Gaussian VaR, the estimated mean and covariance matrix are needed. For the decomposition of modified VaR,
 also estimates of the coskewness and cokurtosis matrices are needed. If \eqn{r} denotes the \eqn{Nx1} return vector and \eqn{mu} is
 the mean vector, then the \eqn{N \times N^2} co-skewness matrix is
-\deqn{ m3 = E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\right]}{m3 = E[ (r - mu)(r - mu)' %x%  (r - \mu)']}
+\deqn{ m3 = E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\right]}{m3 = E[ (r - mu)(r - mu)' \%x\%  (r - \mu)']}
 The \eqn{N \times N^3} co-kurtosis matrix is
 \deqn{ m_{4} =
 E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
-\right] }{E[ (r - \mu)(r - \mu)' %x% (r - \mu)'%x% (r - \mu)']} where \eqn{\otimes}{%x%} stands for the Kronecker product. The matrices can be estimated through the functions
-\code{skewness.MM} and \code{kurtosis.MM}. More efficient estimators were proposed by Martellini and Ziemann (2007) and will be implemented in the future.
+\right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']}
+where \eqn{\otimes}{\%x\%} stands for the Kronecker product. The matrices can be estimated through the functions
+\code{skewness.MM} and \code{kurtosis.MM}.
+More efficient estimators have been proposed by Martellini and Ziemann (2007) and will be implemented in the future.
 
 As discussed among others in Cont, Deguest and Scandolo (2007), it is important that the estimation of the VaR measure
 is robust to single outliers. This is especially the case for  modified VaR and its decomposition, since they use higher order moments.
-By default, the portfolio moments are estimated by their sample counterparts. If \code{clean=c("boudt")} then the \eqn{1-p} most extreme observations
-are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008).
+By default, the portfolio moments are estimated by their sample counterparts. If \code{clean=c("boudt")} then the \eqn{1-p} most extreme observations are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008).
 
 Epperlein and Smillie (2006) introduced a non-parametric kernel estimator for component risk contributions, which is available via \code{method="kernel"} and \code{portfolio_method="component"}.
 
