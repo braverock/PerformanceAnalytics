@@ -38,9 +38,7 @@ Geltner, David, 1993, Estimating Market Values from Appraised Values without Ass
 \author{ Brian Peterson }
 \examples{
 data(managers)
-data(edhec)
-Return.Geltner(edhec)
-Return.Geltner(managers)
+head(Return.Geltner(managers[,1:3]),n=20)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

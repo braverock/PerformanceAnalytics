@@ -37,23 +37,11 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}.
 }
 \author{ Peter Carl }
 \examples{
-data(edhec)
-edhec.length = dim(edhec)[1]
-start = rownames(edhec[1,])
-end = rownames(edhec[edhec.length,])
-
-edhec.zoo = zoo(edhec,order.by=rownames(edhec))
-rf.zoo = download.RiskFree(start = start, end = end)
-sp.zoo = download.SP500PriceReturns(start = start, end = end)
-
-time(edhec.zoo) = as.yearmon(time(edhec.zoo))
-time(sp.zoo) = as.yearmon(time(sp.zoo))
-time(rf.zoo) = as.yearmon(time(rf.zoo))
-
-Return.excess(edhec.zoo[,"Funds.of.Funds",drop=FALSE],rf.zoo)
-Return.excess(edhec.zoo[,"Long.Short.Equity",drop=FALSE],rf.zoo)
-Return.excess(edhec.zoo[,"Funds.of.Funds",drop=FALSE],sp.zoo)
-Return.excess(edhec.zoo[,"Long.Short.Equity",drop=FALSE],sp.zoo)
+data(managers)
+head(Return.excess(managers[,1,drop=FALSE], managers[,10,drop=FALSE]))
+head(Return.excess(managers[,1,drop=FALSE], .04/12))
+head(Return.excess(managers[,1:6], managers[,10,drop=FALSE]))
+head(Return.excess(managers[,1,drop=FALSE], managers[,8,drop=FALSE]))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

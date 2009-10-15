@@ -3,11 +3,11 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Read returns data with different date formats }
 \description{
-  A simple wrapper of read.zoo with some defaults for different date formats
+  A simple wrapper of read.zoo with some defaults for different date formats and xts conversion
 }
 \usage{
 Return.read(filename = stop("Please specify a filename"),
-                 frequency = c("m", "d", "q", "i", "o"), format.in =
+                 frequency = c("d", "m", "q", "i", "o"), format.in =
                  c("ISO8601", "excel", "oo", "gnumeric"), sep = ",",
                  header = TRUE, check.names = FALSE, ...)
 }
@@ -45,12 +45,16 @@ The parameter 'format.in' takes several values, including:
 }
 
 \value{
-A zoo object containing a representation of the data in the file.
+An xts object containing a representation of the data in the file.
 }
 \author{ Peter Carl }
 
 \seealso{ \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}}
 \examples{
+     ## Not run:
+     Return.read("managers.cvs", frequency="d")
+     ## End(Not run)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

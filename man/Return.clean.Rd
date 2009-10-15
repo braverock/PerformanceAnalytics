@@ -42,14 +42,11 @@ zoo object with the same dimensions as R, containing data cleaned with the metho
 \author{
 Peter Carl
 }
-\note{
-}
-
 \seealso{ \code{\link{clean.boudt}} }
 
 \examples{
 data(managers)
-Return.clean(managers)
+head(Return.clean(managers[,1:4]),n=20)
 chart.BarVaR(managers[,1,drop=FALSE], show.clean=TRUE, clean="boudt", lwd=2, methods="ModifiedVaR")
 }
 
