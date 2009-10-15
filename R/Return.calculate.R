@@ -21,7 +21,7 @@ function(prices, method = c("compound","simple"))
         Returns = diff(log(pr))
     }
 
-    reclass(Returns,match.to=prices)
+    reclass(Returns,match.to=pr)
 
 }
 
@@ -38,10 +38,13 @@ function(prices, method = c("compound","simple"))
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.calculate.R,v 1.13 2009-10-10 12:40:08 brian Exp $
+# $Id: Return.calculate.R,v 1.14 2009-10-15 18:20:26 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.12  2009-09-22 02:43:57  peter
 # - function now using cleaned data for 'simple' method
 #
