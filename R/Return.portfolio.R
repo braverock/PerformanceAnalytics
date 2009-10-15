@@ -1,22 +1,32 @@
 Return.rebalancing <- function (R, weights, ...){
 
-    R=checkData(R,method="xts")
+    if (is.vector(weights)){
+        stop("Use Return.portfolio for single weighting vector.  This function is for building portfolios over rebalancing periods.")
+    } 
     weights=checkData(weights,method="xts")
-
-    result=xts(order.by=index(R))
+    R=checkData(R,method="xts")
 
     # loop:
     for (row in 1:nrow(weights)){
         from =as.Date(index(weights[row,]))
-        to = as.Date(index(weights[(row+1),]))-1
-        if(row==1){ startingwealth=1 }
-        resultreturns=Return.portfolio(R[paste(from,to,sep="|"),],weights=weights[row,], startingwealth=startingwealth, ...=...)
+        if (row == nrow(weights)){
+           to = as.Date(index(last(R)))
+        } else {
+           to = as.Date(index(weights[(row+1),]))-1
+        }
+        if(row==1){
+            startingwealth=1
+        }
+        resultreturns=Return.portfolio(R[paste(from,to,sep="/"),],weights=weights[row,], startingwealth=startingwealth, ...=...)
         startingwealth=resultreturns[nrow(resultreturns),"portfolio.wealthindex"]
         # the [,-1] takes out the weighted returns, which you don't care
         # about for contribution, although you may care about it for
         # graphing, and want to pull it into another var
-
-        result=rbind(result,resultreturns)
+        if(row==1){
+            result = resultreturns
+        } else {
+            result = rbind(result,resultreturns)
+        }
     }
     result<-reclass(result, R)
     result
@@ -71,8 +81,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
 
         wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R))
         colnames(wealthindex.weighted)=colnames(wealthindex.assets)
-        rownames(wealthindex.weighted)=rownames(wealthindex.assets)
-        weights=t(weights)
+        rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
         # weight the results
         for (col in colnames(weights)){
             wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
@@ -80,15 +89,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         wealthindex=apply(wealthindex.weighted,1,sum)
 
         # weighted cumulative returns
-        weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights)
-                                                       {
-                                                           ret=matrix(nrow=1,ncol=ncol(weights))
-                                                           for (col in colnames(weights)){
-                                                           
-                                                               ret[,col]= x[,col]-startingwealth* weights[,col]
-                                                           }
-                                                           return(ret)
-                                                       },weights=weights))
+        weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-startingwealth)* weights)},weights=weights))
         weightedreturns=diff(rbind(0,weightedcumcont))
         colnames(weightedreturns)=colnames(wealthindex.assets)
         #browser()
@@ -96,9 +97,6 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         wealthindex=reclass(wealthindex,match.to=R)
 
     if(method=="simple"){
-        # stop("Calculating wealth index for simple returns not yet supported.")
-        #weighted simple returns
-        # probably need to add 1 to the column before doing this
         weightedreturns=Return.calculate(wealthindex,method="simple")
     }
 
@@ -137,10 +135,14 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.6 2009-10-14 21:59:24 brian Exp $
+# $Id: Return.portfolio.R,v 1.7 2009-10-15 12:26:37 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.6  2009-10-14 21:59:24  brian
+# - add xts-based weights handling
+# - handle column names out of order for assets and weights
+#
 # Revision 1.5  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #
