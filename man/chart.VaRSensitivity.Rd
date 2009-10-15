@@ -10,7 +10,7 @@ chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{methods}{ one or more calculation methods indicated "GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES".  See \code{\link{VaR}} or \code{\link{ES}} for more detail. }
   \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt" or 
 "geltner". }

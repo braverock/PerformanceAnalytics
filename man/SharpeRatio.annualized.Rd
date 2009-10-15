@@ -9,7 +9,7 @@ The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviati
 SharpeRatio.annualized(R, Rf = 0, scale = NA)
 }
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }

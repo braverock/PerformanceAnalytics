@@ -11,7 +11,7 @@ clean.boudt(R, alpha = 0.01, trim = 0.001)
 }
 
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{alpha}{ probability to filter at 1-alpha, defaults to .01 (99\%)}
   \item{trim}{ where to set the "extremeness" of the Mahalanobis distance }
 }

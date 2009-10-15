@@ -21,7 +21,7 @@ table.Returns(R, digits = 1, as.perc = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{digits}{ number of digits to round results to for presentation }
   \item{as.perc}{ TRUE/FALSE  if TRUE, multiply simple returns by 100 to get \% }
 }

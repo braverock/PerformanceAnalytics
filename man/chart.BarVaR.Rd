@@ -9,7 +9,7 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "Gaussia
 }
 
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ periods specified for rolling-period calculations.  Note that VaR and Std Dev with width=0 are calculated from the start of the timeseries }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{methods}{ any of \emph{StdDev}, \emph{HistoricalVaR}, \emph{GaussianVaR}, or \emph{ModifiedVaR}, defaults to HistoricalVaR and ModifiedVaR }

@@ -14,8 +14,8 @@ CoKurtosis(Ra,Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{Rb}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rb}{ an xts, vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
 }
 \details{
 Ranaldo and Favre (2005) define coskewness and cokurtosis as the skewness and kurtosis of a given asset analysed with the skewness and kurtosis of the reference asset or portfolio.  Adding an asset to a portfolio, such as a hedge fund with a significant level of coskewness to the portfolio, can increase or decrease the resulting portfolio's skewness. Similarly, adding a hedge fund with a positive cokurtosis coefficient will add kurtosis to the portfolio.

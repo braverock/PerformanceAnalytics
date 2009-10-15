@@ -11,7 +11,7 @@ table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{Rf}{ risk free rate, in same period as your returns }

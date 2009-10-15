@@ -11,7 +11,7 @@ charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL, trim = TRUE,
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ number of periods to apply rolling function over }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, same as in \code{plot} }

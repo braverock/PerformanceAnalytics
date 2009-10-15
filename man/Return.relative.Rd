@@ -9,7 +9,7 @@ Calculates the ratio of the cumulative performance for two assets through time.
 Return.relative(Ra, Rb, ...)
 }
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return object for the benchmark asset }
   \item{\dots}{ ignored }
 }

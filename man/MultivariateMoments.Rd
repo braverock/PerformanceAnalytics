@@ -24,8 +24,8 @@ CoKurtosisMatrix(R, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{w}{ a vector of weights to be applied to each asset in trhe joint distribution }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{w}{ a vector of weights to be applied to each asset in the joint distribution }
 %  \item{mu}{ mean or first centered moment of the distribution }
   \item{sigma}{ variance or second centered moment of the distribution }
   \item{M3}{ The third mathematical moment of the joint distribution, provided by  \code{\link{M3.MM}} }

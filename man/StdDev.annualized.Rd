@@ -23,7 +23,7 @@ Note that any multiperiod or annualized number should be viewed with suspicion i
     StdDev.annualized(R, scale = NA)
 }
 \arguments{
-  \item{x, R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{x, R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
 \value{

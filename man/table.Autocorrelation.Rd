@@ -9,7 +9,7 @@
 table.Autocorrelation(R, digits = 4)
 }
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{digits}{ number of digits to round results to for display }
 }
 \details{

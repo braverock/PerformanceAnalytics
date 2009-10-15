@@ -13,7 +13,7 @@ charts.PerformanceSummary(R, Rf = 0, main = NULL, methods = c("ModifiedVaR",
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, as in \code{plot} }
   \item{methods}{ Used to select the risk parameter to use in the chart.BarVaR.

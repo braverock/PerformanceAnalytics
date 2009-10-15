@@ -10,7 +10,7 @@ chart.RollingCorrelation(Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, co
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{width}{ number of periods to apply rolling function window over }
   \item{xaxis}{ if true, draws the x axis }

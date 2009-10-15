@@ -13,7 +13,7 @@ chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{maxlag}{ the number of lags to calculate for, optional }
   \item{elementcolor}{ the color to use for chart elements, defaults to "gray" }
   \item{main}{ title of the plot; uses the column name by default. }

@@ -21,9 +21,9 @@ Ipower (power, h)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{Rb}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rb}{ an xts, vector, matrix, data frame, timeSeries or zoo object of index, benchmark, portfolio, or secondary asset returns to compare against }
   \item{power}{ power or moment to calculate }
   \item{p1}{ first power of the comoment }
   \item{p2}{ second power of the comoment }

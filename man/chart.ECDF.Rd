@@ -10,7 +10,7 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
   \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }

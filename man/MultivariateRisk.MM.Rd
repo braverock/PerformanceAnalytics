@@ -29,7 +29,7 @@ SR.StdDev.MM (w, mu, sigma)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{w}{ a vector of weights to be applied to each asset in trhe joint distribution }
+  \item{w}{ a vector of weights to be applied to each asset in the joint distribution }
   \item{mu}{ mean or first centered moment of the distribution, normalley provided by  \code{\link{Return.centered}} }
   \item{sigma}{ variance or second centered moment of the distribution }
   \item{M3}{ The third mathematical moment of the joint distribution, provided by  \code{\link{M3.MM}} }

@@ -13,7 +13,7 @@ A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{distribution}{ root name of comparison distribution - e.g., 'norm' for
           the normal distribution; 't' for the t-distribution. See examples for other ideas. }
   \item{xlab}{ set the x-axis label, as in \code{\link{plot}} }

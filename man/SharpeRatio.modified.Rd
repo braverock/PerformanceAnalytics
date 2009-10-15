@@ -16,7 +16,7 @@ SharpeRatio.modified(R, Rf = 0, p = 0.95, FUNCT = c("VaR","ES"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{p}{ confidence level for calculation, default p=.95 }
   \item{FUNCT}{ one of "VaR" or "ES" to use as the denominator }

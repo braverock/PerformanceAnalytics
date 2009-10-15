@@ -18,7 +18,7 @@ CAPM.SML.slope(Rb, Rf = 0)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ return vector of the benchmark asset }
   \item{Rf}{ risk free rate, in same period as your returns }
 }

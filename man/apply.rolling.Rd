@@ -13,7 +13,7 @@ apply.rolling(R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ number of periods to apply rolling function window over }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{trim}{ TRUE/FALSE, whether to keep alignment caused by NA's }

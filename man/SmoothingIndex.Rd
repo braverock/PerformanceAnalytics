@@ -9,7 +9,7 @@ Proposed by Getmansky et al to provide a normalized measure of "liquidity risk."
 SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose=FALSE, ...)
 }
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{neg.thetas}{ if FALSE, function removes negative coefficients (thetas) when calculating the index }
   \item{MAorder}{ specify the number of periods used to calculate the moving average, defaults to 2 }
   \item{verbose}{if TRUE, return a list containing the Thetas in addition to the smoothing index/}

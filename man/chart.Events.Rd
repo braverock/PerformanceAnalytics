@@ -10,7 +10,7 @@ chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{dates}{ a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as in R.  This function matches the re-formatted row or index names (dates) with the given list, so to get a match the formatting needs to be correct. }
   \item{prior}{ the number of periods to plot prior to the event.  Interpreted as a positive number.}
   \item{post}{ the number of periods to plot following to the event.  Interpreted as a positive number. }

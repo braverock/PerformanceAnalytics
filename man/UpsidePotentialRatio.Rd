@@ -10,7 +10,7 @@ UpsidePotentialRatio(R, MAR = 0, method=c("subset","full"))
 UPR(R, MAR = 0, method=c("subset","full"))
 }
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
   \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series above(below) the MAR as the denominator, defaults to "subset"}
 }

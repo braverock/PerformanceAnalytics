@@ -10,7 +10,7 @@ chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{horizontal}{ TRUE/FALSE plot horizontal (TRUE) or vertical (FALSE)  }
   \item{names}{ logical. if TRUE, show the names of each series }
   \item{as.Tufte}{ logical. default FALSE. if TRUE use method derived for Tufte for limiting chartjunk }

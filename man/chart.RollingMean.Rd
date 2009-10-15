@@ -10,7 +10,7 @@ chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, na.pad =
 FALSE, lwd = c(2, 1, 1), ...) }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{width}{ number of periods to apply rolling function window over }
   \item{xaxis}{ if true, draws the x axis }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }

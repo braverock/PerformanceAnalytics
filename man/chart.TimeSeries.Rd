@@ -10,7 +10,7 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{auto.grid}{ if true, draws a grid aligned with the points on the x and y axes }
   \item{grid.color}{ sets the color for the reference grid }
   \item{grid.lty}{ defines the line type for the grid }

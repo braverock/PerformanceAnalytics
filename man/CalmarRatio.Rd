@@ -12,7 +12,7 @@ Calmar and Sterling Ratios are yet another method of creating a risk-adjusted me
 }
 
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{excess}{ for Sterling Ratio, excess amount to add to the max drawdown, traditionally and default .1 (10\%)}
 }

@@ -18,8 +18,8 @@ BetaCoKurtosis(Ra, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{Rb}{ a vector, matrix, data frame, timeSeries or zoo object of index, benchmark, or secondary asset returns to compare against }
+  \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{Rb}{ an xts, vector, matrix, data frame, timeSeries or zoo object of index, benchmark, or secondary asset returns to compare against }
   \item{test}{TRUE/FALSE, whether to make sure the return is in the same direction as the \code{\link{skewness}}}
 }
 \details{

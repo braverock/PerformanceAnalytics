@@ -14,7 +14,7 @@ table.TrailingPeriodsRel(R, Rb, periods = subset(c(12,36,60), c(12,36,60)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
+  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{periods}{ number of periods to use as rolling window(s), subset of \code{c(3, 6, 9, 12, 18, 24, 36, 48)} }
   \item{funcs.names}{ vector of function names used for labeling table rows }
   \item{FUNCS}{ list of functions to apply the rolling period to }
