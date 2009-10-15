@@ -24,8 +24,10 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 
     # Transform input data
 
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+        Rf = checkData(Rf)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -36,24 +38,37 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
     Ra.excess = Return.excess(Ra, Rf)
     Rb.excess = Return.excess(Rb, Rf)
 
+    if(is.na(scale)) {
+        freq = periodicity(Ra)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    }
+
     # Calculate
     for(column.a in 1:columns.a) { # for each asset passed in as R
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
-            merged.assets = na.omit(merged.assets) # leaves the overlapping period
+            merged.assets = as.data.frame(na.omit(merged.assets)) # leaves the overlapping period
             model.lm = lm(merged.assets[,1] ~ merged.assets[,2])
             alpha = coef(model.lm)[[1]]
             beta = coef(model.lm)[[2]]
             htest = cor.test(merged.assets[,1], merged.assets[,2])
-            active.premium = (Return.annualized(merged.assets[,1], scale = scale) - Return.annualized(merged.assets[,2], scale = scale))
+            active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
             tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
-            treynor.ratio = Return.annualized(merged.assets[,1], scale = scale)/beta
+            treynor.ratio = Return.annualized(merged.assets[,1,drop=FALSE], scale = scale)/beta
     
             z = c(
                     alpha,
                     beta,
-                    CAPM.beta.bull(merged.assets[,1], merged.assets[,2]), #inefficient
-                    CAPM.beta.bear(merged.assets[,1], merged.assets[,2]), #inefficient
+                    CAPM.beta.bull(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]), #inefficient
+                    CAPM.beta.bear(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]), #inefficient
                     summary(model.lm)$r.squared,
                     ((1+alpha)^scale - 1),
                     htest$estimate,
@@ -103,10 +118,13 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.15 2009-10-10 12:40:08 brian Exp $
+# $Id: table.CAPM.R,v 1.16 2009-10-15 03:37:08 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.15  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.14  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf
