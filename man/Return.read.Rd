@@ -51,9 +51,9 @@ An xts object containing a representation of the data in the file.
 
 \seealso{ \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}}
 \examples{
-     ## Not run:
+     \dontrun{
      Return.read("managers.cvs", frequency="d")
-     ## End(Not run)
+     }
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
