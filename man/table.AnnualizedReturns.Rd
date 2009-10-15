@@ -27,6 +27,8 @@ A table of estimates of annualized returns and risk measures
     \code{\link{SharpeRatio.annualized}}
 }
 \examples{
+data(managers)
+table.AnnualizedReturns(managers[,1:8])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

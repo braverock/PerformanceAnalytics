@@ -83,7 +83,7 @@ A table with calculated metrics for each column
 \author{ Peter Carl }
 \examples{
 data(edhec)
-table.Arbitrary(edhec,metrics=c("VaR", "VaR"),metricsNames=c("Modified VaR","Traditional VaR"))
+table.Arbitrary(edhec,metrics=c("VaR", "ES"),metricsNames=c("Modified VaR","Modified Expected Shortfall"))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

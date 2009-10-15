@@ -33,7 +33,7 @@ A dataframe organized as a table of estimates of downside risk measures for comp
 }
 \examples{
 data(edhec)
-table.DownsideRisk(edhec,rf=.04/12, MAR =.05/12, p=.95)
+table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

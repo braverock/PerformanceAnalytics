@@ -34,6 +34,8 @@ Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds: Adding Value thr
     \code{\link[fBasics]{kurtosis}}
 }
 \examples{
+data(managers)
+table.HigherMoments(managers[,1:3],managers[,8,drop=FALSE])
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
