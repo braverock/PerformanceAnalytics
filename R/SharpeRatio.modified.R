@@ -33,17 +33,18 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
 
     method=method[1] # use the first method passed in
 
-    srm <-function (R, Rf, p, ...)
+    srm <-function (R, Rf, p, method, ...)
     {
         xR = Return.excess(R, Rf)
+        method <- match.fun(method)
         SRM = mean(xR, na.rm=TRUE)/method(R, p, invert=FALSE, ...)
         SRM
     }
 
-    result = apply(R, 2, srm, Rf=Rf, p=p, ...)
+    result = apply(R, 2, srm, Rf=Rf, p=p, method=method, ...)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
-    rownames(result) = "Modified Sharpe"
+    rownames(result) = paste("Modified Sharpe: ", method, " (p=", round(p*100,1),"%)", sep="")
     return (result)
 }
 
@@ -55,10 +56,13 @@ function (R, Rf = 0, p = 0.95, method=c("VaR","ES"), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.11 2009-10-10 12:40:08 brian Exp $
+# $Id: SharpeRatio.modified.R,v 1.12 2009-10-15 15:11:19 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.10  2009-10-06 15:14:44  peter
 # - fixed rownames
 # - fixed scale = 12 replacement errors
