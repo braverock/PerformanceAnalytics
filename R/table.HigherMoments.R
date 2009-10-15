@@ -25,10 +25,10 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
     # A table of parameters from a linear regression of excess returns
 
     # FUNCTION:
-    Ra = checkData(Ra, method = "zoo")
-    Rb = checkData(Rb, method = "zoo")
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
     if(!is.null(dim(Rf)))
-        Rf = checkData(Rf, method = "zoo")
+        Rf = checkData(Rf)
 
     # Get dimensions and labels
     columns.a = ncol(Ra)
@@ -46,11 +46,11 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
             merged.assets = na.omit(merged.assets) # leaves the overlapping period
 
             z = c(
-                    CoSkewness(merged.assets[,1], merged.assets[,2]),
-                    CoKurtosis(merged.assets[,1], merged.assets[,2]),
-                    BetaCoVariance(merged.assets[,1], merged.assets[,2]),
-                    BetaCoSkewness(merged.assets[,1], merged.assets[,2]),
-                    BetaCoKurtosis(merged.assets[,1], merged.assets[,2])
+                    CoSkewness(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]),
+                    CoKurtosis(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]),
+                    BetaCoVariance(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]),
+                    BetaCoSkewness(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE]),
+                    BetaCoKurtosis(merged.assets[,1,drop=FALSE], merged.assets[,2,drop=FALSE])
                     )
 
             znames = c(
@@ -86,10 +86,13 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.HigherMoments.R,v 1.10 2009-10-10 12:40:08 brian Exp $
+# $Id: table.HigherMoments.R,v 1.11 2009-10-15 03:52:50 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.9  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf
