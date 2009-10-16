@@ -1,5 +1,5 @@
 `chart.StackedBar` <- 
-function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%m/%y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
+function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     # Data should be organized as columns for each category, rows for each period or observation
 
@@ -13,7 +13,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     time.scale = periodicity(w)$scale
     ep = axTicksByTime(w, major.ticks, format.labels = date.format)
     ep1 = ep
-    posn = barplot(w, plot=FALSE)
+    posn = barplot(w, plot=FALSE, space=space)
     for(i in 1:length(ep)) 
         ep1[i] = posn[ep[i]]
 
@@ -52,6 +52,8 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
             if(legend.loc =="under") {# put the legend under the chart
                 op <- par(no.readonly=TRUE)
                 layout(rbind(1,2), height=c(6,1), width=1)
+                par(mar=c(3,4,4,2)+.1) # set the margins of the first panel
+# c(bottom, left, top, right)
             }
 #             else
 #                 par(mar=c(5,4,4,2)+.1) # @todo: this area may be used for other locations later
@@ -92,7 +94,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
                 ep1 = 1:length(xaxis.labels)
             axis(1, at=ep1, labels=xaxis.labels, las=las, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
             #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
-            title(xlab = xlab, cex = cex.lab)
+#             title(xlab = xlab, cex = cex.lab)
             # use axis(..., las=3) for vertical labels.
         }
         box(col = element.color)
@@ -124,10 +126,14 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.14 2009-06-20 03:18:04 peter Exp $
+# $Id: chart.StackedBar.R,v 1.15 2009-10-16 16:17:20 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.14  2009-06-20 03:18:04  peter
+# - added axTicksByTime to give nice xaxis labels
+# - modified to use layout only for legend "under"
+#
 # Revision 1.13  2008-10-14 14:37:29  brian
 # - convert from matrix or data.frame to zoo in checkData call
 #
