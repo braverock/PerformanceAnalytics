@@ -65,6 +65,7 @@ export(
     SmoothingIndex,
     sortDrawdowns,
     SortinoRatio,
+    StdDev.annualized,
     SterlingRatio,
     style.fit,
     style.QPfit,
