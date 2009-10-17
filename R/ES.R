@@ -1,9 +1,9 @@
 ###############################################################################
-# $Id: ES.R,v 1.9 2009-10-15 21:42:30 brian Exp $
+# $Id: ES.R,v 1.10 2009-10-17 15:42:48 brian Exp $
 ###############################################################################
 
 ES <-
-function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
+function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -118,10 +118,13 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: ES.R,v 1.9 2009-10-15 21:42:30 brian Exp $
+# $Id: ES.R,v 1.10 2009-10-17 15:42:48 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-15 21:42:30  brian
+# - updates to pass R CMD check
+#
 # Revision 1.8  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #

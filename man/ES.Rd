@@ -10,14 +10,14 @@ calculates Expected Shortfall(ES) (or Conditional Value-at-Risk(CVaR) for univar
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at Risk(CVaR) for univariate, component, and marginal cases using a variety of analytical methods.}
 \usage{
-ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE, ...)
+ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt","geltner"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{method}{ one of "modified","gaussian","historical", "kernel", see Details. }
-  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt". }
+  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none", "boudt", or "geltner". }
   \item{portfolio_method}{ one of "single","component","marginal" defining whether to do univariate, component, or marginal calc, see Details. }
   \item{weights}{ portfolio weighting vector, default NULL, see Details}
   \item{mu}{If univariate, mu is the mean of the series. Otherwise mu is the vector of means of the return series  , default NULL, , see Details}
@@ -27,7 +27,7 @@ ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clea
 %  \item{m1}{ portfolio m1 matrix, default NULL, see Details}
 %  \item{m2}{ portfolio m2 matrix, default NULL, see Details}
   \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is the coskewness matrix of the returns series, default NULL, see Details}
-  \item{m4}{If multivariate, m4 is the excess kurtosis of the series. Otherwise m4 is the cokurtosis matrix of the return series, default NULL, see Details}
+  \item{m4}{If univariate, m4 is the excess kurtosis of the series. Otherwise m4 is the cokurtosis matrix of the return series, default NULL, see Details}
   \item{invert}{ TRUE/FALSE whether to invert the VaR measure.  see Details. }
   \item{operational}{TRUE/FALSE, default TRUE,  see Details. }
   \item{\dots}{ any other passthru parameters }
@@ -76,7 +76,7 @@ The limitations of Gaussian ES are well covered in the literature, since most fi
    and collapses to standard (traditional) Gaussian ES if the return stream follows a standard distribution. 
    More precisely, for a
 loss probability \eqn{c}, modified ES is defined as the
-expected value of all returns below the \eqn{c} Cornish-Fisher
+negative of the expected value of all returns below the \eqn{c} Cornish-Fisher
 quantile and where the expectation is computed under the second
 order Edgeworth expansion of the true distribution function.
 
@@ -122,8 +122,8 @@ E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
 
 As discussed among others in Cont, Deguest and Scandolo (2007), it is important that the estimation of the ES measure
 is robust to single outliers. This is especially the case for  modified VaR and its decomposition, since they use higher order moments.
-By default, the portfolio moments are estimated by their sample counterparts. If \code{clean=c("boudt")} then the \eqn{1-p} most extreme observations
-are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008).
+By default, the portfolio moments are estimated by their sample counterparts. If \code{clean="boudt"} then the \eqn{1-p} most extreme observations
+are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008) and \code{\link{Return.clean}}.  If your data consist of returns for highly illiquid assets, then \code{clean="geltner"} may be more appropriate to reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}} for details.
 }
 
 \value{
@@ -159,6 +159,7 @@ The option to \code{invert} the ES measure should appease both academics and pra
     \code{\link[VaR]{VaR.gpd}} \cr
     \code{\link[VaR]{VaR.norm}} \cr
     \code{\link[VaR]{VaR.backtest}} \cr
+    \code{\link{Return.clean}}
 }
 \examples{
     data(edhec)

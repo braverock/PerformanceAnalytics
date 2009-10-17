@@ -19,7 +19,7 @@ VaR(R, p = 0.95, method = c("modified", "gaussian","historical", "kernel"),
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{method}{ one of "modified","gaussian","historical", "kernel", see Details. }
-  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt". }
+  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none", "boudt", or "geltner". }
   \item{portfolio_method}{ one of "single","component","marginal" defining whether to do univariate, component, or marginal calc, see Details. }
   \item{weights}{ portfolio weighting vector, default NULL, see Details}
   \item{mu}{If univariate, mu is the mean of the series. Otherwise mu is the vector of means of the return series  , default NULL, , see Details}
@@ -29,7 +29,7 @@ VaR(R, p = 0.95, method = c("modified", "gaussian","historical", "kernel"),
 %  \item{m1}{ portfolio m1 matrix, default NULL, see Details}
 %  \item{m2}{ portfolio m2 matrix, default NULL, see Details}
   \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is the coskewness matrix of the returns series, default NULL, see Details}
-  \item{m4}{If multivariate, m4 is the excess kurtosis of the series. Otherwise m4 is the cokurtosis matrix of the return series, default NULL, see Details}
+  \item{m4}{If univariate, m4 is the excess kurtosis of the series. Otherwise m4 is the cokurtosis matrix of the return series, default NULL, see Details}
   \item{invert}{ TRUE/FALSE whether to invert the VaR measure.  see Details. }
   \item{\dots}{ any other passthru parameters }
 }
@@ -61,7 +61,8 @@ When you don't have a sufficiently long set of returns to use non-parametric or 
 or wish to more closely model an ideal distribution, it is common to us a parmetric estimate based on the distribution. 
 J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR 
 has become what most literature generally refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}}. 
-See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/r2rovv.html},
+See \cite{Return to RiskMetrics: Evolution of a Standard}\url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}.
+
 
 Parametric mean-VaR does a better job of accounting for the tails of the distribution by more precisely estimating shape 
 of the distribution tails of the risk quantile. The most common estimate is a normal (or Gaussian) distribution  \eqn{R\sim N(\mu,\sigma)}
@@ -139,7 +140,7 @@ More efficient estimators have been proposed by Martellini and Ziemann (2007) an
 
 As discussed among others in Cont, Deguest and Scandolo (2007), it is important that the estimation of the VaR measure
 is robust to single outliers. This is especially the case for  modified VaR and its decomposition, since they use higher order moments.
-By default, the portfolio moments are estimated by their sample counterparts. If \code{clean=c("boudt")} then the \eqn{1-p} most extreme observations are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008).
+By default, the portfolio moments are estimated by their sample counterparts. If \code{clean="boudt"} then the \eqn{1-p} most extreme observations are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008) and \code{\link{Return.clean}}.  If your data consist of returns for highly illiquid assets, then \code{clean="geltner"} may be more appropriate to reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}} for details.
 
 Epperlein and Smillie (2006) introduced a non-parametric kernel estimator for component risk contributions, which is available via \code{method="kernel"} and \code{portfolio_method="component"}.
 
@@ -176,6 +177,8 @@ Martellini, Lionel, and Volker Ziemann.  Improved Forecasts of Higher-Order Como
 and Implications for Portfolio Selection. 2007. EDHEC Risk and Asset Management Research Centre
 working paper.
 
+Return to RiskMetrics: Evolution of a Standard
+\url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
 
 Zangari, Peter. A VaR Methodology for Portfolios that include Options. 1996. RiskMetrics Monitor, First Quarter, 4-12.
 
@@ -195,6 +198,7 @@ The prototype of the univariate Cornish Fisher VaR function was completed by Pro
     \code{\link[VaR]{VaR.gpd}} \cr
     \code{\link[VaR]{VaR.norm}} \cr
     \code{\link[VaR]{VaR.backtest}} \cr
+    \code{\link{Return.clean}} \cr
 }
 \examples{
     data(edhec)
