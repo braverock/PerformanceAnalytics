@@ -60,7 +60,6 @@ function(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained"
             if (selection == "AIC") { # @todo: add "BIC" case, where k = log(n) and n is style.cols?
                 # @todo: support multiple colums
                 column.result = step(column.lm) # find the model with minimum AIC value
-print(length(coef(column.result)))
                 if(fund.col == 1 )
                     column.weights=data.frame(matrix(rep(0,length(style.colnames)*fund.cols), nrow = length(style.colnames), ncol = fund.cols),row.names=style.colnames)
                 column.coef = as.data.frame(coef(column.result))
@@ -105,41 +104,5 @@ print(length(coef(column.result)))
     result = list(weights = result.weights, R.squared = result.R2, adj.R.squared = result.adjR2 )
 
     return(result)
-
-    # EXAMPLE:
-    # > head(R.fund)
-    #          SP500.TR
-    # Jan 1996   0.0340
-    # Feb 1996   0.0093
-    # Mar 1996   0.0096
-    # Apr 1996   0.0147
-    # May 1996   0.0258
-    # Jun 1996   0.0038
-    # > head(R.style)
-    #          Russell.1000.Growth Russell.1000.Value
-    # Jan 1996              0.0335             0.0312
-    # Feb 1996              0.0183             0.0076
-    # Mar 1996              0.0013             0.0170
-    # Apr 1996              0.0263             0.0038
-    # May 1996              0.0349             0.0125
-    # Jun 1996              0.0014             0.0008
-    # > style.QPfit(R.fund, R.style)
-    # [1] 0.5047724 0.4952276
-    # > style.QPfit(R.fund, R.style, all=T)
-    # $solution
-    # [1] 0.5047724 0.4952276
-    # 
-    # $value
-    # [1] -0.0008888153
-    # 
-    # $unconstrainted.solution
-    # [1] 0.5040111 0.4815228
-    # 
-    # $iterations
-    # [1] 2 0
-    # 
-    # $iact
-    # [1] 1
-    # 
 
 }

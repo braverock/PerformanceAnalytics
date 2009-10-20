@@ -13,7 +13,7 @@ chart.Style(R.fund, R.style, method = c("constrained", "unconstrained", "normali
 
 chart.RollingStyle(R.fund, R.style, method = c("constrained","unconstrained","normalized"), leverage = FALSE, width = 12, main = NULL, space = 0, ...)
 
-style.fit(R.fund, R.style, model = FALSE, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, ...)
+style.fit(R.fund, R.style, model=FALSE, method = c("constrained", "unconstrained", "normalized"), leverage = FALSE, selection = c("none", "AIC"), ...)
 
 style.QPfit(R.fund, R.style, model = FALSE, leverage = FALSE, ...)
 
@@ -25,6 +25,7 @@ style.QPfit(R.fund, R.style, model = FALSE, leverage = FALSE, ...)
   \item{method}{ specify the method of calculation of style weights as "constrained", "unconstrained", or "normalized".  For more information, see \code{\link{style.fit}} }
   \item{leverage}{ logical, defaults to 'FALSE'.  If 'TRUE', the calculation of weights assumes that leverage may be used.  For more information, see \code{\link{style.fit}} }
   \item{model}{ logical. If 'model' = TRUE in \code{\link{style.QPfit}}, the full result set is shown from the output of \code{solve.QP}. }
+  \item{selection}{ either "none" (default) or "AIC".  If "AIC", then the function uses a stepwise regression to identify find the model with minimum AIC value.  See \code{\link{step}} for more detail.}
   \item{unstacked}{ logical.  If set to 'TRUE' \emph{and} only one row of data is submitted in 'w', then the chart creates a normal column chart.  If more than one row is submitted, then this is ignored.  See examples below. }
   \item{space}{ the amount of space (as a fraction of the average bar width) left before each bar, as in \code{\link{barplot}}. Default for \code{chart.RollingStyle} is 0; for \code{chart.Style} the default is 0.2. }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
