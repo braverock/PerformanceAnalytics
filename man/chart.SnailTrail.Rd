@@ -34,18 +34,14 @@ chart.SnailTrail(R, Rf = 0, main = "Annualized Return and Risk", add.names = c("
   \item{\dots}{ any other passthru parameters }
 }
 \value{
-  ~Describe the value returned
-  If it is a LIST, use
-  \item{comp1 }{Description of 'comp1'}
-  \item{comp2 }{Description of 'comp2'}
-  ...
+chart of risk and return coordinates through time
 }
 \references{ ~put references to the literature/web site here ~ }
 \author{ Peter Carl }
 \seealso{ \code{\link{chart.RiskReturnScatter}}}
 \examples{
 data(managers)
-chart.SnailTrail(managers[,c("HAM2","SP500.TR"),drop=FALSE], width=36, stepsize=12, colorset=c('red','orange'),add.labels="firstandlast", rf=.04/12, main="Trailing 36-month Performance Calc'd Every 12 Months")
+chart.SnailTrail(managers[,c("HAM2","SP500 TR"),drop=FALSE], width=36, stepsize=12, colorset=c('red','orange'),add.names="firstandlast", rf=.04/12, main="Trailing 36-month Performance Calc'd Every 12 Months")
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
