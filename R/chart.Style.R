@@ -10,8 +10,8 @@ function (R.fund, R.style, method = c("constrained", "unconstrained", "normalize
     # FUNCTION:
 
     # Transform input data to a data frame
-    R.fund = checkData(R.fund, method = "zoo")
-    R.style = checkData(R.style, method = "zoo")
+    R.fund = checkData(R.fund)
+    R.style = checkData(R.style)
     method = method[1]
 
     # Calculate
@@ -26,6 +26,7 @@ function (R.fund, R.style, method = c("constrained", "unconstrained", "normalize
         else ylim = NULL
 
     chart.StackedBar(weights, main = main, ylim = ylim, unstacked = unstacked, ...)
+#     barplot(weights, main = main, ylim = ylim, ...)
 
 }
 
@@ -37,10 +38,13 @@ function (R.fund, R.style, method = c("constrained", "unconstrained", "normalize
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.7 2008-07-11 03:24:52 peter Exp $
+# $Id: chart.Style.R,v 1.8 2009-10-20 02:44:16 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2008-07-11 03:24:52  peter
+# - fixed error with alignment of results
+#
 # Revision 1.6  2008-04-18 03:58:04  peter
 # - reduced to a wrapper to chart.StackedBar
 #
