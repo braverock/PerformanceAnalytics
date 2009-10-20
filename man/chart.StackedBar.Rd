@@ -6,7 +6,7 @@
    This creates a stacked column chart with time on the horizontal axis and values in categories.  This kind of chart is commonly used for showing portfolio 'weights' through time, although the function will plot any values by category.
 }
 \usage{
-chart.StackedBar(w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "\%m/\%y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... )
+chart.StackedBar(w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -69,7 +69,7 @@ chart.StackedBar(weights, date.format="\%Y", cex.legend = 0.7, colorset=rainbow1
 chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
 
 # for one row of data, use 'unstacked' for a better chart
-#chart.StackedBar(weights[1,,drop=FALSE], unstacked=TRUE)
+chart.StackedBar(weights[1,,drop=FALSE], unstacked=TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
