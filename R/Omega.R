@@ -48,6 +48,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 
     # FUNCTION
     method = method[1]
+    output = output[1]
 
     if (is.vector(R)) {
         x = na.omit(R)
@@ -77,7 +78,8 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
                 f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
                 if(output == "full") {
-                    omega = cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x))
+                    omega = as.matrix(cumsum(1-f(xcdf$x))/cumsum(f(xcdf$x)))
+                    names(omega) = xcdf$x
                 }
                 else {
                 # returns only the point value for L
@@ -94,11 +96,15 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     }
     else {
         R = checkData(R, method = "matrix", ... = ...)
+        if(output=="full")
+            R = R[,1,drop=FALSE] # constrain to one column
         result = apply(R, 2, Omega, L = L, method = method, output = output, Rf = Rf,
             ... = ...)
-        dim(result) = c(1,NCOL(R))
+        if(output!="full") {
+            dim(result) = c(1,NCOL(R))
+            rownames(result) = paste("Omega (L = ", round(L*100,1),"%)", sep="")
+        }
         colnames(result) = colnames(R)
-        rownames(result) = paste("Omega (L = ", round(L*100,1),"%)", sep="")
         return(result)
     }
 }
@@ -111,10 +117,13 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.16 2009-10-10 12:40:08 brian Exp $
+# $Id: Omega.R,v 1.17 2009-10-21 02:07:22 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.15  2009-10-06 15:14:44  peter
 # - fixed rownames
 # - fixed scale = 12 replacement errors
