@@ -17,35 +17,35 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
             for(i in 1:length(p)){
                 switch(methods[j],
                     GaussianVaR = {
-                        risk[i, j] = -1* as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
+                        risk[i, j] =  as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
                         if(i==1)
                             legend.txt = c(legend.txt, "Gaussian VaR")
 
                     },
                     ModifiedVaR = {
-                        risk[i, j] = -1* as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
+                        risk[i, j] =  as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
                         if(i==1)
                             legend.txt = c(legend.txt, "Modified VaR")
                     },
                     HistoricalVaR = {
-                        risk[i,j] =  -1* as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) #hVaR = quantile(x,probs=.01)
+                        risk[i,j] =   as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) #hVaR = quantile(x,probs=.01)
                         if(i==1)
                             legend.txt = c(legend.txt, "Historical VaR")
 
                     },
                     GaussianES = {
-                        risk[i, j] = -1* as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
+                        risk[i, j] =  as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
                         if(i==1)
                             legend.txt = c(legend.txt, "Gaussian ES")
 
                     },
                     ModifiedES = {
-                        risk[i, j] = -1* as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
+                        risk[i, j] =  as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
                         if(i==1)
                             legend.txt = c(legend.txt, "Modified ES")
                     },
                     HistoricalES = {
-                        risk[i,j] =  -1* as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) #hES = quantile(x,probs=.01)
+                        risk[i,j] =   as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) 
                         if(i==1)
                             legend.txt = c(legend.txt, "Historical ES")
 
@@ -61,7 +61,7 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
     ylim=c(min(risk),max(risk))
     xlim=c(min(p), max(p))
     if(is.null(main))
-        main=paste("VaR Sensitivity of ", columnnames[1], sep="")
+        main=paste("Risk Confidence Sensitivity of ", columnnames[1], sep="")
     if(length(lwd) < risk.columns)
         lwd = rep(lwd,risk.columns)
     if(length(lty) < risk.columns)
