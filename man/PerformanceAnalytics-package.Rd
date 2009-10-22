@@ -7,7 +7,7 @@ Econometric tools for performance and risk analysis.
 }
 
 \description{
-Library of econometric functions for performance and risk analysis of financial instruments or portfolios. This library aims to aid practitioners and researchers in using the latest research for analysis of both normally and non-normally distributed return streams.
+\code{Performanceanalytics} provides an \R library of econometric functions for performance and risk analysis of financial instruments or portfolios. This library aims to aid practitioners and researchers in using the latest research for analysis of both normally and non-normally distributed return streams.
 
 We created this library to include functionality that has been appearing in the academic literature on performance analysis and risk over the past several years, but had no functional equivalent in \R.  In doing so, we also found it valuable to have wrapper functions for functionality easily replicated in \R, so that we could access that functionality using a function with defaults and naming consistent with common usage in the finance literature.  The following sections cover Time Series Data, Performance Analysis, Risk Analysis (with a separate treatment of VaR), Summary Tables of related statistics, Charts and Graphs, a variety of Wrappers and Utility functions, and some thoughts on work yet to be done.
 }
@@ -15,13 +15,8 @@ We created this library to include functionality that has been appearing in the 
 \details{
     \tabular{rl}{
         Package: \tab PerformanceAnalytics\cr
-        Type: \tab Package\cr
-        Version: \tab 1.0.0\cr
-        Date: \tab 2009-10-23\cr
         License: \tab GPL\cr
         Copyright: \tab (c) 2004-2009 Brian G. Peterson and Peter Carl\cr
-        URL: \tab \url{http://braverock.com/R/} \cr
-        URL: \tab \url{http://cran.r-project.org/web/packages/PerformanceAnalytics/index.html}
     }
 
 In general, this library requires return (rather than price) data. Almost all of the functions will work with any periodicity, from annual, monthly, daily, to even minutes and seconds.
