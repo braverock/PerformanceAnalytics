@@ -1,10 +1,10 @@
-\name{CenteredMoments}
+\name{Return.centered}
 \alias{centeredcomoment}
 \alias{centeredmoment}
 \alias{Return.centered}
-\alias{Ipower}
+% \alias{Ipower}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ calculate centered moments of a joint distribution }
+\title{ calculate centered Returns }
 \description{
 the \eqn{n}-th centered moment is calculated as
 \deqn{
@@ -17,7 +17,7 @@ These functions are used internally by PerformanceAnalytics to calculate centere
 centeredcomoment (Ra, Rb, p1, p2, normalize = FALSE)
 centeredmoment (R, power)
 Return.centered (R, ...)
-Ipower (power, h)
+% Ipower (power, h)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -27,7 +27,7 @@ Ipower (power, h)
   \item{power}{ power or moment to calculate }
   \item{p1}{ first power of the comoment }
   \item{p2}{ second power of the comoment }
-  \item{h}{ ~~Describe \code{h} here~~ }
+%  \item{h}{ ~~Describe \code{h} here~~ }
   \item{normalize}{ whether to standardize the calculation to agree with common usage, or leave the default mathematical meaning }
   \item{\dots}{ any other passthru parameters }
 }
@@ -36,10 +36,10 @@ These functions were first utilized in Boudt, Peterson, and Croux (2008), and ha
 
   ~~ Additional Details will be added to documentation as soon as we have time to write them. ~~
 
-\code{Ipower} Computes the constant \eqn{\int_{-\infty}^{h} z^q \phi'(z)dz}  needed for the estimation of mES and
-Component mES where where \eqn{\phi'(z)} is the derivative of the standard gaussian density function and \eqn{h} is typically modified VaR if you are computing mES or Gaussian VaR if you are computing Gaussian Expected Shortfall.
+% \code{Ipower} Computes the constant \eqn{\int_{-\infty}^{h} z^q \phi'(z)dz}  needed for the estimation of mES and
+% Component mES where where \eqn{\phi'(z)} is the derivative of the standard gaussian density function and \eqn{h} is typically modified VaR if you are computing mES or Gaussian VaR if you are computing Gaussian Expected Shortfall.
 
-%Ipower implements the formula: \dEqn{\int_{-\infty}^{h} z^q \phi'(z)dz}
+% Ipower implements the formula: \dEqn{\int_{-\infty}^{h} z^q \phi'(z)dz}
 }
 \value{
 }
