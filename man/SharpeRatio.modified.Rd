@@ -9,7 +9,7 @@ The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviati
 
 A number of papers now recommend using a "modified Sharpe" ratio using a Modified Cornish-Fisher VaR as the measure of Risk.
 
-We have recently extended this concept to create multivariate modified Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR, Gaussian Expected Shortfall, and modified Expected Shortfall. See \code{\link{MultivariateRisk}}.
+We have recently extended this concept to create multivariate modified Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR, Gaussian Expected Shortfall, and modified Expected Shortfall. See \code{\link{VaR}} and \code{\link{ES}}.
 }
 \usage{
 SharpeRatio.modified(R, Rf = 0, p = 0.95, FUNCT = c("VaR","ES"), ...)
@@ -31,8 +31,9 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk Optimization
 \author{ Brian G. Peterson }
 \seealso{
     \code{\link{VaR}} \cr
+    \code{\link{ES}} \cr
     \code{\link{SharpeRatio}} \cr
-    \code{\link{MultivariateRisk}}
+%    \code{\link{MultivariateRisk}}
 }
 \examples{
 data(edhec)

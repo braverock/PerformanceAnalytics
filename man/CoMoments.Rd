@@ -45,7 +45,8 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 \seealso{ \code{\link{BetaCoSkewness}} \cr
           \code{\link{BetaCoKurtosis}} \cr
           \code{\link{BetaCoMoments}} \cr
-          \code{\link{MultivariateMoments}} }
+%          \code{\link{MultivariateMoments}}
+}
 \examples{
 data(managers)
 CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
