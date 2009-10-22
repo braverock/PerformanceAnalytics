@@ -1,5 +1,5 @@
 `SharpeRatio.annualized` <-
-function (R, Rf = 0, scale = NA)
+function (R, Rf = 0, scale = NA, geometric=TRUE)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -36,7 +36,7 @@ function (R, Rf = 0, scale = NA)
     sr <-function (R, Rf, scale)
     {
         xR = Return.excess(R, Rf)
-        SR = Return.annualized(xR, scale=scale)/StdDev.annualized(R, scale=scale)
+        SR = Return.annualized(xR, scale=scale, geometric=geometric)/StdDev.annualized(R, scale=scale)
         SR
     }
 
@@ -56,10 +56,14 @@ function (R, Rf = 0, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.13 2009-10-06 15:14:44 peter Exp $
+# $Id: SharpeRatio.annualized.R,v 1.14 2009-10-22 13:36:16 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.13  2009-10-06 15:14:44  peter
+# - fixed rownames
+# - fixed scale = 12 replacement errors
+#
 # Revision 1.12  2009-10-06 02:56:53  peter
 # - added label to results
 #
