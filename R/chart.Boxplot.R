@@ -1,5 +1,5 @@
 `chart.Boxplot` <-
-function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = FALSE, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
+function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -65,6 +65,12 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
         boxplot(R[,column.order], horizontal = TRUE, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = colorset[column.order], medlwd = 1, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = 1, staplecol = colorset[column.order], staplecex = .5, outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, boxwex=.6, ...)
     } # end else
 
+    if(!is.null(show.data)) {
+      highlight.color=1:24
+      for (item in show.data) {
+        points(as.vector(R[item,column.order]), 1:columns, col=highlight.color[item]) #, pch = mean.symbol[column.order], col=symbol.color[column.order])
+      }
+    }
     if(add.mean)
         points(means[column.order], 1:columns, pch = mean.symbol[column.order], col=symbol.color[column.order])
 
@@ -104,10 +110,13 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Boxplot.R,v 1.7 2009-10-10 12:40:08 brian Exp $
+# $Id: chart.Boxplot.R,v 1.8 2009-10-22 13:45:23 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.7  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.6  2009-04-07 22:18:25  peter
 # - added element.color as a parameter
 #

@@ -21,7 +21,7 @@ chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(
   \item{mean.symbol}{ symbol to use for the mean of the distribution }
   \item{median.symbol}{ symbol to use for the median of the distribution }
   \item{outlier.symbol}{ symbol to use for the outliers of the distribution }
-  \item{show.data}{ logical. default FALSE. if TRUE, show the scatter of all observations }
+  \item{show.data}{ numerical vector of column numbers to display on top of boxplot, default NULL }
   \item{add.mean}{ logical. if TRUE, show a line for the mean of all distributions plotted}
   \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
   \item{main}{ set the chart title, same as in \code{\link{plot}} }
