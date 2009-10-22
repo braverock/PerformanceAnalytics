@@ -9,7 +9,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Functions to calculate systematic or beta co-moments of return series }
 \description{
-    calculate higher co-moment betas, which are sometimes refered to as 'systematic' skewness or kurtosis
+    calculate higher co-moment betas, or 'systematic' variance, skewness, and kurtosis
 }
 \usage{
 BetaCoVariance(Ra, Rb)
@@ -42,7 +42,7 @@ where the \eqn{n}-th centered moment is calculated as
  \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack
 }{moment^n(R) = E[R-E(R)^n]}
 
-A beta is greater than 1 indicates that no diversification benefits should be expected from the introduction of that asset into the portfolio. Conversely, a that is less than 1 indicates that adding the new asset should reduce the resulting portfolio's volatility and kurtosis, and to an increase in skewness. More specifically, the lower the beta the higher the diversification effect on normal risk (i.e. volatility). Similarly, since extreme risks are generally characterised by negative skewness and positive kurtosis, the lower the , the higher the diversification effect on extreme risks (as reflected in Modified Value-at-Risk or ER).
+A beta is greater than 1 indicates that no diversification benefits should be expected from the introduction of that asset into the portfolio. Conversely, a beta that is less than 1 indicates that adding the new asset should reduce the resulting portfolio's volatility and kurtosis, and to an increase in skewness. More specifically, the lower the beta the higher the diversification effect on normal risk (i.e. volatility). Similarly, since extreme risks are generally characterised by negative skewness and positive kurtosis, the lower the beta, the higher the diversification effect on extreme risks (as reflected in Modified Value-at-Risk or ER).
 
 The addition of a small fraction of a new asset to a portfolio leads to a decrease in the portfolio's second moment (respectively, an increase in the portfolio's third moment and a decrease in the portfolio's fourth moment) if and only if the second moment (respectively, the third moment and fourth moment) beta is less than 1 (see Martellini and Ziemann (2007) for more details).  For skewness, the interpretation is slightly more involved.  If the skewness is negative, we would expect an increase in portfolio skewness when the third moment beta is lower than 1. When the skewness of the portfolio is positive, then the condition is that the third moment beta is greater than, as opposed to lower than, one.
 }
