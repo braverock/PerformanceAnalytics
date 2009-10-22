@@ -66,39 +66,42 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         colnames(weights)<-colnames(R)
     } else{
         weights=checkData(weights,method="matrix") # do this to make sure we have columns, and not just a vector
-#         if (length(weights) != ncol(R)) stop ("The Weighting Vector and Return Collection do not have the same number of Columns.")
     }
     if (nrow(weights)>1){
-        stop("Use Return.rebalancing for multiple weighting periods.  This function is for portfolios with a single set of weights.")
+        if ((nrow(weights)==ncol(R)) & (ncol(weights)==1)) {
+          weights = t(weights) #this was a vector that got transformed
+        } else {
+          stop("Use Return.rebalancing for multiple weighting periods.  This function is for portfolios with a single set of weights.")
+        }
     }
-    
+    if (is.null(colnames(weights))) { colnames(weights)<-colnames(R) }
 
     #Function:
 
 
-        # construct the wealth index of unweighted assets
-        wealthindex.assets=cumprod(1+R[,colnames(weights)])
+    # construct the wealth index of unweighted assets
+    wealthindex.assets=cumprod(1+R[,colnames(weights)])
 
-        wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R[,colnames(weights)]))
-        colnames(wealthindex.weighted)=colnames(wealthindex.assets)
-        rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
-        # weight the results
-        for (col in colnames(weights)){
-            wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
-        }
-        wealthindex=apply(wealthindex.weighted,1,sum)
+    wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R[,colnames(weights)]))
+    colnames(wealthindex.weighted)=colnames(wealthindex.assets)
+    rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
+    # weight the results
+    for (col in colnames(weights)){
+        wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
+    }
+    wealthindex=apply(wealthindex.weighted,1,sum)
 
-        # weighted cumulative returns
-        weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
-        weightedreturns=diff(rbind(0,weightedcumcont))
-        colnames(weightedreturns)=colnames(wealthindex.assets)
-        #browser()
-        wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
-        wealthindex=reclass(wealthindex,match.to=R)
+    # weighted cumulative returns
+    weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
+    weightedreturns=diff(rbind(0,weightedcumcont)) # compound returns
+    colnames(weightedreturns)=colnames(wealthindex.assets)
+    #browser()
+    wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
+    wealthindex=reclass(wealthindex,match.to=R)
 
     if(method=="simple"){
-        weightedreturns=Return.calculate(wealthindex,method="simple")
-        weightedreturns[1,]=wealthindex[1,]-1
+       weightedreturns=Return.calculate(wealthindex, method="simple")
+       weightedreturns[1,]=wealthindex[1,]-1 # I think this is still correct to get the first period return
     }
 
     if (!wealth.index){
@@ -133,10 +136,14 @@ pfolioReturn <- function (x, weights=NULL, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.portfolio.R,v 1.9 2009-10-15 18:17:15 brian Exp $
+# $Id: Return.portfolio.R,v 1.10 2009-10-22 12:47:12 brian Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.9  2009-10-15 18:17:15  brian
+# - add dots back in as parameter
+# - add stop error for multirow weights in Return.portfolio, perhaps automatically call appropriate fn in the future
+#
 # Revision 1.8  2009-10-15 14:49:00  brian
 # - update Return.rebalancing to properly accumulate wealth
 # - add rbind workaround provided by Jeff
