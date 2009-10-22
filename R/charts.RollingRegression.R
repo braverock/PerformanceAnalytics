@@ -53,7 +53,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
           yearly = {freq.lab = "year"}
       )
 
-      main = paste("Rolling",width,freq.lab,"Regressions", sep=" ")
+      main = paste("Rolling ",width,"-",freq.lab," Regressions", sep="")
     }
 
     chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
@@ -77,10 +77,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.20 2009-10-15 21:41:13 brian Exp $
+# $Id: charts.RollingRegression.R,v 1.21 2009-10-22 03:33:53 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.20  2009-10-15 21:41:13  brian
+# - updates to add automatic periodicity to chart labels, and support different frequency data
+#
 # Revision 1.19  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #

@@ -61,7 +61,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
           yearly = {freq.lab = "year"}
       )
 
-      main = paste("Rolling",freq.lab, attribute, sep=" ")
+      main = paste("Rolling ",width,"-",freq.lab," ", attribute, sep="")
     }
     chart.TimeSeries(Result.calc, main = main, ...)
 
@@ -75,10 +75,13 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingRegression.R,v 1.22 2009-10-15 21:41:13 brian Exp $
+# $Id: chart.RollingRegression.R,v 1.23 2009-10-22 03:33:36 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.22  2009-10-15 21:41:13  brian
+# - updates to add automatic periodicity to chart labels, and support different frequency data
+#
 # Revision 1.21  2009-10-11 12:19:03  brian
 # - rf to Rf
 #
