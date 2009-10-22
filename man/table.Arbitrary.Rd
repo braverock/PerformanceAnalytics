@@ -76,10 +76,6 @@ Traditional VaR       0.02510709     0.02354012     0.0994635     0.03502065
 }
 but we don't know of a way to compare the same function side by side with different parameters for each.  Suggestions Welcome.
 }
-\value{
-A table with calculated metrics for each column
-}
-\references{ }
 \author{ Peter Carl }
 \examples{
 data(edhec)

@@ -3,8 +3,8 @@
 \alias{weights}
 \title{Selected Portfolio Weights Data}
 \description{
-A data frame that contains columns of monthly weights for a subset of the EDHEC hedge
-fund indexes.
+An xts object that contains columns of monthly weights for a subset of the EDHEC hedge
+fund indexes that demonstrate rebalancing portfolios through time.
 
 Note that all the EDHEC indices are available in \code{\link{edhec}}.
 }

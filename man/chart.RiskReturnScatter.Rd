@@ -33,18 +33,14 @@ chart.RiskReturnScatter(R, Rf = 0, main = "Annualized Return and Risk", add.name
   \item{cex.lab}{ The magnification to be used for x and y labels relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters to \code{plot} }
 }
-\details{
-}
 \value{
 scatter chart with Return on one axis and some Risk measure on the other axis
 }
-\references{ }
 \author{ Peter Carl }
 \note{
 Code inspired by a chart on:
 \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
-\seealso{ }
 \examples{
 data(edhec)
 chart.RiskReturnScatter(edhec, Rf = .04/12)

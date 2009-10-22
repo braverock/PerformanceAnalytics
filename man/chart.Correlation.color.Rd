@@ -24,7 +24,6 @@ chart.Correlation.color(R, nrgcols = 50, labels = TRUE, labcols = 1, title ="", 
 \value{
 correlation chart
 }
-\references{ }
 \author{ Peter Carl }
 \note{
 based on chart by Sandrine Dudoit, sandrine@stat.berkeley.edu, from "SMA" library

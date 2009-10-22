@@ -3,7 +3,7 @@
 \alias{managers}
 \title{Hypothetical Alternative Asset Manager and Benchmark Data}
 \description{
-A data frame that contains columns of monthly returns for six hypothetical
+A xts object that contains columns of monthly returns for six hypothetical
 asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
 fund index, the S\&P 500 total returns, and total return series for
 the US Treasury 10-year bond and 3-month bill. Monthly returns for

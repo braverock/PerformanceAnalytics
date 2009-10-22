@@ -19,13 +19,10 @@ chart.RollingCorrelation(Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, co
   \item{na.pad}{ TRUE/FALSE If TRUE it adds any times that would not otherwise have been in the result with a value of NA. If FALSE those times are dropped. }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-}
 \value{
 chart rolling period correlations of one or more assets
 }
 \author{ Peter Carl }
-\seealso{}
 \examples{
 # First we get the data
 data(managers)

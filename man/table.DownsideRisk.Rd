@@ -18,12 +18,9 @@ table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12, p = 0.95, dig
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{digits}{ number of digits to round results to }
 }
-\details{
-}
 \value{
 A dataframe organized as a table of estimates of downside risk measures for comparison across multiple instruments or funds.
 }
-\references{ }
 \author{ Peter Carl }
 \seealso{
     \code{\link{DownsideDeviation}}  \cr

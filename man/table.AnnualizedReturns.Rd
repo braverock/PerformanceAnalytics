@@ -19,7 +19,6 @@ table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 \value{
 A table of estimates of annualized returns and risk measures
 }
-\references{ }
 \author{ Peter Carl }
 \seealso{
     \code{\link{Return.annualized}} \cr

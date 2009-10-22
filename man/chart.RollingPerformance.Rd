@@ -56,9 +56,6 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
 \value{
 A timeseries line chart of the calculated series
 }
-\references{ 
-
-}
 \author{ Peter Carl }
 \seealso{
     \code{\link{charts.RollingPerformance}}, \code{\link[zoo]{rollapply}}

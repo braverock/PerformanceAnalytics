@@ -17,7 +17,6 @@ table.Correlation(Ra, Rb, ...)
 \value{
 A dataframe with correlation and significance against each column of the data provided as \code{Rb}.
 }
-\references{ }
 \author{ Peter Carl }
 \seealso{\code{\link{cor.test}}}
 \examples{

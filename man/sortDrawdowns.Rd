@@ -20,7 +20,10 @@ sortDrawdowns(runs)
   \item{to }{ending period}
   \item{length }{length in periods}
 }
-\references{}
+\references{
+Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr
+
+}
 \author{
 Peter Carl \cr
 modified with permission from prototype function by Sankalp Upadhyay

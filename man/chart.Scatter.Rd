@@ -29,7 +29,6 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
 \value{
 Draws a graph of type "scatter" with some sensible defaults.
 }
-\references{ }
 \author{ Peter Carl }
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.

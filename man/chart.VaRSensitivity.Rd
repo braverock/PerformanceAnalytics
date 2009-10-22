@@ -35,8 +35,6 @@ chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR
 and Decomposition of Downside Risk for Portfolios with Non-Normal Returns. Journal of
 Risk, forthcoming. }
 \author{ Peter Carl }
-\note{ 
-}
 \seealso{ \code{\link{VaR}} \cr \code{\link{ES}} }
 \examples{
 data(managers)

@@ -42,12 +42,6 @@ charts.PerformanceSummary(R, Rf = 0, main = NULL, methods = c("ModifiedVaR",
   \item{legend.loc}{ sets the legend location in the top chart.  Can be set to NULL or nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }
 }
-\details{
-}
-\value{
-A stack of three related timeseries charts.
-}
-\references{ }
 \author{ Peter Carl }
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.

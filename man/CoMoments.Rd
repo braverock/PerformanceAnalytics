@@ -40,8 +40,6 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
   Higher Order than the Variance. Journal of Finance 35(4):915-919.
 }
 \author{ Kris Boudt, Peter Carl, Brian Peterson }
-\note{
-}
 \seealso{ \code{\link{BetaCoSkewness}} \cr
           \code{\link{BetaCoKurtosis}} \cr
           \code{\link{BetaCoMoments}} \cr

@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Creates a time series chart with some extensions. }
 \description{
-Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{\link{plot}} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline.
+Draws a line chart and labels the x-axis with the appropriate dates.  This is really a "primitive", since it extends the base \code{\link{plot}} and standardizes the elements of a chart.  Adds attributes for shading areas of the timeline or aligning vertical lines along the timeline. This function is intended to be used inside other charting functions.
 }
 \usage{
 chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab = NULL, xlab = "Date", date.format.in = "\%Y-\%m-\%d", date.format = NULL, xlim = NULL, ylim = NULL, element.color = "darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted", xaxis.labels = NULL, ...)
@@ -48,15 +48,7 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
   \item{\dots}{ any other passthru parameters }
 
 }
-\details{
-  This function is intended to be used in a wrapper that is written for a particular purpose.
-}
-\value{
-  Draws a timeseries plot of type "line" with some sensible defaults.
-}
-\references{ }
 \author{ Peter Carl }
-\note{ }
 \seealso{ \code{\link{plot}}, \code{\link{par}}, \code{\link[xts]{axTicksByTime}} }
 \examples{
 

@@ -29,7 +29,10 @@ Note that any multiperiod or annualized number should be viewed with suspicion i
 \value{
 standard deviation value, scaled for multiple periods
 }
-\references{}
+\references{
+Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 27 \cr
+
+}
 \author{ Brian G. Peterson }
 \seealso{
     \code{\link[stats]{sd}} \cr

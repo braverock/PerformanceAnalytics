@@ -16,7 +16,6 @@ chart.Correlation(x, histogram = TRUE)
 \value{
 correlation chart
 }
-\references{ }
 \author{ Peter Carl }
 \note{
 based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}

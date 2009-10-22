@@ -28,8 +28,6 @@ information ratio (number)
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }
 \author{ Peter Carl }
-\note{
-}
 \seealso{
     \code{\link{TrackingError}} \cr
     \code{\link{ActivePremium}} \cr

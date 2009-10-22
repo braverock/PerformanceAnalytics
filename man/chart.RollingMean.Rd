@@ -21,7 +21,6 @@ FALSE, lwd = c(2, 1, 1), ...) }
 \value{
 A timeseries line charts of the rolling mean, with error bars
 }
-\references{ }
 \author{ Peter Carl }
 \examples{
 data(edhec)

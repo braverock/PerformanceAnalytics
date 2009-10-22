@@ -67,7 +67,6 @@ chart.Histogram(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency
 \value{
 chart of histogram of returns
 }
-\references{ }
 \author{ Peter Carl }
 \note{
 Code inspired by a chart on: \cr

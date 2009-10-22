@@ -33,16 +33,15 @@ particular combination of assets under consideration.
 In this version, only one method is supported.  See \code{\link{clean.boudt}} for more details.
 }
 \value{
-zoo object with the same dimensions as R, containing data cleaned with the method selected.
+xts object with the same dimensions as R, containing data cleaned with the method selected.
 }
-\references{
-
-}
-
 \author{
 Peter Carl
 }
-\seealso{ \code{\link{clean.boudt}} }
+\seealso{
+  \code{\link{clean.boudt}} \cr
+  \code{\link{Return.Geltner}} \cr
+}
 
 \examples{
 data(managers)

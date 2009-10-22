@@ -25,17 +25,12 @@ table.Returns(R, digits = 1, as.perc = TRUE)
   \item{digits}{ number of digits to round results to for presentation }
   \item{as.perc}{ TRUE/FALSE  if TRUE, multiply simple returns by 100 to get \% }
 }
-\value{
-table of returns
-}
-\references{ }
 \author{ Peter Carl }
 \note{
 This function assumes monthly returns and does not currently have handling for other scales.
 
 This function defaults to the first column as the monthly returns to be formatted.
 }
-\seealso{ }
 \examples{
 data(managers)
 t(table.CalendarReturns(managers[,c(1,7,8)]))

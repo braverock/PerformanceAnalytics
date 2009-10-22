@@ -33,10 +33,6 @@ Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in Blackjack, Sports 
 \url{http://en.wikipedia.org/wiki/Kelly_criterion}
 }
 \author{ Brian G. Peterson }
-\note{
-}
-\seealso{
-}
 \examples{
     data(managers)
     KellyRatio(managers[,1,drop=FALSE], Rf=.04/12)

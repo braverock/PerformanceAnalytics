@@ -126,8 +126,6 @@ all objects ending in symbol are symbol sets for line charts.
 \seealso{
 \code{\link[graphics]{legend}}
 }
-\examples{
-}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 \keyword{ internal }

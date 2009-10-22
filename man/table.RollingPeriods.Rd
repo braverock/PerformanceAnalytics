@@ -26,9 +26,8 @@ table.TrailingPeriodsRel(R, Rb, periods = subset(c(12,36,60), c(12,36,60)
 \value{
 A table of estimates of rolling period return measures
 }
-\references{ }
 \author{ Peter Carl }
-\seealso{ \code{\link{apply}} }
+\seealso{ \code{\link[zoo]{rollapply}} }
 \examples{
 data(edhec)
 table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))

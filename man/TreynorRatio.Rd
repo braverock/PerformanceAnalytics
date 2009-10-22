@@ -22,6 +22,7 @@ Equation:
 \deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}
 }
 \references{
+\url{http://en.wikipedia.org/wiki/Treynor_ratio}
 }
 \author{ Peter Carl }
 \seealso{

@@ -28,7 +28,9 @@ Up (Down) Percentage Ratio: this is a measure of the number of periods that the 
 \value{
 A numeric value for each calculation.
 }
-\references{}
+\references{
+Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 47 \cr
+}
 \author{ Peter Carl }
 \examples{
 data(managers)

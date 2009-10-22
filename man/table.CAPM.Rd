@@ -17,10 +17,6 @@ table.CAPM(Ra, Rb, scale = NA, Rf = 0, digits = 4)
   \item{digits}{ number of digits to round results to }
 }
 \details{ This table will show statistics pertaining to an asset against a set of benchmarks, or statistics for a set of assets against a benchmark. }
-\value{ A data frame with columns named for the columns in \code{Rb} and rows containing statistics.
-
-}
-\references{ }
 \author{ Peter Carl }
 \seealso{
     \code{\link{CAPM.alpha}} \cr

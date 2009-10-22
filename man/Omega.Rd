@@ -44,8 +44,6 @@ The first three methods implemented here focus on that observation. The first me
 
 The fourth method, "interp", creates a linear interpolation of the cdf of returns, calculates Omega as a vector, and finally interpolates a function for Omega as a function of L.  This method requires library \code{Hmisc}, which can be found on CRAN.
 }
-\value{
-}
 \references{
 Keating, J. and Shadwick, W.F. The Omega Function. working paper. Finance Development Center, London. 2002.
 Kazemi, Schneeweis, and Gupta. Omega as a Performance Measure. 2003.

@@ -20,10 +20,6 @@ charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL, trim = TRUE,
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-A stack of three related timeseries line charts
-}
-\references{ }
 \author{ Peter Carl }
 \seealso{
     \code{\link{chart.RollingPerformance}}

@@ -25,9 +25,9 @@ export(
     checkData,
     clean.boudt,
     CoKurtosis,
-    CoKurtosisMatrix,
+#    CoKurtosisMatrix, #export after co-moments paper is done
     CoSkewness,
-    CoSkewnessMatrix,
+#    CoSkewnessMatrix, #export after co-moments paper is done
     CoVariance,
     DownsideDeviation,
     Drawdowns,
@@ -90,8 +90,8 @@ export(
     table.DownsideRisk,
     table.Drawdowns,
     table.HigherMoments,
-    table.MonthlyReturns,
     table.Returns,
+    table.Stats,
     table.TrailingPeriods,
     table.TrailingPeriodsRel,
     table.UpDownRatios

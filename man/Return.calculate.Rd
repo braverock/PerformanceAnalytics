@@ -23,7 +23,8 @@ Two requirements should be made clear.  First, the function \code{Return.calcula
 
 Second, if corporate actions, dividends, or other adjustments such as time- or money-weighting are to be taken into account, those calculations must be made separately. This is a simple function that assumes fully adjusted close prices as input.  For the IBM timeseries in the example below, dividends and corporate actions are not contained in the "close" price series, so we end up with "price returns" instead of "total returns".  This can lead to significant underestimation of the return series over longer time periods.  To use adjusted returns, specify \code{quote="AdjClose"} in \code{\link[tseries]{get.hist.quote}}, which is found in package \code{tseries}.
 }
-\references{ }
+\references{ Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. Chapter 2 \cr
+}
 \author{ Peter Carl }
 \seealso{
     \code{\link{Return.cumulative}}

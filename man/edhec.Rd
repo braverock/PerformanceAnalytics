@@ -18,7 +18,7 @@ To further assist financial institutions and investors implement the latest rese
 
 see \url{http://www.edhec-risk.com/about_us}
 }
-\format{CSV conformed into a zoo object with idex of class yearmon with monthly observations}
+\format{CSV conformed into an xts object with monthly observations}
 \source{\url{http://www.edhec-risk.com/indexes/pure_style}}
 \references{
 About EDHEC Alternative Indexes. December 16, 2003. EDHEC-Risk. \cr

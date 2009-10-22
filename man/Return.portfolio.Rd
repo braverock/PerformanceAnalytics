@@ -29,6 +29,8 @@ Return.rebalancing(R, weights, ...)
 returns a time series of returns weighted by the \code{weights} parameter, possibly including contribution for each period
 }
 \references{
+Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. Chapter 2\cr
+
 }
 \author{
 Brian G. Peterson

@@ -21,7 +21,6 @@ Any time the cumulative returns dips below the maximum cumulative returns, it's 
 \value{
   A chart with time on the x-axis and the value peak equity attained on the y-axis.
 }
-\references{ }
 \author{ Peter Carl }
 \seealso{
 

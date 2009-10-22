@@ -41,9 +41,7 @@ These functions were first utilized in Boudt, Peterson, and Croux (2008), and ha
 
 % Ipower implements the formula: \dEqn{\int_{-\infty}^{h} z^q \phi'(z)dz}
 }
-\value{
-}
-\references{ 
+\references{
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and Decomposition
   of Downside Risk for Portfolios with Non-Normal Returns. Journal of Risk. Winter.
 
