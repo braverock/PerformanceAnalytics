@@ -55,6 +55,10 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 }
 \author{ Kris Boudt and Brian Peterson }
 \examples{
+
+data(managers)
+Return.centered(managers[,1:3,drop=FALSE])
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

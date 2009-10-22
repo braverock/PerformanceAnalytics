@@ -31,6 +31,9 @@ A timeseries in a zoo object of the calculation results
     \code{\link[zoo]{rollapply}}
 }
 \examples{
+data(managers)
+apply.rolling(managers[,1,drop=FALSE], FUN="mean", width=36)
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

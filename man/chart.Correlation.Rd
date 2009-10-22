@@ -22,7 +22,7 @@ based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.
 }
 \seealso{
     \code{\link{table.Correlation}} \cr
-    \code{\link{chart.Correlation.color}}
+%    \code{\link{chart.Correlation.color}}
 }
 \examples{
 }

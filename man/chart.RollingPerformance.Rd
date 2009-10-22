@@ -51,7 +51,7 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{grid.color}{ sets the color for the reference grid }
   \item{grid.lty}{ defines the line type for the grid }
   \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
-  \item{\dots}{ any other passthru parameters to \code{\link[xts]{rollapply.xts}} }
+  \item{\dots}{ any other passthru parameters to \code{\link[zoo]{rollapply}} }
 }
 \value{
 A timeseries line chart of the calculated series
