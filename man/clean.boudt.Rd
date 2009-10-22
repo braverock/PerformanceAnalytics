@@ -35,20 +35,20 @@ sample means and moments of the cleaned data.
 
 Our cleaning method follows the second approach. It
 is designed in such a way that, if we want to estimate downside risk
-with loss probability \eqn{\alpha}, it will never clean observations
-that belong to the \eqn{1-\alpha} least extreme observations. Suppose we
+with loss probability \eqn{\alpha}{alpha}, it will never clean observations
+that belong to the \eqn{1-\alpha}{(1-alpha)} least extreme observations. Suppose we
 have an \eqn{n}-dimensional vector time series of length \eqn{T}:
 \eqn{r_1,...,r_T}. We clean this time series in three steps.
 
 \enumerate{
 \item \emph{ Ranking the observations in function of their extremeness. }Denote \eqn{\mu} and \eqn{\Sigma} the mean and covariance matrix of the
-bulk of the data and let \eqn{\lfloor \cdot \rfloor} be the operator
+bulk of the data and let \eqn{\lfloor \cdot \rfloor}{floor()} be the operator
 that takes the integer part of its argument. As a measure of the
 extremeness of the return observation \eqn{r_t}, we use its squared
 Mahalanobis distance \eqn{ d^2_t = (r_t-\mu)'\Sigma^{-1}(r_t-\mu).} We
 follow Rousseeuw(1985)  by estimating \eqn{\mu} and \eqn{\Sigma} as
 the mean vector and covariance matrix (corrected to ensure
-consistency) of the subset of size \eqn{\lfloor (1-\alpha)T\rfloor} for
+consistency) of the subset of size \eqn{\lfloor (1-\alpha)T\rfloor}{floor((1-\alpha)T)} for
 which the determinant of the covariance matrix of the elements in
 that subset is the smallest. These estimates will be robust against
 the \eqn{\alpha} most extreme returns. Let \eqn{d^2_{(1)},...,d^2_{(T)}} be
@@ -57,7 +57,7 @@ such that \eqn{d^2_{(i)}\leq d^2_{(i+1)}}.
 
 \item \emph{Outlier identification.} Return observations are qualified as outliers if their estimated
 squared Mahalanobis distance \eqn{d^2_t} is greater than the empirical
-\eqn{1-\alpha} quantile \eqn{d^2_{(\lfloor (1-\alpha)T \rfloor)}} and
+\eqn{1-\alpha} quantile \eqn{d^2_{(\lfloor (1-\alpha)T \rfloor)}}{floor((1-\alpha)T)} and
 exceeds a very extreme quantile of the Chi squared distribution
 function with \eqn{n} degrees of freedom, which is the distribution
 function of \eqn{d^2_t} when the returns are normally distributed. In
@@ -66,8 +66,8 @@ this application we take the 99.9\% quantile, denoted
 
 \item \emph{Data cleaning. } Similarly to Khan(2007) we only clean the returns that are identified
 as outliers in step 2 by replacing these returns \eqn{r_t} with
-\deqn{r_t\sqrt{\max(d^2_{(\lfloor
-(1-\alpha)T)\rfloor},\chi^2_{n,0.999})/d^2_t}}
+\deqn{r_t\sqrt{\frac{\max(d^2_{(\lfloor
+(1-\alpha)T)\rfloor},\chi^2_{n,0.999})}{d^2_t}}}{r_t * sqrt(max(d^2_floor((1-\alpha)T),\chi^2_{n,0.999})/d^2_t)}
 The cleaned return
 vector has the same orientation as the original return vector, but
 its magnitude is smaller. Khan(2007) calls this
