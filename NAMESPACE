@@ -106,7 +106,7 @@ export(
     chart.Boxplot,
     chart.CaptureRatios,
     chart.Correlation,
-    chart.Correlation.color,
+#    chart.Correlation.color,
     chart.CumReturns,
     chart.Drawdown,
     chart.ECDF,
