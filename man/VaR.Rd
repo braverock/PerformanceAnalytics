@@ -1,5 +1,4 @@
 \name{VaR}
-\encoding{latin1}
 \Rdversion{1.1}
 \alias{VaR}
 \alias{VaR.CornishFisher}
@@ -114,12 +113,12 @@ Both the numerical and percentage component contributions to VaR may contain bot
 If a weighting vector is not passed in via \code{weights}, the function will assume an equal weighted (neutral) portfolio.  
 
 Multiple risk decomposition approaches have been suggested in the literature. 
-A \enc{naïve}{naive} approach is to set the risk contribution equal to the stand-alone risk.
+A naive approach is to set the risk contribution equal to the stand-alone risk.
 This approach is overly simplistic and neglects important diversification effects of the units being exposed differently to the underlying risk factors.
 An alternative approach is to measure the VaR contribution as the weight of the position in the portfolio times the partial derivative of the portfolio VaR with respect to the component weight.
 \deqn{C_i \mbox{VaR} = w_i \frac{ \partial \mbox{VaR} }{\partial w_i}.}{C[i]VaR = w[i]*(dVaR/dw[i]).}
 Because the portfolio VaR is linear in position size, we have that by Euler's theorem the portfolio VaR is the sum of these risk contributions. 
-\enc{Gouriéroux}{Gourieroux} (2000) shows that for
+Gourieroux (2000) shows that for
 VaR, this mathematical decomposition of portfolio risk has a
 financial meaning. It equals the negative value of the asset's
 expected contribution to the portfolio return when the portfolio
@@ -153,9 +152,6 @@ This is incredibly confusing, and hasn't been resolved in the literature at this
 Simon Keel and David Ardia (2009) attempt to reconcile some of the definitional issues and address some of the shortcomings of this measure in their working paper titled \dQuote{Generalized Marginal Risk}.
    Hopefully their improved Marginal Risk measures may be included here in the future. 
 }
-\value{
-VaR measure
-}
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008. Estimation and decomposition of downside risk for portfolios with non-normal returns. 2008. The Journal of Risk, vol. 11, 79-103.
 
@@ -167,7 +163,7 @@ Denton M. and Jayaraman, J.D. Incremental, Marginal, and Component VaR. Sunguard
 
 Epperlein, E., Smillie, A. Cracking VaR with kernels. RISK, 2006, vol.  19, 70-74.
 
-\enc{Gouriéroux}{Gourieroux}, Christian, Laurent, Jean-Paul and Olivier Scaillet.  Sensitivity analysis of value at risk. Journal of Empirical Finance, 2000, Vol. 7, 225-245.
+Gourieroux, Christian, Laurent, Jean-Paul and Olivier Scaillet.  Sensitivity analysis of value at risk. Journal of Empirical Finance, 2000, Vol. 7, 225-245.
 
 Keel, Simon and Ardia, David. Generalized marginal risk. Aeris CAPITAL discussion paper.
 

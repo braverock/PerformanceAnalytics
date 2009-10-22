@@ -38,9 +38,7 @@ R-Squared - shows the degree of fit of the regression to the data\cr
 \code{chart.RollingQuantileRegression} uses \code{\link[quantreg]{rq}} rather than
 \code{\link[stats]{lm}} for the regression, and may be more robust to outliers in the data.
 }
-\value{
-A timeseries line chart of the calculated series
-}
+
 \author{ Peter Carl }
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.

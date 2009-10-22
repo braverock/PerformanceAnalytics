@@ -26,9 +26,7 @@ chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = N
   \item{cex.main}{ The magnification to be used for the main title relative to the current setting of 'cex'.  }  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-Draws a graph of type "scatter" with some sensible defaults.
-}
+
 \author{ Peter Carl }
 \note{
 Most inputs are the same as "\code{\link{plot}}" and are principally included so that some sensible defaults could be set.

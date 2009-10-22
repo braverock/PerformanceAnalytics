@@ -26,9 +26,7 @@ chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)", colorset = c("b
   The empirical cumulative distribution function (ECDF for short) calculates the fraction of observations less or equal to a given value.  The resulting plot is a step function of that fraction at each observation.  This function uses \code{ecdf} and overlays the CDF for a fitted normal function as well.  Inspired by a chart in Ruppert (2004).
 
 }
-\value{
-  chart of an ECDF calculated from the data overlaid with a CDF
-}
+
 \references{
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. Ch. 2 Fig. 2.5
 

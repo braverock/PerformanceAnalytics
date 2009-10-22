@@ -19,10 +19,6 @@ chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
   \item{main}{ title of the plot; uses the column name by default. }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-    Returns a one- or two-panel chart.
-}
-\author{ Peter Carl }
 \note{ 
 Inspired by the website: \url{http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R}
 "...here's an R function that will plot the ACF and PACF of a time series 
@@ -34,6 +30,8 @@ n is the number of observations]."
 
 That description made a lot of sense, so it's implemented here for both the ACF alone and the ACF with the PACF.
 }
+\author{ Peter Carl }
+
 \seealso{  \code{\link{plot}} }
 \examples{
 data(edhec)

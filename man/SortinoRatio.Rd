@@ -23,9 +23,6 @@ Choosing the MAR carefully is very important, especially when comparing disparat
  }
  where \eqn{\delta_{MAR}} is the \code{\link{DownsideDeviation}}.
 }
-\value{
-Sortino ratio
-}
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 }

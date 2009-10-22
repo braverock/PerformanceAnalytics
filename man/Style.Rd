@@ -79,8 +79,6 @@ Styles identified in this analysis may be interpreted as an average of potential
 changing exposures over the period covered.  The function \code{\link{chart.RollingStyle}} 
 may be useful for examining the behavior of a manager's average exposures to asset classes over time, using a rolling-window analysis.
 
-}
-\value{
   The chart functions plot a column chart or stacked column chart of the resulting style weights to the current device.  Both \code{style.fit} and \code{style.QPfit} produce a list of data frames containing 'weights' and 'R.squared' results.   If 'model' = TRUE in \code{style.QPfit}, the full result set is shown from the output of \code{solve.QP}.
 }
 \references{ 

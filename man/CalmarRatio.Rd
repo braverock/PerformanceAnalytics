@@ -16,9 +16,6 @@ Calmar and Sterling Ratios are yet another method of creating a risk-adjusted me
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{excess}{ for Sterling Ratio, excess amount to add to the max drawdown, traditionally and default .1 (10\%)}
 }
-\value{
-Calmar or Sterling Reward/Risk Ratio
-}
 \details{
 Both the Calmar and the Sterling ratio are the ratio of annualized return over the absolute value of the maximum drawdown of an investment. The Sterling ratio adds an excess risk measure to the maximum drawdown, traditionally and defaulting to 10\%.
 

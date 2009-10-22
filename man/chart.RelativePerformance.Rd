@@ -30,9 +30,7 @@ May be used to look at the returns of a fund relative to each member of the peer
 group and the peer group index.
 Alternatively, it might be used to assess the peers individually against an asset class or peer group index.
 }
-\value{
-chart of relative returns
-}
+
 \author{ Peter Carl }
 \seealso{
 \code{\link{Return.relative}}

@@ -80,13 +80,13 @@ replaceTabs(text, width=8)
 
   textplot also uses replaceTabs, a function to replace all tabs in a string with an appropriate number of spaces.  That function was also written by Gregory R. Warnes and included in the 'gplots' package.
 }
-\value{
-  The character scaling factor (\code{cex}) used.
-}
+
 \author{Originally written by Gregory R. Warnes \email{warnes@bst.rochester.edu} for the package 'gplots', modified by Peter Carl}
-\seealso{ \code{\link{plot}}, \code{\link{text}}, 
-          \code{\link[utils]{capture.output}, \code{\link[gplots]{textplot}} 
-        }
+\seealso{
+  \code{\link{plot}}, \cr
+  \code{\link{text}}, \cr
+  \code{\link[utils]{capture.output}}, \cr
+  \code{\link[gplots]{textplot}}
 }
 \examples{
 \dontrun{

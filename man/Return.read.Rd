@@ -44,9 +44,6 @@ The parameter 'format.in' takes several values, including:
     }
 }
 
-\value{
-An xts object containing a representation of the data in the file.
-}
 \author{ Peter Carl }
 
 \seealso{ \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}}

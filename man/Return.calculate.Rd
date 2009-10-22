@@ -15,9 +15,7 @@ CalculateReturns(prices, method=c("compound","simple"))
   \item{prices}{ data object containing ordered price observations }
   \item{method}{ calculate "simple" or "compound" returns, default compound }
 }
-\value{
-vector or matrix of simple or compound returns
-}
+
 \details{
 Two requirements should be made clear.  First, the function \code{Return.calculate} assumes regular price data.  In this case, we downloaded monthly close prices.  Prices can be for any time scale, such as daily, weekly, monthly or annual, as long as the data consists of regular observations.  Irregular observations require time period scaling to be comparable.  Fortunately, \code{\link[xts]{to.period}} in the \code{xts} package, or the \code{\link[zoo]{aggregate.zoo}} in the \code{zoo} package supports supports management and conversion of irregular time series.
 

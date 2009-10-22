@@ -14,9 +14,7 @@ table.Drawdowns(R, top= 5, digits = 4)
   \item{top}{ the number of drawdowns to include }
   \item{digits}{ number of digits to round results to }
 }
-\value{
-A data.frame organized as a table of drawdown statistics.
-}
+
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr
 

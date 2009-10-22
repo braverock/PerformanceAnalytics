@@ -14,9 +14,7 @@ Return.annualized(R, scale = NA, geometric = TRUE)
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
-\value{
-annualized return
-}
+
 \details{
 Annualized returns are useful for comparing two assets.  To do so, you must scale your observations to an annual scale by raising the compound return to the number of periods in a year, and taking the root to the number of total observations:
     \deqn{prod(1+R_{a})^{\frac{scale}{n}}-1=\sqrt[n]{prod(1+R_{a})^{scale}}-1}{prod(1 + Ra)^(scale/n) - 1}

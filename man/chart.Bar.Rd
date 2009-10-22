@@ -17,8 +17,7 @@ A wrapper to create a chart of periodic returns in a bar chart.  This is a diffi
 }
 \details{
 This is really a wrapper for chart.TimeSeries, so several other attributes can also be passed.
-}
-\value{
+
 Creates a plot of time on the x-axis and vertical lines for each period to indicate value on the y-axis.
 }
 \author{ Peter Carl }

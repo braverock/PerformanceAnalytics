@@ -15,9 +15,6 @@ SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose=FALSE, ...)
   \item{verbose}{if TRUE, return a list containing the Thetas in addition to the smoothing index/}
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-a value ranging from 0 to 1 (enforced only when neg.thetas = FALSE)
-}
 \details{
 To measure the effects of smoothing, Getmansky, Lo, et al (2004) define a "smoothing profile" as a vector of coefficients for an MLE fit on returns using a two-period moving-average process. 
 

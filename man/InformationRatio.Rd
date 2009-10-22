@@ -18,11 +18,8 @@ InformationRatio(Ra, Rb, scale = NA)
   \item{Rb}{ return vector of the benchmark asset }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
-\details{
+\note{
 William Sharpe now recommends \code{InformationRatio} preferentially to the original \code{\link{SharpeRatio}}.
-}
-\value{
-information ratio (number)
 }
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.

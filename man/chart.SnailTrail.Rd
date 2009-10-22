@@ -33,9 +33,7 @@ chart.SnailTrail(R, Rf = 0, main = "Annualized Return and Risk", add.names = c("
   \item{cex.text}{ The magnification to be used for sizing the text relative to the current setting of 'cex', similar to \code{\link{plot}}. }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-chart of risk and return coordinates through time
-}
+
 \references{ ~put references to the literature/web site here ~ }
 \author{ Peter Carl }
 \seealso{ \code{\link{chart.RiskReturnScatter}}}

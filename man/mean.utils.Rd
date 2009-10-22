@@ -29,9 +29,6 @@
   \item{\dots}{ any other passthru parameters }
 }
 
-\value{
-numeric value for the mean function called
-}
 \author{ Peter Carl }
 \seealso{
    \code{\link[stats]{sd}} \cr

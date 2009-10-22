@@ -34,9 +34,6 @@ The \code{TimingRatio} can help assess whether the manager is a good timer of as
 is best when greater than one in a rising market and less than one in a falling market.
 
 }
-\value{
-systematic beta of an asset to the index, perhaps conditioned on positive or negative returns.
-}
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market equilibrium under conditions of risk. \emph{Journal of finance}, vol 19, 1964, 425-442. \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr

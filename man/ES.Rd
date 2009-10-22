@@ -1,5 +1,4 @@
 \name{ES}
-\encoding{latin1}
 \Rdversion{1.1}
 \alias{ES}
 \alias{CVaR}
@@ -98,12 +97,12 @@ Increasing the position weight will reduce overall portoflio ES.
 If a weighting vector is not passed in via \code{weights}, the function will assume an equal weighted (neutral) portfolio.
 
 Multiple risk decomposition approaches have been suggested in the literature.
-A \enc{na�ve}{naive} approach is to set the risk contribution equal to the stand-alone risk.
+A naive approach is to set the risk contribution equal to the stand-alone risk.
 This approach is overly simplistic and neglects important diversification effects of the units being exposed differently to the underlying risk factors.
 An alternative approach is to measure the ES contribution as the weight of the position in the portfolio times the partial derivative of the portfolio ES with respect to the component weight.
 \deqn{C_i \mbox{ES} = w_i \frac{ \partial \mbox{ES} }{\partial w_i}.}{C[i]ES = w[i]*(dES/dw[i]).}
 Because the portfolio ES is linear in position size, we have that by Euler's theorem the portfolio VaR is the sum of these risk contributions.
-\enc{Scaillet}{Scaillet} (2002) shows that for
+Scaillet (2002) shows that for
 ES, this mathematical decomposition of portfolio risk has a
 financial meaning. It equals the negative value of the asset's
 expected contribution to the portfolio return when the portfolio
@@ -126,9 +125,6 @@ By default, the portfolio moments are estimated by their sample counterparts. If
 are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008) and \code{\link{Return.clean}}.  If your data consist of returns for highly illiquid assets, then \code{clean="geltner"} may be more appropriate to reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}} for details.
 }
 
-\value{
-ES measure
-}
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008. Estimation and decomposition of downside risk for portfolios with non-normal returns. 2008. The Journal of Risk, vol. 11, 79-103.
 

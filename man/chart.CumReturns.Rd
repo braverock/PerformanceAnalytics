@@ -26,9 +26,7 @@ chart.CumReturns(R, wealth.index = FALSE, legend.loc = NULL, colorset =(1:12), b
 \details{
 Cumulates the return series and displays either as a wealth index or as cumulative returns.
 }
-\value{
-A timeseries line chart of the cumulative return series.
-}
+
 \references{ Bacon, Carl. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. \cr }
 \author{ Peter Carl }
 \seealso{

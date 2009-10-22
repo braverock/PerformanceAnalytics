@@ -18,12 +18,14 @@ Drawdowns(R)
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
-\value{
-  unordered list \cr
+\details{
+Returns an unordered list: \cr
+\itemize{
   \item{return }{depth of drawdown}
   \item{from }{starting period}
   \item{to }{ending period}
   \item{length }{length in periods}
+}
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr

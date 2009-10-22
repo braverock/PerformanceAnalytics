@@ -12,9 +12,6 @@ maxDrawdown(R)
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
 }
-\value{
-maximum drawdown
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr
 

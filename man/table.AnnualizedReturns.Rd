@@ -16,9 +16,7 @@ table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{digits}{ number of digits to round results to }
 }
-\value{
-A table of estimates of annualized returns and risk measures
-}
+
 \author{ Peter Carl }
 \seealso{
     \code{\link{Return.annualized}} \cr

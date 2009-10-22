@@ -14,12 +14,10 @@ TreynorRatio(Ra, Rb, Rf = 0, scale = NA)
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
 }
-\value{
-Treynor ratio
-}
+
 \details{
 Equation:
-\deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}
+\deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
 }
 \references{
 \url{http://en.wikipedia.org/wiki/Treynor_ratio}

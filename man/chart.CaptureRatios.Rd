@@ -31,12 +31,14 @@ chart.CaptureRatios(Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Do
 \details{
   Scatter plot shows the coordinates of each set of returns' Up and Down Capture against a benchmark.  The benchmark value is by definition plotted at (1,1) with solid crosshairs.  A diagonal dashed line with slope equal to 1 divides the plot into two regions: above that line the UpCapture exceeds the DownCapture, and vice versa. 
 }
-\value{
-  Scatter plot of Up Capture on one axis and Down Capture on the other axis
-}
 \author{ Peter Carl }
 
-\seealso{ \code{\link{plot}}, \code{\link{par}}, \code{\link{UpDownRatios}}, \code{\link{table.UpDownRatios}} }
+\seealso{
+  \code{\link{plot}}, \cr
+ \code{\link{par}}, \cr
+ \code{\link{UpDownRatios}}, \cr
+ \code{\link{table.UpDownRatios}} \cr
+}
 \examples{
     data(managers)
     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])

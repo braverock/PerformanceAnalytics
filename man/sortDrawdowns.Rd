@@ -13,12 +13,14 @@ sortDrawdowns(runs)
 \arguments{
   \item{runs}{ pass in runs array from findDrawdowns to be sorted }
 }
-\value{
-  sorted list
+\details{
+Returns a sorted list:
+\itemize{
   \item{return }{depth of drawdown}
   \item{from }{starting period}
   \item{to }{ending period}
   \item{length }{length in periods}
+}
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr

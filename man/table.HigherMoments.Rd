@@ -18,9 +18,7 @@ table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
   \item{digits}{ number of digits to round results to }
   \item{method}{ method to use when computing \code{\link{kurtosis}} one of: \code{excess}, \code{moment}, \code{fisher} }
 }
-\value{
-table of summary statistics
-}
+
 \references{
 Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds: Adding Value through Active Style Allocation Decisions. October 2005. Edhec Risk and Asset Management Research Centre.
 }

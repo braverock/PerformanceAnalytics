@@ -14,9 +14,6 @@ table.Correlation(Ra, Rb, ...)
   \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against. }
   \item{\dots}{ any other passthru parameters to \code{\link{cor.test}} }
 }
-\value{
-A dataframe with correlation and significance against each column of the data provided as \code{Rb}.
-}
 \author{ Peter Carl }
 \seealso{\code{\link{cor.test}}}
 \examples{

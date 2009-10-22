@@ -23,9 +23,7 @@ table.TrailingPeriodsRel(R, Rb, periods = subset(c(12,36,60), c(12,36,60)
   \item{digits}{ number of digits to round results to }
   \item{\dots}{ any other passthru parameters for functions specified in FUNCS }
 }
-\value{
-A table of estimates of rolling period return measures
-}
+
 \author{ Peter Carl }
 \seealso{ \code{\link[zoo]{rollapply}} }
 \examples{

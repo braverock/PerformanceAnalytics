@@ -53,9 +53,7 @@ chart.RollingPerformance(R, width = 12, xaxis = TRUE, legend.loc = NULL, colorse
   \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
   \item{\dots}{ any other passthru parameters to \code{\link[zoo]{rollapply}} }
 }
-\value{
-A timeseries line chart of the calculated series
-}
+
 \author{ Peter Carl }
 \seealso{
     \code{\link{charts.RollingPerformance}}, \code{\link[zoo]{rollapply}}

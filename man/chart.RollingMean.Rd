@@ -18,9 +18,7 @@ FALSE, lwd = c(2, 1, 1), ...) }
   \item{lwd}{ set the line width, same as in \code{\link{plot}}.  Specified in order of the main line and the two confidence bands. }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-A timeseries line charts of the rolling mean, with error bars
-}
+
 \author{ Peter Carl }
 \examples{
 data(edhec)

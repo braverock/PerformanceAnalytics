@@ -19,9 +19,7 @@ Tracking error is calculated by taking the square root of the average of the squ
 
 \deqn{ TrackingError = \sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}} }{ TrackingError = sqrt(sum(Ra - Rb)^2 / (length(R) - 1)) * sqrt(scale)}
 }
-\value{
-Tracking Error (number)
-}
+
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }

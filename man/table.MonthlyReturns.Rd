@@ -17,9 +17,7 @@ table.Stats(R, ci = 0.95, digits = 4)
 \details{
 This was created as a way to display a set of related statistics together for comparison across a set of instruments or funds.  Careful consideration to missing data or unequal time series should be given when intepreting the results.
 }
-\value{
-Data frame of columns named to the columns of the data passed in, and rows names for the calculated statistics calculated.
-}
+
 \author{ Peter Carl }
 \examples{
 data(edhec)

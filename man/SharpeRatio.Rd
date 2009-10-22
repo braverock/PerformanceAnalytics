@@ -21,9 +21,7 @@ The Sharpe ratio is simply the return per unit of risk (represented by variance)
 William Sharpe now recommends \code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
 
 }
-\value{
-Sharpe Ratio
-}
+
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }

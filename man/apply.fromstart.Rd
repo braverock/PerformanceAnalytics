@@ -17,12 +17,9 @@ apply.fromstart(R, FUN = "mean" , gap = 1, ...)
   \item{gap}{the number of data points from the beginning of the series required to \dQuote{train} the calculation}
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-A timeseries in a zoo object of the calculation results
-}
 \author{ Peter Carl }
 \seealso{
-    \code{\link{apply}}
+    \code{\link[zoo]{rollapply}}
 }
 \examples{
 data(managers)

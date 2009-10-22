@@ -64,14 +64,11 @@ chart.Histogram(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency
   Alternatively, a function can be supplied which
   will compute the intended number of breaks as a function of \code{R}.
 }
-\value{
-chart of histogram of returns
-}
-\author{ Peter Carl }
 \note{
 Code inspired by a chart on: \cr
 \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
-} 
+}
+\author{ Peter Carl }
 \seealso{
   \code{\link[graphics]{hist}}
 }

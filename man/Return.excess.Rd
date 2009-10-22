@@ -15,9 +15,7 @@ Return.excess(R, Rf=0)
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns, or as a sinlge digit average }
 }
-\value{
-mean excess return
-}
+
 \details{
 Mean of the period return minus the period risk free rate
 

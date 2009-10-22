@@ -21,11 +21,13 @@ chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL, ...)
 \details{
 This is a chart that is commonly used for event studies in econometrics, usually with recession dates, to demonstrate the path of a time series going into and coming out of an event.  The time axis is simply the number of periods prior and following the event, and each line represents a different event.  Note that if time periods are close enough together and the window shown is wide enough, the data will appear to repeat.  That can be confusing, but the function does not currently allow for different windows around each event.
 }
-\value{ Draws a timeseries plot of type "line" on a numbered x-axis, with a vertical dashed line indicating the alignment of the dates given. }
+
 \author{ Peter Carl }
 
 \seealso{
-\code{\link{chart.TimeSeries}}, \code{\link{plot}}, \code{\link{par}}
+\code{\link{chart.TimeSeries}}, \cr
+ \code{\link{plot}}, \cr
+ \code{\link{par}}
 }
 \examples{
 data(managers)

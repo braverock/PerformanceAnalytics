@@ -34,9 +34,7 @@ A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to 
   \item{cex.main}{ The magnification to be used for the main title relative to the current setting of 'cex'.  }
   \item{\dots}{ any other passthru parameters to the distribution function }
 }
-\value{
-QQ Plot
-}
+
 \references{
   main code forked/borrowed/ported from the excellent: \cr
   Fox, John (2007) \emph{car: Companion to Applied Regression} \cr

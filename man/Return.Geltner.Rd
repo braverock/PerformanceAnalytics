@@ -15,9 +15,7 @@ Return.Geltner(Ra, ...)
   \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-return series adjusted for first order autocorrelation
-}
+
 \details{
 The Geltner autocorrelation adjusted return series may be calculated via:
 

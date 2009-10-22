@@ -28,9 +28,6 @@ Choosing the MAR carefully is very important, especially when comparing disparat
  The numerator in \code{UpsidePotentialRatio} only uses returns that exceed the MAR, and the denominator (in \code{\link{DownsideDeviation}}) only uses returns that fall short of the MAR by default.  Sortino contends that this is a more accurate and balanced protrayal of return potential, wherase \code{\link{SortinoRatio}} can reward managers most at the peak of a cycle, without adequately penalizing them for past mediocre performance.  Others have used the full series, and this is provided as an option by the \code{method} argument.
 
 }
-\value{
-Upside potential ratio
-}
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 

@@ -46,10 +46,7 @@ A beta is greater than 1 indicates that no diversification benefits should be ex
 
 The addition of a small fraction of a new asset to a portfolio leads to a decrease in the portfolio's second moment (respectively, an increase in the portfolio's third moment and a decrease in the portfolio's fourth moment) if and only if the second moment (respectively, the third moment and fourth moment) beta is less than 1 (see Martellini and Ziemann (2007) for more details).  For skewness, the interpretation is slightly more involved.  If the skewness is negative, we would expect an increase in portfolio skewness when the third moment beta is lower than 1. When the skewness of the portfolio is positive, then the condition is that the third moment beta is greater than, as opposed to lower than, one.
 }
-\value{
-    numeric value of the normalized co-moment
-}
-\references{ 
+\references{
 
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and Decomposition
   of Downside Risk for Portfolios with Non-Normal Returns. Journal of Risk. Winter.

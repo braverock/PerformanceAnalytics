@@ -32,9 +32,7 @@ particular combination of assets under consideration.
 
 In this version, only one method is supported.  See \code{\link{clean.boudt}} for more details.
 }
-\value{
-xts object with the same dimensions as R, containing data cleaned with the method selected.
-}
+
 \author{
 Peter Carl
 }

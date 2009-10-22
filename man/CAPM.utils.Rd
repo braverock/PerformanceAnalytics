@@ -22,9 +22,6 @@ CAPM.SML.slope(Rb, Rf = 0)
   \item{Rb}{ return vector of the benchmark asset }
   \item{Rf}{ risk free rate, in same period as your returns }
 }
-\value{
-CAPM value for function called
-}
 \details{
 The CAPM provides a justification for passive or index investing by positing that assets that are not on the efficient frontier will either rise or lower in price until they are on the efficient frontier of the market portfolio.
 

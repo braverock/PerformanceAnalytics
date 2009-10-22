@@ -17,9 +17,6 @@ table.UpDownRatios(Ra, Rb, digits = 4)
 \details{
 This table will show statistics pertaining to an asset against a set of benchmarks, or statistics for a set of assets against a benchmark.  \code{table.CaptureRatios} shows only the capture ratio; \code{table.UpDownRatios} shows three: the capture ratio, the number ratio, and the percentage ratio.
 }
-\value{
-  A data.table of calculations for each set of returns against each benchmark.
-}
 \author{ Peter Carl }
 \seealso{ \code{\link{UpDownRatios}}, \code{\link{chart.CaptureRatios}} }
 \examples{

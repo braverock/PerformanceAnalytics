@@ -12,9 +12,6 @@ table.Autocorrelation(R, digits = 4)
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{digits}{ number of digits to round results to for display }
 }
-\value{
-data.frame with columns for the first six auto-correlation coefficients and the Q(6) test.
-}
 \references{
 Lo, Andrew W. 2001. Risk Management for Hedge Funds: Introduction and Overview. SSRN
   eLibrary.

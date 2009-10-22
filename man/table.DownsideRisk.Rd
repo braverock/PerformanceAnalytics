@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Downside Risk Summary: Statistics and Stylized Facts }
 \description{
-Creates estimates of various downside risk measures.
+Creates a table of estimates of downside risk measures for comparison across multiple instruments or funds.
 }
 \usage{
 table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12, p = 0.95, digits = 4)
@@ -18,9 +18,7 @@ table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12, p = 0.95, dig
   \item{p}{ confidence level for calculation, default p=.99 }
   \item{digits}{ number of digits to round results to }
 }
-\value{
-A dataframe organized as a table of estimates of downside risk measures for comparison across multiple instruments or funds.
-}
+
 \author{ Peter Carl }
 \seealso{
     \code{\link{DownsideDeviation}}  \cr

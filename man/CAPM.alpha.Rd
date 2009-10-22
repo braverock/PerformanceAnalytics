@@ -16,9 +16,6 @@ CAPM.alpha(Ra, Rb, Rf = 0)
   \item{Rb}{ return vector of the benchmark asset }
   \item{Rf}{ risk free rate, in same period as your returns }
 }
-\value{
-CAPM alpha
-}
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market equilibrium under conditions of risk. \emph{Journal of finance}, vol 19, 1964, 425-442. \cr
 Ruppert, David. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr

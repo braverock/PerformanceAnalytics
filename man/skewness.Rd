@@ -43,20 +43,10 @@ skewness(x, na.rm = FALSE, method = c("moment", "fisher"), \dots)
 }
 
 \author{Diethelm Wuertz}
-\value{
-
-    \code{skewness}\cr
-    \cr
-
-    returns the value of the statistics, a numeric value. An
-    attribute which reports the used method is added.
-
-}
-
 
 \seealso{
 
-    \code{\link{kurtosis}}.
+    \code{\link{kurtosis}}
 
 }
 

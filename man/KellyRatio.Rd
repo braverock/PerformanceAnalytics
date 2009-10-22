@@ -24,9 +24,6 @@ The Kelly ratio can be simply stated as: \dQuote{bet size is the ratio of edge o
 As a performance metric, the Kelly Ratio is calculated retrospectively on a particular investment as a measure of the edge that investment has over the risk free rate.  It may be use as a stack ranking method to compare investments in a manner similar to the various ratios related to the Sharpe ratio.
 
 }
-\value{
-Kelly Ratio or Bet/Leverage Size
-}
 \references{
 Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in Blackjack, Sports Betting, and the Stock Market.
 \url{http://www.bjmath.com/bjmath/thorp/paper.htm} \cr

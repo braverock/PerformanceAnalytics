@@ -25,9 +25,7 @@ Using an annualized Sharpe Ratio is useful for comparison of multiple return str
 
 William Sharpe now recommends Information Ratio preferentially to the original Sharpe Ratio.
 }
-\value{
-annualized Sharpe Ratio
-}
+
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio Management},Fall 1994, 49-58.
 }

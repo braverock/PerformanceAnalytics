@@ -40,9 +40,7 @@ chart.StackedBar(w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8
   Third, it plots or stacks negative values from an origin of zero, similar to the 
 behavior of \code{\link[lattice]{barchart}} from the 'lattice' package.
 }
-\value{
-  Plots a column chart or stacked column chart to the current device.
-}
+
 \references{ 
      Cleveland, W.S. (1994), The Elements of Graphing Data, Summit, NJ:
      Hobart Press.

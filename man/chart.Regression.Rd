@@ -35,9 +35,7 @@ chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main
   \item{lwd}{ set the line width for fits, same as in \code{\link{lines}} }
   \item{\dots}{ any other passthru parameters to \code{\link{plot}} }
 }
-\value{
-  scatterplot with fitted lines
-}
+
 \references{ Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions and deficiencies. }
 \author{ Peter Carl }
 \seealso{ \code{\link{plot}} }

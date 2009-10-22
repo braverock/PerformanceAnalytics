@@ -24,9 +24,6 @@ The co-moments are useful for measuring the marginal contribution of each asset 
 
 Even outside of the optimization problem, measuring the co-moments should be a useful tool for evaluating whether or not an asset is likely to provide diversification potential to a portfolio, not only in terms of normal risk (i.e. volatility) but also the risk of assymetry (skewness) and extreme events (kurtosis).
 }
-\value{
-    numeric value of the co-moment
-}
 \references{
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and Decomposition
   of Downside Risk for Portfolios with Non-Normal Returns. Journal of Risk. Winter.

@@ -13,9 +13,7 @@ Return.cumulative(R, geometric = TRUE)
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
-\value{
-cumulative simple or geometric return
-}
+
 \details{
 product of all the individual period returns
 

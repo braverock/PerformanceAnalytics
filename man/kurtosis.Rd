@@ -38,11 +38,6 @@ kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher"), \dots)
         }
 
 }
-\value{
-    \code{kurtosis}
-    returns the value of the statistics, a numeric value. An
-    attribute which reports the used method is added.
-}
 \seealso{
     \code{\link{skewness}}.
 }

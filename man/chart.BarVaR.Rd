@@ -30,8 +30,7 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "Gaussia
 }
 \details{
   Note that \code{StdDev} and \code{VaR} are symmetric calculations, so a high and low measure will be plotted.  \code{ModifiedVaR}, on the other hand, is assymetric and only a lower bound will be drawn.
-}
-\value{
+
 Creates a plot of time on the x-axis and vertical lines for each period to indicate value on the y-axis.  Overlays a line to indicate the value of a risk metric calculated at that time period.
 }
 \author{ Peter Carl }

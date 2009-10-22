@@ -25,9 +25,6 @@ Up (Down) Number Ratio: similarly, this is a measure of the number of periods th
 Up (Down) Percentage Ratio: this is a measure of the number of periods that the investment outperformed the benchmark when the benchmark was up (down), divided by the number of periods that the benchmark was up (down). Unlike the prior two metrics, in both cases a higher value is better.
 
 }
-\value{
-A numeric value for each calculation.
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 47 \cr
 }

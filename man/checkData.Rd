@@ -16,12 +16,8 @@ checkData(x, method = c("xts", "zoo", "data.frame", "matrix","vector"), na.rm = 
   \item{method}{ type of coerced data object to return, one of c("zoo","matrix","vector"), default "zoo" }
   \item{\dots}{ any other passthru parameters }
 }
-\value{
-checkData will make a reasonable assumption, or return the object type requested by method
-}
-% \details{
-% The \code{checkData} function grew out of three older functions: \code{checkDataMatrix},\code{checkDataVector}, and \code{checkDataZoo}.  All three of these functions are provided as wrappers to \code{checkData} for backwards compatibility and for clarity inside existing code.  It is worth noting that the older checkData* functions set \code{na.rm=TRUE} by default.  The user is free to specify a value for this parameter to change the behavior.
-% }
+
+
 \author{ Peter Carl }
 \examples{
 data(edhec)
