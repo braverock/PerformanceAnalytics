@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.10 2009-10-15 21:37:17 brian Exp $
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,v 1.11 2009-10-22 19:00:57 brian Exp $
 
 \documentclass{beamer}
 
@@ -252,7 +252,7 @@ t(table.CalendarReturns(managers[,c(manager.col,indexes.cols)]))
   \frametitle{Calculate Statistics.}
   \begin{scriptsize}
 <<MonthlyReturnStats,echo=T>>=
-table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+table.Stats(managers[,c(manager.col,peers.cols)])
 @
   \end{scriptsize}
 \end{frame}
@@ -314,7 +314,7 @@ chart.RiskReturnScatter(managers[trailing36.rows,1:8], Rf=.03/12, main =
 \centering
 \begin{scriptsize}
 <<MonthlyReturnStats,echo=T>>=
-table.MonthlyReturns(managers[,c(manager.col,peers.cols)])
+table.Stats(managers[,c(manager.col,peers.cols)])
 @
 \end{scriptsize}
 \end{figure}
