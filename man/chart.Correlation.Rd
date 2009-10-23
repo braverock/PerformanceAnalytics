@@ -23,6 +23,7 @@ based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.
 %    \code{\link{chart.Correlation.color}}
 }
 \examples{
+data(managers)
 chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
