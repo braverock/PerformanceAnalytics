@@ -13,7 +13,7 @@
 }
 \usage{
 BetaCoVariance(Ra, Rb)
-BetaCoSkewness(Ra, Rb, test = TRUE)
+BetaCoSkewness(Ra, Rb, test = FALSE)
 BetaCoKurtosis(Ra, Rb)
 }
 %- maybe also 'usage' for other objects documented here.
