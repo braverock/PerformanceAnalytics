@@ -5,15 +5,6 @@
 \title{ Monthly and Calendar year Return table }
 \description{
 Returns a table of returns formatted with years in rows, months in columns, and a total column in the last column.  For additional columns in \code{R}, annual returns will be appended as columns.
-
-\preformatted{
-      Jan   Feb   Mar   Apr  May   Jun   Jul   Aug   Sep   Oct   Nov   Dec    Year
-2003 -1.05 -3.16 -1.07  7.99 8.97  1.49 -2.03 -0.79  4.32 -0.89 -1.21  3.05  15.83
-2004  1.83 -0.70  2.45  0.36 0.13 -1.92  0.66 -1.74 -1.37 -0.08  3.90 -0.52   2.87
-2005  2.00  1.28 -1.04 -0.18 1.64  1.91  4.24  1.92 -1.63  1.45 -0.35  0.00  11.68
-2006  2.10    NA    NA    NA   NA    NA    NA    NA    NA    NA    NA    NA   2.10}
-
-NOTE:  the older table.Returns function alias is deprecated, and may be removed in the future
 }
 \usage{
 table.CalendarReturns(R, digits = 1, as.perc = TRUE)
