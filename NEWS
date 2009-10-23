@@ -1,0 +1,44 @@
+PerformanceAnalytics 1.0.0 Release Notes
+
+This release marks a major milestone for PerformanceAnalytics.  After several
+years and acquiring users worldwide, we feel things are stable enough to mark
+this release 1.0.0.  Hopefully this will decrease the number of changes made to
+the interfaces and functionality of the package in the future, and let us work
+on other things.
+
+Probably the most new functionality in this release has gone into VaR, ES and
+modified VaR and ES.  Thanks to some excellent code and research contributions
+from Kris Boudt of K.U. Leuven, we've added substantially to the capabilities in
+this release.  The new 'VaR' and 'ES' functions allow a wide variety of methods
+for calculation, and even methods for calculating risk contribution given
+portfolio weights.  This is great stuff, and we're deeply greatful for Kris'
+contribution.
+
+During the past year, we've modified almost every function in the package. 
+There were two things we wanted to accomplish: move to xts for time series
+functions internally, and improve the speed and convenience of the functions.
+
+The move to xts has improved the package immensely.  Not only have the time axes
+of the graphics improved, but calculations and charts now handle different data
+periodicities automatically.  Calculations are noticably faster, too.
+
+Users of fPortfolio and other Rmetrics packages can use timeSeries objects with
+PA functions seamlessly.  Thanks to xts' reclass function, if you input a
+timeSeries object into a PA function that calculates a time series result (such
+as Drawdowns), that result is delivered as a timeSeries classed object.
+
+All of the functions in PA now support multi-column returns objects.  Drop a
+data set in, and the calculations are done for each column.
+For example:
+> > data(managers)
+> > SharpeRatio.annualized(managers[,1:8])
+       HAM1        HAM2        HAM3        HAM4        HAM5        HAM6
+  1.6033616   1.3240442   1.1488361   0.6169326   0.1933374   1.8380958
+EDHEC.LS.EQ    SP500.TR
+  1.6414220   0.6448502
+
+In any re-write like this, there's good news and bad news.  The bad news is that
+there have been changes to parameter names along the way.  The most substantial
+of these is anywhere we used 'rf' for the risk free rate, we now use Rf. We've
+made the changes to be more consistent and make the code easier to maintain, and
+we appreciate your patience.
