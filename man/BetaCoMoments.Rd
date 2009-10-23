@@ -20,7 +20,7 @@ BetaCoKurtosis(Ra, Rb)
 \arguments{
   \item{Ra}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rb}{ an xts, vector, matrix, data frame, timeSeries or zoo object of index, benchmark, or secondary asset returns to compare against }
-  \item{test}{TRUE/FALSE, whether to make sure the return is in the same direction as the \code{\link{skewness}}}
+  \item{test}{ condition not implemented yet }
 }
 \details{
 The co-moments, including covariance, coskewness, and cokurtosis, do not allow the marginal impact of an asset on a portfolio to be directly measured.  Instead, Martellini and Zieman (2007) develop a framework that assesses the potential diversification of an asset relative to a portfolio. They use higher moment betas to estimate how much portfolio risk will be impacted by adding an asset, in terms of symmetric risk (i.e., volatility), in asymmetry risk (i.e., skewness), and extreme risks (i.e. kurtosis). That allows them to show that adding an asset to a portfolio (or benchmark) will reduce the portfolio's variance to be reduced if the second-order beta of the asset with respect to the portfolio is less than one.  They develop the same concepts for the third and fourth order moments.  The authors offer these higher moment betas as a measure of the diversification potential of an asset.
@@ -28,15 +28,15 @@ The co-moments, including covariance, coskewness, and cokurtosis, do not allow t
 Higher moment betas are defined as proportional to the derivative of the covariance, coskewness and cokurtosis of the second, third and fourth portfolio moment with respect to the portfolio weights. The beta co-variance is calculated as:
 \deqn{
     \beta^{(2)}_{a,b} = \frac{CoV(R_a,R_b)}{\mu^{(2)}(R_b)}
-}{BetaCoV(Ra,Rb) = CoV(Ra,Rb)/var(Rb)}
+}{BetaCoV(Ra,Rb) = CoV(Ra,Rb)/centeredmoment(Rb,2)}
 Beta co-skewness is given as:
 \deqn{
     \beta^{(3)}_{a,b} = \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)}
-}{BetaCoS(Ra,Rb) = CoS(Ra,Rb)/skewness(Rb)}
+}{BetaCoS(Ra,Rb) = CoS(Ra,Rb)/centeredmoment(Rb,3)}
 Beta co-kurtosis is:
 \deqn{
     \beta^{(4)}_{a,b} = \frac{CoK(R_a,R_b)}{\mu^{(4)}(R_b)}
-}{BetaCoK(Ra,Rb) = CoK(Ra,Rb)/kurtosis(Rb)}
+}{BetaCoK(Ra,Rb) = CoK(Ra,Rb)/centeredmoment(Rb,4)}
 where the \eqn{n}-th centered moment is calculated as
 \deqn{
  \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack
@@ -48,7 +48,7 @@ The addition of a small fraction of a new asset to a portfolio leads to a decrea
 
 For skewness, the interpretation is slightly more involved.  If the skewness of the portfolio is negative, we would expect an increase in portfolio skewness when the third moment beta is lower than one. When the skewness of the portfolio is positive, then the condition is that the third moment beta is greater than, as opposed to lower than, one.
 
-Because the interpretation of beta coskewness is made difficult by the need to condition on it's skewness, we deviate from the more widely used measure slightly.  To make the interpretation consistent across all three measures, the beta coskewness function tests the skewness and multiplies the result by the sign of the skewness.  That allows an analyst to review the metric and interpret it without needing additional information.  To use the more widely used metric, simply set the parameter \code{test = FALSE}.
+%Because the interpretation of beta coskewness is made difficult by the need to condition on it's skewness, we deviate from the more widely used measure slightly.  To make the interpretation consistent across all three measures, the beta coskewness function tests the skewness and multiplies the result by the sign of the skewness.  That allows an analyst to review the metric and interpret it without needing additional information.  To use the more widely used metric, simply set the parameter \code{test = FALSE}.
 }
 \references{
 
