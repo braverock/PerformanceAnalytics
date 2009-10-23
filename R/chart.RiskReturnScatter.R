@@ -34,7 +34,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     x = checkData(R, method = "zoo")
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf, method = "zoo")
-
+    op <- par(no.readonly=TRUE)
     columns = ncol(x)
     rows = nrow(x)
     columnnames = colnames(x)
@@ -133,7 +133,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
         #par(original.layout)
     }
-
+    par(op)
 
 }
 
@@ -145,10 +145,13 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.16 2009-10-10 12:40:08 brian Exp $
+# $Id: chart.RiskReturnScatter.R,v 1.17 2009-10-23 02:58:15 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.15  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf

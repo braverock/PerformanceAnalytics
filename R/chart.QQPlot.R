@@ -18,6 +18,7 @@ function(R, distribution="norm", ylab=NULL,
 
     x = checkData(R, method = "vector", na.rm = TRUE)
 #     n = length(x)
+    op <- par(no.readonly=TRUE)
 
     if(is.null(main)){ 
         if(!is.null(colnames(R)[1])) 
@@ -121,6 +122,7 @@ function(R, distribution="norm", ylab=NULL,
     axis(2, cex.axis = cex.axis, col = element.color)
 
     box(col=element.color)
+    par(op)
 
 }
 
@@ -132,10 +134,13 @@ function(R, distribution="norm", ylab=NULL,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.QQPlot.R,v 1.10 2009-10-10 12:40:08 brian Exp $
+# $Id: chart.QQPlot.R,v 1.11 2009-10-23 02:54:59 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.10  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.9  2009-04-07 22:22:03  peter
 # - added element.color parameter
 # - passes cex.* for main, axis labels, and axis titles

@@ -1,12 +1,14 @@
 `chart.StackedBar` <- 
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
+    op <- par(no.readonly=TRUE)
     p <- median(diff(.index(w)))
     if(is.null(p)) p=NA
     if(xtsible(w) & !is.na(p))
         chart.StackedBar.xts(w, colorset = colorset, space = space, cex.axis=cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.labels = cex.labels, cex.main = cex.main, xaxis=xaxis, legend.loc=legend.loc,  element.color = element.color, unstacked = unstacked, xlab=xlab, ylab=ylab, ylim=ylim, date.format = date.format, major.ticks=major.ticks, minor.ticks=minor.ticks, las = las, xaxis.labels = xaxis.labels, ... )
     else
         chart.StackedBar.matrix(w, colorset = colorset, space = space, cex.axis=cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.labels = cex.labels, cex.main = cex.main, xaxis=xaxis, legend.loc=legend.loc,  element.color = element.color, unstacked = unstacked, xlab=xlab, ylab=ylab, ylim=ylim, date.format = date.format, major.ticks=major.ticks, minor.ticks=minor.ticks, las = las, xaxis.labels = xaxis.labels, ... )
+    par(op)
 }
 
 `chart.StackedBar.xts` <- 
@@ -198,10 +200,13 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.16 2009-10-20 02:44:16 peter Exp $
+# $Id: chart.StackedBar.R,v 1.17 2009-10-23 03:01:51 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.16  2009-10-20 02:44:16  peter
+# - fixed chart.Stacked bar to accomodate different kinds of data
+#
 # Revision 1.15  2009-10-16 16:17:20  peter
 # - adjusted axis labels to include space
 # - changed default date label to match other defaults
