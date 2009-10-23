@@ -169,7 +169,7 @@ CoSkewness <- function(Ra,Rb)
     }
 }
 
-BetaCoSkewness <- function(Ra, Rb, test=TRUE)
+BetaCoSkewness <- function(Ra, Rb, test=FALSE)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
     Rb= checkData(Rb)
@@ -187,11 +187,13 @@ BetaCoSkewness <- function(Ra, Rb, test=TRUE)
         if(skew > -0.05 && skew < 0.05 ){
             warning("skewness is close to zero. The classical definition of the coskewness statistic is not applicable and one should normalize using the comoment without standardization.")
         }
-        if(test==TRUE)
-            if(skew < 0)
-                multiplier = -1
-            else
-                multiplier = 1
+        if(test==TRUE){
+#             if(skew < 0)
+#                 multiplier = -1
+#             else
+#                 multiplier = 1
+            stop("Not implemented yet")
+        }
         else
             multiplier = 1
 
@@ -275,10 +277,13 @@ BetaCoKurtosis <- function(Ra,Rb)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CoMoments.R,v 1.11 2009-10-10 12:40:08 brian Exp $
+# $Id: CoMoments.R,v 1.12 2009-10-23 19:46:23 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.11  2009-10-10 12:40:08  brian
+# - update copyright to 2004-2009
+#
 # Revision 1.10  2009-10-06 03:00:19  peter
 # - added label to results
 #
