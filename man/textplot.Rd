@@ -12,16 +12,8 @@
   This function displays text output in a graphics window.  It is the equivalent of 'print' except that the output is displayed as a plot.
 }
 \usage{
-textplot(object, halign="center", valign="center", cex, ...)
-\method{textplot}{default}(object, halign=c("center","left","right"),
-         valign=c("center", "top", "bottom"), cex, ... )
-\method{textplot}{character}(object, halign = c("center", "left", "right"),
-         valign = c("center", "top", "bottom"), cex, fixed.width=TRUE,
-         cspace=1, lspace=1, mar=c(0, 0, 3, 0) + 0.1,
-         tab.width = 8, ...)
-\method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
-         valign = c("center", "top", "bottom"), cex, ...)
-\method{textplot}{matrix}(object, halign = c("center", "left", "right"), valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1, vadj=NULL, row.valign = "center", heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"), col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10, wrap.rownames = 10, ...) 
+textplot(object, halign="center", valign="center", cex, max.cex = 1, cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1, vadj=NULL, row.valign = "center", heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"), col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10, wrap.rownames = 10, ...)
+
 replaceTabs(text, width=8)
 }
 \arguments{
@@ -33,15 +25,6 @@ replaceTabs(text, width=8)
   \item{cex}{Character size, see \code{\link{par}} for details. If
     unset, the code will attempt to use the largest value which allows
     the entire object to be displayed.}
-  \item{fixed.width}{Logical value indicating whether to emulate a
-    fixed-width font by aligning characters in each row of text. This is
-    usually necessary for text-formatted tables display properly.
-    Defaults to 'TRUE'.}
-  \item{cspace}{Space between characters as a
-    multiple of the width of the letter 'W'. This only applies when 
-    \code{fixed.width==TRUE}. }
-  \item{lspace}{Line spacing. This only applies when
-    \code{fixed.width==TRUE}.}
   \item{mar}{Figure margins, see the documentation for \code{par}.}
   \item{rmar, cmar}{Space between rows or columns, in
     fractions of the size of the letter 'M'.}
@@ -57,7 +40,6 @@ replaceTabs(text, width=8)
   \item{col.rownames, col.colnames}{Colors for row names and column
     names, respectively.  Either may be specified as a scalar or a
     vector of appropriate length.}
-  \item{tab.width}{Width of a single tab stop, in characters}
   \item{max.cex}{Sets the largest text size as a ceiling} 
   \item{row.valign}{ Sets the vertical alignment of the row as "top", "bottom", or (default) "center".}
   \item{heading.valign}{ Sets the vertical alignment of the heading as "top", (default) "bottom", or "center".}
@@ -89,7 +71,7 @@ replaceTabs(text, width=8)
   \code{\link[gplots]{textplot}}
 }
 \examples{
-# Also see the examples in the original \code{\link[gplots]{textplot}} function 
+# Also see the examples in the original gplots textplot function
 textplot(table.AnnualizedReturns(managers[,1:6]))
 
 # prettify with format.df in hmisc package
