@@ -12,7 +12,7 @@ Note that all the EDHEC indices are available in \code{\link{edhec}}.
 \details{
  A relatively random weights file used for charting examples.
 }
-\format{CSV conformed into a zoo object with monthly observations}
+\format{CSV conformed into an xts object with monthly observations}
 \examples{
 data(weights)
 
