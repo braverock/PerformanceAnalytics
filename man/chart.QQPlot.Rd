@@ -50,7 +50,7 @@ A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to 
 library(MASS)
 data(managers)
 x = checkData(managers[,2, drop = FALSE], na.rm = TRUE, method = "vector")
-layout(rbind(c(1,2),c(3,4)))
+#layout(rbind(c(1,2),c(3,4)))
 # Panel 1, Normal distribution
 chart.QQPlot(x, main = "Normal Distribution", distribution = 'norm', envelope=0.95)
 # Panel 2, Log-Normal distribution
