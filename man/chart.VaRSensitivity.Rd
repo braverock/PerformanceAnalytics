@@ -1,9 +1,9 @@
 \name{chart.VaRSensitivity}
 \alias{chart.VaRSensitivity}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{ show the sensitivity of Value-at-Risk estimates }
+\title{ show the sensitivity of Value-at-Risk or Expected Shortfall estimates }
 \description{
-Creates a chart of Value-at-Risk estimates by confidence interval for multiple methods.
+Creates a chart of Value-at-Risk and/or Expected Shortfall estimates by confidence interval for multiple methods.
 }
 \usage{
 chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean = c("none", "boudt", "geltner"), elementcolor = "darkgray", reference.grid = TRUE, xlab = "Confidence Level", ylab = "Value at Risk", type = "l", lty = c(1, 2, 4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main = NULL, ...)
