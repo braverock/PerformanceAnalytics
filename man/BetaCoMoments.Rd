@@ -46,7 +46,7 @@ A beta is greater than one indicates that no diversification benefits should be 
 
 The addition of a small fraction of a new asset to a portfolio leads to a decrease in the portfolio's second moment (respectively, an increase in the portfolio's third moment and a decrease in the portfolio's fourth moment) if and only if the second moment (respectively, the third moment and fourth moment) beta is less than one (see Martellini and Ziemann (2007) for more details).  
 
-For skewness, the interpretation is slightly more involved.  If the skewness is negative, we would expect an increase in portfolio skewness when the third moment beta is lower than one. When the skewness of the portfolio is positive, then the condition is that the third moment beta is greater than, as opposed to lower than, one.
+For skewness, the interpretation is slightly more involved.  If the skewness of the portfolio is negative, we would expect an increase in portfolio skewness when the third moment beta is lower than one. When the skewness of the portfolio is positive, then the condition is that the third moment beta is greater than, as opposed to lower than, one.
 
 Because the interpretation of beta coskewness is made difficult by the need to condition on it's skewness, we deviate from the more widely used measure slightly.  To make the interpretation consistent across all three measures, the beta coskewness function tests the skewness and multiplies the result by the sign of the skewness.  That allows an analyst to review the metric and interpret it without needing additional information.  To use the more widely used metric, simply set the parameter \code{test = FALSE}.
 }
