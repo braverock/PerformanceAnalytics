@@ -89,62 +89,15 @@ replaceTabs(text, width=8)
   \code{\link[gplots]{textplot}}
 }
 \examples{
-\dontrun{
-### simple examples
-# show R version information
-textplot(version)
+# Also see the examples in the original \code{\link[gplots]{textplot}} function 
+textplot(table.AnnualizedReturns(managers[,1:6]))
 
-# show the alphabet as a single string
-textplot( paste(letters[1:26], collapse=" ") )
+# prettify with format.df in hmisc package
+require("Hmisc")
+result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,]
 
-# show the alphabet as a matrix
-textplot( matrix(letters[1:26], ncol=2))
+textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,4,0)+0.1)
+title(main="Calendar Returns")
 
-### Make a nice 4 way display with two plots and two text summaries
-
-data(iris)
-par(mfrow=c(2,2))
-plot( Sepal.Length ~ Species, data=iris, border="blue", col="cyan",
-      main="Boxplot of Sepal Length by Species" )
-plotmeans( Sepal.Length ~ Species, data=iris, barwidth=2, connect=FALSE,
-           main="Means and 95\% Confidence Intervals\nof Sepal Length by Species")
-
-info <- sapply( split(iris$Sepal.Length, iris$Species),
-                function(x) round(c(Mean=mean(x), SD=sd(x), N=gdata::nobs(x)),2) )
-
-textplot( info, valign="top"  )
-title("Sepal Length by Species")
-
-reg <- lm( Sepal.Length ~ Species, data=iris )
-textplot( capture.output(summary(reg)), valign="top")
-title("Regression of Sepal Length by Species")
-
-par(mfrow=c(1,1))
-
-### Show how to control text color
-cols <- c("red", "green", "magenta", "forestgreen")
-mat <- cbind(name=cols, t(col2rgb(cols)), hex=col2hex(cols))
-
-textplot(mat,
-         col.data=matrix(cols, nrow=length(cols), byrow=FALSE, ncol=5),
-         )
-
-### Show how to manually tune the character size
-data(iris)
-reg <- lm( Sepal.Length ~ Species, data=iris )
-text <- capture.output(summary(reg))
-
-# do the plot and capture the character size used
-textplot(text, valign="top")
-
-# see what size was used
-cex
-
-# now redo the plot at 80\% size
-textplot( text, valign="top", cex=cex*0.80)
-
-
-
-}
 }
 \keyword{hplot}
