@@ -20,7 +20,7 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 
     sort.by = sort.by[1]
 
-    #op <- par(no.readonly=TRUE)
+    op <- par(no.readonly=TRUE)
 
     if(names){
         par(mar=c(5,12,4,2) + 0.1)
@@ -93,7 +93,7 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 
     abline(v=0, lty="solid",col=element.color)
 
-    #par(op)
+    par(op)
 }
 
 
@@ -110,10 +110,13 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Boxplot.R,v 1.8 2009-10-22 13:45:23 brian Exp $
+# $Id: chart.Boxplot.R,v 1.9 2009-10-23 02:52:30 peter Exp $
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
+# Revision 1.8  2009-10-22 13:45:23  brian
+# - change show.data to be a numerical vector of observations to overplot
+#
 # Revision 1.7  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #
