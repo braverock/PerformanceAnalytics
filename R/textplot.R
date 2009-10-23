@@ -1,5 +1,5 @@
 # # Original function from gplots package written by warnes
-# $Id: textplot.R,v 1.4 2009-10-23 14:02:46 peter Exp $
+# $Id: textplot.R,v 1.5 2009-10-23 14:46:32 peter Exp $
 
 # Example using format.df as a pre-processor
 # > textplot(format.df(t(y), na.blanks=F,cdec=c(3,3,1)), row.valign="center", wrap.rownames=20, wrap.colnames=10, cex=1)
@@ -63,7 +63,7 @@ textplot.data.frame <- function(object,
                             col.colnames=par("col"),
                             wrap = TRUE, 
                             wrap.colnames = 10, 
-                            wrap.rownames = 10, ... )
+                            wrap.rownames = 10, ... ){
     textplot.matrix(object, halign, valign, cex, 
                             max.cex, cmar, rmar,
                             show.rownames, show.colnames,
@@ -77,7 +77,7 @@ textplot.data.frame <- function(object,
                             wrap, 
                             wrap.colnames, 
                             wrap.rownames, ... )
-
+}
 
 textplot.matrix <- function(object,
                             halign=c("center","left","right"),
@@ -286,10 +286,22 @@ textplot.matrix <- function(object,
 textplot.character <- function (object,
                                 halign = c("center", "left", "right"),
                                 valign = c("center", "top", "bottom"),
-                                cex, fixed.width=TRUE,
+                                cex,
+                            max.cex = 1, cmar=2, rmar=0.5,
+                            show.rownames=TRUE, show.colnames=TRUE,
+                            hadj=1, vadj=NULL,
+                            row.valign="center",
+                            heading.valign = "bottom",
+                            mar= c(0,0,3,0)+0.1,
+                            col.data=par("col"),
+                            col.rownames=par("col"),
+                            col.colnames=par("col"),
+                            wrap = TRUE,
+                            wrap.colnames = 10,
+                            wrap.rownames = 10,
+                                fixed.width=TRUE,
                                 cspace=1,
                                 lspace=1,
-                                mar=c(0,0,3,0)+0.1,
                                 tab.width=8,
                                 ...)
   {
