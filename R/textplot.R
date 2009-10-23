@@ -1,17 +1,41 @@
 # # Original function from gplots package written by warnes
-# $Id: textplot.R,v 1.3 2009-08-06 02:51:34 peter Exp $
+# $Id: textplot.R,v 1.4 2009-10-23 14:02:46 peter Exp $
 
 # Example using format.df as a pre-processor
 # > textplot(format.df(t(y), na.blanks=F,cdec=c(3,3,1)), row.valign="center", wrap.rownames=20, wrap.colnames=10, cex=1)
 
-textplot <- function(object, halign="center", valign="center", cex, ... )
+textplot <- function(object, halign="center", valign="center", cex, 
+                            max.cex = 1, cmar=2, rmar=0.5,
+                            show.rownames=TRUE, show.colnames=TRUE,
+                            hadj=1, vadj=NULL,
+                            row.valign="center",
+                            heading.valign = "bottom",
+                            mar= c(0,0,0,0)+0.1,
+                            col.data=par("col"),
+                            col.rownames=par("col"),
+                            col.colnames=par("col"),
+                            wrap = TRUE, 
+                            wrap.colnames = 10, 
+                            wrap.rownames = 10, ... )
   UseMethod('textplot')
 
 
 textplot.default <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
-                             cex, ... )
+                             cex,
+                            max.cex, cmar, rmar,
+                            show.rownames, show.colnames,
+                            hadj, vadj,
+                            row.valign,
+                            heading.valign,
+                            mar,
+                            col.data,
+                            col.rownames,
+                            col.colnames,
+                            wrap, 
+                            wrap.colnames, 
+                            wrap.rownames,... )
 {
 
   if (is.matrix(object) || (is.vector(object) && length(object)>1) )
@@ -27,8 +51,32 @@ textplot.default <- function(object,
 textplot.data.frame <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
-                             cex, ... )
-    textplot.matrix(object, halign, valign, cex, ... )
+                             cex, 
+                            max.cex = 1, cmar=2, rmar=0.5,
+                            show.rownames=TRUE, show.colnames=TRUE,
+                            hadj=1, vadj=NULL,
+                            row.valign="center",
+                            heading.valign = "bottom",
+                            mar= c(0,0,0,0)+0.1,
+                            col.data=par("col"),
+                            col.rownames=par("col"),
+                            col.colnames=par("col"),
+                            wrap = TRUE, 
+                            wrap.colnames = 10, 
+                            wrap.rownames = 10, ... )
+    textplot.matrix(object, halign, valign, cex, 
+                            max.cex, cmar, rmar,
+                            show.rownames, show.colnames,
+                            hadj, vadj,
+                            row.valign,
+                            heading.valign,
+                            mar,
+                            col.data,
+                            col.rownames,
+                            col.colnames,
+                            wrap, 
+                            wrap.colnames, 
+                            wrap.rownames, ... )
 
 
 textplot.matrix <- function(object,
