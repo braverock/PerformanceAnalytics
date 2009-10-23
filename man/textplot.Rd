@@ -76,7 +76,7 @@ data(managers)
 textplot(table.AnnualizedReturns(managers[,1:6]))
 
 # prettify with format.df in hmisc package
-if("package:Hmisc" %in% search()) (
+if("package:Hmisc" \%in\% search()) (
   require("Hmisc");
 
   result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,];
