@@ -249,7 +249,7 @@ Data series \code{\link{edhec}} used in \kbd{PerformanceAnalytics} and related p
 
 Kris Boudt was instrumental in our research on component risk for portfolios with non-normal distributions, and is responsible for much of the code for multivariate moments and co-moments.
 
-Jeff Ryan and Josh Ulrich are active participants in the R finance community and created \code[xts], upon which much of PerformanceAnalytics depends.
+Jeff Ryan and Josh Ulrich are active participants in the R finance community and created \code{xts}, upon which much of PerformanceAnalytics depends.
 
 Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission. Stephan Albrecht provided detailed feedback on the Getmansky/Lo Smoothing Index.  Diethelm Wuertz provided prototypes of modified VaR and skewness and kurtosis functions (and is of course the maintainer of the RMetrics suite of pricing and optimization functions).  Any errors are, of course, our own.
 
