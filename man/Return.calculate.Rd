@@ -28,12 +28,18 @@ Second, if corporate actions, dividends, or other adjustments such as time- or m
     \code{\link{Return.cumulative}}
 }
 \examples{
-require(tseries)
-prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
+  \dontrun{
+    require(tseries)
+    prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
+  }
+  \dontshow{
+    data(prices)
+  }
 R.IBM = Return.calculate(prices, method="simple")
 R.IBM = as.xts(R.IBM)
 colnames(R.IBM)="IBM"
 chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
+round(R.IBM,2)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
