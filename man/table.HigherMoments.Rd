@@ -29,7 +29,8 @@ Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds: Adding Value thr
     \code{\link{BetaCoVariance}} \cr
     \code{\link{BetaCoSkewness}} \cr
     \code{\link{BetaCoKurtosis}} \cr
-    \code{\link[fBasics]{kurtosis}}
+    \code{\link{skewness}} \cr
+    \code{\link{kurtosis}}
 }
 \examples{
 data(managers)
