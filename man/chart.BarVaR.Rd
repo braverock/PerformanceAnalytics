@@ -37,7 +37,7 @@ Creates a plot of time on the x-axis and vertical lines for each period to indic
 \seealso{
    \code{\link{chart.TimeSeries}} \cr
    \code{\link{plot}} \cr
-   \code{\link[fPortfolio]{VaR}} \cr
+   \code{\link{ES}} \cr
    \code{\link{VaR}} \cr
    \code{\link{Return.clean}}
 }
