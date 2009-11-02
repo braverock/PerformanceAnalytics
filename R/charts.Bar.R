@@ -76,7 +76,10 @@ function (R,  space = 0, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 # $Id: charts.Bar.R,v 1.2 2009-09-17 03:15:37 peter Exp $
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
+# $Log: charts.Bar.R,v $
+# Revision 1.2  2009-09-17 03:15:37  peter
+# - fixed labels and title
+#
 # Revision 1.1  2009-08-18 21:24:00  peter
 # - multiple bar plots function
 #

@@ -67,7 +67,10 @@ function (R,  space = 0, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
 # $Id: charts.BarVaR.R,v 1.1 2009-09-17 03:48:40 peter Exp $
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
+# $Log: charts.BarVaR.R,v $
+# Revision 1.1  2009-09-17 03:48:40  peter
+# - first commit of function
+#
 # Revision 1.1  2009-08-18 21:24:00  peter
 # - multiple bar plots function
 #

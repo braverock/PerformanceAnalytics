@@ -64,7 +64,10 @@ function (R,  space = 0, main = "Returns", ...)
 # $Id: charts.TimeSeries.R,v 1.1 2009-08-18 21:40:34 peter Exp $
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
+# $Log: charts.TimeSeries.R,v $
+# Revision 1.1  2009-08-18 21:40:34  peter
+# - multi-panel time series chart
+#
 # Revision 1.2  2008-04-18 03:59:52  peter
 # - added na.omit to avoid problems with missing data
 #
