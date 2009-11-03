@@ -34,7 +34,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     x = checkData(R, method = "zoo")
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf, method = "zoo")
-    op <- par(no.readonly=TRUE)
+#     op <- par(no.readonly=TRUE)
     columns = ncol(x)
     rows = nrow(x)
     columnnames = colnames(x)
@@ -131,9 +131,9 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         boxplot(risk, horizontal = TRUE, axes = FALSE, ylim=xlim)
         title(xlab = xlab, line = 1, cex.lab = cex.lab)
 
-        #par(original.layout)
+        par(original.layout)
     }
-    par(op)
+#     par(op)
 
 }
 
@@ -148,7 +148,10 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # $Id: chart.RiskReturnScatter.R,v 1.17 2009-10-23 02:58:15 peter Exp $
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
+# $Log: chart.RiskReturnScatter.R,v $
+# Revision 1.17  2009-10-23 02:58:15  peter
+# - added par reset
+#
 # Revision 1.16  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #
