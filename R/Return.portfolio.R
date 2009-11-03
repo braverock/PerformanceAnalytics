@@ -79,35 +79,47 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     #Function:
 
 
-    # construct the wealth index of unweighted assets
-    wealthindex.assets=cumprod(1+R[,colnames(weights)])
+    # construct the wealth index
+    if(method=="simple") {
+      # weights=as.vector(weights)
+      weightedreturns = R[,colnames(weights)] * as.vector(weights) # simple weighted returns
+      returns = R[,colnames(weights)] %*% as.vector(weights) # simple compound returns
+      if(wealth.index) {
+        wealthindex = as.matrix(cumsum(returns),ncol=1) # simple wealth index
+      } else {
+        result = returns
+      }
+    } else {
+      #things are a little more complicated for the geometric case
 
-    wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R[,colnames(weights)]))
-    colnames(wealthindex.weighted)=colnames(wealthindex.assets)
-    rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
-    # weight the results
-    for (col in colnames(weights)){
-        wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
+      # first construct an unweighted wealth index of the assets
+      wealthindex.assets=cumprod(1+R[,colnames(weights)])
+
+      wealthindex.weighted = matrix(nrow=nrow(R),ncol=ncol(R[,colnames(weights)]))
+      colnames(wealthindex.weighted)=colnames(wealthindex.assets)
+      rownames(wealthindex.weighted)=as.character(index(wealthindex.assets))
+      # weight the results
+      for (col in colnames(weights)){
+          wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
+      }
+      wealthindex=apply(wealthindex.weighted,1,sum)
+
+      # weighted cumulative returns
+      weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
+      weightedreturns=diff(rbind(0,weightedcumcont)) # compound returns
+      colnames(weightedreturns)=colnames(wealthindex.assets)
+      if (!wealth.index){
+        result=as.matrix(apply(weightedreturns,1,sum),ncol=1)
+      } else {
+        wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
+      }
     }
-    wealthindex=apply(wealthindex.weighted,1,sum)
 
-    # weighted cumulative returns
-    weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
-    weightedreturns=diff(rbind(0,weightedcumcont)) # compound returns
-    colnames(weightedreturns)=colnames(wealthindex.assets)
-    #browser()
-    wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
-    wealthindex=reclass(wealthindex,match.to=R)
-
-    if(method=="simple"){
-       weightedreturns=Return.calculate(wealthindex, method="simple")
-       weightedreturns[1,]=wealthindex[1,]-1 # I think this is still correct to get the first period return
-    }
 
     if (!wealth.index){
-        result=as.matrix(apply(weightedreturns,1,sum),ncol=1)
         colnames(result)="portfolio.returns"
     } else {
+        wealthindex=reclass(wealthindex,match.to=R)
         result=wealthindex
         colnames(result)="portfolio.wealthindex"
     }
