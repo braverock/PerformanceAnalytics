@@ -21,13 +21,10 @@ na.skip <- function (x, FUN=NULL, ...) # maybe add a trim capability?
     # An xts time series that has the same index and NA's as the data 
     # passed in, after applying FUN
 
-
-  tx <- xts(,order.by=index(x))
-  nx <- na.omit(x)
-  fx <- FUN(nx,...=...)
-  if (is.vector(fx)) fx <- xts(fx, order.by=index(nx))
-  result<-merge(tx,fx)
-  return(result)
+    nx <- na.omit(x)
+    fx <- FUN(nx, ... = ...)
+    result <- merge(fx, .xts(, .index(x)))
+    return(result)
 }
 
 ###############################################################################
