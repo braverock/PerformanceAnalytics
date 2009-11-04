@@ -23,7 +23,12 @@ na.skip <- function (x, FUN=NULL, ...) # maybe add a trim capability?
 
     nx <- na.omit(x)
     fx <- FUN(nx, ... = ...)
-    result <- merge(fx, .xts(, .index(x)))
+    if (is.vector(fx)) {
+        result <- .xts(fx, .index(x), .indexCLASS = indexClass(x))
+    }
+    else {
+        result <- merge(fx, .xts(, .index(x)))
+    }
     return(result)
 }
 
