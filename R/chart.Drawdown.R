@@ -1,5 +1,5 @@
 `chart.Drawdown` <-
-function (R, legend.loc = NULL, colorset = (1:12), ...)
+function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -25,7 +25,7 @@ function (R, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Calculate drawdown level
-    drawdown = Drawdowns(R)
+    drawdown = Drawdowns(R, geometric)
 
     # Chart the drawdown level
     chart.TimeSeries(drawdown, col = colorset, legend.loc = legend.loc, ...)

@@ -1,5 +1,5 @@
 `Drawdowns` <-
-function (R)
+function (R, geometric = TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -13,14 +13,17 @@ function (R)
     columns = ncol(x)
     columnnames = colnames(x)
 
-    colDrawdown <- function(x) {
-        Return.cumulative = cumprod(1+x) 
+    colDrawdown <- function(x, geometric) {
+        if(geometric)
+            Return.cumulative = cumprod(1+x)
+        else
+            Return.cumulative = cumsum(x)
         maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
         column.drawdown = Return.cumulative/maxCumulativeReturn - 1
     }
 
     for(column in 1:columns) {
-	column.drawdown <- na.skip(x[,column],FUN=colDrawdown)
+	column.drawdown <- na.skip(x[,column],FUN=colDrawdown, geometric = geometric)
 
         if(column == 1)
             drawdown = column.drawdown

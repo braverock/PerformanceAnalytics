@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, Rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
+function (R, Rf = 0, main = NULL, geometric=TRUE, methods = c("ModifiedVaR","HistoricalVaR"), width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -66,7 +66,7 @@ function (R, Rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, ...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -88,11 +88,9 @@ function (R, Rf = 0, main = NULL, methods = c("ModifiedVaR","HistoricalVaR"), wi
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    chart.Drawdown(x, main = "", ylab = "From Peak", event.labels = NULL, ylog=FALSE, ...)
+    chart.Drawdown(x, geometric = geometric, main = "", ylab = "From Peak", event.labels = NULL, ylog=FALSE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
-    # Unfortunately, the textplot function doesn't provide a lot of control over
-    # formatting.  Also, it requires the gplots package.
     #par(mar=c(0,0,0,0))
     #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
     par(op)
