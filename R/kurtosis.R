@@ -79,7 +79,7 @@ kurtosis <-
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: kurtosis.R,v 1.6 2009-10-10 12:40:08 brian Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

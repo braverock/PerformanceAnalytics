@@ -1,5 +1,5 @@
 # # Original function from gplots package written by warnes
-# $Id: textplot.R,v 1.5 2009-10-23 14:46:32 peter Exp $
+# $Id$
 
 # Example using format.df as a pre-processor
 # > textplot(format.df(t(y), na.blanks=F,cdec=c(3,3,1)), row.valign="center", wrap.rownames=20, wrap.colnames=10, cex=1)

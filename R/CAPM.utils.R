@@ -80,7 +80,7 @@ function (Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.utils.R,v 1.12 2009-10-14 14:09:37 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

@@ -61,7 +61,7 @@ function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.AnnualizedReturns.R,v 1.13 2009-10-23 14:03:03 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

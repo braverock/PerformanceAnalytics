@@ -38,7 +38,7 @@ function (R.fund, R.style, method = c("constrained", "unconstrained", "normalize
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.Style.R,v 1.8 2009-10-20 02:44:16 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

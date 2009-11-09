@@ -180,7 +180,7 @@ function (Ra, Rb, Rf = 0)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CAPM.beta.R,v 1.16 2009-10-13 14:26:55 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

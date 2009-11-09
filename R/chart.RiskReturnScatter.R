@@ -145,7 +145,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RiskReturnScatter.R,v 1.17 2009-10-23 02:58:15 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: chart.RiskReturnScatter.R,v $

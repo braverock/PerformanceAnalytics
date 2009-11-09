@@ -118,7 +118,7 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: table.CAPM.R,v 1.16 2009-10-15 03:37:08 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

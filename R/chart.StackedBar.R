@@ -200,7 +200,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.StackedBar.R,v 1.17 2009-10-23 03:01:51 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

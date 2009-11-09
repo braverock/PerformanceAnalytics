@@ -61,7 +61,7 @@ function (R,  space = 0, main = "Returns", ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.TimeSeries.R,v 1.1 2009-08-18 21:40:34 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: charts.TimeSeries.R,v $

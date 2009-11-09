@@ -77,7 +77,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.RollingRegression.R,v 1.21 2009-10-22 03:33:53 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

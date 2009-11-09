@@ -59,7 +59,7 @@ function (R, Rf = 0, p = 0.95, FUNCT=c("VaR","ES"), ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.modified.R,v 1.14 2009-10-15 15:45:22 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

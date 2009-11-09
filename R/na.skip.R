@@ -40,7 +40,7 @@ na.skip <- function (x, FUN=NULL, ...) # maybe add a trim capability?
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: na.skip.R,v 1.2 2009-10-10 12:40:08 brian Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

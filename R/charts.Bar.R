@@ -73,7 +73,7 @@ function (R,  space = 0, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.Bar.R,v 1.2 2009-09-17 03:15:37 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: charts.Bar.R,v $

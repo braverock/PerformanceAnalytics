@@ -61,7 +61,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.RollingMean.R,v 1.8 2009-10-15 21:41:13 brian Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

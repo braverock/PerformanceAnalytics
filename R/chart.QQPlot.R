@@ -134,7 +134,7 @@ function(R, distribution="norm", ylab=NULL,
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.QQPlot.R,v 1.11 2009-10-23 02:54:59 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

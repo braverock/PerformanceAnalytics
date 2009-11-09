@@ -61,7 +61,7 @@ function (filename=stop("Please specify a filename"), frequency = c("d","m","q",
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Return.read.R,v 1.9 2009-10-15 02:47:31 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

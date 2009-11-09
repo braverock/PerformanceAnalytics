@@ -55,7 +55,7 @@ function (Ra, Rb, scale = NA)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: InformationRatio.R,v 1.12 2009-10-13 14:29:04 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

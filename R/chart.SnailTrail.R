@@ -160,7 +160,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.SnailTrail.R,v 1.10 2009-10-03 18:23:55 brian Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

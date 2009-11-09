@@ -56,7 +56,7 @@ function (R, Rf = 0, scale = NA, geometric=TRUE)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: SharpeRatio.annualized.R,v 1.14 2009-10-22 13:36:16 brian Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $

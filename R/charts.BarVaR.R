@@ -64,7 +64,7 @@ function (R,  space = 0, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: charts.BarVaR.R,v 1.1 2009-09-17 03:48:40 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: charts.BarVaR.R,v $

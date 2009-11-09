@@ -117,7 +117,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: Omega.R,v 1.17 2009-10-21 02:07:22 peter Exp $
+# $Id$
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
