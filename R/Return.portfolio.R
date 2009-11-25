@@ -68,7 +68,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
         weights=checkData(weights,method="matrix") # do this to make sure we have columns, and not just a vector
     }
     if (nrow(weights)>1){
-        if ((nrow(weights)==ncol(R)) & (ncol(weights)==1)) {
+        if ((nrow(weights)==ncol(R) |nrow(weights)==ncol(R[,names(weights)])  ) & (ncol(weights)==1)) {
           weights = t(weights) #this was a vector that got transformed
         } else {
           stop("Use Return.rebalancing for multiple weighting periods.  This function is for portfolios with a single set of weights.")
