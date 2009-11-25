@@ -232,8 +232,12 @@ Portsd =  function(w,sigma)
    dersd = (0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = dersd*as.vector(w)
    # check
-   if( abs( sum(contrib)-sqrt(pm2))>0.01*sqrt(pm2)) { print("error") } else {
-   return(list(  sqrt(pm2) , contrib , contrib/sqrt(pm2) )) }
+   if( abs( sum(contrib)-sqrt(pm2))>0.01*sqrt(pm2)) { print("error") 
+   } else {
+       ret<-list(  sqrt(pm2) , contrib , contrib/sqrt(pm2) ))
+       names(ret) <- c("StdDev","contribution","pct_contrib_StdDev")
+   }
+   return(ret)
 }
 
 VaR.Gaussian.portfolio =  function(p,w,mu,sigma)
