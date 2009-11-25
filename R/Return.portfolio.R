@@ -32,7 +32,7 @@ Return.rebalancing <- function (R, weights, ...)
 
 # ------------------------------------------------------------------------------
 # Return.portfolio
-Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("compound","simple"), ...)
+Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("simple","compound"), ...)
 {   # @author Brian G. Peterson
 
     # Function to calculate weighted portfolio returns

@@ -1,5 +1,5 @@
 `Return.cumulative` <-
-function (R, geometric = TRUE)
+function (R, geometric = FALSE)
 { # @author Peter Carl
 
     # This is a useful function for calculating cumulative return over a period
