@@ -167,7 +167,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
         axis(2, col = element.color, las = las, cex.axis = cex.axis)
         title(ylab = ylab, cex = cex.lab)
         if (xaxis) {
-#             label.height = .25 + cex.axis * apply(t(names(ep1)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
+            label.height = .25 + cex.axis * apply(rownames(w),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
             if(is.null(xaxis.labels))
                 xaxis.labels = rownames(w)
             axis(1, at=1:length(xaxis.labels), labels=xaxis.labels, las=las, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
