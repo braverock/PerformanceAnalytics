@@ -20,16 +20,16 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 
     # check weights options
     if (is.null(weights) & portfolio_method != "single"){
-        warning("no weights passed in, assuming equal weighted portfolio")
+        message("no weights passed in, assuming equal weighted portfolio")
         weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     }
     if (!is.null(weights)) {
         if (portfolio_method == "single") {
-            warning("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
+            message("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
             portfolio_method="component"
         }
         if (is.vector(weights)){
-            warning("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
+            message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
