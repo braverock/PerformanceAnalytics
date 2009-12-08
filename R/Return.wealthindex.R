@@ -1,4 +1,4 @@
-`Return.index` <-
+`Return.wealthindex` <-
 function (R, wealth.index = TRUE, ...)
 { # @author Peter Carl
 
