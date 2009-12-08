@@ -1,31 +1,31 @@
 `maxDrawdown` <-
-function (R,geometric=FALSE)
+		function (R)
 { # @author Peter Carl
-
-    # DESCRIPTION:
-    # To find the maximum drawdown in a return series, we need to first
-    # calculate the cumulative returns and the maximum cumulative return to
-    # that point.  Any time the cumulative returns dips below the maximum
-    # cumulative returns, it's a drawdown.  Drawdowns are measured as a
-    # percentage of that maximum cumulative return, in effect, measured from
-    # peak equity.
-
-    # FUNCTION:
-    if (is.vector(R)) {
-        #R = na.omit(R)
-        Return.cum = Return.cumulative(R,geometric=geometric)
-        maxCumulativeReturn = cummax(c(1, Return.cumulative))[-1]
-        drawdown = Return.cum/maxCumulativeReturn - 1
-        return(min(drawdown))
-    }
-    else {
-        R = checkData(R, method = "matrix")
-        result = apply(R, 2, maxDrawdown, geometric=geometric)
-        dim(result) = c(1,NCOL(R))
-        colnames(result) = colnames(R)
-        rownames(result) = "Worst Drawdown"
-        return(result)
-    }
+	
+	# DESCRIPTION:
+	# To find the maximum drawdown in a return series, we need to first
+	# calculate the cumulative returns and the maximum cumulative return to
+	# that point.  Any time the cumulative returns dips below the maximum
+	# cumulative returns, it's a drawdown.  Drawdowns are measured as a
+	# percentage of that maximum cumulative return, in effect, measured from
+	# peak equity.
+	
+	# FUNCTION:
+	if (is.vector(R)) {
+		R = na.omit(R)
+		Return.cumulative = cumprod(1 + R) 
+		maxCumulativeReturn = cummax(c(1, Return.cumulative))[-1]
+		drawdown = Return.cumulative/maxCumulativeReturn - 1
+		return(min(drawdown))
+	}
+	else {
+		R = checkData(R, method = "matrix")
+		result = apply(R, 2, maxDrawdown)
+		dim(result) = c(1,NCOL(R))
+		colnames(result) = colnames(R)
+		rownames(result) = "Worst Drawdown"
+		return(result)
+	}
 }
 
 ###############################################################################
