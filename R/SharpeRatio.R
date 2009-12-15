@@ -1,6 +1,6 @@
 `SharpeRatio` <-
-function (Ra, Rf = 0)
-{ # @author Peter Carl
+function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
+{ # @author Brian G. Peterson
 
     # DESCRIPTION:
     # The Sharpe ratio is simply the return per unit of risk (represented by
@@ -10,34 +10,65 @@ function (Ra, Rf = 0)
     # The Sharpe Ratio is a risk-adjusted measure of return that uses
     # standard deviation to represent risk.
 
+    # A number of papers now recommend using a "modified Sharpe" ratio
+    # using a Modified Cornish-Fisher VaR as the measure of Risk.
+
     # Inputs:
     # R: in this case, the function anticipates having a return stream as input,
     #    rather than prices.
+    #
     # Rf: the risk free rate MUST be in the same periodicity as the data going in.
+    #
+    # p: probability at which to calculate the modified VaR (defaults to 95%)
 
     # Outputs:
-    # This function returns a Sharpe ratio for the same periodicity of the
+    # This function returns a modified Sharpe ratio for the same periodicity of the
     # data being input (e.g., monthly data -> monthly SR)
 
+    # @todo: loop over FUNCT and type
+    # @todo: annualize using multiperiod VaR and ES calcs
+
     # FUNCTION:
-    Ra = checkData(Ra)
+
+    R = checkData(R)
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
 
-    xRa = Return.excess(Ra, Rf)
-    colnames(xRa) = colnames(Ra)
-    sr <-function (xRa)
-    {
-        xRa = na.omit(xRa)
-        SR = mean(xRa)/sd(xRa)
-        SR
-    }
+    # FUNCT=FUN[1] # use the first method passed in
 
-    result = apply(xRa, 2, sr)
-    dim(result) = c(1,NCOL(Ra))
-    colnames(result) = colnames(Ra)
-    rownames(result) = paste("Sharpe Ratio (Rf=", round(mean(Rf)*100,1), "%)", sep="")
+    xR = Return.excess(R, Rf)
+    srm <-function (R, xR, Rf, p, FUN, ...)
+    {
+        FUNCT <- match.fun(FUN)
+        SRM = mean(xR, na.rm=TRUE)/FUNCT(R, p, invert=FALSE, ...)
+        SRM
+    }
+    
+    i=1
+    if(is.null(weights)){
+        result = matrix(nrow=length(FUN), ncol=ncol(R)) 
+        colnames(result) = colnames(R) 
+    } 
+    else {
+        result = matrix(nrow=length(FUN))
+    }
+        
+    for (FUNCT in FUN){
+        if (is.null(weights))
+            result[i,] = apply(R, 2, srm, xR=xR, Rf=Rf, p=p, FUN=FUNCT, ...)
+        else
+            result[i,] = weighted.mean(xR,w=weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+        rownames(result[i,]) = paste(FUNCT, " Sharpe: ", FUNCT, " (Rf=", round(mean(Rf)*100,1), "%, p=", round(p*100,1),"%)", sep="")
+        i=i+1 #increment counter
+    }
     return (result)
+}
+
+`SharpeRatio.modified` <-
+function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
+    .Deprecated("SharpeRatio", package="PerformanceAnalytics", "The SharpeRatio.modified function has been deprecated in favor of a newer SharpeRatio wrapper that will cover both the classic case and a larger suite of modifed Sharpe Ratios.  This deprecated function may be removed from future versions")
+
+    return(SharpeRatio(R = R, Rf = Rf, p = p, FUN = FUN, weights=weights, ...))
 }
 
 ###############################################################################
@@ -52,43 +83,40 @@ function (Ra, Rf = 0)
 #
 ###############################################################################
 # $Log: not supported by cvs2svn $
-# Revision 1.12  2009-10-10 12:40:08  brian
+# Revision 1.11  2009-10-10 12:40:08  brian
 # - update copyright to 2004-2009
 #
-# Revision 1.11  2009-10-06 15:14:44  peter
+# Revision 1.10  2009-10-06 15:14:44  peter
 # - fixed rownames
 # - fixed scale = 12 replacement errors
 #
-# Revision 1.10  2009-10-06 02:56:39  peter
+# Revision 1.9  2009-10-06 02:57:18  peter
 # - added label to results
 #
-# Revision 1.9  2009-10-03 18:23:55  brian
+# Revision 1.8  2009-10-03 18:23:55  brian
 # - multiple Code-Doc mismatches cleaned up for R CMD check
 # - further rationalized use of R,Ra,Rf
 # - rationalized use of period/scale
 #
-# Revision 1.8  2009-09-30 02:22:33  peter
+# Revision 1.7  2009-10-01 02:41:35  peter
 # - added multi-column support
+# - substituted VaR wrapper and added dots to pass parameters
 #
-# Revision 1.7  2008-06-02 16:05:19  brian
+# Revision 1.6  2008-06-02 16:05:19  brian
 # - update copyright to 2004-2008
 #
-# Revision 1.6  2007/07/12 21:45:09  brian
-# -calculate stddev on excess return to account for a Rf series, per Sharpe paper
+# Revision 1.5  2007/04/02 21:54:42  peter
+# - modified to use CheckData
+# - modified to use Return.excess
 #
-# Revision 1.5  2007/04/09 03:45:04  peter
-# - uses checkData
-# - uses Return.excess
+# Revision 1.4  2007/03/14 00:54:06  brian
+# - updates to parameters for standardization
 #
-# Revision 1.4  2007/03/12 15:34:43  brian
-# - add equations to documentation
-# - standardize on Ra for Returns of asset
-#
-# Revision 1.3  2007/03/04 01:05:24  brian
-# - simplify code because NA's are taken care of in checkDataVector
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
+# Revision 1.3  2007/02/07 13:24:49  brian
 # - fix pervasive comment typo
+#
+# Revision 1.2  2007/02/05 19:08:22  brian
+# - add modSharpe wrapper function
 #
 # Revision 1.1  2007/02/02 19:06:15  brian
 # - Initial Revision of packaged files to version control
