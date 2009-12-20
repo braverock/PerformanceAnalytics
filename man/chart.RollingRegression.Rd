@@ -52,6 +52,9 @@ Most inputs are the same as "\code{\link{plot}}" and are principally included so
 data(managers)
 chart.RollingRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
 charts.RollingRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
+dev.new()
+chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
+charts.RollingQuantileRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
