@@ -14,7 +14,7 @@ ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clea
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{p}{ confidence level for calculation, default p=.99 }
+  \item{p}{ confidence level for calculation, default p=.95 }
   \item{method}{ one of "modified","gaussian","historical", "kernel", see Details. }
   \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none", "boudt", or "geltner". }
   \item{portfolio_method}{ one of "single","component","marginal" defining whether to do univariate, component, or marginal calc, see Details. }
