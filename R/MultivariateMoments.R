@@ -141,7 +141,7 @@ SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

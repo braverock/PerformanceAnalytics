@@ -29,7 +29,7 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
             portfolio_method="component"
         }
         if (is.vector(weights)){
-            message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
+            # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
@@ -114,7 +114,7 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

@@ -1,9 +1,8 @@
 ###############################################################################
-# $Id:$
+# $Id$
 ###############################################################################
 
-StdDev <-
-        function (R , clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, ...)
+StdDev <- function (R , clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, ...)
 { # @author Brian G. Peterson
     
     # Descripion:
@@ -28,7 +27,7 @@ StdDev <-
             message("weights passed as parameter, but portfolio_method set to 'single', using multivariate moment calc")
         }
         if (is.vector(weights)){
-            message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
+            #message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
@@ -51,8 +50,7 @@ StdDev <-
                     tsd<-matrix(nrow=1,ncol=ncol(R))
                     for(column in 1:ncol(R)) {
                         tsd[,column]=sd(R[,column])
-                        
-                    } # end reasonableness checks
+                    } # end column support
                 colnames(tsd)<-colnames(R)    
                 rownames(tsd)<-"StdDev"
                 } else {
@@ -81,11 +79,11 @@ StdDev <-
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2009 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
 # This library is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id:$
+# $Id$
 #
 ###############################################################################
