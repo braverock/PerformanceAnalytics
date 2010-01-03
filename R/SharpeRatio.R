@@ -34,13 +34,13 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
 
-    # FUNCT=FUN[1] # use the first method passed in
+    #FUN = FUN[1] # use the first argument
 
     xR = Return.excess(R, Rf)
-    srm <-function (R, xR, Rf, p, FUN, ...)
+    srm <-function (R, ..., xR, Rf, p, FUN)
     {
         FUNCT <- match.fun(FUN)
-        SRM = mean(xR, na.rm=TRUE)/FUNCT(R, p, invert=FALSE, ...)
+        SRM = mean(xR, na.rm=TRUE)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
         SRM
     }
     
@@ -52,21 +52,24 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     else {
         result = matrix(nrow=length(FUN))
     }
-        
+    tmprownames=vector()    
     for (FUNCT in FUN){
-        if (is.null(weights))
+        if (is.null(weights)){
             result[i,] = apply(R, 2, srm, xR=xR, Rf=Rf, p=p, FUN=FUNCT, ...)
-        else
+        }
+        else {
             result[i,] = weighted.mean(xR,w=weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
-        rownames(result[i,]) = paste(FUNCT, " Sharpe: ", FUNCT, " (Rf=", round(mean(Rf)*100,1), "%, p=", round(p*100,1),"%)", sep="")
+        }
+        tmprownames = c(tmprownames, paste(FUNCT, " Sharpe: ", " (Rf=", round(mean(Rf)*100,1), "%, p=", round(p*100,1),"%)", sep=""))
         i=i+1 #increment counter
     }
+    rownames(result)=tmprownames
     return (result)
 }
 
 `SharpeRatio.modified` <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
-    .Deprecated("SharpeRatio", package="PerformanceAnalytics", "The SharpeRatio.modified function has been deprecated in favor of a newer SharpeRatio wrapper that will cover both the classic case and a larger suite of modifed Sharpe Ratios.  This deprecated function may be removed from future versions")
+    .Deprecated("SharpeRatio", package="PerformanceAnalytics", "The SharpeRatio.modified function has been deprecated in favor of a newer SharpeRatio wrapper that will cover both the classic case and a larger suite of modified Sharpe Ratios.  This deprecated function may be removed from future versions")
 
     return(SharpeRatio(R = R, Rf = Rf, p = p, FUN = FUN, weights=weights, ...))
 }

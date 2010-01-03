@@ -120,6 +120,7 @@ export(
     chart.RollingMean,
     chart.RollingPerformance,
     chart.RollingRegression,
+    chart.RollingQuantileRegression,
     chart.RollingStyle,
     chart.Scatter,
     chart.SnailTrail,

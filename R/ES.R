@@ -3,7 +3,7 @@
 ###############################################################################
 
 ES <-
-function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE, ...)
+function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -14,6 +14,7 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
     #if(exists(modified)({if( modified == TRUE) { method="modified" }}
     #if(method == TRUE or is.null(method) ) { method="modified" }
     method = method[1]
+    clean = clean[1]
     portfolio_method = portfolio_method[1]
     R <- checkData(R, method="xts", ...)
 
@@ -41,7 +42,7 @@ function (R , p=0.95, method=c("modified","gaussian","historical", "kernel"), cl
         }
     } # end weight checks
 
-    if(clean[1]!="none"){
+    if(clean!="none"){
         R = as.matrix(Return.clean(R, method=clean))
     }
     

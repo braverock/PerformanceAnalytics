@@ -9,7 +9,7 @@ calculates Expected Shortfall(ES) (or Conditional Value-at-Risk(CVaR) for univar
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at Risk(CVaR) for univariate, component, and marginal cases using a variety of analytical methods.}
 \usage{
-ES(R, p = 0.95, method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt","geltner"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE, ...)
+ES(R, p = 0.95, ..., method = c("modified", "gaussian", "historical", "kernel"), clean = c("none", "boudt","geltner"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE, operational = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

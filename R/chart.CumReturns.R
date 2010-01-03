@@ -1,5 +1,5 @@
 `chart.CumReturns` <-
-function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
+function (R, wealth.index = FALSE, geometric = FALSE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:

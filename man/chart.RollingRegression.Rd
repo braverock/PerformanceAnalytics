@@ -29,7 +29,7 @@ charts.RollingRegression(Ra, Rb, width = 12, Rf = 0, main = NULL, legend.loc = N
   \item{\dots}{ any other passthru parameters to \code{\link{chart.TimeSeries}} }
 }
 \details{
-The attribute parameter is probably the most confusing.  In mathematical terms, the different choices yeild the following:
+The attribute parameter is probably the most confusing.  In mathematical terms, the different choices yield the following:
 
 Alpha - shows the y-intercept\cr
 Beta - shows the slope of the regression line\cr
@@ -54,7 +54,8 @@ chart.RollingRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf
 charts.RollingRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
 dev.new()
 chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
-charts.RollingQuantileRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
+# not implemented yet
+#charts.RollingQuantileRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

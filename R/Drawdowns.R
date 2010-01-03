@@ -1,5 +1,5 @@
 `Drawdowns` <-
-function (R, geometric = TRUE, ...)
+function (R, geometric = FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:

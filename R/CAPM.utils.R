@@ -8,7 +8,7 @@ function (Rb, Rf = 0 )
     #the Capital Market Line slope is a wrapper for the Sharpe Ratio on the benchmark asset
     #
     # Rb = Return vector of the benchmark or market portfolio
-    result = SharpeRatio(Rb,Rf)
+    result = SharpeRatio(Rb,Rf,FUN="StdDev")
     names = colnames(Rb)
     rownames(result) = paste("Capital Market Line Slope:", names)
     return(result) 

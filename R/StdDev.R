@@ -2,7 +2,7 @@
 # $Id$
 ###############################################################################
 
-StdDev <- function (R , clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, ...)
+StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL)
 { # @author Brian G. Peterson
     
     # Descripion:
@@ -10,10 +10,8 @@ StdDev <- function (R , clean=c("none","boudt","geltner"),  portfolio_method=c("
     # wrapper for univariate and multivariate standard deviation functions.
     
     # Setup:
-    #if(exists(modified)({if( modified == TRUE) { method="modified" }}
-    #if(method == TRUE or is.null(method) ) { method="modified" }
-    method = method[1]
     portfolio_method = portfolio_method[1]
+    clean = clean[1]
     R <- checkData(R, method="xts", ...)
     columns=colnames(R)
     
@@ -40,7 +38,7 @@ StdDev <- function (R , clean=c("none","boudt","geltner"),  portfolio_method=c("
         }
     } # end weight checks
     
-    if(clean[1]!="none"){
+    if(clean!="none"){
         R = as.matrix(Return.clean(R, method=clean))
     }
     

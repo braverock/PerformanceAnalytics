@@ -1,5 +1,5 @@
 `chart.Drawdown` <-
-function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
+function (R, geometric = FALSE, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:

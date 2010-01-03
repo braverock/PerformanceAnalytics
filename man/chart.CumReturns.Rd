@@ -6,12 +6,13 @@
   Chart that cumulates the periodic returns given and draws a line graph of the results as a "wealth index".
 }
 \usage{
-chart.CumReturns(R, wealth.index = FALSE, legend.loc = NULL, colorset =(1:12), begin = c("first","axis"), ...)
+chart.CumReturns(R, wealth.index = FALSE, geometric=FALSE, legend.loc = NULL, colorset =(1:12), begin = c("first","axis"), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{begin}{

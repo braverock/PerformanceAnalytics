@@ -2,6 +2,9 @@
 \alias{zerofill}
 \title{zerofill}
 \usage{zerofill(x)}
+\arguments{
+    \item{x}{ time series to zero fill }
+}
 \description{
 Fill NA's with zeros in a time series to allow analysis when the matrix must be complete.
 }

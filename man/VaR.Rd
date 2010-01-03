@@ -7,11 +7,11 @@
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.
 }
 \usage{
-VaR(R, p = 0.95, method = c("modified", "gaussian","historical", "kernel"),
+VaR(R, p = 0.95, ..., method = c("modified", "gaussian","historical", "kernel"),
            clean = c("none", "boudt", "geltner"),
                  portfolio_method = c("single", "component","marginal"),
                  weights = NULL, mu = NULL, sigma = NULL,
-                 m3 = NULL, m4 = NULL, invert = TRUE, ...)
+                 m3 = NULL, m4 = NULL, invert = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

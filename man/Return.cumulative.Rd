@@ -6,12 +6,12 @@
 This is a useful function for calculating cumulative return over a period of time, say a calendar year.  Can produce simple or geometric return.
 }
 \usage{
-Return.cumulative(R, geometric = TRUE)
+Return.cumulative(R, geometric = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
 }
 
 \details{

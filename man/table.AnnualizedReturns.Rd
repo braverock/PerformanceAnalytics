@@ -6,12 +6,12 @@
 Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe
 }
 \usage{
-table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
+table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = FALSE, digits = 4)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{digits}{ number of digits to round results to }
