@@ -65,6 +65,7 @@ export(
     SmoothingIndex,
     sortDrawdowns,
     SortinoRatio,
+    StdDev,
     StdDev.annualized,
     SterlingRatio,
     style.fit,
@@ -385,7 +386,6 @@ S3method(textplot, matrix)
 # SR.StdDev.MM
 # statsTable
 # std
-# StdDev
 # StdDev.annualized
 # StdDev.MM
 # textplot.character
