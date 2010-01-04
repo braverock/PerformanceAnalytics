@@ -47,7 +47,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
                 if (is.null(weights)) {
                     tsd<-matrix(nrow=1,ncol=ncol(R))
                     for(column in 1:ncol(R)) {
-                        tsd[,column]=sd(R[,column])
+                        tsd[,column]=sd(R[,column], na.rm=TRUE)
                     } # end column support
                 colnames(tsd)<-colnames(R)    
                 rownames(tsd)<-"StdDev"
