@@ -12,12 +12,12 @@ Often used with \code{\link{sortDrawdowns}} to get the largest drawdowns.
 }
 \usage{
 findDrawdowns(R)
-Drawdowns(R, geometric=FALSE, ...)
+Drawdowns(R, geometric=TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{\dots}{ any other passthru parameters }
 }
 \details{

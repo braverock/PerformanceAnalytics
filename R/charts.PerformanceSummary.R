@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, Rf = 0, main = NULL, geometric=FALSE, methods = "none", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
+function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:

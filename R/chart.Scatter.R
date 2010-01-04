@@ -27,7 +27,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     y = checkData(y, method = "vector")
 
     # pass in: cex.axis = cex.axis, cex.main = cex.main, cex.lab = cex.lab
-    plot(x~y, main = main, pch = symbolset, col=colorset, ...)
+    plot(y~x, main = main, pch = symbolset, col=colorset, ...)
 
     if(reference.grid) {
         grid(col = element.color)

@@ -6,12 +6,12 @@
   A time series chart demonstrating drawdowns from peak equity attained through time, calculated from periodic returns.
 }
 \usage{
-chart.Drawdown(R, geometric=FALSE, legend.loc = NULL, colorset = (1:12), ...)
+chart.Drawdown(R, geometric=TRUE, legend.loc = NULL, colorset = (1:12), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{colorset}{ color palette to use, set by default to rational choices }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{\dots}{ any other passthru parameters }

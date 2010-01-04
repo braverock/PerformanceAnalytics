@@ -1,5 +1,5 @@
 `Return.annualized` <-
-function (R, scale = NA, geometric = FALSE )
+function (R, scale = NA, geometric = TRUE )
 { # @author Peter Carl
 
     # Description:

@@ -1,5 +1,5 @@
 `SharpeRatio.annualized` <-
-function (R, Rf = 0, scale = NA, geometric=FALSE)
+function (R, Rf = 0, scale = NA, geometric=TRUE)
 { # @author Peter Carl
 
     # DESCRIPTION:

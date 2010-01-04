@@ -6,7 +6,7 @@
 For a set of returns, create a wealth index chart, bars for monthly performance, and underwater chart for drawdown.
 }
 \usage{
-charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=FALSE, methods = "none", width = 0, event.labels = NULL, ylog
+charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog
                  = FALSE, wealth.index = FALSE, gap = 12, begin =
                  c("first", "axis"), legend.loc = "topleft", ...)
 }
@@ -15,7 +15,7 @@ charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=FALSE, methods = "no
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{main}{ set the chart title, as in \code{plot} }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{methods}{ Used to select the risk parameter of trailing \code{width} returns to use in the \code{\link{chart.BarVaR}} panel:
     May be any of:
     \itemize{

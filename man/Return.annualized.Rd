@@ -6,13 +6,13 @@
  An average annualized return is convenient for comparing returns.
 }
 \usage{
-Return.annualized(R, scale = NA, geometric = FALSE)
+Return.annualized(R, scale = NA, geometric = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
 
 \details{

@@ -6,13 +6,13 @@
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard deviation to represent risk.
 }
 \usage{
-SharpeRatio.annualized(R, Rf = 0, scale = NA, geometric=FALSE)
+SharpeRatio.annualized(R, Rf = 0, scale = NA, geometric=TRUE)
 }
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
-  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default FALSE }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
 }
 \details{
 The Sharpe ratio is simply the return per unit of risk (represented by variance).  The higher the Sharpe ratio, the better the combined performance of "risk" and return.

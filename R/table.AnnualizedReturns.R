@@ -1,5 +1,5 @@
 `table.AnnualizedReturns` <-
-function (R, scale = NA, Rf = 0, geometric = FALSE, digits = 4)
+function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 {# @author Peter Carl
 
     # DESCRIPTION:
