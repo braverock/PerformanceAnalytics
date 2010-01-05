@@ -11,8 +11,8 @@ Often used with \code{\link{sortDrawdowns}} to get the largest drawdowns.
 \code{Drawdowns} will calculate the drawdown levels as percentages, for use in \code{\link{chart.Drawdown}}.
 }
 \usage{
-findDrawdowns(R)
-Drawdowns(R, geometric=TRUE, ...)
+findDrawdowns(R, geometric = TRUE, ...)
+Drawdowns(R, geometric = TRUE, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
