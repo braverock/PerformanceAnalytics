@@ -1,5 +1,5 @@
 `maxDrawdown` <-
-		function (R)
+		function (R, geometric = TRUE)
 { # @author Peter Carl
 	
 	# DESCRIPTION:
@@ -13,10 +13,9 @@
 	# FUNCTION:
 	if (is.vector(R)) {
 		R = na.omit(R)
-		Return.cumulative = cumprod(1 + R) 
-		maxCumulativeReturn = cummax(c(1, Return.cumulative))[-1]
-		drawdown = Return.cumulative/maxCumulativeReturn - 1
-		return(min(drawdown))
+        drawdown = Drawdowns(R, geometric = geometric)
+        result = min(drawdown)
+		return(result)
 	}
 	else {
 		R = checkData(R, method = "matrix")
