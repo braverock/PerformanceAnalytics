@@ -39,7 +39,7 @@ Brian G. Peterson and Kris Boudt
 }
 \seealso{
     \code{\link{Return.clean}}
-    \code{{sd}
+    \code{sd}
 }
 \examples{
     data(edhec)
