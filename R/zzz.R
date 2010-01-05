@@ -12,3 +12,6 @@
 
 }
 
+even <- function (x) x%%2==0
+
+odd  <- function (x) x%%2==1
