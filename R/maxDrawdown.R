@@ -1,5 +1,5 @@
 `maxDrawdown` <-
-		function (R, geometric = TRUE)
+		function (R, geometric = TRUE, ...)
 { # @author Peter Carl
 	
 	# DESCRIPTION:
