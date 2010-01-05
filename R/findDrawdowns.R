@@ -1,5 +1,5 @@
 `findDrawdowns` <-
-function (R)
+function (R, geometric = TRUE, ...)
 { # @author Peter Carl
 
     # modified with permission from function by Sankalp Upadhyay
@@ -12,11 +12,12 @@ function (R)
 
     # FUNCTION:
 
-    x = checkData(R, method="matrix") # matrix?
+    x = checkData(R[,1,drop=FALSE], method="matrix") # matrix?
 
-    Return.cumulative = cumprod(1+na.omit(x)) 
-    maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
-    drawdowns = Return.cumulative/maxCumulativeReturn - 1
+#     Return.cumulative = cumprod(1+na.omit(x)) 
+#     maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
+#     drawdowns = Return.cumulative/maxCumulativeReturn - 1
+    drawdowns = Drawdowns(x, geometric = geometric)
     # if you want to see the drawdown series, plot(drawdown,type="l")
 
     draw = c()
