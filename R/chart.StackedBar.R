@@ -2,9 +2,9 @@
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     op <- par(no.readonly=TRUE)
-    p <- median(diff(.index(w)))
-    if(is.null(p)) p=NA
-    if(xtsible(w) & !is.na(p))
+#     p <- median(diff(.index(w)))
+#     if(is.null(p)) p=NA
+    if(xtsible(w))# & is.null(p))# !is.na(p))
         chart.StackedBar.xts(w, colorset = colorset, space = space, cex.axis=cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.labels = cex.labels, cex.main = cex.main, xaxis=xaxis, legend.loc=legend.loc,  element.color = element.color, unstacked = unstacked, xlab=xlab, ylab=ylab, ylim=ylim, date.format = date.format, major.ticks=major.ticks, minor.ticks=minor.ticks, las = las, xaxis.labels = xaxis.labels, ... )
     else
         chart.StackedBar.matrix(w, colorset = colorset, space = space, cex.axis=cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.labels = cex.labels, cex.main = cex.main, xaxis=xaxis, legend.loc=legend.loc,  element.color = element.color, unstacked = unstacked, xlab=xlab, ylab=ylab, ylim=ylim, date.format = date.format, major.ticks=major.ticks, minor.ticks=minor.ticks, las = las, xaxis.labels = xaxis.labels, ... )
@@ -116,6 +116,11 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     w.columns = NCOL(w)
     w.rows = NROW(w)
 
+    posn = barplot(t(w), plot=FALSE, space=space)
+
+    if(is.null(colnames(w)))
+        legend.loc = NULL
+
     if(is.null(colorset))
         colorset=1:w.columns
 
@@ -167,10 +172,10 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
         axis(2, col = element.color, las = las, cex.axis = cex.axis)
         title(ylab = ylab, cex = cex.lab)
         if (xaxis) {
-            label.height = .25 + cex.axis * apply(rownames(w),1, function(X) max(strheight(X, units="in")/par('cin')[2]) )
+            label.height = .25 + cex.axis * max(strheight(rownames(w), units="in")/par('cin')[2])
             if(is.null(xaxis.labels))
                 xaxis.labels = rownames(w)
-            axis(1, at=1:length(xaxis.labels), labels=xaxis.labels, las=las, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+            axis(1, at=posn, labels=xaxis.labels, las=las, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) #at=1:length(xaxis.labels)
         }
         box(col = element.color)
 
