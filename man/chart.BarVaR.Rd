@@ -1,5 +1,6 @@
 \name{chart.BarVaR}
 \alias{chart.BarVaR}
+\alias{charts.BarVaR}
 \title{ Periodic returns in a bar chart with risk metric overlay }
 \description{
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.

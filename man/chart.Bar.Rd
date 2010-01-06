@@ -1,5 +1,6 @@
 \name{chart.Bar}
 \alias{chart.Bar}
+\alias{charts.Bar}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ wrapper for barchart of returns }
 \description{
