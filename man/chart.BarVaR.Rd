@@ -6,6 +6,7 @@
 }
 \usage{
 chart.BarVaR (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
+charts.BarVaR (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
 }
 
 \arguments{
@@ -38,7 +39,9 @@ chart.BarVaR (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "Gaussi
   \item{legend.loc}{ legend location, such as in \code{\link{chart.TimeSeries}}}
   \item{ypad}{ adds a numerical padding to the y-axis to keep the data away when legend.loc="bottom".  See examples below.}
   \item{legend.cex}{ sets the legend text size, such as in \code{\link{chart.TimeSeries}}}
-  \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{cex.legend}{ sets the legend text size, such as in \code{\link{chart.TimeSeries}}}
+  \item{main}{ sets the title text, such as in \code{\link{chart.TimeSeries}}}
+  \item{colorset}{ color palette to use, such as in \code{\link{chart.TimeSeries}} }
 }
 \details{
   Note that \code{StdDev} and \code{VaR} are symmetric calculations, so a high and low measure will be plotted.  \code{ModifiedVaR}, on the other hand, is assymetric and only a lower bound will be drawn.

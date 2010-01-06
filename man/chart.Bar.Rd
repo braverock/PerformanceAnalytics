@@ -7,12 +7,16 @@ A wrapper to create a chart of periodic returns in a bar chart.  This is a diffi
 }
 \usage{
     chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
+    charts.Bar (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center }
   \item{colorset}{ color palette to use, set by default to rational choices }
+  \item{cex.legend}{ sets the legend text size, such as in \code{\link{chart.TimeSeries}}}
+  \item{cex.main}{ sets the title text size, such as in \code{\link{chart.TimeSeries}}}
+  \item{main}{ sets the title text, such as in \code{\link{chart.TimeSeries}}}
   \item{\dots}{ any other passthru parameters, see \code{plot} }
 }
 \details{
