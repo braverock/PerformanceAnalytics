@@ -1,7 +1,58 @@
+2010-01-06  peter_carl
+
+	* NAMESPACE: - added charts.Bar and charts.BarVaR
+	* R/chart.StackedBar.R: - fixed check for one-row objects
+	* man/chart.Bar.Rd, man/chart.BarVaR.Rd: - added aliases
+	* man/chart.Bar.Rd, man/chart.BarVaR.Rd: - additions to accomodate
+	  charts.* functions
+	* R/charts.Bar.R, R/charts.BarVaR.R: - slight modifications to oma
+	  for better margins
+	* R/chart.StackedBar.R: - fixes bugs with matrix identification and
+	  handling pointed out by Dr. Stefan Albrecht
+	  --Ths line, and those below, will be ignored--
+	  
+	  M chart.StackedBar.R
+
+2010-01-05  braverock
+
+	* R/zzz.R: - add even and odd functions from gtools, not exported
+	* DESCRIPTION, man/StdDev.Rd: - updates to pass R CMD check
+	* man/StdDev.Rd[ADD]: - add documentation for StdDev wrapper so we
+	  can expose it in NAMESPACE for PerfA 1.0.1
+
+2010-01-05  peter_carl
+
+	* R/maxDrawdown.R: - fixed codoc error
+	* man/findDrawdowns.Rd, man/maxDrawdown.Rd: - added geometric
+	* R/maxDrawdown.R: - added geometric and uses Drawdowns function
+	* R/findDrawdowns.R: - added geometric argument and uses Drawdowns
+	  function calc
+	  -This line, and those below, will be ignored--
+	  
+	  M findDrawdowns.R
+
+2010-01-04  peter_carl
+
+	* R/Drawdowns.R, R/Return.annualized.R, R/Return.cumulative.R,
+	  R/SharpeRatio.annualized.R, R/chart.CumReturns.R,
+	  R/chart.Drawdown.R, R/chart.RiskReturnScatter.R,
+	  R/chart.Scatter.R, R/charts.PerformanceSummary.R,
+	  R/table.AnnualizedReturns.R, man/Return.annualized.Rd,
+	  man/Return.cumulative.Rd, man/SharpeRatio.annualized.Rd,
+	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
+	  man/chart.RiskReturnScatter.Rd, man/charts.PerformanceSummary.Rd,
+	  man/findDrawdowns.Rd, man/table.AnnualizedReturns.Rd: - changed
+	  default for geometric back to TRUE
+	* NAMESPACE: - added StdDev to namespace
+	* R/StdDev.R: - changed call to sd to use na.rm
+
 2010-01-03  braverock
 
-	* .Rbuildignore, ChangeLog, generatechangelog.sh: - new ChangeLog
-	  generator for svn repository
+	* DESCRIPTION: - updates to pass R CMD check
+	* .Rbuildignore, ChangeLog, ChangeLog.1.0.0[ADD]: - keep the old
+	  CVS ChangeLog for posterity
+	* .Rbuildignore, ChangeLog, generatechangelog.sh[ADD]: - new
+	  ChangeLog generator for svn repository
 	* NAMESPACE, R/CAPM.utils.R, R/Drawdowns.R, R/ES.R,
 	  R/Return.annualized.R, R/SharpeRatio.R,
 	  R/SharpeRatio.annualized.R, R/StdDev.R, R/VaR.R,
@@ -10,12 +61,12 @@
 	  R/table.AnnualizedReturns.R, man/ES.Rd, man/Return.annualized.Rd,
 	  man/Return.cumulative.Rd, man/Return.portfolio.Rd,
 	  man/SharpeRatio.Rd, man/SharpeRatio.annualized.Rd,
-	  man/SharpeRatio.modified.Rd, man/VaR.Rd, man/chart.BarVaR.Rd,
-	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
-	  man/chart.RiskReturnScatter.Rd, man/chart.RollingRegression.Rd,
-	  man/charts.PerformanceSummary.Rd, man/findDrawdowns.Rd,
-	  man/table.AnnualizedReturns.Rd, man/table.RollingPeriods.Rd,
-	  man/zerofill.Rd,
+	  man/SharpeRatio.modified.Rd[DEL], man/VaR.Rd,
+	  man/chart.BarVaR.Rd, man/chart.CumReturns.Rd,
+	  man/chart.Drawdown.Rd, man/chart.RiskReturnScatter.Rd,
+	  man/chart.RollingRegression.Rd, man/charts.PerformanceSummary.Rd,
+	  man/findDrawdowns.Rd, man/table.AnnualizedReturns.Rd,
+	  man/table.RollingPeriods.Rd, man/zerofill.Rd,
 	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - updates to
 	  pass R CMD check
 
@@ -56,7 +107,7 @@
 
 2009-12-22  braverock
 
-	* man/zerofill.Rd: - add documentation for zerofill fn
+	* man/zerofill.Rd[ADD]: - add documentation for zerofill fn
 	* man/ES.Rd, man/VaR.Rd: - document change of p default to .95
 
 2009-12-20  braverock
@@ -66,12 +117,12 @@
 
 2009-12-18  peter_carl
 
-	* R/zerofill.R: - moved from PortfolioAnalytics package
+	* R/zerofill.R[CPY]: - moved from PortfolioAnalytics package
 
 2009-12-15  braverock
 
-	* R/SharpeRatio.R, R/SharpeRatio.modified.R: - extend SharpeRatio
-	  wrapper to be more general for VaR,ES,maxDrawdown etc
+	* R/SharpeRatio.R[CPY], R/SharpeRatio.modified.R[DEL]: - extend
+	  SharpeRatio wrapper to be more general for VaR,ES,maxDrawdown etc
 	  - use vectorized calcs for weighted portfolios where possible
 	  - move old SharpeRatio.modified wrapper to replace SharpeRatio fn
 	  - remove classic SharpeRatio fn/file
@@ -80,7 +131,7 @@
 2009-12-08  peter_carl
 
 	* R/Return.wealthindex.R: - changed function name
-	* R/Return.wealthindex.R: - renamed the Return.index function
+	* R/Return.wealthindex.R[CPY]: - renamed the Return.index function
 	* R/maxDrawdown.R: - reverted back to working version
 
 2009-11-25  peter_carl
@@ -98,16 +149,16 @@
 	  in optimizer functions
 	* R/MultivariateMoments.R: -add proper handling of dots for mu
 	  argument
-	* R/PortfolioRisk.R, R/StdDev.R: - add StdDev wrapper function to
-	  support univariate, multivariate moment, and component standard
-	  deviation
+	* R/PortfolioRisk.R, R/StdDev.R[ADD]: - add StdDev wrapper function
+	  to support univariate, multivariate moment, and component
+	  standard deviation
 	  - arrange/name returned list in Portsd function to match other
 	  component calcs
 
 2009-11-19  braverock
 
-	* .Rbuildignore, sandbox: - create sandbox dir, add .Rbuildignore
-	  file
+	* .Rbuildignore[ADD], sandbox[ADD]: - create sandbox dir, add
+	  .Rbuildignore file
 
 2009-11-09  braverock
 
@@ -190,16 +241,16 @@
 
 2009-10-31  braverock
 
-	* NEWS: - move to pkg directory
-	* NAMESPACE: - move to pkg directory
-	* DESCRIPTION: - move to pkg directory
-	* ChangeLog: - move to pkg directory
-	* data: - move to pkg directory
-	* tests: - move to pkg directory
-	* R: - move to pkg directory
-	* inst: - move to pkg directory
-	* man: - move to pkg directory
-	* .: - create directory for PerformanceAnalytics
+	* NEWS[CPY]: - move to pkg directory
+	* NAMESPACE[CPY]: - move to pkg directory
+	* DESCRIPTION[CPY]: - move to pkg directory
+	* ChangeLog[CPY]: - move to pkg directory
+	* data[CPY]: - move to pkg directory
+	* tests[CPY]: - move to pkg directory
+	* R[CPY]: - move to pkg directory
+	* inst[CPY]: - move to pkg directory
+	* man[CPY]: - move to pkg directory
+	* .[ADD]: - create directory for PerformanceAnalytics
 
 2009-10-23 16:30  tag v1_0_0-2009-10-23
 
