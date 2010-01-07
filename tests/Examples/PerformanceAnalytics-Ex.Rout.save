@@ -58,19 +58,19 @@ Attaching package: 'PerformanceAnalytics'
 >     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
 [1] NA
 >     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
-[1] 0.02948864
+[1] 0.04078668
 >     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
-                               HAM1      HAM2       HAM3       HAM4       HAM5
-Active Premium: SP500 TR 0.02948864 0.0649992 0.04537955 0.02821591 0.02363766
+                               HAM1       HAM2       HAM3       HAM4       HAM5
+Active Premium: SP500 TR 0.04078668 0.07759873 0.05446935 0.02473443 0.02182245
                                HAM6
-Active Premium: SP500 TR 0.06453281
+Active Premium: SP500 TR 0.07585993
 >     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
-                                  HAM1      HAM2       HAM3       HAM4
-Active Premium: SP500 TR    0.02948864 0.0649992 0.04537955 0.02821591
-Active Premium: EDHEC LS EQ 0.01929000 0.0385100 0.01467000 0.01145000
+                                  HAM1       HAM2       HAM3        HAM4
+Active Premium: SP500 TR    0.04078668 0.07759873 0.05446935  0.02473443
+Active Premium: EDHEC LS EQ 0.01965368 0.03776329 0.01043540 -0.00462594
                                    HAM5       HAM6
-Active Premium: SP500 TR     0.02363766 0.06453281
-Active Premium: EDHEC LS EQ -0.02029091 0.05128125
+Active Premium: SP500 TR     0.02182245 0.07585993
+Active Premium: EDHEC LS EQ -0.03237453 0.05463574
 > 
 > 
 > 
@@ -264,19 +264,19 @@ Security Market Line: SP500 TR 115.4023
 > 
 >     data(managers)
 >     CalmarRatio(managers[,1,drop=FALSE])
-                 HAM1
-Calmar Ratio 0.879424
+                  HAM1
+Calmar Ratio 0.9061697
 >     CalmarRatio(managers[,1:6]) 
-                 HAM1      HAM2      HAM3      HAM4      HAM5     HAM6
-Calmar Ratio 0.879424 0.7075067 0.5161859 0.4600363 0.1440786 1.683891
+                  HAM1     HAM2      HAM3      HAM4      HAM5     HAM6
+Calmar Ratio 0.9061697 0.728094 0.5225829 0.4227315 0.1095909 1.742525
 >     SterlingRatio(managers[,1,drop=FALSE])
                                    HAM1
-Sterling Ratio (Excess = 10%) 0.5301314
+Sterling Ratio (Excess = 10%) 0.5462542
 >     SterlingRatio(managers[,1:6])
-                                   HAM1      HAM2     HAM3     HAM4      HAM5
-Sterling Ratio (Excess = 10%) 0.5301314 0.4993445 0.383613 0.341277 0.1113711
-                                 HAM6
-Sterling Ratio (Excess = 10%) 0.74201
+                                   HAM1      HAM2      HAM3      HAM4
+Sterling Ratio (Excess = 10%) 0.5462542 0.5138746 0.3883671 0.3136025
+                                    HAM5      HAM6
+Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > 
 > 
 > 
@@ -479,19 +479,19 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > data(managers)
 > InformationRatio(managers[,"HAM1",drop=FALSE], managers[, "SP500 TR", drop=FALSE])
-[1] 0.2605771
+[1] 0.3604125
 > InformationRatio(managers[,1:6], managers[,8,drop=FALSE])
                                  HAM1      HAM2      HAM3      HAM4      HAM5
-Information Ratio: SP500 TR 0.2605771 0.4238211 0.3916509 0.1767188 0.1312991
+Information Ratio: SP500 TR 0.3604125 0.5059751 0.4701009 0.1549140 0.1212162
                                  HAM6
-Information Ratio: SP500 TR 0.5719015
+Information Ratio: SP500 TR 0.6722844
 > InformationRatio(managers[,1:6], managers[,8:7])
-                                    HAM1      HAM2      HAM3       HAM4
-Information Ratio: SP500 TR    0.2605771 0.4238211 0.3916509 0.17671882
-Information Ratio: EDHEC LS EQ 0.2545774 0.4245012 0.1798470 0.07297328
+                                    HAM1      HAM2      HAM3        HAM4
+Information Ratio: SP500 TR    0.3604125 0.5059751 0.4701009  0.15491397
+Information Ratio: EDHEC LS EQ 0.2593770 0.4162701 0.1279329 -0.02948210
                                      HAM5      HAM6
-Information Ratio: SP500 TR     0.1312991 0.5719015
-Information Ratio: EDHEC LS EQ -0.1427396 0.9073666
+Information Ratio: SP500 TR     0.1212162 0.6722844
+Information Ratio: EDHEC LS EQ -0.2277438 0.9667207
 > 
 > 
 > 
@@ -767,13 +767,13 @@ Omega (L = 0%)       5.265408
 > 
 > data(managers)
 > Return.annualized(managers[,1,drop=FALSE])
-                       HAM1
-Annualized Return 0.1334727
+                      HAM1
+Annualized Return 0.137532
 > Return.annualized(managers[,1:8])
-                       HAM1      HAM2      HAM3   HAM4       HAM5      HAM6
-Annualized Return 0.1334727 0.1697184 0.1493636 0.1322 0.04905974 0.1326563
-                  EDHEC LS EQ  SP500 TR
-Annualized Return     0.11454 0.1039841
+                      HAM1      HAM2      HAM3      HAM4       HAM5      HAM6
+Annualized Return 0.137532 0.1746569 0.1512147 0.1214798 0.03731645 0.1372755
+                  EDHEC LS EQ   SP500 TR
+Annualized Return   0.1180134 0.09674533
 > Return.annualized(managers[,1:8],geometric=FALSE)
                        HAM1      HAM2      HAM3   HAM4       HAM5      HAM6
 Annualized Return 0.1334727 0.1697184 0.1493636 0.1322 0.04905974 0.1326563
@@ -2880,11 +2880,13 @@ Annualized Return     0.11454 0.1039841
 > 
 > data(managers)
 > Return.cumulative(managers[,1,drop=FALSE])
-                    HAM1
-Cumulative Return 1.4682
+                      HAM1
+Cumulative Return 3.126671
 > Return.cumulative(managers[,1:8])
-                    HAM1   HAM2  HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ SP500 TR
-Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
+                      HAM1     HAM2     HAM3    HAM4      HAM5      HAM6
+Cumulative Return 3.126671 4.348599 3.706732 2.52944 0.2650197 0.9858675
+                  EDHEC LS EQ SP500 TR
+Cumulative Return    2.051197 1.761619
 > Return.cumulative(managers[,1:8],geometric=FALSE)
                     HAM1   HAM2  HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ SP500 TR
 Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
@@ -4098,15 +4100,15 @@ StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
                                        HAM1
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
 > SharpeRatio(managers[,1:6], Rf=.035/12, FUN="StdDev") 
-                                       HAM1 HAM2       HAM3       HAM4 HAM5
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881   NA 0.03651259 0.05319796   NA
-                                 HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%)   NA
+                                       HAM1       HAM2       HAM3       HAM4
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
+                                       HAM5       HAM6
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
 > SharpeRatio(managers[,1:6], Rf = managers[,10,drop=FALSE], FUN="StdDev")
-                                       HAM1 HAM2       HAM3       HAM4 HAM5
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881   NA 0.03651259 0.05319796   NA
-                                 HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%)   NA
+                                       HAM1       HAM2       HAM3       HAM4
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
+                                       HAM5       HAM6
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
 > 
 > 
 > 
@@ -4127,15 +4129,15 @@ ES Sharpe:  (Rf=0%, p=95%)  -0.05909659
 > # and all the methods
 > SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
                                         HAM1        HAM2        HAM3
-StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02562881          NA  0.03651259
+StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02562881  0.03671623  0.03651259
 VaR Sharpe:  (Rf=0.3%, p=95%)    -0.03422955 -0.02763504 -0.03680944
 ES Sharpe:  (Rf=0.3%, p=95%)     -0.06097455 -0.06136169 -0.04404692
                                         HAM4        HAM5        HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%)  0.05319796          NA          NA
+StdDev Sharpe:  (Rf=0.3%, p=95%)  0.05319796  0.04573149  0.02381247
 VaR Sharpe:  (Rf=0.3%, p=95%)    -0.08153971 -0.06756340 -0.02981810
 ES Sharpe:  (Rf=0.3%, p=95%)     -0.11758811 -0.09741309 -0.03904744
                                  EDHEC LS EQ    SP500 TR   US 10Y TR
-StdDev Sharpe:  (Rf=0.3%, p=95%)          NA  0.04330924  0.02038955
+StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02045246  0.04330924  0.02038955
 VaR Sharpe:  (Rf=0.3%, p=95%)    -0.02347884 -0.06834972 -0.03097683
 ES Sharpe:  (Rf=0.3%, p=95%)     -0.03463385 -0.09441034 -0.04439739
 > SharpeRatio(edhec,Rf = .04/12)
@@ -4182,20 +4184,20 @@ ES Sharpe:  (Rf=0.3%, p=95%)        -0.04888118   -0.09022777    -0.04618555
 > data(managers)
 > SharpeRatio.annualized(managers[,1,drop=FALSE], Rf=.035/12) 
                                       HAM1
-Annualized Sharpe Ratio (Rf=3.5%) 1.109167
+Annualized Sharpe Ratio (Rf=3.5%) 1.112293
 > SharpeRatio.annualized(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE])
                                       HAM1
-Annualized Sharpe Ratio (Rf=3.9%) 1.067297
+Annualized Sharpe Ratio (Rf=3.9%) 1.066795
 > SharpeRatio.annualized(managers[,1:6], Rf=.035/12) 
                                       HAM1     HAM2      HAM3      HAM4
-Annualized Sharpe Ratio (Rf=3.5%) 1.109167 1.059201 0.9041795 0.5274492
-                                       HAM5     HAM6
-Annualized Sharpe Ratio (Rf=3.5%) 0.0887506 1.183872
+Annualized Sharpe Ratio (Rf=3.5%) 1.112293 1.059085 0.8854393 0.4512555
+                                        HAM5     HAM6
+Annualized Sharpe Ratio (Rf=3.5%) 0.01046591 1.194146
 > SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE])
                                       HAM1     HAM2      HAM3      HAM4
-Annualized Sharpe Ratio (Rf=3.9%) 1.067297 1.035284 0.8747901 0.5072777
-                                       HAM5     HAM6
-Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
+Annualized Sharpe Ratio (Rf=3.9%) 1.066795 1.033019 0.8539722 0.4292173
+                                        HAM5     HAM6
+Annualized Sharpe Ratio (Rf=3.9%) 0.04441162 1.333868
 > SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE],geometric=FALSE)
                                       HAM1     HAM2      HAM3      HAM4
 Annualized Sharpe Ratio (Rf=3.9%) 1.067297 1.035284 0.8747901 0.5072777
@@ -4261,6 +4263,76 @@ Sortino Ratio (MAR = 0%) 0.3824667
 Sortino Ratio (MAR = 0%) 0.3824667 0.8252045 0.4279693 0.2010037 0.09057819
                               HAM6 EDHEC LS EQ  SP500 TR
 Sortino Ratio (MAR = 0%) 0.4827293   0.5381398 0.1828195
+> 
+> 
+> 
+> cleanEx()
+> nameEx("StdDev")
+> ### * StdDev
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: StdDev
+> ### Title: calculates Standard Deviation for univariate and multivariate
+> ###   series, also calculates component contribution to standard deviation
+> ###   of a portfolio
+> ### Aliases: StdDev
+> ### Keywords: ts multivariate distribution models
+> 
+> ### ** Examples
+> 
+>     data(edhec)
+> 
+>     # first do normal StdDev calc
+>     StdDev(edhec)
+       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+StdDev            0.02004739  0.0251309            0.01834791       0.03857144
+       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
+StdDev           0.009005818   0.01835047             0.01417129   0.01701962
+       Long/Short Equity Merger Arbitrage Relative Value Short Selling
+StdDev        0.02217382       0.01116827     0.01319468    0.05509917
+       Funds of Funds
+StdDev     0.01821196
+>     # or the equivalent
+>     StdDev(edhec, portfolio_method="single")
+       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+StdDev            0.02004739  0.0251309            0.01834791       0.03857144
+       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
+StdDev           0.009005818   0.01835047             0.01417129   0.01701962
+       Long/Short Equity Merger Arbitrage Relative Value Short Selling
+StdDev        0.02217382       0.01116827     0.01319468    0.05509917
+       Funds of Funds
+StdDev     0.01821196
+> 
+>     # now with outliers squished
+>     StdDev(edhec, clean="boudt")
+       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+StdDev             0.0158664  0.0251309            0.01687269        0.0355635
+       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
+StdDev           0.007367818   0.01760712             0.01189823   0.01667315
+       Long/Short Equity Merger Arbitrage Relative Value Short Selling
+StdDev        0.02206307       0.01041944     0.01170342    0.05326087
+       Funds of Funds
+StdDev     0.01813736
+> 
+>     # add Component StdDev for the equal weighted portfolio
+>     StdDev(edhec, clean="boudt", portfolio_method="component")
+no weights passed in, assuming equal weighted portfolio
+$StdDev
+           [,1]
+[1,] 0.01048561
+
+$contribution
+ [1]  0.0008658123  0.0006049525  0.0010509579  0.0021479823  0.0004348643
+ [6]  0.0011469074  0.0006822007  0.0010512230  0.0013150652  0.0005428396
+[11]  0.0007548481 -0.0013277224  0.0012156837
+
+$pct_contrib_StdDev
+ [1]  0.08257143  0.05769357  0.10022854  0.20485039  0.04147247  0.10937913
+ [7]  0.06506063  0.10025383  0.12541613  0.05176994  0.07198892 -0.12662322
+[13]  0.11593824
+
+> 
 > 
 > 
 > 
@@ -4341,8 +4413,6 @@ $adj.R.squared
 NULL
 
 > chart.Style(managers[97:132,2,drop=FALSE],edhec[85:120,], method="constrained", leverage=FALSE, unstack=TRUE, las=3)
-Warning in is.na(x) :
-  is.na() applied to non-(list or vector) of type 'NULL'
 > chart.RollingStyle(managers[,2,drop=FALSE],edhec[,1:11], method="constrained", leverage=FALSE, width=36, cex.legend = .7, colorset=rainbow12equal, las=1)
 > 
 > 
@@ -4393,33 +4463,33 @@ Tracking Error: EDHEC LS EQ 0.1421533 0.05651657
 > 
 > data(managers)
 > TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
-[1] 0.2521042
+[1] 0.2528146
 > TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]) 
-[1] 0.2429183
+[1] 0.2428042
 > TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12) 
-                             HAM1      HAM2      HAM3      HAM4       HAM5
-Treynor Ratio: SP500 TR 0.2521042 0.3925795 0.2052647 0.1412605 0.04422094
+                             HAM1      HAM2      HAM3      HAM4        HAM5
+Treynor Ratio: SP500 TR 0.2528146 0.3925365 0.2010103 0.1208544 0.005214751
                              HAM6
-Treynor Ratio: SP500 TR 0.3015862
+Treynor Ratio: SP500 TR 0.3042033
 > TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
                              HAM1      HAM2      HAM3      HAM4       HAM5
-Treynor Ratio: SP500 TR 0.2429183 0.3891215 0.2003289 0.1352065 0.06064577
+Treynor Ratio: SP500 TR 0.2428042 0.3882701 0.1955616 0.1144007 0.02192927
                              HAM6
-Treynor Ratio: SP500 TR 0.3343216
+Treynor Ratio: SP500 TR 0.3400776
 > TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
-                                HAM1      HAM2       HAM3      HAM4       HAM5
-Treynor Ratio: SP500 TR    0.2521042 0.3925795 0.20526467 0.1412605 0.04422094
-Treynor Ratio: EDHEC LS EQ 0.1293751 0.1087675 0.07922885 0.0588903 0.01198772
-                                 HAM6
-Treynor Ratio: SP500 TR    0.30158616
-Treynor Ratio: EDHEC LS EQ 0.09576317
+                                HAM1      HAM2       HAM3       HAM4
+Treynor Ratio: SP500 TR    0.2528146 0.3925365 0.20101032 0.12085442
+Treynor Ratio: EDHEC LS EQ 0.1297397 0.1087556 0.07758674 0.05038319
+                                  HAM5      HAM6
+Treynor Ratio: SP500 TR    0.005214751 0.3042033
+Treynor Ratio: EDHEC LS EQ 0.001413651 0.0965942
 > TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
-                                HAM1      HAM2       HAM3       HAM4       HAM5
-Treynor Ratio: SP500 TR    0.2429183 0.3891215 0.20032895 0.13520645 0.06064577
-Treynor Ratio: EDHEC LS EQ 0.1242872 0.1070745 0.07718578 0.05569558 0.01662237
-                                HAM6
-Treynor Ratio: SP500 TR    0.3343216
-Treynor Ratio: EDHEC LS EQ 0.1067912
+                                HAM1      HAM2       HAM3       HAM4
+Treynor Ratio: SP500 TR    0.2428042 0.3882701 0.19556161 0.11440074
+Treynor Ratio: EDHEC LS EQ 0.1242288 0.1068402 0.07534894 0.04712509
+                                  HAM5      HAM6
+Treynor Ratio: SP500 TR    0.021929267 0.3400776
+Treynor Ratio: EDHEC LS EQ 0.006010584 0.1086298
 > 
 > 
 > 
@@ -5012,7 +5082,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > ### Name: chart.Bar
 > ### Title: wrapper for barchart of returns
-> ### Aliases: chart.Bar
+> ### Aliases: chart.Bar charts.Bar
 > ### Keywords: ts multivariate distribution models hplot
 > 
 > ### ** Examples
@@ -5030,7 +5100,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > ### Name: chart.BarVaR
 > ### Title: Periodic returns in a bar chart with risk metric overlay
-> ### Aliases: chart.BarVaR
+> ### Aliases: chart.BarVaR charts.BarVaR
 > ### Keywords: ts multivariate distribution models hplot
 > 
 > ### ** Examples
@@ -5454,10 +5524,6 @@ Attaching package: 'quantreg'
 > 
 > data(edhec)
 > chart.Scatter(edhec[,1],edhec[,2])
-Warning in rug(side = 1, x, col = element.color) :
-  some values will be clipped
-Warning in rug(side = 2, y, col = element.color) :
-  some values will be clipped
 > 
 > 
 > 
@@ -6293,13 +6359,13 @@ $recovery
 > data(managers)
 > table.AnnualizedReturns(managers[,1:8])
                             HAM1   HAM2   HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ
-Annualized Return         0.1335 0.1697 0.1494 0.1322 0.0491 0.1327      0.1145
+Annualized Return         0.1375 0.1747 0.1512 0.1215 0.0373 0.1373      0.1180
 Annualized Std Dev        0.0888 0.1272 0.1265 0.1843 0.1584 0.0825      0.0708
-Annualized Sharpe (Rf=0%) 1.5034 1.3344 1.1809 0.7174 0.3097 1.6082      1.6167
+Annualized Sharpe (Rf=0%) 1.5491 1.3732 1.1955 0.6592 0.2356 1.6642      1.6657
                           SP500 TR
-Annualized Return           0.1040
+Annualized Return           0.0967
 Annualized Std Dev          0.1500
-Annualized Sharpe (Rf=0%)   0.6931
+Annualized Sharpe (Rf=0%)   0.6449
 > 
 > require("Hmisc")
 Loading required package: Hmisc
@@ -6424,9 +6490,9 @@ Annualized Alpha              0.0715           0.1147           0.0772
 Correlation                   0.6587           0.4090           0.6589
 Correlation p-value           0.0000           0.0000           0.0000
 Tracking Error                0.0982           0.2106           0.1511
-Active Premium                0.0295           0.0650           0.0454
-Information Ratio             0.3004           0.3086           0.3004
-Treynor Ratio                 0.2429           0.3891           0.2003
+Active Premium                0.0394           0.0750           0.0527
+Information Ratio             0.4011           0.3563           0.3487
+Treynor Ratio                 0.2428           0.3883           0.1956
 > 
 > result = table.CAPM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
 > textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
@@ -7103,7 +7169,7 @@ Warning in check.TZ(x) :
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  130.58 5.86 136.435 0 0 
+Time elapsed:  136.46 5.14 141.605 0 0 
 > grDevices::dev.off()
 postscript 
          2 
