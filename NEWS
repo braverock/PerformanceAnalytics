@@ -1,3 +1,22 @@
+PerformanceAnalytics 1.0.1 Release Notes
+
+This release is predominantly a minor bugfix release.
+
+We've reduced the number of warning() calls throughout the code to better 
+allow for execution in a highly parallel environment.
+
+We've fixed bugs related to assuming compounding/geometric returns in all
+functions that could be affected by such assumptions.
+
+Bugs related to handling matrices pointed out by Dr. Stefan Albrecht 
+have been removed.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
+
+
+
 PerformanceAnalytics 1.0.0 Release Notes
 
 This release marks a major milestone for PerformanceAnalytics.  After several
