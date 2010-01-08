@@ -22,6 +22,7 @@ export(
     CAPM.CML.slope,
     CAPM.RiskPremium,
     CAPM.SML.slope,
+    CDD,
     checkData,
     clean.boudt,
     CoKurtosis,

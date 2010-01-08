@@ -1,5 +1,5 @@
 `maxDrawdown` <-
-		function (R, geometric = TRUE, ...)
+		function (R, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
 	# DESCRIPTION:
@@ -15,6 +15,7 @@
 		R = na.omit(R)
         drawdown = Drawdowns(R, geometric = geometric)
         result = min(drawdown)
+        if (invert) result<- -result
 		return(result)
 	}
 	else {
@@ -25,6 +26,36 @@
 		rownames(result) = "Worst Drawdown"
 		return(result)
 	}
+}
+
+CDD <- function (R, p=.95, weights=NULL, geometric = TRUE, invert=TRUE,  ...)
+{
+    p=.setalphaprob(p)
+    if (is.vector(R) || ncol(R)==1) {
+        R = na.omit(R)
+        drawdowns =     sortDrawdowns(findDrawdowns(R))
+        result = quantile(drawdowns$return,p)
+        if(invert) result<- -result
+        return(result)
+    }    
+    else {
+        R = checkData(R, method = "matrix")
+        if(is.null(weights)) {
+            result=matrix(nrow=1,ncol=ncol(R))
+            for(i in 1:ncol(R) ) {
+                result[i]<-CDD(R[,i,drop=FALSE],p=p, geometric=geometric, invert=invert, ...=...)
+            }
+            dim(result) = c(1,NCOL(R))
+            colnames(result) = colnames(R)
+            rownames(result) = paste("Conditional Drawdown ",p*100,"%",sep='')
+        } else {
+            # we have weights, do the portfolio calc
+            portret<-Return.portfolio(R,weights=weights,geometric=geomentric)
+            result<-CDD(portret,p=p, geometric=geometric, invert=invert, ...=...)
+        }
+        return(result)
+    }
+    # TODO add modified Cornish Fisher and copula methods to this to account for small number of observations likely on real data
 }
 
 ###############################################################################
