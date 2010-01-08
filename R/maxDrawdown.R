@@ -1,5 +1,5 @@
 `maxDrawdown` <-
-		function (R, geometric = TRUE, invert=TRUE, ...)
+		function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
 	# DESCRIPTION:
@@ -11,7 +11,7 @@
 	# peak equity.
 	
 	# FUNCTION:
-	if (is.vector(R)) {
+	if (is.vector(R) || ncol(R)==1 ) {
 		R = na.omit(R)
         drawdown = Drawdowns(R, geometric = geometric)
         result = min(drawdown)
@@ -19,16 +19,22 @@
 		return(result)
 	}
 	else {
-		R = checkData(R, method = "matrix")
-		result = apply(R, 2, maxDrawdown)
-		dim(result) = c(1,NCOL(R))
-		colnames(result) = colnames(R)
-		rownames(result) = "Worst Drawdown"
-		return(result)
+        if(is.null(weights)) {
+            R = checkData(R, method = "matrix")
+    		result = apply(R, 2, maxDrawdown)
+    		dim(result) = c(1,NCOL(R))
+    		colnames(result) = colnames(R)
+    		rownames(result) = "Worst Drawdown"
+        } else {
+            # we have weights, do the portfolio calc
+            portret<-Return.portfolio(R,weights=weights,geometric=geometric)
+            result<-maxDrawdown(portret,p=p, geometric=geometric, invert=invert, ...=...)
+        }
+        return(result)
 	}
 }
 
-CDD <- function (R, p=.95, weights=NULL, geometric = TRUE, invert=TRUE,  ...)
+CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
 {
     p=.setalphaprob(p)
     if (is.vector(R) || ncol(R)==1) {
@@ -50,7 +56,7 @@ CDD <- function (R, p=.95, weights=NULL, geometric = TRUE, invert=TRUE,  ...)
             rownames(result) = paste("Conditional Drawdown ",p*100,"%",sep='')
         } else {
             # we have weights, do the portfolio calc
-            portret<-Return.portfolio(R,weights=weights,geometric=geomentric)
+            portret<-Return.portfolio(R,weights=weights,geometric=geometric)
             result<-CDD(portret,p=p, geometric=geometric, invert=invert, ...=...)
         }
         return(result)
