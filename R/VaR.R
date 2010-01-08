@@ -20,15 +20,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
     columns=colnames(R)
 
     # check weights options
-    if (is.null(weights) & portfolio_method != "single"){
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    }
     if (!is.null(weights)) {
-        if (portfolio_method == "single") {
-            message("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
-            portfolio_method="component"
-        }
         if (is.vector(weights)){
             # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
@@ -41,25 +33,44 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             }
             #@todo: check for date overlap with R and weights
         }
+    } 
+    if (is.null(weights) & portfolio_method != "single"){
+        message("no weights passed in, assuming equal weighted portfolio")
+        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+    } else {
+        # we have weights, so get the moments ready
+        if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
+        if (is.null(sigma)) { sigma = cov(R) }
+        if(method=="modified"){
+            if (is.null(m3)) {m3 = M3.MM(R)}
+            if (is.null(m4)) {m4 = M4.MM(R)}
+        }
     } # end weight checks
-
+    
     if(clean!="none"){
         R = as.matrix(Return.clean(R, method=clean))
     }
     
     switch(portfolio_method,
         single = {
-            switch(method,
-                modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
-                gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
-                historical = { rVaR = -1* t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
-                kernel = { stop("no kernel method defined for non-component VaR")}
-            ) # end sigle switch calc
-            # convert from vector to columns
-            rVaR=as.matrix(rVaR)
-            colnames(rVaR)=columns
-            #rVaR=t(rVaR) #transform so it has real rows and columns
-            # check for unreasonable results
+            if(is.null(weights)){
+                switch(method,
+                    modified = { rVaR = VaR.CornishFisher(R=R,p=p) }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},
+                    gaussian = { rVaR = VaR.Gaussian(R=R,p=p) },
+                    historical = { rVaR = -1* t(apply(R, 2, quantile, probs=1-p, na.rm=TRUE )) },
+                    kernel = { stop("no kernel method defined for non-component VaR")}
+                ) # end sigle switch calc
+                # convert from vector to columns
+                rVaR=as.matrix(rVaR)
+                colnames(rVaR)=columns
+            } else { # we have weights, so we should use the .MM calc
+                weights=as.vector(weights)
+                switch(method,
+                        modified = { rVaR=mVaR.MM(w=weights, mu=mu, sigma=sigma, M3=m3 , M4=m4 , p=p) }, 
+                        gaussian = { rVaR=GVaR.MM(w=weights, mu=mu, sigma=sigma, p=p) },
+                        historical = { rVaR = VaR.historical(R=R,p=p) %*% weights } # note that this is weighting the univariate calc by the weights
+                ) # end multivariate method
+            }
             columns<-ncol(rVaR)
             for(column in 1:columns) {
                 tmp=rVaR[,column]
@@ -85,15 +96,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             #}
             # for now, use as.vector
             weights=as.vector(weights)
-	    names(weights)<-colnames(R)
-            if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
-            if (is.null(sigma)) { sigma = cov(R) }
-            # if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
-            # if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
-            if (is.null(m3)) {m3 = M3.MM(R)}
-            if (is.null(m4)) {m4 = M4.MM(R)}
-            # if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
-            # if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
+    	    names(weights)<-colnames(R)
 
             switch(method,
                 modified = { return(VaR.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))},

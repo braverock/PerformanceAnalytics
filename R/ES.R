@@ -19,15 +19,12 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
     R <- checkData(R, method="xts", ...)
 
     # check weights options
-    if (is.null(weights) & portfolio_method != "single"){
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    }
+
     if (!is.null(weights)) {
-        if (portfolio_method == "single") {
-            message("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
-            portfolio_method="component"
-        }
+#        if (portfolio_method == "single") {
+#            message("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
+#            portfolio_method="component"
+#        }
         if (is.vector(weights)){
             #message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
@@ -40,6 +37,18 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             }
             #@todo: check for date overlap with R and weights
         }
+    }
+    if (is.null(weights) & portfolio_method != "single"){
+        message("no weights passed in, assuming equal weighted portfolio")
+        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+    } else {
+        # we have weights, so get the moments ready
+        if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
+        if (is.null(sigma)) { sigma = cov(R) }
+        if(method=="modified"){
+            if (is.null(m3)) {m3 = M3.MM(R)}
+            if (is.null(m4)) {m4 = M4.MM(R)}
+        }
     } # end weight checks
 
     if(clean!="none"){
@@ -48,20 +57,28 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
     
     switch(portfolio_method,
         single = {
-            columns=colnames(R)
-            switch(method,
-                modified = { if (operational) rES =  operES.CornishFisher(R=R,p=p)
-			     else rES = ES.CornishFisher(R=R,p=p) 
-			   }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
-                gaussian = { rES = ES.Gaussian(R=R,p=p) },
-                historical = { rES = ES.historical(R=R,p=p) }
-            ) # end sigle switch calc
-            
-	    # convert from vector to columns
-            rES=as.matrix(rES)
-            colnames(rES)=columns
-	    
-	    # check for unreasonable results
+            if(is.null(weights)){
+                columns=colnames(R)
+                switch(method,
+                    modified = { if (operational) rES =  operES.CornishFisher(R=R,p=p)
+    			     else rES = ES.CornishFisher(R=R,p=p) 
+    			   }, # mu=mu, sigma=sigma, skew=skew, exkurt=exkurt))},)
+                    gaussian = { rES = ES.Gaussian(R=R,p=p) },
+                    historical = { rES = ES.historical(R=R,p=p) }
+                ) # end single method switch calc
+                
+    	        # convert from vector to columns
+                rES=as.matrix(rES)
+                colnames(rES)=columns
+            } else { # we have weights, so we should use the .MM calc
+                weights=as.vector(weights)
+                switch(method,
+                        modified = { rES=mES.MM(w=weights, mu=mu, sigma=sigma, M3=m3 , M4=m4 , p=p) }, 
+                        gaussian = { rES=GES.MM(w=weights, mu=mu, sigma=sigma, p=p) },
+                        historical = { rES = ES.historical(R=R,p=p) %*% weights } # note that this is not tested for weighting the univariate calc by the weights
+                ) # end multivariate method
+            }
+	        # check for unreasonable results
             columns<-ncol(rES)
             for(column in 1:columns) {
                 tmp=rES[,column]
@@ -88,15 +105,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             #}
             # for now, use as.vector
             weights=as.vector(weights)
-	    names(weights)<-colnames(R)
-            if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
-            if (is.null(sigma)) { sigma = cov(R) }
-            # if (is.null(m1)) {m1 = multivariate_mean(weights, mu)}
-            # if (is.null(m2)) {m2 = StdDev.MM(weights, sigma)}
-            if (is.null(m3)) {m3 = M3.MM(R)}
-            if (is.null(m4)) {m4 = M4.MM(R)}
-            # if (is.null(skew)) { skew = skewness.MM(weights,sigma,m3) }
-            # if (is.null(exkurt)) { exkurt = kurtosis.MM(weights,sigma,m4) - 3 }
+	        names(weights)<-colnames(R)
 
             switch(method,
                 modified = { if (operational) return(operES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
