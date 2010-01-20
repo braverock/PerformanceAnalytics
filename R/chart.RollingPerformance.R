@@ -33,8 +33,9 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
         else
             Return.calc = merge(Return.calc,column.Return.calc)
     }
-
-    ylim = c(min(0,min(Return.calc, na.rm=TRUE)),max(Return.calc, na.rm=TRUE))
+    if(is.null(ylim)){
+        ylim = c(min(0,min(Return.calc, na.rm=TRUE)),max(Return.calc, na.rm=TRUE))
+    }    
     colnames(Return.calc) = columnnames
 
     if(is.null(main)){
