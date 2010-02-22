@@ -32,7 +32,7 @@ Return.rebalancing <- function (R, weights, ...)
 
 # ------------------------------------------------------------------------------
 # Return.portfolio
-Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,method=c("simple","compound"), ...)
+Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,geometric=TRUE, ...)
 {   # @author Brian G. Peterson
 
     # Function to calculate weighted portfolio returns
@@ -57,7 +57,8 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     R=checkData(R,method="xts")
 
     # take only the first method
-    method = method[1]
+    if(hasArg(method) & !is.null(list(...)$method)) method = list(...)$method[1]
+    if(!isTRUE(geometric)) method='simple' else method=FALSE
 
     if (is.null(weights)){
         # set up an equal weighted portfolio

@@ -10,7 +10,7 @@ Calculates weighted returns for a portfolio of assets
 Calculates weighted returns for a portfolio of assets.  If you have a single weighting vector, or want the equal weighted portfolio, use \code{Return.portfolio}.  If you have a portfolio that is periodically rebalanced, and multiple time periods with different weights, use \code{Return.rebalancing}.  Both functions will subset the return series to only include returns for assets for which \code{weight} is provided.
 }
 \usage{
-Return.portfolio(R, weights = NULL, wealth.index = FALSE, contribution = FALSE, method = c("simple", "compound"), ...)
+Return.portfolio(R, weights = NULL, wealth.index = FALSE, contribution = FALSE, geometric = TRUE, ...)
 Return.rebalancing(R, weights, ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -19,7 +19,7 @@ Return.rebalancing(R, weights, ...)
   \item{weights}{a time series or sinlge-row matrix/vector containing asset weights, as percentages}
   \item{wealth.index}{TRUE/FALSE whether to return a wealth index, default FALSE}
   \item{contribution}{if contribution is TRUE, add the weighted return contributed by the asset in this period}
-  \item{method}{"simple" or "compound"}
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{\dots}{ any other passthru parameters }
 }
 %\details{
