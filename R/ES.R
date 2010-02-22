@@ -84,12 +84,12 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             for(column in 1:columns) {
                 tmp=rES[,column]
                 if (eval(0 > tmp)) { #eval added previously to get around Sweave bitching
-                    warning(c("ES calculation produces unreliable result (inverse risk) for column: ",column," : ",rES[,column]))
+                    message(c("ES calculation produces unreliable result (inverse risk) for column: ",column," : ",rES[,column]))
                     # set ES to NA, since inverse risk is unreasonable
                     rES[,column] <- NA
                 } else
                 if (eval(1 < tmp)) { #eval added previously to get around Sweave bitching
-                    warning(c("ES calculation produces unreliable result (risk over 100%) for column: ",column," : ",rES[,column]))
+                    message(c("ES calculation produces unreliable result (risk over 100%) for column: ",column," : ",rES[,column]))
                     # set ES to 1, since greater than 100% is unreasonable
                     rES[,column] <- 1
                 }

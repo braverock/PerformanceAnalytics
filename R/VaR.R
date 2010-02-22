@@ -76,12 +76,12 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             for(column in 1:columns) {
                 tmp=rVaR[,column]
                 if (eval(tmp < 0)) { #eval added previously to get around Sweave bitching
-                    warning(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
+                    message(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
                     rVaR[,column] <- NA
                 } else
                 if (eval(1 < tmp)) { #eval added previously to get around Sweave bitching
-                    warning(c("VaR calculation produces unreliable result (risk over 100%) for column: ",column," : ",rVaR[,column]))
+                    message(c("VaR calculation produces unreliable result (risk over 100%) for column: ",column," : ",rVaR[,column]))
                     # set VaR to 1, since greater than 100% is unreasonable
                     rVaR[,column] <- 1
                 }
