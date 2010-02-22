@@ -33,7 +33,12 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             }
             #@todo: check for date overlap with R and weights
         }
-    } 
+    }
+    
+    if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
+        R = as.matrix(Return.clean(R, method=clean))
+    }
+    
     if (is.null(weights) & portfolio_method != "single"){
         message("no weights passed in, assuming equal weighted portfolio")
         weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
@@ -46,11 +51,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             if (is.null(m4)) {m4 = M4.MM(R)}
         }
     } # end weight checks
-    
-    if(clean!="none"){
-        R = as.matrix(Return.clean(R, method=clean))
-    }
-    
+      
     switch(portfolio_method,
         single = {
             if(is.null(weights)){

@@ -38,7 +38,12 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
             #@todo: check for date overlap with R and weights
         }
     }
-    if (is.null(weights) & portfolio_method != "single"){
+
+    if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
+        R = as.matrix(Return.clean(R, method=clean))
+    }
+    
+    if (is.null(weights) & portfolio_method!="single"){ # what is the difference between & and && ?
         message("no weights passed in, assuming equal weighted portfolio")
         weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     } else {
@@ -51,10 +56,6 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
         }
     } # end weight checks
 
-    if(clean!="none"){
-        R = as.matrix(Return.clean(R, method=clean))
-    }
-    
     switch(portfolio_method,
         single = {
             if(is.null(weights)){
@@ -75,7 +76,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
                 switch(method,
                         modified = { rES=mES.MM(w=weights, mu=mu, sigma=sigma, M3=m3 , M4=m4 , p=p) }, 
                         gaussian = { rES=GES.MM(w=weights, mu=mu, sigma=sigma, p=p) },
-                        historical = { rES = ES.historical(R=R,p=p) %*% weights } # note that this is not tested for weighting the univariate calc by the weights
+                        historical = { rES = (ES.historical(R=R,p=p) %*% weights) } # note that this is not tested for weighting the univariate calc by the weights
                 ) # end multivariate method
             }
 	        # check for unreasonable results
@@ -115,7 +116,7 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
                 historical = { return(ES.historical.portfolio(R, p,weights)) }
             )
 
-        }, # end component portfolio switch
+        } # end component portfolio switch
     )
 
 } # end ES wrapper function
