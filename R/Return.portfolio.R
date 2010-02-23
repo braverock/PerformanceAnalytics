@@ -57,8 +57,11 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
     R=checkData(R,method="xts")
 
     # take only the first method
-    if(hasArg(method) & !is.null(list(...)$method)) method = list(...)$method[1]
-    if(!isTRUE(geometric)) method='simple' else method=FALSE
+    if(hasArg(method) & !is.null(list(...)$method)) 
+        method = list(...)$method[1]
+    else if(!isTRUE(geometric)) 
+        method='simple' 
+    else method=FALSE
 
     if (is.null(weights)){
         # set up an equal weighted portfolio
