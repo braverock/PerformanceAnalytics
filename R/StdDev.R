@@ -16,16 +16,9 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
     columns=colnames(R)
     
     # check weights options
-    if (is.null(weights) & portfolio_method != "single"){
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    }
     if (!is.null(weights)) {
-        if (portfolio_method == "single") {
-            message("weights passed as parameter, but portfolio_method set to 'single', using multivariate moment calc")
-        }
         if (is.vector(weights)){
-            #message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
+            # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
             if (length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
@@ -34,7 +27,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
             if (ncol(weights) != ncol(R)) {
                 stop("number of columns in weighting timeseries not equal to number of columns in R")
             }
-            #TODO: check for date overlap with R and weights
+            #@todo: check for date overlap with R and weights
         }
     } # end weight checks
     
