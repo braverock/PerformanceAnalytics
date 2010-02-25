@@ -1,5 +1,5 @@
 `charts.PerformanceSummary` <-
-function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", ...)
+function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", p=0.95,...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -84,7 +84,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 	yearly = {date.label = "Annual"}
     )
 
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, ...)
+    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
