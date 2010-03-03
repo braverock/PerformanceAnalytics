@@ -9,16 +9,19 @@ Return.rebalancing <- function (R, weights, ...)
 
     # loop:
     for (row in 1:nrow(weights)){
-        from =as.Date(index(weights[row,]))
+        from =as.Date(index(weights[row,]))+1
         if (row == nrow(weights)){
-           to = as.Date(index(last(R)))
+           to = as.Date(index(last(R))) # this is correct
         } else {
-           to = as.Date(index(weights[(row+1),]))-1
+           to = as.Date(index(weights[(row+1),]))
         }
         if(row==1){
             startingwealth=1
         }
-        resultreturns=Return.portfolio(R[paste(from,to,sep="/"),],weights=weights[row,], ...=...)
+        tmpR<-R[paste(from,to,sep="/"),]
+        if (nrow(tmpR)>=1){
+            resultreturns=Return.portfolio(tmpR,weights=weights[row,], ...=...)
+        }
         if(row==1){
             result = resultreturns
         } else {
@@ -55,7 +58,10 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
 
     # Setup:
     R=checkData(R,method="xts")
-
+    if(!nrow(R)>=1){
+        warning("no data passed for R(eturns)")
+        return(NULL)
+    }
     # take only the first method
     if(hasArg(method) & !is.null(list(...)$method)) 
         method = list(...)$method[1]
