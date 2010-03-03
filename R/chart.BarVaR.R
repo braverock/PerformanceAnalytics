@@ -78,12 +78,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                     StdDev = {
                         symmetric = c(symmetric, TRUE)
                         if(width > 0){
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "sd")
+                            column.risk = -1 * apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "sd")
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-",freq.lab," Std Dev",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "sd")
+                            column.risk = -1 * apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "sd")
                             if(column==1)
                                 legend.txt = c(legend.txt, "Std Dev")
                         }
@@ -197,7 +197,7 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
             lty = rep(lty, risk.columns)
         for(column in (risk.columns):2) {
             if (show.symmetric && symmetric[column-1]){
-                lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
+                lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
             }
         }
         for(column in (risk.columns):2) {
