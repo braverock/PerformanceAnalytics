@@ -7,6 +7,12 @@ Return.rebalancing <- function (R, weights, ...)
     weights=checkData(weights,method="xts")
     R=checkData(R,method="xts")
 
+    if(as.Date(first(index(R))) > (as.Date(index(weights[1,]))+1)) {
+        stop(paste('data series starts on',as.Date(first(index(R))),', which is after the first rebalancing period',as.Date(first(index(weights)))+1)) 
+    }
+    if(as.Date(last(index(R))) < (as.Date(index(weights[1,]))+1)){
+        stop(paste('last date in series',as.Date(last(index(R))),'occurs before beginning of first rebalancing period',as.Date(first(index(weights)))+1))
+    }
     # loop:
     for (row in 1:nrow(weights)){
         from =as.Date(index(weights[row,]))+1
