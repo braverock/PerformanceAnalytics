@@ -88,7 +88,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    chart.Drawdown(x, geometric = geometric, main = "", ylab = "From Peak", event.labels = NULL, ylog=FALSE, ...)
+    chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown From Peak", event.labels = NULL, ylog=FALSE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))
