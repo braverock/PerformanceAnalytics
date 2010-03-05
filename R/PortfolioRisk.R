@@ -552,6 +552,22 @@ ES.historical.portfolio = function(R,p,w)
     return(ret)
 }
 
+VaR.historical = function(R,p)
+{
+    alpha = .setalphaprob(p)
+    for(column in 1:ncol(R)) {
+        r = na.omit(as.vector(R[,column]))
+        rq = -quantile(r,probs=alpha)
+        if (column==1) {
+            result=data.frame(rq=rq)
+        } else {
+            rq=data.frame(rq=rq)
+            result=cbind(result,rq)
+        }
+    }
+    colnames(result)<-colnames(R)
+    return(result)
+}    
 VaR.historical.portfolio = function(R,p,w)
 {
     alpha = .setalphaprob(p)

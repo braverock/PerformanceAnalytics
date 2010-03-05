@@ -1,5 +1,4 @@
-`maxDrawdown` <-
-		function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
+maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
 	# DESCRIPTION:
@@ -28,7 +27,7 @@
         } else {
             # we have weights, do the portfolio calc
             portret<-Return.portfolio(R,weights=weights,geometric=geometric)
-            result<-maxDrawdown(portret,p=p, geometric=geometric, invert=invert, ...=...)
+            result<-maxDrawdown(portret, geometric=geometric, invert=invert, ...=...)
         }
         return(result)
 	}

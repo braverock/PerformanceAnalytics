@@ -16,42 +16,50 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
     clean = clean[1]
     method = method[1]
     portfolio_method = portfolio_method[1]
-    R <- checkData(R, method="xts", ...)
-    columns=colnames(R)
+    if(!is.null(R)){
+        R <- checkData(R, method="xts", ...)
+        columns=colnames(R)
+    } else {
+        #R is null, check for moments
+        if(is.null(mu)) stop("Nothing to do! You must pass either R or the moments mu, sigma, etc.")
+    }
 
     # check weights options
-    if (!is.null(weights)) {
+    if (!is.null(weights) & portfolio_method != "single") {
         if (is.vector(weights)){
-            # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
-            if (length (weights)!=ncol(R)) {
+            if (!is.null(R) & length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
         } else {
             weights = checkData(weights, method="matrix", ...)
-            if (ncol(weights) != ncol(R)) {
-                stop("number of columns in weighting timeseries not equal to number of columns in R")
+            if (!is.null(R)){
+                if(ncol(weights) != ncol(R)) {
+                    stop("number of columns in weighting timeseries not equal to number of columns in R")
+                }  
+                #TODO check for date overlap with R and weights
+            } 
+        }
+    }
+    
+    if (!is.null(R)){
+        if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
+            R = as.matrix(Return.clean(R, method=clean))
+        }
+        if (is.null(weights) & portfolio_method != "single"){
+            message("no weights passed in, assuming equal weighted portfolio")
+            weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+        }
+        if(portfolio_method != "single"){
+            # get the moments ready
+            if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
+            if (is.null(sigma)) { sigma = cov(R) }
+            if(method=="modified"){
+                if (is.null(m3)) {m3 = M3.MM(R)}
+                if (is.null(m4)) {m4 = M4.MM(R)}
             }
-            #@todo: check for date overlap with R and weights
-        }
+        } # end weight checks
     }
     
-    if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
-        R = as.matrix(Return.clean(R, method=clean))
-    }
-    
-    if (is.null(weights) & portfolio_method != "single"){
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    } else {
-        # we have weights, so get the moments ready
-        if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
-        if (is.null(sigma)) { sigma = cov(R) }
-        if(method=="modified"){
-            if (is.null(m3)) {m3 = M3.MM(R)}
-            if (is.null(m4)) {m4 = M4.MM(R)}
-        }
-    } # end weight checks
-      
     switch(portfolio_method,
         single = {
             if(is.null(weights)){
@@ -108,10 +116,8 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
 
         }, # end component portfolio switch
         marginal = {
-#             weights=as.vector(weights)
-# 	    names(weights)<-colnames(R)
-	    return(VaR.Marginal(R,p,method,as.vector(weights)))
-	},  # end marginal portfolio switch
+    	    return(VaR.Marginal(R,p,method,as.vector(weights)))
+	    },  # end marginal portfolio switch
     )
 
 } # end VaR wrapper function

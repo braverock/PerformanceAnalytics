@@ -7,11 +7,14 @@
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.
 }
 \usage{
-VaR(R, p = 0.95, ..., method = c("modified", "gaussian","historical", "kernel"),
-           clean = c("none", "boudt", "geltner"),
-                 portfolio_method = c("single", "component","marginal"),
-                 weights = NULL, mu = NULL, sigma = NULL,
-                 m3 = NULL, m4 = NULL, invert = TRUE)
+VaR(R = NULL, 
+    p = 0.95, 
+    ..., 
+    method = c("modified", "gaussian","historical", "kernel"),
+    clean = c("none", "boudt", "geltner"),
+    portfolio_method = c("single", "component","marginal"),
+    weights = NULL, mu = NULL, sigma = NULL,
+    m3 = NULL, m4 = NULL, invert = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -184,7 +187,7 @@ Zangari, Peter. A VaR Methodology for Portfolios that include Options. 1996. Ris
 }
 \author{ Brian G. Peterson and Kris Boudt }
 \note{
-The option to \code{invert} the VaR measure should appease both academics and practitioners.  The mathematical definition of VaR as the negative value of a quantile will (usually) produce a positive number.  Practitioners will argue that VaR denotes a loss, and should be internally consistent with the quantile (a negative number).  For tables and charts, different preferences may apply for clarity and compactness.  As such, we provide the option, and set the default to TRUE to keep the return consistent with prior versions of PerformanceAnalytics, but make no value judgement on which approach is preferable.
+The option to \code{invert} the VaR measure should appease both academics and practitioners.  The mathematical definition of VaR as the negative value of a quantile will (usually) produce a positive number.  Practitioners will argue that VaR denotes a loss, and should be internally consistent with the quantile (a negative number).  For tables and charts, different preferences may apply for clarity and compactness.  As such, we provide the option, and set the default to TRUE to keep the return consistent with prior versions of PerformanceAnalytics, but make no value judgment on which approach is preferable.
 
 The prototype of the univariate Cornish Fisher VaR function was completed by Prof. Diethelm Wuertz.  All corrections to the calculation and error handling are the fault of Brian Peterson.
 }

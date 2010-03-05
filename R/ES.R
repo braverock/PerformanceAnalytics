@@ -3,7 +3,7 @@
 ###############################################################################
 
 ES <-
-function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE)
+function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -16,46 +16,50 @@ function (R , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"
     method = method[1]
     clean = clean[1]
     portfolio_method = portfolio_method[1]
-    R <- checkData(R, method="xts", ...)
-
+    if(!is.null(R)){
+        R <- checkData(R, method="xts", ...)
+        columns=colnames(R)
+    } else {
+        #R is null, check for moments
+        if(is.null(mu)) stop("Nothing to do! You must pass either R or the moments mu, sigma, etc.")
+    }
+    
     # check weights options
-
-    if (!is.null(weights)) {
-#        if (portfolio_method == "single") {
-#            message("weights passed as parameter, but portfolio_method set to 'single', assuming 'component'")
-#            portfolio_method="component"
-#        }
+    if (!is.null(weights) & portfolio_method != "single") {
         if (is.vector(weights)){
-            #message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
-            if (length (weights)!=ncol(R)) {
+            if (!is.null(R) & length (weights)!=ncol(R)) {
                 stop("number of items in weighting vector not equal to number of columns in R")
             }
         } else {
             weights = checkData(weights, method="matrix", ...)
-            if (ncol(weights) != ncol(R)) {
-                stop("number of columns in weighting timeseries not equal to number of columns in R")
-            }
-            #@todo: check for date overlap with R and weights
+            if (!is.null(R)){
+                if(ncol(weights) != ncol(R)) {
+                    stop("number of columns in weighting timeseries not equal to number of columns in R")
+                }  
+                #TODO check for date overlap with R and weights
+            } 
         }
-    }
-
-    if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
-        R = as.matrix(Return.clean(R, method=clean))
     }
     
-    if (is.null(weights) & portfolio_method!="single"){ # what is the difference between & and && ?
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    } else {
-        # we have weights, so get the moments ready
-        if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
-        if (is.null(sigma)) { sigma = cov(R) }
-        if(method=="modified"){
-            if (is.null(m3)) {m3 = M3.MM(R)}
-            if (is.null(m4)) {m4 = M4.MM(R)}
+    if (!is.null(R)){
+        if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
+            R = as.matrix(Return.clean(R, method=clean))
         }
-    } # end weight checks
-
+        if (is.null(weights) & portfolio_method != "single"){
+            message("no weights passed in, assuming equal weighted portfolio")
+            weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+        }
+        if(portfolio_method != "single"){
+            # get the moments ready
+            if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
+            if (is.null(sigma)) { sigma = cov(R) }
+            if(method=="modified"){
+                if (is.null(m3)) {m3 = M3.MM(R)}
+                if (is.null(m4)) {m4 = M4.MM(R)}
+            }
+        } # end weight checks
+    }
+    
     switch(portfolio_method,
         single = {
             if(is.null(weights)){
