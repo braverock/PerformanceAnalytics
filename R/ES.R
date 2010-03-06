@@ -16,38 +16,22 @@ function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "ke
     method = method[1]
     clean = clean[1]
     portfolio_method = portfolio_method[1]
+    if (is.null(weights) & portfolio_method != "single"){
+        message("no weights passed in, assuming equal weighted portfolio")
+        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+    }
     if(!is.null(R)){
         R <- checkData(R, method="xts", ...)
         columns=colnames(R)
-    } else {
-        #R is null, check for moments
-        if(is.null(mu)) stop("Nothing to do! You must pass either R or the moments mu, sigma, etc.")
-    }
-    
-    # check weights options
-    if (!is.null(weights) & portfolio_method != "single") {
-        if (is.vector(weights)){
-            if (!is.null(R) & length (weights)!=ncol(R)) {
-                stop("number of items in weighting vector not equal to number of columns in R")
+        if (!is.null(weights) & portfolio_method != "single") {
+            if ( length(weights) != ncol(R)) {
+                stop("number of items in weights not equal to number of columns in R")
             }
-        } else {
-            weights = checkData(weights, method="matrix", ...)
-            if (!is.null(R)){
-                if(ncol(weights) != ncol(R)) {
-                    stop("number of columns in weighting timeseries not equal to number of columns in R")
-                }  
-                #TODO check for date overlap with R and weights
-            } 
         }
-    }
-    
-    if (!is.null(R)){
+        # weights = checkData(weights, method="matrix", ...) #is this necessary?
+        # TODO check for date overlap with R and weights
         if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
             R = as.matrix(Return.clean(R, method=clean))
-        }
-        if (is.null(weights) & portfolio_method != "single"){
-            message("no weights passed in, assuming equal weighted portfolio")
-            weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
         }
         if(portfolio_method != "single"){
             # get the moments ready
@@ -57,7 +41,13 @@ function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "ke
                 if (is.null(m3)) {m3 = M3.MM(R)}
                 if (is.null(m4)) {m4 = M4.MM(R)}
             }
-        } # end weight checks
+        } 
+    } else { 
+        #R is null, check for moments
+        if(is.null(mu)) stop("Nothing to do! You must pass either R or the moments mu, sigma, etc.")
+        if ( length(weights) != length(mu)) {
+            stop("number of items in weights not equal to number of items in the mean vector")
+        }
     }
     
     switch(portfolio_method,
