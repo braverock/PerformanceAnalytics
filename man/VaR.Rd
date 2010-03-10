@@ -2,6 +2,9 @@
 \Rdversion{1.1}
 \alias{VaR}
 \alias{VaR.CornishFisher}
+\concept{value at risk}
+\concept{Cornish Fisher}
+\concept{component VaR}
 \title{ calculate various Value at Risk (VaR) measures }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases using a variety of analytical methods.

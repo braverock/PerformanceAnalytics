@@ -1,5 +1,6 @@
 \name{chart.RelativePerformance}
 \alias{chart.RelativePerformance}
+\concept{relative performance}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ relative performance chart between multiple return series }
 \description{

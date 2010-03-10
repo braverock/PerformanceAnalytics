@@ -2,6 +2,9 @@
 \Rdversion{1.1}
 \alias{ES}
 \alias{CVaR}
+\concept{conditional value at risk}
+\concept{expected shortfall}
+\concept{Cornish Fisher}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 calculates Expected Shortfall(ES) (or Conditional Value-at-Risk(CVaR) for univariate and component, using a variety of analytical methods.
