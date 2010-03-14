@@ -93,12 +93,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="gaussian", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="gaussian", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Gaussian VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     },
                     ModifiedVaR = {
@@ -106,12 +106,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="modified", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="modified", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Modified VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     },
                     HistoricalVaR = {
@@ -119,12 +119,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="historical") #hVaR = quantile(x,probs=.01)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="historical")
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     },
                     GaussianES = {
@@ -132,12 +132,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="gaussian", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="gaussian", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Gaussian ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     },
                     ModifiedES = {
@@ -145,12 +145,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="modified", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="modified", clean=clean)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Modified ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     },
                     HistoricalES = {
@@ -158,12 +158,12 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
                         if(width > 0) {
                             column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="historical") #hES = quantile(x,probs=.01)
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
                             column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="historical")
                             if(column==1)
-                                legend.txt = c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ",p*100,"%)",sep=""))
+                                legend.txt = c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                     }
                 ) # end switch
