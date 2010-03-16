@@ -66,7 +66,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
