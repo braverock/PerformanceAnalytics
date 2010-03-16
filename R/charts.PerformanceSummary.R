@@ -66,7 +66,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # The first row is the cumulative returns line plot
     par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ...)
+    chart.CumReturns(x, main = main, xaxis = FALSE, ylab = NULL, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -88,7 +88,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown From Peak", event.labels = NULL, ylog=FALSE, ...)
+    chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))
