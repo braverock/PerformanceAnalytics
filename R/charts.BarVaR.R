@@ -31,7 +31,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
         if(i==columns)
             xaxis = TRUE
         chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, ...)
-        text(1, ymax, adj=c(0.5,1.2), cex = 0.8, labels = columnnames[i])
+        text(1, 0.8*ymax, adj=c(0,0), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
 
 #         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
         if(i==1)
