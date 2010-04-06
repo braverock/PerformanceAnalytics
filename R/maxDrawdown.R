@@ -20,16 +20,18 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 	else {
         if(is.null(weights)) {
             R = checkData(R, method = "matrix")
-    		result = apply(R, 2, maxDrawdown)
+    		result = apply(R, 2, maxDrawdown, geometric=geometric, invert=invert, ...=...)
     		dim(result) = c(1,NCOL(R))
     		colnames(result) = colnames(R)
     		rownames(result) = "Worst Drawdown"
+            return(result)
         } else {
             # we have weights, do the portfolio calc
             portret<-Return.portfolio(R,weights=weights,geometric=geometric)
             result<-maxDrawdown(portret, geometric=geometric, invert=invert, ...=...)
+            if (invert) result<- -result
+            return(result)
         }
-        return(result)
 	}
 }
 

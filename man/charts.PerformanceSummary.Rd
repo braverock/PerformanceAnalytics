@@ -8,12 +8,13 @@ For a set of returns, create a wealth index chart, bars for monthly performance,
 \usage{
 charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog
                  = FALSE, wealth.index = FALSE, gap = 12, begin =
-                 c("first", "axis"), legend.loc = "topleft", ...)
+                 c("first", "axis"), legend.loc = "topleft", p=0.95,...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{Rf}{ risk free rate, in same period as your returns }
+  \item{p}{ confidence level for calculation, default p=.95 }
   \item{main}{ set the chart title, as in \code{plot} }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{methods}{ Used to select the risk parameter of trailing \code{width} returns to use in the \code{\link{chart.BarVaR}} panel:
