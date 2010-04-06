@@ -14,6 +14,11 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
     clean = clean[1]
     R <- checkData(R, method="xts", ...)
     columns=colnames(R)
+
+    if (is.null(weights) & portfolio_method != "single"){
+        message("no weights passed in, assuming equal weighted portfolio")
+        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+    }
     
     # check weights options
     if (!is.null(weights)) {
