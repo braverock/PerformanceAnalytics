@@ -34,7 +34,8 @@ http://www.ise.ufl.edu/uryasev/drawdown.pdf
 Brian G. Peterson
 }
 \examples{
-
+data(edhec)
+t(round(CDD(edhec),4))
 }
 \keyword{ ts }
 \keyword{ multivariate }
