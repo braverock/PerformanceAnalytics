@@ -30,12 +30,12 @@ Equation:
 }
 \examples{
 data(managers)
-TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
-TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]) 
-TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12) 
-TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
-TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
-TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
+round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12),4) 
+round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4) 
+round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12),4) 
+round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4) 
+round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

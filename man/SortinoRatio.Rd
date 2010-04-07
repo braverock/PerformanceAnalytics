@@ -37,8 +37,8 @@ Sortino, F. and Price, L. Performance Measurement in a Downside Risk Framework. 
 }
 \examples{
 data(managers)
-SortinoRatio(managers[, 1])
-SortinoRatio(managers[, 1:8])
+round(SortinoRatio(managers[, 1]),4)
+round(SortinoRatio(managers[, 1:8]),4)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

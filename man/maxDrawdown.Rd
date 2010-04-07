@@ -41,9 +41,9 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wi
 }
 \examples{
 data(edhec)
-maxDrawdown(edhec[,"Funds of Funds"])
+t(round(maxDrawdown(edhec[,"Funds of Funds"]),4))
 data(managers)
-maxDrawdown(managers)
+t(round(maxDrawdown(managers),4))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

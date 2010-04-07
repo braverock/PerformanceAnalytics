@@ -51,13 +51,13 @@ data(edhec)
 data(weights)
 
 # calculate an equal weighted portfolio return
-Return.portfolio(edhec)
+round(Return.portfolio(edhec),4)
 
 # now return the contribution too
-Return.portfolio(edhec,contribution=TRUE)
+round(Return.portfolio(edhec,contribution=TRUE),4)
 
 # calculate a portfolio return with rebalancing
-Return.rebalancing(edhec,weights)
+round(Return.rebalancing(edhec,weights),4)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
