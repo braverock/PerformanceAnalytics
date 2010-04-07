@@ -1,5 +1,111 @@
+2010-03-17  peter_carl
+
+	* R/charts.BarVaR.R: - fixed text alignment and size in box frame
+	  title
+
+2010-03-16  peter_carl
+
+	* R/charts.PerformanceSummary.R: - fixed ylab
+	* R/charts.PerformanceSummary.R: - changed ylab in charts
+
+2010-03-14  braverock
+
+	* R/Return.portfolio.R: - change stop to warning for date overlap
+	  check in Return.rebalancing
+
+2010-03-14  peter_carl
+
+	* R/chart.BarVaR.R: - added rounding to labels
+
+2010-03-10  braverock
+
+	* man/ES.Rd, man/VaR.Rd, man/chart.RelativePerformance.Rd: - add
+	  concept tags to docs to improve searchability
+
+2010-03-06  braverock
+
+	* R/ES.R, R/VaR.R: - reorganize checks to better reflect option for
+	  R to be NULL if moments are passed
+	  credit Kris Boudt for the suggestion.
+
+2010-03-05  braverock
+
+	* R/charts.PerformanceSummary.R: - add 'drawdown' to third panel
+	  label
+	* R/ES.R, R/PortfolioRisk.R, R/VaR.R, R/maxDrawdown.R, man/ES.Rd,
+	  man/VaR.Rd, man/maxDrawdown.Rd: - allow R param to be NULL if
+	  moments are passed
+	  - update docs
+	  - implement VaR.historical non-exported utility function
+
+2010-03-04  braverock
+
+	* man/Return.portfolio.Rd: - update documentation to more fully
+	  explain how rebalancing periods work
+	* R/Return.portfolio.R: - add checks to make sure data series and
+	  rebalancing periods actually overlap
+
+2010-03-03  braverock
+
+	* R/Return.portfolio.R: - fix lag in Return.rebalancing so new
+	  weights apply
+	  'from' immediately *after* the weights change 'to' the time of
+	  next change
+	  - don't call Return.portfolio from Return.rebalancing if we have
+	  no returns for from/to period
+	  - don't die in Return.portfolio if no R(eturns) passed in,
+	  return(NULL) w/ warning
+	  
+	* R/chart.BarVaR.R: - fixed show.symmetric bug reported by Helmuth
+	  Vollmeier
+
+2010-02-25  peter_carl
+
+	* R/charts.PerformanceSummary.R: - cleaned up passing 'p' into
+	  chart.BarVaR, labeling
+
+2010-02-24  braverock
+
+	* R/StdDev.R: - apply the same weight handling used by VaR and ES
+	  functions to avoid spurious warnings
+
+2010-02-23  braverock
+
+	* R/Return.portfolio.R: - fix if/else logic for support of
+	  deprecated simple/compound argument,
+	  replace by geometric TRUE/FALSE to match other PerfA fn's
+
+2010-02-22  braverock
+
+	* R/ES.R, R/VaR.R: - change warning to message in rationality
+	  checks in VaR/ES to make optimizer happier
+	* R/ES.R, R/VaR.R: - only clean if we haven't been passed moments
+	* R/Return.portfolio.R, man/Return.portfolio.Rd: - update to use
+	  geometric TRUE/FALSE like other PerfA functions
+
+2010-02-09  braverock
+
+	* R/table.CalendarReturns.R: - add localized month labels, thanks
+	  to David Luthi for pointing out the problem
+
+2010-01-20  braverock
+
+	* R/chart.RollingPerformance.R: - add is.null check around ylim
+	  before clobbering user-supplied value,
+	  patch provided by Dominik Locher
+
+2010-01-08  braverock
+
+	* R/maxDrawdown.R: - add weights parameter to maxDrawdown
+	* DESCRIPTION, NAMESPACE, R/maxDrawdown.R: - add Conditional
+	  Drawdown function CDD, add to NAMESPACE
+	  - bump pkg version to 1.0.2
+	* R/ES.R, R/VaR.R: - add multivariate moment calcs
+
 2010-01-07  braverock
 
+	* ChangeLog, NEWS:
+	* DESCRIPTION: - update prior to release 1.0.1
 	* ChangeLog, generatechangelog.sh: - update Changelog prior to
 	  release 1.0.1
 	* tests/Examples/PerformanceAnalytics-Ex.Rout.save: - update prior
