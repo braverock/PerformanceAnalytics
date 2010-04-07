@@ -5,7 +5,7 @@
 \concept{conditional drawdown}
 \concept{conditional drawdown at risk}
 \title{
-Calulate Uryasev's proposed Conditional Drawdown measure
+Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR) measure
 }
 \description{
 For some confidence level \eqn{p}, the conditional drawdown is the the mean of the worst \eqn{p\%} drawdowns. 
