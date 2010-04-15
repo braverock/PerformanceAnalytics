@@ -84,3 +84,166 @@ there have been changes to parameter names along the way.  The most substantial
 of these is anywhere we used 'rf' for the risk free rate, we now use Rf. We've
 made the changes to be more consistent and make the code easier to maintain, and
 we appreciate your patience.
+
+
+PerformanceAnalytics v0.9.7 Release Notes
+(released to CRAN 2008-10-12)
+
+New Functionality:
+
+This release adds 39 new public functions, an example dataset,
+and utilizes R's namespace capability.  We have also decreased the number 
+of "Requires" packages to just "zoo", moving the rest to "Suggests" and 
+loading them only when needed, with a warning or error (as appropriate) if 
+they are not available.  This should lower both loading time and the memory 
+footprint of using PerformanceAnalytics.
+
+    Risk functionality
+
+        We have extended the risk metrics provided by
+        Performanceanalytics to include multivariate portfolio measures
+        of Gaussian and Cornish fisher VaR and Expected Shortfall.
+
+        Functions:
+        * GES.MM
+        * GVaR.MM 
+        * mES.MM
+        * mVaR.MM 
+
+    Modified Sharpe Ratios
+
+        Earlier versions of PerformanceAnalytics contained the modified
+        Sharpe Ration based on the Cornish fisher expansion.  we have
+        added additional modified Sharpe ratios to calculate portfolio
+        ratios for both Gaussian and modified Cornish Fisher Var and
+        Expected Shortfall of the multivariate portfolio distribution.
+        Functions:
+        * SR.GES.MM
+        * SR.GVaR.MM
+        * SR.mES.MM
+        * SR.mVaR.MM
+        * SR.StdDev.MM
+
+        TODO: need to wrap the SharpeRatio function to take a "method"
+        argument and return one or all.
+
+    Style Analysis
+
+        We are happy to announce that style analysis, long a goal of this
+        package, has made significant progress in this release, with the
+        addition of four new functions.
+
+        These functions calculate style weights using an asset class
+        style model as described in detail in Sharpe (1992).  The use of
+        quadratic programming to determine a fund's exposures to the
+        changes in returns of major asset classes is usually referred to
+        as "style analysis".
+
+        Functions: 
+        * chart.RollingStyle
+               calculates and displays those weights in
+               rolling windows through time.
+        * chart.Style
+               calculates and displays style weights calculated 
+               over a single period.
+        * style.fit
+               manages the calculation of the factor weights by method
+        * style.QPfit
+               calculates the specific constraint case that requires 
+               quadratic programming
+
+    Charts
+        We've added three new graph functions in this release:
+
+        chart.VaRSensitivity
+            Creates a chart of Value-at-Risk estimates by confidence interval
+            for multiple methods. Possibly useful for comparing a calculated
+            VaR method to the historical VaR.
+
+        chart.SnailTrail
+            A scatter chart that shows how rolling calculations of annualized
+            return and annualized standard deviation have proceeded through
+            time.  The color of lines and dots on the chart diminishes with
+            respect to time. May be helpful for showing the trend of the
+            return/risk characteristics of the fund over time.
+
+        chart.StackedBar
+            This creates a stacked column chart with time on the horizontal
+            axis and values in categories.  This kind of chart is commonly
+            used for showing portfolio 'weights' through time, although the
+            function will plot any values by category.  This is a primitive
+            function and is expected to improve.
+
+    Moments of a distribution
+
+        We have added several functions to calculate standardized moments
+        and multivariate moments of an asset or multivariate portfolio
+        distribution.  When working with multivariate series, the joint
+        distribution of the returns is to be preferred over the simple
+        univariate distribution of the resulting return vector of a
+        portfolio.  Once the multivariate moments are available, it is
+        possible to compute the comoments, comoment matrices, and beta or
+        systematic comoments.
+
+        skewness
+        kurtosis
+        skewness.MM
+        kurtosis.MM
+            We've ported and reimplemented skewness and kurtosis from
+            Rmetrics to allow for additional data classes as well as
+            multivariate series.
+
+        StdDev.MM
+        multivariate_mean
+        Return.centered
+        M3.MM
+        M4.MM
+            We've additionally implemented the multivariate moment
+            calculations for the first two portfolio moments (mean and
+            standard deviation) as well as the third and forth mathematical
+            moments.
+
+        CoVariance
+        CoKurtosis
+        CoSkewness
+            Calculates the covariance, coskewness. or cokurtosis of one asset
+            with relation to another (scalar measure) utilizing the
+            standardized central mathematical moments of the distribution.
+
+        CoKurtosisMatrix
+        CoSkewnessMatrix
+            Calculates the N x N2 co-moment matrix of assets to one another,
+            can be utilized in a portfolio context.  This is a complete
+            reimplementation of the prior functions in PerformanceAnalytics
+            to calculate moments, and has been validated by our research work
+            as superior to the prior implementation.
+
+        centeredmoment
+        centeredcomoment
+            Used internally by PerformanceAnalytics to calculate centered
+            moments for a multivariate distribution as well as the
+            standardized moments of a portfolio distribution.  They are
+            exposed here for users who wish to use them directly
+
+        BetaCoVariance
+        BetaCoSkewness
+        BetaCoKurtosis
+            Calculates the systematic or beta comoment of two assets or an
+            asset versus a portfolio. used to assess diversification
+            potential in a portfolio, or in multivariate multimoment
+            portfolio optimization.
+
+Significant Changes to existing functions:
+
+    chart.BarVaR
+        * Incorporates 'Return.clean' methods for using cleaning methods
+          when charting forecasted VaR values.  
+        * Handles multiple columns OR multiple VaR calculation methods
+        * Can show cleaned returns overlaid on original data
+        * Added horizontal line to show exceedences to most recent risk
+          estimate
+
+    Co-moments and Beta/Systematic Co-moments have been completely
+    reimplemented, and are discussed above.
+
+
