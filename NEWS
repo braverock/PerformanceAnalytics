@@ -1,4 +1,26 @@
+PerformanceAnalytics 1.0.2 Release Notes
+(released to CRAN 2010-04-08)
+
+This release is an incremental improvement on v.1.x
+
+We've continued to make functions more friendly for use in parallel 
+execution and optimization environments.
+
+Several bugfixes have been applied to edge case problems, details 
+are in the full ChangeLog provided with the package.
+
+We've added several new ways of calling functions that can take 
+moments rather than returns to allow for more robust or other
+improved methods of calculating moments.
+
+Added patches to graphics provided by Dominik Locher.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
+
 PerformanceAnalytics 1.0.1 Release Notes
+(tagged 2010-01-07, not released to CRAN)
 
 This release is predominantly a minor bugfix release.
 
@@ -18,6 +40,7 @@ course of maintenance.
 
 
 PerformanceAnalytics 1.0.0 Release Notes
+(released to CRAN 2009-10-27)
 
 This release marks a major milestone for PerformanceAnalytics.  After several
 years and acquiring users worldwide, we feel things are stable enough to mark
