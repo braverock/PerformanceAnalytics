@@ -5214,9 +5214,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > data(edhec)
 > chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],main="Cumulative Returns")
-> chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Value of \$1")
-Warning: '\$' is an unrecognized escape in a character string
-Warning: unrecognized escape removed from "Value of \$1"
+> chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Growth of $1")
 > 
 > 
 > 
@@ -7191,7 +7189,7 @@ Warning in check.TZ(x) :
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  139.58 5.75 145.334 0 0 
+Time elapsed:  139.05 5.86 144.914 0 0 
 > grDevices::dev.off()
 postscript 
          2 

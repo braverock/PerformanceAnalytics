@@ -39,7 +39,7 @@ charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=TRUE, methods = "non
     passthru to \code{\link{chart.CumReturns}}
   }
   \item{event.labels}{ TRUE/FALSE whether or not to display lines and labels for historical market shock events }
-  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
+  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of $1", starting the cumulation of returns at 1 rather than zero }
   \item{width}{ number of periods to apply rolling function window over }
   \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
   \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }

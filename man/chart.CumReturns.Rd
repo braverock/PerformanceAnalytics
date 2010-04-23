@@ -11,7 +11,7 @@ chart.CumReturns(R, wealth.index = FALSE, geometric=TRUE, legend.loc = NULL, col
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of \$1", starting the cumulation of returns at 1 rather than zero }
+  \item{wealth.index}{ if \code{wealth.index} is \code{TRUE}, shows the "value of $1", starting the cumulation of returns at 1 rather than zero }
   \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE }
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
   \item{colorset}{ color palette to use, set by default to rational choices }
@@ -37,7 +37,7 @@ Cumulates the return series and displays either as a wealth index or as cumulati
 \examples{
 data(edhec)
 chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],main="Cumulative Returns")
-chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Value of \$1")
+chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Growth of $1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
