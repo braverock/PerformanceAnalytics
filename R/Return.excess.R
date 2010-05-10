@@ -41,6 +41,7 @@ function (R, Rf = 0)
     }
     
     result = apply(R, MARGIN=2, FUN=return.excess, Rf=Rf)
+    if (!is.matrix(result)) result = matrix(result, ncol=ncol(R))
     colnames(result) = paste(colnames(R), ">", columnname.Rf)
     result = reclass(result, R)
 
