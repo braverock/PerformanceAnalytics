@@ -37,9 +37,10 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     #FUN = FUN[1] # use the first argument
 
     xR = Return.excess(R, Rf)
-    srm <-function (R, ..., xR, Rf, p, FUN)
+    srm <-function (R, ..., Rf, p, FUNC)
     {
-        FUNCT <- match.fun(FUN)
+        FUNCT <- match.fun(FUNC)
+        xR = Return.excess(R, Rf)
         SRM = mean(xR, na.rm=TRUE)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
         SRM
     }
@@ -55,7 +56,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     tmprownames=vector()    
     for (FUNCT in FUN){
         if (is.null(weights)){
-            result[i,] = apply(R, 2, srm, xR=xR, Rf=Rf, p=p, FUN=FUNCT, ...)
+            result[i,] = apply(R, MARGIN=2, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
         }
         else {
             result[i,] = weighted.mean(xR,w=weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
