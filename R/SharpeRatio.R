@@ -1,11 +1,11 @@
-`SharpeRatio` <-
+SharpeRatio <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
     # The Sharpe ratio is simply the return per unit of risk (represented by
     # variability).  The higher the Sharpe ratio, the better the combined
-    # peRformance of "risk" and return.
+    # performance of "risk" and return.
 
     # The Sharpe Ratio is a risk-adjusted measure of return that uses
     # standard deviation to represent risk.
@@ -19,24 +19,24 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     #
     # Rf: the risk free rate MUST be in the same periodicity as the data going in.
     #
-    # p: probability at which to calculate the modified VaR (defaults to 95%)
+    # p: probability at which to calculate the modified risk measure (defaults to 95%)
 
     # Outputs:
-    # This function returns a modified Sharpe ratio for the same periodicity of the
+    # This function returns a (modified) Sharpe ratio for the same periodicity of the
     # data being input (e.g., monthly data -> monthly SR)
 
-    # @todo: loop over FUNCT and type
-    # @todo: annualize using multiperiod VaR and ES calcs
+    # @TODO: annualize using multiperiod VaR and ES calcs
 
     # FUNCTION:
 
     R = checkData(R)
+    
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
 
-    #FUN = FUN[1] # use the first argument
-
-    xR = Return.excess(R, Rf)
+    if(is.null(weights)) 
+        xR = Return.excess(R, Rf)
+    
     srm <-function (R, ..., Rf, p, FUNC)
     {
         FUNCT <- match.fun(FUNC)
@@ -53,7 +53,9 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     else {
         result = matrix(nrow=length(FUN))
     }
-    tmprownames=vector()    
+    
+    tmprownames=vector()
+    
     for (FUNCT in FUN){
         if (is.null(weights)){
             result[i,] = apply(R, MARGIN=2, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
@@ -68,7 +70,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     return (result)
 }
 
-`SharpeRatio.modified` <-
+SharpeRatio.modified <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
     .Deprecated("SharpeRatio", package="PerformanceAnalytics", "The SharpeRatio.modified function has been deprecated in favor of a newer SharpeRatio wrapper that will cover both the classic case and a larger suite of modified Sharpe Ratios.  This deprecated function may be removed from future versions")
 
