@@ -120,7 +120,8 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
     if(probability == TRUE) maxyhist = max(hist(x, breaks = breaks, plot = FALSE)$density)
     else maxyhist = max(hist(x, breaks = breaks, plot = FALSE)$count)
     yrange = c(yrange, maxyhist*1.1)
-    ylim = c(0,ceiling(max(yrange)))
+	if(is.null(ylim))
+		ylim = c(0,ceiling(max(yrange)))
 
     hist(x = x, probability = probability, xlim = xlim, ylim = ylim, col = colorset[1], border = border.col, xlab = xlab, main = main, breaks = breaks, axes = FALSE, cex.main = cex.main, cex.lab = cex.lab, ...)
     if(xaxis)
@@ -185,7 +186,7 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 
         abline(v = note.lines, col = note.color, lty = 2)
         if(!is.null(note.labels)) {
-            h = rep(.2*par("usr")[3] + 0.99*par("usr")[4], length(b))
+            h = rep(.2*par("usr")[3] + 0.99*par("usr")[4], length(note.lines))
             text(note.lines, h, note.labels, offset = .2, pos = 2, cex = note.cex, srt = 90, col = note.color)
 
         }
