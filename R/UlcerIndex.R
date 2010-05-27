@@ -28,6 +28,7 @@ function (R, ...) {
     R = checkData(R)
 
     ui <- function(R) {
+        R = na.omit(R)
         result = sqrt(sum(Drawdowns(R)^2)/length(R))
         return(result)
     }
