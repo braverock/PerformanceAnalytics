@@ -65,6 +65,62 @@ CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
     # TODO add modified Cornish Fisher and copula methods to this to account for small number of observations likely on real data
 }
 
+DrawdownDeviation <-
+function (R, ...) {
+
+    # Calculates a standard deviation-type statistic using individual drawdowns.
+    # 
+    # DD = sqrt(sum[j=1,2,...,d](D_j^2/n)) where
+    # D_j = jth drawdown over the entire period
+    # d = total number of drawdowns in entire period
+    # n = number of observations
+
+    R = checkData(R)
+
+    dd <- function(R) {
+        R = na.omit(R)
+        n=length(R)
+        Dj=findDrawdowns(as.matrix(R))$return
+        result = sqrt(sum((Dj[Dj<0]^2)/n))
+        return(result)
+    }
+
+    result = apply(R, MARGIN = 2, dd)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
+    rownames(result) = "Drawdown Deviation"
+    return (result)
+}
+
+AverageDrawdown <-
+function (R, ...) {
+
+    # Calculates the average of the observed drawdowns.
+    # 
+    # ADD = abs(sum[j=1,2,...,d](D_j/d)) where
+    # D'_j = jth drawdown over entire period
+    # d = total number of drawdowns in the entire period
+
+    R = checkData(R)
+
+    ad <- function(R) {
+        R = na.omit(R)
+        Dj = findDrawdowns(as.matrix(R))$return
+        d = length(Dj[Dj<0])
+        result = abs(sum(Dj[Dj<0]/d))
+        return(result)
+    }
+
+    result = apply(R, MARGIN = 2, ad)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
+    rownames(result) = "Average Drawdown"
+    return (result)
+}
+
+
+
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
