@@ -27,6 +27,13 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     # Calculate drawdown level
     drawdown = Drawdowns(R, geometric)
 
+    # workaround provided by Samuel Le to handle single-column input
+    if(NCOL(R)==1)
+    {
+        drawdown<-as.xts(drawdown)
+        colnames(drawdown)<-colnames(R)
+    }
+    
     # Chart the drawdown level
     chart.TimeSeries(drawdown, col = colorset, legend.loc = legend.loc, ...)
 
