@@ -157,6 +157,13 @@ We have chosen the more common usage of calling this difference in VaR's in port
 This is incredibly confusing, and hasn't been resolved in the literature at this time.
 Simon Keel and David Ardia (2009) attempt to reconcile some of the definitional issues and address some of the shortcomings of this measure in their working paper titled \dQuote{Generalized Marginal Risk}.
    Hopefully their improved Marginal Risk measures may be included here in the future. 
+   
+In the case of an existing portfolio, with existing weights, we do not feel that Marginal VaR is very useful, and prefer to use Component VaR. 
+In the case where the portfolio manager is trying to evaluate two or more similar instruments for possible inclusion in a portfolio,
+or considering replacing one instrument with a similar instrument, Marginal VaR can be instructive.  In this case, it demonstrates the specific 
+diversification and substitution effect that each of the instruments under consideration has on the portfolio, and can provide additional 
+information to the asset manager by indicating which instrument has less marginal impact on the risk of the portfolio, and the difference in overall portfolio risk from the potential portfolio.
+  
 }
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008. Estimation and decomposition of downside risk for portfolios with non-normal returns. 2008. The Journal of Risk, vol. 11, 79-103.
