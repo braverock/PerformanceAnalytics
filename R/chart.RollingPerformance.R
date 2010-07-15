@@ -1,5 +1,5 @@
 `chart.RollingPerformance` <-
-function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN = "Return.annualized", na.pad = TRUE, type = "l", pch = NULL, lty = 1, bg = NULL, cex.axis=0.8, cex.legend = 0.8, cex.labels = 0.7, lwd = 2, xlim = NULL, ylim = NULL, log = "", main=NULL, sub = NULL, xlab = "Date", ylab = NULL, ann = par("ann"), axes = TRUE, frame.plot = axes, panel.first = NULL, panel.last = NULL, asp = NA, ylog = FALSE, event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "lightgray", element.color = "darkgray", major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", ...)
+function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -22,12 +22,16 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
     columns = ncol(x)
     columnnames = colnames(x)
 
+    # Separate function args from plot args
+    dotargs <-list(...)
+    funargsmatch = pmatch(names(dotargs), names(formals(FUN)), nomatch = 0L)
+    funargs = dotargs[-funargsmatch]
+    plotargs = dotargs[funargsmatch]
+
     # Calculate
-#     Return.calc = xts:::rollapply.xts(x, width = width, FUN = function(x, FUNCT=FUNCT, ... = ...) { if(class(na.action(na.omit(x)))=="omit") return(NA) else {FUN <- match.fun(FUNCT); FUN}}, FUNCT=FUNCT, ...=..., na.pad = na.pad, align = "right")
-#     print(Return.calc)
     for(column in 1:columns) {
         # the drop=FALSE flag is essential for when the zoo object only has one column
-        column.Return.calc = xts:::rollapply.xts(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ..., na.pad = na.pad, align = "right")
+        column.Return.calc = xts:::rollapply.xts(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ...=funargs, na.pad = na.pad, align = "right")
         if(column == 1)
             Return.calc = xts(column.Return.calc)
         else
@@ -52,10 +56,10 @@ function (R, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), FUN
             yearly = {freq.lab = "year"}
         )
 
-        main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," Performance",sep="")
+        main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," ", FUN,sep="")
     }
 
-    chart.TimeSeries(Return.calc, xaxis = xaxis, colorset = colorset, legend.loc = legend.loc, type = type, pch = pch, lty = lty, bg = bg, cex.axis=cex.axis, cex.legend = cex.legend, cex.labels = cex.labels, lwd = lwd, xlim = xlim, ylim = ylim, main = main, sub = sub, xlab = xlab, ylab = ylab, ann = ann, panel.first = panel.first, panel.last = panel.last, asp = asp, ylog = ylog, event.lines = event.lines, event.labels = event.labels, period.areas = period.areas, event.color = event.color, period.color = period.color, element.color = element.color, major.ticks=major.ticks, minor.ticks=minor.ticks, grid.color=grid.color, grid.lty=grid.lty  )
+    chart.TimeSeries(Return.calc, ylim=ylim, main=main, ...=plotargs )
 
 }
 
