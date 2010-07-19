@@ -25,13 +25,17 @@ function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NUL
     # Separate function args from plot args
     dotargs <-list(...)
     funargsmatch = pmatch(names(dotargs), names(formals(FUN)), nomatch = 0L)
-    funargs = dotargs[-funargsmatch]
-    plotargs = dotargs[funargsmatch]
-
+	funargs = dotargs[funargsmatch>0L]
+	if(is.null(funargs))funargs=list()
+	funargs$...=NULL
+	if (length(funargs)) ...=funargs else ...=NULL
+	plotargs = dotargs[funargsmatch==0L]
+    plotargs$...=NULL
+	
     # Calculate
     for(column in 1:columns) {
         # the drop=FALSE flag is essential for when the zoo object only has one column
-        column.Return.calc = xts:::rollapply.xts(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, ...=funargs, na.pad = na.pad, align = "right")
+        column.Return.calc = xts:::rollapply.xts(na.omit(x[,column,drop=FALSE]), width = width, FUN = FUN, na.pad = na.pad, align = "right", ...)
         if(column == 1)
             Return.calc = xts(column.Return.calc)
         else
@@ -59,7 +63,8 @@ function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NUL
         main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," ", FUN,sep="")
     }
 
-    chart.TimeSeries(Return.calc, ylim=ylim, main=main, ...=plotargs )
+	if (length(plotargs)) ...=plotargs else ...=NULL
+    chart.TimeSeries(Return.calc, ylim=ylim, main=main, ... )
 
 }
 
