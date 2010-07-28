@@ -38,7 +38,7 @@ function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 
     # for each column, do the following:
     for(column in 1:columns) {
-        z = c(Return.annualized(y[,column,drop=FALSE], scale = scale, geometric = geometric), StdDev.annualized(y[,column,drop=FALSE], scale = scale), SharpeRatio.annualized(y[,column,drop=FALSE], scale = scale, Rf = Rf))
+        z = c(Return.annualized(y[,column,drop=FALSE], scale = scale, geometric = geometric), StdDev.annualized(y[,column,drop=FALSE], scale = scale), SharpeRatio.annualized(y[,column,drop=FALSE], scale = scale, Rf = Rf, geometric=geometric))
         znames = c("Annualized Return", "Annualized Std Dev", paste("Annualized Sharpe (Rf=",base::round(mean(Rf)*scale,4)*100,"%)", sep="") )
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
