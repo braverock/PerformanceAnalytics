@@ -96,7 +96,7 @@ CoVariance<- function(Ra,Rb)
 
     covar <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         return(centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=FALSE))
     }
 
@@ -124,7 +124,7 @@ BetaCoVariance <- function(Ra,Rb)
 
     bcovar <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         return(centeredcomoment(R[,1],R[,2],p1=1,p2=1,normalize=TRUE))
     }
 
@@ -153,7 +153,7 @@ CoSkewness <- function(Ra,Rb)
 
     cosk <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         return(centeredcomoment(R[,1],R[,2],p1=1,p2=2,normalize=FALSE))
     }
 
@@ -181,7 +181,7 @@ BetaCoSkewness <- function(Ra, Rb, test=FALSE)
 
     bcosk <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         skew = skewness(Rb)
         # Kris notes: the output should be conditional on the value of the market skewness. 
         if(skew > -0.05 && skew < 0.05 ){
@@ -224,7 +224,7 @@ CoKurtosis <- function(Ra,Rb)
 
     cokurt <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         return(centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=FALSE))
     }
 
@@ -252,7 +252,7 @@ BetaCoKurtosis <- function(Ra,Rb)
 
     bcosk <-function (Ra, Rb)
     {
-        R = na.omit(merge(Ra, Rb)) # remove NA's
+        R = na.omit(cbind(Ra, Rb)) # remove NA's
         return(centeredcomoment(R[,1],R[,2],p1=1,p2=3,normalize=TRUE))
     }
 

@@ -60,6 +60,7 @@ function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm =
             }
         },
         xts = {
+			if(is.xts(x)) return(x)
             if(!xtsible(x))
                 if(class(x) == "numeric"){
                     x= zoo(matrix(x, ncol=NCOL(x)))

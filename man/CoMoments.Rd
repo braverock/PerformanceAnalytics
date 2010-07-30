@@ -44,9 +44,9 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of Preference fo
 }
 \examples{
 data(managers)
-CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
+CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
