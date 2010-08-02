@@ -1,6 +1,6 @@
 
-R version 2.10.1 (2009-12-14)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.11.1 (2010-05-31)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -26,10 +26,9 @@ Loading required package: xts
 
 Attaching package: 'PerformanceAnalytics'
 
+The following object(s) are masked from 'package:graphics':
 
-	The following object(s) are masked from package:graphics :
-
-	 legend 
+    legend
 
 > 
 > assign(".oldSearch", search(), pos = 'CheckExEnv')
@@ -47,8 +46,8 @@ Attaching package: 'PerformanceAnalytics'
 > ### ** Examples
 > 
 >     data(managers)
->     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-[1] NA
+>     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+[1] 0.04078668
 >     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
 [1] 0.04078668
 >     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
@@ -223,7 +222,7 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > 
 > data(managers)
 > CAPM.CML.slope(managers[,"SP500 TR",drop=FALSE], managers[,10,drop=FALSE])
-                                      SP500 TR
+                                     SP500 TR
 Capital Market Line Slope: SP500 TR 0.04330924
 > CAPM.CML(managers[,"HAM1",drop=FALSE], managers[,"SP500 TR",drop=FALSE], Rf=0)
 [1] 0.0004817169
@@ -490,6 +489,9 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > cleanEx()
+
+detaching ‘package:robustbase’
+
 > nameEx("InformationRatio")
 > ### * InformationRatio
 > 
@@ -576,18 +578,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
                Funds of Funds
 Omega (L = 0%)       5.265408
@@ -738,6 +735,9 @@ Omega (L = 0%)       5.265408
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("Return.Geltner")
 > ### * Return.Geltner
 > 
@@ -2891,6 +2891,9 @@ Annualized Return     0.11454 0.1039841
 > 
 > 
 > cleanEx()
+
+detaching ‘package:robustbase’
+
 > nameEx("Return.cumulative")
 > ### * Return.cumulative
 > 
@@ -4038,7 +4041,6 @@ Warning in Return.portfolio(edhec, contribution = TRUE) :
 2009-05-30            0.0350
 2009-06-29            0.0108
 2009-07-30            0.0251
-2009-08-30            0.0181
 > 
 > 
 > 
@@ -4119,20 +4121,20 @@ Warning in Return.portfolio(edhec, contribution = TRUE) :
 > 
 > data(managers)
 > SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev") 
-                                       HAM1
+                                      HAM1
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
 > SharpeRatio(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE], FUN="StdDev")
-                                       HAM1
+                                     HAM1
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
 > SharpeRatio(managers[,1:6], Rf=.035/12, FUN="StdDev") 
-                                       HAM1       HAM2       HAM3       HAM4
+                                      HAM1      HAM2      HAM3      HAM4
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
-                                       HAM5       HAM6
+                                       HAM5      HAM6
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
 > SharpeRatio(managers[,1:6], Rf = managers[,10,drop=FALSE], FUN="StdDev")
-                                       HAM1       HAM2       HAM3       HAM4
+                                     HAM1      HAM2      HAM3      HAM4
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
-                                       HAM5       HAM6
+                                       HAM5      HAM6
 StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
 > 
 > 
@@ -4166,7 +4168,7 @@ StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02045246  0.04330924  0.02038955
 VaR Sharpe:  (Rf=0.3%, p=95%)    -0.02347884 -0.06834972 -0.03097683
 ES Sharpe:  (Rf=0.3%, p=95%)     -0.03463385 -0.09441034 -0.04439739
 > SharpeRatio(edhec,Rf = .04/12)
-                                 Convertible Arbitrage  CTA Global
+                                 Convertible Arbitrage CTA Global
 StdDev Sharpe:  (Rf=0.3%, p=95%)            0.02004739  0.02513090
 VaR Sharpe:  (Rf=0.3%, p=95%)              -0.03247395 -0.03380228
 ES Sharpe:  (Rf=0.3%, p=95%)               -0.09954768 -0.04284185
@@ -4362,6 +4364,9 @@ $pct_contrib_StdDev
 > 
 > 
 > cleanEx()
+
+detaching ‘package:robustbase’
+
 > nameEx("StdDev.annualized")
 > ### * StdDev.annualized
 > 
@@ -4395,50 +4400,6 @@ Annualized Standard Deviation   0.06356791
 >     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
                               Event Driven
 Annualized Standard Deviation   0.03178395
-> 
-> 
-> 
-> cleanEx()
-> nameEx("Style")
-> ### * Style
-> 
-> flush(stderr()); flush(stdout())
-> 
-> ### Name: chart.Style
-> ### Title: calculate and display effective style weights
-> ### Aliases: chart.Style chart.RollingStyle style.fit style.QPfit
-> ### Keywords: ts multivariate hplot
-> 
-> ### ** Examples
-> 
-> data(edhec)
-> data(managers)
-> style.fit(managers[97:132,2,drop=FALSE],edhec[85:120,], method="constrained", leverage=FALSE)
-$weights
-                                HAM2
-Convertible Arbitrage  -2.546949e-18
-CTA Global              0.000000e+00
-Distressed Securities   1.906715e-01
-Emerging Markets        9.663357e-03
-Equity Market Neutral   2.628757e-16
-Event Driven            2.775616e-01
-Fixed Income Arbitrage  9.809811e-17
-Global Macro            2.336338e-01
-Long/Short Equity       2.694605e-01
-Merger Arbitrage        1.117972e-16
-Relative Value          1.219075e-16
-Short Selling           1.900926e-02
-Funds of Funds          2.987914e-16
-
-$R.squared
-               HAM2
-R-squared 0.4799256
-
-$adj.R.squared
-NULL
-
-> chart.Style(managers[97:132,2,drop=FALSE],edhec[85:120,], method="constrained", leverage=FALSE, unstack=TRUE, las=3)
-> chart.RollingStyle(managers[,2,drop=FALSE],edhec[,1:11], method="constrained", leverage=FALSE, width=36, cex.legend = .7, colorset=rainbow12equal, las=1)
 > 
 > 
 > 
@@ -4703,6 +4664,9 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > cleanEx()
+
+detaching ‘package:robustbase’
+
 > nameEx("apply.fromstart")
 > ### * apply.fromstart
 > 
@@ -5145,6 +5109,9 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > cleanEx()
+
+detaching ‘package:robustbase’
+
 > nameEx("chart.Boxplot")
 > ### * chart.Boxplot
 > 
@@ -5346,6 +5313,9 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > cleanEx()
+
+detaching ‘package:MASS’
+
 > nameEx("chart.Regression")
 > ### * chart.Regression
 > 
@@ -5492,30 +5462,22 @@ Warning in par(original.layout) :
 > dev.new()
 > chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
 Loading required package: SparseM
-Package SparseM (0.83) loaded.  
-	   To cite, see citation("SparseM")
+Package SparseM (0.85) loaded.
+           To cite, see citation("SparseM")
 
 
 Attaching package: 'SparseM'
 
+The following object(s) are masked from 'package:base':
 
-	The following object(s) are masked from package:stats :
-
-	 model.response 
-
-
-	The following object(s) are masked from package:base :
-
-	 backsolve,
-	 chol 
+    backsolve
 
 
 Attaching package: 'quantreg'
 
+The following object(s) are masked from 'package:utils':
 
-	The following object(s) are masked from package:utils :
-
-	 vignette 
+    vignette
 
 > # not implemented yet
 > #charts.RollingQuantileRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
@@ -5523,6 +5485,9 @@ Attaching package: 'quantreg'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:quantreg’, ‘package:SparseM’
+
 > nameEx("chart.Scatter")
 > ### * chart.Scatter
 > 
@@ -5574,8 +5539,7 @@ Attaching package: 'quantreg'
 > 
 > data(weights)
 > head(weights)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 1999-12-31            0.02500000 0.14601749             0.0250000
 2000-12-31            0.15785710 0.19577551             0.0250000
@@ -5747,6 +5711,7 @@ Warning in check.TZ(x) :
 > class(x)
 [1] "xts" "zoo"
 > head(x)
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 1997-01-30                0.0119     0.0393                0.0178
 1997-02-27                0.0123     0.0298                0.0122
@@ -5776,6 +5741,7 @@ Warning in check.TZ(x) :
 1997-05-30           0.0197         0.0173       -0.0737         0.0275
 1997-06-29           0.0231         0.0198       -0.0065         0.0225
 > tail(x)
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 2009-03-30                0.0235    -0.0180                0.0022
 2009-04-29                0.0500    -0.0140                0.0387
@@ -5809,6 +5775,7 @@ Warning in check.TZ(x) :
 > class(x)
 [1] "xts" "zoo"
 > head(x)
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage
 1997-01-30                0.0119
 1997-02-27                0.0123
@@ -5821,6 +5788,7 @@ Warning in check.TZ(x) :
 > class(x)
 [1] "xts" "zoo"
 > head(x)
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage
 1997-01-30                0.0119
 1997-02-27                0.0123
@@ -5885,8 +5853,7 @@ Warning in check.TZ(x) :
 > 
 > #preview the data
 > head(edhec)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 1997-01-30                0.0119     0.0393                0.0178
 1997-02-27                0.0123     0.0298                0.0122
@@ -5956,8 +5923,7 @@ Warning in check.TZ(x) :
 > 
 > #cumulative index returns
 > tail(cumprod(1+edhec),1)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 2009-08-30              2.559585   2.550288              3.249667
            Emerging Markets Equity Market Neutral Event Driven
@@ -6102,8 +6068,7 @@ Excess Kurtosis    0.845576 0.5060867
 > 
 > #preview the data
 > head(managers)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
               HAM1 HAM2    HAM3    HAM4 HAM5 HAM6 EDHEC LS EQ SP500 TR
 1996-01-30  0.0074   NA  0.0349  0.0222   NA   NA          NA   0.0340
 1996-02-28  0.0193   NA  0.0351  0.0195   NA   NA          NA   0.0093
@@ -6148,8 +6113,7 @@ Warning in check.TZ(x) :
 > 
 > #cumulative returns
 > tail(cumprod(1+managers),1)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
                HAM1 HAM2     HAM3    HAM4 HAM5 HAM6 EDHEC LS EQ SP500 TR
 2006-12-30 4.126671   NA 4.706732 3.52944   NA   NA          NA 2.761619
            US 10Y TR US 3m TR
@@ -6394,18 +6358,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > result = t(table.AnnualizedReturns(managers[,1:8], Rf=.04/12))
 > 
@@ -6415,6 +6374,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.Arbitrary")
 > ### * table.Arbitrary
 > 
@@ -6561,18 +6523,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > result = t(table.CalendarReturns(managers[,c(1,8)]))
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c( rep("darkgray",12), "black", "blue"), mar = c(0,0,3,0)+0.1)
@@ -6581,6 +6538,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.CaptureRatios")
 > ### * table.CaptureRatios
 > 
@@ -6665,18 +6625,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Correlations to SP500 TR")
@@ -6687,6 +6642,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.DownsideRisk")
 > ### * table.DownsideRisk
 > 
@@ -6782,18 +6740,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Downside Risk Statistics")
@@ -6801,6 +6754,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.Drawdowns")
 > ### * table.Drawdowns
 > 
@@ -6845,18 +6801,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Largest Drawdowns for HAM1")
@@ -6864,6 +6815,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.HigherMoments")
 > ### * table.HigherMoments
 > 
@@ -6893,18 +6847,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Higher Co-Moments with SP500 TR")
@@ -6912,6 +6861,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.MonthlyReturns")
 > ### * table.MonthlyReturns
 > 
@@ -7009,18 +6961,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(1,2),rep(3,14))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=10, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Statistics for EDHEC Indexes")
@@ -7028,6 +6975,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("table.RollingPeriods")
 > ### * table.RollingPeriods
 > 
@@ -7069,18 +7019,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Trailing Period Statistics")
@@ -7088,6 +7033,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("textplot")
 > ### * textplot
 > 
@@ -7113,18 +7061,13 @@ Loading required package: splines
 
 Attaching package: 'Hmisc'
 
+The following object(s) are masked from 'package:survival':
 
-	The following object(s) are masked from package:survival :
+    untangle.specials
 
-	 untangle.specials 
+The following object(s) are masked from 'package:base':
 
-
-	The following object(s) are masked from package:base :
-
-	 format.pval,
-	 round.POSIXt,
-	 trunc.POSIXt,
-	 units 
+    format.pval, round.POSIXt, trunc.POSIXt, units
 
 >   result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,]
 > 
@@ -7136,6 +7079,9 @@ Attaching package: 'Hmisc'
 > 
 > 
 > cleanEx()
+
+detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+
 > nameEx("weights")
 > ### * weights
 > 
@@ -7152,8 +7098,7 @@ Attaching package: 'Hmisc'
 > 
 > #preview the data
 > head(weights)
-Warning in check.TZ(x) :
-  timezone of object (GMT) is different than current timezone ().
+Warning: timezone of object (GMT) is different than current timezone ().
            Convertible Arbitrage CTA Global Distressed Securities
 1999-12-31            0.02500000 0.14601749             0.0250000
 2000-12-31            0.15785710 0.19577551             0.0250000
@@ -7189,7 +7134,7 @@ Warning in check.TZ(x) :
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  139.05 5.86 144.914 0 0 
+Time elapsed:  98.38 2.19 100.664 0 0 
 > grDevices::dev.off()
 postscript 
          2 
