@@ -1,5 +1,4 @@
-`checkData` <-
-function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm = TRUE, quiet = TRUE, ...)
+checkData <- function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm = TRUE, quiet = TRUE, ...)
 { # @author Peter Carl
 
     # Description:
@@ -36,7 +35,7 @@ function (x, method = c("xts", "zoo", "data.frame", "matrix", "vector"), na.rm =
             x = as.vector(x)
         },
         matrix = {
-            x = as.matrix(x, ncol = NCOL(X))
+            x = as.matrix(x, ncol = NCOL(x))
         },
         data.frame = {
             x = as.data.frame(x)
