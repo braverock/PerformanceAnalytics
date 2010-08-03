@@ -197,7 +197,7 @@ operES.CornishFisher =  function(R,p,c=2)
 
 portm2 = function(w,sigma)
 {
-   return(t(w)%*%sigma%*%w) #t(w) for first item?
+   return(w%*%sigma%*%w) #t(w) for first item?
 }
 derportm2 = function(w,sigma)
 {
@@ -205,7 +205,7 @@ derportm2 = function(w,sigma)
 }
 portm3 = function(w,M3)
 {
-   return(t(w)%*%M3%*%(w%x%w)) 
+   return(w%*%M3%*%(w%x%w))  #t(w) for first item?
 }
 derportm3 = function(w,M3)
 {
