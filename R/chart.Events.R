@@ -1,4 +1,4 @@
-`chart.Events` <-
+chart.Events <-
 function (R, dates, prior=12, post=12, main = NULL, xlab=NULL, ...)
 { # @author Peter Carl
   R = checkData(R[,1,drop=FALSE]) 
@@ -49,10 +49,9 @@ function (R, dates, prior=12, post=12, main = NULL, xlab=NULL, ...)
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $

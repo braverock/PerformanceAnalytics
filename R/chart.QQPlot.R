@@ -1,4 +1,4 @@
-`chart.QQPlot` <-
+chart.QQPlot <-
 function(R, distribution="norm", ylab=NULL,
         xlab=paste(distribution, "Quantiles"), main=NULL, las=par("las"),
         envelope=FALSE, labels=FALSE, col=c(1,4), lwd=2, pch=1, cex=1,
@@ -131,42 +131,9 @@ function(R, distribution="norm", ylab=NULL,
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.10  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.9  2009-04-07 22:22:03  peter
-# - added element.color parameter
-# - passes cex.* for main, axis labels, and axis titles
-#
-# Revision 1.8  2008-06-25 03:33:13  peter
-# - changed package test to load MASS quietly
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/12/06 21:38:56  peter
-# - replaced core code with John Fox's qq.plot internals
-# - makes error bands available
-# - allows multiple distribution fitting
-#
-# Revision 1.5  2007/11/21 05:32:13  peter
-# - fixed title
-#
-# Revision 1.3  2007/09/26 02:59:23  peter
-# - changed chart elements to be consistent with other chart
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

@@ -76,26 +76,9 @@ kurtosis <-
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.5  2009-10-06 15:14:44  peter
-# - fixed rownames
-# - fixed scale = 12 replacement errors
-#
-# Revision 1.4  2009-10-06 02:54:31  peter
-# - added label to results
-#
-# Revision 1.3  2009-09-24 02:54:11  peter
-# - changed checkData from zoo to matrix
-#
-# Revision 1.2  2008-06-25 23:07:59  brian
-# - update functions to deal with multi-column zoo/xts data
-#
-# Revision 1.1  2008-06-25 13:50:42  brian
-# - initial commit of skewness and kurtosis functions and documentation ported from RMetrics package fUtilities
-#

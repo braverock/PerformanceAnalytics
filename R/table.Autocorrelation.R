@@ -1,4 +1,4 @@
-`table.Autocorrelation` <-
+table.Autocorrelation <-
 function (R, digits = 4)
 {# @author Peter Carl
 
@@ -67,21 +67,9 @@ function (R, digits = 4)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.3  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.2  2007/12/27 20:13:00  peter
-# - fixed F for FALSE
-#
-# Revision 1.1  2007/10/05 03:24:03  peter
-# - first commit of lag-6 autocorrelation coefficient with Q-stat p-value table
-#
 #
 ###############################################################################

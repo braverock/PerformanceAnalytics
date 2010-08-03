@@ -1,4 +1,4 @@
-`SmoothingIndex` <-
+SmoothingIndex <-
 function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
 { # @author Peter Carl
 
@@ -90,3 +90,15 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
         }
     }
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################

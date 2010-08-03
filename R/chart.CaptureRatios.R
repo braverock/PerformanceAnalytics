@@ -1,4 +1,4 @@
-`chart.CaptureRatios` <-
+chart.CaptureRatios <-
 function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, element.color="darkgray", benchmark.color = "darkgray",...)
 { # @author Peter Carl
 
@@ -74,65 +74,9 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.4  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.3  2009-06-02 03:16:01  peter
-# - corrected order for coloring
-#
-# Revision 1.2  2009-04-17 04:15:56  peter
-# - parameter cleanup
-# - adjusted placement of benchmark name label
-#
-# Revision 1.1  2009-04-02 03:04:45  peter
-# - initial commit to cvs
-#
-# Revision 1.11  2008-08-16 03:39:54  peter
-# - fixed point label adjustment
-#
-# Revision 1.10  2008-07-01 02:47:40  peter
-# - added cex.legend
-#
-# Revision 1.9  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.8  2008-04-18 03:41:42  peter
-# - added cex attributes for passing in formatting changes
-#
-# Revision 1.7  2007/10/03 02:46:18  peter
-# - colors and symbol sets now stretched to match the number of columns
-# - name text colors prints backwards to match the order of the dots
-#
-# Revision 1.6  2007/09/24 02:49:34  peter
-# - chart elements now consistent with time series charts
-# - prints columns backwards so that earlier columns printed on top of later
-# - return axis now unbounded below zero, although it will show zero
-# - zero return line drawn if min is not zero
-#
-# Revision 1.5  2007/08/16 14:29:16  peter
-# - modified checkData to return Zoo object
-# - added checkData to handle Rf as a time series rather than a point est
-#
-# Revision 1.4  2007/04/09 12:31:27  brian
-# - syntax and usage changes to pass R CMD check
-#
-# Revision 1.3  2007/04/02 21:53:25  peter
-# - changed to checkData function
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

@@ -1,5 +1,4 @@
-`apply.fromstart` <-
-function (R, FUN = "mean" , gap = 1, ...)
+apply.fromstart <- function (R, FUN = "mean" , gap = 1, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -50,28 +49,9 @@ function (R, FUN = "mean" , gap = 1, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.6  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.5  2008-06-02 15:25:09  peter
-# - fixed multicolumn support
-#
-# Revision 1.4  2007/08/20 21:03:05  peter
-# - moved as.Date transformations
-#
-# Revision 1.3  2007/03/20 10:48:29  brian
-# - add copyright, license, and CVS Log
-#
-# Revision 1.2 2007-03-20 05:44:46  brian
-# - change F to FALSE to pass R CMD check
-#
-# Revision 1.1  2007/03/20 03:28:56  peter
-# - uses zoo functions to apply functions to expanding windows
 ###############################################################################

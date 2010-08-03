@@ -1,4 +1,4 @@
-`chart.VaRSensitivity` <-
+chart.VaRSensitivity <-
 function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)
 { # @author Peter Carl
 
@@ -97,3 +97,15 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
     title(ylab = ylab)
     title(main = main)
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################

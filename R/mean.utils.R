@@ -4,7 +4,7 @@
 #       but the package check complains about mismatch of the
 #       first parameter with R command mean()
 
-`mean.geometric` <-
+mean.geometric <-
 function (x, ...)
 {# @author Peter Carl
 
@@ -33,7 +33,7 @@ function (x, ...)
     }
 }
 
-`mean.stderr` <-
+mean.stderr <-
 function (x, ...)
 {# @author Peter Carl
 
@@ -62,7 +62,7 @@ function (x, ...)
     }
 }
 
-`mean.LCL` <-
+mean.LCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
 
@@ -98,7 +98,7 @@ function (x, ci = 0.95, ...)
     }
 }
 
-`mean.UCL` <-
+mean.UCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
 
@@ -139,48 +139,9 @@ function (x, ci = 0.95, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.11  2009-10-06 15:14:44  peter
-# - fixed rownames
-# - fixed scale = 12 replacement errors
-#
-# Revision 1.9  2009-09-24 02:35:41  peter
-# - added multicolumn support
-#
-# Revision 1.8  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.7  2007/04/16 01:59:09  brian
-# - add dots parameter to pass R CMD check
-#
-# Revision 1.6  2007/04/09 12:31:27  brian
-# - syntax and usage changes to pass R CMD check
-#
-# Revision 1.5  2007/03/05 04:51:36  brian
-# - add copyright and CVS block
-#
-#
-# revision 1.4
-# date: 2007-03-04 22:48:18 -0600;  brian;
-# - change first parameter to x for R generic method consistency
-# - fix capitalization errors in documentation
-#
-# revision 1.3
-# date: 2007-03-04 22:04:24 -0600;  peter;
-# - fixed bug omitting length()
-#
-# revision 1.2
-# date: 2007-03-04 21:25:04 -0600;  peter;
-# - added defaults for ci
-#
-# revision 1.1
-# date: 2007-03-04 20:54:35 -0600;  peter;
-# - added set of minor utility functions
 #
 ###############################################################################

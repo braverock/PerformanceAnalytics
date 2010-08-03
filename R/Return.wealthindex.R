@@ -1,4 +1,4 @@
-`Return.wealthindex` <-
+Return.wealthindex <-
 function (R, wealth.index = TRUE, ...)
 { # @author Peter Carl
 
@@ -46,16 +46,9 @@ function (R, wealth.index = TRUE, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.2  2009-09-22 02:15:17  peter
-# - cleaned up cvs log
-#
-# Revision 1.1  2009-09-22 02:12:04  peter
-# - separates a function to calculate wealth index
 ###############################################################################

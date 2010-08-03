@@ -1,4 +1,4 @@
-`table.AnnualizedReturns` <-
+table.AnnualizedReturns <-
 function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 {# @author Peter Carl
 
@@ -58,52 +58,9 @@ function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.12  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.11  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.10  2009-10-02 18:55:26  peter
-# - changed parameter Rf to Rf
-#
-# Revision 1.9  2009-04-14 02:50:59  peter
-# - added geometric parameter to pass calculation method
-#
-# Revision 1.8  2008-08-16 03:41:14  peter
-# - fixed rounding in column name label
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/08/16 14:41:09  peter
-# - NA removal now handled in individual calcs
-# - added checkData for Rf
-#
-# Revision 1.5  2007/03/22 14:44:48  peter
-# - uses checkData
-# - eliminated firstcolumn
-#
-# Revision 1.4  2007/02/25 18:23:40  brian
-# - change call to round() to call base::round() to fix conflict with newest fCalendar
-#
-# Revision 1.3  2007/02/22 22:14:46  brian
-# - standardize use of 'digits' as a parameter to round()
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

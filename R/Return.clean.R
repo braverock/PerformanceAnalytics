@@ -1,4 +1,4 @@
-`Return.clean` <-
+Return.clean <-
 function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 { # @author Peter Carl
 
@@ -52,7 +52,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
     return(result)
 }
 
-`clean.boudt` <-
+clean.boudt <-
 function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson
 
@@ -115,37 +115,9 @@ function(R, alpha=.01 , trim=1e-3)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-09-02 14:11:12  brian
-# - add alpha and dots as passthru arguments to clean.boudt
-# - TODO: vectorize and na.skip
-#
-# Revision 1.7  2009-09-02 12:23:39  brian
-# - convert to use xts internally
-# - add reclass
-# - add 'none' and 'geltner' as methods
-#
-# Revision 1.6  2009-09-01 21:40:07  brian
-# - change to use xts internally
-#
-# Revision 1.5  2008-08-13 18:05:22  brian
-# - add copyright, licence, and CVS log
-#
-# Revision 1.4 2008-08-12 17:56:13 brian
-# - add library check for package robustbase
-#
-# Revision 1.3 2008-08-11 08:58:42 peter
-# - moved prior functionality into 'clean.boudt'
-# - made Return.clean a wrapper focused on data handling, multiple methods
-#
-# Revision 1.2 2008-08-08 23:16:09 peter
-# - separated out the cleaning function and added column handling
-#
-# Revision 1.1 2008-08-07 16:39:33 brian
-# - initial revision of robust data cleaning function and documentation

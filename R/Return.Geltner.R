@@ -1,4 +1,4 @@
-`Return.Geltner` <-
+Return.Geltner <-
 function (Ra, ...)
 { # @author Brian G. Peterson, Peter Carl
 
@@ -44,32 +44,9 @@ function (Ra, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.7  2009-09-02 12:13:29  brian
-# - fix for positive lag of lag.xts
-#
-# Revision 1.6  2009-09-02 11:53:57  brian
-# - add na.skip functionality
-# - add reclass functionality to returned series
-#
-# Revision 1.5  2009-03-02 03:21:26  peter
-# - fix acf call to pass in numeric
-#
-# Revision 1.4  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.3  2007/09/11 03:03:45  peter
-# - fixed na.omit for column zoo object
-#
-# Revision 1.1  2007/09/01 16:29:55  brian
-# - initial revision of Geltner Returns function
-# - seems to only work on rectangular multicolumn inputs
-# - may lose rownames
 #
 ###############################################################################

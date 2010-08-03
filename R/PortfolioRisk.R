@@ -2,7 +2,7 @@
 # Functions to peRform component risk calculations on portfolios of assets.
 #
 # Copyright (c) 2007-2009 Kris Boudt and Brian G. Peterson
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
 # $Id$
@@ -586,58 +586,9 @@ VaR.historical.portfolio = function(R,p,w)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson and Kris Boudt
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.13  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.12  2009-09-22 18:07:13  brian
-# - add ncol in loop in ES.historical
-#
-# Revision 1.11  2009-09-21 14:05:17  brian
-# - remove precision global var, unnecessary
-#
-# Revision 1.10  2009-09-04 20:38:23  brian
-# - add historical ES function for completeness
-#
-# Revision 1.9  2009-08-25 15:29:46  brian
-# - clean up labeling, warnings, and returns for Expected Shortfall
-#
-# Revision 1.8  2009-08-25 14:38:06  brian
-# - update display logic and names in list return for Component VaR, test more cases
-#
-# Revision 1.7  2009-08-24 22:08:52  brian
-# - adjust to handle p values for correct results
-# - adjust ES to correctly handle probability
-# - add invert argument with default TRUE to match older behavior
-# - make sure all VaR/ES functions handle columns correctly
-#
-# Revision 1.6  2009-06-25 13:27:31  brian
-# - rationalize function arguments
-# - standardize function returns
-# - TODO: rationalize fn return for VaR/ES.historical.portfolio to match other portfolio methods
-#
-# Revision 1.5  2009-06-24 23:59:16  brian
-# - changes to make portfolio VaR work correctly
-# NOTE: weights is a vector, not time-varying
-#
-# Revision 1.4  2009-06-21 15:07:38  brian
-# - wrapper functions now work for VaR
-#
-# Revision 1.3  2009-06-02 01:01:13  brian
-# - temporarily move VaR.CornishFisher to VaR.CornishFisher.new
-#
-# Revision 1.2  2009-04-17 15:23:47  brian
-# - better standardize use of p for probability and conversion to alpha number
-#
-# Revision 1.1  2009-04-17 15:14:00  brian
-# - Initial revision of VaR wrapper and portfolio risk functions
 #
 ###############################################################################

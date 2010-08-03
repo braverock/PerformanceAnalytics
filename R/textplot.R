@@ -380,3 +380,17 @@ textplot.character <- function (object,
     par(opar)
     invisible(cex)
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analytics
+#
+# Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
+# 
+# Original textplot function from gplots package written by warnes
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################

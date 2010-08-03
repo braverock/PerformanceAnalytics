@@ -1,4 +1,4 @@
-`Return.read` <-
+Return.read <-
 function (filename=stop("Please specify a filename"), frequency = c("d","m","q","i","o"), format.in = c("ISO8601","excel","oo","gnumeric"), sep = ",", header = TRUE, check.names = FALSE, ...)
 { # @author Peter Carl
 
@@ -58,38 +58,9 @@ function (filename=stop("Please specify a filename"), frequency = c("d","m","q",
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.7  2009-03-20 03:23:40  peter
-# - now returns an xts object by default
-#
-# Revision 1.6  2009-03-02 03:26:41  peter
-# - returns an xts object rather than zoo
-#
-# Revision 1.5  2008-08-13 03:32:10  peter
-# - sets rownames for the resulting 'zoo' object
-#
-# Revision 1.4  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.3  2007/09/24 02:32:31  peter
-# - added check.names as a parameter
-# - set default so that names are not checked
-# - spaces will not be replaced by dots in column names by default
-#
-# Revision 1.2  2007/08/16 14:11:44  peter
-# - clarified comments
-#
-# Revision 1.1  2007/08/15 03:37:43  peter
-# - first entry in CVS
-# - wrapper for read.zoo with a few case conditions for setting defaults
 #
 ###############################################################################

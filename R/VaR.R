@@ -120,63 +120,9 @@ function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "ke
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.16  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.15  2009-10-01 19:12:24  brian
-# - update probability to 95% by default
-#
-# Revision 1.14  2009-10-01 19:10:40  brian
-# - label rows
-# - invert historical VaR for consistency with other univariate measures
-#
-# Revision 1.13  2009-09-24 16:01:58  brian
-# - remove unneeded function params
-# - remove deprecated function
-#
-# Revision 1.12  2009-08-25 17:43:37  brian
-# - updates to support Marginal VaR
-# - use reclass() in Return.portfolio to return xts object
-#
-# Revision 1.11  2009-08-25 15:21:07  brian
-# - eliminate deprecated multi-argument return
-#
-# Revision 1.10  2009-08-25 14:48:33  brian
-# - add additional warnings for unreasonable VaR results
-#
-# Revision 1.9  2009-08-25 14:38:06  brian
-# - update display logic and names in list return for Component VaR, test more cases
-#
-# Revision 1.8  2009-08-24 22:08:52  brian
-# - adjust to handle p values for correct results
-# - adjust ES to correctly handle probability
-# - add invert argument with default TRUE to match older behavior
-# - make sure all VaR/ES functions handle columns correctly
-#
-# Revision 1.7  2009-07-02 14:01:23  peter
-# - forced returned value into matrix for naming
-# - made VaR.CornishFisher results negative
-#
-# Revision 1.6  2009-06-26 20:47:16  brian
-# - clean up naming confusion/standardization between VaR/ES wrappers
-#
-# Revision 1.4  2009-06-22 16:35:11  brian
-# - correct apply for historical VaR to pass na.rm=TRUE
-#
-# Revision 1.2  2009-06-19 20:59:35  brian
-# - worked out more of the switch logic,
-# - NOTE: still looping too many times
-#
-# Revision 1.1  2009-04-17 15:14:00  brian
-# - Initial revision of VaR wrapper and portfolio risk functions
 #
 ###############################################################################

@@ -161,41 +161,9 @@ pfolioReturn <- function (x, weights=NULL, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.9  2009-10-15 18:17:15  brian
-# - add dots back in as parameter
-# - add stop error for multirow weights in Return.portfolio, perhaps automatically call appropriate fn in the future
-#
-# Revision 1.8  2009-10-15 14:49:00  brian
-# - update Return.rebalancing to properly accumulate wealth
-# - add rbind workaround provided by Jeff
-#
-# Revision 1.7  2009-10-15 12:26:37  brian
-# - revert change of calc of weighed cumulative returns,
-#   use more efficient apply since wealthindex.assets is already tied to structure of weights
-#
-# Revision 1.6  2009-10-14 21:59:24  brian
-# - add xts-based weights handling
-# - handle column names out of order for assets and weights
-#
-# Revision 1.5  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.4  2009-10-01 20:22:02  brian
-# - add reclass on wealthindex so Return.calculate (now using xts internally) doesn't blow up
-#
-# Revision 1.3  2009-08-25 17:43:37  brian
-# - updates to support Marginal VaR
-# - use reclass() in Return.portfolio to return xts object
-#
-# Revision 1.2  2009-01-08 11:23:01  brian
-# - remove obsolete comments
-# - change yeargrid to rebalancegrid
-# - add comment block
-#

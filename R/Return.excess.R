@@ -1,4 +1,4 @@
-`Return.excess` <-
+Return.excess <-
 function (R, Rf = 0)
 { # @author Peter Carl
 
@@ -54,64 +54,9 @@ function (R, Rf = 0)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.18  2009-10-08 17:35:18  peter
-# - modified to fix unequal length issue between R and Rf
-#
-# Revision 1.17  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.16  2009-09-24 18:00:48  peter
-# - fixed to handle scalar Rf
-#
-# Revision 1.15  2009-09-24 17:46:31  peter
-# - fixed column renaming
-#
-# Revision 1.14  2009-09-24 17:39:22  peter
-# - fixed reclass
-# - added column renaming
-#
-# Revision 1.13  2009-09-24 17:11:30  brian
-# - convert to use apply
-#
-# Revision 1.12  2009-09-22 02:47:21  peter
-# - added reclass
-#
-# Revision 1.11  2009-09-17 03:00:38  peter
-# - reverting back to zoo until rollapply works for xts
-#
-# Revision 1.10  2009-09-15 20:35:50  peter
-# - converted to use xts internally
-#
-# Revision 1.9  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.8  2007/09/26 02:54:58  peter
-# - fixed labeling problem in multi-column asset results
-#
-# Revision 1.7  2007/08/14 23:20:07  peter
-# - added conditional labeling to columns
-#
-# Revision 1.6  2007/08/14 21:37:05  peter
-# - removed support for multiple columns in Rf
-# - now works for numeric Rf
-#
-# Revision 1.5  2007/08/14 01:19:40  peter
-# - function handles multiple columns for both R and Rf
-#
-# Revision 1.4  2007/05/15 19:47:38  peter
-# - handles multiple column objects
-#
-# Revision 1.3  2007/03/16 13:59:20  peter
-# - added cvs footer
-#
 #
 ###############################################################################

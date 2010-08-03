@@ -1,4 +1,4 @@
-`chart.Regression` <-
+chart.Regression <-
 function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
 { # @author Peter Carl
 
@@ -152,49 +152,9 @@ function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = 
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.11  2009-10-02 18:53:17  peter
-# - changed checkData to use xts
-# - changed default Rf to 0
-#
-# Revision 1.10  2009-04-07 22:22:53  peter
-# - uses element.color parameter
-#
-# Revision 1.9  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.8  2008-04-18 03:38:50  peter
-# - fixed x-axis
-# - added method for conditional beta lines
-# - added notes for extending fct to gauging market timing
-#
-# Revision 1.7  2007/12/29 15:38:06  peter
-# - fixed switch statement
-#
-# Revision 1.6  2007/12/27 20:41:43  brian
-# - fix switch syntax error
-#
-# Revision 1.5  2007/12/27 20:36:39  brian
-# - change fit to use a list and a switch
-#
-# Revision 1.4  2007/12/27 19:03:42  brian
-# - change function name from chart.MultiScatter to chart.Regression in prep for public release
-#
-# Revision 1.3  2007/11/19 03:38:07  peter
-# - allow cex to be passed through correctly
-#
-# Revision 1.2  2007/09/26 03:13:29  peter
-# - added a spline fit
-# - switched the order of the lowess fit variables
-#
-# Revision 1.1  2007/04/23 14:35:22  peter
-# - scatterplot to handle multiple columns of data
-#
 #
 ###############################################################################

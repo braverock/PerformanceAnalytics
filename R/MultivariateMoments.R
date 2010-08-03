@@ -8,7 +8,7 @@
 # efficient when running against very large numbers of instruments or portfolios.
 #
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
 # $Id$
@@ -143,28 +143,9 @@ SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson and Kris Boudt
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.5  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.4  2008-08-12 22:52:22  brian
-# - change mean.MM to multivariate_mean fn call to eliminate contention with R core mean fn
-#
-# Revision 1.3  2008-05-07 21:38:24  brian
-# - update header, footer, and licencing to reflect moving into PerformanceAnalytics
-#
-# Revision 1.2  2008-01-20 12:07:24  kris
-# Changed function definitions in optim_functions.R and updated the function calls in optimizer.R to these functions
-#
-# Revision 1.1  2008/01/20 06:30:08  brian
-# - Initial Revision
 #
 ###############################################################################

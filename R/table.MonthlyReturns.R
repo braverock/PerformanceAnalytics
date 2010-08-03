@@ -1,4 +1,4 @@
-`table.Stats` <-
+table.Stats <-
 function (R, ci = 0.95, digits = 4)
 {# @author Peter Carl
 
@@ -94,40 +94,9 @@ function (R, ci = 0.95, digits = 4)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.9  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.8  2008-10-14 14:37:29  brian
-# - convert from matrix or data.frame to zoo in checkData call
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/03/20 13:47:12  peter
-# - changed to checkData
-# - cleaned up alignment
-#
-# Revision 1.5  2007/03/05 03:19:26  peter
-# - removed firstcolumn as an attribute
-#
-# Revision 1.4  2007/02/25 18:23:40  brian
-# - change call to round() to call base::round() to fix conflict with newest fCalendar
-#
-# Revision 1.3  2007/02/22 22:14:46  brian
-# - standardize use of 'digits' as a parameter to round()
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

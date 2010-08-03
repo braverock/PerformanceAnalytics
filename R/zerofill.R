@@ -3,7 +3,7 @@
 #
 # Copyright (c) 2004-2010 Kris Boudt, Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$

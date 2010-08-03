@@ -1,4 +1,4 @@
-`findDrawdowns` <-
+findDrawdowns <-
 function (R, geometric = TRUE, ...)
 { # @author Peter Carl
 
@@ -71,37 +71,9 @@ function (R, geometric = TRUE, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-04-07 22:32:03  peter
-# - changed checkData to a matrix
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/07/26 03:34:46  peter
-# - fixed error when first period is negative
-#
-# Revision 1.5  2007/03/21 16:34:48  peter
-# - fixed period calculations
-#
-# Revision 1.4  2007/03/21 14:07:38  peter
-# - added trough date, periods to trough, periods to recovery
-# - changed to use dataCheck
-#
-# Revision 1.3  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.2  2007/02/06 11:58:42  brian
-# - standardize attribution for Drawdown runs
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

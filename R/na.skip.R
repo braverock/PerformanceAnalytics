@@ -37,15 +37,9 @@ na.skip <- function (x, FUN=NULL, ...) # maybe add a trim capability?
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.1  2009-08-31 20:51:27  brian
-# - add new function na.skip to deal with non-contiguous NA's in data, may eventually go to xts
-# - fix components of charts.PerformanceSummary to use na.skip
 #
 ###############################################################################

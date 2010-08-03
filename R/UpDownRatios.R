@@ -1,4 +1,4 @@
-`UpDownRatios` <-
+UpDownRatios <-
 function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down"))
 {# @author Peter Carl
 
@@ -101,46 +101,9 @@ function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down")
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.10  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.9  2009-10-01 14:33:00  peter
-# - added multiple calc and row labeling
-#
-# Revision 1.8  2009-10-01 03:07:37  peter
-# - added multi-column support
-#
-# Revision 1.7  2009-04-07 22:15:25  peter
-# - removed unused dot dot dot
-#
-# Revision 1.6  2009-04-01 14:02:49  peter
-# - fixed number ratio and added percentage ratio
-#
-# Revision 1.5  2008-10-16 18:45:37  brian
-# - use checkData with method="zoo" instead of checkDataMatrix
-#
-# Revision 1.4  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.3  2007/04/02 21:57:26  peter
-# - modified to use checkData functions
-# - uses zoo to align dates
-# - changed calculations to sum returns
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

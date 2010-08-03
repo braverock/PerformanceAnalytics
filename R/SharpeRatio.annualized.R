@@ -1,4 +1,4 @@
-`SharpeRatio.annualized` <-
+SharpeRatio.annualized <-
 function (R, Rf = 0, scale = NA, geometric=TRUE)
 { # @author Peter Carl
 
@@ -53,56 +53,9 @@ function (R, Rf = 0, scale = NA, geometric=TRUE)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.13  2009-10-06 15:14:44  peter
-# - fixed rownames
-# - fixed scale = 12 replacement errors
-#
-# Revision 1.12  2009-10-06 02:56:53  peter
-# - added label to results
-#
-# Revision 1.11  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.10  2009-10-02 18:37:19  peter
-# - updated copyright
-#
-# Revision 1.9  2009-09-30 02:48:05  peter
-# - added multi-column support
-#
-# Revision 1.8  2009-09-17 03:01:22  peter
-# - using xts internally
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/08/16 14:12:40  peter
-# - added checkData for Rf
-#
-# Revision 1.5  2007/04/09 03:33:19  peter
-# - uses checkData
-# - uses Return.excess
-#
-# Revision 1.4  2007/03/14 00:54:06  brian
-# - updates to parameters for standardization
-#
-# Revision 1.3  2007/03/12 15:34:43  brian
-# - add equations to documentation
-# - standardize on Ra for Returns of asset
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

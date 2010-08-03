@@ -1,4 +1,4 @@
-`chart.Histogram` <-
+chart.Histogram <-
 function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, element.color="darkgray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p = 0.95, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, xaxis=TRUE, yaxis=TRUE, ...)
 { # @author Peter Carl
 
@@ -201,108 +201,9 @@ function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", meth
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.40  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.39  2009-09-17 02:58:36  peter
-# - added xaxis and yaxis controls
-#
-# Revision 1.38  2009-04-18 02:56:53  peter
-# - argument cleanup and codoc issues
-#
-# Revision 1.37  2009-04-07 22:20:34  peter
-# - changed to use element.color parameter
-#
-# Revision 1.36  2008-06-30 21:52:52  peter
-# - changed 'method' to 'methods' in test
-#
-# Revision 1.35  2008-06-30 03:10:57  peter
-# - VaR not calculated without 'add.risk' method
-# - x-axis correctly adjusted with 'add.risk' method
-# - chart reset correctly after 'qq.plot' method
-#
-# Revision 1.34  2008-06-26 02:00:01  peter
-# - changed 'stdev' to 'sd'
-#
-# Revision 1.32  2008-06-23 02:35:10  peter
-# - added note line text size attribute
-# - added check for 'sn' library
-#
-# Revision 1.31  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.30  2008/01/15 21:06:13  peter
-# - fixed ylim for probability T or F
-#
-# Revision 1.28  2007/12/29 19:25:09  brian
-# - minor changes to pass R CMD check
-#
-# Revision 1.27  2007/12/27 20:11:19  peter
-# - fixed F for FALSE in function call
-#
-# Revision 1.24  2007/11/23 04:28:01  peter
-# - added margin to histogram bars for ylim
-#
-# Revision 1.17  2007/11/19 03:40:46  peter
-# - smoothed out the density line for smaller data sets
-# - added parameter for showing all data points rather than center
-#
-# Revision 1.16  2007/09/26 03:33:12  peter
-# - no longer clobbers xlim when passed in from function
-#
-# Revision 1.14  2007/09/18 03:24:07  peter
-# - default for methods is now NULL
-#
-# Revision 1.13  2007/09/14 02:04:56  peter
-# - commented need for adding MASS as a dependency
-#
-# Revision 1.12  2007/08/24 04:02:51  peter
-# - labels now work for note.lines
-#
-# Revision 1.11  2007/08/24 03:54:54  peter
-# - added arbitrary lines and labels
-# - labeling doesn't work yet
-#
-# Revision 1.10  2007/08/24 03:18:08  peter
-# - added cauchy fit
-#
-# Revision 1.9  2007/08/24 01:43:04  peter
-# - beautified format of vertical lines for add.risk
-#
-# Revision 1.8  2007/06/17 21:42:34  brian
-# - update /usage and /items to pass check
-#
-# Revision 1.7  2007/06/07 23:42:00  brian
-# - add comments
-#
-# Revision 1.6  2007/04/30 12:51:38  peter
-# - fixed F instead of FALSE error
-#
-# Revision 1.5  2007/04/27 03:25:00  peter
-# - added risk lines
-#
-# Revision 1.4  2007/04/27 03:08:22  peter
-# - added switch
-# - added qqchart
-# - added rug
-#
-# Revision 1.3  2007/04/15 12:56:04  brian
-# - add breaks as an explicit parameter
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

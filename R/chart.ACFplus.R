@@ -1,5 +1,4 @@
-`chart.ACFplus` <-
-function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
+chart.ACFplus <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 { # @author David Stoffer and Robert Shumway
     # @modifiedby Peter Carl
 
@@ -62,3 +61,15 @@ function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     par(op)
 #    return(cbind(ACF, PACF)) 
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################

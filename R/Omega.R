@@ -1,4 +1,4 @@
-`Omega` <-
+Omega <-
 function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), Rf = 0, ...)
 { # @author Peter Carl
 
@@ -114,60 +114,9 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.16  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.15  2009-10-06 15:14:44  peter
-# - fixed rownames
-# - fixed scale = 12 replacement errors
-#
-# Revision 1.13  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.12  2009-09-24 03:03:21  peter
-# - added multicolumn support
-#
-# Revision 1.11  2008-09-29 13:47:18  brian
-# - fix to use pmax per patch submitted by Ryan Sheftel <at> Malbec Pertners
-#
-# Revision 1.10  2008-06-25 03:50:37  peter
-# - added package test for Hmisc
-#
-# Revision 1.9  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.8  2007/03/04 18:37:09  brian
-# - update to use switch on method, more efficient
-#
-# Revision 1.7  2007/02/28 16:12:46  brian
-# - set plot=FALSE in Ecdf function
-#
-# Revision 1.6  2007/02/28 13:55:23  brian
-# - comment require for Hmisc, as it is included when the main PerformanceAnalytics package loads
-#
-# Revision 1.5  2007/02/28 13:48:48  brian
-# - change ecdf to Ecdf to cover the change in the name of the Hmisc function in R 2.4.x
-#
-# Revision 1.4  2007/02/28 03:47:07  peter
-# - added require("Hmisc")
-#
-# Revision 1.3  2007/02/28 03:35:49  peter
-# - fixed defaults to eliminate warnings
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

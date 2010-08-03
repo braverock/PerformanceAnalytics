@@ -1,4 +1,4 @@
-`chart.SnailTrail` <-
+chart.SnailTrail <-
 function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "lastonly", "firstandlast", "none"), xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,2,3), colorset = 1:12, symbolset = 16, legend.loc = NULL, xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty=1, lwd=2, cex.axis=0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8, cex.legend = 0.8, element.color="darkgray", ...)
 { # @author Peter Carl
 
@@ -157,66 +157,9 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.9  2009-10-02 18:46:13  peter
-# - modified to use apply.rolling to replace rollapply
-#
-# Revision 1.8  2009-04-17 04:13:16  peter
-# - removed commented code
-#
-# Revision 1.7  2009-04-07 22:26:57  peter
-# - added element.color, cex.* attributes
-#
-# Revision 1.6  2009-03-20 03:26:17  peter
-# - changed arguments for consistency
-# - uses xts internally
-#
-# Revision 1.5  2009-03-02 03:25:47  peter
-# - fixed condition when end-dates do not match
-# ----------------------------------------------------------------------
-# R/chart.SnailTrail.R CVS:
-# ----------------------------------------------------------------------
-#
-# Revision 1.4  2008-08-16 03:40:32  peter
-# - added default colorset
-#
-# Revision 1.3  2008-06-26 01:46:26  peter
-# - removed 'first' attribute
-#
-# Revision 1.2  2008-06-24 02:26:59  peter
-# - changed 'add.labels' to 'add.names' to be consistent with chart.RiskReturnScatter
-#
-# Revision 1.7  2007/10/03 02:46:18  peter
-# - colors and symbol sets now stretched to match the number of columns
-# - name text colors prints backwards to match the order of the dots
-#
-# Revision 1.6  2007/09/24 02:49:34  peter
-# - chart elements now consistent with time series charts
-# - prints columns backwards so that earlier columns printed on top of later
-# - return axis now unbounded below zero, although it will show zero
-# - zero return line drawn if min is not zero
-#
-# Revision 1.5  2007/08/16 14:29:16  peter
-# - modified checkData to return Zoo object
-# - added checkData to handle Rf as a time series rather than a point est
-#
-# Revision 1.4  2007/04/09 12:31:27  brian
-# - syntax and usage changes to pass R CMD check
-#
-# Revision 1.3  2007/04/02 21:53:25  peter
-# - changed to checkData function
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

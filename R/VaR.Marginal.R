@@ -1,4 +1,4 @@
-`VaR.Marginal` <-
+VaR.Marginal <-
 function(R, p = 0.95, method=c("modified","gaussian","historical"), weightingvector=NULL)
 {   # @author Brian G. Peterson
 
@@ -66,45 +66,9 @@ function(R, p = 0.95, method=c("modified","gaussian","historical"), weightingvec
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.10  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.9  2009-08-25 17:43:37  brian
-# - updates to support Marginal VaR
-# - use reclass() in Return.portfolio to return xts object
-#
-# Revision 1.8  2008-10-16 18:45:37  brian
-# - use checkData with method="zoo" instead of checkDataMatrix
-#
-# Revision 1.7  2008-06-26 01:42:08  peter
-# - added package test for 'fPortfolio'
-#
-# Revision 1.6  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.5  2007/06/27 19:21:02  brian
-# - add handling for NULL weightingvector (assume equal weight)
-#
-# Revision 1.4  2007/04/09 12:31:27  brian
-# - syntax and usage changes to pass R CMD check
-#
-# Revision 1.3  2007/03/11 17:05:53  brian
-# - change to use checkDataMatrix
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

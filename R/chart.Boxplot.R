@@ -1,4 +1,4 @@
-`chart.Boxplot` <-
+chart.Boxplot <-
 function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
 
@@ -96,45 +96,14 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
     par(op)
 }
 
-
-# dottypes = c(rep(16, length(manager.columns)), closedsymbols[1:length(index.columns)], rep(1, length(peer.columns)))
-
-# > chart.Boxplot(sbc.zoo,names=F,as.Tufte=T,add.mean = TRUE, sort.by="variance", colorset=colorset,symbol.color=colorset, mean.symbol=dottypes)
-
-
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-10-22 13:45:23  brian
-# - change show.data to be a numerical vector of observations to overplot
-#
-# Revision 1.7  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.6  2009-04-07 22:18:25  peter
-# - added element.color as a parameter
-#
-# Revision 1.5  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.4  2007/09/26 02:56:58  peter
-# - changed zero line to solid
-# - removed subtitles
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

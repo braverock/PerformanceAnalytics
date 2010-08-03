@@ -1,5 +1,4 @@
-`apply.rolling` <-
-function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
+apply.rolling <- function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -40,26 +39,9 @@ function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.5  2009-10-02 21:27:39  peter
-# - removed multi-column support so larger objects can be passed in
-#
-# Revision 1.4  2009-10-02 18:44:10  peter
-# - revamped to provide xtsible windows
-#
-# Revision 1.3  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.2  2007/04/04 02:45:04  peter
-# - added some backflips to name the single column zoo object
-#
-# Revision 1.1  2007/03/20 03:28:20  peter
-# - uses zoo functions to apply functions to rolling windows
 #
 ###############################################################################

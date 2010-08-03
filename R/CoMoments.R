@@ -1,6 +1,6 @@
 # Compute co-moment matrices
 
-`Return.centered` <-
+Return.centered <-
 function (R,...)
 { # @author Peter Carl and Kris Boudt
 
@@ -42,7 +42,7 @@ function (R,...)
 
 ###############################################################################
 
-`CoSkewnessMatrix` <-
+CoSkewnessMatrix <-
 function (R, ...)
 { # @author Kris Boudt
     return(M3.MM(R))
@@ -50,7 +50,7 @@ function (R, ...)
 
 ###############################################################################
 
-`CoKurtosisMatrix` <-
+CoKurtosisMatrix <-
 function (R, ...)
 { # @author Kris Boudt
     return(M4.MM(R))
@@ -274,66 +274,9 @@ BetaCoKurtosis <- function(Ra,Rb)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
 ###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.11  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.10  2009-10-06 03:00:19  peter
-# - added label to results
-#
-# Revision 1.9  2009-10-02 18:47:35  peter
-# - all comoment and betacomoment functions support multiple column R
-#
-# Revision 1.8  2008-06-24 00:41:18  peter
-# - changed 'warn' to 'warning'
-#
-# Revision 1.6  2008-06-19 03:54:38  peter
-# - added data check and NA removal to comoment calcs
-#
-# Revision 1.5  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.4  2008-05-07 22:54:04  brian
-# - add parens to denominator in centeredcomoment fn
-#
-# Revision 1.3  2008-05-07 22:05:36  brian
-# - replace with centeredmoment function that is multi-column aware via apply
-#
-# Revision 1.2  2008-05-07 21:30:10  peter
-# - repair to centeredcomoment normalization suggested by Kris in 2008-01-23 email
-#
-# Revision 1.1  2008/01/23 10:17:17  kris
-# Make a clear separation between function applicable to univariate and multivariate series
-#
-# Revision 1.10  2008/01/18 02:56:46  peter
-# - added comments for use of centeredcomoment function
-#
-# Revision 1.8  2008/01/06 01:31:32  peter
-# - added "first" and "Rb" to other beta co-moments
-# - renamed comoment functions back from ".portfolio" until a better convention
-#   occurs
-#
-# Revision 1.7  2008/01/03 03:47:54  peter
-# - added "first" and "Rb" parameters to BetaCoSkewness to preserve pairwise
-#   comparisons using sapply
-#
-# Revision 1.6  2007/12/27 19:21:17  brian
-# - change warn to warning
-#
-# Revision 1.5  2007/11/06 05:24:57  peter
-# - added Return.centered
-# - added CoMoment.portfolio functions
-# - simplified BetaCoMoment functions
-#
-# Revision 1.4  2007/11/05 13:59:03  peter
-# - changed functions per Kris' comments
-#
-# Revision 1.2  2007/10/31 14:47:16  peter
-# - fixed errors caused by calculating mean on zoo objects
-#

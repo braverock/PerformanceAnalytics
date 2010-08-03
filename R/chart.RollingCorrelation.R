@@ -1,4 +1,4 @@
-`chart.RollingCorrelation` <-
+chart.RollingCorrelation <-
 function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)
 { # @author Peter Carl
 
@@ -44,42 +44,9 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.10  2009-10-03 05:00:49  peter
-# - reversion to prior, still working, version
-#
-# Revision 1.8  2009-03-20 03:22:53  peter
-# - added xts
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/10/11 03:56:12  peter
-# - fixed so that it will handle zoo objects with yearmon dates
-#
-# Revision 1.5  2007/04/14 15:42:35  brian
-# - standardize Ra as first argument for asset returns
-#
-# Revision 1.4  2007/03/15 01:15:03  brian
-# - replace drop=F with drop=FALSE for R CMD check compatibility
-#
-# Revision 1.3  2007/03/14 03:12:44  peter
-# - uses checkData function
-# - handles uneven lengths of timeseries data
-# - handles multiple assets and benchmarks for cross correlation
-# - uses zoo rollapply function
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

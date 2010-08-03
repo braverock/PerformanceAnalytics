@@ -1,4 +1,4 @@
-`chart.RiskReturnScatter` <-
+chart.RiskReturnScatter <-
 function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = NA, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl
 
@@ -142,70 +142,9 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: chart.RiskReturnScatter.R,v $
-# Revision 1.17  2009-10-23 02:58:15  peter
-# - added par reset
-#
-# Revision 1.16  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.15  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.14  2009-10-02 18:54:10  peter
-# - changed parameter Rf to Rf
-#
-# Revision 1.13  2009-04-17 04:14:12  peter
-# - added parameters for geometry, scale
-#
-# Revision 1.12  2009-04-07 22:23:53  peter
-# - uses element.color parameter
-#
-# Revision 1.11  2008-08-16 03:39:54  peter
-# - fixed point label adjustment
-#
-# Revision 1.10  2008-07-01 02:47:40  peter
-# - added cex.legend
-#
-# Revision 1.9  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.8  2008-04-18 03:41:42  peter
-# - added cex attributes for passing in formatting changes
-#
-# Revision 1.7  2007/10/03 02:46:18  peter
-# - colors and symbol sets now stretched to match the number of columns
-# - name text colors prints backwards to match the order of the dots
-#
-# Revision 1.6  2007/09/24 02:49:34  peter
-# - chart elements now consistent with time series charts
-# - prints columns backwards so that earlier columns printed on top of later
-# - return axis now unbounded below zero, although it will show zero
-# - zero return line drawn if min is not zero
-#
-# Revision 1.5  2007/08/16 14:29:16  peter
-# - modified checkData to return Zoo object
-# - added checkData to handle Rf as a time series rather than a point est
-#
-# Revision 1.4  2007/04/09 12:31:27  brian
-# - syntax and usage changes to pass R CMD check
-#
-# Revision 1.3  2007/04/02 21:53:25  peter
-# - changed to checkData function
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

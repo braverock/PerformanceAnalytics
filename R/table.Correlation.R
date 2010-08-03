@@ -1,4 +1,4 @@
-`table.Correlation` <-
+table.Correlation <-
 function (Ra, Rb, ...)
 {# @author Peter Carl
 
@@ -56,38 +56,9 @@ function (Ra, Rb, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-04-07 22:33:00  peter
-# - changed checkData to use default xts
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/04/15 14:45:26  brian
-# - remove unused parameter n
-#
-# Revision 1.5  2007/03/22 12:38:50  peter
-# - handles multiple assets and benchmarks
-# - uses checkData
-# - manages unequal time periods
-#
-# Revision 1.4  2007/02/28 03:59:50  peter
-# - repaired broken data check
-#
-# Revision 1.3  2007/02/26 22:04:36  brian
-# - changes in functions to pass "R CMD check" for package
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

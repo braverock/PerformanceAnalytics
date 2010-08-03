@@ -1,4 +1,4 @@
-`charts.TimeSeries` <-
+charts.TimeSeries <-
 function (R,  space = 0, main = "Returns", ...)
 { # @author Peter Carl
 
@@ -58,21 +58,9 @@ function (R,  space = 0, main = "Returns", ...)
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: charts.TimeSeries.R,v $
-# Revision 1.1  2009-08-18 21:40:34  peter
-# - multi-panel time series chart
-#
-# Revision 1.2  2008-04-18 03:59:52  peter
-# - added na.omit to avoid problems with missing data
-#
-# Revision 1.1  2008/02/23 05:55:21  peter
-# - chart demonstrating fund exposures through time
-#
 #
 ###############################################################################

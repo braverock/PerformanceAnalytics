@@ -1,4 +1,4 @@
-`chart.StackedBar` <- 
+chart.StackedBar <- 
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     op <- par(no.readonly=TRUE)
@@ -11,7 +11,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     par(op)
 }
 
-`chart.StackedBar.xts` <- 
+chart.StackedBar.xts <- 
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     # Data should be organized as columns for each category, rows for each period or observation
@@ -107,7 +107,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 
 ### NOT A TIME SERIES OBJECT
 
-`chart.StackedBar.matrix` <- 
+chart.StackedBar.matrix <- 
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {
     # Data should be organized as columns for each category, rows for each period or observation
@@ -202,49 +202,9 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.16  2009-10-20 02:44:16  peter
-# - fixed chart.Stacked bar to accomodate different kinds of data
-#
-# Revision 1.15  2009-10-16 16:17:20  peter
-# - adjusted axis labels to include space
-# - changed default date label to match other defaults
-# - adjusted margins for top plot when legend is under
-#
-# Revision 1.14  2009-06-20 03:18:04  peter
-# - added axTicksByTime to give nice xaxis labels
-# - modified to use layout only for legend "under"
-#
-# Revision 1.13  2008-10-14 14:37:29  brian
-# - convert from matrix or data.frame to zoo in checkData call
-#
-# Revision 1.12  2008-07-11 02:42:15  peter
-# - adjustments to margins again
-# - added cex.axis for sizing axis text
-#
-# Revision 1.5  2008-04-18 03:56:15  peter
-# - added a legend at the bottom
-# - added smarts for displaying single column or stacked
-# - made bottom margin sensitive to length of label names
-#
-# Revision 1.4  2008/02/27 04:01:10  peter
-# - added cex.names for sizing xaxis tags
-#
-# Revision 1.3  2008/02/26 04:56:59  peter
-# - fixed label calculation to handle correct dimension
-#
-# Revision 1.2  2008/02/26 04:38:53  peter
-# - now handles multiple columns for fund
-# - legend "under" draws correctly
-# - bottom margin fits to text with cex=1
-#
-# Revision 1.1  2008/02/23 05:54:37  peter
-# - primitive for weight displays and other charts
 #
 ###############################################################################

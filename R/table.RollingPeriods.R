@@ -1,4 +1,4 @@
-`table.TrailingPeriods` <-
+table.TrailingPeriods <-
 function (R,  periods = subset(c(12,36,60), c(12,36,60)
 < length(as.matrix(R[,1]))), FUNCS=c("mean","sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)
 {# @author Peter Carl
@@ -58,7 +58,7 @@ function (R,  periods = subset(c(12,36,60), c(12,36,60)
 
 }
 
-`table.TrailingPeriodsRel` <-
+table.TrailingPeriodsRel <-
 function (R, Rb, periods = subset(c(12,36,60), c(12,36,60)
 < length(as.matrix(R[,1]))), FUNCS=c("cor","CAPM.beta"), funcs.names = c("Correlation", "Beta"), digits = 4, ...)
 {# @author Peter Carl
@@ -129,37 +129,9 @@ Rb=checkData(Rb)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.8  2009-04-18 02:56:53  peter
-# - argument cleanup and codoc issues
-#
-# Revision 1.7  2009-04-14 03:45:02  peter
-# - smarter labeling of frequency scale
-#
-# Revision 1.6  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.5  2007/03/22 21:53:00  peter
-# - added checkData
-# - using zoo for window() calcs in period lengths
-#
-# Revision 1.4  2007/02/26 22:04:36  brian
-# - changes in functions to pass "R CMD check" for package
-#
-# Revision 1.3  2007/02/25 18:23:40  brian
-# - change call to round() to call base::round() to fix conflict with newest fCalendar
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

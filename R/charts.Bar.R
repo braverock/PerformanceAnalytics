@@ -1,4 +1,4 @@
-`charts.Bar` <-
+charts.Bar <-
 function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 { # @author Peter Carl
 
@@ -61,24 +61,9 @@ function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 #
 # Copyright (c) 2004-2007 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: charts.Bar.R,v $
-# Revision 1.2  2009-09-17 03:15:37  peter
-# - fixed labels and title
-#
-# Revision 1.1  2009-08-18 21:24:00  peter
-# - multiple bar plots function
-#
-# Revision 1.2  2008-04-18 03:59:52  peter
-# - added na.omit to avoid problems with missing data
-#
-# Revision 1.1  2008/02/23 05:55:21  peter
-# - chart demonstrating fund exposures through time
-#
 #
 ###############################################################################

@@ -1,4 +1,4 @@
-`Return.relative` <-
+Return.relative <-
 function (Ra, Rb, ...)
 { # @author Peter Carl
 
@@ -47,19 +47,9 @@ function (Ra, Rb, ...)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
 #
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.3  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.2  2009-09-22 02:44:47  peter
-# - added reclass
-#
-# Revision 1.1  2008-10-30 02:18:39  peter
-# - functionalizes the relative return calculation used in the charts
 ###############################################################################

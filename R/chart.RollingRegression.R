@@ -1,4 +1,4 @@
-`chart.RollingRegression` <-
+chart.RollingRegression <-
 function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
 { # @author Peter Carl
 
@@ -72,81 +72,9 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.22  2009-10-15 21:41:13  brian
-# - updates to add automatic periodicity to chart labels, and support different frequency data
-#
-# Revision 1.21  2009-10-11 12:19:03  brian
-# - rf to Rf
-#
-# Revision 1.20  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.19  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.18  2009-10-03 05:01:09  peter
-# - reversion to prior, still working, version
-#
-# Revision 1.16  2009-04-18 02:56:53  peter
-# - argument cleanup and codoc issues
-#
-# Revision 1.15  2009-03-20 03:22:53  peter
-# - added xts
-#
-# Revision 1.14  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.13  2007/10/11 03:53:00  peter
-# - fixed bug for handling yearmon class dates in zoo object
-#
-# Revision 1.12  2007/04/14 15:01:03  brian
-# - standardize Ra as first argument for asset returns
-#
-# Revision 1.11  2007/04/14 15:00:08  brian
-# - make 'attribute' an enumerated argument
-#
-# Revision 1.10  2007/03/22 11:47:40  peter
-# - changed legend label separator to "to"
-#
-# Revision 1.9  2007/03/16 03:20:51  peter
-# - minor changes
-#
-# Revision 1.8  2007/03/15 01:15:03  brian
-# - replace drop=F with drop=FALSE for R CMD check compatibility
-#
-# Revision 1.7  2007/03/14 22:54:13  peter
-# - fixed Rf calc
-#
-# Revision 1.6  2007/03/14 04:53:47  peter
-# - uses checkData function
-# - uses zoo rollapply function
-# - takes multiple assets and multiple benchmarks
-# - handles unequal lengths of timeseries data
-#
-# Revision 1.5  2007/03/04 18:38:19  brian
-# - update function definition to agree with usage using enumerated argument
-#
-# Revision 1.4  2007/02/07 15:45:33  peter
-# - repaired graphic parameter passing
-# - Rf needs a data check and testing
-#
-# Revision 1.3  2007/02/07 14:58:36  peter
-# - added Rf and calculation of excess returns
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

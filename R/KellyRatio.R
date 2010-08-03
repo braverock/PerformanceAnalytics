@@ -1,4 +1,4 @@
-`KellyRatio` <-
+KellyRatio <-
 function (R, Rf = 0, method = "half")
 { # @author Brian G. Peterson
 
@@ -38,30 +38,9 @@ function (R, Rf = 0, method = "half")
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.7  2009-10-06 15:14:44  peter
-# - fixed rownames
-# - fixed scale = 12 replacement errors
-#
-# Revision 1.5  2009-10-01 01:45:47  peter
-# - added multi-column support
-#
-# Revision 1.4  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.3  2007/03/14 00:54:06  brian
-# - updates to parameters for standardization
-#
-# Revision 1.2  2007/02/22 18:24:48  brian
-# - fix syntaxt error in calc
-#
-# Revision 1.1  2007/02/21 17:25:19  brian
-# - Initial Revision of Kelly Ratio calculation
 #
 ###############################################################################

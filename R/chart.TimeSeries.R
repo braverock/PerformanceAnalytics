@@ -1,4 +1,4 @@
-`chart.TimeSeries` <-
+chart.TimeSeries <-
 function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL, ylab=NULL, xlab="Date", date.format.in="%Y-%m-%d", date.format = NULL, xlim = NULL, ylim = NULL, element.color="darkgray", event.lines = NULL, event.labels = NULL, period.areas = NULL, event.color = "darkgray", period.color = "aliceblue", colorset = (1:12), pch = (1:12), legend.loc = NULL, ylog = FALSE, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks='auto', minor.ticks=TRUE, grid.color="lightgray", grid.lty="dotted", xaxis.labels = NULL, ...)
 { # @author Peter Carl, Brian Peterson
 
@@ -183,88 +183,9 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.25  2009-08-31 22:30:41  brian
-# - update timestamp formatting for more compact format if start and end of series are in same year
-#
-# Revision 1.24  2009-08-21 02:59:28  peter
-# - tweaked the distance of the x-axis labels from the tick marks
-#
-# Revision 1.23  2009-08-20 16:26:54  brian
-# - add as.numeric on range for ylim to handle xts objects with mixed character/numeric columns, which are stored as character matrix
-#
-# Revision 1.22  2009-08-19 17:04:52  brian
-# - add 'seconds' to periodicity switch, since xts supports those now
-#
-# Revision 1.21  2009-08-19 14:02:45  brian
-# - add automatic date.format using periodicity of series to be charted
-#
-# Revision 1.20  2009-06-02 03:12:00  peter
-# - added xaxis.labels to allow for non-date labeling of date axes
-#
-# Revision 1.19  2009-04-18 02:56:53  peter
-# - argument cleanup and codoc issues
-#
-# Revision 1.18  2009-04-17 04:11:25  peter
-# - removed commented code
-# - parameter cleanup
-#
-# Revision 1.17  2009-04-14 02:49:41  peter
-# - restored date formatting needed for matching event lines and areas
-#
-# Revision 1.16  2009-04-07 22:30:52  peter
-# - added cex.* attributes for sizing text elements
-#
-# Revision 1.15  2009-03-20 03:22:53  peter
-# - added xts
-#
-# Revision 1.14  2009-03-04 05:14:05  peter
-# - added axTicksByTime from xts for nice xaxis
-#
-# Revision 1.13  2008-10-06 19:08:50  peter
-# - fixed so that it will plot backgrounds when ylog=T
-#
-# Revision 1.12  2008-08-16 03:42:26  peter
-# - added yaxis.right parameter
-#
-# Revision 1.11  2008-06-28 13:55:25  peter
-# - added cex.labels attribute
-#
-# Revision 1.10  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.9  2008/02/15 04:21:20  peter
-# - added parameters for legend management
-#
-# Revision 1.8  2007/11/19 03:42:14  peter
-# - title will no longer be set to default text, will use column name instead
-#
-# Revision 1.7  2007/11/08 05:04:10  peter
-# - added support for other time formats
-#
-# Revision 1.6  2007/08/20 21:06:11  peter
-# - using range function's na.rm flag to get correct NA behavior
-#
-# Revision 1.5  2007/08/14 23:43:50  peter
-# - now uses zoo internally and handles yearmon and yearqtr formatting
-#
-# Revision 1.4  2007/03/13 04:01:40  peter
-# - added new checkData function
-#
-# Revision 1.3  2007/03/09 03:08:48  peter
-# - fixed y-axis so that ylog could be passed in as a parameter
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

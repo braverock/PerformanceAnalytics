@@ -1,4 +1,4 @@
-`legend` <-
+legend <-
 function (x, y = NULL, legend, fill = NULL, col = par("col"),
     lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"),
     pt.bg = NA, cex = 1, pt.cex = cex, pt.lwd = lwd, xjust = 0,
@@ -422,24 +422,9 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.4  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.3  2008/02/15 04:20:17  peter
-# - parameterized box color separately from background elements
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

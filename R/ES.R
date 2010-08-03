@@ -120,43 +120,9 @@ function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "ke
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.9  2009-10-15 21:42:30  brian
-# - updates to pass R CMD check
-#
-# Revision 1.8  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.7  2009-10-01 19:12:24  brian
-# - update probability to 95% by default
-#
-# Revision 1.6  2009-10-01 19:10:40  brian
-# - label rows
-# - invert historical VaR for consistency with other univariate measures
-#
-# Revision 1.5  2009-09-04 20:45:49  brian
-# - make sure the non-portfolio case returns the same data type as VaR fn
-# - add correct historical ES calc
-#
-# Revision 1.4  2009-08-25 15:29:46  brian
-# - clean up labeling, warnings, and returns for Expected Shortfall
-#
-# Revision 1.3  2009-08-24 22:08:52  brian
-# - adjust to handle p values for correct results
-# - adjust ES to correctly handle probability
-# - add invert argument with default TRUE to match older behavior
-# - make sure all VaR/ES functions handle columns correctly
-#
-# Revision 1.2  2009-06-26 20:47:16  brian
-# - clean up naming confusion/standardization between VaR/ES wrappers
-#
-# Revision 1.1  2009-06-25 16:10:03  brian
-# - initial revision of ES wrapper function to call underlying Es functions for univariate and multivariate series
 #
 ###############################################################################

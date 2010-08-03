@@ -1,5 +1,4 @@
-`chart.BarVaR` <-
-function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
+chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -217,97 +216,9 @@ function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVa
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.29  2009-10-02 18:51:48  peter
-# - changed default p to 0.95
-# - removed negative sign from risk calculation
-#
-# Revision 1.28  2009-09-17 21:40:26  brian
-# - use wrappers for historical VaR/ES, do not pass clean for historical measures
-#
-# Revision 1.27  2009-09-04 20:42:58  brian
-# - add ES functions to as methods to chart.BarVaR, currently suffering from problems in apply.fromstart
-#
-# Revision 1.25  2009-09-01 21:40:47  brian
-# - add na.skip around call to Return.clean
-#
-# Revision 1.24  2009-09-01 20:03:53  brian
-# - move legend location to "topleft"
-#
-# Revision 1.23  2009-08-27 18:34:55  peter
-# - fixed initialization
-#
-# Revision 1.22  2009-07-01 13:31:37  peter
-# - added sensitivity to data periodicity for labeling
-#
-# Revision 1.21  2009-06-30 10:23:49  brian
-# - modify to use VaR wrapper, reverse signs
-#
-# Revision 1.20  2009-04-18 02:56:53  peter
-# - argument cleanup and codoc issues
-#
-# Revision 1.19  2009-04-07 22:17:28  peter
-# - changed to use xts internally
-#
-# Revision 1.18  2009-03-20 03:22:53  peter
-# - added xts
-#
-# Revision 1.17  2008-08-19 03:27:17  peter
-# - fixed legend formatting issues
-#
-# Revision 1.15  2008-08-11 14:06:15  peter
-# - added parameter 'clean' to specify data cleaning method for risk estimation
-# - added parameter 'show.clean' to show cleaned returns overlaid on original data
-# - added parameter 'show.horizontal' to show exceedences to most recent risk value
-#
-# Revision 1.14  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.13  2007/08/20 21:04:58  peter
-# - added as.Date because merge.zoo is not behaving as expected when date
-#   formats are not consistent
-#
-# Revision 1.12  2007/06/25 04:15:59  peter
-# - made gap default 12 (months)
-#
-# Revision 1.11  2007/06/18 03:33:07  brian
-# - use switch for method argument, more efficient
-#
-# Revision 1.10  2007/04/21 14:07:25  peter
-# - added 'all' flag: when F only draws first column
-#
-# Revision 1.9  2007/04/21 01:06:01  peter
-# - creates risk lines for each column of data
-#
-# Revision 1.8  2007/04/13 22:45:18  peter
-# - changed how na.omit is applied
-#
-# Revision 1.7  2007/04/02 21:52:46  peter
-# - added removal of NA's
-#
-# Revision 1.6  2007/03/21 20:49:04  peter
-# - fixed issue with ylim when passed a matrix-like object
-#
-# Revision 1.5  2007/03/20 10:44:46  brian
-# - change F to FALSE to pass R CMD check
-#
-# Revision 1.4  2007/03/20 03:27:00  peter
-# - uses apply.rolling and apply.fromstart to calculate risk lines
-#
-# Revision 1.3  2007/02/26 13:32:37  brian
-# - change method VaR to pass "R CMD check"
-#
-# Revision 1.2  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################

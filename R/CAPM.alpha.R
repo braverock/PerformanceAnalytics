@@ -1,5 +1,4 @@
-`CAPM.alpha` <-
-function (Ra, Rb, Rf = 0)
+CAPM.alpha <- function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -54,50 +53,9 @@ function (Ra, Rb, Rf = 0)
 #
 # Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson
 #
-# This library is distributed under the terms of the GNU Public License (GPL)
+# This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
 # $Id$
-#
-###############################################################################
-# $Log: not supported by cvs2svn $
-# Revision 1.11  2009-10-10 12:40:08  brian
-# - update copyright to 2004-2009
-#
-# Revision 1.10  2009-10-06 03:01:15  peter
-# - added label to results
-#
-# Revision 1.9  2009-10-03 18:23:55  brian
-# - multiple Code-Doc mismatches cleaned up for R CMD check
-# - further rationalized use of R,Ra,Rf
-# - rationalized use of period/scale
-#
-# Revision 1.8  2009-09-29 14:30:00  peter
-# - rewrite of function using apply for multi-column support
-#
-# Revision 1.7  2008-06-02 16:05:19  brian
-# - update copyright to 2004-2008
-#
-# Revision 1.6  2007/03/11 16:53:19  brian
-# - add equations and text to documentation
-# - standardize on Ra as the Return of the Asset
-# - standardize on Ra as first argument where that wasn't previously true
-#
-# Revision 1.5  2007/02/28 03:23:41  peter
-# - added checkDataVector to Rf
-#
-# Revision 1.4  2007/02/08 21:43:39  brian
-# - standardize parameters to R and Rb for consistency with other functions
-#
-# Revision 1.3  2007/02/07 13:24:49  brian
-# - fix pervasive comment typo
-#
-# Revision 1.2  2007/02/07 13:20:52  brian
-# - change Ri to Rb for benchmark asset to standardize parameters
-# - change indexReturns.vec to benchmarkReturns.vec for consistency
-#
-# Revision 1.1  2007/02/02 19:06:15  brian
-# - Initial Revision of packaged files to version control
-# Bug 890
 #
 ###############################################################################
