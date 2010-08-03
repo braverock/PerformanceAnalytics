@@ -223,9 +223,9 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > data(managers)
 > CAPM.CML.slope(managers[,"SP500 TR",drop=FALSE], managers[,10,drop=FALSE])
                                      SP500 TR
-Capital Market Line Slope: SP500 TR 0.04330924
+Capital Market Line Slope: SP500 TR 0.1255829
 > CAPM.CML(managers[,"HAM1",drop=FALSE], managers[,"SP500 TR",drop=FALSE], Rf=0)
-[1] 0.0004817169
+[1] 0.002225442
 > CAPM.RiskPremium(managers[,"SP500 TR",drop=FALSE], Rf=0)
                         SP500 TR
 Risk Premium (Rf=0%) 0.008665341
@@ -318,12 +318,12 @@ Sterling Ratio (Excess = 10%) 6.469038
 > ### ** Examples
 > 
 > data(managers)
-> CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-[1] NaN
-> CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-[1] NaN
-> CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500.TR", drop=FALSE])
-[1] NaN
+> CoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+[1] 0.0006641516
+> CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+[1] -2.101289e-06
+> CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+[1] 2.579066e-06
 > 
 > 
 > 
@@ -4122,76 +4122,76 @@ Warning in Return.portfolio(edhec, contribution = TRUE) :
 > data(managers)
 > SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev") 
                                       HAM1
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.3201889
 > SharpeRatio(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE], FUN="StdDev")
                                      HAM1
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.308102
 > SharpeRatio(managers[,1:6], Rf=.035/12, FUN="StdDev") 
                                       HAM1      HAM2      HAM3      HAM4
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.3201889 0.3057649 0.2610141 0.1522615
                                        HAM5      HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562009 0.3417545
 > SharpeRatio(managers[,1:6], Rf = managers[,10,drop=FALSE], FUN="StdDev")
                                      HAM1      HAM2      HAM3      HAM4
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.02562881 0.03671623 0.03651259 0.05319796
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.308102 0.2988608 0.2525301 0.1464385
                                        HAM5      HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%) 0.04573149 0.02381247
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.03545540 0.3785371
 > 
 > 
 > 
 > data(edhec)
 > SharpeRatio(edhec[, 6, drop = FALSE], FUN="VaR")
                             Event Driven
-VaR Sharpe:  (Rf=0%, p=95%)  -0.02812515
+VaR Sharpe:  (Rf=0%, p=95%)    0.2710161
 > SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR")
                               Event Driven
-VaR Sharpe:  (Rf=0.3%, p=95%)  -0.02812515
+VaR Sharpe:  (Rf=0.3%, p=95%)    0.1524982
 > SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR" , method="gaussian")
                               Event Driven
-VaR Sharpe:  (Rf=0.3%, p=95%)  -0.02246202
+VaR Sharpe:  (Rf=0.3%, p=95%)    0.1909461
 > SharpeRatio(edhec[, 6, drop = FALSE], FUN="ES")
                            Event Driven
-ES Sharpe:  (Rf=0%, p=95%)  -0.05909659
+ES Sharpe:  (Rf=0%, p=95%)    0.1289815
 > 
 > # and all the methods
 > SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
-                                        HAM1        HAM2        HAM3
-StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02562881  0.03671623  0.03651259
-VaR Sharpe:  (Rf=0.3%, p=95%)    -0.03422955 -0.02763504 -0.03680944
-ES Sharpe:  (Rf=0.3%, p=95%)     -0.06097455 -0.06136169 -0.04404692
-                                        HAM4        HAM5        HAM6
-StdDev Sharpe:  (Rf=0.3%, p=95%)  0.05319796  0.04573149  0.02381247
-VaR Sharpe:  (Rf=0.3%, p=95%)    -0.08153971 -0.06756340 -0.02981810
-ES Sharpe:  (Rf=0.3%, p=95%)     -0.11758811 -0.09741309 -0.03904744
-                                 EDHEC LS EQ    SP500 TR   US 10Y TR
-StdDev Sharpe:  (Rf=0.3%, p=95%)  0.02045246  0.04330924  0.02038955
-VaR Sharpe:  (Rf=0.3%, p=95%)    -0.02347884 -0.06834972 -0.03097683
-ES Sharpe:  (Rf=0.3%, p=95%)     -0.03463385 -0.09441034 -0.04439739
+                                      HAM1      HAM2      HAM3       HAM4
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.3081020 0.2988608 0.2525301 0.14643845
+VaR Sharpe:  (Rf=0.3%, p=95%)    0.2306863 0.3970699 0.2504936 0.09553906
+ES Sharpe:  (Rf=0.3%, p=95%)     0.1295014 0.1788256 0.2093343 0.06625013
+                                       HAM5      HAM6 EDHEC LS EQ   SP500 TR
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.03545540 0.3785371   0.3142695 0.12558293
+VaR Sharpe:  (Rf=0.3%, p=95%)    0.02399862 0.3022965   0.2737607 0.07957460
+ES Sharpe:  (Rf=0.3%, p=95%)     0.01664487 0.2308450   0.1855867 0.05760917
+                                  US 10Y TR
+StdDev Sharpe:  (Rf=0.3%, p=95%) 0.05684359
+VaR Sharpe:  (Rf=0.3%, p=95%)    0.03741555
+ES Sharpe:  (Rf=0.3%, p=95%)     0.02610548
 > SharpeRatio(edhec,Rf = .04/12)
                                  Convertible Arbitrage CTA Global
-StdDev Sharpe:  (Rf=0.3%, p=95%)            0.02004739  0.02513090
-VaR Sharpe:  (Rf=0.3%, p=95%)              -0.03247395 -0.03380228
-ES Sharpe:  (Rf=0.3%, p=95%)               -0.09954768 -0.04284185
+StdDev Sharpe:  (Rf=0.3%, p=95%)            0.15339751 0.12558803
+VaR Sharpe:  (Rf=0.3%, p=95%)               0.09469804 0.09337063
+ES Sharpe:  (Rf=0.3%, p=95%)                0.03089192 0.07366957
                                  Distressed Securities Emerging Markets
-StdDev Sharpe:  (Rf=0.3%, p=95%)            0.01834791       0.03857144
-VaR Sharpe:  (Rf=0.3%, p=95%)              -0.02749240      -0.06363081
-ES Sharpe:  (Rf=0.3%, p=95%)               -0.06087217      -0.12788702
+StdDev Sharpe:  (Rf=0.3%, p=95%)            0.25179740       0.12736677
+VaR Sharpe:  (Rf=0.3%, p=95%)               0.16804482       0.07720662
+ES Sharpe:  (Rf=0.3%, p=95%)                0.07589603       0.03841453
                                  Equity Market Neutral Event Driven
-StdDev Sharpe:  (Rf=0.3%, p=95%)           0.009005818   0.01835047
-VaR Sharpe:  (Rf=0.3%, p=95%)             -0.011346373  -0.02812515
-ES Sharpe:  (Rf=0.3%, p=95%)              -0.042900420  -0.05909659
+StdDev Sharpe:  (Rf=0.3%, p=95%)             0.2963971   0.23372885
+VaR Sharpe:  (Rf=0.3%, p=95%)                0.2352556   0.15249824
+ES Sharpe:  (Rf=0.3%, p=95%)                 0.0622208   0.07257669
                                  Fixed Income Arbitrage Global Macro
-StdDev Sharpe:  (Rf=0.3%, p=95%)             0.01417129   0.01701962
-VaR Sharpe:  (Rf=0.3%, p=95%)               -0.02467910  -0.01548247
-ES Sharpe:  (Rf=0.3%, p=95%)                -0.05951833  -0.01983308
+StdDev Sharpe:  (Rf=0.3%, p=95%)             0.06333844    0.2549431
+VaR Sharpe:  (Rf=0.3%, p=95%)                0.03637036    0.2802548
+ES Sharpe:  (Rf=0.3%, p=95%)                 0.01508086    0.2187777
                                  Long/Short Equity Merger Arbitrage
-StdDev Sharpe:  (Rf=0.3%, p=95%)        0.02217382       0.01116827
-VaR Sharpe:  (Rf=0.3%, p=95%)          -0.03037494      -0.01486869
-ES Sharpe:  (Rf=0.3%, p=95%)           -0.04709136      -0.03326371
+StdDev Sharpe:  (Rf=0.3%, p=95%)        0.19962891        0.3090483
+VaR Sharpe:  (Rf=0.3%, p=95%)           0.14572983        0.2321344
+ES Sharpe:  (Rf=0.3%, p=95%)            0.09399888        0.1037628
                                  Relative Value Short Selling Funds of Funds
-StdDev Sharpe:  (Rf=0.3%, p=95%)     0.01319468    0.05509917     0.01821196
-VaR Sharpe:  (Rf=0.3%, p=95%)       -0.01926435   -0.07431463    -0.02502852
-ES Sharpe:  (Rf=0.3%, p=95%)        -0.04888118   -0.09022777    -0.04618555
+StdDev Sharpe:  (Rf=0.3%, p=95%)     0.25525305   0.015024743     0.14194452
+VaR Sharpe:  (Rf=0.3%, p=95%)        0.17482979   0.011139811     0.10328569
+ES Sharpe:  (Rf=0.3%, p=95%)         0.06890142   0.009175123     0.05597178
 > 
 > 
 > 
@@ -5463,7 +5463,7 @@ Warning in par(original.layout) :
 > chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
 Loading required package: SparseM
 Package SparseM (0.85) loaded.
-           To cite, see citation("SparseM")
+	   To cite, see citation("SparseM")
 
 
 Attaching package: 'SparseM'
@@ -7134,7 +7134,7 @@ Warning: timezone of object (GMT) is different than current timezone ().
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  98.38 2.19 100.664 0 0 
+Time elapsed:  98.31 2.05 100.384 0 0 
 > grDevices::dev.off()
 postscript 
          2 
