@@ -35,10 +35,11 @@ which.digit <- function(x, n=1) {
 # 4    1
 # 5    2
 # 6    1
-dig.count=cbind(table(sapply(as.vector(abs(which(edhec[,1]>0))*100),which.digit,n=1)))
+# dig.count=cbind(table(sapply(as.vector(abs(which(edhec[,1]>0))*100),which.digit,n=1)))
 #chisq.test(x=dig.count/sum(dig.count),y=sapply(1:9,dbenford, n=1))
 
-table.Benford <- function(R=NULL, method=c("percentage", "count"), n=1, obs=100){
+table.Benford <- 
+function(R=NULL, method=c("percentage", "count"), n=1, obs=100){
     # n: the nth significant digit to test
     if(!is.null(R))
         R = checkData(R)
@@ -63,7 +64,6 @@ table.Benford <- function(R=NULL, method=c("percentage", "count"), n=1, obs=100)
     }
     else {
         # Calculate actual values
-
         for(column in 1:columns){ # Return a list of tables for each columns
             for(sign.digit in n){
                 digit.count = cbind(table(sapply(as.vector(abs(R[which(R[,column]>0),column])*10000), which.digit, n=sign.digit)))
@@ -86,4 +86,24 @@ table.Benford <- function(R=NULL, method=c("percentage", "count"), n=1, obs=100)
 
     }
     return(result)
+}
+
+chart.Benford <-
+function(R, n=1, p=.95, method=c("actual", "differences"), ...) {
+
+    obs=NROW(R)
+    # Calculate the theoretical line
+    theo = table.Benford(method="percentage", n=n[1])
+    # Calculate digit counts
+    actual = table.Benford(R, method="percentage", n=n[1])
+    # Calculate z-score lines
+#     ztests = (actual-theo)/(sqrt(theo*(1-theo)/obs)
+    zUpper =
+    zLower = 
+
+
+
+    plot(theo, type="b", axes=FALSE)
+    # TODO add axes, labels
+    return(invisible(result))
 }
