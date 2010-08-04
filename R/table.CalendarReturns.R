@@ -117,7 +117,7 @@ table.Returns <-
 function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
 {
     # deprecated wrapper function
-    table.CalendarReturns(R=R, digits = digits, as.perc = as.perc)
+    table.CalendarReturns(R=R, digits = digits, as.perc = as.perc, geometric = geometric)
 }
 
 ###############################################################################
