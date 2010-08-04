@@ -1,5 +1,5 @@
 table.CalendarReturns <-
-function (R, digits = 1, as.perc = TRUE)
+function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -76,8 +76,11 @@ function (R, digits = 1, as.perc = TRUE)
 
         #    next, calculate the cumulative return for each year
         for (i in 1:length(yearcol[,1])) {
-            yearcol[i,columnnames[column]] = prod(1 + na.omit(as.numeric(target.df[i,])))-1
-            if(yearcol[i,columnnames[column]]== 0) 
+			if(geometric)
+				yearcol[i,columnnames[column]] = prod(1 + na.omit(as.numeric(target.df[i,])))-1
+			else
+				yearcol[i,columnnames[column]] = sum(as.numeric(target.df[i,]), na.rm=TRUE)
+			if(yearcol[i,columnnames[column]]== 0) 
                 yearcol[i,columnnames[column]] = NA
         }
         #Now, append the results to the other data.frame
@@ -111,7 +114,7 @@ function (R, digits = 1, as.perc = TRUE)
 }
 
 table.Returns <-
-function (R, digits = 1, as.perc = TRUE)
+function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
 {
     # deprecated wrapper function
     table.CalendarReturns(R=R, digits = digits, as.perc = as.perc)
