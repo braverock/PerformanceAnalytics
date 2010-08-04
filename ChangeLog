@@ -1,3 +1,202 @@
+2010-08-04  peter_carl
+
+	* R/table.CalendarReturns.R: - added geometric to table.Returns as
+	  well
+	* man/table.CalendarReturns.Rd: - added geometric attribute
+	* R/table.CalendarReturns.R: - added geometric to attributes
+	* R/chart.StackedBar.R: - removed op
+
+2010-08-03  peter_carl
+
+	* sandbox/Benford.R: - first functions for implementing tests of
+	  Benford's law
+	* man/chart.RollingPerformance.Rd: - fixed codoc error
+
+2010-08-03  braverock
+
+	* man/PerformanceAnalytics-package.Rd, man/VaR.Rd: - remove
+	  references to orphaned package 'VaR'
+	* tests/Examples/PerformanceAnalytics-Ex.Rout.save: - reconcile
+	  differences between expected output and current code
+	* R/ActivePremium.R, R/CAPM.alpha.R, R/CAPM.beta.R, R/CAPM.utils.R,
+	  R/CalmarRatio.R, R/CoMoments.R, R/DownsideDeviation.R,
+	  R/Drawdowns.R, R/ES.R, R/HerfindahlIndex.R, R/HurstIndex.R,
+	  R/InformationRatio.R, R/KellyRatio.R, R/MultivariateMoments.R,
+	  R/Omega.R, R/PainIndex.R, R/PortfolioRisk.R, R/Return.Geltner.R,
+	  R/Return.annualized.R, R/Return.calculate.R, R/Return.clean.R,
+	  R/Return.cumulative.R, R/Return.excess.R, R/Return.index.R,
+	  R/Return.portfolio.R, R/Return.read.R, R/Return.relative.R,
+	  R/Return.wealthindex.R, R/SemiDeviation.R, R/SharpeRatio.R,
+	  R/SharpeRatio.annualized.R, R/SmoothingIndex.R, R/SortinoRatio.R,
+	  R/StdDev.R, R/StdDev.annualized.R, R/TrackingError.R,
+	  R/TreynorRatio.R, R/UlcerIndex.R, R/UpDownRatios.R,
+	  R/UpsidePotentialRatio.R, R/VaR.Marginal.R, R/VaR.R,
+	  R/apply.fromstart.R, R/apply.rolling.R, R/chart.ACF.R,
+	  R/chart.ACFplus.R, R/chart.Bar.R, R/chart.BarVaR.R,
+	  R/chart.Boxplot.R, R/chart.CaptureRatios.R,
+	  R/chart.Correlation.R, R/chart.CumReturns.R, R/chart.Drawdown.R,
+	  R/chart.ECDF.R, R/chart.Events.R, R/chart.Histogram.R,
+	  R/chart.QQPlot.R, R/chart.Regression.R,
+	  R/chart.RelativePerformance.R, R/chart.RiskReturnScatter.R,
+	  R/chart.RollingCorrelation.R, R/chart.RollingMean.R,
+	  R/chart.RollingPerformance.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.RollingRegression.R,
+	  R/chart.Scatter.R, R/chart.SnailTrail.R, R/chart.StackedBar.R,
+	  R/chart.TimeSeries.R, R/chart.VaRSensitivity.R, R/charts.Bar.R,
+	  R/charts.BarVaR.R, R/charts.PerformanceSummary.R,
+	  R/charts.RollingPerformance.R, R/charts.RollingRegression.R,
+	  R/charts.TimeSeries.R, R/checkData.R, R/findDrawdowns.R,
+	  R/kurtosis.R, R/legend.R, R/maxDrawdown.R, R/mean.utils.R,
+	  R/na.skip.R, R/replaceTabs.R, R/skewness.R, R/sortDrawdowns.R,
+	  R/table.AnnualizedReturns.R, R/table.Arbitrary.R,
+	  R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.DownsideRisk.R,
+	  R/table.Drawdowns.R, R/table.HigherMoments.R,
+	  R/table.MonthlyReturns.R, R/table.RollingPeriods.R,
+	  R/table.UpDownRatios.R, R/textplot.R, R/zerofill.R, R/zzz.R: -
+	  update all footer function, rationalize use of ID, Log, Rev
+	  keywords
+	  - ensure all code files have proper attribution, copyright,
+	  license
+	* R/PortfolioRisk.R: - revert rev 1716
+	* man/PerformanceAnalytics-package.Rd: - update section on Style
+	  Analysis to point people to R-Forge FactorAnalytics
+	* R/checkData.R: - fix typo to pass R CMD check
+	* R/table.CAPM.R: - fix the way we call CAPM.beta.bear and
+	  CAPM.beta.bull to get back to expected results in R CMD check
+
+2010-08-02  braverock
+
+	* tests/Examples/PerformanceAnalytics-Ex.Rout.save: - remove
+	  trivial changes due to R version and test platform differences
+	  - TODO substantive changes still need reconciliation
+
+2010-07-30  braverock
+
+	* R/CoMoments.R, R/checkData.R, man/CoMoments.Rd: - updates to pass
+	  R CMD check
+	  - change merge to cbind
+	  - change "SP500.TR" to "SP500 TR"
+	  - don't transform an xts object to an xts object in checkData,
+	  just return
+
+2010-07-28  braverock
+
+	* R/PortfolioRisk.R: - t(w) to match portm4, seems like a
+	  regression bug
+	* R/table.AnnualizedReturns.R: - pass geometric argument properly
+	  through to SharpeRatio.annualized
+	  bug report credit to Murali.Menon <at> avivainvestors.com
+
+2010-07-19  braverock
+
+	* R/chart.RollingPerformance.R: - rearrange to use do.call so our
+	  lists of args works properly
+	* R/chart.RollingPerformance.R: - fix separation of dots for plot
+	  and function
+
+2010-07-15  peter_carl
+
+	* R/chart.RollingPerformance.R: - first try to separate dots into
+	  FUN and plot separately
+
+2010-07-13  braverock
+
+	* man/VaR.Rd: - add another paragraph on Marginal VaR
+
+2010-06-02  braverock
+
+	* R/chart.Drawdown.R: - workaround provided by Samuel Le to handle
+	  single-column input
+
+2010-06-01  peter_carl
+
+	* R/HurstIndex.R: - adding function
+
+2010-05-29  peter_carl
+
+	* R/maxDrawdown.R: - added AverageDrawdown function
+	  - added DrawdownDeviation function
+
+2010-05-27  peter_carl
+
+	* R/PainIndex.R: - first commit of function
+	* R/UlcerIndex.R: - fixed for NAs
+	* R/UlcerIndex.R: - first commit of function
+
+2010-05-14  peter_carl
+
+	* R/chart.Histogram.R: - fixed bug in labeling vertical lines
+	  - allow ylim to be passed in
+
+2010-05-11  braverock
+
+	* R/SharpeRatio.R: - finish fix for FUN/FUNC/FUNCT confusion
+	  reported by Giuseppe Milicia
+	  - only globally calculate Return.excess if weights is.null
+
+2010-05-11  peter_carl
+
+	* R/SharpeRatio.R: - fixed apply confusion with FUN
+	  - moved xR calculation into interior function
+
+2010-05-10  braverock
+
+	* R/Return.excess.R: - apply patch for edge case provided by
+	  Giuseppe Milicia
+
+2010-05-08  peter_carl
+
+	* man/ActivePremium.Rd: - fixed example
+
+2010-04-30  peter_carl
+
+	* NAMESPACE: - Removed functions that went into StyleAnalytics
+
+2010-04-28  peter_carl
+
+	* man/Style.Rd[DEL]: moving style functions to new pkg
+	* R/chart.RollingStyle.R[DEL]: moving style functions to new pkg
+	* R/chart.Style.R[DEL]: moving style functions to new pkg
+	* R/style.fit.R[DEL]: moving style functions to new pkg
+	* R/style.QPfit.R[DEL]: moving style functions to new pkg
+
+2010-04-23  braverock
+
+	* DESCRIPTION: - re-increment version to 1.0.3
+	* DESCRIPTION, man/PerformanceAnalytics-package.Rd,
+	  man/chart.CumReturns.Rd, man/charts.PerformanceSummary.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - fix silly
+	  escaped backslash fatal error in examples on R 2.11.0 check
+
+2010-04-15  braverock
+
+	* DESCRIPTION: - update DESCRIPTION
+	* NEWS: - back-port release notes from v 0.9.7
+	* NEWS: - update with Release Notes for v1.0.2
+
+2010-04-08  braverock
+
+	* DESCRIPTION: - update Description
+	  - bump version to 1.0.3 post-release
+
+2010-04-07  braverock
+
+	* ChangeLog: - update Changelog prior to 1.0.2 tag
+	* DESCRIPTION, man/Return.portfolio.Rd, man/SortinoRatio.Rd,
+	  man/TreynorRatio.Rd, man/maxDrawdown.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - minor updates
+	  prior to release
+	* man/CDD.Rd: - update doc title and topics
+
+2010-04-06  braverock
+
+	* man/CDD.Rd: - add examples
+	* R/StdDev.R: - updates to pass R CMD check
+	* R/VaR.R, R/maxDrawdown.R, man/CDD.Rd,
+	  man/charts.PerformanceSummary.Rd: - updates to pass R CMD check
+
 2010-03-17  peter_carl
 
 	* R/charts.BarVaR.R: - fixed text alignment and size in box frame
@@ -130,8 +329,8 @@
 
 	* R/zzz.R: - add even and odd functions from gtools, not exported
 	* DESCRIPTION, man/StdDev.Rd: - updates to pass R CMD check
-	* man/StdDev.Rd[ADD]: - add documentation for StdDev wrapper so we
-	  can expose it in NAMESPACE for PerfA 1.0.1
+	* man/StdDev.Rd: - add documentation for StdDev wrapper so we can
+	  expose it in NAMESPACE for PerfA 1.0.1
 
 2010-01-05  peter_carl
 
@@ -162,10 +361,10 @@
 2010-01-03  braverock
 
 	* DESCRIPTION: - updates to pass R CMD check
-	* .Rbuildignore, ChangeLog, ChangeLog.1.0.0[ADD]: - keep the old
-	  CVS ChangeLog for posterity
-	* .Rbuildignore, ChangeLog, generatechangelog.sh[ADD]: - new
-	  ChangeLog generator for svn repository
+	* .Rbuildignore, ChangeLog, ChangeLog.1.0.0: - keep the old CVS
+	  ChangeLog for posterity
+	* .Rbuildignore, ChangeLog, generatechangelog.sh: - new ChangeLog
+	  generator for svn repository
 	* NAMESPACE, R/CAPM.utils.R, R/Drawdowns.R, R/ES.R,
 	  R/Return.annualized.R, R/SharpeRatio.R,
 	  R/SharpeRatio.annualized.R, R/StdDev.R, R/VaR.R,
@@ -220,7 +419,7 @@
 
 2009-12-22  braverock
 
-	* man/zerofill.Rd[ADD]: - add documentation for zerofill fn
+	* man/zerofill.Rd: - add documentation for zerofill fn
 	* man/ES.Rd, man/VaR.Rd: - document change of p default to .95
 
 2009-12-20  braverock
@@ -262,16 +461,16 @@
 	  in optimizer functions
 	* R/MultivariateMoments.R: -add proper handling of dots for mu
 	  argument
-	* R/PortfolioRisk.R, R/StdDev.R[ADD]: - add StdDev wrapper function
-	  to support univariate, multivariate moment, and component
-	  standard deviation
+	* R/PortfolioRisk.R, R/StdDev.R: - add StdDev wrapper function to
+	  support univariate, multivariate moment, and component standard
+	  deviation
 	  - arrange/name returned list in Portsd function to match other
 	  component calcs
 
 2009-11-19  braverock
 
-	* .Rbuildignore[ADD], sandbox[ADD]: - create sandbox dir, add
-	  .Rbuildignore file
+	* .Rbuildignore, sandbox: - create sandbox dir, add .Rbuildignore
+	  file
 
 2009-11-09  braverock
 
@@ -363,7 +562,7 @@
 	* R[CPY]: - move to pkg directory
 	* inst[CPY]: - move to pkg directory
 	* man[CPY]: - move to pkg directory
-	* .[ADD]: - create directory for PerformanceAnalytics
+	* .: - create directory for PerformanceAnalytics
 
 2009-10-23 16:30  tag v1_0_0-2009-10-23
 
