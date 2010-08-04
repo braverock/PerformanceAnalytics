@@ -7,14 +7,15 @@
 Returns a table of returns formatted with years in rows, months in columns, and a total column in the last column.  For additional columns in \code{R}, annual returns will be appended as columns.
 }
 \usage{
-table.CalendarReturns(R, digits = 1, as.perc = TRUE)
-table.Returns(R, digits = 1, as.perc = TRUE)
+table.CalendarReturns(R, digits = 1, as.perc = TRUE, geometric = TRUE)
+table.Returns(R, digits = 1, as.perc = TRUE, geometric = TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{digits}{ number of digits to round results to for presentation }
   \item{as.perc}{ TRUE/FALSE  if TRUE, multiply simple returns by 100 to get \% }
+  \item{geometric}{ generate geometric (TRUE) or simple (FALSE) returns, default TRUE}
 }
 \author{ Peter Carl }
 \note{
