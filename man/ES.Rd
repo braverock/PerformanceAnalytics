@@ -155,9 +155,6 @@ The option to \code{invert} the ES measure should appease both academics and pra
     \code{\link{VaR}} \cr
     \code{\link{SharpeRatio.modified}} \cr
     \code{\link{chart.VaRSensitivity}} \cr
-    \code{\link[VaR]{VaR.gpd}} \cr
-    \code{\link[VaR]{VaR.norm}} \cr
-    \code{\link[VaR]{VaR.backtest}} \cr
     \code{\link{Return.clean}}
 }
 \examples{
