@@ -37,3 +37,53 @@ which.digit <- function(x, n=1) {
 # 6    1
 dig.count=cbind(table(sapply(as.vector(abs(which(edhec[,1]>0))*100),which.digit,n=1)))
 #chisq.test(x=dig.count/sum(dig.count),y=sapply(1:9,dbenford, n=1))
+
+table.Benford <- function(R=NULL, method=c("percentage", "count"), n=1, obs=100){
+    # n: the nth significant digit to test
+    if(!is.null(R))
+        R = checkData(R)
+    method=method[1]
+    columns = NCOL(R)
+    result=NA
+    if(is.null(R)){
+        # Calculate theoretical values
+        for(sign.digit in n){
+            digit.perc = cbind(dbenford(0:9,n=sign.digit))
+            if(sign.digit==1) digit.perc[1] = NA
+            if(sign.digit==n[1])
+                result=digit.perc
+            else
+                result = cbind(result, digit.perc)
+        }
+        colnames(result)=n
+        rownames(result)=0:9
+        if(method=="count")
+            result = round(result*obs,0)
+            
+    }
+    else {
+        # Calculate actual values
+
+        for(column in 1:columns){ # Return a list of tables for each columns
+            for(sign.digit in n){
+                digit.count = cbind(table(sapply(as.vector(abs(R[which(R[,column]>0),column])*10000), which.digit, n=sign.digit)))
+                fill = data.frame(rep(NA,10),row.names=0:9)
+                tmp = merge(digit.count,fill,by=0,all=TRUE)
+                count.col=as.data.frame(tmp[,2],row.names=tmp[,1])
+                if(sign.digit==n[1]) 
+                    result = count.col
+                else
+                    result = cbind(result, count.col)
+            }
+            colnames(result)=n
+            if(NROW(result)==10)
+                rownames(result)=0:9
+            if(method=="percentage"){
+                result[ is.na(result) ] <- 0
+                result=t(t(result)/colSums(result))
+            }
+        }
+
+    }
+    return(result)
+}
