@@ -62,7 +62,7 @@ or wish to more closely model an ideal distribution, it is common to us a parmet
 Parametric ES does a better job of accounting for the tails of the distribution by more precisely estimating shape 
 of the distribution tails of the risk quantile. The most common estimate is a normal (or Gaussian) distribution  \eqn{R\sim N(\mu,\sigma)}
 for the return series. In this case, estimation of ES requires the mean return  \eqn{\bar{R}}, the return distribution
-and the variance of the returns  \eqn{\sigma}. In the most common case, parametric VaR is thus calculated by
+and the variance of the returns  \eqn{\sigma}. In the most common case, parametric ES is thus calculated by
 
 \deqn{\sigma=variance(R)}{sigma=var(R)}
 
@@ -123,7 +123,7 @@ E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
 \code{skewness.MM} and \code{kurtosis.MM}. More efficient estimators were proposed by Martellini and Ziemann (2007) and will be implemented in the future.
 
 As discussed among others in Cont, Deguest and Scandolo (2007), it is important that the estimation of the ES measure
-is robust to single outliers. This is especially the case for  modified VaR and its decomposition, since they use higher order moments.
+is robust to single outliers. This is especially the case for  modified VaR/ES and its component decomposition, since they use higher order moments.
 By default, the portfolio moments are estimated by their sample counterparts. If \code{clean="boudt"} then the \eqn{1-p} most extreme observations
 are winsorized if they are detected as being outliers. For more information, see Boudt, Peterson and Croux (2008) and \code{\link{Return.clean}}.  If your data consist of returns for highly illiquid assets, then \code{clean="geltner"} may be more appropriate to reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}} for details.
 }
