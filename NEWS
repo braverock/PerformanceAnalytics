@@ -1,7 +1,17 @@
+PerformanceAnalytics 1.0.3.1 Release Notes
+
+A change to the behavior of as.xts removed functionality relied on by 
+PerformanceAnalytics in checkData.  Thanks to debugging help from
+Jeff Ryan and a one-line patch, everything should work as expected 
+back through current and older xts versions.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
 PerformanceAnalytics 1.0.3 Release Notes
 (sent to CRAN 2010-08-04)
 
-This is an incremental bugfix and improvement release on the v1.x0.x cycle.
+This is an incremental bugfix and improvement release on the v1.0.x cycle.
 
 We would like to acknowledge feedback and suggestions from 
 Giuseppe Milicia and Murali Menon which have resulted in changes or 
@@ -17,7 +27,7 @@ course of maintenance.
 PerformanceAnalytics 1.0.2 Release Notes
 (released to CRAN 2010-04-08)
 
-This release is an incremental improvement on v.1.0.x
+This release is an incremental improvement on v1.0.x
 
 We've continued to make functions more friendly for use in parallel 
 execution and optimization environments.
