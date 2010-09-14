@@ -445,13 +445,13 @@ ES    -0.05500037
 > 
 >     # now with outliers squished
 >     ES(edhec, clean="boudt")
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
+   Convertible.Arbitrage  CTA.Global Distressed.Securities Emerging.Markets
 ES           -0.03562699 -0.04284185           -0.04112811      -0.08155407
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
+   Equity.Market.Neutral Event.Driven Fixed.Income.Arbitrage Global.Macro
 ES           -0.01328429  -0.04757418            -0.04399325   -0.0207825
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
+   Long.Short.Equity Merger.Arbitrage Relative.Value Short.Selling
 ES       -0.04580446      -0.02084536    -0.02768213    -0.1011923
-   Funds of Funds
+   Funds.of.Funds
 ES    -0.04509196
 > 
 >     # add Component ES for the equal weighted portfolio
@@ -462,27 +462,27 @@ $MES
 [1,] 0.02370317
 
 $contribution
- Convertible Arbitrage             CTA Global  Distressed Securities 
+ Convertible.Arbitrage             CTA.Global  Distressed.Securities 
           0.0029965453          -0.0019497564           0.0029213753 
-      Emerging Markets  Equity Market Neutral           Event Driven 
+      Emerging.Markets  Equity.Market.Neutral           Event.Driven 
           0.0052308852           0.0007126061           0.0033861122 
-Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+Fixed.Income.Arbitrage           Global.Macro      Long.Short.Equity 
           0.0030269713           0.0009179870           0.0032207618 
-      Merger Arbitrage         Relative Value          Short Selling 
+      Merger.Arbitrage         Relative.Value          Short.Selling 
           0.0011805805           0.0020665511          -0.0031688562 
-        Funds of Funds 
+        Funds.of.Funds 
           0.0031614105 
 
 $pct_contrib_MES
- Convertible Arbitrage             CTA Global  Distressed Securities 
+ Convertible.Arbitrage             CTA.Global  Distressed.Securities 
             0.12641958            -0.08225719             0.12324827 
-      Emerging Markets  Equity Market Neutral           Event Driven 
+      Emerging.Markets  Equity.Market.Neutral           Event.Driven 
             0.22068290             0.03006374             0.14285480 
-Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+Fixed.Income.Arbitrage           Global.Macro      Long.Short.Equity 
             0.12770321             0.03872844             0.13587893 
-      Merger Arbitrage         Relative Value          Short Selling 
+      Merger.Arbitrage         Relative.Value          Short.Selling 
             0.04980685             0.08718457            -0.13368911 
-        Funds of Funds 
+        Funds.of.Funds 
             0.13337499 
 
 > 
@@ -573,19 +573,6 @@ Omega (L = 0%)               2.585943     3.516616          2.438064
                Merger Arbitrage Relative Value Short Selling Funds of Funds
 Omega (L = 0%)         4.595886       3.815368      1.228785       2.460153
 >     Omega(edhec[,13],method="interp",output="point")
-Loading required package: survival
-Loading required package: splines
-
-Attaching package: 'Hmisc'
-
-The following object(s) are masked from 'package:survival':
-
-    untangle.specials
-
-The following object(s) are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
                Funds of Funds
 Omega (L = 0%)       5.265408
 >     Omega(edhec[,13],method="interp",output="full")
@@ -735,9 +722,6 @@ Omega (L = 0%)       5.265408
 > 
 > 
 > cleanEx()
-
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
-
 > nameEx("Return.Geltner")
 > ### * Return.Geltner
 > 
@@ -4081,7 +4065,7 @@ Warning in Return.portfolio(edhec, contribution = TRUE) :
 > 
 > data(managers)
 > head(Return.relative(managers[,1:3], managers[,8,drop=FALSE]),n=20)
-           HAM1/SP500 TR HAM2/SP500 TR HAM3/SP500 TR
+           HAM1.SP500.TR HAM2.SP500.TR HAM3.SP500.TR
 1996-01-30     0.9742747            NA      1.000870
 1996-02-28     0.9839276            NA      1.026455
 1996-03-30     0.9896776            NA      1.042925
@@ -4333,13 +4317,13 @@ StdDev     0.01821196
 > 
 >     # now with outliers squished
 >     StdDev(edhec, clean="boudt")
-       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+       Convertible.Arbitrage CTA.Global Distressed.Securities Emerging.Markets
 StdDev             0.0158664  0.0251309            0.01687269        0.0355635
-       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
+       Equity.Market.Neutral Event.Driven Fixed.Income.Arbitrage Global.Macro
 StdDev           0.007367818   0.01760712             0.01189823   0.01667315
-       Long/Short Equity Merger Arbitrage Relative Value Short Selling
+       Long.Short.Equity Merger.Arbitrage Relative.Value Short.Selling
 StdDev        0.02206307       0.01041944     0.01170342    0.05326087
-       Funds of Funds
+       Funds.of.Funds
 StdDev     0.01813736
 > 
 >     # add Component StdDev for the equal weighted portfolio
@@ -4637,27 +4621,27 @@ $MVaR
 [1,] 0.01206124
 
 $contribution
- Convertible Arbitrage             CTA Global  Distressed Securities 
+ Convertible.Arbitrage             CTA.Global  Distressed.Securities 
           1.189614e-03           7.392667e-05           1.380388e-03 
-      Emerging Markets  Equity Market Neutral           Event Driven 
+      Emerging.Markets  Equity.Market.Neutral           Event.Driven 
           3.044882e-03           3.255042e-04           1.633369e-03 
-Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+Fixed.Income.Arbitrage           Global.Macro      Long.Short.Equity 
           1.122597e-03           9.551128e-04           1.725166e-03 
-      Merger Arbitrage         Relative Value          Short Selling 
+      Merger.Arbitrage         Relative.Value          Short.Selling 
           5.594788e-04           9.422577e-04          -2.647415e-03 
-        Funds of Funds 
+        Funds.of.Funds 
           1.756359e-03 
 
 $pct_contrib_MVaR
- Convertible Arbitrage             CTA Global  Distressed Securities 
+ Convertible.Arbitrage             CTA.Global  Distressed.Securities 
            0.098631120            0.006129276            0.114448260 
-      Emerging Markets  Equity Market Neutral           Event Driven 
+      Emerging.Markets  Equity.Market.Neutral           Event.Driven 
            0.252451840            0.026987629            0.135422963 
-Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+Fixed.Income.Arbitrage           Global.Macro      Long.Short.Equity 
            0.093074804            0.079188612            0.143033874 
-      Merger Arbitrage         Relative Value          Short Selling 
+      Merger.Arbitrage         Relative.Value          Short.Selling 
            0.046386511            0.078122792           -0.219497771 
-        Funds of Funds 
+        Funds.of.Funds 
            0.145620091 
 
 > 
@@ -5462,7 +5446,7 @@ Warning in par(original.layout) :
 > dev.new()
 > chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
 Loading required package: SparseM
-Package SparseM (0.85) loaded.
+Package SparseM (0.86) loaded.
 	   To cite, see citation("SparseM")
 
 
@@ -6794,30 +6778,15 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 5 1997-08-30 1997-08-30 1997-11-29 -0.0560      4         1        3
 > 
 > result=table.Drawdowns(managers[,1,drop=FALSE])
-> require("Hmisc")
-Loading required package: Hmisc
-Loading required package: survival
-Loading required package: splines
-
-Attaching package: 'Hmisc'
-
-The following object(s) are masked from 'package:survival':
-
-    untangle.specials
-
-The following object(s) are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-> title(main="Largest Drawdowns for HAM1")
+> 
+> # This was really nice before Hmisc messed up 'format' form R-base
+> #require("Hmisc")
+> #textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1) 
+> # title(main="Largest Drawdowns for HAM1")
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
-
 > nameEx("table.HigherMoments")
 > ### * table.HigherMoments
 > 
@@ -7053,35 +7022,19 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > data(managers)
 > textplot(table.AnnualizedReturns(managers[,1:6]))
 > 
+> # This was really nice before Hmisc messed up 'format' form R-base
 > # prettify with format.df in hmisc package
-> require("Hmisc")
-Loading required package: Hmisc
-Loading required package: survival
-Loading required package: splines
-
-Attaching package: 'Hmisc'
-
-The following object(s) are masked from 'package:survival':
-
-    untangle.specials
-
-The following object(s) are masked from 'package:base':
-
-    format.pval, round.POSIXt, trunc.POSIXt, units
-
+> # require("Hmisc")
 >   result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,]
 > 
->   textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,4,0)+0.1)
+> #  textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,4,0)+0.1)
 > 
->   title(main="Calendar Returns")
+> # title(main="Calendar Returns")
 > 
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
-
 > nameEx("weights")
 > ### * weights
 > 
@@ -7134,7 +7087,7 @@ Warning: timezone of object (GMT) is different than current timezone ().
 > ### * <FOOTER>
 > ###
 > cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  98.31 2.05 100.384 0 0 
+Time elapsed:  102.05 2.33 104.401 0 0 
 > grDevices::dev.off()
 postscript 
          2 

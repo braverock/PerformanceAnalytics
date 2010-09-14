@@ -36,9 +36,11 @@ data(managers)
 table.Drawdowns(managers[,8,drop=FALSE])
 
 result=table.Drawdowns(managers[,1,drop=FALSE])
-require("Hmisc")
-textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-title(main="Largest Drawdowns for HAM1")
+
+# This was really nice before Hmisc messed up 'format' from R-base
+#require("Hmisc")
+#textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1) 
+# title(main="Largest Drawdowns for HAM1")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

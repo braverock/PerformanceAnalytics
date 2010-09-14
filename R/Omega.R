@@ -70,11 +70,11 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
             interp = {
 
                 # require("Hmisc")
-                stopifnot("package:Hmisc" %in% search() || require("Hmisc",quietly=TRUE))
+                # stopifnot("package:Hmisc" %in% search() || require("Hmisc",quietly=TRUE))
                 a = min(x)
                 b = max(x)
 
-                xcdf = Ecdf(x, pl=FALSE)
+                xcdf = Hmisc:::Ecdf.default(x, pl=FALSE)
                 f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
                 if(output == "full") {
