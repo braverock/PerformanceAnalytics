@@ -1,5 +1,6 @@
 2010-09-14  braverock
 
+	* ChangeLog, DESCRIPTION, NEWS: - updates prior to 1.0.3.1 release
 	* R/checkData.R: - patch provided by Jeff Ryan to fix bug
 	  introduced by changes to as.xts functionality
 
