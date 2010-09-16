@@ -1,0 +1,19 @@
+Package: fPerformance
+Version: 290.75
+Revision: 4030
+Date: 2009-04-01
+Title: Rmetrics - Portfolio Performance 
+Author: Diethelm Wuertz
+Depends: R (>= 2.7.0), methods, MASS, timeDate, timeSeries (>= 290.81),
+        fPortfolio
+Suggests: corpcor, covRobust, RUnit, tcltk
+Maintainer: Rmetrics Core Team <Rmetrics-core@r-project.org>
+Description: Environment for teaching "Financial Engineering and
+        Computational Finance"
+NOTE: SEVERAL PARTS ARE STILL PRELIMINARY AND MAY BE CHANGED IN THE
+        FUTURE. THIS TYPICALLY INCLUDES FUNCTION AND ARGUMENT NAMES, AS
+        WELL AS DEFAULTS FOR ARGUMENTS AND RETURN VALUES.
+LazyLoad: yes
+LazyData: yes
+License: GPL (>= 2)
+URL: http://www.rmetrics.org
