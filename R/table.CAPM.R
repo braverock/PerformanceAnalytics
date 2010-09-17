@@ -62,7 +62,8 @@ table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 			CAPMbear = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
             htest = cor.test(merged.assets[,1], merged.assets[,2])
             active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
-            tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
+            #tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
+			tracking.error = TrackingError(Ra[,column.a], Rb[,column.b],scale=scale)
             treynor.ratio = Return.annualized(merged.assets[,1,drop=FALSE], scale = scale)/beta
     
             z = c(
