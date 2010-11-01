@@ -1,5 +1,5 @@
 SortinoRatio <-
-function (R, MAR = 0)
+function (R, MAR = 0,...,weights=NULL)
 { # @author Brian G. Peterson
   # modified from function by Sankalp Upadhyay <sankalp.upadhyay [at] gmail [dot] com> with permission
 
@@ -11,17 +11,23 @@ function (R, MAR = 0)
     # MAR   minimum acceptable return
     # Function:
     R = checkData(R)
-
+    
+    #if we have a weights vector, use it
+    if(!is.null(weights)){
+        R=Return.portfolio(R,weights,...)
+    }
+    
     sr <-function (R, MAR)
     {
         SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR)
         SR
     }
 
+    # apply across multi-column data if we have it
     result = apply(R, MARGIN = 2, sr, MAR = MAR)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
-    rownames(result) = paste("Sortino Ratio (MAR = ", round(MAR,1),"%)", sep="")
+    rownames(result) = paste("Sortino Ratio (MAR = ", round(MAR*100,3),"%)", sep="")
     return (result)
 }
 
