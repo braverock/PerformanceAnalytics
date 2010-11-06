@@ -36,7 +36,7 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
 
     if(begin == "first") {
         length.column.one = length(x[,1])
-    # find the row number of the last NA in the first column
+        # find the row number of the last NA in the first column
         start.row = 1
         start.index = 0
         while(is.na(x[start.row,1])){
@@ -49,10 +49,10 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
             reference.index = na.skip(x[,1],FUN=function(x) {cumsum(x)})
     }
     for(column in 1:columns) {
-        if(begin == "axis")
-            start.index = TRUE
-        else {
-    # find the row number of the last NA in the target column
+        if(begin == "axis") {
+            start.index = FALSE
+		} else {
+    		# find the row number of the last NA in the target column
             start.row = 1
             while(is.na(x[start.row,column])){
                 start.row = start.row + 1
@@ -60,15 +60,14 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
             start.index=ifelse(start.row > 1,TRUE,FALSE)
         }
         if(start.index){
-	    # we need to "pin" the beginning of the shorter series to the (start date - 1 period) 
-	    # value of the reference index while preserving NA's in the shorter series
+	        # we need to "pin" the beginning of the shorter series to the (start date - 1 period) 
+	        # value of the reference index while preserving NA's in the shorter series
             if(geometric)
                 z = na.skip(x[,column],FUN = function(x,index=reference.index[(start.row - 1)]) {rbind(index,1+x)})
             else
                 z = na.skip(x[,column],FUN = function(x,index=reference.index[(start.row - 1)]) {rbind(1+index,1+x)})
-        }
-        else{
-            z = 1+x[,column] ### 
+        } else {
+            z = 1+x[,column] 
         }
         column.Return.cumulative = na.skip(z,FUN = function(x, one, geometric) {if(geometric) cumprod(x)-one else (1-one) + cumsum(x-1)},one=one, geometric=geometric)
         if(column == 1)

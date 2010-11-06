@@ -36,8 +36,11 @@ Cumulates the return series and displays either as a wealth index or as cumulati
 }
 \examples{
 data(edhec)
-chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],main="Cumulative Returns")
-chart.CumReturns(edhec[,"Funds of Funds",drop=FALSE],wealth.index=TRUE, main="Growth of $1")
+chart.CumReturns(edhec[,"Funds of Funds"],main="Cumulative Returns")
+chart.CumReturns(edhec[,"Funds of Funds"],wealth.index=TRUE, main="Growth of $1")
+data(managers)
+chart.CumReturns(managers,main="Cumulative Returns",begin="first")
+chart.CumReturns(managers,main="Cumulative Returns",begin="axis")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
