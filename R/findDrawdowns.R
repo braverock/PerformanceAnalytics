@@ -31,14 +31,14 @@ function (R, geometric = TRUE, ...)
     else
         priorSign = 0
     from = 1
-    sofar = drawdowns[1]
+    sofar = as.numeric(drawdowns[1])
     to = 1
     dmin = 1
 
     for (i in 1:length(drawdowns)) { #2:length()
         thisSign <- ifelse(drawdowns[i] < 0, 0, 1)
         if (thisSign == priorSign) { ###
-            if(drawdowns[i]< sofar) {
+            if(as.numeric(drawdowns[i])< as.numeric(sofar)) {
                 sofar = drawdowns[i]
                 dmin = i
             }
