@@ -18,7 +18,6 @@ function(R, distribution="norm", ylab=NULL,
 
     x = checkData(R, method = "vector", na.rm = TRUE)
 #     n = length(x)
-    op <- par(no.readonly=TRUE)
 
     if(is.null(main)){ 
         if(!is.null(colnames(R)[1])) 
@@ -122,7 +121,6 @@ function(R, distribution="norm", ylab=NULL,
     axis(2, cex.axis = cex.axis, col = element.color)
 
     box(col=element.color)
-    par(op)
 
 }
 
