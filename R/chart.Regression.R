@@ -51,8 +51,8 @@ function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = 
     }
 
     # Get dimensions and labels
-    columns.a = ncol(Ra)
-    columns.b = ncol(Rb)
+    columns.a = NCOL(Ra)
+    columns.b = NCOL(Rb)
     columnnames.a = colnames(Ra)
     columnnames.b = colnames(Rb)
     legendnames = NULL
