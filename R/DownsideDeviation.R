@@ -17,12 +17,17 @@ function (R, MAR = 0, method=c("subset","full"))
     if (is.vector(R)) {
         R = na.omit(R)
 
-        if(!is.null(dim(MAR)))
-            MAR = mean(checkData(MAR, method = "vector"))
-        # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
-
         r = subset(R, R < MAR)
 
+        if(!is.null(dim(MAR))){
+            if(is.timeBased(index(MAR))){
+                MAR <-MAR[index(r)] #subset to the same dates as the R data
+            } else{
+                MAR = mean(checkData(MAR, method = "vector"))
+                # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
+            }   
+        }
+        
         switch(method,
             full   = {len = length(R)},
             subset = {len = length(r)} #previously length(R)
@@ -31,11 +36,11 @@ function (R, MAR = 0, method=c("subset","full"))
         return(result)
     }
     else {
-        R = checkData(R, method = "matrix")
+        R = checkData(R)
         result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
-        dim(result) = c(1,NCOL(R))
+        result<-t(result)
         colnames(result) = colnames(R)
-        rownames(result) = paste("Downside Deviation (MAR = ", round(MAR*100,1),"%)", sep="")
+        rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
         return(result)
     }
 }
