@@ -80,7 +80,7 @@ function (Ra, Rb, Rf = 0)
 
     beta <-function (xRa, xRb)
     {
-        merged = na.omit(merge(xRa, xRb))
+        merged = na.omit(cbind(xRa, xRb))
         merged = as.data.frame(merged)
         colnames(merged) = c("xRa","xRb")
         model.lm = lm(xRa ~ xRb, merged, subset= (xRb > 0))
@@ -132,7 +132,7 @@ function (Ra, Rb, Rf = 0)
 
     beta <-function (xRa, xRb)
     {
-        merged = na.omit(merge(xRa, xRb))
+        merged = na.omit(cbind(xRa, xRb))
         merged = as.data.frame(merged)
         colnames(merged) = c("xRa","xRb")
         model.lm = lm(xRa ~ xRb, merged, subset= (xRb < 0))
