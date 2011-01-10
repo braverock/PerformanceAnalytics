@@ -30,7 +30,7 @@ CAPM.alpha <- function (Ra, Rb, Rf = 0)
 
     alpha <-function (xRa, xRb)
     {
-        merged = as.data.frame(na.omit(merge(xRa, xRb)))
+        merged = as.data.frame(na.omit(cbind(xRa, xRb)))
         model.lm = lm(merged[,1] ~ merged[,2], merged)
         alpha = coef(model.lm)[[1]]
         alpha
