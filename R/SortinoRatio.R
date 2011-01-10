@@ -27,7 +27,7 @@ function (R, MAR = 0,...,weights=NULL)
     result = apply(R, MARGIN = 2, sr, MAR = MAR)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
-    rownames(result) = paste("Sortino Ratio (MAR = ", round(MAR*100,3),"%)", sep="")
+    rownames(result) = paste("Sortino Ratio (MAR = ", round(mean(MAR)*100,3),"%)", sep="")
     return (result)
 }
 
