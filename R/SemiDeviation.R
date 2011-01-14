@@ -32,7 +32,7 @@ function (R)
     }
     else {
         R = checkData(R, method = "matrix")
-        result = apply(R, 2, SemiDeviation)
+        result = apply(R, 2, SemiVariance)
         dim(result) = c(1,NCOL(R))
         colnames(result) = colnames(R)
         rownames(result) = "Semi-Variance"
