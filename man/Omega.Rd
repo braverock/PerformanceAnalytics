@@ -14,7 +14,7 @@ Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), outp
   \item{L}{ L is the loss threshold that can be specified as zero, return from a benchmark index, or an absolute rate of return - any specified level }
   \item{method}{ one of: simple, interp, binomial, blackscholes }
   \item{output}{ one of: point (in time), or full (distribution of Omega) }
-  \item{Rf}{ risk free rate, in same period as your returns }
+  \item{Rf}{ risk free rate, as a single number }
   \item{\dots}{ any other passthru parameters }
 }
 \details{
