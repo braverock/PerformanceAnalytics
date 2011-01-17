@@ -5,6 +5,8 @@ function (runs) {
 
     # modified with permission from function by Sankalp Upadhyay
     # <sankalp.upadhyay [at] gmail [dot] com>
+    
+    if (length(runs$return) == 1) return(runs) 
 
     for (i in 1:length(runs$return)) {
         for (j in 1:(length(runs$return)-1)) {
