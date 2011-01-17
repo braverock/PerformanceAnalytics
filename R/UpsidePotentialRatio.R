@@ -15,14 +15,21 @@ function (R, MAR = 0, method=c("subset","full"))
     method = method[1] 
 
     if (is.vector(R)) {
-        if(!is.null(dim(MAR)))
-            MAR = mean(checkData(MAR, method = "vector"), rm.na=TRUE)
-        r = subset(R, R > MAR)
+        if(!is.null(dim(MAR))){
+            if(is.timeBased(index(MAR))){
+                mar <-MAR[index(r)] #subset to the same dates as the R data
+            } else{
+                mar = mean(checkData(MAR, method = "vector"))
+                # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
+            }   
+        } else mar=MAR
+        r = subset(R, R > mar)
         switch(method,
             full   = {len = length(R)},
             subset = {len = length(r)} #previously length(R)
         ) # end switch
-        result = (sum(r - MAR)/len)/DownsideDeviation(R, MAR=MAR , method=method)
+        excess=-mar+r
+        result = (sum(excess)/len)/DownsideDeviation(R, MAR=MAR , method=method)
         return(result)
     }
     else {
@@ -30,12 +37,12 @@ function (R, MAR = 0, method=c("subset","full"))
         result = apply(R, MARGIN = 2, UpsidePotentialRatio, MAR = MAR, method = method)
         dim(result) = c(1,NCOL(R))
         colnames(result) = colnames(R)
-        rownames(result) = paste("Upside Potential (MAR = ",round(MAR*100,1),"%)", sep="")
+        rownames(result) = paste("Upside Potential (MAR = ",round(mean(MAR)*100,1),"%)", sep="")
         return(result)
     }
 }
 
-UPR<-
+UPR <-
 function (R, MAR = 0, method=c("subset","full"))
 { # @author Brian G. Peterson
     UpsidePotentialRatio(R=R, MAR=MAR, method=method)
