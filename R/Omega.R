@@ -95,6 +95,9 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
         return(result)
     }
     else {
+        if(length(Rf)>1) Rf<-mean(Rf)
+        if(length(L)>1) L<-mean(L)
+        
         R = checkData(R, method = "matrix", ... = ...)
         if(output=="full")
             R = R[,1,drop=FALSE] # constrain to one column
