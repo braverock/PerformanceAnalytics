@@ -862,3 +862,16 @@ bootstrapVaRreport <- function(bootData, w, delta.w = 0.001, h=NULL, tail.prob =
   rownames(VaRreport.df) = fundName                            
   return(VaRreport.df)
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# This file originally written and contributed by Eric Zivot, 2010
+# package Copyright (c) 2004-2011 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################

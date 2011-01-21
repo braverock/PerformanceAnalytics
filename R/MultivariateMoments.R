@@ -8,6 +8,7 @@
 # efficient when running against very large numbers of instruments or portfolios.
 #
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
+# Copyright (c) 2004-2011 Peter Carl and Brian G. Peterson for PerformanceAnalytics
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
@@ -141,7 +142,7 @@ SR.mES.MM = function(w, mu, sigma, M3 , M4 , p){
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2010 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2011 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

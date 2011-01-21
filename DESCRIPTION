@@ -10,5 +10,5 @@ Depends: R (>= 2.9.0), zoo, xts (>= 0.7)
 Suggests: Hmisc, MASS, tseries, quadprog, sn, robustbase, quantreg, SparseM
 License: GPL
 URL: http://r-forge.r-project.org/projects/returnanalytics/
-Copyright: (c) 2004-2010
-Contributors: A special thanks for contributions from Stefan Albrecht, Kris Boudt, Khahn Nygyen, Jeff Ryan, Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke
+Copyright: (c) 2004-2011
+Contributors: A special thanks for contributions from Stefan Albrecht, Kris Boudt, Khahn Nygyen, Jeff Ryan, Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke, H. Felix Wittmann
