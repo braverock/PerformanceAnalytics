@@ -55,17 +55,20 @@ table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             merged.assets = as.data.frame(na.omit(merged.assets)) # leaves the overlapping period
+            # these should probably call CAPM.alpha and CAPM.beta for consistency (not performance)
             model.lm = lm(merged.assets[,1] ~ merged.assets[,2])
             alpha = coef(model.lm)[[1]]
             beta = coef(model.lm)[[2]]
 			CAPMbull = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept 
 			CAPMbear = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
             htest = cor.test(merged.assets[,1], merged.assets[,2])
-            active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
+            #active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
+            active.premium = ActivePremium(Ra=Ra[,column.a],Rb=Rb[,column.b], scale = scale)
             #tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
 			tracking.error = TrackingError(Ra[,column.a], Rb[,column.b],scale=scale)
-            treynor.ratio = Return.annualized(merged.assets[,1,drop=FALSE], scale = scale)/beta
-    
+            #treynor.ratio = Return.annualized(merged.assets[,1,drop=FALSE], scale = scale)/beta
+            treynor.ratio = TreynorRatio(Ra=Ra[,column.a], Rb=Rb[,column.b], Rf = Rf, scale = scale)
+            
             z = c(
                     alpha,
                     beta,
