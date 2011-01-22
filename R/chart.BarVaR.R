@@ -223,7 +223,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedV
         }
     }
 
-    if(legend.txt[1] != "")
+    if(legend.txt[1] != "" & !is.null(legend.loc))
         legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt, horiz=TRUE)
 
 }
