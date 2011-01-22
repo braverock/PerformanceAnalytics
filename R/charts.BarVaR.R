@@ -1,5 +1,5 @@
 charts.BarVaR <-
-function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
+function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -14,8 +14,14 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
     columns = NCOL(R)
     columnnames = colnames(R)
 
-    ymax = max(R, na.rm=TRUE)
-    ymin = min(R, na.rm=TRUE)
+    if(is.na(ylim[1])){
+        ymax = max(R, na.rm = TRUE)
+        ymin = min(R, na.rm = TRUE)
+        ylim=c(ymin, ymax)
+    }
+    else{
+        ymax=ylim[2]
+    }
     # mar: a numerical vector of the form c(bottom, left, top, right) which
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
@@ -31,7 +37,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
         if(i==columns)
             xaxis = TRUE
         chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, ...)
-        text(1, 0.8*ymax, adj=c(0,0), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
+        text(1, 0.8*ymax, adj=c(0,1), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
 
 #         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
         if(i==1)
