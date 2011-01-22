@@ -1,4 +1,4 @@
-chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
+chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, show.endvalue = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -203,6 +203,10 @@ chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedV
             lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
             if(show.horizontal)
                 lines(1:rows, rep(tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
+	    if(show.endvalue){
+		points(rows, tail(risk[,2],1), col = colorset[1], pch=20, cex=.7)
+		mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+	    }
         }
     }
 
