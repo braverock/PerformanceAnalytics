@@ -1,5 +1,5 @@
 charts.BarVaR <-
-function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ...)
+function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., show.yaxis = c("all", "firstonly", "alternating", "none"))
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -9,10 +9,14 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ...)
 
     # Transform input data to a data frame
     R = checkData(R)
-
+    show.yaxis = show.yaxis[1]
     # Get dimensions and labels
     columns = NCOL(R)
     columnnames = colnames(R)
+
+    even <- function (x) {
+	x%%2 == 0
+    }
 
     if(is.na(ylim[1])){
         ymax = max(R, na.rm = TRUE)
@@ -28,25 +32,32 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ...)
     op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
     layout(matrix(c(1:columns), nc = 1, byrow = TRUE), width=1)
     xaxis=FALSE
-    yaxis=TRUE
+    if(show.yaxis == "none")
+	yaxis = FALSE
+    else
+	yaxis=TRUE
     for(i in 1:columns){
-         if(even(i))
+	if(i==1)
+	    legend.loc="bottomleft"
+	else
+	    legend.loc=NULL
+        if(even(i) & show.yaxis=="alternating")
             yaxis.right=TRUE
-         else
+        else
              yaxis.right=FALSE
         if(i==columns)
             xaxis = TRUE
-        chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, ...)
+        chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, legend.loc=legend.loc, ...)
         text(1, 0.8*ymax, adj=c(0,1), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
-
-#         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
-        if(i==1)
+    # TODO: Add histogram at the end, turned on its side to line up with yaxis
+    # chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
+        if((i==1 & show.yaxis == "firstonly") | show.yaxis == "none")
             yaxis=FALSE
     }
 
     mtext(main,
         side = 3, outer = TRUE, 
-        font = 2, cex = 1.2, line=1)
+        font = 2, cex = 1.2, line=1, las=0)
     par(op)
     
 
