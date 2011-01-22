@@ -1,4 +1,4 @@
-chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, show.endvalue = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
+chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, show.endvalue = FALSE, show.greenredbars = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -179,8 +179,21 @@ chart.BarVaR <- function (R, width = 0, gap = 12, methods = c("none", "ModifiedV
         ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
-
-    chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+    if(!show.greenredbars){
+	chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+    }
+    else {
+        positives = x.orig[,1,drop=FALSE]
+        for(row in 1:length(x.orig[,1,drop=FALSE])){ 
+            positives[row,]=max(0,x.orig[row,1])
+        }
+        negatives = x.orig[,1,drop=FALSE]
+        for(row in 1:length(x.orig[,1,drop=FALSE])){ 
+            negatives[row,]=min(0,x.orig[row,1])
+        }
+        chart.TimeSeries(positives, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", col="darkgreen", ...)
+        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", col="darkred", lwd=lwd)
+    }
 
     if(show.clean) {
         lines(1:rows, x[,1, drop=FALSE], type="h", col=colorset[1], lwd = lwd, lend="butt")
