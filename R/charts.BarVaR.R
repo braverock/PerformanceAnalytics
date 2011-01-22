@@ -1,5 +1,5 @@
 charts.BarVaR <-
-function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., show.yaxis = c("all", "firstonly", "alternating", "none"))
+function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., perpanel = NULL, show.yaxis = c("all", "firstonly", "alternating", "none"))
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -26,40 +26,53 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., sh
     else{
         ymax=ylim[2]
     }
-    # mar: a numerical vector of the form c(bottom, left, top, right) which
-    # gives the number of lines of margin to be specified on the four sides
-    # of the plot. The default is c(5, 4, 4, 2) + 0.1
-    op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
-    layout(matrix(c(1:columns), nc = 1, byrow = TRUE), width=1)
-    xaxis=FALSE
-    if(show.yaxis == "none")
-	yaxis = FALSE
-    else
-	yaxis=TRUE
-    for(i in 1:columns){
-	if(i==1)
-	    legend.loc="bottomleft"
-	else
-	    legend.loc=NULL
-        if(even(i) & show.yaxis=="alternating")
-            yaxis.right=TRUE
-        else
-             yaxis.right=FALSE
-        if(i==columns)
-            xaxis = TRUE
-        chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, legend.loc=legend.loc, ...)
-        text(1, 0.8*ymax, adj=c(0,1), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
-    # TODO: Add histogram at the end, turned on its side to line up with yaxis
-    # chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
-        if((i==1 & show.yaxis == "firstonly") | show.yaxis == "none")
-            yaxis=FALSE
+    startcol = 1
+    if(!is.null(perpanel))
+	endcol = perpanel
+    else {
+	endcol = columns
+	perpanel = columns
     }
+    panels = ceiling(columns/perpanel)
+    for(panel in 1:panels) { # Loop for panels
 
-    mtext(main,
-        side = 3, outer = TRUE, 
-        font = 2, cex = 1.2, line=1, las=0)
-    par(op)
-    
+	# mar: a numerical vector of the form c(bottom, left, top, right) which
+	# gives the number of lines of margin to be specified on the four sides
+	# of the plot. The default is c(5, 4, 4, 2) + 0.1
+	op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
+	layout(matrix(c(1:perpanel), nc = 1, byrow = TRUE), width=1)
+	xaxis=FALSE
+	if(show.yaxis == "none")
+	    yaxis = FALSE
+	else
+	    yaxis=TRUE
+	for(i in startcol:endcol){ # loop for columns
+	    if(i==startcol)
+		legend.loc="bottomleft"
+	    else
+		legend.loc=NULL
+	    if(even(i) & show.yaxis=="alternating")
+		yaxis.right=TRUE
+	    else
+		  yaxis.right=FALSE
+	    if(i==endcol)
+		xaxis = TRUE
+	    chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, legend.loc=legend.loc, ...)
+	    text(1, 0.8*ymax, adj=c(0,1), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
+	# TODO: Add histogram at the end, turned on its side to line up with yaxis
+	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
+	    if((i==1 & show.yaxis == "firstonly") | show.yaxis == "none")
+		yaxis=FALSE
+	} # loop for columns
+
+	mtext(main,
+	    side = 3, outer = TRUE, 
+	    font = 2, cex = 1.2, line=1, las=0)
+	par(op)
+	
+	startcol = endcol+1
+	endcol = min(endcol+perpanel, columns)
+    } # Loop for panels
 
 }
 
