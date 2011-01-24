@@ -24,6 +24,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
         ylim=c(ymin, ymax)
     }
     else{
+        ymin=ylim[1]
         ymax=ylim[2]
     }
     startcol = 1
