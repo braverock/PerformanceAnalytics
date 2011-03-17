@@ -31,10 +31,12 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # Code inspired by a chart on:
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
-    x = checkData(R, method = "zoo")
+    if (method == "calc")  x = checkData(R, method = "zoo")
+    else x=t(R)
+    
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf, method = "zoo")
-#     op <- par(no.readonly=TRUE)
+
     columns = ncol(x)
     rows = nrow(x)
     columnnames = colnames(x)
@@ -57,10 +59,13 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         returns = comparison[,1]
         risk = comparison[,2]
         #sharpe = comparison[,3]
+        rnames = row.names(comparison)
     } else {
         # We have to make an assumption about the input here
+        x=t(x[,ncol(x):1])
         returns = x[,1]
         risk = x[,2]
+        rnames = names(returns)
     }
 
     # Set the charts to show the origin
@@ -103,7 +108,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 
     # Label the data points
     if(add.names)
-        text(x = risk,y = returns, labels = row.names(comparison), pos=4, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
+        text(x = risk,y = returns, labels = rnames, pos=4, cex = 0.8, col = colorset[columns:1]) # adj = -0.1
 
     # Add a rug so that data points are easier to identify
     rug(side=1, risk, col = element.color)
