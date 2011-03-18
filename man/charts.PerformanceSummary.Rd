@@ -3,7 +3,7 @@
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Create combined wealth index, period performance, and drawdown chart }
 \description{
-For a set of returns, create a wealth index chart, bars for monthly performance, and underwater chart for drawdown.
+For a set of returns, create a wealth index chart, bars for per-period performance, and underwater chart for drawdown.
 }
 \usage{
 charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog
