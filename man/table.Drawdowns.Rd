@@ -14,7 +14,19 @@ table.Drawdowns(R, top= 5, digits = 4)
   \item{top}{ the number of drawdowns to include }
   \item{digits}{ number of digits to round results to }
 }
-
+\details{
+Returns an data frame with columns: \cr
+\itemize{
+  \item{From }{starting period, high water mark}
+  \item{Trough}{period of low point}
+  \item{To }{ending period, when initial high water mark is recovered}
+  \item{Depth }{drawdown to trough (typically as percentage returns)}
+  \item{Length }{length in periods}
+  \item{to Trough}{number of periods to trough}
+  \item{Recovery}{number of periods to recover}
+}
+}
+}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr
 
