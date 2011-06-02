@@ -1,0 +1,341 @@
+% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.8 2009-10-22 19:00:57 brian Exp $
+
+\documentclass[10pt,presentation]{beamer} %usletter handout
+%\usepackage{pgfpages}
+%\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+
+% may need full path to find these .sty files outside of R environment
+\usepackage{Sweave}
+% \usepackage{/usr/lib/R/share/texmf/Sweave}
+
+\SweaveOpts{engine=R, eps=FALSE, width=8, height=5}
+%\VignetteIndexEntry{PerformanceAnalytics Data Mining Presentation - UseR - 2007}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+% - Talk at a conference/colloquium.
+% - Talk length is about 60min.
+
+% Beamer Presentation Template Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
+% Contents Copyright 2007 Peter Carl and Brian G. Peterson
+%
+% This file can be redistributed and/or modified under
+% the terms of the GNU Public License, version 2.
+
+\mode<presentation>
+{
+  % \usetheme{default}
+  \usetheme[secheader]{Boadilla}
+\usecolortheme{seagull}
+
+  % or ...
+
+%   \setbeamercovered{transparent}
+  % or whatever (possibly just delete it)
+}
+
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+\usepackage{noweb}
+\usepackage{subfigure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+\usepackage[english]{babel}
+\makeatother
+
+\usepackage[latin1]{inputenc}
+% or whatever
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+% Or whatever. Note that the encoding and the font should match. If T1
+% does not look nice, try deleting the line with the fontenc.
+\usefonttheme{structurebold}
+
+\title[textplot] % (optional, use only with long paper titles)
+{How to Present Tables in Plot Devices}
+
+% \subtitle
+% {Include Only If Paper Has a Subtitle}
+
+\author[Peter Carl] % (optional, use only with lots of authors)
+{Peter~Carl}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute[PerformanceAnalytics, etc.] % (optional, but mostly needed)
+%{} %the formatting of our companies is likely to be all screwed up
+
+\date[June 2011] % (optional, should be abbreviation of conference name)
+{Chicago R User Group Meetup: R Output}
+% - Either use conference name or its abbreviation.
+% - Not really informative to the audience, more for people (including
+%   yourself) who are reading the slides online
+
+\subject{How to Present Tables in Plot Devices}
+% This is only inserted into the PDF information catalog. Can be left
+% out.
+
+
+
+% If you have a file called "university-logo-filename.xxx", where xxx
+% is a graphic format that can be processed by latex or pdflatex,
+% resp., then you can add a logo as follows:
+
+% \pgfdeclareimage[height=0.5cm]{university-logo}{university-logo-filename}
+% \logo{\pgfuseimage{university-logo}}
+
+
+
+% Delete this, if you do not want the table of contents to pop up at
+% the beginning of each subsection:
+% \AtBeginSubsection[]
+% {
+%   \begin{frame}<beamer>
+%     \frametitle{Outline}
+%     \tableofcontents[currentsection,currentsubsection]
+%   \end{frame}
+% }
+
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command:
+
+%\beamerdefaultoverlayspecification{<+->}
+\begin{document}
+%\right] \right\rbrace \right\rangle \right( \begin{document}
+% this has to be after \begin{document} to work
+\setkeys{Gin}{width=1\textwidth}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}
+  \frametitle{Outline}
+  \tableofcontents
+  % You might wish to add the option [pausesections]
+\end{frame}
+
+%%% Section --------------------------------------------------
+\section{Overview}
+%%% Section --------------------------------------------------
+
+%\subsection{Objectives}
+
+\begin{frame}
+  \frametitle{Overview}
+
+Graphics in R are plotted on a graphics device
+      \begin{itemize}
+        \item
+  Depending on the OS, in an interactive R session the default device is the screen, using \texttt{windows()}, \texttt{X11()}, or \texttt{quartz()}. 
+        \item
+  Common graphics file formats use the \texttt{bmp()}, \texttt{jpeg()}, \texttt{png()}, and \texttt{tiff()} devices. 
+        \item
+  Other useful file devices include \texttt{postscript()}, \texttt{pdf()}, \texttt{pictex()}, \texttt{xfig()}, and \texttt{bitmap()}.
+      \end{itemize}
+
+Why would we display tabular data on a plot device?
+      \begin{itemize}
+        \item
+  Reviewing results in a terminal isn't usually effective 
+        \item
+  Garner benefits from formatting
+        \item
+  Combining graphics and tables can be very powerful
+      \end{itemize}
+
+Some solutions, with a focus on \texttt{textplot}
+
+\end{frame}
+
+%%% Section --------------------------------------------------
+\section{Example}
+%%% Section --------------------------------------------------
+
+\begin{frame}[fragile]
+  \frametitle{Set up an example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<Prelim,echo=TRUE,fig=FALSE>>=
+library('PerformanceAnalytics')
+data(managers)
+#managers=read.csv("/home/peter/dev/R/managers.csv",row.names=1)
+head(managers)
+dim(managers)
+colnames(managers)
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Set up an example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<Prelim,echo=TRUE,fig=FALSE>>=
+manager.col = 1
+peers.cols = c(2,3,4,5,6)
+indexes.cols = c(7,8)
+Rf.col = 10
+peer.colorset=c("red", rep("darkorange", 2), rep("gray", 5))
+ham1.downside = t(table.DownsideRisk(managers[,c(manager.col, 
+indexes.cols, peers.cols)],Rf=.03/12))
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Construct a table example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<ConstructTableEx,echo=TRUE,fig=FALSE>>=
+ham1.downside
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+%%% Section --------------------------------------------------
+\section{Potential Solutions}
+%%% Section --------------------------------------------------
+
+\begin{frame}
+  \frametitle{\texttt{gplots:::textplot}}
+Gregory R. Warnes' package, \texttt{gplots}, includes the \texttt{textplot} function
+      \begin{itemize}
+        \item
+  Displays text output in a graphics window 
+        \item
+  Provides the equivalent of \texttt{print}
+        \item
+  Creates a new \texttt{plot} and displays a table using the largest font that will fit in the plotting region
+        \item
+  Several other good things in the package, too
+      \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{gplots:::textplot} example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<gplotstextplot,echo=TRUE,fig=TRUE>>=
+library(gplots)
+#args(gplots:::textplot)
+gplots:::textplot(ham1.downside); box(col="lightblue")
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\texttt{Hmisc:::format.df}}
+The \texttt{Hmisc} package by Frank E. Harrell, Jr., and Richard M. Heiberger contains several functions useful for data analysis
+      \begin{itemize}
+        \item
+  Includes functions for advanced table making, character string manipulation, and conversion of S objects to LaTeX code, and many others.
+        \item
+  \texttt{format.df} does rounding and decimal alignment for data.frames, similar to \texttt{format} in \texttt{base}
+        \item
+  Generates a character matrix containing the formatted data
+        \item
+  Useful for formating tables in LaTeX or HTML, as well
+      \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{Hmisc:::format.df} example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<Hmiscformat,echo=TRUE,fig=FALSE>>=
+library(Hmisc)
+args(format.df)
+ham1.f.downside = format.df(ham1.downside, na.blank=TRUE, numeric.dollar = FALSE, cdec=rep(4,dim(ham1.downside)[2]))
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{Hmisc:::format.df} example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<Hmiscformat,echo=TRUE,fig=FALSE>>=
+ham1.f.downside
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{\texttt{PerformanceAnalytics:::textplot}}
+The \texttt{PerformanceAnalytics} package extends the \texttt{gplots:::textplot} function
+      \begin{itemize}
+        \item
+  Equivalent of \texttt{print} except that the output is displayed as a plot
+        \item
+  Fixes some of the layout math
+        \item
+  Adds column and row name word wrapping
+        \item
+  Adds color to the table elements
+        \item
+  Adds vertical alignment for headers and data
+      \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{PerformanceAnalytics:::textplot} example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<PAtextplot, echo=TRUE, fig=FALSE>>=
+require(PerformanceAnalytics)
+args(PerformanceAnalytics:::textplot)
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{\texttt{PerformanceAnalytics:::textplot} example}
+  \begin{figure}
+    \centering
+    \begin{scriptsize}
+<<PAtextplot, echo=TRUE, fig=TRUE>>=
+PerformanceAnalytics:::textplot(ham1.f.downside,  halign = "center", valign = "top", row.valign="center", col.rownames=peer.colorset,  mar = c(0,0,3,0)+0.1)
+box(col="lightblue")
+@
+    \end{scriptsize}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Other Possibilities}
+What else is available?
+      \begin{itemize}
+        \item
+  A very promising package presented at useR! 2010, \texttt{tabulaR}
+        \item
+  Dump results to a spreadsheet, perhaps with \texttt{XLConnect}
+        \item
+  Finally learn \LaTeX ~and Sweave
+        \item
+  What did I miss?  Any feedback would be much appreciated \ldots
+      \end{itemize}
+\end{frame}
+
+%%% END OF DOCUMENT --------------------------------------------------
+\end{document}
