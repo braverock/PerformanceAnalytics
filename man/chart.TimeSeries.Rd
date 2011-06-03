@@ -26,9 +26,9 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
   \item{date.format}{ re-format the dates for the xaxis; the default is "\%m/\%y" }
   \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{event.lines}{ If not null, vertical lines will be drawn to indicate that an event happened during that time period.  \code{event.lines} should be a vector of date subsets (e.g., \code{c("2003-09::2006-05"))} formatted as xts date ranges. }
+  \item{event.lines}{ If not null, vertical lines will be drawn to indicate that an event happened during that time period.  \code{event.lines} should be a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as date.format.  This function matches the re-formatted row names (dates) with the events.list, so to get a match the formatting needs to be correct. }
   \item{event.labels}{ if not null and event.lines is not null, this will apply a list of text labels (e.g., \code{c("This Event", "That Event")} to the vertical lines drawn.  See the example below. }
-  \item{period.areas}{ these are shaded areas described by start and end dates in the same format as the date.format.  This is provided as a list of pairs, e.g., \code{list(c("10/26","11/27"), c("08/29","03/33"))} See the examples below. }
+  \item{period.areas}{ these are shaded areas described by start and end dates in a vector of xts date rangees, e.g., \code{c("1926-10::1927-11","1929-08::1933-03")} See the examples below. }
   \item{event.color}{ draws the event described in \code{event.labels} in the color specified }
   \item{period.color}{ draws the shaded region described by \code{period.areas} in the color specified }
   \item{colorset}{ color palette to use, set by default to rational choices }
