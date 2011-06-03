@@ -96,10 +96,14 @@ function (R, auto.grid=TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = FALSE, ty
 
     # Draw any areas in the background
     if(!is.null(period.areas)) {
+        # build a list of specific dates to find from xts ranges given
+        period.dat = lapply(period.areas,function(x,y) c(first(index(y[x])),last(index(y[x]))),y=y)
         period.ind = NULL
-        for(period in 1:length(period.areas)){
-            period.ind = list(grep(period.areas[[period]][1], rownames), grep(period.areas[[period]][2], rownames))
+        for(period in 1:length(period.dat)){
+          if(!is.na(period.dat[[period]][1])){ 
+            period.ind = list(grep(period.dat[[period]][1], index(y)), grep(period.dat[[period]][2], index(y)))
             rect(period.ind[1], dimensions[3], period.ind[2], dimensions[4], col = period.color, border=NA)
+          }
         }
     }
 
