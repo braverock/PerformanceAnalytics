@@ -2,7 +2,7 @@
 # $Id$
 ###############################################################################
 
-StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, use="everything")
+StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, use="everything", method=c("pearson", "kendall", "spearman"))
 { # @author Brian G. Peterson
     
     # Descripion:
@@ -51,7 +51,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
                 rownames(tsd)<-"StdDev"
                 } else {
                     #do the multivariate calc with weights
-                    if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use)
+                    if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use, method=method[1])
                     tsd<-StdDev.MM(w=weights,sigma=sigma)
                 }
                 return(tsd)
@@ -64,7 +64,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
                 # for now, use as.vector
                 weights=as.vector(weights)
                 names(weights)<-colnames(R)
-                if (is.null(sigma)) { sigma = cov(R, use=use) }
+                if (is.null(sigma)) { sigma = cov(R, use=use, method=method[1]) }
                 
                 return(Portsd(w=weights,sigma))
             } # end component portfolio switch           
