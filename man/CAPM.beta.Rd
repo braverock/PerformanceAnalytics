@@ -23,7 +23,7 @@ TimingRatio(Ra, Rb, Rf = 0)
   \item{Rf}{ risk free rate, in same period as your returns }
 }
 \details{
- \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{a}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{a}-\bar{R_{a}})^{2}}}{beta = cov(Ra,Rb)/var(R)}
+ \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{b}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{b}-\bar{R_{b}})^{2}}}{beta = cov(Ra,Rb)/var(R)}
 
 Ruppert(2004) reports that this equation will give the estimated slope of the linear regression of \eqn{R_{a}}{Ra} on \eqn{R_{b}}{Rb} and that this slope can be used to determine the risk premium or excess expected return (see Eq. 7.9 and 7.10, p. 230-231).
 
