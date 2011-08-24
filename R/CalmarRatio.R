@@ -59,7 +59,7 @@ function (R, scale=NA, excess=.1)
         )
     }
     annualized_return = Return.annualized(R, scale=scale)
-    drawdown = abs(maxDrawdown(R)-excess)
+    drawdown = abs(maxDrawdown(R)+excess)
     result = annualized_return/drawdown
     rownames(result) = paste("Sterling Ratio (Excess = ", round(excess*100,0), "%)", sep="")
     return(result)
