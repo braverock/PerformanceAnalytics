@@ -1,5 +1,5 @@
 SharpeRatio <-
-function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
+function (R, Rf = 0, p = 0.95, annualize = TRUE, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -33,16 +33,37 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
-
-    if(is.null(weights)) 
-        xR = Return.excess(R, Rf)
-    
+        
+    if(annualize){ # scale the Rf to the periodicity of the calculation
+        freq = periodicity(R)
+        switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+        )
+    } else {
+        scale = 1 # won't scale the Rf, will leave it at the same periodicity
+    }
+    # TODO: Consolidate annualized and regular SR calcs
     srm <-function (R, ..., Rf, p, FUNC)
     {
         FUNCT <- match.fun(FUNC)
         xR = Return.excess(R, Rf)
         SRM = mean(xR, na.rm=TRUE)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
         SRM
+    }
+    sra <-function (R, ..., Rf, p, FUNC)
+    {
+        if(FUNC == "StdDev")
+            FUNC = "StdDev.annualized"
+        FUNCT <- match.fun(FUNC)
+        xR = Return.excess(R, Rf)
+        SRA = Return.annualized(xR)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
+        SRA
     }
     
     i=1
@@ -58,12 +79,15 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
     
     for (FUNCT in FUN){
         if (is.null(weights)){
-            result[i,] = apply(R, MARGIN=2, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+            if(annualize)
+                result[i,] = apply(R, MARGIN=2, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
+            else
+                result[i,] = apply(R, MARGIN=2, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
         }
-        else {
-            result[i,] = weighted.mean(xR,w=weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+        else { # TODO FIX this calculation, currently broken
+            result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
         }
-        tmprownames = c(tmprownames, paste(FUNCT, " Sharpe: ", " (Rf=", round(mean(Rf)*100,1), "%, p=", round(p*100,1),"%)", sep=""))
+        tmprownames = c(tmprownames, paste(if(annualize) "Annualized ", FUNCT, " Sharpe", " (Rf=", round(scale*mean(Rf)*100,1), "%, p=", round(p*100,1),"%):", sep=""))
         i=i+1 #increment counter
     }
     rownames(result)=tmprownames
