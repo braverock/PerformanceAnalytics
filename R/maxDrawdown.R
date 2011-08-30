@@ -118,7 +118,32 @@ function (R, ...) {
     return (result)
 }
 
+AverageRecovery <-
+function (R, ...) {
 
+    # Calculates the average length (in months) of the observed recovery period.
+    # 
+    # ADD = abs(sum[j=1,2,...,d](D_j/d)) where
+    # D'_j = jth drawdown over entire period
+    # d = total number of drawdowns in the entire period
+
+    R = checkData(R)
+
+    ar <- function(R) {
+        R = na.omit(R)
+        Dj = findDrawdowns(as.matrix(R))$return
+        Dr = findDrawdowns(as.matrix(R))$recovery
+        d = length(Dr[Dj<0])
+        result = abs(sum(Dr[Dj<0]/d))
+        return(result)
+    }
+
+    result = apply(R, MARGIN = 2, ar)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
+    rownames(result) = "Average Recovery"
+    return (result)
+}
 
 
 ###############################################################################
