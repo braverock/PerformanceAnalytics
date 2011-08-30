@@ -33,6 +33,8 @@ export(
     DownsideDeviation,
     Drawdowns,
     ES,
+    ETL,
+    CVaR,
     findDrawdowns,
     InformationRatio,
     KellyRatio,

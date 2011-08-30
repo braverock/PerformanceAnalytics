@@ -2,8 +2,12 @@
 # $Id$
 ###############################################################################
 
-ES <-
-function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt", "geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE, operational=TRUE)
+ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ..., 
+        method=c("modified","gaussian","historical", "kernel"), 
+        clean=c("none","boudt", "geltner"),  
+        portfolio_method=c("single","component"), 
+        weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, 
+        invert=TRUE, operational=TRUE)
 { # @author Brian G. Peterson
 
     # Descripion:
