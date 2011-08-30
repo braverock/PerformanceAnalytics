@@ -1,5 +1,5 @@
 sd.multiperiod <-
-function (x, scale = NA)
+function (x, scale = NA, ...)
 {
     if (is.vector(x)) {
         #scale standard deviation by multiplying by the square root of the number of periods to scale by
@@ -29,13 +29,13 @@ function (x, scale = NA)
 }
 
 sd.annualized <-
-function (x, scale = NA)
+function (x, scale = NA, ...)
 {   # wrapper function for backwards compatibility
     sd.multiperiod(x, scale = scale)
 }
 
 StdDev.annualized <-
-function (R, scale = NA)
+function (R, scale = NA, ...)
 {   # wrapper function for backwards compatibility
     sd.multiperiod(R, scale = scale)
 }
