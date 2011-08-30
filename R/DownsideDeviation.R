@@ -1,5 +1,5 @@
 DownsideDeviation <-
-function (R, MAR = 0, method=c("subset","full"))
+function (R, MAR = 0, method=c("subset","full"), potential=FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -32,7 +32,9 @@ function (R, MAR = 0, method=c("subset","full"))
             full   = {len = length(R)},
             subset = {len = length(r)} #previously length(R)
         ) # end switch
-        result = sqrt(sum((r - MAR)^2)/len)
+        p=2
+        if(potential) p=1 # calculates downside potential instead
+        result = sqrt(sum((r - MAR)^p)/len)
         return(result)
     }
     else {
@@ -40,11 +42,38 @@ function (R, MAR = 0, method=c("subset","full"))
         result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
         result<-t(result)
         colnames(result) = colnames(R)
-        rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+        if(potential)
+            rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+        else
+            rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
         return(result)
     }
 }
 
+DownsidePotential <-
+function (R)
+{ # @author Peter Carl
+
+    # DESCRIPTION:
+    # This function is just a wrapper of DownsideDeviation with
+    # MAR = mean(x) and potential = TRUE
+    # see below
+
+    # FUNCTION:
+
+    if (is.vector(R)) {
+        R = na.omit(R)
+        return(DownsideDeviation(R, MAR=mean(R), method="full", potential=TRUE))
+    }
+    else {
+        R = checkData(R, method = "matrix")
+        result = apply(R, 2, DownsidePotential)
+        result = matrix(result, nrow=1)
+        colnames(result) = colnames(R)
+        rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+        return(result)
+    }
+}
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
