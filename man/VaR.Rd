@@ -107,7 +107,7 @@ z_cf=z_c+[(z_c^2-1)S]/6+[(z_c^3-3z_c)K]/24-[(2z_c^3-5z_c)S^2]/36}
 
 where \eqn{S} is the skewness of \eqn{R} and \eqn{K} is the excess kurtosis of \eqn{R}.
 
-Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed. As such, the \code{\link{VaR}} and \code{\link{VaR}} functions are wrappers for the \code{VaR} function. The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.  This is the default method for the \code{VaR} function, and may be accessed by setting \code{method="modified"}.
+Cornish-Fisher VaR collapses to traditional mean-VaR when returns are normally distributed.  The Cornish-Fisher expansion also naturally encompasses much of the variability in returns that could be uncovered by more computationally intensive techniques such as resampling or Monte-Carlo simulation.  This is the default method for the \code{VaR} function, and may be accessed by setting \code{method="modified"}.
 
 Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the return/risk measure for their portfolio optimization analysis, see \code{\link{SharpeRatio.modified}} for more information.
 
