@@ -1,6 +1,5 @@
 \name{Return.read}
 \alias{Return.read}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Read returns data with different date formats }
 \description{
   A simple wrapper of read.zoo with some defaults for different date formats and xts conversion
@@ -11,7 +10,6 @@ Return.read(filename = stop("Please specify a filename"),
                  c("ISO8601", "excel", "oo", "gnumeric"), sep = ",",
                  header = TRUE, check.names = FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
     \item{filename}{ the name of the file to be read }
     \item{frequency}{
@@ -36,11 +34,11 @@ Return.read(filename = stop("Please specify a filename"),
 
 \details{
 The parameter 'format.in' takes several values, including:
-    \itemize{
-        \item excel: default date format for MS Excel spreadsheet csv format, which is "\%m/\%d/\%Y",
-        \item oo: default date format for OpenOffice spreadsheet csv format, "\%m/\%d/\%y", although this may be operating system dependent,
-        \item gnumeric: default date format for Gnumeric spreadsheet, which is "\%d-\%b-\%Y",
-        \item ...: alternatively, any specific format may be passed in, such as "\%M/\%y"
+    \describe{
+        \item{excel}{default date format for MS Excel spreadsheet csv format, which is "\%m/\%d/\%Y"}
+        \item{oo}{default date format for OpenOffice spreadsheet csv format, "\%m/\%d/\%y", although this may be operating system dependent}
+        \item{gnumeric}{default date format for Gnumeric spreadsheet, which is "\%d-\%b-\%Y"}
+        \item{...}{alternatively, any specific format may be passed in, such as "\%M/\%y"}
     }
 }
 
