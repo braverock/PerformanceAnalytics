@@ -94,12 +94,12 @@ in the examples that follow.
 As of version 0.9.4, \code{\link{PerformanceAnalytics}} is available
 via CRAN, but you will need version 0.9.5 or later to replicate the examples
 that follow.  \R~ users with connectivity can simply type:
-\code{install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}.  Or, if you
+\code{install.packages("PerformanceAnalytics")}.  Or, if you
 already have an earlier version installed, see \code{update.packages}.
 A number of packages are required, including \code{Hmisc}, \code{zoo},
 and the various Rmetrics packages such as \code{fBasics}, \code{fCalendar},
 and \code{fExtremes}. After installing \code{\link{PerformanceAnalytics}},
-load it into your active \R~ session using \code{library(\char`\"{}PerformanceAnalytics\char`\"{})}.
+load it into your active \R~ session using \code{library("PerformanceAnalytics")}.
 
 <<LoadLibrary,echo=F,results=hide>>=
 library('PerformanceAnalytics')
@@ -131,7 +131,7 @@ asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
 fund index, the S\&P 500 total returns, and total return series for
 the US Treasury 10-year bond and 3-month bill. Monthly returns for
 all series end in December 2006 and begin at different periods starting
-from January 1996. Similar data could be constructed using \code{mymanagers=read.csv(\char`\"{}/path/to/file/mymanagers.csv\char`\"{},
+from January 1996. Similar data could be constructed using \code{mymanagers=read.csv("/path/to/file/mymanagers.csv",
 row.names=1)}, where the first column contains dates in the YYYY-MM-DD
 format.
 
@@ -224,7 +224,7 @@ data graphed as the first element, and include \code{redfocus},
 best used when there is an important data set for the viewer to focus
 on. The other data provide some context, so they are graphed in diminishing
 values of gray. These were generated with \code{RColorBrewer},
-using the 8 level \char`\"{}grays\char`\"{} palette and replacing
+using the 8 level "grays" palette and replacing
 the darkest gray with the focus color. To coordinate these colorsets
 with the equal-weighted colors below, replace the highlight color
 with the first color of the equal weighted palette from below. This
@@ -244,7 +244,7 @@ with with package \code{fields} function \code{tim.colors(12)},
 a function said to emulate the Matlab colorset. The \code{dark8equal},
 \code{dark6equal}, \code{set8equal}, and \code{set6equal}
 colorsets were created with package \code{RColorBrewer}, e.g.,
-\code{brewer.pal(8,\char`\"{}Dark2\char`\"{})}. A third
+\code{brewer.pal(8,"Dark2")}. A third
 category is a set of monochrome colorsets, including \code{greenmono}
 , \code{bluemono}, \code{redmono}, and \code{gray8mono} and
 \code{gray6mono}.
@@ -299,10 +299,10 @@ include \code{opensymbols}, \code{closedsymbols}, \code{fillsymbols},
 \subsubsection*{Legend locations}
 
 In the single charts the legend can be moved around on the plot. There
-are nine locations that can be specified by keyword: \char`\"{}bottomright\char`\"{},
-\char`\"{}bottom\char`\"{}, \char`\"{}bottomleft\char`\"{}, \char`\"{}left\char`\"{},
-\char`\"{}topleft\char`\"{}, \char`\"{}top\char`\"{}, \char`\"{}topright\char`\"{},
-\char`\"{}right\char`\"{} and \char`\"{}center\char`\"{}. This places
+are nine locations that can be specified by keyword: "bottomright",
+"bottom", "bottomleft", "left",
+"topleft", "top", "topright",
+"right" and "center". This places
 the legend on the inside of the plot frame at the given location.
 Further information can be found in \code{\link{xy.coord}}.
 Most compound charts have fixed legend locations.
@@ -350,9 +350,9 @@ Figure \ref{fig:Draw-a-Performance} shows a three-panel performance
 summary chart and the code used to generate it. The top chart is a
 normal cumulative return or wealth index chart that shows the cumulative
 returns through time for each column. For data with later starting
-times, set the parameter \code{begin = \char`\"{}axis\char`\"{}},
+times, set the parameter \code{begin = "axis"},
 which starts the wealth index of all columns at 1, or \code{begin =
-\char`\"{}first\char`\"{}}, which
+"first"}, which
 starts the wealth index of each column at the wealth index value attained
 by the first column of data specified. The second of these settings,
 which is the default, allows the reader to see how the two indexes
@@ -364,8 +364,8 @@ can be generated independently using \code{chart.CumReturns}.
 The second chart shows the individual monthly returns overlaid with
 a rolling measure of tail risk referred to as Cornish Fisher Value-at-Risk
 (VaR) or Modified VaR. Alternative risk measures, including standard
-deviation (specified as \code{\char`\"{}StdDev\char`\"{}}) and traditional
-Value-at-Risk (\code{\char`\"{}VaR\char`\"{}}), can be specified
+deviation (specified as \code{StdDev}) and traditional
+Value-at-Risk (\code{VaR}), can be specified
 using the \code{method} parameter. Note that \code{StdDev} and
 \code{VaR} are symmetric calculations, so a high and low measure
 will be plotted. \code{ModifiedVaR}, on the other hand, is asymmetric
@@ -534,7 +534,7 @@ in any given part of the distribution (as you should see visually
 in a histogram). The \code{\link{[}fBasics]{kurtosis}} function
 will by default return what is referred to as \dQuote{excess kurtosis},
 where zero is a normal distribution, other methods of calculating
-kurtosis than \code{method=\char`\"{}excess\char`\"{}} will set
+kurtosis than \code{method="excess"} will set
 the normal distribution at a value of 3. In general a rational investor
 should prefer an asset with a low to negative excess kurtosis, as
 this will indicate more predictable returns. If you find yourself
@@ -574,8 +574,8 @@ chart.RiskReturnScatter(managers[trailing36.rows,1:8], Rf=.03/12, main = "Traili
 \code{\link{chart.Scatter}} is a utility scatter chart with
 some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.
 Different risk parameters may be used. The parameter \code{method}
-may be any of \code{\char`\"{}modVaR\char`\"{}}, \code{\char`\"{}VaR\char`\"{}},
-or \code{\char`\"{}StdDev\char`\"{}}.
+may be any of \code{modVaR}, \code{VaR},
+or \code{StdDev}.
 
 Additional information can be overlaid, as well. If \code{add.sharpe}
 is set to a value, say \code{c(1,2,3)}, the function overlays Sharpe

@@ -162,12 +162,12 @@ library('PerformanceAnalytics')
         Version 0.9.5 was released at the beginning of July
       \item
         Install with: \linebreak \texttt{>
-        install.packages(\char`\"{}PerformanceAnalytics\char`\"{})}
+        install.packages("PerformanceAnalytics")}
       \item
         Required packages include \texttt{Hmisc}, \texttt{zoo}, and Rmetrics packages such as \texttt{fExtremes}.
       \item
         Load the library into your active R session
-  using: \linebreak \texttt{> library(\char`\"{}PerformanceAnalytics\char`\"{})}.
+  using: \linebreak \texttt{> library("PerformanceAnalytics")}.
   \end{itemize}
 \end{frame}
 
