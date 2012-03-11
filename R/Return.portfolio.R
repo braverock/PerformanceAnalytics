@@ -27,11 +27,11 @@ Return.rebalancing <- function (R, weights, ...)
         tmpR<-R[paste(from,to,sep="/"),]
         if (nrow(tmpR)>=1){
             resultreturns=Return.portfolio(tmpR,weights=weights[row,], ...=...)
-        }
-        if(row==1){
-            result = resultreturns
-        } else {
-            result = rbind(result,resultreturns)
+            if(row==1){
+                result = resultreturns
+            } else {
+                result = rbind(result,resultreturns)
+            }
         }
         startingwealth=last(cumprod(1+result)*startingwealth)
     }
