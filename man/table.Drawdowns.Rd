@@ -26,7 +26,7 @@ Returns an data frame with columns: \cr
   \item{Recovery}{number of periods to recover}
 }
 }
-}
+
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 88 \cr
 
