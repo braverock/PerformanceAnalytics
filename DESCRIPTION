@@ -26,7 +26,6 @@ Suggests:
     sn,
     robustbase,
     quantreg,
-    SparseM,
     gplots,
     ff
 License: GPL
