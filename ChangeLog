@@ -1,5 +1,361 @@
+2012-03-25  braverock
+
+	* DESCRIPTION: - remove Suggests for SparseM
+	* inst/doc/textplotPresentation-CRUG-2011.pdf: - add compiled PDF
+	* DESCRIPTION, NAMESPACE, R/ActivePremium.R, R/CAPM.alpha.R,
+	  R/CAPM.beta.R, R/CAPM.utils.R, R/CalmarRatio.R,
+	  R/DownsideDeviation.R, R/ES.R, R/HurstIndex.R,
+	  R/InformationRatio.R, R/KellyRatio.R, R/Omega.R,
+	  R/PortfolioRisk.R, R/Return.Geltner.R, R/Return.annualized.R,
+	  R/Return.calculate.R, R/Return.clean.R, R/Return.cumulative.R,
+	  R/Return.excess.R, R/Return.portfolio.R, R/Return.read.R,
+	  R/Return.relative.R, R/SharpeRatio.R, R/SharpeRatio.annualized.R,
+	  R/SmoothingIndex.R, R/SortinoRatio.R, R/StdDev.R,
+	  R/StdDev.annualized.R, R/TrackingError.R, R/TreynorRatio.R,
+	  R/UpDownRatios.R, R/UpsidePotentialRatio.R, R/VaR.R,
+	  R/apply.fromstart.R, R/apply.rolling.R, R/chart.ACF.R,
+	  R/chart.Bar.R, R/chart.BarVaR.R, R/chart.Boxplot.R,
+	  R/chart.CaptureRatios.R, R/chart.Correlation.R,
+	  R/chart.CumReturns.R, R/chart.Drawdown.R, R/chart.ECDF.R,
+	  R/chart.Events.R, R/chart.Histogram.R, R/chart.QQPlot.R,
+	  R/chart.Regression.R, R/chart.RelativePerformance.R,
+	  R/chart.RiskReturnScatter.R, R/chart.RollingCorrelation.R,
+	  R/chart.RollingMean.R, R/chart.RollingPerformance.R,
+	  R/chart.RollingRegression.R, R/chart.Scatter.R,
+	  R/chart.SnailTrail.R, R/chart.StackedBar.R, R/chart.TimeSeries.R,
+	  R/chart.VaRSensitivity.R, R/charts.PerformanceSummary.R,
+	  R/charts.RollingPerformance.R, R/checkData.R,
+	  R/checkData.patch[DEL], R/expectedShortFallFunctions.r,
+	  R/findDrawdowns.R, R/kurtosis.R, R/legend.R, R/maxDrawdown.R,
+	  R/mean.utils.R, R/skewness.R, R/sortDrawdowns.R,
+	  R/table.AnnualizedReturns.R, R/table.Arbitrary.R,
+	  R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.DownsideRisk.R,
+	  R/table.Drawdowns.R, R/table.HigherMoments.R,
+	  R/table.MonthlyReturns.R, R/table.RollingPeriods.R, R/textplot.R,
+	  R/zerofill.R, R/zzz.R, inst/doc/PA-charts.Rnw,
+	  inst/doc/PA-charts.pdf,
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.pdf,
+	  inst/doc/PerformanceAnalyticsPresentation-UseR-2007.pdf,
+	  man/DownsideDeviation.Rd, man/SharpeRatio.Rd,
+	  man/SortinoRatio.Rd, man/StdDev.Rd, man/StdDev.annualized.Rd,
+	  man/chart.BarVaR.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - multiple
+	  changes to pass R CMD check on new R core
+	  - sd.xts and mean.xts methods
+	  - bump version to 1.0.4
+
+2012-03-24  braverock
+
+	* man/table.Drawdowns.Rd: -remove extra brace
+
+2012-03-11  peter_carl
+
+	* R/Return.portfolio.R: - fixed bug causing duplicated rows when
+	  calculated results are blank
+
+2012-01-15  braverock
+
+	* DESCRIPTION: - bump version and date
+	  - formally add Kris as an author
+	* DESCRIPTION, R/ActivePremium.R, R/CAPM.alpha.R, R/CAPM.beta.R,
+	  R/CAPM.utils.R, R/CalmarRatio.R, R/CoMoments.R,
+	  R/DownsideDeviation.R, R/Drawdowns.R, R/ES.R,
+	  R/HerfindahlIndex.R, R/HurstIndex.R, R/InformationRatio.R,
+	  R/KellyRatio.R, R/MultivariateMoments.R, R/Omega.R,
+	  R/PainIndex.R, R/PortfolioRisk.R, R/Return.Geltner.R,
+	  R/Return.annualized.R, R/Return.calculate.R, R/Return.clean.R,
+	  R/Return.cumulative.R, R/Return.excess.R, R/Return.index.R,
+	  R/Return.portfolio.R, R/Return.read.R, R/Return.relative.R,
+	  R/Return.wealthindex.R, R/SemiDeviation.R, R/SharpeRatio.R,
+	  R/SharpeRatio.annualized.R, R/SmoothingIndex.R, R/SortinoRatio.R,
+	  R/StdDev.R, R/StdDev.annualized.R, R/TrackingError.R,
+	  R/TreynorRatio.R, R/UlcerIndex.R, R/UpDownRatios.R,
+	  R/UpsidePotentialRatio.R, R/VaR.Marginal.R, R/VaR.R,
+	  R/apply.fromstart.R, R/apply.rolling.R, R/chart.ACF.R,
+	  R/chart.ACFplus.R, R/chart.Bar.R, R/chart.BarVaR.R,
+	  R/chart.Boxplot.R, R/chart.CaptureRatios.R,
+	  R/chart.Correlation.R, R/chart.CumReturns.R, R/chart.Drawdown.R,
+	  R/chart.ECDF.R, R/chart.Events.R, R/chart.Histogram.R,
+	  R/chart.QQPlot.R, R/chart.Regression.R,
+	  R/chart.RelativePerformance.R, R/chart.RiskReturnScatter.R,
+	  R/chart.RollingCorrelation.R, R/chart.RollingMean.R,
+	  R/chart.RollingPerformance.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.RollingRegression.R,
+	  R/chart.Scatter.R, R/chart.SnailTrail.R, R/chart.StackedBar.R,
+	  R/chart.TimeSeries.R, R/chart.VaRSensitivity.R, R/charts.Bar.R,
+	  R/charts.BarVaR.R, R/charts.PerformanceSummary.R,
+	  R/charts.RollingPerformance.R, R/charts.RollingRegression.R,
+	  R/charts.TimeSeries.R, R/checkData.R, R/checkData.patch,
+	  R/decomposeMVaR.R, R/expectedShortFallFunctions.r,
+	  R/findDrawdowns.R, R/kurtosis.R, R/legend.R, R/maxDrawdown.R,
+	  R/mean.utils.R, R/na.skip.R, R/rCornishFisher.r, R/replaceTabs.R,
+	  R/skewness.R, R/sortDrawdowns.R, R/table.AnnualizedReturns.R,
+	  R/table.Arbitrary.R, R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.DownsideRisk.R,
+	  R/table.Drawdowns.R, R/table.HigherMoments.R,
+	  R/table.MonthlyReturns.R, R/table.RollingPeriods.R,
+	  R/table.UpDownRatios.R, R/textplot.R, R/valueAtRiskFunctions.r,
+	  R/zerofill.R, R/zzz.R: - update copyright to 2012
+	* inst/doc/PA-charts.Rnw,
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,
+	  inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw: -
+	  replace \char`\"{} with " in vignettes per a request from Kurt
+	  Hornik related to recent changes in Rd.sty
+
+2011-09-17  braverock
+
+	* man/centeredmoments.Rd: - fix broken equation
+	* man/Return.read.Rd: - change syntax from \itemize to \describe
+	* man/BetaCoMoments.Rd[DEL], man/BetaCoVariance.Rd[CPY],
+	  man/CAPM.RiskPremium.Rd[CPY], man/CAPM.utils.Rd[DEL],
+	  man/CoMoments.Rd[DEL], man/CoVariance.Rd[CPY],
+	  man/PerformanceAnalytics-internal.Rd[DEL], man/VaR.Rd,
+	  man/legend.Rd[CPY], man/mean.geometric.Rd[CPY],
+	  man/mean.utils.Rd[DEL]: - rename files in advance of Rd2roxygen
+	  conversion
+
+2011-08-30  peter_carl
+
+	* R/maxDrawdown.R: - added AverageRecovery function
+	* R/DownsideDeviation.R: - added DownsidePotential function
+	* R/SharpeRatio.R: - added function for annualizing SR,
+	  particularly modified SRs
+	  - TODO Need to fix calculation method for portfolio SR with
+	  weights
+	  - TODO Need to consolidate calculation methods at some point
+	* R/StdDev.annualized.R: - added dots to each wrapper for handling
+	  other parameters cleanly
+
+2011-08-30  braverock
+
+	* NAMESPACE, R/ES.R, man/ES.Rd: - add and export CVaR and ETL
+	  aliases for ES function
+
+2011-08-24  peter_carl
+
+	* R/CalmarRatio.R: - fixed operator for Sterling Ratio to add
+	  excess
+
+2011-07-26  braverock
+
+	* man/CAPM.beta.Rd: - fix equation denominator per Kris
+
+2011-06-20  peter_carl
+
+	* R/StdDev.R: - added method parameter to be passed into cov
+	* R/StdDev.R: - added use parameter to be passed into cov
+
+2011-06-05  peter_carl
+
+	* man/chart.TimeSeries.Rd: - extends the list of NBER recession
+	  dates
+	  - Thanks to Michael Ash for contributing
+
+2011-06-03  peter_carl
+
+	* man/chart.TimeSeries.Rd: - fixed the prior documentation fix
+	* R/chart.TimeSeries.R, man/chart.TimeSeries.Rd: - expanded
+	  functionality of period ranges to accept lower frequency date
+	  ranges than the underlying data
+
+2011-06-02  peter_carl
+
+	* inst/doc/textplotPresentation-CRUG-2011.Rnw: - presentation to
+	  Chicago R Users Group in June 2011
+
+2011-05-10  braverock
+
+	* man/table.Drawdowns.Rd: - describe columns in returned
+	  table.Drawdowns
+
+2011-03-18  braverock
+
+	* man/charts.PerformanceSummary.Rd: - minor wording change
+
+2011-03-17  braverock
+
+	* R/chart.RiskReturnScatter.R: - apply patch modified from one from
+	  Eduardo Susini <eduardo <dot> susini <at> gmail <dot> com> to be
+	  more robust if option 'nocalc' is chosen
+
+2011-01-24  peter_carl
+
+	* R/charts.BarVaR.R: - needed to set ymin as well
+
+2011-01-22  peter_carl
+
+	* R/charts.BarVaR.R: - allows splitting small multiples across
+	  pages
+	* R/charts.BarVaR.R: - added show.yaxis for varying displays
+	* R/chart.BarVaR.R: - fixed legend error when legend.loc = NULL
+	* R/chart.BarVaR.R: - added show.greenredbars to show gains in
+	  green and losses in red
+	* R/chart.BarVaR.R: - added show.endvalue to display ending risk
+	  value in the right margin
+	* R/charts.BarVaR.R: - allows ylim to be set
+
+2011-01-21  braverock
+
+	* DESCRIPTION, R/ActivePremium.R, R/CAPM.alpha.R, R/CAPM.beta.R,
+	  R/CAPM.utils.R, R/CalmarRatio.R, R/CoMoments.R,
+	  R/DownsideDeviation.R, R/Drawdowns.R, R/ES.R,
+	  R/HerfindahlIndex.R, R/HurstIndex.R, R/InformationRatio.R,
+	  R/KellyRatio.R, R/MultivariateMoments.R, R/Omega.R,
+	  R/PainIndex.R, R/PortfolioRisk.R, R/Return.Geltner.R,
+	  R/Return.annualized.R, R/Return.calculate.R, R/Return.clean.R,
+	  R/Return.cumulative.R, R/Return.excess.R, R/Return.index.R,
+	  R/Return.portfolio.R, R/Return.read.R, R/Return.relative.R,
+	  R/Return.wealthindex.R, R/SemiDeviation.R, R/SharpeRatio.R,
+	  R/SharpeRatio.annualized.R, R/SmoothingIndex.R, R/SortinoRatio.R,
+	  R/StdDev.R, R/StdDev.annualized.R, R/TrackingError.R,
+	  R/TreynorRatio.R, R/UlcerIndex.R, R/UpDownRatios.R,
+	  R/UpsidePotentialRatio.R, R/VaR.Marginal.R, R/VaR.R,
+	  R/apply.fromstart.R, R/apply.rolling.R, R/chart.ACF.R,
+	  R/chart.ACFplus.R, R/chart.Bar.R, R/chart.BarVaR.R,
+	  R/chart.Boxplot.R, R/chart.CaptureRatios.R,
+	  R/chart.Correlation.R, R/chart.CumReturns.R, R/chart.Drawdown.R,
+	  R/chart.ECDF.R, R/chart.Events.R, R/chart.Histogram.R,
+	  R/chart.QQPlot.R, R/chart.Regression.R,
+	  R/chart.RelativePerformance.R, R/chart.RiskReturnScatter.R,
+	  R/chart.RollingCorrelation.R, R/chart.RollingMean.R,
+	  R/chart.RollingPerformance.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.RollingRegression.R,
+	  R/chart.Scatter.R, R/chart.SnailTrail.R, R/chart.StackedBar.R,
+	  R/chart.TimeSeries.R, R/chart.VaRSensitivity.R, R/charts.Bar.R,
+	  R/charts.BarVaR.R, R/charts.PerformanceSummary.R,
+	  R/charts.RollingPerformance.R, R/charts.RollingRegression.R,
+	  R/charts.TimeSeries.R, R/checkData.R,
+	  R/expectedShortFallFunctions.r, R/findDrawdowns.R, R/kurtosis.R,
+	  R/legend.R, R/maxDrawdown.R, R/mean.utils.R, R/na.skip.R,
+	  R/rCornishFisher.r, R/replaceTabs.R, R/skewness.R,
+	  R/sortDrawdowns.R, R/table.AnnualizedReturns.R,
+	  R/table.Arbitrary.R, R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.DownsideRisk.R,
+	  R/table.Drawdowns.R, R/table.HigherMoments.R,
+	  R/table.MonthlyReturns.R, R/table.RollingPeriods.R,
+	  R/table.UpDownRatios.R, R/textplot.R, R/valueAtRiskFunctions.r,
+	  R/zerofill.R, R/zzz.R: - update copyright to 2011
+	  - add license and copyright block to files that were missing it
+	  - add svn keywords to files missing them
+	  - update Contributors to add H. Felix Wittman
+	* R/table.CAPM.R: - apply patch for consistency based on report by
+	  H. Felix Wittman < hfwittmann <at> googlemail <dot> com >
+	* R/sortDrawdowns.R: - replace body of function with lapply based
+	  version provided by H. Felix Wittman < hfwittmann <at> googlemail
+	  <dot> com >
+
+2011-01-17  braverock
+
+	* man/Omega.Rd: - correct ambiguity in documentation for Rf in
+	  Omega related to problem reported by Tobias Verbeke
+	* R/Omega.R: - apply mean(x) to Rf or L parameters with
+	  length(x)>1, problem reported by Tobias Verbeke
+	* R/UpsidePotentialRatio.R: - apply patch from Tobias Verbeke for
+	  series time-varying MAR
+	* R/sortDrawdowns.R: - apply patch from Tobias Verbeke for series
+	  with only one drawdown
+
+2011-01-16  braverock
+
+	* R/expectedShortFallFunctions.r[CPY], R/rCornishFisher.r[CPY],
+	  R/valueAtRiskFunctions.r[CPY]: - move to PerformanceAnalytics
+	  pkg/
+
+2011-01-14  braverock
+
+	* DESCRIPTION: - bump version and Date
+	  - add Tobias Verbeke to contributors
+	* R/SemiDeviation.R: - apply multi-column SemiVariance bug fix
+	  patch from Tobias Verbeke < tobias <dot> verbeke <at>
+	  openanalytics <dot> com >
+
+2011-01-10  braverock
+
+	* R/SortinoRatio.R: - patch for time-varying MAR by Tobias Verbeke
+	  < tobias <dot> verbeke <at> openanalytics <dot> eu >
+	* R/CAPM.beta.R: - patch for when input is a timeSeries provided by
+	  Tobias Verbeke < tobias <dot> verbeke <at> openanalytics <dot> eu
+	  >
+	* R/CAPM.alpha.R, R/CAPM.beta.R: - patch for when input is a
+	  timeSeries provided by Tobias Verbeke < tobias <dot> verbeke <at>
+	  openanalytics <dot> eu >
+
+2011-01-03  braverock
+
+	* R/DownsideDeviation.R: - fix bug where MAR is a timeseries
+	  reported by Tobias Verbeke < tobias <dot> verbeke <at>
+	  openanalytics <dot> eu >
+
+2010-12-01  peter_carl
+
+	* R/chart.Regression.R: - fix for single benchmark
+
+2010-11-30  peter_carl
+
+	* R/chart.QQPlot.R: - removed par(op) for layout
+
+2010-11-24  peter_carl
+
+	* R/findDrawdowns.R: - fixed comparison bug caused by date-time
+	  index issues
+
+2010-11-06  braverock
+
+	* R/chart.CumReturns.R, man/chart.CumReturns.Rd: - apply patch from
+	  Aleksandr Rudnev <alex> <dot> <rudnev> <at> <gmail> <dot> <com>
+	  to fix begin='axis'
+	  - add examples for begin argument to catch further regression
+
+2010-11-01  braverock
+
+	* R/SortinoRatio.R, man/SortinoRatio.Rd: - make SortinoRatio
+	  function 'portfolio-aware' by adding handling for weights
+	  - add Sortino-maximizing demo to PortfolioAnalytics
+	  - fix bug in plot method for random portfolios that could make
+	  optimum portfolio not appear
+
+2010-09-17  braverock
+
+	* R/table.CAPM.R: - convert to use TrackingError fn after bug
+	  report from <devlinme <at> mac <dot> com>
+
+2010-09-16  peter_carl
+
+	* sandbox/fPerformance, sandbox/fPerformance/DESCRIPTION,
+	  sandbox/fPerformance/R, sandbox/fPerformance/R/perf-Data.R,
+	  sandbox/fPerformance/R/perf-DownsideRisk.R,
+	  sandbox/fPerformance/R/perf-Drawdown.R,
+	  sandbox/fPerformance/R/perf-RegressionAnalysis.R,
+	  sandbox/fPerformance/R/perf-RelativeRisk.R,
+	  sandbox/fPerformance/R/perf-ReturnDisributions.R,
+	  sandbox/fPerformance/R/perf-Returns.R,
+	  sandbox/fPerformance/R/perf-Risk.R,
+	  sandbox/fPerformance/R/perf-RiskAdjusted.R,
+	  sandbox/fPerformance/R/perf-Tables.R,
+	  sandbox/fPerformance/R/perf-ValueAtRisk.R,
+	  sandbox/fPerformance/man,
+	  sandbox/fPerformance/man/perfAdjustedMeasures.Rd,
+	  sandbox/fPerformance/man/perfDistributionMeasures.Rd,
+	  sandbox/fPerformance/man/perfDownsideMeasures.Rd,
+	  sandbox/fPerformance/man/perfDrawdownMeasures.Rd,
+	  sandbox/fPerformance/man/perfRegressionMeasures.Rd,
+	  sandbox/fPerformance/man/perfRelativeMeasures.Rd,
+	  sandbox/fPerformance/man/perfVaRMeasures.Rd,
+	  sandbox/fPerformance/man/returns.Rd,
+	  sandbox/fPerformance/man/tables.Rd: - initial commit of
+	  Diethelm's code contributions
+
 2010-09-14  braverock
 
+	* DESCRIPTION, R/Omega.R, man/table.Drawdowns.Rd, man/textplot.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - updates to
+	  protect us from failures caused by 'Hmisc' overriding 'format'
+	  from R-base
+	* ChangeLog: - ChangeLog after tag 1.0.3.1
 	* ChangeLog, DESCRIPTION, NEWS: - updates prior to 1.0.3.1 release
 	* R/checkData.R: - patch provided by Jeff Ryan to fix bug
 	  introduced by changes to as.xts functionality
