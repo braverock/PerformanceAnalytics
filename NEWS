@@ -1,3 +1,20 @@
+PerformanceAnalytics 1.0.4.1 Release Notes
+(sent to CRAN 2012-03-25)
+
+This release is aimed almost exclusively at support for 
+multiple changes made to deal with R core changes, especially in 
+the areas of multi-column support for sd() and mean().
+User functionality should be unchanged.  
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
+
+PerformanceAnalytics roxygen note (2011-10-02):
+We're converting the documentation to use roxygen2.  If you find any errors or 
+omissions from previous documentation, please notify us.  
+We will shift to roxygen documentation with package v1.1
+
 PerformanceAnalytics 1.0.3.1 Release Notes
 
 A change to the behavior of as.xts removed functionality relied on by 
