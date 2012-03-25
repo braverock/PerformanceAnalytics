@@ -6,8 +6,33 @@
   Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
 }
 \usage{
-chart.BarVaR (R, width = 0, gap = 12, methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"), p=0.95, clean = c("none", "boudt","geltner"), all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE, show.symmetric = FALSE, legend.loc="bottomleft", ylim = NA, lwd = 2, colorset = 1:12, lty = c(1,2,4,5,6), ypad=0, legend.cex = 0.8 )
-charts.BarVaR (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
+chart.BarVaR  (R, 
+               width = 0, gap = 12, 
+               methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"),
+               p = 0.95, 
+               clean = c("none", "boudt", "geltner"), 
+               all = FALSE, 
+               ..., 
+               show.clean = FALSE, 
+               show.horizontal = FALSE, 
+               show.symmetric = FALSE, 
+               show.endvalue = FALSE,
+               show.greenredbars = FALSE, 
+               legend.loc = "bottomleft",
+               ylim = NA, 
+               lwd = 2, 
+               colorset = 1:12, 
+               lty = c(1, 2, 4, 5, 6), 
+               ypad = 0, 
+               legend.cex = 0.8) 
+charts.BarVaR (R, 
+               main = "Returns", 
+               cex.legend = 0.8, 
+               colorset = 1:12, 
+               ylim = NA, 
+               ..., 
+               perpanel = NULL, 
+               show.yaxis = c("all", "firstonly", "alternating", "none"))
 }
 
 \arguments{
@@ -34,6 +59,10 @@ charts.BarVaR (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ...)
   \item{\dots}{ any other passthru parameters to \code{\link{chart.TimeSeries}} }
   \item{show.horizontal}{ if TRUE, shows a line across the timeseries at the value of the most recent VaR estimate, to help the reader evaluate the number of exceptions thus far }
   \item{show.symmetric}{ if TRUE and the metric is symmetric, this will show the metric's positive values as well as negative values, such as for method "StdDev".}
+  \item{show.endvalue}{ if TRUE, show the final (out of sample) value}
+  \item{show.greenredbars}{ if TRUE, show the per-period returns using green and red bars for positive and negative returns }
+  \item{show.yaxis}{one of "all", "firstonly", "alternating", or "none" to control where y axis is plotted in multipanel charts}
+  \item{perpanel}{default NULL, controls column display} 
   \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
   \item{lwd}{ set the line width, same as in \code{\link{plot}} }
   \item{lty}{ set the line type, same as in \code{\link{plot}} }

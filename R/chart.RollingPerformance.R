@@ -1,3 +1,32 @@
+#' wrapper to create a chart of rolling performance metrics in a line chart
+#' 
+#' A wrapper to create a chart of rolling performance metrics in a line chart
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param width number of periods to apply rolling function window over
+#' @param FUN any function that can be evaluated using a single set of returns
+#' (e.g., rolling \code{\link{CAPM.beta}} won't work, but
+#' \code{\link{Return.annualized}} will)
+#' @param na.pad TRUE/FALSE If TRUE it adds any times that would not otherwise
+#' have been in the result with a value of NA. If FALSE those times are
+#' dropped.
+#' @param main set the chart title, same as in \code{\link{plot}}
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param \dots any other passthru parameters to \code{\link{plot}} or the
+#' function specified
+#' @author Peter Carl
+#' @seealso \code{\link{charts.RollingPerformance}},
+#' \code{\link[zoo]{rollapply}}
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(edhec)
+#' chart.RollingPerformance(edhec[, 1:3], width = 24)
+#' chart.RollingPerformance(edhec[, 1:3], FUN = 'mean', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Mean Return")
+#' chart.RollingPerformance(edhec[, 1:3], FUN = 'SharpeRatio.annualized', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Sharpe Ratio")
+#' 
 chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL)
 { # @author Peter Carl
 

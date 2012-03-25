@@ -1,3 +1,30 @@
+#' Active Premium
+#' 
+#' The return on an investment's annualized return minus the benchmark's
+#' annualized return.
+#' 
+#' Active Premium = Investment's annualized return - Benchmark's annualized
+#' return
+#' 
+#' 
+#' @param Ra return vector of the portfolio
+#' @param Rb return vector of the benchmark asset
+#' @param scale number of periods in a year (daily scale = 252, monthly scale =
+#' 12, quarterly scale = 4)
+#' @author Peter Carl
+#' @seealso \code{\link{InformationRatio}} \code{\link{TrackingError}}
+#' \code{\link{Return.annualized}}
+#' @references Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
+#' Management},Fall 1994, 49-58.
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#'     data(managers)
+#'     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+#'     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
+#'     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
+#'     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
+#' 
 ActivePremium <- function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 

@@ -1,3 +1,34 @@
+#' Time series chart of drawdowns through time
+#' 
+#' A time series chart demonstrating drawdowns from peak equity attained
+#' through time, calculated from periodic returns.
+#' 
+#' Any time the cumulative returns dips below the maximum cumulative returns,
+#' it's a drawdown.  Drawdowns are measured as a percentage of that maximum
+#' cumulative return, in effect, measured from peak equity.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' default TRUE
+#' @param colorset color palette to use, set by default to rational choices
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso
+#' 
+#' \code{\link{plot}} \cr \code{\link{chart.TimeSeries}} \cr
+#' \code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}} \cr
+#' \code{\link{maxDrawdown}} \cr \code{\link{table.Drawdowns}} \cr
+#' \code{\link{table.DownsideRisk}}
+#' @keywords ts
+#' @examples
+#' 
+#' data(edhec)
+#' chart.Drawdown(edhec[,c(1,2)], main="Drawdown from Peak Equity Attained", legend.loc="bottomleft")
+#' 
 chart.Drawdown <-
 function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl

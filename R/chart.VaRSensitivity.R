@@ -1,3 +1,48 @@
+#' show the sensitivity of Value-at-Risk or Expected Shortfall estimates
+#' 
+#' Creates a chart of Value-at-Risk and/or Expected Shortfall estimates by
+#' confidence interval for multiple methods.
+#' 
+#' This chart shows estimated VaR along a series of confidence intervals for
+#' selected calculation methods.  Useful for comparing a method to the
+#' historical VaR calculation.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param methods one or more calculation methods indicated "GaussianVaR",
+#' "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES".
+#' See \code{\link{VaR}} or \code{\link{ES}} for more detail.
+#' @param clean method for data cleaning through \code{\link{Return.clean}}.
+#' Current options are "none" or "boudt" or "geltner".
+#' @param elementcolor the color used to draw chart elements. The default is
+#' "darkgray"
+#' @param reference.grid if true, draws a grid aligned with the points on the x
+#' and y axes
+#' @param ylab set the y-axis label, same as in \code{\link{plot}}
+#' @param xlab set the x-axis label, same as in \code{\link{plot}}
+#' @param type set the chart type, same as in \code{\link{plot}}
+#' @param lty set the line type, same as in \code{\link{plot}}
+#' @param lwd set the line width, same as in \code{\link{plot}}
+#' @param colorset color palette to use, set by default to rational choices
+#' @param pch symbols to use, see also \code{\link{plot}}
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param cex.legend The magnification to be used for sizing the legend
+#' relative to the current setting of 'cex'.
+#' @param main set the chart title, same as in \code{\link{plot}}
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link{VaR}} \cr \code{\link{ES}}
+#' @references Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation and
+#' Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
+#' Journal of Risk, forthcoming.
+#' @keywords ts multivariate distribution
+#' @examples
+#' 
+#' data(managers)
+#' chart.VaRSensitivity(managers[,1,drop=FALSE], methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), colorset=bluefocus, lwd=2)
+#' 
 chart.VaRSensitivity <-
 function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)
 { # @author Peter Carl

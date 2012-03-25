@@ -1,6 +1,10 @@
 # NAMESPACE file for PerformanceAnalytics
 
 importFrom("utils", "packageDescription")
+importFrom("stats", "sd")
+
+importFrom("zoo", "rollapply")
+
 # export all functions/variables that don't start with a .
 # exportPattern("^[^\\.]")
 
@@ -31,6 +35,7 @@ export(
 #    CoSkewnessMatrix, #export after co-moments paper is done
     CoVariance,
     DownsideDeviation,
+    DownsidePotential,
     Drawdowns,
     ES,
     ETL,
@@ -186,6 +191,13 @@ S3method(textplot, default)
 S3method(textplot, character)
 S3method(textplot, data.frame)
 S3method(textplot, matrix)
+
+S3method(mean,xts)
+S3method(sd,xts)
+S3method(mean,matrix)
+S3method(sd,matrix)
+
+S3method(rollapply,xts)
 
 # # Export These
 # ActivePremium

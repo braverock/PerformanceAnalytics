@@ -4,6 +4,33 @@
 #       but the package check complains about mismatch of the
 #       first parameter with R command mean()
 
+
+
+#' calculate attributes relative to the mean of the observation series given,
+#' including geometric, stderr, LCL and UCL
+#' 
+#' \tabular{ll}{ \code{\link{mean.geometric}} \tab geometric mean \cr
+#' \code{\link{mean.stderr}} \tab standard error of the mean (S.E. mean) \cr
+#' \code{\link{mean.LCL}} \tab lower confidence level (LCL) of the mean \cr
+#' \code{\link{mean.UCL}} \tab upper confidence level (UCL) of the mean \cr }
+#' 
+#' 
+#' @aliases mean.utils mean.geometric mean.UCL mean.LCL mean.stderr
+#' @param x a vector, matrix, data frame, or time series to calculate the
+#' modified mean statistic over
+#' @param ci the confidence interval to use
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' mean.geometric(edhec[,"Funds of Funds"])
+#' mean.stderr(edhec[,"Funds of Funds"])
+#' mean.UCL(edhec[,"Funds of Funds"])
+#' mean.LCL(edhec[,"Funds of Funds"])
+#' 
 mean.geometric <-
 function (x, ...)
 {# @author Peter Carl

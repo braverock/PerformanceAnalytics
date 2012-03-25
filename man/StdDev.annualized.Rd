@@ -18,13 +18,14 @@ Note that any multiperiod or annualized number should be viewed with suspicion i
 
 }
 \usage{
-    sd.multiperiod(x, scale = NA)
-    sd.annualized(x, scale = NA)
-    StdDev.annualized(R, scale = NA)
+    sd.multiperiod(x, scale = NA, ...)
+    sd.annualized(x, scale = NA, ...)
+    StdDev.annualized(R, scale = NA, ...)
 }
 \arguments{
   \item{x, R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
+  \item{\dots}{ any other passthru parameters }
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. p. 27 \cr

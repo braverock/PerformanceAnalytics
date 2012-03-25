@@ -1,3 +1,35 @@
+#' Rolling Periods Summary: Statistics and Stylized Facts
+#' 
+#' A table of estimates of rolling period return measures
+#' 
+#' 
+#' @aliases table.TrailingPeriods table.TrailingPeriodsRel table.RollingPeriods
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' index, benchmark, portfolio, or secondary asset returns to compare against
+#' @param periods number of periods to use as rolling window(s), subset of
+#' \code{c(3, 6, 9, 12, 18, 24, 36, 48)}
+#' @param funcs.names vector of function names used for labeling table rows
+#' @param FUNCS list of functions to apply the rolling period to
+#' @param digits number of digits to round results to
+#' @param \dots any other passthru parameters for functions specified in FUNCS
+#' @author Peter Carl
+#' @seealso \code{\link[zoo]{rollapply}}
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' #table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
+#' 
+#' #result=table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
+#' table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
+#' 
+#' result=table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
+#' require("Hmisc")
+#' textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+#' title(main="Trailing Period Statistics")
+#' 
 table.TrailingPeriods <-
 function (R,  periods = subset(c(12,36,60), c(12,36,60)
 < length(as.matrix(R[,1]))), FUNCS=c("mean","sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)

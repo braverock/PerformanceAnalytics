@@ -1,3 +1,41 @@
+#' Kurtosis
+#' 
+#' compute kurtosis of a univariate distribution
+#' 
+#' This function was ported from the RMetrics package fUtilities to eliminate a
+#' dependency on fUtilties being loaded every time.  This function is identical
+#' except for the addition of \code{\link{checkData}} and additional labeling.
+#' 
+#' @param na.rm a logical. Should missing values be removed?
+#' @param method a character string which specifies the method of computation.
+#' These are either \code{"moment"}, \code{"fisher"}, or \code{"excess"}.  If
+#' \code{"excess"} is selected, then the value of the kurtosis is computed by
+#' the \code{"moment"} method and a value of 3 will be subtracted.  The
+#' \code{"moment"} method is based on the definitions of kurtosis for
+#' distributions; these forms should be used when resampling (bootstrap or
+#' jackknife). The \code{"fisher"} method correspond to the usual "unbiased"
+#' definition of sample variance, although in the case of kurtosis exact
+#' unbiasedness is not possible.
+#' @param x a numeric vector or object.
+#' @param \dots arguments to be passed.
+#' @author Diethelm Wuertz
+#' @seealso \code{\link{skewness}}.
+#' @keywords univar
+#' @examples
+#' 
+#' ## mean -
+#' ## var -
+#'    # Mean, Variance:
+#'    r = rnorm(100)
+#'    mean(r)
+#'    var(r)
+#' 
+#' ## kurtosis -
+#'    kurtosis(r)
+#' 
+#' data(managers)
+#' kurtosis(managers[,1:8])
+#' 
 kurtosis <-
     function (x, na.rm = FALSE, method = c("excess", "moment", "fisher"), ...)
 {

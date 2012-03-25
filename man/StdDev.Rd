@@ -8,7 +8,16 @@ calculates Standard Deviation for univariate and multivariate series, also calcu
 calculates Standard Deviation for univariate and multivariate series, also calculates component contribution to standard deviation of a portfolio
 }
 \usage{
-StdDev(R, ..., clean = c("none", "boudt", "geltner"), portfolio_method = c("single", "component"), weights = NULL, mu = NULL, sigma = NULL)
+
+StdDev(R, ..., 
+       clean = c("none", "boudt", "geltner"), 
+       portfolio_method = c("single", "component"), 
+       weights = NULL, 
+       mu = NULL, 
+       sigma = NULL, 
+       use = "everything",
+       method = c("pearson", "kendall", "spearman"))
+
 }
 \arguments{
   \item{R}{ a vector, matrix, data frame, timeSeries or zoo object of asset returns }
@@ -18,6 +27,16 @@ StdDev(R, ..., clean = c("none", "boudt", "geltner"), portfolio_method = c("sing
   \item{weights}{ portfolio weighting vector, default NULL, see Details}
   \item{mu}{If univariate, mu is the mean of the series. Otherwise mu is the vector of means of the return series  , default NULL, , see Details}
   \item{sigma}{If univariate, sigma is the variance of the series. Otherwise sigma is the covariance matrix of the return series , default NULL, see Details}
+  \item{use}{an optional character string giving a
+    method for computing covariances in the presence
+    of missing values.  This must be (an abbreviation of) one of the strings
+    \code{"everything"}, \code{"all.obs"}, \code{"complete.obs"},
+    \code{"na.or.complete"}, or \code{"pairwise.complete.obs"}.}
+  \item{method}{a character string indicating which correlation
+    coefficient (or covariance) is to be computed.  One of
+    \code{"pearson"} (default), \code{"kendall"}, or \code{"spearman"},
+    can be abbreviated.}
+
 }
 \details{
 TODO add more details

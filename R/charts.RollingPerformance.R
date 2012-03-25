@@ -1,3 +1,29 @@
+#' rolling performance chart
+#' 
+#' A wrapper to create a rolling annualized returns chart, rolling annualized
+#' standard deviation chart, and a rolling annualized sharpe ratio chart.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param width number of periods to apply rolling function over
+#' @param Rf risk free rate, in same period as your returns
+#' @param main set the chart title, same as in \code{plot}
+#' @param trim TRUE/FALSE, whether to keep alignment caused by NA's
+#' @param event.labels TRUE/FALSE whether or not to display lines and labels
+#' for historical market shock events
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link{chart.RollingPerformance}}
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(managers)
+#' charts.RollingPerformance(managers[,1:8], Rf=managers[,10,drop=FALSE], colorset=tim8equal, main="Rolling 12-Month Performance", legend.loc="topleft")
+#' 
 charts.RollingPerformance <-
 function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, legend.loc=NULL, ...)
 { # @author Peter Carl

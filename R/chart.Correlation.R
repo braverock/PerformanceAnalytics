@@ -1,3 +1,24 @@
+#' correlation matrix chart
+#' 
+#' Visualization of a Correlation Matrix. On top the (absolute) value of the
+#' correlation plus the result of the cor.test as stars. On botttom, the
+#' bivariate scatterplots, with a fitted line
+#' 
+#' 
+#' @param R data for the x axis, can take matrix,vector, or timeseries
+#' @param histogram TRUE/FALSE whether or not to display a histogram
+#' @param \dots any other passthru parameters into \code{\link{pairs}}
+#' @note based on plot at
+#' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+#' @author Peter Carl
+#' @seealso \code{\link{table.Correlation}} \cr %
+#' \code{\link{chart.Correlation.color}}
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(managers)
+#' chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
+#' 
 chart.Correlation <-
 function (R, histogram = TRUE, ...)
 { # @author R Development Core Team
@@ -28,7 +49,7 @@ function (R, histogram = TRUE, ...)
         text(.8, .8, Signif, cex=cex, col=2)
     }
     f <- function(t) {
-    dnorm(t, mean=mean(x), sd=sd(x) )
+    dnorm(t, mean=mean(x), sd=sd.xts(x) )
     }
     hist.panel = function (x, ...) {
         par(new = TRUE)

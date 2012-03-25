@@ -1,3 +1,35 @@
+#' calculate CAPM alpha
+#' 
+#' This is a wrapper for calculating a CAPM alpha.
+#' 
+#' "Alpha" purports to be a measure of a manager's skill by measuring the
+#' portion of the managers returns that are not attributable to "Beta", or the
+#' portion of performance attributable to a benchmark.
+#' 
+#' 
+#' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rb return vector of the benchmark asset
+#' @param Rf risk free rate, in same period as your returns
+#' @author Peter Carl
+#' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
+#' @references Sharpe, W.F. Capital Asset Prices: A theory of market
+#' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
+#' 1964, 425-442. \cr Ruppert, David. \emph{Statistics and Finance, an
+#' Introduction}. Springer. 2004. \cr
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' # First we load the data
+#'     data(managers)
+#'     CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12) 
+#'     CAPM.alpha(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+#'     CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12)
+#'     CAPM.alpha(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+#'     CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12) 
+#'     CAPM.alpha(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE])
+#' 
+#' 
 CAPM.alpha <- function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 

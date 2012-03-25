@@ -1,3 +1,27 @@
+#' calculate a function over an expanding window always starting from the
+#' beginning of the series
+#' 
+#' A function to calculate a function over an expanding window from the start
+#' of the timeseries.  This wrapper allows easy calculation of \dQuote{from
+#' inception} statistics.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param FUN any function that can be evaluated using a single set of returns
+#' (e.g., rolling beta won't work, but \code{\link{Return.annualized}} will)
+#' @param gap the number of data points from the beginning of the series
+#' required to \dQuote{train} the calculation
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link[zoo]{rollapply}}
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(managers)
+#' apply.fromstart(managers[,1,drop=FALSE], FUN="mean", width=36)
+#' 
+#' 
 apply.fromstart <- function (R, FUN = "mean" , gap = 1, ...)
 { # @author Peter Carl
 

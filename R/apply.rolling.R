@@ -1,3 +1,31 @@
+#' calculate a function over a rolling window
+#' 
+#' Creates a results timeseries of a function applied over a rolling window.
+#' 
+#' Wrapper function for \code{\link[zoo]{rollapply}} to hide some of the
+#' complexity of managing single-column zoo objects.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param width number of periods to apply rolling function window over
+#' @param gap numeric number of periods from start of series to use to train
+#' risk calculation
+#' @param trim TRUE/FALSE, whether to keep alignment caused by NA's
+#' @param FUN any function that can be evaluated using a single set of returns
+#' (e.g., rolling beta won't work, but \code{\link{Return.annualized}} will)
+#' @param by calculate FUN for trailing width points at every by-th time point.
+#' @param \dots any other passthru parameters
+#' @return A timeseries in a zoo object of the calculation results
+#' @author Peter Carl
+#' @seealso \code{\link{apply}} \cr \code{\link[zoo]{rollapply}}
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(managers)
+#' apply.rolling(managers[,1,drop=FALSE], FUN="mean", width=36)
+#' 
+#' 
 apply.rolling <- function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 { # @author Peter Carl
 

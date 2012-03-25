@@ -53,6 +53,7 @@ normalES <- function(mu, sigma, tail.prob = 0.01) {
     stop("mu and sigma must have same number of elements")
   if ( tail.prob < 0 || tail.prob > 1)
     stop("tail.prob must be between 0 and 1")
+
   ES = mu - sigma*dnorm(qnorm(tail.prob))/tail.prob
   return(-ES)
 }
@@ -555,7 +556,7 @@ bootstrapESreport <- function(bootData, w, delta.w = 0.001, tail.prob = 0.01,
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # This file originally written and contributed by Eric Zivot, 2010
-# package Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+# package Copyright (c) 2004-2011 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

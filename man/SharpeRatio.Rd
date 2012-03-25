@@ -24,8 +24,8 @@ You can pass additional arguments to \code{\link{VaR}} and \code{\link{ES}} via 
 This function returns a traditional or modified Sharpe ratio for the same periodicity of the data being input (e.g., monthly data -> monthly SR)
 }
 \usage{
-SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev","VaR","ES"), weights=NULL, ...)
-SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev","VaR","ES"), weights=NULL, ...)
+SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev","VaR","ES"), weights=NULL, annualize=FALSE, ...)
+SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -33,7 +33,8 @@ SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev","VaR","ES"), weights=NULL, ...
   \item{Rf}{ risk free rate, in same period as your returns }
   \item{p}{ confidence level for calculation, default p=.95 }
   \item{FUN}{ one of "StdDev" or "VaR" or "ES" to use as the denominator }
-  \item{weights}{ portfolio weighting vector, default NULL}
+  \item{weights}{ portfolio weighting vector, default NULL, see Details in \code{\link{VaR}}}
+  \item{annualize}{ if TRUE, annualize the measure, default FALSE }
   \item{\dots}{ any other passthru parameters to the VaR or ES functions }
 }
 

@@ -1,3 +1,50 @@
+#' Chart of Capture Ratios against a benchmark
+#' 
+#' Scatter plot of Up Capture versus Down Capture against a benchmark
+#' 
+#' Scatter plot shows the coordinates of each set of returns' Up and Down
+#' Capture against a benchmark.  The benchmark value is by definition plotted
+#' at (1,1) with solid crosshairs.  A diagonal dashed line with slope equal to
+#' 1 divides the plot into two regions: above that line the UpCapture exceeds
+#' the DownCapture, and vice versa.
+#' 
+#' @param Ra Returns to test, e.g., the asset to be examined
+#' @param Rb Returns of a benchmark to compare the asset with
+#' @param main Set the chart title, same as in \code{plot}
+#' @param add.names Plots the row name with the data point.  Default TRUE. Can
+#' be removed by setting it to NULL
+#' @param xlab Set the x-axis label, as in \code{\link{plot}}
+#' @param ylab Set the y-axis label, as in \code{\link{plot}}
+#' @param colorset Color palette to use, set by default to "black"
+#' @param symbolset From \code{pch} in \code{\link{plot}}. Submit a set of
+#' symbols to be used in the same order as the data sets submitted
+#' @param legend.loc Places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param xlim set the x-axis limit, same as in \code{\link{plot}}
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param cex.axis The magnification to be used for axis annotation relative to
+#' the current setting of 'cex', same as in \code{\link{plot}}.
+#' @param cex.legend The magnification to be used for sizing the legend
+#' relative to the current setting of 'cex'.
+#' @param cex.main The magnification to be used for sizing the title relative
+#' to the current setting of 'cex'.
+#' @param cex.lab The magnification to be used for x and y labels relative to
+#' the current setting of 'cex'.
+#' @param element.color Specify the color of the box, axes, and other chart
+#' elements.  Default is "darkgray"
+#' @param benchmark.color Specify the color of the benchmark reference and
+#' crosshairs.  Default is "darkgray"
+#' @param \dots Any other passthru parameters to \code{plot}
+#' @author Peter Carl
+#' @seealso \code{\link{plot}}, \cr \code{\link{par}}, \cr
+#' \code{\link{UpDownRatios}}, \cr \code{\link{table.UpDownRatios}} \cr
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#'     data(managers)
+#'     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
+#' 
 chart.CaptureRatios <-
 function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, element.color="darkgray", benchmark.color = "darkgray",...)
 { # @author Peter Carl

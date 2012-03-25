@@ -6,7 +6,7 @@
 Sortino proposed an improvement on the Sharpe Ratio to better account for skill and excess performance by using only downside semivariance as the measure of risk.
 }
 \usage{
-SortinoRatio(R, MAR = 0)
+SortinoRatio(R, MAR = 0, ..., weights=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

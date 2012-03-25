@@ -1,3 +1,39 @@
+#' Cumulates and graphs a set of periodic returns
+#' 
+#' Chart that cumulates the periodic returns given and draws a line graph of
+#' the results as a "wealth index".
+#' 
+#' Cumulates the return series and displays either as a wealth index or as
+#' cumulative returns.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param wealth.index if \code{wealth.index} is \code{TRUE}, shows the "value
+#' of $1", starting the cumulation of returns at 1 rather than zero
+#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' default TRUE
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param colorset color palette to use, set by default to rational choices
+#' @param begin Align shorter series to: \itemize{ \item first - prior value of
+#' the first column given for the reference or longer series or, \item axis -
+#' the initial value (1 or zero) of the axis.  }
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
+#' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
+#' and Attribution}. Wiley. 2004. \cr
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(edhec)
+#' chart.CumReturns(edhec[,"Funds of Funds"],main="Cumulative Returns")
+#' chart.CumReturns(edhec[,"Funds of Funds"],wealth.index=TRUE, main="Growth of $1")
+#' data(managers)
+#' chart.CumReturns(managers,main="Cumulative Returns",begin="first")
+#' chart.CumReturns(managers,main="Cumulative Returns",begin="axis")
+#' 
 chart.CumReturns <-
 function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
 { # @author Peter Carl

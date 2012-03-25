@@ -1,3 +1,42 @@
+#' Create an ECDF overlaid with a Normal CDF
+#' 
+#' Creates an emperical cumulative distribution function (ECDF) overlaid with a
+#' cumulative distribution function (CDF)
+#' 
+#' The empirical cumulative distribution function (ECDF for short) calculates
+#' the fraction of observations less or equal to a given value.  The resulting
+#' plot is a step function of that fraction at each observation.  This function
+#' uses \code{ecdf} and overlays the CDF for a fitted normal function as well.
+#' Inspired by a chart in Ruppert (2004).
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param main set the chart title, same as in \code{\link{plot}}
+#' @param xlab set the x-axis label, same as in \code{\link{plot}}
+#' @param ylab set the y-axis label, same as in \code{\link{plot}}
+#' @param colorset color palette to use, defaults to c("black", "\#005AFF"),
+#' where first value is used to color the step function and the second color is
+#' used for the fitted normal
+#' @param lwd set the line width, same as in \code{\link{plot}}
+#' @param xlim set the x-axis limit, same as in \code{\link{plot}}
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param element.color specify the color of chart elements.  Default is
+#' "darkgray"
+#' @param lty set the line type, same as in \code{\link{plot}}
+#' @param \dots any other passthru parameters to \code{\link{plot}}
+#' @author Peter Carl
+#' @seealso \code{\link{plot}}, \code{\link{ecdf}}
+#' @references Ruppert, David. \emph{Statistics and Finance, an Introduction}.
+#' Springer. 2004. Ch. 2 Fig. 2.5
+#' 
+#' \url{http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt}
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(edhec)
+#' chart.ECDF(edhec[, 1, drop=FALSE])
+#' 
+#' 
 chart.ECDF <-
 function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, lty = c(1,1), element.color = "darkgray", ...)
 { # @author Peter Carl
@@ -15,7 +54,7 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
     R = checkData(R, method="vector", na.rm = TRUE)
 
     t = seq(-2.5,2.5,length.out=1000)
-    p1 = pnorm(t,mean(R), sd(R))
+    p1 = pnorm(t,mean(R), sd.xts(R))
 
     rx = sort(R)
 

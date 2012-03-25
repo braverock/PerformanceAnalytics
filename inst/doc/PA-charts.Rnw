@@ -745,10 +745,10 @@ of the relation of prices to risk, but it is usually applied to partial
 equilibrium portfolios which can create (sometimes serious) problems
 in valuation.
 
-<<Graph7,echo=T,fig=T>>=
-#source("chart.MultiScatter.R")
-#chart.MultiScatter(Ra=managers[,1,drop=F],Rb=managers[,8,drop=F],linear.fit=T,Rf=managers[,10],excess.returns=T)
-@
+%<<Graph7,echo=T,fig=T>>=
+%#source("chart.MultiScatter.R")
+%#chart.MultiScatter(Ra=managers[,1,drop=F],Rb=managers[,8,drop=F],linear.fit=T,Rf=managers[,10],excess.returns=T)
+%@
 
 In a similar fashion to the rolling performance we displayed earlier,
 we can look at the stability of a linear model's parameters through

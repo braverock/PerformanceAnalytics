@@ -1,3 +1,45 @@
+#' caclulate the maximum drawdown from peak equity
+#' 
+#' To find the maximum drawdown in a return series, we need to first calculate
+#' the cumulative returns and the maximum cumulative return to that point.  Any
+#' time the cumulative returns dips below the maximum cumulative returns, it's
+#' a drawdown.  Drawdowns are measured as a percentage of that maximum
+#' cumulative return, in effect, measured from peak equity.
+#' 
+#' The option to \code{invert} the measure should appease both academics and
+#' practitioners. The default option \code{invert=TRUE} will provide the
+#' drawdown as a positive number.  This should be useful for optimization
+#' (which usually seeks to minimize a value), and for tables (where having
+#' negative signs in front of every number may be considered clutter).
+#' Practitioners will argue that drawdowns denote losses, and should be
+#' internally consistent with the quantile (a negative number), for which
+#' \code{invert=FALSE} will provide the value they expect.  Individually,
+#' different preferences may apply for clarity and compactness.  As such, we
+#' provide the option, but make no value judgment on which approach is
+#' preferable.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param weights portfolio weighting vector, default NULL, see Details
+#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' default TRUE
+#' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
+#' Details.
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}} \cr
+#' \code{\link{table.Drawdowns}} \cr \code{\link{table.DownsideRisk}} \cr
+#' \code{\link{chart.Drawdown}} \cr
+#' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
+#' Attribution}. Wiley. 2004. p. 88 \cr
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' t(round(maxDrawdown(edhec[,"Funds of Funds"]),4))
+#' data(managers)
+#' t(round(maxDrawdown(managers),4))
+#' 
 maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
@@ -35,6 +77,37 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 	}
 }
 
+
+
+#' Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
+#' measure
+#' 
+#' For some confidence level \eqn{p}, the conditional drawdown is the the mean
+#' of the worst \eqn{p\%} drawdowns.
+#' 
+#' 
+#' @aliases CDD CDaR
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param weights portfolio weighting vector, default NULL, see Details
+#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' default TRUE
+#' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
+#' Details.
+#' @param p confidence level for calculation, default p=0.95
+#' @param \dots any other passthru parameters
+#' @author Brian G. Peterson
+#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}}
+#' @references Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
+#' Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
+#' Management Tools, Risk Books, London, 2003
+#' http://www.ise.ufl.edu/uryasev/drawdown.pdf
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' t(round(CDD(edhec),4))
+#' 
 CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
 {
     p=.setalphaprob(p)

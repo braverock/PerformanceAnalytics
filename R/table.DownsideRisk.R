@@ -1,3 +1,33 @@
+#' Downside Risk Summary: Statistics and Stylized Facts
+#' 
+#' Creates a table of estimates of downside risk measures for comparison across
+#' multiple instruments or funds.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param ci confidence interval, defaults to 95%
+#' @param scale number of periods in a year (daily scale = 252, monthly scale =
+#' 12, quarterly scale = 4)
+#' @param Rf risk free rate, in same period as your returns
+#' @param MAR Minimum Acceptable Return, in the same periodicity as your
+#' returns
+#' @param p confidence level for calculation, default p=.99
+#' @param digits number of digits to round results to
+#' @author Peter Carl
+#' @seealso \code{\link{DownsideDeviation}} \cr \code{\link{maxDrawdown}} \cr
+#' \code{\link{VaR}} \cr \code{\link{ES}} \cr
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95)
+#' 
+#' result=t(table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95))
+#' require("Hmisc")
+#' textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+#' title(main="Downside Risk Statistics")
+#' 
 table.DownsideRisk <-
 function (R, ci = 0.95, scale = NA, Rf = 0, MAR = .1/12, p= 0.95, digits = 4)
 {# @author Peter Carl
@@ -51,8 +81,8 @@ function (R, ci = 0.95, scale = NA, Rf = 0, MAR = .1/12, p= 0.95, digits = 4)
 
         z = c(
                 DownsideDeviation(x,MAR=mean(x)),
-                sd(subset(as.vector(x),as.vector(x)>0)),
-                sd(subset(as.vector(x),as.vector(x)<0)),
+                sd.xts(subset(as.vector(x),as.vector(x)>0)),
+                sd.xts(subset(as.vector(x),as.vector(x)<0)),
                 DownsideDeviation(x,MAR=MAR),
                 DownsideDeviation(x,MAR=Rf.subset),
                 DownsideDeviation(x,MAR=0),

@@ -37,7 +37,7 @@ function (R, ...) {
 
     rs <- function(R) {
         R = na.omit(R)
-        m = (max(R) - min(R))/sd(R)
+        m = (max(R) - min(R))/sd.xts(R)
         n = length(R)
         result = log(m)/log(n)
         return(result)

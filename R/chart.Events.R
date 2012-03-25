@@ -1,3 +1,44 @@
+#' Plots a time series with event dates aligned
+#' 
+#' Creates a time series plot where events given by a set of dates are aligned,
+#' with the adjacent prior and posterior time series data plotted in order.
+#' The x-axis is time, but relative to the date specified, e.g., number of
+#' months preceeding or following the events.
+#' 
+#' This is a chart that is commonly used for event studies in econometrics,
+#' usually with recession dates, to demonstrate the path of a time series going
+#' into and coming out of an event.  The time axis is simply the number of
+#' periods prior and following the event, and each line represents a different
+#' event.  Note that if time periods are close enough together and the window
+#' shown is wide enough, the data will appear to repeat.  That can be
+#' confusing, but the function does not currently allow for different windows
+#' around each event.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param dates a list of dates (e.g., \code{c("09/03","05/06"))} formatted the
+#' same as in R.  This function matches the re-formatted row or index names
+#' (dates) with the given list, so to get a match the formatting needs to be
+#' correct.
+#' @param prior the number of periods to plot prior to the event.  Interpreted
+#' as a positive number.
+#' @param post the number of periods to plot following to the event.
+#' Interpreted as a positive number.
+#' @param main set the chart title, same as in \code{\link{plot}}
+#' @param xlab set the x-axis label, same as in \code{\link{plot}}
+#' @param \dots any other passthru parameters to the \code{\link{plot}}
+#' function
+#' @author Peter Carl
+#' @seealso \code{\link{chart.TimeSeries}}, \cr \code{\link{plot}}, \cr
+#' \code{\link{par}}
+#' @keywords ts hplot
+#' @examples
+#' 
+#' data(managers)
+#' R = Drawdowns(managers[,2,drop=FALSE])
+#' n = table.Drawdowns(managers[,2,drop=FALSE])                          
+#' chart.Events(Drawdowns(managers[,2,drop=FALSE]), dates = n$Trough, prior=max(na.omit(n$"To Trough")), post=max(na.omit(n$Recovery)), lwd=2, colorset=redfocus, legend.loc=NULL, main = "Worst Drawdowns")
+#' 
 chart.Events <-
 function (R, dates, prior=12, post=12, main = NULL, xlab=NULL, ...)
 { # @author Peter Carl

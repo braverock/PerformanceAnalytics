@@ -1,3 +1,52 @@
+#' Takes a set of returns and relates them to a market benchmark in a
+#' scatterplot
+#' 
+#' Uses a scatterplot to display the relationship of a set of returns to a
+#' market benchmark.  Fits a linear model and overlays the resulting model.
+#' Also overlays a Loess line for comparison.
+#' 
+#' 
+#' @param Ra a vector of returns to test, e.g., the asset to be examined
+#' @param Rb a matrix, data.frame, or timeSeries of benchmark(s) to test the
+#' asset against
+#' @param Rf risk free rate, in same period as the returns
+#' @param excess.returns logical; should excess returns be used?
+#' @param reference.grid if true, draws a grid aligned with the points on the x
+#' and y axes
+#' @param main set the chart title, same as in \code{\link{plot}}
+#' @param ylab set the y-axis title, same as in \code{\link{plot}}
+#' @param xlab set the x-axis title, same as in \code{\link{plot}}
+#' @param xlim set the x-axis limit, same as in \code{\link{plot}}
+#' @param colorset color palette to use
+#' @param symbolset symbols to use, see also 'pch' in \code{\link{plot}}
+#' @param element.color provides the color for drawing chart elements, such as
+#' the box lines, axis lines, etc. Default is "darkgray"
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param ylog Not used
+#' @param fit for values of "loess", "linear", or "conditional", plots a line
+#' to fit the data.  Conditional lines are drawn separately for positive and
+#' negative benchmark returns.  "Quadratic" is not yet implemented.
+#' @param span passed to loess line fit, as in \code{\link{loess.smooth}}
+#' @param degree passed to loess line fit, as in \code{\link{loess.smooth}}
+#' @param family passed to loess line fit, as in \code{\link{loess.smooth}}
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param evaluation passed to loess line fit, as in \code{\link{loess.smooth}}
+#' @param cex set the cex size, same as in \code{\link{plot}}
+#' @param legend.cex set the legend size
+#' @param lwd set the line width for fits, same as in \code{\link{lines}}
+#' @param \dots any other passthru parameters to \code{\link{plot}}
+#' @author Peter Carl
+#' @seealso \code{\link{plot}}
+#' @references Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM,
+#' its assumptions and deficiencies.
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(managers)
+#' chart.Regression(managers[, 1:2, drop = FALSE], managers[, 8, drop = FALSE], Rf = managers[, 10, drop = FALSE], excess.returns = TRUE, fit = c("loess", "linear"), legend.loc = "topleft")
+#' 
 chart.Regression <-
 function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, legend.cex= 0.8, cex = 0.8, lwd = 2, ...)
 { # @author Peter Carl

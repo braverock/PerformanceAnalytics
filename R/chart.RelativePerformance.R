@@ -1,3 +1,42 @@
+#' relative performance chart between multiple return series
+#' 
+#' Plots a time series chart that shows the ratio of the cumulative performance
+#' for two assets at each point in time and makes periods of under- or
+#' out-performance easier to see.
+#' 
+#' To show under- and out-performance through different periods of time, a time
+#' series view is more helpful. The value of the chart is less important than
+#' the slope of the line. If the slope is positive, the first asset (numerator)
+#' is outperforming the second, and vice versa. May be used to look at the
+#' returns of a fund relative to each member of the peer group and the peer
+#' group index. Alternatively, it might be used to assess the peers
+#' individually against an asset class or peer group index.
+#' 
+#' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rb return vector of the benchmark asset
+#' @param main set the chart title, same as in \code{plot}
+#' @param xaxis if true, draws the x axis
+#' @param colorset color palette to use, set by default to rational choices
+#' @param elementcolor provides the color for drawing less-important chart
+#' elements, such as the box lines, axis lines, etc. replaces \code{darken}
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param ylog TRUE/FALSE set the y-axis to logarithmic scale, similar to
+#' \code{\link{plot}}, default FALSE
+#' @param cex.legend the magnification to be used for sizing the legend
+#' relative to the current setting of 'cex'.
+#' @param lty set the line type, same as in \code{\link{plot}}
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @seealso \code{\link{Return.relative}}
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(managers)
+#' chart.RelativePerformance(managers[, 1:6, drop=FALSE], managers[, 8, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", main="Relative Performance to S&P")
+#' 
 chart.RelativePerformance <-
 function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)
 { # @author Peter Carl

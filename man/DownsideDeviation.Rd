@@ -2,6 +2,7 @@
 \alias{DownsideDeviation}
 \alias{SemiDeviation}
 \alias{SemiVariance}
+\alias{DownsidePotential}
 \title{ downside risk (deviation, variance) of the return distribution }
 
 \description{
@@ -9,15 +10,18 @@ Downside deviation, semideviation, and semivariance are measures of downside ris
 }
 
 \usage{
-DownsideDeviation(R, MAR = 0, method=c("subset","full"))
+DownsideDeviation(R, MAR = 0, method=c("subset","full"), ..., potential=FALSE )
 SemiDeviation(R)
 SemiVariance(R)
+DownsidePotential(R)
 }
 
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
   \item{method}{ one of "full" or "subset", indicating whether to use the length of the full series or the length of the subset of the series below the MAR as the denominator, defaults to "subset"}
+  \item{\dots}{ any other passthru parameters}
+  \item{potential}{ if TRUE, calculate downside potential instead, default FALSE}
 }
 \details{
 Downside deviation, similar to semi deviation, eliminates positive returns when calculating risk.  Instead of using the mean return or zero, it uses the Minimum Acceptable Return as proposed by Sharpe (which may be the mean historical return or zero).
@@ -52,7 +56,7 @@ Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk on R
 \author{ Peter Carl, Brian G. Peterson }
 \examples{
 data(managers)
-sd(managers[,1:6], na.rm=TRUE)
+apply(managers[,1:6], 2, sd, na.rm=TRUE)
 DownsideDeviation(managers[,1:6])  # MAR 0\%
 DownsideDeviation(managers[,1:6], MAR = .04/12) #MAR 4\%
 SemiDeviation(managers[,1,drop=FALSE])

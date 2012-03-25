@@ -1,3 +1,26 @@
+#' chart the rolling mean return
+#' 
+#' A wrapper to create a rolling mean return chart with 95% confidence bands.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param width number of periods to apply rolling function window over
+#' @param xaxis if true, draws the x axis
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param na.pad TRUE/FALSE If TRUE it adds any times that would not otherwise
+#' have been in the result with a value of NA. If FALSE those times are
+#' dropped.
+#' @param lwd set the line width, same as in \code{\link{plot}}.  Specified in
+#' order of the main line and the two confidence bands.
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(edhec)
+#' chart.RollingMean(edhec[, 9, drop = FALSE])
+#' 
 chart.RollingMean <-
 function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1), ...)
 { # @author Peter Carl
@@ -20,7 +43,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
     # Calculate
 
     x.mean = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "mean", na.pad = na.pad, align = "right")
-    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd", na.pad = na.pad, align = "right")
+    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd.xts", na.pad = na.pad, align = "right")
 
     # @todo: allow user to set confidence interval
     # @todo: add chart for StdDev w confidence bands: x.stdev +- 2* x.stdev/sqrt(2*n)

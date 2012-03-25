@@ -1,3 +1,62 @@
+#' scatter chart of returns vs risk for comparing multiple instruments
+#' 
+#' A wrapper to create a scatter chart of annualized returns versus annualized
+#' risk (standard deviation) for comparing manager performance. Also puts a box
+#' plot into the margins to help identify the relative performance quartile.
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rf risk free rate, in same period as your returns
+#' @param scale number of periods in a year (daily scale = 252, monthly scale =
+#' 12, quarterly scale = 4)
+#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' default TRUE
+#' @param main set the chart title, same as in \code{plot}
+#' @param add.names plots the row name with the data point.  default TRUE. Can
+#' be removed by setting it to NULL
+#' @param xlab set the x-axis label, as in \code{\link{plot}}
+#' @param ylab set the y-axis label, as in \code{\link{plot}}
+#' @param method if set as "calc", then the function will calculate values from
+#' the set of returns passed in.  If method is set to "nocalc" then we assume
+#' that R is a column of return and a column of risk (e.g., annualized returns,
+#' annualized risk), in that order.  Other method cases may be set for
+#' different risk/return calculations.
+#' @param add.sharpe this draws a Sharpe ratio line that indicates Sharpe ratio
+#' levels of \code{c(1,2,3)}.  Lines are drawn with a y-intercept of the risk
+#' free rate and the slope of the appropriate Sharpe ratio level.  Lines should
+#' be removed where not appropriate (e.g., sharpe.ratio = NULL).
+#' @param add.boxplots TRUE/FALSE adds a boxplot summary of the data on the
+#' axis
+#' @param colorset color palette to use, set by default to rational choices
+#' @param symbolset from \code{pch} in \code{\link{plot}}, submit a set of
+#' symbols to be used in the same order as the data sets submitted
+#' @param element.color provides the color for drawing chart elements, such as
+#' the box lines, axis lines, etc. Default is "darkgray"
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
+#' @param xlim set the x-axis limit, same as in \code{\link{plot}}
+#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
+#' @param cex.axis The magnification to be used for axis annotation relative to
+#' the current setting of 'cex', same as in \code{\link{plot}}.
+#' @param cex.legend The magnification to be used for sizing the legend
+#' relative to the current setting of 'cex'.
+#' @param cex.main The magnification to be used for sizing the title relative
+#' to the current setting of 'cex'.
+#' @param cex.lab The magnification to be used for x and y labels relative to
+#' the current setting of 'cex'.
+#' @param \dots any other passthru parameters to \code{plot}
+#' @note Code inspired by a chart on:
+#' \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+#' @author Peter Carl
+#' @keywords ts multivariate distribution models hplot
+#' @examples
+#' 
+#' data(edhec)
+#' chart.RiskReturnScatter(edhec, Rf = .04/12)
+#' chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
+#' 
 chart.RiskReturnScatter <-
 function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return", method = "calc", geometric = TRUE, scale = NA, add.sharpe = c(1,2,3), add.boxplots = FALSE, colorset = 1, symbolset = 1, element.color = "darkgray", legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 { # @author Peter Carl

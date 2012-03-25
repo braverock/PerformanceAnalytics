@@ -1,3 +1,28 @@
+#' order list of drawdowns from worst to best
+#' 
+#' sortDrawdowns(findDrawdowns(R)) Gives the drawdowns in order of worst to
+#' best
+#' 
+#' Returns a sorted list: \describe{ \item{return }{depth of drawdown}
+#' \item{from }{starting period} \item{to }{ending period} \item{length
+#' }{length in periods} }
+#' 
+#' @param runs pass in runs array from findDrawdowns to be sorted
+#' @author Peter Carl \cr modified with permission from prototype function by
+#' Sankalp Upadhyay
+#' @seealso \code{\link{DownsideDeviation}} \cr \code{\link{maxDrawdown}} \cr
+#' \code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}} \cr
+#' \code{\link{chart.Drawdown}} \cr \code{\link{table.Drawdowns}} \cr
+#' \code{\link{table.DownsideRisk}}
+#' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
+#' Attribution}. Wiley. 2004. p. 88 \cr
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
+#' sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
+#' 
 sortDrawdowns <- function (runs) {
     # sortDrawdowns(findDrawdowns(returns))
     # gives the drawdowns in order of worst to best
