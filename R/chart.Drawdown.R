@@ -66,7 +66,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     }
     
     # Chart the drawdown level
-    chart.TimeSeries(drawdown, col = colorset, legend.loc = legend.loc, ...)
+    chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
 
 }
 

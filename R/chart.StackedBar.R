@@ -134,7 +134,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     if(!is.null(legend.loc) ){
         if(legend.loc =="under") {# put the legend under the chart
             op <- par(no.readonly=TRUE)
-            layout(rbind(1,2), height=c(6,1), width=1)
+            layout(rbind(1,2), heights=c(6,1), widths=1)
             par(mar=c(3,4,4,2)+.1) # set the margins of the first panel
 # c(bottom, left, top, right)
         }
@@ -234,7 +234,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
         if(!is.null(legend.loc) ){
             if(legend.loc =="under") {# put the legend under the chart
                 op <- par(no.readonly=TRUE)
-                layout(rbind(1,2), height=c(6,1), width=1)
+                layout(rbind(1,2), heights=c(6,1), widths=1)
                 par(mar=c(3,4,4,2)+.1) # set the margins of the first panel
             }
         }

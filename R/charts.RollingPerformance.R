@@ -68,7 +68,7 @@ function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, 
 
     # First, we lay out the graphic as a three row, one column format
 #    plot.new()
-    layout(matrix(c(1,2,3)),height=c(1,0.75,1),width=1)
+    layout(matrix(c(1,2,3)),heights=c(1,0.75,1),widths=1)
     # to see the resulting layout, use layout.show(3)
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which

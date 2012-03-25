@@ -86,7 +86,7 @@ function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
     month = format(strptime(as.POSIXct(time(ri)), "%Y-%m-%d"), "%b")
 
     # create an empty target data frame, labeled correctly
-    monthlabels = strftime(seq.Date(as.Date('2000-01-01'),length=12,by='months'),format='%b')
+    monthlabels = strftime(seq.Date(as.Date('2000-01-01'),length.out=12,by='months'),format='%b')
     rowlabels = (firstyear:lastyear)
 
     # for the column specified, do the following:

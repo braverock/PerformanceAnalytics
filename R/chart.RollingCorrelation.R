@@ -61,7 +61,7 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
         }
     }
 
-    chart.TimeSeries(Result.calc, xaxis = xaxis, col = colorset, legend.loc = legend.loc, ylim = c(-1,1), ...)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, colorset = colorset, legend.loc = legend.loc, ylim = c(-1,1), ...)
 
 }
 

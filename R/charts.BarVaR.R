@@ -41,7 +41,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	# gives the number of lines of margin to be specified on the four sides
 	# of the plot. The default is c(5, 4, 4, 2) + 0.1
 	op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
-	layout(matrix(c(1:perpanel), nc = 1, byrow = TRUE), width=1)
+	layout(matrix(c(1:perpanel), ncol = 1, byrow = TRUE), widths=1)
 	xaxis=FALSE
 	if(show.yaxis == "none")
 	    yaxis = FALSE

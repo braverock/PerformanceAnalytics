@@ -30,7 +30,7 @@ function (R,  space = 0, main = "Returns", ...)
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
     op <- par(oma = c(2,0,4,0), mar=c(0,4,0,4))
-    layout(matrix(c(1:columns), nc = 1, byrow = TRUE), width=1)
+    layout(matrix(c(1:columns), ncol = 1, byrow = TRUE), widths=1)
     xaxis=FALSE
     yaxis=TRUE
     for(i in 1:columns){

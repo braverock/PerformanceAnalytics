@@ -107,7 +107,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # First, we lay out the graphic as a three row, one column format
 #    plot.new()
-    layout(matrix(c(1,2,3)),height=c(2,1,1.3),width=1)
+    layout(matrix(c(1,2,3)),heights=c(2,1,1.3),widths=1)
     # to see the resulting layout, use layout.show(3)
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which

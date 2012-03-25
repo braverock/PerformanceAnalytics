@@ -153,7 +153,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
     colors = colorRamp(c(colorset[1],"white"))
     if(length(methods)>1){
         columns = 1 # if there's more than one method specified, then we'll ignore columns other than the first
-        colorset = c(colorset[1], rgb(colors(.25),max=255), rgb(colors(.5),max=255), rgb(colors(.75),max=255))
+        colorset = c(colorset[1], rgb(colors(.25),maxColorValue=255), rgb(colors(.5),maxColorValue=255), rgb(colors(.75),maxColorValue=255))
     }
     clean = clean[1]
 
@@ -165,7 +165,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
 
     bar.color = colorset[1]
     if (show.clean){
-        bar.color = rgb(colors(.75),max=255)
+        bar.color = rgb(colors(.75),maxColorValue=255)
     }
 
     x.orig = x
@@ -284,7 +284,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
     if(!show.greenredbars){
-	chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+    	chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", colorset = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
     }
     else {
         positives = x.orig[,1,drop=FALSE]
@@ -295,8 +295,8 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         for(row in 1:length(x.orig[,1,drop=FALSE])){ 
             negatives[row,]=min(0,x.orig[row,1])
         }
-        chart.TimeSeries(positives, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", col="darkgreen", ...)
-        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", col="darkred", lwd=lwd)
+        chart.TimeSeries(positives, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", colorset="darkgreen", ...)
+        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", colorset="darkred", lwd=lwd)
     }
 
     if(show.clean) {

@@ -77,7 +77,7 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
         }
     }
 columnnames = colnames(Result.calc)
-    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, col = colorset, ylog = ylog, lty = lty, ...)
+    chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, colorset = colorset, ylog = ylog, lty = lty, ...)
     abline(h=1,col=elementcolor)
     if(!is.null(legend.loc)){
         # There's no good place to put this automatically, except under the graph.

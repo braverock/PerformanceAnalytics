@@ -123,7 +123,7 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
     }
 
     # draw x-axis
-    axis(1, lab=p, at=p, col = elementcolor) # at= 1/(1:length(p))
+    axis(1, labels=p, at=p, col = elementcolor) # at= 1/(1:length(p))
     title(xlab = xlab)
 
     # set up y-axis

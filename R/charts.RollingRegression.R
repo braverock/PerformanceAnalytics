@@ -37,7 +37,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
     op <- par(no.readonly=TRUE)
 
-    layout(matrix(c(1,2,3)),height=c(1.3,1,1.3),width=1)
+    layout(matrix(c(1,2,3)),heights=c(1.3,1,1.3),widths=1)
 
     par(mar=c(1,4,4,2))
     if(is.null(main)){

@@ -147,7 +147,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
 
         # colortrail = gray(0:(length(returns))/(length(returns)))
         colors = colorRamp(c(colorset[column],"white"))
-        colortrail = rgb(colors((0:maxrows)/maxrows),max=255)
+        colortrail = rgb(colors((0:maxrows)/maxrows),maxColorValue=255)
         n.rows = length(returns[,column])
         m.rows = length(na.omit(returns[,column]))
 
