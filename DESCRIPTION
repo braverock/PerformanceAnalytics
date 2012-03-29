@@ -1,8 +1,8 @@
 Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
-Version: 1.0.4.2
-Date: 2012-03-25
+Version: 1.0.4.3
+Date: 2012-03-29
 Author: Peter Carl, Brian G. Peterson, Kris Boudt, Eric Zivot
 Maintainer: Brian G. Peterson <brian@braverock.com>
 Description: Collection of econometric functions for

@@ -164,7 +164,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     }
 
     barplot(t(positives), col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, ...)
-    barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.names, axes = FALSE, axisnames = FALSE, ylim=ylim, ...)
+    barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = xlab, cex.names = cex.lab, axes = FALSE, axisnames = FALSE, ylim=ylim, ...)
     axis(2, col = element.color, las = las, cex.axis = cex.axis)
     title(ylab = ylab, cex = cex.lab)
     if (xaxis) {
@@ -260,7 +260,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
         }
 
         barplot(t(positives), col=colorset, space=space, axisnames = FALSE, axes = FALSE, ylim=ylim, xlab="", ...)
-        barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = "", cex.names = cex.names, axes = FALSE, axisnames = FALSE, ylim=ylim, ...)
+        barplot(t(negatives), add=TRUE , col=colorset, space=space, las = las, xlab = "", cex.names = cex.lab, axes = FALSE, axisnames = FALSE, ylim=ylim, ...)
         axis(2, col = element.color, las = las, cex.axis = cex.axis)
         title(ylab = ylab, cex = cex.lab)
         if (xaxis) {

@@ -140,13 +140,15 @@ function (R)
     # see below
 
     # FUNCTION:
-
+    
+    
     if (is.vector(R)) {
         R = na.omit(R)
         return(DownsideDeviation(R, MAR=mean(R), method="full", potential=TRUE))
     }
     else {
         R = checkData(R, method = "matrix")
+        MAR=mean(R) #dummy for R CMD check
         result = apply(R, 2, DownsidePotential)
         result = matrix(result, nrow=1)
         colnames(result) = colnames(R)

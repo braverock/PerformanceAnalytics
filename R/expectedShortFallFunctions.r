@@ -144,8 +144,7 @@ bootstrapES <- function(bootData, tail.prob = 0.01,
 ## output:
 ## ES        n x 1 matrix of ES values for each asset
 ## References:
-  require(ff)
-  require(PerformanceAnalytics)
+  require(ff,quietly=TRUE)
   method = method[1]
   if (!is.ff(bootData))
     bootData = as.matrix(bootData)
@@ -191,8 +190,7 @@ bootstrapPortfolioES <- function(bootData, w, tail.prob = 0.01,
 ##    Value-at-Risk: Their Estimation Error, Decomposition, and Optimization
 ##    Bank of Japan.
 
-  require(PerformanceAnalytics)
-  require(ff)
+  require(ff, quietly=TRUE)
   method = method[1]
   if (!is.ff(bootData))
     bootData = as.matrix(bootData)
@@ -203,6 +201,7 @@ bootstrapPortfolioES <- function(bootData, w, tail.prob = 0.01,
     stop("tail.prob must be between 0 and 1")
   if (is.ff(bootData)) {
   ## use on disk ff objects
+    dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
     r.p = ffrowapply( bootData[i1:i2, ]%*%w, X=bootData, RETURN=TRUE, RETCOL=1)
   } else {  
   ## use in RAM objects
@@ -265,6 +264,7 @@ bootstrapIncrementalES <- function(bootData, w, tail.prob = 0.01,
   ## portfolio VaR with all assets
   if (is.ff(bootData)) {
   ## use on disk ff object
+    dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
     r.p = ffrowapply( bootData[i1:i2, ]%*%w, X=bootData, RETURN=TRUE, RETCOL=1)
   } else {
   ## use in RAM object
@@ -284,6 +284,7 @@ bootstrapIncrementalES <- function(bootData, w, tail.prob = 0.01,
       temp.w[i,1] = 0
       temp.w = temp.w/sum(temp.w)
       if (is.ff(bootData)) {
+        dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
         temp.r.p = ffrowapply( bootData[i1:i2, ]%*%temp.w, X=bootData, RETURN=TRUE, RETCOL=1)
       } else {
         temp.r.p = bootData %*% temp.w
@@ -309,6 +310,7 @@ bootstrapIncrementalES <- function(bootData, w, tail.prob = 0.01,
       temp.w[i,1] = 0
       temp.w = temp.w/sum(temp.w)
       if (is.ff(bootData)) {
+        dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
         temp.r.p = ffrowapply( bootData[i1:i2, ]%*%temp.w, X=bootData, RETURN=TRUE, RETCOL=1)
       } else {
         temp.r.p = bootData %*% temp.w
@@ -370,7 +372,8 @@ bootstrapMarginalES <- function(bootData, w, delta.w = 0.001, tail.prob = 0.01,
   
   ## portfolio VaR and ES with all assets
   if (is.ff(bootData)) {
-    r.p = ffrowapply( bootData[i1:i2, ]%*%w, X=bootData, RETURN=TRUE, RETCOL=1)
+      dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
+      r.p = ffrowapply( bootData[i1:i2, ]%*%w, X=bootData, RETURN=TRUE, RETCOL=1)
   } else {
     r.p = bootData %*% w
   }  
@@ -394,7 +397,8 @@ bootstrapMarginalES <- function(bootData, w, delta.w = 0.001, tail.prob = 0.01,
     ## increment weight for asset i by delta.w
       temp.w[i,1] = w[i,1] + delta.w
       if (is.ff(bootData)) {
-        temp.r.p = ffrowapply( bootData[i1:i2, ]%*%temp.w, X=bootData, RETURN=TRUE, RETCOL=1)
+          dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
+          temp.r.p = ffrowapply( bootData[i1:i2, ]%*%temp.w, X=bootData, RETURN=TRUE, RETCOL=1)
       } else {
         temp.r.p = bootData %*% temp.w
       }  
@@ -525,6 +529,8 @@ bootstrapESreport <- function(bootData, w, delta.w = 0.001, tail.prob = 0.01,
   incremental.ES = bootstrapIncrementalES(bootData, w, tail.prob, VaR.method)
   
   if (is.ff(bootData)) {
+    dummy<-TRUE; if(!dummy){i1=1;i2=2} #fake assign to make R CMD check happy
+      
     mean.vals = ffrowapply(colMeans(bootData[i1:i2,,drop=FALSE]), 
                            X=bootData, RETURN=TRUE, CFUN="cmean")
     sd.vals = ffrowapply(colMeans(bootData[i1:i2,,drop=FALSE]^2) - colMeans(bootData[i1:i2,,drop=FALSE])^2,

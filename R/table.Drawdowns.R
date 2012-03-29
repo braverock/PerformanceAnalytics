@@ -64,7 +64,8 @@ function (R, top = 5, digits = 4)
     result = data.frame(time(R)[x$from[1:top]], time(R)[x$trough[1:top]], time(R)[x$to[1:top]], base::round(x$return[1:top], digits), x$length[1:top], x$peaktotrough[1:top], ifelse(is.na(time(R)[x$to[1:top]]), NA, x$recovery[1:top]))
 
     colnames(result) = c("From", "Trough", "To", "Depth", "Length", "To Trough", "Recovery")
-    subset(result,Depth<0)
+    dummy<-TRUE; if(!dummy) Depth<-NULL #dummy for R CMD check
+    subset(result,subset=Depth<0)
     result
 }
 
