@@ -9,7 +9,7 @@
 % \usepackage{/usr/lib/R/share/texmf/Sweave}
 
 \SweaveOpts{engine=R, eps=FALSE, width=8, height=5}
-%\VignetteIndexEntry{PerformanceAnalytics Data Mining Presentation - UseR - 2007}
+%\VignetteIndexEntry{How to Present Tables in Plot Devices}
 %\VignetteDepends{PerformanceAnalytics}
 %\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
 %\VignettePackage{PerformanceAnalytics}
