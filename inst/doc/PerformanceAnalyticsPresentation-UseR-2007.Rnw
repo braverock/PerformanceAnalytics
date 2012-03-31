@@ -1,4 +1,4 @@
-% $Header: /cvs/R/PerformanceAnalytics/inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,v 1.8 2009-10-22 19:00:57 brian Exp $
+% $Id$
 
 \documentclass[10pt,usletter]{beamer}
 

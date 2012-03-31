@@ -1,3 +1,5 @@
+% $Id$
+
 %% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
 
 \documentclass[12pt,letterpaper,english]{article}
