@@ -62,8 +62,8 @@ function(prices, method = c("compound","simple"))
     pr = checkData(prices, method = "xts")
 
     if(method=="simple")
-        Returns = pr/pr[-nrow(pr), ] - 1
-        # Returns = pr/lag(pr,k=1) - 1
+        #Returns = pr/pr[-nrow(pr), ] - 1
+        Returns = pr/xts:::lagts.xts(pr) - 1
 
     if(method=="compound") {
         Returns = diff(log(pr))
