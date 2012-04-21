@@ -44,6 +44,12 @@
 #' @param show.symmetric if TRUE and the metric is symmetric, this will show
 #' the metric's positive values as well as negative values, such as for method
 #' "StdDev".
+#' @param show.endvalue if TRUE, show the final (out of sample) value
+#' @param show.greenredbars if TRUE, show the per-period returns using green
+#' and red bars for positive and negative returns
+#' @param show.yaxis one of "all", "firstonly", "alternating", or "none" to
+#' control where y axis is plotted in multipanel charts
+#' @param perpanel default NULL, controls column display
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param lwd set the line width, same as in \code{\link{plot}}
 #' @param lty set the line type, same as in \code{\link{plot}}
