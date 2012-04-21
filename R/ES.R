@@ -6,11 +6,13 @@
 #' univariate and component, using a variety of analytical methods.
 #' 
 #' Calculates Expected Shortfall(ES) (also known as) Conditional Value at
-#' Risk(CVaR) for univariate, component, and marginal cases using a variety of
-#' analytical methods.
+#' Risk(CVaR) or Expected Tail Loss (ETL) for univariate, component, 
+#' and marginal cases using a variety of analytical methods.
 #' 
 #' 
+#' @export
 #' @aliases ES CVaR ETL
+#' @rdname ES
 #' @param R a vector, matrix, data frame, timeSeries or zoo object of asset
 #' returns
 #' @param p confidence level for calculation, default p=.95

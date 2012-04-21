@@ -1,5 +1,7 @@
 #' calculate a Calmar or Sterling reward/risk ratio
 #' 
+#' @aliases SterlingRatio
+#' 
 #' Calmar and Sterling Ratios are yet another method of creating a
 #' risk-adjusted measure for ranking investments similar to the
 #' \code{\link{SharpeRatio}}.
@@ -75,6 +77,8 @@ CalmarRatio <- function (R, scale = NA)
     return(result)
 }
 
+#' @export 
+#' @rdname CalmarRatio
 SterlingRatio <-
 function (R, scale=NA, excess=.1)
 { # @author Brian G. Peterson

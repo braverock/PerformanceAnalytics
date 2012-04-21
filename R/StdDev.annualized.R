@@ -29,6 +29,7 @@
 #' asset returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
+#' @param \dots any other passthru parameters
 #' @author Brian G. Peterson
 #' @seealso \code{\link[stats]{sd}} \cr
 #' \url{http://wikipedia.org/wiki/inverse-square_law}
@@ -43,7 +44,9 @@
 #'     # now for three periods:
 #'     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
 #' 
-sd.multiperiod <-
+#' @export
+#' @rdname StdDev.annualized
+StdDev.annualized <- sd.annualized <- sd.multiperiod <-
 function (x, scale = NA, ...)
 {
     if (is.vector(x)) {
@@ -71,18 +74,6 @@ function (x, scale = NA, ...)
         rownames(result) = "Annualized Standard Deviation"
         return(result)
     }
-}
-
-sd.annualized <-
-function (x, scale = NA, ...)
-{   # wrapper function for backwards compatibility
-    sd.multiperiod(x, scale = scale)
-}
-
-StdDev.annualized <-
-function (R, scale = NA, ...)
-{   # wrapper function for backwards compatibility
-    sd.multiperiod(R, scale = scale)
 }
 
 ###############################################################################

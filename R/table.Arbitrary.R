@@ -9,8 +9,8 @@
 #' 
 #' The idea here is to be able to pass in sets of metrics and values, like:
 #' 
-#' metrics = c(DownsideDeviation(x,MAR=mean(x)), sd.xts(subset(x,x>0)),
-#' sd.xts(subset(x,x<0)), DownsideDeviation(x,MAR=MAR),
+#' metrics = c(DownsideDeviation(x,MAR=mean(x)), sd(subset(x,x>0)),
+#' sd(subset(x,x<0)), DownsideDeviation(x,MAR=MAR),
 #' DownsideDeviation(x,MAR=Rf=0), DownsideDeviation(x,MAR=0),maxDrawdown(x))
 #' 
 #' metricsNames = c("Semi Deviation", "Gain Deviation", "Loss Deviation",

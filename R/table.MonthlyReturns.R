@@ -9,7 +9,7 @@
 #' to missing data or unequal time series should be given when intepreting the
 #' results.
 #' 
-#' @aliases table.MonthlyReturns table.Stats
+#' @aliases table.Stats table.MonthlyReturns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param ci confidence interval, defaults to 95%
@@ -27,6 +27,8 @@
 #' textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(1,2),rep(3,14))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=10, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 #' title(main="Statistics for EDHEC Indexes")
 #' 
+#' @rdname table.MonthlyReturns
+#' @export 
 table.Stats <-
 function (R, ci = 0.95, digits = 4)
 {# @author Peter Carl

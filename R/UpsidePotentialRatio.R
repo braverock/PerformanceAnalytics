@@ -8,6 +8,18 @@
 #' denominator of the ratio equation.
 #' 
 
+
+
+#' calculate Upside Potential Ratio of upside performance over downside risk
+#' 
+#' Sortino proposed an improvement on the Sharpe Ratio to better account for
+#' skill and excess performance by using only downside semivariance as the
+#' measure of risk.  That measure is the \code{\link{SortinoRatio}}. This
+#' function, Upside Potential Ratio, was a further improvement, extending the
+#' measurement of only upside on the numerator, and only downside of the
+#' denominator of the ratio equation.
+#' 
+
 #' 
 #' Sortino contends that risk should be measured in terms of not meeting the
 #' investment goal.  This gives rise to the notion of \dQuote{Minimum

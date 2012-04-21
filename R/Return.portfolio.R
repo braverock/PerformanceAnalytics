@@ -43,6 +43,8 @@ Return.rebalancing <- function (R, weights, ...)
 # Return.portfolio
 
 
+
+
 #' Calculates weighted returns for a portfolio of assets
 #' 
 #' Calculates weighted returns for a portfolio of assets.  If you have a single

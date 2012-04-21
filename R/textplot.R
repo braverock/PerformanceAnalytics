@@ -6,6 +6,8 @@
 
 
 
+
+
 #' Display text information in a graphics plot.
 #' 
 #' This function displays text output in a graphics window.  It is the

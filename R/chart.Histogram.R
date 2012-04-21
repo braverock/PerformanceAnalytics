@@ -20,12 +20,12 @@
 #' the number of cells (see \sQuote{Details}), \item a function to compute the
 #' number of cells.  } In the last three cases the number is a suggestion only.
 #' see \code{\link[graphics]{hist}} for details, default "FD"
-#' @param methods what to graph, one or more of: \describe{ \item{add.density}{
-#' to display the density plot} \item{add.normal}{ to display a fitted normal
-#' distibution line over the mean} \item{add.centered}{ to display a fitted
-#' normal line over zero} \item{add.rug}{ to display a rug of the observations}
-#' \item{add.risk}{ to display common risk metrics} \item{add.qqplot}{ to
-#' display a small qqplot in the upper corner of the histogram plot} }
+#' @param methods what to graph, one or more of: \itemize{ \itemadd.density to
+#' display the density plot \itemadd.normal to display a fitted normal
+#' distibution line over the mean \itemadd.centered to display a fitted normal
+#' line over zero \itemadd.rug to display a rug of the observations
+#' \itemadd.risk to display common risk metrics \itemadd.qqplot to display a
+#' small qqplot in the upper corner of the histogram plot }
 #' @param p confidence level for calculation, default p=.99
 #' @param probability logical; if TRUE, the histogram graphic is a
 #' representation of frequencies, the counts component of the result; if FALSE,

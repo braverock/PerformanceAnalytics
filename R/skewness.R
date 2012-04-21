@@ -3,6 +3,13 @@
 #' compute skewness of a univariate distribution.
 #' 
 
+
+
+#' Skewness
+#' 
+#' compute skewness of a univariate distribution.
+#' 
+
 #' 
 #' This function was ported from the RMetrics package fUtilities to eliminate a
 #' dependency on fUtiltiies being loaded every time.  The function is identical

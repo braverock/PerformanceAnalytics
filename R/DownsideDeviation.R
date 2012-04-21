@@ -47,7 +47,7 @@
 #' future, we'll add a fitted option to this function, and would be happy to
 #' accept a contribution of this nature.
 #' 
-#' @aliases DownsideDeviation SemiDeviation SemiVariance
+#' @aliases DownsideDeviation SemiDeviation SemiVariance DownsidePotential
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param MAR Minimum Acceptable Return, in the same periodicity as your
@@ -55,6 +55,9 @@
 #' @param method one of "full" or "subset", indicating whether to use the
 #' length of the full series or the length of the subset of the series below
 #' the MAR as the denominator, defaults to "subset"
+#' @param \dots any other passthru parameters
+#' @param potential if TRUE, calculate downside potential instead, default
+#' FALSE
 #' @author Peter Carl, Brian G. Peterson
 #' @references Sortino, F. and Price, L. Performance Measurement in a Downside
 #' Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr
@@ -70,7 +73,7 @@
 #' @examples
 #' 
 #' data(managers)
-#' sd.xts(managers[,1:6], na.rm=TRUE)
+#' apply(managers[,1:6], 2, sd, na.rm=TRUE)
 #' DownsideDeviation(managers[,1:6])  # MAR 0%
 #' DownsideDeviation(managers[,1:6], MAR = .04/12) #MAR 4%
 #' SemiDeviation(managers[,1,drop=FALSE])

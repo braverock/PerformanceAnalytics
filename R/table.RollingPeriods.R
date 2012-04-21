@@ -4,6 +4,11 @@
 #' 
 #' 
 #' @aliases table.TrailingPeriods table.TrailingPeriodsRel table.RollingPeriods
+#' 
+#' @export 
+#' 
+#' @rdname table.RollingPeriods
+#' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of

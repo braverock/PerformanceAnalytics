@@ -4,6 +4,8 @@
 
 
 
+
+
 #' calculates Standard Deviation for univariate and multivariate series, also
 #' calculates component contribution to standard deviation of a portfolio
 #' 
@@ -45,6 +47,14 @@
 #' @param sigma If univariate, sigma is the variance of the series. Otherwise
 #' sigma is the covariance matrix of the return series , default NULL, see
 #' Details
+#' @param use an optional character string giving a method for computing
+#' covariances in the presence of missing values.  This must be (an
+#' abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"},
+#' \code{"complete.obs"}, \code{"na.or.complete"}, or
+#' \code{"pairwise.complete.obs"}.
+#' @param method a character string indicating which correlation coefficient
+#' (or covariance) is to be computed.  One of \code{"pearson"} (default),
+#' \code{"kendall"}, or \code{"spearman"}, can be abbreviated.
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{Return.clean}} \code{sd}
 #' @keywords ts multivariate distribution models

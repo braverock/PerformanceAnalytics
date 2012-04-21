@@ -4,6 +4,8 @@
 
 
 
+
+
 #' calculate various Value at Risk (VaR) measures
 #' 
 #' Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
@@ -45,7 +47,6 @@
 #' The prototype of the univariate Cornish Fisher VaR function was completed by
 #' Prof. Diethelm Wuertz.  All corrections to the calculation and error
 #' handling are the fault of Brian Peterson.
-#' 
 #' @section Background: This function provides several estimation methods for
 #' the Value at Risk (typically written as VaR) of a return series and the
 #' Component VaR of a portfolio. Take care to capitalize VaR in the commonly

@@ -8,9 +8,9 @@
 #' \code{Drawdowns} will calculate the drawdown levels as percentages, for use
 #' in \code{\link{chart.Drawdown}}.
 #' 
-#' Returns an unordered list: \cr \describe{ \item{return }{depth of drawdown}
-#' \item{from }{starting period} \item{to }{ending period} \item{length
-#' }{length in periods} }
+#' Returns an unordered list: \cr \itemize{ \itemreturn depth of drawdown
+#' \itemfrom starting period \itemto ending period \itemlength length in
+#' periods }
 #' 
 #' @aliases findDrawdowns Drawdowns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of

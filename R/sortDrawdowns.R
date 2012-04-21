@@ -3,9 +3,8 @@
 #' sortDrawdowns(findDrawdowns(R)) Gives the drawdowns in order of worst to
 #' best
 #' 
-#' Returns a sorted list: \describe{ \item{return }{depth of drawdown}
-#' \item{from }{starting period} \item{to }{ending period} \item{length
-#' }{length in periods} }
+#' Returns a sorted list: \itemize{ \itemreturn depth of drawdown \itemfrom
+#' starting period \itemto ending period \itemlength length in periods }
 #' 
 #' @param runs pass in runs array from findDrawdowns to be sorted
 #' @author Peter Carl \cr modified with permission from prototype function by
