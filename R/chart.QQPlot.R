@@ -19,6 +19,8 @@
 #' ideas.
 #' @param xlab set the x-axis label, as in \code{\link{plot}}
 #' @param ylab set the y-axis label, as in \code{\link{plot}}
+#' @param xaxis if true, draws the x axis
+#' @param yaxis if true, draws the y axis
 #' @param main set the chart title, same as in \code{plot}
 #' @param las set the direction of axis labels, same as in \code{plot}
 #' @param envelope confidence level for point-wise confidence envelope, or
@@ -78,7 +80,7 @@ chart.QQPlot <-
 function(R, distribution="norm", ylab=NULL,
         xlab=paste(distribution, "Quantiles"), main=NULL, las=par("las"),
         envelope=FALSE, labels=FALSE, col=c(1,4), lwd=2, pch=1, cex=1,
-        line=c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
+        line=c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, xaxis=TRUE, yaxis=TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -192,9 +194,10 @@ function(R, distribution="norm", ylab=NULL,
 #     int = q.data[1] - slope* q.theo[1]
 # 
 #     if(line) abline(int, slope, col = colorset[2], lwd = 2)
-
-    axis(1, cex.axis = cex.axis, col = element.color)
-    axis(2, cex.axis = cex.axis, col = element.color)
+    if(xaxis)
+      axis(1, cex.axis = cex.axis, col = element.color)
+    if(yaxis)
+      axis(2, cex.axis = cex.axis, col = element.color)
 
     box(col=element.color)
 

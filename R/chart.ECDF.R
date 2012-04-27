@@ -14,12 +14,12 @@
 #' @param main set the chart title, same as in \code{\link{plot}}
 #' @param xlab set the x-axis label, same as in \code{\link{plot}}
 #' @param ylab set the y-axis label, same as in \code{\link{plot}}
+#' @param xaxis if true, draws the x axis
+#' @param yaxis if true, draws the y axis
 #' @param colorset color palette to use, defaults to c("black", "\#005AFF"),
 #' where first value is used to color the step function and the second color is
 #' used for the fitted normal
 #' @param lwd set the line width, same as in \code{\link{plot}}
-#' @param xlim set the x-axis limit, same as in \code{\link{plot}}
-#' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param element.color specify the color of chart elements.  Default is
 #' "darkgray"
 #' @param lty set the line type, same as in \code{\link{plot}}
@@ -38,7 +38,7 @@
 #' 
 #' 
 chart.ECDF <-
-function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black", "#005AFF"), lwd = 1, xlim = NULL, ylim = NULL, lty = c(1,1), element.color = "darkgray", ...)
+function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black", "#005AFF"), lwd = 1, lty = c(1,1), element.color = "darkgray", xaxis=TRUE, yaxis=TRUE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -63,8 +63,10 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
     plot(rx, stepy, type="s", col = colorset[1], xlab = xlab, ylab = ylab, main = main, axes = FALSE, lty = lty[1], lwd = lwd, ...)
     lines(t, p1, lty = lty[2], col = colorset[2], lwd = lwd, ...)
 
-    axis(1, cex.axis = 0.8, col = element.color)
-    axis(2, cex.axis = 0.8, col = element.color)
+    if(xaxis)
+      axis(1, cex.axis = 0.8, col = element.color)
+    if (yaxis)
+      axis(2, cex.axis = 0.8, col = element.color)
 
     box(col=element.color)
 
