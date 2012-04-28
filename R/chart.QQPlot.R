@@ -21,6 +21,7 @@
 #' @param ylab set the y-axis label, as in \code{\link{plot}}
 #' @param xaxis if true, draws the x axis
 #' @param yaxis if true, draws the y axis
+#' @param ylim set the y-axis limits, same as in \code{\link{plot}}
 #' @param main set the chart title, same as in \code{plot}
 #' @param las set the direction of axis labels, same as in \code{plot}
 #' @param envelope confidence level for point-wise confidence envelope, or
