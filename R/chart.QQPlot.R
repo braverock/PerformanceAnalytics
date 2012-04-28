@@ -80,7 +80,7 @@ chart.QQPlot <-
 function(R, distribution="norm", ylab=NULL,
         xlab=paste(distribution, "Quantiles"), main=NULL, las=par("las"),
         envelope=FALSE, labels=FALSE, col=c(1,4), lwd=2, pch=1, cex=1,
-        line=c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, xaxis=TRUE, yaxis=TRUE, ...)
+        line=c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, xaxis=TRUE, yaxis=TRUE, ylim=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -116,7 +116,7 @@ function(R, distribution="norm", ylab=NULL,
     P <- ppoints(n)
     z <- q.function(P, ...)
     plot(z, ord.x, xlab=xlab, ylab=ylab, main=main, las=las, col=col[1], pch=pch,
-        cex=cex, cex.main = cex.main, cex.lab = cex.lab, axes=FALSE, ...)
+        cex=cex, cex.main = cex.main, cex.lab = cex.lab, axes=FALSE, ylim=ylim, ...)
     if (line=="quartiles"){
         Q.x<-quantile(ord.x, c(.25,.75))
         Q.z<-q.function(c(.25,.75), ...)
