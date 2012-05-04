@@ -302,7 +302,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
             negatives[row,]=min(0,x.orig[row,1])
         }
         chart.TimeSeries(positives, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", colorset="darkgreen", ...)
-        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", colorset="darkred", lwd=lwd)
+        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", col="darkred", lwd=lwd)
     }
 
     if(show.clean) {
