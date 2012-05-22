@@ -18,6 +18,7 @@ library( MASS )
 #'      volatility          the variance of the portfolio along the frontier
 #'      weights             the weights of the portfolio components along the frontier
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' To be tested by: Manan K. Shah
 efficientFrontier = function( discretizations , cov , mu , longonly = FALSE ) 
   {    
   # setup quadratic program
