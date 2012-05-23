@@ -62,7 +62,7 @@ function (R, MAR = 0,...,weights=NULL)
     
     sr <-function (R, MAR)
     {
-        SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR)
+        SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR, ...)
         SR
     }
 
