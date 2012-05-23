@@ -8,6 +8,12 @@
     periods = subset(c(12, 36, 60), c(12, 36, 60) < length(as.matrix(R[, 1]))),
     FUNCS = c("mean", "sd"),
     funcs.names = c("Average", "Std Dev"), digits = 4, ...)
+
+  table.TrailingPeriodsRel(R, Rb,
+    periods = subset(c(12, 36, 60), c(12, 36, 60) < length(as.matrix(R[, 1]))),
+    FUNCS = c("cor", "CAPM.beta"),
+    funcs.names = c("Correlation", "Beta"), digits = 4,
+    ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries

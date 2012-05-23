@@ -95,6 +95,7 @@ function (R,  periods = subset(c(12,36,60), c(12,36,60)
 
 }
 
+#' @rdname table.RollingPeriods
 table.TrailingPeriodsRel <-
 function (R, Rb, periods = subset(c(12,36,60), c(12,36,60)
 < length(as.matrix(R[,1]))), FUNCS=c("cor","CAPM.beta"), funcs.names = c("Correlation", "Beta"), digits = 4, ...)

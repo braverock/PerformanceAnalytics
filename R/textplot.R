@@ -105,6 +105,7 @@ textplot <- function(object, halign="center", valign="center", cex,
   UseMethod('textplot')
 
 
+#' @rdname textplot
 textplot.default <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
@@ -133,6 +134,7 @@ textplot.default <- function(object,
 }
 
 
+#' @rdname textplot
 textplot.data.frame <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
@@ -164,6 +166,7 @@ textplot.data.frame <- function(object,
                             wrap.rownames, ... )
 }
 
+#' @rdname textplot
 textplot.matrix <- function(object,
                             halign=c("center","left","right"),
                             valign=c("center","top","bottom"),
@@ -368,6 +371,7 @@ textplot.matrix <- function(object,
   par(opar)
 }
 
+#' @rdname textplot
 textplot.character <- function (object,
                                 halign = c("center", "left", "right"),
                                 valign = c("center", "top", "bottom"),

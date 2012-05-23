@@ -5,6 +5,10 @@
 \title{calculate centered Returns}
 \usage{
   Return.centered(R, ...)
+
+  centeredmoment(R, power)
+
+  centeredcomoment(Ra, Rb, p1, p2, normalize = FALSE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries

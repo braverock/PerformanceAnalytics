@@ -25,11 +25,6 @@
 #' @param attribute one of "Beta","Alpha","R-Squared" for which attribute to
 #' show
 #' @param main set the chart title, same as in \code{plot}
-#' @param event.labels TRUE/FALSE whether or not to display lines and labels
-#' for historical market shock events
-#' @param legend.loc places a legend into one of nine locations on the chart:
-#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
-#' center.
 #' @param na.pad TRUE/FALSE If TRUE it adds any times that would not otherwise
 #' have been in the result with a value of NA. If FALSE those times are
 #' dropped.

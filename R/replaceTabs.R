@@ -1,9 +1,10 @@
 ## Function to replace all tabs in a string with an appropriate number of spaces.
 
-# handle a single character string
+#' @rdname textplot
 replaceTabs.inner <-  function( text, width=8 )
 {
-  spaces <- "        "
+    # handle a single character string
+    spaces <- "        "
 
   if(nchar(text)<1) return(text)
   
@@ -26,6 +27,7 @@ replaceTabs.inner <-  function( text, width=8 )
     }
 }
 
+#' @rdname textplot
 replaceTabs <- function(text, width=8)
 {
   text <- as.character(text)

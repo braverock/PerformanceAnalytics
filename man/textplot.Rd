@@ -1,5 +1,6 @@
-\name{textplot}
+\name{replaceTabs.inner}
 \alias{replaceTabs}
+\alias{replaceTabs.inner}
 \alias{textplot}
 \alias{textplot.character}
 \alias{textplot.data.frame}
@@ -7,6 +8,10 @@
 \alias{textplot.matrix}
 \title{Display text information in a graphics plot.}
 \usage{
+  replaceTabs.inner(text, width = 8)
+
+  replaceTabs(text, width = 8)
+
   textplot(object, halign = "center", valign = "center",
     cex, max.cex = 1, cmar = 2, rmar = 0.5,
     show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
@@ -15,6 +20,49 @@
     col.data = par("col"), col.rownames = par("col"),
     col.colnames = par("col"), wrap = TRUE,
     wrap.colnames = 10, wrap.rownames = 10, ...)
+
+  textplot.default(object,
+    halign = c("center", "left", "right"),
+    valign = c("center", "top", "bottom"), cex, max.cex,
+    cmar, rmar, show.rownames, show.colnames, hadj, vadj,
+    row.valign, heading.valign, mar, col.data,
+    col.rownames, col.colnames, wrap, wrap.colnames,
+    wrap.rownames, ...)
+
+  textplot.data.frame(object,
+    halign = c("center", "left", "right"),
+    valign = c("center", "top", "bottom"), cex,
+    max.cex = 1, cmar = 2, rmar = 0.5,
+    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+    vadj = NULL, row.valign = "center",
+    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
+    col.data = par("col"), col.rownames = par("col"),
+    col.colnames = par("col"), wrap = TRUE,
+    wrap.colnames = 10, wrap.rownames = 10, ...)
+
+  textplot.matrix(object,
+    halign = c("center", "left", "right"),
+    valign = c("center", "top", "bottom"), cex,
+    max.cex = 1, cmar = 2, rmar = 0.5,
+    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+    vadj = NULL, row.valign = "center",
+    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
+    col.data = par("col"), col.rownames = par("col"),
+    col.colnames = par("col"), wrap = TRUE,
+    wrap.colnames = 10, wrap.rownames = 10, ...)
+
+  textplot.character(object,
+    halign = c("center", "left", "right"),
+    valign = c("center", "top", "bottom"), cex,
+    max.cex = 1, cmar = 2, rmar = 0.5,
+    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+    vadj = NULL, row.valign = "center",
+    heading.valign = "bottom", mar = c(0, 0, 3, 0) + 0.1,
+    col.data = par("col"), col.rownames = par("col"),
+    col.colnames = par("col"), wrap = TRUE,
+    wrap.colnames = 10, wrap.rownames = 10,
+    fixed.width = TRUE, cspace = 1, lspace = 1,
+    tab.width = 8, ...)
 }
 \arguments{
   \item{object}{Object to be displayed.}

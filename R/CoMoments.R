@@ -116,6 +116,7 @@ function (R, ...)
 ###############################################################################
 
 
+#' @rdname centeredmoments
 centeredmoment = function(R,power)
 {# @author Kris Boudt, Peter Carl
     R = checkData(R)
@@ -125,6 +126,7 @@ centeredmoment = function(R,power)
 
 ###############################################################################
 
+#' @rdname centeredmoments
 centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 {# @author Kris Boudt, Peter Carl, and Brian G. Peterson
 
