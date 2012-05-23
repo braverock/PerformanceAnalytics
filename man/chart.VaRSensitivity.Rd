@@ -1,47 +1,97 @@
 \name{chart.VaRSensitivity}
 \alias{chart.VaRSensitivity}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ show the sensitivity of Value-at-Risk or Expected Shortfall estimates }
-\description{
-Creates a chart of Value-at-Risk and/or Expected Shortfall estimates by confidence interval for multiple methods.
-}
+\title{show the sensitivity of Value-at-Risk or Expected Shortfall estimates}
 \usage{
-chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean = c("none", "boudt", "geltner"), elementcolor = "darkgray", reference.grid = TRUE, xlab = "Confidence Level", ylab = "Value at Risk", type = "l", lty = c(1, 2, 4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main = NULL, ...)
+  chart.VaRSensitivity(R,
+    methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES"),
+    clean = c("none", "boudt", "geltner"),
+    elementcolor = "darkgray", reference.grid = TRUE,
+    xlab = "Confidence Level", ylab = "Value at Risk",
+    type = "l", lty = c(1, 2, 4), lwd = 1,
+    colorset = (1:12), pch = (1:12),
+    legend.loc = "bottomleft", cex.legend = 0.8,
+    main = NULL, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{methods}{ one or more calculation methods indicated "GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES".  See \code{\link{VaR}} or \code{\link{ES}} for more detail. }
-  \item{clean}{ method for data cleaning through \code{\link{Return.clean}}.  Current options are "none" or "boudt" or 
-"geltner". }
-  \item{elementcolor}{ the color used to draw chart elements. The default is "darkgray" }
-  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
-  \item{ylab}{ set the y-axis label, same as in \code{\link{plot}} }
-  \item{xlab}{ set the x-axis label, same as in \code{\link{plot}} }
-  \item{type}{ set the chart type, same as in \code{\link{plot}} }
-  \item{lty}{ set the line type, same as in \code{\link{plot}} }
-  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
-  \item{colorset}{ color palette to use, set by default to rational choices }
-  \item{pch}{ symbols to use, see also \code{\link{plot}} }
-  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
-  \item{main}{ set the chart title, same as in \code{\link{plot}} }
-  \item{\dots}{ any other passthru parameters }
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{methods}{one or more calculation methods indicated
+  "GaussianVaR", "ModifiedVaR", "HistoricalVaR",
+  "GaussianES", "ModifiedES", "HistoricalES". See
+  \code{\link{VaR}} or \code{\link{ES}} for more detail.}
+
+  \item{clean}{method for data cleaning through
+  \code{\link{Return.clean}}. Current options are "none" or
+  "boudt" or "geltner".}
+
+  \item{elementcolor}{the color used to draw chart
+  elements. The default is "darkgray"}
+
+  \item{reference.grid}{if true, draws a grid aligned with
+  the points on the x and y axes}
+
+  \item{ylab}{set the y-axis label, same as in
+  \code{\link{plot}}}
+
+  \item{xlab}{set the x-axis label, same as in
+  \code{\link{plot}}}
+
+  \item{type}{set the chart type, same as in
+  \code{\link{plot}}}
+
+  \item{lty}{set the line type, same as in
+  \code{\link{plot}}}
+
+  \item{lwd}{set the line width, same as in
+  \code{\link{plot}}}
+
+  \item{colorset}{color palette to use, set by default to
+  rational choices}
+
+  \item{pch}{symbols to use, see also \code{\link{plot}}}
+
+  \item{legend.loc}{places a legend into one of nine
+  locations on the chart: bottomright, bottom, bottomleft,
+  left, topleft, top, topright, right, or center.}
+
+  \item{cex.legend}{The magnification to be used for sizing
+  the legend relative to the current setting of 'cex'.}
+
+  \item{main}{set the chart title, same as in
+  \code{\link{plot}}}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  Creates a chart of Value-at-Risk and/or Expected
+  Shortfall estimates by confidence interval for multiple
+  methods.
 }
 \details{
-  This chart shows estimated VaR along a series of confidence intervals for selected calculation methods.  Useful for comparing a method to the historical VaR calculation.
+  This chart shows estimated VaR along a series of
+  confidence intervals for selected calculation methods.
+  Useful for comparing a method to the historical VaR
+  calculation.
 }
-\references{ Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation
-and Decomposition of Downside Risk for Portfolios with Non-Normal Returns. Journal of
-Risk, forthcoming. }
-\author{ Peter Carl }
-\seealso{ \code{\link{VaR}} \cr \code{\link{ES}} }
 \examples{
 data(managers)
-chart.VaRSensitivity(managers[,1,drop=FALSE], methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), colorset=bluefocus, lwd=2)
+chart.VaRSensitivity(managers[,1,drop=FALSE],
+		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+		colorset=bluefocus, lwd=2)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
+\author{
+  Peter Carl
+}
+\references{
+  Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation
+  and Decomposition of Downside Risk for Portfolios with
+  Non-Normal Returns. Journal of Risk, forthcoming.
+}
+\seealso{
+  \code{\link{VaR}} \cr \code{\link{ES}}
+}
+\keyword{distribution}
+\keyword{multivariate}
+\keyword{ts}
+

@@ -1,50 +1,100 @@
 \name{chart.CaptureRatios}
 \alias{chart.CaptureRatios}
-\title{ Chart of Capture Ratios against a benchmark }
-\description{
-  Scatter plot of Up Capture versus Down Capture against a benchmark
-}
+\title{Chart of Capture Ratios against a benchmark}
 \usage{
-chart.CaptureRatios(Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1, element.color = "darkgray", benchmark.color = "darkgray", ...)
+  chart.CaptureRatios(Ra, Rb, main = "Capture Ratio",
+    add.names = TRUE, xlab = "Downside Capture",
+    ylab = "Upside Capture", colorset = 1, symbolset = 1,
+    legend.loc = NULL, xlim = NULL, ylim = NULL,
+    cex.legend = 1, cex.axis = 0.8, cex.main = 1,
+    cex.lab = 1, element.color = "darkgray",
+    benchmark.color = "darkgray", ...)
 }
 \arguments{
-  \item{Ra}{ Returns to test, e.g., the asset to be examined }
-  \item{Rb}{ Returns of a benchmark to compare the asset with }
-  \item{main}{ Set the chart title, same as in \code{plot} }
-  \item{add.names}{ Plots the row name with the data point.  Default TRUE. Can be removed by setting it to NULL }
-  \item{xlab}{ Set the x-axis label, as in \code{\link{plot}} }
-  \item{ylab}{ Set the y-axis label, as in \code{\link{plot}} }
-  \item{colorset}{ Color palette to use, set by default to "black" }
-  \item{symbolset}{ From \code{pch} in \code{\link{plot}}. Submit a set of symbols to be used in the same order as the data sets submitted }
-  \item{legend.loc}{ Places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
-  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
-  \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
-  \item{cex.main}{ The magnification to be used for sizing the title relative to the current setting of 'cex'.  }
-  \item{cex.lab}{ The magnification to be used for x and y labels relative to the current setting of 'cex'.  }
-  \item{element.color}{ Specify the color of the box, axes, and other chart elements.  Default is "darkgray" }
-  \item{benchmark.color}{ Specify the color of the benchmark reference and crosshairs.  Default is "darkgray" }
-  \item{\dots}{ Any other passthru parameters to \code{plot} }
+  \item{Ra}{Returns to test, e.g., the asset to be
+  examined}
 
+  \item{Rb}{Returns of a benchmark to compare the asset
+  with}
+
+  \item{main}{Set the chart title, same as in \code{plot}}
+
+  \item{add.names}{Plots the row name with the data point.
+  Default TRUE. Can be removed by setting it to NULL}
+
+  \item{xlab}{Set the x-axis label, as in
+  \code{\link{plot}}}
+
+  \item{ylab}{Set the y-axis label, as in
+  \code{\link{plot}}}
+
+  \item{colorset}{Color palette to use, set by default to
+  "black"}
+
+  \item{symbolset}{From \code{pch} in \code{\link{plot}}.
+  Submit a set of symbols to be used in the same order as
+  the data sets submitted}
+
+  \item{legend.loc}{Places a legend into one of nine
+  locations on the chart: bottomright, bottom, bottomleft,
+  left, topleft, top, topright, right, or center.}
+
+  \item{xlim}{set the x-axis limit, same as in
+  \code{\link{plot}}}
+
+  \item{ylim}{set the y-axis limit, same as in
+  \code{\link{plot}}}
+
+  \item{cex.axis}{The magnification to be used for axis
+  annotation relative to the current setting of 'cex', same
+  as in \code{\link{plot}}.}
+
+  \item{cex.legend}{The magnification to be used for sizing
+  the legend relative to the current setting of 'cex'.}
+
+  \item{cex.main}{The magnification to be used for sizing
+  the title relative to the current setting of 'cex'.}
+
+  \item{cex.lab}{The magnification to be used for x and y
+  labels relative to the current setting of 'cex'.}
+
+  \item{element.color}{Specify the color of the box, axes,
+  and other chart elements.  Default is "darkgray"}
+
+  \item{benchmark.color}{Specify the color of the benchmark
+  reference and crosshairs.  Default is "darkgray"}
+
+  \item{\dots}{Any other passthru parameters to
+  \code{plot}}
+}
+\description{
+  Scatter plot of Up Capture versus Down Capture against a
+  benchmark
 }
 \details{
-  Scatter plot shows the coordinates of each set of returns' Up and Down Capture against a benchmark.  The benchmark value is by definition plotted at (1,1) with solid crosshairs.  A diagonal dashed line with slope equal to 1 divides the plot into two regions: above that line the UpCapture exceeds the DownCapture, and vice versa. 
-}
-\author{ Peter Carl }
-
-\seealso{
-  \code{\link{plot}}, \cr
- \code{\link{par}}, \cr
- \code{\link{UpDownRatios}}, \cr
- \code{\link{table.UpDownRatios}} \cr
+  Scatter plot shows the coordinates of each set of
+  returns' Up and Down Capture against a benchmark.  The
+  benchmark value is by definition plotted at (1,1) with
+  solid crosshairs.  A diagonal dashed line with slope
+  equal to 1 divides the plot into two regions: above that
+  line the UpCapture exceeds the DownCapture, and vice
+  versa.
 }
 \examples{
-    data(managers)
+data(managers)
     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
 }
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
-\keyword{ models }
-\keyword{ hplot }
+\author{
+  Peter Carl
+}
+\seealso{
+  \code{\link{plot}}, \cr \code{\link{par}}, \cr
+  \code{\link{UpDownRatios}}, \cr
+  \code{\link{table.UpDownRatios}} \cr
+}
+\keyword{distribution}
+\keyword{hplot}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

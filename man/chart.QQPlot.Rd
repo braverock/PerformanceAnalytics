@@ -1,17 +1,34 @@
 \name{chart.QQPlot}
 \alias{chart.QQPlot}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{ Plot a QQ chart }
 \description{
 Plot the return data against any theoretical distribution.
 }
 \usage{
-chart.QQPlot(R, distribution = "norm", ylab = NULL, xlab = paste(distribution, "Quantiles"), main = NULL, las = par("las"), envelope = FALSE, labels = FALSE, col = c(1, 4), lwd = 2, pch = 1, cex = 1, line = c("quartiles", "robust", "none"), element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
+chart.QQPlot(R, 
+    distribution = "norm", 
+    ylab = NULL, 
+    xlab = paste(distribution, "Quantiles"), 
+    main = NULL, 
+    las = par("las"), 
+    envelope = FALSE, 
+    labels = FALSE, 
+    col = c(1, 4), 
+    lwd = 2, 
+    pch = 1, 
+    cex = 1, 
+    line = c("quartiles", "robust", "none"), 
+    element.color = "darkgray", 
+    cex.axis = 0.8, 
+    cex.legend = 0.8, 
+    cex.lab = 1, 
+    cex.main = 1, 
+    ...
+    )
 }
 \details{
 A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to the theoretical distributions to visually determine if the observations are likely to have come from a known population. The empirical quantiles are plotted to the y-axis, and the x-axis contains the values of the theorical model.  A 45-degree reference line is also plotted. If the empirical data come from the population with the choosen distribution, the points should fall approximately along this reference line. The larger the departure from the reference line, the greater the evidence that the data set have come from a population with a different distribution.
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
   \item{distribution}{ root name of comparison distribution - e.g., 'norm' for
@@ -49,22 +66,39 @@ A Quantile-Quantile (QQ) plot is a scatter plot designed to compare the data to 
 \examples{
 library(MASS)
 data(managers)
-x = checkData(managers[,2, drop = FALSE], na.rm = TRUE, method = "vector")
+x = checkData(managers[,2, drop = FALSE], 
+    na.rm = TRUE, method = "vector")
+
 #layout(rbind(c(1,2),c(3,4)))
+
 # Panel 1, Normal distribution
-chart.QQPlot(x, main = "Normal Distribution", distribution = 'norm', envelope=0.95)
+chart.QQPlot(x, main = "Normal Distribution", 
+    distribution = 'norm', envelope=0.95)
+
 # Panel 2, Log-Normal distribution
 fit = fitdistr(1+x, 'lognormal')
-chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, distribution='lnorm')#, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]])
+
+chart.QQPlot(1+x, main = "Log-Normal Distribution", 
+    envelope=0.95, distribution='lnorm')#, 
+    meanlog = fit$estimate[[1]], 
+    sdlog = fit$estimate[[2]])
 \dontrun{
 # Panel 3, Skew-T distribution
 library(sn)
 fit = st.mle(y=x)
-chart.QQPlot(x, main = "Skew T Distribution", envelope=0.95, distribution = 'st', location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]])
+chart.QQPlot(x, main = "Skew T Distribution", 
+    envelope=0.95, distribution = 'st', 
+    location = fit$dp[[1]], scale = fit$dp[[2]], 
+    shape = fit$dp[[3]], df=fit$dp[[4]])
 #Panel 4: Stable Parietian
 library(fBasics)
 fit.stable = stableFit(x,doplot=FALSE)
-chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, distribution = 'stable', alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
+chart.QQPlot(x, main = "Stable Pareto Distribution", 
+    envelope=0.95, distribution = 'stable', 
+    alpha = fit.stable@fit$estimate[[1]], 
+    beta = fit.stable@fit$estimate[[2]], 
+    gamma = fit.stable@fit$estimate[[3]], 
+    delta = fit.stable@fit$estimate[[4]], pm = 0)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

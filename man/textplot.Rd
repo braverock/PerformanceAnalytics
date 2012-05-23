@@ -1,74 +1,108 @@
 \name{textplot}
-\alias{textplot}
-\alias{textplot.default}
-\alias{textplot.character}
-\alias{textplot.matrix}
-\alias{textplot.data.frame}
 \alias{replaceTabs}
-
+\alias{textplot}
+\alias{textplot.character}
+\alias{textplot.data.frame}
+\alias{textplot.default}
+\alias{textplot.matrix}
 \title{Display text information in a graphics plot.}
-
-\description{
-  This function displays text output in a graphics window.  It is the equivalent of 'print' except that the output is displayed as a plot.
-}
 \usage{
-textplot(object, halign="center", valign="center", cex, max.cex = 1, cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1, vadj=NULL, row.valign = "center", heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"), col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10, wrap.rownames = 10, ...)
-
-replaceTabs(text, width=8)
+  textplot(object, halign = "center", valign = "center",
+    cex, max.cex = 1, cmar = 2, rmar = 0.5,
+    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+    vadj = NULL, row.valign = "center",
+    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
+    col.data = par("col"), col.rownames = par("col"),
+    col.colnames = par("col"), wrap = TRUE,
+    wrap.colnames = 10, wrap.rownames = 10, ...)
 }
 \arguments{
   \item{object}{Object to be displayed.}
-  \item{halign}{Alignment in the x direction, one of "center", "left",
-    or "right". }
-  \item{valign}{Alignment in the y direction, one of "center", "top" ,
-    or "bottom"}
-  \item{cex}{Character size, see \code{\link{par}} for details. If
-    unset, the code will attempt to use the largest value which allows
-    the entire object to be displayed.}
-  \item{mar}{Figure margins, see the documentation for \code{par}.}
-  \item{rmar, cmar}{Space between rows or columns, in
-    fractions of the size of the letter 'M'.}
-  \item{show.rownames, show.colnames}{Logical value indicating whether row or
-    column names will be displayed.}
-  \item{hadj,vadj}{Vertical and horizontal location of elements within
-    matrix cells.  These have the same meaning as the \code{adj} graphics
-    paramter (see \code{\link{par}}).}
-  \item{col.data}{Colors for data elements.  If a single value is
-    provided, all data elements will be the same color.  If a matrix
-    matching the dimensions of the data is provided, each data element
-    will receive the specified color.}
-  \item{col.rownames, col.colnames}{Colors for row names and column
-    names, respectively.  Either may be specified as a scalar or a
-    vector of appropriate length.}
-  \item{max.cex}{Sets the largest text size as a ceiling} 
-  \item{row.valign}{ Sets the vertical alignment of the row as "top", "bottom", or (default) "center".}
-  \item{heading.valign}{ Sets the vertical alignment of the heading as "top", (default) "bottom", or "center".}
-  \item{wrap}{ If TRUE (default), will wrap column names and rownames }
-  \item{wrap.colnames}{ The number of characters after which column labels will be wrapped.  Default is 10. }
-  \item{wrap.rownames}{ The number of characters after which row headings will be wrapped.  Default is 10. } 
-  \item{text}{ in the function 'replaceTabs', the text string to be processed } 
-  \item{width}{ in the function 'replaceTabs', the number of spaces to replace tabs with } 
-  \item{\dots}{ Optional arguments passed to the text plotting command or specialized object methods}
+
+  \item{halign}{Alignment in the x direction, one of
+  "center", "left", or "right".}
+
+  \item{valign}{Alignment in the y direction, one of
+  "center", "top" , or "bottom"}
+
+  \item{cex}{Character size, see \code{\link{par}} for
+  details. If unset, the code will attempt to use the
+  largest value which allows the entire object to be
+  displayed.}
+
+  \item{mar}{Figure margins, see the documentation for
+  \code{par}.}
+
+  \item{rmar,cmar}{Space between rows or columns, in
+  fractions of the size of the letter 'M'.}
+
+  \item{show.rownames,show.colnames}{Logical value
+  indicating whether row or column names will be
+  displayed.}
+
+  \item{hadj,vadj}{Vertical and horizontal location of
+  elements within matrix cells.  These have the same
+  meaning as the \code{adj} graphics paramter (see
+  \code{\link{par}}).}
+
+  \item{col.data}{Colors for data elements.  If a single
+  value is provided, all data elements will be the same
+  color.  If a matrix matching the dimensions of the data
+  is provided, each data element will receive the specified
+  color.}
+
+  \item{col.rownames,col.colnames}{Colors for row names and
+  column names, respectively.  Either may be specified as a
+  scalar or a vector of appropriate length.}
+
+  \item{max.cex}{Sets the largest text size as a ceiling}
+
+  \item{row.valign}{Sets the vertical alignment of the row
+  as "top", "bottom", or (default) "center".}
+
+  \item{heading.valign}{Sets the vertical alignment of the
+  heading as "top", (default) "bottom", or "center".}
+
+  \item{wrap}{If TRUE (default), will wrap column names and
+  rownames}
+
+  \item{wrap.colnames}{The number of characters after which
+  column labels will be wrapped.  Default is 10.}
+
+  \item{wrap.rownames}{The number of characters after which
+  row headings will be wrapped.  Default is 10.}
+
+  \item{text}{in the function 'replaceTabs', the text
+  string to be processed}
+
+  \item{width}{in the function 'replaceTabs', the number of
+  spaces to replace tabs with}
+
+  \item{\dots}{Optional arguments passed to the text
+  plotting command or specialized object methods}
+}
+\description{
+  This function displays text output in a graphics window.
+  It is the equivalent of 'print' except that the output is
+  displayed as a plot.
 }
 \details{
-  A new plot is created and the object is displayed
-  using the largest font that will fit on in the plotting region.  The
-  \code{halign} and \code{valign} parameters can be used to control the
-  location of the string within the plotting region.
+  A new plot is created and the object is displayed using
+  the largest font that will fit on in the plotting region.
+  The \code{halign} and \code{valign} parameters can be
+  used to control the location of the string within the
+  plotting region.
 
-  For matrixes and vectors a specialized textplot function is available, which plots each of the cells individually, with column widths set
-  according to the sizes of the column elements.  If present, row and
-  column labels will be displayed in a bold font.  
+  For matrixes and vectors a specialized textplot function
+  is available, which plots each of the cells individually,
+  with column widths set according to the sizes of the
+  column elements.  If present, row and column labels will
+  be displayed in a bold font.
 
-  textplot also uses replaceTabs, a function to replace all tabs in a string with an appropriate number of spaces.  That function was also written by Gregory R. Warnes and included in the 'gplots' package.
-}
-
-\author{Originally written by Gregory R. Warnes \email{warnes@bst.rochester.edu} for the package 'gplots', modified by Peter Carl}
-\seealso{
-  \code{\link{plot}}, \cr
-  \code{\link{text}}, \cr
-  \code{\link[utils]{capture.output}}, \cr
-  \code{\link[gplots]{textplot}}
+  textplot also uses replaceTabs, a function to replace all
+  tabs in a string with an appropriate number of spaces.
+  That function was also written by Gregory R. Warnes and
+  included in the 'gplots' package.
 }
 \examples{
 # Also see the examples in the original gplots textplot function
@@ -83,6 +117,16 @@ textplot(table.AnnualizedReturns(managers[,1:6]))
 #  textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,4,0)+0.1)
 
 # title(main="Calendar Returns")
-
+}
+\author{
+  Originally written by Gregory R. Warnes
+  \email{warnes@bst.rochester.edu} for the package
+  'gplots', modified by Peter Carl
+}
+\seealso{
+  \code{\link{plot}}, \cr \code{\link{text}}, \cr
+  \code{\link[utils]{capture.output}}, \cr
+  \code{\link[gplots]{textplot}}
 }
 \keyword{hplot}
+

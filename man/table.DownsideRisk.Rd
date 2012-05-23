@@ -1,30 +1,31 @@
 \name{table.DownsideRisk}
 \alias{table.DownsideRisk}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Downside Risk Summary: Statistics and Stylized Facts }
-\description{
-Creates a table of estimates of downside risk measures for comparison across multiple instruments or funds.
-}
+\title{Downside Risk Summary: Statistics and Stylized Facts}
 \usage{
-table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12, p = 0.95, digits = 4)
+  table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0,
+    MAR = 0.1/12, p = 0.95, digits = 4)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{ci}{ confidence interval, defaults to 95\% }
-  \item{scale}{ number of periods in a year (daily scale = 252, monthly scale = 12, quarterly scale = 4) }
-  \item{Rf}{ risk free rate, in same period as your returns }
-  \item{MAR}{ Minimum Acceptable Return, in the same periodicity as your returns }
-  \item{p}{ confidence level for calculation, default p=.99 }
-  \item{digits}{ number of digits to round results to }
-}
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
 
-\author{ Peter Carl }
-\seealso{
-    \code{\link{DownsideDeviation}}  \cr
-    \code{\link{maxDrawdown}}  \cr
-    \code{\link{VaR}}  \cr
-    \code{\link{ES}}  \cr
+  \item{ci}{confidence interval, defaults to 95\%}
+
+  \item{scale}{number of periods in a year (daily scale =
+  252, monthly scale = 12, quarterly scale = 4)}
+
+  \item{Rf}{risk free rate, in same period as your returns}
+
+  \item{MAR}{Minimum Acceptable Return, in the same
+  periodicity as your returns}
+
+  \item{p}{confidence level for calculation, default p=.99}
+
+  \item{digits}{number of digits to round results to}
+}
+\description{
+  Creates a table of estimates of downside risk measures
+  for comparison across multiple instruments or funds.
 }
 \examples{
 data(edhec)
@@ -35,9 +36,16 @@ require("Hmisc")
 textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 title(main="Downside Risk Statistics")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
-\keyword{ models }
+\author{
+  Peter Carl
+}
+\seealso{
+  \code{\link{DownsideDeviation}} \cr
+  \code{\link{maxDrawdown}} \cr \code{\link{VaR}} \cr
+  \code{\link{ES}} \cr
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

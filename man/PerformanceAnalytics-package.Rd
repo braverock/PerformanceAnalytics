@@ -181,7 +181,7 @@ Graphs and charts can also help to organize the information visually. Our goal i
 
 The cumulative returns or wealth index is usually the first thing displayed, even though neither conveys much information.  See \code{\link{chart.CumReturns}}.  Individual period returns may be helpful for identifying problematic periods, such as in \code{\link{chart.Bar}}.  Risk measures can be helpful when overlaid on the period returns, to display the bounds at which losses may be expected.  See \code{\link{chart.BarVaR}} and the prior section on Risk Analysis.  More information can be conveyed when such charts are displayed together, as in \code{\link{charts.PerformanceSummary}}, which combines the performance data with detail on downside risk (see \code{\link{chart.Drawdown}}).
 
-The relative performance through time of two assets can be plotted with \code{\link{chart.RelativePerformance}}.  This plot displays the ratio of the cumulative performance at each point in time and makes periods of under- or out-performance easy to see.  The value of the chart is less important than the slope of the line.  If the slope is positive, the first asset is outperforming the second, and vice verse.  Affectionately known as the Canto chart, it was used effectively in Canto (2006).
+\code{\link{chart.RelativePerformance}} can plot the relative performance through time of two assets.  This plot displays the ratio of the cumulative performance at each point in time and makes periods of under- or out-performance easy to see.  The value of the chart is less important than the slope of the line.  If the slope is positive, the first asset is outperforming the second, and vice verse.  Affectionately known as the Canto chart, it was used effectively in Canto (2006).
 
 Two-dimensional charts can also be useful while remaining easy to understand.  \code{\link{chart.Scatter}} is a utility scatter chart with some additional attributes that are used in \code{\link{chart.RiskReturnScatter}}.  Overlaying Sharpe ratio lines or boxplots helps to add information about relative performance along those dimensions. 
 
@@ -219,18 +219,31 @@ Maintainer: Brian G. Peterson \email{brian@braverock.com}
 
 \references{
 Amenc, N. and Le Sourd, V. \emph{Portfolio Theory and Performance Analysis}. Wiley. 2003. \cr 
+
 Bacon, C. \emph{Practical Portfolio Performance Measurement and Attribution}. Wiley. 2004. \cr
+
 Canto, V. \emph{Understanding Asset Allocation}. FT Prentice Hall. 2006. \cr
+
 Lhabitant, F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
+
 Litterman, R., Gumerlock R., et. al. \emph{The Practice of Risk Management: Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998. \cr
+
 Martellini, Lionel, and Volker Ziemann. \emph{Improved Forecasts of Higher-Order Comoments and Implications for Portfolio Selection.} EDHEC Risk and Asset Management Research Centre working paper. 2007. \cr
+
 Ranaldo, Angelo, and Laurent Favre Sr. \emph{How to Price Hedge Funds: From Two- to Four-Moment CAPM.} SSRN eLibrary. 2005.
+
 Murrel, P. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
+
 Ruppert, D. \emph{Statistics and Finance, an Introduction}. Springer. 2004. \cr
+
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer. 2005. \cr
+
 Shumway, R. and Stoffer, D. \emph{Time Series Analysis and it's Applications, with R examples}, Springer, 2006. \cr
+
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
-Zin, Markowitz, Zhao (2006) \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=910640} \cr
+
+Zin, Markowitz, Zhao A Note on Semivariance. Mathematical Finance, Vol. 16, No. 1, pp. 53-61, January 2006 
+
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second edition}. Springer. 2006. \cr
 }
 

@@ -35,7 +35,7 @@ chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE, yaxis.right = 
   \item{pch}{ symbols to use, see also \code{\link{plot}} }
   \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" } 
   \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{ylog}{ TRUE/FALSE set the y-axis to logarithmic scale, similar to \code{\link{plot}}, default FALSE }
+  \item{ylog}{ TRUE/FALSE whether to set the y-axis to logarithmic scale, default FALSE }
   \item{date.format.in}{ allows specification of other date formats in the data object, defaults to "\%Y-\%m-\%d" }
   \item{cex.axis}{ The magnification to be used for axis annotation relative to the current setting of 'cex', same as in \code{\link{plot}}.  }
   \item{cex.legend}{ The magnification to be used for sizing the legend relative to the current setting of 'cex'.  }
@@ -119,3 +119,4 @@ chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomr
 \keyword{ distribution }
 \keyword{ models }
 \keyword{ hplot }
+

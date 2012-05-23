@@ -1,35 +1,43 @@
 \name{chart.Correlation}
 \alias{chart.Correlation}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ correlation matrix chart }
-\description{
-Visualization of a Correlation Matrix. On top the (absolute) value of the correlation plus the result of the cor.test as stars. On botttom, the bivariate scatterplots, with a fitted line
-}
+\title{correlation matrix chart}
 \usage{
-chart.Correlation(R, histogram = TRUE, ...)
+  chart.Correlation(R, histogram = TRUE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{R}{ data for the x axis, can take matrix,vector, or timeseries }
-  \item{histogram}{ TRUE/FALSE whether or not to display a histogram }
-  \item{\dots}{ any other passthru parameters into \code{\link{pairs}}}
+  \item{R}{data for the x axis, can take matrix,vector, or
+  timeseries}
+
+  \item{histogram}{TRUE/FALSE whether or not to display a
+  histogram}
+
+  \item{\dots}{any other passthru parameters into
+  \code{\link{pairs}}}
+}
+\description{
+  Visualization of a Correlation Matrix. On top the
+  (absolute) value of the correlation plus the result of
+  the cor.test as stars. On botttom, the bivariate
+  scatterplots, with a fitted line
 }
 \note{
-based on plot at  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
-}
-\author{ Peter Carl }
-\seealso{
-    \code{\link{table.Correlation}} \cr
-%    \code{\link{chart.Correlation.color}}
+  based on plot at
+  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
 }
 \examples{
 data(managers)
 chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
-\keyword{ models }
-\keyword{ hplot }
+\author{
+  Peter Carl
+}
+\seealso{
+  \code{\link{table.Correlation}} \cr %
+  \code{\link{chart.Correlation.color}}
+}
+\keyword{distribution}
+\keyword{hplot}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

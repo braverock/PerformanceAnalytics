@@ -1,52 +1,119 @@
 \name{chart.Regression}
 \alias{chart.Regression}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{ Takes a set of returns and relates them to a market benchmark in a scatterplot }
-\description{
-  Uses a scatterplot to display the relationship of a set of returns to a market benchmark.  Fits a linear model and overlays the resulting model.  Also overlays a Loess line for comparison.
-}
+\title{Takes a set of returns and relates them to a market benchmark in a
+scatterplot}
 \usage{
-chart.Regression(Ra, Rb, Rf, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"), ylim = NA, evaluation = 50, legend.cex = 0.8, cex = 0.8, lwd = 2, ...)
+  chart.Regression(Ra, Rb, Rf = 0, excess.returns = FALSE,
+    reference.grid = TRUE, main = "Title", ylab = NULL,
+    xlab = NULL, xlim = NA, colorset = 1:12,
+    symbolset = 1:12, element.color = "darkgray",
+    legend.loc = NULL, ylog = FALSE,
+    fit = c("loess", "linear", "conditional", "quadratic"),
+    span = 2/3, degree = 1,
+    family = c("symmetric", "gaussian"), ylim = NA,
+    evaluation = 50, legend.cex = 0.8, cex = 0.8, lwd = 2,
+    ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{Ra}{ a vector of returns to test, e.g., the asset to be examined }
-  \item{Rb}{ a matrix, data.frame, or timeSeries of benchmark(s) to test the asset against }
-  \item{Rf}{ risk free rate, in same period as the returns }
-  \item{excess.returns}{ logical; should excess returns be used? }
-  \item{reference.grid}{ if true, draws a grid aligned with the points on the x and y axes }
-  \item{main}{ set the chart title, same as in \code{\link{plot}} }
-  \item{ylab}{ set the y-axis title, same as in \code{\link{plot}} }
-  \item{xlab}{ set the x-axis title, same as in \code{\link{plot}} }
-  \item{xlim}{ set the x-axis limit, same as in \code{\link{plot}} }
-  \item{colorset}{ color palette to use }
-  \item{symbolset}{ symbols to use, see also 'pch' in \code{\link{plot}} }
-  \item{element.color}{ provides the color for drawing chart elements, such as the box lines, axis lines, etc. Default is "darkgray" }
-  \item{legend.loc}{ places a legend into one of nine locations on the chart: bottomright, bottom, bottomleft, left, topleft, top, topright, right, or center. }
-  \item{ylog}{ Not used }
-  \item{fit}{ for values of "loess", "linear", or "conditional", plots a line to fit the data.  Conditional lines are drawn separately for positive and negative benchmark returns.  "Quadratic" is not yet implemented. }
-  \item{span}{ passed to loess line fit, as in \code{\link{loess.smooth}} }
-  \item{degree}{ passed to loess line fit, as in \code{\link{loess.smooth}} }
-  \item{family}{ passed to loess line fit, as in \code{\link{loess.smooth}} }
-  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{evaluation}{ passed to loess line fit, as in \code{\link{loess.smooth}} }
-  \item{cex}{ set the cex size, same as in \code{\link{plot}} }
-  \item{legend.cex}{ set the legend size }
-  \item{lwd}{ set the line width for fits, same as in \code{\link{lines}} }
-  \item{\dots}{ any other passthru parameters to \code{\link{plot}} }
-}
+  \item{Ra}{a vector of returns to test, e.g., the asset to
+  be examined}
 
-\references{ Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its assumptions and deficiencies. }
-\author{ Peter Carl }
-\seealso{ \code{\link{plot}} }
+  \item{Rb}{a matrix, data.frame, or timeSeries of
+  benchmark(s) to test the asset against}
+
+  \item{Rf}{risk free rate, in same period as the returns}
+
+  \item{excess.returns}{logical; should excess returns be
+  used?}
+
+  \item{reference.grid}{if true, draws a grid aligned with
+  the points on the x and y axes}
+
+  \item{main}{set the chart title, same as in
+  \code{\link{plot}}}
+
+  \item{ylab}{set the y-axis title, same as in
+  \code{\link{plot}}}
+
+  \item{xlab}{set the x-axis title, same as in
+  \code{\link{plot}}}
+
+  \item{xlim}{set the x-axis limit, same as in
+  \code{\link{plot}}}
+
+  \item{colorset}{color palette to use}
+
+  \item{symbolset}{symbols to use, see also 'pch' in
+  \code{\link{plot}}}
+
+  \item{element.color}{provides the color for drawing chart
+  elements, such as the box lines, axis lines, etc. Default
+  is "darkgray"}
+
+  \item{legend.loc}{places a legend into one of nine
+  locations on the chart: bottomright, bottom, bottomleft,
+  left, topleft, top, topright, right, or center.}
+
+  \item{ylog}{Not used}
+
+  \item{fit}{for values of "loess", "linear", or
+  "conditional", plots a line to fit the data.  Conditional
+  lines are drawn separately for positive and negative
+  benchmark returns.  "Quadratic" is not yet implemented.}
+
+  \item{span}{passed to loess line fit, as in
+  \code{\link{loess.smooth}}}
+
+  \item{degree}{passed to loess line fit, as in
+  \code{\link{loess.smooth}}}
+
+  \item{family}{passed to loess line fit, as in
+  \code{\link{loess.smooth}}}
+
+  \item{ylim}{set the y-axis limit, same as in
+  \code{\link{plot}}}
+
+  \item{evaluation}{passed to loess line fit, as in
+  \code{\link{loess.smooth}}}
+
+  \item{cex}{set the cex size, same as in
+  \code{\link{plot}}}
+
+  \item{legend.cex}{set the legend size}
+
+  \item{lwd}{set the line width for fits, same as in
+  \code{\link{lines}}}
+
+  \item{\dots}{any other passthru parameters to
+  \code{\link{plot}}}
+}
+\description{
+  Uses a scatterplot to display the relationship of a set
+  of returns to a market benchmark.  Fits a linear model
+  and overlays the resulting model. Also overlays a Loess
+  line for comparison.
+}
 \examples{
 data(managers)
-chart.Regression(managers[, 1:2, drop = FALSE], managers[, 8, drop = FALSE], Rf = managers[, 10, drop = FALSE], excess.returns = TRUE, fit = c("loess", "linear"), legend.loc = "topleft")
+chart.Regression(managers[, 1:2, drop = FALSE],
+		managers[, 8, drop = FALSE],
+		Rf = managers[, 10, drop = FALSE],
+		excess.returns = TRUE, fit = c("loess", "linear"),
+		legend.loc = "topleft")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
-\keyword{ models }
-\keyword{ hplot }
+\author{
+  Peter Carl
+}
+\references{
+  Chapter 7 of Ruppert(2004) gives an extensive overview of
+  CAPM, its assumptions and deficiencies.
+}
+\seealso{
+  \code{\link{plot}}
+}
+\keyword{distribution}
+\keyword{hplot}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

@@ -1,90 +1,133 @@
 \name{chart.BarVaR}
 \alias{chart.BarVaR}
 \alias{charts.BarVaR}
-\title{ Periodic returns in a bar chart with risk metric overlay }
-\description{
-  Plots the periodic returns in a bar chart overlayed with a risk metric calculation.
-}
+\title{Periodic returns in a bar chart with risk metric overlay}
 \usage{
-chart.BarVaR  (R, 
-               width = 0, gap = 12, 
-               methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"),
-               p = 0.95, 
-               clean = c("none", "boudt", "geltner"), 
-               all = FALSE, 
-               ..., 
-               show.clean = FALSE, 
-               show.horizontal = FALSE, 
-               show.symmetric = FALSE, 
-               show.endvalue = FALSE,
-               show.greenredbars = FALSE, 
-               legend.loc = "bottomleft",
-               ylim = NA, 
-               lwd = 2, 
-               colorset = 1:12, 
-               lty = c(1, 2, 4, 5, 6), 
-               ypad = 0, 
-               legend.cex = 0.8) 
-charts.BarVaR (R, 
-               main = "Returns", 
-               cex.legend = 0.8, 
-               colorset = 1:12, 
-               ylim = NA, 
-               ..., 
-               perpanel = NULL, 
-               show.yaxis = c("all", "firstonly", "alternating", "none"))
-}
+  chart.BarVaR(R, width = 0, gap = 12,
+    methods = c("none", "ModifiedVaR", "GaussianVaR", 
+        "HistoricalVaR", "StdDev",
+        "ModifiedES", "GaussianES", "HistoricalES"),
+    p = 0.95, clean = c("none", "boudt", "geltner"),
+    all = FALSE, ..., show.clean = FALSE,
+    show.horizontal = FALSE, show.symmetric = FALSE,
+    show.endvalue = FALSE, show.greenredbars = FALSE,
+    legend.loc = "bottomleft", ylim = NA, lwd = 2,
+    colorset = 1:12, lty = c(1, 2, 4, 5, 6), ypad = 0,
+    legend.cex = 0.8)
 
+  charts.BarVaR(R, main = "Returns", cex.legend = 0.8,
+    colorset = 1:12, ylim = NA, ..., perpanel = NULL,
+    show.yaxis = c("all", "firstonly", "alternating", "none"))
+}
 \arguments{
-  \item{R}{ an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns }
-  \item{width}{ periods specified for rolling-period calculations.  Note that VaR, ES, and Std Dev with width=0 are calculated from the start of the timeseries }
-  \item{gap}{ numeric number of periods from start of series to use to train risk calculation }
-  \item{methods}{ Used to select the risk parameter of trailing \code{width} returns to use:
-    May be any of:
-    \itemize{
-        \item none - does not add a risk line,
-        \item ModifiedVaR - uses Cornish-Fisher modified VaR,
-        \item GaussianVaR - uses traditional Value at Risk,
-        \item HistoricalVaR - calculates historical Value at Risk,
-        \item ModifiedES - uses Cornish-Fisher modified Expected Shortfall,
-        \item GaussianES - uses traditional Expected Shortfall,
-        \item HistoricalES - calculates historical Expected Shortfall,
-        \item StdDev - per-period standard deviation 
-    }
-  }
-  \item{p}{ confidence level for \code{VaR} or \code{ModifiedVaR} calculation, default is .99 }
-  \item{all}{ if TRUE, calculates risk lines for each column given in R.  If FALSE, only calculates the risk line for the first column }
-  \item{clean}{ the method to use to clean outliers from return data prior to risk metric estimation. See \code{\link{Return.clean}} and \code{\link{VaR}} for more detail }
-  \item{show.clean}{ if TRUE and a method for 'clean' is specified, overlays the actual data with the "cleaned" data.  See \code{\link{Return.clean}} for more detail}
-  \item{\dots}{ any other passthru parameters to \code{\link{chart.TimeSeries}} }
-  \item{show.horizontal}{ if TRUE, shows a line across the timeseries at the value of the most recent VaR estimate, to help the reader evaluate the number of exceptions thus far }
-  \item{show.symmetric}{ if TRUE and the metric is symmetric, this will show the metric's positive values as well as negative values, such as for method "StdDev".}
-  \item{show.endvalue}{ if TRUE, show the final (out of sample) value}
-  \item{show.greenredbars}{ if TRUE, show the per-period returns using green and red bars for positive and negative returns }
-  \item{show.yaxis}{one of "all", "firstonly", "alternating", or "none" to control where y axis is plotted in multipanel charts}
-  \item{perpanel}{default NULL, controls column display} 
-  \item{ylim}{ set the y-axis limit, same as in \code{\link{plot}} }
-  \item{lwd}{ set the line width, same as in \code{\link{plot}} }
-  \item{lty}{ set the line type, same as in \code{\link{plot}} }
-  \item{legend.loc}{ legend location, such as in \code{\link{chart.TimeSeries}}}
-  \item{ypad}{ adds a numerical padding to the y-axis to keep the data away when legend.loc="bottom".  See examples below.}
-  \item{legend.cex}{ sets the legend text size, such as in \code{\link{chart.TimeSeries}}}
-  \item{cex.legend}{ sets the legend text size, such as in \code{\link{chart.TimeSeries}}}
-  \item{main}{ sets the title text, such as in \code{\link{chart.TimeSeries}}}
-  \item{colorset}{ color palette to use, such as in \code{\link{chart.TimeSeries}} }
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{width}{periods specified for rolling-period
+  calculations.  Note that VaR, ES, and Std Dev with
+  width=0 are calculated from the start of the timeseries}
+
+  \item{gap}{numeric number of periods from start of series
+  to use to train risk calculation}
+
+  \item{methods}{Used to select the risk parameter of
+  trailing \code{width} returns to use: May be any of:
+  \itemize{ \item none - does not add a risk line, \item
+  ModifiedVaR - uses Cornish-Fisher modified VaR, \item
+  GaussianVaR - uses traditional Value at Risk, \item
+  HistoricalVaR - calculates historical Value at Risk,
+  \item ModifiedES - uses Cornish-Fisher modified Expected
+  Shortfall, \item GaussianES - uses traditional Expected
+  Shortfall, \item HistoricalES - calculates historical
+  Expected Shortfall, \item StdDev - per-period standard
+  deviation }}
+
+  \item{p}{confidence level for \code{VaR} or
+  \code{ModifiedVaR} calculation, default is .99}
+
+  \item{all}{if TRUE, calculates risk lines for each column
+  given in R.  If FALSE, only calculates the risk line for
+  the first column}
+
+  \item{clean}{the method to use to clean outliers from
+  return data prior to risk metric estimation. See
+  \code{\link{Return.clean}} and \code{\link{VaR}} for more
+  detail}
+
+  \item{show.clean}{if TRUE and a method for 'clean' is
+  specified, overlays the actual data with the "cleaned"
+  data.  See \code{\link{Return.clean}} for more detail}
+
+  \item{\dots}{any other passthru parameters to
+  \code{\link{chart.TimeSeries}}}
+
+  \item{show.horizontal}{if TRUE, shows a line across the
+  timeseries at the value of the most recent VaR estimate,
+  to help the reader evaluate the number of exceptions thus
+  far}
+
+  \item{show.symmetric}{if TRUE and the metric is
+  symmetric, this will show the metric's positive values as
+  well as negative values, such as for method "StdDev".}
+
+  \item{show.endvalue}{if TRUE, show the final (out of
+  sample) value}
+
+  \item{show.greenredbars}{if TRUE, show the per-period
+  returns using green and red bars for positive and
+  negative returns}
+
+  \item{show.yaxis}{one of "all", "firstonly",
+  "alternating", or "none" to control where y axis is
+  plotted in multipanel charts}
+
+  \item{perpanel}{default NULL, controls column display}
+
+  \item{ylim}{set the y-axis limit, same as in
+  \code{\link{plot}}}
+
+  \item{lwd}{set the line width, same as in
+  \code{\link{plot}}}
+
+  \item{lty}{set the line type, same as in
+  \code{\link{plot}}}
+
+  \item{legend.loc}{legend location, such as in
+  \code{\link{chart.TimeSeries}}}
+
+  \item{ypad}{adds a numerical padding to the y-axis to
+  move data when legend.loc="bottom".  See
+  examples below.}
+
+  \item{legend.cex}{sets the legend text size, such as in
+  \code{\link{chart.TimeSeries}}}
+
+  \item{cex.legend}{sets the legend text size, such as in
+  \code{\link{chart.TimeSeries}}}
+
+  \item{main}{sets the title text, such as in
+  \code{\link{chart.TimeSeries}}}
+
+  \item{colorset}{color palette to use, such as in
+  \code{\link{chart.TimeSeries}}}
+}
+\description{
+  Plots the periodic returns as a bar chart overlayed with
+  a risk metric calculation.
 }
 \details{
-  Note that \code{StdDev} and \code{VaR} are symmetric calculations, so a high and low measure will be plotted.  \code{ModifiedVaR}, on the other hand, is assymetric and only a lower bound will be drawn.
+  Note that \code{StdDev} and \code{VaR} are symmetric
+  calculations, so a high and low measure will be plotted.
+  \code{ModifiedVaR}, on the other hand, is assymetric and
+  only a lower bound will be drawn.
 
-Creates a plot of time on the x-axis and vertical lines for each period to indicate value on the y-axis.  Overlays a line to indicate the value of a risk metric calculated at that time period.
-}
-\author{ Peter Carl }
-\seealso{
-   \code{\link{chart.TimeSeries}} \cr
-   \code{\link{plot}} \cr
-   \code{\link{ES}} \cr
-   \code{\link{VaR}} \cr
-   \code{\link{Return.clean}}
+  Creates a plot of time on the x-axis and vertical lines
+  for each period to indicate value on the y-axis.
+  Overlays a line to indicate the value of a risk metric
+  calculated at that time period.
+
+  \code{charts.BarVaR} places multile bar charts in a
+  single graphic, with associated risk measures
 }
 \examples{
 data(managers)
@@ -92,27 +135,53 @@ data(managers)
 chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
 
 # with risk line
-chart.BarVaR(managers[,1,drop=FALSE], methods="HistoricalVaR", main="... with Empirical VaR from Inception")
+chart.BarVaR(managers[,1,drop=FALSE],
+		methods="HistoricalVaR",
+		main="... with Empirical VaR from Inception")
 
 # with lines for all managers in the sample
-chart.BarVaR(managers[,1:6], methods="GaussianVaR", all=TRUE, lty=1, lwd=2, colorset= c("red", rep("gray", 5)), main="... with Gaussian VaR and Estimates for Peers")
+chart.BarVaR(managers[,1:6],
+		methods="GaussianVaR",
+		all=TRUE, lty=1, lwd=2,
+		colorset= c("red", rep("gray", 5)),
+		main="... with Gaussian VaR and Estimates for Peers")
 
 # with multiple methods
-chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), main="... with Multiple Methods")
+chart.BarVaR(managers[,1,drop=FALSE],
+		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+		main="... with Multiple Methods")
 
 # cleaned up a bit
-chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), lwd=2, ypad=.01, main="... with Padding for Bottom Legend")
+chart.BarVaR(managers[,1,drop=FALSE],
+		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+		lwd=2, ypad=.01,
+		main="... with Padding for Bottom Legend")
 
 # with 'cleaned' data for VaR estimates
-chart.BarVaR(managers[,1,drop=FALSE],methods=c("HistoricalVaR", "ModifiedVaR"), lwd=2, ypad=.01, clean="boudt", main="... with Robust ModVaR Estimate")
+chart.BarVaR(managers[,1,drop=FALSE],
+		methods=c("HistoricalVaR", "ModifiedVaR"),
+		lwd=2, ypad=.01, clean="boudt",
+		main="... with Robust ModVaR Estimate")
 
-# Cornish Fisher VaR estimated with cleaned data, with horizontal line to show exceptions
-chart.BarVaR(managers[,1,drop=FALSE],methods="ModifiedVaR", lwd=2, ypad=.01, clean="boudt", show.horizontal=TRUE, lty=2, main="... with Robust ModVaR and Line for Identifying Exceptions")
+# Cornish Fisher VaR estimated with cleaned data,
+# with horizontal line to show exceptions
+chart.BarVaR(managers[,1,drop=FALSE],
+		methods="ModifiedVaR",
+		lwd=2, ypad=.01, clean="boudt",
+		show.horizontal=TRUE, lty=2,
+		main="... with Robust ModVaR and Line for Identifying Exceptions")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ts }
-\keyword{ multivariate }
-\keyword{ distribution }
-\keyword{ models }
-\keyword{ hplot }
+\author{
+  Peter Carl
+}
+\seealso{
+  \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
+  \code{\link{ES}} \cr \code{\link{VaR}} \cr
+  \code{\link{Return.clean}}
+}
+\keyword{distribution}
+\keyword{hplot}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+
