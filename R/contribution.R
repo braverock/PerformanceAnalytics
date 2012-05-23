@@ -1,14 +1,9 @@
-#' dissects the total portfolio returns into components
+#' computes contribution of the portfolio segments
 #' 
 #' @aliases contibution
 #' 
-#' Performs simple contribution analysis by dissecting the total portoflio
-#' returns into components
-
-#' Performance calculated at the total portfolio level summarizes a lot 
-#' of data within a single return number. Dissecting the total portfolio 
-#' return into components allows an analyst to uncover the sources of 
-#' the return. 
+#' Performs simple contribution analysis of returns. Used to uncover the sources 
+#' of the return using returns and portfolio weights. 
 #'
 #' @aliases contribution
 #' @param Rp vector of portfolio returns
@@ -19,30 +14,34 @@
 #' \emph{Portfolio Performance Measurement and Benchmarking}. McGraw-Hill. 2009.
 #' @examples
 #' 
-#'     data(managers)
-#'     CalmarRatio(managers[,1,drop=FALSE])
-#'     CalmarRatio(managers[,1:6]) 
-#'     SterlingRatio(managers[,1,drop=FALSE])
-#'     SterlingRatio(managers[,1:6])
-#' 
-contribution <- function (Rp, wp)
+#' data(portfolio)
+#'     c <- contribution(portfolio[, 6], portfolio[, 7])
+#'     data.frame(portfolio, c)
+#'
+#'
+contribution <- 
+function (Rp, wp)
 { # @author Andrii Babii
 
     # DESCRIPTION:
+    # This is a wrapper for calculating contribution to returns.
+    
     # Inputs:
-    # Rp: portfolio returns
-    # wp: portfolio weights
+    # Rp: vector of portfolio returns
+    # wp: vector of portfolio weights
+  
     # Outputs:
-    # This function returns contibutions of each segment
+    # This function returns the vector of contribution to returns
 
     # FUNCTION:
+
     Rp = checkData(Rp)
     wp = checkData(wp)
-    contr <- function(Rp, wp){
-        c = Rp * wp
-    }
-}
 
+    contr = Rp * wp
+    colnames(contr) = c(rep("contribution",ncol(contr)))
+    return(contr)
+}
 
 #' @export 
 #' @rdname contribution
