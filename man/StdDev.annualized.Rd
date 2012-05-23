@@ -7,7 +7,7 @@
   StdDev.annualized(x, scale = NA, ...)
 }
 \arguments{
-  \item{x,R}{an xts, vector, matrix, data frame, timeSeries
+  \item{x}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
   \item{scale}{number of periods in a year (daily scale =

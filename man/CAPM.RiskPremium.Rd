@@ -1,4 +1,4 @@
-\name{CAPM.RiskPremium}
+\name{CAPM.CML.slope}
 \alias{CAPM.CML}
 \alias{CAPM.CML.slope}
 \alias{CAPM.RiskPremium}
@@ -6,6 +6,10 @@
 \alias{CAPM.utils}
 \title{utility functions for CAPM CML, SML, and RiskPremium}
 \usage{
+  CAPM.CML.slope(Rb, Rf = 0)
+
+  CAPM.CML(Ra, Rb, Rf = 0)
+
   CAPM.RiskPremium(Ra, Rf = 0)
 }
 \arguments{

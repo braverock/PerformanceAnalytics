@@ -25,7 +25,7 @@
 #' 
 #' 
 #' @aliases sd.multiperiod sd.annualized StdDev.annualized
-#' @param x,R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' @param x an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
