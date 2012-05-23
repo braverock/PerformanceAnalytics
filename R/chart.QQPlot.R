@@ -79,6 +79,7 @@
 #' fit.stable = stableFit(x,doplot=FALSE)
 #' chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, distribution = 'stable', alpha = fit.stable@fit$estimate[[1]], beta = fit.stable@fit$estimate[[2]], gamma = fit.stable@fit$estimate[[3]], delta = fit.stable@fit$estimate[[4]], pm = 0)
 #' }
+#' #end examples
 #' 
 chart.QQPlot <-
 function(R, distribution="norm", ylab=NULL,

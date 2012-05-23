@@ -115,6 +115,7 @@ library(fBasics)
 fit.stable = stableFit(x,doplot=FALSE)
 chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, distribution = 'stable', alpha = fit.stable
 }
+}
 \author{
   John Fox, ported by Peter Carl
 }
