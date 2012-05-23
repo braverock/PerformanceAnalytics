@@ -48,7 +48,9 @@
 #' the current setting of 'cex'.
 #' @param \dots any other passthru parameters to the distribution function
 #' @author John Fox, ported by Peter Carl
-#' @seealso \code{\link[stats]{qqplot}} \cr \code{\link[car]{qq.plot}} \cr
+#' @seealso 
+#' \code{\link[stats]{qqplot}} \cr 
+#' \code{\link[car]{qq.plot}} \cr
 #' \code{\link{plot}}
 #' @references main code forked/borrowed/ported from the excellent: \cr Fox,
 #' John (2007) \emph{car: Companion to Applied Regression} \cr

@@ -9,7 +9,7 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param digits number of digits to round results to for presentation
-#' @param as.perc TRUE/FALSE if TRUE, multiply simple returns by 100 to get %
+#' @param as.perc TRUE/FALSE if TRUE, multiply simple returns by 100 to get \%
 #' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
 #' default TRUE
 #' @note This function assumes monthly returns and does not currently have

@@ -24,8 +24,14 @@
 #' 
 #' data(edhec)
 #' chart.RollingPerformance(edhec[, 1:3], width = 24)
-#' chart.RollingPerformance(edhec[, 1:3], FUN = 'mean', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Mean Return")
-#' chart.RollingPerformance(edhec[, 1:3], FUN = 'SharpeRatio.annualized', width = 24, colorset = rich8equal, lwd = 2, legend.loc = "topleft", main = "Rolling 24-Month Sharpe Ratio")
+#' chart.RollingPerformance(edhec[, 1:3], 
+#' 		FUN = 'mean', width = 24, colorset = rich8equal, 
+#' 		lwd = 2, legend.loc = "topleft", 
+#' 		main = "Rolling 24-Month Mean Return")
+#' chart.RollingPerformance(edhec[, 1:3], 
+#' 		FUN = 'SharpeRatio.annualized', width = 24, 
+#' 		colorset = rich8equal, lwd = 2, legend.loc = "topleft", 
+#' 		main = "Rolling 24-Month Sharpe Ratio")
 #' 
 chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL)
 { # @author Peter Carl

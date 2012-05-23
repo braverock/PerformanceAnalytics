@@ -1,5 +1,5 @@
 ###############################################################################
-# Functions to peRform multivariate matrix
+# Functions to perform multivariate matrix
 # calculations on portfolios of assets.
 #
 # I've modified these to minimize the number of
@@ -23,7 +23,7 @@ M3.MM = function(R,...){
    for(t in c(1:T))
    {
        centret = as.numeric(matrix(R[t,]-mu,nrow=cAssets,ncol=1))
-        M3 = M3 + ( centret%*%t(centret) )%x%t(centret)
+       M3 = M3 + ( centret%*%t(centret) )%x%t(centret)
    }
    return( 1/T*M3 );
 }

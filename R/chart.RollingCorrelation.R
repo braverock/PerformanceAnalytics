@@ -22,7 +22,10 @@
 #' 
 #' # First we get the data
 #' data(managers)
-#' chart.RollingCorrelation(managers[, 1:6, drop=FALSE], managers[, 8, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", width=24, main = "Rolling 12-Month Correlation")
+#' chart.RollingCorrelation(managers[, 1:6, drop=FALSE], 
+#' 		managers[, 8, drop=FALSE], 
+#' 		colorset=rich8equal, legend.loc="bottomright", 
+#' 		width=24, main = "Rolling 12-Month Correlation")
 #' 
 chart.RollingCorrelation <-
 function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)

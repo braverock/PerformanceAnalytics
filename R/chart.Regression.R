@@ -45,7 +45,11 @@
 #' @examples
 #' 
 #' data(managers)
-#' chart.Regression(managers[, 1:2, drop = FALSE], managers[, 8, drop = FALSE], Rf = managers[, 10, drop = FALSE], excess.returns = TRUE, fit = c("loess", "linear"), legend.loc = "topleft")
+#' chart.Regression(managers[, 1:2, drop = FALSE], 
+#' 		managers[, 8, drop = FALSE], 
+#' 		Rf = managers[, 10, drop = FALSE], 
+#' 		excess.returns = TRUE, fit = c("loess", "linear"), 
+#' 		legend.loc = "topleft")
 #' 
 chart.Regression <-
 function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, colorset = 1:12, symbolset = 1:12, element.color = "darkgray", legend.loc = NULL, ylog = FALSE, fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3, degree = 1, family = c("symmetric", "gaussian"),  ylim = NA, evaluation = 50, legend.cex= 0.8, cex = 0.8, lwd = 2, ...)

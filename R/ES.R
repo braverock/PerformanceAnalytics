@@ -155,8 +155,8 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
             if(method=="modified"){
-                if (is.null(m3)) {m3 = M3.MM(R,mu=mu,sigma=sigma)}
-                if (is.null(m4)) {m4 = M4.MM(R,mu=mu,sigma=sigma)}
+                if (is.null(m3)) {m3 = M3.MM(R,mu=mu)}
+                if (is.null(m4)) {m4 = M4.MM(R,mu=mu)}
             }
         } 
     } else { 

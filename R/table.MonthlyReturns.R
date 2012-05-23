@@ -12,7 +12,7 @@
 #' @aliases table.Stats table.MonthlyReturns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param ci confidence interval, defaults to 95%
+#' @param ci confidence interval, defaults to 95\%
 #' @param digits number of digits to round results to
 #' @author Peter Carl
 #' @keywords ts multivariate distribution models

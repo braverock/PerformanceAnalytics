@@ -41,7 +41,9 @@
 #' @examples
 #' 
 #' data(managers)
-#' chart.VaRSensitivity(managers[,1,drop=FALSE], methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), colorset=bluefocus, lwd=2)
+#' chart.VaRSensitivity(managers[,1,drop=FALSE], 
+#' 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), 
+#' 		colorset=bluefocus, lwd=2)
 #' 
 chart.VaRSensitivity <-
 function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)

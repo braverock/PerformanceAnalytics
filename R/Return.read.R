@@ -3,20 +3,21 @@
 #' A simple wrapper of read.zoo with some defaults for different date formats
 #' and xts conversion
 #' 
-#' The parameter 'format.in' takes several values, including: \describe{
-#' \item{excel}{default date format for MS Excel spreadsheet csv format, which
-#' is "%m/%d/%Y"} \item{oo}{default date format for OpenOffice spreadsheet csv
-#' format, "%m/%d/%y", although this may be operating system dependent}
-#' \item{gnumeric}{default date format for Gnumeric spreadsheet, which is
-#' "%d-%b-%Y"} \item{...}{alternatively, any specific format may be passed in,
-#' such as "%M/%y"} }
+#' The parameter 'format.in' takes several values, including: 
+#' \describe{
+#'   \item{excel}{default date format for MS Excel spreadsheet csv format, which is "\%m/\%d/\%Y"} 
+#'   \item{oo}{default date format for OpenOffice spreadsheet csv format, "\%m/\%d/\%y", although this may be operating system dependent}
+#'   \item{gnumeric}{default date format for Gnumeric spreadsheet, which is "\%d-\%b-\%Y"} 
+#'   \item{...}{alternatively, any specific format may be passed in, such as "\%M/\%y"} 
+#' }
 #' 
 #' @param filename the name of the file to be read
-#' @param frequency \itemize{ \item "d" sets as a daily timeseries using
-#' \code{\link{as.Date}}, \item "m" sets as monthly timeseries using
-#' \code{\link[zoo]{as.yearmon}}, \item "q" sets as a quarterly timeseries
-#' using \code{\link[zoo]{as.yearqtr}}, and \item "i" sets as irregular
-#' timeseries using \code{\link{as.POSIXct}} }
+#' @param frequency \itemize{ 
+#' 	\item "d" sets as a daily timeseries using \code{\link{as.Date}}, 
+#' 	\item "m" sets as monthly timeseries using \code{\link[zoo]{as.yearmon}}, 
+#'  \item "q" sets as a quarterly timeseries using \code{\link[zoo]{as.yearqtr}}, and 
+#' 	\item "i" sets as irregular timeseries using \code{\link{as.POSIXct}} 
+#' }
 #' @param format.in says how the data being read is formatted.  Although the
 #' default is set to the ISO 8601 standard (which can also be set as "%F"),
 #' most spreadsheets have less sensible date formats as defaults. See below.

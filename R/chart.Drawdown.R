@@ -18,16 +18,20 @@
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso
-#' 
-#' \code{\link{plot}} \cr \code{\link{chart.TimeSeries}} \cr
-#' \code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}} \cr
-#' \code{\link{maxDrawdown}} \cr \code{\link{table.Drawdowns}} \cr
+#' \code{\link{plot}} \cr 
+#' \code{\link{chart.TimeSeries}} \cr
+#' \code{\link{findDrawdowns}} \cr 
+#' \code{\link{sortDrawdowns}} \cr
+#' \code{\link{maxDrawdown}} \cr 
+#' \code{\link{table.Drawdowns}} \cr
 #' \code{\link{table.DownsideRisk}}
 #' @keywords ts
 #' @examples
 #' 
 #' data(edhec)
-#' chart.Drawdown(edhec[,c(1,2)], main="Drawdown from Peak Equity Attained", legend.loc="bottomleft")
+#' chart.Drawdown(edhec[,c(1,2)], 
+#' 		main="Drawdown from Peak Equity Attained", 
+#' 		legend.loc="bottomleft")
 #' 
 chart.Drawdown <-
 function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)

@@ -1,7 +1,5 @@
 #' calculate a Calmar or Sterling reward/risk ratio
-#' 
-#' @aliases SterlingRatio
-#' 
+#'  
 #' Calmar and Sterling Ratios are yet another method of creating a
 #' risk-adjusted measure for ranking investments similar to the
 #' \code{\link{SharpeRatio}}.
@@ -9,7 +7,7 @@
 #' Both the Calmar and the Sterling ratio are the ratio of annualized return
 #' over the absolute value of the maximum drawdown of an investment. The
 #' Sterling ratio adds an excess risk measure to the maximum drawdown,
-#' traditionally and defaulting to 10%.
+#' traditionally and defaulting to 10\%.
 #' 
 #' It is also traditional to use a three year return series for these
 #' calculations, although the functions included here make no effort to
@@ -19,8 +17,8 @@
 #' 
 #' Many other measures have been proposed to do similar reward to risk ranking.
 #' It is the opinion of this author that newer measures such as Sortino's
-#' \code{\link{UpsidePotentialRatio}} or Favre's
-#' \code{\link{SharpeRatio.modified}} are both \dQuote{better} measures, and
+#' \code{\link{UpsidePotentialRatio}} or Favre's modified
+#' \code{\link{SharpeRatio}} are both \dQuote{better} measures, and
 #' should be preferred to the Calmar or Sterling Ratio.
 #' 
 #' @aliases CalmarRatio SterlingRatio
@@ -29,10 +27,13 @@
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
 #' @param excess for Sterling Ratio, excess amount to add to the max drawdown,
-#' traditionally and default .1 (10%)
+#' traditionally and default .1 (10\%)
 #' @author Brian G. Peterson
-#' @seealso \code{\link{Return.annualized}}, \cr \code{\link{maxDrawdown}}, \cr
-#' \code{\link{SharpeRatio.modified}}, \cr \code{\link{UpsidePotentialRatio}}
+#' @seealso 
+#' \code{\link{Return.annualized}}, \cr 
+#' \code{\link{maxDrawdown}}, \cr
+#' \code{\link{SharpeRatio.modified}}, \cr 
+#' \code{\link{UpsidePotentialRatio}}
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004.
 #' @keywords ts multivariate distribution models
@@ -44,6 +45,8 @@
 #'     SterlingRatio(managers[,1,drop=FALSE])
 #'     SterlingRatio(managers[,1:6])
 #' 
+#' @export 
+#' @rdname CalmarRatio
 CalmarRatio <- function (R, scale = NA)
 { # @author Brian G. Peterson
 

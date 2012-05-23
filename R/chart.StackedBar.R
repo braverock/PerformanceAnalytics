@@ -35,7 +35,7 @@
 #' the current setting of 'cex'.
 #' @param xaxis If true, draws the x axis
 #' @param ylab Set the y-axis label, same as in \code{\link{plot}}
-#' @param date.format Re-format the dates for the xaxis; the default is "%m/%y"
+#' @param date.format Re-format the dates for the xaxis; the default is "\%m/\%y"
 #' @param major.ticks Should major tickmarks be drawn and labeled, default
 #' 'auto'
 #' @param minor.ticks Should minor tickmarks be drawn, default TRUE
@@ -82,7 +82,7 @@
 #' head(weights)
 #' 
 #' # With the legend "under" the chart
-#' chart.StackedBar(weights, date.format="%Y", cex.legend = 0.7, colorset=rainbow12equal)
+#' chart.StackedBar(weights, date.format="\%Y", cex.legend = 0.7, colorset=rainbow12equal)
 #' 
 #' # Without the legend
 #' chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)

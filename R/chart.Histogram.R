@@ -14,18 +14,24 @@
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param breaks one of: \itemize{ \item a vector giving the breakpoints
-#' between histogram cells, \item a single number giving the number of cells
-#' for the histogram, \item a character string naming an algorithm to compute
-#' the number of cells (see \sQuote{Details}), \item a function to compute the
-#' number of cells.  } In the last three cases the number is a suggestion only.
+#' @param breaks one of: 
+#' \itemize{ 
+#'  \item a vector giving the breakpoints between histogram cells, 
+#'  \item a single number giving the number of cells for the histogram, 
+#'  \item a character string naming an algorithm to compute the number of cells (see \sQuote{Details}), 
+#'  \item a function to compute the number of cells.  
+#' } 
+#' For the last three the number is a suggestion only.
 #' see \code{\link[graphics]{hist}} for details, default "FD"
-#' @param methods what to graph, one or more of: \itemize{ \itemadd.density to
-#' display the density plot \itemadd.normal to display a fitted normal
-#' distibution line over the mean \itemadd.centered to display a fitted normal
-#' line over zero \itemadd.rug to display a rug of the observations
-#' \itemadd.risk to display common risk metrics \itemadd.qqplot to display a
-#' small qqplot in the upper corner of the histogram plot }
+#' @param methods what to graph, one or more of: 
+#' \itemize{ 
+#'   \item add.density to display the density plot 
+#'   \item add.normal  to display a fitted normal distibution line over the mean 
+#'   \item add.centered to display a fitted normal line over zero 
+#'   \item add.rug to display a rug of the observations
+#'   \item add.risk to display common risk metrics 
+#'   \item add.qqplot to display a small qqplot in the upper corner of the histogram plot 
+#' }
 #' @param p confidence level for calculation, default p=.99
 #' @param probability logical; if TRUE, the histogram graphic is a
 #' representation of frequencies, the counts component of the result; if FALSE,
@@ -73,25 +79,66 @@
 #'     data(edhec)
 #'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE])
 #' 
-#'     # version with more breaks and the standard close fit density distribution
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], breaks=40, methods = c("add.density", "add.rug") )
+#'     # version with more breaks and the 
+#' 	   # standard close fit density distribution
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			breaks=40, methods = c("add.density", "add.rug") )
 #' 
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], methods = c( "add.density", "add.normal") )
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			methods = c( "add.density", "add.normal") )
 #' 
-#'     # version with just the histogram and normal distribution centered on 0
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], methods = c( "add.density", "add.centered") )
+#'     # version with just the histogram and 
+#'     # normal distribution centered on 0
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			methods = c( "add.density", "add.centered") )
 #' 
-#'     # add a rug to the previous plot for more granularity on precisely where the distribution fell
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], methods = c( "add.centered", "add.density", "add.rug") )
+#'     # add a rug to the previous plot 
+#' 	   # for more granularity on precisely where the distribution fell
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			methods = c( "add.centered", "add.density", "add.rug") )
 #' 
-#'     # now show a qqplot to give us another view on how normal the data are
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], methods = c( "add.centered", "add.density", "add.rug", "add.qqplot") )
+#'     # now show a qqplot to give us another view 
+#'     # on how normal the data are
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			methods = c("add.centered","add.density","add.rug","add.qqplot"))
 #' 
-#'     # add risk measure(s) to show where those are in relation to observed returns
-#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], methods = c("add.density", "add.centered", "add.rug", "add.risk") )
+#'     # add risk measure(s) to show where those are 
+#' 	   # in relation to observed returns
+#'     chart.Histogram(edhec[,'Equity Market Neutral',drop=FALSE], 
+#' 			methods = c("add.density","add.centered","add.rug","add.risk"))
 #' 
+#' @export
 chart.Histogram <-
-function(R, breaks="FD", main = NULL, xlab = "Returns", ylab = "Frequency", methods = c("none","add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white", lwd = 2, xlim = NULL, ylim = NULL, element.color="darkgray", note.lines = NULL, note.labels = NULL, note.cex = 0.7, note.color = "darkgray", probability = FALSE, p = 0.95, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, xaxis=TRUE, yaxis=TRUE, ...)
+function(R, 
+		breaks="FD", 
+		main = NULL, 
+		xlab = "Returns", 
+		ylab = "Frequency", 
+		methods = c("none","add.density","add.normal", 
+					"add.centered","add.cauchy","add.sst",
+					"add.rug","add.risk","add.qqplot"), 
+		show.outliers = TRUE, 
+		colorset = c("lightgray","#00008F","#005AFF",
+					"#23FFDC","#ECFF13","#FF4A00","#800000"), 
+		border.col = "white", 
+		lwd = 2, 
+		xlim = NULL, 
+		ylim = NULL, 
+		element.color="darkgray", 
+		note.lines = NULL, 
+		note.labels = NULL, 
+		note.cex = 0.7, 
+		note.color = "darkgray", 
+		probability = FALSE, 
+		p = 0.95, 
+		cex.axis = 0.8, 
+		cex.legend = 0.8, 
+		cex.lab = 1, 
+		cex.main = 1, 
+		xaxis=TRUE, 
+		yaxis=TRUE, 
+		...
+)
 { # @author Peter Carl
 
     # DESCRIPTION:

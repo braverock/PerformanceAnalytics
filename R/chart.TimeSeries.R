@@ -23,7 +23,7 @@
 #' @param main set the chart title, same as in \code{\link{plot}}
 #' @param ylab set the y-axis label, same as in \code{\link{plot}}
 #' @param xlab set the x-axis label, same as in \code{\link{plot}}
-#' @param date.format re-format the dates for the xaxis; the default is "%m/%y"
+#' @param date.format re-format the dates for the xaxis; the default is "\%m/\%y"
 #' @param xlim set the x-axis limit, same as in \code{\link{plot}}
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param event.lines If not null, vertical lines will be drawn to indicate
@@ -51,7 +51,7 @@
 #' @param ylog TRUE/FALSE set the y-axis to logarithmic scale, similar to
 #' \code{\link{plot}}, default FALSE
 #' @param date.format.in allows specification of other date formats in the data
-#' object, defaults to "%Y-%m-%d"
+#' object, defaults to "\%Y-\%m-\%d"
 #' @param cex.axis The magnification to be used for axis annotation relative to
 #' the current setting of 'cex', same as in \code{\link{plot}}.
 #' @param cex.legend The magnification to be used for sizing the legend

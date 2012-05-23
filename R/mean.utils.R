@@ -5,7 +5,8 @@
 #       first parameter with R command mean()
 
 
-
+#' @name mean.utils
+#' 
 #' calculate attributes relative to the mean of the observation series given,
 #' including geometric, stderr, LCL and UCL
 #' 
@@ -60,6 +61,7 @@ function (x, ...)
     }
 }
 
+#' @rdname mean.geometric
 mean.stderr <-
 function (x, ...)
 {# @author Peter Carl
@@ -89,6 +91,7 @@ function (x, ...)
     }
 }
 
+#' @rdname mean.geometric
 mean.LCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
@@ -125,6 +128,7 @@ function (x, ci = 0.95, ...)
     }
 }
 
+#' @rdname mean.geometric
 mean.UCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl

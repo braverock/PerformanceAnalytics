@@ -43,13 +43,20 @@
 #' 
 #' # First we load the data
 #' data(managers)
-#' chart.RollingRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
-#' charts.RollingRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
+#' chart.RollingRegression(managers[, 1, drop=FALSE], 
+#' 		managers[, 8, drop=FALSE], Rf = .04/12)
+#' charts.RollingRegression(managers[, 1:6], 
+#' 		managers[, 8, drop=FALSE], Rf = .04/12, 
+#' 		colorset = rich6equal, legend.loc="topleft")
 #' dev.new()
-#' chart.RollingQuantileRegression(managers[, 1, drop=FALSE], managers[, 8, drop=FALSE], Rf = .04/12)
+#' chart.RollingQuantileRegression(managers[, 1, drop=FALSE], 
+#' 		managers[, 8, drop=FALSE], Rf = .04/12)
 #' # not implemented yet
-#' #charts.RollingQuantileRegression(managers[, 1:6], managers[, 8, drop=FALSE], Rf = .04/12, colorset = rich6equal, legend.loc="topleft")
+#' #charts.RollingQuantileRegression(managers[, 1:6], 
+#' 		managers[, 8, drop=FALSE], Rf = .04/12, 
+#' 		colorset = rich6equal, legend.loc="topleft")
 #' 
+#' @export
 chart.RollingRegression <-
 function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
 { # @author Peter Carl

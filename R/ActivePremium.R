@@ -25,6 +25,10 @@
 #'     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
 #'     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
 #' 
+#' @export
+#' 
+#' 
+
 ActivePremium <- function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 

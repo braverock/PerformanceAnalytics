@@ -35,7 +35,10 @@
 #' @examples
 #' 
 #' data(managers)
-#' chart.RelativePerformance(managers[, 1:6, drop=FALSE], managers[, 8, drop=FALSE], colorset=rich8equal, legend.loc="bottomright", main="Relative Performance to S&P")
+#' chart.RelativePerformance(managers[, 1:6, drop=FALSE], 
+#' 		managers[, 8, drop=FALSE], 
+#' 		colorset=rich8equal, legend.loc="bottomright", 
+#' 		main="Relative Performance to S&P")
 #' 
 chart.RelativePerformance <-
 function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)

@@ -8,9 +8,12 @@
 #' \code{Drawdowns} will calculate the drawdown levels as percentages, for use
 #' in \code{\link{chart.Drawdown}}.
 #' 
-#' Returns an unordered list: \cr \itemize{ \itemreturn depth of drawdown
-#' \itemfrom starting period \itemto ending period \itemlength length in
-#' periods }
+#' Returns an unordered list: \cr 
+#' \itemize{ 
+#'   \item return depth of drawdown
+#'   \item from starting period 
+#'   \item to ending period \item length length in periods 
+#' }
 #' 
 #' @aliases findDrawdowns Drawdowns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -22,9 +25,13 @@
 #' 
 #' \code{findDrawdowns} modified with permission from function by Sankalp
 #' Upadhyay
-#' @seealso \code{\link{sortDrawdowns}} \cr \code{\link{maxDrawdown}} \cr
-#' \code{\link{sortDrawdowns}} \cr \code{\link{table.Drawdowns}} \cr
-#' \code{\link{table.DownsideRisk}} \cr \code{\link{chart.Drawdown}} \cr
+#' @seealso 
+#' \code{\link{sortDrawdowns}} \cr 
+#' \code{\link{maxDrawdown}} \cr
+#' \code{\link{sortDrawdowns}} \cr 
+#' \code{\link{table.Drawdowns}} \cr
+#' \code{\link{table.DownsideRisk}} \cr 
+#' \code{\link{chart.Drawdown}} \cr
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 88 \cr
 #' @keywords ts multivariate distribution models
