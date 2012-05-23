@@ -25,16 +25,16 @@
 #' @param main set the chart title, same as in \code{plot}
 #' @param las set the direction of axis labels, same as in \code{plot}
 #' @param envelope confidence level for point-wise confidence envelope, or
-#' 'FALSE' for no envelope.
+#' FALSE for no envelope.
 #' @param labels vector of point labels for interactive point identification,
-#' or 'FALSE' for no labels.
+#' or FALSE for no labels.
 #' @param col color for points and lines; the default is the \emph{second}
 #' entry in the current color palette (see 'palette' and 'par').
 #' @param lwd set the line width, as in \code{\link{plot}}
 #' @param pch symbols to use, see also \code{\link{plot}}
 #' @param cex symbols to use, see also \code{\link{plot}}
-#' @param line '"quartiles"' to pass a line through the quartile-pairs, or
-#' '"robust"' for a robust-regression line; the latter uses the 'rlm' function
+#' @param line 'quartiles' to pass a line through the quartile-pairs, or
+#' 'robust' for a robust-regression line; the latter uses the 'rlm' function
 #' in the 'MASS' package. Specifying 'line = "none"' suppresses the line.
 #' @param element.color provides the color for drawing chart elements, such as
 #' the box lines, axis lines, etc. Default is "darkgray"
@@ -47,6 +47,7 @@
 #' @param cex.main The magnification to be used for the main title relative to
 #' the current setting of 'cex'.
 #' @param \dots any other passthru parameters to the distribution function
+#' 
 #' @author John Fox, ported by Peter Carl
 #' @seealso 
 #' \code{\link[stats]{qqplot}} \cr 

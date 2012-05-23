@@ -126,7 +126,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' matrix of the bulk of the data and let \eqn{\lfloor \cdot \rfloor}{floor()}
 #' be the operator that takes the integer part of its argument. As a measure of
 #' the extremeness of the return observation \eqn{r_t}, we use its squared
-#' Mahalanobis distance \eqn{ d^2_t = (r_t-\mu)'\Sigma^{-1}(r_t-\mu).} We
+#' Mahalanobis distance \eqn{ d^2_t = (r_t-\mu)'\Sigma^{-1}(r_t-\mu)}.  We
 #' follow Rousseeuw(1985) by estimating \eqn{\mu} and \eqn{\Sigma} as the mean
 #' vector and covariance matrix (corrected to ensure consistency) of the subset
 #' of size \eqn{\lfloor (1-\alpha)T\rfloor}{floor((1-\alpha)T)} for which the
@@ -142,14 +142,14 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' (1-\alpha)T \rfloor)}}{floor((1-\alpha)T)} and exceeds a very extreme
 #' quantile of the Chi squared distribution function with \eqn{n} degrees of
 #' freedom, which is the distribution function of \eqn{d^2_t} when the returns
-#' are normally distributed. In this application we take the 99.9% quantile,
-#' denoted \eqn{\chi^2_{n,0.999}}.
+#' are normally distributed. In this application we take the 99.9\% quantile,
+#' denoted \eqn{\chi ^2_{n,0.999}}.
 #' 
 #' \item \emph{Data cleaning. } Similarly to Khan(2007) we only clean the
-#' returns that are identified as outliers in step 2 by replacing these returns
-#' \eqn{r_t} with \deqn{r_t\sqrt{\frac{\max(d^2_{(\lfloor }{r_t *
-#' sqrt(max(d^2_floor((1-\alpha)T),\chi^2_{n,0.999})/d^2_t)}\deqn{(1-\alpha)T)\rfloor},\chi^2_{n,0.999})}{d^2_t}}}{r_t
-#' * sqrt(max(d^2_floor((1-\alpha)T),\chi^2_{n,0.999})/d^2_t)} The cleaned
+#' returns that are identified as outliers in step 2 
+#' by replacing these returns \eqn{r_t} with 
+#' \deqn{r_t\sqrt{\frac{\max(d^2_{(\lfloor(1-\alpha)T)\rfloor},\chi^2_{n,0.999})}{d^2_t}}}{r_t * sqrt(max(d^2_floor((1-\alpha)T),\chi^2_{n,0.999})/d^2_t)}
+#' The cleaned
 #' return vector has the same orientation as the original return vector, but
 #' its magnitude is smaller. Khan(2007) calls this procedure of limiting the
 #' value of \eqn{d^2_t} to a quantile of the \eqn{\chi^2_n} distribution,
@@ -173,7 +173,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param alpha probability to filter at 1-alpha, defaults to .01 (99%)
+#' @param alpha probability to filter at 1-alpha, defaults to .01 (99\%)
 #' @param trim where to set the "extremeness" of the Mahalanobis distance
 #' @return cleaned data matrix
 #' @note This function and much of this text was originally written for Boudt,

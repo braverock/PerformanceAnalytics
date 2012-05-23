@@ -30,7 +30,7 @@
   left, topleft, top, topright, right, or center.}
 
   \item{ylog}{TRUE/FALSE set the y-axis to logarithmic
-  scale, default FALSE}
+  scale, similar to \code{\link{plot}}, default FALSE}
 
   \item{cex.legend}{the magnification to be used for sizing
   the legend relative to the current setting of 'cex'.}

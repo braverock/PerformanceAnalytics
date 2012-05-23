@@ -4,9 +4,7 @@
 \title{Periodic returns in a bar chart with risk metric overlay}
 \usage{
   chart.BarVaR(R, width = 0, gap = 12,
-    methods = c("none", "ModifiedVaR", "GaussianVaR", 
-        "HistoricalVaR", "StdDev",
-        "ModifiedES", "GaussianES", "HistoricalES"),
+    methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"),
     p = 0.95, clean = c("none", "boudt", "geltner"),
     all = FALSE, ..., show.clean = FALSE,
     show.horizontal = FALSE, show.symmetric = FALSE,
@@ -96,7 +94,7 @@
   \code{\link{chart.TimeSeries}}}
 
   \item{ypad}{adds a numerical padding to the y-axis to
-  move data when legend.loc="bottom".  See
+  keep the data away when legend.loc="bottom".  See
   examples below.}
 
   \item{legend.cex}{sets the legend text size, such as in

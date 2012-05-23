@@ -35,7 +35,7 @@
   rational choices}
 
   \item{symbol.color}{draws the symbols described in
-  mean.symbol,median.symbol,outlier.symbol
+  \code{mean.symbol},\code{median.symbol},\code{outlier.symbol}
   in the color specified}
 
   \item{mean.symbol}{symbol to use for the mean of the
