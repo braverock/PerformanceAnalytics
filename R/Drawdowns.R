@@ -17,7 +17,7 @@ function (R, geometric = TRUE, ...)
         if(geometric)
             Return.cumulative = cumprod(1+x)
         else
-            Return.cumulative = exp(cumsum(x))
+            Return.cumulative = 1+cumsum(x)
         maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
         column.drawdown = Return.cumulative/maxCumulativeReturn - 1
     }
