@@ -27,20 +27,31 @@ function (Rp, wp)
     # This is a wrapper for calculating contribution to returns.
     
     # Inputs:
-    # Rp: vector of portfolio returns
-    # wp: vector of portfolio weights
+    # Rp: a matrix, data frame, or timeSeries of returns
+    # wp: a matrix, data frame, or timeSeries of weights
   
     # Outputs:
     # This function returns the vector of contribution to returns
 
     # FUNCTION:
 
-    Rp = checkData(Rp)
-    wp = checkData(wp)
-
-    contr = Rp * wp
-    colnames(contr) = c(rep("contribution",ncol(contr)))
-    return(contr)
+    Rp = checkData(Rp, method = "zoo")
+    wp = checkData(wp, method = "zoo")
+    
+    columns = ncol(Rp)
+    rows = nrow(Rp)
+    columnames = colnames(Rp)
+    
+    for(i in 1:columns){
+    contr = Rp[, i] * wp[, i]
+    if(i == 1){
+        result.contr = contr
+    } else{
+        result.contr = merge(result.contr, contr)
+    }
+    }
+    colnames(result.contr) = columnames
+    return(result.contr)
 }
 
 #' @export 
