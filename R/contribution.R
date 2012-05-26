@@ -3,15 +3,17 @@
 #' @aliases contibution
 #' 
 #' Performs simple contribution analysis of returns. Used to uncover the sources 
-#' of the return using returns and portfolio weights. 
+#' of the return using returns and portfolio weights. Total portfolio returns can be 
+#' decomposed into segments: \deqn{R=\underset{i}{\sum}w_{i}R_{i}}
+#' R=sum_i(wi*Ri)
 #'
 #' @aliases contribution
-#' @param Rp vector of portfolio returns
-#' @param wp vector of portfolio weights
+#' @param Rp a matrix, data frame, or timeSeries of returns
+#' @param wp a matrix, data frame, or timeSeries of weights
 #' @author Andrii Babii
 #' @seealso 
 #' @references Jon A. Christopherson, David R., Wayne E. Ferson 
-#' \emph{Portfolio Performance Measurement and Benchmarking}. McGraw-Hill. 2009.
+#' \emph{Portfolio Performance Measurement and Benchmarking}. McGraw-Hill. 2009., Chapter 17
 #' @examples
 #' 
 #' data(portfolio)
@@ -31,7 +33,7 @@ function (Rp, wp)
     # wp: a matrix, data frame, or timeSeries of weights
   
     # Outputs:
-    # This function returns the vector of contribution to returns
+    # This function returns the vector or matrix of contribution to returns
 
     # FUNCTION:
 
