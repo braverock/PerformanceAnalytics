@@ -9,7 +9,6 @@
             dsc$Title, "\n", dsc$Copyright, " ", dsc$Author, ". License: ", dsc$License, "\n", dsc$URL,
             "\n", sep=""))
     }
-
 }
 
 even <- function (x) x%%2==0
