@@ -82,8 +82,8 @@
 #' SemiVariance (managers[,1:6]) #calculated using method="subset"
 #' 
 DownsideDeviation <-
-function (R, MAR = 0, method=c("subset","full"), ..., potential=FALSE)
-{ # @author Peter Carl
+function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
+{ # @author Peter Carl, Matthieu Lestel
 
     # DESCRIPTION:
     # Downside deviation, similar to semi deviation, eliminates positive returns
@@ -115,9 +115,13 @@ function (R, MAR = 0, method=c("subset","full"), ..., potential=FALSE)
             full   = {len = length(R)},
             subset = {len = length(r)} #previously length(R)
         ) # end switch
-        p=2
-        if(potential) p=1 # calculates downside potential instead
-        result = sqrt(sum((r - MAR)^p)/len)
+
+        if(potential) { # calculates downside potential instead
+        	 result = sum((MAR - r)/len)
+	}
+	else {
+	     result = sqrt(sum((MAR - r)^2/len))
+	}
         return(result)
     }
     else {
@@ -134,20 +138,21 @@ function (R, MAR = 0, method=c("subset","full"), ..., potential=FALSE)
 }
 
 DownsidePotential <-
-function (R)
-{ # @author Peter Carl
+function (R, MAR=0)
+{ # @author Peter Carl, Matthieu Lestel
 
     # DESCRIPTION:
-    # This function is just a wrapper of DownsideDeviation with
-    # MAR = mean(x) and potential = TRUE
-    # see below
+    # To calculate Downside Potential, we take the returns that are less
+    # than the target (or Minimum Acceptable Returns (MAR)) returns and take the
+    # differences of those to the target.  We sum and divide by the
+    # total number of returns.
 
     # FUNCTION:
     
     
     if (is.vector(R)) {
         R = na.omit(R)
-        return(DownsideDeviation(R, MAR=mean(R), method="full", potential=TRUE))
+        return(DownsideDeviation(R, MAR=MAR, method="full", potential=TRUE))
     }
     else {
         R = checkData(R, method = "matrix")
