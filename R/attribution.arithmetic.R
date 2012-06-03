@@ -1,65 +1,82 @@
-#' performs attribution analysis
+#' performs arithmetic attribution
 #' 
 #' @aliases attribution.arithmetic
 #' 
-#' Performs attribution analysis of returns. Used to decompose uncover the sources 
-#' of the return using returns and portfolio weights. 
+#' Performs arithmetic attribution analysis of returns. Used to uncover the sources 
+#' of portfolio return 
 #'
 #' @aliases attribution.arithmetic
-#' @param Rp vector of portfolio returns
-#' @param wp vector of portfolio weights
-#' @param Rb
-#' @param wb
+#' @param Rp portfolio returns
+#' @param wp portfolio weights
+#' @param Rb benchmark returns
+#' @param wb benchmark weights
 #' @author Andrii Babii
 #' @seealso 
 #' @references Jon A. Christopherson, David R., Wayne E. Ferson 
 #' \emph{Portfolio Performance Measurement and Benchmarking}. McGraw-Hill. 2009.
 #' @examples
 #' 
-#' wp  <- rep(c(0.6, 0.1, 0.3), 3)
-#' wb <- rep(c(0.55, 0.05, 0.4), 3)
-#' Rp <- c(-0.037, -0.035, -0.001, 0.041, 0.037, 0.029, 0.035, 0.012, 0.01)
-#' Rb <- c(-0.019, -0.053, -0.09, 0.021, 0.043, 0.024, 0.021, 0.014, 0.004)
-#' dates <- c(rep("01/01/12", 3), rep("02/01/12", 3), rep("03/01/12", 3))
-#' t <- as.Date(dates, "%m/%d/%y")
-#' asset.class <- rep(c("large-cap equity", "small-cap equity", "fixed income"), 3)
-#' data.frame(t, asset.class, attribution.arithmetic(Rp, wp, Rb, wb, "td")) #Top-down
-#' data.frame(t, asset.class, attribution.arithmetic(Rp, wp, Rb, wb, "bu")) #Bottom-up
-#'
+#' 
 #'
 attribution.arithmetic <- 
-function (Rp, wp, Rb, wb, FUN=c("td", "bu"))
+function (Rp, wp, Rb, wb, method = c("top.down", "bottom.up", "simple"))
 { # @author Andrii Babii
 
     # DESCRIPTION:
     # This is a wrapper for attribution analysis.
-    
+    # TODO: extend to multiple periods, time-varying weights, multiple levels 
+
     # Inputs:
-    # Rp: a matrix, data frame, or timeSeries of returns
-    # wp: a matrix, data frame, or timeSeries of weights
-    # Rb: 
-    # wb:
+    # Rp: portfolio returns
+    # wp: portfolio weights
+    # Rb: benchmark returns
+    # wb: benchmark weights
   
     # Outputs:
     # This function returns the
     # FUNCTION:
-
-    Rp = checkData(Rp)
-    wp = checkData(wp)
+    
     Rb = checkData(Rb)
-    wb = checkData(wb)
+    Rp = checkData(Rp)
+    wp = as.xts(matrix(rep(wp, nrow(Rp)), nrow(Rp), ncol(Rp), byrow = TRUE), index(Rp))
+    wb = as.xts(matrix(rep(wb, nrow(Rb)), nrow(Rb), ncol(Rb), byrow = TRUE), index(Rb))
+    colnames(wp) = colnames(Rp)
+    colnames(wb) = colnames(Rb)
 
-    ae = (wp - wb) * Rb
-    se = (wb) * (Rp - Rb)
-    ie = (wp - wb) * (Rp - Rb)
-    te = ae + se + ie
-    result.contr.td = data.frame(ae, se + ie, te) # Top-down
-    result.contr.bu = data.frame(ae + ie, se, te) # Bottom-up
-    if(FUN == "td")
-        return(result.contr.td)
+    allocation = (wp - wb) * (Rb - drop(Rb %*% t(wb)))
+    selection = wb * (Rp - Rb)
+    interaction = (wp - wb) * (Rp - Rb)
+    total = allocation + selection + interaction
+    
+    if(method == "top.down")
+        result = data.frame(t(allocation), t(selection) + t(interaction), 
+        t(total)) # Top-down attribution
     else
-        return(result.contr.bu)
+        if(method == "bottom.up")
+            result = data.frame(t(allocation) + t(interaction), t(selection), 
+            t(total)) # Bottom-up attribution
+        else
+            if(method == "simple")
+                result = data.frame(t(allocation), t(selection), t(total))
+            else
+                stop(paste("Please select the correct method for the attribution output"))    
+    colnames(result) = c("Allocation", "Selection", "Total")
+    sum = (t(as.matrix(colSums(result))))
+    rownames(sum) = "Total"
+    result = rbind(result, sum)
+    return(result)
 }
+#EXAMPLE:
+Rp <- matrix(c(0.0397, 0.0493, 0.0891, 0.0289), 1, 4)
+colnames(Rp) <- c("Oil", "It", "Retail", "Energy")
+rownames(Rp) <- "2011-01-06"
+Rb <- Rp + 0.01
+wp <- c(0.1, 0.4, 0.3, 0.2)
+wb <- c(0.2, 0.1, 0.4, 0.3)
+attribution.arithmetic(Rp, wp, Rb, wb, method = "top.down")
+attribution.arithmetic(Rp, wp, Rb, wb, method = "bottom.up")
+attribution.arithmetic(Rp, wp, Rb, wb, method = "simple")
+attribution.arithmetic(Rp, wp, Rb, wb, method = "simpel")
 
 #' @export 
 #' @rdname attribution.arithmetic
