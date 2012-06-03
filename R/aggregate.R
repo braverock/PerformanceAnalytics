@@ -17,10 +17,11 @@
 #' 
 aggregate <-
 function(Rp, wp, h, level = "Sector"){
-    
+     
     h = split(h$primary_id, h[level])
+    returns = as.xts(matrix(NA, ncol = length(h), nrow = nrow(Rp)), index(Rp))
     for(j in 1:length(h)){
-        for(i in length(h[[j]])){
+        for(i in 1:length(h[[j]])){
             asset = h[[j]][i]
             r = as.data.frame(Rp)[asset] * as.data.frame(wp)[asset]
             r = as.xts(r)
@@ -30,13 +31,9 @@ function(Rp, wp, h, level = "Sector"){
             } else{
                 rp = rp + r
             }
-            colnames(rp) = names(h[j])
         }
-            if (j == 1){ 
-                returns = rp
-            } else { 
-                returns = cbind(returns, rp) 
-            } 
+        returns[, j] = rp
+        colnames(returns) = names(h)
     }
     return(returns)
 }
@@ -61,5 +58,7 @@ wp <- as.xts(matrix(rep(c(0.3, 0.1, 0.2, 0.1, 0.2), 5), 5, 5), index(Rp))
 colnames(wp) <- colnames(Rp)
 
 # 2. Aggregate portfolio
-Rp <- aggregate(Rp, wp, hierarchy, "Sector")
 Rp
+aggregate(Rp, wp, hierarchy, level = "Sector")
+aggregate(Rp, wp, hierarchy, level = "type")
+aggregate(Rp, wp, hierarchy, level = "currency")
