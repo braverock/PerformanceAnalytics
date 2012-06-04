@@ -1,4 +1,4 @@
-#' aggregate portfolio up
+#' aggregate portfolio to the given level
 #' 
 #' @aliases aggregate
 #' 
@@ -7,25 +7,47 @@
 #'
 #' @aliases aggregate
 #' @param Rp xts, data frame or matrix of portfolio returns
-#' @param wp xts, data frame or matrix of portfolio weights. Names of columns 
-#' in weights should correspond to the names of columns in returns
-#' @param h  portfolio hierarchy returned by buildHierarchy
+#' @param wp vector, xts, data frame or matrix of portfolio weights.
+#' @param h  portfolio hierarchy returned by the buildHierarchy function
 #' @param level aggregation level from the hierarchy
 #' @author Andrii Babii
 #' @seealso  \code{\link{buildHierarchy}}
-#' TODO Replace example using portfolio dataset. It should work with returns 
-#' in the same manner as Return.portfolio function in future
+#' TODO Replace example using portfolio dataset. 
 #' @references
 #' @export
 #' @examples
 #' 
-aggregate.returns <-
+Return.level <-
 function(Rp, wp, h, level = "Sector")
 {
-
     Rp = checkData(Rp, method = "xts")
-    wp = checkData(wp, method = "xts")
 
+    # Transform weights to the xts object used by aggregation function
+    if (is.vector(wp)){
+        wp = as.xts(matrix(rep(wp, nrow(Rp)), nrow(Rp), ncol(Rp), byrow = TRUE), index(Rp))
+        colnames(wp) = colnames(Rp)
+    } else{
+        wp = checkData(wp, method = "xts")
+        if(as.Date(first(index(Rp))) > (as.Date(index(wp[1,]))+1)) {
+            warning(paste('data series starts on',as.Date(first(index(Rp))),', which is after the first rebalancing period',as.Date(first(index(wp)))+1)) 
+        }
+        if(as.Date(last(index(R))) < (as.Date(index(weights[1,]))+1)){
+            stop(paste('last date in series',as.Date(last(index(Rp))),'occurs before beginning of first rebalancing period',as.Date(first(index(wp)))+1))
+        }
+        w = Rp
+        for(i in 1:nrow(w)){
+            j = 1
+            if(index(wp[j + 1, ]) > index(w[i, ])){
+                w[i, ] = wp[j, ]
+            } else{
+                j = j + 1
+                w[i, ] = wp[j, ]
+            }
+        }
+    }
+    wp = w
+
+    # Aggregate returns
     h = split(h$primary_id, h[level])
     returns = as.xts(matrix(NA, ncol = length(h), nrow = nrow(Rp)), index(Rp))
     for(j in 1:length(h)){
@@ -38,14 +60,13 @@ function(Rp, wp, h, level = "Sector")
         }
         returns[, j] = rp
         colnames(returns) = names(h)
-    }
+        }
     return(returns)
 }
 
-aggregate.weights <-
+Weight.level <-
 function(wp, h, level = "Sector")
 {
-    Rp = checkData(Rp, method = "xts")
     wp = checkData(wp, method = "xts")
 
     h = split(h$primary_id, h[level])
@@ -81,13 +102,17 @@ for (i in list){
         Rp <- cbind(Rp, r)
     }
 }
-wp <- as.xts(matrix(rep(c(0.3, 0.1, 0.2, 0.1, 0.2), 5), 5, 5, TRUE), index(Rp))
-colnames(wp) <- colnames(Rp)
 
 # 2. Aggregate portfolio
 Rp
-aggregate.returns(Rp, wp, hierarchy, level = "Sector")
-aggregate.returns(Rp, wp, hierarchy, level = "type")
+# with vector weights
+wp <- c(0.3, 0.2, 0.2, 0.1, 0.2)
+Return.level(Rp, wp, hierarchy, level = "Sector")
+# with xts weights
+wp <- Rp[1:2, ]
+wp[1, ] <- c(0.3, 0.2, 0.2, 0.1, 0.2)
+wp[2, ] <- c(0.3, 0.2, 0.2, 0.1, 0.2)
+Return.level(Rp, wp, hierarchy, level = "type")
 aggregate.weights(wp, hierarchy, level = "Sector")
 
 
