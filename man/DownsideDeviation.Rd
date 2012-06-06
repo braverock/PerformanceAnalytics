@@ -6,7 +6,7 @@
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
   DownsideDeviation(R, MAR = 0,
-    method = c("subset", "full"), ..., potential = FALSE)
+    method = c("full", "subset"), ..., potential = FALSE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -34,7 +34,10 @@
   positive returns when calculating risk.  Instead of using
   the mean return or zero, it uses the Minimum Acceptable
   Return as proposed by Sharpe (which may be the mean
-  historical return or zero).
+  historical return or zero). It measures the the
+  variability of underperformance below a minimum targer
+  rate. The downside variance is the square of the downside
+  potential.
 
   To calculate it, we take the subset of returns that are
   less than the target (or Minimum Acceptable Returns
@@ -42,8 +45,14 @@
   target.  We sum the squares and divide by the total
   number of returns to get a below-target semi-variance.
 
-  \deqn{ DownsideDeviation(R , MAR)= \delta_{MAR} = \sqrt{
-  \frac{\sum^{n}_{t=1}(R_{t} - MAR)^{2}}{n} } }
+  \deqn{ DownsideDeviation(R , MAR)= \delta_{MAR} =
+  \sqrt{\sum^{n}_{t=1}\frac{ min[(R_{t} - MAR), 0]^2}{n}}}
+
+  \deqn{ DownsideVariance(R, MAR) =
+  \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2} {n}}
+
+  \deqn{DownsidePotential(R, MAR) =
+  \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]} {n}}
 
   where \eqn{n} is either the number of observations of the
   entire series or the number of observations in the subset
@@ -84,6 +93,15 @@
   contribution of this nature.
 }
 \examples{
+#with data used in Bacon 2008
+
+portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0,-3.7,-6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
+MAR = 0.5
+DownsideDeviation(portfolio_return, MAR) #expected 2.55
+DownsidePotential(portfolio_return, MAR) #expected 1.37
+
+#with data of managers
+
 data(managers)
 apply(managers[,1:6], 2, sd, na.rm=TRUE)
 DownsideDeviation(managers[,1:6])  # MAR 0\%
@@ -94,12 +112,14 @@ SemiVariance (managers[,1,drop=FALSE])
 SemiVariance (managers[,1:6]) #calculated using method="subset"
 }
 \author{
-  Peter Carl, Brian G. Peterson
+  Peter Carl, Brian G. Peterson, Matthieu Lestel
 }
 \references{
   Sortino, F. and Price, L. Performance Measurement in a
   Downside Risk Framework. \emph{Journal of Investing}.
-  Fall 1994, 59-65. \cr
+  Fall 1994, 59-65. \cr Carl Bacon, \emph{Practical
+  portfolio performance measurement and attribution},
+  second edition 2008
 
   Plantinga, A., van der Meer, R. and Sortino, F. The
   Impact of Downside Risk on Risk-Adjusted Performance of

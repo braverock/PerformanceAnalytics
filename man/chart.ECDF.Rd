@@ -4,8 +4,8 @@
 \usage{
   chart.ECDF(R, main = "Empirical CDF", xlab = "x",
     ylab = "F(x)", colorset = c("black", "#005AFF"),
-    lwd = 1, xlim = NULL, ylim = NULL, lty = c(1, 1),
-    element.color = "darkgray", ...)
+    lwd = 1, lty = c(1, 1), element.color = "darkgray",
+    xaxis = TRUE, yaxis = TRUE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -20,18 +20,16 @@
   \item{ylab}{set the y-axis label, same as in
   \code{\link{plot}}}
 
+  \item{xaxis}{if true, draws the x axis}
+
+  \item{yaxis}{if true, draws the y axis}
+
   \item{colorset}{color palette to use, defaults to
   c("black", "\#005AFF"), where first value is used to
   color the step function and the second color is used for
   the fitted normal}
 
   \item{lwd}{set the line width, same as in
-  \code{\link{plot}}}
-
-  \item{xlim}{set the x-axis limit, same as in
-  \code{\link{plot}}}
-
-  \item{ylim}{set the y-axis limit, same as in
   \code{\link{plot}}}
 
   \item{element.color}{specify the color of chart elements.
