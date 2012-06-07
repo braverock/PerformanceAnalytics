@@ -1,33 +1,3 @@
-#' Risk and Asset Allocation functions
-#'
-#' \tabular{ll}{
-#' Package: \tab Atillio Meucci Risk functions\cr
-#' Type: \tab Package\cr
-#' Version: \tab 0.1\cr
-#' Date: \tab 2011-11-22\cr
-#' LazyLoad: \tab yes\cr
-#' }
-#'
-#' Contains a collection of functions to implement code from Atillio Meucci's text
-#' "Risk and Asset Allocation". See www.symmys.com for latest MATLAB source code and 
-#' more information. Special thanks to Atillio Meucci and www.symmys.com 
-#' for providing the MATLAB source on which most of the functions are based
-#' 
-#' @name RiskAssetAllocation-package
-#' @aliases RiskAssetAllocation CMAcopula 
-#' @docType package
-#' @title Implements the CMA copula based on Meucci (2011)
-#' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
-#' @references 
-#' \url{http://www.symmys.com}
-#' @keywords package meucci copula entropy-pooling entropy CMA panic
-#' @examples
-#'         print(" This is a test example at the top of the meuccicopula.R file ")
-# library(roxygen)
-library(roxygen2)
-roxygen:::roxygen()
-
-# Depends: \tab \cr matlab  MASS roxygen2 trust pracma Hmisc Matrix \cr
 
 # fix documentation for @return in PanicCopula()
 # plot shape of the copula (perspective or surface plot)
@@ -49,11 +19,11 @@ roxygen:::roxygen()
 #' TODO: Add Schur decomposition. Right now function is only sampling from mvrnorm so sample moments do no match population moments
 #' I have sample code commented out below to implement this correctly but I require a function that returns the unitaryMatrix from a Schur decomposition
 MvnRnd = function( M , S , J )
-  {
-  library(MASS)
-  X = MASS::mvrnorm( n = J , mu = M , Sigma = S ) # Todo: need to swap with Meucci function and Schur method
-  return( X = X )
-
+{
+    library(MASS)
+    X = MASS::mvrnorm( n = J , mu = M , Sigma = S ) # Todo: need to swap with Meucci function and Schur method
+    return( X = X )
+    
     # # compute sample covariance: NOTE defined as "cov(Y,1)", not as "cov(Y)"
     # S_ = cov( Y , 1 )
     # 
@@ -76,7 +46,7 @@ MvnRnd = function( M , S , J )
     # # affine transformation to match mean and covariances
     # # X = Y%*%B + repmat(M', J , 1 ) 
     #
-  }
+}
 
 
 #' CMA separation. Decomposes arbitrary joint distributions (scenario-probabilities) into their copula and marginals
@@ -106,36 +76,36 @@ CMAseparation = function( X , p )
 # @example     test = cbind( seq( 102 , 1 , -2 ) , seq( 100 , 500 , 8 ) )
 # @example     prob = rep(.02 , 51 )
 # @example     CMAseparation( test , prob )
-
-library(pracma)
+    
+    library(pracma)
 # preprocess variables
     X = as.matrix( X ) # J x N matrix. One column for each marginal distribution, J scenarios
     p = as.matrix( p ) # J x 1 matrix of twisted probabilities
     J = nrow( X )
     N = ncol( X )
     l = J / ( J + 1 ) # Laplace
-
+    
     # To ensure that no scenario in the prior is strictly impossible under the prior distribution we take the max of the prior or epsilon
-        # This is necessary otherwise one cannot apply Bayes rule if the prior probability of a scenario is 0
+    # This is necessary otherwise one cannot apply Bayes rule if the prior probability of a scenario is 0
     p = apply( cbind( p , 1 / J * 10^(-8) ) , 1 , max ) # return a J x 1 matrix where each row is the max of the row in p or 1 / J * 10^(-8)    
-
+    
     p = p / sum(p) # Return a re-scaled vector of probabilities summing to 1
     u = 0 * X # initialize a J x N matrix of 0's
     U = 0 * X
-
+    
 # begin core algorithm        
     # initialize empty J x N matrices
     x = matrix( nrow = J , ncol = N ) 
     Indx = matrix( nrow = J , ncol = N )
-
-    for ( n in 1:N ) # for each marginal...
-        {
-        x[ , n ] = sort( X[ , n ] , decreasing = FALSE ) # a JxN matrix where each column consists of each marginal's generic x values in ascending order
-        Indx[ , n ] = order( X[ , n ] ) # a JxN matrix. Each column contains the rank of the associated generic X in that column
-        }
     
     for ( n in 1:N ) # for each marginal...
-        {
+    {
+        x[ , n ] = sort( X[ , n ] , decreasing = FALSE ) # a JxN matrix where each column consists of each marginal's generic x values in ascending order
+        Indx[ , n ] = order( X[ , n ] ) # a JxN matrix. Each column contains the rank of the associated generic X in that column
+    }
+    
+    for ( n in 1:N ) # for each marginal...
+    {
         I = Indx[ , n ] # a Jx1 vector consisting of a given marginal's rank/index    
         cum_p = cumsum( p[I] ) # compute cdf. The head is a small number, and the tail value is 1
         u[ , n ] = cum_p * l # 'u' will contain cdf for each marginal by column - it is rescaled by 'l' to be <1 at the far right of the distribution    
@@ -146,9 +116,9 @@ library(pracma)
         
         # U is a copula (matrix) - the joint distribution of grades defined by feeding the original variables X into their respective marginal CDF
         U[ , n ] = cum_p[ Rnk ] * l # J x N matrix of grades. compute grades by feeding each column of marginals into its own CDF. U=F(X). Grades can be interepreted as a non-linear z-score. 
-        }
-
-return ( list( xdd = x , udd = u , U = U ) )
+    }
+    
+    return ( list( xdd = x , udd = u , U = U ) )
 }
 
 #' CMA combination. Glues an arbitrary copula and arbitrary marginal distributions into a new joint distribution
@@ -175,16 +145,16 @@ CMAcombination = function( x , u , U )
     J = nrow( x )
     K = ncol( x )
     X = as.matrix( 0 * U ) # a J x N zero matrix
-
+    
     for ( k in 1:K )
     {
-    # Notation: 'j' is a scenario; 'n' is an asset. x-n,j is a generic value of the marginal distribution for the j'th scenario
-    # CMA takes each grade scenario for the copula u-n,j and maps it into the desired combined scenarios x-n,j by inter/extrapolation
-    #       of the copula scenarios u-n,j in a manner similar to step (12) but *reversing the axes*. This replaces the computation of
-    #       the inverse cdf of F for an aribtrary marginal            
-    X[ , k ]  = approxExtrap( x = u[ , k ] , y = x[ , k ] , xout = U[ , k ] , method = "linear" , rule = 2 , ties = ordered )$y # TODO: Is this an inverse CDF? Check out plot( u , y )    
-    
-    # plot ( u[ , 1] , y[ , 1] ) # to see plot of this inverse cdf for an example
+        # Notation: 'j' is a scenario; 'n' is an asset. x-n,j is a generic value of the marginal distribution for the j'th scenario
+        # CMA takes each grade scenario for the copula u-n,j and maps it into the desired combined scenarios x-n,j by inter/extrapolation
+        #       of the copula scenarios u-n,j in a manner similar to step (12) but *reversing the axes*. This replaces the computation of
+        #       the inverse cdf of F for an aribtrary marginal            
+        X[ , k ]  = approxExtrap( x = u[ , k ] , y = x[ , k ] , xout = U[ , k ] , method = "linear" , rule = 2 , ties = ordered )$y # TODO: Is this an inverse CDF? Check out plot( u , y )    
+        
+        # plot ( u[ , 1] , y[ , 1] ) # to see plot of this inverse cdf for an example
     }    
     return( X )
 }
@@ -216,20 +186,19 @@ CMAcombination = function( x , u , U )
 #' @references 
 #' \url{http://www.symmys.com}
 PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig = .2 , sigma )
-# @example PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99  b = .02 , sigma )
 {
 # generate panic distribution
     library(matlab)
     library(Matrix)    
-
+    
     # Step 1 of Entropy Pooling: Generate a panel of joint scenarios for the base-case (the prior)
     # Below we construct a J x N panel of independent joint scenarios using the covariance matrix (Sigma)
     # build a matrix of ones ( J x 1 ), and assign equal probability to each row
     # Alternative #2:, if the risk drivers are "invariants", i.e. if they can be assumed independently
-        # and identically distributed across time, the scenarios can be historical realizations
+    # and identically distributed across time, the scenarios can be historical realizations
     # Alternative #3: the scenarios can be Monte Carlo simulations
     # The collection of joint-scenarios and the J-dimensional vector-p of the probabilities
-        # of each scenario (X,p) constitutes the "prior" distribution of the market
+    # of each scenario (X,p) constitutes the "prior" distribution of the market
     p = ones( J , 1 ) / J 
     
     c2_c = ( 1 - r_c) * diag( N ) + r_c * ones( N , N ) # NxN correlation matrix in a calm market   
@@ -237,8 +206,8 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
     c2_p = ( 1 - r ) * diag(N) + r * ones( N , N ) # NxN correlation matrix in a panic market    
     
     # The return disributions are centered on zero, however, the 'panic' correlation has a higher variance
-        # By the below construction, the distribution of returns from the 'calm' corr matrix and 'panic' 
-        # corr matrix for each row are related
+    # By the below construction, the distribution of returns from the 'calm' corr matrix and 'panic' 
+    # corr matrix for each row are related
     s2 = as.matrix( bdiag( c2_c , c2_p ) ) # create a symmetric block diagonal matrix of dimension 2N x 2N    
     Z = MvnRnd( zeros( 2*N , 1 ) , s2 , J ) # simulate J draws from s2 matrix with mean zero. A J x 2N matrix  
     X_c = Z[ , 1:N ] # J x N joint distribution in calm market. The joint distribution is somewhat correlated.
@@ -250,61 +219,61 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
     # The bottom 'b'-quantile of returns from the panic market replaces returns from the calm market creating a bi-model left-skewed distribution
     # 'X'' represents the joint-scenario probabilities including the risk of a panic market
     X = ( (1-D) * X_c ) + ( D * X_p ) 
-
+    
     # Step 2: perturb probabilities via Fully Flexible Views. In particular, formulate stress-tests or views in terms of linear
-        # constraints on a yet-to-be defined set of probabilities 'p_'
-        # Conceptually, the method leaves the domain of the distribution unaltered and instead shifts the probability masses to reflect the views
-        # Notation:
-            # Aeq: matrix of equality constraints (denoted as 'H' in the "Meucci - Flexible Views Theory & Practice" paper formlua 86 on page 22)
-            # beq: the vector associated with Aeq equality constraints  
-            # Define the matrix-vector pair (H,h) corresponding to objects (Aeq, beq) and constrain probabilities to sum to one
-            # optimizer is constraining choice of probabilities to Hx = h so fixing the top row of 'H', and top element of 'h' to one
-                # forces the probabilites to sum to one: H %*% p = h
-                Aeq = ones( 1 , J ) # 1 x J matrix consisting of ones
-                beq = 1
-
-                # constrain the first moments (i.e. the expected - scenario-probability weighted asset return - for all assets is zero)
-                Aeq = rbind( Aeq , t(X) ) # N+1 x J matrix. Top row is all 1's
-                beq = as.matrix( rbind( beq , zeros( N , 1 ) ) ) # N+1 x 1 column matrix. 1st element is a 1, rest are zeros                            
-                
+    # constraints on a yet-to-be defined set of probabilities 'p_'
+    # Conceptually, the method leaves the domain of the distribution unaltered and instead shifts the probability masses to reflect the views
+    # Notation:
+    # Aeq: matrix of equality constraints (denoted as 'H' in the "Meucci - Flexible Views Theory & Practice" paper formlua 86 on page 22)
+    # beq: the vector associated with Aeq equality constraints  
+    # Define the matrix-vector pair (H,h) corresponding to objects (Aeq, beq) and constrain probabilities to sum to one
+    # optimizer is constraining choice of probabilities to Hx = h so fixing the top row of 'H', and top element of 'h' to one
+    # forces the probabilites to sum to one: H %*% p = h
+    Aeq = ones( 1 , J ) # 1 x J matrix consisting of ones
+    beq = 1
+    
+    # constrain the first moments (i.e. the expected - scenario-probability weighted asset return - for all assets is zero)
+    Aeq = rbind( Aeq , t(X) ) # N+1 x J matrix. Top row is all 1's
+    beq = as.matrix( rbind( beq , zeros( N , 1 ) ) ) # N+1 x 1 column matrix. 1st element is a 1, rest are zeros                            
+    
     # Step 3: Check for consistency of constraints. TODO: Where is this performed?
     
     # Step 4 (performed in EntropyProg): Find 'p_' that display the least relative entropy from the prior distribution and
-        # at the same time satisfy the stress-test/view constraints    
-        emptyMatrix = matrix(nrow=0, ncol=0) # equivalent to MATLAB expression = [ ]
-        EntropyProgResult = EntropyProg( p , emptyMatrix , emptyMatrix , Aeq , beq )
-        p_ = EntropyProgResult$p  # the Jx1 matrix of posterior probabilities
+    # at the same time satisfy the stress-test/view constraints    
+    emptyMatrix = matrix(nrow=0, ncol=0) # equivalent to MATLAB expression = [ ]
+    EntropyProgResult = EntropyProg( p , emptyMatrix , emptyMatrix , Aeq , beq )
+    p_ = EntropyProgResult$p  # the Jx1 matrix of posterior probabilities
     
-        # plot the pdf of the revised probabilities (vs. the uniform prior)
-        plot( x = seq( 1:J ) , y = sort( p_ ) , type = "l" , xlab = "Observations" , ylab = "Partial Density Function for p_")
+    # plot the pdf of the revised probabilities (vs. the uniform prior)
+    plot( x = seq( 1:J ) , y = sort( p_ ) , type = "l" , xlab = "Observations" , ylab = "Partial Density Function for p_")
     
-        # Note: one can validate that the views of asset returns (constraints on first moments) are indeed satisfied
-            # Now we calculate summary statistics by taking a p_ weighted average of a pricing function (or mean, variance, etc.) for each scenario
-            # Aeq %*% p_ # equals the expectations in beq            
-            meanPriorReturnScenarios = apply( Aeq[ -1 , ] , 2 , mean ) # mean return for j'th prior scenario (distribution remains unaltered)
-            # meanPriorReturnScenarios %*% p_ # expected portfolio return with new probabilities at each scenario
-            breaks = ProbabilityWeightedHistogram( meanPriorReturnScenarios , p_ , round( 10 * log(J)) , freq = FALSE )$Breaks            
-            # weighted.hist( meanPriorReturnScenarios, p_ , breaks , freq = FALSE )  # create weighted histogram. TODO: FIX. Cannot abline the expected portfolio return    
+    # Note: one can validate that the views of asset returns (constraints on first moments) are indeed satisfied
+    # Now we calculate summary statistics by taking a p_ weighted average of a pricing function (or mean, variance, etc.) for each scenario
+    # Aeq %*% p_ # equals the expectations in beq            
+    meanPriorReturnScenarios = apply( Aeq[ -1 , ] , 2 , mean ) # mean return for j'th prior scenario (distribution remains unaltered)
+    # meanPriorReturnScenarios %*% p_ # expected portfolio return with new probabilities at each scenario
+    breaks = ProbabilityWeightedHistogram( meanPriorReturnScenarios , p_ , round( 10 * log(J)) , freq = FALSE )$Breaks            
+    # weighted.hist( meanPriorReturnScenarios, p_ , breaks , freq = FALSE )  # create weighted histogram. TODO: FIX. Cannot abline the expected portfolio return    
     
-            bin <- cut( meanPriorReturnScenarios , breaks , include.lowest = TRUE)
-            wsums <- tapply( p_ , bin, sum ) # sum the probabilities in each bin
-            wsums[is.na(wsums)] <- 0
-            prob <- wsums/(diff(breaks) * sum( p_ ))  
-            hist( prob , breaks )    
-        
-        print( c( "Variance of p_" , var( p_ ) ) ) # high variance indicates higher levels of distortion
-        print( c( "Max p_ divided by average p" , max(p_) / mean(p_) ) )
+    bin <- cut( meanPriorReturnScenarios , breaks , include.lowest = TRUE)
+    wsums <- tapply( p_ , bin, sum ) # sum the probabilities in each bin
+    wsums[is.na(wsums)] <- 0
+    prob <- wsums/(diff(breaks) * sum( p_ ))  
+    hist( prob , breaks )    
     
-        # With the new probabilities (weights to joint-scenarios) in hand, one can compute the updated
-        # expectation of any other function of interest h(y) as : sum across all scenarios [ p_ * h(y-jth scenario ) ]    
-        print( EntropyProgResult$optimizationPerformance )
-
+    print( c( "Variance of p_" , var( p_ ) ) ) # high variance indicates higher levels of distortion
+    print( c( "Max p_ divided by average p" , max(p_) / mean(p_) ) )
+    
+    # With the new probabilities (weights to joint-scenarios) in hand, one can compute the updated
+    # expectation of any other function of interest h(y) as : sum across all scenarios [ p_ * h(y-jth scenario ) ]    
+    print( EntropyProgResult$optimizationPerformance )
+    
 # Extract the marginal cdf's from the distribution represented by the joint scenarios
     # NOTE: An alternative approach proposed to broaden the choice of copulas involves simulating the grade
     # scenarios u-n,j directly from a parametric copula F-U without obtaining them from a separation step
     # However, only a restrictive set of parametric copulas is used in practice
     copula = CMAseparation( X , p_ ) # result contains xdd, udd, and the JxN copula U. U is the copula with dimension J x N
-
+    
 # merge panic copula with normal marginals (using random number generation theory / Monte Carlo)
     library(matlab)
     y = NULL # initialize variables for subsequent r-binding
@@ -312,10 +281,10 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
     for ( n in 1:N )
     {    
         # generate a sequence 
-            # create a 100 x 1 linearly spaced vector (i.e. 'even' sample from uniform distribution +/- 4 s.d.'s )
-            yn = as.matrix( linspace( -4 * sig , 4 * sig , 100 ) )      
-            # we calculate the corresponding normal cdf values 
-            un = pnorm( yn , 0 , sig ) # measure P( yn <= x) using the cumulative density function using the uniform sample from yn. The plot is a cdf with range (epsilon : 1-epsilon). 100 x 1 vector.    
+        # create a 100 x 1 linearly spaced vector (i.e. 'even' sample from uniform distribution +/- 4 s.d.'s )
+        yn = as.matrix( linspace( -4 * sig , 4 * sig , 100 ) )      
+        # we calculate the corresponding normal cdf values 
+        un = pnorm( yn , 0 , sig ) # measure P( yn <= x) using the cumulative density function using the uniform sample from yn. The plot is a cdf with range (epsilon : 1-epsilon). 100 x 1 vector.    
         
         if ( is.null( y ) ) 
         { 
@@ -324,20 +293,20 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
         } 
         else 
         {
-        y = cbind( y , yn ) # y is 100 x N. each column of y is identical and in ascending order. the start value is -4*sig, the tail value is 4*sig
-        u = cbind( u , un ) # u is 100 x N. each column of u i identical and in ascending order. The start value is e and tail value is 1 - e
+            y = cbind( y , yn ) # y is 100 x N. each column of y is identical and in ascending order. the start value is -4*sig, the tail value is 4*sig
+            u = cbind( u , un ) # u is 100 x N. each column of u i identical and in ascending order. The start value is e and tail value is 1 - e
         }
     }
-
+    
 # merge a new arbitrary marginal defined by 'y' and its cdf 'u'. 
     # we created linearly spaced vectors for the purposes of linear interpolation
     # The copula of Y will have the same copula as the copula of X (which is result$U)
     Y = CMAcombination( y , u , copula$U ) # Y is a J x N matrix where the minimum in each column is -.8, and the maximum is .8
-
+    
 #  compute portfolio risk
     w = matlab:::ones( N , 1 ) / N  # N x 1 matrix of portfolio weights    
     # J x 1 matrix consisting of the portfolio return distribution based on
-        # the new joint distribution (assumng equal weights)
+    # the new joint distribution (assumng equal weights)
     R_w = Y %*% w # Range is from -.18 to .18
     meanReturn = mean( R_w )
     
@@ -349,12 +318,12 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
     # abline( v = mean( R_w ) , col = "blue" )
     # n = hist$np # returns new probabilities "np" -- length round( 10 * log(J))
     # D = hist$x # returns breaks in histogram -- length round( 10 * log(J))
-
+    
 # correlation of mean return and variance    
     varianceReturns = var( R_w )
     print( c("Mean Return" , meanReturn ) )
     print( c("Variance of Returns" , varianceReturns ) )
-
+    
 #barHist = barplot ( height = n[order(D)] , width = diff( D , differences = 1) , axes = TRUE , axisnames = TRUE )
     # barHist = barplot ( n[order(D)] , D , axes = TRUE , axisnames = TRUE )
     # barHist = barplot ( n , D ) # plot probabilities on Y-Axis. Note - MATLAB and R switch order of first two arguments. h = bar( D , n , 1 ). Todo: What does third argument in bar do?
@@ -362,16 +331,16 @@ PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig 
     # set(gca,'ytick',[])
     # set(h,'FaceColor',.5*[1 1 1],'EdgeColor',.5*[1 1 1]);
     # grid on
-
+    
 # rotate panic copula (only 2Dim)
-if ( N == 2 )
+    if ( N == 2 )
     { 
-    th = pi / 2 
-    R = matrix( c( cos(th) , sin(th) , -sin(th) , cos(th) ) , byrow = TRUE , ncol = 2 )   # create rotation matrix
-    X_ = X %*% t( R )
-    twodimAssetResult = CMAseparation( X_ , p_ ) # returns [xdd,udd,U_]
+        th = pi / 2 
+        R = matrix( c( cos(th) , sin(th) , -sin(th) , cos(th) ) , byrow = TRUE , ncol = 2 )   # create rotation matrix
+        X_ = X %*% t( R )
+        twodimAssetResult = CMAseparation( X_ , p_ ) # returns [xdd,udd,U_]
     }
-        
+    
     return ( list( copula = copula , p_ = invisible( p_ ) , meanReturn = meanReturn , varianceReturns = varianceReturns ) ) 
 }
 
@@ -401,10 +370,10 @@ if ( N == 2 )
 # levelplot( result$copula$xdd[1:10,1:20] )
 # contourplot( result$copula$xdd[1:100,1:20] )
 # show exploratory analysis plots. TODO
-    # hist( p_ , 100 ) # notice the prior probability 'p' is uniformly distributed, whereas p_ is normal with a left tail    
-    # hist( result$copula$udd[,1] , 100 , ylim = c( 0 , 600 ) ) # notice 'u' is not a uniform distribution    
-    # plot( y[ , 1 ] , type = "l" ) # straight line from -4*sig to 4*sig
-    # plot( u[ , 1 ] , type = "l" ) # a normal cdf. x-axis 1:100, y-axis 0:1. Interpretation: CDF of generic 'y' variable. NOT the grade since 'u' is normally distributed
-    # plot( y[ , 1] , u[ , 1 ] , type = "l" ) # Interpretation: Normal CDF. y-axis is the cumulative probability of the generic x    
-    # plot Copula
-    # scatterplot3d( copula$U )
+# hist( p_ , 100 ) # notice the prior probability 'p' is uniformly distributed, whereas p_ is normal with a left tail    
+# hist( result$copula$udd[,1] , 100 , ylim = c( 0 , 600 ) ) # notice 'u' is not a uniform distribution    
+# plot( y[ , 1 ] , type = "l" ) # straight line from -4*sig to 4*sig
+# plot( u[ , 1 ] , type = "l" ) # a normal cdf. x-axis 1:100, y-axis 0:1. Interpretation: CDF of generic 'y' variable. NOT the grade since 'u' is normally distributed
+# plot( y[ , 1] , u[ , 1 ] , type = "l" ) # Interpretation: Normal CDF. y-axis is the cumulative probability of the generic x    
+# plot Copula
+# scatterplot3d( copula$U )

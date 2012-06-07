@@ -1,6 +1,6 @@
 # TODO: translate PlotResults function
-    # TODO: update plot of efficient frontier to show maximum return case
-    # TODO: fix StackedBarChart function
+# TODO: update plot of efficient frontier to show maximum return case
+# TODO: fix StackedBarChart function
 # TODO: add max weights constraint to EfficientFrontier()
 # TODO: add computeCVaR to EfficientFrontier()
 
@@ -8,8 +8,9 @@
 
 #' @param      a matrix of weights where rows are efficient portfolios summing to one, and columns are assets
 #' @param      a string indicating the title of the chart
+#' TODO FIXME check against function in Performanceanalytics, we probably want to use that one  unless there's a reaso to use this
 StackedBarChart = function( weightsMatrix )
-    {
+{
     browser()
     data = as.data.frame( weightsMatrix )
     data$aspect = 1:nrow(data)
@@ -18,65 +19,65 @@ StackedBarChart = function( weightsMatrix )
     library( ggplot2 )
     ggplot(data2, aes(x=factor(aspect), y = value, fill=factor(variable))) + geom_bar() #+ opts( title = expression( "Efficient Frontier Weights" ))
     options( warn = 2 )
-    }
+}
 
 ViewRankingTest = function( X , p , Lower , Upper )
-    {
+{
     J = nrow( X )
     N = ncol( X )
-
+    
     K = length( Lower )
-
+    
     # constrain probabilities to sum to one across all scenarios...
     Aeq = ones( 1 , J )
     beq=1
-
+    
     # ...constrain the expectations... A*x <= 0
-        # X[,Lower] refers to the column of returns for Asset-lower
-        # X[,Upper] refers to the column of returns for Asset-lower
-        # X[ , Lower ] - X[ , Upper ] is vector returns of the "lower"" asset less the returns of the "higher" asset
-        V = X[ , Lower ] - X[ , Upper ] # Jx1 vector. Expectation is assigned to each scenario
-
+    # X[,Lower] refers to the column of returns for Asset-lower
+    # X[,Upper] refers to the column of returns for Asset-lower
+    # X[ , Lower ] - X[ , Upper ] is vector returns of the "lower"" asset less the returns of the "higher" asset
+    V = X[ , Lower ] - X[ , Upper ] # Jx1 vector. Expectation is assigned to each scenario
+    
     A = t( V )
     b = 0 # The expectation is that (Lower - Upper)x <= 0. (i.e. The returns of upper are greater than zero for each scenario)
-
+    
     # ...compute posterior probabilities
     p_ = EntropyProg( p , A , b , Aeq , beq )
-
+    
     return( p_ )
-    }
+}
 
 #' @param  Lower    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @param  Upper    a vector of indexes indicating which column is lower than the corresponding column number in Upper
-#' @example ViewRanking( X , p , Lower = c(3,4) , Upper = c(4,5) ) # two inequality views: asset 3 < asset 4 returns, and asset 4 < asset 5 returns
+# @example ViewRanking( X , p , Lower = c(3,4) , Upper = c(4,5) ) # two inequality views: asset 3 < asset 4 returns, and asset 4 < asset 5 returns
 ViewRanking = function( X , p , Lower , Upper )
-    {
+{
     library( matlab )
     J = nrow( X )
     N = ncol( X )
-
+    
     browser()
     
     K = length( Lower )
-
+    
     # constrain probabilities to sum to one across all scenarios...
     Aeq = ones( 1 , J )
     beq=1
-
+    
     # ...constrain the expectations... A*x <= 0
-        # X[,Lower] refers to the column of returns for Asset-lower
-        # X[,Upper] refers to the column of returns for Asset-lower
-        # X[ , Lower ] - X[ , Upper ] is vector returns of the "lower"" asset less the returns of the "higher" asset
-        V = X[ , Lower ] - X[ , Upper ] # Jx1 vector. Expectation is assigned to each scenario
-
+    # X[,Lower] refers to the column of returns for Asset-lower
+    # X[,Upper] refers to the column of returns for Asset-lower
+    # X[ , Lower ] - X[ , Upper ] is vector returns of the "lower"" asset less the returns of the "higher" asset
+    V = X[ , Lower ] - X[ , Upper ] # Jx1 vector. Expectation is assigned to each scenario
+    
     A = t( V )
     b = 0 # The expectation is that (Lower - Upper)x <= 0. (i.e. The returns of upper are greater than zero for each scenario)
-
+    
     # ...compute posterior probabilities
     p_ = EntropyProg( p , A , b , Aeq , beq )
-
+    
     return( p_ )
-    }
+}
 
 #' @param  X             a matrix with the joint-scenario probabilities by asset (rows are joint-scenarios, columns are assets)
 #' @param  p             a vector of probabilities associated with each scenario in matrix X
@@ -88,10 +89,10 @@ ViewRanking = function( X , p , Lower , Upper )
 #'             e          the NumPortf x 1 matrix of expected returns for each portfolio along the efficient frontier
 #'             s          the NumPortf x 1 matrix of standard deviation of returns for each portfolio along the efficient frontier
 EfficientFrontier = function( X , p , Options)
-    {    
+{    
     
     library( matlab )
-
+    
     J = nrow( X ) # number of scenarios
     N = ncol( X ) # number of assets
     
@@ -100,7 +101,7 @@ EfficientFrontier = function( X , p , Options)
     Scnd_Mom = t(X) %*% (X * ( p %*% ones( 1 , N ) ) )
     Scnd_Mom = ( Scnd_Mom + t(Scnd_Mom) ) / 2 # an N*N matrix
     Covs = Scnd_Mom - Exps %*% t( Exps )
-
+    
     Constr = list()
     
     # constrain the sum of weights to 1
@@ -113,25 +114,25 @@ EfficientFrontier = function( X , p , Options)
     
     Amat = rbind( Constr$Aeq , Constr$Aleq ) # stack the equality constraints on top of the inequality constraints
     bvec = rbind( Constr$beq , Constr$bleq ) # stack the equality constraints on top of the inequality constraints
-
+    
     ############################################################################################
     # determine return of minimum-risk portfolio
     FirstDegree = zeros( N , 1 ) # TODO: assumes that securities have zero expected returns when computing efficient frontier?
     SecondDegree = Covs
     library( quadprog )    
     # Why is FirstDegree "expected returns" set to 0? 
-        # We capture the equality view in the equality constraints matrix
-        # In other words, we have a constraint that the Expected Returns by Asset %*% Weights = Target Return
+    # We capture the equality view in the equality constraints matrix
+    # In other words, we have a constraint that the Expected Returns by Asset %*% Weights = Target Return
     MinVol_Weights = solve.QP( Dmat = SecondDegree , dvec = -1*FirstDegree , Amat = -1*t(Amat) , bvec = -1*bvec , meq = length( Constr$beq ) )
     MinSDev_Exp = t( MinVol_Weights$solution ) %*% Exps
-
+    
     ############################################################################################
     # determine return of maximum-return portfolio
     FirstDegree = -Exps
     library( limSolve )
     MaxRet_Weights = linp( E = Constr$Aeq , F = Constr$beq , G = -1*Constr$Aleq , H = -1*Constr$bleq , Cost = FirstDegree , ispos = FALSE )$X
     MaxExp_Exp = t( MaxRet_Weights) %*% Exps
-
+    
     ############################################################################################
     # slice efficient frontier in NumPortf equally thick horizontal sections
     Grid = matrix( , ncol = 0 , nrow = 0 )
@@ -141,7 +142,7 @@ EfficientFrontier = function( X , p , Options)
     # We establish equally-spaced portfolio return targets and use this find efficient portfolios 
     # in the next step
     Targets = as.numeric( MinSDev_Exp ) + Grid * as.numeric( ( MaxExp_Exp - MinSDev_Exp ) ) 
-
+    
     ############################################################################################
     # compute the NumPortf compositions and risk-return coordinates        
     FirstDegree = zeros( N , 1 )
@@ -151,7 +152,7 @@ EfficientFrontier = function( X , p , Options)
     s = matrix( , ncol = 1 , nrow = 0 )       
     
     for ( i in 1:Options$NumPortf )
-        {
+    {
         # determine least risky portfolio for given expected return
         # Ax = b ; Exps %*% weights = Target Return
         AEq = rbind( Constr$Aeq , t( Exps ) )     # equality constraint: set expected return for each asset...
@@ -165,111 +166,8 @@ EfficientFrontier = function( X , p , Options)
         w = rbind( w , Weights$solution )
         s = rbind( s , sqrt( t(Weights$solution) %*% Covs %*% Weights$solution ) )
         e = rbind( e , Weights$solution %*% Exps )
-        }
-
+    }
+    
     return( list( e = e , Sdev = s , Composition = w , Exps = Exps , Covs = Covs ) )
     
-    }
-
-             
-#' Entropy Pooling Example - Ranking Information script
-#'
-#' This script performs ranking allocation using the 
-#' Entropy-Pooling approach by Attilio Meucci, as it appears in 
-#' "A. Meucci - Fully Flexible Views: Theory and Practice -
-#' The Risk Magazine, October 2008, p 100-106"
-#' available at www.symmys.com > Research > Working Papers
-
-#' Code by A. Meucci, September 2008
-#' Last version available at www.symmys.com > Teaching > MATLAB
-
-#############################################################################
-# Load panel X of joint returns realizations and vector p of respective probabilities
-# In real life, these are provided by the estimation process
-#############################################################################
-load("MeucciReturnsDistribution.rda")
-
-#############################################################################
-# compute and plot efficient frontier based on prior market distribution
-#############################################################################
-Options = list()
-Options$NumPortf = 20 # number of portfolios in efficient frontier
-Options$FrontierSpan = c( .3 , .9 ) # range of normalized exp.vals. spanned by efficient frontier
-
-frontierPrior = EfficientFrontier( X , P , Options ) # Frontier Plot Data contains [e,s,w,M,S]
-
-# PlotResults( frontierPrior$e , frontierPrior$Sdev , frontierPrior$Composition , frontierPrior$Exps )
-    plot( x = (frontierPrior$Sdev)^2 , y = frontierPrior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Prior" , type = "l" , ylim = c( .03 , .1 ) )
-    # create stacked bar chart. each bar is a row (20 rows). each row sums to one. add legend.
-    data = as.data.frame( frontierPrior$Composition )
-    data$aspect = 1:nrow(data)
-    data2 = reshape2:::melt( data , id.vars = "aspect" )
-    options( warn = 0 )
-    library( ggplot2 )
-    ggplot(data2, aes(x=factor(aspect), y = value, fill=factor(variable))) + geom_bar() #+ opts( title = expression( "Efficient Frontier Weights" ))
-    options( warn = 2 )
-
-#############################################################################
-# process ordering information (this is the core of the Entropy Pooling approach
-#############################################################################
-
-# print expected returns of assets 3 and 4
-frontierPrior$Exps[3]
-frontierPrior$Exps[4] # note that asset 4 has a higher expected return assuming the prior distribution
-
-# the expected return of each entry of Lower is supposed to be smaller than respective entry in Upper
-Lower = as.numeric( c( 4 ) )
-Upper = as.numeric( c( 3 ) )
-P_ = ViewRanking( X , P , Lower , Upper )$p_
-
-# confidence
-c = .5 
-blendedProbability = (1-c) * P + c * P_
-
-#############################################################################
-# compute and plot efficient frontier based on posterior market distribution
-#############################################################################
-
-frontierFullConfidencePosterior = EfficientFrontier( X , P_ , Options )
-    # print expected returns of assets 3 and 4
-    frontierFullConfidencePosterior$Exps[3]
-    frontierFullConfidencePosterior$Exps[4] # note that asset 3 and asset 4 have equal expected returns
-
-    # bar chart of portfolios on frontier -- note asset 3 has substantially more weight vs. asset 4
-    data = as.data.frame( frontierFullConfidencePosterior$Composition )
-    data$aspect = 1:nrow(data)
-    data2 = reshape2:::melt( data , id.vars = "aspect" )
-    options( warn = 0 )
-    library( ggplot2 )
-    ggplot(data2, aes(x=factor(aspect), y = value, fill=factor(variable))) + geom_bar() #+ opts( title = expression( "Efficient Frontier Weights" ))
-    options( warn = 2 )
-
-frontierPosterior = EfficientFrontier( X , blendedProbability , Options )
-    # print expected returns of assets 3 and 4
-    frontierPosterior$Exps[3]
-    frontierPosterior$Exps[4] # note that asset 4 still has a higher expected return, but less so
-
-plot( x = (frontierPosterior$Sdev)^2 , y = frontierPosterior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Posterior" , type = "l" , ylim = c( .03 , .1 ) )
-# PlotResults( frontierPosterior$e , frontierPosterior$Sdev , frontierPosterior$Composition , frontierPosterior$Exps , Lower , Upper )
-
-# Tests
-# Test1 - views that are already in the prior return no revision
-result  = ViewRanking( X , P , c(3,3) , c(4,4) ) # none of the probabilities are revised from 1e-05. Why? Because the expectation that asset 3 is lower than expected return of asset 4 is already satisfied in prior
-result2 = ViewRanking( X , P , c(3) , c(4) )     # none of the probabilities are revised from 1e-05
-
-# Test2 - indentical (repeated) views return the same probabilities
-result3 = ViewRanking( X , P , c(4) , c(3) )     # returns revised probability distribution
-result4 = ViewRanking( X , P , c(4,4) , c(3,3) ) # returns identical probability distribution as in result3
-
-# Test3 - indentical (repeated) views return the same probabilities
-result3 = ViewRanking( X , P , c(4) , c(3) )     # returns revised probability distribution
-result4 = ViewRanking( X , P , c(4,4) , c(3,3) ) # returns identical probability distribution as in result3
-
-# Test4 - indentical (repeated) views return the same probabilities
-result5 = ViewRanking( X , P , c(4) , c(3) )     # returns revised probability distribution
-result6 = ViewRanking( X , P , c(4,1) , c(3,2) ) # the second view is non-binding since it is already reflected in prior, so p_ matches result 5
-
-# Test5
-result7 = ViewRanking( X , P , c(4,2) , c(3,1) ) # the second view is non-binding since it is already reflected in prior, so p_ matches result 5
-
-
+}
