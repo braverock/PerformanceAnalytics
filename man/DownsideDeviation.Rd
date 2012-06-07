@@ -34,9 +34,9 @@
   positive returns when calculating risk.  Instead of using
   the mean return or zero, it uses the Minimum Acceptable
   Return as proposed by Sharpe (which may be the mean
-  historical return or zero). It measures the the
-  variability of underperformance below a minimum targer
-  rate. The downside variance is the square of the downside
+  historical return or zero). It measures the variability
+  of underperformance below a minimum targer rate. The
+  downside variance is the square of the downside
   potential.
 
   To calculate it, we take the subset of returns that are
@@ -47,12 +47,18 @@
 
   \deqn{ DownsideDeviation(R , MAR)= \delta_{MAR} =
   \sqrt{\sum^{n}_{t=1}\frac{ min[(R_{t} - MAR), 0]^2}{n}}}
+  {DownsideDeviation(R, MAR) = sqrt(1/n * sum(t=1..n)
+  ((min(R(t)-MAR, 0))^2))}
 
   \deqn{ DownsideVariance(R, MAR) =
   \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2} {n}}
+  {DownsideVariance(R, MAR) = 1/n *
+  sum(t=1..n)((min(R(t)-MAR, 0))^2)}
 
   \deqn{DownsidePotential(R, MAR) =
   \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]} {n}}
+  {DownsidePotential(R, MAR) = 1/n *
+  sum(t=1..n)((min(R(t)-MAR, 0)))}
 
   where \eqn{n} is either the number of observations of the
   entire series or the number of observations in the subset
@@ -95,7 +101,8 @@
 \examples{
 #with data used in Bacon 2008
 
-portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0,-3.7,-6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
+portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0,-3.7,
+-6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
 MAR = 0.5
 DownsideDeviation(portfolio_return, MAR) #expected 2.55
 DownsidePotential(portfolio_return, MAR) #expected 1.37
