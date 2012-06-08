@@ -117,6 +117,7 @@ function (R, ...)
 
 
 #' @rdname centeredmoments
+#' @export
 centeredmoment = function(R,power)
 {# @author Kris Boudt, Peter Carl
     R = checkData(R)
@@ -127,6 +128,7 @@ centeredmoment = function(R,power)
 ###############################################################################
 
 #' @rdname centeredmoments
+#' @export
 centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 {# @author Kris Boudt, Peter Carl, and Brian G. Peterson
 
@@ -195,6 +197,7 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' Preference for Moments of Higher Order than the Variance. Journal of Finance
 #' 35(4):915-919.
 #' @keywords ts multivariate distribution models
+#' @export
 #' @examples
 #' 
 #' data(managers)
@@ -231,6 +234,107 @@ CoVariance<- function(Ra,Rb)
     }
 }
 
+#' Functions to calculate systematic or beta co-moments of return series
+#' 
+#' @name BetaCoMoments
+#' @concept beta co-moments
+#' @concept moments
+#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
+#' @export
+#' calculate higher co-moment betas, or 'systematic' variance, skewness, and
+#' kurtosis
+#' 
+#' The co-moments, including covariance, coskewness, and cokurtosis, do not
+#' allow the marginal impact of an asset on a portfolio to be directly
+#' measured.  Instead, Martellini and Zieman (2007) develop a framework that
+#' assesses the potential diversification of an asset relative to a portfolio.
+#' They use higher moment betas to estimate how much portfolio risk will be
+#' impacted by adding an asset, in terms of symmetric risk (i.e., volatility),
+#' in asymmetry risk (i.e., skewness), and extreme risks (i.e. kurtosis). That
+#' allows them to show that adding an asset to a portfolio (or benchmark) will
+#' reduce the portfolio's variance to be reduced if the second-order beta of
+#' the asset with respect to the portfolio is less than one.  They develop the
+#' same concepts for the third and fourth order moments.  The authors offer
+#' these higher moment betas as a measure of the diversification potential of
+#' an asset.
+#' 
+#' Higher moment betas are defined as proportional to the derivative of the
+#' covariance, coskewness and cokurtosis of the second, third and fourth
+#' portfolio moment with respect to the portfolio weights. The beta co-variance
+#' is calculated as: \deqn{ }{BetaCoV(Ra,Rb) =
+#' CoV(Ra,Rb)/centeredmoment(Rb,2)}\deqn{ \beta^{(2)}_{a,b} =
+#' \frac{CoV(R_a,R_b)}{\mu^{(2)}(R_b)} }{BetaCoV(Ra,Rb) =
+#' CoV(Ra,Rb)/centeredmoment(Rb,2)} Beta co-skewness is given as: \deqn{
+#' }{BetaCoS(Ra,Rb) = CoS(Ra,Rb)/centeredmoment(Rb,3)}\deqn{ \beta^{(3)}_{a,b}
+#' = \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)} }{BetaCoS(Ra,Rb) =
+#' CoS(Ra,Rb)/centeredmoment(Rb,3)} Beta co-kurtosis is: \deqn{
+#' }{BetaCoK(Ra,Rb) = CoK(Ra,Rb)/centeredmoment(Rb,4)}\deqn{ \beta^{(4)}_{a,b}
+#' = \frac{CoK(R_a,R_b)}{\mu^{(4)}(R_b)} }{BetaCoK(Ra,Rb) =
+#' CoK(Ra,Rb)/centeredmoment(Rb,4)} where the \eqn{n}-th centered moment is
+#' calculated as \deqn{ }{moment^n(R) = E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) =
+#' E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
+#' 
+#' A beta is greater than one indicates that no diversification benefits should
+#' be expected from the introduction of that asset into the portfolio.
+#' Conversely, a beta that is less than one indicates that adding the new asset
+#' should reduce the resulting portfolio's volatility and kurtosis, and to an
+#' increase in skewness. More specifically, the lower the beta the higher the
+#' diversification effect on normal risk (i.e. volatility). Similarly, since
+#' extreme risks are generally characterised by negative skewness and positive
+#' kurtosis, the lower the beta, the higher the diversification effect on
+#' extreme risks (as reflected in Modified Value-at-Risk or ER).
+#' 
+#' The addition of a small fraction of a new asset to a portfolio leads to a
+#' decrease in the portfolio's second moment (respectively, an increase in the
+#' portfolio's third moment and a decrease in the portfolio's fourth moment) if
+#' and only if the second moment (respectively, the third moment and fourth
+#' moment) beta is less than one (see Martellini and Ziemann (2007) for more
+#' details).
+#' 
+#' For skewness, the interpretation is slightly more involved.  If the skewness
+#' of the portfolio is negative, we would expect an increase in portfolio
+#' skewness when the third moment beta is lower than one. When the skewness of
+#' the portfolio is positive, then the condition is that the third moment beta
+#' is greater than, as opposed to lower than, one.
+#' 
+#' %Because the interpretation of beta coskewness is made difficult by the need
+#' to condition on it's skewness, we deviate from the more widely used measure
+#' slightly.  To make the interpretation consistent across all three measures,
+#' the beta coskewness function tests the skewness and multiplies the result by
+#' the sign of the skewness.  That allows an analyst to review the metric and
+#' interpret it without needing additional information.  To use the more widely
+#' used metric, simply set the parameter \code{test = FALSE}.
+#' 
+#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
+#' SystematicSkewness SystematicKurtosis
+#' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' index, benchmark, or secondary asset returns to compare against
+#' @param test condition not implemented yet
+#' @author Kris Boudt, Peter Carl, Brian Peterson
+#' @seealso \code{\link{CoMoments}}
+#' @references
+#' 
+#' Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and
+#' Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
+#' Journal of Risk. Winter.
+#' 
+#' Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
+#' Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
+#' and Asset Management Research Centre working paper.
+#' @keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(managers)
+#' 
+#' BetaCoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+#' BetaCoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+#' BetaCoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+#' BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
+#' BetaCoKurtosis(managers[,1:6], managers[,8:7])
+#' 
+#' 
 BetaCoVariance <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -260,6 +364,7 @@ BetaCoVariance <- function(Ra,Rb)
 }
 
 #' @rdname CoMoments
+#' @export
 CoSkewness <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -288,6 +393,8 @@ CoSkewness <- function(Ra,Rb)
     }
 }
 
+#' @rdname BetaCoMoments
+#' @export
 BetaCoSkewness <- function(Ra, Rb, test=FALSE)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -332,6 +439,7 @@ BetaCoSkewness <- function(Ra, Rb, test=FALSE)
 }
 
 #' @rdname CoMoments
+#' @export
 CoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -360,6 +468,8 @@ CoKurtosis <- function(Ra,Rb)
     }
 }
 
+#' @rdname BetaCoMoments
+#' @export
 BetaCoKurtosis <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
