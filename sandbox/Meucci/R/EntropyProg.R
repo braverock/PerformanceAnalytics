@@ -89,7 +89,7 @@ EntropyProg = function( p , A , b , Aeq , beq )
         
         # setup unconstrained optimization
         start = Sys.time()    
-        opts = list( algorithm = "NLOPT_LD_LBFGS" , xtol_rel = 1.0e-7 , 
+        opts = list( algorithm = "NLOPT_LD_LBFGS" , xtol_rel = 1.0e-6 , 
                 check_derivatives = TRUE , check_derivatives_print = "all" , print_level = 2 , maxeval = 1000 )    
         optimResult = nloptr(x0 = x0, eval_f = eval_f_list , opts = opts )    
         end = Sys.time()
@@ -147,13 +147,13 @@ EntropyProg = function( p , A , b , Aeq , beq )
         start = Sys.time()
         # Note: other candidates for constrained optimization in library nloptr: NLOPT_LD_SLSQP, NLOPT_LD_MMA, NLOPT_LN_AUGLAG, NLOPT_LD_AUGLAG_EQ
         # See NLOPT open-source site for more details: http://ab-initio.mit.edu/wiki/index.php/NLopt
-        local_opts <- list( algorithm = "NLOPT_LD_SLSQP", xtol_rel = 1.0e-7 , 
+        local_opts <- list( algorithm = "NLOPT_LD_SLSQP", xtol_rel = 1.0e-6 , 
                 check_derivatives = TRUE , check_derivatives_print = "all" , 
                 eval_f = nestedfunC , eval_g_ineq = InqConstraint , eval_jac_g_ineq = jacobian_constraint )
         optimResult = nloptr( x0 = x0 , eval_f = nestedfunC , eval_g_ineq = InqConstraint , eval_jac_g_ineq = jacobian_constraint ,
                 opts = list( algorithm = "NLOPT_LD_AUGLAG" , local_opts = local_opts ,
                         print_level = 2 , maxeval = 1000 , 
-                        check_derivatives = TRUE , check_derivatives_print = "all" , xtol_rel = 1.0e-7 ) )
+                        check_derivatives = TRUE , check_derivatives_print = "all" , xtol_rel = 1.0e-6 ) )
         end = Sys.time()
         print( c("Optimization completed in " , end - start )) ; rm( start ) ; rm( end )    
         
