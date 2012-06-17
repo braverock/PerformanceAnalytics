@@ -1,4 +1,3 @@
-           
 #' Entropy Pooling Example - Ranking Information script
 #'
 #' This script performs ranking allocation using the 
@@ -14,7 +13,7 @@
 # Load panel X of joint returns realizations and vector p of respective probabilities
 # In real life, these are provided by the estimation process
 #############################################################################
-data("MeucciReturnsDistribution")
+data("ReturnsDistribution")
 
 #############################################################################
 # compute and plot efficient frontier based on prior market distribution
@@ -26,16 +25,13 @@ Options$FrontierSpan = c( .3 , .9 ) # range of normalized exp.vals. spanned by e
 frontierPrior = EfficientFrontier( X , P , Options ) # Frontier Plot Data contains [e,s,w,M,S]
 
 # PlotResults( frontierPrior$e , frontierPrior$Sdev , frontierPrior$Composition , frontierPrior$Exps )
-    plot( x = (frontierPrior$Sdev)^2 , y = frontierPrior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Prior" , type = "l" , ylim = c( .03 , .1 ) )
-    # create stacked bar chart. each bar is a row (20 rows). each row sums to one. add legend.
-    data = as.data.frame( frontierPrior$Composition )
-    data$aspect = 1:nrow(data)
-    data2 = reshape2:::melt( data , id.vars = "aspect" )
-    options( warn = 0 )
-    library( ggplot2 )
-    ggplot(data2, aes(x=factor(aspect), y = value, fill=factor(variable))) + geom_bar() #+ opts( title = expression( "Efficient Frontier Weights" ))
-    options( warn = 2 )
-
+plot( x = (frontierPrior$Sdev)^2 , y = frontierPrior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Prior" , type = "l" , ylim = c( .03 , .1 ) )
+# create stacked bar chart. each bar is a row (20 rows). each row sums to one. add legend.
+options( warn = 0 )
+library( ggplot2 )
+plotStackedBar <- StackedBarChart( frontierPrior$Composition )
+plotStackedBar
+options( warn = 2 )
 #############################################################################
 # process ordering information (this is the core of the Entropy Pooling approach
 #############################################################################
@@ -58,23 +54,21 @@ blendedProbability = (1-c) * P + c * P_
 #############################################################################
 
 frontierFullConfidencePosterior = EfficientFrontier( X , P_ , Options )
-    # print expected returns of assets 3 and 4
-    frontierFullConfidencePosterior$Exps[3]
-    frontierFullConfidencePosterior$Exps[4] # note that asset 3 and asset 4 have equal expected returns
+# print expected returns of assets 3 and 4
+frontierFullConfidencePosterior$Exps[3]
+frontierFullConfidencePosterior$Exps[4] # note that asset 3 and asset 4 have equal expected returns
 
-    # bar chart of portfolios on frontier -- note asset 3 has substantially more weight vs. asset 4
-    data = as.data.frame( frontierFullConfidencePosterior$Composition )
-    data$aspect = 1:nrow(data)
-    data2 = reshape2:::melt( data , id.vars = "aspect" )
-    options( warn = 0 )
-    library( ggplot2 )
-    ggplot(data2, aes(x=factor(aspect), y = value, fill=factor(variable))) + geom_bar() #+ opts( title = expression( "Efficient Frontier Weights" ))
-    options( warn = 2 )
+# bar chart of portfolios on frontier -- note asset 3 has substantially more weight vs. asset 4
+options( warn = 0 )
+library( ggplot2 )
+plotStackedBar <- StackedBarChart( frontierFullConfidencePosterior$Composition )
+plotStackedBar
+options( warn = 2 )
 
 frontierPosterior = EfficientFrontier( X , blendedProbability , Options )
-    # print expected returns of assets 3 and 4
-    frontierPosterior$Exps[3]
-    frontierPosterior$Exps[4] # note that asset 4 still has a higher expected return, but less so
+# print expected returns of assets 3 and 4
+frontierPosterior$Exps[3]
+frontierPosterior$Exps[4] # note that asset 4 still has a higher expected return, but less so
 
 plot( x = (frontierPosterior$Sdev)^2 , y = frontierPosterior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Posterior" , type = "l" , ylim = c( .03 , .1 ) )
 # PlotResults( frontierPosterior$e , frontierPosterior$Sdev , frontierPosterior$Composition , frontierPosterior$Exps , Lower , Upper )
@@ -98,5 +92,3 @@ result6 = ViewRanking( X , P , c(4,1) , c(3,2) ) # the second view is non-bindin
 
 # Test5
 result7 = ViewRanking( X , P , c(4,2) , c(3,1) ) # the second view is non-binding since it is already reflected in prior, so p_ matches result 5
-
-
