@@ -13,30 +13,33 @@
 #' @export
 PlotDistributions = function( X , p , Mu , Sigma , p_ , Mu_ , Sigma_ )
 {
-    J = nrow( X )
-    N = ncol( X )
+  J = nrow( X )
+  N = ncol( X )
     
-    NBins = round( 10*log( J ) )
+  NBins = round( 10*log( J ) )
     
-    for ( n in 1:N )
-    {        
-        # set ranges
-        xl = min(X[ , n ] )
-        xh = max(X[ , n ] )
-        #x = [xl : (xh-xl)/100 : xh]
+  for ( n in 1:N )
+  {        
+    # set ranges
+    xl = min( X[ , n ] )
+    xh = max( X[ , n ] )
+    x = as.matrix(seq(from=xl, to=xh, by=(xh-xl)/100))
         
-        # posterior numerical
-        h3 = pHist(X[ ,n] , p_ , NBins )
+    # posterior numerical
+    #h3 = pHist(X[ ,n] , p_ , NBins )
         
-        # posterior analytical        
-        h4 = plot( x , normpdf( x , Mu_[n] , sqrt( Sigma_[n,n] ) ) )        
+    # posterior analytical        
+    y1 = dnorm( x , Mu_[n] , sqrt( Sigma_[n,n] ) )
+    h4 = plot( x , y1,  type='l', col='red', xlab='', ylab='' )        
         
-        # prior analytical
-        h2 = plot( x , normpdf( x , Mu[n] ,sqrt( Sigma[n,n] ) ) )
+    # prior analytical
+    par(new = TRUE)
+    y2 = dnorm( x , Mu[n] ,sqrt( Sigma[n,n] ) )
+    h2 = plot( x , y2, type='l', col='blue', xlab='', ylab='' )
         
-        # xlim( cbind( xl , xh ) )
-        # legend([h3 h4 h2],'numerical', 'analytical', 'prior')
-    }
+    # xlim( cbind( xl , xh ) )
+    legend(x = 1.5, y =0.4 ,legend=c("analytical","prior"), lwd=c(0.2,0.2), lty=c(1,1), col=c("red", "blue"))
+  }
 }
 
 
@@ -59,12 +62,32 @@ PlotDistributions = function( X , p , Mu , Sigma , p_ , Mu_ , Sigma_ )
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 Prior2Posterior = function( M , Q , M_Q , S , G , S_G )
 {  
-    # See Appendix A.1 formula 49 for derivation
-    M_ = M + S %*% t(Q) %*% solve( Q %*% S %*% t(Q) ) %*% (M_Q - Q %*% M)
+  # See Appendix A.1 formula 49 for derivation
+  M_ = M + S %*% t(Q) %*% solve( Q %*% S %*% t(Q) ) %*% (M_Q - Q %*% M)
     
-    # See Appendix A.1 formula 57 for derivation
-    S_= S + (S %*% t(G)) %*% ( solve( G %*% S %*% t(G) ) %*% S_G %*% solve( G %*% S %*% t(G) ) - solve( G%*%S%*%t(G) ) ) %*% ( G %*% S )
+  # See Appendix A.1 formula 57 for derivation
+  S_= S + (S %*% t(G)) %*% ( solve( G %*% S %*% t(G) ) %*% S_G %*% solve( G %*% S %*% t(G) ) - solve( G%*%S%*%t(G) ) ) %*% ( G %*% S )
     
-    return ( list( M_ = M_ , S_ = S_ ) )    
+  return ( list( M_ = M_ , S_ = S_ ) )    
 }
 
+pHist = function( X, p, nBins )
+{
+  bins = seq(from = min(X), to = max(X), by = (max(X) - min(X))/nBins)
+  histObject1 <- hist( X[,1], breaks = bins, plot = FALSE )
+  histObject2 <- hist( X[,2], breaks = bins, plot = FALSE )
+  x = as.matrix(histObject1$mids)
+  n = cbind( histObject1$counts, histObject2$counts )
+  D = x[2,] - x[1,]
+  np = zeros( length(x), 1 )
+  for( s in 1:length(x) ) {
+    pVector = NULL
+    for( i in 1:nrow(X) ) {
+      if( ( X[i,1] >= (x[s,] - D/2) & X[i,1] <= (x[s,] + D/2) ) | ( X[i,2] >= (x[s,] - D/2) & X[i,2] <= (x[s,] + D/2) ) ) {
+        pVector = rbind(pVector, p[i,] )
+      }    
+    }
+    if( length(pVector) != 0 ) { np[s,] = sum( pVector ) }
+    f = np/D
+  }
+}
