@@ -4,22 +4,23 @@ library( ggplot2 )
 library( MASS )
 
 #' Construct the mean-variance efficient frontier using a quadratic solver
-#'
+#' 
 #' Construct a number of long-only or long-short portfolios on the mean-variance efficient frontier where each
 #' portfolio is equally distanced in return space
-#'
 #' @param discretizations   number of portfolios to generate along efficient frontier (where each portfolio is equally distanced in return spaced)
 #' @param cov               arithmetic covariance matrix of asset returns
 #' @param mu                a vector of arithmetic returns for each asset
 #' @param longonly          a boolean which constrains weights to > 0 if true
 #'
-#' @return a list of portfolios along the frontier from least risky to most risk
+#' @return a list of portfolios along the frontier from least risky to most risky
 #'    The indices in each list correspond to each other
 #'      returns             the expected portfolio returns along the frontier
 #'      volatility          the variance of the portfolio along the frontier
 #'      weights             the weights of the portfolio components along the frontier
+#' @references  Attilio Meucci, 2011, Robust Bayesian Allocation 
+#' \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553}
+#' @seealso \url{http://symmys.com/node/102}
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
-#' Tested and Results Compared with Meucci's Matlab Code : Manan K. Shah
 efficientFrontier = function( discretizations , cov , mu , longonly = FALSE ) 
 {    
   # setup quadratic program
