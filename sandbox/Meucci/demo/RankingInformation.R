@@ -73,6 +73,13 @@ frontierPosterior$Exps[4] # note that asset 4 still has a higher expected return
 plot( x = (frontierPosterior$Sdev)^2 , y = frontierPosterior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Posterior" , type = "l" , ylim = c( .03 , .1 ) )
 # PlotResults( frontierPosterior$e , frontierPosterior$Sdev , frontierPosterior$Composition , frontierPosterior$Exps , Lower , Upper )
 
+# bar chart of portfolios on frontier
+options( warn = 0 )
+library( ggplot2 )
+plotStackedBar <- StackedBarChart( frontierPosterior$Composition )
+plotStackedBar
+options( warn = 2 )
+
 # Tests
 # Test1 - views that are already in the prior return no revision
 result  = ViewRanking( X , P , c(3,3) , c(4,4) ) # none of the probabilities are revised from 1e-05. Why? Because the expectation that asset 3 is lower than expected return of asset 4 is already satisfied in prior
