@@ -17,6 +17,10 @@
   length of the subset of the series below the MAR as the
   denominator, defaults to "subset"}
 
+  \item{method}{one of "risk", "variance" or "potential"
+  indicating whether to return the Upside risk, variance or
+  potential}
+
   \item{\dots}{any other passthru parameters}
 }
 \description{
