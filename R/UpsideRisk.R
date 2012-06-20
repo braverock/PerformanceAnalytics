@@ -40,12 +40,16 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #'
-#' portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0
-#' ,-3.7,-6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
+#' data(portfolio_bacon)
 #' MAR = 0.5
-#' print(UpsideRisk(portfolio_return, MAR, stat="risk")) #expected 2.937
-#' print(UpsideRisk(portfolio_return, MAR, stat="variance")) #expected 8.628
-#' print(UpsideRisk(portfolio_return, MAR, stat="potential")) #expected 1.771
+#' print(UpsideRisk(portfolio_bacon, MAR, stat="risk")) #expected 2.937
+#' print(UpsideRisk(portfolio_bacon, MAR, stat="variance")) #expected 8.628
+#' print(UpsideRisk(portfolio_bacon, MAR, stat="potential")) #expected 1.771
+#'
+#' MAR = 0
+#' data(managers)
+#' print(UpsideRisk(managers['1996'], MAR, stat="risk"))
+#' print(UpsideRisk(managers['1996',1], MAR, stat="risk")) #expected 1.820
 #'
 #' @export 
 
@@ -92,7 +96,6 @@ function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","poten
         result = apply(R, MARGIN = 2, UpsideRisk, MAR = MAR, method = method, stat = stat, ...)
         result<-t(result)
         colnames(result) = colnames(R)
-	print(MAR)
         rownames(result) = paste("Upside Risk (MAR = ",MAR,"%)", sep="")
         return(result)
     }
