@@ -29,9 +29,9 @@
   (t=1..n)(max(-R(t),0)) / nu*sum(t=1..n)(max(R(t),0))}
 
   where \eqn{n} is the number of observations of the entire
-  series \\ \eqn{n_{d}} is the number of observations less
-  than zero \\ \eqn{n_{u}} is the number of observations
-  greater than zero \\
+  series, \eqn{n_{d}} is the number of observations less
+  than zero, \eqn{n_{u}} is the number of observations
+  greater than zero
 }
 \examples{
 data(portfolio_bacon)
