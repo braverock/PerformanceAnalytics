@@ -126,11 +126,10 @@
 \examples{
 #with data used in Bacon 2008
 
-portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0,-3.7,
--6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
+data(portfolio_bacon)
 MAR = 0.5
-DownsideDeviation(portfolio_return, MAR) #expected 2.55
-DownsidePotential(portfolio_return, MAR) #expected 1.37
+DownsideDeviation(portfolio_bacon, MAR) #expected 2.55
+DownsidePotential(portfolio_bacon, MAR) #expected 1.37
 
 #with data of managers
 

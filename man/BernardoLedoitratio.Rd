@@ -28,7 +28,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(BernadoLedoitratio(portfolio_return)) #expected 1.78
+print(BernadoLedoitratio(portfolio_bacon)) #expected 1.78
 
 data(managers)
 print(BernadoLedoitratio(managers['1996']))
