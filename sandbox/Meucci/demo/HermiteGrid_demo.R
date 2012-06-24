@@ -1,11 +1,9 @@
-
 # This script compares the performance of plain Monte Carlo 
 # versus grid in applying Entropy Pooling to process extreme views
 # This script complements the article
 #    "Fully Flexible Extreme Views" A. Meucci, D. Ardia, S. Keel available at www.ssrn.com
 # The most recent version of this code is available at MATLAB Central - File Exchange
 library(matlab)
-
 
 ####################################################################################
 # Prior market model
@@ -27,9 +25,7 @@ monteCarlo.p = normalizeProb( 1/monteCarlo.J * ones( monteCarlo.J , 1 ) )
 
 # numerical (Gauss-Hermite grid) prior 
 ghqMesh = emptyMatrix
-#TODO FIXME NEED EXAMPLE data
-#load( file.choose() )
-ghqx = ghqx[[1]]
+load( "ghq1000.rda" )
 
 tmp = ( ghqx - min( ghqx ) ) / ( max( ghqx ) - min( ghqx ) ) # rescale GH zeros so they belong to [0,1]
 epsilon = 1e-10
@@ -39,7 +35,7 @@ ghqMesh.X  = Lower + tmp*(Upper-Lower) # rescale mesh
 
 p = integrateSubIntervals(ghqMesh.X , market.cdf)
 ghqMesh.p = normalizeProb(p)
-ghqMesh.J = length(ghqMesh.X) 
+ghqMesh.J = nrow(ghqMesh.X) 
 
 ####################################################################################
 # Entropy posterior from extreme view on expectation
@@ -64,11 +60,10 @@ monteCarlo.KLdiv = monteCarloOptimResult$optimizationPerformance$ml
 # numerical (Gaussian-Hermite grid)
 Aeq = rbind( ones( 1 , ghqMesh.J ) , t( ghqMesh.X ) )
 beq = rbind( 1 , view.mu )
-ghqMeshOptimResult = EntropyProg( ghqMesh.J , emptyMatrix , emptyMatrix , Aeq , beq )
+ghqMeshOptimResult = EntropyProg( ghqMesh.p , emptyMatrix , emptyMatrix , Aeq , beq )
 
 ghqMesh.p_ = ghqMeshOptimResult$p_
 ghqMesh.KLdiv = ghqMeshOptimResult$optimizationPerformance$ml
-
 
 ####################################################################################
 # Plots
@@ -83,6 +78,6 @@ plotDataMC = pHist( monteCarlo.X , monteCarlo.p_ , 50 )
 plot( plotDataMC$x , plotDataMC$f , type = "l" )
 
 # Gauss Hermite Grid
-plotDataGHQ = pHist(ghqMesh.X, ghqMesh.p_ , 50 )
+plotDataGHQ = pHist(data.matrix(ghqMesh.X), ghqMesh.p_ , 50 )
 plot( plotDataGHQ$x , plotDataGHQ$f , type = "l" )
 
