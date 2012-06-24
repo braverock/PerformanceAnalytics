@@ -20,27 +20,27 @@
 #' @export
 RejectOutlier = function( sample )
 {   
-    library( matlab )
+  library( matlab )
     
-    # parameter checks
-    if ( ncol( corruptSample ) > nrow( corruptSample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }    
+  # parameter checks
+  if ( ncol( corruptSample ) > nrow( corruptSample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }    
     
-    # initialize parameters
-    T = nrow( sample )
-    m = matrix( colMeans( sample ) , nrow = ncol( sample ) )
-    U = sample - ones( T , 1 ) %*% t( m )
+  # initialize parameters
+  T = nrow( sample )
+  m = matrix( colMeans( sample ) , nrow = ncol( sample ) )
+  U = sample - ones( T , 1 ) %*% t( m )
     
-    # measure lambdas associated with each observation
-    lambdas = diag( U %*% solve( t(U) %*% U ) %*% t(U) ) # result is from Poston, Wegman, Priebe and Solka (1997)
-    # the various lambdas denote the t-th element of the diagonal of the information matrix
-    # the farthest outlier corresponds to the highest value of lambda
-    a = max( lambdas )
-    rejected = which.max( lambdas ) # identify the farthest outlier
+  # measure lambdas associated with each observation
+  lambdas = diag( U %*% solve( t(U) %*% U ) %*% t(U) ) # result is from Poston, Wegman, Priebe and Solka (1997)
+  # the various lambdas denote the t-th element of the diagonal of the information matrix
+  # the farthest outlier corresponds to the highest value of lambda
+  a = max( lambdas )
+  rejected = which.max( lambdas ) # identify the farthest outlier
     
-    if ( max(lambdas > 1) == 1 ) { stop( "Lambdas cannot be greater than 1")}
-    if ( max(lambdas < 0) == 1 ) { stop( "Lambdas cannot be less than 0")}
+  if ( max(lambdas > 1) == 1 ) { stop( "Lambdas cannot be greater than 1")}
+  if ( max(lambdas < 0) == 1 ) { stop( "Lambdas cannot be less than 0")}
     
-    return( list( rejected = rejected , lambdas = lambdas ) )
+  return( list( rejected = rejected , lambdas = lambdas ) )
 }
 
 #' Compute the minimum volume ellipsoid for a given (multi-variate) time-series
@@ -64,57 +64,55 @@ RejectOutlier = function( sample )
 #' @export
 ComputeMVE = function ( data )
 {
-    library( matlab )    
-    NumObservations = nrow( data )
-    Ones = ones( NumObservations , 1 )    
-    det_S_New = 0    
+  library( matlab )    
+  NumObservations = nrow( data )
+  Ones = ones( NumObservations , 1 )    
+  det_S_New = 0    
     
-    # step 0: initialize the relative weights
-    w = 1 / NumObservations * Ones
+  # step 0: initialize the relative weights
+  w = 1 / NumObservations * Ones
     
-    # step 1: compute the location parameter (m), and the scatter matrix (S)
-    m = matrix( colMeans( data ) , nrow = ncol( data ) )
-    S = cov( data ) # notice the weights in the scatter matrix are not normalized
+  # step 1: compute the location parameter (m), and the scatter matrix (S)
+  m = matrix( colMeans( data ) , nrow = ncol( data ) )
+  S = cov( data ) # notice the weights in the scatter matrix are not normalized
     
-    keeploop = TRUE
-    while ( keeploop == TRUE )
+  keeploop = TRUE
+  while ( keeploop == TRUE )
+  {
+    Mahalanobis = matrix( , ncol = 0 , nrow = 1 )          
+    for ( t in 1:NumObservations )
     {
-        Mahalanobis = matrix( , ncol = 0 , nrow = 1 )          
-        for ( t in 1:NumObservations )
-        {
-            # cycle thru each observation...
-            x_t = t( data[ t , , drop = FALSE ] )                            
+      # cycle thru each observation...
+      x_t = t( data[ t , , drop = FALSE ] )                            
             
-            # ...and calculate the square Mahalanobis distances
-            Mahalanobis = cbind( Mahalanobis , t((x_t - m)) %*% solve(S) %*% ( x_t - m ) )
-        }              
+      # ...and calculate the square Mahalanobis distances
+      Mahalanobis = cbind( Mahalanobis , t((x_t - m)) %*% solve(S) %*% ( x_t - m ) )
+    }                
+    # Step 3: update the weights if the Mahalanobis distance squared > 1 as follows...
+    update = matlab:::find(Mahalanobis > 1 )        
+    w[ update ] = w[ update ] * t( Mahalanobis[ update ] ) 
+    # ... otherwise leave the weight unchanged
         
+    # Step 4: If convergence is reached, stop and define mu and Sigma, otherwise go to Step 1
+    m = t( data ) %*% w / sum (w )
+    S = t(( data - Ones %*% t( m ) )) %*% diag( as.vector( w ) ) %*% ( data - Ones %*% t(m) )
         
-        # Step 3: update the weights if the Mahalanobis distance squared > 1 as follows...
-        update = matlab:::find(Mahalanobis > 1 )        
-        w[ update ] = w[ update ] * t( Mahalanobis[ update ] ) 
-        # ... otherwise leave the weight unchanged
+    det_S_Old = det_S_New        
+    det_S_New = base:::det(S)          
         
-        # Step 4: If convergence is reached, stop and define mu and Sigma, otherwise go to Step 1
-        m = t( data ) %*% w / sum (w )
-        S = t(( data - Ones %*% t( m ) )) %*% diag( as.vector( w ) ) %*% ( data - Ones %*% t(m) )
+    exitFlag = ( ( det_S_Old / det_S_New ) < .99999 ) # loop exits when evaluates to FALSE
         
-        det_S_Old = det_S_New        
-        det_S_New = base:::det(S)          
+    if ( det_S_New == 0 ) { exitFlag = TRUE }
         
-        exitFlag = ( ( det_S_Old / det_S_New ) < .99999 ) # loop exits when evaluates to FALSE
+    if ( !is.logical( exitFlag ) ) { browser() }
         
-        if ( det_S_New == 0 ) { exitFlag = TRUE }
-        
-        if ( !is.logical( exitFlag ) ) { browser() }
-        
-        keeploop = ( exitFlag )
-    }    
+    keeploop = ( exitFlag )
+  }    
     
-    MVE_Location = m
-    MVE_Dispersion = S
+  MVE_Location = m
+  MVE_Dispersion = S
     
-    return( list( MVE_Location = MVE_Location , MVE_Dispersion = MVE_Dispersion ) )
+  return( list( MVE_Location = MVE_Location , MVE_Dispersion = MVE_Dispersion ) )
 }
 
 #' Use the minimum volume ellipsoid to detect outliers
@@ -136,54 +134,54 @@ ComputeMVE = function ( data )
 #' @export
 DetectOutliersViaMVE = function( corruptSample )
 {
-    library( matlab )    
+  library( matlab )    
     
-    # parameter checks
-    if ( ncol( corruptSample ) > nrow( corruptSample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }        
+  # parameter checks
+  if ( ncol( corruptSample ) > nrow( corruptSample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }        
     
-    # initialize variables
-    T = nrow( corruptSample )    
-    index = seq( from = 1 , to = T , 1 )
-    vol_MVE = sample_Length = matrix( , nrow = 1 , ncol = 0 )
-    store = rep( list() , length = ceil( T / 2 ) )
+  # initialize variables
+  T = nrow( corruptSample )    
+  index = seq( from = 1 , to = T , 1 )
+  vol_MVE = sample_Length = matrix( , nrow = 1 , ncol = 0 )
+  store = rep( list() , length = ceil( T / 2 ) )
     
-    lambdas = RejectOutlier( corruptSample )$lambdas
-    cutofflist = order( lambdas , decreasing = TRUE )
+  lambdas = RejectOutlier( corruptSample )$lambdas
+  cutofflist = order( lambdas , decreasing = TRUE )
     
-    # compute high-breakdown estimates
-    for ( j in 1:ceil( T / 2 ) ) # stop when the number of data left is less than half the original sample, otherwise repeat
-    {    
-        # step 1: compute MVE location and dispersion 
-        MVE = ComputeMVE( corruptSample )
+  # compute high-breakdown estimates
+  for ( j in 1:ceil( T / 2 ) ) # stop when the number of data left is less than half the original sample, otherwise repeat
+  {    
+    # step 1: compute MVE location and dispersion 
+    MVE = ComputeMVE( corruptSample )
         
-        # store results
-        store[[j]]$MVE_Location = MVE$MVE_Location
-        store[[j]]$MVE_Dispersion = MVE$MVE_Dispersion
+    # store results
+    store[[j]]$MVE_Location = MVE$MVE_Location
+    store[[j]]$MVE_Dispersion = MVE$MVE_Dispersion
         
-        sample_Length = cbind( sample_Length , nrow( corruptSample ) )
-        vol_MVE = cbind( vol_MVE , sqrt( det( MVE$MVE_Dispersion ) ) )
+    sample_Length = cbind( sample_Length , nrow( corruptSample ) )
+    vol_MVE = cbind( vol_MVE , sqrt( det( MVE$MVE_Dispersion ) ) )
         
-        store[[j]]$index = index
+    store[[j]]$index = index
         
-        # step 2: find the farthest outlier among the data and remove the observation (one at a time)        
-        rejected = RejectOutlier( corruptSample )$rejected
-        corruptSample = corruptSample[ -rejected  , ] # drop outlier rows from sample
-        index = index[ -rejected ]
-    }
+    # step 2: find the farthest outlier among the data and remove the observation (one at a time)        
+    rejected = RejectOutlier( corruptSample )$rejected
+    corruptSample = corruptSample[ -rejected  , ] # drop outlier rows from sample
+    index = index[ -rejected ]
+  }
     
-    # plot volume of ellipsoid as function of sample length    
-    # shows an abrupt jump when the first outlier is added to the data
-    # The respective sample covariance is the minimum covariance determinant and the respective ellipsoid
-    plot( sample_Length , vol_MVE , type = "l" , main = "Outlier detection" , ylab = "volume of Min volume ellipsoid" , xlab = "sample length" )
+  # plot volume of ellipsoid as function of sample length    
+  # shows an abrupt jump when the first outlier is added to the data
+  # The respective sample covariance is the minimum covariance determinant and the respective ellipsoid
+  plot( sample_Length , vol_MVE , type = "l" , main = "Outlier detection" , ylab = "volume of Min volume ellipsoid" , xlab = "sample length" )
     
-    # return the minimum volume ellipsoid at each sample length
-    result = rbind( sample_Length , vol_MVE )
-    rownames( result ) = c("index" , "volumeMVE" )   
+  # return the minimum volume ellipsoid at each sample length
+  result = rbind( sample_Length , vol_MVE )
+  rownames( result ) = c("index" , "volumeMVE" )   
     
-    # TODO: measure the slope of result$volumeMVE. When slope doubles that marks the first outlier
-    numOutliers = NULL
+  # TODO: measure the slope of result$volumeMVE. When slope doubles that marks the first outlier
+  numOutliers = NULL
     
-    return( list( plotdata = t( result ) , cutofflist = cutofflist , numOutliers = numOutliers ) )
+  return( list( plotdata = t( result ) , cutofflist = cutofflist , numOutliers = numOutliers ) )
 }
 
 
@@ -200,21 +198,21 @@ DetectOutliersViaMVE = function( corruptSample )
 #' @export
 NoisyObservations = function( numGoodSamples , numOutliers , covarianceMatrix , shuffle = FALSE )
 {    
-    mu = matrix( rep( 0 , nrow( covarianceMatrix ) ) )    
-    T = numGoodSamples
+  mu = matrix( rep( 0 , nrow( covarianceMatrix ) ) )    
+  T = numGoodSamples
     
-    # "good" observations
-    library( MASS )
-    sample = mvrnorm( n = T , mu = mu , Sigma = covarianceMatrix ) # draw T samples from mvrnorm distribution
+  # "good" observations
+  library( MASS )
+  sample = mvrnorm( n = T , mu = mu , Sigma = covarianceMatrix ) # draw T samples from mvrnorm distribution
     
-    # generate outliers
-    outliers = 10 * matrix( runif( numOutliers * nrow( covarianceMatrix ) ) , nrow = numOutliers , ncol = ncol( covarianceMatrix ) )
+  # generate outliers
+  outliers = 10 * matrix( runif( numOutliers * nrow( covarianceMatrix ) ) , nrow = numOutliers , ncol = ncol( covarianceMatrix ) )
     
-    # add "bad" observation(s)
-    corruptSample = rbind ( sample , outliers )
+  # add "bad" observation(s)
+  corruptSample = rbind ( sample , outliers )
     
-    # shuffle rows
-    if ( shuffle == TRUE ) { corruptSample = corruptSample[ sample( nrow( corruptSample ) ) , ] }
+  # shuffle rows
+  if ( shuffle == TRUE ) { corruptSample = corruptSample[ sample( nrow( corruptSample ) ) , ] }
     
-    return( corruptSample = corruptSample )
+  return( corruptSample = corruptSample )
 }
