@@ -18,8 +18,8 @@ library( MASS )
 # analytical representation
 N = 2 # market dimension (2 assets)
 Mu = zeros( N , 1 )
-r= .6
-Sigma = ( 1 - r ) * eye( N ) + r * ones( N , N ) # nxn correlation matrix with correlaiton 'r' in off-diagonals
+r = .6
+Sigma = ( 1 - r ) * eye( N ) + r * ones( N , N ) # nxn correlation matrix with correlation 'r' in off-diagonals
 
 # numerical representation
 J = 100000 # number of scenarios
@@ -46,33 +46,34 @@ Sigma_G = .5^2
 # analytical posterior
 RevisedMuSigma = Prior2Posterior( Mu , Q , Mu_Q , Sigma , G , Sigma_G )
 Mu_ = RevisedMuSigma$M_
+Sigma_ = RevisedMuSigma$S_
 
 # numerical posterior
 Aeq = ones( 1 , J )  # constrain probabilities to sum to one...
 beq = 1
 
 # create views
-    QX = X %*% t(Q) # a Jx1 matrix
+QX = X %*% t(Q) # a Jx1 matrix
 
-    Aeq = rbind( Aeq , t(QX) )    # ...constrain the first moments... 
-        # QX is a linear combination of vector Q and the scenarios X
+Aeq = rbind( Aeq , t(QX) )    # ...constrain the first moments... 
+# QX is a linear combination of vector Q and the scenarios X
     
-    beq = rbind( beq , Mu_Q )
+beq = rbind( beq , Mu_Q )
     
-    SecMom = G %*% Mu_ %*% t(Mu_) %*% t(G) + Sigma_G  # ...constrain the second moments... 
-        # We use Mu_ from analytical result. We do not use Revised Sigma because we are testing whether
-        # the numerical approach for handling expectations of covariance matches the analytical approach
-        # TODO: Can we perform this procedure without relying on Mu_ from the analytical result?
-    GX = X %*% t(G)
+SecMom = G %*% Mu_ %*% t(Mu_) %*% t(G) + Sigma_G  # ...constrain the second moments... 
+# We use Mu_ from analytical result. We do not use Revised Sigma because we are testing whether
+# the numerical approach for handling expectations of covariance matches the analytical approach
+# TODO: Can we perform this procedure without relying on Mu_ from the analytical result?
+GX = X %*% t(G)
     
-    for ( k in 1:nrow( G ) )
-        {
-        for ( l in k:nrow( G ) )
-            {
-            Aeq = rbind( Aeq , t(GX[ , k ] * GX[ , l ] ) )
-            beq = rbind( beq , SecMom[ k , l ] )
-            }
-        }
+for ( k in 1:nrow( G ) )
+{
+  for ( l in k:nrow( G ) )
+  {
+    Aeq = rbind( Aeq , t(GX[ , k ] * GX[ , l ] ) )
+    beq = rbind( beq , SecMom[ k , l ] )
+  }
+}
 
 emptyMatrix = matrix( , nrow = 0 , ncol = 0 )
 p_ = EntropyProg( p , emptyMatrix , emptyMatrix , Aeq , beq ) # ...compute posterior probabilities
