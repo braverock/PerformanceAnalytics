@@ -26,7 +26,7 @@
   {epsilon_r = r_p - alpha_r - beta_r * b}
 
   where \eqn{\alpha_r} is the regression alpha,
-  \eqn{\beta_r} is the regression beta, \eqn{r} is the
+  \eqn{\beta_r} is the regression beta, \eqn{r_p} is the
   portfolio return and b is the benchmark return
 }
 \examples{

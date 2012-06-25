@@ -7,7 +7,7 @@
 #' {epsilon_r = r_p - alpha_r - beta_r * b}
 #'
 #' where \eqn{\alpha_r} is the regression alpha, \eqn{\beta_r} is the regression beta,
-#' \eqn{r} is the portfolio return and b is the benchmark return
+#' \eqn{r_p} is the portfolio return and b is the benchmark return
 #'
 #' @aliases Regression epsilon
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -40,21 +40,21 @@ function (Ra, Rb, Rf = 0, ...)
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
     
-     Rp = (prod(0.01*Ra+1)-1)*100 #portfolio total return
-     Rpb = (prod(0.01*Rb+1)-1)*100 #benchmark total return
-     for (i in (1:length(Ra))) {
-     if (!is.na(Ra[i])) {
-     calcul = TRUE
-}
-}
+       Rp = (prod(0.01*Ra+1)-1)*100 #portfolio total return
+       Rpb = (prod(0.01*Rb+1)-1)*100 #benchmark total return
+       for (i in (1:length(Ra))) {
+          if (!is.na(Ra[i])) {
+             calcul = TRUE
+          }
+        }
 
-     if (calcul) {
-     result = Rf + Rp - CAPM.alpha(Ra,Rb,Rf) - (Rpb - Rf) * CAPM.beta(Ra,Rb,Rf) 
-}   
-    else {
-    result = NA
-}
-     return(result)
+        if (calcul) {
+           result = Rf + Rp - CAPM.alpha(Ra,Rb,Rf) - (Rpb - Rf) * CAPM.beta(Ra,Rb,Rf) 
+        }   
+        else {
+           result = NA
+        }
+        return(result)
     }
     else {
         Ra = checkData(Ra)
