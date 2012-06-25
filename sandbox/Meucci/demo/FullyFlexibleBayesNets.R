@@ -46,25 +46,25 @@ View = rep( list( View ) , length = 2*N + 1)
 
 
 for ( n in 1:N ) # for each asset...
-    {
-    k = 2 * n - 1 
-    View[[k]]$Who = matrix( n , nrow = 1 , ncol = 1 )
-    View[[k]]$Equal = list( matrix( -1 , nrow = 1 , ncol = 1 ) )
-    View[[k]]$Cond_Who = emptyMatrix 
-    View[[k]]$Cond_Equal = list( emptyMatrix )
-    View[[k]]$v = .4
-    View[[k]]$sgn = -1
-    View[[k]]$c = .5
+{
+  k = 2 * n - 1 
+  View[[k]]$Who = matrix( n , nrow = 1 , ncol = 1 )
+  View[[k]]$Equal = list( matrix( -1 , nrow = 1 , ncol = 1 ) )
+  View[[k]]$Cond_Who = emptyMatrix 
+  View[[k]]$Cond_Equal = list( emptyMatrix )
+  View[[k]]$v = .4
+  View[[k]]$sgn = -1
+  View[[k]]$c = .5
 
-    k = 2 * n
-    View[[k]]$Who = matrix( n , nrow = 1 , ncol = 1 )
-    View[[k]]$Equal = list( matrix( -1 , nrow = 1 , ncol = 1 ) )
-    View[[k]]$Cond_Who = emptyMatrix
-    View[[k]]$Cond_Equal = list( emptyMatrix )
-    View[[k]]$v = .4
-    View[[k]]$sgn = -1
-    View[[k]]$c =.5
-    }
+  k = 2 * n
+  View[[k]]$Who = matrix( n , nrow = 1 , ncol = 1 )
+  View[[k]]$Equal = list( matrix( -1 , nrow = 1 , ncol = 1 ) )
+  View[[k]]$Cond_Who = emptyMatrix
+  View[[k]]$Cond_Equal = list( emptyMatrix )
+  View[[k]]$v = .4
+  View[[k]]$sgn = -1
+  View[[k]]$c =.5
+}
 
 k = 2 * N + 1 
 View[[k]]$Who = c( 1 , 2 , 8 ) 
@@ -83,29 +83,22 @@ A = constraints$A ; b = constraints$b ; g = constraints$g ; rm( constraints )
 C_12_ = .6
 New_A = t( X[ , 1 ] * X[ , 2 ] )
 New_b = s[1] * s[2] * C_12_ + m[1] * m[2]
-New_g = -log( 1 - .1 ) # TODO?
+New_g = -log( 1 - .1 )
 
 A = rbind( A , New_A )
 b = rbind( b , New_b )
 g = rbind( g , New_g )
     
 # enforce consistency
-db = Tweak( A , b , g ) # TODO
+db = Tweak( A , b , g )
 b = b + db
 
 ##################################################################################
 # compute posterior
 Aeq = ones( 1 , J )  # constrain probabilities to sum to one
-beq = 1
+beq = as.matrix(1)
 p_ = EntropyProg( p , A , b , Aeq , beq )
 ##################################################################################
 
-# plots TODO
-
-#figure
-#subplot(2,1,1)
-#bar(p)
-#YLim=get(gca,'ylim');
-#subplot(2,1,2)
-#bar(p_)
-#set(gca,'ylim',YLim);
+barplot(p)
+barplot(p_)
