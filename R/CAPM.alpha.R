@@ -64,7 +64,7 @@ CAPM.alpha <- function (Ra, Rb, Rf = 0)
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
 
-    Ra.ncols = NCOL(Ra) 
+    Ra.ncols = NCOL(Ra)	
     Rb.ncols = NCOL(Rb)
 
     xRa = Return.excess(Ra, Rf)

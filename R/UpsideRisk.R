@@ -53,8 +53,6 @@
 #'
 #' @export 
 
-#TODO tests for multi columns data
-
 UpsideRisk <-
 function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","potential"), ...)
 {
