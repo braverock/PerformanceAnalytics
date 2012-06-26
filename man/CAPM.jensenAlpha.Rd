@@ -1,7 +1,7 @@
 \name{CAPM.jensenAlpha}
+\alias{alpha}
 \alias{CAPM.jensenAlpha}
-\alias{epsilon}
-\alias{Regression}
+\alias{Jensen's}
 \title{Jensen's alpha of the return distribution}
 \usage{
   CAPM.jensenAlpha(Ra, Rb, Rf = 0, ...)
@@ -25,7 +25,7 @@
   \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)} {alpha =
   r_p - r_f - beta_p * (b - r_f)}
 
-  where \eqn{r_f} is the systematic risk, \eqn{\beta_r} is
+  where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is
   the regression beta, \eqn{r_p} is the portfolio return
   and b is the benchmark return
 }

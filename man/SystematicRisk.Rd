@@ -1,0 +1,52 @@
+\name{SystematicRisk}
+\alias{risk}
+\alias{systematic}
+\alias{SystematicRisk}
+\title{Systematic risk of the return distribution}
+\usage{
+  SystematicRisk(Ra, Rb, Rf = 0, ...)
+}
+\arguments{
+  \item{Ra}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{Rb}{return vector of the benchmark asset}
+
+  \item{Rf}{risk free rate, in same period as your returns}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  Systematic risk as defined by Bacon(2008) is the product
+  of beta by market risk. Be careful ! It's not the same
+  definition as the one given by Michael Jensen. Market
+  risk is the standard deviation of the benchmark.
+}
+\details{
+  \deqn{\sigma_s = \beta * \sigma_m} {systematic risk =
+  beta * market risk}
+
+  where \eqn{\sigma_s} is the systematic risk, \eqn{\beta}
+  is the regression beta, and \eqn{\sigma_m} is the market
+  risk
+}
+\examples{
+data(portfolio_bacon)
+print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 3.75
+
+data(managers)
+print(SystematicRisk(managers['1996',1], managers['1996',8]))
+print(SystematicRisk(managers['1996',1:5], managers['1996',8]))
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.75
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+
