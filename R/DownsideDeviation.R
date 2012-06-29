@@ -120,7 +120,7 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 
     method = method[1] 
 
-    if (is.vector(R)) {
+    if (ncol(R)==1 || is.vector(R) || is.null(R)) {
         R = na.omit(R)
 
         r = subset(R, R < MAR)
@@ -153,9 +153,9 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
         result<-t(result)
         colnames(result) = colnames(R)
         if(potential)
-            rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+            rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
         else
-            rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+            rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR),1),"%)", sep="")
         return(result)
     }
 }
@@ -173,17 +173,15 @@ function (R, MAR=0)
     # FUNCTION:
     
     
-    if (is.vector(R)) {
-        R = na.omit(R)
+    if (is.vector(R) || is.null(R) || ncol(R)==1) {
         return(DownsideDeviation(R, MAR=MAR, method="full", potential=TRUE))
     }
     else {
         R = checkData(R, method = "matrix")
-        MAR=mean(R) #dummy for R CMD check
-        result = apply(R, 2, DownsidePotential)
+        result = apply(R, MARGIN = 2, DownsidePotential, MAR = MAR)
         result = matrix(result, nrow=1)
         colnames(result) = colnames(R)
-        rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR)*100,1),"%)", sep="")
+        rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
         return(result)
     }
 }
