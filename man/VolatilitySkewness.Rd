@@ -1,0 +1,62 @@
+\name{VolatilitySkewness}
+\alias{VolatilitySkewness}
+\title{Volatility and variability of the return distribution}
+\usage{
+  VolatilitySkewness(R, MAR = 0,
+    stat = c("volatility", "variability"), ...)
+}
+\arguments{
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{MAR}{Minimum Acceptable Return, in the same
+  periodicity as your returns}
+
+  \item{method}{one of "volatility", "variability"
+  indicating whether to return the volatility skewness or
+  the variability skweness}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  Volatility skewness is a similar measure to omega but
+  using the second partial moment. It's the ratio of the
+  upside variance compared to the downside variance.
+  Variability skewness is the ratio of the upside risk
+  compared to the downside risk.
+}
+\details{
+  \deqn{ VolatilitySkewness(R , MAR) =
+  \frac{\sigma_U^2}{\sigma_D^2}} {VolatilitySkewness(R,
+  MAR) = UpsideVariance / DownsideVariance}
+
+  \deqn{ VariabilitySkewness(R , MAR) =
+  \frac{\sigma_U}{\sigma_D}} {VariabilitySkewness(R, MAR) =
+  UpsideRisk / DownsideRisk}
+
+  where \eqn{\sigma_U} is the Upside risk and
+  \eqn{\sigma_D} is the Downside Risk
+}
+\examples{
+data(portfolio_bacon)
+MAR = 0.5
+print(VolatilitySkewness(portfolio_bacon, MAR, stat="volatility")) #expected 1.32
+print(VolatilitySkewness(portfolio_bacon, MAR, stat="variability")) #expected 1.15
+
+MAR = 0
+data(managers)
+print(VolatilitySkewness(managers['1996'], MAR, stat="volatility"))
+print(VolatilitySkewness(managers['1996',1], MAR, stat="volatility"))
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.97-98
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

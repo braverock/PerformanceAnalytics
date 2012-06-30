@@ -29,7 +29,7 @@
 #' returns
 #' @param method one of "full" or "subset", indicating whether to use the
 #' length of the full series or the length of the subset of the series below
-#' the MAR as the denominator, defaults to "subset"
+#' the MAR as the denominator, defaults to "full"
 #' @param method one of "risk", "variance" or "potential" indicating whether
 #' to return the Upside risk, variance or potential
 #' @param \dots any other passthru parameters
