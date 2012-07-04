@@ -16,15 +16,6 @@
 ###################################################################
 load("butterflyTradingX.rda")
 
-FactorNames = c('MSFT_close' , 'MSFT_vol_30' , 'MSFT_vol_91' , 'MSFT_vol_182' , 
-                'YHOO_close' , 'YHOO_vol_30' , 'YHOO_vol_91' , 'YHOO_vol_182' ,
-                'GOOG_close' , 'GOOG_vol_30' , 'GOOG_vol_91' , 'GOOG_vol_182' , 
-                'USD SWAP 2Y rate' , 'USD SWAP 10Y rate' )
-
-p = matrix( rep( 1 / 100224 , 100224 ) , ncol = 1 ) # creates a Jx1 matrix of equal probabilities for each scenario
-
-ans = 1 / 100224
-
 library( R.matlab )
 library( matlab )
 
@@ -67,36 +58,35 @@ Options$Limit = 10000 # limit to absolute value of each investment
 
 # The following commands loads the PnL object as calculated by the MATLAB option-pricing model
     # This is for testing purposes so we can replicate results with the Meucci program
-load("C:\\Users\\Ram Ahluwalia\\Documents\\Applications\\R\\r-user\\MeucciButterflyPnL.rda")
+# load("C:\\Users\\Ram Ahluwalia\\Documents\\Applications\\R\\r-user\\MeucciButterflyPnL.rda")
 
-optimalPortfolios = LongShortMeanCVaRFrontier( PnL , p , Butterflies , Options )
+optimalPortfolios = LongShortMeanCVaRFrontier( PnL , as.matrix(p) , Butterflies , Options )
 
 View( optimalPortfolios ) # Note that composition is measured in dollars. Here we are short GOOG_vol_91 and long GOOG_vol_182
 
-# plot efficient frontier ( Exp , CVaR , w )
+PlotFrontier( optimalPortfolios$Exp , optimalPortfolios$CVaR , optimalPortfolios$Composition )
 
 ###################################################################
 # process views (this is the core of the Entropy Pooling approach
 ###################################################################
 p_1 = ViewImpliedVol( X , p )
-    # View 1 (inequality view): bearish on on 2m-6pm implied volaility spread for Google
-    # Note that the mean-CVaR efficient frontier is long based on the reference model
-    # After processing the view, the G6m-G2m spread is now short in the mean-CVaR long-short efficient frontier
+# View 1 (inequality view): bearish on on 2m-6pm implied volaility spread for Google
+# Note that the mean-CVaR efficient frontier is long based on the reference model
+# After processing the view, the G6m-G2m spread is now short in the mean-CVaR long-short efficient frontier
 
 p_2 = ViewRealizedVol( X , p )
-    # view 2 (relative inequality view on median): bullish on realized volatility of MSFT (i.e. absolute log-change in the underlying). 
-    # This is the variable such that, if larger than a threshold, a long position in the butterfly turns into a profit (e.g. Rachev 2003)
-    # we issue a relative statement on the media comparing it with the third quintile implied by the reference market model
+# view 2 (relative inequality view on median): bullish on realized volatility of MSFT (i.e. absolute log-change in the underlying). 
+# This is the variable such that, if larger than a threshold, a long position in the butterfly turns into a profit (e.g. Rachev 2003)
+# we issue a relative statement on the media comparing it with the third quintile implied by the reference market model
 
 p_3 = ViewCurveSlope( X , p )
-    # view 3 (equality view - expectations and binding constraints): slope of the yield curve will increase by 5 bp
+# view 3 (equality view - expectations and binding constraints): slope of the yield curve will increase by 5 bp
  
 # assign confidence to the views and pool opinions
-    # sum of weights should be equal 1
-    # .35 is the weight on the reference model
-    # .2 is the confidence on View 1; .25 is the confidence on View 2; .2 is the confidence on View 3
-    c = matrix( c( .35 , .2 , .25 , .2 ) , nrow = 1 ) 
-
+# sum of weights should be equal 1
+# .35 is the weight on the reference model
+# .2 is the confidence on View 1; .25 is the confidence on View 2; .2 is the confidence on View 3
+c = matrix( c( .35 , .2 , .25 , .2 ) , nrow = 1 ) 
 p_= cbind( p , p_1 , p_2 , p_3 ) %*% t(c) # compute the uncertainty weighted posterior probabilities
 
 ###################################################################
@@ -107,7 +97,7 @@ optimalPortfoliosPosterior = LongShortMeanCVaRFrontier( PnL , p_ , Butterflies ,
 View( optimalPortfoliosPosterior ) # Note that composition is measured in dollars. Now we are long GOOG_vol_91, and short Goog_vol_182
 
 # plot efficient frontier ( Exp_ , CVaR_ , w_ )
-PlotFrontier(Exp_,SDev_,w_)
+PlotFrontier(optimalPortfoliosPosterior$Exp, optimalPortfoliosPosterior$SDev , optimalPortfoliosPosterior$Composition)
 
 ###################################################################
 # tests
