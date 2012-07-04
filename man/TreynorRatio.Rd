@@ -1,8 +1,9 @@
 \name{TreynorRatio}
 \alias{TreynorRatio}
-\title{calculate Treynor Ratio of excess return over CAPM beta}
+\title{calculate Treynor Ratio or modified Treynor Ratio of excess return over CAPM beta}
 \usage{
-  TreynorRatio(Ra, Rb, Rf = 0, scale = NA)
+  TreynorRatio(Ra, Rb, Rf = 0, scale = NA,
+    modified = FALSE)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -14,6 +15,9 @@
 
   \item{scale}{number of periods in a year (daily scale =
   252, monthly scale = 12, quarterly scale = 4)}
+
+  \item{modified}{a boolean to decide whether to return the
+  Treynor ratio or Modified Treynor ratio}
 }
 \description{
   The Treynor ratio is similar to the Sharpe Ratio, except
@@ -21,10 +25,16 @@
   investment's excess return over the beta).
 }
 \details{
+  To calculate modified Treynor ratio, we divide the
+  numerator by the systematic risk instead of the beta.
+
   Equation:
   \deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
+  \deqn{ModifiedTreynorRatio = \frac{r_p - r_f}{\sigma_s}}
+  {ModifiedTreynorRatio = (Rp - Rf)/sytematic risk}
 }
 \examples{
+data(portfolio_bacon)
 data(managers)
 round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12),4)
 round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
@@ -32,12 +42,19 @@ round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12),4)
 round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
 round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4)
 round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+
+print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 1.677
+
+print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
+print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE))
 }
 \author{
-  Peter Carl
+  Peter Carl, Matthieu Lestel
 }
 \references{
-  \url{http://en.wikipedia.org/wiki/Treynor_ratio}
+  \url{http://en.wikipedia.org/wiki/Treynor_ratio} Carl
+  Bacon, \emph{Practical portfolio performance measurement
+  and attribution}, second edition 2008 p.77
 }
 \seealso{
   \code{\link{SharpeRatio}} \code{\link{SortinoRatio}}

@@ -2,7 +2,8 @@
 #'
 #' Systematic risk as defined by Bacon(2008) is the product of beta by market 
 #' risk. Be careful ! It's not the same definition as the one given by Michael
-#' Jensen. Market risk is the standard deviation of the benchmark.
+#' Jensen. Market risk is the standard deviation of the benchmark. The systematic
+#' risk is annualized
 #'
 #' \deqn{\sigma_s = \beta * \sigma_m} 
 #' {systematic risk = beta * market risk}
@@ -15,6 +16,7 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
+#' @param Period the number of return in a year in the asset return 
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -24,7 +26,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 3.75
+#' print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 13.00
 #'
 #' data(managers)
 #' print(SystematicRisk(managers['1996',1], managers['1996',8]))
@@ -33,7 +35,7 @@
 #' @export 
 
 SystematicRisk <-
-function (Ra, Rb, Rf = 0, ...)
+function (Ra, Rb, Rf = 0, Period = 12, ...)
 {
     calcul = FALSE
     Ra = checkData(Ra, method="matrix")
@@ -48,7 +50,7 @@ function (Ra, Rb, Rf = 0, ...)
       }
 
      if (calcul) {
-        result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))
+        result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))*sqrt(Period)
      }    
      else {
         result = NA

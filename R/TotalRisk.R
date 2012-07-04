@@ -49,7 +49,7 @@ function (Ra, Rb, Rf = 0, Period = 12,  ...)
      if (calcul) {
      	epsilon = Ra - Rb * CAPM.beta(Ra,Rb,Rf) - CAPM.alpha(Ra,Rb,Rf)
 	specifikRisk = sqrt(sum((epsilon - mean(epsilon))^2)/length(epsilon))*sqrt(Period)
-        result = sqrt((SystematicRisk(Ra,Rb,Rf)*sqrt(Period))^2 + specifikRisk^2)
+        result = sqrt((SystematicRisk(Ra,Rb,Rf))^2 + specifikRisk^2)
      }    
      else {
         result = NA

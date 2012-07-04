@@ -4,7 +4,7 @@
 \alias{SystematicRisk}
 \title{Systematic risk of the return distribution}
 \usage{
-  SystematicRisk(Ra, Rb, Rf = 0, ...)
+  SystematicRisk(Ra, Rb, Rf = 0, Period = 12, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -14,13 +14,17 @@
 
   \item{Rf}{risk free rate, in same period as your returns}
 
+  \item{Period}{the number of return in a year in the asset
+  return}
+
   \item{\dots}{any other passthru parameters}
 }
 \description{
   Systematic risk as defined by Bacon(2008) is the product
   of beta by market risk. Be careful ! It's not the same
   definition as the one given by Michael Jensen. Market
-  risk is the standard deviation of the benchmark.
+  risk is the standard deviation of the benchmark. The
+  systematic risk is annualized
 }
 \details{
   \deqn{\sigma_s = \beta * \sigma_m} {systematic risk =
@@ -32,7 +36,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 3.75
+print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 13.00
 
 data(managers)
 print(SystematicRisk(managers['1996',1], managers['1996',8]))
