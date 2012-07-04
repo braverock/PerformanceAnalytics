@@ -205,7 +205,7 @@ Prior2Posterior = function( M , Q , M_Q , S , G , S_G )
   return( list( M_ = M_ , S_ = S_ ) )
 }
 
-pHist = function( X , p , nBins )    
+pHist = function( X , p , nBins, freq = FALSE )    
 {      
   if ( length( match.call() ) < 3 )
   {
