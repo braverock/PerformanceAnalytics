@@ -92,36 +92,35 @@ Tweak = function( A , b , g )
     
   # add lower-bound and upper-bound constraints
   A_ = rbind( A_ , -eye(ncol(A_)) )
-  b_ = rbind( b_ , rep( 0 , ncol(A_)) ) 
+  b_ = rbind( b_ , zeros( ncol(A_), 1) ) 
     
   x0 = rep( 1/ncol( Aeq_ ) , ncol( Aeq_ ) )
   # db_ = linprog( g_ , A_ , b_ , Aeq_ ,beq_ , lb_ , ub_ ) # MATLAB version
-  optimResult = linp( E = Aeq_ ,     # matrix containing coefficients of equality constraints Ex=F
-          F = beq_ ,     # vector containing the right-hand side of equality constraints
-          G = -1*A_ ,    # matrix containint coefficients of the inequality constraints GX >= H
-          H = -1*b_ ,    # vector containing the right-hand side of the inequality constraints
-          Cost = -1*g_ , # vector containing the coefficients of the cost function
-          ispos = FALSE )
+  # optimResult = linp( E = Aeq_ ,     # matrix containing coefficients of equality constraints Ex=F
+  #        F = beq_ ,     # vector containing the right-hand side of equality constraints
+  #        G = -1*A_ ,    # matrix containint coefficients of the inequality constraints GX >= H
+  #        H = -1*b_ ,    # vector containing the right-hand side of the inequality constraints
+  #        Cost = -1*g_ , # vector containing the coefficients of the cost function
+  #        ispos = FALSE )
     
   costFunction = function( x ) { matrix( x , nrow = 1 ) %*% matrix( -1*g_ , ncol = 1) }
+  gradient = function( x ) { -1*g_ }
   optimResult = optim( par = x0 ,
             fn = costFunction , # CHECK
-            gr = -1*g_ ,
+            gr = gradient ,
             method = "L-BFGS-B",
             lower = lb_ ,
             upper = ub_ ,
             hessian = FALSE )
-    
-    
-  library( linprog )
-  optimResult2 = solveLP( E = Aeq_ ,   # numeric matrix containing coefficients of equality constraints Ex=F
-          F = beq_ ,   # numeric vector containing the right-hand side of equality constraints
-          G = -1*A_ ,  # numeric matrix containint coefficients of the inequality constraints GX >= H
-          H = -1*b_ ,  # numeric vector containing the right-hand side of the inequality constraints
-          Cost = -g_ , # numeric vector containing the coefficients of the cost function
-          ispos = FALSE )
-    
-    
+  
+  # library( linprog )
+  # optimResult2 = solveLP( E = Aeq_ ,   # numeric matrix containing coefficients of equality constraints Ex=F
+  #       F = beq_ ,   # numeric vector containing the right-hand side of equality constraints
+  #       G = -1*A_ ,  # numeric matrix containint coefficients of the inequality constraints GX >= H
+  #       H = -1*b_ ,  # numeric vector containing the right-hand side of the inequality constraints
+  #       Cost = -g_ , # numeric vector containing the coefficients of the cost function
+  #       ispos = FALSE )
+     
   db_ = optimResult$X
     
   db = db_[ 1:K ]
