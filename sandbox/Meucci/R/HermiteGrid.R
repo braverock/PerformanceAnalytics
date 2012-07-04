@@ -38,14 +38,27 @@ hermitePolynomial = function( n )
 {
   # convert last object to matrix
   # initialize p based on its expected dimension
-  p<-matrix(nrow=2,ncol=2)    
+  p = zeros(n+1,n+1)
   p[1, 1] = 1.0
   p[2, 1:2] = c(2,0)
-    
-  for (k in 2:n)
-  {
-    p[ k + 1, 1:k + 1] = 2 * cbind(p[k, 1:k], 0) - 2 * (k-1) * cbind(0, 0, p(k-1, 1:k-1))
+  
+  if( n >= 2 ) {
+    for (k in 2:n)
+    {
+      firstPart = 2 *  cbind(t(p[k, 1:k]), 0)
+      secondPart = 2 * (k-1) * cbind(0, 0, t(p[k-1, 1:k-1]))
+      p[ k + 1, 1:(k + 1)] = firstPart  - secondPart
+    }
   }
     
   return( p )  
+}
+
+gaussHermiteMesh = function( J )
+{
+  p = hermitePolynomial( J )
+  x = polyroot( sort( p[ nrow(p), ] ) )
+  x = Re(x) 
+                
+  return( x )
 }
