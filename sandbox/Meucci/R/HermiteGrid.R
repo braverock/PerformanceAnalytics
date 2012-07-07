@@ -66,7 +66,7 @@ kernelbw = function( xi )
 {
   N      = length(xi)
   prop   = 1.0
-  sig    = std( as.numeric( xi ) )
+  sig    = sd( as.numeric( xi ) )
   iqrSig = 0.7413 * IQR(xi, type = 5)
 
   if (max(iqrSig) == 0) {
@@ -82,11 +82,11 @@ kernelcdf = function( x, xi, bw, wi )
 {
   n = length(xi)
   nargin <- length(as.list(match.call())) -1
-  if ( nargin < 4 || isempty( wi ) ) { wi = ones(n, 1) / n }
+  if ( nargin < 4 || length( wi ) == 0 ) { wi = ones(n, 1) / n }
 
   if ( nargin < 3 ) { bw = kernelbw(xi) }
 
-  p = zeros( size( x ) )
+  p = rep( 0, length( x ) )
   for ( i in 1:n ) {
     p = p + exp( log( wi[i] ) + log( pnorm( x, xi[i], bw ) ) )
   }
@@ -98,36 +98,38 @@ kernelpdf = function( x, xi, bw, wi )
 {
   n = length(xi)
   nargin <- length(as.list(match.call())) -1
-  if ( nargin < 4 || isempty( wi ) ) { wi = ones(n, 1) / n }
+  if ( nargin < 4 || length( wi ) == 0 ) { wi = ones(n, 1) / n }
 
   if ( nargin < 3 ) { bw = kernelbw(xi) }
 
-  p = zeros( size( x ) )
+  p = rep( 0, length( x ) )
   for ( i in 1:n ) {
-    p = p + wi(i) * dnorm( x, xi(i), bw )
+    p = p + wi[i] * dnorm( x, xi[i], bw )
   }
+  
+  return( p )
 }
 
 kernelinv = function( p, xi, bw, wi )
 {
   nargin <- length(as.list(match.call())) -1
   emptyMatrix = matrix( ,nrow = 0, ncol = 0)
-  if ( nargin < 4 || isempty(wi) ) { wi = emptyMatrix }
-  if ( nargin < 3 || isempty(bw) ) { bw = kernelbw(xi) }
+  if ( nargin < 4 || length( wi ) == 0 ) { wi = emptyMatrix }
+  if ( nargin < 3 || length( bw ) == 0 ) { bw = kernelbw(xi) }
 
   sortp = sort(p)
 
   if ( length(p) < 10 ) {
     # case with only few points by treating each point seperately
-    x = zeros( dim( p ) )
+    x = rep( 0, length( p ) )
     for ( i in 1:length(p) ) {
-      x(i) = uniroot(function( x ) private_fun(x, xi, bw, wi, p[1]), 0)
+      x[i] = uniroot(function( x ) private_fun(x, xi, bw, wi, p[1]), c( -100, 100 ) )$root
     }
   }
   else {
   # case with many points by interpolation, find x_min and x_max
-  x_min = uniroot(function( x ) private_fun(x, xi, bw, wi, sortp[1]), 0 )
-  x_max = uniroot(function( x ) private_fun(x, xi, bw, wi, sortp[ nrow(sortp) ]), 0 )
+  x_min = uniroot(function( x ) private_fun(x, xi, bw, wi, sortp[1]), c( -100, 100 ) )$root
+  x_max = uniroot(function( x ) private_fun(x, xi, bw, wi, sortp[ nrow(sortp) ]), c( -100, 100 ) )$root
 
   # mesh for x values
   x_ = seq( x_min - 0.1 * abs(x_min), x_max + 0.1 * abs(x_max), len = 500 )
@@ -138,6 +140,8 @@ kernelinv = function( p, xi, bw, wi )
   # interpolation
   x = approx ( t( y_ ), t( x_ ), xout = t( p ) )
   }
+  
+  return( x )
 }
 
 private_fun = function( x, xi, bw, wi, p )
