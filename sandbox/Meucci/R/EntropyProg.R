@@ -27,7 +27,9 @@
 #' @param  A        matrix consisting of inequality constraints (paired with argument 'b'). Denoted as 'F' in the Meucci paper
 #' @param  b        vector consisting of inequality constraints (paired with matrix A). Denoted as 'f' in the Meucci paper
 #'
-#' @return p_       revised probabilities based on entropy pooling
+#' @return a list with 
+#'      p_                       revised probabilities based on entropy pooling
+#'      optimizationPerformance  a list with status of optimization, value, number of iterations and sum of probabilities.
 #' @export
 #'
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
@@ -204,6 +206,22 @@ Prior2Posterior = function( M , Q , M_Q , S , G , S_G )
   
   return( list( M_ = M_ , S_ = S_ ) )
 }
+
+#' Generates histogram
+#'
+#' @param X       a vector containing the data points
+#' @param p       a vector containing the probabilities for each of the data points in X
+#' @param nBins   expected number of Bins the data set is to be broken down into
+#' @param freq    a boolean variable to indicate whether the graphic is a representation of frequencies
+#'
+#' @return a list with 
+#'             f   the frequency for each midpoint
+#'             x   the midpoints of the nBins intervals
+#'
+#' @references 
+#' \url{http://www.symmys.com}
+#' See Meucci script pHist.m used for plotting
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 
 pHist = function( X , p , nBins, freq = FALSE )    
 {      
