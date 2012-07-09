@@ -8,7 +8,10 @@
   \item{ka}{cumulants of Y}
 }
 \value{
-  mu_ the raw non-central moments of Y
+  mu_ the raw non-central moments of Y \deqn {\tilde{ \mu }
+  ^{ \big(n\big) }_{Y} \equiv \kappa^{ \big(n\big) }_{Y} +
+  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$ \kappa_{Y}^{
+  \big(k\big) } \tilde{ \mu } ^{n-k}_{Y} }
 }
 \description{
   step 5 of the projection process: From the cumulants of Y
@@ -18,5 +21,11 @@
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}
+}
+\references{
+  A. Meucci - "Annualization and General Projection of
+  Skewness, Kurtosis and All Summary Statistics" - formula
+  (24) Symmys site containing original MATLAB source code
+  \url{http://www.symmys.com/node/136}
 }
 

@@ -8,7 +8,10 @@
   \item{mu_}{non-central moments of the invariant X-t}
 }
 \value{
-  ka cumulants of X-t
+  ka cumulants of X-t \deqn { \kappa^{ \big(n\big) }_{X}
+  \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -
+  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$ \kappa_{X}^{
+  \big(k\big) } \tilde{ \mu } ^{n-k}_{X} }
 }
 \description{
   Step 3 of the projection process: From the non-central
@@ -20,5 +23,11 @@
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}
+}
+\references{
+  A. Meucci - "Annualization and General Projection of
+  Skewness, Kurtosis and All Summary Statistics" - formula
+  (21) Symmys site containing original MATLAB source code
+  \url{http://www.symmys.com/node/136}
 }
 

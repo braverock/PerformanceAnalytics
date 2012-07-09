@@ -51,6 +51,15 @@
   along the Bayesian efficient frontier weights: the
   weights of each portfolo along the Bayesian efficient
   frontier
+
+  \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w
+  \leq \gamma_{\Sigma}^{(i)} \big\{w' \mu^{1} - \gamma
+  _{\mu} \sqrt{w' \Sigma_{1} w} \big\} \\ \gamma_{\mu}
+  \equiv \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}
+  \frac{v_{1}}{v_{1} - 2} } \\ \gamma_{\Sigma}^{(i)} \equiv
+  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1} \sqrt{
+  \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } }
+  } }
 }
 \description{
   Construct a collection of portfolios along the Bayesian
@@ -61,5 +70,11 @@
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}
+}
+\references{
+  A. Meucci - Robust Bayesian Allocation - See formula (19)
+  - (21) \url{
+  http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553
+  }
 }
 

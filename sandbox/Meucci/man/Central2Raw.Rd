@@ -1,6 +1,6 @@
 \name{Central2Raw}
 \alias{Central2Raw}
-\title{Transforms central moments into raw moments (first central moment defined as expectation)}
+\title{Transforms first n central moments into first n raw moments (first central moment defined as expectation)}
 \usage{
   Central2Raw(mu)
 }
@@ -17,6 +17,13 @@
   recursively an identity (formula 20)
 }
 \author{
-  Ram Ahluwalia \email{rahluwalia@gmail.com}
+  Ram Ahluwalia \email{rahluwalia@gmail.com} \deqn{ \tilde{
+  \mu }^{ \big(1\big) }_{X} \equiv \mu ^{\big(1\big)}_{X}
+  \\ \tilde{ \mu }^{ \big(n\big) }_{X} \equiv \mu ^{n}_{X}
+  \sum_{k=0}^{n-1} \big(-1\big)^{n-k+1} \mu ^{n-k}_{X}
+  \tilde{ \mu }^{\big(k\big)}_{X} } A. Meucci - "Exercises
+  in Advanced Risk and Portfolio Management". See page 10.
+  Symmys site containing original MATLAB source code
+  \url{http://www.symmys.com}
 }
 

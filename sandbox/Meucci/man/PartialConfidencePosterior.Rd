@@ -40,9 +40,15 @@
   posterior covariance matrix of asset returns blended from
   the prior and sample covariance matrix
 
-  time_post a numeric with ... TODO:
+  time_post a numeric
 
-  nu_pst a numeric with ... TODO:
+  nu_pst a numeric \deqn { T_{1} \equiv T_{0} + T \\
+  \mu_{1} \equiv \frac{1}{ T_{1} } \big( T_{0} \mu_{0} + T
+  \hat{ \mu } \big) \\ \nu_{1} \equiv \nu_{0} + T \\
+  \Sigma_{1} \equiv \big( \nu_{0} \Sigma_{0} + T \hat{
+  \Sigma } + \frac{ \big(\mu_{0} - \hat{\mu} \big)
+  \big(\mu_{0} - \hat{\mu} \big)' }{ \big( \frac{1}{T} +
+  \frac{1}{T_{0} } \big) }
 }
 \description{
   Constructs the partial confidence posterior based on
@@ -52,5 +58,11 @@
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}
+}
+\references{
+  A. Meucci - Robust Bayesian Allocation - See formula (11)
+  - (14) \url{
+  http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553
+  }
 }
 

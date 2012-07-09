@@ -19,7 +19,7 @@
 }
 \value{
   a list of portfolios along the frontier from least risky
-  to most risk The indices in each list correspond to each
+  to most risky The indices in each list correspond to each
   other returns the expected portfolio returns along the
   frontier volatility the variance of the portfolio along
   the frontier weights the weights of the portfolio
@@ -32,5 +32,12 @@
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}
+}
+\references{
+  Attilio Meucci, 2011, Robust Bayesian Allocation
+  \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553}
+}
+\seealso{
+  \url{http://symmys.com/node/102}
 }
 

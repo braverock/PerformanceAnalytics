@@ -2,8 +2,7 @@
 \alias{GenerateLogNormalDistribution}
 \title{Generate arbitrary distribution of a shifted-lognormal invariant: X-t + a ~ LogN(m,s^2) (formula 14)}
 \usage{
-  GenerateLogNormalDistribution(J = 1e+05, a = -1, m = 0.2,
-    s = 0.4)
+  GenerateLogNormalDistribution(J, a, m, s)
 }
 \arguments{
   \item{J}{a numeric with the number of scenarios}

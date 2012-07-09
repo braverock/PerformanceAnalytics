@@ -27,7 +27,10 @@
   paper}
 }
 \value{
-  p_ revised probabilities based on entropy pooling
+  a list with p_ revised probabilities based on entropy
+  pooling optimizationPerformance a list with status of
+  optimization, value, number of iterations and sum of
+  probabilities.
 }
 \description{
   Entropy program will change the initial predictive
