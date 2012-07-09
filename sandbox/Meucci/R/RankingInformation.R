@@ -1,6 +1,5 @@
 # TODO: translate PlotResults function
 # TODO: update plot of efficient frontier to show maximum return case
-# TODO: fix StackedBarChart function
 # TODO: add max weights constraint to EfficientFrontier()
 # TODO: add computeCVaR to EfficientFrontier()
 
@@ -8,7 +7,6 @@
 
 #' @param      a matrix of weights where rows are efficient portfolios summing to one, and columns are assets
 #' @param      a string indicating the title of the chart
-#' TODO FIXME check against function in Performanceanalytics, we probably want to use that one  unless there's a reaso to use this
 StackedBarChart = function( weightsMatrix )
 {
   data = as.data.frame( weightsMatrix )
@@ -20,7 +18,8 @@ StackedBarChart = function( weightsMatrix )
 
 #' @param  Lower    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @param  Upper    a vector of indexes indicating which column is lower than the corresponding column number in Upper
-# @example ViewRanking( X , p , Lower = c(3,4) , Upper = c(4,5) ) # two inequality views: asset 3 < asset 4 returns, and asset 4 < asset 5 returns
+#' @export EntropyProg
+#  @example ViewRanking( X , p , Lower = c(3,4) , Upper = c(4,5) ) # two inequality views: asset 3 < asset 4 returns, and asset 4 < asset 5 returns
 ViewRanking = function( X , p , Lower , Upper )
 {
   library( matlab )
