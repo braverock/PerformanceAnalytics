@@ -1,11 +1,15 @@
-#' Transforms raw moments into central moments
+#' Transforms the first n raw moments into the first n central moments
 #'
 #' step 6 of projection process: compute multi-period central moments. Note the first central moment defined as expectation.
 #'
 #' @param  mu_   the raw (multi-period) non-central moment of Y-t
 #' @return mu    (multi-period) central moment of Y-t
+#' \deqn {\tilde{ \mu } ^ {\big(n\big)} _{X}  \equiv E \big\{ X^{n} \big\},
+#' \\ \mu ^{ \big(n\big) }_{X}  \equiv  \sum_0^{n-1}  \big(-1\big)^{n-k}   \mu ^{n-k}_{X}  \tilde{ \mu }^{k}_{X} +  \tilde{ \mu }_{X}^{n}   }
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
-#' TODO FIXME check these against the central moment functions in PerformanceAnalytics
+#' @references
+#' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 9
+#' Symmys site containing original MATLAB source code \url{http://www.symmys.com}
 Raw2Central = function( mu_ )
 {
   N = length( mu_ )
@@ -31,7 +35,11 @@ Raw2Central = function( mu_ )
 #'
 #' @param  ka     cumulants of Y
 #' @return mu_    the raw non-central moments of Y
+#' \deqn {\tilde{ \mu } ^{ \big(n\big) }_{Y} \equiv \kappa^{ \big(n\big) }_{Y}  +  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{Y}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{Y}  }
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
+#' @references
+#' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (24)
+#' Symmys site containing original MATLAB source code \url{http://www.symmys.com/node/136}
 Cumul2Raw = function( ka )
 {
   N = length( ka )
@@ -57,7 +65,11 @@ Cumul2Raw = function( ka )
 #'
 #' @param mu_       non-central moments of the invariant X-t
 #' @return ka       cumulants of X-t
+#' \deqn { \kappa^{ \big(n\big) }_{X}   \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{X}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{X} }
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
+#' @references
+#' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (21)
+#' Symmys site containing original MATLAB source code \url{http://www.symmys.com/node/136}
 Raw2Cumul = function( mu_ )
 {
   N = length( mu_ )
@@ -75,7 +87,7 @@ Raw2Cumul = function( mu_ )
   return( ka = ka )
 }
 
-#' Transforms central moments into raw moments (first central moment defined as expectation)
+#' Transforms first n central moments into first n raw moments (first central moment defined as expectation)
 #'
 #' step 2 of projection process: From the central moments of step 1, we compute the non-central moments. To do so we start
 #' with the first non-central moment and apply recursively an identity (formula 20)
@@ -83,6 +95,11 @@ Raw2Cumul = function( mu_ )
 #' @param   mu      a vector of central moments
 #' @return  mu_     a vector of non-central moments
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
+#' \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu ^{\big(1\big)}_{X}
+#' \\ \tilde{ \mu }^{ \big(n\big) }_{X}  \equiv \mu ^{n}_{X} \sum_{k=0}^{n-1}  \big(-1\big)^{n-k+1}   \mu ^{n-k}_{X}  \tilde{ \mu }^{\big(k\big)}_{X} }
+#' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 10.
+#' Symmys site containing original MATLAB source code \url{http://www.symmys.com}
+
 Central2Raw = function( mu )
 {
   N = length( mu )
