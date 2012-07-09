@@ -102,6 +102,12 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #'                               volatility: the expected volatility of each portfolo along the Bayesian efficient frontier
 #'                               weights: the weights of each portfolo along the Bayesian efficient frontier
 #'
+#' \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w \leq  \gamma_{\Sigma}^{(i)}  \big\{w' \mu^{1} -  \gamma _{\mu}  \sqrt{w' \Sigma_{1} w} \big\} 
+#' \\ \gamma_{\mu} \equiv  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}  \frac{v_{1}}{v_{1} - 2} }
+#' \\ \gamma_{\Sigma}^{(i)} \equiv  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1}  \sqrt{ \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } } }  }
+#' @references
+#' A. Meucci - Robust Bayesian Allocation - See formula (19) - (21) 
+#' \url{ http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553 }
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @export
 robustBayesianPortfolioOptimization = function( mean_post , cov_post , nu_post , riskAversionMu = .1 , riskAversionSigma = .1 , discretizations = 10 , longonly = FALSE , volatility )
@@ -177,10 +183,17 @@ robustBayesianPortfolioOptimization = function( mean_post , cov_post , nu_post ,
 #'
 #' @return mean_post            a vector with the confidence weighted posterior mean vector of asset returns blended from the prior and sample mean vector
 #' @return cov_post             a covariance matrix the confidence weighted posterior covariance matrix of asset returns blended from the prior and sample covariance matrix
-#' @return time_post            a numeric with ... TODO: 
-#' @return nu_pst               a numeric with ... TODO:
+#' @return time_post            a numeric
+#' @return nu_pst               a numeric
+#' \deqn { T_{1}  \equiv T_{0} + T
+#' \\ \mu_{1}  \equiv \frac{1}{ T_{1} }  \big( T_{0}   \mu_{0}  + T \hat{ \mu } \big)  
+#' \\ \nu_{1}  \equiv \nu_{0} + T
+#' \\ \Sigma_{1}  \equiv  \big(  \nu_{0} \Sigma_{0}  + T \hat{ \Sigma } +  \frac{ \big(\mu_{0}  - \hat{\mu} \big) \big(\mu_{0}  - \hat{\mu} \big)' }{ \big( \frac{1}{T} +  \frac{1}{T_{0} }  \big) }
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @export
+#' @references
+#' A. Meucci - Robust Bayesian Allocation - See formula (11) - (14) 
+#' \url{ http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553 }
 PartialConfidencePosterior = function( mean_sample , cov_sample , mean_prior , cov_prior , relativeConfidenceInMeanPrior , relativeConfidenceInCovPrior , sampleSize )
 {
   # parameter checks
