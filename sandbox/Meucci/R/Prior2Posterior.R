@@ -1,7 +1,3 @@
-# TODO: Determine how to extend correlation view to multiple assets
-# TODO: Create plot distributions function
-
-#' 
 #' @param X 
 #' @param p 
 #' @param Mu 
@@ -26,7 +22,7 @@ PlotDistributions = function( X , p , Mu , Sigma , p_ , Mu_ , Sigma_ )
     x = as.matrix(seq(from=xl, to=xh, by=(xh-xl)/100))
         
     # posterior numerical
-    #h3 = pHist(X[ ,n] , p_ , NBins )
+    # h3 = pHist(X[ ,n] , p_ , NBins )
         
     # posterior analytical        
     y1 = dnorm( x , Mu_[n] , sqrt( Sigma_[n,n] ) )
