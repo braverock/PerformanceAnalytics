@@ -31,7 +31,8 @@
 #'      p_                       revised probabilities based on entropy pooling
 #'      optimizationPerformance  a list with status of optimization, value, number of iterations and sum of probabilities.
 #' @export
-#'
+#' \deqn { \tilde{p}  \equiv  argmin_{Fx \leq f, Hx  \equiv  h}  \big\{ \sum_1^J  x_{j}  \big(ln \big( x_{j} \big) - ln \big( p_{j} \big) \big)  \big\} 
+#' \\ \ell  \big(x,  \lambda,  \nu \big)  \equiv  x'  \big(ln \big(x\big) - ln \big(p\big) \big) +   \lambda' \big(Fx - f\big)  +   \nu' \big(Hx - h\big)}
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @references 
 #' A. Meucci - "Fully Flexible Views: Theory and Practice". See page 22 for illustration of numerical implementation
@@ -192,6 +193,10 @@ EntropyProg = function( p , A , b , Aeq , beq )
 #'
 #' @references 
 #' \url{http://www.symmys.com}
+#' \url{http://ssrn.com/abstract=1213325}
+#' \deqn { \tilde{ \mu }  \equiv \mu +  \Sigma  Q'    {\big(Q \Sigma  Q' \big)}^{-1}   \big( \tilde{\mu}_{Q} - Q \mu \big),
+#' \\ \tilde{ \Sigma } \equiv \Sigma + \Sigma G' \big({\big(G \Sigma  G' \big)}^{-1} \tilde{ \Sigma }_G {\big(G \Sigma  G' \big)}^{-1} - {\big(G \Sigma  G' \big)}^{-1} \big) G \Sigma }
+#' A. Meucci - "Fully Flexible Views: Theory and Practice". See formula (21) and (22) on page 7
 #' See Meucci script Prior2Posterior.m attached to Entropy Pooling Paper
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 Prior2Posterior = function( M , Q , M_Q , S , G , S_G )
