@@ -5,6 +5,7 @@
 
 # TODO: confirm QuadProg does not have a bug (i.e. it can optimize expected returns without use dvec by adding an equality constraint)
 
+#' Generate a Stacked Bar Chart based on the frontier weights matrix
 #' @param      a matrix of weights where rows are efficient portfolios summing to one, and columns are assets
 #' @param      a string indicating the title of the chart
 StackedBarChart = function( weightsMatrix )
@@ -47,6 +48,7 @@ ViewRanking = function( X , p , Lower , Upper )
   return( p_ )
 }
 
+#' Generates an efficient frontier based on the Meucci's Ranking Information version with the following inputs
 #' @param  X             a matrix with the joint-scenario probabilities by asset (rows are joint-scenarios, columns are assets)
 #' @param  p             a vector of probabilities associated with each scenario in matrix X
 #' @param  Options       a list of options....TBD
@@ -56,7 +58,7 @@ ViewRanking = function( X , p , Lower , Upper )
 #'             w          the NumPortf x N matrix of compositions (security weights) for each portfolio along the efficient frontier
 #'             e          the NumPortf x 1 matrix of expected returns for each portfolio along the efficient frontier
 #'             s          the NumPortf x 1 matrix of standard deviation of returns for each portfolio along the efficient frontier
-EfficientFrontier = function( X , p , Options)
+RIEfficientFrontier = function( X , p , Options)
 {    
   library( matlab )
     
