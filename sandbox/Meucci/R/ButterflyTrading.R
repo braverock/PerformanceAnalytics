@@ -115,7 +115,7 @@ ViewImpliedVol = function( X , p )
 ComputeCVaR = function( Units , Scenarios , Conf )
 {
   PnL = Scenarios %*% Units
-  Sort_PnL = PnL[ order( PnL , decreasing = FALSE ) ] # DOUBLE CHECK IF I SHOULD USE ORDER INSTEAD OF SORT
+  Sort_PnL = PnL[ order( PnL , decreasing = FALSE ) ]
     
   J = length( PnL )
   Cut = round( J %*% ( 1 - Conf ) , 0 )
