@@ -22,7 +22,7 @@ Options = list()
 Options$NumPortf = 20 # number of portfolios in efficient frontier
 Options$FrontierSpan = c( .3 , .9 ) # range of normalized exp.vals. spanned by efficient frontier
 
-frontierPrior = EfficientFrontier( X , P , Options ) # Frontier Plot Data contains [e,s,w,M,S]
+frontierPrior = RIEfficientFrontier( X , P , Options ) # Frontier Plot Data contains [e,s,w,M,S]
 
 # PlotResults( frontierPrior$e , frontierPrior$Sdev , frontierPrior$Composition , frontierPrior$Exps )
 plot( x = (frontierPrior$Sdev)^2 , y = frontierPrior$e , xlab = "Variance" , ylab = "Expected Return" , main = "Prior" , type = "l" , ylim = c( .03 , .1 ) )
@@ -53,7 +53,7 @@ blendedProbability = (1-c) * P + c * P_
 # compute and plot efficient frontier based on posterior market distribution
 #############################################################################
 
-frontierFullConfidencePosterior = EfficientFrontier( X , P_ , Options )
+frontierFullConfidencePosterior = RIEfficientFrontier( X , P_ , Options )
 # print expected returns of assets 3 and 4
 frontierFullConfidencePosterior$Exps[3]
 frontierFullConfidencePosterior$Exps[4] # note that asset 3 and asset 4 have equal expected returns
@@ -65,7 +65,7 @@ plotStackedBar <- StackedBarChart( frontierFullConfidencePosterior$Composition )
 plotStackedBar
 options( warn = 2 )
 
-frontierPosterior = EfficientFrontier( X , blendedProbability , Options )
+frontierPosterior = RIEfficientFrontier( X , blendedProbability , Options )
 # print expected returns of assets 3 and 4
 frontierPosterior$Exps[3]
 frontierPosterior$Exps[4] # note that asset 4 still has a higher expected return, but less so
