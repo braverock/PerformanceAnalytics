@@ -1,3 +1,4 @@
+#' plot dists
 #' @param X 
 #' @param p 
 #' @param Mu 

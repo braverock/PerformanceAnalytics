@@ -1,11 +1,16 @@
 #' Transforms the first n raw moments into the first n central moments
 #'
-#' step 6 of projection process: compute multi-period central moments. Note the first central moment defined as expectation.
+#' step 6 of projection process: 
+#' 
+#' compute multi-period central moments. 
+#' 
+#' Note the first central moment defined as expectation.
 #'
+#' #' \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X}  \equiv E \big\{ X^{n} \big\},
+#' \\ \mu ^{ \big(n\big) }_{X}  \equiv  \sum_0^{n-1}  \big(-1\big)^{n-k}   \mu ^{n-k}_{X}  \tilde{ \mu }^{k}_{X} +  \tilde{ \mu }_{X}^{n}   }
+#' 
 #' @param  mu_   the raw (multi-period) non-central moment of Y-t
 #' @return mu    (multi-period) central moment of Y-t
-#' \deqn {\tilde{ \mu } ^ {\big(n\big)} _{X}  \equiv E \big\{ X^{n} \big\},
-#' \\ \mu ^{ \big(n\big) }_{X}  \equiv  \sum_0^{n-1}  \big(-1\big)^{n-k}   \mu ^{n-k}_{X}  \tilde{ \mu }^{k}_{X} +  \tilde{ \mu }_{X}^{n}   }
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references
 #' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 9
@@ -30,12 +35,20 @@ Raw2Central = function( mu_ )
 
 #' Transforms cumulants of Y-t into raw moments
 #'
-#' step 5 of the projection process: From the cumulants of Y we compute the raw non-central moments of Y
+#' step 5 of the projection process: 
+#' 
+#' From the cumulants of Y we compute the raw non-central moments of Y
+#' 
 #' We do so recursively by the identity in formula (24) which follows from applying (21) and re-arranging terms
 #'
+#' \deqn{ \tilde{ \mu } ^{ \big(n\big) }_{Y} 
+#' \\ \equiv \kappa^{ \big(n\big) }_{Y}  +  \sum_{k=1}^{n-1} %BPremoved $ $^{n-1} 
+#' C_{k-1}  
+#' \\  \kappa_{Y}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{Y}  }
+#' 
 #' @param  ka     cumulants of Y
 #' @return mu_    the raw non-central moments of Y
-#' \deqn {\tilde{ \mu } ^{ \big(n\big) }_{Y} \equiv \kappa^{ \big(n\big) }_{Y}  +  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{Y}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{Y}  }
+#' 
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references
 #' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (24)
@@ -59,13 +72,16 @@ Cumul2Raw = function( ka )
 #' Transforms raw moments into cumulants
 #'
 #' Step 3 of the projection process: From the non-central moments of X-t, we compute the cumulants. 
+#' 
+#' 
 #' This process follows from the Taylor approximations for any small z and ln(1+x)~x for any small x,
 #' and from the definition of the first cumulant in (17). The we apply recursively the identity
 #' in formula (21). See Kendall and Stuart (1969)
 #'
+#' \deqn{ \kappa^{ \big(n\big) }_{X}   \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{X}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{X} }
+#' 
 #' @param mu_       non-central moments of the invariant X-t
 #' @return ka       cumulants of X-t
-#' \deqn { \kappa^{ \big(n\big) }_{X}   \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{X}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{X} }
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references
 #' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (21)
@@ -92,11 +108,13 @@ Raw2Cumul = function( mu_ )
 #' step 2 of projection process: From the central moments of step 1, we compute the non-central moments. To do so we start
 #' with the first non-central moment and apply recursively an identity (formula 20)
 #'
+#' \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu ^{\big(1\big)}_{X}
+#' \\ \tilde{ \mu }^{ \big(n\big) }_{X}  \equiv \mu ^{n}_{X} \sum_{k=0}^{n-1}  \big(-1\big)^{n-k+1}   \mu ^{n-k}_{X}  \tilde{ \mu }^{\big(k\big)}_{X} }
+
 #' @param   mu      a vector of central moments
 #' @return  mu_     a vector of non-central moments
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
-#' \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu ^{\big(1\big)}_{X}
-#' \\ \tilde{ \mu }^{ \big(n\big) }_{X}  \equiv \mu ^{n}_{X} \sum_{k=0}^{n-1}  \big(-1\big)^{n-k+1}   \mu ^{n-k}_{X}  \tilde{ \mu }^{\big(k\big)}_{X} }
+#' @references 
 #' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 10.
 #' Symmys site containing original MATLAB source code \url{http://www.symmys.com}
 
@@ -154,7 +172,7 @@ SummStats = function( X , N )
 
 #' Calculates the population standard deviation
 #'
-#' Calculates the population standard deviaiton dividing by 'n' instead of 'n-1' equivalent to Matlab
+#' Calculates the population standard deviation dividing by 'n' instead of 'n-1' equivalent to Matlab
 #'
 #' @param   x    a generic numeric vector
 #' @return  std  a numeric with the population standard deviaiton of the generic numeric
@@ -162,7 +180,9 @@ SummStats = function( X , N )
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 std = function( x ) { ( sum( ( x - mean( x ) ) ^ 2 ) / length( x ) ) ^.5 }
 
-#' Generate arbitrary distribution of a shifted-lognormal invariant: X-t + a ~ LogN(m,s^2) (formula 14)
+#' Generate arbitrary distribution of a shifted-lognormal invariant
+#' 
+#' %\deqn{X-t + a ~ LogN(m,s^2)} (formula 14)
 #'
 #' @param   J    a numeric with the number of scenarios
 #' @param   a    a numeric with the location shift parameter. Mean of distribution will be exp(a)
@@ -179,3 +199,4 @@ GenerateLogNormalDistribution = function( J, a, m, s )
   
   return( X = X )
 }
+

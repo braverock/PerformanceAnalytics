@@ -1,5 +1,6 @@
 \name{ViewRanking}
 \alias{ViewRanking}
+\title{view the rankings}
 \usage{
   ViewRanking(X, p, Lower, Upper)
 }
@@ -9,5 +10,8 @@
 
   \item{Upper}{a vector of indexes indicating which column
   is lower than the corresponding column number in Upper}
+}
+\description{
+  view the rankings
 }
 

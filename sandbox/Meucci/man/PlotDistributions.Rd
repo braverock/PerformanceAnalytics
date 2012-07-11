@@ -1,5 +1,6 @@
 \name{PlotDistributions}
 \alias{PlotDistributions}
+\title{plot dists}
 \usage{
   PlotDistributions(X, p, Mu, Sigma, p_, Mu_, Sigma_)
 }
@@ -17,6 +18,9 @@
   \item{Mu_}{}
 
   \item{Sigma_}{}
+}
+\description{
+  plot dists
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}

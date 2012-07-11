@@ -17,6 +17,7 @@ StackedBarChart = function( weightsMatrix )
   return( p )
 }
 
+#' view the rankings
 #' @param  Lower    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @param  Upper    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @export EntropyProg
@@ -48,7 +49,7 @@ ViewRanking = function( X , p , Lower , Upper )
   return( p_ )
 }
 
-#' Generates an efficient frontier based on the Meucci's Ranking Information version with the following inputs
+#' Generates an efficient frontier based on Meucci's Ranking Information version with the following inputs
 #' @param  X             a matrix with the joint-scenario probabilities by asset (rows are joint-scenarios, columns are assets)
 #' @param  p             a vector of probabilities associated with each scenario in matrix X
 #' @param  Options       a list of options....TBD

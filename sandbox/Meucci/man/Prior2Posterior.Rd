@@ -25,8 +25,8 @@
 }
 \value{
   a list with M_ a numeric vector with the full-confidence
-  posterior distribution of Mu S_ a covariance matrix with
-  the full-confidence posterior distribution of Sigma
+  posterior distribution of \Mu S_ a covariance matrix with
+  the full-confidence posterior distribution of \Sigma
 }
 \description{
   Calculate the full-confidence posterior distributions of
@@ -37,12 +37,12 @@
 }
 \references{
   \url{http://www.symmys.com}
-  \url{http://ssrn.com/abstract=1213325} \deqn { \tilde{
-  \mu } \equiv \mu + \Sigma Q' {\big(Q \Sigma Q'
-  \big)}^{-1} \big( \tilde{\mu}_{Q} - Q \mu \big), \\
-  \tilde{ \Sigma } \equiv \Sigma + \Sigma G' \big({\big(G
-  \Sigma G' \big)}^{-1} \tilde{ \Sigma }_G {\big(G \Sigma
-  G' \big)}^{-1} - {\big(G \Sigma G' \big)}^{-1} \big) G
+  \url{http://ssrn.com/abstract=1213325} \deqn{ \tilde{ \mu
+  } \equiv \mu + \Sigma Q' {\big(Q \Sigma Q' \big)}^{-1}
+  \big( \tilde{\mu}_{Q} - Q \mu \big), \\ \tilde{ \Sigma }
+  \equiv \Sigma + \Sigma G' \big({\big(G \Sigma G'
+  \big)}^{-1} \tilde{ \Sigma }_G {\big(G \Sigma G'
+  \big)}^{-1} - {\big(G \Sigma G' \big)}^{-1} \big) G
   \Sigma } A. Meucci - "Fully Flexible Views: Theory and
   Practice". See formula (21) and (22) on page 7 See Meucci
   script Prior2Posterior.m attached to Entropy Pooling

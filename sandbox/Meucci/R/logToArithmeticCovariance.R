@@ -6,7 +6,7 @@
 #' @return                        a list containing two elements:
 #' @return  arithmeticMean          a numeric containing the mean arithmetic returns
 #' @return  arithmeticCovariance    a variance-covariance matrix in simple arithmetic return terms
-#' \deqn { M_{ \tau }^{i}  =  e^{  \mu ^{\tau} _{i} +  \frac{1}{2} \Sigma^{ii} _{\tau} },
+#' \deqn{ M_{ \tau }^{i}  =  e^{  \mu ^{\tau} _{i} +  \frac{1}{2} \Sigma^{ii} _{\tau} },
 #' \\  S^{ij} = e^{  \mu ^{\tau} _{i} + \mu ^{\tau} _{j} + \frac{1}{2} \big(\Sigma^{ii} _{\tau} + \Sigma^{jj} _{\tau}\big)  }  \big(e^{\Sigma^{ij} _{\tau}} - 1\big) }
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @export

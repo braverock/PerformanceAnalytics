@@ -16,14 +16,18 @@
   start with the first non-central moment and apply
   recursively an identity (formula 20)
 }
+\details{
+%  \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu^{\big(1\big)}_{X} 
+%\\ \tilde{ \mu }^{ \big(n\big) }_{X}
+%  \equiv \mu^{n}_{X} \sum_{k=0}^{n-1} \big(-1\big)^{n-k+1}
+%  \mu^{n-k}_{X} \tilde{ \mu }^{\big(k\big)}_{X} }
+}
 \author{
-  Ram Ahluwalia \email{rahluwalia@gmail.com} \deqn{ \tilde{
-  \mu }^{ \big(1\big) }_{X} \equiv \mu ^{\big(1\big)}_{X}
-  \\ \tilde{ \mu }^{ \big(n\big) }_{X} \equiv \mu ^{n}_{X}
-  \sum_{k=0}^{n-1} \big(-1\big)^{n-k+1} \mu ^{n-k}_{X}
-  \tilde{ \mu }^{\big(k\big)}_{X} } A. Meucci - "Exercises
-  in Advanced Risk and Portfolio Management". See page 10.
-  Symmys site containing original MATLAB source code
-  \url{http://www.symmys.com}
+  Ram Ahluwalia \email{rahluwalia@gmail.com}
+}
+\references{
+  A. Meucci - "Exercises in Advanced Risk and Portfolio
+  Management". See page 10. Symmys site containing original
+  MATLAB source code \url{http://www.symmys.com}
 }
 

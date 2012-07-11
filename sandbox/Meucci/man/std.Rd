@@ -12,7 +12,7 @@
   the generic numeric
 }
 \description{
-  Calculates the population standard deviaiton dividing by
+  Calculates the population standard deviation dividing by
   'n' instead of 'n-1' equivalent to Matlab
 }
 \author{

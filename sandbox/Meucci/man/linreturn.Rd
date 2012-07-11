@@ -17,7 +17,7 @@
   returns
 
   arithmeticCovariance a variance-covariance matrix in
-  simple arithmetic return terms \deqn { M_{ \tau }^{i} =
+  simple arithmetic return terms \deqn{ M_{ \tau }^{i} =
   e^{ \mu ^{\tau} _{i} + \frac{1}{2} \Sigma^{ii} _{\tau} },
   \\ S^{ij} = e^{ \mu ^{\tau} _{i} + \mu ^{\tau} _{j} +
   \frac{1}{2} \big(\Sigma^{ii} _{\tau} + \Sigma^{jj}

@@ -9,16 +9,20 @@
   Y-t}
 }
 \value{
-  mu (multi-period) central moment of Y-t \deqn {\tilde{
-  \mu } ^ {\big(n\big)} _{X} \equiv E \big\{ X^{n} \big\},
-  \\ \mu ^{ \big(n\big) }_{X} \equiv \sum_0^{n-1}
-  \big(-1\big)^{n-k} \mu ^{n-k}_{X} \tilde{ \mu }^{k}_{X} +
-  \tilde{ \mu }_{X}^{n} }
+  mu (multi-period) central moment of Y-t
 }
 \description{
-  step 6 of projection process: compute multi-period
-  central moments. Note the first central moment defined as
-  expectation.
+  step 6 of projection process:
+}
+\details{
+  compute multi-period central moments.
+
+  Note the first central moment defined as expectation.
+
+%  \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X} \equiv E
+%  \big\{ X^{n} \big\}, \\ \mu^{ \big(n\big) }_{X} \equiv
+%  \sum_0^{n-1} \big{ -1 \big}^{n-k} \mu^{n-k}_{X} \tilde{
+%  \mu }^{k}_{X} + \tilde{ \mu }_{X}^{n} }
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

@@ -1,5 +1,6 @@
 \name{Tweak}
 \alias{Tweak}
+\title{tweak a matrix}
 \usage{
   Tweak(A, b, g)
 }
@@ -14,6 +15,9 @@
 }
 \value{
   db
+}
+\description{
+  tweak a matrix
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}

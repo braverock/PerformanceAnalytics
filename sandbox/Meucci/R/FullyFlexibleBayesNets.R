@@ -1,9 +1,12 @@
-# Input views
-# statement: View(k).Who (e.g. [1 3])= View(k).Equal (e.g. {[2 3] [1 3 5]})
-# optional conditional statement: View(k).Cond_Who (e.g. [2])= View(k).Cond_Equal (e.g. {[1]})
-# amount of stress is quantified as Prob(statement) <= View(k).v if View(k).sgn = 1;
-#                                   Prob(statement) >= View(k).v if View(k).sgn = -1;
-# confidence in stress is quantified in View(k).c in (0,1)
+#' Input conditional views
+#' 
+#' statement: View(k).Who (e.g. [1 3])= View(k).Equal (e.g. {[2 3] [1 3 5]})
+#' optional conditional statement: View(k).Cond_Who (e.g. [2])= View(k).Cond_Equal (e.g. {[1]})
+#' amount of stress is quantified as Prob(statement) <= View(k).v if View(k).sgn = 1;
+#'                                   Prob(statement) >= View(k).v if View(k).sgn = -1;
+#' 
+#' confidence in stress is quantified in View(k).c in (0,1)
+#' 
 #' @param View              TBD
 #' @param X                 TBD
 #'
@@ -11,6 +14,7 @@
 #' @return b                TBD
 #' @return g                TBD
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' @export
 CondProbViews = function( View , X ) 
 {    
   # initialize parameters    
@@ -64,6 +68,7 @@ CondProbViews = function( View , X )
   return( list( A = A , b = b , g = g ) )
 }
 
+#' tweak a matrix
 #' @param   A     matrix A consisting of inequality constraints ( Ax <= b )
 #' @param   b     matrix b consisting of inequality constraint vector b ( Ax <= b )
 #' @param   g     TODO: TBD

@@ -1,6 +1,6 @@
 \name{GenerateLogNormalDistribution}
 \alias{GenerateLogNormalDistribution}
-\title{Generate arbitrary distribution of a shifted-lognormal invariant: X-t + a ~ LogN(m,s^2) (formula 14)}
+\title{Generate arbitrary distribution of a shifted-lognormal invariant}
 \usage{
   GenerateLogNormalDistribution(J, a, m, s)
 }
@@ -20,8 +20,7 @@
   parameters J, a, m, and s where X = a + exp( m + s * Z )
 }
 \description{
-  Generate arbitrary distribution of a shifted-lognormal
-  invariant: X-t + a ~ LogN(m,s^2) (formula 14)
+  %\deqn{X-t + a ~ LogN(m,s^2)} (formula 14)
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}
