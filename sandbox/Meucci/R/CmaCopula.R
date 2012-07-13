@@ -52,11 +52,11 @@ MvnRnd = function( M , S , J )
 #' CMA separation. Decomposes arbitrary joint distributions (scenario-probabilities) into their copula and marginals
 #'
 #' The CMA separation step attains from the cdf "F" for the marginal "X", the scenario-probabilities representation 
-#'      of the copula (cdf of U: "F") and the inter/extrapolation representation of the marginal CDF's
+#' of the copula (cdf of U: "F") and the inter/extrapolation representation of the marginal CDF's. It seperates this
+#' distribution into the pure "individual" information contained in the marginals and the pure  "joint" information
+#' contained in the copula.
 #'
 #' Separation step of Copula-Marginal Algorithm (CMA)
-#' Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011
-#' Most recent version of article and code available at http://www.symmys.com/node/335
 #'
 #' @param   X    A matrix where each row corresponds to a scenario/sample from a joint distribution. 
 #'                    Each column represents the value from a marginal distribution
@@ -67,10 +67,10 @@ MvnRnd = function( M , S , J )
 #'                  can interpret 'udd' as the probability weighted grade scenarios (see formula 11 in Meucci)
 #' @return  U    a copula (J x N matrix) - the joint distribution of grades defined by feeding the original variables X into their respective marginal CDF
 #'
-#'
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references 
-#' \url{http://www.symmys.com}
+#' Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011
+#' Most recent version of article and code available at \url{http://www.symmys.com/node/335}
 CMAseparation = function( X , p ) 
 {
 # @example     test = cbind( seq( 102 , 1 , -2 ) , seq( 100 , 500 , 8 ) )
@@ -123,7 +123,9 @@ CMAseparation = function( X , p )
 
 #' CMA combination. Glues an arbitrary copula and arbitrary marginal distributions into a new joint distribution
 #'
-#' Combination step of Copula-Marginal Algorithm (CMA)  based on Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011. Most recent version of article and code available at http://www.symmys.com/node/335
+#' The combination step starts from arbitrary marginal distributions, and grades distributed according to a chosen
+#' arbitrary copula which can, but does not need to, be obtained by seperation. Then this function combines the 
+#' marginals and copula into a new joint distribution.
 #'
 #' @param   x   a generic x variable. Note: Linearly spaced 'x' help for coverage when performing linear interpolation
 #' @param   u   The value of the cumulative density function associated with x (parametric or non-parametric)
@@ -131,10 +133,10 @@ CMAseparation = function( X , p )
 #'
 #' @return  X   a J x N matrix containing the new joint distribution based on the arbitrary copula 'U'
 #'
-#'
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references 
-#' \url{http://www.symmys.com}
+#' Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011
+#' Most recent version of article and code available at \url{http://www.symmys.com/node/335}
 CMAcombination = function( x , u , U ) 
 # @example     test = cbind( seq( 102 , 1 , -2 ) , seq( 100 , 500 , 8 ) )
 # @example     prob = rep(.02 , 51 )
