@@ -84,6 +84,10 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #' where each portfolio is equally distanced in return space. The function also returns the most robust
 #' portfolio along the Bayesian efficient frontier
 #'
+#' \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w \leq  \gamma_{\Sigma}^{(i)} }  \big\{w' \mu^{1} -  \gamma _{\mu}  \sqrt{w' \Sigma_{1} w} \big\} 
+#' \\ \gamma_{\mu} \equiv  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}  \frac{v_{1}}{v_{1} - 2} }
+#' \\ \gamma_{\Sigma}^{(i)} \equiv  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1}  \sqrt{ \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } } }  } }
+#'
 #' @param mean_post          the posterior vector of means (after blending prior and sample data)
 #' @param cov_post           the posterior covariance matrix (after blending prior and sample data)
 #' @param confidenceInPrior  a numeric with the relative confidence in the prior vs. the sample data. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
@@ -102,9 +106,6 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #'                               volatility: the expected volatility of each portfolo along the Bayesian efficient frontier
 #'                               weights: the weights of each portfolo along the Bayesian efficient frontier
 #'
-#' \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w \leq  \gamma_{\Sigma}^{(i)}  \big\{w' \mu^{1} -  \gamma _{\mu}  \sqrt{w' \Sigma_{1} w} \big\} 
-#' \\ \gamma_{\mu} \equiv  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}  \frac{v_{1}}{v_{1} - 2} }
-#' \\ \gamma_{\Sigma}^{(i)} \equiv  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1}  \sqrt{ \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } } }  }
 #' @references
 #' A. Meucci - Robust Bayesian Allocation - See formula (19) - (21) 
 #' \url{ http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553 }
@@ -173,6 +174,10 @@ robustBayesianPortfolioOptimization = function( mean_post , cov_post , nu_post ,
 #' Constructs the partial confidence posterior based on prior (mean vector and covariance matrix) and a posterior
 #' with a relative confidence in the prior vs. the sample data
 #'
+#' \deqn{ T_{1}  \equiv T_{0} + T
+#' \\ \mu_{1}  \equiv \frac{1}{ T_{1} }  \big( T_{0}   \mu_{0}  + T \hat{ \mu } \big)  
+#' \\ \nu_{1}  \equiv \nu_{0} + T
+#' \\ \Sigma_{1}  \equiv  \big(  \nu_{0} \Sigma_{0}  + T \hat{ \Sigma } +  \frac{ \big(\mu_{0}  - \hat{\mu} \big) \big(\mu_{0}  - \hat{\mu} \big)' }{ \big( \frac{1}{T} +  \frac{1}{T_{0} }  \big) } }
 #' @param mean                  the mean of the sample returns
 #' @param cov                   the sample covariance matrix
 #' @param mean_prior            the prior for the mean returns
@@ -185,10 +190,6 @@ robustBayesianPortfolioOptimization = function( mean_post , cov_post , nu_post ,
 #' @return cov_post             a covariance matrix the confidence weighted posterior covariance matrix of asset returns blended from the prior and sample covariance matrix
 #' @return time_post            a numeric
 #' @return nu_pst               a numeric
-#' \deqn{ T_{1}  \equiv T_{0} + T
-#' \\ \mu_{1}  \equiv \frac{1}{ T_{1} }  \big( T_{0}   \mu_{0}  + T \hat{ \mu } \big)  
-#' \\ \nu_{1}  \equiv \nu_{0} + T
-#' \\ \Sigma_{1}  \equiv  \big(  \nu_{0} \Sigma_{0}  + T \hat{ \Sigma } +  \frac{ \big(\mu_{0}  - \hat{\mu} \big) \big(\mu_{0}  - \hat{\mu} \big)' }{ \big( \frac{1}{T} +  \frac{1}{T_{0} }  \big) }
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @export
 #' @references
