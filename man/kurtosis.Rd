@@ -3,7 +3,8 @@
 \title{Kurtosis}
 \usage{
   kurtosis(x, na.rm = FALSE,
-    method = c("excess", "moment", "fisher"), ...)
+    method = c("excess", "moment", "fisher", "sample", "sample_excess"),
+    ...)
 }
 \arguments{
   \item{na.rm}{a logical. Should missing values be
@@ -19,7 +20,9 @@
   should be used when resampling (bootstrap or jackknife).
   The \code{"fisher"} method correspond to the usual
   "unbiased" definition of sample variance, although in the
-  case of kurtosis exact unbiasedness is not possible.}
+  case of kurtosis exact unbiasedness is not possible. The
+  \code{"sample"} method gives the sample kurtosis of the
+  distribution.}
 
   \item{x}{a numeric vector or object.}
 
@@ -34,6 +37,35 @@
   loaded every time.  This function is identical except for
   the addition of \code{\link{checkData}} and additional
   labeling.
+
+  \deqn{Kurtosis(moment) =
+  \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i -
+  \overline{r}}{\sigma_P})^4} {kurtosis(moment) =
+  sum((x-mean(x))^4/var(x)^2)/length(x)}
+  \deqn{Kurtosis(excess) =
+  \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i -
+  \overline{r}}{\sigma_P})^4 - 3} {kurtosis(excess) =
+  sum((x-mean(x))^4/var(x)^2)/length(x) - 3}
+  \deqn{Kurtosis(sample) =
+  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i
+  - \overline{r}}{\sigma_{S_P}})^4 } {kurtosis(sample) =
+  sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3))}
+  \deqn{Kurtosis(fisher) =
+  \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}\frac{(r_i)^4}{n}}{(\sum^{n}_{i=1}(\frac{(r_i)^2}{n})^2}
+  - \frac{3*(n-1)}{n+1})} {kurtosis (fisher) =
+  ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 -
+  (3*(n-1))/(n+1)))/((n-2)*(n-3))} \deqn{Kurtosis(sample
+  excess) =
+  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i
+  - \overline{r}}{\sigma_{S_P}})^4 -
+  \frac{3*(n-1)^2}{(n-2)*(n-3)}} {kurtosis(sample excess) =
+  sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3)) -
+  3*(n-1)^2/((n-2)*(n-3))}
+
+  where \eqn{n} is the number of return, \eqn{\overline{r}}
+  is the mean of the return distribution, \eqn{\sigma_P} is
+  its standard deviation and \eqn{\sigma_{S_P}} is its
+  sample standard deviation
 }
 \examples{
 ## mean -
@@ -48,9 +80,19 @@
 
 data(managers)
 kurtosis(managers[,1:8])
+
+data(portfolio_bacon)
+print(kurtosis(portfolio_bacon[,1], method="sample")) #expected 3.03
+print(kurtosis(portfolio_bacon[,1], method="sample_excess")) #expected -0.41
+print(kurtosis(managers['1996'], method="sample"))
+print(kurtosis(managers['1996',1], method="sample"))
 }
 \author{
-  Diethelm Wuertz
+  Diethelm Wuertz, Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.84-85
 }
 \seealso{
   \code{\link{skewness}}.

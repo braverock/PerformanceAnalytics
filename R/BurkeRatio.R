@@ -102,6 +102,10 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
 		in_drawdown = FALSE
 	    }
 
+	    print(drawdown)
+	    D = Drawdowns(R)
+	    print(D)
+
        Rp = period/n*sum(R)
        result = (Rp - Rf)/sqrt(sum(drawdown^2))
        if(modified)
