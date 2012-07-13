@@ -6,7 +6,7 @@
 #' 
 #' Note the first central moment defined as expectation.
 #'
-#' #' \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X}  \equiv E \big\{ X^{n} \big\},
+#' \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X}  \equiv E \big\{ X^{n} \big\},
 #' \\ \mu ^{ \big(n\big) }_{X}  \equiv  \sum_0^{n-1}  \big(-1\big)^{n-k}   \mu ^{n-k}_{X}  \tilde{ \mu }^{k}_{X} +  \tilde{ \mu }_{X}^{n}   }
 #' 
 #' @param  mu_   the raw (multi-period) non-central moment of Y-t
@@ -42,9 +42,8 @@ Raw2Central = function( mu_ )
 #' We do so recursively by the identity in formula (24) which follows from applying (21) and re-arranging terms
 #'
 #' \deqn{ \tilde{ \mu } ^{ \big(n\big) }_{Y} 
-#' \\ \equiv \kappa^{ \big(n\big) }_{Y}  +  \sum_{k=1}^{n-1} %BPremoved $ $^{n-1} 
-#' C_{k-1}  
-#' \\  \kappa_{Y}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{Y}  }
+#' \equiv \kappa^{ \big(n\big) }_{Y}  +  \sum_{k=1}^{n-1} (n-1)C_{k-1}
+#' \kappa_{Y}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{Y}  }
 #' 
 #' @param  ka     cumulants of Y
 #' @return mu_    the raw non-central moments of Y
@@ -78,7 +77,7 @@ Cumul2Raw = function( ka )
 #' and from the definition of the first cumulant in (17). The we apply recursively the identity
 #' in formula (21). See Kendall and Stuart (1969)
 #'
-#' \deqn{ \kappa^{ \big(n\big) }_{X}   \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -  \sum_{k=1}^{n-1} $^{n-1} C_{k-1}$  \kappa_{X}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{X} }
+#' \deqn{ \kappa^{ \big(n\big) }_{X}   \equiv \tilde{ \mu } ^{ \big(n\big) }_{X} -  \sum_{k=1}^{n-1} (n-1)C_{k-1}  \kappa_{X}^{ \big(k\big) }   \tilde{ \mu } ^{n-k}_{X} }
 #' 
 #' @param mu_       non-central moments of the invariant X-t
 #' @return ka       cumulants of X-t
