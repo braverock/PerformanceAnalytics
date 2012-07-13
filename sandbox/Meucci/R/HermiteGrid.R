@@ -8,6 +8,19 @@ normalizeProb = function( p )
   return( normalizedp )
 }
 
+#' Generate the intervals containing jth point of the grid.
+#' 
+#' @param x     a vector containing the scenarios 
+#'
+#' @return      a list containing
+#' @return xLB  a vector containing the lower bound of each interval
+#' @return xUB  a vector containing the upper bound of each interval
+#"
+#' \deqn{ I_{j} \equiv  \big[ x_{j} -  \frac{x_{j} - x_{j-1} }{2}, x_{j} +  \frac{x_{j+1} - x_{j}}{2} \big)  }
+#' @references 
+#' A. Meucci - "Fully Flexible Extreme Views" - See formula (17)
+#' \url{http://ssrn.com/abstract=1542083}
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 subIntervals = function( x )
 {
   n = nrow( x )
@@ -24,7 +37,6 @@ subIntervals = function( x )
   return( list( xLB = xLB , xUB = xUB ) )
 }
 
-
 integrateSubIntervals = function( x , cdf )
 {
   bounds = subIntervals( x )
@@ -34,6 +46,16 @@ integrateSubIntervals = function( x , cdf )
   return( p )
 }
 
+#' Generate a Hermite Polynomial of order n
+#' 
+#' @param n   A numeric defining the order of the Hermite Polynomial
+#'
+#' @return p  A vector containing the Hermite Polynomial of order n
+#' \deqn{ H_{j} (x)  \equiv  (-1)^{J}   e^{ \frac{ -x^{2} }{2} }  \frac{ d^{J} e^{ \frac{ -x^{2} }{2} }}{ dx^{J} } }
+#' @references 
+#' A. Meucci - "Fully Flexible Extreme Views" - See formula (20)
+#' \url{http://ssrn.com/abstract=1542083}
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 hermitePolynomial = function( n )
 {
   # convert last object to matrix
@@ -52,6 +74,26 @@ hermitePolynomial = function( n )
   return( p )  
 }
 
+#' Generates grid reprensentation of a distribution according to the method suggested by Meucci and inspired from
+#' Gauss-Hermite quadratures.
+#'
+#' Grid representation by this method is an alternative to representing distribution of the market, such as 
+#' importance sampling or stratified sampling.However, these techniques focus on sub-domains of the distribution, and thus,
+#' in order to apply such methods, we must forego the full flexibility on the specification of the views. A different approach, 
+#' which preserves the generality of the views specification, consists in selecting the scenarios x_j deterministically as a 
+#' grid and then associate with each of them the suitable probability p_j ( integrated over I_j ). The the generic interval 
+#' _j contains the j-th point of the grid. Once the grid is defined, the entropy optimization can be applied to 
+#' replace p_j with the new posterior probabilities to reflect the views. We generate the grid here using the 
+#' Gauss-Hermite quadrature method.
+#'
+#' @param J   a numeric containing the number of points on the grid
+#'
+#' @return x  a matrix containing the zeroes of Hermite polynomials as a function of polynomial degree
+#'
+#' @references 
+#' A. Meucci - "Fully Flexible Extreme Views".
+#' \url{http://ssrn.com/abstract=1542083}
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 gaussHermiteMesh = function( J )
 {
   p = hermitePolynomial( J )
