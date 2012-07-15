@@ -38,7 +38,7 @@ AdjustedSharpeRatio <- function (R, Rf = 0, period = 12, ...)
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
        n = length(R)
-       Rp = period/n*sum(R)
+      Rp = (prod(1+R/100)^(period/length(R))-1)*100
        Sigp = sqrt(sum((R-mean(R))^2)/n)*sqrt(period)
        SR = (Rp - Rf) / Sigp
        K = kurtosis(R, method = "moment")

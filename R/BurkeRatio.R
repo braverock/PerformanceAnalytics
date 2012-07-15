@@ -27,7 +27,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(BurkeRatio(portfolio_bacon[,1])) #expected 0.79
+#' print(BurkeRatio(portfolio_bacon[,1])) #expected 0.76
 #' print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.86
 #'
 #' data(managers)
@@ -102,11 +102,9 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
 		in_drawdown = FALSE
 	    }
 
-	    print(drawdown)
 	    D = Drawdowns(R)
-	    print(D)
 
-       Rp = period/n*sum(R)
+       Rp = (prod(1+R/100)^(period/length(R))-1)*100
        result = (Rp - Rf)/sqrt(sum(drawdown^2))
        if(modified)
        {

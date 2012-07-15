@@ -14,6 +14,7 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
+#' @param period number of periods in a year monthly scale = 12, quarterly = 4)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -23,7 +24,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -3.046
+#' print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.31
 #'
 #' data(managers)
 #' print(CAPM.epsilon(managers['1996',1], managers['1996',8]))
@@ -32,16 +33,15 @@
 #' @export 
 
 CAPM.epsilon <-
-function (Ra, Rb, Rf = 0, ...)
+function (Ra, Rb, Rf = 0, period=12, ...)
 {
     calcul = FALSE
     Ra = checkData(Ra, method="matrix")
     Rb = checkData(Rb, method="matrix")
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-    
-       Rp = (prod(0.01*Ra+1)-1)*100 #portfolio total return
-       Rpb = (prod(0.01*Rb+1)-1)*100 #benchmark total return
+     Rp = (prod(1+Ra/100)^(period/length(Ra))-1)*100
+     Rpb =  (prod(1+Rb/100)^(period/length(Rb))-1)*100 #benchmark total return
        for (i in (1:length(Ra))) {
           if (!is.na(Ra[i])) {
              calcul = TRUE

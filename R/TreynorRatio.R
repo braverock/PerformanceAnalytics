@@ -45,15 +45,28 @@
 #' 
 
 ModifiedTreynorRatio <-
-function (Ra, Rb, Rf = 0)
+function (Ra, Rb, Rf = 0, scale = NA)
 {
+    		if(is.na(scale)) {
+        	    freq = periodicity(Ra)
+        	    switch(freq$scale,
+            	    minute = {stop("Data periodicity too high")},
+            	    hourly = {stop("Data periodicity too high")},
+            	    daily = {scale = 252},
+            	    weekly = {scale = 52},
+            	    monthly = {scale = 12},
+            	    quarterly = {scale = 4},
+            	    yearly = {scale = 1}
+        	    )
+          }
+
     calcul = FALSE
     Ra = checkData(Ra, method="matrix")
     Rb = checkData(Rb, method="matrix")
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
     
-     Rp = (prod(0.01*Ra+1)-1)*100 #portfolio total return
+     Rp = (prod(1+R/100)^(scale/length(R))-1)*100
      for (i in (1:length(Ra))) {
      	 if (!is.na(Ra[i])) {
      	    calcul = TRUE
@@ -84,7 +97,7 @@ function (Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
 
     if(modified)
     {
-        ModifiedTreynorRatio(Ra, Rb, Rf)
+        ModifiedTreynorRatio(Ra, Rb, Rf, scale)
     }
     else
     {
