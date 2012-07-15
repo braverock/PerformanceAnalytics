@@ -19,7 +19,7 @@
 \details{
   \deqn{MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid
   r_i - \overline{r}\mid}{n}} {MeanAbsoluteDeviation =
-  sum(r-mean(r))/n }
+  sum(|r-mean(r)|)/n }
 
   where \eqn{n} is the number of observations of the entire
   series, \eqn{r_i} is the return in month i and
@@ -31,7 +31,7 @@ print(MeanAbsoluteDeviation(portfolio_bacon)) #expected 1.78
 
 data(managers)
 print(MeanAbsoluteDeviation(managers['1996']))
-print(MeanAbsoluteDeviation(managers['1996',1])) #expected 4.598
+print(MeanAbsoluteDeviation(managers['1996',1]))
 }
 \author{
   Matthieu Lestel
