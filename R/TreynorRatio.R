@@ -11,6 +11,7 @@
 #' \deqn{ModifiedTreynorRatio = \frac{r_p - r_f}{\sigma_s}}
 #' {ModifiedTreynorRatio = (Rp - Rf)/sytematic risk}
 #' 
+#' @aliases TreynorRatio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
