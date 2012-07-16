@@ -1,3 +1,5 @@
+#' @rdname DownsideDeviation
+#' @export
 SemiDeviation <-
 function (R)
 { # @author Peter Carl
@@ -23,6 +25,8 @@ function (R)
     }
 }
 
+#' @rdname DownsideDeviation
+#' @export
 SemiVariance <-
 function (R)
 {

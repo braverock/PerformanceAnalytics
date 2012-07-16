@@ -41,6 +41,7 @@
 #' findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
 #' sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 #' 
+#' @export
 findDrawdowns <-
 function (R, geometric = TRUE, ...)
 { # @author Peter Carl

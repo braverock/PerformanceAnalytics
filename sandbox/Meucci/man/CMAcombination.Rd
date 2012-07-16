@@ -20,16 +20,19 @@
   based on the arbitrary copula 'U'
 }
 \description{
-  Combination step of Copula-Marginal Algorithm (CMA) based
-  on Meucci A., "New Breed of Copulas for Risk and
-  Portfolio Management", Risk, September 2011. Most recent
-  version of article and code available at
-  http://www.symmys.com/node/335
+  The combination step starts from arbitrary marginal
+  distributions, and grades distributed according to a
+  chosen arbitrary copula which can, but does not need to,
+  be obtained by seperation. Then this function combines
+  the marginals and copula into a new joint distribution.
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}
 }
 \references{
-  \url{http://www.symmys.com}
+  Meucci A., "New Breed of Copulas for Risk and Portfolio
+  Management", Risk, September 2011 Most recent version of
+  article and code available at
+  \url{http://www.symmys.com/node/335}
 }
 

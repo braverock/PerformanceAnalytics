@@ -1,4 +1,5 @@
 #' @rdname chart.Bar
+#' @export
 charts.Bar <-
 function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
 { # @author Peter Carl

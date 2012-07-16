@@ -41,6 +41,7 @@
 #' round(SortinoRatio(managers[, 1]),4)
 #' round(SortinoRatio(managers[, 1:8]),4)
 #' 
+#' @export
 SortinoRatio <-
 function (R, MAR = 0,...,weights=NULL)
 { # @author Brian G. Peterson

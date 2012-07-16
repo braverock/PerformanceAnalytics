@@ -35,6 +35,7 @@
 #' Return.annualized(managers[,1:8])
 #' Return.annualized(managers[,1:8],geometric=FALSE)
 #' 
+#' @export
 Return.annualized <-
 function (R, scale = NA, geometric = TRUE )
 { # @author Peter Carl

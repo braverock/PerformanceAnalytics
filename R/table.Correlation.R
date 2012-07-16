@@ -26,6 +26,7 @@
 #' ctable = table.Correlation(managers[,1:6],managers[,8,drop=FALSE], conf.level=.99)
 #' dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 #' 
+#' @export
 table.Correlation <-
 function (Ra, Rb, ...)
 {# @author Peter Carl

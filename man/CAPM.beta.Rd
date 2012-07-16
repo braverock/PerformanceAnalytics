@@ -6,6 +6,12 @@
 \title{calculate CAPM beta}
 \usage{
   CAPM.beta(Ra, Rb, Rf = 0)
+
+  CAPM.beta.bull(Ra, Rb, Rf = 0)
+
+  CAPM.beta.bear(Ra, Rb, Rf = 0)
+
+  TimingRatio(Ra, Rb, Rf = 0)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries

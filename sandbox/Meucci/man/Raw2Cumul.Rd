@@ -21,9 +21,9 @@
   recursively the identity in formula (21). See Kendall and
   Stuart (1969)
 
-%  \deqn{ \kappa^{ \big(n\big) }_{X} \equiv \tilde{ \mu } ^{
-%  \big(n\big) }_{X} - \sum_{k=1}^{n-1} $^{n-1} C_{k-1} %$
-%  \kappa_{X}^{ \big(k\big) } \tilde{ \mu } ^{n-k}_{X} }
+  \deqn{ \kappa^{ \big(n\big) }_{X} \equiv \tilde{ \mu } ^{
+  \big(n\big) }_{X} - \sum_{k=1}^{n-1} (n-1)C_{k-1}
+  \kappa_{X}^{ \big(k\big) } \tilde{ \mu } ^{n-k}_{X} }
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

@@ -61,6 +61,7 @@
 #' print(kurtosis(managers['1996'], method="sample"))
 #' print(kurtosis(managers['1996',1], method="sample"))
 #' 
+#' @export
 kurtosis <-
     function (x, na.rm = FALSE, method = c("excess", "moment", "fisher", "sample", "sample_excess"), ...)
 {

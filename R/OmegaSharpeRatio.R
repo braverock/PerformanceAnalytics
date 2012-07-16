@@ -38,7 +38,6 @@
 #' print(OmegaSharpeRatio(managers['1996',1], MAR)) #expected 3.60
 #'
 #' @export 
-
 OmegaSharpeRatio <-
 function (R, MAR = 0, ...)
 {

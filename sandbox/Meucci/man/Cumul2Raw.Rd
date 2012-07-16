@@ -20,10 +20,9 @@
   We do so recursively by the identity in formula (24)
   which follows from applying (21) and re-arranging terms
 
-  \deqn{ \tilde{ \mu } ^{ \big(n\big) }_{Y} \\ \equiv
-  \kappa^{ \big(n\big) }_{Y} + \sum_{k=1}^{n-1} % ^{n-1}
-  C_{k-1} \\ \kappa_{Y}^{ \big(k\big) } \tilde{ \mu }
-  ^{n-k}_{Y} }
+  \deqn{ \tilde{ \mu } ^{ \big(n\big) }_{Y} \equiv \kappa^{
+  \big(n\big) }_{Y} + \sum_{k=1}^{n-1} (n-1)C_{k-1}
+  \kappa_{Y}^{ \big(k\big) } \tilde{ \mu } ^{n-k}_{Y} }
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

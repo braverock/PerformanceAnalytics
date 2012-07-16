@@ -5,6 +5,9 @@
 \usage{
   Return.calculate(prices,
     method = c("compound", "simple"))
+
+  CalculateReturns(prices,
+    method = c("compound", "simple"))
 }
 \arguments{
   \item{prices}{data object containing ordered price

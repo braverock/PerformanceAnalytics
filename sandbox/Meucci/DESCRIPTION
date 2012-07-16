@@ -26,7 +26,6 @@ License: GPL
 URL: http://r-forge.r-project.org/projects/returnanalytics/
 Copyright: (c) 2004-2012
 Collate:
-    'ButterflyTrading.R'
     'CmaCopula.R'
     'DetectOutliersviaMVE.R'
     'EntropyProg.R'

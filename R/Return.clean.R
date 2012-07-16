@@ -37,6 +37,7 @@
 #' head(Return.clean(managers[,1:4]),n=20)
 #' chart.BarVaR(managers[,1,drop=FALSE], show.clean=TRUE, clean="boudt", lwd=2, methods="ModifiedVaR")
 #' 
+#' @export
 Return.clean <-
 function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 { # @author Peter Carl
@@ -195,6 +196,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' In W. Grossmann, G. Pflug, I. Vincze, and W. Wertz (Eds.), Mathematical
 #' Statistics and Its Applications, Volume B, pp. 283?297. Dordrecht-Reidel.
 #' @keywords ts multivariate distribution models
+#' @export
 clean.boudt <-
 function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson

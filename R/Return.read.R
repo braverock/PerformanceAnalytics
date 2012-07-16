@@ -40,7 +40,7 @@
 #'      Return.read("managers.cvs", frequency="d")
 #'      }
 #' 
-#' 
+#' @export
 Return.read <-
 function (filename=stop("Please specify a filename"), frequency = c("d","m","q","i","o"), format.in = c("ISO8601","excel","oo","gnumeric"), sep = ",", header = TRUE, check.names = FALSE, ...)
 { # @author Peter Carl

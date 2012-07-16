@@ -48,6 +48,7 @@
 #' data(managers)
 #' skewness(managers)
 #' 
+#' @export
 skewness <-
     function (x, na.rm = FALSE, method = c("moment", "fisher", "sample"), ...)
 {

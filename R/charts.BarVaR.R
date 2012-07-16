@@ -1,4 +1,5 @@
 #' @rdname chart.BarVaR
+#' @export 
 charts.BarVaR <-
 function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., perpanel = NULL, show.yaxis = c("all", "firstonly", "alternating", "none"))
 { # @author Peter Carl

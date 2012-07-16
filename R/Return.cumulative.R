@@ -23,6 +23,7 @@
 #' Return.cumulative(managers[,1:8])
 #' Return.cumulative(managers[,1:8],geometric=FALSE)
 #' 
+#' @export
 Return.cumulative <-
 function (R, geometric = TRUE)
 { # @author Peter Carl

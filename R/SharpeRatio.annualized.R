@@ -42,6 +42,7 @@
 #' SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE])
 #' SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE],geometric=FALSE)
 #' 
+#' @export
 SharpeRatio.annualized <-
 function (R, Rf = 0, scale = NA, geometric=TRUE)
 { # @author Peter Carl

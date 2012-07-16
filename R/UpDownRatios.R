@@ -40,7 +40,7 @@
 #' # Down Capture:
 #' UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Down", method="Capture")
 #' 
-#' 
+#' @export
 UpDownRatios <-
 function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down"))
 {# @author Peter Carl

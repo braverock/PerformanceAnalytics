@@ -11,6 +11,10 @@
   chart.RollingRegression(Ra, Rb, width = 12, Rf = 0,
     attribute = c("Beta", "Alpha", "R-Squared"),
     main = NULL, na.pad = TRUE, ...)
+
+  charts.RollingRegression(Ra, Rb, width = 12, Rf = 0,
+    main = NULL, legend.loc = NULL, event.labels = NULL,
+    ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries

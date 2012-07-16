@@ -28,6 +28,7 @@
 #' title(main="CAPM-Related Statistics")
 #' 
 #' 
+#' @export
 table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 {# @author Peter Carl
 

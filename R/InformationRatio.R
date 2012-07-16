@@ -28,6 +28,7 @@
 #' InformationRatio(managers[,1:6], managers[,8,drop=FALSE])
 #' InformationRatio(managers[,1:6], managers[,8:7])
 #' 
+#' @export
 InformationRatio <-
 function (Ra, Rb, scale = NA)
 { # @author Peter Carl

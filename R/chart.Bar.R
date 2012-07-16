@@ -31,6 +31,7 @@
 #' data(edhec)
 #' chart.Bar(edhec[,"Funds of Funds"], main="Monthly Returns")
 #' 
+#' @export 
 chart.Bar <- function (R, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl
 

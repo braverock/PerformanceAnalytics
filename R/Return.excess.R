@@ -38,6 +38,7 @@
 #' head(Return.excess(managers[,1:6], managers[,10,drop=FALSE]))
 #' head(Return.excess(managers[,1,drop=FALSE], managers[,8,drop=FALSE]))
 #' 
+#' @export
 Return.excess <-
 function (R, Rf = 0)
 { # @author Peter Carl

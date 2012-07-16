@@ -17,6 +17,7 @@
 #' data(managers)
 #' head(Return.relative(managers[,1:3], managers[,8,drop=FALSE]),n=20)
 #' 
+#' @export
 Return.relative <-
 function (Ra, Rb, ...)
 { # @author Peter Carl

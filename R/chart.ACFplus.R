@@ -1,3 +1,5 @@
+#' @rdname chart.ACF
+#' @export 
 chart.ACFplus <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 { # @author David Stoffer and Robert Shumway
     # @modifiedby Peter Carl

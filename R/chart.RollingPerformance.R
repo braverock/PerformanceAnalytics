@@ -33,6 +33,7 @@
 #' 		colorset = rich8equal, lwd = 2, legend.loc = "topleft", 
 #' 		main = "Rolling 24-Month Sharpe Ratio")
 #' 
+#' @export 
 chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL)
 { # @author Peter Carl
 

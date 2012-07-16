@@ -30,19 +30,21 @@
   The CMA separation step attains from the cdf "F" for the
   marginal "X", the scenario-probabilities representation
   of the copula (cdf of U: "F") and the inter/extrapolation
-  representation of the marginal CDF's
+  representation of the marginal CDF's. It seperates this
+  distribution into the pure "individual" information
+  contained in the marginals and the pure "joint"
+  information contained in the copula.
 }
 \details{
-  Separation step of Copula-Marginal Algorithm (CMA) Meucci
-  A., "New Breed of Copulas for Risk and Portfolio
-  Management", Risk, September 2011 Most recent version of
-  article and code available at
-  http://www.symmys.com/node/335
+  Separation step of Copula-Marginal Algorithm (CMA)
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}
 }
 \references{
-  \url{http://www.symmys.com}
+  Meucci A., "New Breed of Copulas for Risk and Portfolio
+  Management", Risk, September 2011 Most recent version of
+  article and code available at
+  \url{http://www.symmys.com/node/335}
 }
 

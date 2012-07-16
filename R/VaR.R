@@ -130,6 +130,7 @@
 #'     # add Component VaR for the equal weighted portfolio
 #'     VaR(edhec, clean="boudt", portfolio_method="component")
 #' 
+#' @export
 VaR <-
 function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt","geltner"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE)
 { # @author Brian G. Peterson

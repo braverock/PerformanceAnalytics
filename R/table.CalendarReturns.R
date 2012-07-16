@@ -30,6 +30,7 @@
 #' textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c( rep("darkgray",12), "black", "blue"), mar = c(0,0,3,0)+0.1)
 #' title(main="Calendar Returns")
 #' 
+#' @export
 table.CalendarReturns <-
 function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
 {# @author Peter Carl

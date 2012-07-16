@@ -74,6 +74,7 @@
 #'     StdDev(edhec, clean="boudt", portfolio_method="component")
 #' 
 #' 
+#' @export
 StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, use="everything", method=c("pearson", "kendall", "spearman"))
 { # @author Brian G. Peterson
     

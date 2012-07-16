@@ -35,6 +35,7 @@
 #'     KellyRatio(managers[,1,drop=FALSE], Rf=managers[,10,drop=FALSE])
 #'     KellyRatio(managers[,1:6], Rf=managers[,10,drop=FALSE])
 #' 
+#' @export
 KellyRatio <-
 function (R, Rf = 0, method = "half")
 { # @author Brian G. Peterson

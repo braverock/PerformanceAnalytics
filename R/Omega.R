@@ -66,6 +66,7 @@
 #'     Omega(edhec[,13],method="interp",output="point")
 #'     Omega(edhec[,13],method="interp",output="full")
 #' 
+#' @export
 Omega <-
 function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), Rf = 0, ...)
 { # @author Peter Carl

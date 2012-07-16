@@ -126,6 +126,7 @@ CAPM.CML <- function (Ra, Rb, Rf = 0)
 #' CAPM.RiskPremium(managers[,"HAM1",drop=FALSE], Rf=0)
 #' CAPM.SML.slope(managers[,"SP500 TR",drop=FALSE], Rf=0)
 #' # should create plots like in Ruppert 7.1 7.2
+#' @export
 CAPM.RiskPremium <- function (Ra, Rf = 0)
 { #@author Brian G. Peterson
 
@@ -141,6 +142,8 @@ CAPM.RiskPremium <- function (Ra, Rf = 0)
     return (result)
 }
 
+#' @rdname CAPM.RiskPremium
+#' @export
 CAPM.SML.slope <- function (Rb, Rf = 0)
 { #@author Brian G. Peterson
 

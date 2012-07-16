@@ -39,6 +39,7 @@
 #' data(managers)
 #' head(Return.Geltner(managers[,1:3]),n=20)
 #' 
+#' @export
 Return.Geltner <-
 function (Ra, ...)
 { # @author Brian G. Peterson, Peter Carl

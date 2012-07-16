@@ -76,7 +76,6 @@
 #' @export 
 #' @rdname SharpeRatio
 #' 
-#' 
 SharpeRatio <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , ...)
 { # @author Brian G. Peterson

@@ -40,6 +40,7 @@
 #' data(managers)
 #' t(round(maxDrawdown(managers),4))
 #' 
+#' @export 
 maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
@@ -110,6 +111,7 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 #' data(edhec)
 #' t(round(CDD(edhec),4))
 #' 
+#' @export 
 CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
 {
     p=.setalphaprob(p)
@@ -140,6 +142,17 @@ CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
     # TODO add modified Cornish Fisher and copula methods to this to account for small number of observations likely on real data
 }
 
+#' Calculates a standard deviation-type statistic using individual drawdowns.
+#' 
+#' DD = sqrt(sum[j=1,2,...,d](D_j^2/n)) where
+#' D_j = jth drawdown over the entire period
+#' d = total number of drawdowns in entire period
+#' n = number of observations
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @export
 DrawdownDeviation <-
 function (R, ...) {
 
@@ -167,6 +180,16 @@ function (R, ...) {
     return (result)
 }
 
+#' Calculates the average of the observed drawdowns.
+#' 
+#' ADD = abs(sum[j=1,2,...,d](D_j/d)) where
+#' D'_j = jth drawdown over entire period
+#' d = total number of drawdowns in the entire period
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @export 
 AverageDrawdown <-
 function (R, ...) {
 
@@ -193,6 +216,8 @@ function (R, ...) {
     return (result)
 }
 
+#' @rdname AverageDrawdown
+#' @export 
 AverageRecovery <-
 function (R, ...) {
 

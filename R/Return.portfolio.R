@@ -1,3 +1,5 @@
+#' @rdname Return.portfolio
+#' @export
 Return.rebalancing <- function (R, weights, ...)
 {   # @author Brian G. Peterson
 

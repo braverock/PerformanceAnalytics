@@ -1,7 +1,10 @@
-\name{chart.TimeSeries}
+\name{charts.TimeSeries}
+\alias{charts.TimeSeries}
 \alias{chart.TimeSeries}
 \title{Creates a time series chart with some extensions.}
 \usage{
+  charts.TimeSeries(R, space = 0, main = "Returns", ...)
+
   chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE,
     yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1,
     lwd = 2, main = NULL, ylab = NULL, xlab = "Date",

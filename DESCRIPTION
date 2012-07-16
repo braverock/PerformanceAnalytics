@@ -1,7 +1,7 @@
 Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
-Version: 1.0.4.5
+Version: 1.0.5
 Date: $Date$
 Author: Peter Carl, Brian G. Peterson
 Maintainer: Brian G. Peterson <brian@braverock.com>
@@ -34,5 +34,5 @@ Copyright: (c) 2004-2012
 Contributors: Kris Boudt,  Diethelm Wuertz, Eric Zivot, Matthieu Lestel
 Thanks: A special thanks for additional contributions from
     Stefan Albrecht, Khahn Nygyen, Jeff Ryan,
-    Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke, 
+    Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke,
     H. Felix Wittmann, Ram Ahluwalia

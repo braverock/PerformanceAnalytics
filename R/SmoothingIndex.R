@@ -92,6 +92,7 @@
 #' SmoothingIndex(managers[,1:8])
 #' SmoothingIndex(edhec)
 #' 
+#' @export
 SmoothingIndex <-
 function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
 { # @author Peter Carl

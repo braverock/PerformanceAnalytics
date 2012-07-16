@@ -93,6 +93,7 @@
 #' }
 #' #end examples
 #' 
+#' @export 
 chart.QQPlot <-
 function(R, distribution="norm", ylab=NULL,
         xlab=paste(distribution, "Quantiles"), main=NULL, las=par("las"),

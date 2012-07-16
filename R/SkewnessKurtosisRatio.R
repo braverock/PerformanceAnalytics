@@ -29,7 +29,6 @@
 #' print(SkewnessKurtosisRatio(managers['1996',1])
 #'
 #' @export 
-
 SkewnessKurtosisRatio <-
 function (R, ...)
 {

@@ -17,10 +17,10 @@
   recursively an identity (formula 20)
 }
 \details{
-%  \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu^{\big(1\big)}_{X} 
-%\\ \tilde{ \mu }^{ \big(n\big) }_{X}
-%  \equiv \mu^{n}_{X} \sum_{k=0}^{n-1} \big(-1\big)^{n-k+1}
-%  \mu^{n-k}_{X} \tilde{ \mu }^{\big(k\big)}_{X} }
+  \deqn{ \tilde{ \mu }^{ \big(1\big) }_{X} \equiv \mu
+  ^{\big(1\big)}_{X} \\ \tilde{ \mu }^{ \big(n\big) }_{X}
+  \equiv \mu ^{n}_{X} \sum_{k=0}^{n-1} \big(-1\big)^{n-k+1}
+  \mu ^{n-k}_{X} \tilde{ \mu }^{\big(k\big)}_{X} }
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

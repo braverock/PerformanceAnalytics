@@ -44,7 +44,7 @@
 #' colnames(R.IBM)="IBM"
 #' chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 #' round(R.IBM,2)
-#' 
+#' @export
 Return.calculate <-
 function(prices, method = c("compound","simple"))
 { # @ author Peter Carl
@@ -73,6 +73,8 @@ function(prices, method = c("compound","simple"))
 
 }
 
+#' @rdname Return.calculate
+#' @export 
 CalculateReturns <-
 function(prices, method = c("compound","simple"))
 { # @ author Peter Carl

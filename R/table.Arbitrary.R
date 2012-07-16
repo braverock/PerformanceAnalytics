@@ -65,6 +65,7 @@
 #' data(edhec)
 #' table.Arbitrary(edhec,metrics=c("VaR", "ES"),metricsNames=c("Modified VaR","Modified Expected Shortfall"))
 #' 
+#' @export
 table.Arbitrary <-
 function (R, metrics=c("mean","sd"), metricsNames=c("Average Return","Standard Deviation"), ...)
 { # @author Peter Carl

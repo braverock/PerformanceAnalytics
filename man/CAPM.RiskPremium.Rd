@@ -11,6 +11,8 @@
   CAPM.CML(Ra, Rb, Rf = 0)
 
   CAPM.RiskPremium(Ra, Rf = 0)
+
+  CAPM.SML.slope(Rb, Rf = 0)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries

@@ -44,7 +44,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(BurkeRatio(portfolio_bacon[,1])) #expected 0.79
+print(BurkeRatio(portfolio_bacon[,1])) #expected 0.76
 print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.86
 
 data(managers)

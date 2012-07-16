@@ -103,7 +103,6 @@
 #' SemiVariance (managers[,1:6]) #calculated using method="subset"
 #'
 #' @export 
-
 DownsideDeviation <-
 function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 { # @author Peter Carl, Matthieu Lestel

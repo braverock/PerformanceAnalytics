@@ -197,7 +197,6 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' Preference for Moments of Higher Order than the Variance. Journal of Finance
 #' 35(4):915-919.
 #' @keywords ts multivariate distribution models
-#' @export
 #' @examples
 #' 
 #' data(managers)
@@ -205,7 +204,7 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 #' CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 #' 
-#' 
+#' @export
 CoVariance<- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -236,13 +235,12 @@ CoVariance<- function(Ra,Rb)
 
 #' Functions to calculate systematic or beta co-moments of return series
 #' 
-#' @name BetaCoMoments
-#' @concept beta co-moments
-#' @concept moments
-#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-#' @export
 #' calculate higher co-moment betas, or 'systematic' variance, skewness, and
 #' kurtosis
+#' @name BetaCoMoments
+#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
+#' @concept beta co-moments
+#' @concept moments
 #' 
 #' The co-moments, including covariance, coskewness, and cokurtosis, do not
 #' allow the marginal impact of an asset on a portfolio to be directly
@@ -261,18 +259,27 @@ CoVariance<- function(Ra,Rb)
 #' Higher moment betas are defined as proportional to the derivative of the
 #' covariance, coskewness and cokurtosis of the second, third and fourth
 #' portfolio moment with respect to the portfolio weights. The beta co-variance
-#' is calculated as: \deqn{ }{BetaCoV(Ra,Rb) =
-#' CoV(Ra,Rb)/centeredmoment(Rb,2)}\deqn{ \beta^{(2)}_{a,b} =
+#' is calculated as: 
+#' 
+#' \deqn{ BetaCoV(Ra,Rb) = \beta^{(2)}_{a,b} =
 #' \frac{CoV(R_a,R_b)}{\mu^{(2)}(R_b)} }{BetaCoV(Ra,Rb) =
-#' CoV(Ra,Rb)/centeredmoment(Rb,2)} Beta co-skewness is given as: \deqn{
-#' }{BetaCoS(Ra,Rb) = CoS(Ra,Rb)/centeredmoment(Rb,3)}\deqn{ \beta^{(3)}_{a,b}
-#' = \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)} }{BetaCoS(Ra,Rb) =
-#' CoS(Ra,Rb)/centeredmoment(Rb,3)} Beta co-kurtosis is: \deqn{
-#' }{BetaCoK(Ra,Rb) = CoK(Ra,Rb)/centeredmoment(Rb,4)}\deqn{ \beta^{(4)}_{a,b}
+#' CoV(Ra,Rb)/centeredmoment(Rb,2)} 
+#' 
+#' Beta co-skewness is given as: 
+#' 
+#' \deqn{ BetaCoS(Ra,Rb) = \beta^{(3)}_{a,b}= \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)} }{BetaCoS(Ra,Rb) =
+#' CoS(Ra,Rb)/centeredmoment(Rb,3)} 
+#' 
+#' Beta co-kurtosis is: 
+#' 
+#' \deqn{ BetaCoK(Ra,Rb)=\beta^{(4)}_{a,b}
 #' = \frac{CoK(R_a,R_b)}{\mu^{(4)}(R_b)} }{BetaCoK(Ra,Rb) =
-#' CoK(Ra,Rb)/centeredmoment(Rb,4)} where the \eqn{n}-th centered moment is
-#' calculated as \deqn{ }{moment^n(R) = E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) =
-#' E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
+#' CoK(Ra,Rb)/centeredmoment(Rb,4)} 
+#' 
+#' where the \eqn{n}-th centered moment is
+#' calculated as 
+#' 
+#' \deqn{ \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
 #' 
 #' A beta is greater than one indicates that no diversification benefits should
 #' be expected from the introduction of that asset into the portfolio.
@@ -334,7 +341,7 @@ CoVariance<- function(Ra,Rb)
 #' BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
 #' BetaCoKurtosis(managers[,1:6], managers[,8:7])
 #' 
-#' 
+#' @export 
 BetaCoVariance <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)

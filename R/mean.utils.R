@@ -30,6 +30,7 @@
 #' mean.UCL(edhec[,"Funds of Funds"])
 #' mean.LCL(edhec[,"Funds of Funds"])
 #' @rdname mean.geometric
+#' @export
 mean.geometric <-
 function (x, ...)
 {# @author Peter Carl
@@ -60,6 +61,7 @@ function (x, ...)
 }
 
 #' @rdname mean.geometric
+#' @export
 mean.stderr <-
 function (x, ...)
 {# @author Peter Carl
@@ -90,6 +92,7 @@ function (x, ...)
 }
 
 #' @rdname mean.geometric
+#' @export
 mean.LCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
@@ -127,6 +130,7 @@ function (x, ci = 0.95, ...)
 }
 
 #' @rdname mean.geometric
+#' @export
 mean.UCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl

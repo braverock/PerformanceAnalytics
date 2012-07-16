@@ -28,6 +28,7 @@
 #' TrackingError(managers[,1:6], managers[,8,drop=FALSE]) 
 #' TrackingError(managers[,1:6], managers[,8:7,drop=FALSE])
 #' 
+#' @export
 TrackingError <-
 function (Ra, Rb, scale = NA)
 { # @author Peter Carl

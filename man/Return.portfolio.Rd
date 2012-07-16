@@ -1,8 +1,10 @@
-\name{Return.portfolio}
+\name{Return.rebalancing}
 \alias{Return.portfolio}
 \alias{Return.rebalancing}
 \title{Calculates weighted returns for a portfolio of assets}
 \usage{
+  Return.rebalancing(R, weights, ...)
+
   Return.portfolio(R, weights = NULL, wealth.index = FALSE,
     contribution = FALSE, geometric = TRUE, ...)
 }

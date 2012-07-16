@@ -135,6 +135,7 @@
 #' chart.TimeSeries(Return.cumulative)
 #' chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)
 #' 
+#' @export 
 chart.TimeSeries <-
 function (R, 
           auto.grid=TRUE, 

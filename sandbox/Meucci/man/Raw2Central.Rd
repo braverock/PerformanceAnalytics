@@ -19,10 +19,10 @@
 
   Note the first central moment defined as expectation.
 
-%  \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X} \equiv E
-%  \big\{ X^{n} \big\}, \\ \mu^{ \big(n\big) }_{X} \equiv
-%  \sum_0^{n-1} \big{ -1 \big}^{n-k} \mu^{n-k}_{X} \tilde{
-%  \mu }^{k}_{X} + \tilde{ \mu }_{X}^{n} }
+  \deqn{\tilde{ \mu } ^ {\big(n\big)} _{X} \equiv E \big\{
+  X^{n} \big\}, \\ \mu ^{ \big(n\big) }_{X} \equiv
+  \sum_0^{n-1} \big(-1\big)^{n-k} \mu ^{n-k}_{X} \tilde{
+  \mu }^{k}_{X} + \tilde{ \mu }_{X}^{n} }
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

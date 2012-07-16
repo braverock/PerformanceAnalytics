@@ -1,4 +1,5 @@
 #' @rdname chart.RollingRegression
+#' @export 
 chart.RollingQuantileRegression <-
 function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)
 { # @author Peter Carl, Brian Peterson

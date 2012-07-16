@@ -30,7 +30,6 @@
 #' print(TotalRisk(managers['1996',1:5], managers['1996',8]))
 #'
 #' @export 
-
 TotalRisk <-
 function (Ra, Rb, Rf = 0, Period = 12,  ...)
 {

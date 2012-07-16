@@ -80,6 +80,7 @@
 #' region when legend is placed by keyword.
 #' @seealso \code{\link[graphics]{legend}}
 #' @keywords internal
+#' @export 
 legend <-
 function (x, y = NULL, legend, fill = NULL, col = par("col"),
     lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"),

@@ -1,9 +1,12 @@
 \name{TreynorRatio}
+\alias{ModifiedTreynorRatio}
 \alias{TreynorRatio}
 \title{calculate Treynor Ratio or modified Treynor Ratio of excess return over CAPM beta}
 \usage{
   TreynorRatio(Ra, Rb, Rf = 0, scale = NA,
     modified = FALSE)
+
+  ModifiedTreynorRatio(Ra, Rb, Rf = 0, scale = NA)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -28,8 +31,8 @@
   To calculate modified Treynor ratio, we divide the
   numerator by the systematic risk instead of the beta.
 
-  Equation:
-  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
+  Equation: \deqn{TreynorRatio =
+  \frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
   \deqn{ModifiedTreynorRatio = \frac{r_p - r_f}{\sigma_s}}
   {ModifiedTreynorRatio = (Rp - Rf)/sytematic risk}
 }
@@ -52,7 +55,7 @@ print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE))
   Peter Carl, Matthieu Lestel
 }
 \references{
-  \url{http://en.wikipedia.org/wiki/Treynor_ratio} Carl
+  \url{http://en.wikipedia.org/wiki/Treynor_ratio}, Carl
   Bacon, \emph{Practical portfolio performance measurement
   and attribution}, second edition 2008 p.77
 }

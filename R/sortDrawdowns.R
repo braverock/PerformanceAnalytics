@@ -26,6 +26,7 @@
 #' findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
 #' sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 #' 
+#' @export
 sortDrawdowns <- function (runs) {
     # sortDrawdowns(findDrawdowns(returns))
     # gives the drawdowns in order of worst to best
