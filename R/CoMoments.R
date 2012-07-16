@@ -204,7 +204,7 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' CoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 #' CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 #' 
-#' @export
+#' @export CoVariance
 CoVariance<- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
@@ -341,7 +341,7 @@ CoVariance<- function(Ra,Rb)
 #' BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
 #' BetaCoKurtosis(managers[,1:6], managers[,8:7])
 #' 
-#' @export 
+#' @export  BetaCoVariance
 BetaCoVariance <- function(Ra,Rb)
 {# @author Kris Boudt, Peter Carl
     Ra= checkData(Ra)
