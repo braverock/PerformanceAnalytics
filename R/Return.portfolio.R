@@ -102,7 +102,7 @@ Return.rebalancing <- function (R, weights, ...)
 #' # calculate a portfolio return with rebalancing
 #' round(Return.rebalancing(edhec,weights),4)
 #' 
-#' 
+#' @export
 Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contribution=FALSE,geometric=TRUE, ...)
 {   # @author Brian G. Peterson
 
