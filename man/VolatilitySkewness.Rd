@@ -45,7 +45,7 @@ print(VolatilitySkewness(portfolio_bacon, MAR, stat="variability")) #expected 1.
 
 MAR = 0
 data(managers)
-print(VolatilitySkewness(managers['1996'], MAR, stat="volatility"))
+# print(VolatilitySkewness(managers['1996'], MAR, stat="volatility"))
 print(VolatilitySkewness(managers['1996',1], MAR, stat="volatility"))
 }
 \author{

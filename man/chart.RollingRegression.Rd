@@ -79,8 +79,8 @@ chart.RollingQuantileRegression(managers[, 1, drop=FALSE],
 		managers[, 8, drop=FALSE], Rf = .04/12)
 # not implemented yet
 #charts.RollingQuantileRegression(managers[, 1:6],
-		managers[, 8, drop=FALSE], Rf = .04/12,
-		colorset = rich6equal, legend.loc="topleft")
+#		managers[, 8, drop=FALSE], Rf = .04/12,
+#		colorset = rich6equal, legend.loc="topleft")
 }
 \author{
   Peter Carl

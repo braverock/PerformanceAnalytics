@@ -63,6 +63,7 @@ function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","poten
     R = checkData(R, method="matrix")
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+       print(R)
        R = na.omit(R)
        r = subset(R, R > MAR)
 

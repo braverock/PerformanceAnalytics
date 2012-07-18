@@ -22,8 +22,8 @@
 #' 
 #' @keywords ts multivariate distribution models
 #' @examples
-#' data(portfolio_bacon[,1])
-#' print(PainRatio(portfolio_bacon)) #expected 2.59
+#' data(portfolio_bacon)
+#' print(PainRatio(portfolio_bacon[,1])) #expected 2.59
 #'
 #' data(managers)
 #' print(PainRatio(100*managers['1996']))

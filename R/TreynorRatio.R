@@ -44,9 +44,57 @@
 #' print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE)) 
 #' 
 #' @export
+
 TreynorRatio <-
 function (Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
 { # @author Peter Carl, Matthieu Lestel
+
+ModifiedTreynorRatio <-
+function (Ra, Rb, Rf = 0, scale = NA)
+{
+    		if(is.na(scale)) {
+        	    freq = periodicity(Ra)
+        	    switch(freq$scale,
+            	    minute = {stop("Data periodicity too high")},
+            	    hourly = {stop("Data periodicity too high")},
+            	    daily = {scale = 252},
+            	    weekly = {scale = 52},
+            	    monthly = {scale = 12},
+            	    quarterly = {scale = 4},
+            	    yearly = {scale = 1}
+        	    )
+          }
+
+    calcul = FALSE
+    Ra = checkData(Ra, method="matrix")
+    Rb = checkData(Rb, method="matrix")
+
+    if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
+    
+     Rp = (prod(1+Ra/100)^(scale/length(Ra))-1)*100
+     for (i in (1:length(Ra))) {
+     	 if (!is.na(Ra[i])) {
+     	    calcul = TRUE
+	 }
+      }
+     if (calcul) {
+     	     result = (Rp - Rf) / SystematicRisk(Ra, Rb, Rf)
+     }    
+     else {
+        result = NA
+     }
+      return(result)
+    }
+    else {
+        Ra = checkData(Ra)
+        result = apply(Ra, MARGIN = 2, ModifiedTreynorRatio, Rb = Rb, Rf = Rf)
+        result<-t(result)
+        colnames(result) = colnames(Ra)
+        rownames(result) = paste("Modified Treynor Ratio (Risk free = ",Rf,")", sep="")
+        return(result)
+    }
+}
+
 
     if(modified)
     {

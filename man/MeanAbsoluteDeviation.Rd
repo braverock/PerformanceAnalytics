@@ -26,7 +26,7 @@
   \eqn{\overline{r}} is the mean return
 }
 \examples{
-data(portfolio_bacon[,1])
+data(portfolio_bacon)
 print(MeanAbsoluteDeviation(portfolio_bacon)) #expected 1.78
 
 data(managers)

@@ -124,7 +124,7 @@ data(edhec)
     ES(edhec, clean="boudt")
 
     # add Component ES for the equal weighted portfolio
-    ES(edhec, clean="boudt", portfolio_method="component")
+    #ES(edhec, clean="boudt", portfolio_method="component")
 }
 \author{
   Brian G. Peterson and Kris Boudt

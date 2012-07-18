@@ -22,11 +22,11 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(AdustedSharpeRatio(portfolio_bacon[,1])) #expected 0.813
+#' print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.813
 #'
 #' data(managers)
-#' print(AdustedSharpeRatio(managers['1996']))
-#' print(AdustedSharpeRatio(managers['1996',1])) 
+#' print(AdjustedSharpeRatio(managers['1996']))
+#' print(AdjustedSharpeRatio(managers['1996',1])) 
 #'
 #' @export 
 
@@ -38,7 +38,7 @@ AdjustedSharpeRatio <- function (R, Rf = 0, period = 12, ...)
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
        n = length(R)
-      Rp = (prod(1+R/100)^(period/length(R))-1)*100
+       Rp = (prod(1+R/100)^(period/length(R))-1)*100
        Sigp = sqrt(sum((R-mean(R))^2)/n)*sqrt(period)
        SR = (Rp - Rf) / Sigp
        K = kurtosis(R, method = "moment")

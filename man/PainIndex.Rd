@@ -31,8 +31,8 @@
   period i
 }
 \examples{
-data(portfolio_bacon[,1])
-print(PainIndex(portfolio_bacon)) #expected 4.0
+data(portfolio_bacon)
+print(PainIndex(portfolio_bacon[,1])) #expected 4.0
 
 data(managers)
 print(PainIndex(100*managers['1996']))

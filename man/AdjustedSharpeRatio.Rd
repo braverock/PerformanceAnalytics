@@ -34,11 +34,11 @@
 }
 \examples{
 data(portfolio_bacon)
-print(AdustedSharpeRatio(portfolio_bacon[,1])) #expected 0.813
+print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.813
 
 data(managers)
-print(AdustedSharpeRatio(managers['1996']))
-print(AdustedSharpeRatio(managers['1996',1]))
+print(AdjustedSharpeRatio(managers['1996']))
+print(AdjustedSharpeRatio(managers['1996',1]))
 }
 \author{
   Matthieu Lestel

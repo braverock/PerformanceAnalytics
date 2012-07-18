@@ -118,6 +118,7 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
     # MAR = mean(x)
 
     method = method[1] 
+    R = checkData(R, method="matrix")
 
     if (ncol(R)==1 || is.vector(R) || is.null(R)) {
         R = na.omit(R)
@@ -147,6 +148,7 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
         return(result)
     }
     else {
+        print("doit être format avec date")
         R = checkData(R)
         result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
         result<-t(result)
@@ -176,7 +178,8 @@ function (R, MAR=0)
         return(DownsideDeviation(R, MAR=MAR, method="full", potential=TRUE))
     }
     else {
-        R = checkData(R, method = "matrix")
+        print("doit être format avec date")
+        R = checkData(R)
         result = apply(R, MARGIN = 2, DownsidePotential, MAR = MAR)
         result = matrix(result, nrow=1)
         colnames(result) = colnames(R)

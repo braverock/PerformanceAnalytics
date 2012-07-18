@@ -1,133 +1,441 @@
-export(ActivePremium)
-export(AdjustedSharpeRatio)
-export(apply.fromstart)
-export(apply.rolling)
-export(AverageDrawdown)
-export(AverageRecovery)
-export(BernardoLedoitratio)
-export(BetaCoKurtosis)
-export(BetaCoSkewness)
-export(BetaCoVariance)
-export(BurkeRatio)
-export(CalculateReturns)
-export(CalmarRatio)
-export(CAPM.alpha)
-export(CAPM.beta)
-export(CAPM.beta.bear)
-export(CAPM.beta.bull)
-export(CAPM.CML)
-export(CAPM.CML.slope)
-export(CAPM.epsilon)
-export(CAPM.jensenAlpha)
-export(CAPM.RiskPremium)
-export(CAPM.SML.slope)
-export(CDD)
-export(centeredcomoment)
-export(centeredmoment)
-export(chart.ACF)
-export(chart.ACFplus)
-export(chart.Bar)
-export(chart.BarVaR)
-export(chart.Boxplot)
-export(chart.CaptureRatios)
-export(chart.Correlation)
-export(chart.CumReturns)
-export(chart.Drawdown)
-export(chart.ECDF)
-export(chart.Events)
-export(chart.Histogram)
-export(chart.QQPlot)
-export(chart.Regression)
-export(chart.RelativePerformance)
-export(chart.RiskReturnScatter)
-export(chart.RollingCorrelation)
-export(chart.RollingMean)
-export(chart.RollingPerformance)
-export(chart.RollingQuantileRegression)
-export(chart.RollingRegression)
-export(charts.Bar)
-export(charts.BarVaR)
-export(chart.Scatter)
-export(chart.SnailTrail)
-export(charts.PerformanceSummary)
-export(charts.RollingPerformance)
-export(charts.RollingRegression)
-export(chart.StackedBar)
-export(charts.TimeSeries)
-export(chart.TimeSeries)
-export(chart.VaRSensitivity)
-export(checkData)
-export(clean.boudt)
-export(CoKurtosis)
-export(CoSkewness)
-export(CoVariance)
-export(DownsideDeviation)
-export(DownsideFrequency)
-export(DRatio)
-export(DrawdownDeviation)
-export(ETL)
-export(findDrawdowns)
-export(InformationRatio)
-export(Kappa)
-export(KellyRatio)
-export(kurtosis)
-export(legend)
-export(maxDrawdown)
-export(MeanAbsoluteDeviation)
-export(mean.geometric)
-export(mean.LCL)
-export(mean.stderr)
-export(mean.UCL)
-export(Omega)
-export(OmegaSharpeRatio)
-export(PainIndex)
-export(PainRatio)
-export(Return.annualized)
-export(Return.calculate)
-export(Return.centered)
-export(Return.clean)
-export(Return.cumulative)
-export(Return.excess)
-export(Return.Geltner)
-export(Return.portfolio)
-export(Return.read)
-export(Return.rebalancing)
-export(Return.relative)
-export(SemiDeviation)
-export(SemiVariance)
-export(SharpeRatio)
-export(SharpeRatio.annualized)
-export(SharpeRatio.modified)
-export(skewness)
-export(SkewnessKurtosisRatio)
-export(SmoothingIndex)
-export(sortDrawdowns)
-export(SortinoRatio)
-export(StdDev)
-export(StdDev.annualized)
-export(SterlingRatio)
-export(SystematicRisk)
-export(table.AnnualizedReturns)
-export(table.Arbitrary)
-export(table.Autocorrelation)
-export(table.CalendarReturns)
-export(table.CAPM)
-export(table.CaptureRatios)
-export(table.Correlation)
-export(table.DownsideRisk)
-export(table.Drawdowns)
-export(table.HigherMoments)
-export(table.Stats)
-export(table.TrailingPeriods)
-export(textplot)
-export(TimingRatio)
-export(TotalRisk)
-export(TrackingError)
-export(TreynorRatio)
-export(UlcerIndex)
-export(UpDownRatios)
-export(UpsideFrequency)
-export(UpsidePotentialRatio)
-export(UpsideRisk)
-export(VaR)
-export(VolatilitySkewness)
+# NAMESPACE file for PerformanceAnalytics
+
+importFrom("utils", "packageDescription")
+importFrom("stats", "sd")
+
+importFrom("zoo", "rollapply")
+
+# export all functions/variables that don't start with a .
+# exportPattern("^[^\\.]")
+
+
+export(
+    ActivePremium,
+    AdjustedSharpeRatio,
+    apply.fromstart,
+    apply.rolling,
+    BernardoLedoitRatio,
+    BetaCoKurtosis,
+    BetaCoSkewness,
+    BetaCoVariance,
+    BurkeRatio,
+    CalculateReturns,
+    CalmarRatio,
+    CAPM.alpha,
+    CAPM.beta,
+    CAPM.beta.bear,
+    CAPM.beta.bull,
+    CAPM.CML,
+    CAPM.CML.slope,
+    CAPM.epsilon,
+    CAPM.jensenAlpha,
+    CAPM.RiskPremium,
+    CAPM.SML.slope,
+    CDD,
+    checkData,
+    clean.boudt,
+    CoKurtosis,
+#    CoKurtosisMatrix, #export after co-moments paper is done
+    CoSkewness,
+#    CoSkewnessMatrix, #export after co-moments paper is done
+    CoVariance,
+    DownsideDeviation,
+    DownsideFrequency,
+    DownsidePotential,
+    DRatio,
+    Drawdowns,
+    ES,
+    ETL,
+    CVaR,
+    DrawdownPeak,
+    findDrawdowns,
+    InformationRatio,
+    Kappa,
+    KellyRatio,
+    kurtosis,
+    maxDrawdown,
+    MeanAbsoluteDeviation,
+    mean.geometric,
+    mean.LCL,
+    mean.stderr,
+    mean.UCL,
+    Omega,
+    OmegaSharpeRatio,
+#    pfolioReturn,
+    PainIndex,
+    PainRatio,
+    Return.annualized,
+    Return.calculate,
+    Return.centered,
+    Return.clean,
+    Return.cumulative,
+    Return.excess,
+    Return.Geltner,
+    Return.portfolio,
+    Return.rebalancing,
+    Return.read,
+    Return.relative,
+    sd.annualized,
+    sd.multiperiod,
+    SemiDeviation,
+    SemiVariance,
+    SharpeRatio,
+    SharpeRatio.annualized,
+    SharpeRatio.modified,
+    skewness,
+    SkewnessKurtosisRatio,
+    SmoothingIndex,
+    sortDrawdowns,
+    SortinoRatio,
+    StdDev,
+    StdDev.annualized,
+    SterlingRatio,
+    SystematicRisk,
+#    style.fit,
+#    style.QPfit,
+    TimingRatio,
+    TotalRisk,
+    TrackingError,
+    TreynorRatio,
+    UpDownRatios,
+    UPR,
+    UpsideFrequency,
+    UpsidePotentialRatio,
+    UpsideRisk,
+    VaR,
+    VolatilitySkewness
+)
+
+## Tables
+export(
+    table.AnnualizedReturns,
+    table.Arbitrary,
+    table.Autocorrelation,
+    table.CalendarReturns,
+    table.CAPM,
+    table.CaptureRatios,
+    table.Correlation,
+    table.DownsideRisk,
+    table.Drawdowns,
+    table.HigherMoments,
+    table.Returns,
+    table.Stats,
+    table.TrailingPeriods,
+    table.TrailingPeriodsRel,
+    table.UpDownRatios
+)
+
+## Charts
+export(
+    chart.ACF,
+    chart.ACFplus,
+    chart.Bar,
+    charts.Bar,
+    chart.BarVaR,
+    charts.BarVaR,
+    chart.Boxplot,
+    chart.CaptureRatios,
+    chart.Correlation,
+#    chart.Correlation.color,
+    chart.CumReturns,
+    chart.Drawdown,
+    chart.ECDF,
+    chart.Events,
+    chart.Histogram,
+    chart.QQPlot,
+    chart.Regression,
+    chart.RelativePerformance,
+    chart.RiskReturnScatter,
+    chart.RollingCorrelation,
+    chart.RollingMean,
+    chart.RollingPerformance,
+    chart.RollingRegression,
+    chart.RollingQuantileRegression,
+#    chart.RollingStyle,
+    chart.Scatter,
+    chart.SnailTrail,
+    charts.PerformanceSummary,
+    charts.RollingPerformance,
+    charts.RollingRegression,
+    chart.StackedBar,
+#    chart.Style,
+    chart.TimeSeries,
+    chart.VaRSensitivity,
+    textplot
+)
+
+export(
+    allsymbols,
+    bluefocus,
+    bluemono,
+    bond.dates,
+    bond.labels,
+    closedsymbols,
+    cycles.dates,
+    dark6equal,
+    dark8equal,
+    equity.dates,
+    equity.labels,
+    fillsymbols,
+    greenfocus,
+    greenmono,
+    grey6mono,
+    grey8mono,
+    legend,
+    linesymbols,
+    macro.dates,
+    macro.labels,
+    opensymbols,
+    rainbow10equal,
+    rainbow12equal,
+    rainbow6equal,
+    rainbow8equal,
+    redfocus,
+    redmono,
+    rich10equal,
+    rich12equal,
+    rich6equal,
+    rich8equal,
+    risk.dates,
+    risk.labels,
+    set6equal,
+    set8equal,
+    tim10equal,
+    tim12equal,
+    tim6equal,
+    tim8equal
+)
+
+S3method(textplot, default)
+S3method(textplot, character)
+S3method(textplot, data.frame)
+S3method(textplot, matrix)
+
+S3method(mean,xts)
+S3method(sd,xts)
+#S3method(mean,matrix)
+S3method(sd,matrix)
+
+S3method(rollapply,xts)
+
+# # Export These
+# ActivePremium
+# apply.fromstart
+# apply.rolling
+# BetaCoKurtosis
+# BetaCoSkewness
+# BetaCoVariance
+# CalculateReturns
+# CalmarRatio
+# CAPM.alpha
+# CAPM.beta
+# CAPM.beta.bear
+# CAPM.beta.bull
+# CAPM.CML
+# CAPM.CML.slope
+# CAPM.RiskPremium
+# CAPM.SML.slope
+# chart.ACF
+# chart.ACFplus
+# chart.Bar
+# chart.BarVaR
+# chart.Boxplot
+# chart.CaptureRatios
+# chart.Correlation
+# chart.Correlation.color
+# chart.CumReturns
+# chart.Drawdown
+# chart.ECDF
+# chart.Histogram
+# chart.QQPlot
+# chart.Regression
+# chart.RelativePerformance
+# chart.RiskReturnScatter
+# chart.RollingCorrelation
+# chart.RollingMean
+# chart.RollingPerformance
+# chart.RollingRegression
+# chart.RollingStyle
+# chart.Scatter
+# chart.SnailTrail
+# charts.PerformanceSummary
+# charts.RollingPerformance
+# charts.RollingRegression
+# chart.StackedBar
+# chart.Style
+# chart.TimeSeries
+# chart.VaRSensitivity
+# checkData
+# clean.boudt
+# CoKurtosis
+# CoKurtosisMatrix
+# CoSkewness
+# CoSkewnessMatrix
+# CoVariance
+# DownsideDeviation
+# Drawdowns
+# ES
+# findDrawdowns
+# InformationRatio
+# KellyRatio
+# kurtosis
+# maxDrawdown
+# mean.geometric
+# mean.LCL
+# mean.stderr
+# mean.UCL
+# modifiedVaR
+# modSharpe
+# multivariate_mean
+# Omega
+# pfolioReturn
+# Return.annualized
+# Return.calculate
+# Return.centered
+# Return.clean
+# Return.cumulative
+# Return.excess
+# Return.Geltner
+# Return.portfolio
+# Return.portfolio.multiweight
+# Return.read
+# Return.relative
+# sd.annualized
+# sd.multiperiod
+# SemiDeviation
+# SemiVariance
+# SharpeRatio
+# SharpeRatio.annualized
+# SharpeRatio.modified
+# skewness
+# SmoothingIndex
+# sortDrawdowns
+# SortinoRatio
+# SterlingRatio
+# style.fit
+# style.QPfit
+# table.AnnualizedReturns
+# table.Arbitrary
+# table.Autocorrelation
+# table.CalendarReturns
+# table.CAPM
+# table.CaptureRatios
+# table.Correlation
+# table.DownsideRisk
+# table.Drawdowns
+# table.HigherMoments
+# table.MonthlyReturns
+# table.Returns
+# table.UpDownRatios
+# textplot
+# TimingRatio
+# TrackingError
+# TreynorRatio
+# UpDownRatios
+# UPR
+# UpsidePotentialRatio
+# VaR
+
+# # graphics stuff to export
+# allsymbols
+# bluefocus
+# bluemono
+# bond.dates
+# bond.labels
+# closedsymbols
+# cycles.dates
+# dark6equal
+# dark8equal
+# equity.dates
+# equity.labels
+# fillsymbols
+# greenfocus
+# greenmono
+# grey6mono
+# grey8mono
+# legend
+# linesymbols
+# macro.dates
+# macro.labels
+# opensymbols
+# rainbow10equal
+# rainbow12equal
+# rainbow6equal
+# rainbow8equal
+# redfocus
+# redmono
+# rich10equal
+# rich12equal
+# rich6equal
+# rich8equal
+# risk.dates
+# risk.labels
+# set6equal
+# set8equal
+# tim10equal
+# tim12equal
+# tim6equal
+# tim8equal
+
+# # internal/obsolete functions, do not export
+# centeredcomoment
+# centeredmoment
+# checkDataMatrix
+# checkDataVector
+# checkDataZoo
+# derIpower
+# derportm2
+# derportm3
+# derportm4
+# download.RiskFree
+# download.SP500PriceReturns
+# ES.CornishFisher
+# ES.CornishFisher.portfolio
+# ES.Gaussian
+# ES.Gaussian.portfolio
+# ES.historical.portfolio
+# GES.MM
+# GVaR.MM
+# Ipower
+# kernel
+# kurtosis.MM
+# mES.MM
+# modifiedVaR
+# multivariate_mean
+# mVaR.MM
+# M3.MM
+# M4.MM
+# portm2
+# portm3
+# portm4
+# Portmean
+# Portsd
+# precision
+# pvalJB
+# operES.CornishFisher
+# operES.CornishFisher.portfolio
+# skewness.MM
+# SR.GES.MM
+# SR.GVaR.MM
+# SR.mES.MM
+# SR.mVaR.MM
+# SR.StdDev.MM
+# statsTable
+# std
+# StdDev.annualized
+# StdDev.MM
+# textplot.character
+# textplot.data.frame
+# textplot.default
+# textplot.matrix
+# timing.ratio
+# VaR.Beyond
+# VaR.CornishFisher
+# VaR.CornishFisher.portfolio
+# VaR.Gaussian
+# VaR.Gaussian.portfolio
+# VaR.historical.portfolio
+# VaR.kernel.portfolio
+# VaR.Marginal
+# VaR.mean
+# VaR.traditional

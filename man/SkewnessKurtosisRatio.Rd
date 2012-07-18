@@ -31,7 +31,7 @@ print(SkewnessKurtosisRatio(portfolio_bacon)) #expected -0.0347
 
 data(managers)
 print(SkewnessKurtosisRatio(managers['1996']))
-print(SkewnessKurtosisRatio(managers['1996',1])
+print(SkewnessKurtosisRatio(managers['1996',1]))
 }
 \author{
   Matthieu Lestel
