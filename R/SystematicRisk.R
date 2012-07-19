@@ -11,10 +11,10 @@
 #' where \eqn{\sigma_s} is the systematic risk, \eqn{\beta} is the regression beta,
 #' and \eqn{\sigma_m} is the market risk
 #'
-#' @aliases SystematicRrisk
+#' @aliases SystematicRisk
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param Rb return vector of the benchmark asset
+#' @param Rb return vector of the benchmark asset 
 #' @param Rf risk free rate, in same period as your returns
 #' @param Period the number of return in a year in the asset return 
 #' @param \dots any other passthru parameters
@@ -49,6 +49,8 @@ function (Ra, Rb, Rf = 0, Period = 12, ...)
       }
 
      if (calcul) {
+        print(sqrt(sum((Rb-mean(Rb))^2)/length(Rb)))
+	print(sqrt(var(Rb)*(length(Rb)-1)/length(Rb)))
         result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))*sqrt(Period)
      }    
      else {

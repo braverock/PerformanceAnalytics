@@ -1,6 +1,5 @@
 \name{SystematicRisk}
 \alias{SystematicRisk}
-\alias{SystematicRrisk}
 \title{Systematic risk of the return distribution}
 \usage{
   SystematicRisk(Ra, Rb, Rf = 0, Period = 12, ...)
