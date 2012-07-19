@@ -27,7 +27,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(SkewnessKurtosisRatio(portfolio_bacon)) #expected -0.0347
+print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.0318
 
 data(managers)
 print(SkewnessKurtosisRatio(managers['1996']))

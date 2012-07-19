@@ -30,8 +30,8 @@
 }
 \examples{
 data(portfolio_bacon)
-MAR = 0.5
-print(DownsideFrequency(portfolio_bacon, MAR)) #expected 0.458
+MAR = 0.005
+print(DownsideFrequency(portfolio_bacon[,1], MAR)) #expected 0.458
 
 data(managers)
 print(DownsideFrequency(managers['1996']))

@@ -43,7 +43,6 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
     drawdown = c()
     R0 <- R
     R = checkData(R, method="matrix")
-
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        calcul = FALSE
        n = length(R)
@@ -111,11 +110,10 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
 		result = result * sqrt(n)
        }
 }
-       reclass(result, R0)
        return(result)
     }  
     else {
-        R = checkData(R)
+    	R = checkData(R)
         result = apply(R, MARGIN = 2, BurkeRatio, Rf = Rf, modified = modified, ...)
         result<-t(result)
         colnames(result) = colnames(R)

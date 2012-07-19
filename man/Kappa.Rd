@@ -44,8 +44,8 @@
 l = 2
 
 data(portfolio_bacon)
-MAR = 0.5
-print(Kappa(portfolio_bacon, MAR, l)) #expected 0.157
+MAR = 0.005
+print(Kappa(portfolio_bacon[,1], MAR, l)) #expected 0.157
 
 data(managers)
 MAR = 0

@@ -54,10 +54,10 @@
 }
 \examples{
 data(portfolio_bacon)
-MAR = 0.5
-print(UpsideRisk(portfolio_bacon, MAR, stat="risk")) #expected 2.937
-print(UpsideRisk(portfolio_bacon, MAR, stat="variance")) #expected 8.628
-print(UpsideRisk(portfolio_bacon, MAR, stat="potential")) #expected 1.771
+MAR = 0.005
+print(UpsideRisk(portfolio_bacon[,1], MAR, stat="risk")) #expected 2.937
+print(UpsideRisk(portfolio_bacon[,1], MAR, stat="variance")) #expected 8.628
+print(UpsideRisk(portfolio_bacon[,1], MAR, stat="potential")) #expected 1.771
 
 MAR = 0
 data(managers)

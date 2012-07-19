@@ -41,10 +41,10 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' print(UpsideRisk(portfolio_bacon, MAR, stat="risk")) #expected 2.937
-#' print(UpsideRisk(portfolio_bacon, MAR, stat="variance")) #expected 8.628
-#' print(UpsideRisk(portfolio_bacon, MAR, stat="potential")) #expected 1.771
+#' MAR = 0.005
+#' print(UpsideRisk(portfolio_bacon[,1], MAR, stat="risk")) #expected 2.937
+#' print(UpsideRisk(portfolio_bacon[,1], MAR, stat="variance")) #expected 8.628
+#' print(UpsideRisk(portfolio_bacon[,1], MAR, stat="potential")) #expected 1.771
 #'
 #' MAR = 0
 #' data(managers)
@@ -59,13 +59,11 @@ function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","poten
     method = method[1]
     stat = stat[1]
 
-    R0 <- R
     R = checkData(R, method="matrix")
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
-       print(R)
        R = na.omit(R)
-       r = subset(R, R > MAR)
+       r = R[which(R > MAR)]
 
         if(!is.null(dim(MAR))){
             if(is.timeBased(index(MAR))){
@@ -87,7 +85,6 @@ function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","poten
 	    variance = {result = sum((r - MAR)^2/len)},
 	    potential = {result = sum((r - MAR)/len)}
 	    )
-	reclass(result, R0)
         return(result)
     }
     else {

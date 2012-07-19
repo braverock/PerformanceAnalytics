@@ -23,8 +23,8 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' print(UpsideFrequency(portfolio_bacon, MAR)) #expected 0.542
+#' MAR = 0.005
+#' print(UpsideFrequency(portfolio_bacon[,1], MAR)) #expected 0.542
 #'
 #' data(managers)
 #' print(UpsideFrequency(managers['1996']))
@@ -34,12 +34,11 @@
 
 UpsideFrequency <- function (R, MAR = 0, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
-       r = subset(R, R > MAR)
+       r = R[which(R > MAR)]
 
         if(!is.null(dim(MAR))){
             if(is.timeBased(index(MAR))){
@@ -51,15 +50,12 @@ UpsideFrequency <- function (R, MAR = 0, ...)
             }
         }
 	result = length(r) / length(R)
-	reclass(result, R0)
         return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, UpsideFrequency, MAR = MAR, ...)
         result<-t(result)
         colnames(result) = colnames(R)
-	print(MAR)
         rownames(result) = paste("Upside Frequency (MAR = ",MAR,"%)", sep="")
         return(result)
     }

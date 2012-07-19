@@ -39,8 +39,8 @@
 #' l = 2
 #'
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' print(Kappa(portfolio_bacon, MAR, l)) #expected 0.157
+#' MAR = 0.005
+#' print(Kappa(portfolio_bacon[,1], MAR, l)) #expected 0.157
 #'
 #' data(managers)
 #' MAR = 0
@@ -51,20 +51,17 @@
 
 Kappa <- function (R, MAR, l, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
-       r = subset(R, R<MAR)
+       r = R[which(R < MAR)]
        n = length(R)
        m = mean(R)
        result = (m-MAR)/(((1/n)*sum((MAR - r)^l))^(1/l))
-       reclass(result, R0)
        return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, Kappa, MAR=MAR, l=l, ...)
         result<-t(result)
         colnames(result) = colnames(R)

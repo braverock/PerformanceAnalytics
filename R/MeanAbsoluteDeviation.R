@@ -29,17 +29,14 @@
 
 MeanAbsoluteDeviation <- function (R, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
        result = sum(abs(R - mean(R)))/length(R)
-       reclass(result, R0)
        return(result)
     }  
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, MeanAbsoluteDeviation, ...)
         result<-t(result)
         colnames(result) = colnames(R)

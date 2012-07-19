@@ -34,8 +34,8 @@ data(portfolio_bacon)
 print(PainRatio(portfolio_bacon[,1])) #expected 2.59
 
 data(managers)
-print(PainRatio(100*managers['1996']))
-print(PainRatio(100*managers['1996',1]))
+print(PainRatio(managers['1996']))
+print(PainRatio(managers['1996',1]))
 }
 \author{
   Matthieu Lestel

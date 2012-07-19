@@ -35,21 +35,30 @@
 CAPM.epsilon <-
 function (Ra, Rb, Rf = 0, period=12, ...)
 {
-    calcul = FALSE
     Ra = checkData(Ra, method="matrix")
     Rb = checkData(Rb, method="matrix")
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-     Rp = (prod(1+Ra/100)^(period/length(Ra))-1)*100
-     Rpb =  (prod(1+Rb/100)^(period/length(Rb))-1)*100 #benchmark total return
+    calcul = FALSE
        for (i in (1:length(Ra))) {
           if (!is.na(Ra[i])) {
              calcul = TRUE
           }
         }
+     Ra = na.omit(Ra)
+     Rb = na.omit(Rb)
+     print(Ra)
+     print(Rb)
+     Rp = (prod(1+Ra/100)^(period/length(Ra))-1)*100
+     Rpb =  (prod(1+Rb/100)^(period/length(Rb))-1)*100 #benchmark total return
+     print(Rp)
+     print(Rpb)
 
         if (calcul) {
+	   print(Rf)
+	   print(CAPM.alpha(Ra,Rb,Rf))
            result = Rf + Rp - CAPM.alpha(Ra,Rb,Rf) - (Rpb - Rf) * CAPM.beta(Ra,Rb,Rf) 
+	   print(result)
         }   
         else {
            result = NA
@@ -57,7 +66,7 @@ function (Ra, Rb, Rf = 0, period=12, ...)
         return(result)
     }
     else {
-        Ra = checkData(Ra)
+    	Ra = checkData(Ra)
         result = apply(Ra, MARGIN = 2, CAPM.epsilon, Rb = Rb, Rf = Rf, ...)
         result<-t(result)
         colnames(result) = colnames(Ra)

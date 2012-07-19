@@ -26,28 +26,37 @@
 #' print(PainRatio(portfolio_bacon[,1])) #expected 2.59
 #'
 #' data(managers)
-#' print(PainRatio(100*managers['1996']))
-#' print(PainRatio(100*managers['1996',1])) 
+#' print(PainRatio(managers['1996']))
+#' print(PainRatio(managers['1996',1])) 
 #'
 #' @export 
 
 
 PainRatio <- function (R, Rf = 0, period = 12, ...) 
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+       calcul = FALSE
+        for (i in (1:length(R))) {
+     	     if (!is.na(R[i])) {
+     	    	calcul = TRUE
+	     }
+        }		      
        PI = PainIndex(R)
        R = na.omit(R)
        n = length(R)
-       Rp = (prod(1+R/100)^(period/length(R))-1)*100
-       result = (Rp - Rf) / PI
-       reclass(result, R0)
+       if(!calcul) {
+	  result = NA
+	}
+	else {
+       	     Rp = Return.annualized(R)
+#       Rp = (prod(1+R/100)^(period/length(R))-1)*100
+       	   result = (Rp - Rf) / PI
+	}
        return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, PainRatio, MAR = MAR, Rf = Rf, period = period, ...)
         result<-t(result)
         colnames(result) = colnames(R)

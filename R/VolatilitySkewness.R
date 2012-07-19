@@ -29,9 +29,9 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' print(VolatilitySkewness(portfolio_bacon, MAR, stat="volatility")) #expected 1.32
-#' print(VolatilitySkewness(portfolio_bacon, MAR, stat="variability")) #expected 1.15
+#' MAR = 0.005
+#' print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="volatility")) #expected 1.32
+#' print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="variability")) #expected 1.15
 #'
 #' MAR = 0
 #' data(managers)
@@ -45,10 +45,15 @@ function (R, MAR = 0, stat=c("volatility", "variability"), ...)
 {
     stat = stat[1]
 
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+       calcul = FALSE
+        for (i in (1:length(R))) {
+     	     if (!is.na(R[i])) {
+     	    	calcul = TRUE
+	     }
+        }		      
        R = na.omit(R)
 
         if(!is.null(dim(MAR))){
@@ -60,16 +65,18 @@ function (R, MAR = 0, stat=c("volatility", "variability"), ...)
                 # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
             }
         }
-        
-	switch(stat,
-	    volatility = {result = UpsideRisk(R, MAR, stat="variance")/DownsideDeviation(R,MAR)^2},
-	    variability = {result = UpsideRisk(R, MAR, stat="risk")/DownsideDeviation(R,MAR)},
-	    )
-	reclass(result, R0)
+        if(!calcul) {
+	  result = NA
+	}
+	else {
+	     switch(stat,
+		volatility = {result = UpsideRisk(R, MAR, stat="variance")/DownsideDeviation(R,MAR)^2},
+	    	variability = {result = UpsideRisk(R, MAR, stat="risk")/DownsideDeviation(R,MAR)},
+	    	)
+	}
         return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, VolatilitySkewness, MAR = MAR, stat = stat, ...)
         result<-t(result)
         colnames(result) = colnames(R)

@@ -27,7 +27,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(DRatio(portfolio_bacon)) #expected 0.401
+#' print(DRatio(portfolio_bacon[,1])) #expected 0.401
 #'
 #' data(managers)
 #' print(DRatio(managers['1996']))
@@ -37,21 +37,18 @@
 
 DRatio <- function (R, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
        R = na.omit(R)
-       r1 = subset(R, R > 0)
-       r2 = subset(R, R < 0)
+       r1 = R[which(R > 0)]
+       r2 = R[which(R < 0)]
        nd = length(r2)
        nu = length(r1)
        result = (-nd*sum(r2))/(nu*sum(r1))    
-       reclass(result, R0)
        return(result)
     }  
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, DRatio, ...)
         result<-t(result)
         colnames(result) = colnames(R)

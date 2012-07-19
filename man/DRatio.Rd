@@ -35,7 +35,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(DRatio(portfolio_bacon)) #expected 0.401
+print(DRatio(portfolio_bacon[,1])) #expected 0.401
 
 data(managers)
 print(DRatio(managers['1996']))

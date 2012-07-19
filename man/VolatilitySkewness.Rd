@@ -39,9 +39,9 @@
 }
 \examples{
 data(portfolio_bacon)
-MAR = 0.5
-print(VolatilitySkewness(portfolio_bacon, MAR, stat="volatility")) #expected 1.32
-print(VolatilitySkewness(portfolio_bacon, MAR, stat="variability")) #expected 1.15
+MAR = 0.005
+print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="volatility")) #expected 1.32
+print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="variability")) #expected 1.15
 
 MAR = 0
 data(managers)

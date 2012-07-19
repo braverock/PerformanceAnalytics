@@ -38,8 +38,8 @@
 }
 \examples{
 data(portfolio_bacon)
-MAR = 0.5
-print(OmegaSharpeRatio(portfolio_bacon, MAR)) #expected 0.29
+MAR = 0.005
+print(OmegaSharpeRatio(portfolio_bacon[,1], MAR)) #expected 0.29
 
 MAR = 0
 data(managers)

@@ -29,8 +29,8 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' print(OmegaSharpeRatio(portfolio_bacon, MAR)) #expected 0.29
+#' MAR = 0.005
+#' print(OmegaSharpeRatio(portfolio_bacon[,1], MAR)) #expected 0.29
 #'
 #' MAR = 0
 #' data(managers)
@@ -41,12 +41,17 @@
 OmegaSharpeRatio <-
 function (R, MAR = 0, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+       calcul = FALSE
+        for (i in (1:length(R))) {
+     	     if (!is.na(R[i])) {
+     	    	calcul = TRUE
+	     }
+        }		      
        R = na.omit(R)
-       r = subset(R, R > MAR)
+       r = R[which(R > MAR)]
 
         if(!is.null(dim(MAR))){
             if(is.timeBased(index(MAR))){
@@ -57,12 +62,15 @@ function (R, MAR = 0, ...)
                 # we have to assume that Ra and a vector of Rf passed in for MAR both cover the same time period
             }
         }
-	result = (UpsideRisk(R,MAR,stat="potential") - DownsidePotential(R,MAR))/(DownsidePotential(R,MAR))
-	reclass(result, R0)
+	if(!calcul) {
+	  result = NA
+	}
+	else {
+	    result = (UpsideRisk(R,MAR,stat="potential") - DownsidePotential(R,MAR))/(DownsidePotential(R,MAR))
+        }
         return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, OmegaSharpeRatio, MAR = MAR, ...)
         result<-t(result)
         colnames(result) = colnames(R)

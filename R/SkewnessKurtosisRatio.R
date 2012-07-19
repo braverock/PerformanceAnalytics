@@ -22,7 +22,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(SkewnessKurtosisRatio(portfolio_bacon)) #expected -0.0347
+#' print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.0318
 #'
 #' data(managers)
 #' print(SkewnessKurtosisRatio(managers['1996']))
@@ -32,17 +32,25 @@
 SkewnessKurtosisRatio <-
 function (R, ...)
 {
-    R0 <- R
-    R = checkData(R, method="matrix")
+    R = checkData(R)
 
     if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+       calcul = FALSE
+        for (i in (1:length(R))) {
+     	     if (!is.na(R[i])) {
+     	    	calcul = TRUE
+	     }
+        }		      
        R = na.omit(R)
-	result = skewness(R) / kurtosis(R, method = "moment")
-	reclass(result, R0)
+        if(!calcul) {
+	  result = NA
+	}
+	else {
+	     result = skewness(R) / kurtosis(R, method = "moment")
+	}
         return(result)
     }
     else {
-        R = checkData(R)
         result = apply(R, MARGIN = 2, SkewnessKurtosisRatio, ...)
         result<-t(result)
         colnames(result) = colnames(R)
