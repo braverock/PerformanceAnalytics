@@ -1,6 +1,4 @@
 \name{TotalRisk}
-\alias{risk}
-\alias{total}
 \alias{TotalRisk}
 \title{Total risk of the return distribution}
 \usage{

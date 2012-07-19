@@ -59,6 +59,7 @@ export(
     mean.LCL,
     mean.stderr,
     mean.UCL,
+    MSquared,
     Omega,
     OmegaSharpeRatio,
 #    pfolioReturn,

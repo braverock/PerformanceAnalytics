@@ -7,7 +7,7 @@
 #' \deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific Risk^2}} 
 #' {Total Risk^2 = Systematic Risk^2 + Specific Risk^2}
 #'
-#' @aliases total risk
+#' @aliases TotalRisk
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset

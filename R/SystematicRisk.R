@@ -11,7 +11,7 @@
 #' where \eqn{\sigma_s} is the systematic risk, \eqn{\beta} is the regression beta,
 #' and \eqn{\sigma_m} is the market risk
 #'
-#' @aliases systematic risk
+#' @aliases SystematicRrisk
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
