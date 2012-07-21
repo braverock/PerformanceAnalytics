@@ -25,8 +25,8 @@
   equation and the real result.
 }
 \details{
-  \deqn{\epsilon_r = r_p - \alpha_r - \beta_r * b}
-  {epsilon_r = r_p - alpha_r - beta_r * b}
+  \deqn{\epsilon_r = r_p - \alpha_r - \beta_r *
+  b}{epsilon_r = r_p - alpha_r - beta_r * b}
 
   where \eqn{\alpha_r} is the regression alpha,
   \eqn{\beta_r} is the regression beta, \eqn{r_p} is the

@@ -82,8 +82,7 @@ CoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
 \seealso{
   \code{\link{BetaCoSkewness}} \cr
   \code{\link{BetaCoKurtosis}} \cr
-  \code{\link{BetaCoMoments}} \cr %
-  \code{\link{MultivariateMoments}}
+  \code{\link{BetaCoMoments}}
 }
 \concept{
   co-moments

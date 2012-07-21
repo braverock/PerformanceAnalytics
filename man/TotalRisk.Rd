@@ -27,7 +27,7 @@
 }
 \details{
   \deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific
-  Risk^2}} {Total Risk^2 = Systematic Risk^2 + Specific
+  Risk^2}}{Total Risk^2 = Systematic Risk^2 + Specific
   Risk^2}
 }
 \examples{

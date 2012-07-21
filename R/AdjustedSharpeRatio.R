@@ -4,12 +4,11 @@
 #' for skewness and kurtosis by incorporating a penalty factor for negative skewness
 #' and excess kurtosis.
 #'
-#' \deqn{Adjusted Sharpe Ratio = SR * [1 + (\frac{S}{6}) * SR - (\frac{K - 3}{24}) * SR^2]}
-#' {Adjusted Sharpe ratio = SR x [1 + (S/6) x SR - ((K-3) / 24) x SR^2]}
+#' \deqn{Adjusted Sharpe Ratio = SR * [1 + (\frac{S}{6}) * SR - (\frac{K - 3}{24}) * SR^2]}{Adjusted Sharpe ratio = SR x [1 + (S/6) x SR - ((K-3) / 24) x SR^2]}
 #'
 #' where \eqn{SR} is the sharpe ratio with data annualized, \eqn{S} is the skewness and \eqn{K} is the kurtosis
 #' 
-#' @aliases Adusted Sharpe ratio
+#' @aliases AdjustedSharpeRatio
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf the risk free rate

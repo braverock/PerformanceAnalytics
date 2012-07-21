@@ -5,12 +5,11 @@
 #' It is used in conjunction with the Sharpe ratio to rank portfolios.
 #' The higher the rate the better.
 #'
-#' \deqn{ SkewnessKurtosisRatio(R , MAR) = \frac{S}{K}}
-#' {SkewnessKurtosisRatio(R, MAR) = S/K}
+#' \deqn{ SkewnessKurtosisRatio(R , MAR) = \frac{S}{K}}{SkewnessKurtosisRatio(R, MAR) = S/K}
 #'
 #' where \eqn{S} is the skewness and \eqn{K} is the Kurtosis
 #'
-#' @aliases Skewness-Kurtosis ratio
+#' @aliases Skewness-KurtosisRatio
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param \dots any other passthru parameters

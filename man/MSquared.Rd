@@ -25,7 +25,7 @@
 }
 \details{
   \deqn{M^2 = r_P + SR * (\sigma_M - \sigma_P) = (r_P -
-  r_F) * \frac{\sigma_M}{\sigma_P} + r_F} {M squared = Rp +
+  r_F) * \frac{\sigma_M}{\sigma_P} + r_F}{M squared = Rp +
   SR * (Market risk - Portfolio risk) = (Rp - Rf) * Market
   risk / Portfolio risk + Rf}
 

@@ -2,8 +2,7 @@
 #'
 #' To calculate Mean absolute deviation we take the sum of the absolute value of the difference between the returns and the mean of the returns and we divide it by the number of returns.
 #'
-#' \deqn{MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid r_i - \overline{r}\mid}{n}}
-#' {MeanAbsoluteDeviation = sum(|r-mean(r)|)/n }
+#' \deqn{MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid r_i - \overline{r}\mid}{n}}{MeanAbsoluteDeviation = sum(|r-mean(r)|)/n }
 #'
 #' where \eqn{n} is the number of observations of the entire series, \eqn{r_i} is the
 #' return in month i and \eqn{\overline{r}} is the mean return

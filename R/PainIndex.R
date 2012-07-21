@@ -10,8 +10,7 @@
 #' the horizontal line at zero percent and the drawdown line in the 
 #' Drawdown chart.
 #'
-#' \deqn{Pain index = \sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}
-#' {Pain index = sum(|D'i|/n)}
+#' \deqn{Pain index = \sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}{Pain index = sum(|D'i|/n)}
 #'
 #' where \eqn{n} is the number of observations of the entire series, \eqn{D'_i} is
 #' the drawdown since previous peak in period i

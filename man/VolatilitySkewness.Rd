@@ -12,9 +12,9 @@
   \item{MAR}{Minimum Acceptable Return, in the same
   periodicity as your returns}
 
-  \item{method}{one of "volatility", "variability"
-  indicating whether to return the volatility skewness or
-  the variability skweness}
+  \item{stat}{one of "volatility", "variability" indicating
+  whether to return the volatility skewness or the
+  variability skweness}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -27,11 +27,11 @@
 }
 \details{
   \deqn{ VolatilitySkewness(R , MAR) =
-  \frac{\sigma_U^2}{\sigma_D^2}} {VolatilitySkewness(R,
-  MAR) = UpsideVariance / DownsideVariance}
+  \frac{\sigma_U^2}{\sigma_D^2}}{VolatilitySkewness(R, MAR)
+  = UpsideVariance / DownsideVariance}
 
   \deqn{ VariabilitySkewness(R , MAR) =
-  \frac{\sigma_U}{\sigma_D}} {VariabilitySkewness(R, MAR) =
+  \frac{\sigma_U}{\sigma_D}}{VariabilitySkewness(R, MAR) =
   UpsideRisk / DownsideRisk}
 
   where \eqn{\sigma_U} is the Upside risk and

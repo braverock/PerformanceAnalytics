@@ -6,12 +6,9 @@
 #' dependency on fUtiltiies being loaded every time.  The function is identical
 #' except for the addition of \code{\link{checkData} and column support.}
 #'
-#' \deqn{Skewness(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^3}
-#' {Skewness(moment) = sum((x-mean(x))^3/var(x)^(3/2))/length(x)}
-#' \deqn{Skewness(sample) =  \frac{n}{(n-1)*(n-2)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^3 }
-#' {skewness(sample) = sum(((x-mean(x))/var(x))^3)*n/((n-1)*(n-2))}
-#' \deqn{Skewness(fisher) = \frac{\frac{\sqrt{n*(n-1)}}{n-2}*\sum^{n}_{i=1}\frac{x^3}{n}}{\sum^{n}_{i=1}(\frac{x^2}{n})^{3/2}}}
-#' {Skewness(fisher)((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))}
+#' \deqn{Skewness(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^3}{Skewness(moment) = sum((x-mean(x))^3/var(x)^(3/2))/length(x)}
+#' \deqn{Skewness(sample) =  \frac{n}{(n-1)*(n-2)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^3 }{skewness(sample) = sum(((x-mean(x))/var(x))^3)*n/((n-1)*(n-2))}
+#' \deqn{Skewness(fisher) = \frac{\frac{\sqrt{n*(n-1)}}{n-2}*\sum^{n}_{i=1}\frac{x^3}{n}}{\sum^{n}_{i=1}(\frac{x^2}{n})^{3/2}}}{Skewness(fisher)((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))}
 #'
 #' where \eqn{n} is the number of return, \eqn{\overline{r}} is the mean of the return
 #' distribution, \eqn{\sigma_P} is its standard deviation and \eqn{\sigma_{S_P}} is its

@@ -3,8 +3,7 @@
 #' The Jensen's alpha is the intercept of the regression equation in the Capital
 #' Asset Pricing Model and is in effect the exess return adjusted for systematic risk.
 #'
-#' \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)} 
-#' {alpha = r_p - r_f - beta_p * (b - r_f)}
+#' \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)}{alpha = r_p - r_f - beta_p * (b - r_f)}
 #'
 #' where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is the regression beta,
 #' \eqn{r_p} is the portfolio return and b is the benchmark return

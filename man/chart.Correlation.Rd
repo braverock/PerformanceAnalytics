@@ -32,8 +32,7 @@ chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
   Peter Carl
 }
 \seealso{
-  \code{\link{table.Correlation}} \cr %
-  \code{\link{chart.Correlation.color}}
+  \code{\link{table.Correlation}}
 }
 \keyword{distribution}
 \keyword{hplot}

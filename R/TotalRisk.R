@@ -4,8 +4,7 @@
 #' of specific risk. Specific risk is the standard deviation of the error term in the
 #' regression equation. Both terms are annualized to calculate total risk.
 #'
-#' \deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific Risk^2}} 
-#' {Total Risk^2 = Systematic Risk^2 + Specific Risk^2}
+#' \deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific Risk^2}}{Total Risk^2 = Systematic Risk^2 + Specific Risk^2}
 #'
 #' @aliases TotalRisk
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of

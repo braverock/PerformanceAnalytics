@@ -1,3 +1,16 @@
+#' Drawdawn peak of the return distribution
+#'
+#' Drawdawn peak is for each return its drawdown since the previous peak
+#'
+#' @aliases DrawdownPeak
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @author Matthieu Lestel
+#' 
+#' @keywords ts multivariate distribution models
+#' @export 
+
 DrawdownPeak <- function (R, ...)
 {
    R0 <- R

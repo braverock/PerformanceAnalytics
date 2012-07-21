@@ -1,8 +1,5 @@
 \name{AdjustedSharpeRatio}
 \alias{AdjustedSharpeRatio}
-\alias{Adusted}
-\alias{ratio}
-\alias{Sharpe}
 \title{Adjusted Sharpe ratio of the return distribution}
 \usage{
   AdjustedSharpeRatio(R, Rf = 0, period = 12, ...)
@@ -26,7 +23,7 @@
 }
 \details{
   \deqn{Adjusted Sharpe Ratio = SR * [1 + (\frac{S}{6}) *
-  SR - (\frac{K - 3}{24}) * SR^2]} {Adjusted Sharpe ratio =
+  SR - (\frac{K - 3}{24}) * SR^2]}{Adjusted Sharpe ratio =
   SR x [1 + (S/6) x SR - ((K-3) / 24) x SR^2]}
 
   where \eqn{SR} is the sharpe ratio with data annualized,

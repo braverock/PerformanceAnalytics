@@ -4,9 +4,7 @@
 #' returns that are above 0 and we divide it by the opposite of the sum of
 #' the subset of returns that are below 0
 #'
-#' \deqn{BernardoLedoitRatio(R) = \frac{\frac{1}{n}\sum^{n}_{t=1}{max(R_{t},0)}}{\frac{1}{n}\sum^{n}_{t=1}
-#' {max(-R_{t},0)}}}{BernardoLedoitRatio(R) = 1/n*sum
-#' (t=1..n)(max(R(t),0)) / 1/n*sum(t=1..n)(max(-R(t),0))}
+#' \deqn{BernardoLedoitRatio(R) = \frac{\frac{1}{n}\sum^{n}_{t=1}{max(R_{t},0)}}{\frac{1}{n}\sum^{n}_{t=1}{max(-R_{t},0)}}}{BernardoLedoitRatio(R) = 1/n*sum(t=1..n)(max(R(t),0)) / 1/n*sum(t=1..n)(max(-R(t),0))}
 #'
 #' where \eqn{n} is the number of observations of the entire series
 #' 

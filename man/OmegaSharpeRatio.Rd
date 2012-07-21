@@ -11,11 +11,6 @@
   \item{MAR}{Minimum Acceptable Return, in the same
   periodicity as your returns}
 
-  \item{method}{one of "full" or "subset", indicating
-  whether to use the length of the full series or the
-  length of the subset of the series below the MAR as the
-  denominator, defaults to "subset"}
-
   \item{\dots}{any other passthru parameters}
 }
 \description{
@@ -29,8 +24,8 @@
   the Downside Deviation.
 
   \deqn{OmegaSharpeRatio(R,MAR) = \frac{r_p -
-  r_t}{\sum^n_{t=1}\frac{max(r_t - r_i, 0)}{n}}}
-  {OmegaSharpeRatio(R,MAR) = (Rp - Rt) /
+  r_t}{\sum^n_{t=1}\frac{max(r_t - r_i,
+  0)}{n}}}{OmegaSharpeRatio(R,MAR) = (Rp - Rt) /
   -DownsidePotential(R,MAR)}
 
   where \eqn{n} is the number of observations of the entire

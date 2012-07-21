@@ -25,8 +25,8 @@
   systematic risk is annualized
 }
 \details{
-  \deqn{\sigma_s = \beta * \sigma_m} {systematic risk =
-  beta * market risk}
+  \deqn{\sigma_s = \beta * \sigma_m}{systematic risk = beta
+  * market risk}
 
   where \eqn{\sigma_s} is the systematic risk, \eqn{\beta}
   is the regression beta, and \eqn{\sigma_m} is the market

@@ -7,8 +7,7 @@
 #' Acceptable Returns (MAR)) return from the portfolio return and we divide
 #' it by the opposite of the Downside Deviation.
 #'
-#' \deqn{OmegaSharpeRatio(R,MAR) = \frac{r_p - r_t}{\sum^n_{t=1}\frac{max(r_t - r_i, 0)}{n}}}
-#' {OmegaSharpeRatio(R,MAR) = (Rp - Rt) / -DownsidePotential(R,MAR)}
+#' \deqn{OmegaSharpeRatio(R,MAR) = \frac{r_p - r_t}{\sum^n_{t=1}\frac{max(r_t - r_i, 0)}{n}}}{OmegaSharpeRatio(R,MAR) = (Rp - Rt) / -DownsidePotential(R,MAR)}
 #'
 #' where \eqn{n} is the number of observations of the entire series
 #' 
@@ -17,9 +16,6 @@
 #' asset returns
 #' @param MAR Minimum Acceptable Return, in the same periodicity as your
 #' returns
-#' @param method one of "full" or "subset", indicating whether to use the
-#' length of the full series or the length of the subset of the series below
-#' the MAR as the denominator, defaults to "subset"
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 

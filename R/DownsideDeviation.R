@@ -16,13 +16,11 @@
 #' returns to get a below-target semi-variance.
 #' 
 #'
-#' \deqn{ DownsideDeviation(R , MAR)= \delta_{MAR} = \sqrt{\sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}{DownsideDeviation(R, MAR) = sqrt(1/n * sum(t=1..n)((min(R(t)-MAR, 0))^2))}}
+#' \deqn{DownsideDeviation(R , MAR) = \delta_{MAR} = \sqrt{\sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}}{DownsideDeviation(R, MAR) = sqrt(1/n * sum(t=1..n)((min(R(t)-MAR, 0))^2))}
 #'
-#' \deqn{ DownsideVariance(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2} {n}}
-#' {DownsideVariance(R, MAR) = 1/n * sum(t=1..n)((min(R(t)-MAR, 0))^2)}
+#' \deqn{ DownsideVariance(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}{DownsideVariance(R, MAR) = 1/n * sum(t=1..n)((min(R(t)-MAR, 0))^2)}
 #'
-#' \deqn{DownsidePotential(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]} {n}} 
-#' {DownsidePotential(R, MAR) =  1/n * sum(t=1..n)(min(R(t)-MAR, 0))}
+#' \deqn{DownsidePotential(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]} {n}}{DownsidePotential(R, MAR) =  1/n * sum(t=1..n)(min(R(t)-MAR, 0))}
 #'
 #' where \eqn{n} is either the number of observations of the entire series or
 #' the number of observations in the subset of the series falling below the

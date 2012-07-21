@@ -6,16 +6,11 @@
 #' dependency on fUtilties being loaded every time.  This function is identical
 #' except for the addition of \code{\link{checkData}} and additional labeling.
 #'
-#' \deqn{Kurtosis(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4}
-#' {kurtosis(moment) = sum((x-mean(x))^4/var(x)^2)/length(x)}
-#' \deqn{Kurtosis(excess) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4 - 3}
-#' {kurtosis(excess) = sum((x-mean(x))^4/var(x)^2)/length(x) - 3}
-#' \deqn{Kurtosis(sample) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4 }
-#' {kurtosis(sample) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3))}
-#' \deqn{Kurtosis(fisher) = \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}\frac{(r_i)^4}{n}}{(\sum^{n}_{i=1}(\frac{(r_i)^2}{n})^2} - \frac{3*(n-1)}{n+1})}
-#' {kurtosis (fisher) = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 - (3*(n-1))/(n+1)))/((n-2)*(n-3))}
-#' \deqn{Kurtosis(sample excess) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4  - \frac{3*(n-1)^2}{(n-2)*(n-3)}}
-#' {kurtosis(sample excess) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3)) - 3*(n-1)^2/((n-2)*(n-3))}
+#' \deqn{Kurtosis(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4}{kurtosis(moment) = sum((x-mean(x))^4/var(x)^2)/length(x)}
+#' \deqn{Kurtosis(excess) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4 - 3}{kurtosis(excess) = sum((x-mean(x))^4/var(x)^2)/length(x) - 3}
+#' \deqn{Kurtosis(sample) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4 }{kurtosis(sample) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3))}
+#' \deqn{Kurtosis(fisher) = \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}\frac{(r_i)^4}{n}}{(\sum^{n}_{i=1}(\frac{(r_i)^2}{n})^2} - \frac{3*(n-1)}{n+1})}{kurtosis (fisher) = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 - (3*(n-1))/(n+1)))/((n-2)*(n-3))}
+#' \deqn{Kurtosis(sample excess) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4  - \frac{3*(n-1)^2}{(n-2)*(n-3)}}{kurtosis(sample excess) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3)) - 3*(n-1)^2/((n-2)*(n-3))}
 #'
 #'
 #' where \eqn{n} is the number of return, \eqn{\overline{r}} is the mean of the return

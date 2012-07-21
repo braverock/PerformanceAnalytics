@@ -21,7 +21,7 @@
 }
 \details{
   \deqn{Pain ratio = \frac{r_P - r_F}{\sum^{n}_{i=1}
-  \frac{\mid D'_i \mid}{n}}} {Pain ratio = (rp - rf) / Pain
+  \frac{\mid D'_i \mid}{n}}}{Pain ratio = (rp - rf) / Pain
   index}
 
   where \eqn{r_P} is the annualized portfolio return,

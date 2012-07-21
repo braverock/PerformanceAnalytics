@@ -1,7 +1,6 @@
 \name{SkewnessKurtosisRatio}
-\alias{ratio}
-\alias{Skewness-Kurtosis}
 \alias{SkewnessKurtosisRatio}
+\alias{Skewness-KurtosisRatio}
 \title{Skewness-Kurtosis ratio of the return distribution}
 \usage{
   SkewnessKurtosisRatio(R, ...)
@@ -20,8 +19,8 @@
   It is used in conjunction with the Sharpe ratio to rank
   portfolios. The higher the rate the better.
 
-  \deqn{ SkewnessKurtosisRatio(R , MAR) = \frac{S}{K}}
-  {SkewnessKurtosisRatio(R, MAR) = S/K}
+  \deqn{ SkewnessKurtosisRatio(R , MAR) =
+  \frac{S}{K}}{SkewnessKurtosisRatio(R, MAR) = S/K}
 
   where \eqn{S} is the skewness and \eqn{K} is the Kurtosis
 }

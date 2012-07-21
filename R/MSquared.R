@@ -4,8 +4,7 @@
 #' performance between differents portfolios. With it you can compare portfolios
 #' with different levels of risk.
 #'
-#' \deqn{M^2 = r_P + SR * (\sigma_M - \sigma_P) = (r_P - r_F) * \frac{\sigma_M}{\sigma_P} + r_F}
-#' {M squared = Rp + SR * (Market risk - Portfolio risk) = (Rp - Rf) * Market risk / Portfolio risk + Rf}
+#' \deqn{M^2 = r_P + SR * (\sigma_M - \sigma_P) = (r_P - r_F) * \frac{\sigma_M}{\sigma_P} + r_F}{M squared = Rp + SR * (Market risk - Portfolio risk) = (Rp - Rf) * Market risk / Portfolio risk + Rf}
 #'
 #' where \eqn{r_P} is the portfolio return annualized, \eqn{\sigma_M} is the market
 #' risk and \eqn{\sigma_P} is the portfolio risk

@@ -18,7 +18,7 @@
 }
 \details{
   \deqn{MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid
-  r_i - \overline{r}\mid}{n}} {MeanAbsoluteDeviation =
+  r_i - \overline{r}\mid}{n}}{MeanAbsoluteDeviation =
   sum(|r-mean(r)|)/n }
 
   where \eqn{n} is the number of observations of the entire

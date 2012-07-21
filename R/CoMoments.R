@@ -181,7 +181,7 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' index, benchmark, portfolio, or secondary asset returns to compare against
 #' @author Kris Boudt, Peter Carl, Brian Peterson
 #' @seealso \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
-#' \code{\link{BetaCoMoments}} \cr % \code{\link{MultivariateMoments}}
+#' \code{\link{BetaCoMoments}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.

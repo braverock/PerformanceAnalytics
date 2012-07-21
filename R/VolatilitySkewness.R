@@ -5,11 +5,9 @@
 #' downside variance. Variability skewness is the ratio of the upside risk
 #' compared to the downside risk.
 #'
-#' \deqn{ VolatilitySkewness(R , MAR) = \frac{\sigma_U^2}{\sigma_D^2}}
-#' {VolatilitySkewness(R, MAR) = UpsideVariance / DownsideVariance}
+#' \deqn{ VolatilitySkewness(R , MAR) = \frac{\sigma_U^2}{\sigma_D^2}}{VolatilitySkewness(R, MAR) = UpsideVariance / DownsideVariance}
 #'
-#' \deqn{ VariabilitySkewness(R , MAR) = \frac{\sigma_U}{\sigma_D}}
-#' {VariabilitySkewness(R, MAR) = UpsideRisk / DownsideRisk}
+#' \deqn{ VariabilitySkewness(R , MAR) = \frac{\sigma_U}{\sigma_D}}{VariabilitySkewness(R, MAR) = UpsideRisk / DownsideRisk}
 #'
 #' where \eqn{\sigma_U} is the Upside risk and \eqn{\sigma_D} is the Downside Risk
 #'
@@ -18,7 +16,7 @@
 #' asset returns
 #' @param MAR Minimum Acceptable Return, in the same periodicity as your
 #' returns
-#' @param method one of "volatility", "variability" indicating whether
+#' @param stat one of "volatility", "variability" indicating whether
 #' to return the volatility skewness or the variability skweness
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel

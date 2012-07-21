@@ -11,8 +11,7 @@
 #' @note based on plot at
 #' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
 #' @author Peter Carl
-#' @seealso \code{\link{table.Correlation}} \cr %
-#' \code{\link{chart.Correlation.color}}
+#' @seealso \code{\link{table.Correlation}}
 #' @keywords ts multivariate distribution models hplot
 #' @examples
 #' 

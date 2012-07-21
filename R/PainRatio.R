@@ -3,8 +3,7 @@
 #' To calculate Pain ratio we divide the difference of the portfolio return
 #' and the risk free rate by the Pain index
 #'
-#' \deqn{Pain ratio = \frac{r_P - r_F}{\sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}}
-#' {Pain ratio = (rp - rf) / Pain index}
+#' \deqn{Pain ratio = \frac{r_P - r_F}{\sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}}{Pain ratio = (rp - rf) / Pain index}
 #'
 #' where \eqn{r_P} is the annualized portfolio return, \eqn{r_F} is the risk free
 #' rate, \eqn{n} is the number of observations of the entire series, \eqn{D'_i} is

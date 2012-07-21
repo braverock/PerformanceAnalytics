@@ -5,7 +5,7 @@
 #' divide the length of this subset by the total number of returns.
 #'
 #' \deqn{ UpsideFrequency(R , MAR) = \sum^{n}_{t=1}\frac{max[(R_{t} - MAR),
-#'  0]}{R_{t}*n}} {UpsideFrequency(R, MAR) = length(subset of returns above MAR) /
+#'  0]}{R_{t}*n}}{UpsideFrequency(R, MAR) = length(subset of returns above MAR) /
 #' length(total returns)}
 #'
 #' where \eqn{n} is the number of observations of the entire series

@@ -5,7 +5,7 @@
 #' divide the length of this subset by the total number of returns.
 #'
 #' \deqn{ DownsideFrequency(R , MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR),
-#'  0]}{R_{t}*n}} {DownsideFrequency(R, MAR) = length(subset of returns below MAR) /
+#'  0]}{R_{t}*n}}{DownsideFrequency(R, MAR) = length(subset of returns below MAR) /
 #' length(total returns)}
 #'
 #' where \eqn{n} is the number of observations of the entire series

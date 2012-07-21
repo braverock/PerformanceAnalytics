@@ -25,7 +25,7 @@
   effect the exess return adjusted for systematic risk.
 }
 \details{
-  \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)} {alpha =
+  \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)}{alpha =
   r_p - r_f - beta_p * (b - r_f)}
 
   where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is

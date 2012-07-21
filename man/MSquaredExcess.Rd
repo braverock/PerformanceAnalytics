@@ -1,0 +1,58 @@
+\name{MSquaredExcess}
+\alias{MSquaredExcess}
+\title{M squared excess of the return distribution}
+\usage{
+  MSquaredExcess(Ra, Rb, Rf = 0, Period = 12,
+    Method = c("geometric", "arithmetic"), ...)
+}
+\arguments{
+  \item{Ra}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset return}
+
+  \item{Rb}{return vector of the benchmark asset}
+
+  \item{Rf}{risk free rate, in same period as your returns}
+
+  \item{Period}{the number of return in a year in the asset
+  return}
+
+  \item{Method}{one of "geometric" or "arithmetic"
+  indicating the method to use to calculate MSquareExcess}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  M squared excess is the quantity above the standard M.
+  There is a geometric excess return which is better for
+  Bacon and an arithmetic excess return
+}
+\details{
+  \deqn{M^2 excess (geometric) = \frac{1 + M^2}{1 + b} -
+  1}{MSquared excess (geometric) = (1+M^2)/(1+b) - 1}
+  \deqn{M^2 excess (arithmetic) = M^2 - b}{MSquared excess
+  (arithmetic) = M^2 - b}
+
+  where \eqn{M^2} is MSquared and \eqn{b} is the benchmark
+  annualised return.
+}
+\examples{
+data(portfolio_bacon)
+print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.00998
+print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic")) #expected -0.011
+
+data(managers)
+print(MSquaredExcess(managers['1996',1], managers['1996',8]))
+print(MSquaredExcess(managers['1996',1:5], managers['1996',8]))
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.68
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

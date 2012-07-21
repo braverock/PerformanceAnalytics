@@ -5,15 +5,13 @@
 #' sum of the square of the drawdowns. To calculate the modified Burke ratio
 #' we just multiply the Burke ratio by the square root of the number of datas.
 #'
-#' \deqn{Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}{D_t}^2}}}
-#' {Burke Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2)))}
+#' \deqn{Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}{D_t}^2}}}{Burke Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2)))}
 #'
-#' \deqn{Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}\frac{{D_t}^2}{n}}}}
-#' {Burke Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2 / n)))}
+#' \deqn{Modified Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}\frac{{D_t}^2}{n}}}}{Modified Burke Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2 / n)))}
 #'
 #' where \eqn{n} is the number of observations of the entire series, \eqn{d} is number of drawdowns, \eqn{r_P} is the portfolio return, \eqn{r_F} is the risk free rate and \eqn{D_t} the \eqn{t^{th}} drawdown.
 #' 
-#' @aliases Burke ratio
+#' @aliases BurkeRatio
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf the risk free rate

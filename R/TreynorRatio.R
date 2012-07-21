@@ -8,8 +8,7 @@
 #'
 #' Equation:
 #' \deqn{TreynorRatio = \frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
-#' \deqn{ModifiedTreynorRatio = \frac{r_p - r_f}{\sigma_s}}
-#' {ModifiedTreynorRatio = (Rp - Rf)/sytematic risk}
+#' \deqn{ModifiedTreynorRatio = \frac{r_p - r_f}{\sigma_s}}{ModifiedTreynorRatio = (Rp - Rf)/sytematic risk}
 #' 
 #' @aliases TreynorRatio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of

@@ -1,7 +1,5 @@
 \name{BurkeRatio}
-\alias{Burke}
 \alias{BurkeRatio}
-\alias{ratio}
 \title{Burke ratio of the return distribution}
 \usage{
   BurkeRatio(R, Rf = 0, modified = FALSE, period = 12, ...)
@@ -30,12 +28,12 @@
 }
 \details{
   \deqn{Burke Ratio = \frac{r_P -
-  r_F}{\sqrt{\sum^{d}_{t=1}{D_t}^2}}} {Burke Ratio = (Rp -
+  r_F}{\sqrt{\sum^{d}_{t=1}{D_t}^2}}}{Burke Ratio = (Rp -
   Rf) / (sqrt(sum(t=1..n)(Dt^2)))}
 
-  \deqn{Burke Ratio = \frac{r_P -
-  r_F}{\sqrt{\sum^{d}_{t=1}\frac{{D_t}^2}{n}}}} {Burke
-  Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2 / n)))}
+  \deqn{Modified Burke Ratio = \frac{r_P -
+  r_F}{\sqrt{\sum^{d}_{t=1}\frac{{D_t}^2}{n}}}}{Modified
+  Burke Ratio = (Rp - Rf) / (sqrt(sum(t=1..n)(Dt^2 / n)))}
 
   where \eqn{n} is the number of observations of the entire
   series, \eqn{d} is number of drawdowns, \eqn{r_P} is the

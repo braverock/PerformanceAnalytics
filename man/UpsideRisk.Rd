@@ -17,7 +17,7 @@
   length of the subset of the series below the MAR as the
   denominator, defaults to "full"}
 
-  \item{method}{one of "risk", "variance" or "potential"
+  \item{stat}{one of "risk", "variance" or "potential"
   indicating whether to return the Upside risk, variance or
   potential}
 
@@ -35,17 +35,17 @@
 }
 \details{
   \deqn{ UpsideRisk(R , MAR) = \sqrt{\sum^{n}_{t=1}\frac{
-  max[(R_{t} - MAR), 0]^2}{n}}} {UpsideRisk(R, MAR) =
+  max[(R_{t} - MAR), 0]^2}{n}}}{UpsideRisk(R, MAR) =
   sqrt(1/n * sum(t=1..n) ((max(R(t)-MAR, 0))^2))}
 
   \deqn{ UpsideVariance(R, MAR) =
-  \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]^2} {n}}
-  {UpsideVariance(R, MAR) = 1/n *
+  \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]^2}
+  {n}}{UpsideVariance(R, MAR) = 1/n *
   sum(t=1..n)((max(R(t)-MAR, 0))^2)}
 
   \deqn{UpsidePotential(R, MAR) =
-  \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]} {n}}
-  {DownsidePotential(R, MAR) = 1/n *
+  \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]}
+  {n}}{DownsidePotential(R, MAR) = 1/n *
   sum(t=1..n)(max(R(t)-MAR, 0))}
 
   where \eqn{n} is either the number of observations of the

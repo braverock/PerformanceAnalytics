@@ -1,0 +1,30 @@
+\name{Frequency}
+\alias{Frequency}
+\title{Frequency of the return distribution}
+\usage{
+  Frequency(R, ...)
+}
+\arguments{
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  Gives the period of the return distribution (ie 12 if
+  monthly return, 4 if quarterly return)
+}
+\examples{
+data(portfolio_bacon)
+print(Frequency(portfolio_bacon[,1])) #expected 12
+data(managers)
+print(Frequency(managers['1996',1:5]))
+}
+\author{
+  Matthieu Lestel
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

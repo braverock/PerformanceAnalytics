@@ -25,7 +25,7 @@
 
   \deqn{DRatio(R) =
   \frac{n_{d}*\sum^{n}_{t=1}{max(-R_{t},0)}}{n_{u}*\sum^{n}_{t=1}
-  {max(R_{t},0)}}}{BernadoLedoitratio(R) = nd*sum
+  {max(R_{t},0)}}}{DRatio(R) = nd*sum
   (t=1..n)(max(-R(t),0)) / nu*sum(t=1..n)(max(R(t),0))}
 
   where \eqn{n} is the number of observations of the entire
