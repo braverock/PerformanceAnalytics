@@ -90,10 +90,11 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #'
 #' @param mean_post          the posterior vector of means (after blending prior and sample data)
 #' @param cov_post           the posterior covariance matrix (after blending prior and sample data)
-#' @param confidenceInPrior  a numeric with the relative confidence in the prior vs. the sample data. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
+#' @param nu_post            a numeric with the relative confidence in the prior vs. the sample data. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
 #' @param riskAversionMu     risk aversion coefficient for estimation of means. 
 #' @param riskAversionSigma  risk aversion coefficient for estimation of Sigma.
 #' @param discretizations    an integer with the number of portfolios to generate along efficient frontier (equally distanced in return space). Parameter must be an integer greater or equal to 1.
+#' @param longonly           a boolean for suggesting whether an asset in a portfolio can be shorted or not
 #' @param volatility         a numeric with the volatility used to calculate gamma-m. gamma-m acts as a constraint on the maximum volatility of the robust portfolio. A higher volatility means a higher volatile robust portfolio may be identified.
 #'
 #' @return a list of portfolios along the frontier from least risky to most risky

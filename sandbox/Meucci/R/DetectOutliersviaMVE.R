@@ -8,7 +8,7 @@
 #' See Sec. 4.6.1 of "Risk and Asset Allocation" - Springer (2005), by A. Meucci
 #' for the theory and the routine implemented below
 #'
-#' @param   sample   
+#' @param   sample      a vector containing the input dataset with outliers
 #'
 #' @return  rejected    a numeric indicating which observation in the index to reject
 #'
