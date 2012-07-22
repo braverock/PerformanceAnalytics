@@ -1,11 +1,12 @@
-#' plot dists
-#' @param X 
-#' @param p 
-#' @param Mu 
-#' @param Sigma 
-#' @param p_ 
-#' @param Mu_ 
-#' @param Sigma_ 
+#' Plot numerical and analytical prior and posterior distributions
+#'
+#' @param X       a vector containing the dataset
+#' @param p       a vector cotaining the prior probability values
+#' @param Mu      a vector containing the prior means
+#' @param Sigma   a vector containing the prior standard deviations
+#' @param p_      a vector containing the posterior probability values
+#' @param Mu_     a vector containing the posterior means
+#' @param Sigma_  a vector containing the posterior standard deviations
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @export
 PlotDistributions = function( X , p , Mu , Sigma , p_ , Mu_ , Sigma_ )
