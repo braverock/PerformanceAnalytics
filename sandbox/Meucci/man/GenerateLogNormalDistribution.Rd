@@ -20,7 +20,7 @@
   parameters J, a, m, and s where X = a + exp( m + s * Z )
 }
 \description{
-  %\deqn{X-t + a ~ LogN(m,s^2)} (formula 14)
+  \deqn{X = a + e^{ m + sZ }} (formula 14)
 }
 \author{
   Ram Ahluwalia \email{rahluwalia@gmail.com}

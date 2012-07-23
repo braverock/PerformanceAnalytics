@@ -5,7 +5,8 @@
   RejectOutlier(sample)
 }
 \arguments{
-  \item{sample}{}
+  \item{sample}{a vector containing the input dataset with
+  outliers}
 }
 \value{
   rejected a numeric indicating which observation in the

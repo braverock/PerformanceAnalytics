@@ -13,6 +13,9 @@
 
   \item{covarianceMatrix}{the covariance matrix for the
   asset returns from which good samples will be drawn}
+
+  \item{shuffle}{a boolean suggesting whether order of the
+  twos should be shuffled}
 }
 \value{
   sample a matrix of returns consisting of good and bad

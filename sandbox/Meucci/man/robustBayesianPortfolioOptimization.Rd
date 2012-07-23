@@ -13,10 +13,10 @@
   \item{cov_post}{the posterior covariance matrix (after
   blending prior and sample data)}
 
-  \item{confidenceInPrior}{a numeric with the relative
-  confidence in the prior vs. the sample data. A value of 2
-  indicates twice as much weight to assign to the prior vs.
-  the sample data. Must be greater than or equal to zero}
+  \item{nu_post}{a numeric with the relative confidence in
+  the prior vs. the sample data. A value of 2 indicates
+  twice as much weight to assign to the prior vs. the
+  sample data. Must be greater than or equal to zero}
 
   \item{riskAversionMu}{risk aversion coefficient for
   estimation of means.}
@@ -28,6 +28,9 @@
   portfolios to generate along efficient frontier (equally
   distanced in return space). Parameter must be an integer
   greater or equal to 1.}
+
+  \item{longonly}{a boolean for suggesting whether an asset
+  in a portfolio can be shorted or not}
 
   \item{volatility}{a numeric with the volatility used to
   calculate gamma-m. gamma-m acts as a constraint on the
