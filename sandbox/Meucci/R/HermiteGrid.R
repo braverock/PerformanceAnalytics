@@ -103,7 +103,13 @@ gaussHermiteMesh = function( J )
   return( x )
 }
 
-# Silverman bandwidth
+#' Generates bandwidth of a Gaussian Kernel Density Estimator based on Silverman's rule of thumb
+#'
+#' @param xi  a vector containing the data set for which the bandwidth has to be calculated
+#'
+#' @return bw a numeric signifying the bandwidth
+#'
+#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
 kernelbw = function( xi )
 {
   N      = length(xi)
@@ -120,6 +126,16 @@ kernelbw = function( xi )
   return ( bw )
 }
 
+#' Evaluates cumulative distribution function for the input numeric value
+#'
+#' @param x   a vector containing the numeric values for which cumulative distribution function has to be evaluated
+#' @param xi  a vector containing the data set
+#' @param bw  a numeric value containing Silverman bandwidth of the given data set
+#' @param wi  a vector containing weights
+#'
+#' @return p  a numeric containing the cumulative probability distribution value of length equal to x
+#'
+#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
 kernelcdf = function( x, xi, bw, wi )
 {
   n = length(xi)
@@ -136,6 +152,16 @@ kernelcdf = function( x, xi, bw, wi )
   return ( p )
 }
 
+#' Evaluates probability distribution function for the input numeric value
+#'
+#' @param x   a vector containing the numeric values for which probability distribution function has to be evaluated
+#' @param xi  a vector containing the data set
+#' @param bw  a numeric value containing Silverman bandwidth of the given data set
+#' @param wi  a vector containing weights
+#'
+#' @return p  a vector containing the probability distribution function value of length equal to x
+#'
+#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
 kernelpdf = function( x, xi, bw, wi )
 {
   n = length(xi)
@@ -152,6 +178,16 @@ kernelpdf = function( x, xi, bw, wi )
   return( p )
 }
 
+#' Evaluates inverse probability distribution function for the input probability in order to get the data point
+#'
+#' @param p   a vector containing the probabilities corresponding to which the data points have to be evaluated
+#' @param xi  a vector containing the data set
+#' @param bw  a numeric value containing Silverman bandwidth of the given data set
+#' @param wi  a vector containing weights
+#'
+#' @return x  a vector containing the evaluated numeric values of length equal to p
+#'
+#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
 kernelinv = function( p, xi, bw, wi )
 {
   nargin <- length(as.list(match.call())) -1
@@ -186,6 +222,18 @@ kernelinv = function( p, xi, bw, wi )
   return( x )
 }
 
+#' Evaluates the difference between calculated cumulative distribution function for a data point and the 
+#' true value
+#'
+#' @param x   a vector containing the data points for which cdf has to be evaluated
+#' @param xi  a vector containing the data set
+#' @param bw  a numeric value containing Silverman bandwidth of the given data set
+#' @param wi  a vector containing weights
+#' @param p   a vector containing the true probabilities
+#'
+#' @return f  a vector containing the difference between x and p which is of length equal to x or p
+#'
+#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
 private_fun = function( x, xi, bw, wi, p )
 {
   f = kernelcdf( x, xi, bw, wi ) - p
