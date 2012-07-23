@@ -1,12 +1,15 @@
 #' correlation matrix chart
 #' 
 #' Visualization of a Correlation Matrix. On top the (absolute) value of the
-#' correlation plus the result of the cor.test as stars. On botttom, the
+#' correlation plus the result of the cor.test as stars. On bottom, the
 #' bivariate scatterplots, with a fitted line
 #' 
 #' 
 #' @param R data for the x axis, can take matrix,vector, or timeseries
 #' @param histogram TRUE/FALSE whether or not to display a histogram
+#' @param method a character string indicating which correlation coefficient
+#'           (or covariance) is to be computed.  One of ‘"pearson"’
+#'           (default), ‘"kendall"’, or ‘"spearman"’, can be abbreviated.
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
 #' @note based on plot at
 #' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
@@ -20,7 +23,7 @@
 #' 
 #' @export 
 chart.Correlation <-
-function (R, histogram = TRUE, ...)
+function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
 { # @author R Development Core Team
   # @author modified by Peter Carl
     # Visualization of a Correlation Matrix. On top the (absolute) value of the
@@ -28,13 +31,15 @@ function (R, histogram = TRUE, ...)
     # bivariate scatterplots, with a fitted line
 
     x = checkData(R, method="matrix")
+    
+    method=method[1] #only use one
 
     # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
-    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", cex.cor, ...)
+    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method=method, cex.cor, ...)
     {
         usr <- par("usr"); on.exit(par(usr))
         par(usr = c(0, 1, 0, 1))
-        r <- abs(cor(x, y, use = use))
+        r <- abs(cor(x, y, use = use,method=method))
         txt <- format(c(r, 0.123456789), digits=digits)[1]
         txt <- paste(prefix, txt, sep="")
         if(missing(cex.cor)) cex <- 0.8/strwidth(txt)
