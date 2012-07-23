@@ -181,7 +181,7 @@ std = function( x ) { ( sum( ( x - mean( x ) ) ^ 2 ) / length( x ) ) ^.5 }
 
 #' Generate arbitrary distribution of a shifted-lognormal invariant
 #' 
-#' %\deqn{X-t + a ~ LogN(m,s^2)} (formula 14)
+#' \deqn{X = a +  e^{ m + sZ }} (formula 14)
 #'
 #' @param   J    a numeric with the number of scenarios
 #' @param   a    a numeric with the location shift parameter. Mean of distribution will be exp(a)
