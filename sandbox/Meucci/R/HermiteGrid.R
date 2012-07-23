@@ -124,7 +124,7 @@ gaussHermiteMesh = function( J )
 #'
 #' @return bw a numeric signifying the bandwidth
 #'
-#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
+#' @author Manan Shah \email{mkshah@@tepper.cmu.edu}
 kernelbw = function( xi )
 {
   N      = length(xi)
@@ -150,7 +150,7 @@ kernelbw = function( xi )
 #'
 #' @return p  a numeric containing the cumulative probability distribution value of length equal to x
 #'
-#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
+#' @author Manan Shah \email{mkshah@@tepper.cmu.edu}
 kernelcdf = function( x, xi, bw, wi )
 {
   n = length(xi)
@@ -176,7 +176,7 @@ kernelcdf = function( x, xi, bw, wi )
 #'
 #' @return p  a vector containing the probability distribution function value of length equal to x
 #'
-#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
+#' @author Manan Shah \email{mkshah@@tepper.cmu.edu}
 kernelpdf = function( x, xi, bw, wi )
 {
   n = length(xi)
@@ -202,7 +202,7 @@ kernelpdf = function( x, xi, bw, wi )
 #'
 #' @return x  a vector containing the evaluated numeric values of length equal to p
 #'
-#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
+#' @author Manan Shah \email{mkshah@@tepper.cmu.edu}
 kernelinv = function( p, xi, bw, wi )
 {
   nargin <- length(as.list(match.call())) -1
@@ -248,7 +248,7 @@ kernelinv = function( p, xi, bw, wi )
 #'
 #' @return f  a vector containing the difference between x and p which is of length equal to x or p
 #'
-#' @author Manan Shah \email{mkshah@tepper.cmu.edu}
+#' @author Manan Shah \email{mkshah@@tepper.cmu.edu}
 private_fun = function( x, xi, bw, wi, p )
 {
   f = kernelcdf( x, xi, bw, wi ) - p
