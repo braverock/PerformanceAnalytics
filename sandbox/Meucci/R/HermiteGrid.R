@@ -1,3 +1,10 @@
+#' Generates the normalized probability for an input probability value
+#' 
+#' @param p             a numeric value containing the probability value required to be normalized 
+#'
+#' @return normalizedp  a numeric value containing the normalized probability value
+#'
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 normalizeProb = function( p )
 {
   tol = 1e-20
@@ -37,6 +44,14 @@ subIntervals = function( x )
   return( list( xLB = xLB , xUB = xUB ) )
 }
 
+#' Integrate the subinterval for the given cumulative distribution function to get the equivalent probability
+#' 
+#' @param x     a vector containing the data points
+#' @param cdf   the cumulative distribution function
+#'
+#' @return p    a vector containing the cdf evaluated for each of the subintervals
+#'
+#' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 integrateSubIntervals = function( x , cdf )
 {
   bounds = subIntervals( x )
