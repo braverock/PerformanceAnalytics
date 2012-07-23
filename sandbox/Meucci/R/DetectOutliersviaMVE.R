@@ -23,7 +23,7 @@ RejectOutlier = function( sample )
   library( matlab )
     
   # parameter checks
-  if ( ncol( corruptSample ) > nrow( corruptSample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }    
+  if ( ncol( sample ) > nrow( sample ) ) { stop("The number of assets must be greater than number of observations (otherwise system is singular)") }    
     
   # initialize parameters
   T = nrow( sample )
@@ -203,6 +203,7 @@ DetectOutliersViaMVE = function( corruptSample )
 #' @param    numGoodSamples      number of observations drawn from the covariance matrix
 #' @param    numOutliers         number of outliers added to sample
 #' @param    covarianceMatrix    the covariance matrix for the asset returns from which good samples will be drawn
+#' @param    shuffle             a boolean suggesting whether order of the twos should be shuffled
 #'
 #' @return   sample           a matrix of returns consisting of good and bad sample. Rows are observations, columns are the assets.
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}

@@ -6,8 +6,8 @@
 # TODO: confirm QuadProg does not have a bug (i.e. it can optimize expected returns without use dvec by adding an equality constraint)
 
 #' Generate a Stacked Bar Chart based on the frontier weights matrix
-#' @param      a matrix of weights where rows are efficient portfolios summing to one, and columns are assets
-#' @param      a string indicating the title of the chart
+#'
+#' @param weightsMatrix     a matrix of weights where rows are efficient portfolios summing to one, and columns are assets
 StackedBarChart = function( weightsMatrix )
 {
   data = as.data.frame( weightsMatrix )
@@ -18,6 +18,9 @@ StackedBarChart = function( weightsMatrix )
 }
 
 #' view the rankings
+#'
+#' @param  X        a vector containing returns for all the asset classes
+#' @param  p        a vector containing the prior probability values
 #' @param  Lower    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @param  Upper    a vector of indexes indicating which column is lower than the corresponding column number in Upper
 #' @export EntropyProg

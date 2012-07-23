@@ -179,13 +179,13 @@ robustBayesianPortfolioOptimization = function( mean_post , cov_post , nu_post ,
 #' \\ \mu_{1}  \equiv \frac{1}{ T_{1} }  \big( T_{0}   \mu_{0}  + T \hat{ \mu } \big)  
 #' \\ \nu_{1}  \equiv \nu_{0} + T
 #' \\ \Sigma_{1}  \equiv  \big(  \nu_{0} \Sigma_{0}  + T \hat{ \Sigma } +  \frac{ \big(\mu_{0}  - \hat{\mu} \big) \big(\mu_{0}  - \hat{\mu} \big)' }{ \big( \frac{1}{T} +  \frac{1}{T_{0} }  \big) } }
-#' @param mean                  the mean of the sample returns
-#' @param cov                   the sample covariance matrix
-#' @param mean_prior            the prior for the mean returns
-#' @param cov_prior             the covariance matrix prior
-#' @param confidenceInMeanPrior a numeric with the relative confidence in the mean prior vs. the sample mean. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
-#' @param confidenceInCovPrior  a numeric with the relative confidence in the covariance prior vs. the sample covariance. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
-#' @param sampleSize            a numeric with the number of rows in the sample data used to estimate mean_sample and cov_sample
+#' @param mean_sample                   the mean of the sample returns
+#' @param cov_sample                    the sample covariance matrix
+#' @param mean_prior                    the prior for the mean returns
+#' @param cov_prior                     the covariance matrix prior
+#' @param relativeConfidenceInMeanPrior a numeric with the relative confidence in the mean prior vs. the sample mean. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
+#' @param relativeConfidenceInCovPrior  a numeric with the relative confidence in the covariance prior vs. the sample covariance. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
+#' @param sampleSize                    a numeric with the number of rows in the sample data used to estimate mean_sample and cov_sample
 #'
 #' @return mean_post            a vector with the confidence weighted posterior mean vector of asset returns blended from the prior and sample mean vector
 #' @return cov_post             a covariance matrix the confidence weighted posterior covariance matrix of asset returns blended from the prior and sample covariance matrix
