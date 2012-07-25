@@ -19,7 +19,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(BernardoLedoitRatio(portfolio_bacon)) #expected 1.78
+#' print(BernardoLedoitRatio(portfolio_bacon[,1])) #expected 1.78
 #'
 #' data(managers)
 #' print(BernardoLedoitRatio(managers['1996']))

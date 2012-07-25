@@ -1,14 +1,13 @@
-#' Jensen's alpha of the return distribution
+#' Appraisal ratio of the return distribution
 #'
-#' The Jensen's alpha is the intercept of the regression equation in the Capital
-#' Asset Pricing Model and is in effect the exess return adjusted for systematic risk.
+#' Appraisal ratio is the Jensen's alpha adjusted for systemeatic risk. The numerator
+#' is divided by specific risk instead of total risk.
 #'
-#' \deqn{\alpha = r_p - r_f - \beta_p * (b - r_f)}{alpha = r_p - r_f - beta_p * (b - r_f)}
+#' \deqn{Appraisal ratio = \frac{alpha}{\sigma_{\epsilon}}}{Appraisal ratio = Jensen's alpha / specific risk}
 #'
-#' where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is the regression beta,
-#' \eqn{r_p} is the portfolio return and b is the benchmark return
+#' where \eqn{alpha} is the Jensen's alpha and \eqn{\sigma_{epsilon}} is the specific risk.
 #'
-#' @aliases Jensen'sAlpha
+#' @aliases AppraisalRatio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
@@ -23,25 +22,22 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.41
+#' print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.0952
 #'
 #' data(managers)
-#' print(CAPM.jensenAlpha(managers['1996',1], managers['1996',8]))
-#' print(CAPM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+#' print(AppraisalRatio(managers['1996',1], managers['1996',8]))
+#' print(AppraisalRatio(managers['1996',1:5], managers['1996',8]))
 #'
 #' @export 
 
-CAPM.jensenAlpha <-
+AppraisalRatio <-
 function (Ra, Rb, Rf = 0, period = 12, ...)
 {
-    calcul = FALSE
     Ra = checkData(Ra, method="matrix")
     Rb = checkData(Rb, method="matrix")
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-    
-     Rp = (prod(1+Ra/100)^(period/length(Ra))-1)*100
-     Rpb =  (prod(1+Rb/100)^(period/length(Rb))-1)*100 #benchmark total return
+     calcul = FALSE   
      for (i in (1:length(Ra))) {
      	 if (!is.na(Ra[i])) {
      	    calcul = TRUE
@@ -49,7 +45,8 @@ function (Ra, Rb, Rf = 0, period = 12, ...)
       }
 
      if (calcul) {
-        result = Rp - Rf - CAPM.beta(Ra,Rb,Rf) * (Rpb - Rf) 
+        Period = Frequency(Ra)
+        result = CAPM.jensenAlpha(Ra,Rb,Rf,Period)/SystematicRisk(Ra,Rb,Rf,Period)
      }    
      else {
         result = NA
@@ -58,10 +55,10 @@ function (Ra, Rb, Rf = 0, period = 12, ...)
     }
     else {
         Ra = checkData(Ra)
-        result = apply(Ra, MARGIN = 2, CAPM.jensenAlpha, Rb = Rb, Rf = Rf, ...)
+        result = apply(Ra, MARGIN = 2, AppraisalRatio, Rb = Rb, Rf = Rf, ...)
         result<-t(result)
         colnames(result) = colnames(Ra)
-        rownames(result) = paste("Jensen's Alpha (Risk free = ",Rf,")", sep="")
+        rownames(result) = paste("Appraisal ratio (Risk free = ",Rf,")", sep="")
         return(result)
     }
 }

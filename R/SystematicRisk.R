@@ -48,8 +48,6 @@ function (Ra, Rb, Rf = 0, Period = 12, ...)
       }
 
      if (calcul) {
-        print(sqrt(sum((Rb-mean(Rb))^2)/length(Rb)))
-	print(sqrt(var(Rb)*(length(Rb)-1)/length(Rb)))
         result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))*sqrt(Period)
      }    
      else {

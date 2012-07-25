@@ -1,7 +1,6 @@
 \name{CAPM.jensenAlpha}
-\alias{alpha}
 \alias{CAPM.jensenAlpha}
-\alias{Jensen's}
+\alias{Jensen'sAlpha}
 \title{Jensen's alpha of the return distribution}
 \usage{
   CAPM.jensenAlpha(Ra, Rb, Rf = 0, period = 12, ...)
