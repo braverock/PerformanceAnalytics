@@ -1,7 +1,7 @@
 AnalyticalvsNumerical       This example script compares the numerical and the analytical solution of entropy-pooling
 ButterflyTrading            This example script performs the butterfly-trading case study for the Entropy-Pooling approach by Attilio Meucci
 DetectOutliersviaMVE        This example script detects outliers in two-asset and multi-asset case
-FullyFlexibleBayesNet       This case study uses Entropy Pooling to compute Fully Flexible Bayesian networks for risk management
+FullyFlexibleBayesNets       This case study uses Entropy Pooling to compute Fully Flexible Bayesian networks for risk management
 HermiteGrid_CaseStudy       This script estimates the prior of a hedge fund return and processes extreme views on CVaR according to Entropy Pooling
 HermiteGrid_CVaR_Recursion  This script illustrates the discrete Newton recursion  to process views on CVaR according to Entropy Pooling
 HermiteGrid_demo            This script compares the performance of plain Monte Carlo versus grid in applying Entropy Pooling to process extreme views
