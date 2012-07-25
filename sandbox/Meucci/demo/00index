@@ -1,0 +1,15 @@
+AnalyticalvsNumerical       This example script compares the numerical and the analytical solution of entropy-pooling
+ButterflyTrading            This example script performs the butterfly-trading case study for the Entropy-Pooling approach by Attilio Meucci
+DetectOutliersviaMVE        This example script detects outliers in two-asset and multi-asset case
+FullyFlexibleBayesNet       This case study uses Entropy Pooling to compute Fully Flexible Bayesian networks for risk management
+HermiteGrid_CaseStudy       This script estimates the prior of a hedge fund return and processes extreme views on CVaR according to Entropy Pooling
+HermiteGrid_CVaR_Recursion  This script illustrates the discrete Newton recursion  to process views on CVaR according to Entropy Pooling
+HermiteGrid_demo            This script compares the performance of plain Monte Carlo versus grid in applying Entropy Pooling to process extreme views
+InvariantProjection         This script projects summary statistics to arbitrary horizons under i.i.d. assumption
+logToArithmeticCovariance   This example script generates arithmetric returns and arithmetric covariance matrix given a distribution of log returns
+Prior2Posterior             This example script compares the numerical and the analytical solution of entropy-pooling
+RankingInformation          This script performs ranking allocation using the Entropy-Pooling approach by Attilio Meucci
+RobustBayesianAllocation    This script replicates the example from Meucci's MATLAB script S_SimulationsCaseStudy.M
+S_plotGaussHermite          This example script displays mesh points based on Gaussian-Hermite quadrature
+S_SnPCaseStudy              This script replicates the example from Meucci's MATLAB script S_SnPCaseStudy.M
+S_ToyExample                This toy example illustrates the use of Entropy Pooling to compute Fully Flexible Bayesian networks
