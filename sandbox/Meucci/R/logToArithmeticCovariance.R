@@ -13,6 +13,7 @@
 #' @references
 #' # formula (7) and (8) on page 5 of Appendix to "Meucci - A Common Pitfall in Mean-Variance Estimation"
 #' \url{http://www.wilmott.com/pdfs/011119_meucci.pdf}
+#' @export
 linreturn <- function( mu , sigma )
 {   
     # each element of M represents the linear returns for the corresponding log-returns element in mu

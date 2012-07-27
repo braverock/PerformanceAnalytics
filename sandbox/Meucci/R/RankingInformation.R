@@ -62,6 +62,7 @@ ViewRanking = function( X , p , Lower , Upper )
 #'             w          the NumPortf x N matrix of compositions (security weights) for each portfolio along the efficient frontier
 #'             e          the NumPortf x 1 matrix of expected returns for each portfolio along the efficient frontier
 #'             s          the NumPortf x 1 matrix of standard deviation of returns for each portfolio along the efficient frontier
+#' @export
 RIEfficientFrontier = function( X , p , Options)
 {    
   library( matlab )

@@ -5,6 +5,7 @@
 #' @return normalizedp  a numeric value containing the normalized probability value
 #'
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' @export
 normalizeProb = function( p )
 {
   tol = 1e-20
@@ -28,6 +29,7 @@ normalizeProb = function( p )
 #' A. Meucci - "Fully Flexible Extreme Views" - See formula (17)
 #' \url{http://ssrn.com/abstract=1542083}
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' @export
 subIntervals = function( x )
 {
   n = nrow( x )
@@ -52,6 +54,7 @@ subIntervals = function( x )
 #' @return p    a vector containing the cdf evaluated for each of the subintervals
 #'
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' @export
 integrateSubIntervals = function( x , cdf )
 {
   bounds = subIntervals( x )
@@ -71,6 +74,7 @@ integrateSubIntervals = function( x , cdf )
 #' A. Meucci - "Fully Flexible Extreme Views" - See formula (20)
 #' \url{http://ssrn.com/abstract=1542083}
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
+#' @export
 hermitePolynomial = function( n )
 {
   # convert last object to matrix

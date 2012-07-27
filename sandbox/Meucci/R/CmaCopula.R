@@ -18,6 +18,7 @@
 #' \url{http://www.symmys.com}
 #' TODO: Add Schur decomposition. Right now function is only sampling from mvrnorm so sample moments do no match population moments
 #' I have sample code commented out below to implement this correctly but I require a function that returns the unitaryMatrix from a Schur decomposition
+#' @export
 MvnRnd = function( M , S , J )
 {
   library(MASS)
@@ -71,6 +72,7 @@ MvnRnd = function( M , S , J )
 #' @references 
 #' Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011
 #' Most recent version of article and code available at \url{http://www.symmys.com/node/335}
+#' @export
 CMAseparation = function( X , p ) 
 {
 # @example     test = cbind( seq( 102 , 1 , -2 ) , seq( 100 , 500 , 8 ) )
@@ -137,6 +139,7 @@ CMAseparation = function( X , p )
 #' @references 
 #' Meucci A., "New Breed of Copulas for Risk and Portfolio  Management", Risk, September 2011
 #' Most recent version of article and code available at \url{http://www.symmys.com/node/335}
+#' @export
 CMAcombination = function( x , u , U ) 
 # @example     test = cbind( seq( 102 , 1 , -2 ) , seq( 100 , 500 , 8 ) )
 # @example     prob = rep(.02 , 51 )
@@ -183,10 +186,10 @@ CMAcombination = function( x , u , U )
 #'          varianceReturn      the variance of the portfolio returns
 #' @examples
 #' PanicCopula( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig = .2 , sigma )
-#' @export
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
 #' @references 
 #' \url{http://www.symmys.com}
+#' @export
 PanicCopula = function( N = 20 , J = 50000 , r_c = .3 , r = .99 , b = .02 , sig = .2 , sigma )
 {
   # generate panic distribution

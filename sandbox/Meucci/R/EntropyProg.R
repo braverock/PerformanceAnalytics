@@ -27,12 +27,11 @@
 #' @param  A        matrix consisting of inequality constraints (paired with argument 'b'). Denoted as 'F' in the Meucci paper
 #' @param  b        vector consisting of inequality constraints (paired with matrix A). Denoted as 'f' in the Meucci paper
 #'
+#' ' \deqn{ \tilde{p}  \equiv  argmin_{Fx \leq f, Hx  \equiv  h}  \big\{ \sum_1^J  x_{j}  \big(ln \big( x_{j} \big) - ln \big( p_{j} \big) \big)  \big\} 
+#' \\ \ell  \big(x,  \lambda,  \nu \big)  \equiv  x'  \big(ln \big(x\big) - ln \big(p\big) \big) +   \lambda' \big(Fx - f\big)  +   \nu' \big(Hx - h\big)}
 #' @return a list with 
 #'      p_                       revised probabilities based on entropy pooling
 #'      optimizationPerformance  a list with status of optimization, value, number of iterations and sum of probabilities.
-#' @export
-#' \deqn{ \tilde{p}  \equiv  argmin_{Fx \leq f, Hx  \equiv  h}  \big\{ \sum_1^J  x_{j}  \big(ln \big( x_{j} \big) - ln \big( p_{j} \big) \big)  \big\} 
-#' \\ \ell  \big(x,  \lambda,  \nu \big)  \equiv  x'  \big(ln \big(x\big) - ln \big(p\big) \big) +   \lambda' \big(Fx - f\big)  +   \nu' \big(Hx - h\big)}
 #' @author Ram Ahluwalia \email{ram@@wingedfootcapital.com}
 #' @references 
 #' A. Meucci - "Fully Flexible Views: Theory and Practice". See page 22 for illustration of numerical implementation
@@ -41,6 +40,7 @@
 #' We use the information-theoretic estimator of Kitamur and Stutzer (1997). 
 #' Reversing 'p' and 'p_' leads to the empirical likelihood" estimator of Qin and Lawless (1994). 
 #' See Robertson et al, "Forecasting Using Relative Entropy" (2002) for more theory
+#'  @export
 EntropyProg = function( p , A , b , Aeq , beq )
 {
     library( nloptr )    

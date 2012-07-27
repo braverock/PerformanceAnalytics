@@ -15,6 +15,7 @@
 #' @references
 #' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 9
 #' Symmys site containing original MATLAB source code \url{http://www.symmys.com}
+#' @export
 Raw2Central = function( mu_ )
 {
   N = length( mu_ )
@@ -52,6 +53,7 @@ Raw2Central = function( mu_ )
 #' @references
 #' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (24)
 #' Symmys site containing original MATLAB source code \url{http://www.symmys.com/node/136}
+#' @export
 Cumul2Raw = function( ka )
 {
   N = length( ka )
@@ -85,6 +87,7 @@ Cumul2Raw = function( ka )
 #' @references
 #' A. Meucci - "Annualization and General Projection of Skewness, Kurtosis and All Summary Statistics" - formula (21)
 #' Symmys site containing original MATLAB source code \url{http://www.symmys.com/node/136}
+#' @export
 Raw2Cumul = function( mu_ )
 {
   N = length( mu_ )
@@ -116,7 +119,7 @@ Raw2Cumul = function( mu_ )
 #' @references 
 #' A. Meucci - "Exercises in Advanced Risk and Portfolio Management". See page 10.
 #' Symmys site containing original MATLAB source code \url{http://www.symmys.com}
-
+#' @export
 Central2Raw = function( mu )
 {
   N = length( mu )
@@ -148,6 +151,7 @@ Central2Raw = function( mu )
 #' @return   mu   central moments
 #' @export
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
+#' @export
 SummStats = function( X , N )
 {
   suppressWarnings( library( matlab ) ) # otherwise, stops with "Error: (converted from warning) package 'matlab' was built under R version 2.13.2"
@@ -190,6 +194,7 @@ std = function( x ) { ( sum( ( x - mean( x ) ) ^ 2 ) / length( x ) ) ^.5 }
 #'
 #' @return  X    a numeric vector with i.i.d. lognormal samples based on parameters J, a, m, and s where X = a + exp( m + s * Z )
 #' @author Ram Ahluwalia \email{rahluwalia@@gmail.com}
+#' @export
 GenerateLogNormalDistribution = function( J, a, m, s )
 {
   Z = rnorm( J / 2 , 0 , 1 ) # create J/2 draws from the standard normal 
