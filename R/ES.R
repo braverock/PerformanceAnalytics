@@ -16,7 +16,7 @@
 #' @param R a vector, matrix, data frame, timeSeries or zoo object of asset
 #' returns
 #' @param p confidence level for calculation, default p=.95
-#' @param method one of "modified","gaussian","historical", "kernel", see
+#' @param method one of "modified","gaussian","historical", see
 #' Details.
 #' @param clean method for data cleaning through \code{\link{Return.clean}}.
 #' Current options are "none", "boudt", or "geltner".
@@ -116,7 +116,7 @@
 #'     ES(edhec, clean="boudt", portfolio_method="component")
 #' 
 ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ..., 
-        method=c("modified","gaussian","historical", "kernel"), 
+        method=c("modified","gaussian","historical"), 
         clean=c("none","boudt", "geltner"),  
         portfolio_method=c("single","component"), 
         weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, 
@@ -187,7 +187,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
                 switch(method,
                         modified = { rES=mES.MM(w=weights, mu=mu, sigma=sigma, M3=m3 , M4=m4 , p=p) }, 
                         gaussian = { rES=GES.MM(w=weights, mu=mu, sigma=sigma, p=p) },
-                        historical = { rES = (ES.historical(R=R,p=p) %*% weights) } # note that this is not tested for weighting the univariate calc by the weights
+                        historical = { rES = ES.historical(R=R,p=p) %*% weights }, # note that this is not tested for weighting the univariate calc by the weights,
                 ) # end multivariate method
             }
 	        # check for unreasonable results
@@ -224,7 +224,8 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
 			     else return(ES.CornishFisher.portfolio(p,weights,mu,sigma,m3,m4))
 			   },
                 gaussian = { return(ES.Gaussian.portfolio(p,weights,mu,sigma)) },
-                historical = { return(ES.historical.portfolio(R, p,weights)) }
+                historical = { return(ES.historical.portfolio(R, p,weights)) },
+                kernel = { return(ES.kernel.portfolio(R=R,p=p,w=w)) }
             )
 
         } # end component portfolio switch

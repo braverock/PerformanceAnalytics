@@ -290,6 +290,20 @@ VaR.kernel.portfolio =  function( R, p, w )
    return(ret)
 }
 
+ES.kernel.portfolio= function( R, p, w )
+{#WARNING incomplete
+    VAR<-VaR.kernel.portfolio( R, p, w )
+    
+    #I'm sure that using Return.portfolio probably makes more sense here...
+    T = dim(R)[1]; N = dim(R)[2];
+    portfolioreturn = c();
+    for( t in 1:T ){ portfolioreturn = c( portfolioreturn , sum(w*R[t,]) ) }
+    
+    PES<-mean(portfolioreturn>VAR$VaR)
+    
+    
+}
+
 ES.Gaussian.portfolio =  function(p,w,mu,sigma)
 {
    alpha = .setalphaprob(p)

@@ -6,7 +6,7 @@
 univariate and component, using a variety of analytical methods.}
 \usage{
   ETL(R = NULL, p = 0.95, ...,
-    method = c("modified", "gaussian", "historical", "kernel"),
+    method = c("modified", "gaussian", "historical"),
     clean = c("none", "boudt", "geltner"),
     portfolio_method = c("single", "component"),
     weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
@@ -19,7 +19,7 @@ univariate and component, using a variety of analytical methods.}
   \item{p}{confidence level for calculation, default p=.95}
 
   \item{method}{one of "modified","gaussian","historical",
-  "kernel", see Details.}
+  see Details.}
 
   \item{clean}{method for data cleaning through
   \code{\link{Return.clean}}. Current options are "none",
