@@ -50,6 +50,7 @@ export(
     CVaR,
     DrawdownPeak,
     findDrawdowns,
+    FamaBeta,
     Frequency,
     InformationRatio,
     Kappa,
