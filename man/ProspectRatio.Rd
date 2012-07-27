@@ -18,7 +18,7 @@
 }
 \details{
   \deqn{ProspectRatio(R) =
-  \frac{frac{1}{n}*\sum^{n}_{i=1}(Max(r_i,0)+2.25*Min(r_i,0)
+  \frac{\frac{1}{n}*\sum^{n}_{i=1}(Max(r_i,0)+2.25*Min(r_i,0)
   - MAR)}{\sigma_D}}{ProspectRatio(R) = (1/n *
   sum(Max(ri,0) + 2.25 * Min(ri,0)) - MAR) / DownsideRisk}
 

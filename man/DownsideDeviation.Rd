@@ -3,9 +3,6 @@
 \alias{DownsidePotential}
 \alias{SemiDeviation}
 \alias{SemiVariance}
-\alias{UpsideDeviation,}
-\alias{UpsidePotential}
-\alias{UpsideVariance,}
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
   DownsideDeviation(R, MAR = 0,
@@ -14,9 +11,6 @@
   SemiDeviation(R)
 
   SemiVariance(R)
-
-  DownsideDeviation(R, MAR = 0,
-    method = c("full", "subset"), ..., potential = FALSE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -29,25 +23,6 @@
   whether to use the length of the full series or the
   length of the subset of the series below the MAR as the
   denominator, defaults to "full"}
-
-  \item{\dots}{any other passthru parameters}
-
-  \item{potential}{if TRUE, calculate downside potential
-  instead, default FALSE}
-
-  \item{R}{an xts, vector, matrix, data frame, timeSeries
-  or zoo object of asset returns}
-
-  \item{MAR}{Minimum Acceptable Return, in the same
-  periodicity as your returns}
-
-  \item{method}{one of "full" or "subset", indicating
-  whether to use the length of the full series or the
-  length of the subset of the series below the MAR as the
-  denominator, defaults to "subset"}
-
-  \item{author}{one of "Bacon", "Sortino", indicating
-  whether to}
 
   \item{\dots}{any other passthru parameters}
 
@@ -145,48 +120,11 @@ SemiDeviation(managers[,1,drop=FALSE])
 SemiDeviation(managers[,1:6])
 SemiVariance (managers[,1,drop=FALSE])
 SemiVariance (managers[,1:6]) #calculated using method="subset"
-#with data used in Bacon 2008
-
-portfolio_return <- c(0.3,2.6,1.1,-1.0,1.5,2.5,1.6,6.7,-1.4,4.0,-0.5,8.1,4.0,-3.7,
--6.1,1.7,-4.9,-2.2,7.0,5.8,-6.5,2.4,-0.5,-0.9)
-MAR = 0.5
-DownsideDeviation(portfolio_return, MAR) #expected 2.55
-DownsidePotential(portfolio_return, MAR) #expected 1.37
-
-#with data of managers
-
-data(managers)
-apply(managers[,1:6], 2, sd, na.rm=TRUE)
-DownsideDeviation(managers[,1:6])  # MAR 0\%
-DownsideDeviation(managers[,1:6], MAR = .04/12) #MAR 4\%
-SemiDeviation(managers[,1,drop=FALSE])
-SemiDeviation(managers[,1:6])
-SemiVariance (managers[,1,drop=FALSE])
-SemiVariance (managers[,1:6]) #calculated using method="subset"
 }
 \author{
   Peter Carl, Brian G. Peterson, Matthieu Lestel
-
-  Peter Carl, Brian G. Peterson, Matthieu Lestel
 }
 \references{
-  Sortino, F. and Price, L. Performance Measurement in a
-  Downside Risk Framework. \emph{Journal of Investing}.
-  Fall 1994, 59-65. \cr Carl Bacon, \emph{Practical
-  portfolio performance measurement and attribution},
-  second edition 2008
-
-  Plantinga, A., van der Meer, R. and Sortino, F. The
-  Impact of Downside Risk on Risk-Adjusted Performance of
-  Mutual Funds in the Euronext Markets. July 19, 2001.
-  Available at SSRN: \url{http://ssrn.com/abstract=277352}
-  \cr
-
-  \url{http://www.sortino.com/htm/performance.htm} see
-  especially end note 10
-
-  \url{http://en.wikipedia.org/wiki/Semivariance}
-
   Sortino, F. and Price, L. Performance Measurement in a
   Downside Risk Framework. \emph{Journal of Investing}.
   Fall 1994, 59-65. \cr Carl Bacon, \emph{Practical
