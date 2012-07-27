@@ -513,6 +513,11 @@ ES.historical = function(R,p) {
 	q = quantile(r,probs=alpha)
 	exceedr = r[r<q]
 	hES = (-mean(exceedr))
+        if(is.nan(hES)){
+          warning(paste(colnames(R[,column]),"No values less than VaR observed.  Setting ES equal to VaR."))
+          hES=q
+        }
+          
         hES=array(hES)
         if (column==1) {
             #create data.frame
