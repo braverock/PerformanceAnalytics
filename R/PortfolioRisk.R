@@ -509,23 +509,23 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
 ES.historical = function(R,p) {
     alpha = .setalphaprob(p)
     for(column in 1:ncol(R)) {
-	r = na.omit(as.vector(R[,column]))
-	q = quantile(r,probs=alpha)
-	exceedr = r[r<q]
-	hES = (-mean(exceedr))
-        if(is.nan(hES)){
-          warning(paste(colnames(R[,column]),"No values less than VaR observed.  Setting ES equal to VaR."))
-          hES=q
-        }
-          
-        hES=array(hES)
-        if (column==1) {
-            #create data.frame
-            result=data.frame(hES=hES)
-        } else {
-            hES=data.frame(hES=hES)
-            result=cbind(result,hES)
-        }
+      r = na.omit(as.vector(R[,column]))
+      q = quantile(r,probs=alpha)
+      exceedr = r[r<q]
+      hES = (-mean(exceedr))
+      if(is.nan(hES)){
+        warning(paste(colnames(R[,column]),"No values less than VaR observed.  Setting ES equal to VaR."))
+        hES=-q
+      }
+      
+      hES=array(hES)
+      if (column==1) {
+        #create data.frame
+        result=data.frame(hES=hES)
+      } else {
+        hES=data.frame(hES=hES)
+        result=cbind(result,hES)
+      }
     }	
     colnames(result)<-colnames(R)
     return(result)
