@@ -18,7 +18,7 @@
 
 M3.MM = function(R,...){
    cAssets = ncol(R); T = nrow(R);
-   if(!hasArg(mu)) mu = apply(R,2,'mean') else mu=match.call(expand.dots=TRUE)$mu
+   if(!hasArg(mu)) mu = apply(R,2,'mean') else mu=mu=list(...)$mu
    M3 = matrix(rep(0,cAssets^3),nrow=cAssets,ncol=cAssets^2)
    for(t in c(1:T))
    {
@@ -30,7 +30,7 @@ M3.MM = function(R,...){
 
 M4.MM = function(R,...){
    cAssets = ncol(R); T = nrow(R);
-   if(!hasArg(mu))   mu = apply(R,2,'mean') else mu=match.call(expand.dots=TRUE)$mu
+   if(!hasArg(mu))   mu = apply(R,2,'mean')  else mu=list(...)$mu
    M4 = matrix(rep(0,cAssets^4),nrow=cAssets,ncol=cAssets^3);
    for(t in c(1:T))
    {
