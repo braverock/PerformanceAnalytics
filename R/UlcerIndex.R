@@ -34,8 +34,9 @@ function (R, ...) {
     R = checkData(R)
 
     ui <- function(R) {
+        result = sqrt(sum(DrawdownPeak(R)^2))
         R = na.omit(R)
-        result = sqrt(sum(Drawdowns(R)^2)/length(R))
+	result = result/sqrt(length(R))
         return(result)
     }
 

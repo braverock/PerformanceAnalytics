@@ -1,0 +1,55 @@
+\name{OmegaExcessReturn}
+\alias{OmegaExcessReturn}
+\alias{OmegaExessReturn}
+\title{Omega excess return of the return distribution}
+\usage{
+  OmegaExcessReturn(Ra, Rb, MAR = 0, ...)
+}
+\arguments{
+  \item{Ra}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{Rb}{return vector of the benchmark asset}
+
+  \item{MAR}{the minimum acceptable return}
+
+  \item{\dots}{any other passthru parameters}
+}
+\description{
+  Omega excess return is another form of downside
+  risk-adjusted return. It is calculated by multiplying the
+  downside variance of the style benchmark by 3 times the
+  style beta.
+}
+\details{
+  \deqn{\omega = r_P - 3*\beta_S*\sigma_{MD}^2}{
+  OmegaExcessReturn = Portfolio return - 3*style beta*style
+  benchmark variance squared}
+
+  where \eqn{\omega} is omega excess return, \eqn{\beta_S}
+  is style beta, \eqn{\sigma_D} is the portfolio annualised
+  downside risk and \eqn{\sigma_{MD}} is the benchmark
+  annualised downside risk.
+}
+\examples{
+data(portfolio_bacon)
+MAR = 0.005
+print(OmegaExcessReturn(portfolio_bacon[,1], portfolio_bacon[,2], MAR)) #expected 0.0805
+
+data(managers)
+MAR = 0
+print(OmegaExcessReturn(managers['1996',1], managers['1996',8], MAR))
+print(OmegaExcessReturn(managers['1996',1:5], managers['1996',8], MAR))
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.103
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

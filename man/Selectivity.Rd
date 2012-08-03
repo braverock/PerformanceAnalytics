@@ -2,7 +2,7 @@
 \alias{Selectivity}
 \title{Selectivity of the return distribution}
 \usage{
-  Selectivity(Ra, Rb, Rf = 0, period = 12, ...)
+  Selectivity(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -11,9 +11,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{period}{number of periods in a year monthly scale =
-  12, quarterly = 4)}
 
   \item{\dots}{any other passthru parameters}
 }
