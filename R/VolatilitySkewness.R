@@ -56,7 +56,7 @@ function (R, MAR = 0, stat=c("volatility", "variability"), ...)
 
         if(!is.null(dim(MAR))){
             if(is.timeBased(index(MAR))){
-                MAR <-MAR[index(r)] #subset to the same dates as the R data
+                MAR <-MAR[index(R)] 
             } 
 	    else{
                 MAR = mean(checkData(MAR, method = "vector"))

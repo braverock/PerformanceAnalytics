@@ -55,7 +55,7 @@ MartinRatio <- function (R, Rf = 0, ...)
        return(result)
     }
     else {
-        result = apply(R, MARGIN = 2, MartinRatio, MAR = MAR, Rf = Rf, ...)
+        result = apply(R, MARGIN = 2, MartinRatio, Rf = Rf, ...)
         result<-t(result)
         colnames(result) = colnames(R)
         rownames(result) = paste("Martin Ratio (Rf = ",Rf,")", sep="")

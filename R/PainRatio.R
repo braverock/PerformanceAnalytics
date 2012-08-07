@@ -56,7 +56,7 @@ PainRatio <- function (R, Rf = 0, period = 12, ...)
        return(result)
     }
     else {
-        result = apply(R, MARGIN = 2, PainRatio, MAR = MAR, Rf = Rf, period = period, ...)
+        result = apply(R, MARGIN = 2, PainRatio, Rf = Rf, period = period, ...)
         result<-t(result)
         colnames(result) = colnames(R)
         rownames(result) = paste("Pain Ratio (Rf = ",Rf,")", sep="")
