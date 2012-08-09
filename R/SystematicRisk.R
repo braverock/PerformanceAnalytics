@@ -15,7 +15,6 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset 
 #' @param Rf risk free rate, in same period as your returns
-#' @param Period the number of return in a year in the asset return 
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -25,7 +24,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 13.00
+#' print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.013
 #'
 #' data(managers)
 #' print(SystematicRisk(managers['1996',1], managers['1996',8]))
@@ -33,7 +32,7 @@
 #'
 #' @export 
 SystematicRisk <-
-function (Ra, Rb, Rf = 0, Period = 12, ...)
+function (Ra, Rb, Rf = 0, ...)
 {
     calcul = FALSE
     Ra = checkData(Ra, method="matrix")
@@ -48,6 +47,7 @@ function (Ra, Rb, Rf = 0, Period = 12, ...)
       }
 
      if (calcul) {
+     	Period = Frequency(Ra)
         result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))*sqrt(Period)
      }    
      else {

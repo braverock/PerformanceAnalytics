@@ -1,0 +1,54 @@
+\name{table.DownsideRiskRatio}
+\alias{table.DownsideRiskRatio}
+\title{Downside Summary: Statistics and ratios}
+\usage{
+  table.DownsideRiskRatio(R, MAR = 0, scale = NA,
+    digits = 4)
+}
+\arguments{
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{MAR}{Minimum Acceptable Return, in the same
+  periodicity as your returns}
+
+  \item{scale}{number of periods in a year (daily scale =
+  252, monthly scale =}
+
+  \item{digits}{number of digits to round results to}
+}
+\description{
+  Table of Monthly downside risk, Annualised downside risk,
+  Downside potential, Omega, Sortino ratio, Upside
+  potential, Upside potential ratio and Omega-Sharpe ratio
+}
+\examples{
+data(managers)
+table.DownsideRiskRatio(managers[,1:8])
+
+require("Hmisc")
+result = t(table.DownsideRiskRatio(managers[,1:8]))
+
+textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(3,3,1)),
+rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center", valign = "top",
+row.valign="center", wrap.rownames=20, wrap.colnames=10,
+col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
+title(main="Downside risk statistics")
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.98
+}
+\seealso{
+  \code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}}
+  \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}}
+  \cr \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

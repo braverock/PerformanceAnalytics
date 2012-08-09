@@ -98,6 +98,7 @@ export(
     SmoothingIndex,
     sortDrawdowns,
     SortinoRatio,
+    SpecificRisk,
     StdDev,
     StdDev.annualized,
     SterlingRatio,
@@ -126,14 +127,20 @@ export(
     table.CAPM,
     table.CaptureRatios,
     table.Correlation,
+    table.Distributions,
     table.DownsideRisk,
+    table.DownsideRiskRatio,
     table.Drawdowns,
+    table.DrawdownsRatio,
     table.HigherMoments,
+    table.InformationRatio,
     table.Returns,
+    table.SpecificRisk,
     table.Stats,
     table.TrailingPeriods,
     table.TrailingPeriodsRel,
-    table.UpDownRatios
+    table.UpDownRatios,
+    table.Variability
 )
 
 ## Charts

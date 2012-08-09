@@ -2,7 +2,7 @@
 \alias{TotalRisk}
 \title{Total risk of the return distribution}
 \usage{
-  TotalRisk(Ra, Rb, Rf = 0, Period = 12, ...)
+  TotalRisk(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -11,10 +11,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{Period}{the number of return in a year in the asset
-  return (i.e. 12 for monthly returns, 4 for quarterly
-  returns)}
 
   \item{\dots}{any other passthru parameters}
 }

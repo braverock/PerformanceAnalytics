@@ -1,0 +1,50 @@
+\name{table.InformationRatio}
+\alias{table.InformationRatio}
+\title{Information ratio Summary: Statistics and Stylized Facts}
+\usage{
+  table.InformationRatio(R, Rb, scale = NA, digits = 4)
+}
+\arguments{
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{Rb}{return vector of the benchmark asset}
+
+  \item{scale}{number of periods in a year (daily scale =
+  252, monthly scale = 12, quarterly scale = 4)}
+
+  \item{digits}{number of digits to round results to}
+}
+\description{
+  Table of Tracking error, Annualised tracking error and
+  Information ratio
+}
+\examples{
+data(managers)
+table.InformationRatio(managers[,1:8], managers[,8])
+
+require("Hmisc")
+result = t(table.InformationRatio(managers[,1:8], managers[,8]))
+
+textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(3,3,1)),
+rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center", valign = "top",
+row.valign="center", wrap.rownames=20, wrap.colnames=10,
+col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
+title(main="Portfolio information ratio")
+}
+\author{
+  Matthieu Lestel
+}
+\references{
+  Carl Bacon, \emph{Practical portfolio performance
+  measurement and attribution}, second edition 2008 p.81
+}
+\seealso{
+  \code{\link{InformationRatio}} \cr
+  \code{\link{TrackingError}}
+}
+\keyword{distribution}
+\keyword{models}
+\keyword{multivariate}
+\keyword{ts}
+

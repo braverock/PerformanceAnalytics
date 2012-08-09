@@ -45,7 +45,7 @@ function (R, ...)
 	  result = NA
 	}
 	else {
-	     result = skewness(R) / kurtosis(R, method = "moment")
+	     result = skewness(R, method = "moment") / kurtosis(R, method = "moment")
 	}
         return(result)
     }

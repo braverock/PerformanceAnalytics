@@ -2,7 +2,7 @@
 \alias{SystematicRisk}
 \title{Systematic risk of the return distribution}
 \usage{
-  SystematicRisk(Ra, Rb, Rf = 0, Period = 12, ...)
+  SystematicRisk(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -11,9 +11,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{Period}{the number of return in a year in the asset
-  return}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -34,7 +31,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 13.00
+print(SystematicRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.013
 
 data(managers)
 print(SystematicRisk(managers['1996',1], managers['1996',8]))
