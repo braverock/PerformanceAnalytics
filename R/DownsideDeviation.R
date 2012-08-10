@@ -144,7 +144,6 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
         return(result)
     }
     else {
-        print("doit être format avec date")
         R = checkData(R)
         result = apply(R, MARGIN = 2, DownsideDeviation, MAR = MAR, method = method)
         result<-t(result)

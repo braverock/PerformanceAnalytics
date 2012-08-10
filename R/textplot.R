@@ -67,6 +67,10 @@
 #' tabs with
 #' @param \dots Optional arguments passed to the text plotting command or
 #' specialized object methods
+#' @param fixed.width default is TRUE
+#' @param cspace default is 1
+#' @param lspace default is 1
+#' @param tab.width default is 8
 #' @author Originally written by Gregory R. Warnes
 #' \email{warnes@@bst.rochester.edu} for the package 'gplots', modified by
 #' Peter Carl
@@ -107,6 +111,8 @@ textplot <- function(object, halign="center", valign="center", cex,
 
 
 #' @rdname textplot
+#' @method textplot default
+#' @export
 textplot.default <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
@@ -136,6 +142,8 @@ textplot.default <- function(object,
 
 
 #' @rdname textplot
+#' @method textplot data.frame
+#' @export
 textplot.data.frame <- function(object,
                              halign=c("center","left","right"),
                              valign=c("center","top","bottom"),
@@ -168,6 +176,8 @@ textplot.data.frame <- function(object,
 }
 
 #' @rdname textplot
+#' @method textplot matrix
+#' @export
 textplot.matrix <- function(object,
                             halign=c("center","left","right"),
                             valign=c("center","top","bottom"),
@@ -373,6 +383,8 @@ textplot.matrix <- function(object,
 }
 
 #' @rdname textplot
+#' @method textplot character
+#' @export
 textplot.character <- function (object,
                                 halign = c("center", "left", "right"),
                                 valign = c("center", "top", "bottom"),

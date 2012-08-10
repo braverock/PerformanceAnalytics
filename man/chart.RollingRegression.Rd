@@ -36,6 +36,12 @@
   would not otherwise have been in the result with a value
   of NA. If FALSE those times are dropped.}
 
+  \item{legend.loc}{used to set the position of the legend}
+
+  \item{event.labels}{if not null and event.lines is not
+  null, this will apply a list of text labels to the
+  vertical lines drawn}
+
   \item{\dots}{any other passthru parameters to
   \code{\link{chart.TimeSeries}}}
 }

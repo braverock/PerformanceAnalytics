@@ -21,7 +21,7 @@
     col.colnames = par("col"), wrap = TRUE,
     wrap.colnames = 10, wrap.rownames = 10, ...)
 
-  textplot.default(object,
+  \method{textplot}{default} (object,
     halign = c("center", "left", "right"),
     valign = c("center", "top", "bottom"), cex, max.cex,
     cmar, rmar, show.rownames, show.colnames, hadj, vadj,
@@ -29,7 +29,7 @@
     col.rownames, col.colnames, wrap, wrap.colnames,
     wrap.rownames, ...)
 
-  textplot.data.frame(object,
+  \method{textplot}{data.frame} (object,
     halign = c("center", "left", "right"),
     valign = c("center", "top", "bottom"), cex,
     max.cex = 1, cmar = 2, rmar = 0.5,
@@ -40,7 +40,7 @@
     col.colnames = par("col"), wrap = TRUE,
     wrap.colnames = 10, wrap.rownames = 10, ...)
 
-  textplot.matrix(object,
+  \method{textplot}{matrix} (object,
     halign = c("center", "left", "right"),
     valign = c("center", "top", "bottom"), cex,
     max.cex = 1, cmar = 2, rmar = 0.5,
@@ -51,7 +51,7 @@
     col.colnames = par("col"), wrap = TRUE,
     wrap.colnames = 10, wrap.rownames = 10, ...)
 
-  textplot.character(object,
+  \method{textplot}{character} (object,
     halign = c("center", "left", "right"),
     valign = c("center", "top", "bottom"), cex,
     max.cex = 1, cmar = 2, rmar = 0.5,
@@ -128,6 +128,14 @@
 
   \item{\dots}{Optional arguments passed to the text
   plotting command or specialized object methods}
+
+  \item{fixed.width}{default is TRUE}
+
+  \item{cspace}{default is 1}
+
+  \item{lspace}{default is 1}
+
+  \item{tab.width}{default is 8}
 }
 \description{
   This function displays text output in a graphics window.

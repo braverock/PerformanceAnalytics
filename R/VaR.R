@@ -65,9 +65,8 @@
 #' decomposition is possible in a financially meaningful way.
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{SharpeRatio.modified}} \cr
-#' \code{\link{chart.VaRSensitivity}} \cr % \code{\link[VaR]{VaR.gpd}} \cr %
-#' \code{\link[VaR]{VaR.norm}} \cr % \code{\link[VaR]{VaR.backtest}} \cr
-#' \code{\link{Return.clean}} \cr
+#' \code{\link{chart.VaRSensitivity}} \cr
+#' \code{\link{Return.clean}} 
 #' @references Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
 #' Estimation and decomposition of downside risk for portfolios with non-normal
 #' returns. 2008. The Journal of Risk, vol. 11, 79-103.

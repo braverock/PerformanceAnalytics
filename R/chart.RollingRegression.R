@@ -28,6 +28,9 @@
 #' @param na.pad TRUE/FALSE If TRUE it adds any times that would not otherwise
 #' have been in the result with a value of NA. If FALSE those times are
 #' dropped.
+#' @param legend.loc used to set the position of the legend
+#' @param event.labels 	if not null and event.lines is not null, this will apply a 
+#' list of text labels to the vertical lines drawn
 #' @param \dots any other passthru parameters to \code{\link{chart.TimeSeries}}
 #' @note Most inputs are the same as "\code{\link{plot}}" and are principally
 #' included so that some sensible defaults could be set.

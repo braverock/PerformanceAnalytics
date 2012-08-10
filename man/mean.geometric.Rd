@@ -7,13 +7,13 @@
 \title{calculate attributes relative to the mean of the observation series given,
 including geometric, stderr, LCL and UCL}
 \usage{
-  mean.geometric(x, ...)
+  \method{mean}{geometric} (x, ...)
 
-  mean.stderr(x, ...)
+  \method{mean}{stderr} (x, ...)
 
-  mean.LCL(x, ci = 0.95, ...)
+  \method{mean}{LCL} (x, ci = 0.95, ...)
 
-  mean.UCL(x, ci = 0.95, ...)
+  \method{mean}{UCL} (x, ci = 0.95, ...)
 }
 \arguments{
   \item{x}{a vector, matrix, data frame, or time series to

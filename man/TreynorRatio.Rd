@@ -1,12 +1,9 @@
 \name{TreynorRatio}
-\alias{ModifiedTreynorRatio}
 \alias{TreynorRatio}
 \title{calculate Treynor Ratio or modified Treynor Ratio of excess return over CAPM beta}
 \usage{
   TreynorRatio(Ra, Rb, Rf = 0, scale = NA,
     modified = FALSE)
-
-  ModifiedTreynorRatio(Ra, Rb, Rf = 0, scale = NA)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries

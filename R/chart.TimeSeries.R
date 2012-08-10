@@ -67,6 +67,7 @@
 #' @param minor.ticks Should minor tickmarks be drawn, default TRUE
 #' @param xaxis.labels Allows for non-date labeling of date axes, default is
 #' NULL
+#' @param space default 0
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}, \code{\link{par}},

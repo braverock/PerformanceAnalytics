@@ -132,6 +132,8 @@
   \item{xaxis.labels}{Allows for non-date labeling of date
   axes, default is NULL}
 
+  \item{space}{default 0}
+
   \item{\dots}{any other passthru parameters}
 }
 \description{

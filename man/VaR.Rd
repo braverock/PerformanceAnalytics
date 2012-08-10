@@ -170,11 +170,8 @@ data(edhec)
 }
 \seealso{
   \code{\link{SharpeRatio.modified}} \cr
-  \code{\link{chart.VaRSensitivity}} \cr %
-  \code{\link[VaR]{VaR.gpd}} \cr %
-  \code{\link[VaR]{VaR.norm}} \cr %
-  \code{\link[VaR]{VaR.backtest}} \cr
-  \code{\link{Return.clean}} \cr
+  \code{\link{chart.VaRSensitivity}} \cr
+  \code{\link{Return.clean}}
 }
 \keyword{distribution}
 \keyword{models}
