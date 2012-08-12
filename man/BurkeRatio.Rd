@@ -2,7 +2,7 @@
 \alias{BurkeRatio}
 \title{Burke ratio of the return distribution}
 \usage{
-  BurkeRatio(R, Rf = 0, modified = FALSE, period = 12, ...)
+  BurkeRatio(R, Rf = 0, modified = FALSE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -12,9 +12,6 @@
 
   \item{modified}{a boolean to decide which ratio to
   calculate between Burke ratio and modified Burke ratio.}
-
-  \item{period}{the number of returns in a year (ie 12 for
-  monthly returns, 4 for quaterly returns)}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -42,8 +39,8 @@
 }
 \examples{
 data(portfolio_bacon)
-print(BurkeRatio(portfolio_bacon[,1])) #expected 0.76
-print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.86
+print(BurkeRatio(portfolio_bacon[,1])) #expected 0.74
+print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.65
 
 data(managers)
 print(BurkeRatio(managers['1996']))

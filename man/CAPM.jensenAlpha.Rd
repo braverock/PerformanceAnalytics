@@ -3,7 +3,7 @@
 \alias{Jensen'sAlpha}
 \title{Jensen's alpha of the return distribution}
 \usage{
-  CAPM.jensenAlpha(Ra, Rb, Rf = 0, period = 12, ...)
+  CAPM.jensenAlpha(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -12,9 +12,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{period}{number of periods in a year monthly scale =
-  12, quarterly = 4)}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -33,7 +30,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.41
+print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
 
 data(managers)
 print(CAPM.jensenAlpha(managers['1996',1], managers['1996',8]))

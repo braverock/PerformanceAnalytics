@@ -12,7 +12,6 @@
 #' asset return
 #' @param Rb return vector of the benchmark asset 
 #' @param Rf risk free rate, in same period as your returns
-#' @param Period the number of return in a year in the asset return 
 #' @param Method one of "geometric" or "arithmetic" indicating the method to use
 #' to calculate MSquareExcess
 #' @param \dots any other passthru parameters
@@ -33,7 +32,7 @@
 #'
 #' @export 
 MSquaredExcess <-
-function (Ra, Rb, Rf = 0, Period = 12, Method = c("geometric", "arithmetic"), ...)
+function (Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"), ...)
 {
     Method = Method[1]
 
@@ -49,7 +48,8 @@ function (Ra, Rb, Rf = 0, Period = 12, Method = c("geometric", "arithmetic"), ..
       }
 
      if (calcul) {
-	Rbp = Return.annualized(Rb)
+     	Period = Frequency(Ra)
+        Rbp = (prod(1 + Rb))^(Period / length(Rb)) - 1
 
         switch(Method,
             geometric = {result = (1+MSquared(Ra,Rb))/(1+Rbp) - 1},

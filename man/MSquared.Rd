@@ -2,7 +2,7 @@
 \alias{MSquared}
 \title{M squared of the return distribution}
 \usage{
-  MSquared(Ra, Rb, Rf = 0, Period = 12, ...)
+  MSquared(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -11,9 +11,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{Period}{the number of return in a year in the asset
-  return}
 
   \item{\dots}{any other passthru parameters}
 }

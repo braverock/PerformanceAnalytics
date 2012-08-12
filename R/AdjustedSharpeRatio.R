@@ -12,7 +12,6 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf the risk free rate
-#' @param period the number of returns in a year (ie 12 for monthly returns, 4 for quaterly returns)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -29,7 +28,7 @@
 #'
 #' @export 
 
-AdjustedSharpeRatio <- function (R, Rf = 0, period = 12, ...)
+AdjustedSharpeRatio <- function (R, Rf = 0, ...)
 {
     R = checkData(R)
 
@@ -40,15 +39,16 @@ AdjustedSharpeRatio <- function (R, Rf = 0, period = 12, ...)
      	    	calcul = TRUE
 	     }
         }		      
-       R = na.omit(R)
-       n = length(R)
-       Rp = (prod(1+R/100)^(period/length(R))-1)*100
-       Sigp = sqrt(sum((R-mean(R))^2)/n)*sqrt(period)
-       SR = (Rp - Rf) / Sigp
         if(!calcul) {
 	  result = NA
 	}
 	else {
+	     period = Frequency(R)
+             R = na.omit(R)
+       	     n = length(R)
+       	     Rp = (prod(1+R/100)^(period/length(R))-1)*100
+       	     Sigp = sqrt(sum((R-mean(R))^2)/n)*sqrt(period)
+       	     SR = (Rp - Rf) / Sigp
        	     K = kurtosis(R, method = "moment")
        	     S = skewness(R)
        	     result = SR*(1+(S/6)*SR-((K-3)/24)*SR^2)

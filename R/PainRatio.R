@@ -13,7 +13,6 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf risk free rate, in same period as your returns
-#' @param period number of periods in a year monthly scale = 12, quarterly = 4)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -22,7 +21,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(PainRatio(portfolio_bacon[,1])) #expected 2.59
+#' print(PainRatio(portfolio_bacon[,1])) #expected 2.66
 #'
 #' data(managers)
 #' print(PainRatio(managers['1996']))
@@ -31,7 +30,7 @@
 #' @export 
 
 
-PainRatio <- function (R, Rf = 0, period = 12, ...) 
+PainRatio <- function (R, Rf = 0, ...) 
 {
     R = checkData(R)
 
@@ -49,8 +48,8 @@ PainRatio <- function (R, Rf = 0, period = 12, ...)
 	  result = NA
 	}
 	else {
-       	     Rp = Return.annualized(R)
-#       Rp = (prod(1+R/100)^(period/length(R))-1)*100
+	period = Frequency(R)
+       Rp = (prod(1 + R))^(period / length(R)) - 1
        	   result = (Rp - Rf) / PI
 	}
        return(result)

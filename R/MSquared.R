@@ -14,7 +14,6 @@
 #' asset return
 #' @param Rb return vector of the benchmark asset 
 #' @param Rf risk free rate, in same period as your returns
-#' @param Period the number of return in a year in the asset return 
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -32,7 +31,7 @@
 #'
 #' @export 
 MSquared <-
-function (Ra, Rb, Rf = 0, Period = 12, ...)
+function (Ra, Rb, Rf = 0, ...)
 {
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -46,7 +45,8 @@ function (Ra, Rb, Rf = 0, Period = 12, ...)
       }
 
      if (calcul) {
-        Rp = Return.annualized(Ra)
+        Period = Frequency(Ra)
+        Rp = (prod(1 + Ra))^(Period / length(Ra)) - 1
      	sigp = sqrt(var(Ra)*(length(Ra)-1)/length(Ra))*sqrt(Period)
      	sigm = sqrt(var(Rb)*(length(Rb)-1)/length(Rb))*sqrt(Period)
         result = (Rp - Rf) * sigp / sigm + Rf

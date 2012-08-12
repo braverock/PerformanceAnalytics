@@ -70,7 +70,7 @@ function (Ra, Rb, Rf = 0, scale = NA)
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
     
-     Rp = (prod(1+Ra/100)^(scale/length(Ra))-1)*100
+     Rp = (prod(1 + Ra))^(scale / length(Ra)) - 1
      for (i in (1:length(Ra))) {
      	 if (!is.na(Ra[i])) {
      	    calcul = TRUE

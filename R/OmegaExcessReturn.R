@@ -49,7 +49,7 @@ function (Ra, Rb, MAR = 0, ...)
 
      if (calcul) {
      	Period = Frequency(Ra)
-	Rp = Return.annualized(Ra)
+	Rp = (prod(1 + Ra))^(Period / length(Ra)) - 1
 	SigmaD = DownsideDeviation(Ra,MAR)*sqrt(Period)
 	SigmaDM = DownsideDeviation(Rb,MAR)*sqrt(Period)
         result = Rp - 3 * SigmaD * SigmaDM 

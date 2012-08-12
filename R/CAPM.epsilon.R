@@ -13,7 +13,6 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @param period number of periods in a year monthly scale = 12, quarterly = 4)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -23,7 +22,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.31
+#' print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
 #'
 #' data(managers)
 #' print(CAPM.epsilon(managers['1996',1], managers['1996',8]))
@@ -32,7 +31,7 @@
 #' @export 
 
 CAPM.epsilon <-
-function (Ra, Rb, Rf = 0, period=12, ...)
+function (Ra, Rb, Rf = 0, ...)
 {
     Ra = checkData(Ra, method="matrix")
     Rb = checkData(Rb, method="matrix")
@@ -46,18 +45,12 @@ function (Ra, Rb, Rf = 0, period=12, ...)
         }
      Ra = na.omit(Ra)
      Rb = na.omit(Rb)
-     print(Ra)
-     print(Rb)
-     Rp = (prod(1+Ra/100)^(period/length(Ra))-1)*100
-     Rpb =  (prod(1+Rb/100)^(period/length(Rb))-1)*100 #benchmark total return
-     print(Rp)
-     print(Rpb)
 
         if (calcul) {
-	   print(Rf)
-	   print(CAPM.alpha(Ra,Rb,Rf))
+	   period = Frequency(Ra)
+           Rp = (prod(1 + Ra))^(period / length(Ra)) - 1
+           Rpb = (prod(1 + Rb))^(period / length(Rb)) - 1
            result = Rf + Rp - CAPM.alpha(Ra,Rb,Rf) - (Rpb - Rf) * CAPM.beta(Ra,Rb,Rf) 
-	   print(result)
         }   
         else {
            result = NA

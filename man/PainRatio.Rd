@@ -2,16 +2,13 @@
 \alias{PainRatio}
 \title{Pain ratio of the return distribution}
 \usage{
-  PainRatio(R, Rf = 0, period = 12, ...)
+  PainRatio(R, Rf = 0, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{period}{number of periods in a year monthly scale =
-  12, quarterly = 4)}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -31,7 +28,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(PainRatio(portfolio_bacon[,1])) #expected 2.59
+print(PainRatio(portfolio_bacon[,1])) #expected 2.66
 
 data(managers)
 print(PainRatio(managers['1996']))

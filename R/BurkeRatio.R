@@ -16,7 +16,6 @@
 #' asset returns
 #' @param Rf the risk free rate
 #' @param modified a boolean to decide which ratio to calculate between Burke ratio and modified Burke ratio.
-#' @param period the number of returns in a year (ie 12 for monthly returns, 4 for quaterly returns)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -25,8 +24,8 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(BurkeRatio(portfolio_bacon[,1])) #expected 0.76
-#' print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.86
+#' print(BurkeRatio(portfolio_bacon[,1])) #expected 0.74
+#' print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.65
 #'
 #' data(managers)
 #' print(BurkeRatio(managers['1996']))
@@ -36,7 +35,7 @@
 #'
 #' @export 
 
-BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
+BurkeRatio <- function (R, Rf = 0, modified = FALSE, ...)
 {
     drawdown = c()
     R0 <- R
@@ -55,13 +54,13 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
 	     }
         }		      
 
-       R = na.omit(R)
        if(!calcul) {
             result = NA
 	}
 	else
 	{
-
+	period = Frequency(R)
+       R = na.omit(R)
        for (i in (2:length(R))) {
           if (R[i]<0)
 	  {
@@ -101,8 +100,8 @@ BurkeRatio <- function (R, Rf = 0, modified = FALSE, period = 12, ...)
 
 	    D = Drawdowns(R)
 
-       Rp = (prod(1+R/100)^(period/length(R))-1)*100
-       result = (Rp - Rf)/sqrt(sum(drawdown^2))
+       Rp = (prod(1 + R))^(period / length(R)) - 1
+         result = (Rp - Rf)/sqrt(sum(drawdown^2))
        if(modified)
        {
 		result = result * sqrt(n)

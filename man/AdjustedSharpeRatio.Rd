@@ -2,16 +2,13 @@
 \alias{AdjustedSharpeRatio}
 \title{Adjusted Sharpe ratio of the return distribution}
 \usage{
-  AdjustedSharpeRatio(R, Rf = 0, period = 12, ...)
+  AdjustedSharpeRatio(R, Rf = 0, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
   \item{Rf}{the risk free rate}
-
-  \item{period}{the number of returns in a year (ie 12 for
-  monthly returns, 4 for quaterly returns)}
 
   \item{\dots}{any other passthru parameters}
 }

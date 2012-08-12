@@ -47,7 +47,7 @@ function (Ra, Rb, MAR = 0, ...)
 
      if (calcul) {
      	Period = Frequency(Rb)
-	Rp = Return.annualized(Ra)
+        Rp = (prod(1 + Ra))^(Period / length(Ra)) - 1
 	SigmaD = DownsideDeviation(Ra,MAR)*sqrt(Period)
 	SigmaDM = DownsideDeviation(Rb,MAR)*sqrt(Period)
 	SR = SortinoRatio(Ra,MAR)

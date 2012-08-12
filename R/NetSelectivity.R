@@ -47,7 +47,8 @@ function (Ra, Rb, Rf = 0, ...)
       }
 
      if (calcul) {
-     	b = Return.annualized(Rb)
+     	Period = Frequency(Ra)
+     	b = (prod(1 + Rb))^(Period / length(Rb)) - 1
      	d = (FamaBeta(Ra,Rb)-CAPM.beta(Ra,Rb,Rf)) * (b - Rf)
         result = Selectivity(Ra,Rb,Rf) - d 
      }    

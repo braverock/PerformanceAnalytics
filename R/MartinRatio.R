@@ -49,7 +49,7 @@ MartinRatio <- function (R, Rf = 0, ...)
 	  result = NA
 	}
 	else {
-       	   Rp = Return.annualized(R)
+	   Rp = (prod(1 + R))^(period / length(R)) - 1
        	   result = (Rp - Rf) / UI
 	}
        return(result)

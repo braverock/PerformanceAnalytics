@@ -2,7 +2,7 @@
 \alias{MSquaredExcess}
 \title{M squared excess of the return distribution}
 \usage{
-  MSquaredExcess(Ra, Rb, Rf = 0, Period = 12,
+  MSquaredExcess(Ra, Rb, Rf = 0,
     Method = c("geometric", "arithmetic"), ...)
 }
 \arguments{
@@ -12,9 +12,6 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
-
-  \item{Period}{the number of return in a year in the asset
-  return}
 
   \item{Method}{one of "geometric" or "arithmetic"
   indicating the method to use to calculate MSquareExcess}
