@@ -23,6 +23,8 @@ FitOU = function ( Y, tau )
   VecSig = solve( diag( N^2 ) - expm( Matrix( -TsT * tau ) ) ) %*% TsT %*% VecSig_tau
   Sig = VecSig
   dim( Sig ) = c( N , N )
+  
+  return( list( Mu = Mu, Th = Th, Sig = Sig ) )
 }
 
 OUstep = function( X_0 , t , Mu , Th , Sig )
@@ -53,6 +55,8 @@ OUstep = function( X_0 , t , Mu , Th , Sig )
                      
   X_t = Mu_t + Eps
   Mu_t = t( colMeans( Mu_t ) )
+  
+  return( list( X_t = X_t, Mu_t = Mu_t, Sig_t = Sig_t ) )
 }
 
 ProjectOU = function( x_0 , t , Mu , Th , Sig )
