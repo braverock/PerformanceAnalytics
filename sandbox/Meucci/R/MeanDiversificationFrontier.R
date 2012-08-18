@@ -23,9 +23,11 @@ GenPCBasis = function( S , A )
   if ( length( A ) == 0 )
   {
     N = nrow( S )
+    L = rep( 0, N )
     K = 0
     tmp = eigen( S )
     E_ = tmp$vectors
+    L_ = diag( tmp$values )
     E = E_
     for ( n in 1:N )
     {
@@ -33,6 +35,39 @@ GenPCBasis = function( S , A )
       L[ n ] = L_[ N - n + 1 , N - n + 1 ]
     }
   }
+  else
+  {
+    K = nrow( A )
+    N = ncol( A )
+    emptyMatrix = matrix( ,nrow = 0, ncol = 0 )
+    E = emptyMatrix
+    B = A
+    for ( n in 1:N - K )
+    {
+      if ( length( E ) != 0 )
+      {
+        B = rbind( A, t( E ) %*% S )
+      }
+      e = GenFirstEigVect( S , B )
+      E = cbind( E , e )
+    }
+     
+    for ( n in N - K + 1:N )
+    {
+      B = t( E ) %*% S
+      e = GenFirstEigVect( S , B )
+      E = cbind( E , e )
+    }
+     
+    # swap order
+    E = cbind( E[ , N - K + 1:N ], E[ , 1:N - K ] )
+  }
+  
+  v = t( E ) %*% S %*% E
+  L = diag( v , nrow = length( v ) )
+
+  G = diag( sqrt( L ), nrow = length( L ) ) %*% solve( E )
+  G = G[ K + 1:N , ]
   return( list( E = E, L = L, G = G ) )
 }
 
@@ -45,19 +80,32 @@ MaxEntropy = function( G , w_b , w_0 , Constr )
     p = v_ * v_
     R_2 = max( 10^(-10), p / colSums( p ) )
     Minus_Ent = t( R_2 ) * log( R_2 )
-    return( Minus_Ent )
+    
+    # evaluate gradient
+    gradient = rbind( Constr$b - Constr$A %*% x , Constr$beq - Constr$Aeq %*% x )
+    
+    return( list( objective = Minus_Ent , gradient = gradient ) )
   }
-  x = fmincon( @nestedfun , w_0 , Constr.A , Constr.b , Constr.Aeq , Constr.beq )
+  
+  local_opts <- list( algorithm = "NLOPT_LD_SLSQP", xtol_rel = 1.0e-6 , 
+                      check_derivatives = TRUE , check_derivatives_print = "all" , 
+                      eval_f = nestedfun )
+  x = nloptr( x0 = x0 , eval_f = nestedfunC ,
+              opts = list( algorithm = "NLOPT_LD_AUGLAG" , local_opts = local_opts ,
+                print_level = 2 , maxeval = 1000 , 
+                check_derivatives = TRUE , check_derivatives_print = "all" , xtol_rel = 1.0e-6 ) )
   return( x )
 }
 
 MeanTCEntropyFrontier = function( S , Mu , w_b , w_0 , Constr )
 {
+  emptyMatrix = matrix( ,nrow = 0, ncol = 0)
   # compute conditional principal portfolios
   GenPCBasisResult = GenPCBasis( S, emptyMatrix )
 
-  # compute frontier extrema
-  w_MaxExp = linprog( -Mu , Constr.A , Constr.b , Constr.Aeq , Constr.beq )
+  # compute frontier extrema]
+  library( limSolve )
+  w_MaxExp = linp( E = Constr$Aeq , F = Constr$beq , G = -1*Constr$A , H = -1*Constr$b, Cost = -Mu , ispos = FALSE)$X
   MaxExp = t( Mu ) %*% ( w_MaxExp - w_b )
 
   w_MaxNe = MaxEntropy( G , w_b , w_0 , Constr )
@@ -80,8 +128,8 @@ MeanTCEntropyFrontier = function( S , Mu , w_b , w_0 , Constr )
   for ( k in 1:NumPortf )
   {
     ConstR = Constr
-    ConstR.Aeq = cbind( Constr.Aeq, t( Mu ) )
-    ConstR.beq = cbind( Constr.beq, TargetExp[ k ] + t( Mu ) %*% w_b )
+    ConstR$Aeq = cbind( Constr$Aeq, t( Mu ) )
+    ConstR$beq = cbind( Constr$beq, TargetExp[ k ] + t( Mu ) %*% w_b )
 
     w = MaxEntropy( G , w_b , w_0 , ConstR )
 
