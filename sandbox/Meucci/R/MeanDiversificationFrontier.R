@@ -51,20 +51,20 @@ GenPCBasis = function( S , A )
       e = GenFirstEigVect( S , B )
       E = cbind( E , e )
     }
-     
+    
     for ( n in N - K + 1:N )
     {
       B = t( E ) %*% S
       e = GenFirstEigVect( S , B )
       E = cbind( E , e )
     }
-     
+
     # swap order
     E = cbind( E[ , N - K + 1:N ], E[ , 1:N - K ] )
-  }
-  
-  v = t( E ) %*% S %*% E
-  L = diag( v , nrow = length( v ) )
+  }  
+ 
+  v = t( E ) %*% as.matrix( S ) %*% E
+  L = diag( v )
 
   G = diag( sqrt( L ), nrow = length( L ) ) %*% solve( E )
   G = G[ K + 1:N , ]
@@ -73,12 +73,13 @@ GenPCBasis = function( S , A )
 
 MaxEntropy = function( G , w_b , w_0 , Constr )
 {
+  library( nloptr )
   # Nested function that computes fitness
   nestedfun = function( x )
   {
-    v_ = G %*% ( x - w_b )
+    v_ = G %*% ( x - as.matrix( w_b ) )
     p = v_ * v_
-    R_2 = max( 10^(-10), p / colSums( p ) )
+    R_2 = pmax( 10^(-10), p / colSums( p ) )
     Minus_Ent = t( R_2 ) * log( R_2 )
     
     # evaluate gradient
@@ -88,12 +89,13 @@ MaxEntropy = function( G , w_b , w_0 , Constr )
   }
   
   local_opts <- list( algorithm = "NLOPT_LD_SLSQP", xtol_rel = 1.0e-6 , 
-                      check_derivatives = TRUE , check_derivatives_print = "all" , 
+                      check_derivatives = FALSE , #check_derivatives_print = "all" , 
                       eval_f = nestedfun )
-  x = nloptr( x0 = x0 , eval_f = nestedfunC ,
+  x = nloptr( x0 = w_0 , eval_f = nestedfun ,
               opts = list( algorithm = "NLOPT_LD_AUGLAG" , local_opts = local_opts ,
                 print_level = 2 , maxeval = 1000 , 
-                check_derivatives = TRUE , check_derivatives_print = "all" , xtol_rel = 1.0e-6 ) )
+                check_derivatives = FALSE , #check_derivatives_print = "all" , 
+                           xtol_rel = 1.0e-6 ) )
   return( x )
 }
 
@@ -105,10 +107,10 @@ MeanTCEntropyFrontier = function( S , Mu , w_b , w_0 , Constr )
 
   # compute frontier extrema]
   library( limSolve )
-  w_MaxExp = linp( E = Constr$Aeq , F = Constr$beq , G = -1*Constr$A , H = -1*Constr$b, Cost = -Mu , ispos = FALSE)$X
-  MaxExp = t( Mu ) %*% ( w_MaxExp - w_b )
+  w_MaxExp = as.matrix( linp( E = Constr$Aeq , F = Constr$beq , G = -1*Constr$A , H = -1*Constr$b, Cost = -t( Mu ) , ispos = FALSE)$X )
+  MaxExp = t( Mu ) %*% ( w_MaxExp - as.matrix( w_b ) )
 
-  w_MaxNe = MaxEntropy( G , w_b , w_0 , Constr )
+  w_MaxNe = MaxEntropy( GenPCBasisResult$G , w_b , w_0 , Constr )
   ExpMaxNe = t( Mu ) %*% ( w_MaxNe - w_b )
 
   # slice efficient frontier in NumPortf equally thick horizontal sections
@@ -131,13 +133,13 @@ MeanTCEntropyFrontier = function( S , Mu , w_b , w_0 , Constr )
     ConstR$Aeq = cbind( Constr$Aeq, t( Mu ) )
     ConstR$beq = cbind( Constr$beq, TargetExp[ k ] + t( Mu ) %*% w_b )
 
-    w = MaxEntropy( G , w_b , w_0 , ConstR )
+    w = MaxEntropy( GenPCBasisResult$G , w_b , w_0 , ConstR )
 
     m = t( Mu ) %*% ( w - w_b )
     
     s = sqrt( t( w - w_b ) %*% S %*% ( w - w_b ) )
     
-    v_ = G %*% ( w - w_b )
+    v_ = GenPCBasisResult$G %*% ( w - w_b )
     TE_contr = v_ * v_ / s
 
     R_2 = max( 10^(-10) , TE_contr / colSums( TE_contr ) )

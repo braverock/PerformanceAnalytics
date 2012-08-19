@@ -16,9 +16,9 @@ w_0 = rep( 1, N ) / N
 # long-short constraints...
 Constr = list()
 Constr$A = rbind( diag( N ), -diag( N ) )
-Constr$b = rbind( rep( 1, N ), rep( 0.1, N ) )
-Constr$Aeq = rep( 1 , N ) # budget constraint...
-Constr$beq = 1
+Constr$b = rbind( as.matrix( rep( 1, N ) ), as.matrix( rep( 0.1, N ) ) )
+Constr$Aeq = t( as.matrix( rep( 1 , N ) ) ) # budget constraint...
+Constr$beq = as.matrix( 1 )
 
 # mean-diversification analysis and frontier
 EntropyFrontier = MeanTCEntropyFrontier( S , Mu , w_b , w_0 , Constr )

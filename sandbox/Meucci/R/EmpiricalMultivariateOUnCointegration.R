@@ -1,5 +1,6 @@
 FitOU = function ( Y, tau )
 {
+  library(expm)
   T = nrow( Y )
   N = ncol( Y )
 
@@ -20,7 +21,7 @@ FitOU = function ( Y, tau )
 
   VecSig_tau = Sig_tau
   dim( VecSig_tau ) = c( N^2 , 1 )
-  VecSig = solve( diag( N^2 ) - expm( Matrix( -TsT * tau ) ) ) %*% TsT %*% VecSig_tau
+  VecSig = solve( diag( N^2 ) - expm( as.matrix( -TsT * tau ) ) ) %*% TsT %*% VecSig_tau
   Sig = VecSig
   dim( Sig ) = c( N , N )
   
@@ -33,20 +34,20 @@ OUstep = function( X_0 , t , Mu , Th , Sig )
   N = ncol( X_0 )
 
   # location
-  ExpM = expm( Matrix( -Th %*% t ) )
+  ExpM = expm( as.matrix ( -Th * t ) )
   
   # repmat = function(X,m,n) - R equivalent of repmat (matlab)
   X = t( Mu - ExpM %*% Mu )
   mx = dim( X )[1]
   nx = dim( X )[2]
-  Mu_t = matrix( t ( matrix( X , mx , nx*1 ) ), mx * NumSimul, nx * 1, byrow = T ) + t( X_0 %*% ExpM )
+  Mu_t = matrix( t ( matrix( X , mx , nx*1 ) ), mx * NumSimul, nx * 1, byrow = T ) + X_0 %*% ExpM
               
   # scatter
   TsT = kronecker( Th , diag( N ) ) + kronecker( diag( N ) , Th )
               
   VecSig = Sig
   dim( VecSig ) = c( N^2 , 1 )
-  VecSig_t = solve( TsT ) %*% ( diag( N^2 ) - expm( Matrix( -TsT %*% t ) ) ) %*% VecSig
+  VecSig_t = solve( TsT ) %*% ( diag( N^2 ) - expm( as.matrix( -TsT * t ) ) ) %*% VecSig
   Sig_t = VecSig_t
   dim( Sig_t ) = c( N , N )
   Sig_t = ( Sig_t + t( Sig_t ) ) / 2
@@ -64,14 +65,14 @@ ProjectOU = function( x_0 , t , Mu , Th , Sig )
   N = length( x_0 )
 
   # location
-  Mu_t = Mu + expm( Matrix( -Th %*% t ) ) %*% ( x_0 - Mu )
+  Mu_t = Mu + expm( as.matrix( -Th * t ) ) %*% ( x_0 - Mu )
 
   # scatter
   TsT = kronecker( Th , diag( N ) ) + kronecker( diag( N ) , Th )
 
   VecSig = Sig
   dim( VecSig ) = c( N^2 , 1 )
-  VecSig_t = solve( TsT ) %*% ( diag( N^2 ) - expm( Matrix( -TsT %*% t ) ) ) %*% VecSig
+  VecSig_t = solve( TsT ) %*% ( diag( N^2 ) - expm( as.matrix( -TsT * t ) ) ) %*% VecSig
   Sig_t = VecSig_t
   dim( Sig_t ) = c( N , N )
 }
