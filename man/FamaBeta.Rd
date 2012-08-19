@@ -14,8 +14,8 @@
 }
 \description{
   Fama beta is a beta used to calculate the loss of
-  diversification. It is made so so that the systematic
-  risk is equivalent to the total portfolio risk.
+  diversification. It is made so that the systematic risk
+  is equivalent to the total portfolio risk.
 }
 \details{
   \deqn{\beta_F = \frac{\sigma_P}{\sigma_M}}{Fama beta =

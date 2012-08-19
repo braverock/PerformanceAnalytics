@@ -24,7 +24,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(NetSelectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.41
+#' print(NetSelectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.017
 #'
 #' data(managers)
 #' print(NetSelectivity(managers['1996',1], managers['1996',8]))

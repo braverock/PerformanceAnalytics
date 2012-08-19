@@ -107,8 +107,8 @@
 
 data(portfolio_bacon)
 MAR = 0.5
-DownsideDeviation(portfolio_bacon, MAR) #expected 2.55
-DownsidePotential(portfolio_bacon, MAR) #expected 1.37
+DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.493
+DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.491
 
 #with data of managers
 

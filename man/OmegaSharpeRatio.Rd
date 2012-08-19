@@ -14,8 +14,9 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  The omega ratio is a conversion of the omega ratio to a
-  ranking statistic in familiar form to the Sharpe ratio.
+  The Omega-Sharpe ratio is a conversion of the omega ratio
+  to a ranking statistic in familiar form to the Sharpe
+  ratio.
 }
 \details{
   To calculate the Omega-Sharpe ration we subtract the

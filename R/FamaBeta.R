@@ -1,6 +1,6 @@
 #' Fama beta of the return distribution
 #'
-#' Fama beta is a beta used to calculate the loss of diversification. It is made so
+#' Fama beta is a beta used to calculate the loss of diversification. It is made
 #' so that the systematic risk is equivalent to the total portfolio risk.
 #'
 #' \deqn{\beta_F = \frac{\sigma_P}{\sigma_M}}{Fama beta = portfolio standard deviation / benchmark standard deviation}

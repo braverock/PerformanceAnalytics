@@ -21,7 +21,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(Selectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -1.41
+#' print(Selectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.0141
 #'
 #' data(managers)
 #' print(Selectivity(managers['1996',1], managers['1996',8]))

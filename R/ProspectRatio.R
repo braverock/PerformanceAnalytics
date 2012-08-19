@@ -20,7 +20,7 @@
 #' @examples
 #' data(portfolio_bacon)
 #' MAR = 0.05
-#' print(ProspectRatio(portfolio_bacon[,1], MAR)) #expected -0.221
+#' print(ProspectRatio(portfolio_bacon[,1], MAR)) #expected -0.134
 #'
 #' data(managers)
 #' MAR = 0

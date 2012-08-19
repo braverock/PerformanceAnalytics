@@ -20,7 +20,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(TotalRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 13.4
+#' print(TotalRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.0134
 #'
 #' data(managers)
 #' print(TotalRisk(managers['1996',1], managers['1996',8]))

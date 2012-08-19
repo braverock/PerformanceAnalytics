@@ -21,7 +21,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.0318
+#' print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.034
 #'
 #' data(managers)
 #' print(SkewnessKurtosisRatio(managers['1996']))

@@ -33,7 +33,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2], method="appraisal")) #expected -0.375
+#' print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2], method="appraisal")) #expected -0.430
 #' print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2], method="modified")) 
 #' print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2], method="alternative"))
 #'

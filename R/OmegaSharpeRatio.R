@@ -1,6 +1,6 @@
 #' Omega-Sharpe ratio of the return distribution
 #'
-#' The omega ratio is a conversion of the omega ratio to a ranking statistic 
+#' The Omega-Sharpe ratio is a conversion of the omega ratio to a ranking statistic 
 #' in familiar form to the Sharpe ratio.
 #'
 #' To calculate the Omega-Sharpe ration we subtract the target (or Minimum
