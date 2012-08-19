@@ -15,9 +15,13 @@ DetectOutliersViaMVE                Use the minimum volume ellipsoid to detect o
 efficientFrontier                   Construct the mean-variance efficient frontier using a quadratic solver
 EntropyProg                         Entropy pooling program for blending views on scenarios with a prior
                                     scenario-probability distribution
+FitOU                               Fit the Ornstein-uhlenbeck process to model the behavior for different
+                                    values of the timestep.
 gaussHermiteMesh                    Generates grid reprensentation of a distribution according to the
                                     method suggested by Meucci and inspired from Gauss-Hermite quadratures.
 GenerateLogNormalDistribution       Generate arbitrary distribution of a shifted-lognormal invariant
+GenFirstEigVect                     This function generates the first eigen vector
+GenPCBasis                          This function computes the conditional principal portfolios
 hermitePolynomial                   Generate a Hermite Polynomial of order n
 integrateSubIntervals               Integrate the subinterval for the given cumulative distribution
                                     function to get the equivalent probability
@@ -29,11 +33,17 @@ kernelinv                           Evaluates inverse probability distribution f
 kernelpdf                           Evaluates probability distribution function for the input numeric value
 linreturn                           Generate arithmetric returns and arithmetric covariance matrix given a
                                     distribution of log returns
+MaxEntropy                          This function computes the extreme frontier
+MeanTCEntropyFrontier               This function computes the mean diversification efficient frontier
 MvnRnd                              Generates normal simulations whose sample moments match the population
                                     moments
 NoisyObservations                   Generate observations from a two asset covariance matrix and add
                                     outliers
 normalizeProb                       Generates the normalized probability for an input probability value
+OUstep                              Generate the next element based on Ornstein-Uhlenbeck Process
+OUstepEuler                         Generate the next element based on Ornstein-Uhlenbeck process using
+                                    antithetic concept and assuming that the Brownian motion has Euler
+                                    discretization
 PanicCopula                         Copula-Marginal Algorithm (CMA)
 PartialConfidencePosterior          Constructs the partial confidence posterior based on a prior, sample
                                     mu/covariance, and relative confidence in the prior

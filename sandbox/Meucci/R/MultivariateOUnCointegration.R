@@ -53,7 +53,7 @@ OUstep = function( X_0 , t , Mu , Th , Sig )
 #' Brownian motion has Euler discretization
 #' 
 #' @param X_0   a matrix containing the starting value of each process
-#' @param t     a numeric containing the timestep   
+#' @param Dt     a numeric containing the timestep   
 #' @param Mu    a vector containing the unconditional expectation of the process
 #' @param Th    a transition matrix, i.e., a fully generic square matrix that steers the deterministic portion
 #'              of the evolution of the process

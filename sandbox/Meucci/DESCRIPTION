@@ -33,3 +33,5 @@ Collate:
     'Prior2Posterior.R'
     'RankingInformation.R'
     'RobustBayesianAllocation.R'
+    'MeanDiversificationFrontier.R'
+    'MultivariateOUnCointegration.R'

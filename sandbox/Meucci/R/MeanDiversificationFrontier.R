@@ -38,6 +38,7 @@ GenFirstEigVect = function( S , A )
 #' @return E    a matrix containing conditional principal portfolios composition
 #' @return L    a matrix containing conditional principal portfolios variances
 #' @return G    map weights -> conditional diversification distribution (square root of, not normalized)
+#'
 #' \deqn{ e_{n}  \equiv   argmax_{ e'e  \equiv 1 }  \big\{ e' \Sigma e \big\} s.t.  e' \Sigma  e_{j}  \equiv 0 }
 #' @references 
 #' A. Meucci - "Managing Diversification", Risk Magazine, June 2009 - Formula (12)
@@ -104,6 +105,7 @@ GenPCBasis = function( S , A )
 #' @param Constr  a list containing the equality and inequality constraints
 #'
 #' @return x      a numeric containing the maximum entropy
+#'
 #' \deqn{  N_{ent}  \equiv exp \big(-\sum_{n=k+1}^N  p_{n} ln p_{n}  \big),
 #'  w_{  \varphi }  \equiv  argmax_{w \in C,   \mu'w  \geq  \varphi  }  N_{ent}   \big(w\big) }
 #' @references 
