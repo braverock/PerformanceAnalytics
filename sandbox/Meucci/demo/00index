@@ -13,3 +13,8 @@ RobustBayesianAllocation    This script replicates the example from Meucci's MAT
 S_plotGaussHermite          This example script displays mesh points based on Gaussian-Hermite quadrature
 S_SnPCaseStudy              This script replicates the example from Meucci's MATLAB script S_SnPCaseStudy.M
 S_ToyExample                This toy example illustrates the use of Entropy Pooling to compute Fully Flexible Bayesian networks
+S_FitProjectRates           This script fits the swap rates dynamics to a multivariate Ornstein-Uhlenbeck process and computes and plots the estimated future distribution
+S_CheckDiagonalization      This script verifies the correctness of the eigenvalue-eigenvector representation in terms of real matrices for the transition matrix of an OU process
+S_CovarianceEvolution       This script represents the evolution of the covariance of an OU process in terms of the dispersion ellipsoid
+S_DeterministicEvolution    This script animates the evolution of the determinstic component of an OU process
+MeanDiversificationFrontier This script computes the mean-diversification efficient frontier
