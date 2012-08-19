@@ -1,3 +1,14 @@
+#' This function generates the first eigen vector
+#' 
+#' @param S     Covariance Matrix
+#' @param A     Conditioning Matrix
+#'
+#' @return e    First Eigen Vector
+#'
+#' @references 
+#' A. Meucci - "Managing Diversification", Risk Magazine, June 2009
+#' \url{http://ssrn.com/abstract=1358533}
+#' @author Manan Shah \email{mkshah@@cmu.edu}
 GenFirstEigVect = function( S , A )
 {
   N = nrow( S )
@@ -18,6 +29,20 @@ GenFirstEigVect = function( S , A )
   return( e )
 }
 
+#' This function computes the conditional principal portfolios
+#' 
+#' @param S     Covariance Matrix
+#' @param A     Conditioning Matrix
+#'
+#' @return      a list containing
+#' @return E    a matrix containing conditional principal portfolios composition
+#' @return L    a matrix containing conditional principal portfolios variances
+#' @return G    map weights -> conditional diversification distribution (square root of, not normalized)
+#' \deqn{ e_{n}  \equiv   argmax_{ e'e  \equiv 1 }  \big\{ e' \Sigma e \big\} s.t.  e' \Sigma  e_{j}  \equiv 0 }
+#' @references 
+#' A. Meucci - "Managing Diversification", Risk Magazine, June 2009 - Formula (12)
+#' \url{http://ssrn.com/abstract=1358533}
+#' @author Manan Shah \email{mkshah@@cmu.edu}
 GenPCBasis = function( S , A )
 {  
   if ( length( A ) == 0 )
@@ -71,6 +96,20 @@ GenPCBasis = function( S , A )
   return( list( E = E, L = L, G = G ) )
 }
 
+#' This function computes the extreme frontier
+#' 
+#' @param G       map weights -> conditional diversification distribution (square root of, not normalized)
+#' @param w_b     a matrix containing the benchmark weights
+#' @param w_0     a matrix containing the initial portfolio weights
+#' @param Constr  a list containing the equality and inequality constraints
+#'
+#' @return x      a numeric containing the maximum entropy
+#' \deqn{  N_{ent}  \equiv exp \big(-\sum_{n=k+1}^N  p_{n} ln p_{n}  \big),
+#'  w_{  \varphi }  \equiv  argmax_{w \in C,   \mu'w  \geq  \varphi  }  N_{ent}   \big(w\big) }
+#' @references 
+#' A. Meucci - "Managing Diversification", Risk Magazine, June 2009 - Formula (18,19)
+#' \url{http://ssrn.com/abstract=1358533}
+#' @author Manan Shah \email{mkshah@@cmu.edu}
 MaxEntropy = function( G , w_b , w_0 , Constr )
 {
   library( nloptr )
@@ -99,13 +138,32 @@ MaxEntropy = function( G , w_b , w_0 , Constr )
   return( x )
 }
 
+#' This function computes the mean diversification efficient frontier
+#' 
+#' @param S       Covariance Matrix
+#' @param Mu      a matrix containing the expectations 
+#' @param w_b     a matrix containing the benchmark weights
+#' @param w_0     a matrix containing the initial portfolio weights
+#' @param Constr  a list containing the equality and inequality constraints
+#'
+#' @return        a list containing
+#' @return Weights
+#' @return Ne_s
+#' @return R_2_s
+#' @return m_s
+#' @return s_S
+#'
+#' @references 
+#' A. Meucci - "Managing Diversification", Risk Magazine, June 2009
+#' \url{http://ssrn.com/abstract=1358533}
+#' @author Manan Shah \email{mkshah@@cmu.edu}
 MeanTCEntropyFrontier = function( S , Mu , w_b , w_0 , Constr )
 {
   emptyMatrix = matrix( ,nrow = 0, ncol = 0)
   # compute conditional principal portfolios
   GenPCBasisResult = GenPCBasis( S, emptyMatrix )
 
-  # compute frontier extrema]
+  # compute frontier extrema
   library( limSolve )
   w_MaxExp = as.matrix( linp( E = Constr$Aeq , F = Constr$beq , G = -1*Constr$A , H = -1*Constr$b, Cost = -t( Mu ) , ispos = FALSE)$X )
   MaxExp = t( Mu ) %*% ( w_MaxExp - as.matrix( w_b ) )
