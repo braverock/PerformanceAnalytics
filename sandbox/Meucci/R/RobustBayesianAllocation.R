@@ -84,10 +84,6 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #' where each portfolio is equally distanced in return space. The function also returns the most robust
 #' portfolio along the Bayesian efficient frontier
 #'
-#' \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w \leq  \gamma_{\Sigma}^{(i)} }  \big\{w' \mu^{1} -  \gamma _{\mu}  \sqrt{w' \Sigma_{1} w} \big\} 
-#' \\ \gamma_{\mu} \equiv  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}  \frac{v_{1}}{v_{1} - 2} }
-#' \\ \gamma_{\Sigma}^{(i)} \equiv  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1}  \sqrt{ \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } } }  } }
-#'
 #' @param mean_post          the posterior vector of means (after blending prior and sample data)
 #' @param cov_post           the posterior covariance matrix (after blending prior and sample data)
 #' @param nu_post            a numeric with the relative confidence in the prior vs. the sample data. A value of 2 indicates twice as much weight to assign to the prior vs. the sample data. Must be greater than or equal to zero
@@ -99,14 +95,17 @@ efficientFrontier = function( discretizations , cov , mu , longonly = FALSE )
 #'
 #' @return a list of portfolios along the frontier from least risky to most risky
 #'   bayesianFrontier        a list with portfolio along the Bayesian efficient frontier. Specifically:
-#'                               returns: the expected returns of each portfolo along the Bayesian efficient frontier
-#'                               volatility: the expected volatility of each portfolo along the Bayesian efficient frontier
-#'                               weights: the weights of each portfolo along the Bayesian efficient frontier
+#'                               returns: the expected returns of each portfolio along the Bayesian efficient frontier
+#'                               volatility: the expected volatility of each portfolio along the Bayesian efficient frontier
+#'                               weights: the weights of each portfolio along the Bayesian efficient frontier
 #'   robustPortfolio         the most robust portfolio along the Bayesian efficient frontier. Specifically:
-#'                               returns: the expected returns of each portfolo along the Bayesian efficient frontier
-#'                               volatility: the expected volatility of each portfolo along the Bayesian efficient frontier
-#'                               weights: the weights of each portfolo along the Bayesian efficient frontier
+#'                               returns: the expected returns of each portfolio along the Bayesian efficient frontier
+#'                               volatility: the expected volatility of each portfolio along the Bayesian efficient frontier
+#'                               weights: the weights of each portfolio along the Bayesian efficient frontier
 #'
+#' \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w \leq  \gamma_{\Sigma}^{(i)} }  \big\{w' \mu^{1} -  \gamma _{\mu}  \sqrt{w' \Sigma_{1} w} \big\},
+#' \gamma_{\mu} \equiv  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}  \frac{v_{1}}{v_{1} - 2} }
+#' \gamma_{\Sigma}^{(i)} \equiv  \frac{v^{(i)}}{ \frac{ \nu_{1}}{\nu_{1}+N+1} + \sqrt{ \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } } } }
 #' @references
 #' A. Meucci - Robust Bayesian Allocation - See formula (19) - (21) 
 #' \url{ http://papers.ssrn.com/sol3/papers.cfm?abstract_id=681553 }

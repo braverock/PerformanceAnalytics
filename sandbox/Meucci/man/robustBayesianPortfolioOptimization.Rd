@@ -42,18 +42,27 @@
   a list of portfolios along the frontier from least risky
   to most risky bayesianFrontier a list with portfolio
   along the Bayesian efficient frontier. Specifically:
-  returns: the expected returns of each portfolo along the
+  returns: the expected returns of each portfolio along the
   Bayesian efficient frontier volatility: the expected
-  volatility of each portfolo along the Bayesian efficient
-  frontier weights: the weights of each portfolo along the
+  volatility of each portfolio along the Bayesian efficient
+  frontier weights: the weights of each portfolio along the
   Bayesian efficient frontier robustPortfolio the most
   robust portfolio along the Bayesian efficient frontier.
   Specifically: returns: the expected returns of each
-  portfolo along the Bayesian efficient frontier
-  volatility: the expected volatility of each portfolo
+  portfolio along the Bayesian efficient frontier
+  volatility: the expected volatility of each portfolio
   along the Bayesian efficient frontier weights: the
-  weights of each portfolo along the Bayesian efficient
+  weights of each portfolio along the Bayesian efficient
   frontier
+
+  \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w
+  \leq \gamma_{\Sigma}^{(i)} } \big\{w' \mu^{1} - \gamma
+  _{\mu} \sqrt{w' \Sigma_{1} w} \big\}, \gamma_{\mu} \equiv
+  \sqrt{ \frac{q_{\mu}^{2}}{T_{1}} \frac{v_{1}}{v_{1} - 2}
+  } \gamma_{\Sigma}^{(i)} \equiv \frac{v^{(i)}}{ \frac{
+  \nu_{1}}{\nu_{1}+N+1} + \sqrt{
+  \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } }
+  } }
 }
 \description{
   Construct a collection of portfolios along the Bayesian
@@ -61,16 +70,6 @@
   equally distanced in return space. The function also
   returns the most robust portfolio along the Bayesian
   efficient frontier
-}
-\details{
-  \deqn{ w_{rB}^{(i)} = argmax_{w \in C, w' \Sigma_{1} w
-  \leq \gamma_{\Sigma}^{(i)} } \big\{w' \mu^{1} - \gamma
-  _{\mu} \sqrt{w' \Sigma_{1} w} \big\} \\ \gamma_{\mu}
-  \equiv \sqrt{ \frac{q_{\mu}^{2}}{T_{1}}
-  \frac{v_{1}}{v_{1} - 2} } \\ \gamma_{\Sigma}^{(i)} \equiv
-  \frac{v^{(i)}{ \frac{ \nu_{1}}{\nu_{1}+N+1} \sqrt{
-  \frac{2\nu_{1}^{2}q_{\Sigma}^{2}}{ (\nu_{1}+N+1)^{3} } }
-  } } }
 }
 \author{
   Ram Ahluwalia \email{ram@wingedfootcapital.com}
