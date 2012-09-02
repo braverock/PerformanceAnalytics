@@ -91,3 +91,16 @@ function (p, w, mu, sigma, M3, M4 , names)
 #out = Table.VaR.CornishFisher.portfolio ( p = 0.95 , w = rep(1/N,N) , mu = mu , sigma = sigma , M3 = m3 , M4 = m4 , names = colnames(edhec) ) 
 
 
+
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id$
+#
+###############################################################################
