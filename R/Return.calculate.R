@@ -22,9 +22,17 @@
 #' \code{\link[tseries]{get.hist.quote}}, which is found in package
 #' \code{tseries}.
 #' 
+#' We have changes the default arguments and settings for \code{method}
+#' from \code{compound} and \code{simple} to \code{discrete} and 
+#' \code{log} and \code{discrete} to avoid confusing between the return type
+#' and the chaining method.  In most of the rest of \code{PerformanceAnalytics},
+#' compound and simple are used to refer to the \emph{return chaining} method used for the returns.
+#' The default for this function is to use discrete returns, because most other package 
+#' functions use compound chaining by default.
+#'  
 #' @aliases CalculateReturns Return.calculate
 #' @param prices data object containing ordered price observations
-#' @param method calculate "simple" or "compound" returns, default compound
+#' @param method calculate "discrete" or "log" returns, default discrete(simple)
 #' @author Peter Carl
 #' @seealso \code{\link{Return.cumulative}}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
@@ -39,14 +47,13 @@
 #'   \dontshow{
 #'     data(prices)
 #'   }
-#' R.IBM = Return.calculate(prices, method="simple")
-#' R.IBM = as.xts(R.IBM)
+#' R.IBM = Return.calculate(prices, method="discrete")
 #' colnames(R.IBM)="IBM"
 #' chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 #' round(R.IBM,2)
 #' @export
 Return.calculate <-
-function(prices, method = c("compound","simple"))
+function(prices, method = c("discrete","log"))
 { # @ author Peter Carl
 
     #  Calculate returns from a price stream
@@ -61,22 +68,23 @@ function(prices, method = c("compound","simple"))
     method = method[1]
     pr = checkData(prices, method = "xts")
 
-    if(method=="simple")
+    if(method=="simple" || method=='discrete'){
         #Returns = pr/pr[-nrow(pr), ] - 1
         Returns = pr/xts:::lagts.xts(pr) - 1
-
-    if(method=="compound") {
+        xtsAttributes(Returns) <- list(ret_type="discrete")
+    }
+    if(method=="compound" || method=='log') {
         Returns = diff(log(pr))
+        xtsAttributes(Returns) <- list(ret_type="log")
     }
 
     reclass(Returns,match.to=pr)
-
 }
 
 #' @rdname Return.calculate
 #' @export 
-CalculateReturns <-
-function(prices, method = c("compound","simple"))
+CalculateReturns <- 
+function(prices, method = c("discrete","log"))
 { # @ author Peter Carl
     Return.calculate(prices=prices, method=method)
 }

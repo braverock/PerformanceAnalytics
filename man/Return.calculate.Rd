@@ -3,8 +3,7 @@
 \alias{Return.calculate}
 \title{calculate simple or compound returns from prices}
 \usage{
-  Return.calculate(prices,
-    method = c("compound", "simple"))
+  Return.calculate(prices, method = c("discrete", "log"))
 
   CalculateReturns(prices,
     method = c("compound", "simple"))
@@ -13,8 +12,8 @@
   \item{prices}{data object containing ordered price
   observations}
 
-  \item{method}{calculate "simple" or "compound" returns,
-  default compound}
+  \item{method}{calculate "discrete" or "log" returns,
+  default discrete(simple)}
 }
 \description{
   calculate simple or compound returns from prices
@@ -45,6 +44,17 @@
   specify \code{quote="AdjClose"} in
   \code{\link[tseries]{get.hist.quote}}, which is found in
   package \code{tseries}.
+
+  We have changes the default arguments and settings for
+  \code{method} from \code{compound} and \code{simple} to
+  \code{discrete} and \code{log} and \code{discrete} to
+  avoid confusing between the return type and the chaining
+  method.  In most of the rest of
+  \code{PerformanceAnalytics}, compound and simple are used
+  to refer to the \emph{return chaining} method used for
+  the returns. The default for this function is to use
+  discrete returns, because most other package functions
+  use compound chaining by default.
 }
 \examples{
 \dontrun{
