@@ -180,17 +180,15 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
       for (col in colnames(weights)){
           wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
       }
-      wealthindex=apply(wealthindex.weighted,1,sum)
-
-      # weighted cumulative returns
-      weightedcumcont=t(apply (wealthindex.assets,1, function(x,weights){ as.vector((x-1)* weights)},weights=weights))
-      weightedreturns=diff(rbind(0,weightedcumcont)) # compound returns
-      colnames(weightedreturns)=colnames(wealthindex.assets)
-      if (!wealth.index){
-        result=as.matrix(apply(weightedreturns,1,sum),ncol=1)
-      } else {
-        wealthindex=matrix(cumprod(1 + as.matrix(apply(weightedreturns,1, sum), ncol = 1)),ncol=1)
-      }
+      wealthindex=as.xts(apply(wealthindex.weighted,1,sum))
+      result = wealthindex
+      result[2:length(result)] = result[2:length(result)] /
+        lag(result)[2:length(result)] - 1
+      result[1] = result[1] - 1
+      w = matrix(rep(NA), ncol(wealthindex.assets) * nrow(wealthindex.assets), ncol = ncol(wealthindex.assets), nrow = nrow(wealthindex.assets))
+      w[1, ] = weights
+      w[2:length(wealthindex), ] = (wealthindex.weighted / rep(wealthindex, ncol(wealthindex.weighted)))[1:(length(wealthindex) - 1), ]
+      weightedreturns = R[, colnames(weights)] * w
     }
 
 
@@ -204,7 +202,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
 
     if (contribution==TRUE){
         # show the contribution to the returns in each period.
-        result=cbind(weightedreturns,result)
+        result=cbind(weightedreturns, coredata(result))
     }
     rownames(result)<-NULL # avoid a weird problem with rbind, per Jeff
     result<-reclass(result, R)
