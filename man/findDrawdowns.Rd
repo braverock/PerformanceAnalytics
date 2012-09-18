@@ -9,8 +9,9 @@
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 
   \item{\dots}{any other passthru parameters}
 }

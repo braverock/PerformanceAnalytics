@@ -10,7 +10,7 @@
 #' @param Rf risk free rate, in same period as your returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param main set the chart title, same as in \code{plot}
 #' @param add.names plots the row name with the data point.  default TRUE. Can

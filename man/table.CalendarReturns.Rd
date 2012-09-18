@@ -16,8 +16,9 @@
   \item{as.perc}{TRUE/FALSE if TRUE, multiply simple
   returns by 100 to get \%}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 }
 \description{
   Returns a table of returns formatted with years in rows,

@@ -19,8 +19,9 @@
 
   \item{main}{set the chart title, as in \code{plot}}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 
   \item{methods}{Used to select the risk parameter of
   trailing \code{width} returns to use in the

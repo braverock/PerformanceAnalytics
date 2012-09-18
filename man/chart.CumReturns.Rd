@@ -14,8 +14,9 @@
   \code{TRUE}, shows the "value of $1", starting the
   cumulation of returns at 1 rather than zero}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 
   \item{legend.loc}{places a legend into one of nine
   locations on the chart: bottomright, bottom, bottomleft,

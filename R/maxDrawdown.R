@@ -21,7 +21,7 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param weights portfolio weighting vector, default NULL, see Details
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
 #' Details.
@@ -93,7 +93,7 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param weights portfolio weighting vector, default NULL, see Details
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
 #' Details.

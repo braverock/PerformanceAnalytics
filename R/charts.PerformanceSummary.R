@@ -9,7 +9,7 @@
 #' @param Rf risk free rate, in same period as your returns
 #' @param p confidence level for calculation, default p=.95
 #' @param main set the chart title, as in \code{plot}
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param methods Used to select the risk parameter of trailing \code{width}
 #' returns to use in the \code{\link{chart.BarVaR}} panel: May be any of:

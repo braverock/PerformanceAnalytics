@@ -5,8 +5,7 @@
 \usage{
   Return.calculate(prices, method = c("discrete", "log"))
 
-  CalculateReturns(prices,
-    method = c("compound", "simple"))
+  CalculateReturns(prices, method = c("discrete", "log"))
 }
 \arguments{
   \item{prices}{data object containing ordered price
@@ -64,8 +63,7 @@
   \dontshow{
     data(prices)
   }
-R.IBM = Return.calculate(prices, method="simple")
-R.IBM = as.xts(R.IBM)
+R.IBM = Return.calculate(prices, method="discrete")
 colnames(R.IBM)="IBM"
 chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 round(R.IBM,2)

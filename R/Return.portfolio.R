@@ -77,7 +77,7 @@ Return.rebalancing <- function (R, weights, ...)
 #' FALSE
 #' @param contribution if contribution is TRUE, add the weighted return
 #' contributed by the asset in this period
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param \dots any other passthru parameters
 #' @return returns a time series of returns weighted by the \code{weights}

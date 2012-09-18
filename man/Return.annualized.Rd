@@ -12,8 +12,9 @@ length history}
   \item{scale}{number of periods in a year (daily scale =
   252, monthly scale = 12, quarterly scale = 4)}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 }
 \description{
   An average annualized return is convenient for comparing

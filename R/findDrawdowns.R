@@ -18,7 +18,7 @@
 #' @aliases findDrawdowns Drawdowns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param \dots any other passthru parameters
 #' @author Peter Carl

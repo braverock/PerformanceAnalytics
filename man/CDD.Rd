@@ -14,8 +14,9 @@ measure}
   \item{weights}{portfolio weighting vector, default NULL,
   see Details}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 
   \item{invert}{TRUE/FALSE whether to invert the drawdown
   measure.  see Details.}

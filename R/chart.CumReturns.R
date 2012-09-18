@@ -10,7 +10,7 @@
 #' asset returns
 #' @param wealth.index if \code{wealth.index} is \code{TRUE}, shows the "value
 #' of $1", starting the cumulation of returns at 1 rather than zero
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param legend.loc places a legend into one of nine locations on the chart:
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or

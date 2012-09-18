@@ -9,7 +9,7 @@
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @param colorset color palette to use, set by default to rational choices
 #' @param legend.loc places a legend into one of nine locations on the chart:

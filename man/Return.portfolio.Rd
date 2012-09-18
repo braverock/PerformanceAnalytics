@@ -21,8 +21,9 @@
   \item{contribution}{if contribution is TRUE, add the
   weighted return contributed by the asset in this period}
 
-  \item{geometric}{generate geometric (TRUE) or simple
-  (FALSE) returns, default TRUE}
+  \item{geometric}{utilize geometric chaining (TRUE) or
+  simple/arithmetic chaining (FALSE) to aggregate returns,
+  default TRUE}
 
   \item{\dots}{any other passthru parameters}
 }

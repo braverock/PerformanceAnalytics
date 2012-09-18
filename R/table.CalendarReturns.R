@@ -10,7 +10,7 @@
 #' asset returns
 #' @param digits number of digits to round results to for presentation
 #' @param as.perc TRUE/FALSE if TRUE, multiply simple returns by 100 to get \%
-#' @param geometric generate geometric (TRUE) or simple (FALSE) returns,
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
 #' @note This function assumes monthly returns and does not currently have
 #' handling for other scales.
