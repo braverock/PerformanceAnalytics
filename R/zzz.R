@@ -15,22 +15,6 @@ even <- function (x) x%%2==0
 
 odd  <- function (x) x%%2==1
 
-mean.xts <- function(x,...) {
-    if(is.vector(x) ||is.null(ncol(x))  || ncol(x)==1){
-        x<-as.numeric(x)
-        mean(x,...)
-    } else apply(x,2,mean.xts,...)
-} 
-mean.matrix <- function(x,...) {apply(x,2,mean,...)} 
-
-sd.xts <- function(x,na.rm=FALSE) {
-    if(is.vector(x) || is.null(ncol(x)) || ncol(x)==1){
-        x<-as.numeric(x)
-        sd(x,na.rm=na.rm)
-    } else apply(x,2,sd,na.rm=na.rm)
-}
-sd.matrix <- function(x,na.rm=FALSE) {apply(x,2,sd,na.rm=na.rm)}
-
 rollapply.xts <- xts:::rollapply.xts
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis

@@ -1,7 +1,7 @@
 Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
-Version: 1.0.5
+Version: 1.0.5.1
 Date: $Date$
 Author: Peter Carl, Brian G. Peterson
 Maintainer: Brian G. Peterson <brian@braverock.com>
@@ -17,7 +17,7 @@ Description: Collection of econometric functions for
 Depends:
     R (>= 2.14.0),
     zoo,
-    xts (>= 0.8)
+    xts (>= 0.8-7.1)
 Suggests:
     Hmisc,
     MASS,

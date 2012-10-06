@@ -229,11 +229,6 @@ S3method(textplot, character)
 S3method(textplot, data.frame)
 S3method(textplot, matrix)
 
-S3method(mean,xts)
-S3method(sd,xts)
-#S3method(mean,matrix)
-S3method(sd,matrix)
-
 S3method(rollapply,xts)
 
 # # Export These
