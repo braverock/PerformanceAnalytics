@@ -59,7 +59,6 @@
 \dontrun{
     require(tseries)
     prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
-  }
   \dontshow{
     data(prices)
   }
@@ -67,6 +66,7 @@ R.IBM = Return.calculate(prices, method="discrete")
 colnames(R.IBM)="IBM"
 chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 round(R.IBM,2)
+  }
 }
 \author{
   Peter Carl
