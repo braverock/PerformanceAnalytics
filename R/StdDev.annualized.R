@@ -66,7 +66,7 @@ function (x, scale = NA, ...)
                 yearly = {scale = 1}
             )
         }
-        sqrt(scale)*sd.xts(x, na.rm=TRUE)
+        sqrt(scale)*sd(x, na.rm=TRUE)
     } else { 
         result = apply(x, 2, sd.multiperiod, scale=scale)
         dim(result) = c(1,NCOL(x))
