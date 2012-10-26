@@ -272,7 +272,7 @@ VaR.kernel.portfolio =  function( R, p, w )
    T = dim(R)[1]; N = dim(R)[2];
    portfolioreturn = c();
    for( t in 1:T ){ portfolioreturn = c( portfolioreturn , sum(w*R[t,]) ) }
-   bandwith = 2.575*sd.xts(portfolioreturn)/(T^(1/5)) ;
+   bandwith = 2.575*sd(portfolioreturn)/(T^(1/5)) ;
    CVaR = c();
    VaR = -quantile( portfolioreturn , probs = alpha );
    weights = kernel(x= (-VaR-portfolioreturn) , h=bandwith);
