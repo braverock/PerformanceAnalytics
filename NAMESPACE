@@ -229,8 +229,6 @@ S3method(textplot, character)
 S3method(textplot, data.frame)
 S3method(textplot, matrix)
 
-S3method(rollapply,xts)
-
 # # Export These
 # ActivePremium
 # apply.fromstart

@@ -15,7 +15,7 @@ even <- function (x) x%%2==0
 
 odd  <- function (x) x%%2==1
 
-rollapply.xts <- xts:::rollapply.xts
+sd.xts <- xts:::sd.xts
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
