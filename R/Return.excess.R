@@ -68,9 +68,10 @@ function (R, Rf = 0)
         columnname.Rf=colnames(Rf)
     }
     else {
-        indexseries=index(R)
+        #indexseries=index(R)
         columnname.Rf=Rf
-        Rf=xts(rep(Rf, length(indexseries)),order.by=indexseries)
+        #Rf=xts(rep(Rf, length(indexseries)),order.by=indexseries)
+        Rf = reclass(rep(Rf,nrow(R)),R) #patch thanks to Josh to deal w/ TZ issue
     }
 
     ## prototype
@@ -78,10 +79,10 @@ function (R, Rf = 0)
     
     return.excess <- function (R,Rf)
     { # a function to be called by apply on the inner loop
-        xR = coredata(as.xts(R)-as.xts(Rf))
+        xR = coredata(as.xts(R)-Rf)
     }
     
-    result = apply(R, MARGIN=2, FUN=return.excess, Rf=Rf)
+    result = do.call(merge, lapply(1:NCOL(R), function(nc) R[,nc] - Rf)) # thanks Jeff!
     if (!is.matrix(result)) result = matrix(result, ncol=ncol(R))
     colnames(result) = paste(colnames(R), ">", columnname.Rf)
     result = reclass(result, R)
