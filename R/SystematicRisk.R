@@ -15,6 +15,8 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset 
 #' @param Rf risk free rate, in same period as your returns
+#' @param scale number of periods in a year (daily scale = 252, monthly scale =
+#' 12, quarterly scale = 4)
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -32,37 +34,50 @@
 #'
 #' @export 
 SystematicRisk <-
-function (Ra, Rb, Rf = 0, ...)
+function (Ra, Rb, Rf = 0, scale = NA, ...)
 {
-    calcul = FALSE
-    Ra = checkData(Ra, method="matrix")
-    Rb = checkData(Rb, method="matrix")
-
-    if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-    
-     for (i in (1:length(Ra))) {
-     	 if (!is.na(Ra[i])) {
-     	    calcul = TRUE
-	 }
-      }
-
-     if (calcul) {
-     	Period = Frequency(Ra)
-        result = CAPM.beta(Ra,Rb,Rf) * sqrt(sum((Rb-mean(Rb))^2)/length(Rb))*sqrt(Period)
-     }    
-     else {
-        result = NA
-     }
+  # FUNCTION:
+  Ra = checkData(Ra)
+  Rb = checkData(Rb)
+  if(!is.null(dim(Rf)))
+    Rf = checkData(Rf)
+  
+  if(is.na(scale)) {
+    freq = periodicity(Ra)
+    switch(freq$scale,
+           minute = {stop("Data periodicity too high")},
+           hourly = {stop("Data periodicity too high")},
+           daily = {scale = 252},
+           weekly = {scale = 52},
+           monthly = {scale = 12},
+           quarterly = {scale = 4},
+           yearly = {scale = 1}
+    )
+  }
+  
+  Ra.ncols = NCOL(Ra) 
+  Rb.ncols = NCOL(Rb)
+  
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
+  
+  pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+  
+  sr <- function(xRa, xRb, scale){
+      result = CAPM.beta(xRa, xRb) * StdDev.annualized(xRb, scale=scale)
       return(result)
-    }
-    else {
-        Ra = checkData(Ra)
-        result = apply(Ra, MARGIN = 2, SystematicRisk, Rb = Rb, Rf = Rf, ...)
-        result<-t(result)
-        colnames(result) = colnames(Ra)
-        rownames(result) = paste("Systematic Risk (Risk free = ",Rf,")", sep="")
-        return(result)
-    }
+  }
+  
+  result = apply(pairs, 1, FUN = function(n, xRa, xRb, scale) sr(xRa[,n[1]], xRb[,n[2]], scale), xRa = xRa, xRb = xRb, scale=scale)
+  
+  if(length(result) ==1)
+    return(result)
+  else {
+    dim(result) = c(Ra.ncols, Rb.ncols)
+    colnames(result) = paste("Systematic Risk to ", colnames(Rb), " (Rf = ",Rf,")", sep="")
+    rownames(result) = colnames(Ra)
+    return(t(result))
+  }
 }
 
 
