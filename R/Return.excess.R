@@ -68,24 +68,18 @@ function (R, Rf = 0)
         columnname.Rf=colnames(Rf)
     }
     else {
-        #indexseries=index(R)
         columnname.Rf=Rf
-        #Rf=xts(rep(Rf, length(indexseries)),order.by=indexseries)
-        Rf = reclass(rep(Rf,nrow(R)),R) #patch thanks to Josh to deal w/ TZ issue
+        Rf = reclass(rep(Rf,length(index(R))),R) #patch thanks to Josh to deal w/ TZ issue
     }
 
     ## prototype
     ## xts(apply(managers[,1:6],2,FUN=function(R,Rf,order.by) {xts(R,order.by=order.by)-Rf}, Rf=xts(managers[,10,drop=F]),order.by=index(managers)),order.by=index(managers))
+ 
+    result = do.call(merge, lapply(1:NCOL(R), function(nc) R[,nc] - coredata(Rf))) # thanks Jeff!
     
-    return.excess <- function (R,Rf)
-    { # a function to be called by apply on the inner loop
-        xR = coredata(as.xts(R)-Rf)
-    }
-    
-    result = do.call(merge, lapply(1:NCOL(R), function(nc) R[,nc] - Rf)) # thanks Jeff!
-    if (!is.matrix(result)) result = matrix(result, ncol=ncol(R))
-    colnames(result) = paste(colnames(R), ">", columnname.Rf)
-    result = reclass(result, R)
+    #if (!is.matrix(result)) result = matrix(result, ncol=ncol(R))
+    if(!is.null(dim(result))) colnames(result) = paste(colnames(R), ">", columnname.Rf)
+    #result = reclass(result, R)
 
     # RESULTS:
     return(result)
