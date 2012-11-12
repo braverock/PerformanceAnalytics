@@ -37,7 +37,7 @@
 #' round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4) 
 #' round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
 #'
-#' print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 1.677 
+#' print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 0.7975 
 #'
 #' print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
 #' print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE)) 
@@ -47,110 +47,66 @@
 TreynorRatio <-
 function (Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
 { # @author Peter Carl, Matthieu Lestel
-
-ModifiedTreynorRatio <-
-function (Ra, Rb, Rf = 0, scale = NA)
-{
-    		if(is.na(scale)) {
-        	    freq = periodicity(Ra)
-        	    switch(freq$scale,
-            	    minute = {stop("Data periodicity too high")},
-            	    hourly = {stop("Data periodicity too high")},
-            	    daily = {scale = 252},
-            	    weekly = {scale = 52},
-            	    monthly = {scale = 12},
-            	    quarterly = {scale = 4},
-            	    yearly = {scale = 1}
-        	    )
-          }
-
-    calcul = FALSE
-    Ra = checkData(Ra, method="matrix")
-    Rb = checkData(Rb, method="matrix")
-
-    if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-    
-     Rp = (prod(1 + Ra))^(scale / length(Ra)) - 1
-     for (i in (1:length(Ra))) {
-     	 if (!is.na(Ra[i])) {
-     	    calcul = TRUE
-	 }
-      }
-     if (calcul) {
-     	     result = (Rp - Rf) / SystematicRisk(Ra, Rb, Rf)
-     }    
-     else {
-        result = NA
-     }
-      return(result)
-    }
-    else {
-        Ra = checkData(Ra)
-        result = apply(Ra, MARGIN = 2, ModifiedTreynorRatio, Rb = Rb, Rf = Rf)
-        result<-t(result)
-        colnames(result) = colnames(Ra)
-        rownames(result) = paste("Modified Treynor Ratio (Risk free = ",Rf,")", sep="")
-        return(result)
-    }
+  
+  
+  # DESCRIPTION:
+  #
+  
+  # FUNCTION:
+  Ra = checkData(Ra)
+  Rb = checkData(Rb)
+  if(!is.null(dim(Rf)))
+    Rf = checkData(Rf)
+  
+  Ra.ncols = NCOL(Ra) 
+  Rb.ncols = NCOL(Rb)
+  
+  pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+  
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
+  
+  if(is.na(scale)) {
+    freq = periodicity(Ra)
+    switch(freq$scale,
+           minute = {stop("Data periodicity too high")},
+           hourly = {stop("Data periodicity too high")},
+           daily = {scale = 252},
+           weekly = {scale = 52},
+           monthly = {scale = 12},
+           quarterly = {scale = 4},
+           yearly = {scale = 1}
+    )
+  }
+  
+  tr <-function (xRa, xRb, scale)
+  {
+    beta = CAPM.beta(xRa, xRb)
+    TR = Return.annualized(xRa, scale = scale)/beta
+    TR
+  }
+  
+  mtr <-function (xRa, xRb, scale)
+  {
+    mTR = Return.annualized(xRa, scale = scale)/SystematicRisk(xRa, xRb, Rf=0)
+    mTR
+  }
+  
+  if(modified)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb, scale) mtr(xRa[,n[1]], xRb[,n[2]], scale), xRa = xRa, xRb = xRb, scale = scale)
+  else
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb, scale) tr(xRa[,n[1]], xRb[,n[2]], scale), xRa = xRa, xRb = xRb, scale = scale)
+  
+  if(length(result) ==1)
+    return(result)
+  else {
+    dim(result) = c(Ra.ncols, Rb.ncols)
+    colnames(result) = paste("Treynor Ratio:", colnames(Rb))
+    rownames(result) = colnames(Ra)
+    return(t(result))
+  }
 }
 
-
-    if(modified)
-    {
-        ModifiedTreynorRatio(Ra, Rb, Rf, scale)
-    }
-    else
-    {
-
-       # DESCRIPTION:
-       #
-       
-       # FUNCTION:
-       Ra =	 checkData(Ra)
-       Rb = checkData(Rb)
-       if(!is.null(dim(Rf)))
-		Rf = checkData(Rf)
-
-    		Ra.ncols = NCOL(Ra) 
-    		Rb.ncols = NCOL(Rb)
-
-    		pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
-
-    		xRa = Return.excess(Ra, Rf)
-    		xRb = Return.excess(Rb, Rf)
-
-    		if(is.na(scale)) {
-        	    freq = periodicity(Ra)
-        	    switch(freq$scale,
-            	    minute = {stop("Data periodicity too high")},
-            	    hourly = {stop("Data periodicity too high")},
-            	    daily = {scale = 252},
-            	    weekly = {scale = 52},
-            	    monthly = {scale = 12},
-            	    quarterly = {scale = 4},
-            	    yearly = {scale = 1}
-        	    )
-          }
-
-    	  tr <-function (xRa, xRb, scale)
-    	  {
-          beta = CAPM.beta(xRa, xRb)
-          TR = (Return.annualized(xRa, scale = scale))/beta
-          TR
-    	  }
-
-    	  result = apply(pairs, 1, FUN = function(n, xRa, xRb, scale) tr(xRa[,n[1]], xRb[,n[2]], scale), xRa = xRa, xRb = xRb, scale = scale)
-
-    	  if(length(result) ==1)
-              return(result)
-    	  else {
-               dim(result) = c(Ra.ncols, Rb.ncols)
-               colnames(result) = paste("Treynor Ratio:", colnames(Rb))
-               rownames(result) = colnames(Ra)
-               return(t(result))
-    	  }
-     }
-}
 
 
 
