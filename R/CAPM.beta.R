@@ -244,13 +244,14 @@ function (Ra, Rb, Rf = 0)
     # check columns
     if(NCOL(xRa)!=1L || NCOL(xRb)!=1L || NCOL(subset)!=1L)
         stop("all arguments must have only one column")
-    # merge, drop NA, add column names
+    # merge, drop NA
     merged <- as.data.frame(na.omit(cbind(xRa, xRb, subset)))
-    colnames(merged) <- c("xRa","xRb","subset")
-    merged$subset <- as.logical(merged$subset)
     # return NA if no non-NA values
     if(NROW(merged)==0)
         return(NA)
+    # add column names and convert subset back to logical
+    colnames(merged) <- c("xRa","xRb","subset")
+    merged$subset <- as.logical(merged$subset)
     # calculate beta
     model.lm = lm(xRa ~ xRb, data=merged, subset=merged$subset)
     beta = coef(model.lm)[[2]]
