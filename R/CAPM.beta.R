@@ -111,15 +111,8 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    beta <-function (xRa, xRb)
-    {
-        merged = as.data.frame(na.omit(cbind(xRa, xRb)))
-        model.lm = lm(merged[,1] ~ merged[,2], merged)
-        beta = coef(model.lm)[[2]]
-        beta
-    }
-
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
+        .beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
 
     if(length(result) ==1)
         return(result)
@@ -163,17 +156,8 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    beta <-function (xRa, xRb)
-    {
-        merged = na.omit(cbind(xRa, xRb))
-        merged = as.data.frame(merged)
-        colnames(merged) = c("xRa","xRb")
-        model.lm = lm(xRa ~ xRb, merged, subset= (xRb > 0))
-        beta = coef(model.lm)[[2]]
-        beta
-    }
-
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
+        .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0), xRa = xRa, xRb = xRb)
 
     if(length(result) ==1)
         return(result)
@@ -217,17 +201,8 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    beta <-function (xRa, xRb)
-    {
-        merged = na.omit(cbind(xRa, xRb))
-        merged = as.data.frame(merged)
-        colnames(merged) = c("xRa","xRb")
-        model.lm = lm(xRa ~ xRb, merged, subset= (xRb < 0))
-        beta = coef(model.lm)[[2]]
-        beta
-    }
-
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
+        .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0), xRa = xRa, xRb = xRb)
 
     if(length(result) ==1)
         return(result)
@@ -260,6 +235,26 @@ function (Ra, Rb, Rf = 0)
         rownames(result) = paste("Timing Ratio:", names)
         return(result)
     }
+}
+
+.beta <- function (xRa, xRb, subset) {
+    # subset is assumed to be a logical vector
+    if(missing(subset))
+        subset <- TRUE
+    # check columns
+    if(NCOL(xRa)!=1L || NCOL(xRb)!=1L || NCOL(subset)!=1L)
+        stop("all arguments must have only one column")
+    # merge, drop NA, add column names
+    merged <- as.data.frame(na.omit(cbind(xRa, xRb, subset)))
+    colnames(merged) <- c("xRa","xRb","subset")
+    merged$subset <- as.logical(merged$subset)
+    # return NA if no non-NA values
+    if(NROW(merged)==0)
+        return(NA)
+    # calculate beta
+    model.lm = lm(xRa ~ xRb, data=merged, subset=merged$subset)
+    beta = coef(model.lm)[[2]]
+    beta
 }
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
