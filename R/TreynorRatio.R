@@ -57,6 +57,19 @@ function (Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
   Rb = checkData(Rb)
   if(!is.null(dim(Rf)))
     Rf = checkData(Rf)
+
+  if(is.na(scale)) {
+    freq = periodicity(Ra)
+    switch(freq$scale,
+            minute = {stop("Data periodicity too high")},
+            hourly = {stop("Data periodicity too high")},
+            daily = {scale = 252},
+            weekly = {scale = 52},
+            monthly = {scale = 12},
+            quarterly = {scale = 4},
+            yearly = {scale = 1}
+    )
+  }
   
   Ra.ncols = NCOL(Ra) 
   Rb.ncols = NCOL(Rb)
@@ -65,20 +78,7 @@ function (Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
   
   xRa = Return.excess(Ra, Rf)
   xRb = Return.excess(Rb, Rf)
-  
-  if(is.na(scale)) {
-    freq = periodicity(Ra)
-    switch(freq$scale,
-           minute = {stop("Data periodicity too high")},
-           hourly = {stop("Data periodicity too high")},
-           daily = {scale = 252},
-           weekly = {scale = 52},
-           monthly = {scale = 12},
-           quarterly = {scale = 4},
-           yearly = {scale = 1}
-    )
-  }
-  
+    
   tr <-function (xRa, xRb, scale)
   {
     beta = CAPM.beta(xRa, xRb)
