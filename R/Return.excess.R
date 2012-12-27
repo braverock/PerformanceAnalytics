@@ -24,7 +24,7 @@
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param Rf risk free rate, in same period as your returns, or as a sinlge
+#' @param Rf risk free rate, in same period as your returns, or as a single
 #' digit average
 #' @author Peter Carl
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
