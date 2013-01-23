@@ -67,7 +67,7 @@ function (R, Rf = 0)
         coln.Rf=colnames(Rf)
         Rft=cbind(R,Rf)
         Rft=na.locf(Rft[,make.names(coln.Rf)])
-        Rf=Rft[which(index(Rft)==index(R)),]
+        Rf=Rft[which(index(R) %in% index(Rft))]
     }
     else {
         coln.Rf='Rf'
