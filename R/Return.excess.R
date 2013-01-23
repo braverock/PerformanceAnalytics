@@ -64,11 +64,13 @@ function (R, Rf = 0)
     # and convert it to an xts object.
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
-        indexseries=index(cbind(R,Rf))
-        columnname.Rf=colnames(Rf)
+        coln.Rf=colnames(Rf)
+        Rft=cbind(R,Rf)
+        Rft=na.locf(Rft[,make.names(coln.Rf)])
+        Rf=Rft[which(index(Rft)==index(R)),]
     }
     else {
-        columnname.Rf=Rf
+        coln.Rf='Rf'
         Rf = reclass(rep(Rf,length(index(R))),R) #patch thanks to Josh to deal w/ TZ issue
     }
 
@@ -78,7 +80,7 @@ function (R, Rf = 0)
     result = do.call(merge, lapply(1:NCOL(R), function(nc) R[,nc] - coredata(Rf))) # thanks Jeff!
     
     #if (!is.matrix(result)) result = matrix(result, ncol=ncol(R))
-    if(!is.null(dim(result))) colnames(result) = paste(colnames(R), ">", columnname.Rf)
+    if(!is.null(dim(result))) colnames(result) = paste(colnames(R), ">", coln.Rf)
     #result = reclass(result, R)
 
     # RESULTS:
