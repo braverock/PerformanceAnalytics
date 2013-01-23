@@ -85,7 +85,7 @@ function (R, Rf = 0, scale = NA, geometric=TRUE)
         SR
     }
 
-    result = apply(R, 2, sr, Rf=Rf, scale=scale)
+    result = sapply(R, sr, Rf=Rf, scale=scale)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
     rownames(result) = paste("Annualized Sharpe Ratio (Rf=", round(mean(Rf)*scale*100,1), "%)", sep="")
