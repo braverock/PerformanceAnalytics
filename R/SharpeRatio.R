@@ -158,9 +158,9 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     for (FUNCT in FUN){
         if (is.null(weights)){
             if(annualize)
-                result[i,] = apply(R, MARGIN=2, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
+                result[i,] = sapply(R, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
             else
-                result[i,] = apply(R, MARGIN=2, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+                result[i,] = sapply(R, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
         }
         else { # TODO FIX this calculation, currently broken
             result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
