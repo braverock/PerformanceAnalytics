@@ -9,7 +9,6 @@
 #' @param width number of periods to apply rolling function over
 #' @param Rf risk free rate, in same period as your returns
 #' @param main set the chart title, same as in \code{plot}
-#' @param trim TRUE/FALSE, whether to keep alignment caused by NA's
 #' @param event.labels TRUE/FALSE whether or not to display lines and labels
 #' for historical market shock events
 #' @param legend.loc places a legend into one of nine locations on the chart:
@@ -26,7 +25,7 @@
 #' 
 #' @export 
 charts.RollingPerformance <-
-function (R, width = 12, Rf = 0, main = NULL, trim = TRUE, event.labels = NULL, legend.loc=NULL, ...)
+function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NULL, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
