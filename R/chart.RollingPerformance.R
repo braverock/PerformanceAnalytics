@@ -36,7 +36,7 @@
 #' 		main = "Rolling 24-Month Sharpe Ratio")
 #' 
 #' @export 
-chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL, fill = if(na.pad) NA)
+chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL, fill = if(na.pad) NA else NULL)
 { # @author Peter Carl
 
     # DESCRIPTION:
