@@ -57,14 +57,14 @@ function (R, Rf = 0, method = "half")
     kr <- function (R, Rf, method)
     {
         xR = Return.excess(R, Rf)
-        KR =  mean(xR, na.rm=TRUE)/sd.xts(R, na.rm=TRUE)^2
+        KR =  mean(xR, na.rm=TRUE)/StdDev(R, na.rm=TRUE)^2
         if (method == "half") {
             KR = KR/2
         }
         return(KR)
     }
 
-    result = apply(R, 2, kr, Rf = Rf, method = method)
+    result = sapply(R, kr, Rf = Rf, method = method)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
     rownames(result) = "Kelly Ratio"
