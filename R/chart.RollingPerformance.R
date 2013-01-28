@@ -12,12 +12,12 @@
 #' @param fill a three-component vector or list (recycled otherwise) providing 
 #' filling values at the left/within/to the right of the data range. See the 
 #' fill argument of \code{\link{na.fill}} for details.
-#' @param na.pad deprecated; use \code{fill = NA} instead of \code{na.pad = TRUE}, 
-#' or \code{fill = NULL} instead of \code{na.pad = FALSE}
 #' @param main set the chart title, same as in \code{\link{plot}}
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param \dots any other passthru parameters to \code{\link{plot}} or the
 #' function specified
+#' @details The parameter \code{na.pad} has been deprecated; use \code{fill = NA} instead of \code{na.pad = TRUE}, 
+#' or \code{fill = NULL} instead of \code{na.pad = FALSE}.
 #' @author Peter Carl
 #' @seealso \code{\link{charts.RollingPerformance}},
 #' \code{\link[zoo]{rollapply}}
@@ -36,7 +36,7 @@
 #' 		main = "Rolling 24-Month Sharpe Ratio")
 #' 
 #' @export 
-chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ..., na.pad = TRUE, ylim=NULL, main=NULL, fill = if(na.pad) NA else NULL)
+chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ...,  ylim = NULL, main = NULL, fill = NA)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -60,9 +60,6 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
     columnnames = colnames(x)
 
     # Separate function args from plot args
-    if (!missing(na.pad)) {
-      warning("na.pad argument is deprecated")
-    }
     dotargs <-list(...)
     funargsmatch = pmatch(names(dotargs), names(formals(FUN)), nomatch = 0L)
 	funargs = dotargs[funargsmatch>0L]
