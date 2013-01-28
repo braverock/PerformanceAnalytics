@@ -23,7 +23,7 @@
 #' 
 #' @export 
 chart.RollingMean <-
-function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1), ...)
+function (R, width = 12, xaxis = TRUE, ylim = NULL, lwd=c(2,1,1), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -43,8 +43,8 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
 
     # Calculate
 
-    x.mean = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "mean", na.pad = na.pad, align = "right")
-    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd.xts", na.pad = na.pad, align = "right")
+    x.mean = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "mean", fill = if(na.pad) NA, align = "right")
+    x.stdev = rollapply(na.omit(x[,1,drop=FALSE]), width = width, FUN = "sd.xts", fill = if(na.pad) NA, align = "right")
 
     # @todo: allow user to set confidence interval
     # @todo: add chart for StdDev w confidence bands: x.stdev +- 2* x.stdev/sqrt(2*n)
@@ -55,7 +55,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, na.pad = FALSE, lwd=c(2,1,1)
 
     # Set ylim correctly to allow for confidence bands
     if(is.null(ylim[1]))
-        ylim = range(result)
+        ylim = range(result,na.rm=TRUE)
 
 
     freq = periodicity(R)

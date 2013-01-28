@@ -3,8 +3,8 @@
 \title{rolling performance chart}
 \usage{
   charts.RollingPerformance(R, width = 12, Rf = 0,
-    main = NULL, trim = TRUE, event.labels = NULL,
-    legend.loc = NULL, ...)
+    main = NULL, event.labels = NULL, legend.loc = NULL,
+    ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -16,9 +16,6 @@
   \item{Rf}{risk free rate, in same period as your returns}
 
   \item{main}{set the chart title, same as in \code{plot}}
-
-  \item{trim}{TRUE/FALSE, whether to keep alignment caused
-  by NA's}
 
   \item{event.labels}{TRUE/FALSE whether or not to display
   lines and labels for historical market shock events}

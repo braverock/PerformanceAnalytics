@@ -44,7 +44,7 @@ round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,dr
 round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4)
 round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
 
-print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 1.677
+print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 0.7975
 
 print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
 print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE))

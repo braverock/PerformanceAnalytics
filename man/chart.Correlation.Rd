@@ -14,8 +14,8 @@
 
   \item{method}{a character string indicating which
   correlation coefficient (or covariance) is to be
-  computed.  One of ‘"pearson"’ (default), ‘"kendall"’, or
-  ‘"spearman"’, can be abbreviated.}
+  computed.  One of "pearson" (default), "kendall", or
+  "spearman", can be abbreviated.}
 
   \item{\dots}{any other passthru parameters into
   \code{\link{pairs}}}

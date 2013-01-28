@@ -9,7 +9,7 @@
   or zoo object of asset returns}
 
   \item{Rf}{risk free rate, in same period as your returns,
-  or as a sinlge digit average}
+  or as a single digit average}
 }
 \description{
   Calculates the returns of an asset in excess of the given

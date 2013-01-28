@@ -4,7 +4,7 @@
 \usage{
   chart.RollingCorrelation(Ra, Rb, width = 12,
     xaxis = TRUE, legend.loc = NULL, colorset = (1:12),
-    na.pad = FALSE, ...)
+    ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries

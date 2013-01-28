@@ -2,7 +2,7 @@
 \alias{SystematicRisk}
 \title{Systematic risk of the return distribution}
 \usage{
-  SystematicRisk(Ra, Rb, Rf = 0, ...)
+  SystematicRisk(Ra, Rb, Rf = 0, scale = NA, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -11,6 +11,9 @@
   \item{Rb}{return vector of the benchmark asset}
 
   \item{Rf}{risk free rate, in same period as your returns}
+
+  \item{scale}{number of periods in a year (daily scale =
+  252, monthly scale = 12, quarterly scale = 4)}
 
   \item{\dots}{any other passthru parameters}
 }

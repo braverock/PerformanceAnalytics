@@ -225,7 +225,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
 			   },
                 gaussian = { return(ES.Gaussian.portfolio(p,weights,mu,sigma)) },
                 historical = { return(ES.historical.portfolio(R, p,weights)) },
-                kernel = { return(ES.kernel.portfolio(R=R,p=p,w=w)) }
+                kernel = { return(ES.kernel.portfolio(R=R,p=p,w=weights)) }
             )
 
         } # end component portfolio switch

@@ -126,9 +126,9 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = c("all", "
         y = x[,column,drop=FALSE]
         y = na.omit(y)
         y= as.zoo(y)
-        returns.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = Return.annualized, by=stepsize))#, na.pad = FALSE, align = "right")
+        returns.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = Return.annualized, by=stepsize))#, align = "right")
     
-        risk.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = StdDev.annualized, by=stepsize))#, na.pad = FALSE, align = "right")
+        risk.column = na.omit(apply.rolling(y[(nrow(y)%%stepsize+1):nrow(y),1,drop=FALSE], width = width, FUN = StdDev.annualized, by=stepsize))#, align = "right")
 
         maxrows = max(maxrows, length(returns.column))
 

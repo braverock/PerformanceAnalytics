@@ -3,7 +3,7 @@
 \title{chart the rolling mean return}
 \usage{
   chart.RollingMean(R, width = 12, xaxis = TRUE,
-    ylim = NULL, na.pad = FALSE, lwd = c(2, 1, 1), ...)
+    ylim = NULL, lwd = c(2, 1, 1), ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries

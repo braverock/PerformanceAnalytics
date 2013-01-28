@@ -4,7 +4,8 @@
 \usage{
   chart.RollingPerformance(R, width = 12,
     FUN = "Return.annualized", ..., na.pad = TRUE,
-    ylim = NULL, main = NULL)
+    ylim = NULL, main = NULL,
+    fill = if (na.pad) NA else NULL)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -18,9 +19,14 @@
   \code{\link{CAPM.beta}} won't work, but
   \code{\link{Return.annualized}} will)}
 
-  \item{na.pad}{TRUE/FALSE If TRUE it adds any times that
-  would not otherwise have been in the result with a value
-  of NA. If FALSE those times are dropped.}
+  \item{fill}{a three-component vector or list (recycled
+  otherwise) providing filling values at the left/within/to
+  the right of the data range. See the fill argument of
+  \code{\link{na.fill}} for details.}
+
+  \item{na.pad}{deprecated; use \code{fill = NA} instead of
+  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
+  \code{na.pad = FALSE}}
 
   \item{main}{set the chart title, same as in
   \code{\link{plot}}}

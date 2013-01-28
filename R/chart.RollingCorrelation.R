@@ -29,7 +29,7 @@
 #' 
 #' @export 
 chart.RollingCorrelation <-
-function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), na.pad = FALSE, ...)
+function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -51,7 +51,7 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
     for(column.a in 1:columns.a) { # for each asset passed in as R
         for(column.b in 1:columns.b) { # against each asset passed in as Rb
             merged.assets = merge(Ra[,column.a,drop=FALSE], Rb[,column.b,drop=FALSE])
-            column.calc = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) cor(x[,1,drop=FALSE], x[,2,drop=FALSE]), by = 1, by.column = FALSE, na.pad = na.pad, align = "right")
+            column.calc = rollapply(na.omit(merged.assets[,,drop=FALSE]), width = width, FUN= function(x) cor(x[,1,drop=FALSE], x[,2,drop=FALSE]), by = 1, by.column = FALSE, fill = if(na.pad) NA, align = "right")
 
             # some backflips to name the single column zoo object
             column.calc.tmp = xts(column.calc)

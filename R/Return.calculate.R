@@ -47,7 +47,7 @@
 #'   \dontshow{
 #'     data(prices)
 #'   }
-#' R.IBM = Return.calculate(prices, method="discrete")
+#' R.IBM = Return.calculate(xts(prices), method="discrete")
 #' colnames(R.IBM)="IBM"
 #' chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
 #' round(R.IBM,2)

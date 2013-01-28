@@ -1,3 +1,5 @@
+
+
 #' correlation matrix chart
 #' 
 #' Visualization of a Correlation Matrix. On top the (absolute) value of the
@@ -8,8 +10,8 @@
 #' @param R data for the x axis, can take matrix,vector, or timeseries
 #' @param histogram TRUE/FALSE whether or not to display a histogram
 #' @param method a character string indicating which correlation coefficient
-#'           (or covariance) is to be computed.  One of ‘"pearson"’
-#'           (default), ‘"kendall"’, or ‘"spearman"’, can be abbreviated.
+#'           (or covariance) is to be computed.  One of "pearson"
+#'           (default), "kendall", or "spearman", can be abbreviated.
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
 #' @note based on plot at
 #' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
