@@ -3,7 +3,7 @@
 \title{chart the rolling mean return}
 \usage{
   chart.RollingMean(R, width = 12, xaxis = TRUE,
-    ylim = NULL, lwd = c(2, 1, 1), ...)
+    ylim = NULL, lwd = c(2, 1, 1), ..., fill = NA)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -17,19 +17,26 @@
   \item{ylim}{set the y-axis limit, same as in
   \code{\link{plot}}}
 
-  \item{na.pad}{TRUE/FALSE If TRUE it adds any times that
-  would not otherwise have been in the result with a value
-  of NA. If FALSE those times are dropped.}
-
   \item{lwd}{set the line width, same as in
   \code{\link{plot}}.  Specified in order of the main line
   and the two confidence bands.}
 
   \item{\dots}{any other passthru parameters}
+
+  \item{fill}{a three-component vector or list (recycled
+  otherwise) providing filling values at the left/within/to
+  the right of the data range. See the fill argument of
+  \code{\link{na.fill}} for details.}
 }
 \description{
   A wrapper to create a rolling mean return chart with 95%
   confidence bands.
+}
+\details{
+  The previous parameter \code{na.pad} has been replaced
+  with \code{fill}; use \code{fill = NA} instead of
+  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
+  \code{na.pad = FALSE}.
 }
 \examples{
 data(edhec)

@@ -3,9 +3,8 @@
 \title{wrapper to create a chart of rolling performance metrics in a line chart}
 \usage{
   chart.RollingPerformance(R, width = 12,
-    FUN = "Return.annualized", ..., na.pad = TRUE,
-    ylim = NULL, main = NULL,
-    fill = if (na.pad) NA else NULL)
+    FUN = "Return.annualized", ..., ylim = NULL,
+    main = NULL, fill = NA)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -24,10 +23,6 @@
   the right of the data range. See the fill argument of
   \code{\link{na.fill}} for details.}
 
-  \item{na.pad}{deprecated; use \code{fill = NA} instead of
-  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
-  \code{na.pad = FALSE}}
-
   \item{main}{set the chart title, same as in
   \code{\link{plot}}}
 
@@ -40,6 +35,11 @@
 \description{
   A wrapper to create a chart of rolling performance
   metrics in a line chart
+}
+\details{
+  The parameter \code{na.pad} has been deprecated; use
+  \code{fill = NA} instead of \code{na.pad = TRUE}, or
+  \code{fill = NULL} instead of \code{na.pad = FALSE}.
 }
 \examples{
 data(edhec)

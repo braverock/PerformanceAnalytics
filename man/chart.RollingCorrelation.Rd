@@ -4,7 +4,7 @@
 \usage{
   chart.RollingCorrelation(Ra, Rb, width = 12,
     xaxis = TRUE, legend.loc = NULL, colorset = (1:12),
-    ...)
+    ..., fill = NA)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -24,15 +24,22 @@
   \item{colorset}{color palette to use, set by default to
   rational choices}
 
-  \item{na.pad}{TRUE/FALSE If TRUE it adds any times that
-  would not otherwise have been in the result with a value
-  of NA. If FALSE those times are dropped.}
-
   \item{\dots}{any other passthru parameters}
+
+  \item{fill}{a three-component vector or list (recycled
+  otherwise) providing filling values at the left/within/to
+  the right of the data range. See the fill argument of
+  \code{\link{na.fill}} for details.}
 }
 \description{
   A wrapper to create a chart of rolling correlation
   metrics in a line chart
+}
+\details{
+  The previous parameter \code{na.pad} has been replaced
+  with \code{fill}; use \code{fill = NA} instead of
+  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
+  \code{na.pad = FALSE}.
 }
 \examples{
 # First we get the data
