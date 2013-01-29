@@ -1,7 +1,1259 @@
+2013-01-28  peter_carl
+
+	* R/chart.RollingCorrelation.R, R/chart.RollingMean.R: - added fill
+	  parameter to roxygen
+	* R/chart.RollingCorrelation.R: - replaced na.pad with fill=NA
+
+2013-01-28  braverock
+
+	* DESCRIPTION, R/ES.R, R/Return.calculate.R, R/chart.Correlation.R,
+	  R/chart.RollingCorrelation.R, R/chart.RollingMean.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.SnailTrail.R,
+	  man/Return.calculate.Rd, man/Return.excess.Rd,
+	  man/SystematicRisk.Rd, man/TreynorRatio.Rd,
+	  man/chart.Correlation.Rd, man/chart.RollingCorrelation.Rd,
+	  man/chart.RollingMean.Rd, man/chart.RollingPerformance.Rd,
+	  man/charts.RollingPerformance.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - multiple
+	  changes to pass R CMD check, almost all to documentation
+
+2013-01-23  braverock
+
+	* R/Return.excess.R: - make the which more robust
+
+2013-01-23  peter_carl
+
+	* R/SharpeRatio.annualized.R: - changed apply to sapply to pass xts
+	  objects into Return.excess
+	* R/KellyRatio.R: - changed apply to sapply to pass xts objects
+	  into Return.excess
+	  - changed sd.xts to StdDev
+	* R/SharpeRatio.R: - changed apply to sapply to deal with
+	  Return.excess and xts attributes
+
+2013-01-23  braverock
+
+	* R/Return.excess.R: - correct for Rf of length different from R
+
+2013-01-23  peter_carl
+
+	* R/chart.RollingPerformance.R: - fixed fill parameter to behave
+	  with na.pad
+	* R/charts.RollingPerformance.R: - removed an unused parameter,
+	  trim
+	* R/chart.RollingPerformance.R: - moved from na.pad to fill
+
+2012-12-27  bodanker
+
+	* R/Return.excess.R: - typo in Rf argument description
+
+2012-12-20  braverock
+
+	* R/StdDev.annualized.R, R/TreynorRatio.R: - rearrange handling of
+	  'scale'
+
+2012-12-15  bodanker
+
+	* R/CAPM.beta.R: - check for all NA sooner in CAPM.beta*
+	* R/CAPM.beta.R: - update CAPM.beta* to be more robust to NAs
+
+2012-11-27  braverock
+
+	* R/StdDev.annualized.R: - refactor to remove need for sd.xts
+	* R/StdDev.annualized.R: - use sd.xts again to avoid BDR's
+	  gratuitous apply() warning
+
+2012-11-12  braverock
+
+	* R/Return.excess.R: - further updates to catch more use cases for
+	  Return.excess
+
+2012-11-12  peter_carl
+
+	* R/SystematicRisk.R: - added multiple benchmark handling
+	  - replaced calc with existing StdDev.annualized function
+	* R/TreynorRatio.R: - simplified modified calc of TreynorRatio
+	  - fixed calculation
+
+2012-11-12  braverock
+
+	* R/Return.excess.R: - patch to avoid TZ issue, thanks to attention
+	  by Josh and Jeff
+
+2012-11-10  braverock
+
+	* tests/Examples/PerformanceAnalytics-Ex.Rout.save: - update
+	  example output using current code
+
+2012-11-08  braverock
+
+	* DESCRIPTION: - bump xts version req. for rollapply change
+
+2012-11-08  bodanker
+
+	* DESCRIPTION, NAMESPACE, R/chart.RollingRegression.R, R/zzz.R: -
+	  un-register rollapply.xts S3 method (now in xts)
+	  - copy (unexported) sd.xts from xts namespace
+	  - convert chart.RollingRegression.R to use rollapply.xts
+	  - bump version
+
+2012-11-05  braverock
+
+	* R/chart.TimeSeries.R: - add pch to legend call, does nothing in
+	  the default case
+
+2012-10-26  braverock
+
+	* R/PortfolioRisk.R: - use sd.default for vector
+
+2012-10-25  braverock
+
+	* R/StdDev.annualized.R: - use sd.default for vector
+
+2012-10-06  braverock
+
+	* man/Return.calculate.Rd: - don't run the example for now.
+	* DESCRIPTION, NAMESPACE, R/zzz.R: - remove sd.xts and mean.xts,
+	  since these are now in xts upstream
+	  - bump version, dependencies
+
+2012-09-18  braverock
+
+	* R/Return.annualized.R, R/Return.cumulative.R,
+	  R/Return.portfolio.R, R/SharpeRatio.annualized.R,
+	  R/chart.CumReturns.R, R/chart.Drawdown.R,
+	  R/chart.RiskReturnScatter.R, R/charts.PerformanceSummary.R,
+	  R/findDrawdowns.R, R/maxDrawdown.R, R/table.AnnualizedReturns.R,
+	  R/table.CalendarReturns.R, R/table.Variability.R, man/CDD.Rd,
+	  man/Return.annualized.Rd, man/Return.calculate.Rd,
+	  man/Return.cumulative.Rd, man/Return.portfolio.Rd,
+	  man/SharpeRatio.annualized.Rd, man/chart.CumReturns.Rd,
+	  man/chart.Drawdown.Rd, man/chart.RiskReturnScatter.Rd,
+	  man/charts.PerformanceSummary.Rd, man/findDrawdowns.Rd,
+	  man/maxDrawdown.Rd, man/table.AnnualizedReturns.Rd,
+	  man/table.CalendarReturns.Rd, man/table.Variability.Rd: - change
+	  language around geometric chaining argument to attempt to make it
+	  more clear
+
+2012-09-16  ababii
+
+	* R/Return.portfolio.R: - corrected computation of returns and
+	  contributions
+
+2012-09-05  braverock
+
+	* R/Return.calculate.R, man/Return.calculate.Rd: - change 'simple'
+	  and 'compound' to 'discrete' and 'log', update docs
+	  - add xtsAttributes for ret_type so that we can parse it later
+	  and give the user intelligent warnings
+
+2012-09-02  braverock
+
+	* R/AdjustedSharpeRatio.R, R/AppraisalRatio.R,
+	  R/BernadoLedoitratio.R, R/BurkeRatio.R, R/CAPM.epsilon.R,
+	  R/CAPM.jensenAlpha.R, R/DRatio.R, R/DownsideDeviation.R,
+	  R/DownsideFrequency.R, R/DrawdownPeak.R, R/FamaBeta.R,
+	  R/Frequency.R, R/Kappa.R, R/M2Sortino.R, R/MSquared.R,
+	  R/MSquaredExcess.R, R/MartinRatio.R, R/MeanAbsoluteDeviation.R,
+	  R/NetSelectivity.R, R/OmegaExcessReturn.R, R/OmegaSharpeRatio.R,
+	  R/PainIndex.R, R/PainRatio.R, R/ProspectRatio.R, R/Selectivity.R,
+	  R/SkewnessKurtosisRatio.R, R/SpecificRisk.R, R/SystematicRisk.R,
+	  R/TotalRisk.R, R/TreynorRatio.R, R/UpsideFrequency.R,
+	  R/UpsideRisk.R, R/VolatilitySkewness.R, R/decomposeMVaR.R,
+	  R/table.Distributions.R, R/table.DownsideRiskRatio.R,
+	  R/table.DrawdownsRatio.R, R/table.InformationRatio.R,
+	  R/table.SpecificRisk.R, R/table.Variability.R: - add Copyright
+	  and GPL license block to files created during GSoC 2012
+
+2012-08-29  braverock
+
+	* sandbox/Meucci[DEL]: -delete Meucci directory from sandbox, moved
+	  to top-level pkg dir in r2261 (and earlier revs)
+
+2012-08-24  braverock
+
+	* R/chart.TimeSeries.R: - explicitly call xts's time() fn to avoid
+	  bad behavior by RMetrics TimeSreies, patch from Garrett See
+
+2012-08-20  mkshah
+
+	* sandbox/Meucci/R/RobustBayesianAllocation.R,
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd:
+	  Updating documentation for successful PDF Manual creation
+
+2012-08-19  mkshah
+
+	* sandbox/Meucci/00index, sandbox/Meucci/DESCRIPTION,
+	  sandbox/Meucci/R/EmpiricalMultivariateOUnCointegration.R[DEL],
+	  sandbox/Meucci/R/MeanDiversificationFrontier.R,
+	  sandbox/Meucci/R/MultivariateOUnCointegration.R,
+	  sandbox/Meucci/R/TheoryMultivariateOUnCointegration.R[DEL],
+	  sandbox/Meucci/man/FitOU.Rd[ADD],
+	  sandbox/Meucci/man/GenFirstEigVect.Rd[ADD],
+	  sandbox/Meucci/man/GenPCBasis.Rd[ADD],
+	  sandbox/Meucci/man/MaxEntropy.Rd[ADD],
+	  sandbox/Meucci/man/MeanTCEntropyFrontier.Rd[ADD],
+	  sandbox/Meucci/man/OUstep.Rd[ADD],
+	  sandbox/Meucci/man/OUstepEuler.Rd[ADD]: Updating documentation
+	* sandbox/Meucci/R/MeanDiversificationFrontier.R: Documentation
+	* sandbox/Meucci/R/MultivariateOUnCointegration.R[ADD]: Merging
+	  theoretical and empirical functions in the same file and
+	  documenting
+
+2012-08-19  matthieu_lestel
+
+	* R/AdjustedSharpeRatio.R, R/AppraisalRatio.R,
+	  R/DownsideDeviation.R, R/FamaBeta.R, R/MeanAbsoluteDeviation.R,
+	  R/NetSelectivity.R, R/OmegaSharpeRatio.R, R/PainIndex.R,
+	  R/ProspectRatio.R, R/Selectivity.R, R/SkewnessKurtosisRatio.R,
+	  R/TotalRisk.R, R/UpsideRisk.R, inst/doc/PA-Bacon.Rnw[ADD],
+	  inst/doc/PA-Bacon.pdf[ADD], man/AdjustedSharpeRatio.Rd,
+	  man/AppraisalRatio.Rd, man/DownsideDeviation.Rd, man/FamaBeta.Rd,
+	  man/MeanAbsoluteDeviation.Rd, man/NetSelectivity.Rd,
+	  man/OmegaSharpeRatio.Rd, man/PainIndex.Rd, man/ProspectRatio.Rd,
+	  man/Selectivity.Rd, man/SkewnessKurtosisRatio.Rd,
+	  man/TotalRisk.Rd, man/UpsideRisk.Rd: little corrections in
+	  documentation + additon of vignette on Bacon
+
+2012-08-19  mkshah
+
+	* sandbox/Meucci/demo/00index: Updating the Index file for the
+	  newly added demos
+	* sandbox/Meucci/demo/S_DeterministicEvolution.R[ADD]: Additional
+	  demo for Theoretical Multivariate OU and Cointegration
+	* sandbox/Meucci/R/TheoryMultivariateOUnCointegration.R,
+	  sandbox/Meucci/demo/S_CheckDiagonalization.R[ADD],
+	  sandbox/Meucci/demo/S_CovarianceEvolution.R[ADD]: Correcting
+	  functions and adding demos for
+	  TheoryMultivariateOUnCointegration.R
+	* sandbox/Meucci/R/EmpiricalMultivariateOUnCointegration.R,
+	  sandbox/Meucci/R/MeanDiversificationFrontier.R,
+	  sandbox/Meucci/data/00index,
+	  sandbox/Meucci/data/DB_SwapParRates.rda[ADD],
+	  sandbox/Meucci/demo/MeanDiversificationFrontier.R,
+	  sandbox/Meucci/demo/S_FitProjectRates.R[ADD]: Correcting
+	  functions, adding demos and data files
+
+2012-08-18  mkshah
+
+	* sandbox/Meucci/R/MeanDiversificationFrontier.R,
+	  sandbox/Meucci/data/MeanDiversificationFrontier.rda[ADD],
+	  sandbox/Meucci/demo/MeanDiversificationFrontier.R[ADD]: Adding
+	  demo and data file for MeanDiversificationFrontier.R and editing
+	  the core functions
+
+2012-08-16  mkshah
+
+	* sandbox/Meucci/R/MeanDiversificationFrontier.R: Completing
+	  functions for MeanDiversificationFrontier.R
+	* sandbox/Meucci/R/EmpiricalMultivariateOUnCointegration.R,
+	  sandbox/Meucci/R/TheoryMultivariateOUnCointegration.R[ADD]:
+	  Adding functions for theoretical Multivariate OU and correcting
+	  functions for empirical Multivariate OU
+	* sandbox/Meucci/R/EmpiricalMultivariateOUnCointegration.R:
+	  Remaining functions added
+	* sandbox/Meucci/R/EmpiricalMultivariateOUnCointegration.R[ADD]:
+	  Creating a R script for empirical version of Multivariate OU
+
+2012-08-12  matthieu_lestel
+
+	* R/AdjustedSharpeRatio.R, R/BurkeRatio.R, R/CAPM.epsilon.R,
+	  R/CAPM.jensenAlpha.R, R/M2Sortino.R, R/MSquared.R,
+	  R/MSquaredExcess.R, R/MartinRatio.R, R/NetSelectivity.R,
+	  R/OmegaExcessReturn.R, R/PainRatio.R, R/TreynorRatio.R,
+	  man/AdjustedSharpeRatio.Rd, man/BurkeRatio.Rd,
+	  man/CAPM.epsilon.Rd, man/CAPM.jensenAlpha.Rd, man/MSquared.Rd,
+	  man/MSquaredExcess.Rd, man/PainRatio.Rd: returns annualised
+	  everywhere they were not yet + use of Frequency everywhere
+	  possible to lighten the code
+
+2012-08-10  matthieu_lestel
+
+	* R/DownsideDeviation.R, R/TreynorRatio.R, R/UpsideRisk.R, R/VaR.R,
+	  R/chart.RollingRegression.R, R/chart.TimeSeries.R,
+	  R/mean.utils.R, R/textplot.R,
+	  man/PerformanceAnalytics-package.Rd, man/TreynorRatio.Rd,
+	  man/VaR.Rd, man/chart.RollingRegression.Rd,
+	  man/chart.TimeSeries.Rd, man/mean.geometric.Rd, man/textplot.Rd:
+	  no more warnings in R CMD check
+
+2012-08-09  matthieu_lestel
+
+	* NAMESPACE, R/SkewnessKurtosisRatio.R, R/SpecificRisk.R[ADD],
+	  R/SystematicRisk.R, R/TotalRisk.R, R/table.Distributions.R[ADD],
+	  R/table.DownsideRiskRatio.R[ADD], R/table.DrawdownsRatio.R[ADD],
+	  R/table.InformationRatio.R[ADD], R/table.SpecificRisk.R[ADD],
+	  R/table.Variability.R[ADD], man/SpecificRisk.Rd[ADD],
+	  man/SystematicRisk.Rd, man/TotalRisk.Rd, man/UlcerIndex.Rd[ADD],
+	  man/table.Distributions.Rd[ADD],
+	  man/table.DownsideRiskRatio.Rd[ADD],
+	  man/table.DrawdownsRatio.Rd[ADD],
+	  man/table.InformationRatio.Rd[ADD],
+	  man/table.SpecificRisk.Rd[ADD], man/table.Variability.Rd[ADD]:
+	  addition of SpecificRisk, table.Variability, table.SpecificRisk,
+	  table.InformationRisk, table.Distributions, table.DrawdownsRatio,
+	  table.DownsideRiskRatio with documentation + doc of Ulcer Index +
+	  minor modifications
+
+2012-08-07  matthieu_lestel
+
+	* R/DownsideDeviation.R, R/MartinRatio.R, R/PainRatio.R,
+	  R/TreynorRatio.R, R/VolatilitySkewness.R,
+	  man/portfolio_bacon.Rd[ADD]: documentation of portfolio_bacon
+	  data + other modification to fix warnings in R CMD check
+
+2012-08-03  matthieu_lestel
+
+	* NAMESPACE, R/MartinRatio.R[ADD], R/NetSelectivity.R[ADD],
+	  R/OmegaExcessReturn.R[ADD], R/UlcerIndex.R,
+	  man/MartinRatio.Rd[ADD], man/NetSelectivity.Rd[ADD],
+	  man/OmegaExcessReturn.Rd[ADD], man/Selectivity.Rd: Net
+	  Selectivity, Omega excess return and Martin ratio with examples
+	  and documentation
+
+2012-07-30  mkshah
+
+	* sandbox/Meucci/R/MeanDiversificationFrontier.R[ADD]: Adding a
+	  script for "Managing Diversification" part of Meucci's research
+
+2012-07-27  braverock
+
+	* sandbox/Meucci/DESCRIPTION, sandbox/Meucci/NAMESPACE[ADD],
+	  sandbox/Meucci/R/CmaCopula.R, sandbox/Meucci/R/EntropyProg.R,
+	  sandbox/Meucci/R/HermiteGrid.R,
+	  sandbox/Meucci/R/InvariantProjection.R,
+	  sandbox/Meucci/R/RankingInformation.R,
+	  sandbox/Meucci/R/logToArithmeticCovariance.R,
+	  sandbox/Meucci/man/EntropyProg.Rd: - updates to get closer to
+	  passing R CMD check
+	* sandbox/Meucci/data/00index[CPY],
+	  sandbox/Meucci/data/butterflyAnalytics.Rda[DEL],
+	  sandbox/Meucci/data/butterflyAnalytics.rda[CPY],
+	  sandbox/Meucci/data/datalist[DEL],
+	  sandbox/Meucci/data/pseudodata.Rda[DEL],
+	  sandbox/Meucci/data/pseudodata.rda[CPY]: - cleanup for R CMD
+	  check
+	* R/ES.R, R/PortfolioRisk.R, man/ES.Rd: - remove ES portfolio
+	  kernel method for now, lay groudwork for adding it back in later
+	* R/ES.R, R/MultivariateMoments.R, man/ES.Rd: - fix component ES
+	  multivariat moments bug, reported by Eric Zivot
+
+2012-07-27  matthieu_lestel
+
+	* NAMESPACE: modif of NAMESPACE to pass R CMD check
+	* NAMESPACE, R/AppraisalRatio.R, R/FamaBeta.R[ADD],
+	  R/ProspectRatio.R, R/Selectivity.R[ADD], man/AppraisalRatio.Rd,
+	  man/DownsideDeviation.Rd, man/FamaBeta.Rd[ADD],
+	  man/ProspectRatio.Rd, man/Selectivity.Rd[ADD]: modified jensen's
+	  alpha, alternative modified jensen's alpha, selectivity and fama
+	  beta with examples and documentation
+
+2012-07-27  peter_carl
+
+	* R/PortfolioRisk.R: - fixed the last fix by changing sign on VaR
+	  value
+	* R/PortfolioRisk.R: - fixed corner case in ES.historical where no
+	  observations are larger than VaR
+	  - in that case, set ES = VaR and warn the user
+
+2012-07-25  braverock
+
+	* R/chart.Correlation.R: - fix problem with R CMD check
+
+2012-07-25  matthieu_lestel
+
+	* NAMESPACE, R/AppraisalRatio.R[ADD], R/BernadoLedoitratio.R,
+	  R/CAPM.jensenAlpha.R, R/M2Sortino.R[ADD], R/ProspectRatio.R[ADD],
+	  R/SystematicRisk.R, man/AppraisalRatio.Rd[ADD],
+	  man/BernardoLedoitRatio.Rd[ADD], man/CAPM.jensenAlpha.Rd,
+	  man/DrawdownPeak.Rd[ADD], man/M2Sortino.Rd[ADD],
+	  man/ProspectRatio.Rd[ADD]: M2Sortino, AppraisalRatio and
+	  ProspectRatio with examples and documentation + some doc I forgot
+	  to add in the svn commit
+
+2012-07-25  mkshah
+
+	* sandbox/Meucci/demo/00index: Correcting demo name
+	* sandbox/Meucci/demo/00index[ADD],
+	  sandbox/Meucci/demo/InvariantProjection.R: Adding Index File for
+	  demo folder and deleting unnecessary code in
+	  InvariantProjection.R
+
+2012-07-23  braverock
+
+	* R/chart.Correlation.R, man/chart.Correlation.Rd: - update to pass
+	  method to cor() per request from John Muschelli @ JH
+
+2012-07-23  mkshah
+
+	* sandbox/Meucci/data/MeucciReturnsDistribution.rda[DEL],
+	  sandbox/Meucci/data/butterflyTradingX.rda[DEL],
+	  sandbox/Meucci/data/datalist[ADD]: Deleting unnecessary datasets
+	  and adding datalist which contains information about all the data
+	  files
+	* sandbox/Meucci/00index[ADD], sandbox/Meucci/DESCRIPTION: Adding
+	  the 00index file and changing DESCRIPTION
+	* sandbox/Meucci/man/CMAcombination.Rd,
+	  sandbox/Meucci/man/CMAseparation.Rd,
+	  sandbox/Meucci/man/Central2Raw.Rd,
+	  sandbox/Meucci/man/ComputeMVE.Rd,
+	  sandbox/Meucci/man/ComputeMoments.Rd,
+	  sandbox/Meucci/man/CondProbViews.Rd,
+	  sandbox/Meucci/man/Cumul2Raw.Rd,
+	  sandbox/Meucci/man/DetectOutliersViaMVE.Rd,
+	  sandbox/Meucci/man/EntropyProg.Rd,
+	  sandbox/Meucci/man/GenerateLogNormalDistribution.Rd,
+	  sandbox/Meucci/man/MvnRnd.Rd,
+	  sandbox/Meucci/man/NoisyObservations.Rd,
+	  sandbox/Meucci/man/PanicCopula.Rd,
+	  sandbox/Meucci/man/PartialConfidencePosterior.Rd,
+	  sandbox/Meucci/man/PlotDistributions.Rd,
+	  sandbox/Meucci/man/Prior2Posterior.Rd,
+	  sandbox/Meucci/man/RIEfficientFrontier.Rd[ADD],
+	  sandbox/Meucci/man/Raw2Central.Rd,
+	  sandbox/Meucci/man/Raw2Cumul.Rd,
+	  sandbox/Meucci/man/RejectOutlier.Rd,
+	  sandbox/Meucci/man/StackedBarChart.Rd,
+	  sandbox/Meucci/man/SummStats.Rd, sandbox/Meucci/man/Tweak.Rd,
+	  sandbox/Meucci/man/ViewRanking.Rd,
+	  sandbox/Meucci/man/efficientFrontier.Rd,
+	  sandbox/Meucci/man/gaussHermiteMesh.Rd[ADD],
+	  sandbox/Meucci/man/hermitePolynomial.Rd[ADD],
+	  sandbox/Meucci/man/integrateSubIntervals.Rd[ADD],
+	  sandbox/Meucci/man/kernelbw.Rd[ADD],
+	  sandbox/Meucci/man/kernelcdf.Rd[ADD],
+	  sandbox/Meucci/man/kernelinv.Rd[ADD],
+	  sandbox/Meucci/man/kernelpdf.Rd[ADD],
+	  sandbox/Meucci/man/linreturn.Rd,
+	  sandbox/Meucci/man/normalizeProb.Rd[ADD],
+	  sandbox/Meucci/man/pHist.Rd,
+	  sandbox/Meucci/man/private_fun.Rd[ADD],
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd,
+	  sandbox/Meucci/man/std.Rd,
+	  sandbox/Meucci/man/subIntervals.Rd[ADD]: Adding documentation
+	  files for new functions and updating comments for other functions
+	* sandbox/Meucci/R/HermiteGrid.R: Correcting mistakes in commenting
+	* sandbox/Meucci/R/HermiteGrid.R: Adding comments for remaining
+	  functions
+	* sandbox/Meucci/R/HermiteGrid.R: Adding and updating comments for
+	  Kernel functions
+	* sandbox/Meucci/R/InvariantProjection.R: Updating comments
+	* sandbox/Meucci/R/DetectOutliersviaMVE.R,
+	  sandbox/Meucci/R/RankingInformation.R,
+	  sandbox/Meucci/R/RobustBayesianAllocation.R: Updating comments
+	  and correcting code
+
+2012-07-22  mkshah
+
+	* sandbox/Meucci/R/DetectOutliersviaMVE.R,
+	  sandbox/Meucci/R/RobustBayesianAllocation.R: Updating comments
+	* sandbox/Meucci/man/ProjectInvariant.Rd[DEL]: Deleting an unused
+	  function documentation file
+	* sandbox/Meucci/R/Prior2Posterior.R: Updating comments
+	* sandbox/Meucci/demo/InvariantProjection.R: Removing Roxygen like
+	  commenting
+
+2012-07-21  matthieu_lestel
+
+	* NAMESPACE, R/AdjustedSharpeRatio.R, R/BernadoLedoitratio.R,
+	  R/BurkeRatio.R, R/CAPM.epsilon.R, R/CAPM.jensenAlpha.R,
+	  R/CoMoments.R, R/DRatio.R, R/DownsideDeviation.R,
+	  R/DownsideFrequency.R, R/DrawdownPeak.R, R/Frequency.R[ADD],
+	  R/MSquared.R, R/MSquaredExcess.R[ADD], R/MeanAbsoluteDeviation.R,
+	  R/OmegaSharpeRatio.R, R/PainIndex.R, R/PainRatio.R,
+	  R/SkewnessKurtosisRatio.R, R/SystematicRisk.R, R/TotalRisk.R,
+	  R/TreynorRatio.R, R/UpsideFrequency.R, R/UpsideRisk.R,
+	  R/VolatilitySkewness.R, R/chart.Correlation.R, R/kurtosis.R,
+	  R/skewness.R, man/AdjustedSharpeRatio.Rd, man/BurkeRatio.Rd,
+	  man/CAPM.epsilon.Rd, man/CAPM.jensenAlpha.Rd, man/CoMoments.Rd,
+	  man/DRatio.Rd, man/DownsideDeviation.Rd,
+	  man/DownsideFrequency.Rd, man/Frequency.Rd[ADD], man/MSquared.Rd,
+	  man/MSquaredExcess.Rd[ADD], man/MeanAbsoluteDeviation.Rd,
+	  man/OmegaSharpeRatio.Rd, man/PainIndex.Rd, man/PainRatio.Rd,
+	  man/SkewnessKurtosisRatio.Rd, man/SystematicRisk.Rd,
+	  man/TotalRisk.Rd, man/TreynorRatio.Rd, man/UpsideFrequency.Rd,
+	  man/UpsideRisk.Rd, man/VolatilitySkewness.Rd,
+	  man/chart.Correlation.Rd, man/kurtosis.Rd, man/skewness.Rd:
+	  frequency with examples and documentation + MSquaredExcess with
+	  examples and documentation + correction of all latex equations in
+	  the doc to avoid the html part to appear in the pdf + some
+	  warning corrected in R CMD check
+
+2012-07-19  matthieu_lestel
+
+	* R/DownsideDeviation.R, R/MSquared.R[ADD], R/SystematicRisk.R,
+	  man/DownsideDeviation.Rd, man/MSquared.Rd[ADD],
+	  man/SystematicRisk.Rd: better with the addition of the file
+	* NAMESPACE, R/DownsideDeviation.R, R/SystematicRisk.R,
+	  R/TotalRisk.R, man/DownsideDeviation.Rd, man/SystematicRisk.Rd,
+	  man/TotalRisk.Rd: msquared with examples and documentation
+	* R/AdjustedSharpeRatio.R, R/BurkeRatio.R, R/CAPM.epsilon.R,
+	  R/DRatio.R, R/DownsideFrequency.R, R/Kappa.R,
+	  R/MeanAbsoluteDeviation.R, R/OmegaSharpeRatio.R, R/PainRatio.R,
+	  R/SkewnessKurtosisRatio.R, R/UpsideFrequency.R, R/UpsideRisk.R,
+	  R/VolatilitySkewness.R, man/DRatio.Rd, man/DownsideDeviation.Rd,
+	  man/DownsideFrequency.Rd, man/Kappa.Rd, man/OmegaSharpeRatio.Rd,
+	  man/PainRatio.Rd, man/SkewnessKurtosisRatio.Rd,
+	  man/UpsideFrequency.Rd, man/UpsideRisk.Rd,
+	  man/VolatilitySkewness.Rd: modification to use xts objects inside
+	  the functions
+
+2012-07-18  matthieu_lestel
+
+	* NAMESPACE, R/AdjustedSharpeRatio.R, R/BernadoLedoitratio.R,
+	  R/DownsideDeviation.R, R/ES.R, R/MeanAbsoluteDeviation.R,
+	  R/PainIndex.R, R/PainRatio.R, R/SkewnessKurtosisRatio.R,
+	  R/TreynorRatio.R, R/UpsideRisk.R, R/VolatilitySkewness.R,
+	  R/chart.RollingRegression.R, data/portfolio_bacon.csv,
+	  data/portfolio_bacon.rda, man/AdjustedSharpeRatio.Rd,
+	  man/BernardoLedoitratio.Rd[DEL], man/ES.Rd,
+	  man/MeanAbsoluteDeviation.Rd, man/PainIndex.Rd, man/PainRatio.Rd,
+	  man/SkewnessKurtosisRatio.Rd, man/VolatilitySkewness.Rd,
+	  man/chart.RollingRegression.Rd: Rcheck pass + some other minor
+	  modifications
+
+2012-07-16  braverock
+
+	* NAMESPACE, R/Return.portfolio.R: - add @export for
+	  Return.portfolio
+	* NAMESPACE, R/CoMoments.R: - minor change to exports
+	* DESCRIPTION, NAMESPACE, R/CAPM.beta.R, R/CAPM.utils.R,
+	  R/CoMoments.R, R/DownsideDeviation.R, R/InformationRatio.R,
+	  R/KellyRatio.R, R/Omega.R, R/OmegaSharpeRatio.R,
+	  R/Return.Geltner.R, R/Return.annualized.R, R/Return.calculate.R,
+	  R/Return.clean.R, R/Return.cumulative.R, R/Return.excess.R,
+	  R/Return.portfolio.R, R/Return.read.R, R/Return.relative.R,
+	  R/SemiDeviation.R, R/SharpeRatio.R, R/SharpeRatio.annualized.R,
+	  R/SkewnessKurtosisRatio.R, R/SmoothingIndex.R, R/SortinoRatio.R,
+	  R/StdDev.R, R/SystematicRisk.R, R/TotalRisk.R, R/TrackingError.R,
+	  R/TreynorRatio.R, R/UlcerIndex.R, R/UpDownRatios.R,
+	  R/UpsidePotentialRatio.R, R/VaR.R, R/chart.ACF.R,
+	  R/chart.ACFplus.R, R/chart.Bar.R, R/chart.Boxplot.R,
+	  R/chart.CaptureRatios.R, R/chart.Correlation.R,
+	  R/chart.CumReturns.R, R/chart.Drawdown.R, R/chart.ECDF.R,
+	  R/chart.QQPlot.R, R/chart.Regression.R,
+	  R/chart.RelativePerformance.R, R/chart.RiskReturnScatter.R,
+	  R/chart.RollingCorrelation.R, R/chart.RollingMean.R,
+	  R/chart.RollingPerformance.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.Scatter.R,
+	  R/chart.SnailTrail.R, R/chart.StackedBar.R, R/chart.TimeSeries.R,
+	  R/chart.VaRSensitivity.R, R/charts.Bar.R, R/charts.BarVaR.R,
+	  R/charts.PerformanceSummary.R, R/charts.RollingPerformance.R,
+	  R/charts.RollingRegression.R, R/charts.TimeSeries.R,
+	  R/checkData.R, R/findDrawdowns.R, R/kurtosis.R, R/legend.R,
+	  R/maxDrawdown.R, R/mean.utils.R, R/skewness.R, R/sortDrawdowns.R,
+	  R/table.AnnualizedReturns.R, R/table.Arbitrary.R,
+	  R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.HigherMoments.R,
+	  R/table.RollingPeriods.R, R/textplot.R, man/BetaCoMoments.Rd,
+	  man/BurkeRatio.Rd, man/CAPM.RiskPremium.Rd, man/CAPM.beta.Rd,
+	  man/CAPM.epsilon.Rd, man/CAPM.jensenAlpha.Rd,
+	  man/DownsideDeviation.Rd, man/Return.calculate.Rd,
+	  man/Return.portfolio.Rd, man/TreynorRatio.Rd, man/chart.ACF.Rd,
+	  man/chart.RollingRegression.Rd, man/chart.TimeSeries.Rd,
+	  sandbox/Meucci/DESCRIPTION, sandbox/Meucci/man/CMAcombination.Rd,
+	  sandbox/Meucci/man/CMAseparation.Rd,
+	  sandbox/Meucci/man/Central2Raw.Rd,
+	  sandbox/Meucci/man/Cumul2Raw.Rd,
+	  sandbox/Meucci/man/PartialConfidencePosterior.Rd,
+	  sandbox/Meucci/man/Prior2Posterior.Rd,
+	  sandbox/Meucci/man/Raw2Central.Rd,
+	  sandbox/Meucci/man/Raw2Cumul.Rd,
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd: -
+	  update roxygen doec, specifically @export tags
+
+2012-07-15  matthieu_lestel
+
+	* R/AdjustedSharpeRatio.R, R/BurkeRatio.R, R/CAPM.epsilon.R,
+	  R/CAPM.jensenAlpha.R, R/TreynorRatio.R: modification of the
+	  method of calcul for return to match Bacon(2008) in some
+	  functions
+	* R/PainRatio.R[ADD], R/TreynorRatio.R, man/PainRatio.Rd[ADD]: Pain
+	  ratio with examples and documentation
+	* R/DrawdownPeak.R[ADD], R/MeanAbsoluteDeviation.R, R/PainIndex.R,
+	  man/MeanAbsoluteDeviation.Rd, man/PainIndex.Rd[ADD]:
+	  documentation of PainIndex, correction of PainIndex.R, addition
+	  of DrawdownPeak to calculate drawdown since previous peak
+
+2012-07-14  matthieu_lestel
+
+	* R/MeanAbsoluteDeviation.R[ADD],
+	  man/MeanAbsoluteDeviation.Rd[ADD]: Mean absolute deviation with
+	  examples and documentation
+
+2012-07-13  matthieu_lestel
+
+	* R/BurkeRatio.R, R/kurtosis.R, R/skewness.R, man/kurtosis.Rd,
+	  man/skewness.Rd: correction of calcul of skewness and kurtosis,
+	  update of documentation, addition of sample skewness, sample
+	  kurtosis and sample excess kurtosis
+
+2012-07-13  mkshah
+
+	* sandbox/Meucci/R/RobustBayesianAllocation.R: Correcting
+	  documentation mistakes
+	* sandbox/Meucci/R/InvariantProjection.R: Correcting documentation
+	  mistakes
+	* sandbox/Meucci/R/EntropyProg.R: Correcting documentation mistakes
+	* sandbox/Meucci/R/ButterflyTrading.R[DEL]: Deleting
+	  ButterflyTrading.R since all the functions have been moved to the
+	  demo script demo/ButterflyTrading.R
+	* sandbox/Meucci/demo/ButterflyTrading.R: Including
+	  ButterflyTrading functions in the demo file since it is a case
+	  study and doesn't include any generalized method/process
+	* sandbox/Meucci/R/HermiteGrid.R: Adding comments for the functions
+	  subIntervals, gaussHermiteMesh and hermitePolynomial
+	* sandbox/Meucci/R/CmaCopula.R: Updating comments for
+	  CMACombination and CMASeperation
+
+2012-07-11  braverock
+
+	* sandbox/Meucci/R/DetectOutliersviaMVE.R,
+	  sandbox/Meucci/R/EntropyProg.R,
+	  sandbox/Meucci/R/FullyFlexibleBayesNets.R,
+	  sandbox/Meucci/R/InvariantProjection.R,
+	  sandbox/Meucci/R/Prior2Posterior.R,
+	  sandbox/Meucci/R/RankingInformation.R,
+	  sandbox/Meucci/R/RobustBayesianAllocation.R,
+	  sandbox/Meucci/R/logToArithmeticCovariance.R,
+	  sandbox/Meucci/man/Central2Raw.Rd,
+	  sandbox/Meucci/man/ComputeMVE.Rd,
+	  sandbox/Meucci/man/CondProbViews.Rd,
+	  sandbox/Meucci/man/Cumul2Raw.Rd,
+	  sandbox/Meucci/man/EfficientFrontier.Rd[DEL],
+	  sandbox/Meucci/man/GenerateLogNormalDistribution.Rd,
+	  sandbox/Meucci/man/PartialConfidencePosterior.Rd,
+	  sandbox/Meucci/man/PlotDistributions.Rd,
+	  sandbox/Meucci/man/Prior2Posterior.Rd,
+	  sandbox/Meucci/man/Raw2Central.Rd,
+	  sandbox/Meucci/man/Raw2Cumul.Rd,
+	  sandbox/Meucci/man/StackedBarChart.Rd,
+	  sandbox/Meucci/man/Tweak.Rd, sandbox/Meucci/man/ViewRanking.Rd,
+	  sandbox/Meucci/man/linreturn.Rd,
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd,
+	  sandbox/Meucci/man/std.Rd: - changes to roxygen comments and a
+	  few manual edits to .Rd files so documentation will compile, more
+	  to do here.
+
+2012-07-10  mkshah
+
+	* sandbox/Meucci/R/ButterflyTrading.R: Removing unnecessary
+	  comments
+	* sandbox/Meucci/demo/RankingInformation.R: Changing function name
+	  to avoid conflicts
+	* sandbox/Meucci/R/RankingInformation.R: Changing function name to
+	  avoid conflicts
+
+2012-07-09  braverock
+
+	* sandbox/Meucci/DESCRIPTION, sandbox/Meucci/man/Central2Raw.Rd,
+	  sandbox/Meucci/man/ComputeMVE.Rd,
+	  sandbox/Meucci/man/Cumul2Raw.Rd,
+	  sandbox/Meucci/man/EntropyProg.Rd,
+	  sandbox/Meucci/man/GenerateLogNormalDistribution.Rd,
+	  sandbox/Meucci/man/PartialConfidencePosterior.Rd,
+	  sandbox/Meucci/man/Prior2Posterior.Rd,
+	  sandbox/Meucci/man/Raw2Central.Rd,
+	  sandbox/Meucci/man/Raw2Cumul.Rd,
+	  sandbox/Meucci/man/StackedBarChart.Rd,
+	  sandbox/Meucci/man/efficientFrontier.Rd,
+	  sandbox/Meucci/man/linreturn.Rd,
+	  sandbox/Meucci/man/pHist.Rd[ADD],
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd: -
+	  update roxygen docs
+	  - update DESCRIPTION for easier compilation
+
+2012-07-09  mkshah
+
+	* sandbox/Meucci/R/RobustBayesianAllocation.R: Deleting duplicated
+	  demo content which has already been shifted to
+	  RobustBayesianAllocation.R in the demo folder
+	* sandbox/Meucci/demo/HermiteGrid_CVaR_Recursion.R: Correcting plot
+	  parameters
+	* sandbox/Meucci/R/RobustBayesianAllocation.R: Updating equations
+	  and references
+	* sandbox/Meucci/R/DetectOutliersviaMVE.R: Updating equations and
+	  references
+	* sandbox/Meucci/R/Prior2Posterior.R: Removing unnecessary comments
+	* sandbox/Meucci/R/RankingInformation.R: Updating comments
+	* sandbox/Meucci/R/EntropyProg.R: Updating equations and references
+	* sandbox/Meucci/R/logToArithmeticCovariance.R: Updating equations
+	  and references
+	* sandbox/Meucci/R/InvariantProjection.R: Adding equations and
+	  references.
+
+2012-07-08  mkshah
+
+	* sandbox/Meucci/R/EntropyProg.R: Updating comments
+
+2012-07-08  matthieu_lestel
+
+	* R/AdjustedSharpeRatio.R[ADD], man/AdjustedSharpeRatio.Rd[ADD]:
+	  adjusted sharpe ratio with examples and documentation
+
+2012-07-07  mkshah
+
+	* sandbox/Meucci/demo/HermiteGrid_CVaR_Recursion.R[ADD]: Adding a
+	  demo replicating the S_CVaR_Recursion.m file provided by Meucci
+	* sandbox/Meucci/R/HermiteGrid.R: Correcting the Kernel Functions
+	* sandbox/Meucci/R/EntropyProg.R: Correcting Comments
+	* sandbox/Meucci/demo/HermiteGrid_CaseStudy.R: Completed and
+	  checked the results of the demo with Meucci's Matlab code
+
+2012-07-06  matthieu_lestel
+
+	* R/BurkeRatio.R[ADD], man/BurkeRatio.Rd[ADD]: Burke ratio and
+	  modified Burke ratio with examples and documentation
+
+2012-07-05  mkshah
+
+	* sandbox/Meucci/demo/HermiteGrid_CaseStudy.R[ADD]: Duplicating the
+	  S_CaseStudy.m Demo as provided by Meucci for Fully Flexible
+	  Extreme Views
+	* sandbox/Meucci/R/HermiteGrid.R: Adding the kernel functions as
+	  defined by Meucci for the CaseStudy Demo
+
+2012-07-04  mkshah
+
+	* sandbox/Meucci/data/pseudodata.Rda[ADD]: Adding dataset for the
+	  demo of FullyFlexibleExtremeViews by Meucci
+	* sandbox/Meucci/demo/S_plotGaussHermite.R[ADD]: New Demo for
+	  gaussHermiteMesh function as given by Meucci
+	* sandbox/Meucci/R/HermiteGrid.R: Making hermitePolynomial
+	  executable and adding a function gaussHermiteMesh
+	* sandbox/Meucci/demo/S_ToyExample.R[ADD]: Adding another example
+	  for Fully Flexible Bayesian Network as suggested by Meucci
+	* sandbox/Meucci/R/FullyFlexibleBayesNets.R: Commenting out
+	  unnecessary lines of code
+	* sandbox/Meucci/R/ButterflyTrading.R: Indenting and correcting
+	  code
+	* sandbox/Meucci/demo/ButterflyTrading.R: Correcting code
+	* sandbox/Meucci/data/butterflyAnalytics.Rda[ADD]: Consolidating
+	  data for ButterflyTrading in one workspace
+	* sandbox/Meucci/R/CmaCopula.R: Cleaning and checking results
+	  against Meucci's Matlab Version
+	* sandbox/Meucci/R/EntropyProg.R: Changing the parameter list for
+	  pHist
+
+2012-07-04  matthieu_lestel
+
+	* R/SystematicRisk.R, R/TotalRisk.R, R/TreynorRatio.R,
+	  man/SystematicRisk.Rd, man/TreynorRatio.Rd: Modified Treynor
+	  ratio with examples and documentation
+
+2012-07-02  matthieu_lestel
+
+	* R/SkewnessKurtosisRatio.R, man/SkewnessKurtosisRatio.Rd: addition
+	  of expected value in the exemples
+	* R/SkewnessKurtosisRatio.R[ADD],
+	  man/SkewnessKurtosisRatio.Rd[ADD]: SkewnessKurtosisRatio with
+	  examples and documentation
+
+2012-06-30  matthieu_lestel
+
+	* R/DownsideDeviation.R, R/UpsideRisk.R,
+	  R/VolatilitySkewness.R[ADD], man/DownsideDeviation.Rd,
+	  man/UpsideRisk.Rd, man/VolatilitySkewness.Rd[ADD]: Volatiliy and
+	  variability skewness with examples and documentation
+
+2012-06-29  matthieu_lestel
+
+	* R/OmegaSharpeRatio.R[ADD], man/OmegaSharpeRatio.Rd[ADD]:
+	  OmegaSharpeRatio with examples and documentation
+	* R/DownsideDeviation.R: modification of DownsideDeviation to make
+	  it easier to use for other functions
+
+2012-06-28  matthieu_lestel
+
+	* R/TotalRisk.R[ADD], man/TotalRisk.Rd[ADD]: Total risk with
+	  examples and documentation
+
+2012-06-26  matthieu_lestel
+
+	* R/CAPM.jensenAlpha.R, R/SystematicRisk.R[ADD],
+	  man/CAPM.jensenAlpha.Rd, man/SystematicRisk.Rd[ADD]: Systematic
+	  risk with exemples and documentation
+
+2012-06-25  matthieu_lestel
+
+	* R/CAPM.epsilon.R, R/CAPM.jensenAlpha.R[ADD], man/CAPM.epsilon.Rd,
+	  man/CAPM.jensenAlpha.Rd[ADD]: jensen's alpha with exemples and
+	  documentation
+	* R/CAPM.alpha.R, R/CAPM.epsilon.R[ADD], R/UpsideRisk.R,
+	  data/portfolio_bacon.csv, man/CAPM.epsilon.Rd[ADD]: epsilon
+	  regression with documentation
+
+2012-06-25  mkshah
+
+	* sandbox/Meucci/demo/FullyFlexibleBayesNets.R: Cleaned code and
+	  checked against Meucci's Matlab Code
+	* sandbox/Meucci/R/FullyFlexibleBayesNets.R: Code cleaning
+
+2012-06-24  mkshah
+
+	* sandbox/Meucci/demo/InvariantProjection.R[ADD]: Created a new
+	  demo file for InvariantProjection and checked the results with
+	  Meucci's Matlab Code
+	* sandbox/Meucci/R/InvariantProjection.R: Cleaned code and shifted
+	  the demo part to demo/InvariantProjection.R
+	* sandbox/Meucci/R/HermiteGrid.R: Moving common functions
+	  prior2Posterior and pHist to EntropyProg.R
+	* sandbox/Meucci/R/EntropyProg.R: Moving common functions pHist and
+	  prior2Posterior to EntropyProg.R
+	* sandbox/Meucci/R/Prior2Posterior.R: Moving common functions to
+	  EntropyProg.R
+	* sandbox/Meucci/demo/HermiteGrid_demo.R: Cleaned and checked
+	  against Meucci's Matlab Code
+	* sandbox/Meucci/R/HermiteGrid.R: Cleaned and verified output with
+	  Meucci's Matlab Code.
+	* sandbox/Meucci/data/ghq1000.rda[ADD]: Dataset for HermiteGrid
+	  Demo
+	* sandbox/Meucci/R/DetectOutliersviaMVE.R: Cleaned file and checked
+	  against Meucci's Matlab Code
+	* sandbox/Meucci/demo/DetectOutliersviaMVE.R: Cleaned file and
+	  checked against Meucci's Matlab Code.
+	* sandbox/Meucci/demo/Prior2Posterior.R: Adding missing statements
+
+2012-06-21  matthieu_lestel
+
+	* R/Kappa.R[ADD], man/DRatio.Rd, man/Kappa.Rd[ADD]: addition of
+	  kappa with examples and documentation
+	* R/DRatio.R[ADD], man/BernardoLedoitratio.Rd, man/DRatio.Rd[ADD],
+	  man/DownsideDeviation.Rd, man/DownsideFrequency.Rd,
+	  man/UpsideFrequency.Rd, man/UpsideRisk.Rd: d ratio with exemples
+	  and documentation
+
+2012-06-20  matthieu_lestel
+
+	* R/BernadoLedoitratio.R, R/DownsideDeviation.R,
+	  R/DownsideFrequency.R, R/UpsideFrequency.R, R/UpsideRisk.R: end
+	  of tests for UpsideRisk and correction of a little bug in all
+	  examples
+	* R/BernadoLedoitratio.R[ADD], man/BernardoLedoitratio.Rd[ADD]:
+	  addition of Bernado and Ledoit ratio and its documentation
+	* R/UpsideFrequency.R[ADD], man/UpsideFrequency.Rd[ADD]: addition
+	  of Upside Frequency and its documentation
+
+2012-06-19  matthieu_lestel
+
+	* R/DownsideFrequency.R[ADD], data/portfolio_bacon.csv[ADD],
+	  data/portfolio_bacon.rda[ADD], man/DownsideFrequency.Rd[ADD],
+	  man/UpsideRisk.Rd: DownsideFrequency with exemples and
+	  documentation and addition of Bacon data
+
+2012-06-17  mkshah
+
+	* sandbox/Meucci/R/Prior2Posterior.R: Adding function pHist as seen
+	  in Meucci's Matlab Code and making PlotDistributions function
+	  work
+	* sandbox/Meucci/Meucci_functions.csv: Added the new S&P example
+	  added for Robust Bayesian Allocation to the list of scripts
+	* sandbox/Meucci/R/RobustBayesianAllocation.R: Adding Reference and
+	  Matlab Source Code Information
+	* sandbox/Meucci/demo/RankingInformation.R: Adding StackedBarChart
+	  function for PosteriorFrontier
+	* sandbox/Meucci/R/RankingInformation.R: Making StackedBarChart
+	  function usable by shifting warnings to the calling function,
+	  removing repeated implementation of ViewRanking() function and
+	  modifying indentation
+	* sandbox/Meucci/R/EntropyProg.R: Changing the tolerance for
+	  optimization function from 1e-7 to 1e-6 as used by Meucci
+	* sandbox/Meucci/data/ReturnsDistribution.rda[ADD]: Changed the
+	  name of MeucciReturnsDistribution.rda to ReturnsDistribution.rda
+	* sandbox/Meucci/demo/RankingInformation.R: Used the Function
+	  StackedBarChart and removed unnecessary indentation
+	* sandbox/Meucci/demo/S_SnPCaseStudy.R[ADD]: SnPCaseStudy Demo File
+	  provided by Attilio Meucci
+	* sandbox/Meucci/data/SectorsSnP500.rda[ADD]: Data file for the
+	  example SnPCaseStudy provided by Attilio Meucci
+
+2012-06-11  matthieu_lestel
+
+	* R/UpsideRisk.R[ADD], man/DownsideDeviation.Rd,
+	  man/UpsideRisk.Rd[ADD]: Upside Risk, Variance and Potential with
+	  their documentation documentation
+
+2012-06-09  mkshah
+
+	* sandbox/Meucci/Meucci_functions.csv: Changing the semi-colons to
+	  commas
+
+2012-06-08  braverock
+
+	* R/CoMoments.R, man/BetaCoMoments.Rd[CPY],
+	  man/BetaCoVariance.Rd[DEL]: - roxygenize BetaCoMoments
+	  documentation. I think this is the last to get roxygenized.
+
+2012-06-07  braverock
+
+	* sandbox/Meucci/DESCRIPTION[ADD],
+	  sandbox/Meucci/FactorDistributions.rda[DEL],
+	  sandbox/Meucci/MeucciAnalyticalvsNumerical.R[DEL],
+	  sandbox/Meucci/MeucciButterflyTrading.R[DEL],
+	  sandbox/Meucci/MeucciCmaCopula.R[DEL],
+	  sandbox/Meucci/MeucciEntropyProg.R[DEL],
+	  sandbox/Meucci/MeucciFreaqEst.rda[DEL],
+	  sandbox/Meucci/MeucciFullFlexibleBayesNets.R[DEL],
+	  sandbox/Meucci/MeucciHermiteGrid.R[DEL],
+	  sandbox/Meucci/MeucciInvariantProjection.R[DEL],
+	  sandbox/Meucci/MeucciRankingInformation.R[DEL],
+	  sandbox/Meucci/MeucciReturnsDistribution.rda[DEL],
+	  sandbox/Meucci/MeucciRobustBayesianAllocation.R[DEL],
+	  sandbox/Meucci/MeucciTweakTest.rda[DEL],
+	  sandbox/Meucci/Meucci_DetectOutliersviaMVE.R[DEL],
+	  sandbox/Meucci/Meucci_functions.csv, sandbox/Meucci/R[ADD],
+	  sandbox/Meucci/R/ButterflyTrading.R[CPY],
+	  sandbox/Meucci/R/CmaCopula.R[CPY],
+	  sandbox/Meucci/R/DetectOutliersviaMVE.R[CPY],
+	  sandbox/Meucci/R/EntropyProg.R[CPY],
+	  sandbox/Meucci/R/FullyFlexibleBayesNets.R[CPY],
+	  sandbox/Meucci/R/HermiteGrid.R[CPY],
+	  sandbox/Meucci/R/InvariantProjection.R[CPY],
+	  sandbox/Meucci/R/Prior2Posterior.R[CPY],
+	  sandbox/Meucci/R/RankingInformation.R[CPY],
+	  sandbox/Meucci/R/RobustBayesianAllocation.R[CPY],
+	  sandbox/Meucci/R/logToArithmeticCovariance.R[CPY],
+	  sandbox/Meucci/butterflyTradingX.rda[DEL],
+	  sandbox/Meucci/data[ADD],
+	  sandbox/Meucci/data/FactorDistributions.rda[CPY],
+	  sandbox/Meucci/data/MeucciFreaqEst.rda[CPY],
+	  sandbox/Meucci/data/MeucciReturnsDistribution.rda[CPY],
+	  sandbox/Meucci/data/MeucciTweakTest.rda[CPY],
+	  sandbox/Meucci/data/butterflyTradingX.rda[CPY],
+	  sandbox/Meucci/demo[ADD],
+	  sandbox/Meucci/demo/AnalyticalvsNumerical.R[ADD],
+	  sandbox/Meucci/demo/ButterflyTrading.R[ADD],
+	  sandbox/Meucci/demo/DetectOutliersviaMVE.R[ADD],
+	  sandbox/Meucci/demo/FullyFlexibleBayesNets.R[ADD],
+	  sandbox/Meucci/demo/HermiteGrid_demo.R[ADD],
+	  sandbox/Meucci/demo/Prior2Posterior.R[ADD],
+	  sandbox/Meucci/demo/RankingInformation.R[ADD],
+	  sandbox/Meucci/demo/RobustBayesianAllocation.R[ADD],
+	  sandbox/Meucci/demo/logToArithmeticCovariance.R[ADD],
+	  sandbox/Meucci/logToArithmeticCovariance.R[DEL],
+	  sandbox/Meucci/man[ADD],
+	  sandbox/Meucci/man/CMAcombination.Rd[ADD],
+	  sandbox/Meucci/man/CMAseparation.Rd[ADD],
+	  sandbox/Meucci/man/Central2Raw.Rd[ADD],
+	  sandbox/Meucci/man/ComputeMVE.Rd[ADD],
+	  sandbox/Meucci/man/ComputeMoments.Rd[ADD],
+	  sandbox/Meucci/man/CondProbViews.Rd[ADD],
+	  sandbox/Meucci/man/Cumul2Raw.Rd[ADD],
+	  sandbox/Meucci/man/DetectOutliersViaMVE.Rd[ADD],
+	  sandbox/Meucci/man/EfficientFrontier.Rd[ADD],
+	  sandbox/Meucci/man/EntropyProg.Rd[ADD],
+	  sandbox/Meucci/man/GenerateLogNormalDistribution.Rd[ADD],
+	  sandbox/Meucci/man/MvnRnd.Rd[ADD],
+	  sandbox/Meucci/man/NoisyObservations.Rd[ADD],
+	  sandbox/Meucci/man/PanicCopula.Rd[ADD],
+	  sandbox/Meucci/man/PartialConfidencePosterior.Rd[ADD],
+	  sandbox/Meucci/man/PlotDistributions.Rd[ADD],
+	  sandbox/Meucci/man/Prior2Posterior.Rd[ADD],
+	  sandbox/Meucci/man/ProjectInvariant.Rd[ADD],
+	  sandbox/Meucci/man/Raw2Central.Rd[ADD],
+	  sandbox/Meucci/man/Raw2Cumul.Rd[ADD],
+	  sandbox/Meucci/man/RejectOutlier.Rd[ADD],
+	  sandbox/Meucci/man/StackedBarChart.Rd[ADD],
+	  sandbox/Meucci/man/SummStats.Rd[ADD],
+	  sandbox/Meucci/man/Tweak.Rd[ADD],
+	  sandbox/Meucci/man/ViewRanking.Rd[ADD],
+	  sandbox/Meucci/man/efficientFrontier.Rd[ADD],
+	  sandbox/Meucci/man/linreturn.Rd[ADD],
+	  sandbox/Meucci/man/robustBayesianPortfolioOptimization.Rd[ADD],
+	  sandbox/Meucci/man/std.Rd[ADD]:
+
+2012-06-07  matthieu_lestel
+
+	* R/DownsideDeviation.R, man/DownsideDeviation.Rd: update in
+	  DownsideDeviation documentation for the html version
+
+2012-06-06  braverock
+
+	* DESCRIPTION, R/chart.QQPlot.R, man/DownsideDeviation.Rd,
+	  man/chart.ECDF.Rd, man/chart.QQPlot.Rd: - update roxygen docs.
+	  bump version
+
+2012-06-06  matthieu_lestel
+
+	* R/DownsideDeviation.R: Documentation of DownsideDeviation and
+	  DownsidePotential updated
+
+2012-06-05  ababii
+
+	* data/portfolio.rda[DEL]: - remove old data. I will add new later
+	  to the sandbox directory.
+	* R/Return.level.R[DEL], R/attribution.arithmetic.R[DEL],
+	  R/attribution.geometric.R[DEL], R/attribution.levels.R[DEL]:
+	  Moving attribution functions to the sandbox directory
+
+2012-06-04  ababii
+
+	* R/Return.level.R, R/attribution.levels.R[ADD]: Some improvements
+	  in the Return.level functions.
+	  
+	  attribution.levels is a prototype of the multi-level attribution
+	  function with working example. Currently it works only with 3
+	  levels and may fail if used on other data than included example.
+	* R/Return.level.R[ADD], R/aggregate.R[DEL]: Replaced aggregate.R
+	  by Return.level.R. Now it can use vector weights or periodically
+	  rebalanced weights in the same fashion as Return.portfolio
+	  function.
+	* R/aggregate.R: Corrected some mistakes. Added descriptions. The
+	  function returns aggregated returns and weights to the chosen
+	  level from the hierarchy.
+
+2012-06-03  mkshah
+
+	* sandbox/Meucci/MeucciRobustBayesianAllocation.R: Checked the
+	  formula and results compared with Meucci's Matlab Program
+
+2012-06-03  ababii
+
+	* R/aggregate.R:
+	* R/contribution.R[DEL]:
+	* R/aggregate.R[ADD], R/attribution.geometric.R[ADD]:
+	* R/attribution.arithmetic.R:
+
+2012-06-01  matthieu_lestel
+
+	* R/DownsideDeviation.R: Corrections in functions DownsideDeviation
+	  and DownsidePotential to match Bacon 2008
+
+2012-05-31  matthieu_lestel
+
+	* R/zzz.R: test commit
+
+2012-05-26  ababii
+
+	* R/attribution.arithmetic.R[ADD], R/contribution.R: A sketch for
+	  attribution function
+
+2012-05-25  braverock
+
+	* R/Drawdowns.R: - revert change from r1949 to previous behavior
+	  (r1855 and prior) after further consultation with Pat Burns
+
+2012-05-25  ababii
+
+	* R/contribution.R: Added support of matrix input
+
+2012-05-24  braverock
+
+	* R/CoMoments.R, man/CoMoments.Rd[CPY], man/CoVariance.Rd[DEL]: -
+	  roxygenize CoMoments Rd
+
+2012-05-23  braverock
+
+	* R/CoMoments.R, R/chart.RollingRegression.R, R/replaceTabs.R,
+	  R/table.RollingPeriods.R, R/textplot.R, man/centeredmoments.Rd,
+	  man/chart.RollingRegression.Rd, man/table.RollingPeriods.Rd,
+	  man/textplot.Rd: - fix codoc errors from roxygen conversion
+	* R/CAPM.utils.R, R/StdDev.annualized.R, R/chart.QQPlot.R,
+	  man/CAPM.RiskPremium.Rd, man/StdDev.annualized.Rd: - fix codoc
+	  errors from roxygen conversion
+	* R/SortinoRatio.R: - apply dots to DownsideDeviation function, per
+	  request from Suraj Gupta
+	* DESCRIPTION: - adjust Contributors and Thanks
+	* R/chart.QQPlot.R, man/chart.QQPlot.Rd: - manually fix
+	  chart.QQplot Rd, might still be broken for roxygen
+	* R/Return.clean.R, R/chart.QQPlot.R, R/mean.utils.R,
+	  man/chart.BarVaR.Rd, man/chart.Boxplot.Rd,
+	  man/chart.Histogram.Rd, man/chart.QQPlot.Rd,
+	  man/chart.RelativePerformance.Rd, man/chart.TimeSeries.Rd,
+	  man/clean.boudt.Rd, man/mean.geometric.Rd: - more changes to
+	  complete roxygen conversion of the documentation
+	* R/ActivePremium.R, R/CAPM.alpha.R, R/CAPM.beta.R,
+	  R/CalmarRatio.R, R/ES.R, R/MultivariateMoments.R,
+	  R/Return.read.R, R/apply.fromstart.R, R/apply.rolling.R,
+	  R/chart.BarVaR.R, R/chart.Drawdown.R, R/chart.Events.R,
+	  R/chart.Histogram.R, R/chart.QQPlot.R, R/chart.Regression.R,
+	  R/chart.RelativePerformance.R, R/chart.RollingCorrelation.R,
+	  R/chart.RollingPerformance.R,
+	  R/chart.RollingQuantileRegression.R, R/chart.RollingRegression.R,
+	  R/chart.SnailTrail.R, R/chart.StackedBar.R, R/chart.TimeSeries.R,
+	  R/chart.VaRSensitivity.R, R/charts.Bar.R, R/charts.BarVaR.R,
+	  R/findDrawdowns.R, R/mean.utils.R, R/sortDrawdowns.R,
+	  R/table.CalendarReturns.R, R/table.DownsideRisk.R,
+	  R/table.Drawdowns.R, R/table.MonthlyReturns.R: - improvements to
+	  roxygen docs supporting svn r1954
+	* DESCRIPTION, man/ActivePremium.Rd, man/CAPM.RiskPremium.Rd,
+	  man/CAPM.alpha.Rd, man/CAPM.beta.Rd, man/CDD.Rd,
+	  man/CalmarRatio.Rd, man/DownsideDeviation.Rd, man/ES.Rd,
+	  man/InformationRatio.Rd, man/KellyRatio.Rd, man/Omega.Rd,
+	  man/PerformanceAnalytics-package.Rd, man/Return.Geltner.Rd,
+	  man/Return.annualized.Rd, man/Return.calculate.Rd,
+	  man/Return.clean.Rd, man/Return.cumulative.Rd,
+	  man/Return.excess.Rd, man/Return.portfolio.Rd,
+	  man/Return.read.Rd, man/Return.relative.Rd, man/SharpeRatio.Rd,
+	  man/SharpeRatio.annualized.Rd, man/SmoothingIndex.Rd,
+	  man/SortinoRatio.Rd, man/StdDev.Rd, man/StdDev.annualized.Rd,
+	  man/TrackingError.Rd, man/TreynorRatio.Rd, man/UpDownRatios.Rd,
+	  man/UpsidePotentialRatio.Rd, man/VaR.Rd, man/apply.fromstart.Rd,
+	  man/apply.rolling.Rd, man/centeredmoments.Rd, man/chart.ACF.Rd,
+	  man/chart.Bar.Rd, man/chart.BarVaR.Rd, man/chart.Boxplot.Rd,
+	  man/chart.CaptureRatios.Rd, man/chart.Correlation.Rd,
+	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
+	  man/chart.ECDF.Rd, man/chart.Events.Rd, man/chart.Histogram.Rd,
+	  man/chart.QQPlot.Rd, man/chart.Regression.Rd,
+	  man/chart.RelativePerformance.Rd, man/chart.RiskReturnScatter.Rd,
+	  man/chart.RollingCorrelation.Rd, man/chart.RollingMean.Rd,
+	  man/chart.RollingPerformance.Rd, man/chart.RollingRegression.Rd,
+	  man/chart.Scatter.Rd, man/chart.SnailTrail.Rd,
+	  man/chart.StackedBar.Rd, man/chart.TimeSeries.Rd,
+	  man/chart.VaRSensitivity.Rd, man/charts.PerformanceSummary.Rd,
+	  man/charts.RollingPerformance.Rd, man/checkData.Rd,
+	  man/findDrawdowns.Rd, man/kurtosis.Rd, man/legend.Rd,
+	  man/maxDrawdown.Rd, man/mean.geometric.Rd, man/skewness.Rd,
+	  man/sortDrawdowns.Rd, man/table.AnnualizedReturns.Rd,
+	  man/table.Arbitrary.Rd, man/table.Autocorrelation.Rd,
+	  man/table.CAPM.Rd, man/table.CalendarReturns.Rd,
+	  man/table.CaptureRatios.Rd, man/table.Correlation.Rd,
+	  man/table.DownsideRisk.Rd, man/table.Drawdowns.Rd,
+	  man/table.HigherMoments.Rd, man/table.MonthlyReturns.Rd,
+	  man/table.RollingPeriods.Rd, man/textplot.Rd, man/zerofill.Rd:
+
+2012-05-23  ababii
+
+	* R/contribution.R: Function to calculate contribution of returns
+	* data/portfolio.rda[ADD]: A small dataset. It will be extended
+	  latter.
+
+2012-05-22  mkshah
+
+	* sandbox/Meucci/MeucciRobustBayesianAllocation.R: Making a Test
+	  Commit
+
+2012-05-20  braverock
+
+	* inst/doc/PA-charts.Rnw: - apply patch from Evelyn Mitchell that
+	  fixes long-standing typos s/Palates/Palettes/ in PA-charts.Rnw
+
+2012-05-19  braverock
+
+	* R/Drawdowns.R: - fix error in calculating drawdown with
+	  arithmetic returns. thanks to Pat Burns for the patch
+
+2012-05-04  ababii
+
+	* R/contribution.R[ADD]: Test submission to make sure that I can
+	  make commits
+
+2012-05-04  peter_carl
+
+	* R/chart.BarVaR.R: - fixed color of lower bars when
+	  show.greenredbars = TRUE
+
+2012-05-03  braverock
+
+	* NAMESPACE: - remove S3method line for mean.matrix, as this
+	  exports the function
+
+2012-05-01  braverock
+
+	* R/ES.R: - pass mu and sigma to M# and M4 if we have them
+
+2012-04-28  peter_carl
+
+	* R/chart.QQPlot.R: - added parameter to roxygen doc
+	* R/chart.QQPlot.R: - added ylim into plot
+
+2012-04-27  peter_carl
+
+	* R/chart.ECDF.R, R/chart.QQPlot.R: - added parameters for hiding x
+	  and y axes
+
+2012-04-23  braverock
+
+	* sandbox/Meucci[ADD],
+	  sandbox/Meucci/.~lock.Meucci_functions.csv#[ADD],
+	  sandbox/Meucci/FactorDistributions.rda[ADD],
+	  sandbox/Meucci/MeucciAnalyticalvsNumerical.R[ADD],
+	  sandbox/Meucci/MeucciButterflyTrading.R[ADD],
+	  sandbox/Meucci/MeucciCmaCopula.R[ADD],
+	  sandbox/Meucci/MeucciEntropyProg.R[ADD],
+	  sandbox/Meucci/MeucciFreaqEst.rda[ADD],
+	  sandbox/Meucci/MeucciFullFlexibleBayesNets.R[ADD],
+	  sandbox/Meucci/MeucciHermiteGrid.R[ADD],
+	  sandbox/Meucci/MeucciInvariantProjection.R[ADD],
+	  sandbox/Meucci/MeucciRankingInformation.R[ADD],
+	  sandbox/Meucci/MeucciReturnsDistribution.rda[ADD],
+	  sandbox/Meucci/MeucciRobustBayesianAllocation.R[ADD],
+	  sandbox/Meucci/MeucciTweakTest.rda[ADD],
+	  sandbox/Meucci/Meucci_DetectOutliersviaMVE.R[ADD],
+	  sandbox/Meucci/Meucci_functions.csv[ADD],
+	  sandbox/Meucci/butterflyTradingX.rda[ADD],
+	  sandbox/Meucci/logToArithmeticCovariance.R[ADD]: - add Meucci
+	  functions and data ported from original Matlab code contributed
+	  by Ram Ahluwalia
+
+2012-04-21  braverock
+
+	* R/chart.BarVaR.R: - additional movement towards converting PerfA
+	  to use roxygen2 for documentation
+	* R/CalmarRatio.R, R/CoMoments.R, R/DownsideDeviation.R, R/ES.R,
+	  R/Return.clean.R, R/Return.portfolio.R, R/SharpeRatio.R,
+	  R/StdDev.R, R/StdDev.annualized.R, R/UpsidePotentialRatio.R,
+	  R/VaR.R, R/chart.Histogram.R, R/expectedShortFallFunctions.r,
+	  R/findDrawdowns.R, R/maxDrawdown.R, R/skewness.R,
+	  R/sortDrawdowns.R, R/table.Arbitrary.R, R/table.MonthlyReturns.R,
+	  R/table.RollingPeriods.R, R/textplot.R, R/zerofill.R: -
+	  additional movement towards converting PerfA to use roxygen2 for
+	  documentation
+	* DESCRIPTION: - bump commit to test R-Forge commit list
+	  functionality.
+
+2012-04-18  braverock
+
+	* DESCRIPTION: - add Date keyword property to DESCRIPTION
+	* DESCRIPTION: - bump date
+
+2012-04-02  braverock
+
+	* R/Return.calculate.R: - revert to prior lag behavior for
+	  Return.calculate. bug noticed in same day by Tomáš Bálint and
+	  Effrem Sternbach
+
+2012-03-31  braverock
+
+	* inst/doc/textplotPresentation-CRUG-2011.Rnw: - change index entry
+	  to "How to Present Tables in Plot Devices"
+	* DESCRIPTION, inst/doc/PA-charts.Rnw,
+	  inst/doc/PerformanceAnalyticsChartsPresentation-Meielisalp-2007.Rnw,
+	  inst/doc/PerformanceAnalyticsPresentation-UseR-2007.Rnw,
+	  inst/doc/textplotPresentation-CRUG-2011.Rnw: - fix Sweave Index
+	  - add svn properties
+	  - bump revision post CRAN release
+
+2012-03-30  braverock
+
+	* DESCRIPTION: - remove PA-techniques.tex
+	  - bump CRAN version
+
+2012-03-29  braverock
+
+	* NEWS: - update NEWS before CRAN submit
+	* DESCRIPTION, R/DownsideDeviation.R, R/chart.StackedBar.R,
+	  R/expectedShortFallFunctions.r, R/table.Drawdowns.R: - additional
+	  changes to pass 'no visible binding for global variable' NOTE's
+	  in R CMD check
+
 2012-03-25  braverock
 
+	* DESCRIPTION, R/chart.BarVaR.R, R/chart.CumReturns.R,
+	  R/chart.Drawdown.R, R/chart.RelativePerformance.R,
+	  R/chart.RollingCorrelation.R, R/chart.SnailTrail.R,
+	  R/chart.StackedBar.R, R/chart.TimeSeries.R,
+	  R/chart.VaRSensitivity.R, R/charts.Bar.R, R/charts.BarVaR.R,
+	  R/charts.PerformanceSummary.R, R/charts.RollingPerformance.R,
+	  R/charts.RollingRegression.R, R/charts.TimeSeries.R,
+	  R/table.CalendarReturns.R: - multiple updates to appease BDR
+	* ChangeLog: - update ChangeLog
+	* DESCRIPTION, NEWS: - bump version to 1.0.4.1
+	  - update NEWS
 	* DESCRIPTION: - remove Suggests for SparseM
-	* inst/doc/textplotPresentation-CRUG-2011.pdf: - add compiled PDF
+	* inst/doc/textplotPresentation-CRUG-2011.pdf[ADD]: - add compiled
+	  PDF
 	* DESCRIPTION, NAMESPACE, R/ActivePremium.R, R/CAPM.alpha.R,
 	  R/CAPM.beta.R, R/CAPM.utils.R, R/CalmarRatio.R,
 	  R/DownsideDeviation.R, R/ES.R, R/HurstIndex.R,
@@ -87,8 +1339,8 @@
 	  R/chart.TimeSeries.R, R/chart.VaRSensitivity.R, R/charts.Bar.R,
 	  R/charts.BarVaR.R, R/charts.PerformanceSummary.R,
 	  R/charts.RollingPerformance.R, R/charts.RollingRegression.R,
-	  R/charts.TimeSeries.R, R/checkData.R, R/checkData.patch,
-	  R/decomposeMVaR.R, R/expectedShortFallFunctions.r,
+	  R/charts.TimeSeries.R, R/checkData.R, R/checkData.patch[ADD],
+	  R/decomposeMVaR.R[ADD], R/expectedShortFallFunctions.r,
 	  R/findDrawdowns.R, R/kurtosis.R, R/legend.R, R/maxDrawdown.R,
 	  R/mean.utils.R, R/na.skip.R, R/rCornishFisher.r, R/replaceTabs.R,
 	  R/skewness.R, R/sortDrawdowns.R, R/table.AnnualizedReturns.R,
@@ -163,8 +1415,8 @@
 
 2011-06-02  peter_carl
 
-	* inst/doc/textplotPresentation-CRUG-2011.Rnw: - presentation to
-	  Chicago R Users Group in June 2011
+	* inst/doc/textplotPresentation-CRUG-2011.Rnw[ADD]: - presentation
+	  to Chicago R Users Group in June 2011
 
 2011-05-10  braverock
 
@@ -325,28 +1577,29 @@
 
 2010-09-16  peter_carl
 
-	* sandbox/fPerformance, sandbox/fPerformance/DESCRIPTION,
-	  sandbox/fPerformance/R, sandbox/fPerformance/R/perf-Data.R,
-	  sandbox/fPerformance/R/perf-DownsideRisk.R,
-	  sandbox/fPerformance/R/perf-Drawdown.R,
-	  sandbox/fPerformance/R/perf-RegressionAnalysis.R,
-	  sandbox/fPerformance/R/perf-RelativeRisk.R,
-	  sandbox/fPerformance/R/perf-ReturnDisributions.R,
-	  sandbox/fPerformance/R/perf-Returns.R,
-	  sandbox/fPerformance/R/perf-Risk.R,
-	  sandbox/fPerformance/R/perf-RiskAdjusted.R,
-	  sandbox/fPerformance/R/perf-Tables.R,
-	  sandbox/fPerformance/R/perf-ValueAtRisk.R,
-	  sandbox/fPerformance/man,
-	  sandbox/fPerformance/man/perfAdjustedMeasures.Rd,
-	  sandbox/fPerformance/man/perfDistributionMeasures.Rd,
-	  sandbox/fPerformance/man/perfDownsideMeasures.Rd,
-	  sandbox/fPerformance/man/perfDrawdownMeasures.Rd,
-	  sandbox/fPerformance/man/perfRegressionMeasures.Rd,
-	  sandbox/fPerformance/man/perfRelativeMeasures.Rd,
-	  sandbox/fPerformance/man/perfVaRMeasures.Rd,
-	  sandbox/fPerformance/man/returns.Rd,
-	  sandbox/fPerformance/man/tables.Rd: - initial commit of
+	* sandbox/fPerformance[ADD], sandbox/fPerformance/DESCRIPTION[ADD],
+	  sandbox/fPerformance/R[ADD],
+	  sandbox/fPerformance/R/perf-Data.R[ADD],
+	  sandbox/fPerformance/R/perf-DownsideRisk.R[ADD],
+	  sandbox/fPerformance/R/perf-Drawdown.R[ADD],
+	  sandbox/fPerformance/R/perf-RegressionAnalysis.R[ADD],
+	  sandbox/fPerformance/R/perf-RelativeRisk.R[ADD],
+	  sandbox/fPerformance/R/perf-ReturnDisributions.R[ADD],
+	  sandbox/fPerformance/R/perf-Returns.R[ADD],
+	  sandbox/fPerformance/R/perf-Risk.R[ADD],
+	  sandbox/fPerformance/R/perf-RiskAdjusted.R[ADD],
+	  sandbox/fPerformance/R/perf-Tables.R[ADD],
+	  sandbox/fPerformance/R/perf-ValueAtRisk.R[ADD],
+	  sandbox/fPerformance/man[ADD],
+	  sandbox/fPerformance/man/perfAdjustedMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfDistributionMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfDownsideMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfDrawdownMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfRegressionMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfRelativeMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/perfVaRMeasures.Rd[ADD],
+	  sandbox/fPerformance/man/returns.Rd[ADD],
+	  sandbox/fPerformance/man/tables.Rd[ADD]: - initial commit of
 	  Diethelm's code contributions
 
 2010-09-14  braverock
@@ -392,8 +1645,8 @@
 
 2010-08-03  peter_carl
 
-	* sandbox/Benford.R: - first functions for implementing tests of
-	  Benford's law
+	* sandbox/Benford.R[ADD]: - first functions for implementing tests
+	  of Benford's law
 	* man/chart.RollingPerformance.Rd: - fixed codoc error
 
 2010-08-03  braverock
@@ -404,7 +1657,7 @@
 	  differences between expected output and current code
 	* R/ActivePremium.R, R/CAPM.alpha.R, R/CAPM.beta.R, R/CAPM.utils.R,
 	  R/CalmarRatio.R, R/CoMoments.R, R/DownsideDeviation.R,
-	  R/Drawdowns.R, R/ES.R, R/HerfindahlIndex.R, R/HurstIndex.R,
+	  R/Drawdowns.R, R/ES.R, R/HerfindahlIndex.R[ADD], R/HurstIndex.R,
 	  R/InformationRatio.R, R/KellyRatio.R, R/MultivariateMoments.R,
 	  R/Omega.R, R/PainIndex.R, R/PortfolioRisk.R, R/Return.Geltner.R,
 	  R/Return.annualized.R, R/Return.calculate.R, R/Return.clean.R,
@@ -496,7 +1749,7 @@
 
 2010-06-01  peter_carl
 
-	* R/HurstIndex.R: - adding function
+	* R/HurstIndex.R[ADD]: - adding function
 
 2010-05-29  peter_carl
 
@@ -505,9 +1758,9 @@
 
 2010-05-27  peter_carl
 
-	* R/PainIndex.R: - first commit of function
+	* R/PainIndex.R[ADD]: - first commit of function
 	* R/UlcerIndex.R: - fixed for NAs
-	* R/UlcerIndex.R: - first commit of function
+	* R/UlcerIndex.R[ADD]: - first commit of function
 
 2010-05-14  peter_carl
 
@@ -578,7 +1831,7 @@
 
 	* man/CDD.Rd: - add examples
 	* R/StdDev.R: - updates to pass R CMD check
-	* R/VaR.R, R/maxDrawdown.R, man/CDD.Rd,
+	* R/VaR.R, R/maxDrawdown.R, man/CDD.Rd[ADD],
 	  man/charts.PerformanceSummary.Rd: - updates to pass R CMD check
 
 2010-03-17  peter_carl
@@ -713,8 +1966,8 @@
 
 	* R/zzz.R: - add even and odd functions from gtools, not exported
 	* DESCRIPTION, man/StdDev.Rd: - updates to pass R CMD check
-	* man/StdDev.Rd: - add documentation for StdDev wrapper so we can
-	  expose it in NAMESPACE for PerfA 1.0.1
+	* man/StdDev.Rd[ADD]: - add documentation for StdDev wrapper so we
+	  can expose it in NAMESPACE for PerfA 1.0.1
 
 2010-01-05  peter_carl
 
@@ -745,10 +1998,10 @@
 2010-01-03  braverock
 
 	* DESCRIPTION: - updates to pass R CMD check
-	* .Rbuildignore, ChangeLog, ChangeLog.1.0.0: - keep the old CVS
-	  ChangeLog for posterity
-	* .Rbuildignore, ChangeLog, generatechangelog.sh: - new ChangeLog
-	  generator for svn repository
+	* .Rbuildignore, ChangeLog, ChangeLog.1.0.0[ADD]: - keep the old
+	  CVS ChangeLog for posterity
+	* .Rbuildignore, ChangeLog, generatechangelog.sh[ADD]: - new
+	  ChangeLog generator for svn repository
 	* NAMESPACE, R/CAPM.utils.R, R/Drawdowns.R, R/ES.R,
 	  R/Return.annualized.R, R/SharpeRatio.R,
 	  R/SharpeRatio.annualized.R, R/StdDev.R, R/VaR.R,
@@ -803,7 +2056,7 @@
 
 2009-12-22  braverock
 
-	* man/zerofill.Rd: - add documentation for zerofill fn
+	* man/zerofill.Rd[ADD]: - add documentation for zerofill fn
 	* man/ES.Rd, man/VaR.Rd: - document change of p default to .95
 
 2009-12-20  braverock
@@ -845,16 +2098,16 @@
 	  in optimizer functions
 	* R/MultivariateMoments.R: -add proper handling of dots for mu
 	  argument
-	* R/PortfolioRisk.R, R/StdDev.R: - add StdDev wrapper function to
-	  support univariate, multivariate moment, and component standard
-	  deviation
+	* R/PortfolioRisk.R, R/StdDev.R[ADD]: - add StdDev wrapper function
+	  to support univariate, multivariate moment, and component
+	  standard deviation
 	  - arrange/name returned list in Portsd function to match other
 	  component calcs
 
 2009-11-19  braverock
 
-	* .Rbuildignore, sandbox: - create sandbox dir, add .Rbuildignore
-	  file
+	* .Rbuildignore[ADD], sandbox[ADD]: - create sandbox dir, add
+	  .Rbuildignore file
 
 2009-11-09  braverock
 
@@ -946,7 +2199,7 @@
 	* R[CPY]: - move to pkg directory
 	* inst[CPY]: - move to pkg directory
 	* man[CPY]: - move to pkg directory
-	* .: - create directory for PerformanceAnalytics
+	* .[ADD]: - create directory for PerformanceAnalytics
 
 2009-10-23 16:30  tag v1_0_0-2009-10-23
 
