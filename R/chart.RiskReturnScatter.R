@@ -92,7 +92,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # http://zoonek2.free.fr/UNIX/48_R/03.html
 
     if (method == "calc")  x = checkData(R, method = "zoo")
-    else x=t(R)
+    else x=R
     
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf, method = "zoo")
@@ -122,10 +122,12 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         rnames = row.names(comparison)
     } else {
         # We have to make an assumption about the input here
-        x=t(x[,ncol(x):1])
+        #x=t(x[,ncol(x):1])
         returns = x[,1]
-        risk = x[,2]
-        rnames = names(returns)
+        risk = abs(x[,2])
+        rnames = rownames
+        ylab = colnames(x)[1]
+        xlab = colnames(x)[2]
     }
 
     # Set the charts to show the origin
