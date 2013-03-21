@@ -158,7 +158,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
 
 
     # construct the wealth index
-    if(method=="simple") {
+    if(method=="simple" | nrow(R) == 1) {
       # weights=as.vector(weights)
       weightedreturns = R[,colnames(weights)] * as.vector(weights) # simple weighted returns
       returns = R[,colnames(weights)] %*% as.vector(weights) # simple compound returns
