@@ -1,8 +1,9 @@
-\name{ActivePremium}
-\alias{ActivePremium}
-\title{Active Premium}
+\name{ActiveReturn}
+\alias{ActivePremium,}
+\alias{ActiveReturn}
+\title{Active Premium or Active Return}
 \usage{
-  ActivePremium(Ra, Rb, scale = NA)
+  ActiveReturn(Ra, Rb, scale = NA)
 }
 \arguments{
   \item{Ra}{return vector of the portfolio}
@@ -19,6 +20,8 @@
 \details{
   Active Premium = Investment's annualized return -
   Benchmark's annualized return
+
+  Also commonly referred to as 'active return'.
 }
 \examples{
 data(managers)

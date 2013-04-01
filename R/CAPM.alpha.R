@@ -6,7 +6,10 @@
 #' portion of the managers returns that are not attributable to "Beta", or the
 #' portion of performance attributable to a benchmark.
 #' 
-#' 
+#' While the classical CAPM has been almost completely discredited by the 
+#' literature, it is an example of a simple single factor model, 
+#' comparing an asset to any arbitrary benchmark.
+#'  
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset

@@ -1,8 +1,9 @@
-\name{table.CAPM}
-\alias{table.CAPM}
-\title{Asset-Pricing Model Summary: Statistics and Stylized Facts}
+\name{table.SFM}
+\alias{table.CAPM,}
+\alias{table.SFM}
+\title{Single Factor Asset-Pricing Model Summary: Statistics and Stylized Facts}
 \usage{
-  table.CAPM(Ra, Rb, scale = NA, Rf = 0, digits = 4)
+  table.SFM(Ra, Rb, scale = NA, Rf = 0, digits = 4)
 }
 \arguments{
   \item{Ra}{a vector of returns to test, e.g., the asset to
@@ -19,9 +20,9 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Takes a set of returns and relates them to a market
-  benchmark. Provides a set of measures related to the
-  excess return single index model, or CAPM.
+  Takes a set of returns and relates them to a benchmark
+  return. Provides a set of measures related to an excess
+  return single factor model, or CAPM.
 }
 \details{
   This table will show statistics pertaining to an asset
@@ -30,11 +31,11 @@
 }
 \examples{
 data(managers)
-table.CAPM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+table.SFM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
 
-result = table.CAPM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+result = table.SFM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
 textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-title(main="CAPM-Related Statistics")
+title(main="Single Factor Model Related Statistics")
 }
 \author{
   Peter Carl

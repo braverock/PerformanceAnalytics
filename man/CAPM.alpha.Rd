@@ -20,6 +20,11 @@
   measuring the portion of the managers returns that are
   not attributable to "Beta", or the portion of performance
   attributable to a benchmark.
+
+  While the classical CAPM has been almost completely
+  discredited by the literature, it is an example of a
+  simple single factor model, comparing an asset to any
+  arbitrary benchmark.
 }
 \examples{
 # First we load the data

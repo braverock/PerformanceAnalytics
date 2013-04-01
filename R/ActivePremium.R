@@ -1,4 +1,4 @@
-#' Active Premium
+#' Active Premium or Active Return
 #' 
 #' The return on an investment's annualized return minus the benchmark's
 #' annualized return.
@@ -6,6 +6,7 @@
 #' Active Premium = Investment's annualized return - Benchmark's annualized
 #' return
 #' 
+#' Also commonly referred to as 'active return'.
 #' 
 #' @param Ra return vector of the portfolio
 #' @param Rb return vector of the benchmark asset
@@ -24,12 +25,10 @@
 #'     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
 #'     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
 #'     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
-#' 
-#' @export
-#' 
-#' 
-
-ActivePremium <- function (Ra, Rb, scale = NA)
+#' @rdname ActivePremium
+#' @aliases ActivePremium, ActiveReturn
+#' @export 
+ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 
     # FUNCTION

@@ -21,12 +21,16 @@
 #' Alternatively, \code{CAPM.beta.bear} provides the calculation on negative
 #' market returns.
 #' 
-#' The \code{TimingRatio} can help assess whether the manager is a good timer
+#' The \code{TimingRatio} may help assess whether the manager is a good timer
 #' of asset allocation decisions.  The ratio, which is calculated as
 #' \deqn{TimingRatio =\frac{\beta^{+}}{\beta^{-}}}{Timing Ratio = beta+/beta-}
 #' is best when greater than one in a rising market and less than one in a
 #' falling market.
 #' 
+#' While the classical CAPM has been almost completely discredited by the 
+#' literature, it is an example of a simple single factor model, 
+#' comparing an asset to any arbitrary benchmark.
+#'  
 #' @aliases CAPM.beta CAPM.beta.bull CAPM.beta.bear TimingRatio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
