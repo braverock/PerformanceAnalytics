@@ -44,14 +44,13 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
     # If R is passed as null checking for sharpe ratio , skewness and kurtosis 
     else{
 
-        if(is.null(sr)) stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
-        if(is.null(sk)) stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
-        if(is.null(kr)) stop("You must either pass R or the Sharpe Ratio, Skewness, Kurtosis,n etc")
-        if(is.null(n)) stop("You must either pass R or the Sharpe Ratio, Skewness, Kurtosis, n etc")
+        if(is.null(sr) | is.null(sk) | is.null(kr) | is.null(n)){
+             stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
+       }
     }
     #If weights are not taken into account a message is displayed
     if(is.null(weights)){
-        message("no weights passed will calculate Probability Sharpe Ratio for each column")
+        message("no weights passed,will calculate Probability Sharpe Ratio for each column")
     }
    
     if(!is.null(dim(Rf)))
