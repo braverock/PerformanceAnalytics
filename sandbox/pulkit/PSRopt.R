@@ -1,3 +1,11 @@
+#'@title Implementation of PSR Portfolio Optimization
+#'@description
+#'Maximizing for PSR leads to better diversified and more balanced hedge fund allocations compared to the concentrated outcomes of Sharpe ratio maximization.We would like to find the vector of weights that maximize the expression.Gradient Ascent Logic is used to compute the weights using the Function PsrPortfolio
+#'@param R The return series
+#'@param bounds The bounds for the weights
+#'@param MaxIter The Maximum number of iterations
+#'@param delta The value of delta Z
+
 PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
 
     x = checkData(R)
@@ -5,34 +13,54 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
     n = nrow(x)
     columnnames = colnames(x)
 
-    weights = rep(1,columns)/columns
+    weights = matrix((rep(1,columns)/columns),ncol = 1)
 
     if(is.null(bounds)){
         bounds = matrix(rep(c(0,1),columns),nrow = columns,byrow = TRUE)
     }
+    d1z = NULL
 
-
-     
-
+    #Optimization Function
     optimize<-function(){
-    
-    mean = NULL   
-    for(column in 1:columns){
-        mean = c(mean,get_Moments(x[,column],1))
+        mean = NULL   
+        for(column in 1:columns){
+            mean = c(mean,get_Moments(x[,column],1))
+        }
+        while(TRUE){
+            if(iter == MaxIter) break
+            c(d1z_new,z_new) = get_d1zs(mean,weights)
+            if(z_new>z & checkBounds(weights)==TRUE){
+                z = z_new
+                d1z = d1z_new
+            }
+            iter = iter + 1 
+            weights = stepSize(weights,d1z)
+            if(is.null(weights)) return
+       }
+       return
     }
-    while(TRUE){
-        if(iter == MaxIter) break
-        c(d1z,z) = get_d1zs(mean,weights)
-        
+    # To Check the bounds of the weights
+    checkBounds<-function(weights){
+
+        flag = TRUE
+        for(i in 1:columns){
+            if(weights[i,0]<bounds[i,0]) flag = FALSE
+            if(weights[i,0]>bounds[i,1]) flag = TRUE
+        }
+        return(flag)
     }
 
+    #Calculate the step size to change the weights
+    stepSize<-function(weights,d1Z){
+        if(length(which(d1Z==0)) == 0){
+            return(NULL)
+        }
+        weights[which(d1Z==max(d1Z)),0] = weights[which(d1Z==max(d1Z)),0]+delta/max(d1Z)
+        weights = weights/sum(weights)
+        return(weights) 
 
-    checkBounds<-function(w){
     }
-
-    stepSize<-function(w,d1Z){
-    }
-
+    #To get the first differentials
     get_d1Zs(mean,w){
         d1Z = rep(0,columns)
         m = NULL
@@ -46,41 +74,73 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         for(i in 1:columns){
             d1Z[i] = get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,index)
         }
+        return(d1Z,meanSR/sigmaSR)
     }
 
-    get_d1Z<-function(stats,m,meanSR,sigmaSR,mean,w,index){
+    get_d1Z<-function(stats,m,meanSR,sigmaSR,mean,weights,index){
         d1Mu = get_d1Mu(mean,index)
-        
-
-
+        d1Sigma = get_d1Sigma(stats[1],mean,weights,index)
+        d1Skew = get_d1Skew(d1Sigma,stats[1],mean,weights,index,m[2])
+        d1Kurt = get_d1Kurt(d1Sigma,stats[1],mean,weights,index,m[3])
+        d1meanSR = (d1Mu*stats[1]-d1Sigma*stats[0])/stats[1]^2
+        d1sigmaSR = (d1Kurt * meanSR^2+2*meanSR*d1meanSR*(stats[3]-1))/4
+        d1sigmaSR = d1sigmaSR - d1Skew*meanSR+d1meanSR*stats[2]    
+        d1sigmaSR = (d1sigmaSR/2)*sigmaSR*(n-1)
+        d1Z = (d1meanSR*sigmaSR-d1sigmaSR*meanSR)/sigmaSR^2
+        return(d1Z)
     }
 
     get_d1Mu<-function(mean,index){
+        return(mean[index])
     }
 
-    get_d1Sigma<-function(sigma,mean,w,index){
+    get_d1Sigma<-function(sigma,mean,weights,index){
+        return(get_dnMoments(mean,weights,2,1,index)/(2*sigma))
     }
 
     get_d1Skew<-function(d1Sigma,sigma,mean,w,index,m3){
+        d1Skew = get_dnMoments(mean,weights,3,1,index)*sigma^3
+        d1Skew = d1Skew - 3*sigma^2*d1Sigma*m3
+        d1Skew = d1Skew/sigma^6
+        return(d1Skew)
     }
 
     get_d1Kurt<-function(d1Sigma,sigma,mean,w,index,m4){
+        d1Kurt = get_dnMoments(mean,w,4,1,index)*sigma^4
+        d1Kurt = d1Kurt - 4*sigma^3*d1Sigma*m4
+        d1Kurt = d1Kurt/sigma^8
+        return(d1Kurt)
     }
 
     get_dnMoments<-function(mean,w,mOrder,dOrder,index){
+        sum = 0
+        x0 = 1
+        for(i in 1:dOrder){
+            x0 = x0*(mOrder-i)
+        }
+        for(i in 1:n){
+            x1 = 0
+            x2 = (x[i,index]-mean[index])^dOrder
+            for(j in 1:column){
+                x1 = x1 + weights[j,0]*(x[i,j]-mean[j])
+            }
+        sum = sum + x2*x1^(mOrder-dOrder)
+        }
+        return(x0*sum/n)
     }
 
+    # TO get meanSR and sigmaSR
     get_SR<-function(stats,n){
         meanSR = stats[0]/stats[1]
         sigmaSR = ((1-meanSR*stats[2]+(meanSR^2)*(stats[3]-1)/4)/(n-1))^0.5
         return(meanSR,sigmaSR)
     }
-
+    #To calculate the Stats(mu , sigma , skewness and kurtosis)
     get_Stats<-function(m){
         stats = c(m[0],m[1]^(0.5),(m[2]/m[1])^(3/2),(m[3]/m[1])^(0.5))
         return(stats)
     }
-
+    # TO calculate the moments
     get_Moments<-function(x,order,mean = 0){
 
         sum = 0 
@@ -91,6 +151,8 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         return(moment)
     }
 
+optimize()
+return(weights)
 }
 
 
