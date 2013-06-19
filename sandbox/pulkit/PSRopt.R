@@ -6,7 +6,7 @@
 #'@param MaxIter The Maximum number of iterations
 #'@param delta The value of delta Z
 
-PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
+PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.005){
 
     x = checkData(R)
     columns = ncol(x)
@@ -28,16 +28,18 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         for(column in 1:columns){
             mean = c(mean,mean(x[,column]))
         }
-        while(TRUE){
+        flag = TRUE
+        while(flag){
             if(iter == MaxIter) break
             dZ = get_d1Zs(mean,weights)
-            if(dZ$z>z & checkBounds(weights)==TRUE){
-                z = dZ$z
-                d1z = dZ$d1Z
-            }
+            if(dZ$z<z | checkBounds(weights)==FALSE){
+                break
+           }
+           z = dZ$z
+           d1z = dZ$d1Z
             iter = iter + 1 
-            print(iter)
             weights = stepSize(weights,d1z)
+            print(z)
             if(is.null(weights)) return
        }
        return(weights)
@@ -58,7 +60,9 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         if(length(which(d1Z!=0)) == 0){
             return(NULL)        
         }
-        weights[which(d1Z==max(d1Z))] = weights[which(d1Z==max(d1Z))]+delta/max(d1Z)
+        weights[which(abs(d1Z)==max(abs(d1Z)))] = weights[which(abs(d1Z)==max(abs(d1Z)))]+delta/max(d1Z)
+        # OR all the weights should be changed ?
+        #weights = weights + delta/d1Z
         weights = weights/sum(weights)
         return(weights) 
 
@@ -76,7 +80,7 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         m = c(stats[1],stats[2]^2,stats[3]*(stats[2]^3),stats[4]*(stats[2]^2))
         SR = get_SR(stats,n)
         meanSR = SR$meanSR
-        sigmaSR = SR$sigmaSR 
+        sigmaSR = SR$sigmaSR
         for(i in 1:columns){
             d1Z = c(d1Z,get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i))
         }
@@ -146,7 +150,7 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         return(SR)
     }
 
-optimize()
+weights = optimize()
 return(weights)
 }
 
