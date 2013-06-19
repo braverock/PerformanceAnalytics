@@ -17,17 +17,16 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
     if(is.null(bounds)){
         bounds = matrix(rep(c(0,1),columns),nrow = columns,byrow = TRUE)
     }
-    print(bounds)
-    d1z = NULL
 
     #Optimization Function
     optimize<-function(){
         weights = rep(1,columns)/columns
+        d1z = 0
         z = 0
         iter = 0
         mean = NULL   
         for(column in 1:columns){
-            mean = c(mean,get_Moments(x[,column],1))
+            mean = c(mean,mean(x[,column]))
         }
         while(TRUE){
             if(iter == MaxIter) break
@@ -37,6 +36,7 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
                 d1z = dZ$d1Z
             }
             iter = iter + 1 
+            print(iter)
             weights = stepSize(weights,d1z)
             if(is.null(weights)) return
        }
@@ -55,8 +55,8 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
 
     #Calculate the step size to change the weights
     stepSize<-function(weights,d1Z){
-        if(length(which(d1Z==0)) == 0){
-            return(NULL)
+        if(length(which(d1Z!=0)) == 0){
+            return(NULL)        
         }
         weights[which(d1Z==max(d1Z))] = weights[which(d1Z==max(d1Z))]+delta/max(d1Z)
         weights = weights/sum(weights)
@@ -67,12 +67,13 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
     get_d1Zs<-function(mean,weights){
         d1Z = NULL
         m = NULL
-        x = Return.portfolio(x,weights)
-        m[1] = get_Moments(x,1)
-        for(i in 2:4){
-            m = c(m,get_Moments(x,i+1,m[1])) 
-        }
-        stats = get_Stats(m)
+        x_portfolio = Return.portfolio(x,weights)
+        mu = mean(x_portfolio)
+        sd = StdDev(x_portfolio)
+        sk = skewness(x_portfolio)
+        kr = kurtosis(x_portfolio)
+        stats = c(mu,sd,sk,kr)
+        m = c(stats[1],stats[2]^2,stats[3]*(stats[2]^3),stats[4]*(stats[2]^2))
         SR = get_SR(stats,n)
         meanSR = SR$meanSR
         sigmaSR = SR$sigmaSR 
@@ -80,6 +81,7 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
             d1Z = c(d1Z,get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i))
         }
         dZ = list("d1Z"=d1Z,"z"=meanSR/sigmaSR)
+
         return(dZ)
     }
 
@@ -104,31 +106,32 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         return(get_dnMoments(mean,weights,2,1,index)/(2*sigma))
     }
 
-    get_d1Skew<-function(d1Sigma,sigma,mean,w,index,m3){
+    get_d1Skew<-function(d1Sigma,sigma,mean,weights,index,m3){
         d1Skew = get_dnMoments(mean,weights,3,1,index)*sigma^3
         d1Skew = d1Skew - 3*sigma^2*d1Sigma*m3
         d1Skew = d1Skew/sigma^6
         return(d1Skew)
     }
 
-    get_d1Kurt<-function(d1Sigma,sigma,mean,w,index,m4){
-        d1Kurt = get_dnMoments(mean,w,4,1,index)*sigma^4
+    get_d1Kurt<-function(d1Sigma,sigma,mean,weights,index,m4){
+        d1Kurt = get_dnMoments(mean,weights,4,1,index)*sigma^4
         d1Kurt = d1Kurt - 4*sigma^3*d1Sigma*m4
         d1Kurt = d1Kurt/sigma^8
         return(d1Kurt)
     }
 
-    get_dnMoments<-function(mean,w,mOrder,dOrder,index){
+    get_dnMoments<-function(mean,weights,mOrder,dOrder,index){
         sum = 0
         x0 = 1
         for(i in 1:dOrder){
             x0 = x0*(mOrder-i)
         }
+        x_mat = as.matrix(na.omit(x))
         for(i in 1:n){
             x1 = 0
-            x2 = (x[i,index]-mean[index])^dOrder
+            x2 = (x_mat[i,index]-mean[index])^dOrder
             for(j in 1:columns){
-                x1 = x1 + weights[j]*(x[i,j]-mean[j])
+                x1 = x1 + weights[j]*(x_mat[i,j]-mean[j])
             }
         sum = sum + x2*x1^(mOrder-dOrder)
         }
@@ -142,25 +145,11 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.05){
         SR<-list("meanSR"=meanSR,"sigmaSR"=sigmaSR)
         return(SR)
     }
-    #To calculate the Stats(mu , sigma , skewness and kurtosis)
-    get_Stats<-function(m){
-        stats = c(m[1],m[2]^(0.5),(m[3]/m[2])^(3/2),(m[4]/m[2])^(0.5))
-        return(stats)
-    }
-    # TO calculate the moments
-    get_Moments<-function(x,order,mean = 0){
-
-        sum = 0 
-        for(i in 1:n){
-            sum = sum + (x[i]-mean)^order
-        }
-        moment = sum/n
-        return(moment)
-    }
 
 optimize()
 return(weights)
 }
+
 
 
 
