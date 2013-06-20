@@ -47,11 +47,11 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.005){
     # To Check the bounds of the weights
     checkBounds<-function(weights){
         flag = TRUE
-        #for(i in 1:columns){
-         #   if(weights[i] < bounds[i,0]) flag = FALSE
+        for(i in 1:columns){
+            if(weights[i] < bounds[i,1]) flag = FALSE
 
-          #  if(weights[i] > bounds[i,1]) flag = FALSE
-        #}
+            if(weights[i] > bounds[i,1]) flag = FALSE
+        }
         return(TRUE)
     }
 
@@ -60,7 +60,7 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.005){
         if(length(which(d1Z!=0)) == 0){
             return(NULL)        
         }
-        weights[which(abs(d1Z)==max(abs(d1Z)))] = weights[which(abs(d1Z)==max(abs(d1Z)))]+delta/max(d1Z)
+        weights[which(abs(d1Z)==max(abs(d1Z)))] = weights[which(abs(d1Z)==max(abs(d1Z)))]+delta/d1Z[which(abs(d1Z)==max(abs(d1Z)))]
         # OR all the weights should be changed ?
         #weights = weights + delta/d1Z
         weights = weights/sum(weights)
