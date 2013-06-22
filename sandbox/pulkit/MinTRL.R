@@ -1,14 +1,29 @@
-#'@title Probabilistic Sharpe Ratio
+#'@title Minimum Track Record Length
+#'
 #'@description
-#'Given a predefined
-#'benchmark4 Sharpe ratio (), the observed Sharpe  Ratiô can be expressed
-#' in probabilistic
+#'“How long should a track record be in order to have statistical confidence 
+#'that its Sharpe ratio is above a given threshold? . if a track record is shorter#' than MinTRL, we do not have enough confidence that the observed ̂ is above the designated threshold
+#'
+#'@aliases MinTrackRecord
 #'
 #'@param R the return series
 #'@param Rf the risk free rate of return
 #'@param refSR the reference Sharpe Ratio
-#'@param the confidence level
+#'@param p the confidence level
 #'@param weights the weights for the portfolio
+#'@param sr Sharpe Ratio
+#'@param sk Skewness
+#'@param kr Kurtosis
+#'
+#'@reference Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
+#'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
+#' 2012/13
+#'@keywords ts multivariate distribution models
+#'@examples
+#'
+#'data(edhec)
+#'MinTrackRecord(edhec[,1],0.20)
+
 
 MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL,sk = NULL, kr = NULL, ...){
     columns = 1

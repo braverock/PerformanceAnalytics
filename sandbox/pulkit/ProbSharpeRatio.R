@@ -1,14 +1,34 @@
 #'@title Probabilistic Sharpe Ratio
+#'
 #'@description
-#'Given a predefined
-#'benchmark4 Sharpe ratio (), the observed Sharpe  Ratiô can be expressed
-#' in probabilistic
+#'Given a predefined benchmark Sharpe ratio ,the observed Sharpe Ratio 
+#'can be expressed in probabilistic terms known as the Probabilistic Sharpe Ratio
+#'PSR takes higher moments  into account and delivers a corrected, atemporal 
+#'measure of performance expressed in terms of probability of skill.
+#'
+#'@aliases ProbSharpeRatio
 #'
 #'@param R the return series
 #'@param Rf the risk free rate of return
 #'@param refSR the reference Sharpe Ratio
 #'@param the confidence level
 #'@param weights the weights for the portfolio
+#'@param sr Sharpe Ratio
+#'@param sk Skewness
+#'@param kr Kurtosis
+#'
+#'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
+#'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
+#' 2012/13
+#'
+#'@keywords ts multivariate distribution models
+#'
+#'@examples
+#'
+#'data(edhec)
+#'ProbSharpeRatio(edhec[,1],refSR = 0.28) 
+#'ProbSharpeRatio(edhec,reSR = 0.28,Rf = 0.06)
+
 
 ProbSharpeRatio<-
 function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = NULL, kr = NULL, ...){
