@@ -1,0 +1,34 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontec}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Probabilistic Sharpe Ratio}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+
+\title{Probabilistic Sharpe Ratio}
+
+% \keywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+    This vignette gives an overview of the Probabilistic Sharpe Ratio , Minimum Track Record Length and the Probabilistic Sharpe Ratio Optimization technique used to find the optimal portfolio that maximizes the Probabilistic Sharpe Ratio. It gives an overview of the usability of the functions and its application"
+
+\end{abstract}
+
+
