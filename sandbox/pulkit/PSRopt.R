@@ -151,7 +151,9 @@ PsrPortfolio<-function(R,bounds=NULL,MaxIter = 1000,delta = 0.005){
     }
 
 weights = optimize()
-return(weights)
+    result = matrix(weights,nrow = columns)
+    rownames(result) = columnnames
+return(result)
 }
 
 

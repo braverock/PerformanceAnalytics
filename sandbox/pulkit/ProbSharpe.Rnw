@@ -35,10 +35,19 @@
 library(PerformanceAnalytics)
 @
 
+
+<<echo=FALSE>>=
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/ProbSharpeRatio.R")
+@
+
+<<echo=FALSE>>=
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/MinTRL.R")
+@
+
 \section{Probabilistic Sharpe Ratio}
  Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in probabilistic terms as
  
- \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma{_3}}SR^\ast + \frac{\hat{\gamma{_4}}-1}{4}\hat{SR^2}}}\biggr]}
+ \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
  
  Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
  
@@ -51,15 +60,32 @@ data(edhec)
 ProbSharpeRatio(edhec,refSR = 0.28)
 @
 
+\section{Minimum Track Record Length}
 
+If a track record is shorter than Minimum Track Record Length(MinTRL), we do
+not have enough confidence that the observed $\hat{SR}$ is above the designated threshold
+$SR^\ast$. Minimum Track Record Length is given by the following expression.
 
+\deqn{MinTRL = n^\ast = 1+\biggl[1-\hat{\gamma_3}\hat{SR}+\frac{\hat{\gamma_4}}{4}\hat{SR^2}\biggr]\biggl(\frac{Z_\alpha}{\hat{SR}-SR^\ast}\biggr)^2}
 
- 
- 
- 
+$\gamma{_3}$ and $\gamma{_4}$ are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms.
 
+<<>>=
+data(edhec)
+MinTrackRecord(edhec,refSR = 0.28)
+@
 
+\section{Probabilistic Sharpe Ratio Optimal Portfolio}
 
-\end{document}
- 
+We would like to find the vector of weights that maximize the expression
+
+ \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
+
+where 
+\eqn{\sigma = \sqrt{E[(r-\mu)^2]}} ,its standard deviation.
+\eqn{\gamma_3=\frac{E\biggl[(r-\mu)^3\biggr]}{\sigma^3}} its skewness,\eqn{\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}} its kurtosis and \eqn{SR = \frac{\mu}{\sigma}} its Sharpe Ratio.
+
+Because \eqn{\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]} is a monotonic increasing function of \eqn{\hat{Z^\ast}}. This optimal vector is invariant of the value adopted by the parameter \eqn{SR^\ast}. 
+
+\end{document}a 
 
