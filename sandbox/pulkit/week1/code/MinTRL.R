@@ -63,7 +63,7 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
     }
     #If weights are not taken into account a message is displayed
     if(is.null(weights)){
-        message("no weights passed,will calculate Probability Sharpe Ratio for each column")
+        message("no weights passed,will calculate Minimum Track Record Length for each column")
     }
    
     if(!is.null(dim(Rf)))
