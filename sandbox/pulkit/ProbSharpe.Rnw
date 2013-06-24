@@ -1,11 +1,10 @@
 \documentclass[12pt,letterpaper,english]{article}
 \usepackage{times}
-\usepackage[T1]{fontec}
+\usepackage[T1]{fontenc}
 \IfFileExists{url.sty}{\usepackage{url}}
                       {\newcommand{\url}{\texttt}}
 
 \usepackage{babel}
-\usepackage{noweb}
 \usepackage{Rd}
 
 \usepackage{Sweave}
@@ -16,8 +15,9 @@
 %\VignettePackage{PerformanceAnalytics}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
-\title{Probabilistic Sharpe Ratio}
+\title{ Probabilistic Sharpe Ratio }
 
 % \keywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
 
@@ -31,4 +31,35 @@
 
 \end{abstract}
 
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+@
+
+\section{Probabilistic Sharpe Ratio}
+ Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in probabilistic terms as
+ 
+ \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma{_3}}SR^\ast + \frac{\hat{\gamma{_4}}-1}{4}\hat{SR^2}}}\biggr]}
+ 
+ Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
+ 
+ $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the skewness and kurtosis respectively.
+ It is not unusual to find strategies with irregular trading frequencies, such as weekly strategies that may not trade for a month. This poses a problem when computing an annualized Sharpe ratio, and there is no consensus as how skill should be measured in the context of irregular bets. Because PSR measures skill in probabilistic terms, it is invariant to calendar conventions. All calculations are done in the original frequency
+of the data, and there is no annualization.
+
+<<>>=
+data(edhec)
+ProbSharpeRatio(edhec,refSR = 0.28)
+@
+
+
+
+
+ 
+ 
+ 
+
+
+
+\end{document}
+ 
 
