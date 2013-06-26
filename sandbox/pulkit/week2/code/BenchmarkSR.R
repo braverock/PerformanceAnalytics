@@ -9,6 +9,7 @@
 #' the input with the benchmark Sharpe Ratio as the output.
 #' 
 #'@aliases BenchmarkSR
+#'\deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
 #'
 #'@param R a vector, matrix, data frame,timeseries or zoo object of asset returns
 #'
