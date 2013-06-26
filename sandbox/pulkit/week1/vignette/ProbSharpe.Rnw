@@ -37,15 +37,15 @@ library(PerformanceAnalytics)
 
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/ProbSharpeRatio.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/ProbSharpeRatio.R")
 @
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/MinTRL.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/MinTRL.R")
 @
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/PSRopt.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/PSRopt.R")
 @
 
 \section{Probabilistic Sharpe Ratio}
@@ -88,7 +88,8 @@ We would like to find the vector of weights that maximize the expression
 where $\sigma = \sqrt{E[(r-\mu)^2]}$ ,its standard deviation.$\gamma_3=\frac{E\biggl[(r-\mu)^3\biggr]}{\sigma^3}$ its skewness,$\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}$ its kurtosis and $SR = \frac{\mu}{\sigma}$ its Sharpe Ratio.
 
 Because $\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]$ is a monotonic increasing function of 
-$\hat{Z^\ast}$. This optimal vector is invariant of the value adopted by the parameter $SR^\ast$. 
+$\hat{Z^\ast}$ ,it suffices to compute the vector that maximizes $\hat{Z^\ast}$
+ This optimal vector is invariant of the value adopted by the parameter $SR^\ast$. 
 
 
 <<>>=

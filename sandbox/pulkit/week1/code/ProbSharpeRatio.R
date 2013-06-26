@@ -69,9 +69,9 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
        }
     }
     #If weights are not taken into account a message is displayed
-    if(is.null(weights)){
-        message("no weights passed,will calculate Probability Sharpe Ratio for each column")
-    }
+#    if(is.null(weights)){
+ #       message("no weights passed,will calculate Probability Sharpe Ratio for each column")
+  #  }
    
     if(!is.null(dim(Rf)))
         Rf = checkData(Rf)
