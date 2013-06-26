@@ -33,6 +33,7 @@
 
 <<echo = FALSE >>=
 library(PerformanceAnalytics)
+data(edhec)
 @
 
 
