@@ -1,0 +1,60 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Sharpe Ratio Indifference Curve}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Benchmark Sharpe Ratio,Sharpe Ratio Indifference Curve,Benchmark Sharpe Ratio Plots}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{Sharpe Ratio Indifference Curve}
+% \keywords{Sharpe Ratio Indifference Curve,Benchmark Sharpe Ratio,risk,benchmark,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+ This vignette gives an overview of the Benchmark Sharpe Ratio, Sharpe Ratio Indifference Curve and various plots associated with a Benchmark Sharpe Ratio.It gives an overview of the usability of the functions and its application.
+ 
+ \end{abstract}
+ 
+<<echo=FALSE>>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+ 
+<<echo=FALSE>>=
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week2/code/BenchmarkSR.R")
+@
+ 
+ \section{Benchmark Sharpe Ratio}
+ 
+ The performance of an Equal Volatility Weights benchmark ($SR_B$) is fully characterized in terms of:
+
+1. Number of approved strategies (S).
+2. Average SR among strategies (SR).
+3. Average off-diagonal correlations among strategies($\bar{\rho}$)). 
+
+The benchmark SR is a linear function of the average SR of the individual strategies, and a decreasing convex function of the number of strategies and the average pairwise correlation.
+ 
+The benchmark Sharpe Ratio is given by the following equation.
+ 
+\deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
+ 
+<<>>=
+BenchmanrkSR(edhec)
+@
+
+\end{document}
