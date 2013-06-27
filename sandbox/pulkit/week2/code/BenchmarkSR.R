@@ -28,6 +28,10 @@
 BenchmanrkSR<-function(R){
   x = checkData(R)
   columns = ncol(x)
+  #TODO : What to do if the number of columns is only one ?  
+  if(columns == 1){
+    stop("The number of return series should be greater than 1")
+  }
   SR = SharpeRatio(x)
   sr_avg = mean(SR)
   corr = table.Correlation(edhec,edhec)

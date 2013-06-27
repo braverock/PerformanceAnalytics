@@ -32,11 +32,16 @@
  
 <<echo=FALSE>>=
 library(PerformanceAnalytics)
+library(ggplot2)
 data(edhec)
 @
  
 <<echo=FALSE>>=
 source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week2/code/BenchmarkSR.R")
+@
+
+<<echo=FALSE>>=
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week2/code/SRIndifferenceCurve.R")
 @
  
  \section{Benchmark Sharpe Ratio}
@@ -55,6 +60,23 @@ The benchmark Sharpe Ratio is given by the following equation.
  
 <<>>=
 BenchmanrkSR(edhec)
+@
+
+\section{Sharpe Ratio Indifference Curve}
+
+The trade-off between a candidate’s SR and its correlation
+to the existing set of strategies, is given by the Sharpe 
+ratio indifference curve. It is a plot between the candidate's 
+Sharpe Ratio and candidate's average correlation for a given 
+portfolio Sharpe Ratio.
+
+The equation for the candidate's average autocorrelation for a given 
+sharpe Ratio is given by
+
+\deqn{\bar{\rho}{_{s+1}}=\frac{1}{2}\biggl[\frac{\bar{SR}.S+SR_{s+1}^2}{S.SR_B^2}-\frac{S+1}{S}-\bar{\rho}{S-1}\biggr]}
+
+<<fig = TRUE>>=
+SRIndifference(edhec)
 @
 
 \end{document}
