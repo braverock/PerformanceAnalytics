@@ -73,7 +73,7 @@ portfolio Sharpe Ratio.
 The equation for the candidate's average autocorrelation for a given 
 sharpe Ratio is given by
 
-\deqn{\bar{\rho}{_{s+1}}=\frac{1}{2}\biggl[\frac{\bar{SR}.S+SR_{s+1}^2}{S.SR_B^2}-\frac{S+1}{S}-\bar{\rho}{S-1}\biggr]}
+\deqn{\bar{\rho}{_{s+1}}=\frac{1}{2}\biggl[\frac{\bar{({SR}.S+SR_{s+1}})^2}{S.SR_B^2}-\frac{S+1}{S}-\bar{\rho}{S-1}\biggr]}
 
 <<fig = TRUE>>=
 SRIndifference(edhec)
