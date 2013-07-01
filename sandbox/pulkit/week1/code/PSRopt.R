@@ -30,45 +30,45 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
 
 
     if(is.null(bounds)){
-        message("Bounds not given assumeing bounds to be (0,1) for each weight")
+        message("Bounds not given assuming bounds to be (0,1) for each weight")
         bounds = matrix(rep(c(0,1),columns),nrow = columns,byrow = TRUE)
     }
-
+    z = 0
+    iter = 0
+    w = rep(1,columns)
+    d1z = 0
     #Optimization Function
     optimize<-function(){
-        weights = rep(1,columns)/columns
-        d1z = 0
-        z = 0
-        iter = 0
+        weights = w
         mean = NULL   
         for(column in 1:columns){
-            mean = c(mean,mean(x[,column]))
+            mean = c(mean,get_Moments(x[,column],1))
         }
         while(TRUE){
             if(iter == MaxIter) break
             dZ = get_d1Zs(mean,weights)
-            if(dZ$z<z | checkBounds(weights)==FALSE){
-                break
+            print(dZ$z)
+            if(dZ$z>z && checkBounds(weights)==TRUE){
+                z = dZ$z
+                d1z = dZ$d1Z    
+                w = weights
            }
-           z = dZ$z
-            
-           d1z = dZ$d1Z
             iter = iter + 1 
-            weights_new = stepSize(weights,d1z)
-            if(is.null(weights_new)) break
-            weights = weights_new
+            weights = stepSize(weights,dZ$d1Z)
+            if(is.null(weights)) break
        }
-       return(weights)
+       return(w)
     }
     # To Check the bounds of the weights
     checkBounds<-function(weights){
         flag = TRUE
         for(i in 1:columns){
+                         
             if(weights[i] < bounds[i,1]) flag = FALSE
 
-            if(weights[i] > bounds[i,1]) flag = FALSE
+            if(weights[i] > bounds[i,2]) flag = FALSE
         }
-        return(TRUE)
+        return(flag)
     }
 
     #Calculate the step size to change the weights
@@ -76,7 +76,8 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         if(length(which(d1Z!=0)) == 0){
             return(NULL)        
         }
-        weights[which(abs(d1Z)==max(abs(d1Z)))] = weights[which(abs(d1Z)==max(abs(d1Z)))]+(delta/d1Z[which(abs(d1Z)==max(abs(d1Z)))])
+        index = which(abs(d1Z) ==max(abs(d1Z)))
+        weights[index] = weights[index]+delta/d1Z[index]
         weights = weights/sum(weights)
         return(weights) 
 
@@ -85,13 +86,19 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     get_d1Zs<-function(mean,weights){
         d1Z = NULL
         m = NULL
-        x_portfolio = Return.portfolio(x,weights)
-        mu = mean(x_portfolio)
-        sd = StdDev(x_portfolio)
-        sk = skewness(x_portfolio)
-        kr = kurtosis(x_portfolio)
-        stats = c(mu,sd,sk,kr)
-        m = c(stats[1],stats[2]^2,stats[3]*(stats[2]^3),stats[4]*(stats[2]^4))
+        x_portfolio = x%*%weights
+
+        m[1] = get_Moments(x_portfolio,1)
+        for(i in 2:4){
+            m = c(m,get_Moments(x_portfolio,i,m[1]))
+        }
+        stats = get_Stats(m)
+        #mu = mean(x_portfolio)
+        #sd = StdDev(x_portfolio)
+        #sk = skewness(x_portfolio)
+        #kr = kurtosis(x_portfolio)
+        #stats = c(mu,sd,sk,kr)
+        #m = c(stats[1],stats[2]^2,stats[3]*(stats[2]^3),stats[4]*(stats[2]^4))
         SR = get_SR(stats,n)
         meanSR = SR$meanSR
         sigmaSR = SR$sigmaSR
@@ -107,13 +114,13 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     get_d1Z<-function(stats,m,meanSR,sigmaSR,mean,weights,index){
         d1Mu = get_d1Mu(mean,index)
         d1Sigma = get_d1Sigma(stats[2],mean,weights,index)
-        d1Skew = get_d1Skew(d1Sigma,stats[2],mean,weights,index,m[2])
-        d1Kurt = get_d1Kurt(d1Sigma,stats[2],mean,weights,index,m[3])
+        d1Skew = get_d1Skew(d1Sigma,stats[2],mean,weights,index,m[3])
+        d1Kurt = get_d1Kurt(d1Sigma,stats[2],mean,weights,index,m[4])
         d1meanSR = (d1Mu*stats[2]-d1Sigma*stats[1])/stats[2]^2
         d1sigmaSR = (d1Kurt * meanSR^2+2*meanSR*d1meanSR*(stats[4]-1))/4
-        d1sigmaSR = d1sigmaSR - d1Skew*meanSR+d1meanSR*stats[3]    
+        d1sigmaSR = d1sigmaSR-(d1Skew*meanSR+d1meanSR*stats[3])  
         d1sigmaSR = d1sigmaSR/(2*sigmaSR*(n-1))
-        d1Z = (d1meanSR*sigmaSR-d1sigmaSR*(meanSR-refSR))/sigmaSR^2
+        d1Z = (d1meanSR*sigmaSR-d1sigmaSR*meanSR)/sigmaSR^2
         return(d1Z)
     }
 
@@ -163,6 +170,16 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         sigmaSR = ((1-meanSR*stats[3]+(meanSR^2)*(stats[4]-1)/4)/(n-1))^0.5
         SR<-list("meanSR"=meanSR,"sigmaSR"=sigmaSR)
         return(SR)
+    }
+    get_Stats<-function(m){
+        return(c(m[1],m[2]^0.5,m[3]/(m[2]^1.5),m[4]/(m[2]^2)))
+    }
+    get_Moments<-function(series,order,mean = 0){
+        sum = 0
+        for(i in series){
+            sum = sum + (i-mean)^order
+        }
+        return(sum/n)
     }
 
     weights = optimize()
