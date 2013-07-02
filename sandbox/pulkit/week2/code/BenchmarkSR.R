@@ -25,7 +25,7 @@
 #'
 #'@export
 #'
-BenchmanrkSR<-function(R){
+BenchmarkSR<-function(R){
   x = checkData(R)
   columns = ncol(x)
   #TODO : What to do if the number of columns is only one ?  
@@ -42,6 +42,6 @@ BenchmanrkSR<-function(R){
     }
   }
   corr_avg = corr_avg*2/(columns*(columns-1))
-  SR_Benchmark = sr_avg*sqrt(columns/(1+(columns-1))*corr_avg[1,1])
+  SR_Benchmark = sr_avg*sqrt(columns/(1+(columns-1)*corr_avg[1,1]))
   return(SR_Benchmark)
 }

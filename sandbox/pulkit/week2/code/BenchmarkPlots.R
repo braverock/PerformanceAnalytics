@@ -23,10 +23,7 @@ BenchmarkSRPlots<-function(R=NULL,ylab = NULL,xlab = NULL,lwd = 2,pch = 1,cex = 
   
   rho = seq(0,1,length.out=30)
   SR_B = avgSR*sqrt(columns/(1+(columns-1)*rho))
-  df1<-data.frame(x=rho,y=SR_B)
-  df1$model<-"A"
-  df2<-data.frame(x=corr_avg[1,1],y=BenchmanrkSR(R))
-  df2$model<-"B"
-  dfc<-rbind(df1,df2)
-  ggplot(dfc,aes(x,y,group=model)) +geom_point()+geom_line()+xlab("Correlation")+ylab("Benchmark Sharpe Ratio")+ggtitle("Benchmark SR vs Correlation")
+  plot(rho,SR_B,type="l",xlab="Correlation",ylab="Benchmark Sharpe Ratio",main="Benchmark Sharpe Ratio vs Correlation")
+  points(corr_avg[1,1],BenchmarkSR(R),col="blue",pch=10)
+  text(corr_avg[1,1],BenchmarkSR(R),"Original Point",pos=4)
 }
