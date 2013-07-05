@@ -3,6 +3,7 @@
 # On 20121128 by MLdP <lopezdeprado@lbl.gov>
 
 import numpy as np
+import time
 #-------------------------------------------
 #-------------------------------------------
 class PSR_Opt:
@@ -143,7 +144,10 @@ def main():
     
     #3) Create class and solve
     psrOpt=PSR_Opt(series,seed,delta,maxIter,bounds)
+    start = time.time()
     psrOpt.optimize()
+    end = time.time()
+    print(end-start)
     
     #4) Optimize and report optimal portfolio
     print 'Maximized Z-value: '+str(psrOpt.z)

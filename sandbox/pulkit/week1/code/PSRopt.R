@@ -47,7 +47,6 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         while(TRUE){
             if(iter == MaxIter) break
             dZ = get_d1Zs(mean,weights)
-            print(dZ$z)
             if(dZ$z>z && checkBounds(weights)==TRUE){
                 z = dZ$z
                 d1z = dZ$d1Z    
@@ -84,13 +83,13 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     }
     #To get the first differentials
     get_d1Zs<-function(mean,weights){
-        d1Z = NULL
-        m = NULL
+        d1Z = numeric(columns)
+        m = numeric(4)
         x_portfolio = x%*%weights
 
         m[1] = get_Moments(x_portfolio,1)
         for(i in 2:4){
-            m = c(m,get_Moments(x_portfolio,i,m[1]))
+            m[i] = get_Moments(x_portfolio,i,m[1])
         }
         stats = get_Stats(m)
         #mu = mean(x_portfolio)
@@ -104,7 +103,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         sigmaSR = SR$sigmaSR
 
         for(i in 1:columns){
-            d1Z = c(d1Z,get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i))
+            d1Z[i] = get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i)
         }
         dZ = list("d1Z"=d1Z,"z"=meanSR/sigmaSR)
 
@@ -153,15 +152,20 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
             x0 = x0*(mOrder-i)
         }
         x_mat = as.matrix(na.omit(x))
-        for(i in 1:n){
-            x1 = 0
-            x2 = (x_mat[i,index]-mean[index])^dOrder
-            for(j in 1:columns){
-                x1 = x1 + weights[j]*(x_mat[i,j]-mean[j])
-            }
-        sum = sum + x2*x1^(mOrder-dOrder)
-        }
-        return(x0*sum/n)
+        sum = 0
+        output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum)
+       #for(i in 1:n){
+         #   x1 = 0
+         #   x2 = (x_mat[i,index]-mean[index])^dOrder
+            #if(index == 1){
+            #    print(x2)
+            #}
+          #  for(j in 1:columns){
+          #      x1 = x1 + weights[j]*(x_mat[i,j]-mean[j])
+          #  }
+       # sum = sum + x2*x1^(mOrder-dOrder)
+       # }
+        return(x0*(output)/n)
     }
 
     # TO get meanSR and sigmaSR
@@ -181,16 +185,12 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         }
         return(sum/n)
     }
-
     weights = optimize()
     result = matrix(weights,nrow = columns)
     rownames(result) = columnnames
     colnames(result) = "weight"
     return(result)
 }
-
-
-
 
 
 
