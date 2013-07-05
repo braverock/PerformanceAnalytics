@@ -31,4 +31,30 @@ SEXP sums(SEXP mat,SEXP index,SEXP Rmean,SEXP dOrder,SEXP Rweights,SEXP mOrder,S
     return sum;
 }
 
-        
+SEXP sums_m(SEXP mat,SEXP Rmean,SEXP order){
+    int i,j,row,column;
+    SEXP Rsum;
+    SEXP Rdim = getAttrib(mat,R_DimSymbol);
+    row = INTEGER(Rdim)[0];
+    column = INTEGER(Rdim)[1];
+    mat = coerceVector(mat,REALSXP);
+    order = coerceVector(order,INTSXP);
+    int o = INTEGER(order)[0];
+    Rmean = coerceVector(Rmean,REALSXP);
+    double m = REAL(Rmean)[0];
+    PROTECT(Rsum = allocVector(REALSXP,1));
+    double s = REAL(Rsum)[0];
+    s = 0; 
+    for(i = 0;i<row;i++){
+        for(j = 0;j<column;j++){
+          s = s + pow(REAL(mat)[i +row*j]-m,o);
+        }
+    }
+    REAL(Rsum)[0] =s;
+    UNPROTECT(1);
+
+    return Rsum;
+}
+
+    
+

@@ -27,7 +27,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     columns = ncol(x)
     n = nrow(x)
     columnnames = colnames(x)
-
+    k<-rep(0,5)
 
     if(is.null(bounds)){
         message("Bounds not given assuming bounds to be (0,1) for each weight")
@@ -101,10 +101,11 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         SR = get_SR(stats,n)
         meanSR = SR$meanSR
         sigmaSR = SR$sigmaSR
-
         for(i in 1:columns){
+
             d1Z[i] = get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i)
         }
+
         dZ = list("d1Z"=d1Z,"z"=meanSR/sigmaSR)
 
         return(dZ)
@@ -148,9 +149,11 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     get_dnMoments<-function(mean,weights,mOrder,dOrder,index){
         sum = 0
         x0 = 1
+
         for(i in 0:(dOrder-1)){
             x0 = x0*(mOrder-i)
         }
+
         x_mat = as.matrix(na.omit(x))
         sum = 0
         output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum)
@@ -180,12 +183,15 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     }
     get_Moments<-function(series,order,mean = 0){
         sum = 0
-        for(i in series){
-            sum = sum + (i-mean)^order
-        }
+        mat = as.matrix(series)
+        sum = .Call("sums_m",mat,mean,order)
+       # for(i in series){
+        #    sum = sum + (i-mean)^order
+       # }
         return(sum/n)
     }
     weights = optimize()
+    print(k)
     result = matrix(weights,nrow = columns)
     rownames(result) = columnnames
     colnames(result) = "weight"
