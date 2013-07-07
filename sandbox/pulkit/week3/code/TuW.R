@@ -67,7 +67,7 @@ get_TuW<-function(R,confidence){
         bets = bets + 1
         q_value = getQ(bets, phi, mu, sigma, dp0, confidence)
     }
-    TuW = golden_section(bets-1,bets,TRUE,diff,mu,sigma_infinity,phi,sigma,dp0,confidence)
+    TuW = golden_section(bets-1,bets,TRUE,diff,phi,mu,sigma,dp0,confidence)
     return(TuW$x)
 }
 
