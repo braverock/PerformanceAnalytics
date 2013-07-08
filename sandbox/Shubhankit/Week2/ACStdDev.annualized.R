@@ -11,7 +11,7 @@
 #' @seealso \code{\link[stats]{sd}} \cr
 #' \url{http://wikipedia.org/wiki/inverse-square_law}
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
-working paper.http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf \cr
+#' working paper.http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf \cr
 #' @keywords ts multivariate distribution models
 #' @examples
 #' 
