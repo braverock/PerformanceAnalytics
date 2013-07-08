@@ -42,7 +42,7 @@ table.ComparitiveReturn.GLM <-
       z = c(skew,
             ((sum(arma.coeff$theta^2)^1.5)*(skew/(sum(arma.coeff$theta^3)))),
             kurt,
-             (kurt*(sum(arma.coeff$theta^2)^2)/(sum(arma.coeff$theta^4))))
+             (kurt*(sum(arma.coeff$theta^2)^2-6*(sum(arma.coeff$theta^2)*sum(arma.coeff$theta^2)))/(sum(arma.coeff$theta^4))))
       znames = c(
         "Skewness ( Orignal) ",
         "Skewness (Unsmooth)",
