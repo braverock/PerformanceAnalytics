@@ -17,7 +17,6 @@ if(!is.null(R)){
     # A potfolio is constructed by applying the weights
     
     count = q
-    x=edhec
     columns = ncol(x)
     columnnames = colnames(x)
     
