@@ -3,7 +3,11 @@
 #'
 #' @description
 #' @reference Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
-
+#' 
+#'@param a initial point
+#'@param b final point
+#'@param minimum TRUE to calculate the minimum and FALSE to calculate the Maximum
+#'@param function_name The name of the function  
 
 golden_section<-function(a,b,minimum = TRUE,function_name,...){
 
