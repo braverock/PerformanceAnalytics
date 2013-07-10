@@ -40,11 +40,10 @@ chart.ArcarJames <-
       x = y[,column]
       mu = musig.ratio[ratio] *.01
       sig= .01
-      r <- matrix(0,T+1,n)  # matrix to hold stock path
+      r <- matrix(0,T+1,n)  # matrix to hold Asset Path
       r[1,] <- s0  
-      drawdown <- matrix(0,length(musig.ratio,n)
-      #  return(Ed)
-      
+      drawdown <- matrix(0,length(musig.ratio),n)
+  
       for(j in 1:n){
         for(i in 2:(T+1)){
           
@@ -86,6 +85,6 @@ chart.ArcarJames <-
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: EMaxDDGBM
+# $Id: chart.ArcarJames
 #
 ###############################################################################
