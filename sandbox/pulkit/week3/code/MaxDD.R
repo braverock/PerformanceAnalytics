@@ -12,20 +12,29 @@
 
 MaxDD<-function(R,confidence,...)
 {
-    x = checkData(R)
-    columns = ncol(x)
-    i = 0 
-    tp = matrix(nrow=columns,ncol=2)
-
-
-     for(i in 1:columns){
-        column_MinQ <- get_minq(x[,i],confidence)
-        tp[i,] <- column_MinQ
-    } 
- row.names(tp)<-colnames(R)
-  colnames(tp) = c("MaxDD(in %)","t*")
-  return(tp)
+  x = checkData(R)
   
+  if(ncol(x)==1 || is.null(R) || is.vector(R)){
+    
+    calcul = FALSE
+    for(i in (1:length(x))){
+      if(!is.na(x[i])){
+        calcul = TRUE
+      }
+    }
+    x = na.omit(x)
+    if(!calcul){
+      result = NA
+    }
+    else{
+      result = get_minq(x,confidence)
+    }
+    return(result)
+  }
+    
+    result = apply(x,MARGIN = 2,get_minq,confidence)
+  rownames(result) = c("MaxDD(in %)","t*")
+  return(result)  
 }
 
 

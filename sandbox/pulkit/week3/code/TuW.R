@@ -11,19 +11,33 @@
 #' @reference Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
 
 TuW<-function(R,confidence,...){
-    x = checkData(R)
-    columns = ncol(R)
-    i = 0 
-    tp = matrix(nrow=columns)
-    for(i in 1:columns){
-        column_TuW = get_TuW(x[,i],confidence)
-        tp[i] <- column_TuW
+  x = checkData(R)
+  
+  if(ncol(x)==1 || is.null(R) || is.vector(R)){
+    
+    calcul = FALSE
+    for(i in (1:length(x))){
+      if(!is.na(x[i])){
+        calcul = TRUE
+      }
     }
-
-
-rownames(tp)<-colnames(R)
-colnames(tp)<-"Max Time Under Water"
-return(tp)
-}
+    x = na.omit(x)
+    if(!calcul){
+      result = NA
+    }
+    else{
+      result = get_TuW(x,confidence)
+    }
+    return(result)
+  }
+    else{
+      result=apply(x,MARGIN = 2, get_TuW,confidence)
+      result<-as.data.frame(result)
+      result<-t(result)
+      rownames(result)=paste("Max Time Under Water")
+      return(result)
+    }
+    
+  }
       
 

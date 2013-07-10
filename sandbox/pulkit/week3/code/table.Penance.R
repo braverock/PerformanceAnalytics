@@ -20,20 +20,26 @@ table.Penance<-function(R,confidence){
   # Creates a Table showing mean stdDev phi sigma MaxDD t* MaxTuW and Penance
   #
   # Function:
-    x = checkData(R)
-    columns = ncol(x) 
-    tp = data.frame()
-    for(i in 1:columns){
-	phi = cov(x[,i][-1],x[,i][-length(x[,i])])/(cov(x[,i][-length(x[,i])]))
-	sigma_infinity = StdDev(x[,i])
-	sigma = sigma_infinity*((1-phi^2)^0.5)
-	column_MinQ<-c(mean(x[,i]),sigma_infinity,phi,sigma)
-        column_MinQ <- c(column_MinQ,get_minq(x[,i],confidence))
-        column_TuW = get_TuW(x[,i],confidence)
-        tp <- rbind(tp,c(column_MinQ,column_TuW,column_MinQ[5]/column_TuW))
+  x = checkData(R)
+  columns = ncol(x) 
+  columnnames = colnames(x)
+  rownames = c("mean","stdDev","phi","sigma","MaxDD(in %)","t*","MaxTuW","Penance")
+  for(column in 1:columns){
+    phi = cov(x[,column][-1],x[,column][-length(x[,column])])/(cov(x[,column][-length(x[,column])]))
+    sigma_infinity = StdDev(x[,column])
+    sigma = sigma_infinity*((1-phi^2)^0.5)
+    column_MinQ<-c(mean(x[,column]),sigma_infinity,phi,sigma)
+    column_MinQ <- c(column_MinQ,get_minq(x[,column],confidence))
+    column_TuW = get_TuW(x[,column],confidence)
+    v = c(column_MinQ,column_TuW,column_MinQ[5]/column_TuW)
+    if(column == 1){
+      result = data.frame(Value = v, row.names = rownames)
     }
-  row.names(tp)<-colnames(R)
-  colnames(tp) = c("mean","stdDev","phi","sigma","MaxDD(in %)","t*","MaxTuW","Penance")
-  print(tp)
-  
+    else{
+      nextcolumn = data.frame(Value = v,row.names = rownames)
+      result = cbind(result,nextcolumn)
+    }
+  }
+  colnames(result) = columnnames
+  result
 }
