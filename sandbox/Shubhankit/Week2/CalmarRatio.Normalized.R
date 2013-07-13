@@ -1,10 +1,10 @@
-#' calculate a Calmar or Sterling reward/risk ratio
+#' calculate a Normalized Calmar or Sterling reward/risk ratio
 #'  
-#' Calmar and Sterling Ratios are yet another method of creating a
+#' Normalized Calmar and Sterling Ratios are yet another method of creating a
 #' risk-adjusted measure for ranking investments similar to the
 #' \code{\link{SharpeRatio}}.
 #' 
-#' Both the Calmar and the Sterling ratio are the ratio of annualized return
+#' Both the Normalized Calmar and the Sterling ratio are the ratio of annualized return
 #' over the absolute value of the maximum drawdown of an investment. The
 #' Sterling ratio adds an excess risk measure to the maximum drawdown,
 #' traditionally and defaulting to 10\%.
@@ -21,7 +21,7 @@
 #' \code{\link{SharpeRatio}} are both \dQuote{better} measures, and
 #' should be preferred to the Calmar or Sterling Ratio.
 #' 
-#' @aliases CalmarRatio SterlingRatio
+#' @aliases Normalized.CalmarRatio Normalized.SterlingRatio
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
@@ -34,16 +34,15 @@
 #' \code{\link{maxDrawdown}}, \cr
 #' \code{\link{SharpeRatio.modified}}, \cr 
 #' \code{\link{UpsidePotentialRatio}}
-#' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
-#' and Attribution}. Wiley. 2004.
+#' @references Bacon, Carl. \emph{Magdon-Ismail, M. and Amir Atiya, Maximum drawdown. Risk Magazine, 01 Oct 2004.
 #' @keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(managers)
-#'     CalmarRatio(managers[,1,drop=FALSE])
-#'     CalmarRatio(managers[,1:6]) 
-#'     SterlingRatio(managers[,1,drop=FALSE])
-#'     SterlingRatio(managers[,1:6])
+#'     Normalized.CalmarRatio(managers[,1,drop=FALSE])
+#'     Normalized.CalmarRatio(managers[,1:6]) 
+#'     Normalized.SterlingRatio(managers[,1,drop=FALSE])
+#'     Normalized.SterlingRatio(managers[,1:6])
 #' 
 #' @export 
 #' @rdname CalmarRatio
@@ -85,14 +84,14 @@ CalmarRatio.Normalized <- function (R, tau = 1,scale = NA)
   annualized_return = Return.annualized(R, scale=scale)
   drawdown = abs(maxDrawdown(R))
   result = (annualized_return/drawdown)*(QP.Norm(R,Time)/QP.Norm(R,tau))*(tau/Time)
-  rownames(result) = "Calmar Ratio"
+  rownames(result) = "Normalized Calmar Ratio"
   return(result)
 }
 
 #' @export 
 #' @rdname CalmarRatio
-SterlingRatio <-
-  function (R, scale=NA, excess=.1)
+SterlingRatio.Normalized <-
+  function (R, tau=1,scale=NA, excess=.1)
   { # @author Brian G. Peterson
     
     # DESCRIPTION:
@@ -104,7 +103,7 @@ SterlingRatio <-
     # This function returns a Sterling Ratio
     
     # FUNCTION:
-    
+    Time = nyears(R)
     R = checkData(R)
     if(is.na(scale)) {
       freq = periodicity(R)
@@ -120,15 +119,15 @@ SterlingRatio <-
     }
     annualized_return = Return.annualized(R, scale=scale)
     drawdown = abs(maxDrawdown(R)+excess)
-    result = annualized_return/drawdown
-    rownames(result) = paste("Sterling Ratio (Excess = ", round(excess*100,0), "%)", sep="")
+    result = annualized_return/drawdown*(QP.Norm(R,Time)/QP.Norm(R,tau))*(tau/Time)
+    rownames(result) = paste("Normalized Sterling Ratio (Excess = ", round(excess*100,0), "%)", sep="")
     return(result)
   }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2013 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
