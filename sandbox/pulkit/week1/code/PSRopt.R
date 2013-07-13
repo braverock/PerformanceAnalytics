@@ -101,12 +101,15 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         SR = get_SR(stats,n)
         meanSR = SR$meanSR
         sigmaSR = SR$sigmaSR
+        if(refSR>meanSR){
+            stop("The Reference Sharpe Ratio should be less than the Observred Sharpe Ratio")
+        }
         for(i in 1:columns){
 
             d1Z[i] = get_d1Z(stats,m,meanSR,sigmaSR,mean,weights,i)
         }
 
-        dZ = list("d1Z"=d1Z,"z"=meanSR/sigmaSR)
+        dZ = list("d1Z"=d1Z,"z"=(meanSR-refSR)/sigmaSR)
 
         return(dZ)
     }
@@ -120,7 +123,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         d1sigmaSR = (d1Kurt * meanSR^2+2*meanSR*d1meanSR*(stats[4]-1))/4
         d1sigmaSR = d1sigmaSR-(d1Skew*meanSR+d1meanSR*stats[3])  
         d1sigmaSR = d1sigmaSR/(2*sigmaSR*(n-1))
-        d1Z = (d1meanSR*sigmaSR-d1sigmaSR*meanSR)/sigmaSR^2
+        d1Z = (d1meanSR*sigmaSR-d1sigmaSR*(meanSR-refSR))/sigmaSR^2
         return(d1Z)
     }
 
@@ -191,7 +194,6 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
         return(sum/n)
     }
     weights = optimize()
-    print(k)
     result = matrix(weights,nrow = columns)
     rownames(result) = columnnames
     colnames(result) = "weight"
