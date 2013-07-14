@@ -1,0 +1,46 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Lo Sharpe Ratio }
+
+% \keywords{Lo Sharpe Ratio,GLM Smooth Index,GLM Return Table}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+    This vignette gives an overview of the Lo Sharpe Ratio which have addressed the issue of IID in financial time series data.
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+
+\section{Lo Sharpe Ratio}
+ Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in terms of autocorrelated coefficients as
+ 
+ \deqn{ \hat{SR} (q) - SR(q)= Normal Distribution(0,V_{GMM}(q)) }
+ 
+The estimator for the Sharpe ratio then follows directly:
+\deqn{  \hat{SR} (q) =  \hat{ \eta } (q)  * Sharpe Ratio}
+\deqn{  \hat{ \eta } (q)= q/\sqrt{q +  \sum_k^n  \rho  } }
+
+<<>>=
+data(edhec)
+LoSharpe(edhec)
+@
+
+\end{document}
