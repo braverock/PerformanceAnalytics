@@ -58,7 +58,7 @@ source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/co
  
  $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the skewness and kurtosis respectively.
  It is not unusual to find strategies with irregular trading frequencies, such as weekly strategies that may not trade for a month. This poses a problem when computing an annualized Sharpe ratio, and there is no consensus as how skill should be measured in the context of irregular bets. Because PSR measures skill in probabilistic terms, it is invariant to calendar conventions. All calculations are done in the original frequency
-of the data, and there is no annualization.
+of the data, and there is no annualization. The Reference Sharpe Ratio is also given in the non-annualized form and should be greater than the Observed Sharpe Ratio.
 
 <<>>=
 data(edhec)
@@ -73,7 +73,7 @@ $SR^\ast$. Minimum Track Record Length is given by the following expression.
 
 \deqn{MinTRL = n^\ast = 1+\biggl[1-\hat{\gamma_3}\hat{SR}+\frac{\hat{\gamma_4}}{4}\hat{SR^2}\biggr]\biggl(\frac{Z_\alpha}{\hat{SR}-SR^\ast}\biggr)^2}
 
-$\gamma{_3}$ and $\gamma{_4}$ are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms.
+$\gamma{_3}$ and $\gamma{_4}$ are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms. All the values used in the above formula are non-annualized, in the same frequency as that of the returns.
 
 <<>>=
 data(edhec)
