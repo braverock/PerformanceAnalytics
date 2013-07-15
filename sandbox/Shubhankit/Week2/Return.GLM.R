@@ -1,43 +1,35 @@
-#' calculate Geltner liquidity-adjusted return series
-#' 
-#' David Geltner developed a method to remove estimating or liquidity bias in
-#' real estate index returns.  It has since been applied with success to other
-#' return series that show autocorrelation or illiquidity effects.
-#' 
-#' The theory is that by correcting for autocorrelation, you are uncovering a
-#' "true" return from a series of observed returns that contain illiquidity or
-#' manual pricing effects.
+#' True returns represent the flow of information that would determine the equilibrium
+#' value of the fund's securities in a frictionless market. However, true economic
+#' returns are not observed. Instead, Rot
+#' denotes the reported or observed return in
+#' period t, which is a weighted average of the fund's true returns over the most recent k þ 1
+#' periods, includingthe current period.
+#' This averaging process captures the essence of smoothed returns in several
+#' respects. From the perspective of illiquidity-driven smoothing, is consistent
+#' with several models in the nonsynchronous tradingliterat ure. For example, Cohen
+#' et al. (1 986, Chapter 6.1) propose a similar weighted-average model for observed
+#' returns.
 #' 
 #' The Geltner autocorrelation adjusted return series may be calculated via:
 #' 
-#' \deqn{ }{Geltner.returns = [R(t) - R(t-1)*acf(R(t-1))]/1-acf(R(t-1)) }\deqn{
-#' R_{G}=\frac{R_{t}-(R_{t-1}\cdot\rho_{1})}{1-\rho_{1}} }{Geltner.returns =
-#' [R(t) - R(t-1)*acf(R(t-1))]/1-acf(R(t-1)) }
-#' 
-#' where \eqn{\rho_{1}}{acf(R(t-1))} is the first-order autocorrelation of the
-#' return series \eqn{R_{a}}{Ra} and \eqn{R_{t}}{R(t)} is the return of
-#' \eqn{R_{a}}{Ra} at time \eqn{t} and \eqn{R_{t-1}}{R(t-1)} is the one-period
-#' lagged return.
-#' 
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param \dots any other passthru parameters
-#' @author Brian Peterson
-#' @references "Edhec Funds of Hedge Funds Reporting Survey : A Return-Based
-#' Approach to Funds of Hedge Funds Reporting",Edhec Risk and Asset Management
-#' Research Centre, January 2005,p. 27
+
+#' @param q order of autocorrelation coefficient
+#' @author R
+#' @references "An econometric model of serial correlation and
+#' illiquidity in hedge fund returns
+#' Mila Getmansky1, Andrew W. Lo*, Igor Makarov
+#' MIT Sloan School of Management, 50 Memorial Drive, E52-432, Cambridge, MA 02142-1347, USA
+#' Received 16 October 2002; received in revised form 7 March 2003; accepted 15 May 2003
+#' Available online 10 July 2004
 #' 
-#' Geltner, David, 1991, Smoothing in Appraisal-Based Returns, Journal of Real
-#' Estate Finance and Economics, Vol.4, p.327-345.
-#' 
-#' Geltner, David, 1993, Estimating Market Values from Appraised Values without
-#' Assuming an Efficient Market, Journal of Real Estate Research, Vol.8,
-#' p.325-345.
+#'
 #' @keywords ts multivariate distribution models
 #' @examples
 #' 
-#' data(managers)
-#' head(Return.Geltner(managers[,1:3]),n=20)
+#' data(edhec)
+#' Return.GLM(edhec,4)
 #' 
 #' @export
 Return.GLM <-
@@ -45,9 +37,7 @@ Return.GLM <-
   { # @author Brian G. Peterson, Peter Carl
     
     # Description:
-    # Geltner Returns came from real estate where they are used to uncover a
-    # liquidity-adjusted return series.
-    
+   
     # Ra    return vector
     # q     Lag Factors
     # Function:
@@ -57,19 +47,9 @@ Return.GLM <-
     columnnames.a = colnames(R)
     
     clean.GLM <- function(column.R,q=3) {
-      ma.coeff = as.numeric(arma(column.R, order = c(0,q))$coef)
-#      for( i in 1: q)
- #     {
-#        if(q == 1){column.glm = ma.coeff[i]*lag(column.R,i)}
-#else{        column.glm = ma.coeff[i]*lag(column.R,i)+ column.glm} 
- #     }
-      column.glm = ma.coeff[q]*lag(column.R,q)
-      # compute the lagged return series
-      #lagR = lag(column.R, k=1)
-      # compute the first order autocorrelation
-      #f_acf = as.numeric(acf(as.numeric(column.R), plot = FALSE)[1][[1]])
-      # now calculate and return the Geltner series
-      #column.geltner = (column.R-(lagR*f_acf))/(1-f_acf)
+      ma.coeff = as.numeric(arma(edhec[,1],0,q)$theta)
+ column.glm = ma.coeff[q]*lag(column.R,q)
+     
     return(column.glm)
     }
     
