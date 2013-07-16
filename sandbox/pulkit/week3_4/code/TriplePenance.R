@@ -1,3 +1,38 @@
+
+
+dd_norm<-function(x,confidence){
+    # DESCRIPTION:
+    # A function to return the maximum drawdown for a normal distribution
+
+    # Inputs:
+    # R: The Return Series
+    #
+    # confidence: The confidence Level
+    sd = StdDev(x)
+    mu = mean(x, na.rm = TRUE)
+    dd = max(0,((qnorm(1-confidence)*sd)^2)/(4*mu))
+    t = ((qnorm(1-confidence)*sd)/(2*mu))^2
+
+    return(c(dd*100,t))
+}
+
+tuw_norm<-function(x,confidence){
+    # DESCRIPTION:
+    # A function to return the Time under water
+
+    # Inputs:
+    # R: Return series
+    # confidence: The confidence level
+    sd = StdDev(x)
+    mu = mean(x,na.rm = TRUE)
+    tuw = ((qnorm(1-confidence)*sd)/mu)^2
+
+    return(tuw)
+}
+
+
+
+
 get_minq<-function(R,confidence){
   
     # DESCRIPTION:
@@ -8,7 +43,7 @@ get_minq<-function(R,confidence){
     # Inputs:
     # R: The function takes Returns as the input
     #
-    # confidence: The confidence interval of the input.
+    # confidence: The confidence interval.
     x = checkData(R)
     mu = mean(x, na.rm = TRUE)
     sigma_infinity = StdDev(x)
