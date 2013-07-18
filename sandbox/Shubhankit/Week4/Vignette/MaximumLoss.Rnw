@@ -1,0 +1,56 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Triple Penance Rule}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Triple Penance Rule,Maximum Drawdown,Time under water,risk,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Maximum Loss and Maximum Drawdown in Financial
+Markets}
+
+% \keywords{Triple Penance Rule,Maximum Drawdown,Time Under Water,risk,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+The main concern of this paper is the study of alternative risk measures: namely maximum loss and maximum drawdown. Both statistics have received little attention from academics despite their extensive use by proprietary traders and derivative fund managers.
+
+Firstly, this paper recalls from previously published research the expected maximum loss under the normal random walk with drift assumption. In that case, we see that exact analytical formulae can be established. The expected maximum loss can be derived as a function of the mean and standard deviation of the asset. For the maximum drawdown, exact formulae seems more difficult to establish.
+
+Therefore Monte-Carlo simulations have to be used.
+
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+
+\section{ Maximum Drawdown }
+
+Unfortunately, there is no analytical formulae to establish the maximum drawdown properties under the random walk assumption. We should note first that due to its definition, the maximum drawdown divided by volatility is an only function of the ratio mean divided by volatility.
+
+When the distibution is normal
+
+\deqn{MD_{\sigma}=min\left\{0,\frac{({\X}\sigma)}}
+
+
+
+
+
+
+\end{document}
