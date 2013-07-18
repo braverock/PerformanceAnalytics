@@ -1,0 +1,108 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Triple Penance Rule}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Triple Penance Rule,Maximum Drawdown,Time under water,risk,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Triple Penance Rule }
+
+% \keywords{Triple Penance Rule,Maximum Drawdown,Time Under Water,risk,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+Drawdown based stopouts is a framework for informing the decision of stopping a portfolio manager or investment strategy once it has reached the drawdown or time under water limit associated with a certain confidence limit. 
+
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE>>=
+source("../code/MaxDD.R")
+@
+
+<<echo=FALSE>>=
+source("../code/TriplePenance.R")
+@
+
+<<echo=FALSE>>=
+source("../code/GoldenSection.R")
+@
+
+
+\section{ Maximum Drawdown }
+Maximum Drawdown tells us Up to how much could a particular strategy lose with a given confidence level ?. This function calculated Maximum Drawdown for two underlying processes normal and autoregressive. For a normal process Maximum Drawdown is given by the formula
+
+When the distibution is normal
+
+\deqn{MaxDD_{\alpha}=max\left\{0,\frac{(z_{\alpha}\sigma)^2}{4\mu}\right\}}
+
+The time at which the Maximum Drawdown occurs is given by
+
+\deqn{t^\ast=\biggl(\frac{Z_{\alpha}\sigma}{2\mu}\biggr)^2}
+
+Here $Z_{\alpha}$ is the critical value of the Standard Normal Distribution associated with a probability $\alpha$.$\sigma$ and $\mu$ are the Standard Distribution and the mean respectively.
+
+When the distribution is non-normal and time dependent, Autoregressive process.
+
+
+\deqn{Q_{\alpha,t}=\frac{\phi^{(t+1)}-\phi}{\phi-1}(\triangle\pi_0-\mu)+{\mu}t+Z_{\alpha}\frac{\sigma}{|\phi-1|}\biggl(\frac{\phi^{2(t+1)}-1}{\phi^2-1}-2\frac{\phi^(t+1)-1}{\phi-1}+t+1\biggr)^{1/2}}
+
+$\phi$ is estimated as
+
+\deqn{\hat{\phi} = Cov_0[\triangle\pi_\tau,\triangle\pi_{\tau-1}](Cov_0[\triangle\pi_{\tau-1},\triangle\pi_{\tau-1}])^{-1}}
+
+
+and the Maximum Drawdown is given by.
+
+\deqn{MaxDD_{\alpha}=max\left\{0,-MinQ_\alpha\right\}}
+
+Golden Section Algorithm is used to calculate the Minimum of the function Q.
+
+
+\subsection{Usage of the function}
+
+The Return Series ,confidence level and the type of distribution is taken as the input. The Return Series can be an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
+<<>>=
+data(edhec)
+MaxDD(edhec,0.95,type="ar")
+@
+
+
+The $t^\ast$ in the output is the time at which Maximum Drawdown occurs.
+
+\section{ Maximum Time Under Water }
+
+For a particular sequence $\left\{\pi_t\right\}$, the time under water $(TuW)$ is the minimum number of observations, $t>0$, such that $\pi_{t-1}<0$ and $\pi_t>0$. 
+
+For a normal distribution Maximum Time Under Water is given by the following expression.
+
+\deqn{MaxTuW_\alpha=\biggl(\frac{Z_\alpha{\sigma}}{\mu}\biggr)^2}
+
+For a Autoregressive process the Time under water is found using the golden section algorithm.
+
+\subsection{Usage}
+
+
+
+\end{document}
+
