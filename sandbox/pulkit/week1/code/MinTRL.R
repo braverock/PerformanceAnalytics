@@ -49,6 +49,7 @@
 #'MinTrackRecord(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78)
 #'MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24))
 #'@export
+#'
 MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL,sk = NULL, kr = NULL, ...){
     columns = 1
     columnnames = NULL
@@ -107,3 +108,14 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
     return(result)
 }
 
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: MinTRL.R $
+#
+##############################################################################

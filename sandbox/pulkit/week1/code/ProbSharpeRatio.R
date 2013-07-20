@@ -105,3 +105,14 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
     return(result)
     
 }
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: ProbSharpeRatio.R $
+#
+##############################################################################
