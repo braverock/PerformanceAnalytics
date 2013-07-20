@@ -58,7 +58,7 @@ SRIndifference<-function(R, ylab = NULL,xlab = NULL,lwd = 2,pch = 1,cex = 1,...)
   if(is.null(xlab)){
     xlab = "Candidate's Strategy's Sharpe Ratio"
   }
-  #plot(SR_i,corr_range,type="l",xlab = xlab,ylab = ylab,main="Sharpe Ratio Indifference Curve")
+  plot(SR_i,corr_range,type="l",xlab = xlab,ylab = ylab,main="Sharpe Ratio Indifference Curve")
   #OR we can use ggplot2 for much better plots
-  qplot(SR_i,corr_range,geom="line",xlab=xlab,ylab=ylab,main="Sharpe Ratio IndifferenceCurve",margins=TRUE,facet="grid")+stat_summary()
+  #qplot(SR_i,corr_range,geom="line",xlab=xlab,ylab=ylab,main="Sharpe Ratio IndifferenceCurve",margins=TRUE,facet="grid")+stat_summary()
 }

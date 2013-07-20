@@ -19,8 +19,8 @@ chart.Penance<-function(R,confidence,...){
         phi[column] = cov(x[,column][-1],x[,column][-length(x[,column])])/(cov(x[,column][-length(x[,column])]))
         penance[column]<-get_minq(x[,column],confidence)[1]/get_TuW(x[,column],confidence)
     }
-    plot(x=phi,y=penance,xlab="Phi",ylab = "Penance",main="Penance vs Phi")
-    text(phi,penance,columnnames,pos = 4)
+    plot(x=phi,y=penance,xlab="Phi",ylab = "Penance",main="Penance vs Phi",pch=2)
+    text(phi,penance,columnnames,pos = 4,col=c(1:columns))
 }
 
 

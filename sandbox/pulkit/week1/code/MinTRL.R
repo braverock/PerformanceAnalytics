@@ -1,7 +1,7 @@
 #'@title Minimum Track Record Length
 #'
 #'@description
-#'Minimum Track Record Length will tell us “How long should a track record be in 
+#'Minimum Track Record Length tells us “How long should a track record be in 
 #'order to have statistical confidence that its Sharpe ratio is above a given 
 #'threshold? ". If a track record is shorter than MinTRL, we do not have enough
 #'confidence that the observed Sharpe Ratio is above the designated threshold.
@@ -16,16 +16,27 @@
 #'It is important to note that MinTRL is expressed in terms of number of observations,
 #'not annual or calendar terms.
 #'
+#'The sharpe ratio , skewness and kurtosis can be directly given if the return series 
+#'is not available using the input parameters sr,sk and kr. If the return series 
+#'is available these parameters can be left.
+#'
+#'weights will be needed to be entered if a portfolio's MinTRL is to be calculated
+#'else weight can be left as NULL.
+#'
 #'@aliases MinTrackRecord
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset return 
 #'@param Rf the risk free rate of return
-#'@param refSR the reference Sharpe Ratio,in the same periodicity as the returns(non-annualized)
+#'@param refSR the reference Sharpe Ratio, can be a single value or a vector for a multicolumn
+#'  return series.Should be non-annualized , in the same periodicity as the returns.
 #'@param p the confidence level
 #'@param weights the weights for the portfolio
-#'@param sr Sharpe Ratio,in the same periodicity as the returns(non-annualized)
-#'@param sk Skewness, in the same periodicity as the returns(non-annualized)
-#'@param kr Kurtosis, in the same periodicity as the returns(non-annualized)
+#'@param sr Sharpe Ratio,in the same periodicity as the returns(non-annualized).
+#'To be given in case the return series is not given.
+#'@param sk Skewness, in the same periodicity as the returns(non-annualized).
+#'To be given in case the return series is not given.
+#'@param kr Kurtosis, in the same periodicity as the returns(non-annualized).
+#'To be given in case the return series is not given.
 #'
 #'@reference Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
@@ -34,9 +45,10 @@
 #'@examples
 #'
 #'data(edhec)
-#'MinTrackRecord(edhec[,1],refSR=0.20)
-
-
+#'MinTrackRecord(edhec[,1],refSR=0.1,Rf = 0.04/12)
+#'MinTrackRecord(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78)
+#'MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24))
+#'@export
 MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL,sk = NULL, kr = NULL, ...){
     columns = 1
     columnnames = NULL
@@ -65,7 +77,12 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
         }
 
     columnnames = colnames(x)
- 
+        if(length(refSR)==1){
+          refSR = rep(refSR,columns)
+        }
+        if(length(refSR)!=columns){
+          stop("Reference Sharpe Ratio should be given for each series")
+        }
     }
     # If R is passed as null checking for sharpe ratio , skewness and kurtosis 
     else{
@@ -73,23 +90,19 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
              stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
         }
     }
-    #If weights are not taken into account a message is displayed
-    #if(is.null(weights)){
-     #   message("no weights passed,will calculate Minimum Track Record Length for each column")
-    #}
-   
+    
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
     }
     #If the refSR is greater than SR an error is displayed
-    if(refSR>sr){
+    if(length(which(refSR>sr))!=0){
         stop("The Reference Sharpe Ratio should be less than the Observed Sharpe Ratio")
     }
 
     result = 1 + (1 - sk*sr + ((kr-1)/4)*sr^2)*(qnorm(p)/(sr-refSR))^2
     if(!is.null(dim(result))){ 
-        colnames(result) = columnnames
-        rownames(result) = paste("Minimum Track Record Length(p=",round(p*100,1),"%):")
+      colnames(result) = paste(columnnames,"(SR >",refSR,")") 
+      rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
     }
     return(result)
 }

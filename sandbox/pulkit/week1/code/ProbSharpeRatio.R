@@ -7,23 +7,29 @@
 #' corrected, atemporal measure of performance expressed in terms of 
 #' probability of skill. The reference Sharpe Ratio should be less than 
 #' the Observed Sharpe Ratio.
+#' 
 #' \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
 
 #' Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
 
 #' $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the skewness and kurtosis respectively.
-
+#'
 #'
 #' @aliases ProbSharpeRatio
 #'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset return 
 #' @param Rf the risk free rate of return
-#' @param refSR the reference Sharpe Ratio, in the same periodicity as the returns(non-annualized)
-#' @param the confidence level
+#' @param refSR the reference Sharpe Ratio, can be a single value or a vector for a multicolumn
+#'  return series.Should be non-annualized , in the same periodicity as the returns.
+#' @param p the confidence level
 #' @param weights the weights for the portfolio
-#' @param sr Sharpe Ratio, in the same periodicity as the returns(non-annualized)
-#' @param sk Skewness, in the same periodicity as the returns(non-annualized)
-#' @param kr Kurtosis, in the same periodicity as the returns(non-annualized)
+#' @param sr Sharpe Ratio, in the same periodicity as the returns(non-annualized).
+#' To be given in case the return series is not given.
+#' @param sk Skewness, in the same periodicity as the returns(non-annualized).
+#' To be given in case the return series is not given.
+#' @param kr Kurtosis, in the same periodicity as the returns(non-annualized).
+#' To be given in case the return series is not given.
+#' @param n track record length. To be given in case the return series is not given.
 #'
 #' @references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #' Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
@@ -34,9 +40,9 @@
 #' @examples
 #'
 #' data(edhec)
-#' ProbSharpeRatio(edhec[,1],refSR = 0.28) 
-#' ProbSharpeRatio(edhec,reSR = 0.28,Rf = 0.06)
-
+#' ProbSharpeRatio(edhec[,1],refSR = 0.23) 
+#' ProbSharpeRatio(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78,n=59)
+#' ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24)) 
 
 ProbSharpeRatio<-
 function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = NULL, kr = NULL, ...){
@@ -67,6 +73,13 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
         }
 
     columnnames = colnames(x)
+        if(length(refSR)==1){
+          refSR = rep(refSR,columns)
+        }
+        if(length(refSR)!=columns){
+          stop("Reference Sharpe Ratio should be given for each series")
+        }
+        
  
     }
     # If R is passed as null checking for sharpe ratio , skewness and kurtosis 
@@ -76,21 +89,17 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
              stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
        }
     }
-    #If weights are not taken into account a message is displayed
-#    if(is.null(weights)){
- #       message("no weights passed,will calculate Probability Sharpe Ratio for each column")
-  #  }
    
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
     }
     #If the Reference Sharpe Ratio is greater than the Observred Sharpe Ratio an error is displayed
-    if(refSR>sr){
+    if(length(which(refSR>sr))!=0){
         stop("The Reference Sharpe Ratio should be less than the Observed Sharpe Ratio")
     }
     result = pnorm(((sr - refSR)*(n-1)^(0.5))/(1-sr*sk+sr^2*(kr-1)/4)^(0.5))
     if(!is.null(dim(result))){ 
-        colnames(result) = columnnames
+        colnames(result) = paste(columnnames,"(SR >",refSR,")") 
         rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
     }
     return(result)

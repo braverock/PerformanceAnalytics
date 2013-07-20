@@ -30,18 +30,24 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE, weights = NULL,...)
     columns = ncol(x)
     rowx = nrow(x)
     columnnames = colnames(x)
-    rf = checkData(rf)
-    rowr = nrow(rf)
+    rf = checkData(Rf)
+    rowr = length(Rf)
     if(rowr != 1 && rowr != rowx ){
-            warning("The number of rows of the returns and the risk free rate do not match")
-        }
+      stop("The number of rows of the returns and the risk free rate do not match")
+    }
     
     REDD<-function(x,geometric){
         if(geometric)
             Return.cumulative = cumprod(1+x)
         else Return.cumulative = 1 + cumsum(x)
         l = length(Return.cumulative)
-        REM = max(Return.cumulative*(1+rf)^(l-c(1:l)))
+        if(rowr == 1){
+          REM = max(Return.cumulative*(1+rf)^(l-c(1:l)))
+        }
+        else{
+          prodRf = prod(1+rf)
+          REM = max(Return.cumulative*prodRf)
+        }
         result = 1 - Return.cumulative[l]/REM
     }
 
