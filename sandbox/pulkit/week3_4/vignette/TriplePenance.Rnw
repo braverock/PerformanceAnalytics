@@ -49,6 +49,9 @@ source("../code/GoldenSection.R")
 @
 
 
+<<echo=FALSE>>=
+source("../code/TuW.R")
+@
 \section{ Maximum Drawdown }
 Maximum Drawdown tells us Up to how much could a particular strategy lose with a given confidence level ?. This function calculated Maximum Drawdown for two underlying processes normal and autoregressive. For a normal process Maximum Drawdown is given by the formula
 
@@ -101,7 +104,16 @@ For a normal distribution Maximum Time Under Water is given by the following exp
 For a Autoregressive process the Time under water is found using the golden section algorithm.
 
 \subsection{Usage}
+<<>>=
+data(edhec)
+TuW(edhec,0.95,type="ar")
+@
 
+The Return Series ,confidence level and the type of distribution is taken as the input. The Return Series can be an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
+
+The out is given in the same periodicity as the input series.
+
+\section{ Golden Section Algorithm }
 
 
 \end{document}

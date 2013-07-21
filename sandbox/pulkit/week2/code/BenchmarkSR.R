@@ -11,6 +11,9 @@
 #'@aliases BenchmarkSR
 #'\deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
 #'
+#'Here \eqn{\bar{SR}} is the average SR of the portfolio and \eqn{\bar{\rho}} 
+#'is the average correlation across off-diagonal elements
+#'
 #'@param R a vector, matrix, data frame,timeseries or zoo object of asset returns
 #'
 #'@references
@@ -21,11 +24,20 @@
 #'@examples
 #'
 #'data(edhec)
-#'BenchmarkSR(edhec) #expected 0.2019308
+#'BenchmarkSR(edhec) #expected 0.393797
 #'
 #'@export
 #'
 BenchmarkSR<-function(R){
+  # DESCRIPTION:
+  # Returns the Value of the Benchmark Sharpe Ratio.
+  
+  # INPUT:
+  # The return series of all the series in the portfolio is taken as the input
+  # The return series can be a vector, matrix, data frame,timeseries or zoo 
+  # object of asset returns.
+  
+  # FUNCTION:
   x = checkData(R)
   columns = ncol(x)
   #TODO : What to do if the number of columns is only one ?  
@@ -45,3 +57,14 @@ BenchmarkSR<-function(R){
   SR_Benchmark = sr_avg*sqrt(columns/(1+(columns-1)*corr_avg[1,1]))
   return(SR_Benchmark)
 }
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2013 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: BenchmarkSR.R $
+#
+###############################################################################
