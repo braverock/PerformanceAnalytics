@@ -109,10 +109,10 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
     ) # end switch
 
     if(as.Tufte){
-        boxplot(R[,column.order], horizontal = TRUE, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = "white", medlty = "blank", medpch = median.symbol, medlwd = 2, medcex = .8, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = "blank", outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, ...)
+        boxplot(R[,column.order], horizontal = horizontal, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = "white", medlty = "blank", medpch = median.symbol, medlwd = 2, medcex = .8, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = "blank", outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, ...)
     }
     else{
-        boxplot(R[,column.order], horizontal = TRUE, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = colorset[column.order], medlwd = 1, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = 1, staplecol = colorset[column.order], staplecex = .5, outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, boxwex=.6, ...)
+        boxplot(R[,column.order], horizontal = horizontal, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = colorset[column.order], medlwd = 1, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = 1, staplecol = colorset[column.order], staplecex = .5, outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, boxwex=.6, ...)
     } # end else
 
     if(!is.null(show.data)) {
