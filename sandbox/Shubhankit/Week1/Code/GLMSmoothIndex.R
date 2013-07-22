@@ -1,11 +1,26 @@
-#This measure is well known in the
-#industrial organization literature as the Herfindahl index, a measure of the
-#concentration of firms in a given industry where yj represents the market share of
-#firm j: Because yjA½0; 1  ; x is also confined to the unit interval, and is minimized when
-#all the yj's are identical, which implies a value of 1=ðk þ 1Þ for x; and is maximized
-#when one coefficient is 1 and the rest are 0, in which case x ¼ 1: In the context of
-##smoothed returns, a lower value of x implies more smoothing, and the upper bound
-#of 1 implies no smoothing, hence we shall refer to x as a ''smoothingindex' '.
+#'@title Getmansky Lo Markov Smoothing Index Parameter
+#'@description
+#A useful summary statistic for measuring the concentration of weights is
+# a sum of square of Moving Average lag coefficient.
+# This measure is well known in the industrial organization literature as the 
+# Herfindahl index, a measure of the concentration of firms in a given industry. 
+# The index is maximized when one coefficient is 1 and the rest are 0, in which case x ¼ 1: In the context of
+#smoothed returns, a lower value of x implies more smoothing, and the upper bound
+#of 1 implies no smoothing,  hence x is reffered as a ''smoothingindex' '.
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @author R
+#' @references "An econometric model of serial correlation and illiquidity in 
+#' hedge fund returns" Mila Getmansky1, Andrew W. Lo*, Igor Makarov
+#' 
+#' @keywords ts multivariate distribution models non-iid 
+#' @examples
+#' 
+#' data(edhec)
+#' head(GLMSmoothIndex(edhec)
+#' 
+#' @export
 GLMSmoothIndex<-
   function(R = NULL, ...)
   {
@@ -38,21 +53,21 @@ GLMSmoothIndex<-
             result.df = cbind(result.df, nextcol)
           }
         }
+      rownames(result.df)= paste("GLM Smooth Index")
+      
         return(result.df)
       
     }  
-    
-    
-    ###############################################################################
-    # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
-    #
-    # Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
-    #
-    # This R package is distributed under the terms of the GNU Public License (GPL)
-    # for full details see the file COPYING
-    #
-    # $Id: Return.Geltner.R 2163 2012-07-16 00:30:19Z braverock $
-    #
-    ###############################################################################
-    
   }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: GLMSmoothIndex.R 2163 2012-07-16 00:30:19Z braverock $
+#
+###############################################################################

@@ -3,9 +3,7 @@
 # We have simulated cash flows over a period of 36 monthly returns and measured maximum 
 #drawdown for varied levels of annualised return divided by volatility varying from minus
 # two to two by step of 0.1. The process has been repeated six thousand times.
-AcarSim <-
-  function ()
-{
+
 mu=mean(Return.annualized(edhec))
 monthly=(1+mu)^(1/12)-1
 sig=StdDev.annualized(edhec[,1])[1];
@@ -32,9 +30,8 @@ for(i in 1:len)
     
       r[j,2:37]=monthly+sig*dz
     
-    ddown[j,i]= ES((r[j,]))/monthly
+    ddown[j,i]= ES((r[j,]))
 }
 }
 plot(ddown[1,])
 
-}
