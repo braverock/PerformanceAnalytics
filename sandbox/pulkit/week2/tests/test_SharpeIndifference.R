@@ -4,6 +4,6 @@ data(edhec)
 
 test_BenchmarkSR<-function(){
   
-  checkEqualsNumeric(BenchmanrkSR(edhec),0.170288,tolerance = 1.0e-6)
+  checkEqualsNumeric(BenchmarkSR(edhec),0.393797,tolerance = 1.0e-6)
   
 }

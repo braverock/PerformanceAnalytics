@@ -3,7 +3,16 @@
 #'@description
 #'Benchmark Sharpe Ratio Plots are used to give the relation ship between the
 #'Benchmark Sharpe Ratio and average correlation,average sharpe ratio or the number of #'strategies keeping other parameters constant. Here average Sharpe ratio , average #'correlation stand for the average of all the strategies in the portfolio. The original 
-#'point of the return series is also shown on the plots. 
+#'point of the return series is also shown on the plots.
+#'
+#'The equation for the Benchamark Sharpe Ratio is.
+#'
+#'\deqn{SR_B = \overline{SR}\sqrt{\frac{S}{1+(S-1)\overline{\rho}}}}
+#'
+#'Here \eqn{S} is the number of strategies and \eqn{\overline{\rho}} is the average 
+#'correlation across off diagonal elements and is given by
+#'
+#'\deqn{\overline{\rho} = \frac{2\sum_{s=1}^{S} \sum_{t=s+1}^{S} \rho_{S,t}}{S(S-1)}}
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
