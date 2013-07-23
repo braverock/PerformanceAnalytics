@@ -61,7 +61,7 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
     }
 
     for(column in 1:columns){
-        column.drawdown <- apply.rolling(x[,column],width = h, FUN = REDD, geometric = geometric)
+        column.drawdown <- rollapplyr(x[,column],width = h, FUN = REDD, geometric = geometric)
         if(column == 1)
             rolldrawdown = column.drawdown
         else rolldrawdown = merge(rolldrawdown, column.drawdown) 

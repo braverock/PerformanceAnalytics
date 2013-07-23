@@ -63,12 +63,11 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,sharpe=NULL,...){
     sd = StdDev(R)
     factor = (as.vector(sharpe)/as.vector(sd)+0.5)/(1-delta^2)
     redd = rollDrawdown(R,Rf,h,geometric)
-    redd = na.omit(redd)
     xt = max(0,(delta-redd)/(1-redd))
     return(xt)
   }
   for(column in 1:columns){
-    column.xt <- na.skip(x[,column],FUN = dynamicPort)
+    column.xt <- as.xts(apply((x[,column],MARGIN = 1,FUN = dynamicPort)))
     if(column == 1)
       xt = column.xt
     else xt = merge(xt, column.xt) 

@@ -50,11 +50,11 @@ BenchmarkSR<-function(R){
   corr_avg = 0
   for(i in 1:(columns-1)){
     for(j in (i+1):columns){
-      corr_avg = corr_avg + corr[(i-1)*columns+j,]
+      corr_avg = corr_avg + corr[(i-1)*columns+j,1]
     }
   }
   corr_avg = corr_avg*2/(columns*(columns-1))
-  SR_Benchmark = sr_avg*sqrt(columns/(1+(columns-1)*corr_avg[1,1]))
+  SR_Benchmark = sr_avg*sqrt(columns/(1+(columns-1)*corr_avg))
   return(SR_Benchmark)
 }
 ###############################################################################

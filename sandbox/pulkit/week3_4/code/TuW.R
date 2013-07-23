@@ -12,6 +12,16 @@
 #' \deqn{MaxTuW_\alpha=\biggl(\frac{Z_\alpha{\sigma}}{\mu}\biggr)^2}
 #' 
 #' For a Autoregressive process the Time under water is found using the golden section algorithm.
+#' 
+#'The non normal time dependent process is defined by
+#'
+#'\deqn{\triangle{\pi_{\tau}}=(1-\phi)\mu + \phi{\delta_{\tau-1}} + \sigma{\epsilon_{\tau}}}
+#'
+#'The random shocks are iid distributed \eqn{\epsilon_{\tau}~N(0,1)}. These random shocks follow an independent and 
+#'identically distributed Gaussian Process, however \eqn{\triangle{\pi_\tau}} is neither an independent nor an 
+#'identically distributed Gaussian Process. This is due to the parameter \eqn{\phi}, which incorporates a first-order 
+#'serial-correlation effect of auto-regressive form.
+
 #'
 #' @param R return series
 #' @param confidence the confidence interval
