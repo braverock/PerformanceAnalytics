@@ -39,7 +39,7 @@
 #'@export
 #'
 
-REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,sharpe=NULL,...){
+REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three"),...){
   # DESCRIPTION
   # Calculates the dynamic weights for single and double risky asset portfolios
   # using Rolling Economic Drawdown
@@ -51,32 +51,65 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,sharpe=NULL,...){
   # FUNCTION:
   x = checkData(R)
   columns = ncol(x)
-  n = nrow(x)
   columnnames = colnames(x)
-  rf = checkData(Rf)
-  nr = length(Rf)
-
-  if(is.null(sharpe)){
-    sharpe = SharpeRatio(R,FUN="StdDev",Rf ,p=0.95)
+  sharpe = SharpeRatio(x,FUN="StdDev",Rf ,p=0.95)
+  sd = StdDev(x)
+  rho = cor(x)
+  if(asset == "two" && columns != 2 ){
+      stop("The number of series should be two")
+    }
+  
+    if(asset == "three" && columns != 3){
+    stop("The number of series should be three")
   }
-  dynamicPort<-function(x){
-    sd = StdDev(R)
-    factor = (as.vector(sharpe)/as.vector(sd)+0.5)/(1-delta^2)
-    redd = rollDrawdown(R,Rf,h,geometric)
-    xt = max(0,(delta-redd)/(1-redd))
+  dynamicPort<-function(x,column){
+
+    if(asset == "one"){
+      factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta^2)
+      xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+    }
+    if(asset == "two"){
+      if(column == 1){
+      factor = (sharpe[,1] + 0.5*sd[,1]-rho[1,1]*(sharpe[,2] + 0.5*sd[,2]))/sd[,1]
+      xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+    }
+      if(column == 2){
+        factor = (sharpe[,2] + 0.5*sd[,2]-rho[1,1]*(sharpe[,1] + 0.5*sd[,1]))/sd[,2]
+        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+      }
+      
+  }
+    if(asset == "three"){
+      if(column == 1){
+        factor = ((sharpe[,1] + 0.5*sd[,1])*(1-rho[2,3]^2)-(rho[2,3]*rho[1,3]-rho[1,2])*(sharpe[,2] + 0.5*sd[,2])+(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,1]
+        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+      }
+      if(column == 2){
+        factor = ((sharpe[,2] + 0.5*sd[,2])*(1-rho[1,3]^2)-(rho[1,3]*rho[2,3]-rho[1,2])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,2]
+        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+      }
+      
+      if(column == 3){
+        factor = ((sharpe[,3] + 0.5*sd[,3])*(1-rho[1,2]^2)-(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,2] + 0.5*sd[,2]))/sd[,3]
+        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+      }
+      
+    }
     return(xt)
   }
+  redd = rollDrawdown(R,Rf,h,geometric)
+
   for(column in 1:columns){
-    column.xt <- as.xts(apply((x[,column],MARGIN = 1,FUN = dynamicPort)))
+    column.xt <- na.skip(redd[,column],FUN = dynamicPort,column = column)
     if(column == 1)
       xt = column.xt
     else xt = merge(xt, column.xt) 
   }
   colnames(xt) = columnnames
-  xt = reclass(xt, x)
   return(xt)
   
 }
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
