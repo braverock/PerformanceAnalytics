@@ -52,7 +52,7 @@ rollEconomicMax<-function(R,Rf,h,geometric = TRUE,...){
     }
     else{
       prodRf = prod(1+rf)
-      REM = max(Return.cumulative*prodRf)
+      REM = max(Return.cumulative*as.numeric(last(prodRf)/prodRf))
     }
     result = REM
   }

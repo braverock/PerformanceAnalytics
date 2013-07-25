@@ -34,6 +34,12 @@
 #'
 #'
 #'@examples
+#'
+#' # with S&P 500 data and T-bill data
+#'
+#'dt<-read.zoo("returns.csv",sep=",",header = TRUE)
+#'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,2])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
+#'
 #'data(edhec)
 #'REDDCOPS(edhec,delta = 0.1,Rf = 0,h = 40)
 #'data(managers)
@@ -70,6 +76,7 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
     if(type == "calibrated"){
       if(asset == "one"){
         factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta^2)
+        print(factor)
         xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
         print(sd[,column])
       }

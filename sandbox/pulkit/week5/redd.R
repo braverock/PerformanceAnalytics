@@ -45,23 +45,25 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
       stop("The number of rows of the returns and the risk free rate do not match")
     }
     
-    REDD<-function(x,geometric){
+    REDD<-function(xh,geometric){
         if(geometric)
-            Return.cumulative = cumprod(1+x)
-        else Return.cumulative = 1 + cumsum(x)
+            Return.cumulative = cumprod(1+xh)
+        else Return.cumulative = 1 + cumsum(xh)
         l = length(Return.cumulative)
         if(nr == 1){
           REM = max(Return.cumulative*(1+rf)^(l-c(1:l)))
         }
         else{
-          prodRf = prod(1+rf)
-          REM = max(Return.cumulative*prodRf)
+          rf = rf[index(xh)]
+          prodRf = cumprod(1+rf)
+          REM = max(Return.cumulative*as.numeric(last(prodRf)/prodRf))
         }
-        result = 1 - Return.cumulative[l]/REM
+        #as.numeric(first(prodRf[index(xh[which(xh==max(xh))])]))
+        result = 1 - last(Return.cumulative)/REM
     }
 
     for(column in 1:columns){
-        column.drawdown <- rollapplyr(x[,column],width = h, FUN = REDD, geometric = geometric)
+        column.drawdown <- apply.rolling(x[,column],width = h, FUN = REDD, geometric = geometric)
         if(column == 1)
             rolldrawdown = column.drawdown
         else rolldrawdown = merge(rolldrawdown, column.drawdown) 
