@@ -34,12 +34,14 @@
 #'
 #'
 #'@examples
+#'data(edhec)
 #'REDDCOPS(edhec,delta = 0.1,Rf = 0,h = 40)
-#'
+#'data(managers)
+#'REDDCOPS(managers[,1],0.80, Rf = managers[,10,drop=FALSE],12,asset="one")
 #'@export
 #'
 
-REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three"),...){
+REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three"),type=c("calibrated","risk-based"),...){
   # DESCRIPTION
   # Calculates the dynamic weights for single and double risky asset portfolios
   # using Rolling Economic Drawdown
@@ -52,9 +54,11 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
   x = checkData(R)
   columns = ncol(x)
   columnnames = colnames(x)
-  sharpe = SharpeRatio(x,FUN="StdDev",Rf ,p=0.95)
-  sd = StdDev(x)
+  sharpe = SharpeRatio.annualized(x,Rf)
+  sd = StdDev.annualized(R)
   rho = cor(x)
+  asset = asset[1]
+  type = type[1]
   if(asset == "two" && columns != 2 ){
       stop("The number of series should be two")
     }
@@ -63,40 +67,52 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
     stop("The number of series should be three")
   }
   dynamicPort<-function(x,column){
-
-    if(asset == "one"){
-      factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta^2)
-      xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-    }
-    if(asset == "two"){
-      if(column == 1){
-      factor = (sharpe[,1] + 0.5*sd[,1]-rho[1,1]*(sharpe[,2] + 0.5*sd[,2]))/sd[,1]
-      xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-    }
-      if(column == 2){
-        factor = (sharpe[,2] + 0.5*sd[,2]-rho[1,1]*(sharpe[,1] + 0.5*sd[,1]))/sd[,2]
+    if(type == "calibrated"){
+      if(asset == "one"){
+        factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta^2)
         xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        print(sd[,column])
+      }
+      if(asset == "two"){
+        if(column == 1){
+          factor = (sharpe[,1] + 0.5*sd[,1]-rho[1,1]*(sharpe[,2] + 0.5*sd[,2]))/sd[,1]
+          xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        }
+        if(column == 2){
+          factor = (sharpe[,2] + 0.5*sd[,2]-rho[1,1]*(sharpe[,1] + 0.5*sd[,1]))/sd[,2]
+          xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        }
+        
+      }
+      if(asset == "three"){
+        if(column == 1){
+          factor = ((sharpe[,1] + 0.5*sd[,1])*(1-rho[2,3]^2)-(rho[2,3]*rho[1,3]-rho[1,2])*(sharpe[,2] + 0.5*sd[,2])+(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,1]
+          xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        }
+        if(column == 2){
+          factor = ((sharpe[,2] + 0.5*sd[,2])*(1-rho[1,3]^2)-(rho[1,3]*rho[2,3]-rho[1,2])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,2]
+          xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        }
+        
+        if(column == 3){
+          factor = ((sharpe[,3] + 0.5*sd[,3])*(1-rho[1,2]^2)-(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,2] + 0.5*sd[,2]))/sd[,3]
+          xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
+        }
+        
       }
       
-  }
-    if(asset == "three"){
-      if(column == 1){
-        factor = ((sharpe[,1] + 0.5*sd[,1])*(1-rho[2,3]^2)-(rho[2,3]*rho[1,3]-rho[1,2])*(sharpe[,2] + 0.5*sd[,2])+(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,1]
-        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-      }
-      if(column == 2){
-        factor = ((sharpe[,2] + 0.5*sd[,2])*(1-rho[1,3]^2)-(rho[1,3]*rho[2,3]-rho[1,2])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,3] + 0.5*sd[,3]))/sd[,2]
-        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-      }
+    }
+    if(type =="risk-based"){
       
-      if(column == 3){
-        factor = ((sharpe[,3] + 0.5*sd[,3])*(1-rho[1,2]^2)-(rho[2,3]*rho[1,2]-rho[1,3])*(sharpe[,1] + 0.5*sd[,1])+(rho[1,3]*rho[1,2]-rho[2,3])*(sharpe[,2] + 0.5*sd[,2]))/sd[,3]
-        xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-      }
+      sharpe = mean(na.omit(apply.rolling(x,width = h,FUN = SharpeRatio.annualized,Rf = 0)))
+      sd = mean(na.omit(apply.rolling(x,width = h, FUN = StdDev.annualized)))
+      factor = 1/(1-delta^2)
+      xt = (sharpe/sd + 0.5)*ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
       
     }
     return(xt)
   }
+  
   redd = rollDrawdown(R,Rf,h,geometric)
 
   for(column in 1:columns){
