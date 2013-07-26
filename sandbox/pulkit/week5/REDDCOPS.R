@@ -75,10 +75,9 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
   dynamicPort<-function(x,column){
     if(type == "calibrated"){
       if(asset == "one"){
+        mu = mean(x[,column])
         factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta^2)
-        print(factor)
         xt = ifelse(factor*(delta-x)/(1-x)>0,factor*(delta-x)/(1-x),0)
-        print(sd[,column])
       }
       if(asset == "two"){
         if(column == 1){

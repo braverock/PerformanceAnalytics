@@ -1,4 +1,18 @@
-
+## A set of functions for Triple Penance Rule
+##
+## These set of functions are used for calculating Maximum Drawdown and Maximum Time under water
+## for different distributions such as normal and non-normal.
+## 
+## FUNCTIONS:
+## dd_norm
+## tuw_norm
+## get_minq
+## getQ
+## get_TuW
+##
+## REFERENCE:
+## Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
+## and the ‘Triple Penance’ Rule(January 1, 2013).
 
 dd_norm<-function(x,confidence){
     # DESCRIPTION:
@@ -79,6 +93,7 @@ getQ<-function(bets,phi,mu,sigma,dp0,confidence){
     # dp0: The r0 or the first return
     #
     # confidence: The confidence level of the quantile function
+  
     mu_new = (phi^(bets+1)-phi)/(1-phi)*(dp0-mu)+mu*bets
     var = sigma^2/(phi-1)^2
     var = var*((phi^(2*(bets+1))-1)/(phi^2-1)-2*(phi^(bets+1)-1)/(phi-1)+bets +1)
@@ -116,6 +131,24 @@ get_TuW<-function(R,confidence){
 
 
 diff_Q<-function(bets,phi,mu,sigma,dp0,confidence){
+  
+  # DESCRIPTION:
+  # The functions to be minimized to calculate the maximum Time Under water using
+  # Golden section algorithm
+  #
+  # Inputs:
+  # bets: The number fo steps
+  #
+  # phi: The coefficient for AR[1]
+  #
+  # mu: The mean of the returns
+  #
+  # sigma: The standard deviation of the returns
+  #
+  # dp0: The r0 or the first return
+  #
+  # confidence: The confidence level of the quantile function
+  
     return(abs(getQ(bets,phi,mu,sigma,dp0,confidence)))
 }
 
