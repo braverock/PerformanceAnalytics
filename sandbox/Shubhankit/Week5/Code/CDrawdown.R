@@ -1,23 +1,21 @@
-#' Active Premium or Active Return
+#' Conditional Drawdown
 #' 
-#' The return on an investment's annualized return minus the benchmark's
-#' annualized return.
-#' 
-#' Active Premium = Investment's annualized return - Benchmark's annualized
-#' return
-#' 
-#' Also commonly referred to as 'active return'.
+#' A new one-parameter family of risk measures called Conditional Drawdown (CDD) has
+#'been proposed. These measures of risk are functionals of the portfolio drawdown (underwater) curve considered in active portfolio management. For some value of the tolerance
+#' parameter ??, in the case of a single sample path, drawdown functional is de???ned as
+#'the mean of the worst (1 ??? ??) ??? 100% drawdowns. The CDD measure generalizes the
+#'notion of the drawdown functional to a multi-scenario case and can be considered as a
+#'generalization of deviation measure to a dynamic case. The CDD measure includes the
+#'Maximal Drawdown and Average Drawdown as its limiting cases. 
 #' 
 #' @param Ra return vector of the portfolio
 #' @param Rb return vector of the benchmark asset
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
 #' @author Peter Carl
-#' @seealso \code{\link{InformationRatio}} \code{\link{TrackingError}}
-#' \code{\link{Return.annualized}}
-#' @references Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
-#' Management},Fall 1994, 49-58.
-#' @keywords ts multivariate distribution models
+#' @references DRAWDOWN MEASURE IN PORTFOLIO OPTIMIZATION,\emph{International Journal of Theoretical and Applied Finance}
+#' ,Fall 1994, 49-58.Vol. 8, No. 1 (2005) 13-58
+#' @keywords Conditional Drawdown models
 #' @examples
 #' 
 #'     data(managers)

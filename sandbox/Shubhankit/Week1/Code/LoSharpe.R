@@ -1,31 +1,31 @@
-#'@title Andrew Lo Sharpe Ratio
-#'@description
-#' Although the Sharpe ratio has become part of the canon of modern financial 
-#' analysis, its applications typically do not account for the fact that it is an
-#' estimated quantity, subject to estimation errors that can be substantial in 
-#' some cases.
-#' 
-#' Many studies have documented various violations of the assumption of 
-#' IID returns for financial securities.
-#' 
-#' Under the assumption of stationarity,a version of the Central Limit Theorem can 
-#' still be  applied to the estimator .
-#' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' daily asset returns
-#' @param Rf an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' annualized Risk Free Rate
-#' @param q Number of autocorrelated lag periods. Taken as 3 (Default)
-#' @param \dots any other passthru parameters
-#' @author R
-#' @references "The Statistics of Sharpe Ratios" Andrew. W. Lo
-#' 
-#' @keywords ts multivariate distribution models non-iid 
-#' @examples
-#' 
-#' data(edhec)
-#' head(LoSharpe(edhec,0,3)
-#' 
-#' @export
+##'@title Andrew Lo Sharpe Ratio
+##'@description
+##' Although the Sharpe ratio has become part of the canon of modern financial 
+##' analysis, its applications typically do not account for the fact that it is an
+##' estimated quantity, subject to estimation errors that can be substantial in 
+##' some cases.
+##' 
+##' Many studies have documented various violations of the assumption of 
+##' IID returns for financial securities.
+##' 
+##' Under the assumption of stationarity,a version of the Central Limit Theorem can 
+##' still be  applied to the estimator .
+##' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
+##' daily asset returns
+##' @param Rf an xts, vector, matrix, data frame, timeSeries or zoo object of
+##' annualized Risk Free Rate
+##' @param q Number of autocorrelated lag periods. Taken as 3 (Default)
+##' @param \dots any other passthru parameters
+##' @author R
+##' @references "The Statistics of Sharpe Ratios" Andrew. W. Lo
+##' 
+##' @keywords ts multivariate distribution models non-iid 
+##' @examples
+##' 
+##' data(edhec)
+##' head(LoSharpe(edhec,0,3)
+##' 
+##' @export
 LoSharpe <-
   function (Ra,Rf = 0,q = 3, ...)
   { # @author Brian G. Peterson, Peter Carl
