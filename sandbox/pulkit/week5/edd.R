@@ -67,7 +67,7 @@ EconomicDrawdown<-function(R,Rf, geometric = TRUE,...)
     else Economicdrawdown = merge(Economicdrawdown, column.drawdown) 
   }
   colnames(Economicdrawdown) = columnnames
-  Economicdrawdown = reclass(Economicdrawdown, x)
+  #Economicdrawdown = reclass(Economicdrawdown, x)
   return(Economicdrawdown)
 }
 

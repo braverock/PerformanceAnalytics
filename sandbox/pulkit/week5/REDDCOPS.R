@@ -38,6 +38,7 @@
 #' # with S&P 500 data and T-bill data
 #'
 #'dt<-read.zoo("returns.csv",sep=",",header = TRUE)
+#'dt<-as.xts(dt)
 #'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,2])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
 #'
 #'data(edhec)
@@ -128,6 +129,7 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
     else xt = merge(xt, column.xt) 
   }
   colnames(xt) = columnnames
+  xt = reclass(xt, x)
   return(xt)
   
 }
