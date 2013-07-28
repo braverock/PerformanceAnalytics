@@ -1,0 +1,73 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+%\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{Maximum Drawdown of a Brownian Motion}
+\author{R Project for Statistical Computing}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+
+\begin{abstract}
+if $\hat{X}$(t) is a random process on [0,T], the maximum drawdown in defined as the largest drop from a peak to a bottom.This paper investigates the behavior of this statistic for a Brownian motion with drift. In particular, it gives an  $\infty$ series representation of its distribution, and consider its expected value. When the drift is zero, it gives an analytic expression for the expected value, and for non-zero drift, it gives an  $\infty$ series representation.For all cases, we compute the limiting  T tends to $\infty$ behavior, which can be
+logarithmic ($\mu$ greater than 0), square root ( $\mu$ equal to 0), or linear ($\mu$ less than 0).  
+\end{abstract}
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE,eval=TRUE,results=verbatim >>=
+source("../Code/EmaxDDGBM.R")
+@
+
+\section{Background}
+
+The maximum drawdown is a commonly used in finance as a measure of risk for a stock that follows a particular random process. Here we consider the maximum drawdown of a Brownian motion.
+
+
+\section{Usage}
+
+In this example we use edhec database, to compute true Hedge Fund Returns.
+
+<<>>=
+library(PerformanceAnalytics)
+data(edhec)
+table.EMaxDDGBM(edhec)
+@
+
+
+
+\end{document}

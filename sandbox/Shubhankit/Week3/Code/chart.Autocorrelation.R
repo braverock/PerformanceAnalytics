@@ -33,8 +33,8 @@ chart.Autocorrelation <-
 # Graph autos with adjacent bars using rainbow colors
  
 aa= table.Autocorrelation(R)
-barplot(as.matrix(aa), main="Auto Correlation Lag", ylab= "Value of Coefficient",
-                   , xlab = "Fund Type",beside=TRUE, col=rainbow(6))
+    barplot(as.matrix(aa), main="ACF Lag Plot", ylab= "Value of Coefficient",
+                   , xlab = NULL,col=rainbow(6))
 
    # Place the legend at the top-left corner with no frame  
    # using rainbow colors

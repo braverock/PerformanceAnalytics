@@ -1,0 +1,67 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+%\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{Stacked Bar Plot of Autocorrelation Coefficient}
+\author{R Project for Statistical Computing}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+
+\begin{abstract}
+Creates an ACF chart stacked bar plot with the ACF and PACF set to some depict the ACF weightage of different lag factors.
+\end{abstract}
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE,eval=TRUE,results=verbatim >>=
+source("../Code/chart.Autocorrelation.R")
+@
+
+\section{Usage}
+
+In this example we use edhec database, to show autocorrelation effect of the return time series with respect to lag factors.
+
+<<fig=TRUE>>=
+library(PerformanceAnalytics)
+data(edhec)
+chart.Autocorrelation(edhec[,1:3])
+@
+
+
+
+\end{document}
