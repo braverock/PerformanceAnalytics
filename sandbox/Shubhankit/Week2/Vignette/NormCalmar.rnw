@@ -1,0 +1,109 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+%\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{Normalized Calmar and Sterling Ratio}
+\author{R Project for Statistical Computing}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+
+\begin{abstract}
+ Both the Calmar and the Sterling ratio are the ratio of annualized returnmover the absolute value of the maximum drawdown of an investment. The Sterling ratio adds an excess risk measure to the maximum drawdown,  traditionally and defaulting to 10\%.It is also traditional to use a three year return series for these
+ calculations, although the functions included here make no effort to
+ determine the length of your series. However, Malik Magdon-Ismail devised a scaling law in which can be used to compare Calmar/Sterling ratio's with different 
+$\mu$ ,$\sigma$ and T.
+\end{abstract}
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE>>=
+source("../Code/CalmarRatio.Normalized.R")
+@
+
+\section{Background}
+Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the Calmar and Sterling Ratio's are defined as :
+
+%Let $X \sim N(0,1)$ and $Y \sim \textrm{Exponential}(\mu)$.  Let
+%$Z = \sin(X)$. $\sqrt{X}$.
+  
+%$\hat{\mu}$ = $\displaystyle\frac{22}{7}$
+%e^{2 \mu} = 1
+%\begin{equation}
+%\left(\sum_{t=1}^{T} R_t/T\right) = \hat{\mu} \\
+%\end{equation}
+\begin{equation}
+ Calmar Ratio  =  \frac{Return [0,T]}{max Drawdown  [0,T]} \\
+\end{equation}
+
+\begin{equation}
+ Sterling Ratio  =  \frac{Return [0,T]}{max Drawdown  [0,T] - 10\%} \\
+\end{equation}
+
+\section{Scaling Law}
+Malik Magdon-Ismail  impmemented a sclaing law for different $\mu$ ,$\sigma$ and T.Defined as :
+
+
+\begin{equation}
+Calmar_{\tau}  =  \gamma(_{\tau , Sharpe_{1}})Calmar_{T_{1}}  \\
+\end{equation}
+
+Where : 
+  \begin{equation}
+\gamma(_{\tau , Sharpe_{1}})  =  \frac{\frac{Q_p(T_1/2Sharpe^2_{1})}{T_1}}{\frac{Q_p(T_2/2Sharpe^2_{1})}{\tau}} \\
+\end{equation}
+
+ And , when T tends to  Infinity
+\begin{equation}
+Q_p(T/2Sharpe^2)  =  .63519 + log (Sharpe)  + 0.5 log T\\
+\end{equation}
+
+Same methodolgy goes to Sterling Ratio.
+\section{Usage}
+
+In this example we use edhec database, to compute Calmar and Sterling Ratio.
+
+<<echo=T>>=
+library(PerformanceAnalytics)
+data(edhec)
+CalmarRatio.Normalized(edhec,1)
+SterlingRatio.Normalized(edhec,1)
+@
+
+We can see as we shrunk the period the Ratio's decrease because the Max Drawdown does not change much over reduction of time period, but returns are approximately scaled according to  the time length. 
+
+\end{document}
