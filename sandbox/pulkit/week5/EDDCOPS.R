@@ -51,7 +51,8 @@ EDDCOPS<-function(R ,delta,gamma,Rf,geometric = TRUE,...){
   rf = checkData(Rf)
   columns = ncol(x)
   columnnames = colnames(x)
-  sharpe = SharpeRatio.annualized(x,rf)
+  sharpe = SharpeRatio.annualized(x,Rf)
+
   sd = StdDev.annualized(R)
   dynamicPort<-function(x){
     factor = (sharpe[,column]/sd[,column]+0.5)/(1-delta*gamma)

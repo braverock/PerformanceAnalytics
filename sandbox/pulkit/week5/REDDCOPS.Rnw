@@ -1,0 +1,177 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Rolling Economic Drawdown}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Drawdown,risk,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Rolling Economic Drawdown Controlled Optimal Strategy }
+
+% \keywords{Drawdown,risk,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+Drawdown based stopouts is a framework for informing the decision of stopping a portfolio manager or investment strategy once it has reached the drawdown or time under water limit associated with a certain confidence limit. 
+
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE>>=
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/R/na.skip.R")
+@
+
+
+<<echo=FALSE>>=
+source("redd.R")
+@
+
+<<echo=FALSE>>=
+source("edd.R")
+@
+
+<<echo=FALSE>>=
+source("REM.R")
+@
+
+
+<<echo=FALSE>>=
+source("REDDCOPS.R")
+@
+
+
+<<echo=FALSE>>=
+source("EDDCOPS.R")
+@
+\section{ Rolling Economic Max }
+Rolling Economic Max at time t, looking back at portfolio Wealth history
+for a rolling window of length H is given by:
+
+\deqn{REM(t,h)=\max_{t-H \leq s}\[(1+r_f)^{t-s}W_s\]}
+
+Here rf is the average realized risk free rate over a period of length t-s. If the risk free rate is changing. This is used to compound.
+
+\deqn{ \prod_{i=s}^{t}(1+r_{i}{\triangle}t)}
+
+
+here  \eqn{r_i} denotes the risk free interest rate during \eqn{i^{th}} discrete 
+time interval \eqn{{\triangle}t}.
+
+
+\subsection{Usage of the function}
+
+The Return Series ,risk free rate of return , lookback priod and the type of cumulative return is taken as the input. The Return Series can be an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
+
+<<>>=
+data(edhec)
+head(rollEconomicMax(edhec,0.08,100))
+@
+
+
+
+\section{ Rolling Economic Drawdown }
+
+To calculate the rolling economic drawdown cumulative 
+return and rolling economic max is calculated for each point. The Return series,risk 
+free return(rf) and the lookback period(h) is taken as the input.
+Rolling Economic Drawdown is given by the equation.
+
+\deqn{REDD(t,h)=1-\frac{W_t}/{REM(t,H)}}
+
+Here REM stands for Rolling Economic Max
+
+\subsection{Usage}
+
+The Return Series ,risk free return and the type of cumulative return is taken as the input. The Return Series can be an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
+
+
+<<>>=
+data(edhec)
+head(rollDrawdown(edhec,0.08,100))
+@
+
+
+\section{ Rolling Economic Drawdown Controlled Optimal Strategy }
+
+The Rolling Economic Drawdown Controlled Optimal Portfolio Strategy(REDD-COPS) has 
+the portfolio fraction allocated to single risky asset as:
+
+\deqn{x_t = Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-REDD(t,h)}{1-REDD(t,h)}\biggr]\right\}}
+ 
+The risk free asset accounts for the rest of the portfolio allocation \eqn{x_f = 1 - x_t}.
+ 
+For two risky assets in REDD-COPS,dynamic asset allocation weights are :
+ 
+\deqn{\left[{\begin{array}{c} x_1 \\
+                               x_2 
+                               \end{array}}\right] = \frac{1}{1-{\rho}^2}\left[\begin{array{c} (\lambda_1 + {1/2}*\sigma_1 - \rho.(\lambda_2 + {1/2}.\sigma_2)/\sigma_1) \\
+(\lambda_1 + {1/2}*\sigma_1 - \rho.(\lambda_2 + {1/2}.\sigma_2)/\sigma_1)
+\end{array}}\right].Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-REDD(t,h)}{1-REDD(t,h)}\biggr]\right\}}
+  
+The portion of the risk free asset is \eqn{x_f = 1 - x_1 - x_2}.
+\iffalse
+\subsection{Usage}
+
+The Return series ,drawdown limit, risk free rate and the lookback period , the number of assets and the type of REDD-COPS is taken as the input.
+
+
+<<>>=
+data(edhec)
+head(REDDCOPS(edhec,delta = 0.1,Rf = 0,h = 40))
+@
+
+\section{ Economic Drawdown }
+
+To calculate the economic drawdown cumulative 
+return and economic max is calculated for each point. The Return series,risk 
+free return(rf) and the lookback period(h) is taken as the input.
+Economic Drawdown is given by the equation
+
+\deqn{EDD(t)=1-\frac{W_t}/{EM(t)}}
+
+Here EM stands for Economic Max.
+
+\subsection{ Usage}
+
+The Return Series ,risk free return and the type of cumulative return is taken as the input. The Return Series can be an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns.
+
+<<>>=
+data(edhec)
+head(EDDCOPS(edhec,delta = 0.1,gamma = 0.7,Rf = 0))
+@
+
+\section{ Economic Drawdown Controlled Optimal Strategy }
+The  Economic Drawdown Controlled Optimal Portfolio Strategy(EDD-COPS) has 
+the portfolio fraction allocated to single risky asset as:
+
+\deqn{x_t = Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-EDD(t)}{1-EDD(t)}\biggr]\right\}}
+ 
+The risk free asset accounts for the rest of the portfolio allocation \eqn{x_f = 1 - x_t}.
+ 
+\subsection{Usage}
+<<>>=
+data(edhec)
+head(EDDCOPS(edhec,delta = 0.1,gamma = 0.7,Rf = 0))
+@
+\fi
+
+\end{document}
