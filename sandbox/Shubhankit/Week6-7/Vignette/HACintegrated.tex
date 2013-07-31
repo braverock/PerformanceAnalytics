@@ -1,0 +1,43 @@
+\documentclass[nojss]{jss}
+\usepackage{thumbpdf}
+%% need no \usepackage{Sweave}
+
+\author{Achim Zeileis\\Wirtschaftsuniversit\"at Wien}
+\Plainauthor{Achim Zeileis}
+
+\title{Econometric Computing with HC and HAC Covariance Matrix Estimators}
+
+\Keywords{covariance matrix estimators, heteroskedasticity, autocorrelation,
+  estimating functions, econometric computing, \proglang{R}}
+\Plainkeywords{covariance matrix estimators, heteroskedasticity, autocorrelation,
+  estimating functions, econometric computing, R}
+
+\Abstract{
+This introduction to the \proglang{R} package \pkg{sandwich} is a (slightly)
+modified version of \cite{hac:Zeileis:2004a}, published in the
+\emph{Journal of Statistical Software}. A follow-up paper on object object-oriented
+computation of sandwich estimators is available in \citep{hac:Zeileis:2006}.
+
+Data described by econometric models typically contains autocorrelation 
+and/or heteroskedasticity of unknown form and for inference in such models
+it is essential to use covariance matrix estimators that can consistently
+estimate the covariance of the model parameters. Hence, suitable heteroskedasticity-consistent
+(HC) and heteroskedasticity and autocorrelation consistent (HAC) estimators
+have been receiving attention in the econometric literature over the last
+20 years. To apply these estimators in practice, an implementation is needed
+that preferably translates the conceptual properties of the underlying
+theoretical frameworks into computational tools. In this paper, such an implementation
+in the package \pkg{sandwich} in the \proglang{R} system for statistical
+computing is described and it is shown how the suggested functions
+provide reusable components that build on readily existing functionality
+and how they can be integrated easily into new inferential procedures or applications.
+The toolbox contained in \pkg{sandwich}
+is extremely flexible and comprehensive, including specific functions for the most important HC
+and HAC estimators from the econometric literature.
+Several real-world data sets are used to illustrate how the functionality
+can be integrated into applications.
+}
+
+
+
+\end{document}
