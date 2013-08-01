@@ -1,6 +1,7 @@
 CDD<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, 
           p = 0.95, ...) 
 {
+  alpha = p
   #p = .setalphaprob(p)
   if (is.vector(R) || ncol(R) == 1) {
     R = na.omit(R)
