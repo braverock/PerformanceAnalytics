@@ -22,15 +22,126 @@
 #'  
 #'@param R an xts, vector, matrix,data frame, timeSeries or zoo object of multiple sample path returns
 #'@param ps the probability for each sample path 
+#'@param scen the number of scenarios in the Return series
+#'@param instr the number of instruments in the Return series
+#'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic 
+#'chaining (FALSE) to aggregate returns, default TRUE
 #'@param p confidence level for calculation ,default(p=0.95)
 #'@param \dots any other passthru parameters
 #'
 #'@references
-#'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model (CAPM) with Drawdown Measure. 
-#'Research Report 2012-9, ISE Dept., University of Florida, September 2012 
+#'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model (CAPM)
+#' with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida, 
+#' September 2012 
   
 
-
-CdarMultiPath<-function(){
-  
-}
+  CdarMultiPath<-function (R,ps,sample,instr, geometric = TRUE,p = 0.95, ...) 
+  {
+    #p = .setalphaprob(p)
+    if (is.vector(R) || ncol(R) == 1) {
+      R = na.omit(R)
+      nr = nrow(R)
+      # checking if nr*p is an integer
+      if((p*nr) %% 1 == 0){
+        drawdowns = as.matrix(Drawdowns(R))
+        drawdowns = drawdowns(order(drawdowns),decreasing = TRUE)
+        # average of the drawdowns greater the (1-alpha).100% largest drawdowns 
+        result = (1/((1-p)*nr(R)))*sum(drawdowns[((1-p)*nr):nr])
+      }
+      else{ # if nr*p is not an integer
+        #f.obj = c(rep(0,nr),rep((1/(1-p))*(1/nr),nr),1)
+        
+        
+        # The objective function is defined
+        
+        for(i in 1:sample){
+          for(j in 1:nr){
+            f.obj = c(f.obj,ps[i]*drawdowns[i,j])
+          }
+        }
+        print(f.obj)
+        
+        # constraint 1: ps.qst = 1
+        for(i in 1:sample){
+          for(j in 1:nr){
+            f.con = c(f.con,ps[i])
+          }
+        }
+        f.con = matrix(f.con,nrow =1)
+        f.dir = "="
+        f.rhs = 1
+        # constraint 2 : qst >= 0
+        for(i in 1:sample){
+          for(j in 1:nr){
+            r<-rep(0,sample*nr)
+            r[(i-1)*s+j] = 1
+            f.con = rbind(f.con,r)
+          }
+        }
+        f.dir = c(f.dir,">=",sample*nr)
+        f.rhs = c(f.rhs,rep(0,sample*nr))
+        
+        
+        # constraint 3 : qst =< 1/(1-alpha)*T
+        for(i in 1:sample){
+          for(j in 1:nr){
+            r<-rep(0,sample*nr)
+            r[(i-1)*s+j] = 1
+            f.con = rbind(f.con,r)
+          }
+        }
+        f.dir = c(f.dir,"<=",sample*nr)
+        f.rhs = c(f.rhs,rep(1/(1-p)*nr,sample*nr))
+        
+        # constraint 1:
+        # f.con = cbind(-diag(nr),diag(nr),1)
+        # f.dir = c(rep(">=",nr))
+        # f.rhs = c(rep(0,nr))
+        
+        #constatint 2:
+        # ut = diag(nr)
+        # ut[-1,-nr] = ut[-1,-nr] - diag(nr - 1)
+        # f.con = rbind(f.con,cbind(ut,matrix(0,nr,nr),1))
+        # f.dir = c(rep(">=",nr))
+        # f.rhs = c(f.rhs,-R)
+        
+        #constraint 3:
+        # f.con = rbind(f.con,cbind(matrix(0,nr,nr),diag(nr),1))
+        # f.dir = c(rep(">=",nr))
+        # f.rhs = c(f.rhs,rep(0,nr))
+        
+        #constraint 4:
+        # f.con = rbind(f.con,cbind(diag(nr),matrix(0,nr,nr),1))
+        # f.dir = c(rep(">=",nr))
+        # f.rhs = c(f.rhs,rep(0,nr))
+        
+        val = lp("max",f.obj,f.con,f.dir,f.rhs)
+        result = val$objval
+      }
+      if (invert) 
+        result <- -result
+      
+      return(result)
+    }
+    else {
+      R = checkData(R, method = "matrix")
+      if (is.null(weights)) {
+        result = matrix(nrow = 1, ncol = ncol(R))
+        for (i in 1:ncol(R)) {
+          result[i] <- CDD(R[, i, drop = FALSE], p = p, 
+                           geometric = geometric, invert = invert, ... = ...)
+        }
+        dim(result) = c(1, NCOL(R))
+        colnames(result) = colnames(R)
+        rownames(result) = paste("Conditional Drawdown ", 
+                                 p * 100, "%", sep = "")
+      }
+      else {
+        portret <- Return.portfolio(R, weights = weights, 
+                                    geometric = geometric)
+        result <- CDD(portret, p = p, geometric = geometric, 
+                      invert = invert, ... = ...)
+      }
+      return(result)
+    }
+  }
