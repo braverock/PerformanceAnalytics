@@ -1,5 +1,4 @@
-CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, 
-          p = 0.95, ...) 
+CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ...) 
 {
   #p = .setalphaprob(p)
   if (is.vector(R) || ncol(R) == 1) {
@@ -7,40 +6,42 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE,
     nr = nrow(R)
     # checking if nr*p is an integer
     if((p*nr) %% 1 == 0){
-    drawdowns = Drawdowns(R)
-    drawdowns = drawdowns[order(drawdowns),decreasing = TRUE]
+    drawdowns = -Drawdowns(R)
+    drawdowns = drawdowns[order(drawdowns),increasing = TRUE]
     # average of the drawdowns greater the (1-alpha).100% largest drawdowns 
-    result = (1/((1-p)*nr))*sum(drawdowns[(p*nr):nr])
+    result = -(1/((1-p)*nr))*sum(drawdowns[((p)*nr):nr])
     }
-    else{# if nr*p is not an integer
-      f.obj = c(rep(0,nr),rep((1/(1-p))*(1/nr),nr),1)
+    else{
+        
+        result = ES(Drawdowns(R),p=p,method="historical")
+        # if nr*p is not an integer
+#      f.obj = c(rep(0,nr),rep((1/(1-p))*(1/nr),nr),1)
       
       # k varies from 1:nr
-      
       # constraint : zk -uk +y >= 0
-      f.con = cbind(-diag(nr),diag(nr),1)
-      f.dir = c(rep(">=",nr))
-      f.rhs = c(rep(0,nr))
+#      f.con = cbind(-diag(nr),diag(nr),1)
+#      f.dir = c(rep(">=",nr))
+#      f.rhs = c(rep(0,nr))
       
       # constraint : uk -uk-1 >= -rk
-      ut = diag(nr)
-      ut[-1,-nr] = ut[-1,-nr] - diag(nr - 1)
-      f.con = rbind(f.con,cbind(ut,matrix(0,nr,nr),1))
-      f.dir = c(rep(">=",nr))
-      f.rhs = c(f.rhs,-R)
+#      ut = diag(nr)
+#      ut[-1,-nr] = ut[-1,-nr] - diag(nr - 1)
+#      f.con = rbind(f.con,cbind(ut,matrix(0,nr,nr),1))
+#      f.dir = c(rep(">=",nr))
+#      f.rhs = c(f.rhs,-R)
       
       # constraint : zk >= 0
-      f.con = rbind(f.con,cbind(matrix(0,nr,nr),diag(nr),1))
-      f.dir = c(rep(">=",nr))
-      f.rhs = c(f.rhs,rep(0,nr))
+#      f.con = rbind(f.con,cbind(matrix(0,nr,nr),diag(nr),1))
+#      f.dir = c(rep(">=",nr))
+#      f.rhs = c(f.rhs,rep(0,nr))
       
       # constraint : uk >= 0 
-      f.con = rbind(f.con,cbind(diag(nr),matrix(0,nr,nr),1))
-      f.dir = c(rep(">=",nr))
-      f.rhs = c(f.rhs,rep(0,nr))
+#      f.con = rbind(f.con,cbind(diag(nr),matrix(0,nr,nr),1))
+#      f.dir = c(rep(">=",nr))
+#      f.rhs = c(f.rhs,rep(0,nr))
       
-      val = lp("min",f.obj,f.con,f.dir,f.rhs)
-      result = val$objval
+#      val = lp("min",f.obj,f.con,f.dir,f.rhs)
+#      result = val$objval
     }
     if (invert) 
       result <- -result
@@ -52,18 +53,17 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE,
     if (is.null(weights)) {
       result = matrix(nrow = 1, ncol = ncol(R))
       for (i in 1:ncol(R)) {
-        result[i] <- CDD(R[, i, drop = FALSE], p = p, 
+        result[i] <- CDaR(R[, i, drop = FALSE], p = p, 
                          geometric = geometric, invert = invert, ... = ...)
       }
       dim(result) = c(1, NCOL(R))
       colnames(result) = colnames(R)
-      rownames(result) = paste("Conditional Drawdown ", 
-                               p * 100, "%", sep = "")
+      rownames(result) = paste("Conditional Drawdown ",  p*100, "%", sep = "")
     }
     else {
       portret <- Return.portfolio(R, weights = weights, 
                                   geometric = geometric)
-      result <- CDD(portret, p = p, geometric = geometric, 
+      result <- CDaR(portret, p = p, geometric = geometric, 
                     invert = invert, ... = ...)
     }
     return(result)
