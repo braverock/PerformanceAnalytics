@@ -41,13 +41,15 @@ Return.GLM <-
     # Ra    return vector
     # q     Lag Factors
     # Function:
+    library(tseries)
+    library(PerformanceAnalytics)
     R = checkData(Ra, method="xts")
     # Get dimensions and labels
     columns.a = ncol(R)
     columnnames.a = colnames(R)
     
     clean.GLM <- function(column.R,q=3) {
-      ma.coeff = as.numeric(arma(edhec[,1],0,q)$theta)
+      ma.coeff = as.numeric((arma(edhec[,1],order=c(0,q)))$coef[1:q])
  column.glm = ma.coeff[q]*lag(column.R,q)
      
     return(column.glm)
