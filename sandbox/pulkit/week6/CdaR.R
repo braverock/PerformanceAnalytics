@@ -12,36 +12,36 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ..
     result = -(1/((1-p)*nr))*sum(drawdowns[((p)*nr):nr])
     }
     else{
-        
-        result = ES(Drawdowns(R),p=p,method="historical")
+        # CDaR using the CVaR function
+        # result = ES(Drawdowns(R),p=p,method="historical")
         # if nr*p is not an integer
-#      f.obj = c(rep(0,nr),rep((1/(1-p))*(1/nr),nr),1)
+      f.obj = c(rep(0,nr),rep(((1/(1-p))*(1/nr)),nr),1)
       
       # k varies from 1:nr
       # constraint : zk -uk +y >= 0
-#      f.con = cbind(-diag(nr),diag(nr),1)
-#      f.dir = c(rep(">=",nr))
-#      f.rhs = c(rep(0,nr))
+      f.con = cbind(-diag(nr),diag(nr),1)
+      f.dir = c(rep(">=",nr))
+      f.rhs = c(rep(0,nr))
       
       # constraint : uk -uk-1 >= -rk
-#      ut = diag(nr)
-#      ut[-1,-nr] = ut[-1,-nr] - diag(nr - 1)
-#      f.con = rbind(f.con,cbind(ut,matrix(0,nr,nr),1))
-#      f.dir = c(rep(">=",nr))
-#      f.rhs = c(f.rhs,-R)
+      ut = diag(nr)
+      ut[-1,-nr] = ut[-1,-nr] - diag(nr - 1)
+      f.con = rbind(f.con,cbind(ut,matrix(0,nr,nr),0))
+      f.dir = c(rep(">=",nr))
+      f.rhs = c(f.rhs,-R)
       
       # constraint : zk >= 0
-#      f.con = rbind(f.con,cbind(matrix(0,nr,nr),diag(nr),1))
-#      f.dir = c(rep(">=",nr))
-#      f.rhs = c(f.rhs,rep(0,nr))
+      f.con = rbind(f.con,cbind(matrix(0,nr,nr),diag(nr),0))
+      f.dir = c(rep(">=",nr))
+      f.rhs = c(f.rhs,rep(0,nr))
       
       # constraint : uk >= 0 
-#      f.con = rbind(f.con,cbind(diag(nr),matrix(0,nr,nr),1))
-#      f.dir = c(rep(">=",nr))
-#      f.rhs = c(f.rhs,rep(0,nr))
+      f.con = rbind(f.con,cbind(diag(nr),matrix(0,nr,nr),0))
+      f.dir = c(rep(">=",nr))
+      f.rhs = c(f.rhs,rep(0,nr))
       
-#      val = lp("min",f.obj,f.con,f.dir,f.rhs)
-#      result = val$objval
+      val = lp("min",f.obj,f.con,f.dir,f.rhs)
+      result = -val$objval
     }
     if (invert) 
       result <- -result
@@ -58,7 +58,7 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ..
       }
       dim(result) = c(1, NCOL(R))
       colnames(result) = colnames(R)
-      rownames(result) = paste("Conditional Drawdown ",  p*100, "%", sep = "")
+      rownames(result) = paste("Conditional Drawdown ", round(p,3)*100, "%", sep = "")
     }
     else {
       portret <- Return.portfolio(R, weights = weights, 
