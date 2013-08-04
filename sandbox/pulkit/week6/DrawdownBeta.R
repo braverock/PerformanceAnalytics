@@ -29,7 +29,7 @@
 #'@param Rm Return series of the optimal portfolio an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns
 #'@param p confidence level for calculation ,default(p=0.95)
 #'@param weights portfolio weighting vector, default NULL, see Details
-#'#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns, default TRUE
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns, default TRUE
 #' @param invert TRUE/FALSE whether to invert the drawdown measure.  see Details.
 #'@param \dots any passthru variable.
 #'
@@ -38,7 +38,7 @@
 #'with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida, 
 #'September 2012. 
 
-BetaDrawdown<-function(R,Rm,h,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,...){
+BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,...){
 
     x = checkData(R)
     xm = checkData(Rm)
@@ -50,9 +50,11 @@ BetaDrawdown<-function(R,Rm,h,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,...
     }
     if(geometric){
         cumul_x = cumprod(x+1)-1
+        cumul_xm = cumprod(xm+1)-1
     }
     else{
         cumul_x = cumsum(x)
+        cumul_xm = cumsum(xm)
     }
     beta<-function(x){
         q = NULL
@@ -60,22 +62,26 @@ BetaDrawdown<-function(R,Rm,h,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,...
         for(i in 1:nrow(Rm)){
 
             if(drawdowns_m[i]<q_quantile){
-              q = c(q,i)
+              q = c(q,1/((1-p)*nrow(x)))
             }
-            else q = c(q,0)
+            else q=c(q,0)
         }
-        beta_dd = sum((x[which(x==max(xm))]-x)[q])/CDaR(Rm,p=p)
+        beta_dd = sum((as.numeric(x[which(cumul_xm==max(cumul_xm))])-x)*q)/CDaR(Rm,p=p)
+        return(beta_dd)
     }
 
-    for(column in columns){
-        column.beta = beta(x[,column])
+    for(column in 1:columns){
+        column.beta = beta(cumul_x[,column])
         if(column == 1){
             beta = column.beta
         }
-        else beta = merge(beta,column.beta)
+        else{ 
+            beta = cbind(beta,column.beta)
+        }
     }
     if(invert){
     }
+    print(columnnames)
     colnames(beta) = columnnames
     beta = reclass(beta,R)
     return(beta)
