@@ -34,11 +34,27 @@
 #'@param \dots any passthru variable.
 #'
 #'@references
-#'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model (CAPM)
-#'with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida, 
-#'September 2012. 
+#'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model 
+#'(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University 
+#'of Florida,September 2012.
+#'
+#'@examples
+#'
+#'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 
 
-BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,...){
+BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
+
+    # DESCRIPTION:
+    #
+    # The function is used to find the Drawdown Beta.
+    # 
+    # INPUT:
+    # The Return series of the portfolio and the optimal portfolio
+    # is taken as the input.
+    #
+    # OUTPUT:
+    # The Drawdown beta is given as the output.   
+
 
     x = checkData(R)
     xm = checkData(Rm)
@@ -56,7 +72,7 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,.
         cumul_x = cumsum(x)
         cumul_xm = cumsum(xm)
     }
-    beta<-function(x){
+    DDbeta<-function(x){
         q = NULL
         q_quantile = quantile(drawdowns_m,1-p)
         for(i in 1:nrow(Rm)){
@@ -71,7 +87,7 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,.
     }
 
     for(column in 1:columns){
-        column.beta = beta(cumul_x[,column])
+        column.beta = DDbeta(cumul_x[,column])
         if(column == 1){
             beta = column.beta
         }
@@ -79,10 +95,13 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,invert=TRUE,.
             beta = cbind(beta,column.beta)
         }
     }
-    if(invert){
+    
+    if(columns==1){
+        return(beta)
     }
-    print(columnnames)
+    print(beta)
     colnames(beta) = columnnames
+    rownames(beta) = paste("Drawdown Beta (p =",p*100,"%)")
     beta = reclass(beta,R)
     return(beta)
 
