@@ -40,7 +40,7 @@
 #'
 #'@examples
 #'
-#'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 
+#'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 
 BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
 
@@ -82,7 +82,18 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
             }
             else q=c(q,0)
         }
-        beta_dd = sum((as.numeric(x[which(cumul_xm==max(cumul_xm))])-x)*q)/CDaR(Rm,p=p)
+        boolean = (cummax(cumul_xm)==cumul_xm)
+        index = NULL
+        for(j in 1:nrow(Rm)){
+            if(boolean[j] == TRUE){
+                index = c(index,j)
+                b = j
+            }
+            else{
+                index = c(index,b)
+            }
+        }
+        beta_dd = sum((as.numeric(x[index])-x)*q)/CDaR(Rm,p=p)
         return(beta_dd)
     }
 
@@ -99,7 +110,6 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
     if(columns==1){
         return(beta)
     }
-    print(beta)
     colnames(beta) = columnnames
     rownames(beta) = paste("Drawdown Beta (p =",p*100,"%)")
     beta = reclass(beta,R)
