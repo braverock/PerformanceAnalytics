@@ -30,7 +30,8 @@
 #'@param p confidence level for calculation ,default(p=0.95)
 #'@param weights portfolio weighting vector, default NULL, see Details
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns, default TRUE
-#' @param invert TRUE/FALSE whether to invert the drawdown measure.  see Details.
+#' @param type The type of BetaDrawdown if specified alpha then the alpha value given is taken (default 0.95). If "average" then
+#' alpha = 0 and if "max" then alpha = 1 is taken.
 #'@param \dots any passthru variable.
 #'
 #'@references
@@ -42,7 +43,7 @@
 #'
 #'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 
-BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
+BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
     # DESCRIPTION:
     #
@@ -61,6 +62,13 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
     columnnames = colnames(R)
     columns = ncol(R)
     drawdowns_m = Drawdowns(Rm)
+    type = type[1]
+    if(type=="average"){
+        p = 0
+    }
+    if(type == "max"){
+        p = 1
+    }
     if(!is.null(weights)){
         x = Returns.portfolio(R,weights)
     }
@@ -116,3 +124,5 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,...){
     return(beta)
 
 }
+
+
