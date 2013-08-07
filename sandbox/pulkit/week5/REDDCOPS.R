@@ -39,7 +39,14 @@
 #'
 #'dt<-read.zoo("returns.csv",sep=",",header = TRUE)
 #'dt<-as.xts(dt)
-#'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,2])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
+#'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
+#'
+#'
+#' # with S&P 500 , barclays and T-bill data
+#'
+#'dt<-read.zoo("ret.csv",sep=";",header = TRUE)
+#'dt<-as.xts(dt)
+#'REDDCOPS(dt[,1:2],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "two")
 #'
 #'data(edhec)
 #'REDDCOPS(edhec,delta = 0.1,Rf = 0,h = 40)
@@ -128,7 +135,6 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
       xt = column.xt
     else xt = merge(xt, column.xt) 
   }
-  print(xt)
   colnames(xt) = columnnames
   xt = reclass(xt, x)
   return(xt)
