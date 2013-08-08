@@ -83,6 +83,7 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha
     DDbeta<-function(x){
         q = NULL
         q_quantile = quantile(drawdowns_m,1-p)
+        print(drawdowns_m)
         for(i in 1:nrow(Rm)){
 
             if(drawdowns_m[i]<q_quantile){
@@ -102,6 +103,7 @@ BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha
             }
         }
         beta_dd = sum((as.numeric(x[index])-x)*q)/CDaR(Rm,p=p)
+        print((as.numeric(x[index])-x)*q)
         return(beta_dd)
     }
 
