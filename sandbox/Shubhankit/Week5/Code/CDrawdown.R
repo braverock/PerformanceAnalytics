@@ -3,7 +3,7 @@
 #' A new one-parameter family of risk measures called Conditional Drawdown (CDD) has
 #'been proposed. These measures of risk are functionals of the portfolio drawdown (underwater) curve considered in active portfolio management. For some value of the tolerance
 #' parameter ??, in the case of a single sample path, drawdown functional is de???ned as
-#'the mean of the worst (1 ??? ??) ??? 100% drawdowns. The CDD measure generalizes the
+#'the mean of the worst 100% drawdowns. The CDD measure generalizes the
 #'notion of the drawdown functional to a multi-scenario case and can be considered as a
 #'generalization of deviation measure to a dynamic case. The CDD measure includes the
 #'Maximal Drawdown and Average Drawdown as its limiting cases. 
@@ -60,3 +60,15 @@ CDrawdown <-
     #ans
     resultingtable
   }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: CDrawdown.R 2271 2012-09-02 01:56:23Z braverock $
+#
+###############################################################################

@@ -1,16 +1,18 @@
 #'@title Getmansky Lo Markov Smoothing Index Parameter
 #'@description
-#A useful summary statistic for measuring the concentration of weights is
-# a sum of square of Moving Average lag coefficient.
-# This measure is well known in the industrial organization literature as the 
-# Herfindahl index, a measure of the concentration of firms in a given industry. 
-# The index is maximized when one coefficient is 1 and the rest are 0, in which case x ¼ 1: In the context of
-#smoothed returns, a lower value of x implies more smoothing, and the upper bound
-#of 1 implies no smoothing,  hence x is reffered as a ''smoothingindex' '.
+#'A useful summary statistic for measuring the concentration of weights is
+#' a sum of square of Moving Average lag coefficient.
+#' This measure is well known in the industrial organization literature as the 
+#' Herfindahl index, a measure of the concentration of firms in a given industry. 
+#' The index is maximized when one coefficient is 1 and the rest are 0, in which case x ¼ 1: In the context of
+#'smoothed returns, a lower value of x implies more smoothing, and the upper bound
+#'of 1 implies no smoothing,  hence x is reffered as a ''smoothingindex' '.
 #' 
+#' \deqn{ R_t  =    {\mu} + {\beta}{{\delta}}_t+ \xi_t}
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @author R
+#' @aliases Return.Geltner
 #' @references "An econometric model of serial correlation and illiquidity in 
 #' hedge fund returns" Mila Getmansky1, Andrew W. Lo*, Igor Makarov
 #' 
@@ -18,7 +20,7 @@
 #' @examples
 #' 
 #' data(edhec)
-#' head(GLMSmoothIndex(edhec)
+#' head(GLMSmoothIndex(edhec))
 #' 
 #' @export
 GLMSmoothIndex<-

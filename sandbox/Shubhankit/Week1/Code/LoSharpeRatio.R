@@ -1,3 +1,30 @@
+#' Lo Sharpe Ratio
+#'
+#' The building blocks of the Sharpe ratio-expected returns and volatilities-
+#'  are unknown quantities that must be estimated statistically and are,
+#' therefore, subject to estimation error.In an illustrative
+#' empirical example of mutual funds and hedge funds, Andrew Lo finds that the annual Sharpe ratio for a hedge fund can be overstated by as much as 65 percent
+#' because of the presence of serial correlation in monthly returns, and once
+#' this serial correlation is properly taken into account, the rankings of hedge
+#' funds based on Sharpe ratios can change dramatically.
+#'
+#' 
+#' 
+#' @aliases LoSharpeRatio
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @references  \emph{The statistics of Sharpe Ratio 
+#' }, Andrew Lo
+#' 
+#' @keywords ts multivariate distribution models
+#' @examples
+#' library(PerformanceAnalytics)
+#' data(edhec)
+#' LoSharpe(edhec)
+#' @export 
+
 LoSharpeRatio<-
   function(R = NULL,Rf=0.,q = 0., ...)
   {
@@ -68,3 +95,16 @@ if(!is.null(R)){
   }
   }  
 }
+
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: LoSharpeRatio.R 2271 2012-09-02 01:56:23Z braverock $
+#
+###############################################################################
