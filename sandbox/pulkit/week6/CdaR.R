@@ -18,7 +18,7 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ..
       f.obj = c(rep(0,nr),rep(((1/(1-p))*(1/nr)),nr),1)
       
       # k varies from 1:nr
-      # constraint : zk -uk +y >= 0
+      # constraint : -uk +zk +y >= 0
       f.con = cbind(-diag(nr),diag(nr),1)
       f.dir = c(rep(">=",nr))
       f.rhs = c(rep(0,nr))
@@ -41,6 +41,7 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ..
       f.rhs = c(f.rhs,rep(0,nr))
       
       val = lp("min",f.obj,f.con,f.dir,f.rhs)
+      val_disp = lp("min",f.obj,f.con,f.dir,f.rhs,compute.sens = TRUE )
       result = -val$objval
     }
     if (invert) 

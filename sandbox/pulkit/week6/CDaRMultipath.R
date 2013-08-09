@@ -37,12 +37,18 @@
 
 CdarMultiPath<-function (R,ps,sample,instr, geometric = TRUE,p = 0.95, ...) 
 {
+  
   #p = .setalphaprob(p)
   R = na.omit(R)
   nr = nrow(R)
-  # checking if nr*p is an integer
+
+  # ERROR HANDLING and TESTING
+  #if(sample == instr){
+
+  #}
 
   multicdar<-function(x){
+  # checking if nr*p is an integer
   if((p*nr) %% 1 == 0){
     drawdowns = as.matrix(Drawdowns(x))
     drawdowns = drawdowns(order(drawdowns),decreasing = TRUE)
@@ -119,7 +125,8 @@ CdarMultiPath<-function (R,ps,sample,instr, geometric = TRUE,p = 0.95, ...)
   }
 }
     R = checkData(R, method = "matrix")
-    result = matrix(nrow = 1, ncol = ncol(R))
+    result = matrix(nrow = 1, ncol = ncol(R)/sample)
+
     for (i in 1:(ncol(R)/sample)) {
         ret<-NULL
         for(j in 1:sample){
@@ -127,8 +134,8 @@ CdarMultiPath<-function (R,ps,sample,instr, geometric = TRUE,p = 0.95, ...)
         }
       result[i] <- multicdar(ret)
     }
-    dim(result) = c(1, NCOL(R))
-    colnames(result) = colnames(R)
+    dim(result) = c(1, NCOL(R)/sample)
+    colnames(result) = colnames(R)[1:ncol(R)/sample]
     rownames(result) = paste("Conditional Drawdown ", 
                              p * 100, "%", sep = "")
   return(result)
