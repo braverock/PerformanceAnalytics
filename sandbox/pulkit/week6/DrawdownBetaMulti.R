@@ -35,10 +35,10 @@
 #'of Florida,September 2012.
 #'
 #'@examples
-#'
+#'MultiBetaDrawdown(cbind(edhec,edhec),cbind(edhec[,2],edhec[,2]),sample = 2,ps=c(0.4,0.6))
 #'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 
-MultiBetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
+MultiBetaDrawdown<-function(R,Rm,sample,ps,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
     # DESCRIPTION:
     #
@@ -58,6 +58,7 @@ MultiBetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("
     columns = ncol(R)
     drawdowns_m = Drawdowns(Rm)
     type = type[1]
+    nr = nrow(Rm)
     if(type=="average"){
         p = 0
     }
@@ -109,8 +110,7 @@ MultiBetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("
     f.rhs = c(f.rhs,rep(1/(1-p)*nr,sample*nr))
     
     val = lp("max",f.obj,f.con,f.dir,f.rhs)
-    q = matrix(val$solutions,ncol = sample)
-
+    q = matrix(val$solution,ncol = sample)
     # TODO INCORPORATE WEIGHTS
 
     if(geometric){
@@ -123,37 +123,42 @@ MultiBetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("
     multiDDbeta<-function(x){
         boolean = (cummax(cumul_xm)==cumul_xm)
         index = NULL
-        for(j in 1:nrow(Rm)){
-            if(boolean[j] == TRUE){
-                index = c(index,j)
-                b = j
-            }
-            else{
-                index = c(index,b)
-            }
-        }
         for(i in 1:sample){
-            for(j in 1:nrow(x)){
-
-        beta_dd = (p[i]*q[j,i]*(x[index,i]-x[,i]))/CDaR(Rm,p=p)
+            for(j in 1:nrow(Rm)){
+                if(boolean[j,i] == TRUE){
+                    index = c(index,j)
+                    b = j
+                    }
+                    else{
+                        index = c(index,b)
+                        }
+                        }
+        }
+        index = matrix(index,ncol = sample)
+        beta_dd = 0
+        for(i in 1:sample){
+            beta_dd = beta_dd + sum(ps[i]*q[,i]*(as.numeric(x[index[,i],i])-x[,i]))
+        }
+        beta_dd = beta_dd/CdarMultiPath(Rm,ps=ps,p=p,sample = sample)
         return(beta_dd)
     }
 
-    result = matrix(nrow = 1, ncol = ncol(R)/sample)
+    result = NULL
 
     for (i in 1:(ncol(R)/sample)) {
         ret<-NULL
         for(j in 1:sample){
             ret<-cbind(ret,R[,(j-1)*ncol(R)/sample+i])
         }
-      result[i] <- multiDDbeta(ret)
+      result <-c(result, multiDDbeta(ret))
     }
- 
-    dim(result) = c(1, NCOL(R)/sample)
-    colnames(result) = colnames(R)[1:ncol(R)/sample]
-    rownames(result) = paste("Conditional Drawdown ", 
- 
+    result = matrix(result,nrow = 1)
+    colnames(result) = colnames(R)[1:(ncol(R)/sample)]
+    #colnames(result) = colnames(R)[1:ncol(R)/sample]
+    rownames(result) = paste("Conditional Drawdown","(",p*100,"%)",sep="")
+    return(result)
+ }
 
-}
+
 
 

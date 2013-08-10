@@ -35,7 +35,7 @@
 #' September 2012 
 
 
-CdarMultiPath<-function (R,ps,sample,instr, geometric = TRUE,p = 0.95, ...) 
+CdarMultiPath<-function (R,ps,sample, geometric = TRUE,p = 0.95, ...) 
 {
   
   #p = .setalphaprob(p)
