@@ -132,6 +132,6 @@ SterlingRatio.Normalized <-
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: CalmarRatio.R 1955 2012-05-23 16:38:16Z braverock $
+# $Id: CalmarRatioNormalized.R 1955 2012-05-23 16:38:16Z braverock $
 #
 ###############################################################################

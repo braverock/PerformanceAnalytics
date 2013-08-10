@@ -18,7 +18,7 @@
 #' data(edhec[,1])
 #' chart.Autocorrelation(edhec[,1])
 #' 
-#' 
+#' @rdname chart.Autocorrelation
 #' @export 
 chart.Autocorrelation <-
   function (R, ...)
@@ -45,3 +45,14 @@ aa= table.Autocorrelation(R)
 
 
 }
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: Chart.Autocorrelation.R 2271 2012-09-02 01:56:23Z braverock $
+#
+###############################################################################

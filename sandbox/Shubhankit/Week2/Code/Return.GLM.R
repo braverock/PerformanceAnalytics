@@ -1,3 +1,6 @@
+#' Getmansky Lo Markov Unsmooth Return Model
+#'
+#'
 #' True returns represent the flow of information that would determine the equilibrium
 #' value of the fund's securities in a frictionless market. However, true economic
 #' returns are not observed. Instead, Rot

@@ -1,8 +1,19 @@
-#To get some insight on the relationships between maximum drawdown per unit of volatility 
-#and mean return divided by volatility, we have proceeded to Monte-Carlo simulations.
-# We have simulated cash flows over a period of 36 monthly returns and measured maximum 
-#drawdown for varied levels of annualised return divided by volatility varying from minus
-# two to two by step of 0.1. The process has been repeated six thousand times.
+#' Acar and Shane Maximum Loss 
+#' 
+#'To get some insight on the relationships between maximum drawdown per unit of volatility 
+#'and mean return divided by volatility, we have proceeded to Monte-Carlo simulations.
+#' We have simulated cash flows over a period of 36 monthly returns and measured maximum 
+#'drawdown for varied levels of annualised return divided by volatility varying from minus
+#' two to two by step of 0.1. The process has been repeated six thousand times.
+#' @author R Project
+#' @references DRAWDOWN MEASURE IN PORTFOLIO OPTIMIZATION,\emph{International Journal of Theoretical and Applied Finance}
+#' ,Fall 1994, 49-58.Vol. 8, No. 1 (2005) 13-58
+#' @keywords Conditional Drawdown models
+#' @examples
+#' library(PerformanceAnalytics)
+#' AcarSim()
+#' @rdname Cdrawdown
+#' @export 
 AcarSim <-
   function()
   {
@@ -59,3 +70,15 @@ legend(32,-4, c("%99", "%95", "%90","%85"), col = c("blue","pink","green","red")
 title("Maximum Drawdown/Volatility as a function of Return/Volatility 
 36 monthly returns simulated 6,000 time") 
 }
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: AcarSim.R 2163 2012-07-16 00:30:19Z braverock $
+#
+###############################################################################
