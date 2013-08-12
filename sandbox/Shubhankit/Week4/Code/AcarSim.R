@@ -5,6 +5,8 @@
 #' We have simulated cash flows over a period of 36 monthly returns and measured maximum 
 #'drawdown for varied levels of annualised return divided by volatility varying from minus
 #' two to two by step of 0.1. The process has been repeated six thousand times.
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
 #' @author R Project
 #' @references DRAWDOWN MEASURE IN PORTFOLIO OPTIMIZATION,\emph{International Journal of Theoretical and Applied Finance}
 #' ,Fall 1994, 49-58.Vol. 8, No. 1 (2005) 13-58
@@ -15,8 +17,11 @@
 #' @rdname Cdrawdown
 #' @export 
 AcarSim <-
-  function()
+  function(R)
   {
+    R = checkData(Ra, method="xts")
+    # Get dimensions and labels
+    # simulated parameters using edhec data
 mu=mean(Return.annualized(edhec))
 monthly=(1+mu)^(1/12)-1
 sig=StdDev.annualized(edhec[,1])[1];
@@ -68,7 +73,7 @@ legend(32,-4, c("%99", "%95", "%90","%85"), col = c("blue","pink","green","red")
        lty = c(2, -1, 1), pch = c(-1, 3, 4), merge = TRUE, bg='gray90')
 
 title("Maximum Drawdown/Volatility as a function of Return/Volatility 
-36 monthly returns simulated 6,000 time") 
+36 monthly returns simulated 6,000 times") 
 }
 
 ###############################################################################
