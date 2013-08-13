@@ -2,18 +2,22 @@ chart.SharpeEfficientFrontier<-function(R){
 
     x = checkData(R)
     columns = ncol(x)
-    com
-    permutations<-function (n, r, v = 1:n) 
-    { 
-      if (r == 1) 
-        matrix(v, n, 1) 
-      else if (n == 1) 
-        matrix(v, 1, r) 
-      else { 
-        X <- NULL 
-        for (i in 1:n) X <- rbind(X, cbind(v[i], fn_perm_list(n - 
-                                                                1, r - 1, v[-i]))) 
-        X 
-      } 
-    } 
+
+    mat<-NULL
+    subset_sum<-function(numbers,target,partial){
+        s = sum(partial)
+        print(s)
+        if(s==target){
+            mat = rbind(mat,partial)
+        }
+      
+        x<-NULL
+        for(i in 1:length(numbers)){
+            n = numbers[i]
+            remaining = numbers[(i+1):length(numbers)]
+            subset_sum(remaining,target,c(partial,n))
+        }
+    }
+    subset_sum(c(1:10),10,0)
+}
     

@@ -31,7 +31,7 @@
 #' 
 #' @examples
 #' TuW(edhec,0.95,"ar")
-#' uW(edhec[,1],0.95,"normal") # expected value 103.2573 
+#' TuW(edhec[,1],0.95,"normal") # expected value 103.2573 
 
 TuW<-function(R,confidence,type=c("ar","normal"),...){
   x = checkData(R)
