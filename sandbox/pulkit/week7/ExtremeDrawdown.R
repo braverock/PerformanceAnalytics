@@ -27,11 +27,27 @@
 #'
 #'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset return 
+#' @param type The type of distribution "gpd","pd","weibull","exponential"
+#' @param threshold The threshold beyond which the drawdowns have to be modelled
 #' 
 #'@references
-#'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
+#'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. 
+#'Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
 #'
 #'
+DrawdownGPD<-function(R,type=c("gpd","pd","weibull","exponential"),threshold=0.90){
+    x = checkData(R)
+    columns = ncol(R)
+    columnnames = colnames(R)
+    type = type[1]
+    dr = -Drawdowns(R)
+    dr_sorted = sort(as.vector(dr))
+    data = dr_sorted[0.9*nrow(R):nrow(r)]
+}
+
+
+
+
 
 
 
