@@ -1,11 +1,3 @@
-#This measure is well known in the
-#industrial organization literature as the Herfindahl index, a measure of the
-#concentration of firms in a given industry where yj represents the market share of
-#firm j: Because yjA½0; 1  ; x is also confined to the unit interval, and is minimized when
-#all the yj's are identical, which implies a value of 1=ðk þ 1Þ for x; and is maximized
-#when one coefficient is 1 and the rest are 0, in which case x ¼ 1: In the context of
-##smoothed returns, a lower value of x implies more smoothing, and the upper bound
-#of 1 implies no smoothing, hence we shall refer to x as a ''smoothingindex' '.
 GLMSmoothIndex<-
   function(R = NULL, ...)
   {
