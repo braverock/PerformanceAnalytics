@@ -1,0 +1,53 @@
+Package: Shubhankit
+Type: Package
+Title: Econometric tools for performance and risk analysis.
+Version: 1.1.0
+Date: $Date: 2013-01-29 21:04:00 +0800 (Tue, 29 Jan 2013) $
+Author: Peter Carl, Brian G. Peterson
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: Collection of econometric functions for
+    performance and risk analysis. This package aims to aid
+    practitioners and researchers in utilizing the latest
+    research in analysis of non-normal return streams.  In
+    general, it is most tested on return (rather than
+    price) data on a regular scale, but most functions will
+    work with irregular return data as well, and increasing
+    numbers of functions will work with P&L or price data
+    where possible.
+Depends:
+    R (>= 2.14.0),
+    zoo,
+    xts (>= 0.8-9)
+Suggests:
+    Hmisc,
+    MASS,
+    tseries,
+    quadprog,
+    sn,
+    robustbase,
+    quantreg,
+    gplots,
+    ff
+License: GPL
+URL: http://r-forge.r-project.org/projects/returnanalytics/
+Copyright: (c) 2004-2012
+Contributors: Kris Boudt,  Diethelm Wuertz, Eric Zivot, Matthieu Lestel
+Thanks: A special thanks for additional contributions from
+    Stefan Albrecht, Khahn Nygyen, Jeff Ryan,
+    Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke,
+    H. Felix Wittmann, Ram Ahluwalia
+Collate:
+    'GLMSmoothIndex.R'
+    'chart.Autocorrelation.R'
+    'ACStdDev.annualized.R'
+    'CalmarRatio.Normalized.R'
+    'na.skip.R'
+    'Return.GLM.R'
+    'table.ComparitiveReturn.GLM.R'
+    'table.UnsmoothReturn.R'
+    'UnsmoothReturn.R'
+    'EmaxDDGBM.R'
+    'maxDDGBM.R'
+    'table.normDD.R'
+    'CDDopt.R'
+    'CDrawdown.R'
