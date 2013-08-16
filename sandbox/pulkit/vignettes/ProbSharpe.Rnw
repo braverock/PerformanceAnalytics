@@ -17,7 +17,8 @@
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 
-\title{ Probabilistic Sharpe Ratio }
+\title{ Probabilistic Sharpe Ratio Optimization }
+\author{Guide : Prof. Parama Barai}
 
 % \keywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
 
@@ -27,7 +28,16 @@
 
 \begin{abstract}
 
-    This vignette gives an overview of the Probabilistic Sharpe Ratio , Minimum Track Record Length and the Probabilistic Sharpe Ratio Optimization technique used to find the optimal portfolio that maximizes the Probabilistic Sharpe Ratio. It gives an overview of the usability of the functions and its application"
+    This vignette gives an overview of the Probabilistic Sharpe Ratio , Minimum Track Record Length and the Probabilistic Sharpe Ratio Optimization technique used to find the optimal portfolio that maximizes the Probabilistic Sharpe Ratio. It gives an overview of the usability of the functions and its application.
+
+A probabilistic translation of Sharpe ratio, called PSR, is proposed to account for estimation errors in an IID non-Normal framework.When assessing Sharpe ratio’s ability to evaluate skill,we find that a longer track record may be able to compensate for certain statistical shortcomings of the returns probability distribution. Stated differently, despite Sharpe ratio's well-documented deficiencies, it can still provide evidence of investment skill, as long as the user learns to require the proper track record length.
+
+The portfolio of hedge fund indices that maximizes Sharpe ratio can be very different from
+the portfolio that delivers the highest PSR. Maximizing for PSR leads to better diversified and
+more balanced hedge fund allocations compared to the concentrated outcomes of Sharpe ratio
+maximization.
+
+
 
 \end{abstract}
 
@@ -49,6 +59,10 @@ source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/co
 source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/PSRopt.R")
 @
 
+<<echo=FALSE>>=
+dyn.load("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/moment.so")
+@
+
 \section{Probabilistic Sharpe Ratio}
  Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in probabilistic terms as
  
@@ -62,7 +76,7 @@ of the data, and there is no annualization. The Reference Sharpe Ratio is also g
 
 <<>>=
 data(edhec)
-ProbSharpeRatio(edhec,refSR = 0.28)
+ProbSharpeRatio(edhec[,1],refSR = 0.23)
 @
 
 \section{Minimum Track Record Length}
@@ -77,7 +91,7 @@ $\gamma{_3}$ and $\gamma{_4}$ are the skewness and kurtosis respectively. It is 
 
 <<>>=
 data(edhec)
-MinTrackRecord(edhec,refSR = 0.28)
+MinTrackRecord(edhec[,1],refSR = 0.23)
 @
 
 \section{Probabilistic Sharpe Ratio Optimal Portfolio}
@@ -97,6 +111,11 @@ $\hat{Z^\ast}$ ,it suffices to compute the vector that maximizes $\hat{Z^\ast}$
 data(edhec)
 PsrPortfolio(edhec)
 @
+
+\section{Future Plans}
+
+To compare the existing portfolio optimization techniques with the present one for various data. Incorporate changes in the
+Probabilistic Sharpe Ratio to improve the performance of the Portfolio. Plot the Sharpe Ratio Efficient Frontier and Capital Allocation curves to get a better understanding of the sharpe ratio obtained for different portfolios.
 
 \end{document}
 

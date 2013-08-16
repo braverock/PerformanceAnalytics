@@ -8,6 +8,7 @@ CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ..
     if((p*nr) %% 1 == 0){
     drawdowns = -Drawdowns(R)
     drawdowns = drawdowns[order(drawdowns),increasing = TRUE]
+    print(drawdowns)
     # average of the drawdowns greater the (1-alpha).100% largest drawdowns 
     result = -(1/((1-p)*nr))*sum(drawdowns[((p)*nr):nr])
     }
