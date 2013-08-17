@@ -1,53 +1,32 @@
-Package: Shubhankit
+Package: noniid.sm
 Type: Package
-Title: Econometric tools for performance and risk analysis.
-Version: 1.1.0
-Date: $Date: 2013-01-29 21:04:00 +0800 (Tue, 29 Jan 2013) $
-Author: Peter Carl, Brian G. Peterson
-Maintainer: Brian G. Peterson <brian@braverock.com>
-Description: Collection of econometric functions for
-    performance and risk analysis. This package aims to aid
-    practitioners and researchers in utilizing the latest
-    research in analysis of non-normal return streams.  In
-    general, it is most tested on return (rather than
-    price) data on a regular scale, but most functions will
-    work with irregular return data as well, and increasing
-    numbers of functions will work with P&L or price data
-    where possible.
+Title: Non-i.i.d. GSoC 2013 Shubhankit
+Version: 0.1
+Date: $Date: 2013-05-13 14:30:22 -0500 (Mon, 13 May 2013) $
+Author: Shubhankit Mohan <shubhankit1@gmail.com>
+Contributors: Peter Carl, Brian G. Peterson
 Depends:
-    R (>= 2.14.0),
-    zoo,
-    xts (>= 0.8-9)
+    xts,
+    PerformanceAnalytics
 Suggests:
-    Hmisc,
-    MASS,
-    tseries,
-    quadprog,
-    sn,
-    robustbase,
-    quantreg,
-    gplots,
-    ff
-License: GPL
-URL: http://r-forge.r-project.org/projects/returnanalytics/
-Copyright: (c) 2004-2012
-Contributors: Kris Boudt,  Diethelm Wuertz, Eric Zivot, Matthieu Lestel
-Thanks: A special thanks for additional contributions from
-    Stefan Albrecht, Khahn Nygyen, Jeff Ryan,
-    Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke,
-    H. Felix Wittmann, Ram Ahluwalia
+    PortfolioAnalytics
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: GSoC 2013 project to replicate literature on drawdowns and
+    non-i.i.d assumptions in finance.
+License: GPL-3
+ByteCompile: TRUE
 Collate:
-    'GLMSmoothIndex.R'
-    'chart.Autocorrelation.R'
     'ACStdDev.annualized.R'
     'CalmarRatio.Normalized.R'
+    'CDDopt.R'
+    'CDrawdown.R'
+    'chart.Autocorrelation.R'
+    'EmaxDDGBM.R'
+    'GLMSmoothIndex.R'
+    'maxDDGBM.R'
     'na.skip.R'
     'Return.GLM.R'
     'table.ComparitiveReturn.GLM.R'
+    'table.normDD.R'
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
-    'EmaxDDGBM.R'
-    'maxDDGBM.R'
-    'table.normDD.R'
-    'CDDopt.R'
-    'CDrawdown.R'

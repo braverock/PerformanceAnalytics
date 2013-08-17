@@ -1,3 +1,5 @@
+#' QP function fo calculation of Sharpe Ratio
+#' 
 #' calculate a Normalized Calmar or Sterling reward/risk ratio
 #'  
 #' Normalized Calmar and Sterling Ratios are yet another method of creating a
@@ -45,14 +47,14 @@
 #'     Normalized.SterlingRatio(managers[,1:6])
 #' 
 #' @export 
-#' @rdname CalmarRatio
-#' QP function fo calculation of Sharpe Ratio
+#' @rdname CalmarRatio.normalized
 QP.Norm <- function (R, tau,scale = NA)
 {
   Sharpe= as.numeric(SharpeRatio.annualized(edhec))
 return(.63519+(.5*log(tau))+log(Sharpe))
 }
 
+#' @export 
 CalmarRatio.Normalized <- function (R, tau = 1,scale = NA)
 { # @author Brian G. Peterson
   
@@ -89,7 +91,7 @@ CalmarRatio.Normalized <- function (R, tau = 1,scale = NA)
 }
 
 #' @export 
-#' @rdname CalmarRatio
+#' @rdname CalmarRatio.normalized
 SterlingRatio.Normalized <-
   function (R, tau=1,scale=NA, excess=.1)
   { # @author Brian G. Peterson

@@ -1,20 +1,18 @@
-\name{table.EMaxDDGBM}
-\alias{table.EMaxDDGBM}
+\name{EMaxDDGBM}
+\alias{EMaxDDGBM}
 \title{Expected Drawdown using Brownian Motion Assumptions}
 \usage{
-  table.EMaxDDGBM(R, digits = 4)
+  EMaxDDGBM(R, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 }
 \description{
-  Works on the model specified by Maddon-Ismail which
-  investigates the behavior of this statistic for a
-  Brownian motion with drift.
+  Works on the model specified by Maddon-Ismail
 }
 \author{
-  Peter Carl, Brian Peterson, Shubhankit Mohan
+  R
 }
 \keyword{Assumptions}
 \keyword{Brownian}
