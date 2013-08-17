@@ -1,13 +1,9 @@
-#' Expected Drawdown using Brownian Motion Assumptions
+#' @title Expected Drawdown using Brownian Motion Assumptions
 #' 
-#' Works on the model specified by Maddon-Ismail
-#' 
-#' 
-#' 
-#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' asset returns
-
-#' @author R
+#' @description  Works on the model specified by Maddon-Ismail which investigates the behavior of this statistic for a Brownian motion 
+#' with drift.
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of  asset returns
+#' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @keywords Expected Drawdown Using Brownian Motion Assumptions
 #' @rdname EmaxDDGBM
 #' @export 

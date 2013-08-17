@@ -1,4 +1,4 @@
-#' calculate a multiperiod or annualized Autocorrleation adjusted Standard Deviation 
+#' @title Autocorrleation adjusted Standard Deviation 
 #'
 #' @aliases sd.multiperiod sd.annualized StdDev.annualized
 #' @param x an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -7,17 +7,16 @@
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
 #' @param \dots any other passthru parameters
-#' @author R
+#' @author Peter Carl,Brian Peterson, Shubhankit Mohan
 #' @seealso \code{\link[stats]{sd}} \cr
 #' \url{http://wikipedia.org/wiki/inverse-square_law}
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
-#' working paper.http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf \cr
+#' working paper.}
+#'  \code{\link[stats]{}} \cr
+#' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 #' @keywords ts multivariate distribution models
-#' @examples
-#' 
-#'     data(edhec)
-#'     ACsd.annualized(edhec,3)
-
+#' @usage ACsd.annualized(edhec,3)
+#'
 #' 
 #' @export
 #' @rdname ACStdDev.annualized

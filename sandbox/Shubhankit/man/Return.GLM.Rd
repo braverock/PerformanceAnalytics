@@ -28,7 +28,7 @@
   satisfy the following linear single-factor model: where:
   \deqn{R(0,t) = \theta_{0}R(t) + \theta_{1}R(t-1) +
   \theta_{2}R(t-2) ....  + \theta_{k}R(t-k)} where
-  \eqn{\theta} is defined as the weighted lag of
+  \eqn{\theta}'i is defined as the weighted lag of
   autocorrelated lag and whose sum is 1.
 }
 \author{

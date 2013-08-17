@@ -1,6 +1,6 @@
 \name{chart.Autocorrelation}
 \alias{chart.Autocorrelation}
-\title{Stacked Bar Plot of Autocorrelation Lag Coefficients}
+\title{Stacked Bar Autocorrelation Plot}
 \usage{
   chart.Autocorrelation(R, ...)
 }
@@ -27,12 +27,13 @@ data(edhec[,1])
 chart.Autocorrelation(edhec[,1])
 }
 \author{
-  R
+  Peter Carl, Brian Peterson, Shubhankit Mohan
 }
 \references{
-  Burghardt, Duncan and Liu(2013) \emph{It's the
-  autocorrelation, stupid}. AlternativeEdge Note November,
-  2012 }
+  Burghardt, G., and L. Liu, \emph{ It's the
+  Autocorrelation, Stupid (November 2012) Newedge working
+  paper.} \code{\link[stats]{}} \cr
+  \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 }
 \seealso{
   \code{\link[graphics]{boxplot}}

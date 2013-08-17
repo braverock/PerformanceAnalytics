@@ -1,17 +1,20 @@
-#' Stacked Bar Plot of Autocorrelation Lag Coefficients
+#' @title Stacked Bar Autocorrelation Plot
 #' 
-#' A wrapper to create box and whiskers plot of comparitive inputs
+#' @description A wrapper to create box and whiskers plot of comparitive inputs
 #' 
-#' We have also provided controls for all the symbols and lines in the chart.
+#' @details We have also provided controls for all the symbols and lines in the chart.
 #' One default, set by \code{as.Tufte=TRUE}, will strip chartjunk and draw a
 #' Boxplot per recommendations by Burghardt, Duncan and Liu(2013)
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' an asset return
 #' @return Stack Bar plot of lagged return  coefficients
-#' @author R 
+#' @author Peter Carl, Brian Peterson, Shubhankit Mohan 
 #' @seealso \code{\link[graphics]{boxplot}}
-#' @references Burghardt, Duncan and Liu(2013)  \emph{It's the autocorrelation, stupid}. AlternativeEdge Note  November, 2012 }
+#' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
+#' working paper.}
+#'  \code{\link[stats]{}} \cr
+#' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 #' @keywords Autocorrelation lag factors
 #' @examples
 #' 
@@ -28,7 +31,7 @@ chart.Autocorrelation <-
     # A wrapper to create box and whiskers plot, of autocorrelation lag coeffiecients
     # of the First six factors
     
-    R = checkData(R, method="xts")
+    # R = checkData(R, method="xts")
     
 # Graph autos with adjacent bars using rainbow colors
  

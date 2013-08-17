@@ -3,9 +3,9 @@
 \alias{sd.annualized}
 \alias{sd.multiperiod}
 \alias{StdDev.annualized}
-\title{calculate a multiperiod or annualized Autocorrleation adjusted Standard Deviation}
+\title{Autocorrleation adjusted Standard Deviation}
 \usage{
-  ACStdDev.annualized(R, lag = 6, scale = NA, ...)
+  ACsd.annualized(edhec,3)
 }
 \arguments{
   \item{x}{an xts, vector, matrix, data frame, timeSeries
@@ -20,21 +20,16 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  calculate a multiperiod or annualized Autocorrleation
-  adjusted Standard Deviation
-}
-\examples{
-data(edhec)
-    ACsd.annualized(edhec,3)
+  Autocorrleation adjusted Standard Deviation
 }
 \author{
-  R
+  Peter Carl,Brian Peterson, Shubhankit Mohan
 }
 \references{
   Burghardt, G., and L. Liu, \emph{ It's the
   Autocorrelation, Stupid (November 2012) Newedge working
-  paper.http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf
-  \cr
+  paper.} \code{\link[stats]{}} \cr
+  \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 }
 \seealso{
   \code{\link[stats]{sd}} \cr
