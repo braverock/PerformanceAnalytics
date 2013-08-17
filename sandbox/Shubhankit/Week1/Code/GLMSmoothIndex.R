@@ -1,6 +1,6 @@
-#'@title Getmansky Lo Markov Smoothing Index Parameter
-#'@description
-#'A useful summary statistic for measuring the concentration of weights is
+#' @title Getmansky Lo Markov Smoothing Index Parameter
+#'  @description
+#' A useful summary statistic for measuring the concentration of weights is
 #' a sum of square of Moving Average lag coefficient.
 #' This measure is well known in the industrial organization literature as the 
 #' Herfindahl index, a measure of the concentration of firms in a given industry. 
@@ -11,7 +11,7 @@
 #' \deqn{ R_t  =    {\mu} + {\beta}{{\delta}}_t+ \xi_t}
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @author R
+#' @author Peter Carl
 #' @aliases Return.Geltner
 #' @references "An econometric model of serial correlation and illiquidity in 
 #' hedge fund returns" Mila Getmansky1, Andrew W. Lo*, Igor Makarov

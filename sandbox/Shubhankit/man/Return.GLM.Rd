@@ -1,49 +1,44 @@
 \name{Return.GLM}
 \alias{Return.GLM}
-\title{Getmansky Lo Markov Unsmooth Return Model}
+\title{GLM Return Model}
 \usage{
-  Return.GLM(Ra, q = 3)
+  Return.GLM(edhec,4)
 }
 \arguments{
-  \item{Ra}{an xts, vector, matrix, data frame, timeSeries
-  or zoo object of asset returns}
+  \item{Ra}{: an xts, vector, matrix, data frame,
+  timeSeries or zoo object of asset returns}
 
-  \item{q}{order of autocorrelation coefficient}
+  \item{q}{: order of autocorrelation coefficient lag
+  factors}
 }
 \description{
   True returns represent the flow of information that would
   determine the equilibrium value of the fund's securities
   in a frictionless market. However, true economic returns
-  are not observed. Instead, Rot denotes the reported or
-  observed return in period t, which is a weighted average
-  of the fund's true returns over the most recent k ˛ 1
-  periods, includingthe current period. This averaging
-  process captures the essence of smoothed returns in
-  several respects. From the perspective of
-  illiquidity-driven smoothing, is consistent with several
-  models in the nonsynchronous tradingliterat ure. For
-  example, Cohen et al. (1 986, Chapter 6.1) propose a
-  similar weighted-average model for observed returns.
+  are not observed. The returns to hedge funds and other
+  alternative investments are often highly serially
+  correlated.We propose an econometric model of return
+  smoothingand develop estimators for the smoothing
+  proÔ¨Åle as well as a smoothing-adjusted Sharpe ratio.
 }
 \details{
-  The Geltner autocorrelation adjusted return series may be
-  calculated via:
-}
-\examples{
-data(edhec)
-Return.GLM(edhec,4)
+  To quantify the impact of all of these possible sources
+  of serial correlation, denote by R(t) the true economic
+  return of a hedge fund in period 't'; and let R(t)
+  satisfy the following linear single-factor model: where:
+  \deqn{R(0,t) = \theta_{0}R(t) + \theta_{1}R(t-1) +
+  \theta_{2}R(t-2) ....  + \theta_{k}R(t-k)} where
+  \eqn{\theta} is defined as the weighted lag of
+  autocorrelated lag and whose sum is 1.
 }
 \author{
-  R
+  Brian Peterson,Peter Carl, Shubhankit Mohan
 }
 \references{
-  "An econometric model of serial correlation and
-  illiquidity in hedge fund returns Mila Getmansky1, Andrew
-  W. Lo*, Igor Makarov MIT Sloan School of Management, 50
-  Memorial Drive, E52-432, Cambridge, MA 02142-1347, USA
-  Received 16 October 2002; received in revised form 7
-  March 2003; accepted 15 May 2003 Available online 10 July
-  2004
+  Mila Getmansky, Andrew W. Lo, Igor Makarov,\emph{An
+  econometric model of serial correlation and and
+  illiquidity in hedge fund Returns},Journal of Financial
+  Economics 74 (2004).
 }
 \keyword{distribution}
 \keyword{models}
