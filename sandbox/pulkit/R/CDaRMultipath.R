@@ -1,7 +1,7 @@
 #'@title
 #'Conditional Drawdown at Risk for Multiple Sample Path
 #'
-#'@desctipion
+#'@description
 #'
 #' For a given \eqn{\alpha \epsilon [0,1]} in the multiple sample-paths setting,CDaR, 
 #' denoted by \eqn{D_{\alpha}(w)}, is the average of \eqn{(1-\alpha).100\%} drawdowns 

@@ -15,7 +15,7 @@
 #' \eqn{f(x_2)<f(x_1)} then the three new points are \eqn{x_2<x_1<x_u}. This process is continued until the distance between the outer point
 #' is sufficiently small.
 
-#' @reference Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
 #' 
 #'@param a initial point
 #'@param b final point

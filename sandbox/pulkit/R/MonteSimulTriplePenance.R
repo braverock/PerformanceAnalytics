@@ -20,7 +20,7 @@
 #' @param bets Number of bets in the cumulative process
 #' @param confidence Confidence level for quantile
 #' 
-#' @reference Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
+#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
 #'  and the ‘Triple Penance’ Rule(January 1, 2013).
 #'  
 #'  @examples

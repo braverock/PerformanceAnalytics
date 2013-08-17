@@ -1,0 +1,46 @@
+Package: noniid.pm
+Type: Package
+Title: Non-i.i.d. GSoC 2013 Pulkit
+Version: 0.1
+Date: $Date: 2013-05-13 14:30:22 -0500 (Mon, 13 May 2013) $
+Author: Pulkit Mahotra <mehrotra.pulkit@gmail.com>
+Contributors: Peter Carl, Brian G. Peterson
+Depends:
+    xts,
+    PerformanceAnalytics
+Suggests:
+    PortfolioAnalytics
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: GSoC 2013 project to replicate literature on drawdowns and
+    non-i.i.d assumptions in finance.
+License: GPL (>=3)
+ByteCompile: TRUE
+Collate:
+    'BenchmarkPlots.R'
+    'BenchmarkSR.R'
+    'CDaRMultipath.R'
+    'CdaR.R'
+    'chart.Penance.R'
+    'chart.REDD.R'
+    'chart.SharpeEfficient.R'
+    'Drawdownalpha.R'
+    'DrawdownBetaMulti.R'
+    'DrawdownBeta.R'
+    'EDDCOPS.R'
+    'edd.R'
+    'Edd.R'
+    'ExtremeDrawdown.R'
+    'GoldenSection.R'
+    'MaxDD.R'
+    'MinTRL.R'
+    'MonteSimulTriplePenance.R'
+    'ProbSharpeRatio.R'
+    'PSRopt.R'
+    'REDDCOPS.R'
+    'redd.R'
+    'REM.R'
+    'SRIndifferenceCurve.R'
+    'table.Penance.R'
+    'table.PSR.R'
+    'TriplePenance.R'
+    'TuW.R'

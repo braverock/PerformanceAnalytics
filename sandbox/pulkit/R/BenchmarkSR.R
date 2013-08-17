@@ -8,7 +8,6 @@
 #' average pairwise correlation. The Returns are given as
 #' the input with the benchmark Sharpe Ratio as the output.
 #' 
-#'@aliases BenchmarkSR
 #'\deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
 #'
 #'Here \eqn{\bar{SR}} is the average SR of the portfolio and \eqn{\bar{\rho}} 

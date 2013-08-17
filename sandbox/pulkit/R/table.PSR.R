@@ -12,7 +12,7 @@
 #'@param the confidence level
 #'@param weights the weights for the portfolio
 #'
-#'@reference Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
+#'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
 #' 2012/13
 #'@keywords ts multivariate distribution models
