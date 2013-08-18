@@ -21,6 +21,7 @@
 #'data(edhec)
 #'table.PSR(edhec[,1],0.20)
 #'
+#'@export
 table.PSR<-function(R=NULL,refSR,Rf=0,p=0.95,weights = NULL,...){
     
     if(!is.null(R)){

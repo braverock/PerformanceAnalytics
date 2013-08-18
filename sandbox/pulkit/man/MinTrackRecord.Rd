@@ -48,8 +48,8 @@
   \deqn{MinTRL = n^\ast =
   1+\biggl[1-\hat{\gamma_3}\hat{SR}+\frac{\hat{\gamma_4}}{4}\hat{SR^2}\biggr]\biggl(\frac{Z_\alpha}{\hat{SR}-SR^\ast}\biggr)^2}
 
-  $\gamma{_3}$ and $\gamma{_4}$ are the skewness and
-  kurtosis respectively. It is important to note that
+  \eqn{\gamma{_3}} and \eqn{\gamma{_4}} are the skewness
+  and kurtosis respectively. It is important to note that
   MinTRL is expressed in terms of number of observations,
   not annual or calendar terms.
 

@@ -34,7 +34,7 @@
 #'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. 
 #'Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
 #'
-#'
+#'@export
 DrawdownGPD<-function(R,type=c("gpd","pd","weibull"),threshold=0.90){
     x = checkData(R)
     columns = ncol(R)

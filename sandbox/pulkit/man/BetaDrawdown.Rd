@@ -65,7 +65,7 @@
   the market performs well.
 }
 \examples{
-BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
+BetaDrawdown(edhec[,1],edhec[,2])
 }
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital

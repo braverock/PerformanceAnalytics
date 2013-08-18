@@ -14,14 +14,13 @@
 #' in which \eqn{x_2} is chosen. If \eqn{f(x_2)>f(x_1)} then the new three points would be \eqn{x_l \textless x_2 \textless x_1} else if
 #' \eqn{f(x_2)<f(x_1)} then the three new points are \eqn{x_2<x_1<x_u}. This process is continued until the distance between the outer point
 #' is sufficiently small.
-
-#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
-#' 
 #'@param a initial point
 #'@param b final point
 #'@param minimum TRUE to calculate the minimum and FALSE to calculate the Maximum
 #'@param function_name The name of the function  
-
+#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#' 
+#'@export
 golden_section<-function(a,b,minimum = TRUE,function_name,...){
 
     # DESCRIPTION

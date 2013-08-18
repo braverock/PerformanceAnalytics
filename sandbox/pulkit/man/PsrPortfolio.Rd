@@ -23,8 +23,8 @@
   would like to find the vector of weights that maximize
   the expression
 
-  \deqn{\hat{PSR}(SR^\ast) =
-  Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast
+  \deqn{\hat{PSR}(SR^\**) =
+  Z\biggl[\frac{(\hat{SR}-SR^\**)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\**
   + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
 
   where \eqn{\sigma = \sqrt{E[(r-\mu)^2]}} ,its standard
@@ -32,14 +32,14 @@
   its skewness,
   \eqn{\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}}
   its kurtosis and \eqn{SR = \frac{\mu}{\sigma}} its Sharpe
-  Ratio. Because \eqn{\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]}
-  is a monotonic increasing function of \eqn{\hat{Z^\ast}}
-  ,it suffices to compute the vector that maximizes
-  \eqn{\hat{Z^\ast}}
+  Ratio. Because \eqn{\hat{PSR}(SR^\**)=Z[\hat{Z^\**}]} is
+  a monotonic increasing function of \eqn{\hat{Z^\**}} ,it
+  suffices to compute the vector that maximizes
+  \eqn{\hat{Z^\**}}
 
   This optimal vector is invariant of the value adopted by
-  the parameter $SR^\ast$. Gradient Ascent Logic is used to
-  compute the weights using the Function PsrPortfolio
+  the parameter \eqn{SR^\**}. Gradient Ascent Logic is used
+  to compute the weights using the Function PsrPortfolio
 }
 \examples{
 data(edhec)

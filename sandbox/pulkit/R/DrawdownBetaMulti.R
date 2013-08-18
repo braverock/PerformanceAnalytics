@@ -37,6 +37,7 @@
 #'@examples
 #'MultiBetaDrawdown(cbind(edhec,edhec),cbind(edhec[,2],edhec[,2]),sample = 2,ps=c(0.4,0.6))
 #'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
+#'@export
 
 MultiBetaDrawdown<-function(R,Rm,sample,ps,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 

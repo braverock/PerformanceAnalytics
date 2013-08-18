@@ -47,11 +47,12 @@
 
   \deqn{\hat{PSR}(SR^\ast) =
   Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast
-  + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]} Here $n$
-  is the track record length or the number of data points.
-  It can be daily,weekly or yearly depending on the input
-  given $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the
-  skewness and kurtosis respectively.
+  + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]} Here
+  \eqn{n} is the track record length or the number of data
+  points. It can be daily,weekly or yearly depending on the
+  input given \eqn{\hat{\gamma{_3}}} and
+  \eqn{\hat{\gamma{_4}}} are the skewness and kurtosis
+  respectively.
 }
 \examples{
 data(edhec)

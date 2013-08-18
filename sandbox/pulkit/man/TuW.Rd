@@ -17,10 +17,10 @@
   under water for a particular confidence interval is given
   by
 
-  For a particular sequence $\left\{\pi_t\right\}$, the
-  time under water $(TuW)$ is the minimum number of
-  observations, $t>0$, such that $\pi_{t-1}<0$ and
-  $\pi_t>0$.
+  For a particular sequence \eqn{\left\{\pi_t\right\}}, the
+  time under water \eqn{(TuW)} is the minimum number of
+  observations, \eqn{t>0}, such that \eqn{\pi_{t-1}<0} and
+  \eqn{\pi_t>0}.
 
   For a normal distribution Maximum Time Under Water is
   given by the following expression.

@@ -8,6 +8,7 @@
 #' @param confidence the confidence interval
 #' 
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#' @export
 
 table.Penance<-function(R,confidence){
   # DESCRIPTION:

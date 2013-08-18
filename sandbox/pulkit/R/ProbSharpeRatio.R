@@ -10,9 +10,9 @@
 #' 
 #' \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
 
-#' Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
+#' Here \eqn{n} is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
 
-#' $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the skewness and kurtosis respectively.
+#' \eqn{\hat{\gamma{_3}}} and \eqn{\hat{\gamma{_4}}} are the skewness and kurtosis respectively.
 #'
 #'
 #' @aliases ProbSharpeRatio
@@ -43,6 +43,7 @@
 #' ProbSharpeRatio(edhec[,1],refSR = 0.23) 
 #' ProbSharpeRatio(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78,n=59)
 #' ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24)) 
+#'@export
 
 ProbSharpeRatio<-
 function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = NULL, kr = NULL, ...){

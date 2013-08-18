@@ -40,8 +40,7 @@
 #'of Florida,September 2012.
 #'
 #'@examples
-#'
-#'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
+#'BetaDrawdown(edhec[,1],edhec[,2]) 
 
 BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
