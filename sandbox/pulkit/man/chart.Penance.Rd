@@ -76,7 +76,7 @@ water.}
   water.
 }
 \examples{
-ls()
+chart.Penance(edhec,0.95)
 }
 \references{
   Bailey, David H. and Lopez de Prado,

@@ -71,6 +71,7 @@ chart.BenchmarkSR<-function(R=NULL,main=NULL,ylab = NULL,xlab = NULL,element.col
     }
     
   }
+  vs = vs[1]
   corr = table.Correlation(edhec,edhec)
   corr_avg = 0
   for(i in 1:(columns-1)){
