@@ -34,6 +34,8 @@
 #'chart.Penance(edhec,0.95)
 #'
 #'@references Bailey, David H. and Lopez de Prado, Marcos,Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#'
+#'@export
 
 chart.Penance<-function(R,confidence,type=c("ar","normal"),reference.grid = TRUE,main=NULL,ylab = NULL,xlab = NULL,element.color="darkgrey",lwd = 2,pch = 1,cex = 1,cex.axis=0.8,cex.lab = 1,cex.main = 1,xlim = NULL,ylim = NULL,...){
 

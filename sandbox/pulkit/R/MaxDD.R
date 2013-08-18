@@ -9,7 +9,7 @@
 #' Maximum Drawdown is given by the formula
 #' When the distibution is normal
 #' 
-#' \deqn{MaxDD_{\alpha}=max\left\{0,\frac{(z_{\alpha}\sigma)^2}{4\mu}\right\}}
+#' \deqn{MaxDD_\alpha=max\left\{0,\frac{(z_\alpha\sigma)^2}{4\mu}\right\}}
 #' 
 #' The time at which the Maximum Drawdown occurs is given by
 #' \deqn{t^\ast=\biggl(\frac{Z_{\alpha}\sigma}{2\mu}\biggr)^2}

@@ -1,3 +1,23 @@
+#'@title 
+#' Time series of Rolling Economic Drawdown
+#'
+#'@description
+#' This function plots the time series of Rolling Economic Drawdown. 
+#' For more details on rolling economic drawdown see \code{rollDrawdown}.
+#'
+#'@param R an xts, vector, matrix, data frame, timeseries, or zoo object of asset return.
+#'@param Rf risk free rate can be vector such as government security rate of return
+#'@param h lookback period 
+#'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining(FALSE) to aggregate returns, default is TRUE.
+#'@param legend.loc set the legend.loc, as in \code{\link{plot}}
+#'@param colorset set the colorset label, as in \code{\link{plot}}
+#'@param \dots any other  variable
+#'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
+#'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
+#'@examples
+#'chart.REDD(edhec,0.08,20)
+#'
+
 chart.REDD<-function(R,rf,h, geometric = TRUE,legend.loc = NULL, colorset = (1:12),...)
 {
 #DESCRIPTION:

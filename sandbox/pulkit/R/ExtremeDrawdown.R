@@ -8,7 +8,7 @@
 #'
 #' Modified Generalized Pareto Distribution is given by the following formula
 #'
-#' \dqeqn{G_{\eta}(m) = \begin{array}{l} 1-(1+\eta\frac{m^\gamma}{\psi})^(-1/\eta), if \eta \neq 0 \\ 1- e^{-frac{m^\gamma}{\psi}}, if \eta = 0,\end{array}}
+#' \deqn{G_{\eta}(m) = \begin{array}{l} 1-(1+\eta\frac{m^\gamma}{\psi})^(-1/\eta), if \eta \neq 0 \\ 1- e^{-frac{m^\gamma}{\psi}}, if \eta = 0,\end{array}}
 #'
 #' Here \eqn{\gamma{\epsilon}R} is the modifying parameter. When \eqn{\gamma<1} the corresponding densities are
 #' strictly decreasing with heavier tail; the GDP is recovered by setting \eqn{\gamma = 1} .\eqn{\gamma \textgreater 1}

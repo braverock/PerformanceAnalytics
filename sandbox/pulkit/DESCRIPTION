@@ -27,7 +27,6 @@ Collate:
     'DrawdownBetaMulti.R'
     'DrawdownBeta.R'
     'EDDCOPS.R'
-    'edd.R'
     'Edd.R'
     'ExtremeDrawdown.R'
     'GoldenSection.R'

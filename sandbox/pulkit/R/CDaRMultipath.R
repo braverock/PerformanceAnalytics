@@ -31,8 +31,9 @@
 #'
 #'@references
 #'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model (CAPM)
-#' with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida, 
-#' September 2012 
+#' with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida,  September 2012
+#'
+#'@export 
 
 
 CdarMultiPath<-function (R,ps,sample, geometric = TRUE,p = 0.95, ...) 

@@ -41,6 +41,7 @@
 #'
 #'chart.BenchmarkSR(edhec,vs="strategies")
 #'chart.BenchmarkSR(edhec,vs="sharpe")
+#'
 #'@export
 
 chart.BenchmarkSR<-function(R=NULL,main=NULL,ylab = NULL,xlab = NULL,element.color="darkgrey",lwd = 2,pch = 1,cex = 1,cex.axis=0.8,cex.lab = 1,cex.main = 1,vs=c("sharpe","correlation","strategies"),xlim = NULL,ylim = NULL,...){
