@@ -4,6 +4,7 @@
 \IfFileExists{url.sty}{\usepackage{url}}
                       {\newcommand{\url}{\texttt}}
 
+\usepackage[utf8]{inputenc}
 \usepackage{babel}
 \usepackage{Rd}
 
@@ -18,7 +19,6 @@
 \SweaveOpts{concordance=TRUE}
 
 \title{ Probabilistic Sharpe Ratio Optimization }
-\author{Guide : Prof. Parama Barai}
 
 % \keywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
 
@@ -48,19 +48,19 @@ data(edhec)
 
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/ProbSharpeRatio.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/ProbSharpeRatio.R")
 @
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/MinTRL.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/MinTRL.R")
 @
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/PSRopt.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/PSRopt.R")
 @
 
 <<echo=FALSE>>=
-dyn.load("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/code/moment.so")
+dyn.load("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/src/moment.so")
 @
 
 \section{Probabilistic Sharpe Ratio}
@@ -70,7 +70,7 @@ dyn.load("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week1/
  
  Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
  
- $\hat{\gamma{_3}}$ and $\hat{\gamma{_4}}$ are the skewness and kurtosis respectively.
+ \eqn{\hat{\gamma{_3}}} and \eqn{\hat{\gamma{_4}}} are the skewness and kurtosis respectively.
  It is not unusual to find strategies with irregular trading frequencies, such as weekly strategies that may not trade for a month. This poses a problem when computing an annualized Sharpe ratio, and there is no consensus as how skill should be measured in the context of irregular bets. Because PSR measures skill in probabilistic terms, it is invariant to calendar conventions. All calculations are done in the original frequency
 of the data, and there is no annualization. The Reference Sharpe Ratio is also given in the non-annualized form and should be greater than the Observed Sharpe Ratio.
 
@@ -82,12 +82,12 @@ ProbSharpeRatio(edhec[,1],refSR = 0.23)
 \section{Minimum Track Record Length}
 
 If a track record is shorter than Minimum Track Record Length(MinTRL), we do
-not have enough confidence that the observed $\hat{SR}$ is above the designated threshold
-$SR^\ast$. Minimum Track Record Length is given by the following expression.
+not have enough confidence that the observed \eqn{\hat{SR}} is above the designated threshold
+\eqn{SR^\ast}. Minimum Track Record Length is given by the following expression.
 
 \deqn{MinTRL = n^\ast = 1+\biggl[1-\hat{\gamma_3}\hat{SR}+\frac{\hat{\gamma_4}}{4}\hat{SR^2}\biggr]\biggl(\frac{Z_\alpha}{\hat{SR}-SR^\ast}\biggr)^2}
 
-$\gamma{_3}$ and $\gamma{_4}$ are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms. All the values used in the above formula are non-annualized, in the same frequency as that of the returns.
+\eqn{\gamma{_3}} and \eqn{\gamma{_4}} are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms. All the values used in the above formula are non-annualized, in the same frequency as that of the returns.
 
 <<>>=
 data(edhec)
@@ -100,22 +100,17 @@ We would like to find the vector of weights that maximize the expression
 
  \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
 
-where $\sigma = \sqrt{E[(r-\mu)^2]}$ ,its standard deviation.$\gamma_3=\frac{E\biggl[(r-\mu)^3\biggr]}{\sigma^3}$ its skewness,$\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}$ its kurtosis and $SR = \frac{\mu}{\sigma}$ its Sharpe Ratio.
+where \eqn{\sigma = \sqrt{E[(r-\mu)^2]}} ,its standard deviation.\eqn{\gamma_3=\frac{E\biggl[(r-\mu)^3\biggr]}{\sigma^3}} its skewness,\eqn{\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}} its kurtosis and \eqn{SR = \frac{\mu}{\sigma}} its Sharpe Ratio.
 
-Because $\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]$ is a monotonic increasing function of 
-$\hat{Z^\ast}$ ,it suffices to compute the vector that maximizes $\hat{Z^\ast}$
- This optimal vector is invariant of the value adopted by the parameter $SR^\ast$. 
+Because \eqn{\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]} is a monotonic increasing function of 
+\eqn{\hat{Z^\ast}} ,it suffices to compute the vector that maximizes \eqn{\hat{Z^\ast}}
+ This optimal vector is invariant of the value adopted by the parameter \eqn{SR^\ast}. 
 
 
 <<>>=
 data(edhec)
 PsrPortfolio(edhec)
 @
-
-\section{Future Plans}
-
-To compare the existing portfolio optimization techniques with the present one for various data. Incorporate changes in the
-Probabilistic Sharpe Ratio to improve the performance of the Portfolio. Plot the Sharpe Ratio Efficient Frontier and Capital Allocation curves to get a better understanding of the sharpe ratio obtained for different portfolios.
 
 \end{document}
 
