@@ -18,6 +18,7 @@
 #'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining(FALSE)
 #'to aggregate returns, default is TRUE
 #'@param \dots any other  variable
+#'@author Pulkit Mehrotra
 #'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples

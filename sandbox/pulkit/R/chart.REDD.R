@@ -12,6 +12,7 @@
 #'@param legend.loc set the legend.loc, as in \code{\link{plot}}
 #'@param colorset set the colorset label, as in \code{\link{plot}}
 #'@param \dots any other  variable
+#'@author Pulkit Mehrotra
 #'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples

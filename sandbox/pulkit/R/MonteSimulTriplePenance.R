@@ -19,7 +19,7 @@
 #' @param dp0 Bet at origin (initialization of AR(1))
 #' @param bets Number of bets in the cumulative process
 #' @param confidence Confidence level for quantile
-#' 
+#' @author Pulkit Mehrotra
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
 #'  and the ‘Triple Penance’ Rule(January 1, 2013).
 #'  

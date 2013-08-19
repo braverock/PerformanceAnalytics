@@ -1,5 +1,6 @@
 export(AlphaDrawdown)
 export(BenchmarkSR)
+export(CDaR)
 export(CdarMultiPath)
 export(chart.BenchmarkSR)
 export(chart.Penance)

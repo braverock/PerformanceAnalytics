@@ -29,6 +29,7 @@
 #'@param p confidence level for calculation ,default(p=0.95)
 #'@param \dots any other passthru parameters
 #'
+#'@author Pulkit Mehrotra
 #'@references
 #'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model (CAPM)
 #' with Drawdown Measure.Research Report 2012-9, ISE Dept., University of Florida,  September 2012

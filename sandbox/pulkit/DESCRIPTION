@@ -9,7 +9,8 @@ Depends:
     xts,
     PerformanceAnalytics
 Suggests:
-    PortfolioAnalytics
+    PortfolioAnalytics,
+    lpSolve
 Maintainer: Brian G. Peterson <brian@braverock.com>
 Description: GSoC 2013 project to replicate literature on drawdowns and
     non-i.i.d assumptions in finance.

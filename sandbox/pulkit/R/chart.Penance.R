@@ -28,6 +28,7 @@
 #'@param ylim set the ylim value, as in \code{\link{plot}}
 #'@param xlim set the xlim value, as in \code{\link{plot}}
 #'
+#'@author Pulkit Mehrotra
 #'@seealso \code{\link{plot}}
 #'@keywords ts multivariate distribution models hplot
 #'@examples

@@ -15,6 +15,7 @@
 #'
 #'@param R a vector, matrix, data frame,timeseries or zoo object of asset returns
 #'
+#'@author Pulkit Mehrotra
 #'@references
 #'Bailey, David H. and Lopez de Prado, Marcos, The Strategy Approval Decision: 
 #'A Sharpe Ratio Indifference Curve Approach (January 2013). Algorithmic Finance, 

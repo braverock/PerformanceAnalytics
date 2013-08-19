@@ -29,7 +29,8 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset return 
 #' @param type The type of distribution "gpd","pd","weibull"
 #' @param threshold The threshold beyond which the drawdowns have to be modelled
-#' 
+#'
+#'@author Pulkit Mehrotra 
 #'@references
 #'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. 
 #'Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.

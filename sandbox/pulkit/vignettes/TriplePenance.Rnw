@@ -37,20 +37,20 @@ data(edhec)
 @
 
 <<echo=FALSE>>=
-source("../code/MaxDD.R")
+source("../R/MaxDD.R")
 @
 
 <<echo=FALSE>>=
-source("../code/TriplePenance.R")
+source("../R/TriplePenance.R")
 @
 
 <<echo=FALSE>>=
-source("../code/GoldenSection.R")
+source("../R/GoldenSection.R")
 @
 
 
 <<echo=FALSE>>=
-source("../code/TuW.R")
+source("../R/TuW.R")
 @
 \section{ Maximum Drawdown }
 Maximum Drawdown tells us Up to how much could a particular strategy lose with a given confidence level ?. This function calculated Maximum Drawdown for two underlying processes normal and autoregressive. For a normal process Maximum Drawdown is given by the formula
@@ -60,6 +60,7 @@ When the distibution is normal
 \deqn{MaxDD_{\alpha}=max\left\{0,\frac{(z_{\alpha}\sigma)^2}{4\mu}\right\}}
 
 The time at which the Maximum Drawdown occurs is given by
+
 
 \deqn{t^\ast=\biggl(\frac{Z_{\alpha}\sigma}{2\mu}\biggr)^2}
 

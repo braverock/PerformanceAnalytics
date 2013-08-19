@@ -48,11 +48,12 @@
   their CAPM predictions
 }
 \examples{
-AlphaDrawdown(edhec[,1],edhec[,2]) ## expected value : 0.5141929
+data(edhec)
+AlphaDrawdown(edhec[,1],edhec[,2])
 
-AlphaDrawdown(edhec[,1],edhec[,2],type="max") ## expected value : 0.8983177
+AlphaDrawdown(edhec[,1],edhec[,2],type="max") # expected value : 0.8983177
 
-AlphaDrawdown(edhec[,1],edhec[,2],type="average") ## expected value : 1.692592
+AlphaDrawdown(edhec[,1],edhec[,2],type="average") # expected value : 1.692592
 }
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital

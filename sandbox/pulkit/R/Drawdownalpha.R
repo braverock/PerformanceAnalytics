@@ -25,16 +25,19 @@
 #' @param type The type of BetaDrawdown if specified alpha then the alpha value given is taken (default 0.95). If "average" then alpha = 0 and if "max" then alpha = 1 is taken.
 #'@param \dots any passthru variable
 #'
+#'@author Pulkit Mehrotra
 #'@references
 #'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model 
 #'(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University 
 #'of Florida,September 2012.
 #'@examples
-#'AlphaDrawdown(edhec[,1],edhec[,2]) ## expected value : 0.5141929
+#'data(edhec)
+#'AlphaDrawdown(edhec[,1],edhec[,2])
 #'
-#'AlphaDrawdown(edhec[,1],edhec[,2],type="max") ## expected value : 0.8983177
+#'AlphaDrawdown(edhec[,1],edhec[,2],type="max") # expected value : 0.8983177
 #'
-#'AlphaDrawdown(edhec[,1],edhec[,2],type="average") ## expected value : 1.692592
+#'AlphaDrawdown(edhec[,1],edhec[,2],type="average") # expected value : 1.692592
+#'
 #'@export
 
 

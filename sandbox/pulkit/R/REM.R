@@ -20,6 +20,7 @@
 #'@param h Look back period
 #'@param geomtric geometric utilize geometric chaining (TRUE) or simple/arithmetic #'chaining(FALSE) to aggregate returns, default is TRUE.
 #'@param ... any other variable
+#'@author Pulkit Mehrotra
 #'@examples
 #'rollEconomicMax(edhec,0.08,100)
 #'@export

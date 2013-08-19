@@ -1,3 +1,36 @@
+#'@title
+#' Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
+#' measure
+#' 
+#' @description
+#' For some confidence level \eqn{p}, the conditional drawdown is the the mean
+#' of the worst \eqn{p\%} drawdowns.
+#' 
+#' @aliases CDD CDaR
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param weights portfolio weighting vector, default NULL, see Details
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
+#' default TRUE
+#' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
+#' Details.
+#' @param p confidence level for calculation, default p=0.95
+#' @param \dots any other passthru parameters
+#' @author Brian G. Peterson
+#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}}
+#' @references Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
+#' Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
+#' Management Tools, Risk Books, London, 2003
+#' http://www.ise.ufl.edu/uryasev/drawdown.pdf
+#' @keywords ts multivariate distribution models
+#' @examples
+#' library(lpSolve)
+#' data(edhec)
+#' t(round(CDaR(edhec),4))
+#' 
+#' @export 
+
+
 CDaR<-function (R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ...) 
 {
   #p = .setalphaprob(p)

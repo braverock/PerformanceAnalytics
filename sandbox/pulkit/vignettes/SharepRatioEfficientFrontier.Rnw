@@ -4,6 +4,7 @@
 \IfFileExists{url.sty}{\usepackage{url}}
                       {\newcommand{\url}{\texttt}}
 
+\usepackage[utf8]{inputenc}
 \usepackage{babel}
 \usepackage{Rd}
 
@@ -32,25 +33,24 @@
  
 <<echo=FALSE>>=
 library(PerformanceAnalytics)
-library(ggplot2)
 data(edhec)
 @
  
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week2/code/BenchmarkSR.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/BenchmarkSR.R")
 @
 
 <<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/week2/code/SRIndifferenceCurve.R")
+source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/SRIndifferenceCurve.R")
 @
  
  \section{Benchmark Sharpe Ratio}
  
- The performance of an Equal Volatility Weights benchmark ($SR_B$) is fully characterized in terms of:
+ The performance of an Equal Volatility Weights benchmark (\eqn{SR_B}) is fully characterized in terms of:
 
 1. Number of approved strategies (S).
 2. Average SR among strategies (SR).
-3. Average off-diagonal correlations among strategies($\bar{\rho}$)). 
+3. Average off-diagonal correlations among strategies\eqn{\bar{\rho}}. 
 
 The benchmark SR is a linear function of the average SR of the individual strategies, and a decreasing convex function of the number of strategies and the average pairwise correlation.
  
@@ -59,7 +59,7 @@ The benchmark Sharpe Ratio is given by the following equation.
 \deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
  
 <<>>=
-BenchmanrkSR(edhec)
+BenchmarkSR(edhec)
 @
 
 \section{Sharpe Ratio Indifference Curve}
@@ -76,7 +76,7 @@ sharpe Ratio is given by
 \deqn{\bar{\rho}{_{s+1}}=\frac{1}{2}\biggl[\frac{\bar{({SR}.S+SR_{s+1}})^2}{S.SR_B^2}-\frac{S+1}{S}-\bar{\rho}{S-1}\biggr]}
 
 <<fig = TRUE>>=
-SRIndifference(edhec)
+chart.SRIndifference(edhec)
 @
 
 \end{document}

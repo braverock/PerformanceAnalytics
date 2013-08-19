@@ -29,6 +29,7 @@
 #' alpha = 0 and if "max" then alpha = 1 is taken.
 #'@param \dots any passthru variable.
 #'
+#'@author Pulkit Mehrotra
 #'@references
 #'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model 
 #'(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University 

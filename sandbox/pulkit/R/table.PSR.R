@@ -2,8 +2,9 @@
 #'
 #'@description
 #'A table to display the Probabilistic Sharpe Ratio Along with 
-#'the Minimum Track Record Length for better assessment of the returns.
-#'
+#'the Minimum Track Record Length for better assessment of the returns.For more
+#'details about Probabilistic Sharpe Ratio and Minimum Track record length see\
+#'\code{ProbSharpeRatio} and \code{MinTrackRecord} respectively.
 #'@aliases table.PSR
 #'
 #'@param R the return series
@@ -12,6 +13,7 @@
 #'@param the confidence level
 #'@param weights the weights for the portfolio
 #'
+#'@author Pulkit Mehrotra
 #'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
 #' 2012/13
