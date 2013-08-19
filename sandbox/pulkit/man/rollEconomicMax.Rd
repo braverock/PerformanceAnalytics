@@ -38,4 +38,12 @@
 \examples{
 rollEconomicMax(edhec,0.08,100)
 }
+\author{
+  Pulkit Mehrotra
+}
+\seealso{
+  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}}
+  \code{\link{rollDrawdown}} \code{\link{REDDCOPS}}
+  \code{\link{EDDCOPS}}
+}
 

@@ -34,9 +34,17 @@
 \examples{
 EconomicDrawdown(edhec,0.08,100)
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Yang, Z. George and Zhong, Liang, Optimal Portfolio
   Strategy to Control Maximum Drawdown - The Case of Risk
   Based Dynamic Asset Allocation (February 25, 2012)
+}
+\seealso{
+  \code{\link{chart.REDD}} \code{\link{EDDCOPS}}
+  \code{\link{rollDrawdown}} \code{\link{REDDCOPS}}
+  \code{\link{rollEconomicMax}}
 }
 

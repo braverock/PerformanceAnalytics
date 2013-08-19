@@ -35,26 +35,24 @@
   The drawdown beta is formulated as follows
 
   \deqn{\beta_DD =
-  \frac{{\sum_{t=1}^T}{q_t^\asterisk}{(w_{k^{\asterisk}(t)}-w_t)}}{D_{\alpha}(w^M)}}
+  \frac{{\sum_{t=1}^T}{q_t^\**}{(w_{k^{\**}(t)}-w_t)}}{D_{\alpha}(w^M)}}
   here \eqn{\beta_DD} is the drawdown beta of the
   instrument.
-  \eqn{k^{\asterisk}(t)\in{argmax_{t_{\tau}{\le}k{\le}t}}w_k^M}
+  \eqn{k^{\**}(t)\in{argmax_{t_{\tau}{\le}k{\le}t}}w_k^M}
 
-  \eqn{q_t^\asterisk=1/((1-\alpha)T)} if \eqn{d_t^M} is one
-  of the \eqn{(1-\alpha)T} largest drawdowns \eqn{d_1^{M}
-  ,......d_t^M} of the optimal portfolio and
-  \eqn{q_t^\asterisk = 0} otherwise. It is assumed that
-  \eqn{D_\alpha(w^M) {\neq} 0} and that \eqn{q_t^\asterisk}
-  and \eqn{k^{\asterisk}(t) are uniquely determined for all
-  \eqn{t = 1....T}
+  \eqn{q_t^\**=1/((1-\alpha)T)} if \eqn{d_t^M} is one of
+  the \eqn{(1-\alpha)T} largest drawdowns \eqn{d_1^{M}
+  ,......d_t^M} of the optimal portfolio and \eqn{q_t^\** =
+  0} otherwise. It is assumed that \eqn{D_\alpha(w^M)
+  {\neq} 0} and that \eqn{q_t^\**} and \eqn{k^{\**}(t)} are
+  uniquely determined for all \eqn{t = 1....T}
 
   The numerator in \eqn{\beta_DD} is the average rate of
   return of the instrument over time periods corresponding
   to the \eqn{(1-\alpha)T} largest drawdowns of the optimal
-  portfolio, where \eqn{w_t - w_k^{\asterisk}(t)} is the
+  portfolio, where \eqn{w_t - w_k^{\**}(t)} is the
   cumulative rate of return of the instrument from the
-  optimal portfolio#' peak time \eqn{k^\asterisk(t)} to
-  time t.
+  optimal portfolio peak time \eqn{k^\**(t)} to time t.
 
   The difference in CDaR and standard betas can be
   explained by the conceptual difference in beta
@@ -67,10 +65,18 @@
 \examples{
 BetaDrawdown(edhec[,1],edhec[,2])
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital
   Asset Pricing Model (CAPM) with Drawdown Measure.Research
   Report 2012-9, ISE Dept., University of Florida,September
   2012.
+}
+\seealso{
+  \code{\link{ES}} \code{\link{maxDrawdown}}
+  \code{\link{CdarMultiPath}} \code{\link{AlphaDrawdown}}
+  \code{\link{MultiBetaDrawdown}} \code{\link{CDaR}}
 }
 

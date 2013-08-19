@@ -54,10 +54,19 @@
   \eqn{\alpha} = 0, \eqn{D_\alpha(w)} is the average
   drawdown
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital
   Asset Pricing Model (CAPM) with Drawdown Measure.Research
   Report 2012-9, ISE Dept., University of Florida,
   September 2012
+}
+\seealso{
+  \code{\link{ES}} \code{\link{maxDrawdown}}
+  \code{\link{CDaR}} \code{\link{AlphaDrawdown}}
+  \code{\link{MultiBetaDrawdown}}
+  \code{\link{BetaDrawdown}}
 }
 

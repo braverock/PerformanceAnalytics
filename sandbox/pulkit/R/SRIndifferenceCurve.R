@@ -39,7 +39,7 @@
 #'A Sharpe Ratio Indifference Curve Approach (January 2013). Algorithmic Finance, 
 #'Vol. 2, No. 1 (2013).
 #'
-#'@seealso \code{\link{plot}}
+#'@seealso \code{\link{BenchmarkSR}} \code{\link{chart.BenchmarkSR}} \code{\link{plot}}
 #'@keywords ts multivariate distribution models hplot
 #'@examples
 #' 

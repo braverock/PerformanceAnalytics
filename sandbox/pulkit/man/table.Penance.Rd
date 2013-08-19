@@ -12,11 +12,20 @@
 \description{
   \code{table.Penance} Displays the table showing
   mean,Standard Deviation , phi, sigma , MaxDD,time at
-  which MaxDD occurs, MaxTuW and the penance.
+  which MaxDD occurs, MaxTuW and the penance.For more
+  details about MaxDD , Time under Water see code
+  \code{MaxDD} and \code{TuW} respoectively.
+}
+\author{
+  Pulkit Mehrotra
 }
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
   Drawdown-Based Stop-Outs and the ‘Triple Penance’
   Rule(January 1, 2013).
+}
+\seealso{
+  \code{\link{chart.Penance}} \code{\link{MaxDD}}
+  \code{\link{TuW}}
 }
 

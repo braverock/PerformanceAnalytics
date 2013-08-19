@@ -69,6 +69,9 @@
 data(edhec)
 chart.SRIndifference(edhec)
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos, The Strategy
   Approval Decision: A Sharpe Ratio Indifference Curve
@@ -76,6 +79,7 @@ chart.SRIndifference(edhec)
   1 (2013).
 }
 \seealso{
+  \code{\link{BenchmarkSR}} \code{\link{chart.BenchmarkSR}}
   \code{\link{plot}}
 }
 \keyword{distribution}

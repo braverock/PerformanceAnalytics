@@ -14,6 +14,7 @@
 #'@param weights the weights for the portfolio
 #'
 #'@author Pulkit Mehrotra
+#'@seealso \code{\link{ProbSharpeRatio}} \code{\link{PsrPortfolio}} \code{\link{MinTrackRecord}}
 #'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
 #' 2012/13

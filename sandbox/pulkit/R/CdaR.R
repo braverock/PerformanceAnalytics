@@ -17,7 +17,8 @@
 #' @param p confidence level for calculation, default p=0.95
 #' @param \dots any other passthru parameters
 #' @author Brian G. Peterson
-#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}}
+#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}} \code{\link{CdarMultiPath}} 
+#'\code{\link{AlphaDrawdown}} \code{\link{MultiBetaDrawdown}} \code{\link{BetaDrawdown}}
 #' @references Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
 #' Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
 #' Management Tools, Risk Books, London, 2003

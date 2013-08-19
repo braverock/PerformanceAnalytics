@@ -45,9 +45,17 @@ EDDCOPS(dt[,1],delta = 0.33,gamma = 0.7,Rf = (1+dt[,2])^(1/12)-1,geometric = TRU
 data(edhec)
 EDDCOPS(edhec,delta = 0.1,gamma = 0.7,Rf = 0)
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Yang, Z. George and Zhong, Liang, Optimal Portfolio
   Strategy to Control Maximum Drawdown - The Case of Risk
   Based Dynamic Asset Allocation (February 25, 2012)
+}
+\seealso{
+  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}}
+  \code{\link{rollDrawdown}} \code{\link{REDDCOPS}}
+  \code{\link{rollEconomicMax}}
 }
 

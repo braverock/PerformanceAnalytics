@@ -25,6 +25,9 @@
 data(edhec)
 BenchmarkSR(edhec) #expected 0.393797
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos, The Strategy
   Approval Decision: A Sharpe Ratio Indifference Curve

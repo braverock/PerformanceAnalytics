@@ -65,9 +65,16 @@ data(edhec)
 MaxDD(edhec,0.95,"ar")
 MaxDD(edhec[,1],0.95,"normal") #expected values 4.241799 6.618966
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
   Drawdown-Based Stop-Outs and the ‘Triple Penance’
   Rule(January 1, 2013).
+}
+\seealso{
+  \code{\link{chart.Penance}} \code{\link{table.Penance}}
+  \code{\link{TuW}}
 }
 

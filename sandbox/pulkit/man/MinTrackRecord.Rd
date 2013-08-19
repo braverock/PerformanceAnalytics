@@ -68,10 +68,17 @@ MinTrackRecord(edhec[,1],refSR=0.1,Rf = 0.04/12)
 MinTrackRecord(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78)
 MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24))
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos, \emph{The
   Sharpe Ratio Efficient Frontier} (July 1, 2012). Journal
   of Risk, Vol. 15, No. 2, Winter 2012/13
+}
+\seealso{
+  \code{\link{ProbSharpeRatio}} \code{\link{PsrPortfolio}}
+  \code{\link{table.PSR}}
 }
 \keyword{distribution}
 \keyword{models}

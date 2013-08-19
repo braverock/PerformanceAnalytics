@@ -71,9 +71,17 @@ REDDCOPS(edhec,delta = 0.1,Rf = 0,h = 40)
 data(managers)
 REDDCOPS(managers[,1],0.80, Rf = managers[,10,drop=FALSE],12,asset="one")
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Yang, Z. George and Zhong, Liang, Optimal Portfolio
   Strategy to Control Maximum Drawdown - The Case of Risk
   Based Dynamic Asset Allocation (February 25, 2012)
+}
+\seealso{
+  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}}
+  \code{\link{rollDrawdown}} \code{\link{EDDCOPS}}
+  \code{\link{rollEconomicMax}}
 }
 

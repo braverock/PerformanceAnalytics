@@ -37,6 +37,9 @@
   \eqn{x_2<x_1<x_u}. This process is continued until the
   distance between the outer point is sufficiently small.
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
   Drawdown-Based Stop-Outs and the ‘Triple Penance’

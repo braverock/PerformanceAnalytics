@@ -30,6 +30,9 @@
 #'@param \dots any passthru variable.
 #'
 #'@author Pulkit Mehrotra
+#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}} \code{\link{CdarMultiPath}} 
+#'\code{\link{AlphaDrawdown}} \code{\link{CDaR}} \code{\link{BetaDrawdown}}
+
 #'@references
 #'Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model 
 #'(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University 

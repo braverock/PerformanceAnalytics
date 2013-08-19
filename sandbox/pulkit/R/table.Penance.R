@@ -10,6 +10,7 @@
 #' @param confidence the confidence interval
 #' 
 #' @author Pulkit Mehrotra
+#' @seealso \code{\link{chart.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
 #' @export
 

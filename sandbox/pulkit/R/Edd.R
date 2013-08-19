@@ -19,6 +19,8 @@
 #'to aggregate returns, default is TRUE
 #'@param \dots any other  variable
 #'@author Pulkit Mehrotra
+#'@seealso  \code{\link{chart.REDD}} \code{\link{EDDCOPS}} 
+#'\code{\link{rollDrawdown}} \code{\link{REDDCOPS}} \code{\link{rollEconomicMax}}
 #'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples

@@ -1,5 +1,8 @@
 #'@title
 #'Penance vs phi plot
+#'
+#'@description
+#'
 #'A plot for Penance vs phi for the given portfolio
 #'The relationship between penance and phi is given by
 #'
@@ -29,7 +32,7 @@
 #'@param xlim set the xlim value, as in \code{\link{plot}}
 #'
 #'@author Pulkit Mehrotra
-#'@seealso \code{\link{plot}}
+#'@seealso \code{\link{plot}} \code{\link{table.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
 #'@keywords ts multivariate distribution models hplot
 #'@examples
 #'chart.Penance(edhec,0.95)

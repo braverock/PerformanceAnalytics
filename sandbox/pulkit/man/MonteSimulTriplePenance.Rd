@@ -38,6 +38,9 @@
 \examples{
 MonteSimulTriplePenance(10^6,0.5,1,2,1,25,0.95) # Expected Value Quantile (Exact) = 6.781592
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
   Drawdown-Based Stop-Outs and the ‘Triple Penance’

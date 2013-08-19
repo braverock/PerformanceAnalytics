@@ -1,16 +1,6 @@
 \name{chart.Penance}
 \alias{chart.Penance}
-\title{Penance vs phi plot
-A plot for Penance vs phi for the given portfolio
-The relationship between penance and phi is given by
-
-\deqn{penance = \frac{Maximum Drawdown}{Maximum Time Under Water}}
-
-Penance Measures how long it takes to recover from the maximum drawdown
-as a multiple of the time it took to reach the bottom. Penance is smaller,
-the higher the value of \eqn{\phi(Phi)} and the higher the ratio \eqn{\frac{\mu}{\sigma}}.
-Positive serial autocorrelation leads to smaller Penance due to greater periods under
-water.}
+\title{Penance vs phi plot}
 \usage{
   chart.Penance(R, confidence, type = c("ar", "normal"),
     reference.grid = TRUE, main = NULL, ylab = NULL,
@@ -60,9 +50,8 @@ water.}
   \item{xlim}{set the xlim value, as in \code{\link{plot}}}
 }
 \description{
-  Penance vs phi plot A plot for Penance vs phi for the
-  given portfolio The relationship between penance and phi
-  is given by
+  A plot for Penance vs phi for the given portfolio The
+  relationship between penance and phi is given by
 
   \deqn{penance = \frac{Maximum Drawdown}{Maximum Time
   Under Water}}
@@ -78,13 +67,17 @@ water.}
 \examples{
 chart.Penance(edhec,0.95)
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Bailey, David H. and Lopez de Prado,
   Marcos,Drawdown-Based Stop-Outs and the ‘Triple Penance’
   Rule(January 1, 2013).
 }
 \seealso{
-  \code{\link{plot}}
+  \code{\link{plot}} \code{\link{table.Penance}}
+  \code{\link{MaxDD}} \code{\link{TuW}}
 }
 \keyword{distribution}
 \keyword{hplot}

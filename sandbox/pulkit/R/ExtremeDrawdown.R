@@ -1,7 +1,7 @@
 #'@title
 #'Modelling Drawdown using Extreme Value Theory
 #'
-#"@description
+#'@description
 #'It has been shown empirically that Drawdowns can be modelled using Modified Generalized Pareto 
 #'distribution(MGPD), Generalized Pareto Distribution(GPD) and other particular cases of MGPD such 
 #'as weibull distribution \eqn{MGPD(\gamma,0,\psi)} and unit exponential distribution\eqn{MGPD(1,0,\psi)}

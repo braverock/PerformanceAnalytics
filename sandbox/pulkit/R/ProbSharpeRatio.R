@@ -31,6 +31,7 @@
 #' To be given in case the return series is not given.
 #' @param n track record length. To be given in case the return series is not given.
 #'@author Pulkit Mehrotra
+#'@seealso \code{\link{PsrPortfolio}} \code{\link{table.PSR}} \code{\link{MinTrackRecord}}
 #' @references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #' Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
 #' 2012/13

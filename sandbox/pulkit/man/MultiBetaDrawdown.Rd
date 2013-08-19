@@ -60,10 +60,18 @@
 MultiBetaDrawdown(cbind(edhec,edhec),cbind(edhec[,2],edhec[,2]),sample = 2,ps=c(0.4,0.6))
 BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital
   Asset Pricing Model (CAPM) with Drawdown Measure.Research
   Report 2012-9, ISE Dept., University of Florida,September
   2012.
+}
+\seealso{
+  \code{\link{ES}} \code{\link{maxDrawdown}}
+  \code{\link{CdarMultiPath}} \code{\link{AlphaDrawdown}}
+  \code{\link{CDaR}} \code{\link{BetaDrawdown}}
 }
 

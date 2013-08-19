@@ -23,6 +23,7 @@
 #'@param delta The value of delta Z
 #'
 #'@author Pulkit Mehrotra
+#'@seealso \code{\link{ProbSharpeRatio}} \code{\link{table.PSR}} \code{\link{MinTrackRecord}}
 #'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 
 #'Efficient Frontier} (July 1, 2012). Journal of Risk, Vol. 15, No. 2, Winter
 #'2012/13

@@ -55,10 +55,19 @@ AlphaDrawdown(edhec[,1],edhec[,2],type="max") # expected value : 0.8983177
 
 AlphaDrawdown(edhec[,1],edhec[,2],type="average") # expected value : 1.692592
 }
+\author{
+  Pulkit Mehrotra
+}
 \references{
   Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital
   Asset Pricing Model (CAPM) with Drawdown Measure.Research
   Report 2012-9, ISE Dept., University of Florida,September
   2012.
+}
+\seealso{
+  \code{\link{ES}} \code{\link{maxDrawdown}}
+  \code{\link{CdarMultiPath}} \code{\link{CDaR}}
+  \code{\link{MultiBetaDrawdown}}
+  \code{\link{BetaDrawdown}}
 }
 
