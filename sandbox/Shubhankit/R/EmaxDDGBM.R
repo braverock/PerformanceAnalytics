@@ -5,7 +5,15 @@
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of  asset returns
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @keywords Expected Drawdown Using Brownian Motion Assumptions
-#' @rdname EmaxDDGBM
+#' @references An Analysis of the maximum drawdown measure,\emph{Journal of Applied Probability}
+#' (2004) 
+#' @keywords Drawdown models Brownian Motion Assumptions
+#' @examples
+#' 
+#'library(PerformanceAnalytics)
+#' data(edhec)
+#' table.EmaxDDGBM(edhec)
+#' @rdname table.EmaxDDGBM
 #' @export 
 table.EMaxDDGBM <-
   function (R,digits =4)

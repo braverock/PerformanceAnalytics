@@ -1,6 +1,6 @@
 #' @title Stacked Bar Autocorrelation Plot
 #' 
-#' @description A wrapper to create box and whiskers plot of comparitive inputs
+#' @description A wrapper to create box and whiskers plot of lagged autocorrelation analysis
 #' 
 #' @details We have also provided controls for all the symbols and lines in the chart.
 #' One default, set by \code{as.Tufte=TRUE}, will strip chartjunk and draw a

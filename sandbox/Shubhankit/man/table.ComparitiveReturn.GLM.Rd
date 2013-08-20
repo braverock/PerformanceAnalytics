@@ -21,7 +21,7 @@
   Respectively
 }
 \author{
-  R
+  Peter Carl, Brian Peterson, Shubhankit Mohan
 }
 \keyword{GLM}
 \keyword{models}

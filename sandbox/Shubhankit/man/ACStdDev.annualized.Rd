@@ -20,7 +20,9 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Autocorrleation adjusted Standard Deviation
+  Incorporating the component of lagged autocorrelation
+  factor into adjusted time scale standard deviation
+  translation
 }
 \author{
   Peter Carl,Brian Peterson, Shubhankit Mohan

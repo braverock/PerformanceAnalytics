@@ -23,7 +23,7 @@
 #' @author Brian Peterson,Peter Carl, Shubhankit Mohan
 #' @references Mila Getmansky, Andrew W. Lo, Igor Makarov,\emph{An econometric model of serial correlation and 
 #' and illiquidity in hedge fund Returns},Journal of Financial Economics 74 (2004).
-#' @keywords ts multivariate distribution models
+#' @keywords ts multivariate distribution model
 Return.GLM <-
   function (Ra,q=3)
   { # @author Brian G. Peterson, Peter Carl

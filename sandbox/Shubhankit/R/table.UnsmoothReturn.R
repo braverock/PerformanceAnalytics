@@ -1,6 +1,6 @@
-#' Compenent Decomposition of Table of Unsmooth Returns
+#' @title Compenent Decomposition of Table of Unsmooth Returns
 #' 
-#' Creates a table of estimates of moving averages for comparison across
+#' @description Creates a table of estimates of moving averages for comparison across
 #' multiple instruments or funds as well as their standard error and
 #' smoothing index
 #' 
@@ -10,9 +10,9 @@
 #' @param n number of series lags
 #' @param p confidence level for calculation, default p=.99
 #' @param digits number of digits to round results to
-#' @author R
+#' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @keywords ts smooth return models
-#'
+#' @rdname table.UnsmoothReturn
 #' @export 
 table.UnsmoothReturn <-
   function (R, n = 3, p= 0.95, digits = 4)

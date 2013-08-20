@@ -22,7 +22,7 @@
   as their standard error and smoothing index
 }
 \author{
-  R
+  Peter Carl, Brian Peterson, Shubhankit Mohan
 }
 \keyword{models}
 \keyword{return}

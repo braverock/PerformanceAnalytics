@@ -4,17 +4,17 @@
 #' a sum of square of Moving Average lag coefficient.
 #' This measure is well known in the industrial organization literature as the 
 #' Herfindahl index, a measure of the concentration of firms in a given industry. 
-#' The index is maximized when one coefficient is 1 and the rest are 0, in which case x ? 1: In the context of
+#' The index is maximized when one coefficient is 1 and the rest are 0. In the context of
 #'smoothed returns, a lower value of x implies more smoothing, and the upper bound
 #'of 1 implies no smoothing,  hence x is reffered as a ''smoothingindex' '.
 #' 
-#' \deqn{ R_t  =    {\mu} + {\beta}{{\delta}}_t+ \xi_t}
+#' \deqn{ R_t  =    \mu + \beta \delta_t+ \xi_t}
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @author R
+#' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @aliases Return.Geltner
 #' @references "An econometric model of serial correlation and illiquidity in 
-#' hedge fund returns" Mila Getmansky1, Andrew W. Lo*, Igor Makarov
+#' hedge fund returns" Mila Getmansky, Andrew W. Lo, Igor Makarov
 #' 
 #' @keywords ts multivariate distribution models non-iid 
 #' @examples

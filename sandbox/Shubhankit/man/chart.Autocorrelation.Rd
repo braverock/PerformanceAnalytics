@@ -12,8 +12,8 @@
   Stack Bar plot of lagged return coefficients
 }
 \description{
-  A wrapper to create box and whiskers plot of comparitive
-  inputs
+  A wrapper to create box and whiskers plot of lagged
+  autocorrelation analysis
 }
 \details{
   We have also provided controls for all the symbols and

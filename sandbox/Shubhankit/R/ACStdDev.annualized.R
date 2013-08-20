@@ -1,5 +1,5 @@
 #' @title Autocorrleation adjusted Standard Deviation 
-#'
+#' @description Incorporating the component of lagged autocorrelation factor into adjusted time scale standard deviation translation
 #' @aliases sd.multiperiod sd.annualized StdDev.annualized
 #' @param x an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns

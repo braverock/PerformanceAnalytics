@@ -1,4 +1,6 @@
-#' To simulate net asset value (NAV) series where skewness and kurtosis are zero, 
+#'@title Generalised Lambda Distribution Simulated Drardown 
+#'
+#'@description  To simulate net asset value (NAV) series where skewness and kurtosis are zero, 
 #' we draw sample returns from a lognormal return distribution. To capture skewness 
 #' and kurtosis, we sample returns from a generalised lambda distribution.The values of 
 #' skewness and excess kurtosis used were roughly consistent with the range of values we 
@@ -10,11 +12,14 @@
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-
-#' @author R
-#' @keywords Expected Drawdown Using Brownian Motion Assumptions
-#'
-#' @export 
+#' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
+#' working paper.}
+#'  \code{\link[stats]{}} \cr
+#' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
+#' @author Peter Carl, Brian Peterson, Shubhankit Mohan
+#' @keywords Simulated Drawdown Using Brownian Motion Assumptions
+#' @rdname table.normDD
+#' @export
 table.NormDD <-
   function (R,digits =4)
   {# @author 
