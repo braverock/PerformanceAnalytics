@@ -34,29 +34,27 @@
 #'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. 
 #'Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
 #'
-#'
 DrawdownGPD<-function(R,type=c("gpd","pd","weibull"),threshold=0.90){
     x = checkData(R)
     columns = ncol(R)
     columnnames = colnames(R)
     type = type[1]
     dr = -Drawdowns(R)
-    dr_sorted = sort(as.vector(dr))
-    #data = dr_sorted[(0.9*nrow(R)):nrow(R)]
+    data = sort(as.vector(dr))
+    threshold = data[threshold*nrow(R)]
     if(type=="gpd"){
-        gpd_fit = gpd(dr_sorted,dr_sorted[threshold*nrow(R)])
+        gpd_fit = gpd(data,threshold)
         return(gpd_fit)
     }
     if(type=="wiebull"){
-        weibull = fitdistr(data,"weibull")
-        return(weibull)
-    }
-    if(type=="pd"){
-        scale = min(data)
-        shape = length(data)/(sum(log(data))-length(data)*log(a))
-    }
-    
-
+            # From package MASS
+            if(any( data<= 0)) stop("Weibull values must be > 0")
+            lx <- log(data)
+            m <- mean(lx); v <- var(lx)
+            shape <- 1.2/sqrt(v); scale <- exp(m + 0.572/shape)
+            result <- list(shape = shape, scale = scale)
+            return(result)
+        }
 }
 
 
