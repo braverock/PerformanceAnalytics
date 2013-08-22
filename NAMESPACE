@@ -127,6 +127,7 @@ export(
     table.Autocorrelation,
     table.CalendarReturns,
     table.CAPM,
+    table.SFM,
     table.CaptureRatios,
     table.Correlation,
     table.Distributions,

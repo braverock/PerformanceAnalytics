@@ -1,5 +1,5 @@
 \name{ActiveReturn}
-\alias{ActivePremium,}
+\alias{ActivePremium}
 \alias{ActiveReturn}
 \title{Active Premium or Active Return}
 \usage{

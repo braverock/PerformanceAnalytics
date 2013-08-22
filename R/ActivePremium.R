@@ -1,13 +1,13 @@
 #' Active Premium or Active Return
-#' 
+#'
 #' The return on an investment's annualized return minus the benchmark's
 #' annualized return.
-#' 
+#'
 #' Active Premium = Investment's annualized return - Benchmark's annualized
 #' return
-#' 
+#'
 #' Also commonly referred to as 'active return'.
-#' 
+#'
 #' @param Ra return vector of the portfolio
 #' @param Rb return vector of the benchmark asset
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
@@ -19,15 +19,17 @@
 #' Management},Fall 1994, 49-58.
 #' @keywords ts multivariate distribution models
 #' @examples
-#' 
+#'
 #'     data(managers)
 #'     ActivePremium(managers[, "HAM1", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
-#'     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
-#'     ActivePremium(managers[,1:6], managers[,8,drop=FALSE]) 
+#'     ActivePremium(managers[,1,drop=FALSE], managers[,8,drop=FALSE])
+#'     ActivePremium(managers[,1:6], managers[,8,drop=FALSE])
 #'     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
 #' @rdname ActivePremium
-#' @aliases ActivePremium, ActiveReturn
-#' @export 
+#' @aliases
+#' ActivePremium
+#' ActiveReturn
+#' @export
 ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 
@@ -35,7 +37,7 @@ ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
     Ra = checkData(Ra)
     Rb = checkData(Rb)
 
-    Ra.ncols = NCOL(Ra) 
+    Ra.ncols = NCOL(Ra)
     Rb.ncols = NCOL(Rb)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)

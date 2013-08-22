@@ -1,5 +1,5 @@
 \name{table.SFM}
-\alias{table.CAPM,}
+\alias{table.CAPM}
 \alias{table.SFM}
 \title{Single Factor Asset-Pricing Model Summary: Statistics and Stylized Facts}
 \usage{
