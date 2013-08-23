@@ -31,6 +31,7 @@ Collate:
     'EDDCOPS.R'
     'Edd.R'
     'ExtremeDrawdown.R'
+    'gpdmle.R'
     'GoldenSection.R'
     'MaxDD.R'
     'MinTRL.R'
