@@ -30,3 +30,8 @@ Collate:
     'table.normDD.R'
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
+    'AcarSim.R'
+    'CDD.Opt.R'
+    'CalmarRatio.Norm.R'
+    'SterlingRatio.Norm.R'
+
