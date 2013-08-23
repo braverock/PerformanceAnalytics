@@ -21,32 +21,40 @@
 #'
 #'\deqn{G(m) =  1- e^{-frac{m^\gamma}{\psi}}}
 #'
-#'The unit exponential distribution is given by the following equation \eqn{MGPD(1,0,\psi)}
-#'
-#'\deqn{G(m) =  1- e^{-m}}
-#'
+#'In this function weibull and generalized Pareto distribution has been covered. This function can be 
+#'expanded in the future to include more Extreme Value distributions as the literature on such distribution
+#'matures in the future. 
 #'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset return 
 #' @param type The type of distribution "gpd","pd","weibull"
 #' @param threshold The threshold beyond which the drawdowns have to be modelled
+#'
+#'
+#'@examples
+#'
+#'DrawdownGPD(edhec[,1],"gpd",0.95)
+#'
+#'DrawdownGPD(edhec[,1],"weibull")
 #' 
 #'@references
-#'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). Coppead Working Paper Series No. 359. 
-#'Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
+#'Mendes, Beatriz V.M. and Leal, Ricardo P.C., Maximum Drawdown: Models and Applications (November 2003). 
+#'Coppead Working Paper Series No. 359.Available at SSRN: http://ssrn.com/abstract=477322 or http://dx.doi.org/10.2139/ssrn.477322.
 #'
-DrawdownGPD<-function(R,type=c("gpd","pd","weibull"),threshold=0.90){
+DrawdownGPD<-function(R,type=c("gpd","weibull"),threshold=0.90){
     x = checkData(R)
     columns = ncol(R)
     columnnames = colnames(R)
     type = type[1]
     dr = -Drawdowns(R)
-    data = sort(as.vector(dr))
-    threshold = data[threshold*nrow(R)]
-    if(type=="gpd"){
-        gpd_fit = gpd(data,threshold)
-        return(gpd_fit)
-    }
-    if(type=="wiebull"){
+
+
+    gpdfit<-function(data,threshold){
+        if(type=="gpd"){
+            gpd_fit = gpd(data,threshold)
+            result = list(shape = gpd_fit$param[2],scale = gpd_fit$param[1])
+            return(result)
+            }
+        if(type=="wiebull"){
             # From package MASS
             if(any( data<= 0)) stop("Weibull values must be > 0")
             lx <- log(data)
@@ -54,7 +62,28 @@ DrawdownGPD<-function(R,type=c("gpd","pd","weibull"),threshold=0.90){
             shape <- 1.2/sqrt(v); scale <- exp(m + 0.572/shape)
             result <- list(shape = shape, scale = scale)
             return(result)
-        }
+            }
+    }
+    for(column in 1:columns){
+        data = sort(as.vector(dr[,column]))
+        threshold = data[threshold*nrow(R)]
+        column.parameters <- gpdfit(data,threshold)
+            if(column == 1){
+                shape = column.parameters$shape
+                scale = column.parameters$scale
+            }
+            else {
+                scale = merge(scale, column.parameters$scale) 
+                shape = merge(shape, column.parameters$shape)
+                print(scale)
+                print(shape)
+            }
+    }
+    parameters = rbind(scale,shape)
+    colnames(parameters) = columnnames
+    parameters = reclass(parameters, x)
+    rownames(parameters)=c("scale","shape")
+    return(parameters)
 }
 
 
