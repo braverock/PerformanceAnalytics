@@ -24,6 +24,13 @@
   factor into adjusted time scale standard deviation
   translation
 }
+\details{
+  Given a sample of historical returns R(1),R(2), . .
+  .,R(T),the method assumes the fund manager smooths
+  returns in the following manner, when 't' is the unit
+  time interval: The square root time translation can be
+  defined as : \deqn{ \sigma(T) = T \sqrt\sigma(t)}
+}
 \author{
   Peter Carl,Brian Peterson, Shubhankit Mohan
 }
@@ -35,7 +42,8 @@
 }
 \seealso{
   \code{\link[stats]{sd}} \cr
-  \url{http://wikipedia.org/wiki/inverse-square_law}
+  \code{\link[stats]{stdDev.annualized}} \cr
+  \url{http://en.wikipedia.org/wiki/Volatility_(finance)}
 }
 \keyword{distribution}
 \keyword{models}

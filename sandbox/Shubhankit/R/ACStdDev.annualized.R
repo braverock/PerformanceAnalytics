@@ -1,5 +1,8 @@
 #' @title Autocorrleation adjusted Standard Deviation 
 #' @description Incorporating the component of lagged autocorrelation factor into adjusted time scale standard deviation translation
+#' @details Given a sample of historical returns R(1),R(2), . . .,R(T),the method assumes the fund manager smooths returns in the following manner, when 't' is the unit time interval:
+#'  The square root time translation can be defined as :
+#'   \deqn{ \sigma(T)  =  T \sqrt\sigma(t)}  
 #' @aliases sd.multiperiod sd.annualized StdDev.annualized
 #' @param x an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
@@ -8,8 +11,8 @@
 #' 12, quarterly scale = 4)
 #' @param \dots any other passthru parameters
 #' @author Peter Carl,Brian Peterson, Shubhankit Mohan
-#' @seealso \code{\link[stats]{sd}} \cr
-#' \url{http://wikipedia.org/wiki/inverse-square_law}
+#' @seealso \code{\link[stats]{sd}} \cr \code{\link[stats]{stdDev.annualized}} \cr
+#' \url{http://en.wikipedia.org/wiki/Volatility_(finance)}
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
 #' working paper.}
 #'  \code{\link[stats]{}} \cr

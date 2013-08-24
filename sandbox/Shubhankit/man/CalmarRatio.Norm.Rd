@@ -1,6 +1,6 @@
 \name{CalmarRatio.Norm}
 \alias{CalmarRatio.Norm}
-\title{Normalized Calmar reward/risk ratio}
+\title{Normalized Calmar ratio}
 \usage{
   CalmarRatio.Norm(R, tau = 1, scale = NA)
 }
@@ -22,14 +22,17 @@
 \details{
   Both the Normalized Calmar and the Sterling ratio are the
   ratio of annualized return over the absolute value of the
-  maximum drawdown of an investment. The Sterling ratio
-  adds an excess risk measure to the maximum drawdown,
-  traditionally and defaulting to 10%.
-
-  It is also traditional to use a three year return series
-  for these calculations, although the functions included
-  here make no effort to determine the length of your
-  series.  If you want to use a subset of your series,
+  maximum drawdown of an investment. \deqn{Sterling Ratio =
+  [Return over (0,T)]/[max Drawdown(0,T)]} It is also
+  \emph{traditional} to use a three year return series for
+  these calculations, although the functions included here
+  make no effort to determine the length of your series.
+  If you want to use a subset of your series, you'll need
+  to truncate or subset the input data to the desired
+  length. It is also traditional to use a three year return
+  series for these calculations, although the functions
+  included here make no effort to determine the length of
+  your series.  If you want to use a subset of your series,
   you'll need to truncate or subset the input data to the
   desired length.
 }

@@ -13,8 +13,7 @@
 #' asset returns
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @aliases Return.Geltner
-#' @references "An econometric model of serial correlation and illiquidity in 
-#' hedge fund returns" Mila Getmansky, Andrew W. Lo, Igor Makarov
+#' @references \emph{Getmansky, Mila, Lo, Andrew W. and Makarov, Igor} An Econometric Model of Serial Correlation and Illiquidity in Hedge Fund Returns (March 1, 2003). MIT Sloan Working Paper No. 4288-03; MIT Laboratory for Financial Engineering Working Paper No. LFE-1041A-03; EFMA 2003 Helsinki Meetings. Available at SSRN: \url{http://ssrn.com/abstract=384700}
 #' 
 #' @keywords ts multivariate distribution models non-iid 
 #' @examples
