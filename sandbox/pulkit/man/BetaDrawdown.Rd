@@ -63,6 +63,7 @@
   the market performs well.
 }
 \examples{
+data(edhec)
 BetaDrawdown(edhec[,1],edhec[,2])
 }
 \author{

@@ -51,9 +51,10 @@
 #'of Florida,September 2012.
 #'
 #'@examples
+#'data(edhec)
 #'BetaDrawdown(edhec[,1],edhec[,2]) 
 #'
-#'
+#'@export
 BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
     # DESCRIPTION:

@@ -55,7 +55,7 @@
 \examples{
 # with S&P 500 data and T-bill data
 
-dt<-read.zoo("returns.csv",sep=",",header = TRUE)
+dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
 dt<-as.xts(dt)
 REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
 

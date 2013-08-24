@@ -38,7 +38,7 @@
 \examples{
 # with S&P 500 data and T-bill data
 
-dt<-read.zoo("returns.csv",sep=",",header = TRUE)
+dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
 dt<-as.xts(dt)
 EDDCOPS(dt[,1],delta = 0.33,gamma = 0.7,Rf = (1+dt[,2])^(1/12)-1,geometric = TRUE)
 
