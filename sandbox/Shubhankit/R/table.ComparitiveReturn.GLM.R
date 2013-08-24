@@ -11,6 +11,8 @@
 #' @param digits number of digits to round results to
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @keywords ts unsmooth GLM return models
+#' @references Okunev, John and White, Derek R., \emph{ Hedge Fund Risk Factors and Value at Risk of Credit Trading Strategies} (October 2003). 
+#' Available at SSRN: \url{http://ssrn.com/abstract=460641} 
 #' @rdname table.ComparitiveReturn.GLM
 #' @export 
 table.ComparitiveReturn.GLM <-

@@ -1,6 +1,6 @@
 \name{table.NormDD}
 \alias{table.NormDD}
-\title{Generalised Lambda Distribution Simulated Drardown}
+\title{Generalised Lambda Distribution Simulated Drawdown}
 \usage{
   table.NormDD(R, digits = 4)
 }
@@ -9,17 +9,26 @@
   or zoo object of asset returns}
 }
 \description{
+  When selecting a hedge fund manager, one risk measure
+  investors often consider is drawdown. How should drawdown
+  distributions look? Carr Futures' Galen Burghardt, Ryan
+  Duncan and Lianyan Liu share some insights from their
+  research to show investors how to begin to answer this
+  tricky question
+}
+\details{
   To simulate net asset value (NAV) series where skewness
   and kurtosis are zero, we draw sample returns from a
   lognormal return distribution. To capture skewness and
-  kurtosis, we sample returns from a generalised lambda
-  distribution.The values of skewness and excess kurtosis
-  used were roughly consistent with the range of values we
-  observed for commodity trading advisers in our database.
-  The NAV series is constructed from the return series. The
-  simulated drawdowns are then derived and used to produce
-  the theoretical drawdown distributions. A typical run
-  usually requires 10,000 iterations to produce a smooth
+  kurtosis, we sample returns from a \bold{generalised
+  \eqn{\lambda} distribution}.The values of skewness and
+  excess kurtosis used were roughly consistent with the
+  range of values the paper observed for commodity trading
+  advisers in our database. The NAV series is constructed
+  from the return series. The simulated drawdowns are then
+  derived and used to produce the theoretical drawdown
+  distributions. A typical run usually requires
+  \bold{10,000} iterations to produce a smooth
   distribution.
 }
 \author{
@@ -30,6 +39,13 @@
   Autocorrelation, Stupid (November 2012) Newedge working
   paper.} \code{\link[stats]{}} \cr
   \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
+  Burghardt, G., Duncan, R. and L. Liu, \eph{Deciphering
+  drawdown}. Risk magazine, Risk management for investors,
+  September, S16-S20, 2003.
+  \url{http://www.risk.net/data/risk/pdf/investor/0903_risk.pdf}
+}
+\seealso{
+  Drawdowns.R
 }
 \keyword{Assumptions}
 \keyword{Brownian}

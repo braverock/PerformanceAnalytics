@@ -45,8 +45,9 @@ data(managers)
   Brian G. Peterson , Peter Carl , Shubhankit Mohan
 }
 \references{
-  Bacon, Carl. \emph{Magdon-Ismail, M. and Amir Atiya,
-  Maximum drawdown. Risk Magazine, 01 Oct 2004.
+  Bacon, Carl, Magdon-Ismail, M. and Amir Atiya,\emph{
+  Maximum drawdown. Risk Magazine,} 01 Oct 2004.
+  \url{http://www.cs.rpi.edu/~magdon/talks/mdd_NYU04.pdf}
 }
 \keyword{distribution}
 \keyword{models}

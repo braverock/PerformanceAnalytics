@@ -23,6 +23,12 @@
 \author{
   Peter Carl, Brian Peterson, Shubhankit Mohan
 }
+\references{
+  Okunev, John and White, Derek R., \emph{ Hedge Fund Risk
+  Factors and Value at Risk of Credit Trading Strategies}
+  (October 2003). Available at SSRN:
+  \url{http://ssrn.com/abstract=460641}
+}
 \keyword{GLM}
 \keyword{models}
 \keyword{return}
