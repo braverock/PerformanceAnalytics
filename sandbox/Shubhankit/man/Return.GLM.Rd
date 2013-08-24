@@ -18,8 +18,8 @@
   are not observed. The returns to hedge funds and other
   alternative investments are often highly serially
   correlated.We propose an econometric model of return
-  smoothingand develop estimators for the smoothing proﬁle
-  as well as a smoothing-adjusted Sharpe ratio.
+  smoothingand develop estimators for the smoothing
+  proﬁle as well as a smoothing-adjusted Sharpe ratio.
 }
 \details{
   To quantify the impact of all of these possible sources
@@ -41,7 +41,7 @@
   Economics 74 (2004).
 }
 \keyword{distribution}
-\keyword{models}
+\keyword{model}
 \keyword{multivariate}
 \keyword{ts}
 

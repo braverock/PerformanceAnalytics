@@ -1,14 +1,14 @@
-#'@title Getmansky Lo Markov Smoothing Index Parameter
+#'@title  GLM Index 
 #'@description
-#'A useful summary statistic for measuring the concentration of weights is
+#'Getmansky Lo Markov Smoothing Index is a useful summary statistic for measuring the concentration of weights is
 #' a sum of square of Moving Average lag coefficient.
 #' This measure is well known in the industrial organization literature as the 
-#' Herfindahl index, a measure of the concentration of firms in a given industry. 
+#' \bold{ Herfindahl index}, a measure of the concentration of firms in a given industry. 
 #' The index is maximized when one coefficient is 1 and the rest are 0. In the context of
-#'smoothed returns, a lower value of x implies more smoothing, and the upper bound
-#'of 1 implies no smoothing,  hence x is reffered as a ''smoothingindex' '.
-#' 
-#' \deqn{ R_t  =    \mu + \beta \delta_t+ \xi_t}
+#'smoothed returns, a lower value implies more smoothing, and the upper bound
+#'of 1 implies no smoothing,  hence \eqn{\xi} is reffered as a '\bold{smoothingindex}'.
+#'\deqn{ \xi =   \sum\theta(j)^2}
+#'Where j belongs to 0 to k,which is the number of lag factors input.
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan

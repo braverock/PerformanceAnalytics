@@ -34,4 +34,5 @@ Collate:
     'CDD.Opt.R'
     'CalmarRatio.Norm.R'
     'SterlingRatio.Norm.R'
-
+    'LoSharpe.R'
+    'Return.Okunev.R'
