@@ -48,7 +48,7 @@
 #' data(edhec)
 #' MaxDD(edhec,0.95,"ar")
 #' MaxDD(edhec[,1],0.95,"normal") #expected values 4.241799 6.618966
-
+#'@export
 MaxDD<-function(R,confidence,type=c("ar","normal"),...)
 {
   

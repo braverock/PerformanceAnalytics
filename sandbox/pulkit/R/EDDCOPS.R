@@ -8,7 +8,7 @@
 #' \deqn{x_t = Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-EDD(t)}{1-EDD(t)}\biggr]\right\}}
 #' 
 #' The risk free asset accounts for the rest of the portfolio allocation \eqn{x_f = 1 - x_t}.
-#' 
+#'dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
@@ -30,9 +30,8 @@
 #'@examples
 #'
 #' # with S&P 500 data and T-bill data
-#'
-#'dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
-#'dt<-as.xts(dt)
+#'data(ret)
+#'dt<-as.xts(read.zoo(ret))
 #'EDDCOPS(dt[,1],delta = 0.33,gamma = 0.7,Rf = (1+dt[,2])^(1/12)-1,geometric = TRUE)
 #'
 #'data(edhec)

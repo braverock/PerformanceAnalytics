@@ -24,6 +24,7 @@
 #'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples
+#'data(edhec)
 #'EconomicDrawdown(edhec,0.08,100)
 #'
 #' @export

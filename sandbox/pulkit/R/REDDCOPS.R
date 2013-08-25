@@ -18,6 +18,7 @@
 #'   .\gamma}\biggr).\biggl[\frac{\delta-REDD(t,h)}{1-REDD(t,h)}\biggr]\right\}}
 #'  
 #'The portion of the risk free asset is \eqn{x_f = 1 - x_1 - x_2}.
+#'dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
@@ -39,8 +40,7 @@
 #'@examples
 #'
 #' # with S&P 500 data and T-bill data
-#'
-#'dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)
+#'dt<-data(ret)
 #'dt<-as.xts(dt)
 #'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
 #'

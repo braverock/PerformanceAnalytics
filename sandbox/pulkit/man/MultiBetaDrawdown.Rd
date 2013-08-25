@@ -57,6 +57,7 @@
   the market performs well.
 }
 \examples{
+data(edhec)
 MultiBetaDrawdown(cbind(edhec,edhec),cbind(edhec[,2],edhec[,2]),sample = 2,ps=c(0.4,0.6))
 BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 }

@@ -32,6 +32,7 @@
   \code{\link{EconomicMax}}
 }
 \examples{
+data(edhec)
 EconomicDrawdown(edhec,0.08,100)
 }
 \author{
