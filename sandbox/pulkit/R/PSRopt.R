@@ -12,8 +12,6 @@
 #'
 #'This optimal vector is invariant of the value adopted by the parameter \eqn{SR^\**}. 
 #'Gradient Ascent Logic is used to compute the weights using the Function PsrPortfolio
-
-
 #'@aliases PsrPortfolio
 #'
 #'@param R The return series
@@ -185,7 +183,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
 
         x_mat = as.matrix(na.omit(x))
         sum = 0
-        output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum)
+        output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum,PACKAGE="noniid.pm")
        #for(i in 1:n){
          #   x1 = 0
          #   x2 = (x_mat[i,index]-mean[index])^dOrder
@@ -213,7 +211,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     get_Moments<-function(series,order,mean = 0){
         sum = 0
         mat = as.matrix(series)
-        sum = .Call("sums_m",mat,mean,order)
+        sum = .Call("sums_m",mat,mean,order,PACKAGE="noniid.pm")
        # for(i in series){
         #    sum = sum + (i-mean)^order
        # }
