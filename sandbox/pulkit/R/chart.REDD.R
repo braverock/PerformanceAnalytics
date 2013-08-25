@@ -18,8 +18,10 @@
 #'@references Yang, Z. George and Zhong, Liang, Optimal Portfolio Strategy to 
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples
+#'data(edhec)
 #'chart.REDD(edhec,0.08,20)
 #'
+#'@export
 
 chart.REDD<-function(R,rf,h, geometric = TRUE,legend.loc = NULL, colorset = (1:12),...)
 {

@@ -35,6 +35,7 @@
   \code{\link{rollEconomicMax}}
 }
 \examples{
+data(edhec)
 rollDrawdown(edhec,0.08,100)
 }
 \author{

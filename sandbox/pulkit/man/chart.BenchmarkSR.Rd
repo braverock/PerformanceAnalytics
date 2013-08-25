@@ -68,6 +68,7 @@
   \sum_{t=s+1}^{S} \rho_{S,t}}{S(S-1)}}
 }
 \examples{
+data(edhec)
 chart.BenchmarkSR(edhec,vs="strategies")
 chart.BenchmarkSR(edhec,vs="sharpe")
 }

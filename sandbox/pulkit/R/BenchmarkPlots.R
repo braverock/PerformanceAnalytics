@@ -40,7 +40,7 @@
 #'@seealso \code{\link{plot}}
 #'@keywords ts multivariate distribution models hplot
 #'@examples
-#'
+#'data(edhec)
 #'chart.BenchmarkSR(edhec,vs="strategies")
 #'chart.BenchmarkSR(edhec,vs="sharpe")
 #'

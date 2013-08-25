@@ -35,6 +35,7 @@
 #'@seealso \code{\link{plot}} \code{\link{table.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
 #'@keywords ts multivariate distribution models hplot
 #'@examples
+#'data(edhec)
 #'chart.Penance(edhec,0.95)
 #'
 #'@references Bailey, David H. and Lopez de Prado, Marcos,Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).

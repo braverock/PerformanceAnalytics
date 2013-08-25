@@ -44,24 +44,9 @@ maximization.
 <<echo = FALSE >>=
 library(PerformanceAnalytics)
 data(edhec)
+library(noniid.pm)
 @
 
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/ProbSharpeRatio.R")
-@
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/MinTRL.R")
-@
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/PSRopt.R")
-@
-
-<<echo=FALSE>>=
-dyn.load("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/src/moment.so")
-@
 
 \section{Probabilistic Sharpe Ratio}
  Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in probabilistic terms as

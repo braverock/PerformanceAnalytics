@@ -36,6 +36,7 @@
   \eqn{i^{th}} discrete time interval \eqn{{\triangle}t}.
 }
 \examples{
+data(edhec)
 rollEconomicMax(edhec,0.08,100)
 }
 \author{

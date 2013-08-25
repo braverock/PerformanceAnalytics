@@ -31,6 +31,7 @@
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
 #' 
 #' @examples
+#' data(edhec)
 #' TuW(edhec,0.95,"ar")
 #' TuW(edhec[,1],0.95,"normal") # expected value 103.2573 
 #'@export

@@ -14,6 +14,7 @@
 #'Gradient Ascent Logic is used to compute the weights using the Function PsrPortfolio
 #'@aliases PsrPortfolio
 #'
+#'@useDynLib noniid.pm
 #'@param R The return series
 #'@param refSR The benchmark Sharpe Ratio
 #'@param bounds The bounds for the weights
@@ -31,7 +32,7 @@
 #'@examples
 #'
 #'data(edhec)
-#'PsrPortfolio(edhec) 
+#'PsrPortfolio(edhec)
 #'@export
 
 PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
@@ -183,7 +184,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
 
         x_mat = as.matrix(na.omit(x))
         sum = 0
-        output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum,PACKAGE="noniid.pm")
+        output = .Call("sums",mat = x_mat,index,mean,dOrder,weights,mOrder,sum)
        #for(i in 1:n){
          #   x1 = 0
          #   x2 = (x_mat[i,index]-mean[index])^dOrder
@@ -211,7 +212,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     get_Moments<-function(series,order,mean = 0){
         sum = 0
         mat = as.matrix(series)
-        sum = .Call("sums_m",mat,mean,order,PACKAGE="noniid.pm")
+        sum = .Call("sums_m",mat,mean,order)
        # for(i in series){
         #    sum = sum + (i-mean)^order
        # }

@@ -41,14 +41,13 @@
 #'
 #' # with S&P 500 data and T-bill data
 #'dt<-data(ret)
-#'dt<-as.xts(dt)
+#'dt<-as.xts(read.zoo(ret))
 #'REDDCOPS(dt[,1],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "one")
 #'
 #'
 #' # with S&P 500 , barclays and T-bill data
-#'
-#'dt<-read.zoo("ret.csv",sep=";",header = TRUE)
-#'dt<-as.xts(dt)
+#'data(ret)
+#'dt<-as.xts(read.zoo(ret))
 #'REDDCOPS(dt[,1:2],delta = 0.33,Rf = (1+dt[,3])^(1/12)-1,h = 12,geometric = TRUE,asset = "two")
 #'
 #'data(edhec)

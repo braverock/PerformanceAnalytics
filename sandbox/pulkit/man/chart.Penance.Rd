@@ -65,6 +65,7 @@
   water.
 }
 \examples{
+data(edhec)
 chart.Penance(edhec,0.95)
 }
 \author{

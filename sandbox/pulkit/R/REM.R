@@ -24,7 +24,9 @@
 #'@seealso  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}} 
 #'\code{\link{rollDrawdown}} \code{\link{REDDCOPS}} \code{\link{EDDCOPS}}
 #'@examples
+#'data(edhec)
 #'rollEconomicMax(edhec,0.08,100)
+
 #'@export
 #'
 rollEconomicMax<-function(R,Rf,h,geometric = TRUE,...){

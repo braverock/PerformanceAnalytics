@@ -34,23 +34,7 @@ Drawdown based stopouts is a framework for informing the decision of stopping a 
 <<echo = FALSE >>=
 library(PerformanceAnalytics)
 data(edhec)
-@
-
-<<echo=FALSE>>=
-source("../R/MaxDD.R")
-@
-
-<<echo=FALSE>>=
-source("../R/TriplePenance.R")
-@
-
-<<echo=FALSE>>=
-source("../R/GoldenSection.R")
-@
-
-
-<<echo=FALSE>>=
-source("../R/TuW.R")
+library(noniid.pm)
 @
 \section{ Maximum Drawdown }
 Maximum Drawdown tells us Up to how much could a particular strategy lose with a given confidence level ?. This function calculated Maximum Drawdown for two underlying processes normal and autoregressive. For a normal process Maximum Drawdown is given by the formula

@@ -34,34 +34,9 @@ Drawdown based stopouts is a framework for informing the decision of stopping a 
 <<echo = FALSE >>=
 library(PerformanceAnalytics)
 data(edhec)
+library(noniid.pm)
 @
 
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/R/na.skip.R")
-@
-
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/redd.R")
-@
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/Edd.R")
-@
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/REM.R")
-@
-
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/REDDCOPS.R")
-@
-
-
-<<echo=FALSE>>=
-source("/home/pulkit/workspace/GSOC/PerformanceAnalytics/sandbox/pulkit/R/EDDCOPS.R")
-@
 \section{ Rolling Economic Max }
 Rolling Economic Max at time t, looking back at portfolio Wealth history
 for a rolling window of length H is given by:
