@@ -45,9 +45,14 @@
   \item{cex.main}{set the cex.main value, as in
   \code{\link{plot}}}
 
+  \item{cex.lab}{set the cex.lab value, as in
+  \code{\link{plot}}}
+
   \item{ylim}{set the ylim value, as in \code{\link{plot}}}
 
   \item{xlim}{set the xlim value, as in \code{\link{plot}}}
+
+  \item{\dots}{Any other pass thru variable}
 }
 \description{
   A plot for Penance vs phi for the given portfolio The
@@ -73,7 +78,7 @@ chart.Penance(edhec,0.95)
 }
 \references{
   Bailey, David H. and Lopez de Prado,
-  Marcos,Drawdown-Based Stop-Outs and the ‘Triple Penance’
+  Marcos,Drawdown-Based Stop-Outs and the "Triple Penance"
   Rule(January 1, 2013).
 }
 \seealso{

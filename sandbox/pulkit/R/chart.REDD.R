@@ -6,7 +6,7 @@
 #' For more details on rolling economic drawdown see \code{rollDrawdown}.
 #'
 #'@param R an xts, vector, matrix, data frame, timeseries, or zoo object of asset return.
-#'@param Rf risk free rate can be vector such as government security rate of return
+#'@param rf risk free rate can be vector such as government security rate of return
 #'@param h lookback period 
 #'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining(FALSE) to aggregate returns, default is TRUE.
 #'@param legend.loc set the legend.loc, as in \code{\link{plot}}

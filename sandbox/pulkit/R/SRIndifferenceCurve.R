@@ -2,7 +2,7 @@
 #'Sharpe Ratio Indifference Curve
 #'
 #'@description
-#'The trade-off between a candidate’s SR and its correlation
+#'The trade-off between a candidate's SR and its correlation
 #'to the existing set of strategies, is given by the Sharpe 
 #'ratio indifference curve. It is a plot between the candidate's 
 #'Sharpe Ratio and candidate's average correlation for a given 
@@ -28,11 +28,12 @@
 #'@param lwd set the width of the line, as in \code{\link{plot}}
 #'@param pch set the pch value, as in \code{\link{plot}}
 #'@param cex set the cex value, as in \code{\link{plot}}
+#'@param cex.lab set the cex.lab value, as in \code{\link{plot}}
 #'@param cex.axis set the cex.axis value, as in \code{\link{plot}}
 #'@param cex.main set the cex.main value, as in \code{\link{plot}}
 #'@param ylim set the ylim value, as in \code{\link{plot}}
 #'@param xlim set the xlim value, as in \code{\link{plot}}
-#'
+#'@param \dots Any other passthru variable
 #'@author Pulkit Mehrotra
 #'@references 
 #'Bailey, David H. and Lopez de Prado, Marcos, The Strategy Approval Decision: 

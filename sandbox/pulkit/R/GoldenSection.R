@@ -18,8 +18,9 @@
 #'@param b final point
 #'@param minimum TRUE to calculate the minimum and FALSE to calculate the Maximum
 #'@param function_name The name of the function  
+#'@param \dots any other passthru variable
 #'@author Pulkit Mehrotra
-#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #' 
 #'@export
 golden_section<-function(a,b,minimum = TRUE,function_name,...){

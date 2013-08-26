@@ -22,7 +22,9 @@
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns
 #'@param Rm Return series of the optimal portfolio an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns
+#'@param sample The number of sample paths in the return series
 #'@param p confidence level for calculation ,default(p=0.95)
+#'@param ps The probability for each sample path
 #'@param weights portfolio weighting vector, default NULL, see Details
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns, default TRUE
 #' @param type The type of BetaDrawdown if specified alpha then the alpha value given is taken (default 0.95). If "average" then
@@ -44,7 +46,7 @@
 #'BetaDrawdown(edhec[,1],edhec[,2]) #expected value 0.5390431
 #'@export
 
-MultiBetaDrawdown<-function(R,Rm,sample,ps,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
+MultiBetaDrawdown<-function(R,Rm,sample,ps,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
     # DESCRIPTION:
     #

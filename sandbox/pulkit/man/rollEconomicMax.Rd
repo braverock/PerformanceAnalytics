@@ -13,7 +13,7 @@
 
   \item{h}{Look back period}
 
-  \item{geomtric}{geometric utilize geometric chaining
+  \item{geometric}{geometric utilize geometric chaining
   (TRUE) or simple/arithmetic #'chaining(FALSE) to
   aggregate returns, default is TRUE.}
 

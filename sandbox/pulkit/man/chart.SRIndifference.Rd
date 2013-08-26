@@ -35,6 +35,9 @@
 
   \item{cex}{set the cex value, as in \code{\link{plot}}}
 
+  \item{cex.lab}{set the cex.lab value, as in
+  \code{\link{plot}}}
+
   \item{cex.axis}{set the cex.axis value, as in
   \code{\link{plot}}}
 
@@ -44,9 +47,11 @@
   \item{ylim}{set the ylim value, as in \code{\link{plot}}}
 
   \item{xlim}{set the xlim value, as in \code{\link{plot}}}
+
+  \item{\dots}{Any other passthru variable}
 }
 \description{
-  The trade-off between a candidate’s SR and its
+  The trade-off between a candidate's SR and its
   correlation to the existing set of strategies, is given
   by the Sharpe ratio indifference curve. It is a plot
   between the candidate's Sharpe Ratio and candidate's

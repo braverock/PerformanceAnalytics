@@ -27,8 +27,11 @@
 #'else the return series will be used
 #'@param Rf risk free rate can be vector such as government security rate of return.
 #'@param h Look back period
-#'@param geomtric geometric utilize geometric chaining (TRUE) or simple/arithmetic #'chaining(FALSE) to aggregate returns, default is TRUE.
-#'@param ... any other variable
+#'@param geometric geometric utilize geometric chaining (TRUE) or simple/arithmetic 
+#'chaining(FALSE) to aggregate returns, default is TRUE.
+#'@param \dots any other variable
+#'@param asset The number of risky assets in the portfolio
+#'@param type The type of portfolio optimization
 #'
 #'@author Pulkit Mehrotra
 #'@seealso  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}} 
@@ -57,7 +60,7 @@
 #'@export
 #'
 
-REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three"),type=c("calibrated","risk-based"),...){
+REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three"),type=c("calibrated","risk-based"),sharpe = 0,...){
   # DESCRIPTION
   # Calculates the dynamic weights for single and double risky asset portfolios
   # using Rolling Economic Drawdown

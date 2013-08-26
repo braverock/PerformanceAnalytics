@@ -22,8 +22,7 @@
 #'  
 #'@param R an xts, vector, matrix,data frame, timeSeries or zoo object of multiple sample path returns
 #'@param ps the probability for each sample path 
-#'@param scen the number of scenarios in the Return series
-#'@param instr the number of instruments in the Return series
+#'@param sample the number of samples in the Return series
 #'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic 
 #'chaining (FALSE) to aggregate returns, default TRUE
 #'@param p confidence level for calculation ,default(p=0.95)

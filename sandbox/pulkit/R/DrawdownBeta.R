@@ -55,7 +55,7 @@
 #'BetaDrawdown(edhec[,1],edhec[,2]) 
 #'
 #'@export
-BetaDrawdown<-function(R,Rm,h=0,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
+BetaDrawdown<-function(R,Rm,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","average","max"),...){
 
     # DESCRIPTION:
     #

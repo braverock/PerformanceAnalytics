@@ -16,8 +16,7 @@
 #'@param gamma (1-gamma) is the investor risk aversion
 #'else the return series will be used
 #'@param Rf risk free rate can be vector such as government security rate of return.
-#'@param h Look back period
-#'@param geomtric geometric utilize geometric chaining (TRUE) or simple/arithmetic #'chaining(FALSE) to aggregate returns, default is TRUE.
+#'@param geometric geometric utilize geometric chaining (TRUE) or simple/arithmetic #'chaining(FALSE) to aggregate returns, default is TRUE.
 #'@param ... any other variable
 #'@author Pulkit Mehrotra
 #'@seealso  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}} 

@@ -4,7 +4,7 @@
 \usage{
   REDDCOPS(R, delta, Rf, h, geometric = TRUE,
     asset = c("one", "two", "three"),
-    type = c("calibrated", "risk-based"), ...)
+    type = c("calibrated", "risk-based"), sharpe = 0, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -20,11 +20,15 @@
 
   \item{h}{Look back period}
 
-  \item{geomtric}{geometric utilize geometric chaining
-  (TRUE) or simple/arithmetic #'chaining(FALSE) to
-  aggregate returns, default is TRUE.}
+  \item{geometric}{geometric utilize geometric chaining
+  (TRUE) or simple/arithmetic chaining(FALSE) to aggregate
+  returns, default is TRUE.}
 
-  \item{...}{any other variable}
+  \item{\dots}{any other variable}
+
+  \item{asset}{The number of risky assets in the portfolio}
+
+  \item{type}{The type of portfolio optimization}
 }
 \description{
   The Rolling Economic Drawdown Controlled Optimal

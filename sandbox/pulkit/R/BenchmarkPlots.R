@@ -25,11 +25,12 @@
 #'@param cex set the cex value, as in \code{\link{plot}}
 #'@param cex.axis set the cex.axis value, as in \code{\link{plot}}
 #'@param cex.main set the cex.main value, as in \code{\link{plot}}
+#'@param cex.lab set the cex.lab value, as in \code{\link{plot}}
 #'@param vs The values against which benchmark SR has to be plotted. can be 
 #'"sharpe","correlation" or "strategies"
 #'@param ylim set the ylim value, as in \code{\link{plot}}
 #'@param xlim set the xlim value, as in \code{\link{plot}}
-#'
+#'@param \dots any other passthru variable
 #'@author Pulkit Mehrotra
 #'@seealso \code{\link{BenchmarkSR}} \code{\link{chart.SRIndifference}} \code{\link{plot}}
 #'@references

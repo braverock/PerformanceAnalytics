@@ -12,9 +12,11 @@
 
   \item{refSR}{the reference Sharpe Ratio}
 
-  \item{the}{confidence level}
+  \item{p}{the confidence level}
 
   \item{weights}{the weights for the portfolio}
+
+  \item{\dots}{Any other passthru variable}
 }
 \description{
   A table to display the Probabilistic Sharpe Ratio Along

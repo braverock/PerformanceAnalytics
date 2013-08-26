@@ -10,9 +10,9 @@
 #'@param R the return series
 #'@param Rf the risk free rate of return
 #'@param refSR the reference Sharpe Ratio
-#'@param the confidence level
+#'@param p the confidence level
 #'@param weights the weights for the portfolio
-#'
+#'@param \dots Any other passthru variable
 #'@author Pulkit Mehrotra
 #'@seealso \code{\link{ProbSharpeRatio}} \code{\link{PsrPortfolio}} \code{\link{MinTrackRecord}}
 #'@references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 

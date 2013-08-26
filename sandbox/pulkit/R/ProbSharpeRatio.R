@@ -30,6 +30,7 @@
 #' @param kr Kurtosis, in the same periodicity as the returns(non-annualized).
 #' To be given in case the return series is not given.
 #' @param n track record length. To be given in case the return series is not given.
+#' @param \dots any other passthru variable 
 #'@author Pulkit Mehrotra
 #'@seealso \code{\link{PsrPortfolio}} \code{\link{table.PSR}} \code{\link{MinTrackRecord}}
 #' @references Bailey, David H. and Lopez de Prado, Marcos, \emph{The Sharpe Ratio 

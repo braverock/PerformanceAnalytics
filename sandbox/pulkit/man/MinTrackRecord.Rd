@@ -31,9 +31,11 @@
   \item{kr}{Kurtosis, in the same periodicity as the
   returns(non-annualized). To be given in case the return
   series is not given.}
+
+  \item{\dots}{any other passthru variable}
 }
 \description{
-  Minimum Track Record Length tells us “How long should a
+  Minimum Track Record Length tells us "How long should a
   track record be in order to have statistical confidence
   that its Sharpe ratio is above a given threshold? ". If a
   track record is shorter than MinTRL, we do not have

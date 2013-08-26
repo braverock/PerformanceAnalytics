@@ -38,12 +38,17 @@
   \item{cex.main}{set the cex.main value, as in
   \code{\link{plot}}}
 
+  \item{cex.lab}{set the cex.lab value, as in
+  \code{\link{plot}}}
+
   \item{vs}{The values against which benchmark SR has to be
   plotted. can be "sharpe","correlation" or "strategies"}
 
   \item{ylim}{set the ylim value, as in \code{\link{plot}}}
 
   \item{xlim}{set the xlim value, as in \code{\link{plot}}}
+
+  \item{\dots}{any other passthru variable}
 }
 \description{
   Benchmark Sharpe Ratio Plots are used to give the

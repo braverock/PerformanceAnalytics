@@ -2,7 +2,7 @@
 \alias{MultiBetaDrawdown}
 \title{Drawdown Beta for Multiple path}
 \usage{
-  MultiBetaDrawdown(R, Rm, sample, ps, h = 0, p = 0.95,
+  MultiBetaDrawdown(R, Rm, sample, ps, p = 0.95,
     weights = NULL, geometric = TRUE,
     type = c("alpha", "average", "max"), ...)
 }
@@ -14,8 +14,13 @@
   vector, matrix, data frame, timeSeries or zoo object of
   asset returns}
 
+  \item{sample}{The number of sample paths in the return
+  series}
+
   \item{p}{confidence level for calculation
   ,default(p=0.95)}
+
+  \item{ps}{The probability for each sample path}
 
   \item{weights}{portfolio weighting vector, default NULL,
   see Details}

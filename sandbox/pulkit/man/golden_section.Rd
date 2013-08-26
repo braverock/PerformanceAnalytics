@@ -13,6 +13,8 @@
   calculate the Maximum}
 
   \item{function_name}{The name of the function}
+
+  \item{\dots}{any other passthru variable}
 }
 \description{
   The Golden Section Search method is used to find the
@@ -42,7 +44,7 @@
 }
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
-  Drawdown-Based Stop-Outs and the ‘Triple Penance’
+  Drawdown-Based Stop-Outs and the "Triple Penance"
   Rule(January 1, 2013).
 }
 

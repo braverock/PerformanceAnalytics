@@ -39,9 +39,10 @@
 #' @param R Returns
 #' @param confidence the confidence interval
 #' @param type The type of distribution "normal" or "ar"."ar" stands for Autoregressive.
+#' @param \dots any other passthru variable
 #' @author Pulkit Mehrotra
 #' @seealso  \code{\link{chart.Penance}} \code{\link{table.Penance}} \code{\link{TuW}}
-#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #' 
 #' @examples
 #' 

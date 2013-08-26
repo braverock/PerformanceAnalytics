@@ -35,6 +35,8 @@
 
   \item{n}{track record length. To be given in case the
   return series is not given.}
+
+  \item{\dots}{any other passthru variable}
 }
 \description{
   Given a predefined benchmark Sharpe ratio ,the observed

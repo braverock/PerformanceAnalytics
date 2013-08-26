@@ -2,7 +2,7 @@
 \alias{BetaDrawdown}
 \title{Drawdown Beta for single path}
 \usage{
-  BetaDrawdown(R, Rm, h = 0, p = 0.95, weights = NULL,
+  BetaDrawdown(R, Rm, p = 0.95, weights = NULL,
     geometric = TRUE, type = c("alpha", "average", "max"),
     ...)
 }

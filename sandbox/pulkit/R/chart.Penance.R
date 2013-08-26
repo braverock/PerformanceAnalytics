@@ -28,9 +28,10 @@
 #'@param cex set the cex value, as in \code{\link{plot}}
 #'@param cex.axis set the cex.axis value, as in \code{\link{plot}}
 #'@param cex.main set the cex.main value, as in \code{\link{plot}}
+#'@param cex.lab set the cex.lab value, as in \code{\link{plot}}
 #'@param ylim set the ylim value, as in \code{\link{plot}}
 #'@param xlim set the xlim value, as in \code{\link{plot}}
-#'
+#'@param \dots Any other pass thru variable
 #'@author Pulkit Mehrotra
 #'@seealso \code{\link{plot}} \code{\link{table.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
 #'@keywords ts multivariate distribution models hplot
@@ -38,7 +39,7 @@
 #'data(edhec)
 #'chart.Penance(edhec,0.95)
 #'
-#'@references Bailey, David H. and Lopez de Prado, Marcos,Drawdown-Based Stop-Outs and the ‘Triple Penance’ Rule(January 1, 2013).
+#'@references Bailey, David H. and Lopez de Prado, Marcos,Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #'
 #'@export
 

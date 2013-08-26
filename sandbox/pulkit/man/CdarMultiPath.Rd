@@ -11,10 +11,7 @@
 
   \item{ps}{the probability for each sample path}
 
-  \item{scen}{the number of scenarios in the Return series}
-
-  \item{instr}{the number of instruments in the Return
-  series}
+  \item{sample}{the number of samples in the Return series}
 
   \item{geometric}{utilize geometric chaining (TRUE) or
   simple/arithmetic chaining (FALSE) to aggregate returns,

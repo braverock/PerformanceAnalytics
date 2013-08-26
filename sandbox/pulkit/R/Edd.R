@@ -10,7 +10,7 @@
 #'
 #'\deqn{EDD(t)=1-\frac{W_t}/{EM(t)}}
 #'
-#'Here EM stands for Economic Max and is the code \code{\link{EconomicMax}}
+#'Here EM stands for Economic Max.
 #' 
 #'
 #'@param R an xts, vector, matrix, data frame, timeseries, or zoo object of asset return.

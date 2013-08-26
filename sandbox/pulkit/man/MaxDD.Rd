@@ -11,6 +11,8 @@
 
   \item{type}{The type of distribution "normal" or
   "ar"."ar" stands for Autoregressive.}
+
+  \item{\dots}{any other passthru variable}
 }
 \description{
   \code{MaxDD} calculates the Maximum drawdown for a
@@ -70,7 +72,7 @@ MaxDD(edhec[,1],0.95,"normal") #expected values 4.241799 6.618966
 }
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
-  Drawdown-Based Stop-Outs and the ‘Triple Penance’
+  Drawdown-Based Stop-Outs and the "Triple Penance"
   Rule(January 1, 2013).
 }
 \seealso{

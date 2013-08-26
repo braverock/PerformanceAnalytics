@@ -11,6 +11,8 @@
 
   \item{type}{The type of distribution "normal" or
   "ar"."ar" stands for Autoregressive.}
+
+  \item{\dots}{Any other passthru variable}
 }
 \description{
   \code{TriplePenance} calculates the maximum Maximum Time
@@ -53,7 +55,7 @@ TuW(edhec[,1],0.95,"normal") # expected value 103.2573
 }
 \references{
   Bailey, David H. and Lopez de Prado, Marcos,
-  Drawdown-Based Stop-Outs and the ‘Triple Penance’
+  Drawdown-Based Stop-Outs and the "Triple Penance"
   Rule(January 1, 2013).
 }
 \seealso{
