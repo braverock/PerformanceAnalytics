@@ -40,7 +40,7 @@
 
 
 \begin{abstract}
-The returns to hedge funds and other alternative investments are often highly serially correlated. In this paper, we explore several sources of such serial correlation and show that the most likely explanation is illiquidity exposure and smoothed returns. We propose an econometric model of return smoothingand develop estimators for the smoothingprofile as well as a smoothing-adjusted Sharpe ratio.\end{abstract}
+The returns to hedge funds and other alternative investments are often highly serially correlated. In this paper, we explore several sources of such serial correlation and show that the most likely explanation is illiquidity exposure and smoothed returns. We propose an econometric model of return smoothingand develop estimators for the smoothing profile as well as a smoothing-adjusted obtained Sharpe ratio.\end{abstract}
 
 <<echo=FALSE >>=
 library(PerformanceAnalytics)

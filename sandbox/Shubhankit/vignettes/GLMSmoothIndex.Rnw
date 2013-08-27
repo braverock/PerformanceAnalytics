@@ -53,7 +53,7 @@ source("../code/GLMSmoothIndex.R")
 @
 
 \section{Background}
-To quantify the impact of all of these possible sources of serial correlation, denote by \(R_t\),the true economic return of a hedge fund in period t; and let \(R_t\) satisfy the following linear single-factor model:
+To quantify the impact of all of these possible sources of serial correlation, denote by \(R_t\),the true economic return of a hedge fund in period t; and let \(R_t\) satisfy the following linear single factor model:
 
 \begin{equation}
  R_t  =   \\ {\mu} + {\beta}{{\delta}}_t+ \xi_t

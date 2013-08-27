@@ -28,7 +28,7 @@ Markets}
 
 \begin{abstract}
 
-The main concern of this paper is the study of alternative risk measures: namely maximum loss and maximum drawdown. Both statistics have received little attention from academics despite their extensive use by proprietary traders and derivative fund managers.
+The main concern of this paper is the study of alternative risk measures: namely maximum loss and maximum drawdown. Both statistics have received little attention in the financial industry despite their extensive use by proprietary traders and derivative fund managers.
 
 Firstly, this paper recalls from previously published research the expected maximum loss under the normal random walk with drift assumption. In that case, we see that exact analytical formulae can be established. The expected maximum loss can be derived as a function of the mean and standard deviation of the asset. For the maximum drawdown, exact formulae seems more difficult to establish.
 

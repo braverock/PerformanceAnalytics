@@ -22,7 +22,7 @@
 
 \begin{abstract}
 
-    This vignette gives an overview of the Lo Sharpe Ratio which have addressed the issue of IID in financial time series data.
+    This vignette gives an overview of the Lo Sharpe Ratio which have addressed the issue of IID in the financial time series data.
 \end{abstract}
 
 <<echo = FALSE >>=

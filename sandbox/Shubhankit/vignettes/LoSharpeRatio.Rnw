@@ -93,7 +93,7 @@ the assumption that returns \(R_t\) are stationary,
 Var[(R_t)] =   \sum_{i=0}^{q-1} \sum_{j=1}^{q-1} Cov(R(t-i),R(t-j)) = q\hat{\sigma^2} + 2\hat{\sigma^2} \sum_{k=1}^{q-1} (q-k)\rho_k \\
 \end{equation}
 
-Where  $\rho$\(_k\) = Cov(\(R(t)\),\(R(t-k\)))/Var[\(R_t\)] is the \(k^{th}\) order autocorrelation coefficient of the series of returns.This yields the following relationship between SR and SR(q):
+Where  $\rho$\(_k\) = Cov(\(R(t)\),\(R(t-k\)))/Var[\(R_t\)] is the \(k^{th}\) order autocorrelation coefficient's of the series of returns.This yields the following relationship between SR and SR(q):
 
 \begin{equation}
 \hat{SR}(q)  =  \eta(q) \\

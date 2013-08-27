@@ -1,0 +1,247 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+%\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{Maximum Loss and Maximum Drawdown in Financial Markets}
+\author{R Project for Statistical Computing}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+
+\begin{abstract}
+The main concern of this paper is the study of alternative time s the Newedge CTI and the HFRX Commodity index, both of which are peer group indexes; the Morningstar CLS index,
+which is a simple rules-based trend following index operated in
+commodities; and the DJUBS Commodity index, a long-only index of a wide
+variety of commodities.
+\end{abstract}
+
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+@
+
+<<echo=FALSE>>=
+source("../Code/ACStdDev.annualized.R")
+@
+
+\section{Methodology}
+Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the method assumes the fund manager smooths returns in the following manner, when 't' is the unit time interval:
+
+%Let $X \sim N(0,1)$ and $Y \sim \textrm{Exponential}(\mu)$.  Let
+%$Z = \sin(X)$. $\sqrt{X}$.
+  
+%$\hat{\mu}$ = $\displaystyle\frac{22}{7}$
+%e^{2 \mu} = 1
+%\begin{equation}
+%\left(\sum_{t=1}^{T} R_t/T\right) = \hat{\mu} \\
+%\end{equation}
+\begin{equation}
+ \sigma_{T}  =  T \sqrt{\sigma_{t}} \\
+\end{equation}
+
+
+\section{Usage}
+
+In this example we use HAM3.dat database, to compute true Hedge Fund Returns.
+
+<<Graph10,echo=T,fig=T>>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+ACFVol = ACStd Dev.annualized(HAM3.dat[,1:4])
+Vol = StdDev.annualized(HAM3.dat[,1:4])
+Vol
+ACFVol
+barplot(rbind(ACFVol,Vol), main="ACF and Orignal Volatility",
+         xlab="Fund Type",ylab="Volatilty (in %)", col=c("darkblue","red"), beside=TRUE)
+   legend("topright", c("1","2"), cex=0.6, 
+                   bty="2", fill=c("darkblue","red"));
+@
+
+The above figure shows the behaviour of the distribution tending to a normal IID distribution.For comparitive purpose, one can observe the change in the charateristics of return as compared to the orignal.
+
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+@
+
+<<echo=FALSE,eval=TRUE,results=verbatim >>=
+source("../Code/AcarSim.R")
+@
+
+\section{Expected Maximum Loss}
+
+The model is focused on concept of drawdown measure which is in possession of all properties of a deviation measure,generalization of deviation measures to a dynamic case.Concept of risk profiling - Mixed Conditional Drawdown (generalization of CDD).Optimization techniques for CDD computation - reduction to linear programming (LP) problem. Portfolio optimization with constraint on Mixed CDD
+The model develops concept of drawdown measure by generalizing the notion
+of the CDD to the case of several sample paths for portfolio uncompounded rate
+of return.
+
+
+\section{Maximum Drawdown}
+Unfortunately, there is no analytical formulae to establish the maximum drawdown properties under the random walk assumption. We should note first that due to its definition, the maximum drawdown divided by volatility is an only function of the ratio mean divided by volatility. 
+\begin{equation}
+MD / \sigma =  Min \frac{ \sum_{j=1}^{t} X_{j}}{\sigma} = F(\frac{\mu}{\sigma}) \\
+\end{equation}
+
+Such a ratio is useful in that this is a complementary statistic to the return divided by volatility ratio. To get some insight on the relationships between maximum drawdown per unit of volatility and mean  return divided by volatility, we have proceeded to Monte-Carlo simulations. We have simulated cash flows over a period of 36 monthly returns and measured maximum drawdown for varied levels of  annualised return divided by volatility varying from minus two to two by step of 0.1. The process has  been repeated six thousand times.
+
+\section{Shane Arcar Model Usage}
+Figure below illustrates the average maximum drawdown as well as the quantiles 85\%, 90\%, 95\%, 99\%.For instance, an investment exhibiting an annualised return/volatility equal to -2 should experience on average a maximum drawdown equal to six times the annualised volatility.
+
+Other observations are that:maximum drawdown is a positive function of the return /volatility ratio ,confidence interval widens as the return/volatility ratio decreases.This means that as the return/volatility increases not only the magnitude of drawdown decreases but the confidence interval as well. In others words losses are both smaller and more predictable.
+
+<<fig=TRUE>>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+AcarSim(HAM3.dat[,1:4])
+@
+
+<echo=FALSE>>=
+source("../Code/CalmarRatio.Normalized.R")
+@
+
+\section{Calmar and serling Ratio's}
+Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the Calmar and Sterling Ratio's are defined as :
+
+%Let $X \sim N(0,1)$ and $Y \sim \textrm{Exponential}(\mu)$.  Let
+%$Z = \sin(X)$. $\sqrt{X}$.
+  
+%$\hat{\mu}$ = $\displaystyle\frac{22}{7}$
+%e^{2 \mu} = 1
+%\begin{equation}
+%\left(\sum_{t=1}^{T} R_t/T\right) = \hat{\mu} \\
+%\end{equation}
+\begin{equation}
+ Calmar Ratio  =  \frac{Return [0,T]}{max Drawdown  [0,T]} \\
+\end{equation}
+
+\begin{equation}
+ Sterling Ratio  =  \frac{Return [0,T]}{max Drawdown  [0,T] - 10\%} \\
+\end{equation}
+
+\section{Scaling Law}
+Malik Magdon-Ismail  impmemented a sclaing law for different $\mu$ ,$\sigma$ and T.Defined as :
+
+
+\begin{equation}
+Calmar_{\tau}  =  \gamma(_{\tau , Sharpe_{1}})Calmar_{T_{1}}  \\
+\end{equation}
+
+Where : 
+  \begin{equation}
+\gamma(_{\tau , Sharpe_{1}})  =  \frac{\frac{Q_p(T_1/2Sharpe^2_{1})}{T_1}}{\frac{Q_p(T_2/2Sharpe^2_{1})}{\tau}} \\
+\end{equation}
+
+ And , when T tends to  Infinity
+\begin{equation}
+Q_p(T/2Sharpe^2)  =  .63519 + log (Sharpe)  + 0.5 log T\\
+\end{equation}
+
+Same methodolgy goes to Sterling Ratio.
+\section{Calmar and Sterling Ratio - Usage}
+
+In this example we use HAM3.dat database, to compute Calmar and Sterling Ratio.
+
+<<echo=T>>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+CalmarRatio.Normalized(HAM3.dat,1)
+SterlingRatio.Normalized(HAM3.dat,1)
+@
+
+We can see as we shrunk the period the Ratio's decrease because the Max Drawdown does not change much over reduction of time period, but returns are approximately scaled according to  the time length. 
+
+<<echo=FALSE>>=
+source("../code/LoSharpe.R")
+@
+
+\section{Background- Lo Sharpe}
+Given a sample of historical returns \((R_1,R_2, . . .,R_T)\), the standard estimators for these moments are the sample mean and variance:
+
+%Let $X \sim N(0,1)$ and $Y \sim \textrm{Exponential}(\mu)$.  Let
+%$Z = \sin(X)$. $\sqrt{X}$.
+  
+%$\hat{\mu}$ = $\displaystyle\frac{22}{7}$
+%e^{2 \mu} = 1
+%\begin{equation}
+%\left(\sum_{t=1}^{T} R_t/T\right) = \hat{\mu} \\
+%\end{equation}
+\begin{equation}
+ \hat{\mu}  =  \sum_{t=1}^{T} (R_t)/T\\
+\end{equation}
+\begin{equation}
+\hat{\sigma^2}  =  \sum_{t=1}^{T} (R_t-\hat{\mu})^2/T\\
+\end{equation}
+
+From which the estimator of the Sharpe ratio $\hat{SR}$ follows immediately:
+%\left(\mu \right) =  \sum_{t=1}^{T} \(Ri)/T\ \\
+\begin{equation}
+\hat{SR}  =  (\hat{\mu}- R_f)/\hat{\sigma} \\
+\end{equation}
+
+Using a set of techniques collectively known as "large-sample'' or "asymptotic'' statistical theory in which the Central Limit Theorem is applied to
+estimators such as and , the distribution of and other nonlinear functions of and can be easily derived.
+
+\section{Lo- Sharpe Non-IID Returns}
+The relationship between SR and SR(q) is somewhat more involved for non-
+IID returns because the variance of Rt(q) is not just the sum of the variances of component returns but also includes all the covariances. Specifically, under
+the assumption that returns \(R_t\) are stationary,
+\begin{equation}
+Var[(R_t)] =   \sum_{i=0}^{q-1} \sum_{j=1}^{q-1} Cov(R(t-i),R(t-j)) = q\hat{\sigma^2} + 2\hat{\sigma^2} \sum_{k=1}^{q-1} (q-k)\rho_k \\
+\end{equation}
+
+Where  $\rho$\(_k\) = Cov(\(R(t)\),\(R(t-k\)))/Var[\(R_t\)] is the \(k^{th}\) order autocorrelation coefficient of the series of returns.This yields the following relationship between SR and SR(q):
+
+\begin{equation}
+\hat{SR}(q)  =  \eta(q) \\
+\end{equation}
+
+Where :
+
+\begin{equation}
+\eta(q)  =  \frac{q}{\sqrt{(q\hat{\sigma^2} + 2\hat{\sigma^2} \sum_{k=1}^{q-1} (q-k)\rho_k)}} \\
+\end{equation}
+
+\section{Usage}
+
+In this example we use HAM3.dat database, to compute Sharpe Ratio for Hedge Fund Returns.
+<<>>=
+library(PerformanceAnalytics)
+data(HAM3.dat)
+LoSharpe(HAM3.dat)
+@
+
+
+\end{document}

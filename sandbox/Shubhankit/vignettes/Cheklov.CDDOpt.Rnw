@@ -1,0 +1,65 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Triple Penance Rule}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Triple Penance Rule,Maximum Drawdown,Time under water,risk,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Chekhlov Conditional Drawdown at Risk Optimization}
+
+% \keywords{Triple Penance Rule,Maximum Drawdown,Time Under Water,risk,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+ A new one-parameter family of risk measures called Conditional Drawdown (CDD) has
+#'been proposed. These measures of risk are functionals of the portfolio drawdown (underwater) curve considered in active portfolio management. For some value of the tolerance parameter, in the case of a single sample path, drawdown functional is defined sum of the mean of the worst  drawdowns. 
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+
+\section{ Maximum Drawdown }
+
+ This section formulates a portfolio optimization problem with drawdown risk measure and suggests efficient optimization techniques for its solving. Optimal asset allocation considers: Generation of sample paths for the assets' rates of return and  Uncompounded cumulative portfolio rate of return rather than compounded one.
+
+
+The main concern of this paper is the study of alternative risk measures: namely maximum loss and maximum drawdown. Both statistics have received little attention from academics despite their extensive use by proprietary traders and derivative fund managers.
+
+Firstly, this paper recalls from previously published research the expected maximum loss under the normal random walk with drift assumption. In that case, we see that exact analytical formulae can be established. The expected maximum loss can be derived as a function of the mean and standard deviation of the asset. For the maximum drawdown, exact formulae seems more difficult to establish.
+
+Therefore Monte-Carlo simulations have to be used.
+
+Unfortunately, there is no analytical formulae to establish the maximum drawdown properties under the random walk assumption. We should note first that due to its definition, the maximum drawdown divided by volatility is an only function of the ratio mean divided by volatility.
+
+When the distibution is normal
+ Given a sample path of instrument's rates of return (r(1),r(2)...,r(N)),
+ the CDD functional, is computed by the following optimization procedure
+\begin{equation}
+\delta[\alpha(w)] = min y + [1]/[(1-\alpha)N] \sum [z(k)]
+\end{equation}
+s.t. 
+\begin{equation}
+z(k) greater than u(k)-y 
+u(k) greater than u(k-1)- r(k)
+\end{equation}
+
+ which leads to a single optimal value of y , and to a closed interval of optimal y with the left endpoint.
+
+
+\end{document}

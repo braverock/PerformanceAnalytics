@@ -3,3 +3,5 @@ generatechangelog\.sh
 ChangeLog\.1\.0\.0
 week*
 Week*
+^.*\.Rproj$
+^\.Rproj\.user$

@@ -72,7 +72,7 @@ Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the method assumes
 where :  \sum_{i}^{} \beta_{i} = (1- \alpha) \\
 \end{equation}
 
-\(r_{0,t}\) : is the observed (reported) return at time t (with 0 adjustments to reported returns), \\
+\(r_{0,t}\) : is the observed (reported) return at time t (with 0 adjustments' to reported returns), \\
 \(r_{m,t}\) : is the true underlying (unreported) return at time t (determined by making m adjustments to reported returns). \\
 
 The objective is to determine the true underlying return by removing the
