@@ -17,7 +17,6 @@ License: GPL-3
 ByteCompile: TRUE
 Collate:
     'ACStdDev.annualized.R'
-    'CalmarRatio.Normalized.R'
     'CDDopt.R'
     'CDrawdown.R'
     'chart.Autocorrelation.R'
@@ -27,7 +26,6 @@ Collate:
     'na.skip.R'
     'Return.GLM.R'
     'table.ComparitiveReturn.GLM.R'
-    'table.normDD.R'
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
     'AcarSim.R'
@@ -37,3 +35,4 @@ Collate:
     'LoSharpe.R'
     'Return.Okunev.R'
     'se.LoSharpe.R'
+    'chart.AcarSim.R'

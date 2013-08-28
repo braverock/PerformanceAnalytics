@@ -1,8 +1,8 @@
-\name{AcarSim}
-\alias{AcarSim}
+\name{chart.AcarSim}
+\alias{chart.AcarSim}
 \title{Acar-Shane Maximum Loss Plot}
 \usage{
-  AcarSim()
+  chart.AcarSim(R)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -24,14 +24,14 @@
   establish the maximum drawdown properties under the
   random walk assumption. We should note first that due to
   its definition, the maximum drawdown divided by
-  volatility can be interpreted as the only function of the
-  ratio mean divided by volatility. \deqn{MD/[\sigma]= Min
-  (\sum[X(j)])/\sigma = F(\mu/\sigma)} Where j varies from
-  1 to n ,which is the number of drawdown's in simulation
+  volatility is an only function of the ratio mean divided
+  by volatility. \deqn{MD/[\sigma]= Min (\sum[X(j)])/\sigma
+  = F(\mu/\sigma)} Where j varies from 1 to n ,which is the
+  number of drawdown's in simulation
 }
 \examples{
 library(PerformanceAnalytics)
-AcarSim(edhec)
+chart.AcarSim(edhec)
 }
 \author{
   Shubhankit Mohan
