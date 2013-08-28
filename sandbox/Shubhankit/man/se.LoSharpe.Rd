@@ -1,8 +1,8 @@
-\name{LoSharpe}
-\alias{LoSharpe}
-\title{Andrew Lo Sharpe Ratio}
+\name{se.LoSharpe}
+\alias{se.LoSharpe}
+\title{Andrew Lo Sharpe Ratio Statistics}
 \usage{
-  LoSharpe(Ra, Rf = 0, q = 3, ...)
+  se.LoSharpe(Ra, Rf = 0, q = 3, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -20,7 +20,7 @@
   Although the Sharpe ratio has become part of the canon of
   modern financial analysis, its applications typically do
   not account for the fact that it is an estimated
-  quantity, subject to estimation errors that can be
+  quantity, subject to estimation errors which can be
   substantial in some cases.
 
   Many studies have documented various violations of the
@@ -48,7 +48,7 @@
 }
 \examples{
 data(edhec)
-head(LoSharpe(edhec,0,3)
+head(se.LoSharpe(edhec,0,3)
 }
 \author{
   Brian G. Peterson, Peter Carl, Shubhankit Mohan

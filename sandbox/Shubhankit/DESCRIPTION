@@ -36,3 +36,4 @@ Collate:
     'SterlingRatio.Norm.R'
     'LoSharpe.R'
     'Return.Okunev.R'
+    'se.LoSharpe.R'
