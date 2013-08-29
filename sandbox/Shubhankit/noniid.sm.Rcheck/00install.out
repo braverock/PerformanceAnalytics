@@ -1,7 +1,0 @@
-* installing *source* package 'noniid.sm' ...
-** R
-Error in .install_package_code_files(".", instdir) : 
-files in 'C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm.Rcheck/00_pkg_src/noniid.sm/R' missing from 'Collate' field:
-  table.EMaxDDGBM.R
-ERROR: unable to collate and parse R files for package 'noniid.sm'
-* removing 'C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm.Rcheck/noniid.sm'
