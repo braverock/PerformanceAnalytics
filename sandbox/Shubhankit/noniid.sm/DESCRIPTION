@@ -1,0 +1,37 @@
+Package: noniid.sm
+Type: Package
+Title: Non-i.i.d. GSoC 2013 Shubhankit
+Version: 0.1
+Date: $Date: 2013-05-13 14:30:22 -0500 (Mon, 13 May 2013) $
+Author: Shubhankit Mohan <shubhankit1@gmail.com>
+Contributors: Peter Carl, Brian G. Peterson
+Depends:
+    xts,
+    PerformanceAnalytics,
+    tseries,
+    stats
+Maintainer: Brian G. Peterson <brian@braverock.com>
+Description: GSoC 2013 project to replicate literature on drawdowns and
+    non-i.i.d assumptions in finance.
+License: GPL-3
+ByteCompile: TRUE
+Collate:
+    'AcarSim.R'
+    'ACStdDev.annualized.R'
+    'CalmarRatio.Norm.R'
+    'CDrawdown.R'
+    'chart.AcarSim.R'
+    'chart.Autocorrelation.R'
+    'GLMSmoothIndex.R'
+    'LoSharpe.R'
+    'maxDDGBM.R'
+    'na.skip.R'
+    'noniid.sm-internal.R'
+    'Return.GLM.R'
+    'Return.Okunev.R'
+    'se.LoSharpe.R'
+    'SterlingRatio.Norm.R'
+    'table.ComparitiveReturn.GLM.R'
+    'table.UnsmoothReturn.R'
+    'UnsmoothReturn.R'
+    'EmaxDDGBM.R'
