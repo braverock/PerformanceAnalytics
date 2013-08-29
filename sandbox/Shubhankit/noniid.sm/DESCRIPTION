@@ -35,3 +35,5 @@ Collate:
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
     'EmaxDDGBM.R'
+    'table.EMaxDDGBM.R'
+
