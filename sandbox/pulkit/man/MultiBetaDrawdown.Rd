@@ -40,18 +40,17 @@
   The drawdown beta is formulated as follows
 
   \deqn{\beta_DD^i =
-  \frac{{\sum_{s=1}^S}{\sum_{t=1}^T}p_s{q_t^\asterisk}{(w_{s,k^{\asterisk}(s,t)^i}-w_{st}^i)}}{D_{\alpha}(w^M)}}
+  \frac{{\sum_{s=1}^S}{\sum_{t=1}^T}p_s{q_t^{*}}{(w_{s,k^{*}(s,t)^i}-w_{st}^i)}}{D_{\alpha}(w^M)}}
   here \eqn{\beta_DD} is the drawdown beta of the
   instrument for multiple sample path.
-  \eqn{k^{\asterisk}(s,t)\in{argmax_{t_{\tau}{\le}k{\le}t}}w_{sk}^p(x^\asterisk)}
+  \eqn{k^{*}(s,t)\in{argmax_{t_{\tau}{\le}k{\le}t}}w_{sk}^p(x^{*})}
 
   The numerator in \eqn{\beta_DD} is the average rate of
   return of the instrument over time periods corresponding
   to the \eqn{(1-\alpha)T} largest drawdowns of the optimal
-  portfolio, where \eqn{w_t - w_k^{\asterisk}(t)} is the
-  cumulative rate of return of the instrument from the
-  optimal portfolio peak time \eqn{k^\asterisk(t)} to time
-  t.
+  portfolio, where \eqn{w_t - w_k^{*}(t)} is the cumulative
+  rate of return of the instrument from the optimal
+  portfolio peak time \eqn{k^{*}(t)} to time t.
 
   The difference in CDaR and standard betas can be
   explained by the conceptual difference in beta

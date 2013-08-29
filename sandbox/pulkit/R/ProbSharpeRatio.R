@@ -8,7 +8,7 @@
 #' probability of skill. The reference Sharpe Ratio should be less than 
 #' the Observed Sharpe Ratio.
 #' 
-#' \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
+#' \deqn{\hat{PSR}(SR^{*}) = Z\bigg[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\bigg]}
 
 #' Here \eqn{n} is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
 
