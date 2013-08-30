@@ -1,4 +1,3 @@
-#'@export
 na.skip <- function (x, FUN=NULL, ...) # maybe add a trim capability?
 { # @author Brian Peterson
 

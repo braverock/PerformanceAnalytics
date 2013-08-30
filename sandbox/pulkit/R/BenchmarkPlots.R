@@ -2,7 +2,8 @@
 #'
 #'@description
 #'Benchmark Sharpe Ratio Plots are used to give the relation ship between the
-#'Benchmark Sharpe Ratio and average correlation,average sharpe ratio or the number of #'strategies keeping other parameters constant. Here average Sharpe ratio , average #'correlation stand for the average of all the strategies in the portfolio. The original 
+#'Benchmark Sharpe Ratio and average correlation,average sharpe ratio or the number of #'strategies keeping other parameters constant. 
+#'Here average Sharpe ratio , average correlation stand for the average of all the strategies in the portfolio. The original 
 #'point of the return series is also shown on the plots.
 #'
 #'The equation for the Benchamark Sharpe Ratio is.

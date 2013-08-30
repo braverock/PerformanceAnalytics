@@ -13,7 +13,7 @@
 ## REFERENCE:
 ## Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
 ## and the ‘Triple Penance’ Rule(January 1, 2013).
-#'@export
+
 dd_norm<-function(x,confidence){
     # DESCRIPTION:
     # A function to return the maximum drawdown for a normal distribution
@@ -30,7 +30,6 @@ dd_norm<-function(x,confidence){
     return(c(dd*100,t))
 }
 
-#'@export
 tuw_norm<-function(x,confidence){
     # DESCRIPTION:
     # A function to return the Time under water
@@ -47,7 +46,6 @@ tuw_norm<-function(x,confidence){
 
 
 
-#'@export
 get_minq<-function(R,confidence){
   
     # DESCRIPTION:
@@ -75,7 +73,6 @@ get_minq<-function(R,confidence){
     return(c(-minQ$value*100,minQ$x))
 }
 
-#'@export
 getQ<-function(bets,phi,mu,sigma,dp0,confidence){
 
     # DESCRIPTION:
@@ -103,7 +100,6 @@ getQ<-function(bets,phi,mu,sigma,dp0,confidence){
 
 }
 
-#'@export
 get_TuW<-function(R,confidence){
 
     # DESCRIPTION:
@@ -134,7 +130,6 @@ get_TuW<-function(R,confidence){
 
 
 
-#'@export
 diff_Q<-function(bets,phi,mu,sigma,dp0,confidence){
   
   # DESCRIPTION:
