@@ -56,5 +56,5 @@ SEXP sums_m(SEXP mat,SEXP Rmean,SEXP order){
     return Rsum;
 }
 
-    
+ 
 

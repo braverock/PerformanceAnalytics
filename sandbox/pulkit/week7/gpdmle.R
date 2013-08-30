@@ -1,6 +1,6 @@
 ## This function comes from the  package "POT" . The gpd function
 ## corresponds to the gpdmle function. So, I'm very gratefull to Mathieu Ribatet.
-
+#'@useDynLib gpd
 gpd <- function(x, threshold, start, ...,
                    std.err.type = "observed", corr = FALSE,
                    method = "BFGS", warn.inf = TRUE){
@@ -10,7 +10,7 @@ gpd <- function(x, threshold, start, ...,
   
   nlpot <- function(scale, shape) { 
     -.C("gpdlik", exceed, nat, threshold, scale,
-        shape, dns = double(1), PACKAGE = "POT")$dns
+        shape, dns = double(1))$dns
   }
   
   nn <- length(x)
