@@ -2,7 +2,7 @@
 \alias{AcarSim}
 \title{Acar-Shane Maximum Loss Plot}
 \usage{
-  AcarSim()
+  AcarSim(R)
 }
 \description{
   To get some insight on the relationships between maximum

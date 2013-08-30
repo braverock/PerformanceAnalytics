@@ -31,7 +31,7 @@
 #' @rdname table.UnsmoothReturn
 #' @export 
 table.UnsmoothReturn <-
-  function (R, n = 3, p= 0.95, digits = 4)
+  function (R, n = 2, p= 0.95, digits = 4)
   {# @author 
     
     # DESCRIPTION:
@@ -53,17 +53,17 @@ table.UnsmoothReturn <-
     # for each column, do the following:
     for(column in 1:columns) {
       x = y[,column]
-      
-      z = c(arma(x,0,2)$theta[1],
-        arma(x,0,2)$se.theta[1],
-        arma(x,0,2)$theta[2],
-        arma(x,0,2)$se.theta[2],
-            arma(x,0,2)$se.theta[2])
+      ma.stats= arma(x, order = c(0, 2))
+
+      z = c(as.numeric(ma.stats$coef[1]),
+        sqrt(as.numeric(ma.stats$vcov[1]))*100,
+            as.numeric(ma.stats$coef[2]),
+            sqrt(as.numeric(ma.stats$vcov[4]))*100,sum(as.numeric(ma.stats$coef[1:2])*as.numeric(ma.stats$coef[1:2])))
       znames = c(
-        "Moving Average(1)",
-        "Std Error of MA(1)",
-        "Moving Average(2)",
-        "Std Error of MA(2)",
+        "MA(1)",
+        "Std Error of MA(1)(in %)",
+        "MA(2)",
+        "Std Error of MA(2)(in %)",
         "Smoothing Invest"
         
       )

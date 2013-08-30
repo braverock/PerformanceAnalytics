@@ -20,7 +20,7 @@
 #' @rdname AcarSim
 #' @export 
 AcarSim <-
-  function()
+  function(R)
   {
     
     library(PerformanceAnalytics)
@@ -30,13 +30,16 @@ AcarSim <-
     R = checkData(edhec, method="xts")
     # Get dimensions and labels
     # simulated parameters using edhec data
-mu=mean(Return.annualized(edhec))
+mu=mean(Return.annualized(R))
 monthly=(1+mu)^(1/12)-1
-sig=StdDev.annualized(edhec[,1])[1];
+    vol = as.numeric(StdDev.annualized(R));
+    ret=as.numeric(Return.annualized(R))
+    drawdown =as.numeric(maxDrawdown(R))
+    sig=mean(StdDev.annualized(R));
 T= 36
 j=1
 dt=1/T
-nsim=6000;
+nsim=1;
 thres=4;
 r=matrix(0,nsim,T+1)
 monthly = 0
@@ -77,9 +80,10 @@ plot(((fddown[,1])/(sig*nsim)),xlab="Annualised Return/Volatility from [-2,2]",y
 lines(((fddown[,2])/(sig*nsim)),type='o',col="pink")
 lines(((fddown[,3])/(sig*nsim)),type='o',col="green")
 lines(((fddown[,4])/(sig*nsim)),type='o',col="red")
-legend(32,-4, c("%99", "%95", "%90","%85"), col = c("blue","pink","green","red"), text.col= "black",
-       lty = c(2, -1, 1), pch = c(-1, 3, 4), merge = TRUE, bg='gray90')
-
+    points((ret/vol), (-drawdown/vol), col = "black", pch=10)
+    legend(32,-4, c("%99", "%95", "%90","%85","Fund"), col = c("blue","pink","green","red","black"), text.col= "black",
+       lty = c(2, -1, 1,2), pch = c(-1, 3, 4,10), merge = TRUE, bg='gray90')
+    
 title("Maximum Drawdown/Volatility as a function of Return/Volatility 
 36 monthly returns simulated 6,000 times") 
 }

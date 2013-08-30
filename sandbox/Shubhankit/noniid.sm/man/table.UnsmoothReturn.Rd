@@ -2,7 +2,7 @@
 \alias{table.UnsmoothReturn}
 \title{Table of Unsmooth Returns}
 \usage{
-  table.UnsmoothReturn(R, n = 3, p = 0.95, digits = 4)
+  table.UnsmoothReturn(R, n = 2, p = 0.95, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries

@@ -21,7 +21,7 @@
 #' @param q number of lag factors for autocorrelation
 #' @references Okunev, John and White, Derek R., \emph{ Hedge Fund Risk Factors and Value at Risk of Credit Trading Strategies} (October 2003). 
 #' Available at SSRN: \url{http://ssrn.com/abstract=460641} 
-#' @author Peter Carl, Brian Peterson, Shubhankit Mohan
+#' @author Shubhankit Mohan
 #' @seealso  \code{\link{Return.Geltner}} \cr
 #' @keywords ts multivariate distribution models
 #' @examples
@@ -33,8 +33,12 @@
 #' @export
 Return.Okunev<-function(R,q=3)
 {
+  
   column.okunev=R
-  column.okunev <- column.okunev[!is.na(column.okunev)]
+ col=ncol(R)
+  for(j in 1:col){
+  column.okunev[,j] <- column.okunev[,j][!is.na(column.okunev[,j])]
+}
   for(i in 1:q)
   {
     lagR = lag(column.okunev, k=i)
@@ -42,7 +46,8 @@ Return.Okunev<-function(R,q=3)
   }
   return(c(column.okunev))
 }
-#' Recusrsive Okunev Call Function
+# Recusrsive Okunev Call Function
+
 quad <- function(R,d)
 {
   coeff = as.numeric(acf(as.numeric(edhec[,1]), plot = FALSE)[1:2][[1]])

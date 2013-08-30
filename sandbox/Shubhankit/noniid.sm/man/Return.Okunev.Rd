@@ -59,7 +59,7 @@ data(managers)
 head(Return.Okunev(managers[,1:3]),n=3)
 }
 \author{
-  Peter Carl, Brian Peterson, Shubhankit Mohan
+  Shubhankit Mohan
 }
 \references{
   Okunev, John and White, Derek R., \emph{ Hedge Fund Risk
