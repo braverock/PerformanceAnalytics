@@ -5,17 +5,11 @@
 #'The Rolling Economic Drawdown Controlled Optimal Portfolio Strategy(REDD-COPS) has 
 #'the portfolio fraction allocated to single risky asset as:
 #'
-#' \deqn{x_t = Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-REDD(t,h)}{1-REDD(t,h)}\biggr]\right\}}
 #' 
 #' The risk free asset accounts for the rest of the portfolio allocation \eqn{x_f = 1 - x_t}.
 #' 
 #' For two risky assets in REDD-COPS,dynamic asset allocation weights are :
 #' 
-#'\deqn{\left[\begin{array}{c} x_1 \\ x_2 \end{array}\right] = \frac{1}{1-{\rho}^2}
-#'   \left[\begin{array}{c} (\lambda_1 + {1/2}\sigma_1 - \rho.(\lambda_2 + {1/2}\sigma_2
-#'   )/\sigma_1) \\ (\lambda_1 + {1/2}\sigma_1 - \rho(\lambda_2 + {1/2}\sigma_2)/\sigma_
-#'   1) \end{array}\right] Max\left\{0,\biggl(\frac{\lambda/\sigma + 1/2}{1-\delta
-#'   .\gamma}\biggr).\biggl[\frac{\delta-REDD(t,h)}{1-REDD(t,h)}\biggr]\right\}}
 #'  
 #'The portion of the risk free asset is \eqn{x_f = 1 - x_1 - x_2}.
 #'dt<-read.zoo("../data/ret.csv",sep=",",header = TRUE)

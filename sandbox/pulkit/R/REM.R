@@ -5,7 +5,7 @@
 #'Rolling Economic Max at time t, looking back at portfolio Wealth history
 #'for a rolling window of length H is given by:
 #'
-#'\deqn{REM(t,h)=\max_{t-H \leq s}\[(1+r_f)^{t-s}W_s\]}
+#'\deqn{REM(t,h)=\max_{t-H \leq s}[(1+r_f)^{t-s}W_s]}
 #'
 #'Here rf is the average realized risk free rate over a period of length t-s. If the risk free rate is changing. This is used to compound.
 #'
