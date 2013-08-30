@@ -25,7 +25,9 @@
 \description{
   The Economic Drawdown Controlled Optimal Portfolio
   Strategy(EDD-COPS) has the portfolio fraction allocated
-  to single risky asset as:
+  to single risky asset as: \deqn{x_t =
+  Max\left\{0,\biggl(\frac{\lambda/\sigma +
+  1/2}{1-\delta.\gamma}\biggr).\biggl[\frac{\delta-EDD(t)}{1-EDD(t)}\biggr]\right\}}
 
   The risk free asset accounts for the rest of the
   portfolio allocation \eqn{x_f = 1 - x_t}.
