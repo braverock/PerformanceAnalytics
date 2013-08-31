@@ -29,7 +29,7 @@
   drawdown, traditionally and defaulting to 10\%.
 
   \deqn{Sterling Ratio = [Return over (0,T)]/[max
-  Drawdown(0,T) - 10%]} It is also \emph{traditional} to
+  Drawdown(0,T) - 10\%]} It is also \emph{traditional} to
   use a three year return series for these calculations,
   although the functions included here make no effort to
   determine the length of your series.  If you want to use

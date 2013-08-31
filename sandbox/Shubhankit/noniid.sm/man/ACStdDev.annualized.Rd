@@ -33,6 +33,7 @@
 }
 \examples{
 library(PerformanceAnalytics)
+data(edhec)
 ACStdDev.annualized(edhec,3)
 }
 \author{

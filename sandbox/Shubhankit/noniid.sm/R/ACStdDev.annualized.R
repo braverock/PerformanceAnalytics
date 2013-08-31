@@ -18,6 +18,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' library(PerformanceAnalytics)
+#' data(edhec)
 #' ACStdDev.annualized(edhec,3)
 #' 
 #' @export

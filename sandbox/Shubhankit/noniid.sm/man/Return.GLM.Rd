@@ -43,7 +43,7 @@
   estimation,arima0 from package \bold{stats} can be used.
 }
 \examples{
-library(PerformanceAnalytics)
+data(edhec)
 Return.GLM(edhec,4)
 }
 \author{

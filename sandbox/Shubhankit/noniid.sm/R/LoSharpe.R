@@ -34,7 +34,7 @@
 #' @examples
 #' 
 #' data(edhec)
-#' head(LoSharpe(edhec,0,3)
+#' head(LoSharpe(edhec,0,3))
 #' @rdname LoSharpe
 #' @export
 LoSharpe <-

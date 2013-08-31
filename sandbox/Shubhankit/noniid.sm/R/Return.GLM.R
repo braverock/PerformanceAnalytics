@@ -1,11 +1,12 @@
-#'  @title GLM Return Model
-#' @description True returns represent the flow of information that would determine the equilibrium
+#' GLM Return Model
+#'
+#' True returns represent the flow of information that would determine the equilibrium
 #' value of the fund's securities in a frictionless market. However, true economic
 #' returns are not observed. The returns to hedge funds and other alternative investments are often 
 #' highly serially correlated.We propose an econometric model of return smoothing and \emph{develop estimators for the smoothing 
 #' profile as well as a smoothing-adjusted Sharpe ratio}.
 #' @examples
-#' library(PerformanceAnalytics)
+#' data(edhec)
 #' Return.GLM(edhec,4)
 #' @param 
 #' Ra : an xts, vector, matrix, data frame, timeSeries or zoo object of
