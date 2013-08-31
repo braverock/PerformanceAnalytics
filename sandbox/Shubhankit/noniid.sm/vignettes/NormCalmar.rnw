@@ -52,9 +52,9 @@ data(edhec)
 @
 
 <<echo=FALSE>>=
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/CalmarRatio.Norm.R")
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/SterlingRatio.Norm.R")
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/QP.Norm.R")
+require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/CalmarRatio.Norm.R")
+require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/SterlingRatio.Norm.R")
+require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/QP.Norm.R")
 @
 
 \section{Background}

@@ -49,7 +49,7 @@ data(edhec)
 @
 
 <<echo=FALSE,eval=TRUE,results=verbatim >>=
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/Return.Okunev.R")
+require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/Return.Okunev.R")
 @
 
 \section{Methodology}
