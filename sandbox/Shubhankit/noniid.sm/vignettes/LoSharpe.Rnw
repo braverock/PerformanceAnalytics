@@ -1,0 +1,76 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Lo Sharpe Ratio }
+\author{R Project for Statistical Computing}
+% \keywords{Lo Sharpe Ratio,GLM Smooth Index,GLM Return Table}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+    This vignette gives an overview of the Lo Sharpe Ratio which have addressed the issue of IID in the financial time series data.
+\end{abstract}
+
+
+<<echo=FALSE>>=
+source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/LoSharpe.R')
+@
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+\section{Background}
+The building blocks of the \textbf{Sharpe Ratio} : expected returns and volatilities  are unknown quantities that must be estimated statistically and are,
+therefore, subject to \emph{estimation error} . This raises the natural question: How
+\emph{accurately} are Sharpe ratios measured? To address this question, Andrew Lo derives explicit expressions for the statistical distribution of the Sharpe ratio using
+standard asymptotic theory. 
+
+
+\section{Lo Sharpe Ratio}
+ Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio         $\hat{SR}$  can be expressed in terms of autocorrelated coefficients as
+ 
+ \deqn{ \hat{SR} (q) - SR(q)= Normal Distribution(0,V_{GMM}(q)) }
+ 
+The estimator for the Sharpe ratio then follows directly:
+\deqn{  \hat{SR} (q) =  \hat{ \eta } (q)  * Sharpe Ratio}
+\deqn{  \hat{ \eta } (q)= q/\sqrt{q +  \sum_k^n  \rho  } }
+\section{Example}
+
+In an illustrative
+empirical example of mutual funds and hedge funds, we find results, similar reported in paper, that the annual Sharpe ratio for a hedge fund can be overstated by as much as \textbf{65} \% because of the presence of \textbf{serial correlation} , and once
+this serial correlation is properly taken into account, the rankings of hedge
+funds based on \emph{Sharpe ratios} can change dramatically.
+
+<<echo=T,fig=T>>=
+data(edhec)
+charts.PerformanceSummary(edhec[,2:4],
+colorset = rich6equal, lwd = 2, ylog = TRUE)
+@
+
+We can observe that the fund "\textbf{Emerging Markets}", which has the largest drawdown and serial autocorrelation, has it's Andrew Lo Sharpe ratio , \emph{decrease} most significantly as comapared to other funds.
+<<echo=T,fig=T>>=
+Lo.Sharpe = LoSharpe(edhec[,2:4])
+Theoretical.Sharpe= SharpeRatio.annualized(edhec[,2:4])
+barplot(rbind(Theoretical.Sharpe,Lo.Sharpe), main="Theoretical and Andrew Lo Sharpe Ratio Observed",
+         xlab="Fund Type",ylab="Value", col=c("darkblue","red"), beside=TRUE)
+   legend("topright", c("1","2"), cex=0.6, 
+                   bty="2", fill=c("darkblue","red"));
+@
+
+
+\end{document}
