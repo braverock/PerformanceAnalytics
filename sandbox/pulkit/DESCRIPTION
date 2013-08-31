@@ -45,3 +45,6 @@ Collate:
     'table.PSR.R'
     'TriplePenance.R'
     'TuW.R'
+    'capm_aorda.R'
+    'psr_python.R'
+    'ret.R'

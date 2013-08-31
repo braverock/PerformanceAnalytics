@@ -46,7 +46,7 @@ BenchmarkSR<-function(R){
   }
   SR = SharpeRatio(x)
   sr_avg = mean(SR)
-  corr = table.Correlation(edhec,edhec)
+  corr = table.Correlation(R,R)
   corr_avg = 0
   for(i in 1:(columns-1)){
     for(j in (i+1):columns){
