@@ -31,7 +31,7 @@
 }
 \examples{
 library(PerformanceAnalytics)
-AcarSim()
+AcarSim(R)
 }
 \author{
   Shubhankit Mohan

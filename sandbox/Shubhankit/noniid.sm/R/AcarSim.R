@@ -18,7 +18,7 @@
 #' @keywords Maximum Loss Simulated Drawdown
 #' @examples
 #' library(PerformanceAnalytics)
-#' AcarSim()
+#' AcarSim(R)
 #' @rdname AcarSim
 #' @export 
 AcarSim <-
@@ -28,7 +28,7 @@ AcarSim <-
 
     data(edhec)
     
-    R = checkData(edhec, method="xts")
+    R = checkData(R, method="xts")
     # Get dimensions and labels
     # simulated parameters using edhec data
 mu=mean(Return.annualized(R))
@@ -40,7 +40,7 @@ monthly=(1+mu)^(1/12)-1
 T= 36
 j=1
 dt=1/T
-nsim=1;
+nsim=30;
 thres=4;
 r=matrix(0,nsim,T+1)
 monthly = 0

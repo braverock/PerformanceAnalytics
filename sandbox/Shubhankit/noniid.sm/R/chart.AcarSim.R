@@ -39,7 +39,7 @@ chart.AcarSim <-
     T= 36
     j=1
     dt=1/T
-    nsim=6000;
+    nsim=6;
     thres=4;
     r=matrix(0,nsim,T+1)
     monthly = 0
