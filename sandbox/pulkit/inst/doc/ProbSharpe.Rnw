@@ -1,0 +1,101 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+%\VignetteIndexEntry{Probabilistic Sharpe Ratio}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ Probabilistic Sharpe Ratio Optimization }
+
+% \keywords{Probabilistic Sharpe Ratio,Minimum Track Record Length,risk,benchmark,portfolio}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+
+    This vignette gives an overview of the Probabilistic Sharpe Ratio , Minimum Track Record Length and the Probabilistic Sharpe Ratio Optimization technique used to find the optimal portfolio that maximizes the Probabilistic Sharpe Ratio. It gives an overview of the usability of the functions and its application.
+
+A probabilistic translation of Sharpe ratio, called PSR, is proposed to account for estimation errors in an IID non-Normal framework.When assessing Sharpe ratio’s ability to evaluate skill,we find that a longer track record may be able to compensate for certain statistical shortcomings of the returns probability distribution. Stated differently, despite Sharpe ratio's well-documented deficiencies, it can still provide evidence of investment skill, as long as the user learns to require the proper track record length.
+
+The portfolio of hedge fund indices that maximizes Sharpe ratio can be very different from
+the portfolio that delivers the highest PSR. Maximizing for PSR leads to better diversified and
+more balanced hedge fund allocations compared to the concentrated outcomes of Sharpe ratio
+maximization.
+
+
+
+\end{abstract}
+
+<<echo = FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+library(noniid.pm)
+@
+
+
+\section{Probabilistic Sharpe Ratio}
+ Given a predefined benchmark Sharpe ratio $SR^\ast$ , the observed Sharpe ratio $\hat{SR}$  can be expressed in probabilistic terms as
+ 
+ \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
+ 
+ Here $n$ is the track record length or the number of data points. It can be daily,weekly or yearly depending on the input given
+ 
+ \eqn{\hat{\gamma{_3}}} and \eqn{\hat{\gamma{_4}}} are the skewness and kurtosis respectively.
+ It is not unusual to find strategies with irregular trading frequencies, such as weekly strategies that may not trade for a month. This poses a problem when computing an annualized Sharpe ratio, and there is no consensus as how skill should be measured in the context of irregular bets. Because PSR measures skill in probabilistic terms, it is invariant to calendar conventions. All calculations are done in the original frequency
+of the data, and there is no annualization. The Reference Sharpe Ratio is also given in the non-annualized form and should be greater than the Observed Sharpe Ratio.
+
+<<>>=
+data(edhec)
+ProbSharpeRatio(edhec[,1],refSR = 0.23)
+@
+
+\section{Minimum Track Record Length}
+
+If a track record is shorter than Minimum Track Record Length(MinTRL), we do
+not have enough confidence that the observed \eqn{\hat{SR}} is above the designated threshold
+\eqn{SR^\ast}. Minimum Track Record Length is given by the following expression.
+
+\deqn{MinTRL = n^\ast = 1+\biggl[1-\hat{\gamma_3}\hat{SR}+\frac{\hat{\gamma_4}}{4}\hat{SR^2}\biggr]\biggl(\frac{Z_\alpha}{\hat{SR}-SR^\ast}\biggr)^2}
+
+\eqn{\gamma{_3}} and \eqn{\gamma{_4}} are the skewness and kurtosis respectively. It is important to note that MinTRL is expressed in terms of number of observations, not annual or calendar terms. All the values used in the above formula are non-annualized, in the same frequency as that of the returns.
+
+<<>>=
+data(edhec)
+MinTrackRecord(edhec[,1],refSR = 0.23)
+@
+
+\section{Probabilistic Sharpe Ratio Optimal Portfolio}
+
+We would like to find the vector of weights that maximize the expression
+
+ \deqn{\hat{PSR}(SR^\ast) = Z\biggl[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\biggr]}
+
+where \eqn{\sigma = \sqrt{E[(r-\mu)^2]}} ,its standard deviation.\eqn{\gamma_3=\frac{E\biggl[(r-\mu)^3\biggr]}{\sigma^3}} its skewness,\eqn{\gamma_4=\frac{E\biggl[(r-\mu)^4\biggr]}{\sigma^4}} its kurtosis and \eqn{SR = \frac{\mu}{\sigma}} its Sharpe Ratio.
+
+Because \eqn{\hat{PSR}(SR^\ast)=Z[\hat{Z^\ast}]} is a monotonic increasing function of 
+\eqn{\hat{Z^\ast}} ,it suffices to compute the vector that maximizes \eqn{\hat{Z^\ast}}
+ This optimal vector is invariant of the value adopted by the parameter \eqn{SR^\ast}. 
+
+
+<<>>=
+data(edhec)
+PsrPortfolio(edhec)
+@
+
+\end{document}
+
