@@ -4,6 +4,10 @@
 \usage{
   AcarSim(R)
 }
+\arguments{
+  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+}
 \description{
   To get some insight on the relationships between maximum
   drawdown per unit of volatility and mean return divided

@@ -24,7 +24,6 @@ Collate:
     'chart.Autocorrelation.R'
     'GLMSmoothIndex.R'
     'LoSharpe.R'
-    'maxDDGBM.R'
     'na.skip.R'
     'noniid.sm-internal.R'
     'Return.GLM.R'
@@ -34,6 +33,6 @@ Collate:
     'table.ComparitiveReturn.GLM.R'
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
-    'EmaxDDGBM.R'
+    'EMaxDDGBM.R'
     'table.EMaxDDGBM.R'
-
+    'QP.Norm.R'

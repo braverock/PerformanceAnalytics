@@ -11,19 +11,21 @@
 #'Where j belongs to 0 to k,which is the number of lag factors input.
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
+#' @param ... Additional Parameters
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @aliases Return.Geltner
 #' @references \emph{Getmansky, Mila, Lo, Andrew W. and Makarov, Igor} An Econometric Model of Serial Correlation and Illiquidity in Hedge Fund Returns (March 1, 2003). MIT Sloan Working Paper No. 4288-03; MIT Laboratory for Financial Engineering Working Paper No. LFE-1041A-03; EFMA 2003 Helsinki Meetings. Available at SSRN: \url{http://ssrn.com/abstract=384700}
 #' 
 #' @keywords ts multivariate distribution models non-iid 
 #' @examples
-#' 
-#' data(edhec)
-#' head(GLMSmoothIndex(edhec))
+#'     require(PerformanceAnalytics)
+#'  library(PerformanceAnalytics)
+#'  data(edhec)
+#' GLMSmoothIndex(edhec)
 #' 
 #' @export
 GLMSmoothIndex<-
-  function(R = NULL)
+  function(R = NULL, ...)
   {
     columns = 1
     columnnames = NULL
@@ -33,32 +35,33 @@ GLMSmoothIndex<-
       columns = ncol(x)
       n = nrow(x)
       count = q
-        x=edhec
-        columns = ncol(x)
-        columnnames = colnames(x)
+      
+      columns = ncol(x)
+      columnnames = colnames(x)
+      
+      # Calculate AutoCorrelation Coefficient
+      for(column in 1:columns) { # for each asset passed in as R
+        y = checkData(x[,column], method="vector", na.rm = TRUE)
+        sum = sum(abs(acf(y,plot=FALSE,lag.max=6)[[1]][2:7]));
+        acflag6 = acf(y,plot=FALSE,lag.max=6)[[1]][2:7]/sum;
+        values = sum(acflag6*acflag6)
         
-        # Calculate AutoCorrelation Coefficient
-        for(column in 1:columns) { # for each asset passed in as R
-          y = checkData(x[,column], method="vector", na.rm = TRUE)
-          sum = sum(abs(acf(y,plot=FALSE,lag.max=6)[[1]][2:7]));
-          acflag6 = acf(y,plot=FALSE,lag.max=6)[[1]][2:7]/sum;
-          values = sum(acflag6*acflag6)
-          
-          if(column == 1) {
-            result.df = data.frame(Value = values)
-            colnames(result.df) = columnnames[column]
-          }
-          else {
-            nextcol = data.frame(Value = values)
-            colnames(nextcol) = columnnames[column]
-            result.df = cbind(result.df, nextcol)
-          }
+        if(column == 1) {
+          result.df = data.frame(Value = values)
+          colnames(result.df) = columnnames[column]
         }
+        else {
+          nextcol = data.frame(Value = values)
+          colnames(nextcol) = columnnames[column]
+          result.df = cbind(result.df, nextcol)
+        }
+      }
       rownames(result.df)= paste("GLM Smooth Index")
       
-        return(result.df)
+      return(result.df)
       
     }  
+    edhec=NULL
   }
 
 ###############################################################################

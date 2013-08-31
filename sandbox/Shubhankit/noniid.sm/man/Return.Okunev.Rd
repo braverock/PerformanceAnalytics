@@ -5,10 +5,11 @@
   Return.Okunev(R, q = 3)
 }
 \arguments{
-  \item{R}{an xts, vector, matrix, data frame, timeSeries
+  \item{R}{: an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
-  \item{q}{number of lag factors for autocorrelation}
+  \item{q}{: order of autocorrelation coefficient lag
+  factors}
 }
 \description{
   The objective is to determine the true underlying return
@@ -59,7 +60,7 @@ data(managers)
 head(Return.Okunev(managers[,1:3]),n=3)
 }
 \author{
-  Shubhankit Mohan
+  Peter Carl, Brian Peterson, Shubhankit Mohan
 }
 \references{
   Okunev, John and White, Derek R., \emph{ Hedge Fund Risk

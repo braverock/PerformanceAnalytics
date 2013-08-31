@@ -1,29 +1,17 @@
-#' @title Expected Drawdown using Brownian Motion Assumptions
+#' Expected Drawdown using Brownian Motion Assumptions
 #' 
-#' @description  Works on the model specified by Maddon-Ismail which investigates the behavior of this statistic for a Brownian motion 
-#' with drift.
-#' @details If X(t) is a random process on [0, T ], the maximum drawdown at time T , D(T), is defined by
-#' where \deqn{D(T) = sup [X(s) - X(t)]} where s belongs to [0,t] and s belongs to [0,T]
-#'Informally, this is the largest drop from a peak to a bottom. In this paper, we investigate the
-#'behavior of this statistic for a Brownian motion with drift. In particular, we give an infinite 
-#'series representation of its distribution, and consider its expected value. When the drift is zero,
-#'we give an analytic expression for the expected value, and for non-zero drift, we give an infinite
-#'series representation. For all cases, we compute the limiting \bold{(\eqn{T tends to \infty})} behavior, which can be
-#'logarithmic (\eqn{\mu} > 0), square root (\eqn{\mu} = 0), or linear (\eqn{\mu} < 0).
-#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of  asset returns
+#' Works on the model specified by Maddon-Ismail
+#' 
+#' 
+#' 
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
 #' @param digits significant number
-#' @author Shubhankit Mohan
+#' @author Shubhankit
 #' @keywords Expected Drawdown Using Brownian Motion Assumptions
-#' @references Magdon-Ismail, M., Atiya, A., Pratap, A., and Yaser S. Abu-Mostafa: On the Maximum Drawdown of a Browninan Motion, Journal of Applied Probability 41, pp. 147-161, 2004 \url{http://alumnus.caltech.edu/~amir/drawdown-jrnl.pdf}
-#' @keywords Drawdown models Brownian Motion Assumptions
-#' @examples
-#' 
-#'library(PerformanceAnalytics)
-#' data(edhec)
-#' table.EmaxDDGBM(edhec)
-#' @rdname table.EmaxDDGBM
+#'
 #' @export 
-table.EMaxDDGBM <-
+EMaxDDGBM <-
   function (R,digits =4)
   {# @author 
     
@@ -168,40 +156,19 @@ table.EMaxDDGBM <-
         
       }
       
-    #  return(Ed)
+       return(Ed[1]*100)
       
-      z = c((mu*100),
-            (sig*100),
-            (Ed*100))
-      znames = c(
-        "Annual Returns in %",
-        "Std Devetions in %",
-        "Expected Drawdown in %"
-      )
-      if(column == 1) {
-        resultingtable = data.frame(Value = z, row.names = znames)
-      }
-      else {
-        nextcolumn = data.frame(Value = z, row.names = znames)
-        resultingtable = cbind(resultingtable, nextcolumn)
-      }
-    }
-    colnames(resultingtable) = columnnames
-    ans = base::round(resultingtable, digits)
-    ans
-    
-    
+      
   }
-
+}
 ###############################################################################
-################################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (http://r-project.org/) 
 #
-# Copyright (c) 2004-2012 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2013 
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: EmaxDDGBM.R 2271 2012-09-02 01:56:23Z braverock $
+# $Id: EMaxDDGBM
 #
 ###############################################################################

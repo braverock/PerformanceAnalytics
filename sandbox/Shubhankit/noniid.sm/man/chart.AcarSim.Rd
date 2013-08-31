@@ -30,7 +30,9 @@
   number of drawdown's in simulation
 }
 \examples{
-library(PerformanceAnalytics)
+require(PerformanceAnalytics)
+ library(PerformanceAnalytics)
+ data(edhec)
 chart.AcarSim(edhec)
 }
 \author{

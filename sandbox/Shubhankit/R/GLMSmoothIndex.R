@@ -17,9 +17,10 @@
 #' 
 #' @keywords ts multivariate distribution models non-iid 
 #' @examples
-#' 
-#' data(edhec)
-#' head(GLMSmoothIndex(edhec))
+#'     require(PerformanceAnalytics)
+#'  library(PerformanceAnalytics)
+#'  data(edhec)
+#' GLMSmoothIndex(edhec)
 #' 
 #' @export
 GLMSmoothIndex<-
@@ -33,7 +34,7 @@ GLMSmoothIndex<-
       columns = ncol(x)
       n = nrow(x)
       count = q
-        x=edhec
+       
         columns = ncol(x)
         columnnames = colnames(x)
         
@@ -59,6 +60,7 @@ GLMSmoothIndex<-
         return(result.df)
       
     }  
+  edhec=NULL
   }
 
 ###############################################################################

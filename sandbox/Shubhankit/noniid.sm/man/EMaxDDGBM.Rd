@@ -7,12 +7,14 @@
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
+
+  \item{digits}{significant number}
 }
 \description{
   Works on the model specified by Maddon-Ismail
 }
 \author{
-  R
+  Shubhankit
 }
 \keyword{Assumptions}
 \keyword{Brownian}

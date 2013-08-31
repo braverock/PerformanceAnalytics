@@ -48,7 +48,7 @@ LoSharpe <-
     columns.a = ncol(R)
     columnnames.a = colnames(R)
     # Time used for daily Return manipulations
-    Time= 252*nyears(edhec)
+    Time= 252*nyears(R)
     clean.lo <- function(column.R,q) {
       # compute the lagged return series
       gamma.k =matrix(0,q)
@@ -85,7 +85,7 @@ LoSharpe <-
     rownames(lo)= paste("Lo Sharpe Ratio")
     return(lo)
     
-    
+    edhec=NULL
     # RESULTS:
     
   }

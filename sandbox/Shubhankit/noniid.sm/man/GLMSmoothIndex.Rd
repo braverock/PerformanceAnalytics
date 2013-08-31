@@ -3,11 +3,13 @@
 \alias{Return.Geltner}
 \title{GLM Index}
 \usage{
-  GLMSmoothIndex(R = NULL)
+  GLMSmoothIndex(R = NULL, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
+
+  \item{...}{Additional Parameters}
 }
 \description{
   Getmansky Lo Markov Smoothing Index is a useful summary
@@ -25,8 +27,10 @@
   factors input.
 }
 \examples{
-data(edhec)
-head(GLMSmoothIndex(edhec))
+require(PerformanceAnalytics)
+ library(PerformanceAnalytics)
+ data(edhec)
+GLMSmoothIndex(edhec)
 }
 \author{
   Peter Carl, Brian Peterson, Shubhankit Mohan

@@ -11,7 +11,7 @@
 \usepackage{Rd}
 
 \usepackage{Sweave}
-\SweaveOpts{engine=R,eps=FALSE}
+
 %\VignetteIndexEntry{Performance Attribution from Bacon}
 %\VignetteDepends{PerformanceAnalytics}
 %\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
@@ -34,7 +34,7 @@
 \author{R Project for Statistical Computing}
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{ACFSTDEV-concordance}
 
 \maketitle
 
@@ -43,14 +43,7 @@
 The fact that many hedge fund returns exhibit extraordinary levels of serial correlation is now well-known and generally accepted as fact.Because hedge fund strategies have exceptionally high autocorrelations in reported returns and this is taken as evidence of return smoothing, we highlight the effect autocorrelation has on volatility which is hazed by the square root of time rule used in the industry
 \end{abstract}
 
-<<echo=FALSE >>=
-library(PerformanceAnalytics)
-data(edhec)
-@
 
-<<echo=FALSE>>=
-source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/ACStdDev.annualized.R')
-@
 
 \section{Methodology}
 Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the method assumes the fund manager smooths returns in the following manner, when 't' is the unit time interval:
@@ -72,18 +65,37 @@ Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the method assumes
 
 In this example we use edhec database, to compute true Hedge Fund Returns.
 
-<<Graph10,echo=T,fig=T>>=
-library(PerformanceAnalytics)
-data(edhec)
-ACFVol = ACStdDev.annualized(edhec[,1:3])
-Vol = StdDev.annualized(edhec[,1:3])
-Vol
-ACFVol
-barplot(rbind(ACFVol,Vol), main="ACF and Orignal Volatility",
-         xlab="Fund Type",ylab="Volatilty (in %)", col=c("darkblue","red"), beside=TRUE)
-   legend("topright", c("1","2"), cex=0.6, 
-                   bty="2", fill=c("darkblue","red"));
-@
+\begin{Schunk}
+\begin{Sinput}
+> library(PerformanceAnalytics)
+> data(edhec)
+> ACFVol = ACStdDev.annualized(edhec[,1:3])
+> Vol = StdDev.annualized(edhec[,1:3])
+> Vol
+\end{Sinput}
+\begin{Soutput}
+                              Convertible Arbitrage CTA Global
+Annualized Standard Deviation            0.06944619 0.08705599
+                              Distressed Securities
+Annualized Standard Deviation            0.06355903
+\end{Soutput}
+\begin{Sinput}
+> ACFVol
+\end{Sinput}
+\begin{Soutput}
+                                             Convertible Arbitrage CTA Global
+Autocorrelated Annualized Standard Deviation             0.1322706 0.09640755
+                                             Distressed Securities
+Autocorrelated Annualized Standard Deviation             0.1137627
+\end{Soutput}
+\begin{Sinput}
+> barplot(rbind(ACFVol,Vol), main="ACF and Orignal Volatility",
++          xlab="Fund Type",ylab="Volatilty (in %)", col=c("darkblue","red"), beside=TRUE)
+>    legend("topright", c("1","2"), cex=0.6, 
++                    bty="2", fill=c("darkblue","red"));
+\end{Sinput}
+\end{Schunk}
+\includegraphics{ACFSTDEV-Graph10}
 
 The above figure shows the behaviour of the distribution tending to a normal IID distribution.For comparitive purpose, one can observe the change in the charateristics of return as compared to the orignal.
 

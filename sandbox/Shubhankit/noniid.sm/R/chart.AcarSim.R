@@ -17,14 +17,20 @@
 #' Forecasting Financial Markets, London, United Kingdom, May 1997} \url{http://www.intelligenthedgefundinvesting.com/pubs/easj.pdf}
 #' @keywords Maximum Loss Simulated Drawdown
 #' @examples
-#' library(PerformanceAnalytics)
+#'     require(PerformanceAnalytics)
+#'  library(PerformanceAnalytics)
+#'  data(edhec)
 #' chart.AcarSim(edhec)
 #' @rdname chart.AcarSim
 #' @export 
 chart.AcarSim <-
   function(R)
   {
-    R = checkData(Ra, method="xts")
+    
+    require(PerformanceAnalytics)
+    library(PerformanceAnalytics)
+    data(edhec)
+    R = checkData(R, method="xts")
     # Get dimensions and labels
     # simulated parameters using edhec data
     mu=mean(Return.annualized(edhec))
@@ -79,6 +85,7 @@ chart.AcarSim <-
     
     title("Maximum Drawdown/Volatility as a function of Return/Volatility 
 36 monthly returns simulated 6,000 times") 
+  edhec= NULL
   }
 
 ###############################################################################

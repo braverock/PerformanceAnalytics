@@ -20,8 +20,8 @@
 #' 
 #'library(PerformanceAnalytics)
 #' data(edhec)
-#' table.EmaxDDGBM(edhec)
-#' @rdname table.EmaxDDGBM
+#' table.EMaxDDGBM(edhec)
+#' @rdname table.EMaxDDGBM
 #' @export 
 table.EMaxDDGBM <-
   function (R,digits =4)

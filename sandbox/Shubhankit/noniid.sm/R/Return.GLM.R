@@ -48,7 +48,7 @@ Return.GLM <-
     columnnames.a = colnames(R)
     
     clean.GLM <- function(column.R,q=3) {
-      ma.coeff = as.numeric((arma(edhec[,1],order=c(0,q)))$coef[1:q])
+      ma.coeff = as.numeric((arma(column.R,order=c(0,q)))$coef[1:q])
  column.glm = ma.coeff[q]*lag(column.R,q)
      
     return(column.glm)

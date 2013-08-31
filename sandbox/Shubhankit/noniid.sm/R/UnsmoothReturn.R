@@ -9,13 +9,12 @@ UnSmoothReturn<-
       columns = ncol(x)
       n = nrow(x)
       count = q
-      x=edhec
       columns = ncol(x)
       columnnames = colnames(x)
       
       # Calculate AutoCorrelation Coefficient
       for(column in 1:columns) { # for each asset passed in as R
-        y = checkData(edhec[,column], method="vector", na.rm = TRUE)
+        y = checkData(R[,column], method="vector", na.rm = TRUE)
         
         acflag6 = acf(y,plot=FALSE,lag.max=6)[[1]][2:7]
         values = sum(acflag6*acflag6)/(sum(acflag6)*sum(acflag6))
