@@ -23,7 +23,7 @@
   Liu(2013)
 }
 \examples{
-data(edhec[,1])
+data(edhec)
 chart.Autocorrelation(edhec[,1])
 }
 \author{

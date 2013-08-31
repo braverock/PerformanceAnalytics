@@ -17,7 +17,7 @@
 #' @keywords Autocorrelation lag factors
 #' @examples
 #' 
-#' data(edhec[,1])
+#' data(edhec)
 #' chart.Autocorrelation(edhec[,1])
 #' 
 #' @rdname chart.Autocorrelation
