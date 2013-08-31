@@ -66,7 +66,7 @@ AlphaDrawdown<-function(R,Rm,p=0.95,weights = NULL,geometric = TRUE,type=c("alph
     xm = checkData(Rm)
     beta = BetaDrawdown(R,Rm,p = p,weights=weights,geometric=geometric,type=type,...)
     if(!is.null(weights)){
-        x = Returns.portfolio(R,weights)
+        x = Return.portfolio(R,weights)
     }
     if(geometric){
         cumul_x = cumprod(x+1)-1
