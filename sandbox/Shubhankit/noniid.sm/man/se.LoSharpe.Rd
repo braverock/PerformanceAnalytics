@@ -48,7 +48,7 @@
 }
 \examples{
 data(edhec)
-head(se.LoSharpe(edhec,0,3)
+se.LoSharpe(edhec,0,3)
 }
 \author{
   Brian G. Peterson, Peter Carl, Shubhankit Mohan
