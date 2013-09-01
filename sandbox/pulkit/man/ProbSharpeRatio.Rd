@@ -48,7 +48,7 @@
   the Observed Sharpe Ratio.
 
   \deqn{\hat{PSR}(SR^{*}) =
-  Z\bigg[\frac{(\hat{SR}-SR^\ast)\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^\ast
+  Z\bigg[\frac{(\hat{SR}-SR^{*})\sqrt{n-1}}{\sqrt{1-\hat{\gamma_3}SR^{*}
   + \frac{\hat{\gamma_4}-1}{4}\hat{SR^2}}}\bigg]} Here
   \eqn{n} is the track record length or the number of data
   points. It can be daily,weekly or yearly depending on the
