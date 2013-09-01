@@ -17,6 +17,7 @@
 #'
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
+#'@param S Number of strategies
 #'@param ylab set the y-axis label, as in \code{\link{plot}}
 #'@param xlab set the x-axis label, as in \code{\link{plot}}
 #'@param main set the chart title, as in \code{\link{plot}}
@@ -48,7 +49,7 @@
 #'
 #'@export
 
-chart.BenchmarkSR<-function(R=NULL,main=NULL,ylab = NULL,xlab = NULL,element.color="darkgrey",lwd = 2,pch = 1,cex = 1,cex.axis=0.8,cex.lab = 1,cex.main = 1,vs=c("sharpe","correlation","strategies"),xlim = NULL,ylim = NULL,...){
+chart.BenchmarkSR<-function(R=NULL,S=NULL,main=NULL,ylab = NULL,xlab = NULL,element.color="darkgrey",lwd = 2,pch = 1,cex = 1,cex.axis=0.8,cex.lab = 1,cex.main = 1,vs=c("sharpe","correlation","strategies"),xlim = NULL,ylim = NULL,...){
   
   # DESCRIPTION:
   # Draws Benchmark SR vs various variables such as average sharpe , 

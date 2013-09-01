@@ -2,9 +2,9 @@
 \alias{chart.BenchmarkSR}
 \title{Benchmark Sharpe Ratio Plots}
 \usage{
-  chart.BenchmarkSR(R = NULL, main = NULL, ylab = NULL,
-    xlab = NULL, element.color = "darkgrey", lwd = 2,
-    pch = 1, cex = 1, cex.axis = 0.8, cex.lab = 1,
+  chart.BenchmarkSR(R = NULL, S = NULL, main = NULL,
+    ylab = NULL, xlab = NULL, element.color = "darkgrey",
+    lwd = 2, pch = 1, cex = 1, cex.axis = 0.8, cex.lab = 1,
     cex.main = 1,
     vs = c("sharpe", "correlation", "strategies"),
     xlim = NULL, ylim = NULL, ...)
@@ -12,6 +12,8 @@
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
+
+  \item{S}{Number of strategies}
 
   \item{ylab}{set the y-axis label, as in
   \code{\link{plot}}}
