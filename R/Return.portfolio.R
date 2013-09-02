@@ -180,7 +180,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
       for (col in colnames(weights)){
           wealthindex.weighted[,col]=weights[,col]*wealthindex.assets[,col]
       }
-      wealthindex=as.xts(apply(wealthindex.weighted,1,sum))
+      wealthindex=reclass(apply(wealthindex.weighted,1,sum), R)
       result = wealthindex
       result[2:length(result)] = result[2:length(result)] /
         lag(result)[2:length(result)] - 1
