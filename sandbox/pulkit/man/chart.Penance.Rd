@@ -82,12 +82,12 @@ chart.Penance(edhec,0.95)
   Rule(January 1, 2013).
 }
 \seealso{
-  \code{\link{plot}} \code{\link{table.Penance}}
-  \code{\link{MaxDD}} \code{\link{TuW}}
+  \code{\link{table.Penance}} \code{\link{MaxDD}}
+  \code{\link{TuW}}
 }
 \keyword{distribution}
-\keyword{hplot}
 \keyword{models}
 \keyword{multivariate}
+\keyword{plot}
 \keyword{ts}
 

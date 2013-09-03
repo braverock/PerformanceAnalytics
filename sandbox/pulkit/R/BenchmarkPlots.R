@@ -34,7 +34,7 @@
 #'@param xlim set the xlim value, as in \code{\link{plot}}
 #'@param \dots any other passthru variable
 #'@author Pulkit Mehrotra
-#'@seealso \code{\link{BenchmarkSR}} \code{\link{chart.SRIndifference}} \code{\link{plot}}
+#'@seealso \code{\link{BenchmarkSR}} \code{\link{chart.SRIndifference}} 
 #'@references
 #'Bailey, David H. and Lopez de Prado, Marcos, The Strategy Approval Decision: 
 #'A Sharpe Ratio Indifference Curve Approach (January 2013). Algorithmic Finance, 

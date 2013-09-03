@@ -61,7 +61,6 @@
   September 2012
 }
 \seealso{
-  \code{\link{ES}} \code{\link{maxDrawdown}}
   \code{\link{CDaR}} \code{\link{AlphaDrawdown}}
   \code{\link{MultiBetaDrawdown}}
   \code{\link{BetaDrawdown}}

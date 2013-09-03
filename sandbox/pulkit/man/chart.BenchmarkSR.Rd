@@ -90,7 +90,7 @@ chart.BenchmarkSR(edhec,vs="sharpe")
 }
 \seealso{
   \code{\link{BenchmarkSR}}
-  \code{\link{chart.SRIndifference}} \code{\link{plot}}
+  \code{\link{chart.SRIndifference}}
 
   \code{\link{plot}}
 }

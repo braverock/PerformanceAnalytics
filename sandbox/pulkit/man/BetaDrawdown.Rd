@@ -76,7 +76,6 @@ BetaDrawdown(edhec[,1],edhec[,2])
   2012.
 }
 \seealso{
-  \code{\link{ES}} \code{\link{maxDrawdown}}
   \code{\link{CdarMultiPath}} \code{\link{AlphaDrawdown}}
   \code{\link{MultiBetaDrawdown}} \code{\link{CDaR}}
 }

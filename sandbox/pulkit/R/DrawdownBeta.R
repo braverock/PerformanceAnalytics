@@ -40,7 +40,7 @@
 #'@param \dots any passthru variable.
 #'
 #'@author Pulkit Mehrotra
-#' @seealso \code{\link{ES}} \code{\link{maxDrawdown}} \code{\link{CdarMultiPath}} 
+#' @seealso   \code{\link{CdarMultiPath}} 
 #'\code{\link{AlphaDrawdown}} \code{\link{MultiBetaDrawdown}} \code{\link{CDaR}}
 
 #'

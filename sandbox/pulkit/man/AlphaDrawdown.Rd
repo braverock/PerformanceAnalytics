@@ -65,7 +65,6 @@ AlphaDrawdown(edhec[,1],edhec[,2],type="average") # expected value : 1.692592
   2012.
 }
 \seealso{
-  \code{\link{ES}} \code{\link{maxDrawdown}}
   \code{\link{CdarMultiPath}} \code{\link{CDaR}}
   \code{\link{MultiBetaDrawdown}}
   \code{\link{BetaDrawdown}}

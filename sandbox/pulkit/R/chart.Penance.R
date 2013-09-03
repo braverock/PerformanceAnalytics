@@ -33,8 +33,8 @@
 #'@param xlim set the xlim value, as in \code{\link{plot}}
 #'@param \dots Any other pass thru variable
 #'@author Pulkit Mehrotra
-#'@seealso \code{\link{plot}} \code{\link{table.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
-#'@keywords ts multivariate distribution models hplot
+#'@seealso  \code{\link{table.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
+#'@keywords ts multivariate distribution models plot
 #'@examples
 #'data(edhec)
 #'chart.Penance(edhec,0.95)

@@ -211,7 +211,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     }
     get_Moments<-function(series,order,mean = 0){
         sum = 0
-        mat = as.matrix(series)
+        mat = na.omit(as.matrix(series))
         sum = .Call("sums_m",mat,mean,order)
        # for(i in series){
         #    sum = sum + (i-mean)^order
