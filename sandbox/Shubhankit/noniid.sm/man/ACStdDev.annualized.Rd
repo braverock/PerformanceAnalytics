@@ -38,12 +38,11 @@ ACStdDev.annualized(edhec,3)
 }
 \author{
   Peter Carl,Brian Peterson, Shubhankit Mohan
-  \url{http://en.wikipedia.org/wiki/Volatility_(finance)}
 }
 \references{
   Burghardt, G., and L. Liu, \emph{ It's the
   Autocorrelation, Stupid (November 2012) Newedge working
-  paper.}
+  paper.} Paper Available at :
   \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 }
 \keyword{distribution}

@@ -11,9 +11,8 @@
 #' 12, quarterly scale = 4)
 #' @param \dots any other passthru parameters
 #' @author Peter Carl,Brian Peterson, Shubhankit Mohan
-#' \url{http://en.wikipedia.org/wiki/Volatility_(finance)}
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
-#' working paper.}
+#' working paper.} Paper Available at : 
 #' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 #' @keywords ts multivariate distribution models
 #' @examples

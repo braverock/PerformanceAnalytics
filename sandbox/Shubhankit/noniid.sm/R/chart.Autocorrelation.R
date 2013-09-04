@@ -13,7 +13,7 @@
 #' @seealso \code{\link[graphics]{boxplot}}
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
 #' working paper.}
-#' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
+#' Paper Available at : \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 #' @keywords Autocorrelation lag factors
 #' @examples
 #' 

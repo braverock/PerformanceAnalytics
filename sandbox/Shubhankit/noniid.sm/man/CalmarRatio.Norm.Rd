@@ -46,7 +46,8 @@ data(managers)
 }
 \references{
   Bacon, Carl, Magdon-Ismail, M. and Amir Atiya,\emph{
-  Maximum drawdown. Risk Magazine,} 01 Oct 2004.
+  Maximum drawdown. Risk Magazine,} 01 Oct 2004. Paper
+  Available at :
   \url{http://www.cs.rpi.edu/~magdon/talks/mdd_NYU04.pdf}
 }
 \keyword{distribution}

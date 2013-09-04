@@ -27,7 +27,7 @@
 #' traditionally and default .1 (10\%)
 #' @author Brian G. Peterson , Peter Carl , Shubhankit Mohan
 #' @references Bacon, Carl, Magdon-Ismail, M. and Amir Atiya,\emph{ Maximum drawdown. Risk Magazine,} 01 Oct 2004.
-#' \url{http://www.cs.rpi.edu/~magdon/talks/mdd_NYU04.pdf}
+#' Paper Available at : \url{http://www.cs.rpi.edu/~magdon/talks/mdd_NYU04.pdf}
 #' @keywords ts multivariate distribution models
 #' @examples
 #' 

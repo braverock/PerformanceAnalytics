@@ -62,16 +62,16 @@ for(i in 1:len)
     
       r[j,2:37]=monthly+(sig*dz*sqrt(3*dt))
     
-    ddown[j,i,1]= ES((r[j,]),.99)
+    ddown[j,i,1]= ES((r[j,]),.99, method="modified")
     ddown[j,i,1][is.na(ddown[j,i,1])] <- 0
     fddown[i,1]=fddown[i,1]+ddown[j,i,1]
-    ddown[j,i,2]= ES((r[j,]),.95)
+    ddown[j,i,2]= ES((r[j,]),.95, method="modified")
     ddown[j,i,2][is.na(ddown[j,i,2])] <- 0
     fddown[i,2]=fddown[i,2]+ddown[j,i,2]
-    ddown[j,i,3]= ES((r[j,]),.90)
+    ddown[j,i,3]= ES((r[j,]),.90, method="modified")
     ddown[j,i,3][is.na(ddown[j,i,3])] <- 0
     fddown[i,3]=fddown[i,3]+ddown[j,i,3]
-    ddown[j,i,4]= ES((r[j,]),.85)
+    ddown[j,i,4]= ES((r[j,]),.85, method="modified")
     ddown[j,i,4][is.na(ddown[j,i,4])] <- 0
     fddown[i,4]=fddown[i,4]+ddown[j,i,4]
     assign("last.warning", NULL, envir = baseenv())

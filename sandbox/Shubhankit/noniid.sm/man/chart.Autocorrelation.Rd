@@ -32,7 +32,7 @@ chart.Autocorrelation(edhec[,1])
 \references{
   Burghardt, G., and L. Liu, \emph{ It's the
   Autocorrelation, Stupid (November 2012) Newedge working
-  paper.}
+  paper.} Paper Available at :
   \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 }
 \seealso{

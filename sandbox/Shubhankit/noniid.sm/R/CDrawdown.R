@@ -21,7 +21,7 @@
 #' @param p confidence interval
 #' @param ... adiitional parameters
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
-#' @references Chekhlov, Alexei, Uryasev, Stanislav P. and Zabarankin, Michael, \emph{Drawdown Measure in Portfolio Optimization} (June 25, 2003). Available at SSRN: \url{http://ssrn.com/abstract=544742} or \url{http://dx.doi.org/10.2139/ssrn.544742}
+#' @references Chekhlov, Alexei, Uryasev, Stanislav P. and Zabarankin, Michael, \emph{Drawdown Measure in Portfolio Optimization} (June 25, 2003). Paper available at SSRN: \url{http://ssrn.com/abstract=544742} or \url{http://dx.doi.org/10.2139/ssrn.544742}
 #' @keywords Conditional Drawdown models
 #' @examples
 #' 
