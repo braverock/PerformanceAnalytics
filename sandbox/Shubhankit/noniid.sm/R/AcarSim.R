@@ -12,6 +12,7 @@
 #' Where j varies from 1 to n ,which is the number of drawdown's in simulation 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
+#' @param nsim number of simulations input
 #' @author Shubhankit Mohan
 #' @references Maximum Loss and Maximum Drawdown in Financial Markets,\emph{International Conference Sponsored by BNP and Imperial College on: 
 #' Forecasting Financial Markets, London, United Kingdom, May 1997} \url{http://www.intelligenthedgefundinvesting.com/pubs/easj.pdf}
@@ -22,7 +23,7 @@
 #' @rdname AcarSim
 #' @export 
 AcarSim <-
-  function(R)
+  function(R,nsim=1)
   {
        library(PerformanceAnalytics)
 
@@ -40,7 +41,6 @@ monthly=(1+mu)^(1/12)-1
 T= 36
 j=1
 dt=1/T
-nsim=30;
 thres=4;
 r=matrix(0,nsim,T+1)
 monthly = 0

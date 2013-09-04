@@ -25,8 +25,10 @@
   factors input.
 }
 \examples{
-data(edhec)
-head(GLMSmoothIndex(edhec))
+require(PerformanceAnalytics)
+ library(PerformanceAnalytics)
+ data(edhec)
+GLMSmoothIndex(edhec)
 }
 \author{
   Peter Carl, Brian Peterson, Shubhankit Mohan

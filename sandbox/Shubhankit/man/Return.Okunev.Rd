@@ -4,6 +4,13 @@
 \usage{
   Return.Okunev(R, q = 3)
 }
+\arguments{
+  \item{R}{: an xts, vector, matrix, data frame, timeSeries
+  or zoo object of asset returns}
+
+  \item{q}{: order of autocorrelation coefficient lag
+  factors}
+}
 \description{
   The objective is to determine the true underlying return
   by removing the autocorrelation structure in the original

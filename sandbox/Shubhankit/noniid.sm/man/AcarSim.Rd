@@ -2,11 +2,13 @@
 \alias{AcarSim}
 \title{Acar-Shane Maximum Loss Plot}
 \usage{
-  AcarSim(R)
+  AcarSim(R, nsim = 1)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
+
+  \item{nsim}{number of simulations input}
 }
 \description{
   To get some insight on the relationships between maximum
