@@ -36,12 +36,12 @@ chart.Autocorrelation <-
  
 aa= table.Autocorrelation(R)
     barplot(as.matrix(aa), main="ACF Lag Plot", ylab= "Value of Coefficient",
-                   , xlab = NULL,col=rainbow(6))
+                   , xlab = NULL,col=rich6equal)
 
    # Place the legend at the top-left corner with no frame  
    # using rainbow colors
    legend("topright", c("1","2","3","4","5","6"), cex=0.6, 
-                   bty="n", fill=rainbow(6));
+                   bty="n", fill=rich6equal);
 
 
 
