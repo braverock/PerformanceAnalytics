@@ -97,12 +97,23 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
         Rf = checkData(Rf)
     }
     #If the Reference Sharpe Ratio is greater than the Observred Sharpe Ratio an error is displayed
-    if(length(which(refSR>sr))!=0){
-        stop("The Reference Sharpe Ratio should be less than the Observed Sharpe Ratio")
+        index = which(refSR>sr)
+    if(length(index)!=0){
+        if(length(index)==columns){
+            stop("The reference Sharpe Ratio greater than the Observed Sharpe ratio for all the cases")
+        }
+        sr = sr[-index]
+        refSR = refSR[-index]
+        sk = sk[-index]
+        kr = kr[-index]
+        warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for case",columnnames[index],"\n"))
+        
     }
     result = pnorm(((sr - refSR)*(n-1)^(0.5))/(1-sr*sk+sr^2*(kr-1)/4)^(0.5))
+    columnnames = columnnames[-index]
     if(!is.null(dim(result))){ 
         colnames(result) = paste(columnnames,"(SR >",refSR,")") 
+        
         rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
     }
     return(result)
