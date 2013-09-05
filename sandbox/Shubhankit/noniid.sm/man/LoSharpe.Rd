@@ -44,23 +44,24 @@
   yields the following relationship between SR and SR(q):
   and i,j belongs to 0 to q-1 \deqn{SR(q) = \eta(q) } Where
   : \deqn{ }{\eta(q) = [q]/[\sqrt(q\sigma^2) + 2\sigma^2
-  \sum(q-k)\rho(k)] } Where k belongs to 0 to q-1
+  \sum(q-k)\rho(k)] } Where, k belongs to 0 to q-1 SR(q) :
+  Estimated Lo Sharpe Ratio SR : Theoretical William Sharpe
+  Ratio
 }
 \examples{
 data(edhec)
-head(LoSharpe(edhec,0,3))
+LoSharpe(edhec,0,3)
 }
 \author{
-  Brian G. Peterson, Peter Carl, Shubhankit Mohan
+  Shubhankit Mohan
 }
 \references{
-  Getmansky, Mila, Lo, Andrew W. and Makarov, Igor,\emph{
-  An Econometric Model of Serial Correlation and
-  Illiquidity in Hedge Fund Returns} (March 1, 2003). MIT
-  Sloan Working Paper No. 4288-03; MIT Laboratory for
-  Financial Engineering Working Paper No. LFE-1041A-03;
-  EFMA 2003 Helsinki Meetings.
-  \url{http://ssrn.com/abstract=384700}
+  Andrew Lo,\emph{ The Statistics of Sharpe Ratio.}2002,
+  AIMR. \code{\link[stats]{}} \cr
+  \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=377260}
+
+  Andrew Lo,\emph{Sharpe Ratio may be Overstated}
+  \url{http://www.risk.net/risk-magazine/feature/1506463/lo-sharpe-ratios-overstated}
 }
 \keyword{distribution}
 \keyword{models}

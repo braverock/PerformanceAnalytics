@@ -1,8 +1,8 @@
-\name{se.LoSharpe}
-\alias{se.LoSharpe}
-\title{Andrew Lo Sharpe Ratio Statistics}
+\name{table.Sharpe}
+\alias{table.Sharpe}
+\title{Sharpe Ratio Statistics Summary}
 \usage{
-  se.LoSharpe(Ra, Rf = 0, q = 3, ...)
+  table.Sharpe(Ra, Rf = 0, q = 3, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -17,11 +17,26 @@
   \item{\dots}{any other pass thru parameters}
 }
 \description{
-  Although the Sharpe ratio has become part of the canon of
-  modern financial analysis, its applications typically do
-  not account for the fact that it is an estimated
-  quantity, subject to estimation errors which can be
-  substantial in some cases.
+  The Sharpe ratio is simply the return per unit of risk
+  (represented by variability).  In the classic case, the
+  unit of risk is the standard deviation of the returns.
+
+  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}}
+
+  William Sharpe now recommends
+  \code{\link{InformationRatio}} preferentially to the
+  original Sharpe Ratio.
+
+  The higher the Sharpe ratio, the better the combined
+  performance of "risk" and return.
+
+  As noted, the traditional Sharpe Ratio is a risk-adjusted
+  measure of return that uses standard deviation to
+  represent risk. Although the Sharpe ratio has become part
+  of the canon of modern financial analysis, its
+  applications typically do not account for the fact that
+  it is an estimated quantity, subject to estimation errors
+  that can be substantial in some cases.
 
   Many studies have documented various violations of the
   assumption of IID returns for financial securities.
@@ -44,16 +59,13 @@
   yields the following relationship between SR and SR(q):
   and i,j belongs to 0 to q-1 \deqn{SR(q) = \eta(q) } Where
   : \deqn{ }{\eta(q) = [q]/[\sqrt(q\sigma^2) + 2\sigma^2
-  \sum(q-k)\rho(k)] } Where k belongs to 0 to q-1 Under the
-  assumption of assumption of asymptotic variance of SR(q),
-  the standard error for the Sharpe Ratio Esitmator can be
-  computed as: \deqn{SE(SR(q)) = \sqrt((1+SR^2/2)/T)} SR(q)
-  : Estimated Lo Sharpe Ratio SR : Theoretical William
-  Sharpe Ratio
+  \sum(q-k)\rho(k)] } Where, k belongs to 0 to q-1 SR(q) :
+  Estimated Lo Sharpe Ratio SR : Theoretical William Sharpe
+  Ratio
 }
 \examples{
 data(edhec)
-se.LoSharpe(edhec,0,3)
+table.Sharpe(edhec,0,3)
 }
 \author{
   Shubhankit Mohan

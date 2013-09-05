@@ -1,5 +1,20 @@
-#'@title Andrew Lo Sharpe Ratio
+#'@title Sharpe Ratio Statistics Summary 
 #'@description
+#' The Sharpe ratio is simply the return per unit of risk (represented by
+#' variability).  In the classic case, the unit of risk is the standard
+#' deviation of the returns.
+#' 
+#' \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}}
+#' 
+#' William Sharpe now recommends \code{\link{InformationRatio}} preferentially
+#' to the original Sharpe Ratio.
+#' 
+#' The higher the Sharpe ratio, the better the combined performance of "risk"
+#' and return.
+#' 
+#' As noted, the traditional Sharpe Ratio is a risk-adjusted measure of return
+#' that uses standard deviation to represent risk.
+
 #' Although the Sharpe ratio has become part of the canon of modern financial 
 #' analysis, its applications typically do not account for the fact that it is an
 #' estimated quantity, subject to estimation errors that can be substantial in 
@@ -40,59 +55,44 @@
 #' @examples
 #' 
 #' data(edhec)
-#' LoSharpe(edhec,0,3)
-#' @rdname LoSharpe
+#' table.Sharpe(edhec,0,3)
+#' @rdname table.Sharpe
 #' @export
-LoSharpe <-
+table.Sharpe <-
   function (Ra,Rf = 0,q = 3, ...)
-  { # @author Brian G. Peterson, Peter Carl
+  { y = checkData(Ra, method = "xts")
+    columns = ncol(y)
+    rows = nrow(y)
+    columnnames = colnames(y)
+    rownames = rownames(y)
     
-    
-    # Function:
-    R = checkData(Ra, method="xts")
-    # Get dimensions and labels
-    columns.a = ncol(R)
-    columnnames.a = colnames(R)
-    # Time used for daily Return manipulations
-    Time= 252*nyears(edhec)
-    clean.lo <- function(column.R,q) {
-      # compute the lagged return series
-      gamma.k =matrix(0,q)
-      mu = sum(column.R)/(Time)
-      Rf= Rf/(Time)
-      for(i in 1:q){
-        lagR = lag(column.R, k=i)
-        # compute the Momentum Lagged Values
-        gamma.k[i]= (sum(((column.R-mu)*(lagR-mu)),na.rm=TRUE))
-      }
-      return(gamma.k)
-    }
-    neta.lo <- function(pho.k,q) {
-      # compute the lagged return series
-      sumq = 0
-      for(j in 1:q){
-        sumq = sumq+ (q-j)*pho.k[j]
-      }
-      return(q/(sqrt(q+2*sumq)))
-    }
-    for(column.a in 1:columns.a) { # for each asset passed in as R
-      # clean the data and get rid of NAs
-      clean.ret=na.omit(R[,column.a])
-      mu = sum(clean.ret)/(Time)
-      sig=sqrt(((clean.ret-mu)^2/(Time)))
-      pho.k = clean.lo(clean.ret,q)/(as.numeric(sig[1]))
-      netaq=neta.lo(pho.k,q)
-      #column.lo = (netaq*((mu-Rf)/as.numeric(sig[1])))
-      column.lo = as.numeric(SharpeRatio.annualized(R[,column.a]))[1]*netaq
-      if(column.a == 1)  { lo = column.lo }
-      else { lo = cbind (lo, column.lo) }
+    # for each column, do the following:
+    for(column in 1:columns) {
+      x = y[,column]
       
+      z = c(SharpeRatio.annualized(x),
+            SharpeRatio.modified(x),
+            LoSharpe(x),
+            Return.annualized(x),StdDev.annualized(x),se.Losharpe(x))
+            
+      znames = c(
+        "William Sharpe Ratio",
+        "Modified Sharpe Ratio",
+        "Andrew Lo Sharpe Ratio",
+        "Annualized Return",
+        "Annualized Standard Deviation","Sharpe Ratio Standard Error(95%)"        
+      )
+      if(column == 1) {
+        resultingtable = data.frame(Value = z, row.names = znames)
+      }
+      else {
+        nextcolumn = data.frame(Value = z, row.names = znames)
+        resultingtable = cbind(resultingtable, nextcolumn)
+      }
     }
-    colnames(lo) = columnnames.a
-    rownames(lo)= paste("Lo Sharpe Ratio")
-    return(lo)
+    colnames(resultingtable) = columnnames
+    ans = base::round(resultingtable, digits)
+    ans
     
-    
-    # RESULTS:
     
   }

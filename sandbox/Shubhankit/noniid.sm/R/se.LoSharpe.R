@@ -21,15 +21,23 @@
 #'Where :
 #' \deqn{ }{\eta(q) = [q]/[\sqrt(q\sigma^2) + 2\sigma^2 \sum(q-k)\rho(k)] }
 #' Where k belongs to 0 to q-1
+#' Under the assumption of assumption of asymptotic variance of SR(q), the standard error for the Sharpe Ratio Esitmator can be computed as:
+#' \deqn{SE(SR(q)) = \sqrt((1+SR^2/2)/T)}
+#' SR(q) :  Estimated Lo Sharpe Ratio
+#' SR : Theoretical William Sharpe Ratio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' daily asset returns
 #' @param Rf an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' annualized Risk Free Rate
 #' @param q Number of autocorrelated lag periods. Taken as 3 (Default)
 #' @param \dots any other pass thru parameters
-#' @author Brian G. Peterson, Peter Carl, Shubhankit Mohan
-#' @references Getmansky, Mila, Lo, Andrew W. and Makarov, Igor,\emph{ An Econometric Model of Serial Correlation and Illiquidity in Hedge Fund Returns} (March 1, 2003). MIT Sloan Working Paper No. 4288-03; MIT Laboratory for Financial Engineering Working Paper No. LFE-1041A-03; EFMA 2003 Helsinki Meetings.
-#' \url{http://ssrn.com/abstract=384700}
+#' @author Shubhankit Mohan
+#' @references Andrew Lo,\emph{ The Statistics of Sharpe Ratio.}2002, AIMR.
+#'\code{\link[stats]{}} \cr
+#' \url{http://papers.ssrn.com/sol3/papers.cfm?abstract_id=377260}
+#' 
+#' Andrew Lo,\emph{Sharpe Ratio may be Overstated} 
+#' \url{http://www.risk.net/risk-magazine/feature/1506463/lo-sharpe-ratios-overstated}
 #' @keywords ts multivariate distribution models non-iid 
 #' @examples
 #' 
@@ -48,7 +56,7 @@ se.LoSharpe <-
     columns.a = ncol(R)
     columnnames.a = colnames(R)
     # Time used for daily Return manipulations
-    Time= 252*nyears(R)
+    Time= 252*nyears(edhec)
     clean.lo <- function(column.R,q) {
       # compute the lagged return series
       gamma.k =matrix(0,q)
