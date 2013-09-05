@@ -98,12 +98,19 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
     }
-    #If the refSR is greater than SR an error is displayed
-    if(length(which(refSR>sr))!=0){
-        stop("The Reference Sharpe Ratio should be less than the Observed Sharpe Ratio")
+    index = which(refSR>sr)
+    if(length(index)!=0){
+        if(length(index)==columns){
+            stop("The reference Sharpe Ratio greater than the Observed Sharpe ratio for all the cases")
+        }
+        sr = sr[-index]
+        refSR = refSR[-index]
+        sk = sk[-index]
+        kr = kr[-index]
+        warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for case",columnnames[index],"\n"))    
     }
-
     result = 1 + (1 - sk*sr + ((kr-1)/4)*sr^2)*(qnorm(p)/(sr-refSR))^2
+    columnnames = columnnames[-index]
     if(!is.null(dim(result))){ 
       colnames(result) = paste(columnnames,"(SR >",refSR,")") 
       rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
