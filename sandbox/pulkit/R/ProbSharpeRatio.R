@@ -106,13 +106,14 @@ function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,n = NULL,sr = NULL,sk = N
         refSR = refSR[-index]
         sk = sk[-index]
         kr = kr[-index]
+        columnnames = columnnames[-index]
         warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for case",columnnames[index],"\n"))
         
     }
-    result = pnorm(((sr - refSR)*(n-1)^(0.5))/(1-sr*sk+sr^2*(kr-1)/4)^(0.5))
-    columnnames = columnnames[-index]
+    result = pnorm(((sr - refSR)*((n-1)^(0.5)))/(1-sr*sk+(sr^2)*(kr-1)/4)^(0.5))
+
     if(!is.null(dim(result))){ 
-        colnames(result) = paste(columnnames,"(SR >",refSR,")") 
+        colnames(result) = paste(columnnames,"(SR >",round(refSR,2),")") 
         
         rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
     }

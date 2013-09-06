@@ -134,12 +134,12 @@ class PSR_Opt:
 def main():
     #1) Inputs (path to csv file with returns series)
     path='data.csv'
-    maxIter=1000 # Maximum number of iterations
+    maxIter=10000 # Maximum number of iterations
     delta=.005 # Delta Z (attempted gain per interation)
     
     #2) Load data, set seed
     series=np.genfromtxt(path,delimiter=',') # load as numpy array
-    seed=np.ones((series.shape[1],1)) # initialize seed
+    seed=np.ones((series.shape[1],1))/series.shape[1] # initialize seed
     bounds=[(0,1) for i in seed] # min and max boundary per weight
     
     #3) Create class and solve

@@ -60,7 +60,7 @@ PsrPortfolio<-function(R,refSR=0,bounds=NULL,MaxIter = 1000,delta = 0.005){
     }
     z = 0
     iter = 0
-    w = rep(1,columns)
+    w = rep(1,columns)/columns
     d1z = 0
     #Optimization Function
     optimize<-function(){

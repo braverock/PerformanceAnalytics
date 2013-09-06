@@ -107,12 +107,12 @@ MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL
         refSR = refSR[-index]
         sk = sk[-index]
         kr = kr[-index]
+        columnnames = columnnames[-index]
         warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for case",columnnames[index],"\n"))    
     }
     result = 1 + (1 - sk*sr + ((kr-1)/4)*sr^2)*(qnorm(p)/(sr-refSR))^2
-    columnnames = columnnames[-index]
     if(!is.null(dim(result))){ 
-      colnames(result) = paste(columnnames,"(SR >",refSR,")") 
+      colnames(result) = paste(columnnames,"(SR >",round(refSR,2),")") 
       rownames(result) = paste("Probabilistic Sharpe Ratio(p=",round(p*100,1),"%):")
     }
     return(result)
