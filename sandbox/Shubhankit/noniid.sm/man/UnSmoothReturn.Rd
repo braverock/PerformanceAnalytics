@@ -1,18 +1,16 @@
-\name{table.UnsmoothReturn}
-\alias{table.UnsmoothReturn}
-\title{Table of Unsmooth Returns}
+\name{UnsmoothReturn}
+\alias{UnsmoothReturn}
+\title{Unsmooth Time Series Return}
 \usage{
-  table.UnsmoothReturn(R, n = 2, p = 0.95, digits = 4)
+  UnsmoothReturn(R = NULL, q = 2, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
   or zoo object of asset returns}
 
-  \item{n}{number of series lags}
+  \item{q}{number of series lags}
 
-  \item{p}{confidence level for calculation, default p=.99}
-
-  \item{digits}{number of digits to round results to}
+  \item{...}{any other passthru parameter}
 }
 \description{
   Creates a table of estimates of moving averages for
@@ -46,10 +44,10 @@
 library(PerformanceAnalytics)
 library(tseries)
 data(managers)
-table.UnsmoothReturn(managers,3)
+UnsmoothReturn(managers,3)
 }
 \author{
-  Peter Carl, Brian Peterson, Shubhankit Mohan
+  Shubhankit Mohan
 }
 \references{
   Cavenaile, Laurent, Coen, Alain and Hubner,

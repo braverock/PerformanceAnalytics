@@ -18,6 +18,12 @@
   Skewness and Kurtosis for Orignal and Unsmooth Returns
   Respectively
 }
+\examples{
+library(PerformanceAnalytics)
+library(tseries)
+data(managers)
+table.ComparitiveReturn.GLM(managers,3)
+}
 \author{
   Peter Carl, Brian Peterson, Shubhankit Mohan
 }

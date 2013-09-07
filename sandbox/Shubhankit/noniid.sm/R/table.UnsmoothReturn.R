@@ -29,6 +29,11 @@
 #' 
 #' 
 #' @rdname table.UnsmoothReturn
+#' @examples
+#' library(PerformanceAnalytics)
+#' library(tseries)
+#' data(managers)
+#' table.UnsmoothReturn(managers,3)
 #' @export 
 table.UnsmoothReturn <-
   function (R, n = 2, p= 0.95, digits = 4)

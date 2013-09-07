@@ -13,6 +13,11 @@
 #' @references Okunev, John and White, Derek R., \emph{ Hedge Fund Risk Factors and Value at Risk of Credit Trading Strategies} (October 2003). 
 #' Available at SSRN: \url{http://ssrn.com/abstract=460641} 
 #' @rdname table.ComparitiveReturn.GLM
+#' @examples
+#' library(PerformanceAnalytics)
+#' library(tseries)
+#' data(managers)
+#' table.ComparitiveReturn.GLM(managers,3)
 #' @export 
 table.ComparitiveReturn.GLM <-
   function (R, n = 3, digits = 4)

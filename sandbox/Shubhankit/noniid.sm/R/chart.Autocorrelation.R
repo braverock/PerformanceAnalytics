@@ -36,7 +36,7 @@ chart.Autocorrelation <-
  
 aa= table.Autocorrelation(R)
     chart.StackedBar(as.matrix(aa), main="ACF Lag Plot", ylab= "Value of Coefficient",
-                   , xlab = NULL,col=bluemono)
+                   , xlab = NULL,colorset=bluemono)
 
    # Place the legend at the top-left corner with no frame  
    # using rainbow colors
