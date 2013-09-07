@@ -27,7 +27,7 @@ table.ComparitiveReturn.GLM <-
     # p = Confifence Level
     # Output:
     # A table of estimates of Moving Average
-    
+    require("tseries")
     y = checkData(R, method = "xts")
     columns = ncol(y)
     rows = nrow(y)
@@ -37,13 +37,14 @@ table.ComparitiveReturn.GLM <-
     # for each column, do the following:
     for(column in 1:columns) {
       x = y[,column]
+      x=na.omit(x)
       skew = skewness(x)
-      arma.coeff= arma(x,0,n)
+      arma.coeff= arma(x,order=c(0,n))
       kurt= kurtosis(x)
       z = c(skew,
-            ((sum(arma.coeff$theta^2)^1.5)*(skew/(sum(arma.coeff$theta^3)))),
+            ((sum(as.numeric(arma.coeff$coef[1:n])^2)^1.5)*(skew/(sum(as.numeric(arma.coeff$coef[1:n])^3)))),
             kurt,
-             (kurt*(sum(arma.coeff$theta^2)^2-6*(sum(arma.coeff$theta^2)*sum(arma.coeff$theta^2)))/(sum(arma.coeff$theta^4))))
+             (-kurt*(sum(as.numeric(arma.coeff$coef[1:n])^2)^2-6*(sum(as.numeric(arma.coeff$coef[1:n])^2)*sum(as.numeric(arma.coeff$coef[1:n])^2)))/(sum(as.numeric(arma.coeff$coef[1:n])^4))))
       znames = c(
         "Skewness ( Orignal) ",
         "Skewness (Unsmooth)",
@@ -60,8 +61,8 @@ table.ComparitiveReturn.GLM <-
     colnames(resultingtable) = columnnames
     ans = base::round(resultingtable, digits)
     ans
-    
-    
+    # arma.coeff$theta
+    # as.numeric(arma.coeff$coef[1:n])
   }
 
 ###############################################################################

@@ -53,6 +53,7 @@ table.UnsmoothReturn <-
     # for each column, do the following:
     for(column in 1:columns) {
       x = y[,column]
+    x=na.omit(x)
       ma.stats= arma(x, order = c(0, 2))
 
       z = c(as.numeric(ma.stats$coef[1]),
