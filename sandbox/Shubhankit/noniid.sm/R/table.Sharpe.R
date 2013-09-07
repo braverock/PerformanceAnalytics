@@ -70,14 +70,12 @@ table.Sharpe <-
     for(column in 1:columns) {
       x = y[,column]
       
-      z = c(SharpeRatio.annualized(x),
-            SharpeRatio.modified(x),
-            LoSharpe(x),
-            Return.annualized(x),StdDev.annualized(x),se.Losharpe(x))
+      z = c(as.numeric(SharpeRatio.annualized(x)),
+            as.numeric(LoSharpe(x)),
+            as.numeric(Return.annualized(x)),as.numeric(StdDev.annualized(x)),as.numeric(se.Losharpe(x)))
             
       znames = c(
         "William Sharpe Ratio",
-        "Modified Sharpe Ratio",
         "Andrew Lo Sharpe Ratio",
         "Annualized Return",
         "Annualized Standard Deviation","Sharpe Ratio Standard Error(95%)"        
