@@ -16,7 +16,6 @@ Description: GSoC 2013 project to replicate literature on drawdowns and
 License: GPL-3
 ByteCompile: TRUE
 Collate:
-    'AcarSim.R'
     'ACStdDev.annualized.R'
     'CalmarRatio.Norm.R'
     'CDrawdown.R'
@@ -24,16 +23,13 @@ Collate:
     'chart.Autocorrelation.R'
     'EmaxDDGBM.R'
     'GLMSmoothIndex.R'
-    'LoSharpe.R'
     'na.skip.R'
     'noniid.sm-internal.R'
     'QP.Norm.R'
     'Return.GLM.R'
     'Return.Okunev.R'
-    'se.LoSharpe.R'
     'SterlingRatio.Norm.R'
     'table.ComparitiveReturn.GLM.R'
     'table.EMaxDDGBM.R'
     'table.UnsmoothReturn.R'
     'UnsmoothReturn.R'
-    'table.Sharpe.R'

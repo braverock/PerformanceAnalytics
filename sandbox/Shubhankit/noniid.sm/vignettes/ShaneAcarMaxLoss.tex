@@ -11,7 +11,7 @@
 \usepackage{Rd}
 
 \usepackage{Sweave}
-\SweaveOpts{engine=R,eps=FALSE}
+
 %\VignetteIndexEntry{Performance Attribution from Bacon}
 %\VignetteDepends{PerformanceAnalytics}
 %\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
@@ -34,7 +34,7 @@
 \author{R Project for Statistical Computing}
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
+\input{ShaneAcarMaxLoss-concordance}
 
 \maketitle
 
@@ -46,14 +46,7 @@ Firstly, this paper recalls from previously published research the expected maxi
 Therefore Monte-Carlo simulations have to be used. 
 \end{abstract}
 
-<<echo=FALSE >>=
-library(PerformanceAnalytics)
-data(edhec)
-@
 
-<<echo=FALSE,eval=TRUE,results=verbatim >>=
-require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/AcarSim.R")
-@
 
 \section{Background}
 
@@ -76,11 +69,14 @@ Figure below illustrates the average maximum drawdown as well as the quantiles 8
 
 Other observations are that:maximum drawdown is a positive function of the return /volatility ratio ,confidence interval widens as the return/volatility ratio decreases.This means that as the return/volatility increases not only the magnitude of drawdown decreases but the confidence interval as well. In others words losses are both smaller and more predictable.
 
-<<fig=TRUE>>=
-library(PerformanceAnalytics)
-data(edhec)
-chart.AcarSim(edhec)
-@
+\begin{Schunk}
+\begin{Sinput}
+> library(PerformanceAnalytics)
+> data(edhec)
+> chart.AcarSim(edhec)
+\end{Sinput}
+\end{Schunk}
+\includegraphics{ShaneAcarMaxLoss-003}
 
 
 
