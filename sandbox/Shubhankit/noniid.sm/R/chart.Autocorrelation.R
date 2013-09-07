@@ -35,13 +35,13 @@ chart.Autocorrelation <-
 # Graph autos with adjacent bars using rainbow colors
  
 aa= table.Autocorrelation(R)
-    barplot(as.matrix(aa), main="ACF Lag Plot", ylab= "Value of Coefficient",
-                   , xlab = NULL,col=rich6equal)
+    chart.StackedBar(as.matrix(aa), main="ACF Lag Plot", ylab= "Value of Coefficient",
+                   , xlab = NULL,col=bluemono)
 
    # Place the legend at the top-left corner with no frame  
    # using rainbow colors
-   legend("topright", c("1","2","3","4","5","6"), cex=0.6, 
-                   bty="n", fill=rich6equal);
+   #legend("topright", c("1","2","3","4","5","6"), cex=0.6, 
+#                   bty="n", fill=rich6equal);
 
 
 

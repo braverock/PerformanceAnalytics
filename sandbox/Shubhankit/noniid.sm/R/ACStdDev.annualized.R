@@ -46,7 +46,8 @@ ACStdDev.annualized <- ACsd.annualized <- ACsd.multiperiod <-
     
     for(column.a in 1:columns.a) { # for each asset passed in as R
       # clean the data and get rid of NAs
-      column.return = R[,column.a]
+     # column.return = R[,column.a]
+      column.return = na.omit(R[,column.a])
       acf = as.numeric(acf(as.numeric(column.return), plot = FALSE)[1:lag][[1]])
       coef= sum(acf*acf)
       if(!xtsible(R) & is.na(scale))
