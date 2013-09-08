@@ -51,6 +51,9 @@
 #'MinTrackRecord(edhec[,1],refSR=0.1,Rf = 0.04/12)
 #'MinTrackRecord(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78)
 #'MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24))
+#'
+#'data(managers)
+#'MinTrackRecord(managers,refSR = 0)
 #'@export
 #'
 MinTrackRecord<-function(R = NULL, refSR,Rf=0,p = 0.95, weights = NULL,sr = NULL,sk = NULL, kr = NULL, ...){

@@ -37,9 +37,9 @@
 #' TuW(edhec[,1],0.95,"normal") # expected value 103.2573 
 #'@export
 
-TuW<-function(R,confidence,type=c("ar","normal"),...){
+TuW<-function(R,confidence=0.95,type=c("ar","normal"),...){
   x = checkData(R)
-  type = type[1] 
+  x = na.omit(x)
   if(ncol(x)==1 || is.null(R) || is.vector(R)){ 
     calcul = FALSE
     for(i in (1:length(x))){
@@ -47,30 +47,30 @@ TuW<-function(R,confidence,type=c("ar","normal"),...){
         calcul = TRUE
       }
     }
-    x = na.omit(x)
     if(!calcul){
       result = NA
     }
     else{
-        if(type=="ar"){
+        if(type[1]=="ar"){
             result = get_TuW(x,confidence)
         }
-        if(type=="normal"){
+        if(type[1]=="normal"){
             result = tuw_norm(x,confidence)
         }
     }
     return(result)
   }
     else{
-        if(type=="ar"){
+        if(type[1]=="ar"){
             result=apply(x,MARGIN = 2, get_TuW,confidence)
         }
-        if(type=="normal"){
+        if(type[1]=="normal"){
              result=apply(x,MARGIN = 2, tuw_norm,confidence)
         }
                    
       result<-as.data.frame(result)
       result<-t(result)
+      result<-round(result,3)
       rownames(result)=paste("Max Time Under Water")
       return(result)
     }

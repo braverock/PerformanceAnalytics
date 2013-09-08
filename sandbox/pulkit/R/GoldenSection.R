@@ -23,7 +23,7 @@
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #' 
 #'@export
-golden_section<-function(a,b,minimum = TRUE,function_name,...){
+golden_section<-function(a,b,function_name,minimum = TRUE,...){
 
     # DESCRIPTION
     # A function to perform the golden search algorithm on the provided function

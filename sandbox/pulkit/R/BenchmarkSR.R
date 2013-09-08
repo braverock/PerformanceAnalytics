@@ -25,6 +25,8 @@
 #'
 #'data(edhec)
 #'BenchmarkSR(edhec) #expected 0.393797
+#'data(managers)
+#'BenchmarkSR(managers) # expected 0.8110536
 #'
 #'@export
 #'
@@ -44,7 +46,7 @@ BenchmarkSR<-function(R){
   if(columns == 1){
     stop("The number of return series should be greater than 1")
   }
-  SR = SharpeRatio(x)
+  SR = SharpeRatio(x,FUN="StdDev")
   sr_avg = mean(SR)
   corr = table.Correlation(R,R)
   corr_avg = 0

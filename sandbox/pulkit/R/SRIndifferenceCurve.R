@@ -46,7 +46,8 @@
 #' 
 #'data(edhec)
 #'chart.SRIndifference(edhec)
-#' 
+#'data(managers)
+#'chart.SRIndifference(managers) 
 #'@export 
 
 chart.SRIndifference<-function(R,reference.grid = TRUE, ylab = NULL,xlab = NULL,main = "Sharpe Ratio Indifference Curve",element.color = "darkgrey",lwd = 2,pch = 1,cex = 1,cex.axis = 0.8,cex.lab = 1,cex.main = 1,ylim = NULL,xlim = NULL,...){
@@ -74,7 +75,7 @@ chart.SRIndifference<-function(R,reference.grid = TRUE, ylab = NULL,xlab = NULL,
   if(columns == 1){  
     stop("The number of return series should be greater 1 ")
   }
-  SR = SharpeRatio(x)
+  SR = SharpeRatio(x,FUN="StdDev")
   sr_avg = mean(SR)
   corr = table.Correlation(R,R)
   corr_avg = 0

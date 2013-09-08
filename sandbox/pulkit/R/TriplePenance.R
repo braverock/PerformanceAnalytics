@@ -61,15 +61,27 @@ get_minq<-function(R,confidence){
     mu = mean(x, na.rm = TRUE)
     sigma_infinity = StdDev(x)
     phi = cov(x[-1],x[-length(x)])/(cov(x[-length(x)]))
+
     sigma = sigma_infinity*((1-phi^2)^0.5)
     dp0 = 0
     q_value = 0
     bets = 0
-    while(q_value <= 0){
+   if(phi>=0 & mu >0){
+        while(q_value <= 0){
         bets = bets + 1
         q_value = getQ(bets, phi, mu, sigma, dp0, confidence)
     }
-    minQ = golden_section(0,bets,TRUE,getQ,phi,mu,sigma,dp0,confidence)
+        minQ = golden_section(0,bets,getQ,TRUE,phi,mu,sigma,dp0,confidence)
+    }
+    else{
+    if(phi<0){
+        warning(paste("NaN produced because phi < 0 ",colnames(x)))
+    }
+    if(mu<0){
+        warning(paste("NaN produced because mu < 0 ",colnames(x)))
+    }
+        minQ = list(value=NaN,x=NaN)
+    }
     return(c(-minQ$value*100,minQ$x))
 }
 
@@ -120,11 +132,23 @@ get_TuW<-function(R,confidence){
     dp0 = 0
     q_value = 0
     bets = 0
+    if(phi >=0 & mu >0){
     while(q_value <= 0){
         bets = bets + 1
         q_value = getQ(bets, phi, mu, sigma, dp0, confidence)
     }
-    TuW = golden_section(bets-1,bets,TRUE,diff_Q,phi,mu,sigma,dp0,confidence)
+        TuW = golden_section(bets-1,bets,diff_Q,TRUE,phi,mu,sigma,dp0,confidence)
+    }
+    else{
+    if(phi<0){
+        warning(paste("NaN produced because phi < 0 ",colnames(x)))
+    }
+    if(mu<0){
+        warning(paste("NaN produced because mu < 0 ",colnames(x)))
+    }
+ 
+        TuW = list(x=NaN)
+    }
     return(TuW$x)
 }
 

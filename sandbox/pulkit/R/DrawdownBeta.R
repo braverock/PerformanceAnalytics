@@ -115,7 +115,6 @@ BetaDrawdown<-function(R,Rm,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","a
             }
         }
         beta_dd = sum((as.numeric(x[index])-x)*q)/CDaR(Rm,p=p)
-        print((as.numeric(x[index])-x)*q)
         return(beta_dd)
     }
 

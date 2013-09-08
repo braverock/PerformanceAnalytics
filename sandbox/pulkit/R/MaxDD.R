@@ -50,7 +50,7 @@
 #' MaxDD(edhec,0.95,"ar")
 #' MaxDD(edhec[,1],0.95,"normal") #expected values 4.241799 6.618966
 #'@export
-MaxDD<-function(R,confidence,type=c("ar","normal"),...)
+MaxDD<-function(R,confidence=0.95,type=c("ar","normal"),...)
 {
   
   # DESCRIPTION:
@@ -65,36 +65,35 @@ MaxDD<-function(R,confidence,type=c("ar","normal"),...)
   
   # FUNCTION:
   x = checkData(R)
-  
+  x = na.omit(x) 
   if(ncol(x)==1 || is.null(R) || is.vector(R)){
-    type = type[1] 
     calcul = FALSE
     for(i in (1:length(x))){
       if(!is.na(x[i])){
         calcul = TRUE
       }
     }
-    x = na.omit(x)
     if(!calcul){
       result = NA
     }
     else{
-      if(type=="ar"){  
+      if(type[1]=="ar"){  
         result = get_minq(x,confidence)
         }
-      if(type=="normal"){
+      if(type[1]=="normal"){
           result = dd_norm(x,confidence)
       }
     }
 
     return(result)
   }
-    if(type=="ar"){
+    if(type[1]=="ar"){
         result = apply(x,MARGIN = 2,get_minq,confidence)
     }
-    if(type=="normal"){
+    if(type[1]=="normal"){
         result = apply(x,MARGIN = 2,dd_norm,confidence)
     }
+    result = round(result,3)
   rownames(result) = c("MaxDD(in %)","t*")
   return(result)  
 }

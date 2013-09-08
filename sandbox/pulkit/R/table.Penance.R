@@ -26,6 +26,7 @@ table.Penance<-function(R,confidence){
   #
   # Function:
   x = checkData(R)
+  x = na.omit(x)
   columns = ncol(x) 
   columnnames = colnames(x)
   rownames = c("mean","stdDev","phi","sigma","MaxDD(in %)","t*","MaxTuW","Penance")
