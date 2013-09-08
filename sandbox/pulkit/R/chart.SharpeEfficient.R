@@ -1,23 +1,27 @@
 chart.SharpeEfficientFrontier<-function(R){
 
     x = checkData(R)
+    x = na.omit(x)
     columns = ncol(x)
-
-    mat<-NULL
-    subset_sum<-function(numbers,target,partial){
-        s = sum(partial)
-        print(s)
-        if(s==target){
-            mat = rbind(mat,partial)
-        }
-      
-        x<-NULL
-        for(i in 1:length(numbers)){
-            n = numbers[i]
-            remaining = numbers[(i+1):length(numbers)]
-            subset_sum(remaining,target,c(partial,n))
-        }
+    weights<-matrix(ncol=ncol(x))
+    for(i in 1:20000){
+       weights<-rbind(weights,sample(1:ncol(x))/ncol(x))
     }
-    subset_sum(c(1:10),10,0)
+    y_axis<-NULL
+    x_axis<-NULL
+    print(weights)
+    for(i in 1:20000){
+        x_portfolio = Return.portfolio(x,weights[i,])
+        print(x_portfolio)
+        sr<-SharpeRatio(x_portfolio,FUN="StdDev")
+        sk<-skewness(x_portfolio)
+        kr<-kurtosis(x_portfolio)
+        sd<-StdDev(x_portfolio)
+        sigma_sr<-((1-sk*sr+(sr^2)*(kr-1)/4)/(length(x_portfolio)-1))^0.5
+        y_axis<-c(y_axis,as.vector(sr))
+        x_axis<-c(x_axis,as.vector(sigma_sr))
+    }
+    plot(x_axis,y_axis)
+
 }
     

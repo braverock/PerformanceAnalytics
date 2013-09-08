@@ -45,10 +45,23 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
     columnnames = colnames(x)
     rf = checkData(Rf)
     nr = length(Rf)
+    x_check = x
     if(nr != 1 && nr != n ){
       stop("The number of rows of the returns and the risk free rate do not match")
     }
-    
+    index = NULL
+    # ERROR Handling for cases in which lookback period is greater than the number of rows
+    for(i in 1:ncol(x)){
+        if(length(na.omit(x[,i]))<h){
+            warning(paste("The lookback Period greater than rows eliminating series",columnnames[i]))
+            index = c(index,i)
+            columns = columns -1
+        }
+    }
+    x = x[,-index]
+    rf = rf[-index]
+    columnnames = columnnames[-index]
+
     REDD<-function(xh,geometric){
         if(geometric)
             Return.cumulative = cumprod(1+xh)

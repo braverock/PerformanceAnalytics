@@ -46,7 +46,21 @@ rollEconomicMax<-function(R,Rf,h,geometric = TRUE,...){
   if(nr != 1 && nr != n ){
     stop("The number of rows of the returns and the risk free rate do not match")
   }
-  
+
+   index = NULL
+    #ERROR handling for cases when lookback period is greater than the number of rows
+   for(i in 1:ncol(x)){
+       if(length(na.omit(x[,i]))<h){
+           warning(paste("The lookback Period greater than rows eliminating series",columnnames[i]))
+           index = c(index,i)
+           columns = columns -1
+       }
+   }
+    x = x[,-index]
+    rf = rf[-index]
+    columnnames = columnnames[-index]
+
+ 
   REM<-function(x,geometric){
     if(geometric)
       Return.cumulative = cumprod(1+x)
