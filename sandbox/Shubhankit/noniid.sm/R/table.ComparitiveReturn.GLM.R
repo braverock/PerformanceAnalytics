@@ -44,12 +44,16 @@ table.ComparitiveReturn.GLM <-
       x = y[,column]
       x=na.omit(x)
       skew = skewness(x)
-      arma.coeff= arma(x,order=c(0,n))
+    #  arma.coeff= arma(x,order=c(0,n))
       kurt= kurtosis(x)
-      z = c(skew,
-            ((sum(as.numeric(arma.coeff$coef[1:n])^2)^1.5)*(skew/(sum(as.numeric(arma.coeff$coef[1:n])^3)))),
-            kurt,
-             (-kurt*(sum(as.numeric(arma.coeff$coef[1:n])^2)^2-6*(sum(as.numeric(arma.coeff$coef[1:n])^2)*sum(as.numeric(arma.coeff$coef[1:n])^2)))/(sum(as.numeric(arma.coeff$coef[1:n])^4))))
+     # z = c(skew,
+      #      ((sum(as.numeric(arma.coeff$coef[1:n])^2)^1.5)*(skew/(sum(as.numeric(arma.coeff$coef[1:n])^3)))),
+       #     kurt,
+        #     (abs(kurt*(sum(as.numeric(arma.coeff$coef[1:n])^2)^2/6-(sum(as.numeric(arma.coeff$coef[1:n])^2)*sum(as.numeric(arma.coeff$coef[1:n])^2)))/(sum(as.numeric(arma.coeff$coef[1:n])^4)))))
+      aa=Return.GLM(x)
+      skew1=skewness(aa)
+      kurt1=kurtosis(aa)
+      z=c(skew,skew1,kurt,kurt1)
       znames = c(
         "Skewness ( Orignal) ",
         "Skewness (Unsmooth)",
