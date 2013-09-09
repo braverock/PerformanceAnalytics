@@ -59,11 +59,13 @@ AlphaDrawdown<-function(R,Rm,p=0.95,weights = NULL,geometric = TRUE,type=c("alph
 
 
     # TODO  ERROR HANDLING
-    if(ncol(R) != ncol(Rm)){
-        stop("The number of columns in R and Rm should be equal")
-    }
+    R = na.omit(R)
+    Rm = na.omit(Rm)
     x = checkData(R)
     xm = checkData(Rm)
+    if(nrow(x) != nrow(xm)){
+        stop("The number of rows of the return series and the optimal portfolio should be equal")
+    }
     beta = BetaDrawdown(R,Rm,p = p,weights=weights,geometric=geometric,type=type,...)
     if(!is.null(weights)){
         x = Return.portfolio(R,weights)

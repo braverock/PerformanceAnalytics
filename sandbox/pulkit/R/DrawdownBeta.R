@@ -69,8 +69,13 @@ BetaDrawdown<-function(R,Rm,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","a
     # The Drawdown beta is given as the output.   
 
 
+    R = na.omit(R)
+    Rm = na.omit(Rm)
     x = checkData(R)
     xm = checkData(Rm)
+    if(nrow(x) != nrow(xm)){
+        stop("The number of rows of the return series and the optimal portfolio should be equal")
+    }
     columnnames = colnames(R)
     columns = ncol(R)
     drawdowns_m = Drawdowns(Rm)
@@ -95,7 +100,6 @@ BetaDrawdown<-function(R,Rm,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","a
     DDbeta<-function(x){
         q = NULL
         q_quantile = quantile(drawdowns_m,1-p)
-        print(drawdowns_m)
         for(i in 1:nrow(Rm)){
 
             if(drawdowns_m[i]<q_quantile){
