@@ -1,0 +1,257 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+%\usepackage{noweb}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{Umsmooth Return Models Impact}
+\author{Shubhankit Mohan}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\maketitle
+
+
+\begin{abstract}
+The fact that many hedge fund returns exhibit extraordinary levels of serial correlation is now well-known and generally accepted as fact.Because hedge fund strategies have exceptionally high autocorrelations in reported returns and this is taken as evidence of return smoothing, we first develop a method to completely eliminate any order of serial correlation across a wide array of time series processes.Once this is complete, we can determine the underlying risk factors to the "true" hedge fund returns and examine the incremental benefit attained from using nonlinear payoffs relative to the more traditional linear factors.
+\end{abstract}
+\tableofcontents
+
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+@
+
+<<echo=FALSE,eval=TRUE,results=verbatim >>=
+require(noniid.sm) #source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/Return.Okunev.R")
+@
+
+\section{Okunev White Model Methodology}
+Given a sample of historical returns \((R_1,R_2, . . .,R_T)\),the method assumes the fund manager smooths returns in the following manner:
+
+%Let $X \sim N(0,1)$ and $Y \sim \textrm{Exponential}(\mu)$.  Let
+%$Z = \sin(X)$. $\sqrt{X}$.
+  
+%$\hat{\mu}$ = $\displaystyle\frac{22}{7}$
+%e^{2 \mu} = 1
+%\begin{equation}
+%\left(\sum_{t=1}^{T} R_t/T\right) = \hat{\mu} \\
+%\end{equation}
+\begin{equation}
+ r_{0,t}  =  \sum_{i}^{} \beta_{i}r_{0,t-i} + (1- \alpha)r_{m,t} \\
+\end{equation}
+
+
+\begin{equation}
+where :  \sum_{i}^{} \beta_{i} = (1- \alpha) \\
+\end{equation}
+
+\(r_{0,t}\) : is the observed (reported) return at time t (with 0 adjustments' to reported returns), \\
+\(r_{m,t}\) : is the true underlying (unreported) return at time t (determined by making m adjustments to reported returns). \\
+
+The objective is to determine the true underlying return by removing the
+autocorrelation structure in the original return series without making any assumptions regarding the actual time series properties of the underlying process. We are implicitly assuming by this approach that the autocorrelations that arise in reported returns are entirely due to the smoothing behavior funds engage in when reporting results. In fact, the method may be adopted to produce any desired level of autocorrelation at any lag and is not limited to simply eliminating all autocorrelations.
+
+\section{To Remove Up to m Orders of Autocorrelation}
+To remove the first m orders of autocorrelation from a given return series we would proceed in a manner very similar to that detailed in \textbf{Geltner Return}. We would initially remove the first order autocorrelation, then proceed to eliminate the second order autocorrelation through the iteration process. In general, to remove any order, m, autocorrelations from a given return series we would make the following transformation to returns:
+
+\begin{equation}
+r_{m,t}=\frac{r_{m-1,t}-c_{m}r_{m-1,t-m}}{1-c_{m}}
+\end{equation}
+
+Where  \(r_{m-1,t}\) is the series return with the first (m-1) order autocorrelation coefficient's removed.The general form for all the autocorrelations given by the process is : 
+\begin{equation}
+a_{m,n}=\frac{a_{m-1,n}(1+c_{m}^2)-c_{m}(1+a_{m-1,2m})}{1+c_{m}^2 -2c_{m}a_{m-1,n}}
+\end{equation}
+
+Once a solution is found for \(c_{m}\) to create \(r_{m,t}\) , one will need to iterate back to remove the first 'm'autocorrelations again. One will then need to once again remove the mth autocorrelation using the adjustment in equation (3). It would continue the process until the first m autocorrelations are sufficiently close to zero.
+
+\section{Time Series Characteristics}
+
+Given a series  of historical returns \((R_1,R_2, . . .,R_T)\) from \textbf{January-1997} to \textbf{January-2008}, create a wealth index chart, bars for per-period performance, and underwater chart for drawdown of the  Hedge Funds Indiciesfrom EDHEC Database.
+
+\subsection{ Performance Summary}
+<<echo=F,fig=T>>=
+data(edhec)
+
+charts.PerformanceSummary(edhec[1:132,],colorset = rich6equal, lwd = 2, ylog = TRUE)
+@
+
+After applying the \textbf{Okunev White Model} to remove the serial correlation , we get the following Performance Chart.
+
+<<echo=F,fig=T>>=
+data(edhec)
+
+charts.PerformanceSummary(Return.Okunev(edhec[1:132,]),colorset = rich6equal, lwd = 2, ylog = TRUE)
+@
+
+\subsection{Autocorrelation UnSmoothing Impact}
+One promiment feature visible by the summary chart is the removal of \textbf{serial autocorrelation} and \textbf{unsoomthing} of the return series.The significant drop in autocorrelation, is visible by the following chart based on  indicies of the CTA global ,Distressed Securities and Ememrging Markets which had the highest autocorrelation .
+
+<<echo=F,fig=T>>=
+data(edhec)
+chart.Autocorrelation(edhec[,1:3])
+@
+
+The change can be evidently seen by the following chart :
+
+
+<<echo=F,fig=T>>=
+data(edhec)
+chart.Autocorrelation(Return.Okunev(edhec[,1:3]))
+@
+
+
+\subsection{Comparing Distributions}
+
+In this example we use edhec database, to compute true Hedge Fund Returns.
+
+<<echo=T,fig=T>>=
+library(PerformanceAnalytics)
+data(edhec)
+Returns = Return.Okunev(edhec[,1])
+skewness(edhec[,1])
+skewness(Returns)
+# Right Shift of Returns Ditribution for a negative skewed distribution 
+kurtosis(edhec[,1])
+kurtosis(Returns)
+# Reduction in "peakedness" around the mean
+layout(rbind(c(1, 2), c(3, 4)))
+ chart.Histogram(Returns, main = "Plain", methods = NULL)
+ chart.Histogram(Returns, main = "Density", breaks = 40,
+ methods = c("add.density", "add.normal"))
+ chart.Histogram(Returns, main = "Skew and Kurt",
+ methods = c("add.centered", "add.rug"))
+chart.Histogram(Returns, main = "Risk Measures",
+ methods = c("add.risk"))
+@
+
+The above figure shows the behaviour of the distribution tending to a normal IID distribution.For comparitive purpose, one can observe the change in the charateristics of return as compared to the orignal.
+<<echo=T,fig=T>>=
+library(PerformanceAnalytics)
+data(edhec)
+Returns = Return.Okunev(edhec[,1])
+layout(rbind(c(1, 2), c(3, 4)))
+ chart.Histogram(edhec[,1], main = "Plain", methods = NULL)
+ chart.Histogram(edhec[,1], main = "Density", breaks = 40,
+ methods = c("add.density", "add.normal"))
+ chart.Histogram(edhec[,1], main = "Skew and Kurt",
+ methods = c("add.centered", "add.rug"))
+chart.Histogram(edhec[,1], main = "Risk Measures",
+ methods = c("add.risk"))
+
+@
+
+\section{Risk Measure}
+
+\subsection{Mean absolute deviation}
+
+To calculate Mean absolute deviation we take the sum of the absolute value of the difference between the returns and the mean of the returns and we divide it by the number of returns.
+
+ \deqn{MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid r_i - \overline{r}\mid}{n}}{MeanAbsoluteDeviation = sum(|r-mean(r)|)/n }
+
+where \eqn{n} is the number of observations of the entire series, \eqn{r_i} is the return in month i and \eqn{\overline{r}} is the mean return
+
+<<echo=FALSE>>=
+data(edhec)
+t1=MeanAbsoluteDeviation(edhec[,1:3])
+t2=MeanAbsoluteDeviation(Return.Okunev(edhec[,1:3])) 
+((t2-t1)*100)/(t1) # % Change
+@
+
+We can observe than due to the spurious serial autocorrelation, the true \textbf{volatility} was hidden, which is \textbf{more than 100 \% } in case of Distressed Securities to the one apparent to the investor.\textbf{CTA Global}, has the lowerst change, which is consistent,with the fact with it has the lowerst autocorreration.
+
+\subsection{Frequency (p.64)}
+
+Gives the period of the return distribution (ie 12 if monthly return, 4 if quarterly return)
+
+<<>>=
+data(portfolio_bacon)
+print(Frequency(portfolio_bacon[,1])) #expected 12
+@
+
+\subsection{Sharpe Ratio (p.64)}
+
+The Sharpe ratio is simply the return per unit of risk (represented by variability).  In the classic case, the unit of risk is the standard deviation of the returns.
+ 
+\deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}}
+
+<<>>=
+data(managers)
+SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev") 
+@
+
+\subsection{Risk-adjusted return: MSquared (p.67)}
+
+\eqn{M^2} is a risk adjusted return useful to judge the size of relative performance between differents portfolios. With it you can compare portfolios with different levels of risk.
+
+\deqn{M^2 = r_P + SR * (\sigma_M - \sigma_P) = (r_P - r_F) * \frac{\sigma_M}{\sigma_P} + r_F}{M squared = Rp + SR * (Market risk - Portfolio risk) = (Rp - Rf) * Market risk / Portfolio risk + Rf}
+
+where \eqn{r_P}. is the portfolio return annualized, \eqn{\sigma_M}. is the market risk and \eqn{\sigma_P} is the portfolio risk
+
+<<>>=
+data(portfolio_bacon)
+print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.1068
+@
+
+\subsection{MSquared Excess (p.68)}
+
+\eqn{M^2} excess is the quantity above the standard M. There is a geometric excess return which is better for Bacon and an arithmetic excess return
+
+\deqn{M^2 excess (geometric) = \frac{1 + M^2}{1 + b} - 1}{MSquared excess (geometric) = (1+M^2)/(1+b) - 1}
+\deqn{M^2 excess (arithmetic) = M^2 - b}{MSquared excess (arithmetic) = M^2 - b}
+
+where \eqn{M^2}. is MSquared and \eqn{b}. is the benchmark annualised return.
+
+<<>>=
+data(portfolio_bacon)
+print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.00998
+print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic")) #expected -0.011
+@
+
+
+\section{Downside Risk}
+As we have obtained the true hedge fund returns, what is the actual \textbf{VaR,drawdown and downside potential} of the indices, can be illustrated by the following example, where we CTA Global and Distressed Securities indicies have been as sample sata sets.
+
+The following table, shows the change in \textbf{absolute value} in terms of percentage, when the Okunev White Return model has been implemented as compared to the Orginal model. We can observe, that for the given period , before the 2008 financial crisis, the hedge fund returns have a \textbf{100} \% increase in exposure.The result is consistent , when tested on other indicies, which show that true risk was camouflaged under the haze of smoothing in the hedge fund industry.
+
+
+<<echo=F>>=
+data(edhec)
+table1 = table.DownsideRisk(edhec[,2:3])
+table2 = table.DownsideRisk(Return.Okunev(edhec[,2:3]))
+((abs(table2)-abs(table1))/(abs(table1)))*100
+@
+
+\section{Impact on Performance Ratios}
+
+
+\end{document}
