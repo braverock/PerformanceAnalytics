@@ -133,8 +133,8 @@ class PSR_Opt:
 #-------------------------------------------
 def main():
     #1) Inputs (path to csv file with returns series)
-    path='data.csv'
-    maxIter=10000 # Maximum number of iterations
+    path='ham_data.csv'
+    maxIter=1000 # Maximum number of iterations
     delta=.005 # Delta Z (attempted gain per interation)
     
     #2) Load data, set seed

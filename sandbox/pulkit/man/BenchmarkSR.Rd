@@ -24,6 +24,8 @@
 \examples{
 data(edhec)
 BenchmarkSR(edhec) #expected 0.393797
+data(managers)
+BenchmarkSR(managers) # expected 0.8110536
 }
 \author{
   Pulkit Mehrotra

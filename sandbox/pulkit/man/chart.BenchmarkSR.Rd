@@ -78,6 +78,9 @@
 data(edhec)
 chart.BenchmarkSR(edhec,vs="strategies")
 chart.BenchmarkSR(edhec,vs="sharpe")
+
+data(managers)
+chart.BenchmarkSR(managers,vs="strategies")
 }
 \author{
   Pulkit Mehrotra

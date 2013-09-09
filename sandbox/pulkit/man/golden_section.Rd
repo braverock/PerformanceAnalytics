@@ -2,7 +2,7 @@
 \alias{golden_section}
 \title{Golden Section Algorithm}
 \usage{
-  golden_section(a, b, minimum = TRUE, function_name, ...)
+  golden_section(a, b, function_name, minimum = TRUE, ...)
 }
 \arguments{
   \item{a}{initial point}

@@ -12,9 +12,6 @@
 
   \item{delta}{Drawdown limit}
 
-  \item{sharpe}{If you want to use a constant Sharpe Ratio
-  please specify here else the return series will be used}
-
   \item{Rf}{risk free rate can be vector such as government
   security rate of return.}
 
@@ -29,6 +26,9 @@
   \item{asset}{The number of risky assets in the portfolio}
 
   \item{type}{The type of portfolio optimization}
+
+  \item{sharpe}{If you want to use a constant Sharpe Ratio
+  please specify here else the return series will be used}
 }
 \description{
   The Rolling Economic Drawdown Controlled Optimal

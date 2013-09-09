@@ -69,10 +69,10 @@ BetaDrawdown<-function(R,Rm,p=0.95,weights=NULL,geometric=TRUE,type=c("alpha","a
     # The Drawdown beta is given as the output.   
 
 
-    R = na.omit(R)
-    Rm = na.omit(Rm)
     x = checkData(R)
     xm = checkData(Rm)
+    x = na.omit(x)
+    xm = na.omit(xm)
     if(nrow(x) != nrow(xm)){
         stop("The number of rows of the return series and the optimal portfolio should be equal")
     }

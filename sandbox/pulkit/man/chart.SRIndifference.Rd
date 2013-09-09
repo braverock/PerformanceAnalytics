@@ -73,6 +73,8 @@
 \examples{
 data(edhec)
 chart.SRIndifference(edhec)
+data(managers)
+chart.SRIndifference(managers)
 }
 \author{
   Pulkit Mehrotra

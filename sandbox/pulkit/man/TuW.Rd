@@ -2,7 +2,7 @@
 \alias{TuW}
 \title{Maximum Time Under Water}
 \usage{
-  TuW(R, confidence, type = c("ar", "normal"), ...)
+  TuW(R, confidence = 0.95, type = c("ar", "normal"), ...)
 }
 \arguments{
   \item{R}{return series}

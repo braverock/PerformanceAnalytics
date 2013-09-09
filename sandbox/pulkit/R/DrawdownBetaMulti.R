@@ -59,9 +59,14 @@ MultiBetaDrawdown<-function(R,Rm,sample,ps,p=0.95,weights=NULL,geometric=TRUE,ty
     # OUTPUT:
     # The Drawdown beta for multiple sample path is given as the output.   
 
-
     x = checkData(R)
-    xm = checkData(Rm)
+    xm = checkData(Rm) 
+    x = na.omit(x)
+    xm = na.omit(xm)
+    if(nrow(R) != nrow(Rm)){
+        stop("The length of the return series with the optimal portfolio should be equal")
+    }
+ 
     columnnames = colnames(R)
     columns = ncol(R)
     drawdowns_m = Drawdowns(Rm)

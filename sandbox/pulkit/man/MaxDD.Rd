@@ -2,7 +2,8 @@
 \alias{MaxDD}
 \title{Triple Penance Rule}
 \usage{
-  MaxDD(R, confidence, type = c("ar", "normal"), ...)
+  MaxDD(R, confidence = 0.95, type = c("ar", "normal"),
+    ...)
 }
 \arguments{
   \item{R}{Returns}
