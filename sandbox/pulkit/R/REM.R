@@ -56,11 +56,10 @@ rollEconomicMax<-function(R,Rf,h,geometric = TRUE,...){
            columns = columns -1
        }
    }
-    x = x[,-index]
-    rf = rf[-index]
-    columnnames = columnnames[-index]
-
- 
+   if(!is.null(index)){
+       x = x[,-index]
+       columnnames = columnnames[-index]
+   }
   REM<-function(x,geometric){
     if(geometric)
       Return.cumulative = cumprod(1+x)

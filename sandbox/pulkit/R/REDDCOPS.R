@@ -23,8 +23,6 @@
 #'@param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #'@param delta Drawdown limit
-#'@param sharpe If you want to use a constant Sharpe Ratio please specify here
-#'else the return series will be used
 #'@param Rf risk free rate can be vector such as government security rate of return.
 #'@param h Look back period
 #'@param geometric geometric utilize geometric chaining (TRUE) or simple/arithmetic 
@@ -32,7 +30,8 @@
 #'@param \dots any other variable
 #'@param asset The number of risky assets in the portfolio
 #'@param type The type of portfolio optimization
-#'
+#'@param sharpe If you want to use a constant Sharpe Ratio please specify here
+#'else the return series will be used
 #'@author Pulkit Mehrotra
 #'@seealso  \code{\link{chart.REDD}} \code{\link{EconomicDrawdown}} 
 #'\code{\link{rollDrawdown}} \code{\link{EDDCOPS}} \code{\link{rollEconomicMax}}
@@ -73,6 +72,19 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
   x = checkData(R)
   columns = ncol(x)
   columnnames = colnames(x)
+  index = NULL
+  # ERROR Handling for cases in which lookback period is greater than the number of rows
+  for(i in 1:ncol(x)){
+      if(length(na.omit(x[,i]))<h){
+          warning(paste("The lookback Period greater than rows eliminating series",columnnames[i]))
+          index = c(index,i)
+          columns = columns -1
+        }
+    }
+    if(!is.null(index)){
+        x = x[,-index]
+        columnnames = columnnames[-index]
+    }
   sharpe = SharpeRatio.annualized(x,Rf)
   sd = StdDev.annualized(R)
   rho = cor(x)
@@ -132,15 +144,14 @@ REDDCOPS<-function(R ,delta,Rf,h,geometric = TRUE,asset = c("one","two","three")
     return(xt)
   }
   
-  redd = rollDrawdown(R,Rf,h,geometric)
-
+  redd = rollDrawdown(R,Rf,h,geometric)  
   for(column in 1:columns){
     column.xt <- na.skip(redd[,column],FUN = dynamicPort,column = column)
     if(column == 1)
       xt = column.xt
-    else xt = merge(xt, column.xt) 
+    else xt = cbind(xt, column.xt) 
   }
-  colnames(xt) = columnnames
+  colnames(xt) = colnames(redd)
   xt = reclass(xt, x)
   return(xt)
   

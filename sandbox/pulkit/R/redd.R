@@ -45,7 +45,6 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
     columnnames = colnames(x)
     rf = checkData(Rf)
     nr = length(Rf)
-    x_check = x
     if(nr != 1 && nr != n ){
       stop("The number of rows of the returns and the risk free rate do not match")
     }
@@ -58,9 +57,10 @@ rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
             columns = columns -1
         }
     }
-    x = x[,-index]
-    rf = rf[-index]
-    columnnames = columnnames[-index]
+    if(!is.null(index)){
+        x = x[,-index]
+        columnnames = columnnames[-index]
+    }
 
     REDD<-function(xh,geometric){
         if(geometric)
