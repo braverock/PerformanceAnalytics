@@ -37,7 +37,7 @@ table.Penance<-function(R,confidence=0.95){
     column_MinQ<-c(mean(col_val),sigma_infinity,phi,sigma)
     column_MinQ <- c(column_MinQ,get_minq(x[,column],confidence))
     column_TuW = get_TuW(x[,column],confidence)
-    v = c(column_MinQ,column_TuW,column_MinQ[5]/column_TuW)
+    v = c(column_MinQ,column_TuW,(column_TuW/column_MinQ[5])-1)
     if(column == 1){
       result = data.frame(Value = v, row.names = rownames)
     }
