@@ -2,7 +2,7 @@
 #'Benchmark Sharpe Ratio
 #'
 #'@description
-#'The benchmark SR is a linear function of the average
+#'The benchmark SR is a linear function of the average annualized
 #' SR of the individual strategies, and a decreasing
 #' convex function of the number of strategies and the 
 #' average pairwise correlation. The Returns are given as
@@ -10,8 +10,9 @@
 #' 
 #'\deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
 #'
-#'Here \eqn{\bar{SR}} is the average SR of the portfolio and \eqn{\bar{\rho}} 
-#'is the average correlation across off-diagonal elements
+#'Here \eqn{\bar{SR}} is the average annualized Sharpe Ratio of the portfolio and \eqn{\bar{\rho}} 
+#'is the average correlation across off-diagonal elements.
+#' 
 #'
 #'@param R a vector, matrix, data frame,timeseries or zoo object of asset returns
 #'
@@ -46,7 +47,7 @@ BenchmarkSR<-function(R){
   if(columns == 1){
     stop("The number of return series should be greater than 1")
   }
-  SR = SharpeRatio(x,FUN="StdDev")
+  SR = SharpeRatio.annualized(x)
   sr_avg = mean(SR)
   corr = table.Correlation(R,R)
   corr_avg = 0

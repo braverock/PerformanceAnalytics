@@ -72,7 +72,7 @@ chart.BenchmarkSR<-function(R=NULL,S=NULL,main=NULL,ylab = NULL,xlab = NULL,elem
   if(!is.null(R)){
     x = checkData(R)
     columns = ncol(x)
-    avgSR = mean(SharpeRatio(R,FUN="StdDev"))
+    avgSR = mean(SharpeRatio.annualized(R))
   }
   else{
     if(is.null(avgSR) | is.null(S)){

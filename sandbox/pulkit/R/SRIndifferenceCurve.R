@@ -75,7 +75,7 @@ chart.SRIndifference<-function(R,reference.grid = TRUE, ylab = NULL,xlab = NULL,
   if(columns == 1){  
     stop("The number of return series should be greater 1 ")
   }
-  SR = SharpeRatio(x,FUN="StdDev")
+  SR = SharpeRatio.annualized(x)
   sr_avg = mean(SR)
   corr = table.Correlation(R,R)
   corr_avg = 0
