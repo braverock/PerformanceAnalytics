@@ -1,17 +1,31 @@
-#' Expected Drawdown using Brownian Motion Assumptions
+#' @title Summary of Expected Drawdown using Brownian Motion Assumptions and Return-Volatility 
 #' 
-#' Works on the model specified by Maddon-Ismail
-#' 
-#' 
-#' 
-#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' asset returns
+#' @title Expected Maximum Drawdown Using Brownian Motion Assumptions
+#' @description  Works on the model specified by Maddon-Ismail which investigates the behavior of this statistic for a Brownian motion 
+#' with drift.
+#' @details If X(t) is a random process on [0, T ], the maximum drawdown at time T , D(T), is defined by
+#' where \deqn{D(T) = sup [X(s) - X(t)]} where s belongs to [0,t] and s belongs to [0,T]
+#'Informally, this is the largest drop from a peak to a bottom. In this paper, we investigate the
+#'behavior of this statistic for a Brownian motion with drift. In particular, we give an infinite 
+#'series representation of its distribution, and consider its expected value. When the drift is zero,
+#'we give an analytic expression for the expected value, and for non-zero drift, we give an infinite
+#'series representation. For all cases, we compute the limiting \bold{(\eqn{T tends to \infty})} behavior, which can be
+#'logarithmic (\eqn{\mu} > 0), square root (\eqn{\mu} = 0), or linear (\eqn{\mu} < 0).
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of  asset returns
 #' @param digits significant number
-#' @author Shubhankit
+#' @author Shubhankit Mohan
 #' @keywords Expected Drawdown Using Brownian Motion Assumptions
-#'
+#' @references Magdon-Ismail, M., Atiya, A., Pratap, A., and Yaser S. Abu-Mostafa: On the Maximum Drawdown of a Browninan Motion, Journal of Applied Probability 41, pp. 147-161, 2004 \url{http://alumnus.caltech.edu/~amir/drawdown-jrnl.pdf}
+#' @keywords Drawdown models Brownian Motion Assumptions
+#' @examples
+#' 
+#'library(PerformanceAnalytics)
+#' data(edhec)
+#' EmaxDDGBM(edhec)
+#' @rdname EMaxDDGBM
+#' @export
 #' @export 
-EMaxDDGBM <-
+EmaxDDGBM <-
   function (R,digits =4)
   {# @author 
     
@@ -153,13 +167,26 @@ EMaxDDGBM <-
           Ed<-(2*sig^2/mu)*(-Qn)
           
         }
-        
       }
       
-       return(Ed[1]*100)
+      
+      z = c((Ed*100))
+      znames = c("Expected Drawdown in % using Brownian Motion Assumptions")
+      if(column == 1) {
+        resultingtable = data.frame(Value = z, row.names = znames)
+      }
+      else {
+        nextcolumn = data.frame(Value = z, row.names = znames)
+        resultingtable = cbind(resultingtable, nextcolumn)
+      }
+    }
+    colnames(resultingtable) = columnnames
+    ans = base::round(resultingtable, digits)
+    ans
+    
       
       
-  }
+  
 }
 ###############################################################################
 # R (http://r-project.org/) 

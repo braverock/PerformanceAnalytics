@@ -1,6 +1,6 @@
 \name{table.EMaxDDGBM}
 \alias{table.EMaxDDGBM}
-\title{Expected Drawdown using Brownian Motion Assumptions}
+\title{Summary of Expected Drawdown using Brownian Motion Assumptions and Return-Volatility}
 \usage{
   table.EMaxDDGBM(R, digits = 4)
 }

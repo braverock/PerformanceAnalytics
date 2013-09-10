@@ -1,4 +1,4 @@
-#' @title Expected Drawdown using Brownian Motion Assumptions
+#' @title Summary of Expected Drawdown using Brownian Motion Assumptions and Return-Volatility 
 #' 
 #' @description  Works on the model specified by Maddon-Ismail which investigates the behavior of this statistic for a Brownian motion 
 #' with drift.
