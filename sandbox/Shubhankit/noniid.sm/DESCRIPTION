@@ -36,3 +36,5 @@ Collate:
     'LoSharpe.R'
     'se.LoSharpe.R'
     'table.Sharpe.R'
+    'glmi.R'
+    'lmi.R'
