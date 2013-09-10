@@ -58,6 +58,7 @@ get_minq<-function(R,confidence){
     #
     # confidence: The confidence interval.
     x = checkData(R)
+    x = na.omit(x)
     mu = mean(x, na.rm = TRUE)
     sigma_infinity = StdDev(x)
     phi = cov(x[-1],x[-length(x)])/(cov(x[-length(x)]))
@@ -79,6 +80,7 @@ get_minq<-function(R,confidence){
     }
     if(mu<0){
         warning(paste("NaN produced because mu < 0 ",colnames(x)))
+
     }
         minQ = list(value=NaN,x=NaN)
     }
@@ -124,6 +126,7 @@ get_TuW<-function(R,confidence){
 
 
     x = checkData(R)
+    x = na.omit(x)
     mu = mean(x, na.rm = TRUE)
     sigma_infinity = StdDev(x)
     phi = cov(x[-1],x[-length(x)])/(cov(x[-length(x)]))

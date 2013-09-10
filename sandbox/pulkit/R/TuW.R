@@ -39,7 +39,6 @@
 
 TuW<-function(R,confidence=0.95,type=c("ar","normal"),...){
   x = checkData(R)
-  x = na.omit(x)
   if(ncol(x)==1 || is.null(R) || is.vector(R)){ 
     calcul = FALSE
     for(i in (1:length(x))){

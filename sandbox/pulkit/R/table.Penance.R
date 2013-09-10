@@ -14,7 +14,7 @@
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #' @export
 
-table.Penance<-function(R,confidence){
+table.Penance<-function(R,confidence=0.95){
   # DESCRIPTION:
   # Maximum Drawdown and Time under Water considering first-order serial correlation
   # 
@@ -26,15 +26,15 @@ table.Penance<-function(R,confidence){
   #
   # Function:
   x = checkData(R)
-  x = na.omit(x)
   columns = ncol(x) 
   columnnames = colnames(x)
   rownames = c("mean","stdDev","phi","sigma","MaxDD(in %)","t*","MaxTuW","Penance")
   for(column in 1:columns){
-    phi = cov(x[,column][-1],x[,column][-length(x[,column])])/(cov(x[,column][-length(x[,column])]))
-    sigma_infinity = StdDev(x[,column])
+    col_val = na.omit(x[,column])
+    phi = cov(col_val[-1],col_val[-length(col_val)])/(cov(col_val[-length(col_val)]))
+    sigma_infinity = StdDev(col_val)
     sigma = sigma_infinity*((1-phi^2)^0.5)
-    column_MinQ<-c(mean(x[,column]),sigma_infinity,phi,sigma)
+    column_MinQ<-c(mean(col_val),sigma_infinity,phi,sigma)
     column_MinQ <- c(column_MinQ,get_minq(x[,column],confidence))
     column_TuW = get_TuW(x[,column],confidence)
     v = c(column_MinQ,column_TuW,column_MinQ[5]/column_TuW)
