@@ -14,6 +14,19 @@
 ## Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs
 ## and the ‘Triple Penance’ Rule(January 1, 2013).
 
+
+penance_norm<-function(x,confidence){
+    # DESCRIPTION:
+    # A function to return the Penance for a normal distribution
+
+    # Inputs:
+    # R: The Return Series
+    #
+    # confidence: The confidence Level
+    penance = (tuw_norm(x,confidence)/dd_norm(x,confidence)[2])-1
+    return(penance)
+}
+ 
 dd_norm<-function(x,confidence){
     # DESCRIPTION:
     # A function to return the maximum drawdown for a normal distribution
@@ -22,6 +35,7 @@ dd_norm<-function(x,confidence){
     # R: The Return Series
     #
     # confidence: The confidence Level
+    x = na.omit(x)
     sd = StdDev(x)
     mu = mean(x, na.rm = TRUE)
     dd = max(0,((qnorm(1-confidence)*sd)^2)/(4*mu))
@@ -37,6 +51,7 @@ tuw_norm<-function(x,confidence){
     # Inputs:
     # R: Return series
     # confidence: The confidence level
+    x = na.omit(x)
     sd = StdDev(x)
     mu = mean(x,na.rm = TRUE)
     tuw = ((qnorm(1-confidence)*sd)/mu)^2
@@ -45,7 +60,17 @@ tuw_norm<-function(x,confidence){
 }
 
 
+get_penance<-function(x,confidence){
+    # DESCRIPTION:
+    # A function to return the Penance for a first order serially autocorrelated distribution
 
+    # Inputs:
+    # R: The Return Series
+    #
+    # confidence: The confidence Level
+    penance = (get_TuW(x,confidence)/get_minq(x,confidence)[2])-1
+    return(penance)
+}
 get_minq<-function(R,confidence){
   
     # DESCRIPTION:

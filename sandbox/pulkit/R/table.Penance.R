@@ -8,13 +8,13 @@
 #'  
 #' @param R Returns
 #' @param confidence the confidence interval
-#' 
+#' @param type The type of distribution "normal" or "ar"."ar" stands for Autoregressive.
 #' @author Pulkit Mehrotra
 #' @seealso \code{\link{chart.Penance}} \code{\link{MaxDD}} \code{\link{TuW}}
 #' @references Bailey, David H. and Lopez de Prado, Marcos, Drawdown-Based Stop-Outs and the "Triple Penance" Rule(January 1, 2013).
 #' @export
 
-table.Penance<-function(R,confidence=0.95){
+table.Penance<-function(R,confidence=0.95,type=c("ar","norm")){
   # DESCRIPTION:
   # Maximum Drawdown and Time under Water considering first-order serial correlation
   # 
@@ -35,9 +35,10 @@ table.Penance<-function(R,confidence=0.95){
     sigma_infinity = StdDev(col_val)
     sigma = sigma_infinity*((1-phi^2)^0.5)
     column_MinQ<-c(mean(col_val),sigma_infinity,phi,sigma)
-    column_MinQ <- c(column_MinQ,get_minq(x[,column],confidence))
-    column_TuW = get_TuW(x[,column],confidence)
-    v = c(column_MinQ,column_TuW,(column_TuW/column_MinQ[5])-1)
+    column_MinQ <- c(column_MinQ,MaxDD(x[,column],confidence,type=type[1]))
+    column_TuW = TuW(x[,column],confidence,type=type[1])
+    v = c(column_MinQ,column_TuW,Penance(x[,column],confidence,type=type[1]))
+    v = round(v,4)
     if(column == 1){
       result = data.frame(Value = v, row.names = rownames)
     }

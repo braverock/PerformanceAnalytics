@@ -2,11 +2,10 @@
 #'Penance vs phi plot
 #'
 #'@description
-#'
 #'A plot for Penance vs phi for the given portfolio
 #'The relationship between penance and phi is given by
 #'
-#'\deqn{penance = \frac{Maximum Drawdown}{Maximum Time Under Water}}
+#'\deqn{penance = \frac{Maximum Time under water}{t_\alpha^{*}-1}}
 #'
 #'Penance Measures how long it takes to recover from the maximum drawdown
 #'as a multiple of the time it took to reach the bottom. Penance is smaller,
@@ -68,8 +67,9 @@ chart.Penance<-function(R,confidence,type=c("ar","normal"),reference.grid = TRUE
     phi = 1:columns
     penance = 1:columns
     for(column in 1:columns){
-        phi[column] = cov(x[,column][-1],x[,column][-length(x[,column])])/(cov(x[,column][-length(x[,column])]))
-        penance[column]<-MaxDD(x[,column],confidence,type = type)[1]/TuW(x[,column],confidence,type = type)
+        col_val = na.omit(x[,column])
+        phi[column] = cov(col_val[-1],col_val[-length(col_val)])/(cov(col_val[-length(col_val)]))
+        penance[column]<-Penance(x[,column],confidence,type=type[1])
     }
     if(is.null(ylab)){
       ylab = "Penance"

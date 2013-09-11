@@ -9,17 +9,18 @@
   object of asset returns}
 }
 \description{
-  The benchmark SR is a linear function of the average SR
-  of the individual strategies, and a decreasing convex
-  function of the number of strategies and the average
-  pairwise correlation. The Returns are given as the input
-  with the benchmark Sharpe Ratio as the output.
+  The benchmark SR is a linear function of the average
+  annualized SR of the individual strategies, and a
+  decreasing convex function of the number of strategies
+  and the average pairwise correlation. The Returns are
+  given as the input with the benchmark Sharpe Ratio as the
+  output.
 
   \deqn{SR_B = \bar{SR}\sqrt{\frac{S}{1+(S-1)\bar{\rho}}}}
 
-  Here \eqn{\bar{SR}} is the average SR of the portfolio
-  and \eqn{\bar{\rho}} is the average correlation across
-  off-diagonal elements
+  Here \eqn{\bar{SR}} is the average annualized Sharpe
+  Ratio of the portfolio and \eqn{\bar{\rho}} is the
+  average correlation across off-diagonal elements.
 }
 \examples{
 data(edhec)

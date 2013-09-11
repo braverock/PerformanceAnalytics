@@ -2,12 +2,16 @@
 \alias{table.Penance}
 \title{Table for displaying the Mximum Drawdown and the Time under Water}
 \usage{
-  table.Penance(R, confidence)
+  table.Penance(R, confidence = 0.95,
+    type = c("ar", "norm"))
 }
 \arguments{
   \item{R}{Returns}
 
   \item{confidence}{the confidence interval}
+
+  \item{type}{The type of distribution "normal" or
+  "ar"."ar" stands for Autoregressive.}
 }
 \description{
   \code{table.Penance} Displays the table showing

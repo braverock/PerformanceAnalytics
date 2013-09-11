@@ -58,8 +58,8 @@
   A plot for Penance vs phi for the given portfolio The
   relationship between penance and phi is given by
 
-  \deqn{penance = \frac{Maximum Drawdown}{Maximum Time
-  Under Water}}
+  \deqn{penance = \frac{Maximum Time under
+  water}{t_\alpha^{*}-1}}
 
   Penance Measures how long it takes to recover from the
   maximum drawdown as a multiple of the time it took to

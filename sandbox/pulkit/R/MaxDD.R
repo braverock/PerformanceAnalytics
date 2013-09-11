@@ -91,6 +91,7 @@ MaxDD<-function(R,confidence=0.95,type=c("ar","normal"),...)
     }
     if(type[1]=="normal"){
         result = apply(x,MARGIN = 2,dd_norm,confidence)
+        print(result)
     }
     result = round(result,3)
   rownames(result) = c("MaxDD(in %)","t*")
