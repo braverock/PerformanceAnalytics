@@ -49,3 +49,5 @@ Collate:
     'psr_python.R'
     'ret.R'
     'Penance.R'
+    'ExtremeDrawdown.R'
+    'gpdmle.R'

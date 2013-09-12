@@ -9,7 +9,9 @@
 #'@param rf risk free rate can be vector such as government security rate of return
 #'@param h lookback period 
 #'@param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining(FALSE) to aggregate returns, default is TRUE.
-#'@param legend.loc set the legend.loc, as in \code{\link{plot}}
+#' @param legend.loc places a legend into one of nine locations on the chart:
+#' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
+#' center.
 #'@param colorset set the colorset label, as in \code{\link{plot}}
 #'@param \dots any other  variable
 #'@author Pulkit Mehrotra
@@ -19,8 +21,9 @@
 #'Control Maximum Drawdown - The Case of Risk Based Dynamic Asset Allocation (February 25, 2012)
 #'@examples
 #'data(edhec)
-#'chart.REDD(edhec,0.08,20)
-#'
+#'chart.REDD(edhec,0.08,20,legend.loc = "topleft")
+#'data(managers)
+#'chart.REDD(managers,0.08,20,legend.loc = "topleft")
 #'@export
 
 chart.REDD<-function(R,rf,h, geometric = TRUE,legend.loc = NULL, colorset = (1:12),...)
@@ -34,7 +37,7 @@ chart.REDD<-function(R,rf,h, geometric = TRUE,legend.loc = NULL, colorset = (1:1
   # free return(rf) and the lookback period(h) is taken as the input.
  
 
-    rolldrawdown = rollDrawdown(R,geometric = TRUE,weights = NULL,rf,h)
+    rolldrawdown = rollDrawdown(R,geometric = TRUE,rf,h)
     chart.TimeSeries(rolldrawdown, colorset = colorset, legend.loc = legend.loc, ...)
 }
 

@@ -27,7 +27,8 @@
 #'@examples
 #'data(edhec)
 #'rollDrawdown(edhec,0.08,100)
-#'
+#'data(managers)
+#'rollDrawdown(managers[,1:9],managers[,10],10)
 #' @export
 rollDrawdown<-function(R,Rf,h, geometric = TRUE,...)
 {

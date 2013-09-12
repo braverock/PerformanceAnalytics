@@ -2,11 +2,12 @@
 \alias{chart.Penance}
 \title{Penance vs phi plot}
 \usage{
-  chart.Penance(R, confidence, type = c("ar", "normal"),
-    reference.grid = TRUE, main = NULL, ylab = NULL,
-    xlab = NULL, element.color = "darkgrey", lwd = 2,
-    pch = 1, cex = 1, cex.axis = 0.8, cex.lab = 1,
-    cex.main = 1, xlim = NULL, ylim = NULL, ...)
+  chart.Penance(R, confidence = 0.95,
+    type = c("ar", "normal"), reference.grid = TRUE,
+    main = NULL, ylab = NULL, xlab = NULL,
+    element.color = "darkgrey", lwd = 2, pch = 1, cex = 1,
+    cex.axis = 0.8, cex.lab = 1, cex.main = 1, xlim = NULL,
+    ylim = NULL, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
