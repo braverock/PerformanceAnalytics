@@ -1,0 +1,77 @@
+\name{MarketTiming}
+\alias{MarketTiming}
+\title{Market timing models}
+\usage{
+  MarketTiming(Ra, Rb, Rf = 0, method = c("TM", "HM"))
+}
+\arguments{
+  \item{Ra}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of the asset returns}
+
+  \item{Rb}{an xts, vector, matrix, data frame, timeSeries
+  or zoo object of the benchmark asset return}
+
+  \item{Rf}{risk free rate, in same period as your returns}
+
+  \item{method}{used to select between Treynor-Mazuy and
+  Henriksson-Merton models. May be any of: \itemize{ \item
+  TM - Treynor-Mazuy model, \item HM - Henriksson-Merton
+  model} By default Treynor-Mazuy is selected}
+
+  \item{\dots}{any other passthrough parameters}
+}
+\description{
+  Allows to estimate Treynor-Mazuy or Merton-Henriksson
+  market timing model. The Treynor-Mazuy model is
+  essentially a quadratic extension of the basic CAPM. It
+  is estimated using a multiple regression. The second term
+  in the regression is the value of excess return squared.
+  If the gamma coefficient in the regression is positive,
+  then the estimated equation describes a convex
+  upward-sloping regression "line". The quadratic
+  regression is: \deqn{R_{p}-R_{f}=\alpha+\beta (R_{b} -
+  R_{f})+\gamma (R_{b}-R_{f})^2+ \varepsilon_{p}}{Rp - Rf =
+  alpha + beta(Rb -Rf) + gamma(Rb - Rf)^2 + epsilonp}
+  \eqn{\gamma}{gamma} is a measure of the curvature of the
+  regression line. If \eqn{\gamma}{gamma} is positive, this
+  would indicate that the manager's investment strategy
+  demonstrates market timing ability.
+}
+\details{
+  The basic idea of the Merton-Henriksson test is to
+  perform a multiple regression in which the dependent
+  variable (portfolio excess return and a second variable
+  that mimics the payoff to an option). This second
+  variable is zero when the market excess return is at or
+  below zero and is 1 when it is above zero:
+  \deqn{R_{p}-R_{f}=\alpha+\beta (R_{b}-R_{f})+\gamma
+  D+\varepsilon_{p}}{Rp - Rf = alpha + beta * (Rb - Rf) +
+  gamma * D + epsilonp} where all variables are familiar
+  from the CAPM model, except for the up-market return
+  \eqn{D=max(0,R_{b}-R_{f})}{D = max(0, Rb - Rf)} and
+  market timing abilities \eqn{\gamma}{gamma}
+}
+\examples{
+data(managers)
+MarketTiming(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12, method = "HM")
+MarketTiming(managers[80:120,1:6], managers[80:120,7,drop=FALSE], managers[80:120,10,drop=FALSE])
+MarketTiming(managers[80:120,1:6], managers[80:120,8:7], managers[80:120,10,drop=FALSE], method = "TM")
+}
+\author{
+  Andrii Babii, Peter Carl
+}
+\references{
+  J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio
+  Performance Measurement and Benchmarking}. 2009.
+  McGraw-Hill, p. 127-133. \cr J. L. Treynor and K. Mazuy,
+  "Can Mutual Funds Outguess the Market?" \emph{Harvard
+  Business Review}, vol44, 1966, pp. 131-136 \cr Roy D.
+  Henriksson and Robert C. Merton, "On Market Timing and
+  Investment Performance. II. Statistical Procedures for
+  Evaluating Forecast Skills," \emph{Journal of Business},
+  vol.54, October 1981, pp.513-533 \cr
+}
+\seealso{
+  \code{\link{CAPM.beta}}
+}
+
