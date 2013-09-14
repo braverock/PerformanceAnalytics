@@ -43,6 +43,8 @@
 The fact that many hedge fund returns exhibit extraordinary levels of serial correlation is now well-known and generally accepted as fact. The effect of this autocorrelation on investment returns diminishes the apparent risk of such asset classes as the true returns/risk is easily \textbf{camouflaged} within a haze of illiquidity, stale prices, averaged price quotes and smoothed return reporting. We highlight the effect \emph{autocorrelation} and \emph{drawdown} has on performance analysis by investigating the results of functions developed during the Google Summer of Code 2013 on \textbf{commodity based index} .
 \end{abstract}
 
+\tableofcontents
+
 <<echo=FALSE >>=
 library(PerformanceAnalytics)
 library(noniid.sm)
