@@ -1,0 +1,15 @@
+{
+    "contents" : "Package: noniid.sm\nType: Package\nTitle: Non-i.i.d. GSoC 2013 Shubhankit\nVersion: 0.1\nDate: $Date: 2013-05-13 14:30:22 -0500 (Mon, 13 May 2013) $\nAuthor: Shubhankit Mohan <shubhankit1@gmail.com>\nContributors: Peter Carl, Brian G. Peterson\nDepends:\n    xts,\n    PerformanceAnalytics,\n    tseries,\n    stats\nMaintainer: Brian G. Peterson <brian@braverock.com>\nDescription: GSoC 2013 project to replicate literature on drawdowns and\n    non-i.i.d assumptions in finance.\nLicense: GPL-3\nByteCompile: TRUE\nCollate:\n    'ACStdDev.annualized.R'\n    'CalmarRatio.Norm.R'\n    'CDrawdown.R'\n    'chart.AcarSim.R'\n    'chart.Autocorrelation.R'\n    'EmaxDDGBM.R'\n    'GLMSmoothIndex.R'\n    'na.skip.R'\n    'noniid.sm-internal.R'\n    'QP.Norm.R'\n    'Return.GLM.R'\n    'Return.Okunev.R'\n    'SterlingRatio.Norm.R'\n    'table.ComparitiveReturn.GLM.R'\n    'table.EMaxDDGBM.R'\n    'table.UnsmoothReturn.R'\n    'UnsmoothReturn.R'\n    'LoSharpe.R'\n    'se.LoSharpe.R'\n    'table.Sharpe.R'\n    'glmi.R'\n    'lmi.R'\n",
+    "created" : 1379107778236.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "677145396",
+    "id" : "7D095D73",
+    "lastKnownWriteTime" : 1379111172,
+    "path" : "C:/Users/shubhankit/Desktop/1 week/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}

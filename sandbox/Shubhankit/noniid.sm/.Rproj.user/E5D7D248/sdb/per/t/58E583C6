@@ -1,0 +1,15 @@
+{
+    "contents" : "* Edit the help file skeletons in 'man', possibly combining help files for multiple\n  functions.\n* Edit the exports in 'NAMESPACE', and add necessary imports.\n* Put any C/C++/Fortran code in 'src'.\n* If you have compiled code, add a useDynLib() directive to 'NAMESPACE'.\n* Run R CMD build to build the package tarball.\n* Run R CMD check to check the package tarball.\n\nRead \"Writing R Extensions\" for more information.\n",
+    "created" : 1379111136257.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3579872522",
+    "id" : "58E583C6",
+    "lastKnownWriteTime" : 1378551041,
+    "path" : "C:/Users/shubhankit/Desktop/1 week/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/Read-and-delete-me",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "text"
+}
