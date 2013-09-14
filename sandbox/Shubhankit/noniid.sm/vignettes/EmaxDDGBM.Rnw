@@ -1,0 +1,83 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+                      {\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps = FALSE}
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{ On the Maximum Drawdown of a Brownian Motion }
+\author{Shubhankit}
+% \keywords{Lo Sharpe Ratio,GLM Smooth Index,GLM Return Table}
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+The maximum drawdown possible of an asset whose return series follows a Geometric Brownian Motion Process.
+   
+\end{abstract}
+
+
+<<echo=FALSE>>=
+require(noniid.sm) #source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/LoSharpe.R')
+@
+
+<<echo=FALSE >>=
+library(PerformanceAnalytics)
+data(edhec)
+data(managers)
+@
+\section{Background}
+ If X(t) is a random process on [0, T ], the maximum
+  drawdown at time T , D(T), is defined by where \deqn{D(T)
+  = sup [X(s) - X(t)]} where s belongs to [0,t] and s
+  belongs to [0,T] Informally, this is the largest drop
+  from a peak to a bottom. In this paper, we investigate
+  the behavior of this statistic for a Brownian motion with
+  drift. In particular, we give an infinite series
+  representation of its distribution, and consider its
+  expected value. When the drift is zero, we give an
+  analytic expression for the expected value, and for
+  non-zero drift, we give an infinite series
+  representation. For all cases, we compute the limiting
+  \bold{(\eqn{T  "tends to"  \infty})} behavior, which can be
+  logarithmic (\eqn{\mu > 0} ), square root (\eqn{\mu = 0}),
+  or linear (\eqn{\mu < 0} ).
+
+
+
+<<echo=F,fig=T>>=
+source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/EmaxDDGBM.R')
+data(edhec)
+Lo.Sharpe = -100*ES(edhec,.99)
+Theoretical.Sharpe= EmaxDDGBM(edhec)
+barplot(as.matrix(rbind(Theoretical.Sharpe,Lo.Sharpe)), main="Expected Shortfall(.99) and Drawdown of a Brwonian Motion Asset Process",
+         xlab="Fund Type",ylab="Value", col=rich6equal[1:2], beside=TRUE)
+   legend("topright", c("ES","EGBMDD"), cex=0.6, 
+                   bty="2", fill=rich6equal[1:2]);
+@
+
+We can observe that the fund "\textbf{Emerging Markets}", which has the largest drawdown and serial autocorrelation, has highest Drawdown , \emph{decrease} most significantly as comapared to other funds.
+
+<<echo=F,fig=T>>=
+
+data(managers)
+Lo.Sharpe = -100*ES(managers[,1:6],.99)
+Theoretical.Sharpe= EmaxDDGBM(managers[,1:6])
+barplot(as.matrix(rbind(Theoretical.Sharpe,Lo.Sharpe)), main="Expected Shortfall(.99) and Drawdown of a Brwonian Motion Asset Process",
+         xlab="Fund Type",ylab="Value", col=rich6equal[1:2], beside=TRUE)
+   legend("topright", c("ES","EGBMDD"), cex=0.6, 
+                   bty="2", fill=rich6equal[1:2]);
+@
+
+We can see that the model, correctly ranks the highest drawdown fund managers, i.e. \textbf{HAM2}, which has the largest drawdown among all the funds.
+
+\end{document}

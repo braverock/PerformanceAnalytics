@@ -1,8 +1,8 @@
 \name{ACStdDev.annualized}
 \alias{ACStdDev.annualized}
+\alias{StdDev.annualized}
 \alias{sd.annualized}
 \alias{sd.multiperiod}
-\alias{StdDev.annualized}
 \title{Autocorrleation adjusted Standard Deviation}
 \usage{
   ACStdDev.annualized(R, lag = 6, scale = NA, ...)

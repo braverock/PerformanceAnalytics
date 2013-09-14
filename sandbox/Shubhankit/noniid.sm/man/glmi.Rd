@@ -104,11 +104,11 @@
   the S function of the same name described in Hastie &
   Pregibon (1992).
 }
+\keyword{HAC}
+\keyword{HC}
 \keyword{covariance}
 \keyword{estimation}
 \keyword{fitting}
-\keyword{HAC}
-\keyword{HC}
 \keyword{model}
 \keyword{regression}
 

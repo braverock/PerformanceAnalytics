@@ -22,7 +22,7 @@
 #'library(PerformanceAnalytics)
 #' data(edhec)
 #' EmaxDDGBM(edhec)
-#' @rdname EMaxDDGBM
+#' @rdname EmaxDDGBM
 #' @export
 #' @export 
 EmaxDDGBM <-

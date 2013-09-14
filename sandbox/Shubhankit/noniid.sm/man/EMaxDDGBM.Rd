@@ -51,7 +51,7 @@ EmaxDDGBM(edhec)
 \keyword{Brownian}
 \keyword{Drawdown}
 \keyword{Expected}
-\keyword{models}
 \keyword{Motion}
 \keyword{Using}
+\keyword{models}
 
