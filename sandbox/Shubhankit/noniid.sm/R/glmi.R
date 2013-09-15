@@ -13,7 +13,7 @@
 #'
 #'@param vcov HC-HAC covariance estimation
 #'@param weights  
-#'an optional vector of weights to be used in the fitting process. Should be NULL or a numeric vector. If non-NULL, weighted least squares is used with weights weights (that is, minimizing sum(w*e^2)); otherwise ordinary least squares is used. See also ‘Details’,
+#'an optional vector of weights to be used in the fitting process. Should be NULL or a numeric vector. If non-NULL, weighted least squares is used with weights weights (that is, minimizing sum; otherwise ordinary least squares is used. See also ‘Details’,
 #'@param subset	
 #'an optional vector specifying a subset of observations to be used in the fitting process.
 #'

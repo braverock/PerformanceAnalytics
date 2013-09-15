@@ -31,9 +31,8 @@
   \item{weights}{an optional vector of weights to be used
   in the fitting process. Should be NULL or a numeric
   vector. If non-NULL, weighted least squares is used with
-  weights weights (that is, minimizing sum(w*e^2));
-  otherwise ordinary least squares is used. See also
-  ‘Details’,}
+  weights weights (that is, minimizing sum; otherwise
+  ordinary least squares is used. See also ‘Details’,}
 
   \item{subset}{an optional vector specifying a subset of
   observations to be used in the fitting process.}
@@ -104,11 +103,11 @@
   the S function of the same name described in Hastie &
   Pregibon (1992).
 }
-\keyword{HAC}
-\keyword{HC}
 \keyword{covariance}
 \keyword{estimation}
 \keyword{fitting}
+\keyword{HAC}
+\keyword{HC}
 \keyword{model}
 \keyword{regression}
 

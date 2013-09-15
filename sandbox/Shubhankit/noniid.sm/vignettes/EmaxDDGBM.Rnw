@@ -1,3 +1,5 @@
+%% no need for  \DeclareGraphicsExtensions{.pdf,.eps}
+
 \documentclass[12pt,letterpaper,english]{article}
 \usepackage{times}
 \usepackage[T1]{fontenc}
@@ -5,20 +7,37 @@
                       {\newcommand{\url}{\texttt}}
 
 \usepackage{babel}
+%\usepackage{noweb}
 \usepackage{Rd}
 
 \usepackage{Sweave}
-\SweaveOpts{engine=R,eps = FALSE}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Performance Attribution from Bacon}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{returns, performance, risk, benchmark, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+%\documentclass[a4paper]{article}
+%\usepackage[noae]{Sweave}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage[top=3cm, bottom=3cm, left=2.5cm]{geometry}
+%\usepackage{graphicx}
+%\usepackage{graphicx, verbatim}
+%\usepackage{ucs}
+%\usepackage[utf8x]{inputenc}
+%\usepackage{amsmath, amsthm, latexsym}
+%\usepackage{graphicx}
+
+\title{On the Maximum Drawdown of a Brownian Motion}
+\author{Shubhankit Mohan}
+
 \begin{document}
 \SweaveOpts{concordance=TRUE}
 
-\title{ On the Maximum Drawdown of a Brownian Motion }
-\author{Shubhankit}
-% \keywords{Lo Sharpe Ratio,GLM Smooth Index,GLM Return Table}
-
-\makeatletter
-\makeatother
 \maketitle
+
 
 \begin{abstract}
 The maximum drawdown possible of an asset whose return series follows a Geometric Brownian Motion Process.

@@ -9,7 +9,8 @@ Depends:
     xts,
     PerformanceAnalytics,
     tseries,
-    stats
+    stats,
+    gld
 Maintainer: Brian G. Peterson <brian@braverock.com>
 Description: GSoC 2013 project to replicate literature on drawdowns and
     non-i.i.d assumptions in finance.
@@ -38,3 +39,4 @@ Collate:
     'table.Sharpe.R'
     'glmi.R'
     'lmi.R'
+    'table.normDD.R'
