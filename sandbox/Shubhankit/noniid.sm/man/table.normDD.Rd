@@ -1,8 +1,8 @@
-\name{table.NormDD}
-\alias{table.NormDD}
+\name{table.normDD}
+\alias{table.normDD}
 \title{Generalised Lambda Distribution Simulated Drawdown}
 \usage{
-  table.NormDD(R, digits = 4)
+  table.normDD(R, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries

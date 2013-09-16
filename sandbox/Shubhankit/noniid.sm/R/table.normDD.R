@@ -26,7 +26,7 @@
 #' @seealso Drawdowns.R
 #' @rdname table.normDD
 #' @export
-table.NormDD <-
+table.normDD <-
   function (R,digits =4)
   {# @author 
     
