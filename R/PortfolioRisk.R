@@ -231,10 +231,13 @@ Portsd =  function(w,sigma)
    dpm2 = derportm2(w,sigma)
    dersd = (0.5*as.vector(dpm2))/sqrt(pm2);
    contrib = dersd*as.vector(w)
+   names(contrib) = names(w)
+   pct_contrib = contrib/sqrt(pm2)
+   names(pct_contrib) = names(w)
    # check
    if( abs( sum(contrib)-sqrt(pm2))>0.01*sqrt(pm2)) { print("error") 
    } else {
-       ret<-list(  sqrt(pm2) , contrib , contrib/sqrt(pm2) )
+       ret<-list(  sqrt(pm2) , contrib , pct_contrib )
        names(ret) <- c("StdDev","contribution","pct_contrib_StdDev")
    }
    return(ret)
