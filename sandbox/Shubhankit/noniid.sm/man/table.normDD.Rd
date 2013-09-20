@@ -1,6 +1,6 @@
 \name{table.normDD}
 \alias{table.normDD}
-\title{Generalised Lambda Distribution Simulated Drawdown}
+\title{Generalised Lambda Distribution  Drawdown}
 \usage{
   table.normDD(R, digits = 4)
 }

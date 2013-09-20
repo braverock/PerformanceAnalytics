@@ -1,4 +1,4 @@
-#'@title Generalised Lambda Distribution Simulated Drawdown 
+#'@title Generalised Lambda Distribution  Drawdown 
 #'@description When selecting a hedge fund manager, one risk measure investors often
 #' consider is drawdown. How should drawdown distributions look? Carr Futures'
 #' Galen Burghardt, Ryan Duncan and Lianyan Liu share some insights from their
@@ -23,6 +23,10 @@
 #' Burghardt, G., Duncan, R. and L. Liu, \emph{Deciphering drawdown}. Risk magazine, Risk management for investors, September, S16-S20, 2003. \url{http://www.risk.net/data/risk/pdf/investor/0903_risk.pdf}
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
 #' @keywords Simulated Drawdown Using Brownian Motion Assumptions
+#' @examples 
+#' library(PerformanceAnalytics)
+#' data(edhec)
+#' table.normDD(edhec[,1])
 #' @seealso Drawdowns.R
 #' @rdname table.normDD
 #' @export
@@ -53,29 +57,32 @@ table.normDD <-
       x = y[,column]
       mu = Return.annualized(x, scale = NA, geometric = TRUE)
       sig=StdDev.annualized(x)
-      skew = skewness(x)
-      kurt = kurtosis(x)
+      #skew = skewness(x)
+      #kurt = kurtosis(x)
       r <- matrix(0,T+1,n)  # matrix to hold short rate paths
       s <- matrix(0,T+1,n)
       r[1,] <- r0  
       s[1,] <- s0
       drawdown <- matrix(0,n)
       #  return(Ed)
+      data=as.numeric(x)
+      # using starship model to fit lambda distribution
+      lpara= starship.adaptivegrid(data,list(lcvect=(0:4)/10,ldvect=(0:4)/10))
       
       for(j in 1:n){
-        r[2:(T+1),j]= rgl(T,mu,sig,skew,kurt)
+             r[2:(T+1),j]= rgl(T,lpara$lambda[1],lpara$lambda[2],lpara$lambda[3],lpara$lambda[4],param="fkml")
           for(i in 2:(T+1)){
           
-            dr <- r[i,j]*dt 
-            s[i,j] <- s[i-1,j] + (dr/100)
+            dr <- r[i,j] 
+            s[i,j] <- (dr)
         }
         
         
-        drawdown[j] = as.numeric(maxdrawdown(s[,j])[1])
+        drawdown[j] = as.numeric(maxDrawdown(s[,j])[1])
       }
       z = c((mu*100),
             (sig*100),
-            ((mean(drawdown))))
+            ((mean(drawdown)*100)))
       znames = c(
         "Annual Returns in %",
         "Std Devetions in %",
