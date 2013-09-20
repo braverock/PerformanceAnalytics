@@ -33,21 +33,23 @@
   \bold{10,000} iterations to produce a smooth
   distribution.
 }
+\examples{
+library(PerformanceAnalytics)
+data(edhec)
+table.normDD(edhec[1:30,1])
+}
 \author{
   Peter Carl, Brian Peterson, Shubhankit Mohan
 }
 \references{
   Burghardt, G., and L. Liu, \emph{ It's the
   Autocorrelation, Stupid (November 2012) Newedge working
-  paper.} \code{\link[stats]{}} \cr
+  paper.}
   \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
   Burghardt, G., Duncan, R. and L. Liu, \emph{Deciphering
   drawdown}. Risk magazine, Risk management for investors,
   September, S16-S20, 2003.
   \url{http://www.risk.net/data/risk/pdf/investor/0903_risk.pdf}
-}
-\seealso{
-  Drawdowns.R
 }
 \keyword{Assumptions}
 \keyword{Brownian}

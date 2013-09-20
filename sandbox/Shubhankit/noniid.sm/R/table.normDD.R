@@ -18,7 +18,6 @@
 #' @param digits  number of rounding off digits.
 #' @references Burghardt, G., and L. Liu, \emph{ It's the Autocorrelation, Stupid (November 2012) Newedge
 #' working paper.}
-#'  \code{\link[stats]{}} \cr
 #' \url{http://www.amfmblog.com/assets/Newedge-Autocorrelation.pdf}
 #' Burghardt, G., Duncan, R. and L. Liu, \emph{Deciphering drawdown}. Risk magazine, Risk management for investors, September, S16-S20, 2003. \url{http://www.risk.net/data/risk/pdf/investor/0903_risk.pdf}
 #' @author Peter Carl, Brian Peterson, Shubhankit Mohan
@@ -26,8 +25,7 @@
 #' @examples 
 #' library(PerformanceAnalytics)
 #' data(edhec)
-#' table.normDD(edhec[,1])
-#' @seealso Drawdowns.R
+#' table.normDD(edhec[1:30,1])
 #' @rdname table.normDD
 #' @export
 table.normDD <-
@@ -76,9 +74,9 @@ table.normDD <-
             dr <- r[i,j] 
             s[i,j] <- (dr)
         }
-        
-        
-        drawdown[j] = as.numeric(maxDrawdown(s[,j])[1])
+            # s=     as.POSIXct(s, origin = "1960-01-01")   
+       #      drawdown[j] = as.numeric(maxDrawdown(as.POSIXct(s[,j], origin = "1960-01-01") )[1])
+       drawdown[j] = as.numeric(maxDrawdown(s[,j])[1])
       }
       z = c((mu*100),
             (sig*100),

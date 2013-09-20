@@ -7,11 +7,11 @@
 #'an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted. The details of model specification are given under ‘Details’.
 #'
 #'
-#'@param data	
+#'@param data  
 #'an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model. If not found in data, the variables are taken from environment(formula), typically the environment from which lm is called.
 #'
 #'@param vcov HC-HAC covariance estimation
-#'@param weights	
+#'@param weights  
 #'an optional vector of weights to be used in the fitting process. Should be NULL or a numeric vector. If non-NULL, weighted least squares is used with weights weights (that is, minimizing sum; otherwise ordinary least squares is used. See also ‘Details’,
 #'
 #'
