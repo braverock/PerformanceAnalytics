@@ -11,8 +11,7 @@
 \arguments{
   \item{formula}{an object of class "formula" (or one that
   can be coerced to that class): a symbolic description of
-  the model to be fitted. The details of model
-  specification are given under ‘Details’.}
+  the model to be fitted.}
 
   \item{family}{a description of the error distribution and
   link function to be used in the model. This can be a
@@ -29,20 +28,14 @@
   \item{vcov}{HC-HAC covariance estimation}
 
   \item{weights}{an optional vector of weights to be used
-  in the fitting process. Should be NULL or a numeric
-  vector. If non-NULL, weighted least squares is used with
-  weights weights (that is, minimizing sum; otherwise
-  ordinary least squares is used. See also ‘Details’,}
+  in the fitting process.}
 
   \item{subset}{an optional vector specifying a subset of
   observations to be used in the fitting process.}
 
   \item{na.action}{a function which indicates what should
-  happen when the data contain NAs. The default is set by
-  the na.action setting of options, and is na.fail if that
-  is unset. The ‘factory-fresh’ default is na.omit.
-  Another possible value is NULL, no action. Value
-  na.exclude can be useful.}
+  happen when the data contain NAs. Another possible value
+  is NULL, no action. Value na.exclude can be useful.}
 
   \item{start}{starting values for the parameters in the
   linear predictor.}
@@ -94,6 +87,15 @@
 }
 \details{
   see \code{\link{glm}}.
+}
+\examples{
+## Dobson (1990) Page 93: Randomized Controlled Trial :
+counts <- c(18,17,15,20,10,20,25,13,12)
+outcome <- gl(3,1,9)
+treatment <- gl(3,3)
+print(d.AD <- data.frame(treatment, outcome, counts))
+glm.D93 <- glmi(counts ~ outcome + treatment, family = poisson())
+summary(glm.D93)
 }
 \author{
   The original R implementation of glm was written by Simon

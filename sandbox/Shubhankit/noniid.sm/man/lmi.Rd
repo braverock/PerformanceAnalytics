@@ -10,8 +10,7 @@
 \arguments{
   \item{formula}{an object of class "formula" (or one that
   can be coerced to that class): a symbolic description of
-  the model to be fitted. The details of model
-  specification are given under ‘Details’.}
+  the model to be fitted.}
 
   \item{data}{an optional data frame, list or environment
   (or object coercible by as.data.frame to a data frame)
@@ -25,7 +24,7 @@
   in the fitting process. Should be NULL or a numeric
   vector. If non-NULL, weighted least squares is used with
   weights weights (that is, minimizing sum; otherwise
-  ordinary least squares is used. See also ‘Details’,}
+  ordinary least squares is used.}
 
   \item{subset}{an optional vector specifying a subset of
   observations to be used in the fitting process.}
@@ -33,9 +32,8 @@
   \item{na.action}{a function which indicates what should
   happen when the data contain NAs. The default is set by
   the na.action setting of options, and is na.fail if that
-  is unset. The ‘factory-fresh’ default is na.omit.
-  Another possible value is NULL, no action. Value
-  na.exclude can be useful.}
+  is unsed. Another possible value is NULL, no action.
+  Value na.exclude can be useful.}
 
   \item{method}{the method to be used; for fitting,
   currently only method = "qr" is supported; method =
@@ -82,6 +80,15 @@
 }
 \details{
   see \code{\link{lm}}.
+}
+\examples{
+ctl <- c(4.17,5.58,5.18,6.11,4.50,4.61,5.17,4.53,5.33,5.14)
+trt <- c(4.81,4.17,4.41,3.59,5.87,3.83,6.03,4.89,4.32,4.69)
+group <- gl(2, 10, 20, labels = c("Ctl","Trt"))
+weight <- c(ctl, trt)
+lm.D9 <- lmi(weight ~ group)
+lm.D90 <- lmi(weight ~ group - 1) # omitting intercept
+summary(lm.D90)
 }
 \author{
   The original R implementation of glm was written by Simon
