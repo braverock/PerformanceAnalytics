@@ -20,6 +20,7 @@
 #' and y axes
 #' @param ylab set the y-axis label, same as in \code{\link{plot}}
 #' @param xlab set the x-axis label, same as in \code{\link{plot}}
+#' @param ylim set the y-axis dimensions, same as in \code{\link{plot}}
 #' @param type set the chart type, same as in \code{\link{plot}}
 #' @param lty set the line type, same as in \code{\link{plot}}
 #' @param lwd set the line width, same as in \code{\link{plot}}
