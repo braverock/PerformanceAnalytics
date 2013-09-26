@@ -47,7 +47,7 @@
 #' 
 #' @export 
 chart.VaRSensitivity <-
-function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL,...)
+function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","GaussianES", "ModifiedES", "HistoricalES"), clean=c("none", "boudt", "geltner"), elementcolor="darkgray", reference.grid=TRUE, xlab = "Confidence Level", ylab="Value at Risk", type = "l", lty = c(1,2,4), lwd = 1, colorset = (1:12), pch = (1:12), legend.loc = "bottomleft", cex.legend = 0.8, main=NULL, ylim=NULL, ...)
 { # @author Peter Carl
 
     R = checkData(R)
@@ -106,7 +106,8 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
 # print(risk)
 
     risk.columns = ncol(risk)
-    ylim=c(min(risk),max(risk))
+    if(is.null(ylim))
+        ylim=c(min(risk),max(risk))
     xlim=c(min(p), max(p))
     if(is.null(main))
         main=paste("Risk Confidence Sensitivity of ", columnnames[1], sep="")
