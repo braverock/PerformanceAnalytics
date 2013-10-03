@@ -137,7 +137,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
         ylim = c(min(c(0,returns)), max(returns) + 0.02)
 
     if(add.boxplots){
-        original.layout <- par()
+        original.layout <- par(no.readonly=TRUE)
         layout( matrix( c(2,1,0,3), 2, 2, byrow=TRUE ),
                 c(1,6), c(4,1),
             )
