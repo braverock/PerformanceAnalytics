@@ -20,6 +20,7 @@
 #' @param type set the chart type, same as in \code{\link{plot}}
 #' @param lty set the line type, same as in \code{\link{plot}}
 #' @param lwd set the line width, same as in \code{\link{plot}}
+#' @param las set the axis label rotation, same as in \code{\link{plot}}
 #' @param main set the chart title, same as in \code{\link{plot}}
 #' @param ylab set the y-axis label, same as in \code{\link{plot}}
 #' @param xlab set the x-axis label, same as in \code{\link{plot}}
@@ -146,9 +147,10 @@ function (R,
           type = "l", 
           lty = 1, 
           lwd = 2, 
+          las = par("las"),
           main = NULL, 
           ylab=NULL, 
-          xlab="Date", 
+          xlab="", 
           date.format.in="%Y-%m-%d", 
           date.format = NULL, 
           xlim = NULL, 
@@ -319,13 +321,13 @@ function (R,
 
     if (xaxis) {
         if(minor.ticks)
-            axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB')
+            axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB', las=las)
         label.height = cex.axis *(.5 + apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) ))
         if(is.null(xaxis.labels))
             xaxis.labels = names(ep)
         else
             ep = 1:length(xaxis.labels)
-        axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis) 
+        axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis, las=las) 
 #         axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,2,0), cex.axis = cex.axis) 
         #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
         title(xlab = xlab, cex = cex.lab)
@@ -335,9 +337,9 @@ function (R,
     # set up y-axis
     if (yaxis)
         if(yaxis.right)
-            axis(4, cex.axis = cex.axis, col=element.color, ylog=ylog)
+            axis(4, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las)
         else
-            axis(2, cex.axis = cex.axis, col=element.color, ylog=ylog)
+            axis(2, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las)
     box(col = element.color)
 
     if(!is.null(legend.loc)){
