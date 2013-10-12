@@ -45,9 +45,6 @@ The maximum drawdown possible of an asset whose return series follows a Geometri
 \end{abstract}
 
 
-<<echo=FALSE>>=
-require(noniid.sm) #source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/LoSharpe.R')
-@
 
 <<echo=FALSE >>=
 library(PerformanceAnalytics)
@@ -74,7 +71,7 @@ data(managers)
 
 
 <<echo=F,fig=T>>=
-source('C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/EmaxDDGBM.R')
+library(noniid.sm)
 data(edhec)
 Lo.Sharpe = -100*ES(edhec,.99)
 Theoretical.Sharpe= EmaxDDGBM(edhec)
@@ -87,7 +84,7 @@ barplot(as.matrix(rbind(Theoretical.Sharpe,Lo.Sharpe)), main="Expected Shortfall
 We can observe that the fund "\textbf{Emerging Markets}", which has the largest drawdown and serial autocorrelation, has highest Drawdown , \emph{decrease} most significantly as comapared to other funds.
 
 <<echo=F,fig=T>>=
-
+library(noniid.sm)
 data(managers)
 Lo.Sharpe = -100*ES(managers[,1:6],.99)
 Theoretical.Sharpe= EmaxDDGBM(managers[,1:6])

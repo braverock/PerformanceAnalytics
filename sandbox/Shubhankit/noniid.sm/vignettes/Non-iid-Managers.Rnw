@@ -198,7 +198,7 @@ This measure is well known in the industrial organization literature as the Herf
 
 <<echo=FALSE,fig=TRUE>>=
 library(noniid.sm)
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/GLMSmoothIndex.R")
+
 GLM.index=GLMSmoothIndex(managers[,1:6])
 barplot(as.matrix(GLM.index), main="GLM Smooth Index",
          xlab="Fund Type",ylab="Value",colorset = rich6equal[1], beside=TRUE)
@@ -231,8 +231,8 @@ Other observations are that:
 This means that as the return/volatility increases not only the magnitude of drawdown decreases but the confidence interval as well. In others words losses are both smaller and more predictable.
 
 <<echo=FALSE,fig=TRUE>>=
-source("C:/Users/shubhankit/Desktop/Again/pkg/PerformanceAnalytics/sandbox/Shubhankit/noniid.sm/R/AcarSim.R")
-AcarSim(managers[,1:6])
+library(noniid.sm)
+chart.AcarSim(managers[,1:6])
 @
 
 As we can see from the \emph{simulated chart}, DJUBS.Commodity comes at the bottom , which imply a \emph{lower} \textbf{return-maximum loss} ratio.
