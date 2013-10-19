@@ -185,7 +185,7 @@ Return.portfolio <- function (R, weights=NULL, wealth.index = FALSE, contributio
       result[2:length(result)] = result[2:length(result)] /
         lag(result)[2:length(result)] - 1
       #result[1] = result[1] - 1
-      result[1] = result[1] / sum(abs(weights[1,])) #divide by the sum of the first weighting vector to account for possible leverage
+      result[1] = result[1] / sum(abs(weights[1,])) -1 #divide by the sum of the first weighting vector to account for possible leverage
 	  w = matrix(rep(NA), ncol(wealthindex.assets) * nrow(wealthindex.assets), ncol = ncol(wealthindex.assets), nrow = nrow(wealthindex.assets))
       w[1, ] = weights
       w[2:length(wealthindex), ] = (wealthindex.weighted / rep(wealthindex, ncol(wealthindex.weighted)))[1:(length(wealthindex) - 1), ]
