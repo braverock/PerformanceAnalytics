@@ -351,8 +351,8 @@ function (R,
     # Add the other titles
     if(is.null(main))
         main=columnnames[1]
-    title(ylab = ylab, cex = cex.lab)
-    title(main = main, cex = cex.main)
+    title(ylab = ylab, cex.lab = cex.lab)
+    title(main = main, cex.main = cex.main)
 
 }
 
