@@ -1,4 +1,5 @@
 \name{legend}
+\alias{PerformanceAnalytics.internal}
 \alias{allsymbols}
 \alias{bluefocus}
 \alias{bluemono}
@@ -20,7 +21,6 @@
 \alias{macro.dates}
 \alias{macro.labels}
 \alias{opensymbols}
-\alias{PerformanceAnalytics.internal}
 \alias{rainbow10equal}
 \alias{rainbow12equal}
 \alias{rainbow6equal}

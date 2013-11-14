@@ -1,8 +1,8 @@
 \name{mean.geometric}
-\alias{mean.geometric}
 \alias{mean.LCL}
-\alias{mean.stderr}
 \alias{mean.UCL}
+\alias{mean.geometric}
+\alias{mean.stderr}
 \alias{mean.utils}
 \title{calculate attributes relative to the mean of the observation series given,
 including geometric, stderr, LCL and UCL}

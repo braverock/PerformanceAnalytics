@@ -1,6 +1,6 @@
 \name{SkewnessKurtosisRatio}
-\alias{SkewnessKurtosisRatio}
 \alias{Skewness-KurtosisRatio}
+\alias{SkewnessKurtosisRatio}
 \title{Skewness-Kurtosis ratio of the return distribution}
 \usage{
   SkewnessKurtosisRatio(R, ...)

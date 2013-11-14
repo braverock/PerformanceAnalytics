@@ -1,23 +1,24 @@
-\name{charts.TimeSeries}
-\alias{charts.TimeSeries}
+\name{chart.TimeSeries}
 \alias{chart.TimeSeries}
+\alias{charts.TimeSeries}
 \title{Creates a time series chart with some extensions.}
 \usage{
-  charts.TimeSeries(R, space = 0, main = "Returns", ...)
-
   chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE,
     yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1,
-    lwd = 2, main = NULL, ylab = NULL, xlab = "Date",
-    date.format.in = "\%Y-\%m-\%d", date.format = NULL,
-    xlim = NULL, ylim = NULL, element.color = "darkgray",
-    event.lines = NULL, event.labels = NULL,
-    period.areas = NULL, event.color = "darkgray",
-    period.color = "aliceblue", colorset = (1:12),
-    pch = (1:12), legend.loc = NULL, ylog = FALSE,
-    cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1,
-    cex.labels = 0.8, cex.main = 1, major.ticks = "auto",
-    minor.ticks = TRUE, grid.color = "lightgray",
-    grid.lty = "dotted", xaxis.labels = NULL, ...)
+    lwd = 2, las = par("las"), main = NULL, ylab = NULL,
+    xlab = "", date.format.in = "\%Y-\%m-\%d",
+    date.format = NULL, xlim = NULL, ylim = NULL,
+    element.color = "darkgray", event.lines = NULL,
+    event.labels = NULL, period.areas = NULL,
+    event.color = "darkgray", period.color = "aliceblue",
+    colorset = (1:12), pch = (1:12), legend.loc = NULL,
+    ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,
+    cex.lab = 1, cex.labels = 0.8, cex.main = 1,
+    major.ticks = "auto", minor.ticks = TRUE,
+    grid.color = "lightgray", grid.lty = "dotted",
+    xaxis.labels = NULL, ...)
+
+  charts.TimeSeries(R, space = 0, main = "Returns", ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -44,6 +45,9 @@
   \code{\link{plot}}}
 
   \item{lwd}{set the line width, same as in
+  \code{\link{plot}}}
+
+  \item{las}{set the axis label rotation, same as in
   \code{\link{plot}}}
 
   \item{main}{set the chart title, same as in

@@ -1,7 +1,7 @@
 \name{Return.centered}
+\alias{Return.centered}
 \alias{centeredcomoment}
 \alias{centeredmoment}
-\alias{Return.centered}
 \title{calculate centered Returns}
 \usage{
   Return.centered(R, ...)

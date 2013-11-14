@@ -1,7 +1,7 @@
 \name{CAPM.epsilon}
 \alias{CAPM.epsilon}
-\alias{epsilon}
 \alias{Regression}
+\alias{epsilon}
 \title{Regression epsilon of the return distribution}
 \usage{
   CAPM.epsilon(Ra, Rb, Rf = 0, ...)

@@ -10,7 +10,7 @@
     type = "l", lty = c(1, 2, 4), lwd = 1,
     colorset = (1:12), pch = (1:12),
     legend.loc = "bottomleft", cex.legend = 0.8,
-    main = NULL, ...)
+    main = NULL, ylim = NULL, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -35,6 +35,9 @@
   \code{\link{plot}}}
 
   \item{xlab}{set the x-axis label, same as in
+  \code{\link{plot}}}
+
+  \item{ylim}{set the y-axis dimensions, same as in
   \code{\link{plot}}}
 
   \item{type}{set the chart type, same as in

@@ -1,7 +1,7 @@
 \name{StdDev.annualized}
+\alias{StdDev.annualized}
 \alias{sd.annualized}
 \alias{sd.multiperiod}
-\alias{StdDev.annualized}
 \title{calculate a multiperiod or annualized Standard Deviation}
 \usage{
   StdDev.annualized(x, scale = NA, ...)

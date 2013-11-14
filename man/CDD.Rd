@@ -1,6 +1,6 @@
 \name{CDD}
-\alias{CDaR}
 \alias{CDD}
+\alias{CDaR}
 \title{Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
 measure}
 \usage{

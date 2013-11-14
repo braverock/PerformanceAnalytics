@@ -1,12 +1,12 @@
-\name{chart.ACFplus}
+\name{chart.ACF}
 \alias{chart.ACF}
 \alias{chart.ACFplus}
 \title{Create ACF chart or ACF with PACF two-panel chart}
 \usage{
-  chart.ACFplus(R, maxlag = NULL, elementcolor = "gray",
+  chart.ACF(R, maxlag = NULL, elementcolor = "gray",
     main = NULL, ...)
 
-  chart.ACF(R, maxlag = NULL, elementcolor = "gray",
+  chart.ACFplus(R, maxlag = NULL, elementcolor = "gray",
     main = NULL, ...)
 }
 \arguments{

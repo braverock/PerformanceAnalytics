@@ -47,8 +47,8 @@ length history}
   + Rpa) / (1 + Rba) - 1}
 }
 \examples{
-data(attrib)
-Return.annualized.excess(Rp = attrib.returns[, 21], Rb = attrib.returns[, 22])
+data(managers)
+Return.annualized.excess(Rp = managers[,1], Rb = managers[,8])
 }
 \author{
   Andrii Babii
