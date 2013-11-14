@@ -68,6 +68,7 @@ export(
     mean.LCL,
     mean.stderr,
     mean.UCL,
+    Modigliani,
     MSquared,
     MSquaredExcess,
     NetSelectivity,
