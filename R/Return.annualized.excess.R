@@ -36,9 +36,8 @@
 #' and Attribution}. Wiley. 2004. p. 206-207
 #' @keywords ts multivariate distribution models
 #' @examples
-#' 
-#' data(attrib)
-#' Return.annualized.excess(Rp = attrib.returns[, 21], Rb = attrib.returns[, 22])
+#' data(managers)
+#' Return.annualized.excess(Ra = managers[,1], Rb = managers[,8])
 #' 
 #' @export
 Return.annualized.excess <- 
