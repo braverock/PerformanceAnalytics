@@ -37,7 +37,7 @@
 #' @keywords ts multivariate distribution models
 #' @examples
 #' data(managers)
-#' Return.annualized.excess(Ra = managers[,1], Rb = managers[,8])
+#' Return.annualized.excess(Rp = managers[,1], Rb = managers[,8])
 #' 
 #' @export
 Return.annualized.excess <- 
