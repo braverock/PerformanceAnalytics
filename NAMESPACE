@@ -29,6 +29,7 @@ export(
     CAPM.beta.bull,
     CAPM.CML,
     CAPM.CML.slope,
+    CAPM.dynamic,
     CAPM.epsilon,
     CAPM.jensenAlpha,
     CAPM.RiskPremium,
