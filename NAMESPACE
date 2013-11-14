@@ -80,6 +80,7 @@ export(
     PainRatio,
     ProspectRatio,
     Return.annualized,
+    Return.annualized.excess,
     Return.calculate,
     Return.centered,
     Return.clean,
