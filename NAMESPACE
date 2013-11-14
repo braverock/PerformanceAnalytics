@@ -61,6 +61,7 @@ export(
     kurtosis,
     M2Sortino,
     maxDrawdown,
+    MarketTiming,
     MartinRatio,
     MeanAbsoluteDeviation,
     mean.geometric,
