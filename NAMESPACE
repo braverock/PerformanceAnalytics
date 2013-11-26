@@ -16,6 +16,7 @@ export(
     apply.rolling,
     AppraisalRatio,
     AverageDrawdown,
+    AverageRecovery,
     BernardoLedoitRatio,
     BetaCoKurtosis,
     BetaCoSkewness,
