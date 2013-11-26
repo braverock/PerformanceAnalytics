@@ -83,9 +83,9 @@
 #' #with data used in Bacon 2008
 #'
 #' data(portfolio_bacon)
-#' MAR = 0.5
-#' DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.493
-#' DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.491
+#' MAR = 0.005
+#' DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.0255
+#' DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.0137
 #' 
 #' #with data of managers
 #'
