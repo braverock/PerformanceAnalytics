@@ -52,8 +52,8 @@ function (Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"), ...)
         Rbp = (prod(1 + Rb))^(Period / length(Rb)) - 1
 
         switch(Method,
-            geometric = {result = (1+MSquared(Ra,Rb))/(1+Rbp) - 1},
-            arithmetic = {result = MSquared(Ra,Rb) - Rbp} 
+            geometric = {result = (1+MSquared(Ra,Rb,Rf))/(1+Rbp) - 1},
+            arithmetic = {result = MSquared(Ra,Rb,Rf) - Rbp} 
         ) # end switch
      }    
      else {
