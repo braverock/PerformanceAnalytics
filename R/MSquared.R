@@ -23,7 +23,7 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.1068
+#' print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.10062
 #'
 #' data(managers)
 #' print(MSquared(managers['1996',1], managers['1996',8]))
@@ -49,7 +49,7 @@ function (Ra, Rb, Rf = 0, ...)
         Rp = (prod(1 + Ra))^(Period / length(Ra)) - 1
      	sigp = sqrt(var(Ra)*(length(Ra)-1)/length(Ra))*sqrt(Period)
      	sigm = sqrt(var(Rb)*(length(Rb)-1)/length(Rb))*sqrt(Period)
-        result = (Rp - Rf) * sigp / sigm + Rf
+        result = (Rp - Rf) * sigm / sigp + Rf
      }    
      else {
         result = NA
