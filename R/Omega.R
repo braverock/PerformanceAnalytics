@@ -143,7 +143,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
                 a = min(x)
                 b = max(x)
 
-                xcdf = Hmisc:::Ecdf.default(x, pl=FALSE)
+                xcdf = Hmisc::Ecdf.default(x, pl=FALSE)
                 f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
                 if(output == "full") {
