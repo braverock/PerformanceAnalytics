@@ -114,7 +114,7 @@
 #' 
 #'     # add Component ES for the equal weighted portfolio
 #'     ES(edhec, clean="boudt", portfolio_method="component")
-#' 
+#' @export ETL CVaR ES
 ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ..., 
         method=c("modified","gaussian","historical"), 
         clean=c("none","boudt", "geltner"),  

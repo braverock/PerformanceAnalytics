@@ -31,7 +31,7 @@
 #' @aliases
 #' table.CAPM
 #' table.SFM
-#' @export
+#' @export table.SFM table.CAPM
 table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
 {# @author Peter Carl
 
