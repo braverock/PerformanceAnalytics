@@ -23,7 +23,7 @@ Suggests:
     MASS,
     tseries,
     quadprog,
-    sn,
+    gamlss,
     robustbase,
     quantreg,
     gplots,
