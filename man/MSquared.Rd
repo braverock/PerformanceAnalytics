@@ -32,7 +32,7 @@
 }
 \examples{
 data(portfolio_bacon)
-print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.1068
+print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.10062
 
 data(managers)
 print(MSquared(managers['1996',1], managers['1996',8]))

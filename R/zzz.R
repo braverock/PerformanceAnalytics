@@ -16,6 +16,12 @@ even <- function (x) x%%2==0
 odd  <- function (x) x%%2==1
 
 sd.xts <- xts:::sd.xts
+
+#' @importFrom utils packageDescription
+#' @importFrom stats sd
+#' @importFrom zoo rollapply
+NULL
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #

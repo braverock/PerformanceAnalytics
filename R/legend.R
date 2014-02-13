@@ -81,6 +81,11 @@
 #' @seealso \code{\link[graphics]{legend}}
 #' @keywords internal
 #' @export 
+#' @export allsymbols bluefocus bluemono bond.dates bond.labels closedsymbols cycles.dates 
+#' @export dark6equal dark8equal equity.dates equity.labels fillsymbols greenfocus greenmono grey6mono
+#' @export grey8mono legend linesymbols macro.dates macro.labels opensymbols rainbow10equal 
+#' @export rainbow12equal rainbow6equal rainbow8equal redfocus redmono rich10equal rich12equal rich6equal
+#' @export rich8equal risk.dates risk.labels set6equal set8equal tim10equal tim12equal tim6equal tim8equal
 legend <-
 function (x, y = NULL, legend, fill = NULL, col = par("col"),
     lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"),
