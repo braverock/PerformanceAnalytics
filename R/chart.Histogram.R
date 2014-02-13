@@ -225,11 +225,10 @@ function(R,
                 probability = TRUE
             },
             add.sst = {
-#               requires library(sn)
-                stopifnot("package:sn" %in% search() || require("sn",quietly=TRUE))
-
-                fit = st.mle(y=x)
-                fitted.sst = dst(s, location = fit$dp[[1]], scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]], log = FALSE)
+#               requires library(gamlss)
+                stopifnot("package:gamlss" %in% search() || require("gamlss",quietly=TRUE))              
+                fit = gamlss(coredata(y)~1, family="ST1", verbose=FALSE)
+                fitted.sst = dST1(s, mu = fitted(fit)[1], sigma = fitted(fit, "sigma")[1], nu = fitted(fit, "nu")[1], tau = fitted(fit, "tau")[1])
                 yrange=c(yrange,max(fitted.sst))
                 probability = TRUE
             },
@@ -297,6 +296,7 @@ function(R,
 #             },
             add.sst = { #requires package sn
                 lines(s, fitted.sst, col = colorset[4], lwd=lwd)
+#               curve(fitted.sst, col=colorset[4], lwd=lwd, add=TRUE)
             },
             add.rug = {
                 rug(x, col = element.color)
