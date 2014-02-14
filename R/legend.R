@@ -86,6 +86,8 @@
 #' @export grey8mono legend linesymbols macro.dates macro.labels opensymbols rainbow10equal 
 #' @export rainbow12equal rainbow6equal rainbow8equal redfocus redmono rich10equal rich12equal rich6equal
 #' @export rich8equal risk.dates risk.labels set6equal set8equal tim10equal tim12equal tim6equal tim8equal
+#' @export tol1qualitative tol2qualitative tol3qualitative tol4qualitative tol5qualitative tol6qualitative tol7qualitative tol8qualitative tol9qualitative tol10qualitative tol11qualitative tol12qualitative
+#' @export tol14rainbow tol15rainbow tol18rainbow tol21rainbow
 legend <-
 function (x, y = NULL, legend, fill = NULL, col = par("col"),
     lty, lwd, pch, angle = 45, density = NULL, bty = "o", bg = par("bg"),
@@ -437,6 +439,31 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     grey8mono = c("#000000","#252525", "#525252", "#737373", "#969696", "#BDBDBD", "#D9D9D9", "#F0F0F0")
 
     grey6mono = c("#242424", "#494949", "#6D6D6D", "#929292", "#B6B6B6", "#DBDBDB")
+
+    # QUALITATIVE
+    # by Paul Tol, http://www.sron.nl/~pault/colourschemes.pdf
+    tol1qualitative=c("#4477AA")
+    tol2qualitative=c("#4477AA", "#CC6677")
+    tol3qualitative=c("#4477AA", "#DDCC77", "#CC6677")
+    tol4qualitative=c("#4477AA", "#117733", "#DDCC77", "#CC6677")
+    tol5qualitative=c("#332288", "#88CCEE", "#117733", "#DDCC77", "#CC6677")
+    tol6qualitative=c("#332288", "#88CCEE", "#117733", "#DDCC77", "#CC6677","#AA4499")
+    tol7qualitative=c("#332288", "#88CCEE", "#44AA99", "#117733", "#DDCC77", "#CC6677","#AA4499")
+    tol8qualitative=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#CC6677","#AA4499")
+    tol9qualitative=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#CC6677", "#882255", "#AA4499")
+    tol10qualitative=c("#332288", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#661100", "#CC6677", "#882255", "#AA4499")
+    tol11qualitative=c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#661100", "#CC6677", "#882255", "#AA4499")
+    tol12qualitative=c("#332288", "#6699CC", "#88CCEE", "#44AA99", "#117733", "#999933", "#DDCC77", "#661100", "#CC6677", "#AA4466", "#882255", "#AA4499")
+
+    # A recent update to his technical paper adds a new banded rainbow scheme, several with a large number of steps.  He notes that when you're using them, you're better off picking a scheme that matches the number of colors needed, rather than using only a few colors from a larger scheme.
+
+  tol14rainbow=c("#882E72", "#B178A6", "#D6C1DE", "#1965B0", "#5289C7", "#7BAFDE", "#4EB265", "#90C987", "#CAE0AB", "#F7EE55", "#F6C141", "#F1932D", "#E8601C", "#DC050C")
+
+  tol15rainbow=c("#114477", "#4477AA", "#77AADD", "#117755", "#44AA88", "#99CCBB", "#777711", "#AAAA44", "#DDDD77", "#771111", "#AA4444", "#DD7777", "#771144", "#AA4477", "#DD77AA")
+
+  tol18rainbow=c("#771155", "#AA4488", "#CC99BB", "#114477", "#4477AA", "#77AADD", "#117777", "#44AAAA", "#77CCCC", "#777711", "#AAAA44", "#DDDD77", "#774411", "#AA7744", "#DDAA77", "#771122", "#AA4455", "#DD7788") 
+
+  tol21rainbow= c("#771155", "#AA4488", "#CC99BB", "#114477", "#4477AA", "#77AADD", "#117777", "#44AAAA", "#77CCCC", "#117744", "#44AA77", "#88CCAA", "#777711", "#AAAA44", "#DDDD77", "#774411", "#AA7744", "#DDAA77", "#771122", "#AA4455", "#DD7788")
 
 # ------------------------------------------------------------------------------
 
