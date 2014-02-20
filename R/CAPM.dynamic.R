@@ -1,4 +1,4 @@
-#' Time-varying conditional beta
+#' Time-varying conditional single factor model beta
 #' 
 #' CAPM is estimated assuming that betas and alphas change over time. It is 
 #' assumed that the market prices of securities fully reflect readily available
@@ -6,10 +6,16 @@
 #' measures this information. Possible variables in \eqn{Z} could be the
 #' divident yield, Tresaury yield, etc. The betas of stocks and managed
 #' portfolios are allowed to change with market conditions:
+#' 
 #' \deqn{\beta_{p}(z_{t})=b_{0p}+B_{p}'z_{t}}{beta(zt) = b0 + Bp'zt}
-#' where \eqn{z_{t}=Z_{t}-E[Z]}{zt = Zt - E[Z]} - a normalized vector of the 
-#' deviations of \eqn{Z_{t}}{Zt}, \eqn{B_{p}}{Bp} - a vector with the same 
-#' dimension as \eqn{Z_{t}}{Zt}. The coefficient \eqn{b_{0p}}{b0} can be 
+#' 
+#' where \eqn{z_{t}=Z_{t}-E[Z]}{zt = Zt - E[Z]} 
+#' 
+#' - a normalized vector of the deviations of \eqn{Z_{t}}{Zt}, \eqn{B_{p}}{Bp} 
+#' 
+#' - a vector with the same dimension as \eqn{Z_{t}}{Zt}. 
+#' 
+#' The coefficient \eqn{b_{0p}}{b0} can be 
 #' interpreted as the "average beta" or the beta when all infromation variables
 #' are at their means. The elements of \eqn{B_{p}}{Bp} measure the sensitivity 
 #' of the conditional beta to the deviations of the \eqn{Z_{t}}{Zt} from their
@@ -44,9 +50,10 @@
 #' CAPM.dynamic(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12, Z=managers[, 9:10])
 #' CAPM.dynamic(managers[80:120,1:6], managers[80:120,7,drop=FALSE], Rf=managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
 #' CAPM.dynamic(managers[80:120,1:6], managers[80:120,8:7], managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
-#'
-#' @export
-CAPM.dynamic <- function (Ra, Rb, Rf = 0, Z, lags = 1, ...)
+#' 
+#' @rdname CAPM.dynamic 
+#' @export CAPM.dynamic SFM.dynamic 
+CAPM.dynamic <- SFM.dynamic <- function (Ra, Rb, Rf = 0, Z, lags = 1, ...)
 { # @author Andrii Babii
     
     # FUNCTION

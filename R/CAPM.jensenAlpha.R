@@ -22,15 +22,16 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
+#' print(SFM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
 #'
 #' data(managers)
-#' print(CAPM.jensenAlpha(managers['1996',1], managers['1996',8]))
-#' print(CAPM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+#' print(SFM.jensenAlpha(managers['1996',1], managers['1996',8]))
+#' print(SFM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @rdname CAPM.jensenAlpha
+#' @export CAPM.jensenAlpha SFM.jensenAlpha
 
-CAPM.jensenAlpha <-
+CAPM.jensenAlpha <- SFM.jensenAlpha <-
 function (Ra, Rb, Rf = 0, ...)
 {
     calcul = FALSE

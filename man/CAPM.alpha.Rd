@@ -1,6 +1,6 @@
 \name{CAPM.alpha}
 \alias{CAPM.alpha}
-\title{calculate CAPM alpha}
+\title{calculate single factor model (CAPM) alpha}
 \usage{
   CAPM.alpha(Ra, Rb, Rf = 0)
 }
@@ -13,7 +13,8 @@
   \item{Rf}{risk free rate, in same period as your returns}
 }
 \description{
-  This is a wrapper for calculating a CAPM alpha.
+  This is a wrapper for calculating a single factor model
+  (CAPM) alpha.
 }
 \details{
   "Alpha" purports to be a measure of a manager's skill by

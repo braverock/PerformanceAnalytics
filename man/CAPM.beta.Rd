@@ -3,7 +3,7 @@
 \alias{CAPM.beta.bear}
 \alias{CAPM.beta.bull}
 \alias{TimingRatio}
-\title{calculate CAPM beta}
+\title{calculate single factor model (CAPM) beta}
 \usage{
   CAPM.beta(Ra, Rb, Rf = 0)
 
@@ -22,9 +22,9 @@
   \item{Rf}{risk free rate, in same period as your returns}
 }
 \description{
-  CAPM Beta is the beta of an asset to the variance and
-  covariance of an initial portfolio.  Used to determine
-  diversification potential.
+  The single factor model or CAPM Beta is the beta of an
+  asset to the variance and covariance of an initial
+  portfolio.  Used to determine diversification potential.
 }
 \details{
   This function uses a linear intercept model to achieve

@@ -31,11 +31,11 @@
 }
 \examples{
 data(portfolio_bacon)
-print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
+print(SFM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
 
 data(managers)
-print(CAPM.epsilon(managers['1996',1], managers['1996',8]))
-print(CAPM.epsilon(managers['1996',1:5], managers['1996',8]))
+print(SFM.epsilon(managers['1996',1], managers['1996',8]))
+print(SFM.epsilon(managers['1996',1:5], managers['1996',8]))
 }
 \author{
   Matthieu Lestel

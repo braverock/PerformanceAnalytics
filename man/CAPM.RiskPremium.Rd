@@ -4,7 +4,12 @@
 \alias{CAPM.RiskPremium}
 \alias{CAPM.SML.slope}
 \alias{CAPM.utils}
-\title{utility functions for CAPM CML, SML, and RiskPremium}
+\alias{SFM.CML}
+\alias{SFM.CML.slope}
+\alias{SFM.RiskPremium}
+\alias{SFM.SML.slope}
+\alias{SFM.utils}
+\title{utility functions for single factor (CAPM) CML, SML, and RiskPremium}
 \usage{
   CAPM.CML.slope(Rb, Rf = 0)
 
@@ -29,6 +34,11 @@
   values for various measures proposed in the CAPM.
 }
 \details{
+  At it's core, the CAPM is a single factor linear model.
+  In light of the general ustility and wide use of single
+  factor model, all functions in the CAPM suite will also
+  be available with SFM (single factor model) prefixes.
+
   The CAPM provides a justification for passive or index
   investing by positing that assets that are not on the
   efficient frontier will either rise or lower in price
@@ -68,21 +78,21 @@
   Chapter 7 of Ruppert(2004) gives an extensive overview of
   CAPM, its assumptions and deficiencies.
 
-  \code{CAPM.RiskPremium} is the premium returned to the
+  \code{SFM.RiskPremium} is the premium returned to the
   investor over the risk free asset
 
   \deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-Rf=0)}
 
-  \code{CAPM.CML} calculates the expected return of the
+  \code{SFM.CML} calculates the expected return of the
   asset against the benchmark Capital Market Line
 
-  \code{CAPM.CML.slope} calculates the slope of the Capital
+  \code{SFM.CML.slope} calculates the slope of the Capital
   Market Line for looking at how a particular asset
   compares to the CML
 
-  \code{CAPM.SML.slope} calculates the slope of the
-  Security Market Line for looking at how a particular
-  asset compares to the SML created by the benchmark
+  \code{SFM.SML.slope} calculates the slope of the Security
+  Market Line for looking at how a particular asset
+  compares to the SML created by the benchmark
 }
 \examples{
 data(managers)

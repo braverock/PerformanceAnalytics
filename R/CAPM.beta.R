@@ -1,7 +1,7 @@
-#' calculate CAPM beta
+#' calculate single factor model (CAPM) beta
 #' 
-#' CAPM Beta is the beta of an asset to the variance and covariance of an
-#' initial portfolio.  Used to determine diversification potential.
+#' The single factor model or CAPM Beta is the beta of an asset to the variance 
+#' and covariance of an initial portfolio.  Used to determine diversification potential.
 #' 
 #' This function uses a linear intercept model to achieve the same results as
 #' the symbolic model used by \code{\link{BetaCoVariance}}
@@ -83,10 +83,10 @@
 #' 			Rf = managers[, "US 3m TR", drop=FALSE], 
 #' 			fit="conditional", 
 #' 			main="Conditional Beta")
-#' 
-#' @export
-CAPM.beta <-
-function (Ra, Rb, Rf = 0)
+#'   		
+#' @rdname CAPM.beta
+#' @export CAPM.beta SFM.beta
+CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:

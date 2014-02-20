@@ -1,16 +1,23 @@
-#' calculate the lower partial moment of a time series
-#'
-#' Code to calculate the Lower Partion Moments around the mean or a specified threshold
-#' from Huffman S,P & Moll C.R. 2011 "The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures" Algorithmic Finance 1 (2011) 79-93
+#' calculate a lower partial moment for a time series
+#' 
+#' Caclulate a Lower Partial Moment around the mean or a specified threshold.
+#' 
+#' Lower partial moments capture negative deviation from a reference point.  
+#' That reference point may be the mean, or some specified threshold that
+#' has other meaning for the investor.
+#' 
+#' @references Huffman S.P. & Moll C.R., 
+#' "The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures", 
+#' Algorithmic Finance 1, 2011 p. 79-93
 #'
 #' @param R xts data
 #' @param n the n-th moment to return
 #' @param threshold threshold can be the mean or any point as desired
 #' @param about_mean TRUE/FALSE calculate LPM about the mean under the threshold or use the threshold to calculate the LPM around (if FALSE)
 #'
-#' @author Kyle Balkissoon /email{kylebalkissoon@gmail.com} /email{kyle@corporateknights.com}
+#' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
-lpm <- function(R,n,threshold,about_mean=FALSE){
+lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
 
   if(about_mean==TRUE){
     #Calculate Number of obs less than threshold

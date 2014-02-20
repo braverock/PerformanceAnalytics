@@ -22,15 +22,15 @@
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
+#' print(SFM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
 #'
 #' data(managers)
-#' print(CAPM.epsilon(managers['1996',1], managers['1996',8]))
-#' print(CAPM.epsilon(managers['1996',1:5], managers['1996',8]))
+#' print(SFM.epsilon(managers['1996',1], managers['1996',8]))
+#' print(SFM.epsilon(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
-
-CAPM.epsilon <-
+#' @rdname CAPM.epsilon
+#' @export CAPM.epsilon SFM.epsilon
+CAPM.epsilon <- SFM.epsilon <-
 function (Ra, Rb, Rf = 0, ...)
 {
     Ra = checkData(Ra, method="matrix")

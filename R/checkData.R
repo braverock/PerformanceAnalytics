@@ -3,8 +3,8 @@
 #' This function was created to make the different kinds of data classes at
 #' least \emph{seem} more fungible.  It allows the user to pass in a data
 #' object without being concerned that the function requires a matrix,
-#' data.frame, or timeSeries object.  By using this, the function "knows" what
-#' data format it has to work with.
+#' data.frame, vector, xts, or timeSeries object.  By using \code{checkData}, 
+#' the function "knows" what data format it has to work with.
 #' 
 #' 
 #' @param x a vector, matrix, data.frame, xts, timeSeries or zoo object to be
@@ -13,7 +13,7 @@
 #' @param quiet TRUE/FALSE if false, it will throw warnings when errors are
 #' noticed, default TRUE
 #' @param method type of coerced data object to return, one of
-#' c("zoo","matrix","vector"), default "zoo"
+#' c("xts", "zoo", "data.frame", "matrix", "vector"), default "xts"
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @keywords ts multivariate distribution models

@@ -1,6 +1,6 @@
-#' calculate CAPM alpha
+#' calculate single factor model (CAPM) alpha
 #' 
-#' This is a wrapper for calculating a CAPM alpha.
+#' This is a wrapper for calculating a single factor model (CAPM) alpha.
 #' 
 #' "Alpha" purports to be a measure of a manager's skill by measuring the
 #' portion of the managers returns that are not attributable to "Beta", or the
@@ -43,9 +43,10 @@
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#' 
-#' @export
-CAPM.alpha <- function (Ra, Rb, Rf = 0)
+#'   		
+#' @rdname CAPM.alpha
+#' @export SFM.alpha CAPM.alpha
+CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
 
     # DESCRIPTION:

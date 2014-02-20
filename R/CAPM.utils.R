@@ -2,8 +2,8 @@
 # CAPM.alpha and CAPM.beta could probably have gone in here too, but they're already in separate files
 
 #' @rdname CAPM.RiskPremium
-#' @export
-CAPM.CML.slope <- function (Rb, Rf = 0 )
+#' @export CAPM.CML.slope SFM.CML.slope
+CAPM.CML.slope <- SFM.CML.slope <- function (Rb, Rf = 0 )
 { #author Brian G. Peterson
 
     #the Capital Market Line slope is a wrapper for the Sharpe Ratio on the benchmark asset
@@ -16,8 +16,8 @@ CAPM.CML.slope <- function (Rb, Rf = 0 )
 }
 
 #' @rdname CAPM.RiskPremium
-#' @export
-CAPM.CML <- function (Ra, Rb, Rf = 0)
+#' @export CAPM.CML SFM.CML 
+CAPM.CML <- SFM.CML <-function (Ra, Rb, Rf = 0)
 { #@author Brian G. Peterson
 
     Ra = checkData(Ra)
@@ -50,12 +50,17 @@ CAPM.CML <- function (Ra, Rb, Rf = 0)
 
 
 
-#' utility functions for CAPM CML, SML, and RiskPremium
+#' utility functions for single factor (CAPM) CML, SML, and RiskPremium
 #' 
 #' The Capital Asset Pricing Model, from which the popular
 #' \code{\link{SharpeRatio}} is derived, is a theory of market equilibrium.
 #' These utility functions provide values for various measures proposed in the
 #' CAPM.
+#' 
+#' At it's core, the CAPM is a single factor linear model.  In light of 
+#' the general ustility and wide use of single factor model, all 
+#' functions in the CAPM suite will also be available with SFM (single factor model)
+#' prefixes.
 #' 
 #' The CAPM provides a justification for passive or index investing by positing
 #' that assets that are not on the efficient frontier will either rise or lower
@@ -87,22 +92,22 @@ CAPM.CML <- function (Ra, Rb, Rf = 0)
 #' Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM, its
 #' assumptions and deficiencies.
 #' 
-#' \code{CAPM.RiskPremium} is the premium returned to the investor over the
+#' \code{SFM.RiskPremium} is the premium returned to the investor over the
 #' risk free asset
 #' 
 #' \deqn{\overline{(R_{a}-R_{f})}}{mean(Ra-Rf=0)}
 #' 
-#' \code{CAPM.CML} calculates the expected return of the asset against the
+#' \code{SFM.CML} calculates the expected return of the asset against the
 #' benchmark Capital Market Line
 #' 
-#' \code{CAPM.CML.slope} calculates the slope of the Capital Market Line for
+#' \code{SFM.CML.slope} calculates the slope of the Capital Market Line for
 #' looking at how a particular asset compares to the CML
 #' 
-#' \code{CAPM.SML.slope} calculates the slope of the Security Market Line for
+#' \code{SFM.SML.slope} calculates the slope of the Security Market Line for
 #' looking at how a particular asset compares to the SML created by the
 #' benchmark
 #' 
-#' @aliases CAPM.utils CAPM.RiskPremium CAPM.CML CAPM.CML.slope CAPM.SML.slope
+#' @aliases CAPM.utils CAPM.RiskPremium CAPM.CML CAPM.CML.slope CAPM.SML.slope SFM.utils SFM.RiskPremium SFM.CML SFM.CML.slope SFM.SML.slope
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset

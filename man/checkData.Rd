@@ -17,7 +17,8 @@
   when errors are noticed, default TRUE}
 
   \item{method}{type of coerced data object to return, one
-  of c("zoo","matrix","vector"), default "zoo"}
+  of c("xts", "zoo", "data.frame", "matrix", "vector"),
+  default "xts"}
 
   \item{\dots}{any other passthru parameters}
 }
@@ -26,8 +27,9 @@
   data classes at least \emph{seem} more fungible.  It
   allows the user to pass in a data object without being
   concerned that the function requires a matrix,
-  data.frame, or timeSeries object.  By using this, the
-  function "knows" what data format it has to work with.
+  data.frame, vector, xts, or timeSeries object.  By using
+  \code{checkData}, the function "knows" what data format
+  it has to work with.
 }
 \examples{
 data(edhec)

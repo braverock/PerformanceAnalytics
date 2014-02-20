@@ -30,11 +30,11 @@
 }
 \examples{
 data(portfolio_bacon)
-print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
+print(SFM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
 
 data(managers)
-print(CAPM.jensenAlpha(managers['1996',1], managers['1996',8]))
-print(CAPM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+print(SFM.jensenAlpha(managers['1996',1], managers['1996',8]))
+print(SFM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
 }
 \author{
   Matthieu Lestel
