@@ -29,7 +29,7 @@
 #' @aliases
 #' ActivePremium
 #' ActiveReturn
-#' @export
+#' @export ActiveReturn ActivePremium
 ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
 { # @author Peter Carl
 

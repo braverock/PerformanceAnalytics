@@ -25,6 +25,7 @@
 #' that this will skew your results.
 #' 
 #' @param x time series to zero fill
+#' @export
 zerofill <- function (x) {
   mat<-checkData(x,"matrix")
   for(column in 1:ncol(mat)){

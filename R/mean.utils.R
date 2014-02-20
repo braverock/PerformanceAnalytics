@@ -31,7 +31,7 @@
 #' mean.LCL(edhec[,"Funds of Funds"])
 #' @rdname mean.geometric
 #' @method mean geometric
-#' @export
+#' @export mean.geometric
 mean.geometric <-
 function (x, ...)
 {# @author Peter Carl
@@ -63,7 +63,7 @@ function (x, ...)
 
 #' @rdname mean.geometric
 #' @method mean stderr
-#' @export
+#' @export mean.stderr
 mean.stderr <-
 function (x, ...)
 {# @author Peter Carl
@@ -95,7 +95,7 @@ function (x, ...)
 
 #' @rdname mean.geometric
 #' @method mean LCL
-#' @export
+#' @export mean.LCL
 mean.LCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
@@ -134,7 +134,7 @@ function (x, ci = 0.95, ...)
 
 #' @rdname mean.geometric
 #' @method mean UCL
-#' @export
+#' @export mean.UCL
 mean.UCL <-
 function (x, ci = 0.95, ...)
 {# @author Peter Carl
