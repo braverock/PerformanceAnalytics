@@ -20,7 +20,10 @@
 #' rich12equal rich6equal rich8equal set6equal set8equal tim10equal tim12equal
 #' tim6equal tim8equal bond.dates bond.labels cycles.dates equity.dates
 #' equity.labels macro.dates macro.labels risk.dates risk.labels allsymbols
-#' closedsymbols fillsymbols linesymbols opensymbols
+#' closedsymbols fillsymbols linesymbols opensymbols tol1qualitative tol2qualitative tol3qualitative
+#' tol4qualitative tol5qualitative tol6qualitative tol7qualitative tol8qualitative tol9qualitative
+#' tol10qualitative tol11qualitative tol12qualitative
+#' tol14rainbow tol15rainbow tol18rainbow tol21rainbow
 #' @param x,y the x and y co-ordinates to be used to position the legend.  They
 #' can be specified by keyword or in any way which is accepted by
 #' \code{\link{xy.coords}}: See Details.
