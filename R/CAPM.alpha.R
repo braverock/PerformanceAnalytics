@@ -10,6 +10,7 @@
 #' literature, it is an example of a simple single factor model, 
 #' comparing an asset to any arbitrary benchmark.
 #'  
+#' @aliases SFM.alpha
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
