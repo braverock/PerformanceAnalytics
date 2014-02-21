@@ -8,7 +8,7 @@
 #' where \eqn{\alpha_r} is the regression alpha, \eqn{\beta_r} is the regression beta,
 #' \eqn{r_p} is the portfolio return and b is the benchmark return
 #'
-#' @aliases Regression epsilon
+#' @aliases SFM.epsilon
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset

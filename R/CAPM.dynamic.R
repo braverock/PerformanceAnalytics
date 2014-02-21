@@ -27,6 +27,7 @@
 #' \deqn{r_{pt+1}=\alpha_{0p}+A_{p}'z_{t}+b_{0p}r_{bt+1}+B_{p}'[z_{t}r_{bt+1}]+
 #' \mu_{pt+1}}
 #' 
+#' @aliases SFM.dynamic
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' the asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of 

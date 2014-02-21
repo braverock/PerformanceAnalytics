@@ -8,7 +8,7 @@
 #' where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is the regression beta,
 #' \eqn{r_p} is the portfolio return and b is the benchmark return
 #'
-#' @aliases Jensen'sAlpha
+#' @aliases SFM.jensenAlpha
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
