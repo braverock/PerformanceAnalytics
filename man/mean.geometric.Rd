@@ -7,13 +7,13 @@
 \title{calculate attributes relative to the mean of the observation series given,
 including geometric, stderr, LCL and UCL}
 \usage{
-  \method{mean}{geometric} (x, ...)
+\method{mean}{geometric}(x, ...)
 
-  \method{mean}{stderr} (x, ...)
+\method{mean}{stderr}(x, ...)
 
-  \method{mean}{LCL} (x, ci = 0.95, ...)
+\method{mean}{LCL}(x, ci = 0.95, ...)
 
-  \method{mean}{UCL} (x, ci = 0.95, ...)
+\method{mean}{UCL}(x, ci = 0.95, ...)
 }
 \arguments{
   \item{x}{a vector, matrix, data frame, or time series to
@@ -24,12 +24,12 @@ including geometric, stderr, LCL and UCL}
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  \tabular{ll}{ \code{\link{mean.geometric}} \tab geometric
-  mean \cr \code{\link{mean.stderr}} \tab standard error of
-  the mean (S.E. mean) \cr \code{\link{mean.LCL}} \tab
-  lower confidence level (LCL) of the mean \cr
-  \code{\link{mean.UCL}} \tab upper confidence level (UCL)
-  of the mean \cr }
+\tabular{ll}{ \code{\link{mean.geometric}} \tab geometric
+mean \cr \code{\link{mean.stderr}} \tab standard error of
+the mean (S.E. mean) \cr \code{\link{mean.LCL}} \tab lower
+confidence level (LCL) of the mean \cr
+\code{\link{mean.UCL}} \tab upper confidence level (UCL) of
+the mean \cr }
 }
 \examples{
 data(edhec)
@@ -39,10 +39,10 @@ mean.UCL(edhec[,"Funds of Funds"])
 mean.LCL(edhec[,"Funds of Funds"])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
+\code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
 }
 \keyword{distribution}
 \keyword{models}

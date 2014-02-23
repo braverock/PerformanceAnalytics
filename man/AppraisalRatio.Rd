@@ -2,9 +2,8 @@
 \alias{AppraisalRatio}
 \title{Appraisal ratio of the return distribution}
 \usage{
-  AppraisalRatio(Ra, Rb, Rf = 0,
-    method = c("appraisal", "modified", "alternative"),
-    ...)
+AppraisalRatio(Ra, Rb, Rf = 0, method = c("appraisal", "modified",
+  "alternative"), ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -22,32 +21,31 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Appraisal ratio is the Jensen's alpha adjusted for
-  specific risk. The numerator is divided by specific risk
-  instead of total risk.
+Appraisal ratio is the Jensen's alpha adjusted for specific
+risk. The numerator is divided by specific risk instead of
+total risk.
 }
 \details{
-  Modified Jensen's alpha is Jensen's alpha divided by
-  beta.
+Modified Jensen's alpha is Jensen's alpha divided by beta.
 
-  Alternative Jensen's alpha is Jensen's alpha divided by
-  systematic risk.
+Alternative Jensen's alpha is Jensen's alpha divided by
+systematic risk.
 
-  \deqn{Appraisal ratio =
-  \frac{\alpha}{\sigma_{\epsilon}}}{Appraisal ratio =
-  Jensen's alpha / specific risk}
+\deqn{Appraisal ratio =
+\frac{\alpha}{\sigma_{\epsilon}}}{Appraisal ratio =
+Jensen's alpha / specific risk}
 
-  \deqn{Modified Jensen's alpha =
-  \frac{\alpha}{\beta}}{Modified Jensen's alpha = Jensen's
-  alpha / beta}
+\deqn{Modified Jensen's alpha =
+\frac{\alpha}{\beta}}{Modified Jensen's alpha = Jensen's
+alpha / beta}
 
-  \deqn{Alternative Jensen's alpha =
-  \frac{\alpha}{\sigma_S}}{Alternative Jensen's alpha =
-  Jensen's alpha / systematic risk}
+\deqn{Alternative Jensen's alpha =
+\frac{\alpha}{\sigma_S}}{Alternative Jensen's alpha =
+Jensen's alpha / systematic risk}
 
-  where \eqn{alpha} is the Jensen's alpha,
-  \eqn{\sigma_{epsilon}} is the specific risk,
-  \eqn{\sigma_S} is the systematic risk.
+where \eqn{alpha} is the Jensen's alpha,
+\eqn{\sigma_{epsilon}} is the specific risk, \eqn{\sigma_S}
+is the systematic risk.
 }
 \examples{
 data(portfolio_bacon)
@@ -60,11 +58,11 @@ print(AppraisalRatio(managers['1996',1], managers['1996',8]))
 print(AppraisalRatio(managers['1996',1:5], managers['1996',8]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.77
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.77
 }
 \keyword{distribution}
 \keyword{models}

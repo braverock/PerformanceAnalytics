@@ -33,17 +33,17 @@
 #' \code{\link{par}}
 #' @keywords ts hplot
 #' @examples
-#' 
+#' \dontrun{
 #' data(managers)
-#' R = Drawdowns(managers[,2,drop=FALSE])
+#' R = PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE])
 #' n = table.Drawdowns(managers[,2,drop=FALSE])                          
-#' chart.Events(Drawdowns(managers[,2,drop=FALSE]), 
+#' chart.Events(PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE]), 
 #' 		dates = n$Trough, 
 #' 		prior=max(na.omit(n$"To Trough")), 
 #' 		post=max(na.omit(n$Recovery)), 
 #' 		lwd=2, colorset=redfocus, legend.loc=NULL, 
 #' 		main = "Worst Drawdowns")
-#' 
+#' }
 #' @export
 chart.Events <-
 function (R, dates, prior=12, post=12, main = NULL, xlab=NULL, ...)

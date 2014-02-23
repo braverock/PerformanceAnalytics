@@ -2,9 +2,8 @@
 \alias{chart.RollingCorrelation}
 \title{chart rolling correlation fo multiple assets}
 \usage{
-  chart.RollingCorrelation(Ra, Rb, width = 12,
-    xaxis = TRUE, legend.loc = NULL, colorset = (1:12),
-    ..., fill = NA)
+chart.RollingCorrelation(Ra, Rb, width = 12, xaxis = TRUE,
+  legend.loc = NULL, colorset = (1:12), ..., fill = NA)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -32,14 +31,14 @@
   \code{\link{na.fill}} for details.}
 }
 \description{
-  A wrapper to create a chart of rolling correlation
-  metrics in a line chart
+A wrapper to create a chart of rolling correlation metrics
+in a line chart
 }
 \details{
-  The previous parameter \code{na.pad} has been replaced
-  with \code{fill}; use \code{fill = NA} instead of
-  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
-  \code{na.pad = FALSE}.
+The previous parameter \code{na.pad} has been replaced with
+\code{fill}; use \code{fill = NA} instead of \code{na.pad =
+TRUE}, or \code{fill = NULL} instead of \code{na.pad =
+FALSE}.
 }
 \examples{
 # First we get the data
@@ -50,7 +49,7 @@ chart.RollingCorrelation(managers[, 1:6, drop=FALSE],
 		width=24, main = "Rolling 12-Month Correlation")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \keyword{distribution}
 \keyword{hplot}

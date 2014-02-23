@@ -2,8 +2,7 @@
 \alias{table.DownsideRiskRatio}
 \title{Downside Summary: Statistics and ratios}
 \usage{
-  table.DownsideRiskRatio(R, MAR = 0, scale = NA,
-    digits = 4)
+table.DownsideRiskRatio(R, MAR = 0, scale = NA, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -18,9 +17,9 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of Monthly downside risk, Annualised downside risk,
-  Downside potential, Omega, Sortino ratio, Upside
-  potential, Upside potential ratio and Omega-Sharpe ratio
+Table of Monthly downside risk, Annualised downside risk,
+Downside potential, Omega, Sortino ratio, Upside potential,
+Upside potential ratio and Omega-Sharpe ratio
 }
 \examples{
 data(managers)
@@ -36,16 +35,16 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Downside risk statistics")
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.98
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.98
 }
 \seealso{
-  \code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}}
-  \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}}
-  \cr \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
+\code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}} \cr
+\code{\link{PainIndex}} \cr \code{\link{UlcerIndex}} \cr
+\code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
 }
 \keyword{distribution}
 \keyword{models}

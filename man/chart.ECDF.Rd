@@ -2,10 +2,9 @@
 \alias{chart.ECDF}
 \title{Create an ECDF overlaid with a Normal CDF}
 \usage{
-  chart.ECDF(R, main = "Empirical CDF", xlab = "x",
-    ylab = "F(x)", colorset = c("black", "#005AFF"),
-    lwd = 1, lty = c(1, 1), element.color = "darkgray",
-    xaxis = TRUE, yaxis = TRUE, ...)
+chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)",
+  colorset = c("black", "#005AFF"), lwd = 1, lty = c(1, 1),
+  element.color = "darkgray", xaxis = TRUE, yaxis = TRUE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -42,34 +41,34 @@
   \code{\link{plot}}}
 }
 \description{
-  Creates an emperical cumulative distribution function
-  (ECDF) overlaid with a cumulative distribution function
-  (CDF)
+Creates an emperical cumulative distribution function
+(ECDF) overlaid with a cumulative distribution function
+(CDF)
 }
 \details{
-  The empirical cumulative distribution function (ECDF for
-  short) calculates the fraction of observations less or
-  equal to a given value.  The resulting plot is a step
-  function of that fraction at each observation.  This
-  function uses \code{ecdf} and overlays the CDF for a
-  fitted normal function as well. Inspired by a chart in
-  Ruppert (2004).
+The empirical cumulative distribution function (ECDF for
+short) calculates the fraction of observations less or
+equal to a given value.  The resulting plot is a step
+function of that fraction at each observation.  This
+function uses \code{ecdf} and overlays the CDF for a fitted
+normal function as well. Inspired by a chart in Ruppert
+(2004).
 }
 \examples{
 data(edhec)
 chart.ECDF(edhec[, 1, drop=FALSE])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Ruppert, David. \emph{Statistics and Finance, an
-  Introduction}. Springer. 2004. Ch. 2 Fig. 2.5
+Ruppert, David. \emph{Statistics and Finance, an
+Introduction}. Springer. 2004. Ch. 2 Fig. 2.5
 
-  \url{http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt}
+\url{http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt}
 }
 \seealso{
-  \code{\link{plot}}, \code{\link{ecdf}}
+\code{\link{plot}}, \code{\link{ecdf}}
 }
 \keyword{distribution}
 \keyword{hplot}

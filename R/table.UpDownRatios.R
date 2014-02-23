@@ -1,3 +1,5 @@
+#' @rdname table.CaptureRatios
+#' @export
 table.UpDownRatios <-
 function (Ra, Rb, digits = 4)
 {# @author Peter Carl

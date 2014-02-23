@@ -2,8 +2,8 @@
 \alias{table.DownsideRisk}
 \title{Downside Risk Summary: Statistics and Stylized Facts}
 \usage{
-  table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0,
-    MAR = 0.1/12, p = 0.95, digits = 4)
+table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12,
+  p = 0.95, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -24,8 +24,8 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Creates a table of estimates of downside risk measures
-  for comparison across multiple instruments or funds.
+Creates a table of estimates of downside risk measures for
+comparison across multiple instruments or funds.
 }
 \examples{
 data(edhec)
@@ -37,12 +37,12 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(r
 title(main="Downside Risk Statistics")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{DownsideDeviation}} \cr
-  \code{\link{maxDrawdown}} \cr \code{\link{VaR}} \cr
-  \code{\link{ES}} \cr
+\code{\link{DownsideDeviation}} \cr
+\code{\link{maxDrawdown}} \cr \code{\link{VaR}} \cr
+\code{\link{ES}} \cr
 }
 \keyword{distribution}
 \keyword{models}

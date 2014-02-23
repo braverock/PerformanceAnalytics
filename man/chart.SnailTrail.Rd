@@ -2,16 +2,13 @@
 \alias{chart.SnailTrail}
 \title{chart risk versus return over rolling time periods}
 \usage{
-  chart.SnailTrail(R, Rf = 0,
-    main = "Annualized Return and Risk",
-    add.names = c("all", "lastonly", "firstandlast", "none"),
-    xlab = "Annualized Risk", ylab = "Annualized Return",
-    add.sharpe = c(1, 2, 3), colorset = 1:12,
-    symbolset = 16, legend.loc = NULL, xlim = NULL,
-    ylim = NULL, width = 12, stepsize = 12, lty = 1,
-    lwd = 2, cex.axis = 0.8, cex.main = 1, cex.lab = 1,
-    cex.text = 0.8, cex.legend = 0.8,
-    element.color = "darkgray", ...)
+chart.SnailTrail(R, Rf = 0, main = "Annualized Return and Risk",
+  add.names = c("all", "lastonly", "firstandlast", "none"),
+  xlab = "Annualized Risk", ylab = "Annualized Return", add.sharpe = c(1,
+  2, 3), colorset = 1:12, symbolset = 16, legend.loc = NULL,
+  xlim = NULL, ylim = NULL, width = 12, stepsize = 12, lty = 1,
+  lwd = 2, cex.axis = 0.8, cex.main = 1, cex.lab = 1, cex.text = 0.8,
+  cex.legend = 0.8, element.color = "darkgray", ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -92,10 +89,10 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  A chart that shows rolling calculations of annualized
-  return and annualized standard deviation have proceeded
-  through time.  Lines and dots are darker for more recent
-  time periods.
+A chart that shows rolling calculations of annualized
+return and annualized standard deviation have proceeded
+through time.  Lines and dots are darker for more recent
+time periods.
 }
 \examples{
 data(managers)
@@ -107,13 +104,13 @@ chart.SnailTrail(managers[,c("HAM2","SP500 TR"),drop=FALSE],
 		main="Trailing 36-month Performance Calc'd Every 12 Months")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  ~put references to the literature/web site here ~
+~put references to the literature/web site here ~
 }
 \seealso{
-  \code{\link{chart.RiskReturnScatter}}
+\code{\link{chart.RiskReturnScatter}}
 }
 \keyword{ts}
 

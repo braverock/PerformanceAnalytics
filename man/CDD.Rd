@@ -4,8 +4,7 @@
 \title{Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
 measure}
 \usage{
-  CDD(R, weights = NULL, geometric = TRUE, invert = TRUE,
-    p = 0.95, ...)
+CDD(R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -27,25 +26,24 @@ measure}
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  For some confidence level \eqn{p}, the conditional
-  drawdown is the the mean of the worst \eqn{p\%}
-  drawdowns.
+For some confidence level \eqn{p}, the conditional drawdown
+is the the mean of the worst \eqn{p\%} drawdowns.
 }
 \examples{
 data(edhec)
 t(round(CDD(edhec),4))
 }
 \author{
-  Brian G. Peterson
+Brian G. Peterson
 }
 \references{
-  Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
-  Optimization With Drawdown Constraints. B. Scherer (Ed.)
-  Asset and Liability Management Tools, Risk Books, London,
-  2003 http://www.ise.ufl.edu/uryasev/drawdown.pdf
+Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
+Optimization With Drawdown Constraints. B. Scherer (Ed.)
+Asset and Liability Management Tools, Risk Books, London,
+2003 http://www.ise.ufl.edu/uryasev/drawdown.pdf
 }
 \seealso{
-  \code{\link{ES}} \code{\link{maxDrawdown}}
+\code{\link{ES}} \code{\link{maxDrawdown}}
 }
 \keyword{distribution}
 \keyword{models}

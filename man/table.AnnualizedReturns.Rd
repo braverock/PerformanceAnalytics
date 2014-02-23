@@ -2,8 +2,8 @@
 \alias{table.AnnualizedReturns}
 \title{Annualized Returns Summary: Statistics and Stylized Facts}
 \usage{
-  table.AnnualizedReturns(R, scale = NA, Rf = 0,
-    geometric = TRUE, digits = 4)
+table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE,
+  digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -21,8 +21,8 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of Annualized Return, Annualized Std Dev, and
-  Annualized Sharpe
+Table of Annualized Return, Annualized Std Dev, and
+Annualized Sharpe
 }
 \examples{
 data(managers)
@@ -35,12 +35,12 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(3,3,1)), 
 title(main="Annualized Performance")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{Return.annualized}} \cr
-  \code{\link{StdDev.annualized}} \cr
-  \code{\link{SharpeRatio.annualized}}
+\code{\link{Return.annualized}} \cr
+\code{\link{StdDev.annualized}} \cr
+\code{\link{SharpeRatio.annualized}}
 }
 \keyword{distribution}
 \keyword{models}

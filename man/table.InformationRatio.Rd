@@ -2,7 +2,7 @@
 \alias{table.InformationRatio}
 \title{Information ratio Summary: Statistics and Stylized Facts}
 \usage{
-  table.InformationRatio(R, Rb, scale = NA, digits = 4)
+table.InformationRatio(R, Rb, scale = NA, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -16,8 +16,8 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of Tracking error, Annualised tracking error and
-  Information ratio
+Table of Tracking error, Annualised tracking error and
+Information ratio
 }
 \examples{
 data(managers)
@@ -33,15 +33,15 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Portfolio information ratio")
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.81
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.81
 }
 \seealso{
-  \code{\link{InformationRatio}} \cr
-  \code{\link{TrackingError}}
+\code{\link{InformationRatio}} \cr
+\code{\link{TrackingError}}
 }
 \keyword{distribution}
 \keyword{models}

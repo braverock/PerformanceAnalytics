@@ -2,10 +2,9 @@
 \alias{Return.read}
 \title{Read returns data with different date formats}
 \usage{
-  Return.read(filename = stop("Please specify a filename"),
-    frequency = c("d", "m", "q", "i", "o"),
-    format.in = c("ISO8601", "excel", "oo", "gnumeric"),
-    sep = ",", header = TRUE, check.names = FALSE, ...)
+Return.read(filename = stop("Please specify a filename"), frequency = c("d",
+  "m", "q", "i", "o"), format.in = c("ISO8601", "excel", "oo", "gnumeric"),
+  sep = ",", header = TRUE, check.names = FALSE, ...)
 }
 \arguments{
   \item{filename}{the name of the file to be read}
@@ -39,20 +38,19 @@
   \code{\link[zoo]{read.zoo}}}
 }
 \description{
-  A simple wrapper of read.zoo with some defaults for
-  different date formats and xts conversion
+A simple wrapper of read.zoo with some defaults for
+different date formats and xts conversion
 }
 \details{
-  The parameter 'format.in' takes several values,
-  including: \describe{ \item{excel}{default date format
-  for MS Excel spreadsheet csv format, which is
-  "\%m/\%d/\%Y"} \item{oo}{default date format for
-  OpenOffice spreadsheet csv format, "\%m/\%d/\%y",
-  although this may be operating system dependent}
-  \item{gnumeric}{default date format for Gnumeric
-  spreadsheet, which is "\%d-\%b-\%Y"}
-  \item{...}{alternatively, any specific format may be
-  passed in, such as "\%M/\%y"} }
+The parameter 'format.in' takes several values, including:
+\describe{ \item{excel}{default date format for MS Excel
+spreadsheet csv format, which is "\%m/\%d/\%Y"}
+\item{oo}{default date format for OpenOffice spreadsheet
+csv format, "\%m/\%d/\%y", although this may be operating
+system dependent} \item{gnumeric}{default date format for
+Gnumeric spreadsheet, which is "\%d-\%b-\%Y"}
+\item{...}{alternatively, any specific format may be passed
+in, such as "\%M/\%y"} }
 }
 \examples{
 \dontrun{
@@ -60,11 +58,11 @@
      }
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link[zoo]{read.zoo}},
-  \code{\link[utils]{read.table}}
+\code{\link[zoo]{read.zoo}},
+\code{\link[utils]{read.table}}
 }
 \keyword{distribution}
 \keyword{models}

@@ -2,7 +2,7 @@
 \alias{table.Drawdowns}
 \title{Worst Drawdowns Summary: Statistics and Stylized Facts}
 \usage{
-  table.Drawdowns(R, top = 5, digits = 4)
+table.Drawdowns(R, top = 5, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -13,16 +13,16 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Creates table showing statistics for the worst drawdowns.
+Creates table showing statistics for the worst drawdowns.
 }
 \details{
-  Returns an data frame with columns: \cr \itemize{ \item
-  From starting period, high water mark \item Trough period
-  of low point \item To ending period, when initial high
-  water mark is recovered \item Depth drawdown to trough
-  (typically as percentage returns) \item Length length in
-  periods \item toTrough number of periods to trough \item
-  Recovery number of periods to recover }
+Returns an data frame with columns: \cr \itemize{ \item
+From starting period, high water mark \item Trough period
+of low point \item To ending period, when initial high
+water mark is recovered \item Depth drawdown to trough
+(typically as percentage returns) \item Length length in
+periods \item toTrough number of periods to trough \item
+Recovery number of periods to recover }
 }
 \examples{
 data(edhec)
@@ -39,18 +39,18 @@ result=table.Drawdowns(managers[,1,drop=FALSE])
 # title(main="Largest Drawdowns for HAM1")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Bacon, C. \emph{Practical Portfolio Performance
-  Measurement and Attribution}. Wiley. 2004. p. 88 \cr
+Bacon, C. \emph{Practical Portfolio Performance Measurement
+and Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-  \code{\link{DownsideDeviation}} \cr
-  \code{\link{maxDrawdown}} \cr \code{\link{findDrawdowns}}
-  \cr \code{\link{sortDrawdowns}} \cr
-  \code{\link{chart.Drawdown}} \cr
-  \code{\link{table.DownsideRisk}}
+\code{\link{DownsideDeviation}} \cr
+\code{\link{maxDrawdown}} \cr \code{\link{findDrawdowns}}
+\cr \code{\link{sortDrawdowns}} \cr
+\code{\link{chart.Drawdown}} \cr
+\code{\link{table.DownsideRisk}}
 }
 \keyword{distribution}
 \keyword{models}

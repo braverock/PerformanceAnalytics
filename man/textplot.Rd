@@ -8,61 +8,47 @@
 \alias{textplot.matrix}
 \title{Display text information in a graphics plot.}
 \usage{
-  replaceTabs.inner(text, width = 8)
+replaceTabs.inner(text, width = 8)
 
-  replaceTabs(text, width = 8)
+replaceTabs(text, width = 8)
 
-  textplot(object, halign = "center", valign = "center",
-    cex, max.cex = 1, cmar = 2, rmar = 0.5,
-    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-    vadj = NULL, row.valign = "center",
-    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
-    col.data = par("col"), col.rownames = par("col"),
-    col.colnames = par("col"), wrap = TRUE,
-    wrap.colnames = 10, wrap.rownames = 10, ...)
+textplot(object, halign = "center", valign = "center", cex, max.cex = 1,
+  cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
+  hadj = 1, vadj = NULL, row.valign = "center",
+  heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
+  col.data = par("col"), col.rownames = par("col"),
+  col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10,
+  wrap.rownames = 10, ...)
 
-  \method{textplot}{default} (object,
-    halign = c("center", "left", "right"),
-    valign = c("center", "top", "bottom"), cex, max.cex,
-    cmar, rmar, show.rownames, show.colnames, hadj, vadj,
-    row.valign, heading.valign, mar, col.data,
-    col.rownames, col.colnames, wrap, wrap.colnames,
-    wrap.rownames, ...)
+\method{textplot}{default}(object, halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"), cex, max.cex, cmar, rmar,
+  show.rownames, show.colnames, hadj, vadj, row.valign, heading.valign, mar,
+  col.data, col.rownames, col.colnames, wrap, wrap.colnames, wrap.rownames, ...)
 
-  \method{textplot}{data.frame} (object,
-    halign = c("center", "left", "right"),
-    valign = c("center", "top", "bottom"), cex,
-    max.cex = 1, cmar = 2, rmar = 0.5,
-    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-    vadj = NULL, row.valign = "center",
-    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
-    col.data = par("col"), col.rownames = par("col"),
-    col.colnames = par("col"), wrap = TRUE,
-    wrap.colnames = 10, wrap.rownames = 10, ...)
+\method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
+  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+  vadj = NULL, row.valign = "center", heading.valign = "bottom",
+  mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"),
+  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
+  wrap.colnames = 10, wrap.rownames = 10, ...)
 
-  \method{textplot}{matrix} (object,
-    halign = c("center", "left", "right"),
-    valign = c("center", "top", "bottom"), cex,
-    max.cex = 1, cmar = 2, rmar = 0.5,
-    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-    vadj = NULL, row.valign = "center",
-    heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
-    col.data = par("col"), col.rownames = par("col"),
-    col.colnames = par("col"), wrap = TRUE,
-    wrap.colnames = 10, wrap.rownames = 10, ...)
+\method{textplot}{matrix}(object, halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
+  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+  vadj = NULL, row.valign = "center", heading.valign = "bottom",
+  mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"),
+  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
+  wrap.colnames = 10, wrap.rownames = 10, ...)
 
-  \method{textplot}{character} (object,
-    halign = c("center", "left", "right"),
-    valign = c("center", "top", "bottom"), cex,
-    max.cex = 1, cmar = 2, rmar = 0.5,
-    show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-    vadj = NULL, row.valign = "center",
-    heading.valign = "bottom", mar = c(0, 0, 3, 0) + 0.1,
-    col.data = par("col"), col.rownames = par("col"),
-    col.colnames = par("col"), wrap = TRUE,
-    wrap.colnames = 10, wrap.rownames = 10,
-    fixed.width = TRUE, cspace = 1, lspace = 1,
-    tab.width = 8, ...)
+\method{textplot}{character}(object, halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
+  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
+  vadj = NULL, row.valign = "center", heading.valign = "bottom",
+  mar = c(0, 0, 3, 0) + 0.1, col.data = par("col"),
+  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
+  wrap.colnames = 10, wrap.rownames = 10, fixed.width = TRUE,
+  cspace = 1, lspace = 1, tab.width = 8, ...)
 }
 \arguments{
   \item{object}{Object to be displayed.}
@@ -138,27 +124,27 @@
   \item{tab.width}{default is 8}
 }
 \description{
-  This function displays text output in a graphics window.
-  It is the equivalent of 'print' except that the output is
-  displayed as a plot.
+This function displays text output in a graphics window.
+It is the equivalent of 'print' except that the output is
+displayed as a plot.
 }
 \details{
-  A new plot is created and the object is displayed using
-  the largest font that will fit on in the plotting region.
-  The \code{halign} and \code{valign} parameters can be
-  used to control the location of the string within the
-  plotting region.
+A new plot is created and the object is displayed using the
+largest font that will fit on in the plotting region.  The
+\code{halign} and \code{valign} parameters can be used to
+control the location of the string within the plotting
+region.
 
-  For matrixes and vectors a specialized textplot function
-  is available, which plots each of the cells individually,
-  with column widths set according to the sizes of the
-  column elements.  If present, row and column labels will
-  be displayed in a bold font.
+For matrixes and vectors a specialized textplot function is
+available, which plots each of the cells individually, with
+column widths set according to the sizes of the column
+elements.  If present, row and column labels will be
+displayed in a bold font.
 
-  textplot also uses replaceTabs, a function to replace all
-  tabs in a string with an appropriate number of spaces.
-  That function was also written by Gregory R. Warnes and
-  included in the 'gplots' package.
+textplot also uses replaceTabs, a function to replace all
+tabs in a string with an appropriate number of spaces.
+That function was also written by Gregory R. Warnes and
+included in the 'gplots' package.
 }
 \examples{
 # Also see the examples in the original gplots textplot function
@@ -175,14 +161,14 @@ textplot(table.AnnualizedReturns(managers[,1:6]))
 # title(main="Calendar Returns")
 }
 \author{
-  Originally written by Gregory R. Warnes
-  \email{warnes@bst.rochester.edu} for the package
-  'gplots', modified by Peter Carl
+Originally written by Gregory R. Warnes
+\email{warnes@bst.rochester.edu} for the package 'gplots',
+modified by Peter Carl
 }
 \seealso{
-  \code{\link{plot}}, \cr \code{\link{text}}, \cr
-  \code{\link[utils]{capture.output}}, \cr
-  \code{\link[gplots]{textplot}}
+\code{\link{plot}}, \cr \code{\link{text}}, \cr
+\code{\link[utils]{capture.output}}, \cr
+\code{\link[gplots]{textplot}}
 }
 \keyword{hplot}
 

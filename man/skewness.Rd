@@ -2,8 +2,7 @@
 \alias{skewness}
 \title{Skewness}
 \usage{
-  skewness(x, na.rm = FALSE,
-    method = c("moment", "fisher", "sample"), ...)
+skewness(x, na.rm = FALSE, method = c("moment", "fisher", "sample"), ...)
 }
 \arguments{
   \item{na.rm}{a logical. Should missing values be
@@ -25,30 +24,29 @@
   \item{\dots}{arguments to be passed.}
 }
 \description{
-  compute skewness of a univariate distribution.
+compute skewness of a univariate distribution.
 }
 \details{
-  This function was ported from the RMetrics package
-  fUtilities to eliminate a dependency on fUtiltiies being
-  loaded every time.  The function is identical except for
-  the addition of \code{\link{checkData} and column
-  support.}
+This function was ported from the RMetrics package
+fUtilities to eliminate a dependency on fUtiltiies being
+loaded every time.  The function is identical except for
+the addition of \code{\link{checkData} and column support.}
 
-  \deqn{Skewness(moment) =
-  \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i -
-  \overline{r}}{\sigma_P})^3}{Skewness(moment) =
-  sum((x-mean(x))^3/var(x)^(3/2))/length(x)}
-  \deqn{Skewness(sample) =
-  \frac{n}{(n-1)*(n-2)}*\sum^{n}_{i=1}(\frac{r_i -
-  \overline{r}}{\sigma_{S_P}})^3 }{skewness(sample) =
-  sum(((x-mean(x))/var(x))^3)*n/((n-1)*(n-2))}
-  \deqn{Skewness(fisher) =
-  \frac{\frac{\sqrt{n*(n-1)}}{n-2}*\sum^{n}_{i=1}\frac{x^3}{n}}{\sum^{n}_{i=1}(\frac{x^2}{n})^{3/2}}}{Skewness(fisher)((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))}
+\deqn{Skewness(moment) =
+\frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i -
+\overline{r}}{\sigma_P})^3}{Skewness(moment) =
+sum((x-mean(x))^3/var(x)^(3/2))/length(x)}
+\deqn{Skewness(sample) =
+\frac{n}{(n-1)*(n-2)}*\sum^{n}_{i=1}(\frac{r_i -
+\overline{r}}{\sigma_{S_P}})^3 }{skewness(sample) =
+sum(((x-mean(x))/var(x))^3)*n/((n-1)*(n-2))}
+\deqn{Skewness(fisher) =
+\frac{\frac{\sqrt{n*(n-1)}}{n-2}*\sum^{n}_{i=1}\frac{x^3}{n}}{\sum^{n}_{i=1}(\frac{x^2}{n})^{3/2}}}{Skewness(fisher)((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))}
 
-  where \eqn{n} is the number of return, \eqn{\overline{r}}
-  is the mean of the return distribution, \eqn{\sigma_P} is
-  its standard deviation and \eqn{\sigma_{S_P}} is its
-  sample standard deviation
+where \eqn{n} is the number of return, \eqn{\overline{r}}
+is the mean of the return distribution, \eqn{\sigma_P} is
+its standard deviation and \eqn{\sigma_{S_P}} is its sample
+standard deviation
 }
 \examples{
 ## mean -
@@ -64,14 +62,14 @@ data(managers)
 skewness(managers)
 }
 \author{
-  Diethelm Wuertz, Matthieu Lestel
+Diethelm Wuertz, Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.83-84
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.83-84
 }
 \seealso{
-  \code{\link{kurtosis}}
+\code{\link{kurtosis}}
 }
 \keyword{univar}
 

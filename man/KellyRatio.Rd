@@ -2,7 +2,7 @@
 \alias{KellyRatio}
 \title{calculate Kelly criterion ratio (leverage or bet size) for a strategy}
 \usage{
-  KellyRatio(R, Rf = 0, method = "half")
+KellyRatio(R, Rf = 0, method = "half")
 }
 \arguments{
   \item{R}{a vector of returns to perform a mean over}
@@ -13,29 +13,29 @@
   is the default}
 }
 \description{
-  Kelly criterion ratio (leverage or bet size) for a
-  strategy.
+Kelly criterion ratio (leverage or bet size) for a
+strategy.
 }
 \details{
-  The Kelly Criterion was identified by Bell Labs scientist
-  John Kelly, and applied to blackjack and stock strategy
-  sizing by Ed Thorpe.
+The Kelly Criterion was identified by Bell Labs scientist
+John Kelly, and applied to blackjack and stock strategy
+sizing by Ed Thorpe.
 
-  The Kelly ratio can be simply stated as: \dQuote{bet size
-  is the ratio of edge over odds.} Mathematically, you are
-  maximizing log-utility.  As such, the Kelly criterion is
-  equal to the expected excess return of the strategy
-  divided by the expected variance of the excess return, or
+The Kelly ratio can be simply stated as: \dQuote{bet size
+is the ratio of edge over odds.} Mathematically, you are
+maximizing log-utility.  As such, the Kelly criterion is
+equal to the expected excess return of the strategy divided
+by the expected variance of the excess return, or
 
-  \deqn{leverage=\frac{(\overline{R}_{s}-R_{f})}{StdDev(R)^{2}}}{leverage
-  = (mean(R)-Rf=0)/StdDev(R)^2}
+\deqn{leverage=\frac{(\overline{R}_{s}-R_{f})}{StdDev(R)^{2}}}{leverage
+= (mean(R)-Rf=0)/StdDev(R)^2}
 
-  As a performance metric, the Kelly Ratio is calculated
-  retrospectively on a particular investment as a measure
-  of the edge that investment has over the risk free rate.
-  It may be use as a stack ranking method to compare
-  investments in a manner similar to the various ratios
-  related to the Sharpe ratio.
+As a performance metric, the Kelly Ratio is calculated
+retrospectively on a particular investment as a measure of
+the edge that investment has over the risk free rate.  It
+may be use as a stack ranking method to compare investments
+in a manner similar to the various ratios related to the
+Sharpe ratio.
 }
 \examples{
 data(managers)
@@ -44,14 +44,13 @@ data(managers)
     KellyRatio(managers[,1:6], Rf=managers[,10,drop=FALSE])
 }
 \author{
-  Brian G. Peterson
+Brian G. Peterson
 }
 \references{
-  Thorp, Edward O. (1997; revised 1998). The Kelly
-  Criterion in Blackjack, Sports Betting, and the Stock
-  Market.
-  \url{http://www.bjmath.com/bjmath/thorp/paper.htm} \cr
-  \url{http://en.wikipedia.org/wiki/Kelly_criterion}
+Thorp, Edward O. (1997; revised 1998). The Kelly Criterion
+in Blackjack, Sports Betting, and the Stock Market.
+\url{http://www.bjmath.com/bjmath/thorp/paper.htm} \cr
+\url{http://en.wikipedia.org/wiki/Kelly_criterion}
 }
 \keyword{distribution}
 \keyword{models}

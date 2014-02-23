@@ -2,8 +2,8 @@
 \alias{chart.Correlation}
 \title{correlation matrix chart}
 \usage{
-  chart.Correlation(R, histogram = TRUE,
-    method = c("pearson", "kendall", "spearman"), ...)
+chart.Correlation(R, histogram = TRUE, method = c("pearson", "kendall",
+  "spearman"), ...)
 }
 \arguments{
   \item{R}{data for the x axis, can take matrix,vector, or
@@ -21,24 +21,24 @@
   \code{\link{pairs}}}
 }
 \description{
-  Visualization of a Correlation Matrix. On top the
-  (absolute) value of the correlation plus the result of
-  the cor.test as stars. On bottom, the bivariate
-  scatterplots, with a fitted line
+Visualization of a Correlation Matrix. On top the
+(absolute) value of the correlation plus the result of the
+cor.test as stars. On bottom, the bivariate scatterplots,
+with a fitted line
 }
 \note{
-  based on plot at
-  \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+based on plot at
+\url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
 }
 \examples{
 data(managers)
 chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{table.Correlation}}
+\code{\link{table.Correlation}}
 }
 \keyword{distribution}
 \keyword{hplot}

@@ -3,19 +3,18 @@
 \alias{charts.BarVaR}
 \title{Periodic returns in a bar chart with risk metric overlay}
 \usage{
-  chart.BarVaR(R, width = 0, gap = 12,
-    methods = c("none", "ModifiedVaR", "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES", "HistoricalES"),
-    p = 0.95, clean = c("none", "boudt", "geltner"),
-    all = FALSE, ..., show.clean = FALSE,
-    show.horizontal = FALSE, show.symmetric = FALSE,
-    show.endvalue = FALSE, show.greenredbars = FALSE,
-    legend.loc = "bottomleft", ylim = NA, lwd = 2,
-    colorset = 1:12, lty = c(1, 2, 4, 5, 6), ypad = 0,
-    legend.cex = 0.8)
+chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR",
+  "GaussianVaR", "HistoricalVaR", "StdDev", "ModifiedES", "GaussianES",
+  "HistoricalES"), p = 0.95, clean = c("none", "boudt", "geltner"),
+  all = FALSE, ..., show.clean = FALSE, show.horizontal = FALSE,
+  show.symmetric = FALSE, show.endvalue = FALSE,
+  show.greenredbars = FALSE, legend.loc = "bottomleft", ylim = NA,
+  lwd = 2, colorset = 1:12, lty = c(1, 2, 4, 5, 6), ypad = 0,
+  legend.cex = 0.8)
 
-  charts.BarVaR(R, main = "Returns", cex.legend = 0.8,
-    colorset = 1:12, ylim = NA, ..., perpanel = NULL,
-    show.yaxis = c("all", "firstonly", "alternating", "none"))
+charts.BarVaR(R, main = "Returns", cex.legend = 0.8, colorset = 1:12,
+  ylim = NA, ..., perpanel = NULL, show.yaxis = c("all", "firstonly",
+  "alternating", "none"))
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -110,22 +109,22 @@
   \code{\link{chart.TimeSeries}}}
 }
 \description{
-  Plots the periodic returns as a bar chart overlayed with
-  a risk metric calculation.
+Plots the periodic returns as a bar chart overlayed with a
+risk metric calculation.
 }
 \details{
-  Note that \code{StdDev} and \code{VaR} are symmetric
-  calculations, so a high and low measure will be plotted.
-  \code{ModifiedVaR}, on the other hand, is assymetric and
-  only a lower bound will be drawn.
+Note that \code{StdDev} and \code{VaR} are symmetric
+calculations, so a high and low measure will be plotted.
+\code{ModifiedVaR}, on the other hand, is assymetric and
+only a lower bound will be drawn.
 
-  Creates a plot of time on the x-axis and vertical lines
-  for each period to indicate value on the y-axis.
-  Overlays a line to indicate the value of a risk metric
-  calculated at that time period.
+Creates a plot of time on the x-axis and vertical lines for
+each period to indicate value on the y-axis.  Overlays a
+line to indicate the value of a risk metric calculated at
+that time period.
 
-  \code{charts.BarVaR} places multile bar charts in a
-  single graphic, with associated risk measures
+\code{charts.BarVaR} places multile bar charts in a single
+graphic, with associated risk measures
 }
 \examples{
 data(managers)
@@ -170,12 +169,12 @@ chart.BarVaR(managers[,1,drop=FALSE],
 		main="... with Robust ModVaR and Line for Identifying Exceptions")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
-  \code{\link{ES}} \cr \code{\link{VaR}} \cr
-  \code{\link{Return.clean}}
+\code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
+\code{\link{ES}} \cr \code{\link{VaR}} \cr
+\code{\link{Return.clean}}
 }
 \keyword{distribution}
 \keyword{hplot}

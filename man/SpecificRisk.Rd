@@ -2,7 +2,7 @@
 \alias{SpecificRisk}
 \title{Specific risk of the return distribution}
 \usage{
-  SpecificRisk(Ra, Rb, Rf = 0, ...)
+SpecificRisk(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -15,8 +15,8 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Specific risk is the standard deviation of the error term
-  in the regression equation.
+Specific risk is the standard deviation of the error term
+in the regression equation.
 }
 \examples{
 data(portfolio_bacon)
@@ -27,11 +27,11 @@ print(SpecificRisk(managers['1996',1], managers['1996',8]))
 print(SpecificRisk(managers['1996',1:5], managers['1996',8]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.75
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.75
 }
 \keyword{distribution}
 \keyword{models}

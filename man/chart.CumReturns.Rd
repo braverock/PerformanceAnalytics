@@ -2,9 +2,8 @@
 \alias{chart.CumReturns}
 \title{Cumulates and graphs a set of periodic returns}
 \usage{
-  chart.CumReturns(R, wealth.index = FALSE,
-    geometric = TRUE, legend.loc = NULL, colorset = (1:12),
-    begin = c("first", "axis"), ...)
+chart.CumReturns(R, wealth.index = FALSE, geometric = TRUE,
+  legend.loc = NULL, colorset = (1:12), begin = c("first", "axis"), ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -33,12 +32,12 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Chart that cumulates the periodic returns given and draws
-  a line graph of the results as a "wealth index".
+Chart that cumulates the periodic returns given and draws a
+line graph of the results as a "wealth index".
 }
 \details{
-  Cumulates the return series and displays either as a
-  wealth index or as cumulative returns.
+Cumulates the return series and displays either as a wealth
+index or as cumulative returns.
 }
 \examples{
 data(edhec)
@@ -49,14 +48,14 @@ chart.CumReturns(managers,main="Cumulative Returns",begin="first")
 chart.CumReturns(managers,main="Cumulative Returns",begin="axis")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Bacon, Carl. \emph{Practical Portfolio Performance
-  Measurement and Attribution}. Wiley. 2004. \cr
+Bacon, Carl. \emph{Practical Portfolio Performance
+Measurement and Attribution}. Wiley. 2004. \cr
 }
 \seealso{
-  \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
+\code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
 \keyword{distribution}
 \keyword{hplot}

@@ -2,12 +2,10 @@
 \alias{charts.PerformanceSummary}
 \title{Create combined wealth index, period performance, and drawdown chart}
 \usage{
-  charts.PerformanceSummary(R, Rf = 0, main = NULL,
-    geometric = TRUE, methods = "none", width = 0,
-    event.labels = NULL, ylog = FALSE,
-    wealth.index = FALSE, gap = 12,
-    begin = c("first", "axis"), legend.loc = "topleft",
-    p = 0.95, ...)
+charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric = TRUE,
+  methods = "none", width = 0, event.labels = NULL, ylog = FALSE,
+  wealth.index = FALSE, gap = 12, begin = c("first", "axis"),
+  legend.loc = "topleft", p = 0.95, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -66,26 +64,24 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  For a set of returns, create a wealth index chart, bars
-  for per-period performance, and underwater chart for
-  drawdown.
+For a set of returns, create a wealth index chart, bars for
+per-period performance, and underwater chart for drawdown.
 }
 \note{
-  Most inputs are the same as "\code{\link{plot}}" and are
-  principally included so that some sensible defaults could
-  be set.
+Most inputs are the same as "\code{\link{plot}}" and are
+principally included so that some sensible defaults could
+be set.
 }
 \examples{
 data(edhec)
 charts.PerformanceSummary(edhec[,c(1,13)])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{chart.CumReturns}} \cr
-  \code{\link{chart.BarVaR}} \cr
-  \code{\link{chart.Drawdown}}
+\code{\link{chart.CumReturns}} \cr
+\code{\link{chart.BarVaR}} \cr \code{\link{chart.Drawdown}}
 }
 \keyword{distribution}
 \keyword{hplot}

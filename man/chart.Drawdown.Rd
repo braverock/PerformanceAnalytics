@@ -2,8 +2,8 @@
 \alias{chart.Drawdown}
 \title{Time series chart of drawdowns through time}
 \usage{
-  chart.Drawdown(R, geometric = TRUE, legend.loc = NULL,
-    colorset = (1:12), ...)
+chart.Drawdown(R, geometric = TRUE, legend.loc = NULL, colorset = (1:12),
+  ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -23,15 +23,15 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  A time series chart demonstrating drawdowns from peak
-  equity attained through time, calculated from periodic
-  returns.
+A time series chart demonstrating drawdowns from peak
+equity attained through time, calculated from periodic
+returns.
 }
 \details{
-  Any time the cumulative returns dips below the maximum
-  cumulative returns, it's a drawdown.  Drawdowns are
-  measured as a percentage of that maximum cumulative
-  return, in effect, measured from peak equity.
+Any time the cumulative returns dips below the maximum
+cumulative returns, it's a drawdown.  Drawdowns are
+measured as a percentage of that maximum cumulative return,
+in effect, measured from peak equity.
 }
 \examples{
 data(edhec)
@@ -40,14 +40,14 @@ chart.Drawdown(edhec[,c(1,2)],
 		legend.loc="bottomleft")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{plot}} \cr \code{\link{chart.TimeSeries}} \cr
-  \code{\link{findDrawdowns}} \cr
-  \code{\link{sortDrawdowns}} \cr \code{\link{maxDrawdown}}
-  \cr \code{\link{table.Drawdowns}} \cr
-  \code{\link{table.DownsideRisk}}
+\code{\link{plot}} \cr \code{\link{chart.TimeSeries}} \cr
+\code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}}
+\cr \code{\link{maxDrawdown}} \cr
+\code{\link{table.Drawdowns}} \cr
+\code{\link{table.DownsideRisk}}
 }
 \keyword{ts}
 

@@ -2,9 +2,8 @@
 \alias{charts.RollingPerformance}
 \title{rolling performance chart}
 \usage{
-  charts.RollingPerformance(R, width = 12, Rf = 0,
-    main = NULL, event.labels = NULL, legend.loc = NULL,
-    ...)
+charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL,
+  event.labels = NULL, legend.loc = NULL, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -27,19 +26,19 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  A wrapper to create a rolling annualized returns chart,
-  rolling annualized standard deviation chart, and a
-  rolling annualized sharpe ratio chart.
+A wrapper to create a rolling annualized returns chart,
+rolling annualized standard deviation chart, and a rolling
+annualized sharpe ratio chart.
 }
 \examples{
 data(managers)
 charts.RollingPerformance(managers[,1:8], Rf=managers[,10,drop=FALSE], colorset=tim8equal, main="Rolling 12-Month Performance", legend.loc="topleft")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{chart.RollingPerformance}}
+\code{\link{chart.RollingPerformance}}
 }
 \keyword{distribution}
 \keyword{hplot}

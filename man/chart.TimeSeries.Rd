@@ -3,22 +3,19 @@
 \alias{charts.TimeSeries}
 \title{Creates a time series chart with some extensions.}
 \usage{
-  chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE,
-    yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1,
-    lwd = 2, las = par("las"), main = NULL, ylab = NULL,
-    xlab = "", date.format.in = "\%Y-\%m-\%d",
-    date.format = NULL, xlim = NULL, ylim = NULL,
-    element.color = "darkgray", event.lines = NULL,
-    event.labels = NULL, period.areas = NULL,
-    event.color = "darkgray", period.color = "aliceblue",
-    colorset = (1:12), pch = (1:12), legend.loc = NULL,
-    ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,
-    cex.lab = 1, cex.labels = 0.8, cex.main = 1,
-    major.ticks = "auto", minor.ticks = TRUE,
-    grid.color = "lightgray", grid.lty = "dotted",
-    xaxis.labels = NULL, ...)
+chart.TimeSeries(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE,
+  yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, las = par("las"),
+  main = NULL, ylab = NULL, xlab = "", date.format.in = "\%Y-\%m-\%d",
+  date.format = NULL, xlim = NULL, ylim = NULL,
+  element.color = "darkgray", event.lines = NULL, event.labels = NULL,
+  period.areas = NULL, event.color = "darkgray",
+  period.color = "aliceblue", colorset = (1:12), pch = (1:12),
+  legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,
+  cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks = "auto",
+  minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted",
+  xaxis.labels = NULL, ...)
 
-  charts.TimeSeries(R, space = 0, main = "Returns", ...)
+charts.TimeSeries(R, space = 0, main = "Returns", ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -141,13 +138,13 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Draws a line chart and labels the x-axis with the
-  appropriate dates.  This is really a "primitive", since
-  it extends the base \code{\link{plot}} and standardizes
-  the elements of a chart.  Adds attributes for shading
-  areas of the timeline or aligning vertical lines along
-  the timeline. This function is intended to be used inside
-  other charting functions.
+Draws a line chart and labels the x-axis with the
+appropriate dates.  This is really a "primitive", since it
+extends the base \code{\link{plot}} and standardizes the
+elements of a chart.  Adds attributes for shading areas of
+the timeline or aligning vertical lines along the timeline.
+This function is intended to be used inside other charting
+functions.
 }
 \examples{
 # These are start and end dates, formatted as xts ranges.
@@ -211,11 +208,11 @@ chart.TimeSeries(Return.cumulative)
 chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{plot}}, \code{\link{par}},
-  \code{\link[xts]{axTicksByTime}}
+\code{\link{plot}}, \code{\link{par}},
+\code{\link[xts]{axTicksByTime}}
 }
 \keyword{distribution}
 \keyword{hplot}

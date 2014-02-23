@@ -3,7 +3,7 @@
 \alias{SkewnessKurtosisRatio}
 \title{Skewness-Kurtosis ratio of the return distribution}
 \usage{
-  SkewnessKurtosisRatio(R, ...)
+SkewnessKurtosisRatio(R, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -12,17 +12,17 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Skewness-Kurtosis ratio is the division of Skewness by
-  Kurtosis.
+Skewness-Kurtosis ratio is the division of Skewness by
+Kurtosis.
 }
 \details{
-  It is used in conjunction with the Sharpe ratio to rank
-  portfolios. The higher the rate the better.
+It is used in conjunction with the Sharpe ratio to rank
+portfolios. The higher the rate the better.
 
-  \deqn{ SkewnessKurtosisRatio(R , MAR) =
-  \frac{S}{K}}{SkewnessKurtosisRatio(R, MAR) = S/K}
+\deqn{ SkewnessKurtosisRatio(R , MAR) =
+\frac{S}{K}}{SkewnessKurtosisRatio(R, MAR) = S/K}
 
-  where \eqn{S} is the skewness and \eqn{K} is the Kurtosis
+where \eqn{S} is the skewness and \eqn{K} is the Kurtosis
 }
 \examples{
 data(portfolio_bacon)
@@ -33,11 +33,11 @@ print(SkewnessKurtosisRatio(managers['1996']))
 print(SkewnessKurtosisRatio(managers['1996',1]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.100
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.100
 }
 \keyword{distribution}
 \keyword{models}

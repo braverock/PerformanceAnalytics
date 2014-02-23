@@ -2,7 +2,7 @@
 \alias{M2Sortino}
 \title{M squared for Sortino of the return distribution}
 \usage{
-  M2Sortino(Ra, Rb, MAR = 0, ...)
+M2Sortino(Ra, Rb, MAR = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -15,18 +15,18 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  M squared for Sortino is a M^2 calculated for Downside
-  risk instead of Total Risk
+M squared for Sortino is a M^2 calculated for Downside risk
+instead of Total Risk
 }
 \details{
-  \deqn{M^2_S = r_P + Sortino ratio * (\sigma_{DM} -
-  \sigma_D)}{M^2 (Sortino) = Rp + Sortino ratio *
-  (DownsideRiskBenchmark - DownsideRiskPortfolio)}
+\deqn{M^2_S = r_P + Sortino ratio * (\sigma_{DM} -
+\sigma_D)}{M^2 (Sortino) = Rp + Sortino ratio *
+(DownsideRiskBenchmark - DownsideRiskPortfolio)}
 
-  where \eqn{M^2_S} is MSquared for Sortino, \eqn{r_P} is
-  the annualised portfolio return, \eqn{\sigma_{DM}} is the
-  benchmark annualised downside risk and \eqn{D} is the
-  portfolio annualised downside risk
+where \eqn{M^2_S} is MSquared for Sortino, \eqn{r_P} is the
+annualised portfolio return, \eqn{\sigma_{DM}} is the
+benchmark annualised downside risk and \eqn{D} is the
+portfolio annualised downside risk
 }
 \examples{
 data(portfolio_bacon)
@@ -39,12 +39,11 @@ print(MSquaredExcess(managers['1996',1], managers['1996',8], MAR))
 print(MSquaredExcess(managers['1996',1:5], managers['1996',8], MAR))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008
-  p.102-103
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.102-103
 }
 \keyword{distribution}
 \keyword{models}

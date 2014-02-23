@@ -2,8 +2,8 @@
 \alias{chart.RollingMean}
 \title{chart the rolling mean return}
 \usage{
-  chart.RollingMean(R, width = 12, xaxis = TRUE,
-    ylim = NULL, lwd = c(2, 1, 1), ..., fill = NA)
+chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, lwd = c(2,
+  1, 1), ..., fill = NA)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -29,21 +29,21 @@
   \code{\link{na.fill}} for details.}
 }
 \description{
-  A wrapper to create a rolling mean return chart with 95%
-  confidence bands.
+A wrapper to create a rolling mean return chart with 95%
+confidence bands.
 }
 \details{
-  The previous parameter \code{na.pad} has been replaced
-  with \code{fill}; use \code{fill = NA} instead of
-  \code{na.pad = TRUE}, or \code{fill = NULL} instead of
-  \code{na.pad = FALSE}.
+The previous parameter \code{na.pad} has been replaced with
+\code{fill}; use \code{fill = NA} instead of \code{na.pad =
+TRUE}, or \code{fill = NULL} instead of \code{na.pad =
+FALSE}.
 }
 \examples{
 data(edhec)
 chart.RollingMean(edhec[, 9, drop = FALSE])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \keyword{distribution}
 \keyword{hplot}

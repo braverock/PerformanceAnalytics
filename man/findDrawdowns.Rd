@@ -3,7 +3,7 @@
 \alias{findDrawdowns}
 \title{Find the drawdowns and drawdown levels in a timeseries.}
 \usage{
-  findDrawdowns(R, geometric = TRUE, ...)
+findDrawdowns(R, geometric = TRUE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -16,19 +16,19 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  \code{findDrawdowns} will find the starting period, the
-  ending period, and the amount and length of the drawdown.
+\code{findDrawdowns} will find the starting period, the
+ending period, and the amount and length of the drawdown.
 }
 \details{
-  Often used with \code{\link{sortDrawdowns}} to get the
-  largest drawdowns.
+Often used with \code{\link{sortDrawdowns}} to get the
+largest drawdowns.
 
-  \code{Drawdowns} will calculate the drawdown levels as
-  percentages, for use in \code{\link{chart.Drawdown}}.
+\code{Drawdowns} will calculate the drawdown levels as
+percentages, for use in \code{\link{chart.Drawdown}}.
 
-  Returns an unordered list: \cr \itemize{ \item return
-  depth of drawdown \item from starting period \item to
-  ending period \item length length in periods }
+Returns an unordered list: \cr \itemize{ \item return depth
+of drawdown \item from starting period \item to ending
+period \item length length in periods }
 }
 \examples{
 data(edhec)
@@ -36,21 +36,21 @@ findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
 sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 }
 \author{
-  Peter Carl
+Peter Carl
 
-  \code{findDrawdowns} modified with permission from
-  function by Sankalp Upadhyay
+\code{findDrawdowns} modified with permission from function
+by Sankalp Upadhyay
 }
 \references{
-  Bacon, C. \emph{Practical Portfolio Performance
-  Measurement and Attribution}. Wiley. 2004. p. 88 \cr
+Bacon, C. \emph{Practical Portfolio Performance Measurement
+and Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-  \code{\link{sortDrawdowns}} \cr \code{\link{maxDrawdown}}
-  \cr \code{\link{sortDrawdowns}} \cr
-  \code{\link{table.Drawdowns}} \cr
-  \code{\link{table.DownsideRisk}} \cr
-  \code{\link{chart.Drawdown}} \cr
+\code{\link{sortDrawdowns}} \cr \code{\link{maxDrawdown}}
+\cr \code{\link{sortDrawdowns}} \cr
+\code{\link{table.Drawdowns}} \cr
+\code{\link{table.DownsideRisk}} \cr
+\code{\link{chart.Drawdown}} \cr
 }
 \keyword{distribution}
 \keyword{models}

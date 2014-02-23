@@ -44,7 +44,8 @@
 #'     # now for three periods:
 #'     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
 #' 
-#' @export
+#' @export StdDev.annualized sd.annualized sd.multiperiod
+#' @alias StdDev.annualized sd.annualized sd.multiperiod
 #' @rdname StdDev.annualized
 StdDev.annualized <- sd.annualized <- sd.multiperiod <-
 function (x, scale = NA, ...)

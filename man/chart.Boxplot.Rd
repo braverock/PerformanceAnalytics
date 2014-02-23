@@ -2,15 +2,12 @@
 \alias{chart.Boxplot}
 \title{box whiskers plot wrapper}
 \usage{
-  chart.Boxplot(R, horizontal = TRUE, names = TRUE,
-    as.Tufte = FALSE,
-    sort.by = c(NULL, "mean", "median", "variance"),
-    colorset = "black", symbol.color = "red",
-    mean.symbol = 1, median.symbol = "|",
-    outlier.symbol = 1, show.data = NULL, add.mean = TRUE,
-    sort.ascending = FALSE, xlab = "Return",
-    main = "Return Distribution Comparison",
-    element.color = "darkgray", ...)
+chart.Boxplot(R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE,
+  sort.by = c(NULL, "mean", "median", "variance"), colorset = "black",
+  symbol.color = "red", mean.symbol = 1, median.symbol = "|",
+  outlier.symbol = 1, show.data = NULL, add.mean = TRUE,
+  sort.ascending = FALSE, xlab = "Return",
+  main = "Return Distribution Comparison", element.color = "darkgray", ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -65,21 +62,20 @@
   \item{\dots}{any other passthru parameters}
 }
 \value{
-  box plot of returns
+box plot of returns
 }
 \description{
-  A wrapper to create box and whiskers plot with some
-  defaults useful for comparing distributions.
+A wrapper to create box and whiskers plot with some
+defaults useful for comparing distributions.
 }
 \details{
-  We have also provided controls for all the symbols and
-  lines in the chart. One default, set by
-  \code{as.Tufte=TRUE}, will strip chartjunk and draw a
-  Boxplot per recommendations by Edward Tufte. It can also
-  be useful when comparing several series to sort them in
-  order of ascending or descending "mean", "median",
-  "variance" by use of \code{sort.by} and
-  \code{sort.ascending=TRUE}.
+We have also provided controls for all the symbols and
+lines in the chart. One default, set by
+\code{as.Tufte=TRUE}, will strip chartjunk and draw a
+Boxplot per recommendations by Edward Tufte. It can also be
+useful when comparing several series to sort them in order
+of ascending or descending "mean", "median", "variance" by
+use of \code{sort.by} and \code{sort.ascending=TRUE}.
 }
 \examples{
 data(edhec)
@@ -87,15 +83,14 @@ chart.Boxplot(edhec)
 chart.Boxplot(edhec,as.Tufte=TRUE)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Tufte, Edward R.  \emph{The Visual Display of
-  Quantitative Information}. Graphics Press. 1983. p.
-  124-129
+Tufte, Edward R.  \emph{The Visual Display of Quantitative
+Information}. Graphics Press. 1983. p. 124-129
 }
 \seealso{
-  \code{\link[graphics]{boxplot}}
+\code{\link[graphics]{boxplot}}
 }
 \keyword{distribution}
 \keyword{hplot}

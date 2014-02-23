@@ -2,7 +2,7 @@
 \alias{table.SpecificRisk}
 \title{Specific risk Summary: Statistics and Stylized Facts}
 \usage{
-  table.SpecificRisk(Ra, Rb, Rf = 0, digits = 4)
+table.SpecificRisk(Ra, Rb, Rf = 0, digits = 4)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -15,7 +15,7 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of specific risk, systematic risk and total risk
+Table of specific risk, systematic risk and total risk
 }
 \examples{
 data(managers)
@@ -31,15 +31,15 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Portfolio specific, systematic and total risk")
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.76
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.76
 }
 \seealso{
-  \code{\link{SystematicRisk}} \cr
-  \code{\link{SpecificRisk}} \cr \code{\link{TotalRisk}}
+\code{\link{SystematicRisk}} \cr \code{\link{SpecificRisk}}
+\cr \code{\link{TotalRisk}}
 }
 \keyword{distribution}
 \keyword{models}

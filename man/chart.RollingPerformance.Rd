@@ -2,9 +2,8 @@
 \alias{chart.RollingPerformance}
 \title{wrapper to create a chart of rolling performance metrics in a line chart}
 \usage{
-  chart.RollingPerformance(R, width = 12,
-    FUN = "Return.annualized", ..., ylim = NULL,
-    main = NULL, fill = NA)
+chart.RollingPerformance(R, width = 12, FUN = "Return.annualized", ...,
+  ylim = NULL, main = NULL, fill = NA)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -33,13 +32,13 @@
   \code{\link{plot}} or the function specified}
 }
 \description{
-  A wrapper to create a chart of rolling performance
-  metrics in a line chart
+A wrapper to create a chart of rolling performance metrics
+in a line chart
 }
 \details{
-  The parameter \code{na.pad} has been deprecated; use
-  \code{fill = NA} instead of \code{na.pad = TRUE}, or
-  \code{fill = NULL} instead of \code{na.pad = FALSE}.
+The parameter \code{na.pad} has been deprecated; use
+\code{fill = NA} instead of \code{na.pad = TRUE}, or
+\code{fill = NULL} instead of \code{na.pad = FALSE}.
 }
 \examples{
 data(edhec)
@@ -54,11 +53,11 @@ chart.RollingPerformance(edhec[, 1:3],
 		main = "Rolling 24-Month Sharpe Ratio")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{charts.RollingPerformance}},
-  \code{\link[zoo]{rollapply}}
+\code{\link{charts.RollingPerformance}},
+\code{\link[zoo]{rollapply}}
 }
 \keyword{distribution}
 \keyword{hplot}

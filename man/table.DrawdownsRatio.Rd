@@ -2,7 +2,7 @@
 \alias{table.DrawdownsRatio}
 \title{Drawdowns Summary: Statistics and ratios}
 \usage{
-  table.DrawdownsRatio(R, Rf = 0, scale = NA, digits = 4)
+table.DrawdownsRatio(R, Rf = 0, scale = NA, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -16,8 +16,8 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of Calmar ratio, Sterling ratio, Burke ratio, Pain
-  index, Ulcer index, Pain ratio and Martin ratio
+Table of Calmar ratio, Sterling ratio, Burke ratio, Pain
+index, Ulcer index, Pain ratio and Martin ratio
 }
 \examples{
 data(managers)
@@ -33,16 +33,16 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Drawdowns ratio statistics")
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.93
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.93
 }
 \seealso{
-  \code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}}
-  \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}}
-  \cr \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
+\code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}} \cr
+\code{\link{PainIndex}} \cr \code{\link{UlcerIndex}} \cr
+\code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
 }
 \keyword{distribution}
 \keyword{models}

@@ -9,7 +9,6 @@
 #' \code{table.UpDownRatios} shows three: the capture ratio, the number ratio,
 #' and the percentage ratio.
 #' 
-#' @aliases table.CaptureRatios table.UpDownRatios
 #' @param Ra a vector of returns to test, e.g., the asset to be examined
 #' @param Rb a matrix, data.frame, or timeSeries of benchmark(s) to test the
 #' asset against.
@@ -27,6 +26,8 @@
 #' colnames(result)=colnames(managers[,1:6])
 #' textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 #' title(main="Capture Ratios for EDHEC LS EQ")
+#' 
+#' @aliases table.CaptureRatios table.UpDownRatios
 #' 
 #' @export
 table.CaptureRatios <-

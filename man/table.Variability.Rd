@@ -2,8 +2,7 @@
 \alias{table.Variability}
 \title{Variability Summary: Statistics and Stylized Facts}
 \usage{
-  table.Variability(R, scale = NA, geometric = TRUE,
-    digits = 4)
+table.Variability(R, scale = NA, geometric = TRUE, digits = 4)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -19,8 +18,8 @@
   \item{digits}{number of digits to round results to}
 }
 \description{
-  Table of Mean absolute difference, Monthly standard
-  deviation and annualised standard deviation
+Table of Mean absolute difference, Monthly standard
+deviation and annualised standard deviation
 }
 \examples{
 data(managers)
@@ -36,15 +35,15 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Portfolio variability")
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.65
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.65
 }
 \seealso{
-  \code{\link{StdDev.annualized}} \cr
-  \code{\link{MeanAbsoluteDeviation}}
+\code{\link{StdDev.annualized}} \cr
+\code{\link{MeanAbsoluteDeviation}}
 }
 \keyword{distribution}
 \keyword{models}

@@ -2,7 +2,7 @@
 \alias{table.Correlation}
 \title{calculate correlalations of multicolumn data}
 \usage{
-  table.Correlation(Ra, Rb, ...)
+table.Correlation(Ra, Rb, ...)
 }
 \arguments{
   \item{Ra}{a vector of returns to test, e.g., the asset to
@@ -15,8 +15,8 @@
   \code{\link{cor.test}}}
 }
 \description{
-  This is a wrapper for calculating correlation and
-  significance against each column of the data provided.
+This is a wrapper for calculating correlation and
+significance against each column of the data provided.
 }
 \examples{
 # First we load the data
@@ -33,10 +33,10 @@ ctable = table.Correlation(managers[,1:6],managers[,8,drop=FALSE], conf.level=.9
 dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{cor.test}}
+\code{\link{cor.test}}
 }
 \keyword{distribution}
 \keyword{models}

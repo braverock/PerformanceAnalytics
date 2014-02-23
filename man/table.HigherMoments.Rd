@@ -2,8 +2,8 @@
 \alias{table.HigherMoments}
 \title{Higher Moments Summary: Statistics and Stylized Facts}
 \usage{
-  table.HigherMoments(Ra, Rb, scale = NA, Rf = 0,
-    digits = 4, method = "moment")
+table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4,
+  method = "moment")
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -23,10 +23,9 @@
   \code{moment}, \code{fisher}}
 }
 \description{
-  Summary of the higher moements and Co-Moments of the
-  return distribution. Used to determine diversification
-  potential. Also called "systematic" moments by several
-  papers.
+Summary of the higher moements and Co-Moments of the return
+distribution. Used to determine diversification potential.
+Also called "systematic" moments by several papers.
 }
 \examples{
 data(managers)
@@ -38,20 +37,20 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(r
 title(main="Higher Co-Moments with SP500 TR")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Martellini L., Vaissie M., Ziemann V. Investing in Hedge
-  Funds: Adding Value through Active Style Allocation
-  Decisions. October 2005. Edhec Risk and Asset Management
-  Research Centre.
+Martellini L., Vaissie M., Ziemann V. Investing in Hedge
+Funds: Adding Value through Active Style Allocation
+Decisions. October 2005. Edhec Risk and Asset Management
+Research Centre.
 }
 \seealso{
-  \code{\link{CoSkewness}} \cr \code{\link{CoKurtosis}} \cr
-  \code{\link{BetaCoVariance}} \cr
-  \code{\link{BetaCoSkewness}} \cr
-  \code{\link{BetaCoKurtosis}} \cr \code{\link{skewness}}
-  \cr \code{\link{kurtosis}}
+\code{\link{CoSkewness}} \cr \code{\link{CoKurtosis}} \cr
+\code{\link{BetaCoVariance}} \cr
+\code{\link{BetaCoSkewness}} \cr
+\code{\link{BetaCoKurtosis}} \cr \code{\link{skewness}} \cr
+\code{\link{kurtosis}}
 }
 \keyword{distribution}
 \keyword{models}

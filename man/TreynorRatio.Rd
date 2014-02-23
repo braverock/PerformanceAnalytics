@@ -2,8 +2,7 @@
 \alias{TreynorRatio}
 \title{calculate Treynor Ratio or modified Treynor Ratio of excess return over CAPM beta}
 \usage{
-  TreynorRatio(Ra, Rb, Rf = 0, scale = NA,
-    modified = FALSE)
+TreynorRatio(Ra, Rb, Rf = 0, scale = NA, modified = FALSE)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -20,19 +19,19 @@
   Treynor ratio or Modified Treynor ratio}
 }
 \description{
-  The Treynor ratio is similar to the Sharpe Ratio, except
-  it uses beta as the volatility measure (to divide the
-  investment's excess return over the beta).
+The Treynor ratio is similar to the Sharpe Ratio, except it
+uses beta as the volatility measure (to divide the
+investment's excess return over the beta).
 }
 \details{
-  To calculate modified Treynor ratio, we divide the
-  numerator by the systematic risk instead of the beta.
+To calculate modified Treynor ratio, we divide the
+numerator by the systematic risk instead of the beta.
 
-  Equation: \deqn{TreynorRatio =
-  \frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
-  \deqn{ModifiedTreynorRatio = \frac{r_p -
-  r_f}{\sigma_s}}{ModifiedTreynorRatio = (Rp -
-  Rf)/sytematic risk}
+Equation: \deqn{TreynorRatio =
+\frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}}{(mean(Ra-Rf))/(Beta(Ra,Rb))}
+\deqn{ModifiedTreynorRatio = \frac{r_p -
+r_f}{\sigma_s}}{ModifiedTreynorRatio = (Rp - Rf)/sytematic
+risk}
 }
 \examples{
 data(portfolio_bacon)
@@ -50,16 +49,16 @@ print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
 print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE))
 }
 \author{
-  Peter Carl, Matthieu Lestel
+Peter Carl, Matthieu Lestel
 }
 \references{
-  \url{http://en.wikipedia.org/wiki/Treynor_ratio}, Carl
-  Bacon, \emph{Practical portfolio performance measurement
-  and attribution}, second edition 2008 p.77
+\url{http://en.wikipedia.org/wiki/Treynor_ratio}, Carl
+Bacon, \emph{Practical portfolio performance measurement
+and attribution}, second edition 2008 p.77
 }
 \seealso{
-  \code{\link{SharpeRatio}} \code{\link{SortinoRatio}}
-  \code{\link{CAPM.beta}}
+\code{\link{SharpeRatio}} \code{\link{SortinoRatio}}
+\code{\link{CAPM.beta}}
 }
 \keyword{distribution}
 \keyword{models}

@@ -2,8 +2,7 @@
 \alias{SmoothingIndex}
 \title{calculate Normalized Getmansky Smoothing Index}
 \usage{
-  SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2,
-    verbose = FALSE, ...)
+SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose = FALSE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -21,86 +20,84 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Proposed by Getmansky et al to provide a normalized
-  measure of "liquidity risk."
+Proposed by Getmansky et al to provide a normalized measure
+of "liquidity risk."
 }
 \details{
-  To measure the effects of smoothing, Getmansky, Lo, et al
-  (2004) define a "smoothing profile" as a vector of
-  coefficients for an MLE fit on returns using a two-period
-  moving-average process.
+To measure the effects of smoothing, Getmansky, Lo, et al
+(2004) define a "smoothing profile" as a vector of
+coefficients for an MLE fit on returns using a two-period
+moving-average process.
 
-  The moving-average process of order \eqn{k=2} (specified
-  using \code{MAorder}) gives \eqn{R_t = \theta_{0} R_{t} +
-  \theta_1 R_{t -1} + \theta_2 R_{t-2}}, under the
-  constraint that the sum of the coefficients is equal to
-  1. In , the \code{arima} function allows us to create an
-  MA(2) model using an "ARIMA(p,d,q)" model, where \eqn{p}
-  is the number of autoregressive terms (AR), \eqn{d} is
-  the degree of differencing, and \eqn{q} is the number of
-  lagged forecast errors (MA) in the prediction equation.
-  The \code{order} parameter allows us to specify the three
-  components \eqn{(p, d, q)} as an argument, e.g.,
-  \code{order = c(0, 0, 2)}. The \code{method} specifies
-  how to fit the model, in this case using maximum
-  likelihood estimation (MLE) in a fashion similar to the
-  estimation of standard moving-average time series models,
-  using:
+The moving-average process of order \eqn{k=2} (specified
+using \code{MAorder}) gives \eqn{R_t = \theta_{0} R_{t} +
+\theta_1 R_{t -1} + \theta_2 R_{t-2}}, under the constraint
+that the sum of the coefficients is equal to 1. In , the
+\code{arima} function allows us to create an MA(2) model
+using an "ARIMA(p,d,q)" model, where \eqn{p} is the number
+of autoregressive terms (AR), \eqn{d} is the degree of
+differencing, and \eqn{q} is the number of lagged forecast
+errors (MA) in the prediction equation.  The \code{order}
+parameter allows us to specify the three components
+\eqn{(p, d, q)} as an argument, e.g., \code{order = c(0, 0,
+2)}. The \code{method} specifies how to fit the model, in
+this case using maximum likelihood estimation (MLE) in a
+fashion similar to the estimation of standard
+moving-average time series models, using:
 
-  \code{arima(ra, order=c(0,0,2), method="ML",
-  transform.pars=TRUE, include.mean=FALSE)}
+\code{arima(ra, order=c(0,0,2), method="ML",
+transform.pars=TRUE, include.mean=FALSE)}
 
-  \code{include.mean}: Getmansky, et al. (2004) p 555 "By
-  applying the above procedure to observed de-meaned
-  returns...", so we set that parameter to 'FALSE'.
+\code{include.mean}: Getmansky, et al. (2004) p 555 "By
+applying the above procedure to observed de-meaned
+returns...", so we set that parameter to 'FALSE'.
 
-  \code{transform.pars}: ibid, "we impose the additional
-  restriction that the estimated MA(k) process be
-  invertible," so we set the parameter to 'TRUE'.
+\code{transform.pars}: ibid, "we impose the additional
+restriction that the estimated MA(k) process be
+invertible," so we set the parameter to 'TRUE'.
 
-  The coefficients, \eqn{\theta_{j}}, are then normalized
-  to sum to interpreted as a "weighted average of the
-  fund's true returns over the most recent \eqn{k + 1}
-  periods, including the current period."
+The coefficients, \eqn{\theta_{j}}, are then normalized to
+sum to interpreted as a "weighted average of the fund's
+true returns over the most recent \eqn{k + 1} periods,
+including the current period."
 
-  If these weights are disproportionately centered on a
-  small number of lags, relatively little serial
-  correlation will be induced. However, if the weights are
-  evenly distributed among many lags, this would show
-  higher serial correlation.
+If these weights are disproportionately centered on a small
+number of lags, relatively little serial correlation will
+be induced. However, if the weights are evenly distributed
+among many lags, this would show higher serial correlation.
 
-  The paper notes that because \eqn{\theta_j \in [0, 1]},
-  \eqn{\xi} is also confined to the unit interval, and is
-  minimized when all the \eqn{\theta_j}'s are identical.
-  That implies a value of \eqn{1/(k + 1)} for \eqn{\xi},
-  and a maximum value of \eqn{\xi = 1} when one coefficient
-  is 1 and the rest are 0.  In the context of smoothed
-  returns, a lower value of \eqn{\xi} implies more
-  smoothing, and the upper bound of 1 implies no smoothing.
+The paper notes that because \eqn{\theta_j \in [0, 1]},
+\eqn{\xi} is also confined to the unit interval, and is
+minimized when all the \eqn{\theta_j}'s are identical.
+That implies a value of \eqn{1/(k + 1)} for \eqn{\xi}, and
+a maximum value of \eqn{\xi = 1} when one coefficient is 1
+and the rest are 0.  In the context of smoothed returns, a
+lower value of \eqn{\xi} implies more smoothing, and the
+upper bound of 1 implies no smoothing.
 
-  The "smoothing index," represented as \eqn{\xi}, is
-  calculated the same way the Herfindahl index.  The
-  Herfindal measure is well known in the industrial
-  organization literature as a measure of the concentration
-  of firms in a given industry where \eqn{y_j} represents
-  the market share of firm \eqn{j}.
+The "smoothing index," represented as \eqn{\xi}, is
+calculated the same way the Herfindahl index.  The
+Herfindal measure is well known in the industrial
+organization literature as a measure of the concentration
+of firms in a given industry where \eqn{y_j} represents the
+market share of firm \eqn{j}.
 
-  This method (as well as the implementation described in
-  the paper), does not enforce \eqn{\theta_j \in [0, 1]},
-  so \eqn{\xi} is not limited to that range either.  All we
-  can say is that lower values are "less liquid" and higher
-  values are "more liquid" or mis-specified.  In this
-  function, setting the parameter neg.thetas = FALSE does
-  enforce the limitation, eliminating negative
-  autocorrelation coefficients from the calculation (the
-  papers below do not make an economic case for eliminating
-  negative autocorrelation, however).
+This method (as well as the implementation described in the
+paper), does not enforce \eqn{\theta_j \in [0, 1]}, so
+\eqn{\xi} is not limited to that range either.  All we can
+say is that lower values are "less liquid" and higher
+values are "more liquid" or mis-specified.  In this
+function, setting the parameter neg.thetas = FALSE does
+enforce the limitation, eliminating negative
+autocorrelation coefficients from the calculation (the
+papers below do not make an economic case for eliminating
+negative autocorrelation, however).
 
-  Interpretation of the resulting value is difficult.  All
-  we can say is that lower values appear to have
-  autocorrelation structure like we might expect of "less
-  liquid" instruments.  Higher values appear "more liquid"
-  or are poorly fit or mis-specified.
+Interpretation of the resulting value is difficult.  All we
+can say is that lower values appear to have autocorrelation
+structure like we might expect of "less liquid"
+instruments.  Higher values appear "more liquid" or are
+poorly fit or mis-specified.
 }
 \section{Acknowledgments}{
   Thanks to Dr. Stefan Albrecht, CFA, for invaluable input.
@@ -113,15 +110,15 @@ SmoothingIndex(managers[,1:8])
 SmoothingIndex(edhec)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Chan, Nicholas, Mila Getmansky, Shane M. Haas, and Andrew
-  W. Lo. 2005. Systemic Risk and Hedge Funds. NBER Working
-  Paper Series (11200). Getmansky, Mila, Andrew W. Lo, and
-  Igor Makarov. 2004. An Econometric Model of Serial
-  Correlation and Illiquidity in Hedge Fund Returns.
-  Journal of Financial Economics (74): 529-609.
+Chan, Nicholas, Mila Getmansky, Shane M. Haas, and Andrew
+W. Lo. 2005. Systemic Risk and Hedge Funds. NBER Working
+Paper Series (11200). Getmansky, Mila, Andrew W. Lo, and
+Igor Makarov. 2004. An Econometric Model of Serial
+Correlation and Illiquidity in Hedge Fund Returns. Journal
+of Financial Economics (74): 529-609.
 }
 \keyword{distribution}
 \keyword{models}

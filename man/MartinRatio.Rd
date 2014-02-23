@@ -2,7 +2,7 @@
 \alias{MartinRatio}
 \title{Martin ratio of the return distribution}
 \usage{
-  MartinRatio(R, Rf = 0, ...)
+MartinRatio(R, Rf = 0, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -13,19 +13,18 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  To calculate Martin ratio we divide the difference of the
-  portfolio return and the risk free rate by the Ulcer
-  index
+To calculate Martin ratio we divide the difference of the
+portfolio return and the risk free rate by the Ulcer index
 }
 \details{
-  \deqn{Martin ratio = \frac{r_P -
-  r_F}{\sqrt{\sum^{n}_{i=1} \frac{{D'_i}^2}{n}}}}{Martin
-  ratio = (rp - rf) / Ulcer index}
+\deqn{Martin ratio = \frac{r_P - r_F}{\sqrt{\sum^{n}_{i=1}
+\frac{{D'_i}^2}{n}}}}{Martin ratio = (rp - rf) / Ulcer
+index}
 
-  where \eqn{r_P} is the annualized portfolio return,
-  \eqn{r_F} is the risk free rate, \eqn{n} is the number of
-  observations of the entire series, \eqn{D'_i} is the
-  drawdown since previous peak in period i
+where \eqn{r_P} is the annualized portfolio return,
+\eqn{r_F} is the risk free rate, \eqn{n} is the number of
+observations of the entire series, \eqn{D'_i} is the
+drawdown since previous peak in period i
 }
 \examples{
 data(portfolio_bacon)
@@ -36,11 +35,11 @@ print(MartinRatio(managers['1996']))
 print(MartinRatio(managers['1996',1]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.91
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.91
 }
 \keyword{distribution}
 \keyword{models}

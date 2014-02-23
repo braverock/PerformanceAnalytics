@@ -4,11 +4,11 @@
 \alias{centeredmoment}
 \title{calculate centered Returns}
 \usage{
-  Return.centered(R, ...)
+Return.centered(R, ...)
 
-  centeredmoment(R, power)
+centeredmoment(R, power)
 
-  centeredcomoment(Ra, Rb, p1, p2, normalize = FALSE)
+centeredcomoment(Ra, Rb, p1, p2, normalize = FALSE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -34,51 +34,50 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  the \eqn{n}-th centered moment is calculated as \deqn{
-  }{moment^n(R) = E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) =
-  E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
+the \eqn{n}-th centered moment is calculated as \deqn{
+}{moment^n(R) = E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) =
+E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
 }
 \details{
-  These functions are used internally by
-  PerformanceAnalytics to calculate centered moments for a
-  multivariate distribution as well as the standardized
-  moments of a portfolio distribution.  They are exposed
-  here for users who wish to use them directly, and we'll
-  get more documentation written when we can.
+These functions are used internally by PerformanceAnalytics
+to calculate centered moments for a multivariate
+distribution as well as the standardized moments of a
+portfolio distribution.  They are exposed here for users
+who wish to use them directly, and we'll get more
+documentation written when we can.
 
-  These functions were first utilized in Boudt, Peterson,
-  and Croux (2008), and have been subsequently used in our
-  other research.
+These functions were first utilized in Boudt, Peterson, and
+Croux (2008), and have been subsequently used in our other
+research.
 
-  ~~ Additional Details will be added to documentation as
-  soon as we have time to write them. Documentation Patches
-  Welcome. ~~
+~~ Additional Details will be added to documentation as
+soon as we have time to write them. Documentation Patches
+Welcome. ~~
 }
 \examples{
 data(managers)
 Return.centered(managers[,1:3,drop=FALSE])
 }
 \author{
-  Kris Boudt and Brian Peterson
+Kris Boudt and Brian Peterson
 }
 \references{
-  Boudt, Kris, Brian G. Peterson, and Christophe Croux.
-  2008. Estimation and Decomposition of Downside Risk for
-  Portfolios with Non-Normal Returns. Journal of Risk.
-  Winter.
+Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
+Estimation and Decomposition of Downside Risk for
+Portfolios with Non-Normal Returns. Journal of Risk.
+Winter.
 
-  Martellini, Lionel, and Volker Ziemann. 2007. Improved
-  Forecasts of Higher-Order Comoments and Implications for
-  Portfolio Selection. EDHEC Risk and Asset Management
-  Research Centre working paper.
+Martellini, Lionel, and Volker Ziemann. 2007. Improved
+Forecasts of Higher-Order Comoments and Implications for
+Portfolio Selection. EDHEC Risk and Asset Management
+Research Centre working paper.
 
-  Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price
-  Hedge Funds: From Two- to Four-Moment CAPM. SSRN
-  eLibrary.
+Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price
+Hedge Funds: From Two- to Four-Moment CAPM. SSRN eLibrary.
 
-  Scott, Robert C., and Philip A. Horvath. 1980. On the
-  Direction of Preference for Moments of Higher Order than
-  the Variance. Journal of Finance 35(4):915-919.
+Scott, Robert C., and Philip A. Horvath. 1980. On the
+Direction of Preference for Moments of Higher Order than
+the Variance. Journal of Finance 35(4):915-919.
 }
 \keyword{distribution}
 \keyword{models}

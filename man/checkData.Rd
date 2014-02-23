@@ -2,9 +2,8 @@
 \alias{checkData}
 \title{check input data type and format and coerce to the desired output type}
 \usage{
-  checkData(x,
-    method = c("xts", "zoo", "data.frame", "matrix", "vector"),
-    na.rm = TRUE, quiet = TRUE, ...)
+checkData(x, method = c("xts", "zoo", "data.frame", "matrix", "vector"),
+  na.rm = TRUE, quiet = TRUE, ...)
 }
 \arguments{
   \item{x}{a vector, matrix, data.frame, xts, timeSeries or
@@ -23,13 +22,12 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  This function was created to make the different kinds of
-  data classes at least \emph{seem} more fungible.  It
-  allows the user to pass in a data object without being
-  concerned that the function requires a matrix,
-  data.frame, vector, xts, or timeSeries object.  By using
-  \code{checkData}, the function "knows" what data format
-  it has to work with.
+This function was created to make the different kinds of
+data classes at least \emph{seem} more fungible.  It allows
+the user to pass in a data object without being concerned
+that the function requires a matrix, data.frame, vector,
+xts, or timeSeries object.  By using \code{checkData}, the
+function "knows" what data format it has to work with.
 }
 \examples{
 data(edhec)
@@ -53,7 +51,7 @@ class(x)
 head(x)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \keyword{distribution}
 \keyword{models}

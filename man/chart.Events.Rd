@@ -2,8 +2,8 @@
 \alias{chart.Events}
 \title{Plots a time series with event dates aligned}
 \usage{
-  chart.Events(R, dates, prior = 12, post = 12,
-    main = NULL, xlab = NULL, ...)
+chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL,
+  ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -31,41 +31,43 @@
   \code{\link{plot}} function}
 }
 \description{
-  Creates a time series plot where events given by a set of
-  dates are aligned, with the adjacent prior and posterior
-  time series data plotted in order. The x-axis is time,
-  but relative to the date specified, e.g., number of
-  months preceeding or following the events.
+Creates a time series plot where events given by a set of
+dates are aligned, with the adjacent prior and posterior
+time series data plotted in order. The x-axis is time, but
+relative to the date specified, e.g., number of months
+preceeding or following the events.
 }
 \details{
-  This is a chart that is commonly used for event studies
-  in econometrics, usually with recession dates, to
-  demonstrate the path of a time series going into and
-  coming out of an event.  The time axis is simply the
-  number of periods prior and following the event, and each
-  line represents a different event.  Note that if time
-  periods are close enough together and the window shown is
-  wide enough, the data will appear to repeat.  That can be
-  confusing, but the function does not currently allow for
-  different windows around each event.
+This is a chart that is commonly used for event studies in
+econometrics, usually with recession dates, to demonstrate
+the path of a time series going into and coming out of an
+event.  The time axis is simply the number of periods prior
+and following the event, and each line represents a
+different event.  Note that if time periods are close
+enough together and the window shown is wide enough, the
+data will appear to repeat.  That can be confusing, but the
+function does not currently allow for different windows
+around each event.
 }
 \examples{
+\dontrun{
 data(managers)
-R = Drawdowns(managers[,2,drop=FALSE])
+R = PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE])
 n = table.Drawdowns(managers[,2,drop=FALSE])
-chart.Events(Drawdowns(managers[,2,drop=FALSE]),
+chart.Events(PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE]),
 		dates = n$Trough,
 		prior=max(na.omit(n$"To Trough")),
 		post=max(na.omit(n$Recovery)),
 		lwd=2, colorset=redfocus, legend.loc=NULL,
 		main = "Worst Drawdowns")
 }
+}
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{chart.TimeSeries}}, \cr \code{\link{plot}},
-  \cr \code{\link{par}}
+\code{\link{chart.TimeSeries}}, \cr \code{\link{plot}}, \cr
+\code{\link{par}}
 }
 \keyword{hplot}
 \keyword{ts}

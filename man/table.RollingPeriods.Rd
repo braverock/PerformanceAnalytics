@@ -4,16 +4,13 @@
 \alias{table.TrailingPeriodsRel}
 \title{Rolling Periods Summary: Statistics and Stylized Facts}
 \usage{
-  table.TrailingPeriods(R,
-    periods = subset(c(12, 36, 60), c(12, 36, 60) < length(as.matrix(R[, 1]))),
-    FUNCS = c("mean", "sd"),
-    funcs.names = c("Average", "Std Dev"), digits = 4, ...)
+table.TrailingPeriods(R, periods = subset(c(12, 36, 60), c(12, 36, 60) <
+  length(as.matrix(R[, 1]))), FUNCS = c("mean", "sd"),
+  funcs.names = c("Average", "Std Dev"), digits = 4, ...)
 
-  table.TrailingPeriodsRel(R, Rb,
-    periods = subset(c(12, 36, 60), c(12, 36, 60) < length(as.matrix(R[, 1]))),
-    FUNCS = c("cor", "CAPM.beta"),
-    funcs.names = c("Correlation", "Beta"), digits = 4,
-    ...)
+table.TrailingPeriodsRel(R, Rb, periods = subset(c(12, 36, 60), c(12, 36, 60)
+  < length(as.matrix(R[, 1]))), FUNCS = c("cor", "CAPM.beta"),
+  funcs.names = c("Correlation", "Beta"), digits = 4, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -39,7 +36,7 @@
   specified in FUNCS}
 }
 \description{
-  A table of estimates of rolling period return measures
+A table of estimates of rolling period return measures
 }
 \examples{
 data(edhec)
@@ -54,10 +51,10 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(r
 title(main="Trailing Period Statistics")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link[zoo]{rollapply}}
+\code{\link[zoo]{rollapply}}
 }
 \keyword{distribution}
 \keyword{models}

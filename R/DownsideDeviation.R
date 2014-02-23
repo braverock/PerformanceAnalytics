@@ -156,6 +156,8 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
     }
 }
 
+#' @rdname DownsideDeviation
+#' @export
 DownsidePotential <-
 function (R, MAR=0)
 { # @author Peter Carl, Matthieu Lestel

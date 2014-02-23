@@ -3,12 +3,10 @@
 \alias{VaR.CornishFisher}
 \title{calculate various Value at Risk (VaR) measures}
 \usage{
-  VaR(R = NULL, p = 0.95, ...,
-    method = c("modified", "gaussian", "historical", "kernel"),
-    clean = c("none", "boudt", "geltner"),
-    portfolio_method = c("single", "component", "marginal"),
-    weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
-    m4 = NULL, invert = TRUE)
+VaR(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
+  "historical", "kernel"), clean = c("none", "boudt", "geltner"),
+  portfolio_method = c("single", "component", "marginal"), weights = NULL,
+  mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -52,27 +50,26 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Calculates Value-at-Risk(VaR) for univariate, component,
-  and marginal cases using a variety of analytical methods.
+Calculates Value-at-Risk(VaR) for univariate, component,
+and marginal cases using a variety of analytical methods.
 }
 \note{
-  The option to \code{invert} the VaR measure should
-  appease both academics and practitioners.  The
-  mathematical definition of VaR as the negative value of a
-  quantile will (usually) produce a positive number.
-  Practitioners will argue that VaR denotes a loss, and
-  should be internally consistent with the quantile (a
-  negative number).  For tables and charts, different
-  preferences may apply for clarity and compactness.  As
-  such, we provide the option, and set the default to TRUE
-  to keep the return consistent with prior versions of
-  PerformanceAnalytics, but make no value judgment on which
-  approach is preferable.
+The option to \code{invert} the VaR measure should appease
+both academics and practitioners.  The mathematical
+definition of VaR as the negative value of a quantile will
+(usually) produce a positive number. Practitioners will
+argue that VaR denotes a loss, and should be internally
+consistent with the quantile (a negative number).  For
+tables and charts, different preferences may apply for
+clarity and compactness.  As such, we provide the option,
+and set the default to TRUE to keep the return consistent
+with prior versions of PerformanceAnalytics, but make no
+value judgment on which approach is preferable.
 
-  The prototype of the univariate Cornish Fisher VaR
-  function was completed by Prof. Diethelm Wuertz.  All
-  corrections to the calculation and error handling are the
-  fault of Brian Peterson.
+The prototype of the univariate Cornish Fisher VaR function
+was completed by Prof. Diethelm Wuertz.  All corrections to
+the calculation and error handling are the fault of Brian
+Peterson.
 }
 \section{Background}{
   This function provides several estimation methods for the
@@ -122,56 +119,55 @@ data(edhec)
     VaR(edhec, clean="boudt", portfolio_method="component")
 }
 \author{
-  Brian G. Peterson and Kris Boudt
+Brian G. Peterson and Kris Boudt
 }
 \references{
-  Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
-  Estimation and decomposition of downside risk for
-  portfolios with non-normal returns. 2008. The Journal of
-  Risk, vol. 11, 79-103.
+Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
+Estimation and decomposition of downside risk for
+portfolios with non-normal returns. 2008. The Journal of
+Risk, vol. 11, 79-103.
 
-  Cont, Rama, Deguest, Romain and Giacomo Scandolo.
-  Robustness and sensitivity analysis of risk measurement
-  procedures. Financial Engineering Report No. 2007-06,
-  Columbia University Center for Financial Engineering.
+Cont, Rama, Deguest, Romain and Giacomo Scandolo.
+Robustness and sensitivity analysis of risk measurement
+procedures. Financial Engineering Report No. 2007-06,
+Columbia University Center for Financial Engineering.
 
-  Denton M. and Jayaraman, J.D. Incremental, Marginal, and
-  Component VaR. Sunguard. 2004.
+Denton M. and Jayaraman, J.D. Incremental, Marginal, and
+Component VaR. Sunguard. 2004.
 
-  Epperlein, E., Smillie, A. Cracking VaR with kernels.
-  RISK, 2006, vol.  19, 70-74.
+Epperlein, E., Smillie, A. Cracking VaR with kernels. RISK,
+2006, vol.  19, 70-74.
 
-  Gourieroux, Christian, Laurent, Jean-Paul and Olivier
-  Scaillet.  Sensitivity analysis of value at risk. Journal
-  of Empirical Finance, 2000, Vol. 7, 225-245.
+Gourieroux, Christian, Laurent, Jean-Paul and Olivier
+Scaillet.  Sensitivity analysis of value at risk. Journal
+of Empirical Finance, 2000, Vol. 7, 225-245.
 
-  Keel, Simon and Ardia, David. Generalized marginal risk.
-  Aeris CAPITAL discussion paper.
+Keel, Simon and Ardia, David. Generalized marginal risk.
+Aeris CAPITAL discussion paper.
 
-  Laurent Favre and Jose-Antonio Galeano. Mean-Modified
-  Value-at-Risk Optimization with Hedge Funds. Journal of
-  Alternative Investment, Fall 2002, v 5.
+Laurent Favre and Jose-Antonio Galeano. Mean-Modified
+Value-at-Risk Optimization with Hedge Funds. Journal of
+Alternative Investment, Fall 2002, v 5.
 
-  Martellini, Lionel, and Volker Ziemann.  Improved
-  Forecasts of Higher-Order Comoments and Implications for
-  Portfolio Selection. 2007. EDHEC Risk and Asset
-  Management Research Centre working paper.
+Martellini, Lionel, and Volker Ziemann.  Improved Forecasts
+of Higher-Order Comoments and Implications for Portfolio
+Selection. 2007. EDHEC Risk and Asset Management Research
+Centre working paper.
 
-  Return to RiskMetrics: Evolution of a Standard
-  \url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
+Return to RiskMetrics: Evolution of a Standard
+\url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
 
-  Zangari, Peter. A VaR Methodology for Portfolios that
-  include Options. 1996. RiskMetrics Monitor, First
-  Quarter, 4-12.
+Zangari, Peter. A VaR Methodology for Portfolios that
+include Options. 1996. RiskMetrics Monitor, First Quarter,
+4-12.
 
-  Rockafellar, Terry and Uryasev, Stanislav. Optimization
-  of Conditional VaR. The Journal of Risk, 2000, vol. 2,
-  21-41.
+Rockafellar, Terry and Uryasev, Stanislav. Optimization of
+Conditional VaR. The Journal of Risk, 2000, vol. 2, 21-41.
 }
 \seealso{
-  \code{\link{SharpeRatio.modified}} \cr
-  \code{\link{chart.VaRSensitivity}} \cr
-  \code{\link{Return.clean}}
+\code{\link{SharpeRatio.modified}} \cr
+\code{\link{chart.VaRSensitivity}} \cr
+\code{\link{Return.clean}}
 }
 \keyword{distribution}
 \keyword{models}

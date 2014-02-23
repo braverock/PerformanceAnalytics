@@ -2,8 +2,8 @@
 \alias{apply.rolling}
 \title{calculate a function over a rolling window}
 \usage{
-  apply.rolling(R, width, trim = TRUE, gap = 12, by = 1,
-    FUN = "mean", ...)
+apply.rolling(R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean",
+  ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -28,26 +28,26 @@
   \item{\dots}{any other passthru parameters}
 }
 \value{
-  A timeseries in a zoo object of the calculation results
+A timeseries in a zoo object of the calculation results
 }
 \description{
-  Creates a results timeseries of a function applied over a
-  rolling window.
+Creates a results timeseries of a function applied over a
+rolling window.
 }
 \details{
-  Wrapper function for \code{\link[zoo]{rollapply}} to hide
-  some of the complexity of managing single-column zoo
-  objects.
+Wrapper function for \code{\link[zoo]{rollapply}} to hide
+some of the complexity of managing single-column zoo
+objects.
 }
 \examples{
 data(managers)
 apply.rolling(managers[,1,drop=FALSE], FUN="mean", width=36)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{apply}} \cr \code{\link[zoo]{rollapply}}
+\code{\link{apply}} \cr \code{\link[zoo]{rollapply}}
 }
 \keyword{distribution}
 \keyword{models}

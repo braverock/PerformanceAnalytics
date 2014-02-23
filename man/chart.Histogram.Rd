@@ -2,17 +2,16 @@
 \alias{chart.Histogram}
 \title{histogram of returns}
 \usage{
-  chart.Histogram(R, breaks = "FD", main = NULL,
-    xlab = "Returns", ylab = "Frequency",
-    methods = c("none", "add.density", "add.normal", "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"),
-    show.outliers = TRUE,
-    colorset = c("lightgray", "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"),
-    border.col = "white", lwd = 2, xlim = NULL,
-    ylim = NULL, element.color = "darkgray",
-    note.lines = NULL, note.labels = NULL, note.cex = 0.7,
-    note.color = "darkgray", probability = FALSE, p = 0.95,
-    cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1,
-    cex.main = 1, xaxis = TRUE, yaxis = TRUE, ...)
+chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns",
+  ylab = "Frequency", methods = c("none", "add.density", "add.normal",
+  "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"),
+  show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF",
+  "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white",
+  lwd = 2, xlim = NULL, ylim = NULL, element.color = "darkgray",
+  note.lines = NULL, note.labels = NULL, note.cex = 0.7,
+  note.color = "darkgray", probability = FALSE, p = 0.95,
+  cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1,
+  xaxis = TRUE, yaxis = TRUE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -111,26 +110,25 @@
   \code{\link{plot}}}
 }
 \description{
-  Create a histogram of returns, with optional curve fits
-  for density and normal.  This is a wrapper function for
-  \code{\link[graphics]{hist}}, see the help for that
-  function for additional arguments you may wish to pass
-  in.
+Create a histogram of returns, with optional curve fits for
+density and normal.  This is a wrapper function for
+\code{\link[graphics]{hist}}, see the help for that
+function for additional arguments you may wish to pass in.
 }
 \details{
-  The default for \code{breaks} is \code{"FD"}. Other names
-  for which algorithms are supplied are \code{"Sturges"}
-  (see \code{\link{nclass.Sturges}}), \code{"Scott"}, and
-  \code{"FD"} / \code{"Freedman-Diaconis"} (with
-  corresponding functions \code{\link{nclass.scott}} and
-  \code{\link{nclass.FD}}).  Case is ignored and partial
-  matching is used.  Alternatively, a function can be
-  supplied which will compute the intended number of breaks
-  as a function of \code{R}.
+The default for \code{breaks} is \code{"FD"}. Other names
+for which algorithms are supplied are \code{"Sturges"} (see
+\code{\link{nclass.Sturges}}), \code{"Scott"}, and
+\code{"FD"} / \code{"Freedman-Diaconis"} (with
+corresponding functions \code{\link{nclass.scott}} and
+\code{\link{nclass.FD}}).  Case is ignored and partial
+matching is used.  Alternatively, a function can be
+supplied which will compute the intended number of breaks
+as a function of \code{R}.
 }
 \note{
-  Code inspired by a chart on: \cr
-  \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+Code inspired by a chart on: \cr
+\url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
 \examples{
 data(edhec)
@@ -165,10 +163,10 @@ data(edhec)
 			methods = c("add.density","add.centered","add.rug","add.risk"))
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link[graphics]{hist}}
+\code{\link[graphics]{hist}}
 }
 \keyword{distribution}
 \keyword{hplot}

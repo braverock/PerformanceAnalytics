@@ -3,10 +3,9 @@
 \alias{charts.Bar}
 \title{wrapper for barchart of returns}
 \usage{
-  chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
+chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
 
-  charts.Bar(R, main = "Returns", cex.legend = 0.8,
-    cex.main = 1, ...)
+charts.Bar(R, main = "Returns", cex.legend = 0.8, cex.main = 1, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -32,27 +31,27 @@
   \code{plot}}
 }
 \description{
-  A wrapper to create a chart of periodic returns in a bar
-  chart.  This is a difficult enough graph to read that it
-  doesn't get much use.  Still, it is useful for viewing a
-  single set of data.
+A wrapper to create a chart of periodic returns in a bar
+chart.  This is a difficult enough graph to read that it
+doesn't get much use.  Still, it is useful for viewing a
+single set of data.
 }
 \details{
-  This is really a wrapper for chart.TimeSeries, so several
-  other attributes can also be passed.
+This is really a wrapper for chart.TimeSeries, so several
+other attributes can also be passed.
 
-  Creates a plot of time on the x-axis and vertical lines
-  for each period to indicate value on the y-axis.
+Creates a plot of time on the x-axis and vertical lines for
+each period to indicate value on the y-axis.
 }
 \examples{
 data(edhec)
 chart.Bar(edhec[,"Funds of Funds"], main="Monthly Returns")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
+\code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
 \keyword{distribution}
 \keyword{hplot}

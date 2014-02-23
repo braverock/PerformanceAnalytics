@@ -2,8 +2,7 @@
 \alias{MSquaredExcess}
 \title{M squared excess of the return distribution}
 \usage{
-  MSquaredExcess(Ra, Rb, Rf = 0,
-    Method = c("geometric", "arithmetic"), ...)
+MSquaredExcess(Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"), ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -19,18 +18,18 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  M squared excess is the quantity above the standard M.
-  There is a geometric excess return which is better for
-  Bacon and an arithmetic excess return
+M squared excess is the quantity above the standard M.
+There is a geometric excess return which is better for
+Bacon and an arithmetic excess return
 }
 \details{
-  \deqn{M^2 excess (geometric) = \frac{1 + M^2}{1 + b} -
-  1}{MSquared excess (geometric) = (1+M^2)/(1+b) - 1}
-  \deqn{M^2 excess (arithmetic) = M^2 - b}{MSquared excess
-  (arithmetic) = M^2 - b}
+\deqn{M^2 excess (geometric) = \frac{1 + M^2}{1 + b} -
+1}{MSquared excess (geometric) = (1+M^2)/(1+b) - 1}
+\deqn{M^2 excess (arithmetic) = M^2 - b}{MSquared excess
+(arithmetic) = M^2 - b}
 
-  where \eqn{M^2} is MSquared and \eqn{b} is the benchmark
-  annualised return.
+where \eqn{M^2} is MSquared and \eqn{b} is the benchmark
+annualised return.
 }
 \examples{
 data(portfolio_bacon)
@@ -42,11 +41,11 @@ print(MSquaredExcess(managers['1996',1], managers['1996',8]))
 print(MSquaredExcess(managers['1996',1:5], managers['1996',8]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.68
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.68
 }
 \keyword{distribution}
 \keyword{models}

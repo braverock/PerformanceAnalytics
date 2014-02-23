@@ -2,14 +2,13 @@
 \alias{chart.QQPlot}
 \title{Plot a QQ chart}
 \usage{
-  chart.QQPlot(R, distribution = "norm", ylab = NULL,
-    xlab = paste(distribution, "Quantiles"), main = NULL,
-    las = par("las"), envelope = FALSE, labels = FALSE,
-    col = c(1, 4), lwd = 2, pch = 1, cex = 1,
-    line = c("quartiles", "robust", "none"),
-    element.color = "darkgray", cex.axis = 0.8,
-    cex.legend = 0.8, cex.lab = 1, cex.main = 1,
-    xaxis = TRUE, yaxis = TRUE, ylim = NULL, ...)
+chart.QQPlot(R, distribution = "norm", ylab = NULL,
+  xlab = paste(distribution, "Quantiles"), main = NULL, las = par("las"),
+  envelope = FALSE, labels = FALSE, col = c(1, 4), lwd = 2, pch = 1,
+  cex = 1, line = c("quartiles", "robust", "none"),
+  element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8,
+  cex.lab = 1, cex.main = 1, xaxis = TRUE, yaxis = TRUE, ylim = NULL,
+  ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -78,22 +77,21 @@
   distribution function}
 }
 \description{
-  Plot the return data against any theoretical
-  distribution.
+Plot the return data against any theoretical distribution.
 }
 \details{
-  A Quantile-Quantile (QQ) plot is a scatter plot designed
-  to compare the data to the theoretical distributions to
-  visually determine if the observations are likely to have
-  come from a known population. The empirical quantiles are
-  plotted to the y-axis, and the x-axis contains the values
-  of the theorical model.  A 45-degree reference line is
-  also plotted. If the empirical data come from the
-  population with the choosen distribution, the points
-  should fall approximately along this reference line. The
-  larger the departure from the reference line, the greater
-  the evidence that the data set have come from a
-  population with a different distribution.
+A Quantile-Quantile (QQ) plot is a scatter plot designed to
+compare the data to the theoretical distributions to
+visually determine if the observations are likely to have
+come from a known population. The empirical quantiles are
+plotted to the y-axis, and the x-axis contains the values
+of the theorical model.  A 45-degree reference line is also
+plotted. If the empirical data come from the population
+with the choosen distribution, the points should fall
+approximately along this reference line. The larger the
+departure from the reference line, the greater the evidence
+that the data set have come from a population with a
+different distribution.
 }
 \examples{
 library(MASS)
@@ -130,17 +128,17 @@ chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95,
 #end examples
 }
 \author{
-  John Fox, ported by Peter Carl
+John Fox, ported by Peter Carl
 }
 \references{
-  main code forked/borrowed/ported from the excellent: \cr
-  Fox, John (2007) \emph{car: Companion to Applied
-  Regression} \cr \url{http://www.r-project.org},
-  \url{http://socserv.socsci.mcmaster.ca/jfox/}
+main code forked/borrowed/ported from the excellent: \cr
+Fox, John (2007) \emph{car: Companion to Applied
+Regression} \cr \url{http://www.r-project.org},
+\url{http://socserv.socsci.mcmaster.ca/jfox/}
 }
 \seealso{
-  \code{\link[stats]{qqplot}} \cr
-  \code{\link[car]{qq.plot}} \cr \code{\link{plot}}
+\code{\link[stats]{qqplot}} \cr \code{\link[car]{qq.plot}}
+\cr \code{\link{plot}}
 }
 \keyword{distribution}
 \keyword{hplot}

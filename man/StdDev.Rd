@@ -3,11 +3,10 @@
 \title{calculates Standard Deviation for univariate and multivariate series, also
 calculates component contribution to standard deviation of a portfolio}
 \usage{
-  StdDev(R, ..., clean = c("none", "boudt", "geltner"),
-    portfolio_method = c("single", "component"),
-    weights = NULL, mu = NULL, sigma = NULL,
-    use = "everything",
-    method = c("pearson", "kendall", "spearman"))
+StdDev(R, ..., clean = c("none", "boudt", "geltner"),
+  portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
+  sigma = NULL, use = "everything", method = c("pearson", "kendall",
+  "spearman"))
 }
 \arguments{
   \item{R}{a vector, matrix, data frame, timeSeries or zoo
@@ -48,37 +47,36 @@ calculates component contribution to standard deviation of a portfolio}
   abbreviated.}
 }
 \description{
-  calculates Standard Deviation for univariate and
-  multivariate series, also calculates component
-  contribution to standard deviation of a portfolio
+calculates Standard Deviation for univariate and
+multivariate series, also calculates component contribution
+to standard deviation of a portfolio
 }
 \details{
-  TODO add more details
+TODO add more details
 
-  This wrapper function provides fast matrix calculations
-  for univariate, multivariate, and component contributions
-  to Standard Deviation.
+This wrapper function provides fast matrix calculations for
+univariate, multivariate, and component contributions to
+Standard Deviation.
 
-  It is likely that the only one that requires much
-  description is the component decomposition.  This
-  provides a weighted decomposition of the contribution
-  each portfolio element makes to the univariate standard
-  deviation of the whole portfolio.
+It is likely that the only one that requires much
+description is the component decomposition.  This provides
+a weighted decomposition of the contribution each portfolio
+element makes to the univariate standard deviation of the
+whole portfolio.
 
-  Formally, this is the partial derivative of each
-  univariate standard deviation with respect to the
-  weights.
+Formally, this is the partial derivative of each univariate
+standard deviation with respect to the weights.
 
-  As with \code{\link{VaR}}, this contribution is presented
-  in two forms, both a scalar form that adds up to the
-  univariate standard deviation of the portfolio, and a
-  percentage contribution, which adds up to 100%.  Note
-  that as with any contribution calculation, contribution
-  can be negative.  This indicates that the asset in
-  question is a diversified to the overall standard
-  deviation of the portfolio, and increasing its weight in
-  relation to the rest of the portfolio would decrease the
-  overall portfolio standard deviation.
+As with \code{\link{VaR}}, this contribution is presented
+in two forms, both a scalar form that adds up to the
+univariate standard deviation of the portfolio, and a
+percentage contribution, which adds up to 100%.  Note that
+as with any contribution calculation, contribution can be
+negative.  This indicates that the asset in question is a
+diversified to the overall standard deviation of the
+portfolio, and increasing its weight in relation to the
+rest of the portfolio would decrease the overall portfolio
+standard deviation.
 }
 \examples{
 data(edhec)
@@ -95,10 +93,10 @@ data(edhec)
     StdDev(edhec, clean="boudt", portfolio_method="component")
 }
 \author{
-  Brian G. Peterson and Kris Boudt
+Brian G. Peterson and Kris Boudt
 }
 \seealso{
-  \code{\link{Return.clean}} \code{sd}
+\code{\link{Return.clean}} \code{sd}
 }
 \keyword{distribution}
 \keyword{models}

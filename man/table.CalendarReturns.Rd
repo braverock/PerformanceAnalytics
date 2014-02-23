@@ -3,8 +3,7 @@
 \alias{table.Returns}
 \title{Monthly and Calendar year Return table}
 \usage{
-  table.CalendarReturns(R, digits = 1, as.perc = TRUE,
-    geometric = TRUE)
+table.CalendarReturns(R, digits = 1, as.perc = TRUE, geometric = TRUE)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -21,17 +20,17 @@
   default TRUE}
 }
 \description{
-  Returns a table of returns formatted with years in rows,
-  months in columns, and a total column in the last column.
-  For additional columns in \code{R}, annual returns will
-  be appended as columns.
+Returns a table of returns formatted with years in rows,
+months in columns, and a total column in the last column.
+For additional columns in \code{R}, annual returns will be
+appended as columns.
 }
 \note{
-  This function assumes monthly returns and does not
-  currently have handling for other scales.
+This function assumes monthly returns and does not
+currently have handling for other scales.
 
-  This function defaults to the first column as the monthly
-  returns to be formatted.
+This function defaults to the first column as the monthly
+returns to be formatted.
 }
 \examples{
 data(managers)
@@ -44,7 +43,7 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(r
 title(main="Calendar Returns")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \keyword{distribution}
 \keyword{models}

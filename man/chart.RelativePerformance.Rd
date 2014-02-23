@@ -2,11 +2,9 @@
 \alias{chart.RelativePerformance}
 \title{relative performance chart between multiple return series}
 \usage{
-  chart.RelativePerformance(Ra, Rb,
-    main = "Relative Performance", xaxis = TRUE,
-    colorset = (1:12), legend.loc = NULL, ylog = FALSE,
-    elementcolor = "darkgray", lty = 1, cex.legend = 0.7,
-    ...)
+chart.RelativePerformance(Ra, Rb, main = "Relative Performance",
+  xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE,
+  elementcolor = "darkgray", lty = 1, cex.legend = 0.7, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -41,21 +39,21 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Plots a time series chart that shows the ratio of the
-  cumulative performance for two assets at each point in
-  time and makes periods of under- or out-performance
-  easier to see.
+Plots a time series chart that shows the ratio of the
+cumulative performance for two assets at each point in time
+and makes periods of under- or out-performance easier to
+see.
 }
 \details{
-  To show under- and out-performance through different
-  periods of time, a time series view is more helpful. The
-  value of the chart is less important than the slope of
-  the line. If the slope is positive, the first asset
-  (numerator) is outperforming the second, and vice versa.
-  May be used to look at the returns of a fund relative to
-  each member of the peer group and the peer group index.
-  Alternatively, it might be used to assess the peers
-  individually against an asset class or peer group index.
+To show under- and out-performance through different
+periods of time, a time series view is more helpful. The
+value of the chart is less important than the slope of the
+line. If the slope is positive, the first asset (numerator)
+is outperforming the second, and vice versa. May be used to
+look at the returns of a fund relative to each member of
+the peer group and the peer group index. Alternatively, it
+might be used to assess the peers individually against an
+asset class or peer group index.
 }
 \examples{
 data(managers)
@@ -65,10 +63,10 @@ chart.RelativePerformance(managers[, 1:6, drop=FALSE],
 		main="Relative Performance to S&P")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{Return.relative}}
+\code{\link{Return.relative}}
 }
 \keyword{distribution}
 \keyword{hplot}

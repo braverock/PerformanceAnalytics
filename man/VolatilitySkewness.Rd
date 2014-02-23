@@ -2,8 +2,7 @@
 \alias{VolatilitySkewness}
 \title{Volatility and variability of the return distribution}
 \usage{
-  VolatilitySkewness(R, MAR = 0,
-    stat = c("volatility", "variability"), ...)
+VolatilitySkewness(R, MAR = 0, stat = c("volatility", "variability"), ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -19,23 +18,23 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Volatility skewness is a similar measure to omega but
-  using the second partial moment. It's the ratio of the
-  upside variance compared to the downside variance.
-  Variability skewness is the ratio of the upside risk
-  compared to the downside risk.
+Volatility skewness is a similar measure to omega but using
+the second partial moment. It's the ratio of the upside
+variance compared to the downside variance. Variability
+skewness is the ratio of the upside risk compared to the
+downside risk.
 }
 \details{
-  \deqn{ VolatilitySkewness(R , MAR) =
-  \frac{\sigma_U^2}{\sigma_D^2}}{VolatilitySkewness(R, MAR)
-  = UpsideVariance / DownsideVariance}
+\deqn{ VolatilitySkewness(R , MAR) =
+\frac{\sigma_U^2}{\sigma_D^2}}{VolatilitySkewness(R, MAR) =
+UpsideVariance / DownsideVariance}
 
-  \deqn{ VariabilitySkewness(R , MAR) =
-  \frac{\sigma_U}{\sigma_D}}{VariabilitySkewness(R, MAR) =
-  UpsideRisk / DownsideRisk}
+\deqn{ VariabilitySkewness(R , MAR) =
+\frac{\sigma_U}{\sigma_D}}{VariabilitySkewness(R, MAR) =
+UpsideRisk / DownsideRisk}
 
-  where \eqn{\sigma_U} is the Upside risk and
-  \eqn{\sigma_D} is the Downside Risk
+where \eqn{\sigma_U} is the Upside risk and \eqn{\sigma_D}
+is the Downside Risk
 }
 \examples{
 data(portfolio_bacon)
@@ -49,11 +48,11 @@ data(managers)
 print(VolatilitySkewness(managers['1996',1], MAR, stat="volatility"))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.97-98
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.97-98
 }
 \keyword{distribution}
 \keyword{models}

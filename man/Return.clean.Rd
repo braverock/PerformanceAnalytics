@@ -2,8 +2,7 @@
 \alias{Return.clean}
 \title{clean returns in a time series to to provide more robust risk estimates}
 \usage{
-  Return.clean(R, method = c("none", "boudt", "geltner"),
-    alpha = 0.01, ...)
+Return.clean(R, method = c("none", "boudt", "geltner"), alpha = 0.01, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -20,29 +19,29 @@
   underlying cleaning function}
 }
 \description{
-  A function that provides access to multiple methods for
-  cleaning outliers from return data.
+A function that provides access to multiple methods for
+cleaning outliers from return data.
 }
 \details{
-  This is a wrapper for offering multiple data cleaning
-  methods for data objects containing returns.
+This is a wrapper for offering multiple data cleaning
+methods for data objects containing returns.
 
-  The primary value of data cleaning lies in creating a
-  more robust and stable estimation of the distribution
-  generating the large majority of the return data. The
-  increased robustness and stability of the estimated
-  moments using cleaned data should be used for portfolio
-  construction. If an investor wishes to have a more
-  conservative risk estimate, cleaning may not be indicated
-  for risk monitoring.
+The primary value of data cleaning lies in creating a more
+robust and stable estimation of the distribution generating
+the large majority of the return data. The increased
+robustness and stability of the estimated moments using
+cleaned data should be used for portfolio construction. If
+an investor wishes to have a more conservative risk
+estimate, cleaning may not be indicated for risk
+monitoring.
 
-  In actual practice, it is probably best to back-test the
-  results of both cleaned and uncleaned series to see what
-  works best when forecasting risk with the particular
-  combination of assets under consideration.
+In actual practice, it is probably best to back-test the
+results of both cleaned and uncleaned series to see what
+works best when forecasting risk with the particular
+combination of assets under consideration.
 
-  In this version, only one method is supported.  See
-  \code{\link{clean.boudt}} for more details.
+In this version, only one method is supported.  See
+\code{\link{clean.boudt}} for more details.
 }
 \examples{
 data(managers)
@@ -50,11 +49,11 @@ head(Return.clean(managers[,1:4]),n=20)
 chart.BarVaR(managers[,1,drop=FALSE], show.clean=TRUE, clean="boudt", lwd=2, methods="ModifiedVaR")
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{clean.boudt}} \cr
-  \code{\link{Return.Geltner}} \cr
+\code{\link{clean.boudt}} \cr \code{\link{Return.Geltner}}
+\cr
 }
 \keyword{distribution}
 \keyword{models}

@@ -2,11 +2,10 @@
 \alias{chart.Scatter}
 \title{wrapper to draw scatter plot with sensible defaults}
 \usage{
-  chart.Scatter(x, y, reference.grid = TRUE,
-    main = "Title", ylab = NULL, xlab = NULL, xlim = NA,
-    ylim = NA, colorset = 1, symbolset = 1,
-    element.color = "darkgray", cex.axis = 0.8,
-    cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
+chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL,
+  xlab = NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1,
+  element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8,
+  cex.lab = 1, cex.main = 1, ...)
 }
 \arguments{
   \item{x}{data for the x axis, can take matrix,vector, or
@@ -59,24 +58,23 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Draws a scatter chart.  This is another chart
-  "primitive", since it only contains a set of sensible
-  defaults.
+Draws a scatter chart.  This is another chart "primitive",
+since it only contains a set of sensible defaults.
 }
 \note{
-  Most inputs are the same as "\code{\link{plot}}" and are
-  principally included so that some sensible defaults could
-  be set.
+Most inputs are the same as "\code{\link{plot}}" and are
+principally included so that some sensible defaults could
+be set.
 }
 \examples{
 data(edhec)
 chart.Scatter(edhec[,1],edhec[,2])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{plot}}
+\code{\link{plot}}
 }
 \keyword{distribution}
 \keyword{hplot}

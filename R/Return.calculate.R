@@ -41,8 +41,8 @@
 #' @examples
 #' 
 #'   \dontrun{
-#'     require(tseries)
-#'     prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
+#'     require(quantmod)
+#'     prices = getSymbols("IBM", from = "1999-01-01", to = "2007-01-01")
 #'   }
 #'   \dontshow{
 #'     data(prices)

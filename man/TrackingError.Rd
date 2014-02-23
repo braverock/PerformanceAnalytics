@@ -2,7 +2,7 @@
 \alias{TrackingError}
 \title{Calculate Tracking Error of returns against a benchmark}
 \usage{
-  TrackingError(Ra, Rb, scale = NA)
+TrackingError(Ra, Rb, scale = NA)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -14,20 +14,20 @@
   252, monthly scale = 12, quarterly scale = 4)}
 }
 \description{
-  A measure of the unexplained portion of performance
-  relative to a benchmark.
+A measure of the unexplained portion of performance
+relative to a benchmark.
 }
 \details{
-  Tracking error is calculated by taking the square root of
-  the average of the squared deviations between the
-  investment's returns and the benchmark's returns, then
-  multiplying the result by the square root of the scale of
-  the returns.
+Tracking error is calculated by taking the square root of
+the average of the squared deviations between the
+investment's returns and the benchmark's returns, then
+multiplying the result by the square root of the scale of
+the returns.
 
-  \deqn{ TrackingError =
-  \sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}
-  }{ TrackingError = sqrt(sum(Ra - Rb)^2 / (length(R) - 1))
-  * sqrt(scale)}
+\deqn{ TrackingError =
+\sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}
+}{ TrackingError = sqrt(sum(Ra - Rb)^2 / (length(R) - 1)) *
+sqrt(scale)}
 }
 \examples{
 data(managers)
@@ -36,15 +36,14 @@ TrackingError(managers[,1:6], managers[,8,drop=FALSE])
 TrackingError(managers[,1:6], managers[,8:7,drop=FALSE])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
-  Management},Fall 1994, 49-58.
+Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
+Management},Fall 1994, 49-58.
 }
 \seealso{
-  \code{\link{InformationRatio}}
-  \code{\link{TrackingError}}
+\code{\link{InformationRatio}} \code{\link{TrackingError}}
 }
 \keyword{distribution}
 \keyword{models}

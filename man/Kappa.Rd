@@ -2,7 +2,7 @@
 \alias{Kappa}
 \title{Kappa of the return distribution}
 \usage{
-  Kappa(R, MAR, l, ...)
+Kappa(R, MAR, l, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -16,29 +16,29 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Introduced by Kaplan and Knowles (2004), Kappa is a
-  generalized downside risk-adjusted performance measure.
+Introduced by Kaplan and Knowles (2004), Kappa is a
+generalized downside risk-adjusted performance measure.
 }
 \details{
-  To calculate it, we take the difference of the mean of
-  the distribution to the target and we divide it by the
-  l-root of the lth lower partial moment. To calculate the
-  lth lower partial moment we take the subset of returns
-  below the target and we sum the differences of the target
-  to these returns. We then return return this sum divided
-  by the length of the whole distribution.
+To calculate it, we take the difference of the mean of the
+distribution to the target and we divide it by the l-root
+of the lth lower partial moment. To calculate the lth lower
+partial moment we take the subset of returns below the
+target and we sum the differences of the target to these
+returns. We then return return this sum divided by the
+length of the whole distribution.
 
-  \deqn{Kappa(R, MAR, l) =
-  \frac{r_{p}-MAR}{\sqrt[l]{\frac{1}{n}*\sum^n_{t=1}
-  max(MAR-R_{t}, 0)^l}}}{Kappa(R, MAR, l) = (rp -
-  MAR)/(\sqrt[l](1/n*sum(t=1..n) (max(MAR-r(t),0)^l)))}
+\deqn{Kappa(R, MAR, l) =
+\frac{r_{p}-MAR}{\sqrt[l]{\frac{1}{n}*\sum^n_{t=1}
+max(MAR-R_{t}, 0)^l}}}{Kappa(R, MAR, l) = (rp -
+MAR)/(\sqrt[l](1/n*sum(t=1..n) (max(MAR-r(t),0)^l)))}
 
-  For l=1 kappa is the Sharpe-omega ratio and for l=2 kappa
-  is the sortino ratio.
+For l=1 kappa is the Sharpe-omega ratio and for l=2 kappa
+is the sortino ratio.
 
-  Kappa should only be used to rank portfolios as it is
-  difficult to interpret the absolute differences between
-  kappas. The higher the kappa is, the better.
+Kappa should only be used to rank portfolios as it is
+difficult to interpret the absolute differences between
+kappas. The higher the kappa is, the better.
 }
 \examples{
 l = 2
@@ -53,11 +53,11 @@ print(Kappa(managers['1996'], MAR, l))
 print(Kappa(managers['1996',1], MAR, l)) #expected 1.493
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.96
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.96
 }
 \keyword{distribution}
 \keyword{models}

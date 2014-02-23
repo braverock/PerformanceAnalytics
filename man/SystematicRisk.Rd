@@ -2,7 +2,7 @@
 \alias{SystematicRisk}
 \title{Systematic risk of the return distribution}
 \usage{
-  SystematicRisk(Ra, Rb, Rf = 0, scale = NA, ...)
+SystematicRisk(Ra, Rb, Rf = 0, scale = NA, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -18,19 +18,18 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Systematic risk as defined by Bacon(2008) is the product
-  of beta by market risk. Be careful ! It's not the same
-  definition as the one given by Michael Jensen. Market
-  risk is the standard deviation of the benchmark. The
-  systematic risk is annualized
+Systematic risk as defined by Bacon(2008) is the product of
+beta by market risk. Be careful ! It's not the same
+definition as the one given by Michael Jensen. Market risk
+is the standard deviation of the benchmark. The systematic
+risk is annualized
 }
 \details{
-  \deqn{\sigma_s = \beta * \sigma_m}{systematic risk = beta
-  * market risk}
+\deqn{\sigma_s = \beta * \sigma_m}{systematic risk = beta *
+market risk}
 
-  where \eqn{\sigma_s} is the systematic risk, \eqn{\beta}
-  is the regression beta, and \eqn{\sigma_m} is the market
-  risk
+where \eqn{\sigma_s} is the systematic risk, \eqn{\beta} is
+the regression beta, and \eqn{\sigma_m} is the market risk
 }
 \examples{
 data(portfolio_bacon)
@@ -41,11 +40,11 @@ print(SystematicRisk(managers['1996',1], managers['1996',8]))
 print(SystematicRisk(managers['1996',1:5], managers['1996',8]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.75
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.75
 }
 \keyword{distribution}
 \keyword{models}

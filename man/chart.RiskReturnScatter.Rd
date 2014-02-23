@@ -2,15 +2,13 @@
 \alias{chart.RiskReturnScatter}
 \title{scatter chart of returns vs risk for comparing multiple instruments}
 \usage{
-  chart.RiskReturnScatter(R, Rf = 0,
-    main = "Annualized Return and Risk", add.names = TRUE,
-    xlab = "Annualized Risk", ylab = "Annualized Return",
-    method = "calc", geometric = TRUE, scale = NA,
-    add.sharpe = c(1, 2, 3), add.boxplots = FALSE,
-    colorset = 1, symbolset = 1,
-    element.color = "darkgray", legend.loc = NULL,
-    xlim = NULL, ylim = NULL, cex.legend = 1,
-    cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
+chart.RiskReturnScatter(R, Rf = 0, main = "Annualized Return and Risk",
+  add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return",
+  method = "calc", geometric = TRUE, scale = NA, add.sharpe = c(1, 2,
+  3), add.boxplots = FALSE, colorset = 1, symbolset = 1,
+  element.color = "darkgray", legend.loc = NULL, xlim = NULL,
+  ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1,
+  cex.lab = 1, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -91,15 +89,14 @@
   \code{plot}}
 }
 \description{
-  A wrapper to create a scatter chart of annualized returns
-  versus annualized risk (standard deviation) for comparing
-  manager performance. Also puts a box plot into the
-  margins to help identify the relative performance
-  quartile.
+A wrapper to create a scatter chart of annualized returns
+versus annualized risk (standard deviation) for comparing
+manager performance. Also puts a box plot into the margins
+to help identify the relative performance quartile.
 }
 \note{
-  Code inspired by a chart on:
-  \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+Code inspired by a chart on:
+\url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 }
 \examples{
 data(edhec)
@@ -107,7 +104,7 @@ chart.RiskReturnScatter(edhec, Rf = .04/12)
 chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \keyword{distribution}
 \keyword{hplot}

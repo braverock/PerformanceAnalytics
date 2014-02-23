@@ -2,7 +2,7 @@
 \alias{TotalRisk}
 \title{Total risk of the return distribution}
 \usage{
-  TotalRisk(Ra, Rb, Rf = 0, ...)
+TotalRisk(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
   \item{Ra}{an xts, vector, matrix, data frame, timeSeries
@@ -15,16 +15,16 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  The square of total risk is the sum of the square of
-  systematic risk and the square of specific risk. Specific
-  risk is the standard deviation of the error term in the
-  regression equation. Both terms are annualized to
-  calculate total risk.
+The square of total risk is the sum of the square of
+systematic risk and the square of specific risk. Specific
+risk is the standard deviation of the error term in the
+regression equation. Both terms are annualized to calculate
+total risk.
 }
 \details{
-  \deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific
-  Risk^2}}{Total Risk^2 = Systematic Risk^2 + Specific
-  Risk^2}
+\deqn{Total Risk = \sqrt{Systematic Risk^2 + Specific
+Risk^2}}{Total Risk^2 = Systematic Risk^2 + Specific
+Risk^2}
 }
 \examples{
 data(portfolio_bacon)
@@ -35,11 +35,11 @@ print(TotalRisk(managers['1996',1], managers['1996',8]))
 print(TotalRisk(managers['1996',1:5], managers['1996',8]))
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.75
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.75
 }
 \keyword{distribution}
 \keyword{models}

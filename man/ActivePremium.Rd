@@ -3,7 +3,7 @@
 \alias{ActiveReturn}
 \title{Active Premium or Active Return}
 \usage{
-  ActiveReturn(Ra, Rb, scale = NA)
+ActiveReturn(Ra, Rb, scale = NA)
 }
 \arguments{
   \item{Ra}{return vector of the portfolio}
@@ -14,14 +14,14 @@
   252, monthly scale = 12, quarterly scale = 4)}
 }
 \description{
-  The return on an investment's annualized return minus the
-  benchmark's annualized return.
+The return on an investment's annualized return minus the
+benchmark's annualized return.
 }
 \details{
-  Active Premium = Investment's annualized return -
-  Benchmark's annualized return
+Active Premium = Investment's annualized return -
+Benchmark's annualized return
 
-  Also commonly referred to as 'active return'.
+Also commonly referred to as 'active return'.
 }
 \examples{
 data(managers)
@@ -31,16 +31,15 @@ data(managers)
     ActivePremium(managers[,1:6], managers[,8:7,drop=FALSE])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
-  Management},Fall 1994, 49-58.
+Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
+Management},Fall 1994, 49-58.
 }
 \seealso{
-  \code{\link{InformationRatio}}
-  \code{\link{TrackingError}}
-  \code{\link{Return.annualized}}
+\code{\link{InformationRatio}} \code{\link{TrackingError}}
+\code{\link{Return.annualized}}
 }
 \keyword{distribution}
 \keyword{models}

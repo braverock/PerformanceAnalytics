@@ -2,7 +2,7 @@
 \alias{lpm}
 \title{calculate a lower partial moment for a time series}
 \usage{
-  lpm(R, n = 2, threshold = 0, about_mean = FALSE)
+lpm(R, n = 2, threshold = 0, about_mean = FALSE)
 }
 \arguments{
   \item{R}{xts data}
@@ -17,21 +17,21 @@
   LPM around (if FALSE)}
 }
 \description{
-  Caclulate a Lower Partial Moment around the mean or a
-  specified threshold.
+Caclulate a Lower Partial Moment around the mean or a
+specified threshold.
 }
 \details{
-  Lower partial moments capture negative deviation from a
-  reference point. That reference point may be the mean, or
-  some specified threshold that has other meaning for the
-  investor.
+Lower partial moments capture negative deviation from a
+reference point. That reference point may be the mean, or
+some specified threshold that has other meaning for the
+investor.
 }
 \author{
-  Kyle Balkissoon \email{kylebalkisoon@gmail.com}
+Kyle Balkissoon \email{kylebalkisoon@gmail.com}
 }
 \references{
-  Huffman S.P. & Moll C.R., "The impact of Asymmetry on
-  Expected Stock Returns: An Investigation of Alternative
-  Risk Measures", Algorithmic Finance 1, 2011 p. 79-93
+Huffman S.P. & Moll C.R., "The impact of Asymmetry on
+Expected Stock Returns: An Investigation of Alternative
+Risk Measures", Algorithmic Finance 1, 2011 p. 79-93
 }
 

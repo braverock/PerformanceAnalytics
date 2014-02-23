@@ -2,7 +2,7 @@
 \alias{UpsideFrequency}
 \title{upside frequency of the return distribution}
 \usage{
-  UpsideFrequency(R, MAR = 0, ...)
+UpsideFrequency(R, MAR = 0, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -14,19 +14,19 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  To calculate Upside Frequency, we take the subset of
-  returns that are more than the target (or Minimum
-  Acceptable Returns (MAR)) returns and divide the length
-  of this subset by the total number of returns.
+To calculate Upside Frequency, we take the subset of
+returns that are more than the target (or Minimum
+Acceptable Returns (MAR)) returns and divide the length of
+this subset by the total number of returns.
 }
 \details{
-  \deqn{ UpsideFrequency(R , MAR) =
-  \sum^{n}_{t=1}\frac{max[(R_{t} - MAR),
-  0]}{R_{t}*n}}{UpsideFrequency(R, MAR) = length(subset of
-  returns above MAR) / length(total returns)}
+\deqn{ UpsideFrequency(R , MAR) =
+\sum^{n}_{t=1}\frac{max[(R_{t} - MAR),
+0]}{R_{t}*n}}{UpsideFrequency(R, MAR) = length(subset of
+returns above MAR) / length(total returns)}
 
-  where \eqn{n} is the number of observations of the entire
-  series
+where \eqn{n} is the number of observations of the entire
+series
 }
 \examples{
 data(portfolio_bacon)
@@ -38,11 +38,11 @@ print(UpsideFrequency(managers['1996']))
 print(UpsideFrequency(managers['1996',1])) #expected 0.75
 }
 \author{
-  Matthieu Lestel
+Matthieu Lestel
 }
 \references{
-  Carl Bacon, \emph{Practical portfolio performance
-  measurement and attribution}, second edition 2008 p.94
+Carl Bacon, \emph{Practical portfolio performance
+measurement and attribution}, second edition 2008 p.94
 }
 \keyword{distribution}
 \keyword{models}

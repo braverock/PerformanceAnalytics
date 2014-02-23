@@ -2,15 +2,13 @@
 \alias{chart.VaRSensitivity}
 \title{show the sensitivity of Value-at-Risk or Expected Shortfall estimates}
 \usage{
-  chart.VaRSensitivity(R,
-    methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES"),
-    clean = c("none", "boudt", "geltner"),
-    elementcolor = "darkgray", reference.grid = TRUE,
-    xlab = "Confidence Level", ylab = "Value at Risk",
-    type = "l", lty = c(1, 2, 4), lwd = 1,
-    colorset = (1:12), pch = (1:12),
-    legend.loc = "bottomleft", cex.legend = 0.8,
-    main = NULL, ylim = NULL, ...)
+chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR",
+  "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES"),
+  clean = c("none", "boudt", "geltner"), elementcolor = "darkgray",
+  reference.grid = TRUE, xlab = "Confidence Level",
+  ylab = "Value at Risk", type = "l", lty = c(1, 2, 4), lwd = 1,
+  colorset = (1:12), pch = (1:12), legend.loc = "bottomleft",
+  cex.legend = 0.8, main = NULL, ylim = NULL, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -67,15 +65,13 @@
   \item{\dots}{any other passthru parameters}
 }
 \description{
-  Creates a chart of Value-at-Risk and/or Expected
-  Shortfall estimates by confidence interval for multiple
-  methods.
+Creates a chart of Value-at-Risk and/or Expected Shortfall
+estimates by confidence interval for multiple methods.
 }
 \details{
-  This chart shows estimated VaR along a series of
-  confidence intervals for selected calculation methods.
-  Useful for comparing a method to the historical VaR
-  calculation.
+This chart shows estimated VaR along a series of confidence
+intervals for selected calculation methods.  Useful for
+comparing a method to the historical VaR calculation.
 }
 \examples{
 data(managers)
@@ -84,15 +80,15 @@ chart.VaRSensitivity(managers[,1,drop=FALSE],
 		colorset=bluefocus, lwd=2)
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \references{
-  Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation
-  and Decomposition of Downside Risk for Portfolios with
-  Non-Normal Returns. Journal of Risk, forthcoming.
+Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation and
+Decomposition of Downside Risk for Portfolios with
+Non-Normal Returns. Journal of Risk, forthcoming.
 }
 \seealso{
-  \code{\link{VaR}} \cr \code{\link{ES}}
+\code{\link{VaR}} \cr \code{\link{ES}}
 }
 \keyword{distribution}
 \keyword{multivariate}

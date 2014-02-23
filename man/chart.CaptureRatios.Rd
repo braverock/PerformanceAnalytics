@@ -2,13 +2,11 @@
 \alias{chart.CaptureRatios}
 \title{Chart of Capture Ratios against a benchmark}
 \usage{
-  chart.CaptureRatios(Ra, Rb, main = "Capture Ratio",
-    add.names = TRUE, xlab = "Downside Capture",
-    ylab = "Upside Capture", colorset = 1, symbolset = 1,
-    legend.loc = NULL, xlim = NULL, ylim = NULL,
-    cex.legend = 1, cex.axis = 0.8, cex.main = 1,
-    cex.lab = 1, element.color = "darkgray",
-    benchmark.color = "darkgray", ...)
+chart.CaptureRatios(Ra, Rb, main = "Capture Ratio", add.names = TRUE,
+  xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1,
+  symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL,
+  cex.legend = 1, cex.axis = 0.8, cex.main = 1, cex.lab = 1,
+  element.color = "darkgray", benchmark.color = "darkgray", ...)
 }
 \arguments{
   \item{Ra}{Returns to test, e.g., the asset to be
@@ -68,29 +66,28 @@
   \code{plot}}
 }
 \description{
-  Scatter plot of Up Capture versus Down Capture against a
-  benchmark
+Scatter plot of Up Capture versus Down Capture against a
+benchmark
 }
 \details{
-  Scatter plot shows the coordinates of each set of
-  returns' Up and Down Capture against a benchmark.  The
-  benchmark value is by definition plotted at (1,1) with
-  solid crosshairs.  A diagonal dashed line with slope
-  equal to 1 divides the plot into two regions: above that
-  line the UpCapture exceeds the DownCapture, and vice
-  versa.
+Scatter plot shows the coordinates of each set of returns'
+Up and Down Capture against a benchmark.  The benchmark
+value is by definition plotted at (1,1) with solid
+crosshairs.  A diagonal dashed line with slope equal to 1
+divides the plot into two regions: above that line the
+UpCapture exceeds the DownCapture, and vice versa.
 }
 \examples{
 data(managers)
     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
 }
 \author{
-  Peter Carl
+Peter Carl
 }
 \seealso{
-  \code{\link{plot}}, \cr \code{\link{par}}, \cr
-  \code{\link{UpDownRatios}}, \cr
-  \code{\link{table.UpDownRatios}} \cr
+\code{\link{plot}}, \cr \code{\link{par}}, \cr
+\code{\link{UpDownRatios}}, \cr
+\code{\link{table.UpDownRatios}} \cr
 }
 \keyword{distribution}
 \keyword{hplot}
