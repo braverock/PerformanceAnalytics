@@ -15,7 +15,7 @@ Description: Collection of econometric functions for
     numbers of functions will work with P&L or price data
     where possible.
 Depends:
-    R (>= 2.14.0),
+    R (>= 3.0.0),
     zoo,
     xts (>= 0.8-9)
 Suggests:
@@ -32,8 +32,7 @@ License: GPL
 URL: http://r-forge.r-project.org/projects/returnanalytics/
 Copyright: (c) 2004-2014
 Contributors: Kris Boudt,  Diethelm Wuertz, Eric Zivot, Matthieu Lestel
-Thanks: A special thanks for additional contributions from
+Thanks: A special thanks for additional contributions or patches from
     Stefan Albrecht, Khahn Nygyen, Jeff Ryan,
     Josh Ulrich, Sankalp Upadhyay, Tobias Verbeke,
-    H. Felix Wittmann, Ram Ahluwalia
-
+    H. Felix Wittmann, Ram Ahluwalia, R. Douglas Martin

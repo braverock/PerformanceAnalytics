@@ -9,7 +9,7 @@
                       {\newcommand{\url}{\texttt}}
 
 \usepackage{babel}
-\usepackage{noweb}
+%%\usepackage{noweb}
 \usepackage{Rd}
 
 \usepackage{Sweave}

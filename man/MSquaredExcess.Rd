@@ -33,12 +33,13 @@ annualised return.
 }
 \examples{
 data(portfolio_bacon)
-print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.00998
-print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic")) #expected -0.011
+MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2]) #expected -0.00998
+
+MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic") #expected -0.011
 
 data(managers)
-print(MSquaredExcess(managers['1996',1], managers['1996',8]))
-print(MSquaredExcess(managers['1996',1:5], managers['1996',8]))
+MSquaredExcess(managers['1996',1], managers['1996',8])
+MSquaredExcess(managers['1996',1:5], managers['1996',8])
 }
 \author{
 Matthieu Lestel

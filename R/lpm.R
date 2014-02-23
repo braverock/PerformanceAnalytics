@@ -19,34 +19,32 @@
 #' @export
 lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
 
+  R <- checkData(R)
   if(about_mean==TRUE){
     #Calculate Number of obs less than threshold
-    nb = nrow(x[x<threshold,])
+    nb = nrow(R[R<threshold,])
     #Calculate mean of all obs less than threshold
-    R_avg = mean(x[x<threshold,],na.rm=T)
+    R_avg = mean(R[R<threshold,],na.rm=T)
     #subset data as less than threshold
-    x_cond = x[x<threshold,]
+    x_cond = R[R<threshold,]
     #Calculate LPM
 
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
   } else {
 
   #Calculate Number of obs less than threshold
-    nb = nrow(x[x<threshold,])
+    nb = nrow(R[R<threshold,])
     #Calculate mean of all obs less than threshold
     R_avg = threshold
     #subset data as less than threshold
-    x_cond = x[x<threshold,]
+    x_cond = R[R<threshold,]
     #Calculate LPM
 
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
 
   }
-
   return(LPM)
 }
-
-
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis

@@ -63,7 +63,8 @@
 #' @examples
 #' 
 #' data(edhec)
-#' table.Arbitrary(edhec,metrics=c("VaR", "ES"),metricsNames=c("Modified VaR","Modified Expected Shortfall"))
+#' table.Arbitrary(edhec,metrics=c("VaR", "ES"),
+#'                 metricsNames=c("Modified VaR","Modified Expected Shortfall"))
 #' 
 #' @export
 table.Arbitrary <-

@@ -20,6 +20,7 @@ sd.xts <- xts:::sd.xts
 #' @importFrom utils packageDescription
 #' @importFrom stats sd
 #' @importFrom zoo rollapply
+#' @import xts
 NULL
 
 ###############################################################################

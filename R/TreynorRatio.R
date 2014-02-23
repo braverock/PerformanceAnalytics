@@ -30,12 +30,12 @@
 #'
 #' data(portfolio_bacon) 
 #' data(managers)
-#' round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12),4) 
-#' round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4) 
-#' round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12),4) 
-#' round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
-#' round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4) 
-#' round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+#' round(TreynorRatio(managers[,1], managers[,8], Rf=.035/12),4) 
+#' round(TreynorRatio(managers[,1], managers[,8], Rf = managers[,10]),4) 
+#' round(TreynorRatio(managers[,1:6], managers[,8], Rf=.035/12),4) 
+#' round(TreynorRatio(managers[,1:6], managers[,8], Rf = managers[,10]),4)
+#' round(TreynorRatio(managers[,1:6], managers[,8:7], Rf=.035/12),4) 
+#' round(TreynorRatio(managers[,1:6], managers[,8:7], Rf = managers[,10]),4)
 #'
 #' print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 0.7975 
 #'
