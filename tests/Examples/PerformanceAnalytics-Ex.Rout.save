@@ -1,7 +1,6 @@
 
-R version 2.15.2 (2012-10-26) -- "Trick or Treat"
-Copyright (C) 2012 The R Foundation for Statistical Computing
-ISBN 3-900051-07-0
+R version 3.0.2 (2013-09-25) -- "Frisbee Sailing"
+Copyright (C) 2013 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -26,7 +25,7 @@ Loading required package: zoo
 
 Attaching package: ‘zoo’
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     as.Date, as.Date.numeric
 
@@ -34,21 +33,21 @@ Loading required package: xts
 
 Attaching package: ‘PerformanceAnalytics’
 
-The following object(s) are masked from ‘package:graphics’:
+The following object is masked from ‘package:graphics’:
 
     legend
 
 > 
-> assign(".oldSearch", search(), pos = 'CheckExEnv')
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("ActivePremium")
 > ### * ActivePremium
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: ActivePremium
-> ### Title: Active Premium
-> ### Aliases: ActivePremium
+> ### Name: ActiveReturn
+> ### Title: Active Premium or Active Return
+> ### Aliases: ActivePremium ActiveReturn
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -171,7 +170,6 @@ Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
 > ### Title: Functions to calculate systematic or beta co-moments of return
 > ###   series
 > ### Aliases: BetaCoKurtosis BetaCoMoments BetaCoSkewness BetaCoVariance
-> ###   SystematicKurtosis SystematicSkewness
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -243,9 +241,11 @@ Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125948      Inf
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: CAPM.CML.slope
-> ### Title: utility functions for CAPM CML, SML, and RiskPremium
+> ### Title: utility functions for single factor (CAPM) CML, SML, and
+> ###   RiskPremium
 > ### Aliases: CAPM.CML CAPM.CML.slope CAPM.RiskPremium CAPM.SML.slope
-> ###   CAPM.utils
+> ###   CAPM.utils SFM.CML SFM.CML.slope SFM.RiskPremium SFM.SML.slope
+> ###   SFM.utils
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -276,8 +276,8 @@ Security Market Line: SP500 TR 115.4023
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: CAPM.alpha
-> ### Title: calculate CAPM alpha
-> ### Aliases: CAPM.alpha
+> ### Title: calculate single factor model (CAPM) alpha
+> ### Aliases: CAPM.alpha SFM.alpha
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -334,8 +334,8 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > flush(stderr()); flush(stdout())
 > 
 > ### Name: CAPM.beta
-> ### Title: calculate CAPM beta
-> ### Aliases: CAPM.beta CAPM.beta.bear CAPM.beta.bull TimingRatio
+> ### Title: calculate single factor model (CAPM) beta
+> ### Aliases: CAPM.beta CAPM.beta.bear CAPM.beta.bull SFM.beta TimingRatio
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -406,6 +406,94 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > 
 > 
 > cleanEx()
+> nameEx("CAPM.dynamic")
+> ### * CAPM.dynamic
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: CAPM.dynamic
+> ### Title: Time-varying conditional single factor model beta
+> ### Aliases: CAPM.dynamic SFM.dynamic
+> 
+> ### ** Examples
+> 
+> data(managers)
+> CAPM.dynamic(managers[,1,drop=FALSE], managers[,8,drop=FALSE],
++              Rf=.035/12, Z=managers[, 9:10])
+                 Average alpha US 10Y TR alpha at t - 1 US 3m TR alpha at t - 1
+HAM1 to SP500 TR     0.0070965                -0.196351               0.1665381
+                 Average beta US 10Y TR beta at t - 1 US 3m TR beta at t - 1
+HAM1 to SP500 TR    0.3248015                3.493336              -63.74814
+> 
+> CAPM.dynamic(managers[80:120,1:6], managers[80:120,7,drop=FALSE],
++              Rf=managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
+                    Average alpha US 10Y TR alpha at t - 1
+HAM1 to EDHEC LS EQ -0.0001741347              -0.23890464
+HAM2 to EDHEC LS EQ -0.0027673634              -0.06632217
+HAM3 to EDHEC LS EQ  0.0062624783              -0.21733015
+HAM4 to EDHEC LS EQ -0.0033262023               0.16135997
+HAM5 to EDHEC LS EQ  0.0043380559               0.26882960
+HAM6 to EDHEC LS EQ -0.0053865004               0.05000616
+                    US 3m TR alpha at t - 1 Average beta
+HAM1 to EDHEC LS EQ              -0.4385012    1.1793098
+HAM2 to EDHEC LS EQ              -4.0176982    0.7067390
+HAM3 to EDHEC LS EQ               7.6804829    0.4260623
+HAM4 to EDHEC LS EQ              -0.2091890    1.6367609
+HAM5 to EDHEC LS EQ               3.8497148    1.2224547
+HAM6 to EDHEC LS EQ              -3.0664314    1.6281908
+                    US 10Y TR beta at t - 1 US 3m TR beta at t - 1
+HAM1 to EDHEC LS EQ                3.861212              -51.01409
+HAM2 to EDHEC LS EQ                5.682080              171.16658
+HAM3 to EDHEC LS EQ                1.507916             -705.20354
+HAM4 to EDHEC LS EQ               -7.622136             -565.85196
+HAM5 to EDHEC LS EQ                7.083956               39.70358
+HAM6 to EDHEC LS EQ              -11.035136              343.52891
+> 
+> CAPM.dynamic(managers[80:120,1:6], managers[80:120,8:7],
++               managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
+                    Average alpha US 10Y TR alpha at t - 1
+HAM1 to SP500 TR     0.0036316941              -0.03538369
+HAM2 to SP500 TR     0.0016901086              -0.05484988
+HAM3 to SP500 TR     0.0072668556              -0.05978008
+HAM4 to SP500 TR    -0.0015875926               0.41314240
+HAM5 to SP500 TR     0.0083363515               0.35300102
+HAM6 to SP500 TR     0.0012839717               0.03521033
+HAM1 to EDHEC LS EQ -0.0001741347              -0.23890464
+HAM2 to EDHEC LS EQ -0.0027673634              -0.06632217
+HAM3 to EDHEC LS EQ  0.0062624783              -0.21733015
+HAM4 to EDHEC LS EQ -0.0033262023               0.16135997
+HAM5 to EDHEC LS EQ  0.0043380559               0.26882960
+HAM6 to EDHEC LS EQ -0.0053865004               0.05000616
+                    US 3m TR alpha at t - 1 Average beta
+HAM1 to SP500 TR                 0.08506313   0.51861197
+HAM2 to SP500 TR                -2.91835013   0.05157528
+HAM3 to SP500 TR                 4.10231175   0.17720080
+HAM4 to SP500 TR                -6.04090381   1.20562924
+HAM5 to SP500 TR                 1.56695525   0.57212866
+HAM6 to SP500 TR                -1.72313785   0.59611332
+HAM1 to EDHEC LS EQ             -0.43850123   1.17930984
+HAM2 to EDHEC LS EQ             -4.01769818   0.70673900
+HAM3 to EDHEC LS EQ              7.68048289   0.42606233
+HAM4 to EDHEC LS EQ             -0.20918897   1.63676093
+HAM5 to EDHEC LS EQ              3.84971482   1.22245465
+HAM6 to EDHEC LS EQ             -3.06643145   1.62819081
+                    US 10Y TR beta at t - 1 US 3m TR beta at t - 1
+HAM1 to SP500 TR                  -1.181057              -65.73676
+HAM2 to SP500 TR                   2.075534              -23.79983
+HAM3 to SP500 TR                   1.063350             -256.19346
+HAM4 to SP500 TR                  -1.812210              162.03456
+HAM5 to SP500 TR                   4.277306              183.06200
+HAM6 to SP500 TR                  -5.106318              189.51371
+HAM1 to EDHEC LS EQ                3.861212              -51.01409
+HAM2 to EDHEC LS EQ                5.682080              171.16658
+HAM3 to EDHEC LS EQ                1.507916             -705.20354
+HAM4 to EDHEC LS EQ               -7.622136             -565.85196
+HAM5 to EDHEC LS EQ                7.083956               39.70358
+HAM6 to EDHEC LS EQ              -11.035136              343.52891
+> 
+> 
+> 
+> cleanEx()
 > nameEx("CAPM.epsilon")
 > ### * CAPM.epsilon
 > 
@@ -413,19 +501,19 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > 
 > ### Name: CAPM.epsilon
 > ### Title: Regression epsilon of the return distribution
-> ### Aliases: CAPM.epsilon epsilon Regression
+> ### Aliases: CAPM.epsilon SFM.epsilon
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
 > data(portfolio_bacon)
-> print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
+> print(SFM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
 [1] -0.01313932
 > 
 > data(managers)
-> print(CAPM.epsilon(managers['1996',1], managers['1996',8]))
+> print(SFM.epsilon(managers['1996',1], managers['1996',8]))
 [1] 0.07425366
-> print(CAPM.epsilon(managers['1996',1:5], managers['1996',8]))
+> print(SFM.epsilon(managers['1996',1:5], managers['1996',8]))
                                          HAM1      HAM2      HAM3       HAM4
 Regression epsilon (Risk free = 0) 0.07425366 0.5399193 0.2048063 0.05570592
                                    HAM5
@@ -441,19 +529,19 @@ Regression epsilon (Risk free = 0)   NA
 > 
 > ### Name: CAPM.jensenAlpha
 > ### Title: Jensen's alpha of the return distribution
-> ### Aliases: CAPM.jensenAlpha Jensen'sAlpha
+> ### Aliases: CAPM.jensenAlpha SFM.jensenAlpha
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
 > data(portfolio_bacon)
-> print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
+> print(SFM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
 [1] -0.01416944
 > 
 > data(managers)
-> print(CAPM.jensenAlpha(managers['1996',1], managers['1996',8]))
+> print(SFM.jensenAlpha(managers['1996',1], managers['1996',8]))
 [1] 0.08077871
-> print(CAPM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+> print(SFM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
                                      HAM1 HAM2      HAM3       HAM4 HAM5
 Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > 
@@ -468,7 +556,7 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > ### Name: CDD
 > ### Title: Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD
 > ###   or CDaR) measure
-> ### Aliases: CDaR CDD
+> ### Aliases: CDD CDaR
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -590,11 +678,11 @@ d ratio 0.04607631  1.361501        0
 > #with data used in Bacon 2008
 > 
 > data(portfolio_bacon)
-> MAR = 0.5
-> DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.493
-[1] 0.492524
-> DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.491
-[1] 0.491
+> MAR = 0.005
+> DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.0255
+[1] 0.02553674
+> DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.0137
+[1] 0.01370833
 > 
 > #with data of managers
 > 
@@ -938,11 +1026,11 @@ Sortino Ratio (MAR = 0.5%)                    0.1034799
 > data(managers)
 > MAR = 0
 > print(MSquaredExcess(managers['1996',1], managers['1996',8], MAR))
-          HAM1
-HAM1 -0.127433
+           SP500 TR
+SP500 TR 0.02027322
 > print(MSquaredExcess(managers['1996',1:5], managers['1996',8], MAR))
-                                    HAM1 HAM2      HAM3        HAM4 HAM5
-MSquaredExcess (Risk free = 0) -0.127433   NA 0.1456129 -0.01310258   NA
+                                     HAM1 HAM2      HAM3        HAM4 HAM5
+MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > 
 > 
@@ -960,17 +1048,17 @@ MSquaredExcess (Risk free = 0) -0.127433   NA 0.1456129 -0.01310258   NA
 > ### ** Examples
 > 
 > data(portfolio_bacon)
-> print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.1068
-                             portfolio.monthly.return....
-portfolio.monthly.return....                    0.1068296
+> print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.10062
+                     benchmark.return....
+benchmark.return....              0.10062
 > 
 > data(managers)
 > print(MSquared(managers['1996',1], managers['1996',8]))
-           HAM1
-HAM1 0.07287385
+          SP500 TR
+SP500 TR 0.2544876
 > print(MSquared(managers['1996',1:5], managers['1996',8]))
-                               HAM1 HAM2      HAM3    HAM4 HAM5
-MSquared (Risk free = 0) 0.07287385   NA 0.4086003 0.21345   NA
+                              HAM1 HAM2      HAM3      HAM4 HAM5
+MSquared (Risk free = 0) 0.2544876   NA 0.4028725 0.1982483   NA
 > 
 > 
 > 
@@ -988,20 +1076,62 @@ MSquared (Risk free = 0) 0.07287385   NA 0.4086003 0.21345   NA
 > ### ** Examples
 > 
 > data(portfolio_bacon)
-> print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.00998
-                             portfolio.monthly.return....
-portfolio.monthly.return....                 -0.009976721
-> print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic")) #expected -0.011
-                             portfolio.monthly.return....
-portfolio.monthly.return....                  -0.01115381
+> MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2]) #expected -0.00998
+                     benchmark.return....
+benchmark.return....          -0.01553103
+> 
+> MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmetic") #expected -0.011
+                     benchmark.return....
+benchmark.return....          -0.01736344
 > 
 > data(managers)
-> print(MSquaredExcess(managers['1996',1], managers['1996',8]))
-          HAM1
-HAM1 -0.127433
-> print(MSquaredExcess(managers['1996',1:5], managers['1996',8]))
-                                    HAM1 HAM2      HAM3        HAM4 HAM5
-MSquaredExcess (Risk free = 0) -0.127433   NA 0.1456129 -0.01310258   NA
+> MSquaredExcess(managers['1996',1], managers['1996',8])
+           SP500 TR
+SP500 TR 0.02027322
+> MSquaredExcess(managers['1996',1:5], managers['1996',8])
+                                     HAM1 HAM2      HAM3        HAM4 HAM5
+MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
+> 
+> 
+> 
+> cleanEx()
+> nameEx("MarketTiming")
+> ### * MarketTiming
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: MarketTiming
+> ### Title: Market timing models
+> ### Aliases: MarketTiming
+> 
+> ### ** Examples
+> 
+> data(managers)
+> MarketTiming(managers[,1], managers[,8], Rf=.035/12, method = "HM")
+                       Alpha      Beta      Gamma
+HAM1 to SP500 TR 0.008275839 0.4555824 -0.1344417
+> MarketTiming(managers[80:120,1:6], managers[80:120,7], managers[80:120,10])
+                            Alpha      Beta     Gamma
+HAM1 to EDHEC LS EQ -0.0005755802 1.3121058 -0.405150
+HAM2 to EDHEC LS EQ -0.0003616789 0.4370998  8.520620
+HAM3 to EDHEC LS EQ -0.0058148518 1.1898242 11.913786
+HAM4 to EDHEC LS EQ -0.0055113742 2.0616524 18.797340
+HAM5 to EDHEC LS EQ  0.0005125284 1.0703704 -5.077881
+HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.443428
+> MarketTiming(managers[80:120,1:6], managers[80:120,8:7], managers[80:120,10], method = "TM")
+                            Alpha      Beta      Gamma
+HAM1 to SP500 TR     0.0048833318 0.5970167 -0.2801650
+HAM2 to SP500 TR     0.0050694247 0.1190405 -0.5000263
+HAM3 to SP500 TR     0.0032110848 0.5272982 -0.6645684
+HAM4 to SP500 TR     0.0094634771 0.8779523 -0.8155100
+HAM5 to SP500 TR     0.0087234498 0.2869943 -2.7728051
+HAM6 to SP500 TR     0.0048031173 0.2902262  0.6910898
+HAM1 to EDHEC LS EQ -0.0005755802 1.3121058 -0.4051500
+HAM2 to EDHEC LS EQ -0.0003616789 0.4370998  8.5206196
+HAM3 to EDHEC LS EQ -0.0058148518 1.1898242 11.9137857
+HAM4 to EDHEC LS EQ -0.0055113742 2.0616524 18.7973395
+HAM5 to EDHEC LS EQ  0.0005125284 1.0703704 -5.0778814
+HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.4434281
 > 
 > 
 > 
@@ -1060,6 +1190,36 @@ Mean absolute deviation 0.0125375 0.031576 0.02229444 0.02540972  NaN  NaN
 Mean absolute deviation         NaN  0.02225 0.01611653  0.00021
 > print(MeanAbsoluteDeviation(managers['1996',1]))
 [1] 0.0125375
+> 
+> 
+> 
+> cleanEx()
+> nameEx("Modigliani")
+> ### * Modigliani
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Modigliani
+> ### Title: Modigliani-Modigliani measure
+> ### Aliases: Modigliani
+> 
+> ### ** Examples
+> 
+> data(managers)
+> Modigliani(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12)
+[1] 0.01678381
+> Modigliani(managers[,1:6], managers[,8,drop=FALSE], managers[,8,drop=FALSE])
+                                              HAM1       HAM2      HAM3
+Modigliani-Modigliani measure: SP500 TR 0.01281799 0.01505458 0.0131509
+                                              HAM4       HAM5       HAM6
+Modigliani-Modigliani measure: SP500 TR 0.01057959 0.01053081 0.01844616
+> Modigliani(managers[,1:6], managers[,8:7], managers[,8,drop=FALSE])
+                                                 HAM1       HAM2       HAM3
+Modigliani-Modigliani measure: SP500 TR    0.01281799 0.01505458 0.01315090
+Modigliani-Modigliani measure: EDHEC LS EQ 0.01062640 0.01168261 0.01078361
+                                                 HAM4        HAM5       HAM6
+Modigliani-Modigliani measure: SP500 TR    0.01057959 0.010530812 0.01844616
+Modigliani-Modigliani measure: EDHEC LS EQ 0.00956933 0.009546295 0.01328426
 > 
 > 
 > 
@@ -1482,6 +1642,27 @@ Annualized Return     0.11454 0.1039841
 > 
 > 
 > cleanEx()
+> nameEx("Return.annualized.excess")
+> ### * Return.annualized.excess
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: Return.annualized.excess
+> ### Title: calculates an annualized excess return for comparing instruments
+> ###   with different length history
+> ### Aliases: Return.annualized.excess
+> ### Keywords: distribution models multivariate ts
+> 
+> ### ** Examples
+> 
+> data(managers)
+> Return.annualized.excess(Rp = managers[,1], Rb = managers[,8])
+                        HAM1
+Annualized Return 0.03718883
+> 
+> 
+> 
+> cleanEx()
 > nameEx("Return.calculate")
 > ### * Return.calculate
 > 
@@ -1495,8 +1676,8 @@ Annualized Return     0.11454 0.1039841
 > ### ** Examples
 > 
 > ## Not run: 
-> ##D     require(tseries)
-> ##D     prices = get.hist.quote("IBM", start = "1999-01-01", end = "2007-01-01", quote = "AdjClose", compression = "d")
+> ##D     require(quantmod)
+> ##D     prices = getSymbols("IBM", from = "1999-01-01", to = "2007-01-01")
 > ##D   
 > ## End(Not run)
 >   ## Don't show: 
@@ -4938,7 +5119,7 @@ Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
 > 
 > ### Name: SkewnessKurtosisRatio
 > ### Title: Skewness-Kurtosis ratio of the return distribution
-> ### Aliases: SkewnessKurtosisRatio Skewness-KurtosisRatio
+> ### Aliases: Skewness-KurtosisRatio SkewnessKurtosisRatio
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -5101,14 +5282,28 @@ $StdDev
 [1,] 0.01048561
 
 $contribution
- [1]  0.0008658123  0.0006049525  0.0010509579  0.0021479823  0.0004348643
- [6]  0.0011469074  0.0006822007  0.0010512230  0.0013150652  0.0005428396
-[11]  0.0007548481 -0.0013277224  0.0012156837
+ Convertible Arbitrage             CTA Global  Distressed Securities 
+          0.0008658123           0.0006049525           0.0010509579 
+      Emerging Markets  Equity Market Neutral           Event Driven 
+          0.0021479823           0.0004348643           0.0011469074 
+Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+          0.0006822007           0.0010512230           0.0013150652 
+      Merger Arbitrage         Relative Value          Short Selling 
+          0.0005428396           0.0007548481          -0.0013277224 
+        Funds of Funds 
+          0.0012156837 
 
 $pct_contrib_StdDev
- [1]  0.08257143  0.05769357  0.10022854  0.20485039  0.04147247  0.10937913
- [7]  0.06506063  0.10025383  0.12541613  0.05176994  0.07198892 -0.12662322
-[13]  0.11593824
+ Convertible Arbitrage             CTA Global  Distressed Securities 
+            0.08257143             0.05769357             0.10022854 
+      Emerging Markets  Equity Market Neutral           Event Driven 
+            0.20485039             0.04147247             0.10937913 
+Fixed Income Arbitrage           Global Macro      Long/Short Equity 
+            0.06506063             0.10025383             0.12541613 
+      Merger Arbitrage         Relative Value          Short Selling 
+            0.05176994             0.07198892            -0.12662322 
+        Funds of Funds 
+            0.11593824 
 
 > 
 > 
@@ -5124,7 +5319,7 @@ detaching ‘package:robustbase’
 > 
 > ### Name: StdDev.annualized
 > ### Title: calculate a multiperiod or annualized Standard Deviation
-> ### Aliases: sd.annualized sd.multiperiod StdDev.annualized
+> ### Aliases: StdDev.annualized sd.annualized sd.multiperiod
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -5254,21 +5449,21 @@ Tracking Error: EDHEC LS EQ 0.1421533 0.05651657
 > 
 > data(portfolio_bacon)
 > data(managers)
-> round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf=.035/12),4)
+> round(TreynorRatio(managers[,1], managers[,8], Rf=.035/12),4)
 [1] 0.2528
-> round(TreynorRatio(managers[,1,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+> round(TreynorRatio(managers[,1], managers[,8], Rf = managers[,10]),4)
 [1] 0.2428
-> round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf=.035/12),4)
+> round(TreynorRatio(managers[,1:6], managers[,8], Rf=.035/12),4)
                           HAM1   HAM2  HAM3   HAM4   HAM5   HAM6
 Treynor Ratio: SP500 TR 0.2528 0.3925 0.201 0.1209 0.0052 0.3042
-> round(TreynorRatio(managers[,1:6], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+> round(TreynorRatio(managers[,1:6], managers[,8], Rf = managers[,10]),4)
                           HAM1   HAM2   HAM3   HAM4   HAM5   HAM6
 Treynor Ratio: SP500 TR 0.2428 0.3883 0.1956 0.1144 0.0219 0.3401
-> round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf=.035/12),4)
+> round(TreynorRatio(managers[,1:6], managers[,8:7], Rf=.035/12),4)
                              HAM1   HAM2   HAM3   HAM4   HAM5   HAM6
 Treynor Ratio: SP500 TR    0.2528 0.3925 0.2010 0.1209 0.0052 0.3042
 Treynor Ratio: EDHEC LS EQ 0.1297 0.1088 0.0776 0.0504 0.0014 0.0966
-> round(TreynorRatio(managers[,1:6], managers[,8:7,drop=FALSE], Rf = managers[,10,drop=FALSE]),4)
+> round(TreynorRatio(managers[,1:6], managers[,8:7], Rf = managers[,10]),4)
                              HAM1   HAM2   HAM3   HAM4   HAM5   HAM6
 Treynor Ratio: SP500 TR    0.2428 0.3883 0.1956 0.1144 0.0219 0.3401
 Treynor Ratio: EDHEC LS EQ 0.1242 0.1068 0.0753 0.0471 0.0060 0.1086
@@ -5792,7 +5987,7 @@ detaching ‘package:robustbase’
 > 
 > ### Name: Return.centered
 > ### Title: calculate centered Returns
-> ### Aliases: centeredcomoment centeredmoment Return.centered
+> ### Aliases: Return.centered centeredcomoment centeredmoment
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -5941,7 +6136,7 @@ detaching ‘package:robustbase’
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: chart.ACFplus
+> ### Name: chart.ACF
 > ### Title: Create ACF chart or ACF with PACF two-panel chart
 > ### Aliases: chart.ACF chart.ACFplus
 > ### Keywords: distribution hplot models multivariate ts
@@ -6502,15 +6697,17 @@ Warning in title(...) : "method" is not a graphical parameter
 > 
 > ### ** Examples
 > 
-> data(managers)
-> R = Drawdowns(managers[,2,drop=FALSE])
-> n = table.Drawdowns(managers[,2,drop=FALSE])
-> chart.Events(Drawdowns(managers[,2,drop=FALSE]),
-+ 		dates = n$Trough,
-+ 		prior=max(na.omit(n$"To Trough")),
-+ 		post=max(na.omit(n$Recovery)),
-+ 		lwd=2, colorset=redfocus, legend.loc=NULL,
-+ 		main = "Worst Drawdowns")
+> ## Not run: 
+> ##D data(managers)
+> ##D R = PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE])
+> ##D n = table.Drawdowns(managers[,2,drop=FALSE])
+> ##D chart.Events(PerformanceAnalytics:::Drawdowns(managers[,2,drop=FALSE]),
+> ##D 		dates = n$Trough,
+> ##D 		prior=max(na.omit(n$"To Trough")),
+> ##D 		post=max(na.omit(n$Recovery)),
+> ##D 		lwd=2, colorset=redfocus, legend.loc=NULL,
+> ##D 		main = "Worst Drawdowns")
+> ## End(Not run)
 > 
 > 
 > 
@@ -6672,16 +6869,6 @@ detaching ‘package:MASS’
 > data(edhec)
 > chart.RiskReturnScatter(edhec, Rf = .04/12)
 > chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
-Warning in par(original.layout) :
-  graphical parameter "cin" cannot be set
-Warning in par(original.layout) :
-  graphical parameter "cra" cannot be set
-Warning in par(original.layout) :
-  graphical parameter "csi" cannot be set
-Warning in par(original.layout) :
-  graphical parameter "cxy" cannot be set
-Warning in par(original.layout) :
-  graphical parameter "din" cannot be set
 > 
 > 
 > 
@@ -6777,13 +6964,10 @@ Warning in par(original.layout) :
 > dev.new()
 > chart.RollingQuantileRegression(managers[, 1, drop=FALSE],
 + 		managers[, 8, drop=FALSE], Rf = .04/12)
-Package SparseM (0.96) loaded.
-	   To cite, see citation("SparseM")
-
 
 Attaching package: ‘SparseM’
 
-The following object(s) are masked from ‘package:base’:
+The following object is masked from ‘package:base’:
 
     backsolve
 
@@ -6899,9 +7083,9 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: charts.TimeSeries
+> ### Name: chart.TimeSeries
 > ### Title: Creates a time series chart with some extensions.
-> ### Aliases: charts.TimeSeries chart.TimeSeries
+> ### Aliases: chart.TimeSeries charts.TimeSeries
 > ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
@@ -6964,7 +7148,13 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > R=edhec[,"Funds of Funds",drop=FALSE]
 > Return.cumulative = cumprod(1+R) - 1
 > chart.TimeSeries(Return.cumulative)
-> chart.TimeSeries(Return.cumulative, colorset = "darkblue", legend.loc = "bottomright", period.areas = cycles.dates, period.color = "lightblue", event.lines = risk.dates, event.labels = risk.labels, event.color = "red", lwd = 2)
+> chart.TimeSeries(Return.cumulative, colorset = "darkblue",
++                  legend.loc = "bottomright",
++                  period.areas = cycles.dates,
++                  period.color = "lightblue",
++                  event.lines = risk.dates,
++                  event.labels = risk.labels,
++                  event.color = "red", lwd = 2)
 > 
 > 
 > 
@@ -7022,7 +7212,11 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### ** Examples
 > 
 > data(managers)
-> charts.RollingPerformance(managers[,1:8], Rf=managers[,10,drop=FALSE], colorset=tim8equal, main="Rolling 12-Month Performance", legend.loc="topleft")
+> charts.RollingPerformance(managers[,1:8],
++                           Rf=managers[,10,drop=FALSE],
++                           colorset=tim8equal,
++                           main="Rolling 12-Month Performance",
++                           legend.loc="topleft")
 > 
 > 
 > 
@@ -7502,7 +7696,7 @@ US 3m TR            0.0000
 > ### Name: mean.geometric
 > ### Title: calculate attributes relative to the mean of the observation
 > ###   series given, including geometric, stderr, LCL and UCL
-> ### Aliases: mean.geometric mean.LCL mean.stderr mean.UCL mean.utils
+> ### Aliases: mean.LCL mean.UCL mean.geometric mean.stderr mean.utils
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
@@ -7734,37 +7928,45 @@ Annualized Sharpe (Rf=0%)   0.6449
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 > result = t(table.AnnualizedReturns(managers[,1:8], Rf=.04/12))
 > 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(3,3,1)), rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++          cdec=c(3,3,1)), rmar = 0.8, cmar = 2,  max.cex=.9,
++          halign = "center", valign = "top", row.valign="center",
++          wrap.rownames=20, wrap.colnames=10, col.rownames=c("red",
++          rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
+> 
 > title(main="Annualized Performance")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.Arbitrary")
 > ### * table.Arbitrary
@@ -7780,7 +7982,8 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > ### ** Examples
 > 
 > data(edhec)
-> table.Arbitrary(edhec,metrics=c("VaR", "ES"),metricsNames=c("Modified VaR","Modified Expected Shortfall"))
+> table.Arbitrary(edhec,metrics=c("VaR", "ES"),
++                 metricsNames=c("Modified VaR","Modified Expected Shortfall"))
                             Convertible Arbitrage  CTA Global
 Modified VaR                          -0.03247395 -0.03380228
 Modified Expected Shortfall           -0.09954768 -0.04284185
@@ -7831,7 +8034,11 @@ US 10Y TR    0.0398 -0.1739  0.1049 -0.0355 -0.1116 -0.0602       0.2199
 US 3m TR     0.9224  0.9081  0.8968  0.8746  0.8363  0.8127       0.0000
 > 
 > result = t(table.Autocorrelation(managers[,1:8]))
-> textplot(result, rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> 
+> textplot(result, rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center",
++          valign = "top", row.valign="center", wrap.rownames=15,
++          wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> 
 > title(main="Autocorrelation")
 > 
 > 
@@ -7842,15 +8049,16 @@ US 3m TR     0.9224  0.9081  0.8968  0.8746  0.8363  0.8127       0.0000
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: table.CAPM
-> ### Title: Asset-Pricing Model Summary: Statistics and Stylized Facts
-> ### Aliases: table.CAPM
+> ### Name: table.SFM
+> ### Title: Single Factor Asset-Pricing Model Summary: Statistics and
+> ###   Stylized Facts
+> ### Aliases: table.CAPM table.SFM
 > ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
 > data(managers)
-> table.CAPM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
+> table.SFM(managers[,1:3], managers[,8], Rf = managers[,10])
                     HAM1 to SP500 TR HAM2 to SP500 TR HAM3 to SP500 TR
 Alpha                         0.0058           0.0091           0.0062
 Beta                          0.3901           0.3384           0.5523
@@ -7865,9 +8073,11 @@ Active Premium                0.0408           0.0776           0.0545
 Information Ratio             0.3604           0.5060           0.4701
 Treynor Ratio                 0.2428           0.3883           0.1956
 > 
-> result = table.CAPM(managers[,1:3,drop=FALSE], managers[,8,drop=FALSE], Rf = managers[,10,drop=FALSE])
-> textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-> title(main="CAPM-Related Statistics")
+> result = table.SFM(managers[,1:3], managers[,8], Rf = managers[,10])
+> textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9,
++          halign = "center", valign = "top", row.valign="center",
++          wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> title(main="Single Factor Model Related Statistics")
 > 
 > 
 > 
@@ -7906,36 +8116,46 @@ SP500 TR    23.0 33.4 28.6 21.0 -9.1 -11.9 -22.1 28.7 10.9  4.9 15.8
 > # prettify with format.df in hmisc package
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
 > result = t(table.CalendarReturns(managers[,c(1,8)]))
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c( rep("darkgray",12), "black", "blue"), mar = c(0,0,3,0)+0.1)
+> 
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++          cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,
++          max.cex=.9, halign = "center", valign = "top",
++          row.valign="center", wrap.rownames=20, wrap.colnames=10,
++          col.rownames=c( rep("darkgray",12), "black", "blue"),
++          mar = c(0,0,3,0)+0.1)
+> 
 > title(main="Calendar Returns")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.CaptureRatios")
 > ### * table.CaptureRatios
@@ -7977,7 +8197,10 @@ HAM6 to EDHEC LS EQ       0.4762
 > 
 > result = t(table.UpDownRatios(managers[,1:6], managers[,7,drop=FALSE]))
 > colnames(result)=colnames(managers[,1:6])
-> textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9,
++          halign = "center", valign = "top", row.valign="center",
++          wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> 
 > title(main="Capture Ratios for EDHEC LS EQ")
 > 
 > 
@@ -8016,28 +8239,32 @@ HAM6 to SP500 TR      0.5091542 1.735968e-05 0.30101889 0.6709863
 > rownames(result)=colnames(managers[,1:6])
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,
++          max.cex=.9, halign = "center", valign = "top", row.valign="center"
++          , wrap.rownames=20, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Correlations to SP500 TR")
 > 
 > ctable = table.Correlation(managers[,1:6],managers[,8,drop=FALSE], conf.level=.99)
@@ -8047,7 +8274,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.Distributions")
 > ### * table.Distributions
@@ -8080,24 +8309,25 @@ Sample excess kurtosis   0.6285
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8113,7 +8343,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.DownsideRisk")
 > ### * table.DownsideRisk
@@ -8205,35 +8437,41 @@ Modified ES (95%)                 -0.0902        -0.0462
 > result=t(table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,
++          max.cex=.9, halign = "center", valign = "top", row.valign="center",
++          wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Downside Risk Statistics")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.DownsideRiskRatio")
 > ### * table.DownsideRiskRatio
@@ -8270,24 +8508,25 @@ Omega-sharpe ratio         0.6581
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8303,7 +8542,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.Drawdowns")
 > ### * table.Drawdowns
@@ -8345,7 +8586,10 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > 
 > # This was really nice before Hmisc messed up 'format' from R-base
 > #require("Hmisc")
-> #textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> #textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
+> #           cdec=c(rep(3,4), rep(0,3))), rmar = 0.8, cmar = 1.5,
+> #           max.cex=.9, halign = "center", valign = "top", row.valign="center",
+> #           wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > # title(main="Largest Drawdowns for HAM1")
 > 
 > 
@@ -8376,24 +8620,25 @@ Martin ratio   3.7992 1.7473 1.3572 1.0798 0.2042 4.5928      3.6345   0.5112
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8409,7 +8654,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.HigherMoments")
 > ### * table.HigherMoments
@@ -8435,35 +8682,41 @@ Beta CoKurtosis           0.4815           0.1988           0.5068
 > rownames(result)=colnames(managers[,1:6])
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,
++          max.cex=.9, halign = "center", valign = "top", row.valign="center",
++          wrap.rownames=5, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Higher Co-Moments with SP500 TR")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.InformationRatio")
 > ### * table.InformationRatio
@@ -8490,24 +8743,25 @@ Information Ratio              NaN
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8523,7 +8777,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.MonthlyReturns")
 > ### * table.MonthlyReturns
@@ -8617,35 +8873,40 @@ Funds of Funds          -0.4594   3.2993
 > result=t(table.Stats(edhec))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(1,2),rep(3,14))), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=10, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(1,2),rep(3,14))),
++          rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top",
++          row.valign="center", wrap.rownames=10, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Statistics for EDHEC Indexes")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.RollingPeriods")
 > ### * table.RollingPeriods
@@ -8661,9 +8922,6 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > ### ** Examples
 > 
 > data(edhec)
-> #table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
-> 
-> #result=table.TrailingPeriods(edhec[,10:13], FUNCS=c("SharpeRatio","VaR"), funcs.names = c("Sharpe Ratio", "Modified VaR"), periods=c(12,24,36))
 > table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
                       Merger Arbitrage Relative Value Short Selling
 Last 12 month Average           0.0025         0.0003        0.0026
@@ -8683,35 +8941,41 @@ Last 36 month Std Dev         0.0217
 > result=table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
-> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
+> textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
++                    cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,
++                    max.cex=.9, halign = "center", valign = "top", row.valign="center",
++                    wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 > title(main="Trailing Period Statistics")
 > 
 > 
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.SpecificRisk")
 > ### * table.SpecificRisk
@@ -8734,24 +8998,25 @@ Total Risk      0.0886     NA 0.1262 0.1838     NA     NA          NA     0.15
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8767,7 +9032,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("table.Variability")
 > ### * table.Variability
@@ -8794,24 +9061,25 @@ Annualized Std Dev        0.1500
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: cluster
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
+Loading required package: Formula
 Hmisc library by Frank E Harrell Jr
 
 Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
 to see overall documentation.
 
-NOTE:Hmisc no longer redefines [.factor to drop unused levels when
-subsetting.  To get the old behavior of Hmisc type dropUnusedLevels().
-
 
 Attaching package: ‘Hmisc’
 
-The following object(s) are masked from ‘package:survival’:
+The following objects are masked from ‘package:survival’:
 
-    untangle.specials
+    survfitKM, untangle.specials
 
-The following object(s) are masked from ‘package:base’:
+The following objects are masked from ‘package:base’:
 
     format.pval, round.POSIXt, trunc.POSIXt, units
 
@@ -8827,7 +9095,9 @@ The following object(s) are masked from ‘package:base’:
 > 
 > cleanEx()
 
-detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
+detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’,
+  ‘package:cluster’
 
 > nameEx("textplot")
 > ### * textplot
@@ -8849,10 +9119,14 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > # This was really nice before Hmisc messed up 'format' from R-base
 > # prettify with format.df in hmisc package
 > # require("Hmisc")
->   result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,]
+> # result = t(table.CalendarReturns(managers[,1:8]))[-1:-12,]
 > 
-> #  textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9, halign = "center", valign = "top", row.valign="center", wrap.rownames=20, wrap.colnames=10, col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,4,0)+0.1)
-> 
+> #  textplot(Hmisc::format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
+> #           cdec=rep(1,dim(result)[2])), rmar = 0.8, cmar = 1,  max.cex=.9,
+> #           halign = "center", valign = "top", row.valign="center", wrap.rownames=20,
+> #           wrap.colnames=10, col.rownames=c("red", rep("darkgray",5),
+> #           rep("orange",2)), mar = c(0,0,4,0)+0.1)
+> #
 > # title(main="Calendar Returns")
 > 
 > 
@@ -8908,8 +9182,9 @@ detaching ‘package:Hmisc’, ‘package:survival’, ‘package:splines’
 > 
 > ### * <FOOTER>
 > ###
-> cat("Time elapsed: ", proc.time() - get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  80.165 1.052 105.03 0 0 
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  74.877 1.842 76.936 0 0 
 > grDevices::dev.off()
 pdf 
   2 
