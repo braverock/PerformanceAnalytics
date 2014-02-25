@@ -79,7 +79,7 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
     for(column in 1:columns) {
         # the drop=FALSE flag is essential for when the zoo object only has one column
 		rollargs<-c(list(data=na.omit(x[,column,drop=FALSE])),funargs)
-		column.Return.calc <- do.call(xts:::rollapply.xts,rollargs)
+		column.Return.calc <- do.call(rollapply,rollargs)
         if(column == 1)
             Return.calc = xts(column.Return.calc)
         else

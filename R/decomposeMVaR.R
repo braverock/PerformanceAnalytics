@@ -4,28 +4,28 @@ portm2 = function(w,sigma)
 {
    return(t(w)%*%sigma%*%w)
 }
-PerformanceAnalytics:::portm2
+portm2
 
 portm3 = function(w,M3)
 {
    return(t(w)%*%M3%*%(w%x%w))
 }
-PerformanceAnalytics:::portm3
+portm3
 
 table.VaR.CornishFisher.portfolio = 
 function (p, w, mu, sigma, M3, M4 , names) 
 {
     w = matrix( w , ncol = 1 )
-    alpha = PerformanceAnalytics:::.setalphaprob(p)
+    alpha = .setalphaprob(p)
     p = alpha
     z = qnorm(alpha)
     location = t(w) %*% mu
     pm2 = portm2(w, sigma)
-    dpm2 = as.vector(PerformanceAnalytics:::derportm2(w, sigma))
+    dpm2 = as.vector(derportm2(w, sigma))
     pm3 = portm3(w, M3)
-    dpm3 = as.vector(PerformanceAnalytics:::derportm3(w, M3))
-    pm4 = PerformanceAnalytics:::portm4(w, M4)
-    dpm4 = as.vector(PerformanceAnalytics:::derportm4(w, M4))
+    dpm3 = as.vector(derportm3(w, M3))
+    pm4 = portm4(w, M4)
+    dpm4 = as.vector(derportm4(w, M4))
     skew = pm3/pm2^(3/2)
     exkurt = pm4/pm2^(2) - 3
     derskew = (2 * (pm2^(3/2)) * dpm3 - 3 * pm3 * sqrt(pm2) * 

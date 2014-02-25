@@ -234,7 +234,7 @@ function (R,
 	)
     }
     # Needed for finding aligned dates for event lines and period areas
-    rownames = as.Date(xts:::time.xts(y))
+    rownames = as.Date(time(y))
     rownames = format(strptime(rownames,format = date.format.in), date.format)
 
     time.scale = periodicity(y)$scale
