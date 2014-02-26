@@ -12,7 +12,6 @@
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param horizontal TRUE/FALSE plot horizontal (TRUE) or vertical (FALSE)
 #' @param names logical. if TRUE, show the names of each series
 #' @param as.Tufte logical. default FALSE. if TRUE use method derived for Tufte
 #' for limiting chartjunk
@@ -49,7 +48,7 @@
 #' 
 #' @export 
 chart.Boxplot <-
-function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
+function (R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -109,10 +108,10 @@ function (R, horizontal = TRUE, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL
     ) # end switch
 
     if(as.Tufte){
-        boxplot(R[,column.order], horizontal = horizontal, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = "white", medlty = "blank", medpch = median.symbol, medlwd = 2, medcex = .8, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = "blank", outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, ...)
+        boxplot(R[,column.order], horizontal = TRUE, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = "white", medlty = "blank", medpch = median.symbol, medlwd = 2, medcex = .8, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = "blank", outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, ...)
     }
     else{
-        boxplot(R[,column.order], horizontal = horizontal, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = colorset[column.order], medlwd = 1, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = 1, staplecol = colorset[column.order], staplecex = .5, outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, boxwex=.6, ...)
+        boxplot(R[,column.order], horizontal = TRUE, names = names, main = main, xlab = xlab, ylab = "", pars = list(boxcol = colorset[column.order], medlwd = 1, medcol = colorset[column.order], whisklty = c(1,1), whiskcol = colorset[column.order], staplelty = 1, staplecol = colorset[column.order], staplecex = .5, outpch = outlier.symbol, outcex = .5, outcol = colorset[column.order] ), axes = FALSE, boxwex=.6, ...)
     } # end else
 
     if(!is.null(show.data)) {
