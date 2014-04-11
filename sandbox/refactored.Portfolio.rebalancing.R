@@ -49,7 +49,7 @@
 #' round(Return.rebalancing(edhec,weights),4)
 #' 
 #' @export
-Return.rebalancing2 <- function (R, weights=NA, on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'), verbose=FALSE, ..., adj.capital=FALSE) {
+Return.rebalancing <- function (R, weights=NULL, on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'), verbose=FALSE, ..., adj.capital=FALSE) {
   on = on[1]
   R = checkData(R, method="xts")
   # find the right unit to subtract from the first return date to create a start date
@@ -64,9 +64,10 @@ Return.rebalancing2 <- function (R, weights=NA, on=c(NA, 'years', 'quarters', 'm
 	    quarterly = { time_unit = "quarter" },
 	    yearly = { time_unit = "year"}
 	)
+  # calculates the end of the prior period
   start_date = seq(as.Date(index(R)[1]), length = 2, by = paste("-1", time_unit))[2]
 
-  if(is.na(weights)){
+  if(is.null(weights)){
     #   generate equal weight vector for return columns  
     weights = rep(1/NCOL(R), NCOL(R))
   }
@@ -88,7 +89,7 @@ Return.rebalancing2 <- function (R, weights=NA, on=c(NA, 'years', 'quarters', 'm
     # make sure that frequency(weights)<frequency(R) ?
     
     # make sure the number of assets in R matches the number of assets in weights
-    if(CNOL(R) != NCOL(weights)){
+    if(NCOL(R) != NCOL(weights)){
       if(NCOL(R) > NCOL(weights)){
         R <- R[, 1:NCOL(weights)]
         warning("number of assets in beginning_weights is less than number of columns in returns, so subsetting returns.")
@@ -97,65 +98,69 @@ Return.rebalancing2 <- function (R, weights=NA, on=c(NA, 'years', 'quarters', 'm
       }
     }
   } # we should have good weights objects at this point
-  
+
   leverage = 1
   # create an empty variables for storage
-  x.leverage = matrix(1, ncol=1)
+  x.capital_adj = NULL
   x.starting_weights = NULL
-  x.ending_weights = matrix(NA, ncol=NCOL(weights))
-  x.contributions = matrix(NA, ncol=NCOL(weights))
-  x.portfolio_return = matrix(NA, ncol=1)
+  x.ending_weights = NULL 
+  x.sum_ending_weights = xts(matrix(1, ncol=1), order.by=as.Date(start_date))
+  x.sum_starting_weights = NULL
+  x.contributions = NULL 
+  x.portfolio_return = NULL 
   # loop over rebalance periods
   start_date=index(weights)[1]
-  for(i in 1:NROW(weights)) {
+
+  for(i in 1:(NROW(weights)-1)) {
     # identify rebalance from and to dates (weights[i,], weights[i+1])
-    from = as.Date(index(weights[i,]))
+    from = as.Date(index(weights[i,]))+1
     to = as.Date(index(weights[i+1,]))
     returns = R[paste0(from,"::",to)]
+    print(return)
+
     # get returns between rebalance dates
     for(j in 1:NROW(returns)){
-      if(j==1) # if first period of rebalance
-        starting_weights = as.numeric(last(x.leverage,1)) * weights[i,]
+      if(j==1) {# if first period of rebalance
+        if(!adj.capital)
+          starting_weights = as.numeric(last(x.sum_ending_weights,1)) * weights[i,]
+        else
+          starting_weights = weights[i,]
+      }
       else
         starting_weights = last(x.ending_weights,1)
-      contributions = as.vector(starting_weights) * as.vector(returns[j,])
+      contributions = coredata(starting_weights) * coredata(returns[j,])
       ending_weights = contributions + starting_weights # has the wrong date
       portfolio_return = sum(contributions)
-      if(j==NROW(returns) & adj.capital==FALSE)
-        leverage = sum(last(ending_weights,1))
+      sum_prior_ending_weights = last(x.sum_ending_weights,1)
+      sum_starting_weights = sum(starting_weights)
+      sum_ending_weights = sum(ending_weights)
+      capital_adj = sum(starting_weights) - sum_prior_ending_weights
+  
       # store results
-      if(is.null(x.starting_weights)) 
-        x.starting_weights = starting_weights
-      else
-        x.starting_weights = rbind(x.starting_weights, starting_weights)
-#       x.contributions = rbind(x.contributions, contributions)
-      if(is.null(x.contributions)) 
-        x.contributions = contributions
-      else
-        x.contributions = rbind(x.contributions, contributions)
-#       x.ending_weights = rbind(x.ending_weights, ending_weights)
-      if(is.null(x.ending_weights)) 
-        x.ending_weights = ending_weights
-      else
-        x.ending_weights = rbind(x.ending_weights, ending_weights)
-#       x.portfolio_return = rbind(x.portfolio_return, portfolio_return)
-      if(is.null(x.portfolio_return)) 
-        x.portfolio_return = portfolio_return
-      else
-        x.portfolio_return = rbind(x.portfolio_return, portfolio_return)
-#       x.leverage = rbind(x.leverage, leverage)
-      if(is.null(x.leverage)) 
-        x.leverage = leverage
-      else
-        x.leverage = rbind(x.leverage, leverage)
+      x.starting_weights = rbind(x.starting_weights, xts(starting_weights, order.by=index(returns[j,])))
+      x.contributions = rbind(x.contributions, xts(contributions, order.by=index(returns[j,])))
+      x.ending_weights = rbind(x.ending_weights, xts(ending_weights, order.by=index(returns[j,])))
+      x.portfolio_return = rbind(x.portfolio_return, xts(portfolio_return, order.by=index(returns[j,])))
+      x.sum_starting_weights = rbind(x.sum_starting_weights, xts(sum_starting_weights, order.by=index(returns[j,])))
+      x.sum_ending_weights = rbind(x.sum_ending_weights, xts(sum_ending_weights, order.by=index(returns[j,])))
+      x.capital_adj = rbind(x.capital_adj, xts(capital_adj, order.by=index(returns[j,])))
     }
-
-    # if verbose = TRUE
-    #   return list
-    # else
-    #   return portfolio_return time series
   }
-  result=portfolio_returns
-  result<-reclass(result, R)
-  result
+  colnames(x.portfolio_return) = "Portfolio"
+  colnames(x.capital_adj) = "Implied Capital Change"
+  if(verbose){ # return full list of calculations
+    result = list(Starting_Weights = x.starting_weights, 
+                  Contributions = x.contributions, 
+                  Ending_Weights = x.ending_weights, 
+                  Portfolio_Return = x.portfolio_return, 
+                  Sum_Ending_Weights = x.sum_ending_weights,
+                  Implied_Capital_Adj = x.capital_adj
+                  )
+    return(result)
+  }
+  else { #  return resulting time series only
+    result=x.portfolio_return
+    result<-reclass(result, R)
+    return(result)
+  }
 }
