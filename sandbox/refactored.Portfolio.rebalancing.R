@@ -421,6 +421,13 @@ Return.rebalancing2 <- function (R, weights=NULL, on=c(NA, 'years', 'quarters', 
 #' data(edhec)
 #' Return.rebalancing(edhec["1997",1:5], rebalance="quarterly") # returns time series
 #' Return.rebalancing(edhec["1997",1:5], rebalance="quarterly", verbose=TRUE) # returns list
+#' # with a weights object
+#' data(weights) # rebalance at the beginning of the year to various weights through time
+#' chart.StackedBar(weights)
+#' x <- Return.rebalancing(edhec["2000::",1:11], weights=weights,verbose=TRUE)
+#' chart.CumReturns(x$returns)
+#' chart.StackedBar(x$BOP.Weight)
+#' chart.StackedBar(x$BOP.Value)
 #' @export
 Return.rebalancing3 <- function(R, 
                                 weights=NULL,  
