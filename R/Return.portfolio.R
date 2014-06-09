@@ -105,9 +105,10 @@
 #' Attribution}. Wiley. 2004. Chapter 2\cr
 #' @keywords ts multivariate distribution models
 #' @examples
+#' 
 #' data(edhec)
-#' Return.rebalancing(edhec["1997",1:5], rebalance="quarterly") # returns time series
-#' Return.rebalancing(edhec["1997",1:5], rebalance="quarterly", verbose=TRUE) # returns list
+#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly") # returns time series
+#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly", verbose=TRUE) # returns list
 #' # with a weights object
 #' data(weights) # rebalance at the beginning of the year to various weights through time
 #' chart.StackedBar(weights)
@@ -115,8 +116,11 @@
 #' chart.CumReturns(x$returns)
 #' chart.StackedBar(x$BOP.Weight)
 #' chart.StackedBar(x$BOP.Value)
-#' @export
-Return.rebalancing3 <- function(R, 
+#' 
+#' @rdname Return.portfolio
+#' @export Return.portfolio 
+#' @export Return.rebalancing
+Return.portfolio <- Return.rebalancing <- function(R, 
                                 weights=NULL,  
                                 rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
                                 value=1,
