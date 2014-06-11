@@ -65,6 +65,10 @@ function (R, Rf = 0)
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
         coln.Rf=colnames(Rf)
+        if(is.null(coln.Rf)){
+          colnames(Rf) = "Rf"
+          coln.Rf = colnames(Rf)
+        }
         Rft=cbind(R,Rf)
         Rft=na.locf(Rft[,make.names(coln.Rf)])
         Rf=Rft[which(index(R) %in% index(Rft))]
