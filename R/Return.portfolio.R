@@ -78,8 +78,7 @@
 #' 
 #' To calculate BOP and EOP position value, we create an index for each position.  The 
 #' sum of that value across assets represents an indexed value of the total portfolio.  
-#' The change in value contained in slot seven is the asset's period return times its 
-#' BOP value. 
+#' Note that BOP and EOP position values are only computed when \code{geometric = TRUE}.
 #' 
 #' From the value calculations, we can calculate different aggregations through time 
 #' for the asset contributions.  Those are calculated as the EOP asset value less the 
@@ -91,7 +90,13 @@
 #' @param R An xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param weights A time series or single-row matrix/vector containing asset
-#' weights, as decimal percentages, treated as beginning of period weights.  See Details below.
+#' weights, as decimal percentages, treated as beginning of period weights.  
+#' See Details below.
+#' @param wealth.index TRUE/FALSE whether to return a wealth index. Default FALSE
+#' @param contribution if contribution is TRUE, add the weighted return 
+#' contributed by the asset in a given period. Default FALSE
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic (FALSE)
+#' to aggregate returns. Default TRUE. 
 #' @param rebalance_on Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{endpoints}.
 #' @param value The beginning of period total portfolio value. This is used for calculating position value.
 #' @param verbose If verbose is TRUE, return a list of intermediary calculations. 
@@ -121,11 +126,14 @@
 #' @export Return.portfolio 
 #' @export Return.rebalancing
 Return.portfolio <- Return.rebalancing <- function(R, 
-                                weights=NULL,  
-                                rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
-                                value=1,
-                                verbose=FALSE,
-                                ...){
+                                                   weights=NULL,
+                                                   wealth.index=FALSE,
+                                                   contribution=FALSE,
+                                                   geometric=TRUE,
+                                                   rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
+                                                   value=1,
+                                                   verbose=FALSE,
+                                                   ...){
   R = checkData(R, method="xts")
   rebalance_on = rebalance_on[1]
   
@@ -186,16 +194,124 @@ Return.portfolio <- Return.rebalancing <- function(R,
     R <- R[paste0(as.Date(index(weights[1,]))+1, "/")]
   }
   
+  
+  if(geometric){
+    out = Return.portfolio.geometric(R=R, 
+                                     weights=weights, 
+                                     wealth.index=wealth.index, 
+                                     contribution=contribution, 
+                                     rebalance_on=rebalance_on, 
+                                     value=value, 
+                                     verbose=verbose, 
+                                     ...=...)
+  } else {
+    out = Return.portfolio.arithmetic(R=R, 
+                                      weights=weights, 
+                                      wealth.index=wealth.index, 
+                                      contribution=contribution, 
+                                      rebalance_on=rebalance_on, 
+                                      verbose=verbose, 
+                                      ...=...)
+  }
+  return(out)
+}
+
+Return.portfolio.arithmetic <- function(R, 
+                                        weights=NULL,
+                                        wealth.index=FALSE,
+                                        contribution=FALSE,
+                                        rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
+                                        verbose=FALSE,
+                                        ...)
+{
+  # bop = beginning of period
+  # eop = end of period
+  # Initialize objects
+  bop_weights = matrix(0, NROW(R), NCOL(R))
+  colnames(bop_weights) = colnames(R)
+  eop_weights = period_contrib = bop_weights
+  ret = vector("numeric", NROW(R))
+  
+  # initialize counter
+  k = 1
+  for(i in 1:NROW(weights)) {
+    # identify rebalance from and to dates (weights[i,], weights[i+1]) and
+    # subset the R(eturns) object
+    from = as.Date(index(weights[i,]))+1
+    if (i == nrow(weights)){
+      to = as.Date(index(last(R))) # this is correct
+    } else {
+      to = as.Date(index(weights[(i+1),]))
+    }
+    returns = R[paste0(from, "::", to)]
+    
+    # Only enter the loop if we have a valid returns object
+    if(nrow(returns) >= 1){
+      # inner loop counter
+      jj = 1
+      for(j in 1:nrow(returns)){
+        # For arithmetic returns, the beginning of period weights are always 
+        # equal to the rebalance weights
+        bop_weights[k,] = weights[i,]
+        period_contrib[k,] = coredata(returns[j,]) * bop_weights[k,]
+        eop_weights[k,] = (period_contrib[k,] + bop_weights[k,]) / sum(c(period_contrib[k,], bop_weights[k,]))
+        ret[k] = sum(period_contrib[k,])
+        
+        # increment the counters
+        k = k + 1
+      }
+    }
+  }
+  R.idx = index(R)
+  ret = xts(ret, R.idx)
+  colnames(ret) = "portfolio.returns"
+  
+  if(wealth.index){
+    result = cumsum(ret) + 1
+    colnames(result) = "portfolio.wealthindex"
+  } else {
+    result = ret
+  }
+  
+  if(verbose){
+    out = list()
+    out$returns = ret
+    out$contribution = xts(period_contrib, R.idx)
+    out$BOP.Weight = xts(bop_weights, R.idx)
+    out$EOP.Weight = xts(eop_weights, R.idx)
+    if(wealth.index){
+      out$wealthindex = result
+    }
+  } else if(contribution){
+    out = cbind(result, xts(period_contrib, R.idx))
+  } else {
+    out = result
+  }
+  return(out)
+}
+
+Return.portfolio.geometric <- function(R, 
+                                       weights=NULL,
+                                       wealth.index=FALSE,
+                                       contribution=FALSE,
+                                       rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
+                                       value=1,
+                                       verbose=FALSE,
+                                       ...)
+{
   # bop = beginning of period
   # eop = end of period
   # Initialize objects
   bop_value = matrix(0, NROW(R), NCOL(R))
   colnames(bop_value) = colnames(R)
   eop_value = bop_value
-  if(verbose){
-    bop_weights = bop_value
-    eop_weights = bop_value
+  
+  if(verbose | contribution){
     period_contrib = bop_value
+    if(verbose){
+      bop_weights = bop_value
+      eop_weights = bop_value
+    }
   }
   ret = eop_value_total = bop_value_total = vector("numeric", NROW(R))
   
@@ -235,12 +351,14 @@ Return.portfolio <- Return.rebalancing <- function(R,
         eop_value[k,] = (1 + coredata(returns[j,])) * bop_value[k,]
         eop_value_total[k] = sum(eop_value[k,])
         
-        if(verbose){
-          # Compute bop and eop weights
-          bop_weights[k,] = bop_value[k,] / bop_value_total[k]
-          eop_weights[k,] = eop_value[k,] / eop_value_total[k]
+        if(contribution | verbose){
           # Compute period contribution
           period_contrib[k,] = returns[j,] * bop_value[k,] / sum(bop_value[k,])
+          if(verbose){
+            # Compute bop and eop weights
+            bop_weights[k,] = bop_value[k,] / bop_value_total[k]
+            eop_weights[k,] = eop_value[k,] / eop_value_total[k]
+          }
         }
         
         # Compute portfolio returns
@@ -261,6 +379,13 @@ Return.portfolio <- Return.rebalancing <- function(R,
   ret = xts(ret, R.idx)
   colnames(ret) = "portfolio.returns"
   
+  if(wealth.index){
+    result = cumprod(1 + ret)
+    colnames(result) = "portfolio.wealthindex"
+  } else {
+    result = ret
+  }
+  
   if(verbose){
     out = list()
     out$returns = ret
@@ -269,8 +394,13 @@ Return.portfolio <- Return.rebalancing <- function(R,
     out$EOP.Weight = xts(eop_weights, R.idx)
     out$BOP.Value = xts(bop_value, R.idx)
     out$EOP.Value = xts(eop_value, R.idx)
+    if(wealth.index){
+      out$wealthindex = result
+    }
+  } else if(contribution){
+    out = cbind(result, xts(period_contrib, R.idx))
   } else {
-    out = ret
+    out = result
   }
   return(out)
 }
