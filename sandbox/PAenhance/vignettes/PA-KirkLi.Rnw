@@ -1,0 +1,142 @@
+% 
+\documentclass[a4paper]{article}
+\usepackage{Sweave}
+\usepackage{listings}
+\title{PerformanceAnalytics Changed by Kirk Li}
+\author{kirkli@u.washington.edu}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+<<setup, cache=FALSE,echo=FALSE>>=
+# global chunk options
+library(knitr)
+opts_chunk$set(cache=FALSE, tidy=FALSE, autodep=TRUE, 
+		fig.width=6, fig.height=6)
+options(width=60)
+listing <- function(x, options) {
+	paste("\\begin{lstlisting}[basicstyle=\\ttfamily,breaklines=true]\n",
+			x, "\\end{lstlisting}\n", sep = "")
+}
+knit_hooks$set(source=listing, output=listing)
+		
+
+@
+
+<<echo = FALSE, message = FALSE>>=
+library(PAKK)
+library(nor1mix)
+@
+
+\section{Changes on chart.Boxplot}
+Remarks: 
+\begin{itemize}
+  \item Sorting boxplot by different risk measure
+        \begin{itemize}
+          \item Enable the ascending sorting and descending sorting
+          \item Enable one of 18 measures that adopted from table.Distributions,
+				table.DrawdownsRatio,
+				table.DownsideRiskRatio,
+				table.AnnualizedReturns.
+        \end{itemize}
+  \item Fix the horizontal and vertical display of boxplot
+        \begin{itemize}
+          \item Adjust the par value per horizontal=TRUE or FALSE
+          \item Adjust the labeling per horizontal=TRUE or FALSE
+          \item Modify the angle of axis label to reduce the space
+        \end{itemize}
+  \item Add base measure that records the base ordering, relative to
+  the specified ordering.
+    \begin{itemize}
+      \item vertical
+      \item horizontal
+     \end{itemize}
+\end{itemize}
+<<fig=TRUE>>=
+# read data
+data(edhec)
+# vertical box, sort by Sortino ratio, 
+chart.Boxplot(R=edhec,sort.by="Sortino ratio", horizontal=FALSE, as.Tufte=TRUE)
+@
+
+\newpage
+<<fig=TRUE>>=
+# horizontal box, sort by Sortino ratio, 
+chart.Boxplot(R=edhec,sort.by="Sortino ratio", horizontal=TRUE, as.Notch=TRUE)
+@
+
+\newpage
+<<fig=TRUE>>=
+# vertical box, sort by mean, with base order variance
+# ascending sort
+chart.Boxplot(R=edhec,sort.by="mean", horizontal=FALSE, sort.base="variance", sort.ascending=TRUE)
+@
+
+\newpage
+<<fig=TRUE>>=
+# horizontal box, sort by mean, with base order variance
+# descending sort
+chart.Boxplot(R=edhec,sort.by="upside risk", horizontal=TRUE, sort.base="std dev", sort.ascending=FALSE)
+@
+
+
+\newpage
+<<fig=TRUE,eval=FALSE>>=
+# horizontal box, sort by mean, with base order variance
+# descending sort
+measure_set <- c("NULL", "mean", "median", "variance", "sharp ratio", 
+		"mean absolute deviation", "std dev", "sterling ratio", "calmar ratio", "burke ratio", "pain index", "ulcer index","martin ratio", "downside risk", "omega ratio", "sortino ratio", "upside risk","upside potential ratio", "omega sharpe ratio") 
+try(
+		sapply(measure_set,function(x){
+					cat(x,"\n") 
+					chart.Boxplot(R=edhec,sort.by=x)
+				})
+)
+@
+
+\section{Changes on chart.QQplot}
+Remarks: 
+\begin{itemize}
+  \item add normal mixture distribution
+\end{itemize}
+
+
+<<fig=TRUE>>=
+data(managers)
+# fit with real data, using fitted distribution as theoretical quantiles
+chart.QQPlot( checkData(managers[,2, drop = FALSE], na.rm = TRUE, method = "vector"), main = "Normal Mixture Distribution",
+		line=c("quartiles"), para=list(m=2), distribution = 'mixnormal', 
+		envelope=0.95)
+@
+
+\newpage
+<<fig=TRUE>>=
+# fit with simulated data, using fitted distribution as theoretical quantiles
+x <- replicate(10000,ifelse(runif(1)>0.5,rnorm(1,5,5),rnorm(1,-10,10)))
+chart.QQPlot(x, main = "Normal Mixture Distribution",
+		line=c("quartiles"), para=list(m=2), distribution = 'mixnormal', 
+		envelope=0.95)
+@
+
+<<fig=TRUE>>=
+# fit with simulated data, using true distribution as theoretical quantiles
+x <- replicate(10000,ifelse(runif(1)>0.5,rnorm(1,5,5),rnorm(1,-10,10)))
+chart.QQPlot(x, main = "Normal Mixture Distribution",
+		line=c("quartiles"), para=list(m=2,mu=c(5,-10),sig2=c(25,100),w=c(0.5,0.5)), distribution = 'mixnormal', 
+		envelope=0.95)
+@
+
+<<fig=TRUE>>=
+# fit with simulated data, using wrong distribution as theoretical quantiles
+x <- replicate(10000,ifelse(runif(1)>0.5,rnorm(1,5,5),rnorm(1,-10,10)))
+chart.QQPlot(x, main = "Normal Mixture Distribution",
+		line=c("quartiles"), para=list(m=2,mu=c(0,20),sig2=c(25,100),w=c(0.5,0.5)), distribution = 'mixnormal', 
+		envelope=0.95)
+
+
+@
+
+\end{document}

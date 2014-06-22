@@ -1,0 +1,13 @@
+Package: PAenhance
+Type: Package
+Title: Enhancement of PerformanceAnalytics developed by Kirk Li and Douglass
+    Martin
+Version: 1.0
+Date: 2014-05-10
+Author: Kirk Li, Douglass Martin
+Maintainer: Kirk Li <kirkli@stat.washington.edu>
+Description: Develop various enhancement to PerformanceAnalytics Package
+License: GPL
+Copyright: (c) 2014-2014
+Contributors: 
+Roxygen: list(wrap = TRUE)
