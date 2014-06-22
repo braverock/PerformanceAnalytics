@@ -2,10 +2,11 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
-\title{A modified version of SharpeRatio that compatible with table.Peroformance}
+\title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
+VaR or ES, accompanied with bootstrap of standard error.}
 \usage{
 SharpeRatio(R, Rf = 0, p = 0.95, method = c("StdDev", "VaR", "ES"),
-  weights = NULL, annualize = FALSE, ...)
+  weights = NULL, annualize = FALSE, bootsd = FALSE, ...)
 }
 \arguments{
   \item{R}{an xts, vector, matrix, data frame, timeSeries
@@ -28,11 +29,14 @@ SharpeRatio(R, Rf = 0, p = 0.95, method = c("StdDev", "VaR", "ES"),
   ES functions}
 }
 \description{
+A modified version of SharpeRatio that compatible with
+table.Peroformance
+}
+\details{
 The Sharpe ratio is simply the return per unit of risk
 (represented by variability).  In the classic case, the
 unit of risk is the standard deviation of the returns.
-}
-\details{
+
 \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}}
 
 William Sharpe now recommends
@@ -81,6 +85,10 @@ SharpeRatio(edhec[, 6, drop = FALSE], FUN="ES")
 # and all the methods
 SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
 SharpeRatio(edhec,Rf = .04/12)
+
+# bootstrap sd
+R =managers[,1:2,drop=FALSE]
+SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR", bootsd=TRUE)
 }
 \author{
 Brian G. Peterson, Kirk Li

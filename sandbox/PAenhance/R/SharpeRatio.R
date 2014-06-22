@@ -1,3 +1,6 @@
+#' calculate a traditional or modified Sharpe Ratio of Return over StdDev or
+#' VaR or ES, accompanied with bootstrap of standard error. 
+#' 
 #' A modified version of SharpeRatio that compatible with table.Peroformance
 #' 
 #' The Sharpe ratio is simply the return per unit of risk (represented by
@@ -72,11 +75,15 @@
 #' SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
 #' SharpeRatio(edhec,Rf = .04/12)
 #' 
+#' # bootstrap sd
+#' R =managers[,1:2,drop=FALSE]
+#' SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR", bootsd=TRUE)
+#' 
 #' @export 
 #' @rdname SharpeRatio
 SharpeRatio <-
 function (R, Rf = 0, p = 0.95, method = c("StdDev", "VaR", "ES"), 
-		weights = NULL, annualize = FALSE, ...) 
+		weights = NULL, annualize = FALSE, bootsd = FALSE, ...) 
 {
 	R = checkData(R)
 	
@@ -121,23 +128,47 @@ function (R, Rf = 0, p = 0.95, method = c("StdDev", "VaR", "ES"),
 				invert = FALSE)
 		SRA
 	}
+	
+	boot.sd.fn <- function(X,idx,...,Rf, p, FUNC, FUN_ma) # FUN_ma: selecting srm.boot or sra
+	{
+		match.fun(FUN_ma)(X[idx],Rf=Rf,FUNC=FUNC,p=p)
+	}
+	
+	boot.sd <- function(X, ..., Rf, p, FUNC, FUN_ma) 
+	{
+		boot.res = boot(X, statistic=boot.sd.fn, FUN_ma=FUN_ma, Rf=Rf, p=p, R=10*length(X), FUNC=FUNC)
+		sd(as.vector(boot.res$t))
+	}
+	
+	
 	i = 1
 	if (is.null(weights)) {
 		result = matrix(nrow = length(method), ncol = ncol(R))
 		colnames(result) = colnames(R)
+		if(bootsd){
+			result.boot.sd = matrix(nrow=length(FUN), ncol=ncol(R))
+			}
 	}
 	else {
 		result = matrix(nrow = length(method))
 	}
 	tmprownames = vector()
 	
+	if(bootsd) require(boot)
+	
 	for (FUNCT in method) {
 		if (is.null(weights)) {
-			if (annualize) 
+			if (annualize) {
 				result[i, ] = sapply(R, FUN = sra, Rf = Rf, p = p, 
 						FUNC = FUNCT, ...)
-			else result[i, ] = sapply(R, FUN = srm, Rf = Rf, 
+			if(bootsd)
+				result.boot.sd[i,] = sapply(R,FUN=boot.sd, Rf=Rf, p=p, FUNC=FUNCT,FUN_ma="sra",...)
+		}
+			else {result[i, ] = sapply(R, FUN = srm, Rf = Rf, 
 						p = p, FUNC = FUNCT, ...)
+				if(bootsd)
+					result.boot.sd[i,] = sapply(R,FUN=boot.sd,Rf=Rf, p=p, FUNC=FUNCT,FUN_ma="srm",...)
+			}
 		}
 		else {
 			result[i, ] = mean(R %*% weights, na.rm = TRUE)/match.fun(FUNCT)(R, 
@@ -150,5 +181,9 @@ function (R, Rf = 0, p = 0.95, method = c("StdDev", "VaR", "ES"),
 		i = i + 1
 	}
 	rownames(result) = tmprownames
+	if(bootsd)
+		rownames(result.boot.sd)=tmprownames
+	if(bootsd) 
+		return(list(estimate = result, boot.sd = result.boot.sd))
 	return(result)
 }
