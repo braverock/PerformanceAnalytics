@@ -1,0 +1,269 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{verbatim}
+
+\begin{document}
+
+\section{Basic definitions}
+
+Suppose we have a portfolio of $N$ assets.
+
+The value of asset $i$ in the portfolio is defined as
+
+\begin{eqnarray*}
+V_i = \lambda_i * P_i
+\end{eqnarray*}
+
+where:
+\begin{eqnarray*}
+\lambda_i \text{ is the number of shares of asset $i$}\\
+P_i \text{ is the price of asset $i$}\\
+\end{eqnarray*}
+
+The total portfolio value is defined as
+\begin{eqnarray*}
+V_P = \sum_{i=1}^N V_i
+\end{eqnarray*}
+
+The weight of asset $i$ in the portfolio is defined as
+
+\begin{eqnarray*}
+w_i = V_i / V_P
+\end{eqnarray*}
+
+where:
+\begin{eqnarray*}
+V_i \text{ is the value of asset $i$}\\
+V_P \text{ is the total value of the portfolio}\\
+\end{eqnarray*}
+
+The portfolio return at time $t$ is defined as
+
+\begin{eqnarray*}
+R_t = \frac{V_t - V_{t-1}}{V_{t-1}}
+\end{eqnarray*}
+
+\section{Simple Example: Prices and Shares Framework}
+Suppose we have a portfolio of $N = 2$ assets, asset A and asset B. The prices for assets A and B are given as:
+
+<<>>=
+prices = cbind(c(5, 7, 6, 7),
+                c(10, 11, 12, 8))
+dimnames(prices) = list(paste0("t",0:3), c("A", "B"))
+prices
+@
+
+
+We wish to form an equal weight portfolio, that is, form a portfolio where 
+\begin{equation*}
+w_i = \frac{1}{N} \text{ for } i \in 1, \hdots, N.
+\end{equation*}
+
+Let $V_{P0} = 1000$ be the portfolio value at $t_0$.
+
+Step 1: Compute the number of shares of each asset to purchase.
+\begin{eqnarray*}
+w_i &=& \frac{V_i}{V_P}\\
+&=& \frac{\lambda_i * P_i}{V_P}\\
+\end{eqnarray*}
+
+Solve for $\lambda_i$.
+\begin{eqnarray*}
+\lambda_i &=& \frac{w_i * V_P}{P_i}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+\lambda_A &=& \frac{w_A * V_P0}{P_A} = \frac{0.5 * \$1000}{\$5} = 100\\
+\lambda_B &=& \frac{w_B * V_P0}{P_B} = \frac{0.5 * \$1000}{\$10} = 50\\
+\end{eqnarray*}
+
+<<>>=
+V_P0 = 1000
+N = ncol(prices)
+w = rep(1 / N, N)
+lambda = w * V_P0 / prices["t0",]
+lambda
+@
+
+
+Step 2: Compute the asset value and portfolio value for $t \in 0, \hdots, 3$.
+<<>>=
+# Compute the value of the assets
+V_assets <- matrix(0, nrow(prices), ncol(prices), dimnames=dimnames(prices))
+for(i in 1:nrow(prices)){
+  V_assets[i,] = prices[i,] * lambda
+}
+V_assets
+@
+
+<<>>=
+# Compute the value of the portfolio
+V_P = rowSums(V_assets)
+V_P
+@
+
+
+Step 3: Compute the portfolio returns for $t \in 1, \hdots, 3$.
+<<>>=
+# Compute the portfolio returns
+R_t = diff(V_P) / V_P[1:3]
+R_t
+@
+
+
+Step 4: Compute the weights of each asset in the portfolio for $t \in 0, \hdots, 3$
+<<>>=
+weights = V_assets / V_P
+weights
+@
+
+We have shown that calculating portfolio weights, values, and returns is simple in a prices and shares framework. However, calculating these metrics becomes more of a challenge in a weights and returns framework.
+
+\section{Example: Weights and Returns Framework}
+
+For this example, we will use the monthly returns during 1997 of the first 5 assets in the edhec dataset.
+
+<<>>=
+library(PerformanceAnalytics)
+data(edhec)
+R = edhec["1997", 1:5]
+colnames(R) = c("CA", "CTAG", "DS", "EM", "EMN")
+R
+@
+
+Suppose that on 1996-12-31 we wish to form an equal weight portfolio such that the weight for asset $i$ is given as:
+
+\begin{equation*}
+w_i = frac{1 / N} \quad \text{for } i \in 1, \hdots, N
+\end{equation*}
+
+where $N$ is equal to the number of assets.
+
+<<>>=
+N = ncol(R)
+weights = xts(matrix(rep(1 / N, N), 1), as.Date("1996-12-31"))
+colnames(weights) = colnames(R)
+weights
+@
+
+There are two cases we need to consider when calculating the beginning of period (bop) value.
+
+Case 1: The beginning of period $t$ is a rebalancing event. For example, the rebalance weights at the end of \verb"1996-12-31" take effect at the beginning of \verb"1997-01-31". This means that the beginning of \verb"1997-01-31" is considered a rebalance event.
+
+The beginning of period value for asset $i$ at time $t$ is given as:
+
+\begin{equation*}
+V_{{bop}_{t,i}} = w_i * V_{t-1}
+\end{equation*}
+
+where $w_i$ is the weight of asset $i$ and $V_{t-1}$ is the end of period (eop) portfolio value of the prior period.
+
+Case 2: The beginning of period $t$ is not a rebalancing event.
+\begin{equation*}
+V_{{bop}_{t,i}} = V_{{eop}_{t-1,i}}
+\end{equation*}
+
+where $V_{{eop}_{t,i}}$ is the end of period value for asset $i$ from the prior period.
+
+The end of period value for asset $i$ at time $t$ is given as:
+\begin{equation*}
+V_{{eop}_{t,i}} = (1 + R_{t,i}) * V_{{bop}_{t,i}}
+\end{equation*}
+
+Here we demonstrate this and compute values for the periods 1 and 2.
+
+For the first period, $t=1$, we need an initial value for the portfolio value. Let $V_0 = 1$ denote the initial portfolio value. Note that the initial portfolio value can be any arbitrary number. Here we use $V_0 = 1$ for simplicity.
+
+<<>>=
+V_0 = 1
+bop_value = eop_value = matrix(0, 2, ncol(R))
+@
+
+Compute the values for $t=1$.
+<<>>=
+t = 1
+bop_value[t,] = coredata(weights) * V_0
+eop_value[t,] = coredata(1 + R[t,]) * bop_value[t,]
+@
+
+Now compute the values for $t=2$.
+<<>>=
+t = 2
+bop_value[t,] = eop_value[t-1,]
+eop_value[t,] = coredata(1 + R[t,]) * bop_value[t,]
+@
+
+It is easily seen that the values for the rest of the time periods can be computed by iterating over $ t \in 1, \hdots, T$ where $T=12$ in this example.
+
+The weight of asset $i$ at time $t$ is calculated as:
+\begin{equation*}
+w_{t,i} = \frac{V_{t,i}}{\sum_{i=0}^N V_{t,i}}
+\end{equation*}
+
+Here we compute the beginning and end of period weights.
+<<>>=
+bop_weights = eop_weights = matrix(0, 2, ncol(R))
+for(t in 1:2){
+  bop_weights[t,] = bop_value[t,] / sum(bop_value[t,])
+  eop_weights[t,] = eop_value[t,] / sum(eop_value[t,])
+}
+bop_weights
+eop_weights
+@
+
+The portfolio returns for time $t$ are calculated as:
+
+\begin{equation*}
+R_{P_t} = \frac{V_t - V_{t-1}}{V_{t-1}}
+\end{equation*}
+
+<<>>=
+V = c(V_0, rowSums(eop_value))
+R_P = diff(V) / V[1:2]
+R_P
+@
+
+
+The contribution of asset $i$ at time $t$ is calculated as:
+
+\begin{equation*}
+contribution_{t,i} = \frac{V_{{eop}_{t,i}} - V_{{bop}_{t,i}}}{\sum_{i=1}^N V_{{bop}_{t,i}}}
+\end{equation*}
+
+<<>>=
+contribution = matrix(0, 2, ncol(R))
+for(t in 1:2){
+  contribution[t,] = (eop_value[t,] - bop_value[t,]) / sum(bop_value[t,])
+}
+contribution
+@
+
+Note that contribution can also be calculated as:
+\begin{equation*}
+contribution_{t,i} = R_{t,i} * w_{t,i}
+\end{equation*}
+
+\section{Return.portfolio Examples}
+
+<<>>=
+args(Return.portfolio)
+@
+
+
+If no \verb"weights" are specified, then an equal weight portfolio is computed. Also, if \verb"rebalance_on=NA" then a buy and hold portfolio is assumed. See \verb"?Return.portfolio" for a detailed explanation of the function and arguments.
+
+<<tidy=FALSE>>=
+# Equally weighted, buy and hold portfolio returns
+Return.portfolio(R)
+
+# Equally weighted, rebalanced quarterly portfolio returns
+Return.portfolio(R, rebalance_on="quarters")
+
+# Equally weighted, rebalanced quarterly portfolio returns. 
+# Use verbose=TRUE to return additional information 
+# including asset values and weights
+Return.portfolio(R, rebalance_on="quarters", verbose=TRUE)
+@
+
+
+\end{document}
