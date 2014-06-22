@@ -1,0 +1,68 @@
+<html>
+
+<head>
+  <script src="shared/jquery.js" type="text/javascript"></script>
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="shared/shiny.css"/> 
+<meta charset="utf-8">
+<title>jQuery fieldChooser Plugin Demo</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css" />
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+
+<script src="../fieldChooser.js"></script>
+<script>
+            $(document).ready(function () {
+                var $chooser = $("#fieldChooser").fieldChooser();
+                var $sourceFields = $("#sourceFields").children();
+                $chooser.getSourceList().add($sourceFields);
+            });
+        </script>
+</head>
+
+<body>
+<h1 style="margin-top:150px;">jQuery fieldChooser Plugin Demo</h1>
+<div id="sourceFields">
+<div>First name</div>
+<div>Last name</div>
+<div>Home</div>
+<div>Work</div>
+<div>Direct</div>
+<div>Cell</div>
+<div>Fax</div>
+<div>Work email</div>
+<div>Personal email</div>
+<div>Website</div>
+</div>
+<div id="fieldChooser" tabIndex="1"></div>
+
+
+
+  <h1>HTML UI</h1>
+ 
+  <p>
+    <label>Distribution type:</label><br />
+    <select name="dist">
+      <option value="norm">Normal</option>
+      <option value="unif">Uniform</option>
+      <option value="lnorm">Log-normal</option>
+      <option value="exp">Exponential</option>
+    </select> 
+  </p>
+ 
+  <p>
+    <label>Number of observations:</label><br /> 
+    <input type="number" name="n" value="500" min="1" max="1000" />
+  </p>
+ 
+  <pre id="summary" class="shiny-text-output"></pre> 
+  
+  <div id="plot" class="shiny-plot-output" 
+       style="width: 100%; height: 400px"></div> 
+  
+  <div id="table" class="shiny-html-output"></div>
+</body>
+
+</html>

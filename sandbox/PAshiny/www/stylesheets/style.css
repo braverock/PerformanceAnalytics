@@ -1,0 +1,37 @@
+body {
+background-color: #ffffff;
+font-family: Helvetica, Arial, sans-serif;
+font-weight: lighter;
+}
+div#sourceFields {
+display: none;
+}
+div#fieldChooser {
+width: 350px;
+}
+.fc-field {
+margin: 0 0 0 0;
+padding: 5px;
+font-size: 1.2em;
+width: 120px;
+outline: #777777 ridge thin;
+background-color: #cccccc;
+}
+.fc-selected {
+background-color: #999999;
+}
+.fc-field-list {
+margin: 0;
+padding: 3px 3px 3px 3px;
+margin-right: 10px;
+outline: #333333 solid thin;
+height: 600px;
+width: 150px;
+overflow: scroll;
+}
+.fc-source-fields {
+float: left;
+}
+.fc-destination-fields {
+float: right;
+}
