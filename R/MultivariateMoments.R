@@ -16,7 +16,7 @@
 ###############################################################################
 
 
-M3.MM = function(R,...){
+M3.MM.old = function(R,...){
    cAssets = ncol(R); T = nrow(R);
    if(!hasArg(mu)) mu = apply(R,2,'mean') else mu=mu=list(...)$mu
    M3 = matrix(rep(0,cAssets^3),nrow=cAssets,ncol=cAssets^2)
@@ -28,7 +28,35 @@ M3.MM = function(R,...){
    return( 1/T*M3 );
 }
 
-M4.MM = function(R,...){
+#'@useDynLib PerformanceAnalytics
+M3.MM = function(R, ...){
+  if(!hasArg(mu)) mu = colMeans(R) else mu=list(...)$mu
+  
+  # Pass variables directly from R to the Fortran subroutine
+  # Note that we also need to allocate the object that the Fortran subroutine
+  # returns
+  # It is ok to allocate objects in R and then pass to the Fortran subroutine
+  # https://stat.ethz.ch/pipermail/r-devel/2005-September/034570.html
+  x <- coredata(R)
+  
+  nr <- NROW(x)
+  nc <- NCOL(x)
+  
+  CC <- matrix(0, nc*nc, nc)
+  om <- matrix(0, nc, nc*nc)
+  
+  out <- .Fortran("M3",
+                  x=x,
+                  mu=as.double(mu),
+                  nr=as.integer(nr),
+                  nc=as.integer(nc),
+                  C=CC,
+                  om=om,
+                  PACKAGE="PerformanceAnalytics")$om
+  out
+}
+
+M4.MM.old = function(R,...){
    cAssets = ncol(R); T = nrow(R);
    if(!hasArg(mu))   mu = apply(R,2,'mean')  else mu=list(...)$mu
    M4 = matrix(rep(0,cAssets^4),nrow=cAssets,ncol=cAssets^3);
@@ -38,6 +66,33 @@ M4.MM = function(R,...){
        M4 = M4 + ( centret%*%t(centret) )%x%t(centret)%x%t(centret)
    }
    return( 1/T*M4 );
+}
+
+#'@useDynLib PerformanceAnalytics
+M4.MM = function(R, ...){
+   if(!hasArg(mu)) mu = colMeans(R) else mu=list(...)$mu
+   
+  # Pass variables directly from R to the Fortran subroutine
+  # Note that we also need to allocate the object that the Fortran subroutine
+  # returns
+  # It is ok to allocate objects in R and then pass to the Fortran subroutine
+  # https://stat.ethz.ch/pipermail/r-devel/2005-September/034570.html
+  x <- coredata(R)
+  nr <- NROW(x)
+  nc <- NCOL(x)
+  
+  DD <- matrix(0, nc*nc*nc, nc)
+  om <- matrix(0, nc, nc*nc*nc)
+  
+  out <- .Fortran("M4",
+                  x=x,
+                  mu=as.double(mu),
+                  nr=as.integer(nr),
+                  nc=as.integer(nc),
+                  D=DD,
+                  om=om,
+                  PACKAGE="PerformanceAnalytics")$om
+  out
 }
 
 multivariate_mean = function(w,mu){
