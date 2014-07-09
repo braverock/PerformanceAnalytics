@@ -19,8 +19,10 @@
 #' @param arg.list optional argument to specify input optional argument for each metric, uses 
 #' only interactive=FALSE
 #' @param digits optional argument to specify the significant digits in printed table, default is 4
-#' @param latex logical, default is FALSE, optional arguemnt to output latex code
-#' @param exportFun logical, default is FALSE, optional argument to export function, see details
+#' @param latex logical, default is FALSE, optional argument to output latex code
+#' @param exportFun logical, default is NULL, optional argument to export function, see details
+#' @param exportXLS logical, default is FALSE, optional argument to export resulting table to excel file
+#' @param ExcelFileName The name of the Excel file to be created, default is "PerformanceReport.XLSX"
 #' @details use \code{table.Performance.pool} to check available metrics. recoded SharpeRatio.
 #' Both interactive and fixed input on metric set and optional arguments. Output latex code for resulting table. Export function that uses the same metrics and optional argument from interactive input. 
 #' @author Kirk Li  \email{kirkli@@stat.washington.edu} 
@@ -63,9 +65,15 @@
 #' myfun1(R=edhec)  
 #' # myfun1 uses res.ex5's metrics and optional arguments 
 #' args(myfun1)
+#' 
+#' # Example 6: Export XLSX 
+#' res.ex6 <- table.Performance(R=edhec,metrics=c("VaR", "ES"), interactive=FALSE, 
+#' arg.list=arg.list, verbose=T, digits=4, latex=TRUE, exportXLS=TRUE,ExcelFileName="PerformanceReport.xls")
+#' 
+#' 
 #' @export
 table.Performance <-
-		function(R,metrics=NULL,metricsNames=NULL, verbose=FALSE, interactive=TRUE, arg.list=NULL, digits=4, latex=FALSE, exportFun=NULL, flag.pre.arg.list=FALSE,...){
+		function(R,metrics=NULL,metricsNames=NULL, verbose=FALSE, interactive=TRUE, arg.list=NULL, digits=4, latex=FALSE, exportFun=NULL, exportXLS=FALSE, ExcelFileName="PerformanceReport.xls",flag.pre.arg.list=FALSE,...){
 	# FUNCTION: 47-1 different metrics
 	pool <- table.Performance.pool()
 	
@@ -295,6 +303,16 @@ table.Performance <-
 		
 	}
 	
+  if(exportXLS){
+      cat("###################################","\n")
+      cat(paste0("Exporting to Excel file ",ExcelFileName,"\n"))
+      cat("###################################","\n")
+    require(WriteXLS)
+    temp <- res$resultingtable
+    inslib(WriteXLS)
+    WriteXLS("temp",row.names = TRUE,ExcelFileName=ExcelFileName )
+    
+  }
 	return(res)
 }
 
