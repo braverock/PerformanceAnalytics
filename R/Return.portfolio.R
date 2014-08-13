@@ -150,9 +150,9 @@ Return.portfolio <- Return.rebalancing <- function(R,
          yearly = { time_unit = "year"}
   )
   
-  # calculates the end of the prior period
-  start_date = seq(as.Date(index(R)[1]), length = 2, by = paste("-1", time_unit))[2]
-  
+  # calculates the end of the prior period 
+  # need to use the if on quarter as quarter is incompatible with seq (it does not work with by)
+  if(time_unit=='quarter'){  start_date = as.yearqtr(seq(as.Date(index(R)[1]), length = 2, by = paste("-3", 'month'))[2])}else{  start_date = seq(as.Date(index(R)[1]), length = 2, by = paste("-1", time_unit))[2]}  
   if(is.null(weights)){
     # generate equal weight vector for return columns  
     weights = rep(1 / NCOL(R), NCOL(R))
