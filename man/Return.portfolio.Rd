@@ -127,8 +127,8 @@ portfolio for that same time period.  The function does not do this directly, ho
 }
 \examples{
 data(edhec)
-Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly") # returns time series
-Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly", verbose=TRUE) # returns list
+Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters") # returns time series
+Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
 # with a weights object
 data(weights) # rebalance at the beginning of the year to various weights through time
 chart.StackedBar(weights)

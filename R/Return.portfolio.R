@@ -112,8 +112,8 @@
 #' @examples
 #' 
 #' data(edhec)
-#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly") # returns time series
-#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarterly", verbose=TRUE) # returns list
+#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters") # returns time series
+#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
 #' # with a weights object
 #' data(weights) # rebalance at the beginning of the year to various weights through time
 #' chart.StackedBar(weights)
@@ -135,6 +135,11 @@ Return.portfolio <- Return.rebalancing <- function(R,
                                                    verbose=FALSE,
                                                    ...){
   R = checkData(R, method="xts")
+  if(any(is.na(R))){
+    warning("NA's detected: filling NA's with zeros")
+    #R <- zerofill(R)
+    R[is.na(R)] <- 0
+  }
   rebalance_on = rebalance_on[1]
   
   # find the right unit to subtract from the first return date to create a start date
