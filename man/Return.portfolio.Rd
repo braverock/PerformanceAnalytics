@@ -24,7 +24,7 @@ contributed by the asset in a given period. Default FALSE}
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic (FALSE)
 to aggregate returns. Default TRUE.}
 
-\item{rebalance_on}{Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{endpoints}.}
+\item{rebalance_on}{Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{\link[xts]{endpoints}}.}
 
 \item{value}{The beginning of period total portfolio value. This is used for calculating position value.}
 
@@ -74,7 +74,7 @@ the portfolio will be rebalanced to the starting weights at the interval specifi
 
 Return.rebalancing will work only on daily or lower frequencies. If you are
 rebalancing intraday, you should be using a trades/prices framework like
-{\link{\code{blotter}}}, not a weights/returns framework.
+the \code{blotter} package, not a weights/returns framework.
 
 Irregular rebalancing can be done by specifying a time series of weights.  The
 function uses the date index of the weights for xts-style subsetting of rebalancing
@@ -145,7 +145,7 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. Chapter 2\cr
 }
 \seealso{
-\code{\link{Return.calculate}} \code{\link{xts::endpoints}} \cr
+\code{\link{Return.calculate}} \code{\link[xts]{endpoints}} \cr
 }
 \keyword{distribution}
 \keyword{models}

@@ -35,7 +35,7 @@
 #' 
 #' Return.rebalancing will work only on daily or lower frequencies. If you are 
 #' rebalancing intraday, you should be using a trades/prices framework like 
-#' {\link{\code{blotter}}}, not a weights/returns framework.
+#' the \code{blotter} package, not a weights/returns framework.
 #' 
 #' Irregular rebalancing can be done by specifying a time series of weights.  The 
 #' function uses the date index of the weights for xts-style subsetting of rebalancing 
@@ -97,7 +97,7 @@
 #' contributed by the asset in a given period. Default FALSE
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic (FALSE)
 #' to aggregate returns. Default TRUE. 
-#' @param rebalance_on Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{endpoints}.
+#' @param rebalance_on Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{\link[xts]{endpoints}}.
 #' @param value The beginning of period total portfolio value. This is used for calculating position value.
 #' @param verbose If verbose is TRUE, return a list of intermediary calculations. 
 #' See Details below.
@@ -105,7 +105,7 @@
 #' @return returns a time series of returns weighted by the \code{weights}
 #' parameter, or a list that includes intermediate calculations
 #' @author Peter Carl, Ross Bennett, Brian Peterson
-#' @seealso \code{\link{Return.calculate}} \code{\link{xts::endpoints}} \cr
+#' @seealso \code{\link{Return.calculate}} \code{\link[xts]{endpoints}} \cr
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. Chapter 2\cr
 #' @keywords ts multivariate distribution models
