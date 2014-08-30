@@ -1,4 +1,7 @@
-#' 
+#' Probability of Outperformance
+#' Returns tables of convertable arbitrage between a return series and 
+#'   a benchmark
+#'
 #' @description Tool for Robustness analysis of a strategy, can be used to give the probability an investor investing at any point in time will outperform the benchmark over a given horizon. Calculates Count of trailing periods where a fund outperformed its benchmark and calculates the proportion of those periods, this is commonly used in marketing as the probability of outperformance on a N period basis.
 #' 
 #' @param R an xts, timeSeries or zoo object of asset returns
