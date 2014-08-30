@@ -1,20 +1,33 @@
-#' Probability of Outperformance
-#' Returns tables of convertable arbitrage between a return series and 
-#'   a benchmark
+#' Performance Reporting Fund vs Benchmark
 #'
-#' @description Tool for Robustness analysis of a strategy, can be used to give the probability an investor investing at any point in time will outperform the benchmark over a given horizon. Calculates Count of trailing periods where a fund outperformed its benchmark and calculates the proportion of those periods, this is commonly used in marketing as the probability of outperformance on a N period basis.
-#' 
+#' Table of Performance Reporting vs Benchmark
+#'
+#' Returns a table that contains the counts and probabilities 
+#' of outperformance relative to benchmark for the various period_lengths
+#'
+#' Tool for Robustness analysis of a strategy, can be used to 
+#' give the probability an investor investing at any point in time will 
+#' outperform the benchmark over a given horizon. Calculates Count of 
+#' trailing periods where a fund outperformed its benchmark and calculates 
+#' the proportion of those periods, this is commonly used in marketing as 
+#' the probability of outperformance on a N period basis.
+#'
 #' @param R an xts, timeSeries or zoo object of asset returns
 #' @param Rb an xts, timeSeries or zoo object of the benchmark returns
-#' @param period_lengths a vector of periods the user wants to evaluate this over i.e. c(1,3,6,9,12,18,36)
+#' @param period_lengths a vector of periods the user wants to evaluate this 
+#' over i.e. c(1,3,6,9,12,18,36)
 #' @author Kyle Balkissoon
-#' @keywords Performance Reporting Fund vs Benchmark
-#' @details Returns a table that contains the counts and probabilities of outperformance relative to benchmark for the various period_lengths
+#' @keywords ts multivariate distribution models
+#' @details Returns a table that contains the counts and probabilities 
+#' of outperformance relative to benchmark for the various period_lengths
+#'
 #' @examples 
-#' data(edhec) ##get data
-#' table.ProbOutPerformance(edhec[,1],edhec[,2]) ##Returns tables of conv arb benchmarked to cta global
-#' @export table_ProbOutperformance
-
+#'
+#' data(edhec) 
+#'
+#' table.ProbOutPerformance(edhec[,1],edhec[,2]) 
+#' title(main='Table of Convertible Arbitrage vs Benchmark')
+#' @export 
 table.ProbOutPerformance = function(R,Rb,period_lengths=c(1,3,6,9,12,18,36)){
   if(nrow(R)!=nrow(Rb)){
     stop("R and Rb must be the same length")
