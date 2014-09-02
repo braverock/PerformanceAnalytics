@@ -99,6 +99,8 @@ function (R,...)
 
 ###############################################################################
 
+#' @rdname CoMoments
+#' @export
 CoSkewnessMatrix <-
 function (R, ...)
 { # @author Kris Boudt
@@ -107,6 +109,8 @@ function (R, ...)
 
 ###############################################################################
 
+#' @rdname CoMoments
+#' @export
 CoKurtosisMatrix <-
 function (R, ...)
 { # @author Kris Boudt
@@ -175,10 +179,13 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' @concept co-moments
 #' @concept moments
 #' @aliases CoMoments CoVariance CoSkewness CoKurtosis
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' index, benchmark, portfolio, or secondary asset returns to compare against
+#' @param \dots any other passthru parameters
 #' @author Kris Boudt, Peter Carl, Brian Peterson
 #' @seealso \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
 #' \code{\link{BetaCoMoments}}

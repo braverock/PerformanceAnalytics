@@ -46,7 +46,7 @@
 #' judgement on which approach is preferable.
 #' @section Background: This function provides several estimation methods for
 #' the Expected Shortfall (ES) (also called Expected Tail Loss (ETL)
-#' orConditional Value at Risk (CVaR)) of a return series and the Component ES
+#' or Conditional Value at Risk (CVaR)) of a return series and the Component ES
 #' (ETL/CVaR) of a portfolio.
 #' 
 #' At a preset probability level denoted \eqn{c}, which typically is between 1

@@ -1,11 +1,11 @@
-#' Performance Reporting Fund vs Benchmark
+#' Outperformance Report of Asset vs Benchmark
 #'
-#' Table of Performance Reporting vs Benchmark
+#' Table of Outperformance Reporting vs Benchmark
 #'
 #' Returns a table that contains the counts and probabilities 
 #' of outperformance relative to benchmark for the various period_lengths
 #'
-#' Tool for Robustness analysis of a strategy, can be used to 
+#' Tool for robustness analysis of an asset or strategy, can be used to 
 #' give the probability an investor investing at any point in time will 
 #' outperform the benchmark over a given horizon. Calculates Count of 
 #' trailing periods where a fund outperformed its benchmark and calculates 
@@ -27,6 +27,7 @@
 #'
 #' table.ProbOutPerformance(edhec[,1],edhec[,2]) 
 #' title(main='Table of Convertible Arbitrage vs Benchmark')
+#'
 #' @export 
 table.ProbOutPerformance = function(R,Rb,period_lengths=c(1,3,6,9,12,18,36)){
   if(nrow(R)!=nrow(Rb)){

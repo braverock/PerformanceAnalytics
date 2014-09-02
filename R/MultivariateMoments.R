@@ -29,6 +29,8 @@ M3.MM.old = function(R,...){
 }
 
 #'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
 M3.MM = function(R, ...){
   if(!hasArg(mu)) mu = colMeans(R) else mu=list(...)$mu
   
@@ -69,6 +71,8 @@ M4.MM.old = function(R,...){
 }
 
 #'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
 M4.MM = function(R, ...){
    if(!hasArg(mu)) mu = colMeans(R) else mu=list(...)$mu
    
