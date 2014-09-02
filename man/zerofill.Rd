@@ -9,13 +9,12 @@ zerofill(x)
 }
 \description{
 Fill NA's with zeros in a time series to allow analysis
-when the matrix must be complete.
+when the data must be complete.
 }
 \details{
 Note that this function has risks, use carefully.  Complete
 data is preferred.  Barring that, filling a small
-percentage of results in a the middle of a large set are
+percentage of results in the middle of a large set is
 unlikely to cause problems. Barring that, realize that this
 will skew your results.
 }
-

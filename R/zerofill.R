@@ -16,23 +16,18 @@
 
 #' zerofill
 #' 
-#' Fill NA's with zeros in a time series to allow analysis when the matrix must
+#' Fill NA's with zeros in a time series to allow analysis when the data must
 #' be complete.
 #' 
 #' Note that this function has risks, use carefully.  Complete data is
-#' preferred.  Barring that, filling a small percentage of results in a the
-#' middle of a large set are unlikely to cause problems. Barring that, realize
+#' preferred.  Barring that, filling a small percentage of results in the
+#' middle of a large set is unlikely to cause problems. Barring that, realize
 #' that this will skew your results.
 #' 
 #' @param x time series to zero fill
 #' @export
 zerofill <- function (x) {
-  mat<-checkData(x,"matrix")
-  for(column in 1:ncol(mat)){
-    for (row in 1:nrow(mat)){
-      if(is.na(mat[row,column])) mat[row,column] <- 0
-    }
-  }
-  x<-reclass(mat,x)
+  x <- checkData(x,"xts")
+  x[is.na(x)] <- 0
   return(x)
 }
