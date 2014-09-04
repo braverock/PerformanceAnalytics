@@ -144,6 +144,18 @@ RiskMetrics Monitor, First Quarter, 4-12.
 
 Rockafellar, Terry and Uryasev, Stanislav. Optimization of Conditional VaR.
 The Journal of Risk, 2000, vol. 2, 21-41.
+
+Dowd, Kevin. Measuring Market Risk, John Wiley and Sons, 2010.
+
+Jorian, Phillippe. Value at Risk, the new benchmark for managing financial risk.
+3rd Edition, McGraw Hill, 2006.
+
+Hallerback, John. "Decomposing Portfolio Value-at-Risk: A General Analysis",
+2003. The Journal of Risk vol 5/2.
+
+Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and
+   Value-at-Risk: Their Estimation Error, Decomposition, and Optimization",
+   Bank of Japan.
 }
 \seealso{
 \code{\link{SharpeRatio.modified}} \cr
