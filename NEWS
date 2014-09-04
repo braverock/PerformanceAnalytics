@@ -1,3 +1,32 @@
+PerformanceAnalytics 1.4 Release Notes
+
+This release mostly adds some functionality from Bacon, and 
+makes visible some features that were previously internal to 
+the package.  
+
+We've also moved to using roxygen2 to generate the NAMESPACE file,
+which required touching basically every single generated .Rd file.
+
+
+
+Most of the commits leading up to release are the result of continued 
+tightening and drift in CRAN standards, most should not have user-visible
+results.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
+PerformanceAnalytics 1.1 Release Notes
+
+Another release almost exclusively based on R core changes ahead of R 3.0.0.
+
+Most of the commits leading up to release are the result of continued 
+tightening and drift in CRAN standards, most should not have user-visible
+results.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
 PerformanceAnalytics 1.0.4.3 Release Notes
 (sent to CRAN 2012-03-29)
 
