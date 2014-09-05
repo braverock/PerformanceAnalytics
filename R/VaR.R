@@ -217,6 +217,8 @@ function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "ke
             columns<-ncol(rVaR)
             for(column in 1:columns) {
                 tmp=rVaR[,column]
+                if (!is.finite(tmp)) # skip reasonableness check if tmp is NA, NaN, +/-Inf, etc
+                    next()
                 if (eval(tmp < 0)) { #eval added previously to get around Sweave bitching
                     message(c("VaR calculation produces unreliable result (inverse risk) for column: ",column," : ",rVaR[,column]))
                     # set VaR to NA, since inverse risk is unreasonable
