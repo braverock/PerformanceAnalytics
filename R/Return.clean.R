@@ -211,7 +211,7 @@ function(R, alpha=.01 , trim=1e-3)
 
    T=dim(R)[1]; date=c(1:T)
    N=dim(R)[2];
-   MCD = covMcd(as.matrix(R),alpha=1-alpha)
+   MCD = robustbase::covMcd(as.matrix(R),alpha=1-alpha)
    mu = as.matrix(MCD$raw.center) #no reweighting
    sigma = MCD$raw.cov
    invSigma = solve(sigma);

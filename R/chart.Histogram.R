@@ -200,7 +200,7 @@ function(R,
                 # Show density estimate
                 den = density(x, n=length(x))
                 yrange=c(yrange,max(den$y))
-                 probability = TRUE
+                probability = TRUE
             },
 #             add.stable = {
 #                 stopifnot("package:fBasics" %in% search() || require("fBasics",quietly=TRUE))
@@ -211,29 +211,27 @@ function(R,
 #                 probability = TRUE
 #             },
             add.cauchy = {
-                # requires library(MASS)
                 stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
-
                 # This uses a Maximum Likelihood method as shown on:
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and
                 # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
-                fit = fitdistr(x, 'cauchy')
+                fit = MASS::fitdistr(x, 'cauchy')
                 xlab = paste("Cauchy (location = ",round(fit$estimate[[1]],2),", scale = ",round(fit$estimate[[2]],2),")", sep="")
                 fitted.cauchy = dcauchy(s,location = fit$estimate[[1]], scale = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.cauchy))
                 probability = TRUE
             },
             add.sst = {
-#               requires library(gamlss)
                 stopifnot("package:gamlss" %in% search() || require("gamlss",quietly=TRUE))              
-                fit = gamlss(coredata(y)~1, family="ST1", verbose=FALSE)
-                fitted.sst = dST1(s, mu = fitted(fit)[1], sigma = fitted(fit, "sigma")[1], nu = fitted(fit, "nu")[1], tau = fitted(fit, "tau")[1])
+                #stopifnot("package:gamlss.dist" %in% search() || require("gamlss",quietly=TRUE))              
+                fitted.sst = gamlss.dist::dST1(s, mu = fitted(fit)[1], sigma = fitted(fit, "sigma")[1], nu = fitted(fit, "nu")[1], tau = fitted(fit, "tau")[1])
                 yrange=c(yrange,max(fitted.sst))
                 probability = TRUE
             },
             add.lnorm = {
-                fit = fitdistr(1+x,'log-normal')
+                stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
+                fit = MASS::fitdistr(1+x,'log-normal')
                 fitted.lnorm = dlnorm(1+s, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.lnorm))
                 probability = TRUE

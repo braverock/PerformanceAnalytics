@@ -1,7 +1,7 @@
 Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
-Version: 1.3.3524
+Version: 1.3.3526
 Date: $Date$
 Author: Peter Carl, Brian G. Peterson
 Maintainer: Brian G. Peterson <brian@braverock.com>
@@ -23,6 +23,7 @@ Suggests:
     MASS,
     quantmod,
     gamlss,
+    gamlss.dist,
     robustbase,
     quantreg,
     gplots

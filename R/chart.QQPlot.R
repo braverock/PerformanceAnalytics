@@ -145,7 +145,7 @@ function(R, distribution="norm", ylab=NULL,
         }
     if (line=="robust"){
         stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
-        coef<-coefficients(rlm(ord.x~z))
+        coef<-coefficients(MASS::rlm(ord.x~z))
         a<-coef[1]
         b<-coef[2]
         abline(a,b, col=col[2])
