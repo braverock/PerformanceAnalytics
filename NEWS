@@ -2,12 +2,18 @@ PerformanceAnalytics 1.4 Release Notes
 
 This release mostly adds some functionality from Bacon, and 
 makes visible some features that were previously internal to 
-the package.  
+the package.  We've also completely re-written Return.portfolio.
 
 We've also moved to using roxygen2 to generate the NAMESPACE file,
 which required touching basically every single generated .Rd file.
 
-
+We're also altering out version numbering system. We'll be using a 
+"major.cran-release.r-forge-rev" form to make it easier for us to track 
+where reported issues may have been introduced.  Major releases will continue 
+to indicate that significant changes to the interfaces of the functions 
+were made.  This is our 4th CRAN release after 1.0, so the minor number 
+moves to 4.  The trailing number will reflect the revision number from
+R-Forge's svn associated with the tagged CRAN (or subsequent) release.
 
 Most of the commits leading up to release are the result of continued 
 tightening and drift in CRAN standards, most should not have user-visible
