@@ -254,7 +254,7 @@ function (R, ...) {
     result = apply(R, MARGIN = 2, ar)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
-    rownames(result) = "Average Recovery"
+    rownames(result) = "Average Length"
     return (result)
 }
 
