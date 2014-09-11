@@ -44,15 +44,6 @@
 maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
-	# DESCRIPTION:
-	# To find the maximum drawdown in a return series, we need to first
-	# calculate the cumulative returns and the maximum cumulative return to
-	# that point.  Any time the cumulative returns dips below the maximum
-	# cumulative returns, it's a drawdown.  Drawdowns are measured as a
-	# percentage of that maximum cumulative return, in effect, measured from
-	# peak equity.
-	
-	# FUNCTION:
 	if (is.vector(R) || ncol(R)==1 ) {
 		R = na.omit(R)
         drawdown = Drawdowns(R, geometric = geometric)
@@ -156,13 +147,6 @@ CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
 DrawdownDeviation <-
 function (R, ...) {
 
-    # Calculates a standard deviation-type statistic using individual drawdowns.
-    # 
-    # DD = sqrt(sum[j=1,2,...,d](D_j^2/n)) where
-    # D_j = jth drawdown over the entire period
-    # d = total number of drawdowns in entire period
-    # n = number of observations
-
     R = checkData(R)
 
     dd <- function(R) {
@@ -180,7 +164,7 @@ function (R, ...) {
     return (result)
 }
 
-#' Calculates the average of the observed drawdowns.
+#' Calculates the average depth of the observed drawdowns.
 #' 
 #' ADD = abs(sum[j=1,2,...,d](D_j/d)) where
 #' D'_j = jth drawdown over entire period
@@ -189,6 +173,7 @@ function (R, ...) {
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param \dots any other passthru parameters
+#' @author Peter Carl
 #' @export 
 AverageDrawdown <-
 function (R, ...) {
@@ -216,16 +201,16 @@ function (R, ...) {
     return (result)
 }
 
-#' @rdname AverageDrawdown
+#' Calculates the average length (in periods) of the observed recovery period.
+#' 
+#' Similar to \code{\link{AverageDrawdown}}, which calculates the average depth of drawdown, this function calculates the average length of the recovery period of the drawdowns observed.
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
 #' @export 
 AverageRecovery <-
 function (R, ...) {
-
-    # Calculates the average length (in months) of the observed recovery period.
-    # 
-    # ADD = abs(sum[j=1,2,...,d](D_j/d)) where
-    # D'_j = jth drawdown over entire period
-    # d = total number of drawdowns in the entire period
 
     R = checkData(R)
 
@@ -244,7 +229,34 @@ function (R, ...) {
     rownames(result) = "Average Recovery"
     return (result)
 }
+#' Calculates the average length (in periods) of the observed drawdowns.
+#' 
+#' Similar to \code{\link{AverageDrawdown}}, which calculates the average depth of drawdown, this function calculates the average length of the drawdowns observed.
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param \dots any other passthru parameters
+#' @author Peter Carl
+#' @export 
+AverageLength <-
+function (R, ...) {
 
+    R = checkData(R)
+
+    ar <- function(R) {
+        R = na.omit(R)
+        Dj = findDrawdowns(as.matrix(R))$return
+        Dr = findDrawdowns(as.matrix(R))$length
+        d = length(Dr[Dj<0])
+        result = abs(sum(Dr[Dj<0]/d))
+        return(result)
+    }
+
+    result = apply(R, MARGIN = 2, ar)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
+    rownames(result) = "Average Recovery"
+    return (result)
+}
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis

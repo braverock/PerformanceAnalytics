@@ -72,9 +72,9 @@ Return.rebalancing <- function (R, weights=NULL, on=c(NA, 'years', 'quarters', '
     weights = rep(1/NCOL(R), NCOL(R))
   }
   if(is.vector(weights)) { # weights are a vector
-    if(is.na(endpoints)) { # and endpoints are not specified 
+    if(is.na(on)) { # and endpoints are not specified 
       # then use the weights only at the beginning of the returns series, without rebalancing
-      weights = xts(weights, order.by=as.Date(start_date))
+      weights = xts(matrix(weights, nrow=1), order.by=as.Date(start_date))
     }
     else { # and endpoints are specified
       #  generate a time series of the given weights at the endpoints
@@ -111,10 +111,16 @@ Return.rebalancing <- function (R, weights=NULL, on=c(NA, 'years', 'quarters', '
   # loop over rebalance periods
   start_date=index(weights)[1]
 
-  for(i in 1:(NROW(weights)-1)) {
-    # identify rebalance from and to dates (weights[i,], weights[i+1])
-    from = as.Date(index(weights[i,]))+1
-    to = as.Date(index(weights[i+1,]))
+    if(NROW(weights)>1)
+      for(i in 1:(NROW(weights)-1)) {
+      # identify rebalance from and to dates (weights[i,], weights[i+1])
+        from = as.Date(index(weights[i,]))+1
+        to = as.Date(index(weights[i+1,]))
+      }
+    else{
+      from = as.Date(index(weights[1,]))+1
+      to=NULL
+    }
     returns = R[paste0(from,"::",to)]
     #print(returns)
 
