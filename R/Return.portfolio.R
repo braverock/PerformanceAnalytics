@@ -33,7 +33,7 @@
 #' and no further rebalancing will take place. If a rebalancing period is specified, 
 #' the portfolio will be rebalanced to the starting weights at the interval specified.  
 #' 
-#' Return.rebalancing will work only on daily or lower frequencies. If you are 
+#' \code{Return.portfolio} will work only on daily or lower frequencies. If you are 
 #' rebalancing intraday, you should be using a trades/prices framework like 
 #' the \code{blotter} package, not a weights/returns framework.
 #' 
@@ -86,6 +86,11 @@
 #' Across assets, those will sum to equal the geometric chained returns of the 
 #' portfolio for that same time period.  The function does not do this directly, however.
 #'
+#' @note
+#' This function was previously two functions: \code{Return.portfolio} and 
+#' \code{Return.rebalancing}.  Both function names are still exported,
+#' but the code is now common, and \code{Return.portfolio} is probably to be preferred.
+#' 
 #' @aliases Return.portfolio Return.rebalancing
 #' @param R An xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
@@ -112,12 +117,12 @@
 #' @examples
 #' 
 #' data(edhec)
-#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters") # returns time series
-#' Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
+#' Return.portfolio(edhec["1997",1:5], rebalance_on="quarters") # returns time series
+#' Return.portfolio(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
 #' # with a weights object
 #' data(weights) # rebalance at the beginning of the year to various weights through time
 #' chart.StackedBar(weights)
-#' x <- Return.rebalancing(edhec["2000::",1:11], weights=weights,verbose=TRUE)
+#' x <- Return.portfolio(edhec["2000::",1:11], weights=weights,verbose=TRUE)
 #' chart.CumReturns(x$returns)
 #' chart.StackedBar(x$BOP.Weight)
 #' chart.StackedBar(x$BOP.Value)
