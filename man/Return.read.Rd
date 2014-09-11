@@ -59,8 +59,4 @@ Peter Carl
 \seealso{
 \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

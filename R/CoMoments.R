@@ -1,7 +1,5 @@
 # Compute co-moment matrices
 
-
-
 #' calculate centered Returns
 #' 
 #' the \eqn{n}-th centered moment is calculated as \deqn{ }{moment^n(R) =
@@ -48,7 +46,7 @@
 #' Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of
 #' Preference for Moments of Higher Order than the Variance. Journal of Finance
 #' 35(4):915-919.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' 
@@ -98,6 +96,10 @@ function (R,...)
 }
 
 ###############################################################################
+
+#' @rdname CoMoments
+#' @name CoMoments
+NULL
 
 #' @rdname CoMoments
 #' @export
@@ -203,7 +205,7 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of
 #' Preference for Moments of Higher Order than the Variance. Journal of Finance
 #' 35(4):915-919.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)
@@ -337,7 +339,7 @@ CoVariance<- function(Ra,Rb)
 #' Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
 #' Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
 #' and Asset Management Research Centre working paper.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

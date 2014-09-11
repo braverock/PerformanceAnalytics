@@ -48,8 +48,4 @@ Blackjack, Sports Betting, and the Stock Market.
 \url{http://www.bjmath.com/bjmath/thorp/paper.htm} \cr
 \url{http://en.wikipedia.org/wiki/Kelly_criterion}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

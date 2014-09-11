@@ -31,7 +31,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}}, \cr \code{\link{plot}}, \cr
 #' \code{\link{par}}
-#' @keywords ts hplot
+###keywords ts hplot
 #' @examples
 #' \dontrun{
 #' data(managers)

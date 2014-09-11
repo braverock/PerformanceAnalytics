@@ -16,7 +16,7 @@
 #' and attribution}, second edition 2008 p.65
 #' @seealso \code{\link{StdDev.annualized}}
 #' \cr \code{\link{MeanAbsoluteDeviation}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

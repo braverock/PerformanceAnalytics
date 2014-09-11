@@ -79,8 +79,4 @@ table.Arbitrary(edhec,metrics=c("VaR", "ES"),
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

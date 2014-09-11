@@ -33,7 +33,7 @@
 #' Geltner, David, 1993, Estimating Market Values from Appraised Values without
 #' Assuming an Efficient Market, Journal of Real Estate Research, Vol.8,
 #' p.325-345.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

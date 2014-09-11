@@ -45,8 +45,4 @@ Peter Carl
 \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
 \code{\link{InformationRatio}} \cr \code{\link{TreynorRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

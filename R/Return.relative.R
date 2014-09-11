@@ -11,7 +11,7 @@
 #' @return xts or other time series of relative return
 #' @author Peter Carl
 #' @seealso \code{\link{chart.RelativePerformance}}
-#' @keywords ts
+###keywords ts
 #' @examples
 #' 
 #' data(managers)

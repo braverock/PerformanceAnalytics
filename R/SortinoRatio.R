@@ -34,7 +34,7 @@
 #' \code{\link{InformationRatio}}
 #' @references Sortino, F. and Price, L. Performance Measurement in a Downside
 #' Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

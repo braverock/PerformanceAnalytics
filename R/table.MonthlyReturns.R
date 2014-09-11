@@ -15,7 +15,7 @@
 #' @param ci confidence interval, defaults to 95\%
 #' @param digits number of digits to round results to
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

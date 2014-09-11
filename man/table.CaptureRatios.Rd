@@ -46,8 +46,4 @@ Peter Carl
 \seealso{
 \code{\link{UpDownRatios}}, \code{\link{chart.CaptureRatios}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

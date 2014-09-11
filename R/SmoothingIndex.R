@@ -83,7 +83,7 @@
 #' Getmansky, Mila, Andrew W. Lo, and Igor Makarov. 2004. An Econometric Model
 #' of Serial Correlation and Illiquidity in Hedge Fund Returns. Journal of
 #' Financial Economics (74): 529-609.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

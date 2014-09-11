@@ -33,7 +33,7 @@
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.96
 #' 
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #'
 #' @examples
 #' l = 2

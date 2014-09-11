@@ -42,8 +42,4 @@ and attribution}, second edition 2008 p.76
 \code{\link{SystematicRisk}} \cr \code{\link{SpecificRisk}}
 \cr \code{\link{TotalRisk}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

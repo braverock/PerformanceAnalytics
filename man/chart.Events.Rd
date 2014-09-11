@@ -63,6 +63,4 @@ Peter Carl
 \code{\link{chart.TimeSeries}}, \cr \code{\link{plot}}, \cr
 \code{\link{par}}
 }
-\keyword{hplot}
-\keyword{ts}
 

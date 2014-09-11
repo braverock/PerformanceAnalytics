@@ -58,8 +58,4 @@ and attribution}, second edition 2008 p.77
 \code{\link{SharpeRatio}} \code{\link{SortinoRatio}}
 \code{\link{CAPM.beta}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

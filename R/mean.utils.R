@@ -21,7 +21,7 @@
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

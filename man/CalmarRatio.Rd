@@ -61,8 +61,4 @@ and Attribution}. Wiley. 2004.
 \code{\link{SharpeRatio.modified}}, \cr
 \code{\link{UpsidePotentialRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

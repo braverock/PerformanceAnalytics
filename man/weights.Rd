@@ -21,4 +21,3 @@ head(weights)
 
 }
 \keyword{datasets}
-\keyword{ ts }

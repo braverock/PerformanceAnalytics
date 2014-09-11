@@ -53,9 +53,4 @@ Peter Carl
 \code{\link{charts.RollingPerformance}},
 \code{\link[zoo]{rollapply}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

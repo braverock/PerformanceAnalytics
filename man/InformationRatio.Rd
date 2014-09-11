@@ -44,8 +44,4 @@ Management},Fall 1994, 49-58.
 \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
 \code{\link{SharpeRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

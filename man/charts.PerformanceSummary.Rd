@@ -75,9 +75,4 @@ Peter Carl
 \code{\link{chart.CumReturns}} \cr \code{\link{chart.BarVaR}} \cr
 \code{\link{chart.Drawdown}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -17,7 +17,7 @@
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{chart.RollingPerformance}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(managers)

@@ -32,7 +32,7 @@
 #' \code{\link{SortinoRatio}}
 #' @references Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
 #' Management},Fall 1994, 49-58.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

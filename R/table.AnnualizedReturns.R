@@ -14,7 +14,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{Return.annualized}} \cr \code{\link{StdDev.annualized}}
 #' \cr \code{\link{SharpeRatio.annualized}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

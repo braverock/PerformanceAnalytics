@@ -13,7 +13,7 @@
 #' \cr \code{\link{TrackingError}}
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.81
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

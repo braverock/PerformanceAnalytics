@@ -42,8 +42,4 @@ Management},Fall 1994, 49-58.
 \code{\link{InformationRatio}} \code{\link{TrackingError}}
 \code{\link{Return.annualized}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

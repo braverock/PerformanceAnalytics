@@ -57,8 +57,4 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{table.Drawdowns}} \cr \code{\link{table.DownsideRisk}} \cr
 \code{\link{chart.Drawdown}} \cr
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -42,8 +42,4 @@ and attribution}, second edition 2008 p.87
 \code{\link{StdDev.annualized}} \cr \code{\link{skewness}} \cr
 \code{\link{kurtosis}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

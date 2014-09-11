@@ -43,9 +43,4 @@ Peter Carl
 \seealso{
 \code{\link{chart.RollingPerformance}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -79,7 +79,7 @@ value of \eqn{d^2_t} to a quantile of the \eqn{\chi^2_n} distribution,
 }
 
 Note that the primary value of data cleaning lies in creating a more robust
-and stable estimation of the distribution generating the large majority of
+and stable estimation of the distribution describing the large majority of
 the return data. The increased robustness and stability of the estimated
 moments utilizing cleaned data should be used for portfolio construction. If
 a portfolio manager wishes to have a more conservative risk estimate,
@@ -118,8 +118,4 @@ Statistics and Its Applications, Volume B, pp. 283?297. Dordrecht-Reidel.
 \seealso{
 \code{\link{Return.clean}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

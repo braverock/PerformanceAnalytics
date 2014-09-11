@@ -57,7 +57,7 @@
 #' \code{"kendall"}, or \code{"spearman"}, can be abbreviated.
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{Return.clean}} \code{sd}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(edhec)

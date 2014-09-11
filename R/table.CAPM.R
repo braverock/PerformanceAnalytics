@@ -17,7 +17,7 @@
 #' @seealso \code{\link{CAPM.alpha}} \cr \code{\link{CAPM.beta}} \cr
 #' \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
 #' \code{\link{InformationRatio}} \cr \code{\link{TreynorRatio}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #'
 #' data(managers)

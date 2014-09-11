@@ -20,7 +20,7 @@
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.94
 #' 
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
 #' MAR = 0.005

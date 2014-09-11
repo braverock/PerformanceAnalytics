@@ -39,7 +39,7 @@
 #' @seealso \code{\link[graphics]{boxplot}}
 #' @references Tufte, Edward R.  \emph{The Visual Display of Quantitative
 #' Information}. Graphics Press. 1983. p. 124-129
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

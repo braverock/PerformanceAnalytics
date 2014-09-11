@@ -84,9 +84,4 @@ Peter Carl
 \seealso{
 \code{\link[stats]{lm}} \cr \code{\link[quantreg]{rq}} \cr
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

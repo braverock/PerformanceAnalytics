@@ -51,8 +51,4 @@ Geltner, David, 1993, Estimating Market Values from Appraised Values without
 Assuming an Efficient Market, Journal of Real Estate Research, Vol.8,
 p.325-345.
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

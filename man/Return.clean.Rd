@@ -51,8 +51,4 @@ Peter Carl
 \seealso{
 \code{\link{clean.boudt}} \cr \code{\link{Return.Geltner}} \cr
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

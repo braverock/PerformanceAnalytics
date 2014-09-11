@@ -24,7 +24,7 @@
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004. \cr
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

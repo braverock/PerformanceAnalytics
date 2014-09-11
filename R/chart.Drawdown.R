@@ -25,7 +25,7 @@
 #' \code{\link{maxDrawdown}} \cr 
 #' \code{\link{table.Drawdowns}} \cr
 #' \code{\link{table.DownsideRisk}}
-#' @keywords ts
+###keywords ts
 #' @examples
 #' 
 #' data(edhec)

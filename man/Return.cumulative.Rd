@@ -37,8 +37,4 @@ and Attribution}. Wiley. 2004. p. 6
 \seealso{
 \code{\link{Return.annualized}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -130,7 +130,4 @@ http://www.edwardtufte.com for this and other references.
 \seealso{
 \code{\link{barplot}}, \code{\link{par}}
 }
-\keyword{hplot}
-\keyword{multivariate}
-\keyword{ts}
 

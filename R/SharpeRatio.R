@@ -52,7 +52,7 @@
 #' Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 #' Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 #' v 5.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

@@ -44,7 +44,7 @@
 #' 1964, 425-442. \cr Ruppert, David. \emph{Statistics and Finance, an
 #' Introduction}. Springer. 2004. \cr Bacon, Carl. \emph{Practical portfolio
 #' performance measurement and attribution}. Wiley. 2004. \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

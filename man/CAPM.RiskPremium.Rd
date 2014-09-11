@@ -109,8 +109,4 @@ Finance, an Introduction}. Springer. 2004. \cr
 \code{\link{SharpeRatio}} \code{\link{InformationRatio}}
 \code{\link{TrackingError}} \code{\link{ActivePremium}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

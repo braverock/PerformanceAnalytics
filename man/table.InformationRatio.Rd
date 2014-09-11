@@ -43,8 +43,4 @@ and attribution}, second edition 2008 p.81
 \code{\link{InformationRatio}}
 \cr \code{\link{TrackingError}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

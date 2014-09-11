@@ -30,7 +30,7 @@
 #' function
 #' @author Peter Carl
 #' @seealso \code{\link{clean.boudt}} \cr \code{\link{Return.Geltner}} \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)
@@ -159,7 +159,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' }
 #' 
 #' Note that the primary value of data cleaning lies in creating a more robust
-#' and stable estimation of the distribution generating the large majority of
+#' and stable estimation of the distribution describing the large majority of
 #' the return data. The increased robustness and stability of the estimated
 #' moments utilizing cleaned data should be used for portfolio construction. If
 #' a portfolio manager wishes to have a more conservative risk estimate,
@@ -195,7 +195,7 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
 #' Rousseeuw, P. J. (1985). Multivariate estimation with high breakdown point.
 #' In W. Grossmann, G. Pflug, I. Vincze, and W. Wertz (Eds.), Mathematical
 #' Statistics and Its Applications, Volume B, pp. 283?297. Dordrecht-Reidel.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @export
 clean.boudt <-
 function(R, alpha=.01 , trim=1e-3)

@@ -72,5 +72,4 @@ and attribution}, second edition 2008 p.84-85
 \seealso{
 \code{\link{skewness}}.
 }
-\keyword{univar}
 

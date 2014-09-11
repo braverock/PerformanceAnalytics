@@ -96,5 +96,4 @@ Peter Carl
 \seealso{
 \code{\link{chart.RiskReturnScatter}}
 }
-\keyword{ts}
 

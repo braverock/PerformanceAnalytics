@@ -1,7 +1,7 @@
 Package: PerformanceAnalytics
 Type: Package
 Title: Econometric tools for performance and risk analysis.
-Version: 1.3.3526
+Version: 1.3.3528
 Date: $Date$
 Author: Peter Carl, Brian G. Peterson
 Maintainer: Brian G. Peterson <brian@braverock.com>
@@ -32,6 +32,6 @@ URL: http://r-forge.r-project.org/projects/returnanalytics/
 Copyright: (c) 2004-2014
 Contributors: Kris Boudt, Ross Bennett, Josh Ulrich, Eric Zivot, Matthieu Lestel
 Thanks: A special thanks for additional contributions or patches from
-    Stefan Albrecht, Khahn Nygyen, Jeff Ryan,
-    Sankalp Upadhyay, Tobias Verbeke, Diethelm Wuertz
-    H. Felix Wittmann, Ram Ahluwalia, R. Douglas Martin
+    Ram Ahluwalia, Stefan Albrecht, Andrii Babii,  
+    Khahn Nygyen, R. Douglas Martin, Jeff Ryan, Sankalp Upadhyay, 
+    Tobias Verbeke, H. Felix Wittmann, Diethelm Wuertz

@@ -22,7 +22,7 @@
 #' @references Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds:
 #' Adding Value through Active Style Allocation Decisions. October 2005. Edhec
 #' Risk and Asset Management Research Centre.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

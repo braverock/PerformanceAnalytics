@@ -49,8 +49,4 @@ Peter Carl
 \code{\link{VaR}} \cr
 \code{\link{ES}} \cr
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

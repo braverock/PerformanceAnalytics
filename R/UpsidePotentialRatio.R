@@ -62,7 +62,7 @@
 #' Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk
 #' on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July
 #' 19, 2001. Available at SSRN: \url{http://ssrn.com/abstract=277352}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

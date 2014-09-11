@@ -39,7 +39,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}, \cr \code{\link{par}}, \cr
 #' \code{\link{UpDownRatios}}, \cr \code{\link{table.UpDownRatios}} \cr
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #'     data(managers)

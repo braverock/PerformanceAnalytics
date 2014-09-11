@@ -41,7 +41,7 @@
 #' @seealso \code{\link{plot}}
 #' @references Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM,
 #' its assumptions and deficiencies.
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(managers)

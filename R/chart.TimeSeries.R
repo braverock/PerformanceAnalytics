@@ -73,7 +73,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}, \code{\link{par}},
 #' \code{\link[xts]{axTicksByTime}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' 

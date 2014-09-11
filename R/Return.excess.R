@@ -29,7 +29,7 @@
 #' @author Peter Carl
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004. p. 47-52
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

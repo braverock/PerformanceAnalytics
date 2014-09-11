@@ -50,8 +50,4 @@ Peter Carl
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004. p. 47-52
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

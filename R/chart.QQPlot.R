@@ -57,7 +57,7 @@
 #' John (2007) \emph{car: Companion to Applied Regression} \cr
 #' \url{http://www.r-project.org},
 #' \url{http://socserv.socsci.mcmaster.ca/jfox/}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' library(MASS)

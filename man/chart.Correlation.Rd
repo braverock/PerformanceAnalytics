@@ -36,9 +36,4 @@ Peter Carl
 \seealso{
 \code{\link{table.Correlation}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

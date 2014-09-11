@@ -21,7 +21,7 @@
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
 #' 1964, 425-442. \cr Ruppert, David. \emph{Statistics and Finance, an
 #' Introduction}. Springer. 2004. \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' # First we load the data

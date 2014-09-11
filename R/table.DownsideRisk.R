@@ -20,7 +20,7 @@
 #' \code{\link{maxDrawdown}} \cr
 #' \code{\link{VaR}} \cr 
 #' \code{\link{ES}} \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

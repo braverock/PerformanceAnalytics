@@ -43,8 +43,4 @@ Peter Carl
 \seealso{
 \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

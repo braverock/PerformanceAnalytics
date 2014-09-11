@@ -63,9 +63,4 @@ Peter Carl
 \seealso{
 \code{\link{Return.relative}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

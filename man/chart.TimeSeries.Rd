@@ -201,9 +201,4 @@ Peter Carl
 \code{\link{plot}}, \code{\link{par}},
 \code{\link[xts]{axTicksByTime}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -77,7 +77,7 @@
 #' \url{http://www.sortino.com/htm/performance.htm} see especially end note 10
 #' 
 #' \url{http://en.wikipedia.org/wiki/Semivariance}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #'
 #' #with data used in Bacon 2008

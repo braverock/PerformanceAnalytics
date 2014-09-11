@@ -15,4 +15,3 @@ head(prices)
 
 }
 \keyword{datasets}
-\keyword{ ts }

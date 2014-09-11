@@ -36,7 +36,7 @@
 #' included so that some sensible defaults could be set.
 #' @author Peter Carl
 #' @seealso \code{\link[stats]{lm}} \cr \code{\link[quantreg]{rq}} \cr
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' # First we load the data

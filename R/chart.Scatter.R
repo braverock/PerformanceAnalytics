@@ -31,7 +31,7 @@
 #' included so that some sensible defaults could be set.
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

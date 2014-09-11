@@ -10,7 +10,7 @@
 #' @param \dots any other passthru parameters to \code{\link{cor.test}}
 #' @author Peter Carl
 #' @seealso \code{\link{cor.test}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' # First we load the data

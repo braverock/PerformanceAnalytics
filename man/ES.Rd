@@ -140,8 +140,4 @@ expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
 \code{\link{VaR}} \cr \code{\link{SharpeRatio.modified}} \cr
 \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

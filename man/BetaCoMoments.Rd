@@ -124,8 +124,4 @@ the sign of the skewness.  That allows an analyst to review the metric and
 interpret it without needing additional information.  To use the more widely
 used metric, simply set the parameter \code{test = FALSE}.
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

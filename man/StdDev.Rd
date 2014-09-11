@@ -87,8 +87,4 @@ Brian G. Peterson and Kris Boudt
 \seealso{
 \code{\link{Return.clean}} \code{sd}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

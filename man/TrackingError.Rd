@@ -43,8 +43,4 @@ Management},Fall 1994, 49-58.
 \seealso{
 \code{\link{InformationRatio}} \code{\link{TrackingError}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

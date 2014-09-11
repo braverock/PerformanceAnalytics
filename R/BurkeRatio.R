@@ -21,7 +21,7 @@
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.90-91
 #' 
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
 #' print(BurkeRatio(portfolio_bacon[,1])) #expected 0.74

@@ -49,8 +49,4 @@ title(main="Calendar Returns")
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

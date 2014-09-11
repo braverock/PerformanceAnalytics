@@ -38,7 +38,7 @@
 #' @references Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation and
 #' Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
 #' Journal of Risk, forthcoming.
-#' @keywords ts multivariate distribution
+###keywords ts multivariate distribution
 #' @examples
 #' 
 #' data(managers)

@@ -51,8 +51,4 @@ head(x)
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

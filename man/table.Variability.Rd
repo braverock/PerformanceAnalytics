@@ -45,8 +45,4 @@ and attribution}, second edition 2008 p.65
 \code{\link{StdDev.annualized}}
 \cr \code{\link{MeanAbsoluteDeviation}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

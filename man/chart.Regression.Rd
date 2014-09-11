@@ -91,9 +91,4 @@ its assumptions and deficiencies.
 \seealso{
 \code{\link{plot}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

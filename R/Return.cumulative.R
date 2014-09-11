@@ -15,7 +15,7 @@
 #' @seealso \code{\link{Return.annualized}}
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004. p. 6
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

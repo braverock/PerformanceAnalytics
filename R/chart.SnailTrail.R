@@ -46,7 +46,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.RiskReturnScatter}}
 #' @references ~put references to the literature/web site here ~
-#' @keywords ts
+###keywords ts
 #' @examples
 #' 
 #' data(managers)

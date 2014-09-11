@@ -19,7 +19,7 @@
 #' \code{\link{table.DownsideRisk}}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 88 \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

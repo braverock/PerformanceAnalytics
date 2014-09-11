@@ -23,8 +23,4 @@ print(Frequency(managers['1996',1:5]))
 \author{
 Matthieu Lestel
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

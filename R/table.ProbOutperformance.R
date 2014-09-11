@@ -17,7 +17,7 @@
 #' @param period_lengths a vector of periods the user wants to evaluate this 
 #' over i.e. c(1,3,6,9,12,18,36)
 #' @author Kyle Balkissoon
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @details Returns a table that contains the counts and probabilities 
 #' of outperformance relative to benchmark for the various period_lengths
 #'

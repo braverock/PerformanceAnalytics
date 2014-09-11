@@ -50,7 +50,7 @@
 #' @note Code inspired by a chart on:
 #' \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

@@ -40,8 +40,4 @@ Peter Carl
 \seealso{
 \code{\link{cor.test}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

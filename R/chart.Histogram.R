@@ -73,7 +73,7 @@
 #' \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
 #' @author Peter Carl
 #' @seealso \code{\link[graphics]{hist}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #'     data(edhec)

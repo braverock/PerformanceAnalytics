@@ -39,8 +39,4 @@ title(main='Table of Convertible Arbitrage vs Benchmark')
 \author{
 Kyle Balkissoon
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

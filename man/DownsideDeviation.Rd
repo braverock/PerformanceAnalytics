@@ -121,8 +121,4 @@ on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July
 
 \url{http://en.wikipedia.org/wiki/Semivariance}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -95,8 +95,4 @@ v 5.
 \code{\link{ActivePremium}} \cr \code{\link{SortinoRatio}} \cr
 \code{\link{VaR}} \cr \code{\link{ES}} \cr
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

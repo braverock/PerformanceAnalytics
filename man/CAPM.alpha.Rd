@@ -60,8 +60,4 @@ Introduction}. Springer. 2004. \cr
 \seealso{
 \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

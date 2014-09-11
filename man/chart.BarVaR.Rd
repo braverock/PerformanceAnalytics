@@ -158,9 +158,4 @@ Peter Carl
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
 \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

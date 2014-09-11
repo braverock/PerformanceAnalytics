@@ -25,7 +25,7 @@
 #' @param \dots any other passthru parameters, see \code{plot}
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

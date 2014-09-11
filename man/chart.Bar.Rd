@@ -50,9 +50,4 @@ Peter Carl
 \seealso{
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

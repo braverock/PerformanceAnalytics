@@ -19,7 +19,7 @@
 #' @details The previous parameter \code{na.pad} has been replaced with \code{fill}; use \code{fill = NA} instead of 
 #' \code{na.pad = TRUE}, or \code{fill = NULL} instead of \code{na.pad = FALSE}.
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' # First we get the data

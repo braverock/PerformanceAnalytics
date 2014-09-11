@@ -35,7 +35,7 @@
 #' \url{http://wikipedia.org/wiki/inverse-square_law}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 27 \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(edhec)

@@ -17,7 +17,7 @@
 #' @seealso \code{\link{Box.test}}, \code{\link{acf}}
 #' @references Lo, Andrew W. 2001. Risk Management for Hedge Funds:
 #' Introduction and Overview. SSRN eLibrary.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

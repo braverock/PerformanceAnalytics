@@ -70,7 +70,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
 #' \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(managers)

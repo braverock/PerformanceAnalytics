@@ -81,9 +81,4 @@ Information}. Graphics Press. 1983. p. 124-129
 \seealso{
 \code{\link[graphics]{boxplot}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -45,8 +45,4 @@ Peter Carl
 \code{\link{Return.annualized}} \cr \code{\link{StdDev.annualized}}
 \cr \code{\link{SharpeRatio.annualized}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

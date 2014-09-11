@@ -18,7 +18,7 @@
 #' This function defaults to the first column as the monthly returns to be
 #' formatted.
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

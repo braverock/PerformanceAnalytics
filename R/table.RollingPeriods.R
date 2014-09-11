@@ -21,7 +21,7 @@
 #' @param \dots any other passthru parameters for functions specified in FUNCS
 #' @author Peter Carl
 #' @seealso \code{\link[zoo]{rollapply}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

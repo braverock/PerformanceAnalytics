@@ -68,8 +68,4 @@ Attribution}. Wiley. 2004. Chapter 2 \cr
 \seealso{
 \code{\link{Return.cumulative}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

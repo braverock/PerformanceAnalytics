@@ -15,7 +15,7 @@
 #' @seealso \code{\link{CalmarRatio}} \cr \code{\link{BurkeRatio}}
 #' \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}} \cr 
 #' \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

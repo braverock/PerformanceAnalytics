@@ -59,8 +59,4 @@ Attribution}. Wiley. 2004. p. 27 \cr
 \code{\link[stats]{sd}} \cr
 \url{http://wikipedia.org/wiki/inverse-square_law}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

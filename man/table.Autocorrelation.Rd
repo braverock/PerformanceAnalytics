@@ -45,8 +45,4 @@ Introduction and Overview. SSRN eLibrary.
 \seealso{
 \code{\link{Box.test}}, \code{\link{acf}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

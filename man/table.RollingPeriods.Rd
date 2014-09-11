@@ -52,8 +52,4 @@ Peter Carl
 \seealso{
 \code{\link[zoo]{rollapply}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

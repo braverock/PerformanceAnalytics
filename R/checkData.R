@@ -16,7 +16,7 @@
 #' c("xts", "zoo", "data.frame", "matrix", "vector"), default "xts"
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

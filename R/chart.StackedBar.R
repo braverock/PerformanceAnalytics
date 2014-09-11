@@ -75,7 +75,7 @@
 #' Tufte, Edward R. (2001) The Visual Display of Quantitative Information, 2nd
 #' edition. The Graphics Press, Cheshire, Connecticut. See
 #' http://www.edwardtufte.com for this and other references.
-#' @keywords ts multivariate hplot
+###keywords ts multivariate hplot
 #' @examples
 #' 
 #' data(weights)

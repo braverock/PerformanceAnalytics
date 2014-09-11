@@ -19,7 +19,7 @@
 #' @return A timeseries in a zoo object of the calculation results
 #' @author Peter Carl
 #' @seealso \code{\link{apply}} \cr \code{\link[zoo]{rollapply}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

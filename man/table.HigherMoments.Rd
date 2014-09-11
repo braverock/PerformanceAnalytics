@@ -53,8 +53,4 @@ Risk and Asset Management Research Centre.
 \code{\link{BetaCoKurtosis}} \cr \code{\link{skewness}} \cr
 \code{\link{kurtosis}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

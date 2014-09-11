@@ -108,8 +108,4 @@ performance measurement and attribution}. Wiley. 2004. \cr
 \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
 \code{\link{CAPM.utils}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

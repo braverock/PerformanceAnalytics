@@ -93,9 +93,4 @@ chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

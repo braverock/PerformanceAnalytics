@@ -43,8 +43,4 @@ Matthieu Lestel
 Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

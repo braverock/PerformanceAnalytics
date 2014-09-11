@@ -33,7 +33,7 @@
 #' \code{\link[zoo]{read.zoo}}
 #' @author Peter Carl
 #' @seealso \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'      \dontrun{

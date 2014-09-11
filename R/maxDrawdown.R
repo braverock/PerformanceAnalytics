@@ -32,7 +32,7 @@
 #' \code{\link{chart.Drawdown}} \cr
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 88 \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)
@@ -105,7 +105,7 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 #' Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
 #' Management Tools, Risk Books, London, 2003
 #' http://www.ise.ufl.edu/uryasev/drawdown.pdf
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

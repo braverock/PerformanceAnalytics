@@ -131,9 +131,4 @@ John (2007) \emph{car: Companion to Applied Regression} \cr
 \code{\link[car]{qq.plot}} \cr
 \code{\link{plot}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -83,8 +83,4 @@ on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July
 \code{\link{DownsideDeviation}} \cr \code{\link{SemiVariance}} \cr
 \code{\link{SemiDeviation}} \cr \code{\link{InformationRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

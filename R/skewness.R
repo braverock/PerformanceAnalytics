@@ -30,7 +30,7 @@
 #' \code{\link{kurtosis}}
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.83-84
-#' @keywords univar
+###keywords univar
 #' @examples
 #' 
 #' ## mean -

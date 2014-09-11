@@ -90,7 +90,7 @@
 #' 
 #' Scaillet, Olivier. Nonparametric estimation and sensitivity analysis of
 #' expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(edhec)

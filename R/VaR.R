@@ -117,7 +117,7 @@
 #'    Value-at-Risk: Their Estimation Error, Decomposition, and Optimization",
 #'    Bank of Japan.
 #'      
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(edhec)

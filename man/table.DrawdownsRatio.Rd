@@ -45,8 +45,4 @@ and attribution}, second edition 2008 p.93
 \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}} \cr
 \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

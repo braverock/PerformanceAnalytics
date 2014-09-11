@@ -162,8 +162,4 @@ Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and
 \code{\link{chart.VaRSensitivity}} \cr
 \code{\link{Return.clean}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

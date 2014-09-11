@@ -163,5 +163,4 @@ Peter Carl
 \code{\link{plot}}, \cr \code{\link{text}}, \cr
 \code{\link[utils]{capture.output}}, \cr \code{\link[gplots]{textplot}}
 }
-\keyword{hplot}
 

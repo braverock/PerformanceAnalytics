@@ -23,7 +23,7 @@
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates 
 #' 
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
 #' print(PainIndex(portfolio_bacon[,1])) #expected 0.04

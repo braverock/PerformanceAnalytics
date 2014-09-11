@@ -48,7 +48,6 @@ The following object is masked from ‘package:graphics’:
 > ### Name: ActiveReturn
 > ### Title: Active Premium or Active Return
 > ### Aliases: ActivePremium ActiveReturn
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -81,7 +80,6 @@ Active Premium: EDHEC LS EQ -0.03237453 0.05463574
 > ### Name: AdjustedSharpeRatio
 > ### Title: Adjusted Sharpe ratio of the return distribution
 > ### Aliases: AdjustedSharpeRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -111,7 +109,6 @@ Adjusted Sharpe ratio (Risk free = 0) -606.3258
 > ### Name: AppraisalRatio
 > ### Title: Appraisal ratio of the return distribution
 > ### Aliases: AppraisalRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -141,7 +138,6 @@ Appraisal ratio (Risk free = 0) 1.623025   NA 3.527723 0.7070483   NA
 > ### Name: BernardoLedoitRatio
 > ### Title: Bernardo and Ledoit ratio of the return distribution
 > ### Aliases: BernardoLedoitRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -170,7 +166,6 @@ Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
 > ### Title: Functions to calculate systematic or beta co-moments of return
 > ###   series
 > ### Aliases: BetaCoKurtosis BetaCoMoments BetaCoSkewness BetaCoVariance
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -206,7 +201,6 @@ Beta Cokurtosis: EDHEC LS EQ 0.8618328
 > ### Name: BurkeRatio
 > ### Title: Burke ratio of the return distribution
 > ### Aliases: BurkeRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -246,7 +240,6 @@ Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125948      Inf
 > ### Aliases: CAPM.CML CAPM.CML.slope CAPM.RiskPremium CAPM.SML.slope
 > ###   CAPM.utils SFM.CML SFM.CML.slope SFM.RiskPremium SFM.SML.slope
 > ###   SFM.utils
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -278,7 +271,6 @@ Security Market Line: SP500 TR 115.4023
 > ### Name: CAPM.alpha
 > ### Title: calculate single factor model (CAPM) alpha
 > ### Aliases: CAPM.alpha SFM.alpha
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -336,7 +328,6 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > ### Name: CAPM.beta
 > ### Title: calculate single factor model (CAPM) beta
 > ### Aliases: CAPM.beta CAPM.beta.bear CAPM.beta.bull SFM.beta TimingRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -502,7 +493,6 @@ HAM6 to EDHEC LS EQ              -11.035136              343.52891
 > ### Name: CAPM.epsilon
 > ### Title: Regression epsilon of the return distribution
 > ### Aliases: CAPM.epsilon SFM.epsilon
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -530,7 +520,6 @@ Regression epsilon (Risk free = 0)   NA
 > ### Name: CAPM.jensenAlpha
 > ### Title: Jensen's alpha of the return distribution
 > ### Aliases: CAPM.jensenAlpha SFM.jensenAlpha
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -557,7 +546,6 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > ### Title: Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD
 > ###   or CDaR) measure
 > ### Aliases: CDD CDaR
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -589,7 +577,6 @@ Funds of Funds                          0.0563
 > ### Name: CalmarRatio
 > ### Title: calculate a Calmar or Sterling reward/risk ratio
 > ### Aliases: CalmarRatio SterlingRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -617,11 +604,10 @@ Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > 
 > flush(stderr()); flush(stdout())
 > 
-> ### Name: CoSkewnessMatrix
+> ### Name: CoMoments
 > ### Title: Functions for calculating comoments of financial time series
 > ### Aliases: CoKurtosis CoKurtosisMatrix CoMoments CoSkewness
 > ###   CoSkewnessMatrix CoVariance M3.MM M4.MM
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -644,7 +630,6 @@ Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > ### Name: DRatio
 > ### Title: d ratio of the return distribution
 > ### Aliases: DRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -672,7 +657,6 @@ d ratio 0.04607631  1.361501        0
 > ### Name: DownsideDeviation
 > ### Title: downside risk (deviation, variance) of the return distribution
 > ### Aliases: DownsideDeviation DownsidePotential SemiDeviation SemiVariance
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -725,7 +709,6 @@ Semi-Variance 0.02698249 0.02580294 0.03186006 0.05763839 0.04558371 0.02602228
 > ### Name: DownsideFrequency
 > ### Title: downside frequency of the return distribution
 > ### Aliases: DownsideFrequency
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -756,7 +739,6 @@ Downside Frequency (MAR = 0%)         NaN 0.1666667 0.5833333        0
 > ###   Value-at-Risk(CVaR) for univariate and component, using a variety of
 > ###   analytical methods.
 > ### Aliases: CVaR ES ETL
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -873,7 +855,6 @@ detaching ‘package:robustbase’
 > ### Name: FamaBeta
 > ### Title: Fama beta of the return distribution
 > ### Aliases: FamaBeta
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -901,7 +882,6 @@ Fama Beta  0.5351217   NA 1.007084 1.037632   NA
 > ### Name: Frequency
 > ### Title: Frequency of the return distribution
 > ### Aliases: Frequency
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -924,7 +904,6 @@ Frequency   12   12   12   12   NA
 > ### Name: InformationRatio
 > ### Title: InformationRatio = ActivePremium/TrackingError
 > ### Aliases: InformationRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -955,7 +934,6 @@ Information Ratio: EDHEC LS EQ -0.2277438 0.9667207
 > ### Name: Kappa
 > ### Title: Kappa of the return distribution
 > ### Aliases: Kappa
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -988,7 +966,6 @@ kappa (MAR = 0%) 1.274332 0.01674457      Inf
 > ### Title: calculate Kelly criterion ratio (leverage or bet size) for a
 > ###   strategy
 > ### Aliases: KellyRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1014,7 +991,6 @@ Kelly Ratio 6.010854 4.069873 3.458124 1.376354 0.3876476 7.948295
 > ### Name: M2Sortino
 > ### Title: M squared for Sortino of the return distribution
 > ### Aliases: M2Sortino
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1044,7 +1020,6 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > ### Name: MSquared
 > ### Title: M squared of the return distribution
 > ### Aliases: MSquared
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1072,7 +1047,6 @@ MSquared (Risk free = 0) 0.2544876   NA 0.4028725 0.1982483   NA
 > ### Name: MSquaredExcess
 > ### Title: M squared excess of the return distribution
 > ### Aliases: MSquaredExcess
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1145,7 +1119,6 @@ HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.4434281
 > ### Name: MartinRatio
 > ### Title: Martin ratio of the return distribution
 > ### Aliases: MartinRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1175,7 +1148,6 @@ Ulcer Index 15.49888
 > ### Name: MeanAbsoluteDeviation
 > ### Title: Mean absolute deviation of the return distribution
 > ### Aliases: MeanAbsoluteDeviation
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1233,7 +1205,6 @@ Modigliani-Modigliani measure: EDHEC LS EQ 0.00956933 0.009546295 0.01328426
 > ### Name: NetSelectivity
 > ### Title: Net selectivity of the return distribution
 > ### Aliases: NetSelectivity
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1261,7 +1232,6 @@ Net Selectivity (Risk free = 0) 0.01333906   NA 0.1745397 -0.03249043   NA
 > ### Name: Omega
 > ### Title: calculate Omega for a return series
 > ### Aliases: Omega
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1433,7 +1403,6 @@ Omega (L = 0%)       5.265408
 > ### Name: OmegaExcessReturn
 > ### Title: Omega excess return of the return distribution
 > ### Aliases: OmegaExcessReturn OmegaExessReturn
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1461,7 +1430,6 @@ Omega Excess Return (MAR = 0) 0.1325302   NA 0.3991416 0.1985718   NA
 > ### Name: OmegaSharpeRatio
 > ### Title: Omega-Sharpe ratio of the return distribution
 > ### Aliases: OmegaSharpeRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1491,7 +1459,6 @@ OmegaSharpeRatio (MAR = 0%)          NA 3.340625 0.02827709      Inf
 > ### Name: PainIndex
 > ### Title: Pain index of the return distribution
 > ### Aliases: PainIndex
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1521,7 +1488,6 @@ Pain Index 0.3714087
 > ### Name: PainRatio
 > ### Title: Pain ratio of the return distribution
 > ### Aliases: PainRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1551,7 +1517,6 @@ Pain Index 36.7226
 > ### Name: ProspectRatio
 > ### Title: Prospect ratio of the return distribution
 > ### Aliases: ProspectRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1581,7 +1546,6 @@ Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
 > ### Name: Return.Geltner
 > ### Title: calculate Geltner liquidity-adjusted return series
 > ### Aliases: Return.Geltner
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1621,7 +1585,6 @@ Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
 > ### Title: calculate an annualized return for comparing instruments with
 > ###   different length history
 > ### Aliases: Return.annualized
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1652,7 +1615,6 @@ Annualized Return     0.11454 0.1039841
 > ### Title: calculates an annualized excess return for comparing instruments
 > ###   with different length history
 > ### Aliases: Return.annualized.excess
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -1672,7 +1634,6 @@ Annualized Return 0.03718883
 > ### Name: Return.calculate
 > ### Title: calculate simple or compound returns from prices
 > ### Aliases: CalculateReturns Return.calculate
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -3714,7 +3675,6 @@ Annualized Return 0.03718883
 > ### Title: clean returns in a time series to to provide more robust risk
 > ###   estimates
 > ### Aliases: Return.clean
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -3757,7 +3717,6 @@ detaching ‘package:robustbase’
 > ### Name: Return.cumulative
 > ### Title: calculate a compounded (geometric) cumulative return
 > ### Aliases: Return.cumulative
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -3786,7 +3745,6 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > ### Title: Calculates the returns of an asset in excess of the given risk
 > ###   free rate
 > ### Aliases: Return.excess
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -3842,7 +3800,6 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > ### Name: Return.portfolio
 > ### Title: Calculate weighted returns for a portfolio of assets
 > ### Aliases: Return.portfolio Return.rebalancing
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4036,7 +3993,6 @@ $EOP.Value
 > ### Name: Return.read
 > ### Title: Read returns data with different date formats
 > ### Aliases: Return.read
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4056,7 +4012,6 @@ $EOP.Value
 > ### Name: Return.relative
 > ### Title: calculate the relative return of one asset to another
 > ### Aliases: Return.relative
-> ### Keywords: ts
 > 
 > ### ** Examples
 > 
@@ -4095,7 +4050,6 @@ $EOP.Value
 > ### Name: Selectivity
 > ### Title: Selectivity of the return distribution
 > ### Aliases: Selectivity
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4122,7 +4076,6 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > ### Title: calculate a traditional or modified Sharpe Ratio of Return over
 > ###   StdDev or VaR or ES
 > ### Aliases: SharpeRatio SharpeRatio.modified
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4211,7 +4164,6 @@ ES Sharpe (Rf=0.3%, p=95%):         0.06890142   0.009175123     0.05597178
 > ### Name: SharpeRatio.annualized
 > ### Title: calculate annualized Sharpe Ratio
 > ### Aliases: SharpeRatio.annualized
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4249,7 +4201,6 @@ Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
 > ### Name: SkewnessKurtosisRatio
 > ### Title: Skewness-Kurtosis ratio of the return distribution
 > ### Aliases: Skewness-KurtosisRatio SkewnessKurtosisRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4277,7 +4228,6 @@ SkewnessKurtosisRatio          NA -0.03981589 -0.01634447 -0.2626715
 > ### Name: SmoothingIndex
 > ### Title: calculate Normalized Getmansky Smoothing Index
 > ### Aliases: SmoothingIndex
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4312,7 +4262,6 @@ Smoothing Index        0.4791138      0.4227911     0.7532756      0.4914581
 > ### Name: SortinoRatio
 > ### Title: calculate Sortino Ratio of performance over downside risk
 > ### Aliases: SortinoRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4337,7 +4286,6 @@ Sortino Ratio (MAR = 0%)   0.3064
 > ### Name: SpecificRisk
 > ### Title: Specific risk of the return distribution
 > ### Aliases: SpecificRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4365,7 +4313,6 @@ Specific Risk =  0.04977046   NA 0.06225051 0.0857627   NA
 > ###   series, also calculates component contribution to standard deviation
 > ###   of a portfolio
 > ### Aliases: StdDev
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4449,7 +4396,6 @@ detaching ‘package:robustbase’
 > ### Name: StdDev.annualized
 > ### Title: calculate a multiperiod or annualized Standard Deviation
 > ### Aliases: StdDev.annualized sd.annualized sd.multiperiod
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4486,7 +4432,6 @@ Annualized Standard Deviation   0.03178395
 > ### Name: SystematicRisk
 > ### Title: Systematic risk of the return distribution
 > ### Aliases: SystematicRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4514,7 +4459,6 @@ Systematic Risk to SP500 TR (Rf = 0)   NA
 > ### Name: TotalRisk
 > ### Title: Total risk of the return distribution
 > ### Aliases: TotalRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4540,7 +4484,6 @@ Total Risk =  0.05627721   NA 0.1079938 0.1099375   NA
 > ### Name: TrackingError
 > ### Title: Calculate Tracking Error of returns against a benchmark
 > ### Aliases: TrackingError
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4572,7 +4515,6 @@ Tracking Error: EDHEC LS EQ 0.1421533 0.05651657
 > ### Title: calculate Treynor Ratio or modified Treynor Ratio of excess
 > ###   return over CAPM beta
 > ### Aliases: TreynorRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4617,7 +4559,6 @@ Treynor Ratio: SP500 TR 5.184256 9.129899 4.597618 2.990718   NA
 > ### Name: UpDownRatios
 > ### Title: calculate metrics on up and down markets for the benchmark asset
 > ### Aliases: UpDownRatios
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4667,7 +4608,6 @@ SP500 TR Down Capture 0.2076304
 > ### Name: UpsideFrequency
 > ### Title: upside frequency of the return distribution
 > ### Aliases: UpsideFrequency
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4697,7 +4637,6 @@ Upside Frequency (MAR = 0%) 0.8333333 0.4166667        1
 > ### Title: calculate Upside Potential Ratio of upside performance over
 > ###   downside risk
 > ### Aliases: UPR UpsidePotentialRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4724,7 +4663,6 @@ Upside Potential (MAR = 0%)             0.5200563    0.6294689
 > ### Name: UpsideRisk
 > ### Title: upside risk, variance and potential of the return distribution
 > ### Aliases: UpsideRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4758,7 +4696,6 @@ Upside Risk (MAR = 0%)           0 0.03204533 0.01397565 0.004324785
 > ### Name: VaR
 > ### Title: calculate various Value at Risk (VaR) measures
 > ### Aliases: VaR VaR.CornishFisher
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4875,7 +4812,6 @@ detaching ‘package:robustbase’
 > ### Name: VolatilitySkewness
 > ### Title: Volatility and variability of the return distribution
 > ### Aliases: VolatilitySkewness
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4904,7 +4840,6 @@ detaching ‘package:robustbase’
 > ### Title: calculate a function over an expanding window always starting
 > ###   from the beginning of the series
 > ### Aliases: apply.fromstart
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -4966,7 +4901,6 @@ detaching ‘package:robustbase’
 > ### Name: apply.rolling
 > ### Title: calculate a function over a rolling window
 > ### Aliases: apply.rolling
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5117,7 +5051,6 @@ detaching ‘package:robustbase’
 > ### Name: Return.centered
 > ### Title: calculate centered Returns
 > ### Aliases: Return.centered centeredcomoment centeredmoment
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5268,7 +5201,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.ACF
 > ### Title: Create ACF chart or ACF with PACF two-panel chart
 > ### Aliases: chart.ACF chart.ACFplus
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5286,7 +5218,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.Bar
 > ### Title: wrapper for barchart of returns
 > ### Aliases: chart.Bar charts.Bar
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5304,7 +5235,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.BarVaR
 > ### Title: Periodic returns in a bar chart with risk metric overlay
 > ### Aliases: chart.BarVaR charts.BarVaR
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5363,7 +5293,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.Boxplot
 > ### Title: box whiskers plot wrapper
 > ### Aliases: chart.Boxplot
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5382,7 +5311,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.CaptureRatios
 > ### Title: Chart of Capture Ratios against a benchmark
 > ### Aliases: chart.CaptureRatios
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5400,7 +5328,6 @@ detaching ‘package:robustbase’
 > ### Name: chart.Correlation
 > ### Title: correlation matrix chart
 > ### Aliases: chart.Correlation
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5762,7 +5689,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.CumReturns
 > ### Title: Cumulates and graphs a set of periodic returns
 > ### Aliases: chart.CumReturns
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5784,7 +5710,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.Drawdown
 > ### Title: Time series chart of drawdowns through time
 > ### Aliases: chart.Drawdown
-> ### Keywords: ts
 > 
 > ### ** Examples
 > 
@@ -5804,7 +5729,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.ECDF
 > ### Title: Create an ECDF overlaid with a Normal CDF
 > ### Aliases: chart.ECDF
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5822,7 +5746,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.Events
 > ### Title: Plots a time series with event dates aligned
 > ### Aliases: chart.Events
-> ### Keywords: hplot ts
 > 
 > ### ** Examples
 > 
@@ -5848,7 +5771,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.Histogram
 > ### Title: histogram of returns
 > ### Aliases: chart.Histogram
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5894,7 +5816,6 @@ Warning in title(...) : "method" is not a graphical parameter
 > ### Name: chart.QQPlot
 > ### Title: Plot a QQ chart
 > ### Aliases: chart.QQPlot
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5946,7 +5867,6 @@ detaching ‘package:MASS’
 > ### Title: Takes a set of returns and relates them to a market benchmark in
 > ###   a scatterplot
 > ### Aliases: chart.Regression
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5968,7 +5888,6 @@ detaching ‘package:MASS’
 > ### Name: chart.RelativePerformance
 > ### Title: relative performance chart between multiple return series
 > ### Aliases: chart.RelativePerformance
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -5990,7 +5909,6 @@ detaching ‘package:MASS’
 > ### Title: scatter chart of returns vs risk for comparing multiple
 > ###   instruments
 > ### Aliases: chart.RiskReturnScatter
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6009,7 +5927,6 @@ detaching ‘package:MASS’
 > ### Name: chart.RollingCorrelation
 > ### Title: chart rolling correlation fo multiple assets
 > ### Aliases: chart.RollingCorrelation
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6031,7 +5948,6 @@ detaching ‘package:MASS’
 > ### Name: chart.RollingMean
 > ### Title: chart the rolling mean return
 > ### Aliases: chart.RollingMean
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6050,7 +5966,6 @@ detaching ‘package:MASS’
 > ### Title: wrapper to create a chart of rolling performance metrics in a
 > ###   line chart
 > ### Aliases: chart.RollingPerformance
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6078,7 +5993,6 @@ detaching ‘package:MASS’
 > ###   through time
 > ### Aliases: chart.RollingQuantileRegression chart.RollingRegression
 > ###   charts.RollingRegression
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6118,7 +6032,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: chart.Scatter
 > ### Title: wrapper to draw scatter plot with sensible defaults
 > ### Aliases: chart.Scatter
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6136,7 +6049,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: chart.SnailTrail
 > ### Title: chart risk versus return over rolling time periods
 > ### Aliases: chart.SnailTrail
-> ### Keywords: ts
 > 
 > ### ** Examples
 > 
@@ -6159,7 +6071,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: chart.StackedBar
 > ### Title: create a stacked bar plot
 > ### Aliases: chart.StackedBar
-> ### Keywords: hplot multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6214,7 +6125,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: chart.TimeSeries
 > ### Title: Creates a time series chart with some extensions.
 > ### Aliases: chart.TimeSeries charts.TimeSeries
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6296,7 +6206,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Title: show the sensitivity of Value-at-Risk or Expected Shortfall
 > ###   estimates
 > ### Aliases: chart.VaRSensitivity
-> ### Keywords: distribution multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6317,7 +6226,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Title: Create combined wealth index, period performance, and drawdown
 > ###   chart
 > ### Aliases: charts.PerformanceSummary
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6335,7 +6243,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: charts.RollingPerformance
 > ### Title: rolling performance chart
 > ### Aliases: charts.RollingPerformance
-> ### Keywords: distribution hplot models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6358,7 +6265,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Title: check input data type and format and coerce to the desired
 > ###   output type
 > ### Aliases: checkData
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6497,7 +6403,7 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: edhec
 > ### Title: EDHEC-Risk Hedge Fund Style Indices
 > ### Aliases: edhec
-> ### Keywords: datasets ts
+> ### Keywords: datasets
 > 
 > ### ** Examples
 > 
@@ -6594,7 +6500,6 @@ detaching ‘package:quantreg’, ‘package:SparseM’
 > ### Name: findDrawdowns
 > ### Title: Find the drawdowns and drawdown levels in a timeseries.
 > ### Aliases: Drawdowns findDrawdowns
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6675,7 +6580,6 @@ $recovery
 > ### Name: kurtosis
 > ### Title: Kurtosis
 > ### Aliases: kurtosis
-> ### Keywords: univar
 > 
 > ### ** Examples
 > 
@@ -6791,7 +6695,6 @@ Excess Kurtosis 4.893647  3.250776 4.817395
 > ### Name: maxDrawdown
 > ### Title: caclulate the maximum drawdown from peak equity
 > ### Aliases: maxDrawdown
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6825,7 +6728,6 @@ US 3m TR            0.0000
 > ### Title: calculate attributes relative to the mean of the observation
 > ###   series given, including geometric, stderr, LCL and UCL
 > ### Aliases: mean.LCL mean.UCL mean.geometric mean.stderr mean.utils
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -6854,7 +6756,7 @@ Lower Confidence Level    0.002999801
 > ### Name: portfolio_bacon
 > ### Title: Bacon(2008) Data
 > ### Aliases: portfolio_bacon
-> ### Keywords: datasets ts
+> ### Keywords: datasets
 > 
 > ### ** Examples
 > 
@@ -6896,7 +6798,7 @@ Lower Confidence Level    0.002999801
 > ### Name: prices
 > ### Title: Selected Price Series Example Data
 > ### Aliases: prices
-> ### Keywords: datasets ts
+> ### Keywords: datasets
 > 
 > ### ** Examples
 > 
@@ -6924,7 +6826,6 @@ Lower Confidence Level    0.002999801
 > ### Name: skewness
 > ### Title: Skewness
 > ### Aliases: skewness
-> ### Keywords: univar
 > 
 > ### ** Examples
 > 
@@ -6958,7 +6859,6 @@ Skewness  0.01773013 -0.5531032 -0.4048722 -0.328171
 > ### Name: sortDrawdowns
 > ### Title: order list of drawdowns from worst to best
 > ### Aliases: sortDrawdowns
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7039,7 +6939,6 @@ $recovery
 > ### Name: table.AnnualizedReturns
 > ### Title: Annualized Returns Summary: Statistics and Stylized Facts
 > ### Aliases: table.AnnualizedReturns
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7101,7 +7000,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Title: wrapper function for combining arbitrary function list into a
 > ###   table
 > ### Aliases: statsTable table.Arbitrary
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7139,7 +7037,6 @@ Modified Expected Shortfall   -0.09022777    -0.04618555
 > ### Title: table for calculating the first six autocorrelation coefficients
 > ###   and significance
 > ### Aliases: table.Autocorrelation
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7177,7 +7074,6 @@ US 3m TR     0.9224  0.9081  0.8968  0.8746  0.8363  0.8127       0.0000
 > ### Title: Single Factor Asset-Pricing Model Summary: Statistics and
 > ###   Stylized Facts
 > ### Aliases: table.CAPM table.SFM
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7214,7 +7110,6 @@ Treynor Ratio                 0.2428           0.3883           0.1956
 > ### Name: table.CalendarReturns
 > ### Title: Monthly and Calendar year Return table
 > ### Aliases: table.CalendarReturns table.Returns
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7286,7 +7181,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Title: Calculate and display a table of capture ratio and related
 > ###   statistics
 > ### Aliases: table.CaptureRatios table.UpDownRatios
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7334,7 +7228,6 @@ HAM6 to EDHEC LS EQ       0.4762
 > ### Name: table.Correlation
 > ### Title: calculate correlalations of multicolumn data
 > ### Aliases: table.Correlation
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7402,7 +7295,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.Distributions
 > ### Title: Distributions Summary: Statistics and Stylized Facts
 > ### Aliases: table.Distributions
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7467,7 +7359,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.DownsideRisk
 > ### Title: Downside Risk Summary: Statistics and Stylized Facts
 > ### Aliases: table.DownsideRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7589,7 +7480,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.DownsideRiskRatio
 > ### Title: Downside Summary: Statistics and ratios
 > ### Aliases: table.DownsideRiskRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7658,7 +7548,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.Drawdowns
 > ### Title: Worst Drawdowns Summary: Statistics and Stylized Facts
 > ### Aliases: table.Drawdowns
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7707,7 +7596,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.DrawdownsRatio
 > ### Title: Drawdowns Summary: Statistics and ratios
 > ### Aliases: table.DrawdownsRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7766,7 +7654,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.HigherMoments
 > ### Title: Higher Moments Summary: Statistics and Stylized Facts
 > ### Aliases: table.HigherMoments
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7822,7 +7709,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.InformationRatio
 > ### Title: Information ratio Summary: Statistics and Stylized Facts
 > ### Aliases: table.InformationRatio
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -7881,7 +7767,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.Stats
 > ### Title: Returns Summary: Statistics and Stylized Facts
 > ### Aliases: table.MonthlyReturns table.Stats
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -8004,7 +7889,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.ProbOutPerformance
 > ### Title: Outperformance Report of Asset vs Benchmark
 > ### Aliases: table.ProbOutPerformance
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -8041,7 +7925,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Title: Rolling Periods Summary: Statistics and Stylized Facts
 > ### Aliases: table.RollingPeriods table.TrailingPeriods
 > ###   table.TrailingPeriodsRel
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -8105,7 +7988,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.SpecificRisk
 > ### Title: Specific risk Summary: Statistics and Stylized Facts
 > ### Aliases: table.SpecificRisk
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -8160,7 +8042,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: table.Variability
 > ### Title: Variability Summary: Statistics and Stylized Facts
 > ### Aliases: table.Variability
-> ### Keywords: distribution models multivariate ts
 > 
 > ### ** Examples
 > 
@@ -8220,7 +8101,6 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Title: Display text information in a graphics plot.
 > ### Aliases: replaceTabs replaceTabs.inner textplot textplot.character
 > ###   textplot.data.frame textplot.default textplot.matrix
-> ### Keywords: hplot
 > 
 > ### ** Examples
 > 
@@ -8252,7 +8132,7 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ### Name: weights
 > ### Title: Selected Portfolio Weights Data
 > ### Aliases: weights
-> ### Keywords: datasets ts
+> ### Keywords: datasets
 > 
 > ### ** Examples
 > 
@@ -8296,7 +8176,7 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  63.201 1.584 84.706 0 0 
+Time elapsed:  63.363 1.601 84.903 0 0 
 > grDevices::dev.off()
 pdf 
   2 

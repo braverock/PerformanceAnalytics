@@ -30,5 +30,4 @@ Peter Carl
 \seealso{
 \code{\link{chart.RelativePerformance}}
 }
-\keyword{ts}
 

@@ -85,8 +85,4 @@ Gupta. Omega as a Performance Measure. 2003.
 \seealso{
 \code{\link[Hmisc]{Ecdf}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

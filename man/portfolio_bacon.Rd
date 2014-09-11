@@ -21,4 +21,3 @@ summary(portfolio_bacon)
 tail(cumprod(1+portfolio_bacon),1)
 }
 \keyword{datasets}
-\keyword{ ts }

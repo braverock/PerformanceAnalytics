@@ -37,7 +37,7 @@
 #' @seealso \code{\link{Return.cumulative}}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. Chapter 2 \cr
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'   \dontrun{

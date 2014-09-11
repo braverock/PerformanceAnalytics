@@ -50,8 +50,4 @@ and Attribution}. Wiley. 2004. p. 6
 \seealso{
 \code{\link{Return.cumulative}},
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -34,7 +34,7 @@
 #' @seealso \code{\link{Return.annualized}},
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004. p. 206-207
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' data(managers)
 #' Return.annualized.excess(Rp = managers[,1], Rb = managers[,8])

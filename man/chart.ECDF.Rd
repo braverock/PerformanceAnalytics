@@ -61,9 +61,4 @@ Springer. 2004. Ch. 2 Fig. 2.5
 \seealso{
 \code{\link{plot}}, \code{\link{ecdf}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

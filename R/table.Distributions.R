@@ -13,7 +13,7 @@
 #' and attribution}, second edition 2008 p.87
 #' @seealso \code{\link{StdDev.annualized}} \cr \code{\link{skewness}} \cr
 #' \code{\link{kurtosis}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

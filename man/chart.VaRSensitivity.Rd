@@ -81,7 +81,4 @@ Journal of Risk, forthcoming.
 \seealso{
 \code{\link{VaR}} \cr \code{\link{ES}}
 }
-\keyword{distribution}
-\keyword{multivariate}
-\keyword{ts}
 

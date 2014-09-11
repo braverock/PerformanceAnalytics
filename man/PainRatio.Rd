@@ -39,8 +39,4 @@ Matthieu Lestel
 Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.91
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

@@ -48,5 +48,4 @@ Peter Carl
 \code{\link{table.Drawdowns}} \cr
 \code{\link{table.DownsideRisk}}
 }
-\keyword{ts}
 

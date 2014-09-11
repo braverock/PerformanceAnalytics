@@ -40,8 +40,4 @@ title(main="Statistics for EDHEC Indexes")
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

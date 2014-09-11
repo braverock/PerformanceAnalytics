@@ -40,4 +40,3 @@ summary(edhec)
 tail(cumprod(1+edhec),1)
 }
 \keyword{datasets}
-\keyword{ ts }

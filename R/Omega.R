@@ -58,7 +58,7 @@
 #' @references Keating, J. and Shadwick, W.F. The Omega Function. working
 #' paper. Finance Development Center, London. 2002. Kazemi, Schneeweis, and
 #' Gupta. Omega as a Performance Measure. 2003.
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #'     data(edhec)

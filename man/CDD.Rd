@@ -43,8 +43,4 @@ http://www.ise.ufl.edu/uryasev/drawdown.pdf
 \seealso{
 \code{\link{ES}} \code{\link{maxDrawdown}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

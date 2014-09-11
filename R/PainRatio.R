@@ -18,7 +18,7 @@
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.91
 #' 
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
 #' print(PainRatio(portfolio_bacon[,1])) #expected 2.66

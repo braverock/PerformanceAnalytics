@@ -76,7 +76,7 @@
 #' Peter Carl
 #' @seealso \code{\link{plot}}, \cr \code{\link{text}}, \cr
 #' \code{\link[utils]{capture.output}}, \cr \code{\link[gplots]{textplot}}
-#' @keywords hplot
+###keywords hplot
 #' @examples
 #' 
 #' # Also see the examples in the original gplots textplot function

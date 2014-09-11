@@ -54,9 +54,4 @@ and Attribution}. Wiley. 2004. \cr
 \seealso{
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

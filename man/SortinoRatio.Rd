@@ -57,8 +57,4 @@ Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 \code{\link{SemiVariance}} \cr \code{\link{SemiDeviation}} \cr
 \code{\link{InformationRatio}}
 }
-\keyword{distribution}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

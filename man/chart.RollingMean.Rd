@@ -39,9 +39,4 @@ chart.RollingMean(edhec[, 9, drop = FALSE])
 \author{
 Peter Carl
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

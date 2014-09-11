@@ -15,7 +15,7 @@
 #' @param digits number of digits to round results to for presentation
 #' @author Peter Carl
 #' @seealso \code{\link{UpDownRatios}}, \code{\link{chart.CaptureRatios}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

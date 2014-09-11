@@ -15,7 +15,7 @@
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link[zoo]{rollapply}}
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(managers)

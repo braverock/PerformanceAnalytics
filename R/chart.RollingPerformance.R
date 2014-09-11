@@ -21,7 +21,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{charts.RollingPerformance}},
 #' \code{\link[zoo]{rollapply}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)

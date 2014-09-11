@@ -59,7 +59,7 @@
 #' @param metricsNames column names for each function
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
-#' @keywords ts multivariate distribution models
+###keywords ts multivariate distribution models
 #' @examples
 #' 
 #' data(edhec)

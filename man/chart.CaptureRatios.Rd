@@ -77,9 +77,4 @@ Peter Carl
 \code{\link{plot}}, \cr \code{\link{par}}, \cr
 \code{\link{UpDownRatios}}, \cr \code{\link{table.UpDownRatios}} \cr
 }
-\keyword{distribution}
-\keyword{hplot}
-\keyword{models}
-\keyword{multivariate}
-\keyword{ts}
 

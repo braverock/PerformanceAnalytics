@@ -42,7 +42,7 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.CumReturns}} \cr \code{\link{chart.BarVaR}} \cr
 #' \code{\link{chart.Drawdown}}
-#' @keywords ts multivariate distribution models hplot
+###keywords ts multivariate distribution models hplot
 #' @examples
 #' 
 #' data(edhec)
