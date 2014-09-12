@@ -1,6 +1,7 @@
 sandbox
 generatechangelog.sh
 ChangeLog.1.0.0
+ChangeLog
 ^.*\.Rproj$
 ^\.Rproj\.user$
 codeblock.txt

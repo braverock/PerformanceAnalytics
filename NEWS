@@ -1,13 +1,19 @@
 PerformanceAnalytics 1.4 Release Notes
 
-This release mostly adds some functionality from Bacon, and 
-makes visible some features that were previously internal to 
-the package.  We've also completely re-written Return.portfolio.
+We've completely re-written Return.portfolio to make more of the
+internals available for those who have the need to disassemble the 
+various components of the portfolio return.  Return.portfolio and
+Return.rebalancing are now the same function, with Return.portfolio
+being preferred for new code.
 
-We've also moved to using roxygen2 to generate the NAMESPACE file,
+This release also adds some functionality from Bacon, and 
+makes visible some functions that were previously internal to 
+the package.  
+
+We've moved to using roxygen2 to generate the NAMESPACE file,
 which required touching basically every single generated .Rd file.
 
-We're also altering out version numbering system. We'll be using a 
+We're also altering our version numbering system. We'll be using a 
 "major.cran-release.r-forge-rev" form to make it easier for us to track 
 where reported issues may have been introduced.  Major releases will continue 
 to indicate that significant changes to the interfaces of the functions 

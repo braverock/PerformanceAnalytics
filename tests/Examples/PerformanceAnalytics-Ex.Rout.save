@@ -3804,7 +3804,7 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > ### ** Examples
 > 
 > data(edhec)
-> Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters") # returns time series
+> Return.portfolio(edhec["1997",1:5], rebalance_on="quarters") # returns time series
            portfolio.returns
 1997-01-31       0.033400000
 1997-02-28       0.023762011
@@ -3818,7 +3818,7 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 1997-10-31      -0.010780000
 1997-11-30      -0.002621013
 1997-12-31       0.012985944
-> Return.rebalancing(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
+> Return.portfolio(edhec["1997",1:5], rebalance_on="quarters", verbose=TRUE) # returns list
 $returns
            portfolio.returns
 1997-01-31       0.033400000
@@ -3977,7 +3977,7 @@ $EOP.Value
 > # with a weights object
 > data(weights) # rebalance at the beginning of the year to various weights through time
 > chart.StackedBar(weights)
-> x <- Return.rebalancing(edhec["2000::",1:11], weights=weights,verbose=TRUE)
+> x <- Return.portfolio(edhec["2000::",1:11], weights=weights,verbose=TRUE)
 > chart.CumReturns(x$returns)
 > chart.StackedBar(x$BOP.Weight)
 > chart.StackedBar(x$BOP.Value)
@@ -8176,7 +8176,7 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  63.363 1.601 84.903 0 0 
+Time elapsed:  62.721 1.582 85.601 0 0 
 > grDevices::dev.off()
 pdf 
   2 

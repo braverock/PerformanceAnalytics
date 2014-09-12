@@ -1,3 +1,131 @@
+2014-09-12  braverock
+
+	* DESCRIPTION, NAMESPACE, man/AverageDrawdown.Rd: - minor updates
+	  prior to CRAN release
+
+2014-09-11  peter_carl
+
+	* R/maxDrawdown.R: - changed row label to fit function name
+	* R/maxDrawdown.R, sandbox/refactored.Portfolio.rebalancing.R: -
+	  added AverageLength function
+	  - added documentation for additional drawdown functions
+	* man/PerformanceAnalytics-package.Rd: - minor changes to reflect
+	  changes in release
+
+2014-09-11  braverock
+
+	* R/Return.portfolio.R, man/Return.portfolio.Rd: - update docs for
+	  Return.portfolio
+	* DESCRIPTION, R/ActivePremium.R, R/AdjustedSharpeRatio.R,
+	  R/AppraisalRatio.R, R/BernadoLedoitratio.R, R/BurkeRatio.R,
+	  R/CAPM.alpha.R, R/CAPM.beta.R, R/CAPM.epsilon.R,
+	  R/CAPM.jensenAlpha.R, R/CAPM.utils.R, R/CalmarRatio.R,
+	  R/CoMoments.R, R/DRatio.R, R/DownsideDeviation.R,
+	  R/DownsideFrequency.R, R/DrawdownPeak.R, R/ES.R, R/FamaBeta.R,
+	  R/Frequency.R, R/InformationRatio.R, R/Kappa.R, R/KellyRatio.R,
+	  R/M2Sortino.R, R/MSquared.R, R/MSquaredExcess.R, R/MartinRatio.R,
+	  R/MeanAbsoluteDeviation.R, R/NetSelectivity.R, R/Omega.R,
+	  R/OmegaExcessReturn.R, R/OmegaSharpeRatio.R, R/PainIndex.R,
+	  R/PainRatio.R, R/ProspectRatio.R, R/Return.Geltner.R,
+	  R/Return.annualized.R, R/Return.annualized.excess.R,
+	  R/Return.calculate.R, R/Return.clean.R, R/Return.cumulative.R,
+	  R/Return.excess.R, R/Return.portfolio.R, R/Return.read.R,
+	  R/Return.relative.R, R/Selectivity.R, R/SharpeRatio.R,
+	  R/SharpeRatio.annualized.R, R/SkewnessKurtosisRatio.R,
+	  R/SmoothingIndex.R, R/SortinoRatio.R, R/SpecificRisk.R,
+	  R/StdDev.R, R/StdDev.annualized.R, R/SystematicRisk.R,
+	  R/TotalRisk.R, R/TrackingError.R, R/TreynorRatio.R,
+	  R/UpDownRatios.R, R/UpsideFrequency.R, R/UpsidePotentialRatio.R,
+	  R/UpsideRisk.R, R/VaR.R, R/VolatilitySkewness.R,
+	  R/apply.fromstart.R, R/apply.rolling.R, R/chart.ACF.R,
+	  R/chart.Bar.R, R/chart.BarVaR.R, R/chart.Boxplot.R,
+	  R/chart.CaptureRatios.R, R/chart.Correlation.R,
+	  R/chart.CumReturns.R, R/chart.Drawdown.R, R/chart.ECDF.R,
+	  R/chart.Events.R, R/chart.Histogram.R, R/chart.QQPlot.R,
+	  R/chart.Regression.R, R/chart.RelativePerformance.R,
+	  R/chart.RiskReturnScatter.R, R/chart.RollingCorrelation.R,
+	  R/chart.RollingMean.R, R/chart.RollingPerformance.R,
+	  R/chart.RollingRegression.R, R/chart.Scatter.R,
+	  R/chart.SnailTrail.R, R/chart.StackedBar.R, R/chart.TimeSeries.R,
+	  R/chart.VaRSensitivity.R, R/charts.PerformanceSummary.R,
+	  R/charts.RollingPerformance.R, R/checkData.R, R/findDrawdowns.R,
+	  R/kurtosis.R, R/maxDrawdown.R, R/mean.utils.R, R/skewness.R,
+	  R/sortDrawdowns.R, R/table.AnnualizedReturns.R,
+	  R/table.Arbitrary.R, R/table.Autocorrelation.R, R/table.CAPM.R,
+	  R/table.CalendarReturns.R, R/table.CaptureRatios.R,
+	  R/table.Correlation.R, R/table.Distributions.R,
+	  R/table.DownsideRisk.R, R/table.DownsideRiskRatio.R,
+	  R/table.Drawdowns.R, R/table.DrawdownsRatio.R,
+	  R/table.HigherMoments.R, R/table.InformationRatio.R,
+	  R/table.MonthlyReturns.R, R/table.ProbOutperformance.R,
+	  R/table.RollingPeriods.R, R/table.SpecificRisk.R,
+	  R/table.Variability.R, R/textplot.R, man/ActivePremium.Rd,
+	  man/AdjustedSharpeRatio.Rd, man/AppraisalRatio.Rd,
+	  man/BernardoLedoitRatio.Rd, man/BetaCoMoments.Rd,
+	  man/BurkeRatio.Rd, man/CAPM.RiskPremium.Rd, man/CAPM.alpha.Rd,
+	  man/CAPM.beta.Rd, man/CAPM.epsilon.Rd, man/CAPM.jensenAlpha.Rd,
+	  man/CDD.Rd, man/CalmarRatio.Rd, man/CoMoments.Rd, man/DRatio.Rd,
+	  man/DownsideDeviation.Rd, man/DownsideFrequency.Rd,
+	  man/DrawdownPeak.Rd, man/ES.Rd, man/FamaBeta.Rd,
+	  man/Frequency.Rd, man/InformationRatio.Rd, man/Kappa.Rd,
+	  man/KellyRatio.Rd, man/M2Sortino.Rd, man/MSquared.Rd,
+	  man/MSquaredExcess.Rd, man/MartinRatio.Rd,
+	  man/MeanAbsoluteDeviation.Rd, man/NetSelectivity.Rd,
+	  man/Omega.Rd, man/OmegaExcessReturn.Rd, man/OmegaSharpeRatio.Rd,
+	  man/PainIndex.Rd, man/PainRatio.Rd, man/ProspectRatio.Rd,
+	  man/Return.Geltner.Rd, man/Return.annualized.Rd,
+	  man/Return.annualized.excess.Rd, man/Return.calculate.Rd,
+	  man/Return.clean.Rd, man/Return.cumulative.Rd,
+	  man/Return.excess.Rd, man/Return.portfolio.Rd,
+	  man/Return.read.Rd, man/Return.relative.Rd, man/Selectivity.Rd,
+	  man/SharpeRatio.Rd, man/SharpeRatio.annualized.Rd,
+	  man/SkewnessKurtosisRatio.Rd, man/SmoothingIndex.Rd,
+	  man/SortinoRatio.Rd, man/SpecificRisk.Rd, man/StdDev.Rd,
+	  man/StdDev.annualized.Rd, man/SystematicRisk.Rd,
+	  man/TotalRisk.Rd, man/TrackingError.Rd, man/TreynorRatio.Rd,
+	  man/UpDownRatios.Rd, man/UpsideFrequency.Rd,
+	  man/UpsidePotentialRatio.Rd, man/UpsideRisk.Rd, man/VaR.Rd,
+	  man/VolatilitySkewness.Rd, man/apply.fromstart.Rd,
+	  man/apply.rolling.Rd, man/centeredmoments.Rd, man/chart.ACF.Rd,
+	  man/chart.Bar.Rd, man/chart.BarVaR.Rd, man/chart.Boxplot.Rd,
+	  man/chart.CaptureRatios.Rd, man/chart.Correlation.Rd,
+	  man/chart.CumReturns.Rd, man/chart.Drawdown.Rd,
+	  man/chart.ECDF.Rd, man/chart.Events.Rd, man/chart.Histogram.Rd,
+	  man/chart.QQPlot.Rd, man/chart.Regression.Rd,
+	  man/chart.RelativePerformance.Rd, man/chart.RiskReturnScatter.Rd,
+	  man/chart.RollingCorrelation.Rd, man/chart.RollingMean.Rd,
+	  man/chart.RollingPerformance.Rd, man/chart.RollingRegression.Rd,
+	  man/chart.Scatter.Rd, man/chart.SnailTrail.Rd,
+	  man/chart.StackedBar.Rd, man/chart.TimeSeries.Rd,
+	  man/chart.VaRSensitivity.Rd, man/charts.PerformanceSummary.Rd,
+	  man/charts.RollingPerformance.Rd, man/checkData.Rd,
+	  man/clean.boudt.Rd, man/edhec.Rd, man/findDrawdowns.Rd,
+	  man/kurtosis.Rd, man/maxDrawdown.Rd, man/mean.geometric.Rd,
+	  man/portfolio_bacon.Rd, man/prices.Rd, man/skewness.Rd,
+	  man/sortDrawdowns.Rd, man/table.AnnualizedReturns.Rd,
+	  man/table.Arbitrary.Rd, man/table.Autocorrelation.Rd,
+	  man/table.CAPM.Rd, man/table.CalendarReturns.Rd,
+	  man/table.CaptureRatios.Rd, man/table.Correlation.Rd,
+	  man/table.Distributions.Rd, man/table.DownsideRisk.Rd,
+	  man/table.DownsideRiskRatio.Rd, man/table.Drawdowns.Rd,
+	  man/table.DrawdownsRatio.Rd, man/table.HigherMoments.Rd,
+	  man/table.InformationRatio.Rd, man/table.MonthlyReturns.Rd,
+	  man/table.ProbOutPerformance.Rd, man/table.RollingPeriods.Rd,
+	  man/table.SpecificRisk.Rd, man/table.Variability.Rd,
+	  man/textplot.Rd, man/weights.Rd,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - updates to
+	  pass R CMD check --as-cran
+
+2014-09-08  peter_carl
+
+	* NEWS: - added comments on version number method
+
+2014-09-07  braverock
+
+	* ChangeLog, DESCRIPTION, R/Return.clean.R, R/chart.Histogram.R,
+	  R/chart.QQPlot.R, R/chart.RollingQuantileRegression.R: - updates
+	  to pass R CMD check on r-devel
+
 2014-09-05  bodanker
 
 	* R/VaR.R: - Fix error in reasonableness check when tmp is not
