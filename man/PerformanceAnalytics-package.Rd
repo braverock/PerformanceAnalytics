@@ -266,7 +266,7 @@ Jeff Ryan and Josh Ulrich are active participants in the R finance community and
 
 Prototypes of the drawdowns functionality were provided by Sankalp Upadhyay, and modified with permission. Stephan Albrecht provided detailed feedback on the Getmansky/Lo Smoothing Index.  Diethelm Wuertz provided prototypes of modified VaR and skewness and kurtosis functions (and is of course the maintainer of the RMetrics suite of pricing and optimization functions).  He also contributed prototypes for many other functions from Bacon's book that were incorporated into PerformanceAnalytics by Matthieu Lestel.  Any errors are, of course, our own.
 
-Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions, and to Khanh Nguyen and Ryan Sheftel for careful testing and detailed problem reports.
+Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early versions of these functions, and to Khanh Nguyen Tobias Verbeke, H. Felix Wittmann, and Ryan Sheftel for careful testing and detailed problem reports.
 
 Thanks also to our Google Summer of Code students through the years for their contributions.  Significant contributions from GSOC students to this package have come from Matthieu Lestel and Andrii Babii so far.  We expect to eventually incorporate contributions from Pulkit Mehrotra and Shubhankit Mohan, who worked with us during the summer of 2013.
 

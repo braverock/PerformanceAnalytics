@@ -10,7 +10,7 @@ Authors@R: c(
   , person(given="Eric",family="Zivot",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
   )
-Version: 1.4.3535
+Version: 1.4.3536
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
@@ -37,7 +37,3 @@ Suggests:
 License: GPL-2 | GPL-3
 URL: http://r-forge.r-project.org/projects/returnanalytics/
 Copyright: (c) 2004-2014
-Thanks: A special thanks for additional testing, suggestions, or patches from
-    Ram Ahluwalia, Stefan Albrecht, Andrii Babii,  
-    Khahn Nygyen, R. Douglas Martin, Jeff Ryan, Sankalp Upadhyay, 
-    Tobias Verbeke, H. Felix Wittmann, Diethelm Wuertz
