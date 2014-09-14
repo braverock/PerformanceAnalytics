@@ -4,13 +4,14 @@ Title: Econometric tools for performance and risk analysis.
 Authors@R: c(
   person(given=c("Brian","G."),family="Peterson",role=c("cre","aut","cph"), email="brian@braverock.com")
   , person(given="Peter",family="Carl",role=c("aut","cph"), email="peter@braverock.com")
-  , person(given="Kris",family="Boudt",role="ctb")
+  , person(given="Kris",family="Boudt",role=c("ctb","cph"))
   , person(given="Ross",family="Bennett",role="ctb")
   , person(given="Joshua",family="Ulrich",role="ctb")
   , person(given="Eric",family="Zivot",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
+  , person(given="Kyle",family="Balkissoon",role="ctb")  
   )
-Version: 1.4.3536
+Version: 1.4.3538
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
