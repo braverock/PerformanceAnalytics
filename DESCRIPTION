@@ -10,8 +10,9 @@ Authors@R: c(
   , person(given="Eric",family="Zivot",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
   , person(given="Kyle",family="Balkissoon",role="ctb")  
+  , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.4.3538
+Version: 1.4.3540
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
