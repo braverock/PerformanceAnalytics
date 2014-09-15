@@ -6,7 +6,9 @@
     if(interactive() || getOption("verbose")) { 
         # not in test scripts
         MSG(paste("\nPackage ", pkg, " (",dsc$Version,") loaded.\n",
-            dsc$Title, "\n", dsc$Copyright, " ", dsc$Author, ". License: ", dsc$License, "\n", dsc$URL,
+            # dsc$Title, "\n", 
+            "Copyright (c) 2004-2014 Peter Carl and Brian G. Peterson, ", 
+            dsc$License, "\n", dsc$URL,
             "\n", sep=""))
     }
 }

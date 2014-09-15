@@ -5248,43 +5248,45 @@ detaching ‘package:robustbase’
 + 		main="... with Empirical VaR from Inception")
 > 
 > # with lines for all managers in the sample
+> 
 > chart.BarVaR(managers[,1:6],
 + 		methods="GaussianVaR",
 + 		all=TRUE, lty=1, lwd=2,
 + 		colorset= c("red", rep("gray", 5)),
 + 		main="... with Gaussian VaR and Estimates for Peers")
 > 
-> # with multiple methods
-> chart.BarVaR(managers[,1,drop=FALSE],
-+ 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
-+ 		main="... with Multiple Methods")
-> 
-> # cleaned up a bit
-> chart.BarVaR(managers[,1,drop=FALSE],
-+ 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
-+ 		lwd=2, ypad=.01,
-+ 		main="... with Padding for Bottom Legend")
-> 
-> # with 'cleaned' data for VaR estimates
-> chart.BarVaR(managers[,1,drop=FALSE],
-+ 		methods=c("HistoricalVaR", "ModifiedVaR"),
-+ 		lwd=2, ypad=.01, clean="boudt",
-+ 		main="... with Robust ModVaR Estimate")
-> 
-> # Cornish Fisher VaR estimated with cleaned data,
-> # with horizontal line to show exceptions
-> chart.BarVaR(managers[,1,drop=FALSE],
-+ 		methods="ModifiedVaR",
-+ 		lwd=2, ypad=.01, clean="boudt",
-+ 		show.horizontal=TRUE, lty=2,
-+ 		main="... with Robust ModVaR and Line for Identifying Exceptions")
+> ## Not run: 
+> ##D # not run on CRAN because of example time
+> ##D 
+> ##D # with multiple methods
+> ##D chart.BarVaR(managers[,1,drop=FALSE],
+> ##D 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+> ##D 		main="... with Multiple Methods")
+> ##D 
+> ##D # cleaned up a bit
+> ##D chart.BarVaR(managers[,1,drop=FALSE],
+> ##D 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+> ##D 		lwd=2, ypad=.01,
+> ##D 		main="... with Padding for Bottom Legend")
+> ##D 
+> ##D # with 'cleaned' data for VaR estimates
+> ##D chart.BarVaR(managers[,1,drop=FALSE],
+> ##D 		methods=c("HistoricalVaR", "ModifiedVaR"),
+> ##D 		lwd=2, ypad=.01, clean="boudt",
+> ##D 		main="... with Robust ModVaR Estimate")
+> ##D 
+> ##D # Cornish Fisher VaR estimated with cleaned data,
+> ##D # with horizontal line to show exceptions
+> ##D chart.BarVaR(managers[,1,drop=FALSE],
+> ##D 		methods="ModifiedVaR",
+> ##D 		lwd=2, ypad=.01, clean="boudt",
+> ##D 		show.horizontal=TRUE, lty=2,
+> ##D 		main="... with Robust ModVaR and Line for Identifying Exceptions")
+> ## End(Not run)
 > 
 > 
 > 
 > cleanEx()
-
-detaching ‘package:robustbase’
-
 > nameEx("chart.Boxplot")
 > ### * chart.Boxplot
 > 
@@ -6955,20 +6957,13 @@ Annualized Sharpe (Rf=0%)   0.6449
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -6989,7 +6984,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.Arbitrary")
 > ### * table.Arbitrary
@@ -7135,20 +7130,13 @@ SP500 TR    23.0 33.4 28.6 21.0 -9.1 -11.9 -22.1 28.7 10.9  4.9 15.8
 > # prettify with format.df in hmisc package
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7170,7 +7158,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.CaptureRatios")
 > ### * table.CaptureRatios
@@ -7252,20 +7240,13 @@ HAM6 to SP500 TR      0.5091542 1.735968e-05 0.30101889 0.6709863
 > rownames(result)=colnames(managers[,1:6])
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7285,7 +7266,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.Distributions")
 > ### * table.Distributions
@@ -7317,20 +7298,13 @@ Sample excess kurtosis   0.6285
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7349,7 +7323,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.DownsideRisk")
 > ### * table.DownsideRisk
@@ -7440,20 +7414,13 @@ Modified ES (95%)                 -0.0902        -0.0462
 > result=t(table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7470,7 +7437,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.DownsideRiskRatio")
 > ### * table.DownsideRiskRatio
@@ -7506,20 +7473,13 @@ Omega-sharpe ratio         0.6581
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7538,7 +7498,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.Drawdowns")
 > ### * table.Drawdowns
@@ -7612,20 +7572,13 @@ Martin ratio   3.7992 1.7473 1.3572 1.0798 0.2042 4.5928      3.6345   0.5112
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7644,7 +7597,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.HigherMoments")
 > ### * table.HigherMoments
@@ -7669,20 +7622,13 @@ Beta CoKurtosis           0.4815           0.1988           0.5068
 > rownames(result)=colnames(managers[,1:6])
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7699,7 +7645,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.InformationRatio")
 > ### * table.InformationRatio
@@ -7725,20 +7671,13 @@ Information Ratio              NaN
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7757,7 +7696,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.MonthlyReturns")
 > ### * table.MonthlyReturns
@@ -7850,20 +7789,13 @@ Funds of Funds          -0.4594   3.2993
 > result=t(table.Stats(edhec))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7879,7 +7811,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.ProbOutPerformance")
 > ### * table.ProbOutPerformance
@@ -7948,20 +7880,13 @@ Last 36 month Std Dev         0.0217
 > result=table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -7978,7 +7903,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.SpecificRisk")
 > ### * table.SpecificRisk
@@ -8000,20 +7925,13 @@ Total Risk      0.0886     NA 0.1262 0.1838     NA     NA          NA     0.15
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -8032,7 +7950,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("table.Variability")
 > ### * table.Variability
@@ -8058,20 +7976,13 @@ Annualized Std Dev        0.1500
 > 
 > require("Hmisc")
 Loading required package: Hmisc
+Loading required package: grid
+Loading required package: lattice
 Loading required package: survival
 Loading required package: splines
 Loading required package: Formula
-Hmisc library by Frank E Harrell Jr
-
-Type library(help='Hmisc'), ?Overview, or ?Hmisc.Overview')
-to see overall documentation.
-
 
 Attaching package: ‘Hmisc’
-
-The following objects are masked from ‘package:survival’:
-
-    survfitKM, untangle.specials
 
 The following objects are masked from ‘package:base’:
 
@@ -8090,7 +8001,7 @@ The following objects are masked from ‘package:base’:
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
-  ‘package:splines’
+  ‘package:splines’, ‘package:lattice’, ‘package:grid’
 
 > nameEx("textplot")
 > ### * textplot
@@ -8176,7 +8087,7 @@ detaching ‘package:Hmisc’, ‘package:Formula’, ‘package:survival’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  62.721 1.582 85.601 0 0 
+Time elapsed:  45.537 1.744 47.545 0 0 
 > grDevices::dev.off()
 pdf 
   2 

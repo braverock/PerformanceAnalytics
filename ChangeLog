@@ -1,5 +1,24 @@
+2014-09-14  braverock
+
+	* DESCRIPTION: - add Diethelm to 'ctb' designation
+	* R/zerofill.R: - remove Kris from copyright banner for zerofill,
+	  Ross (and Brian) wrote this
+	* DESCRIPTION: - add Kris to 'cph' designation, per Kurt Hornick
+	  for CRAN team
+	* man/PerformanceAnalytics-package.Rd: - add missing comma
+	* DESCRIPTION, man/PerformanceAnalytics-package.Rd: - move all
+	  Thanks to the documentation, it is now against CRAN policies to
+	  thank people in the DESCRIPTION file.
+	* DESCRIPTION: - change Authors and Contributors fields to
+	  Authors@R to address yet another suggestion that is actually a
+	  requirement from CRAN
+
 2014-09-12  braverock
 
+	* .Rbuildignore, ChangeLog, DESCRIPTION, NEWS,
+	  tests/Examples/PerformanceAnalytics-Ex.Rout.save: - minor updates
+	  prior to CRAN submit
+	  - bump version to 1.4.3534
 	* DESCRIPTION, NAMESPACE, man/AverageDrawdown.Rd: - minor updates
 	  prior to CRAN release
 
