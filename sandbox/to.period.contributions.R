@@ -1,7 +1,22 @@
-to.period.contributions <- function(C, period = c("years", "quarters", "months", "weeks"), ...){
+to.period.contributions <- function(Contributions, period = c("years", "quarters", "months", "weeks"), ...){
+  C = checkData(Contributions)
   period = period[1] 
   columnnames = colnames(C)
-  # @TODO make sure period > frequency of C
+  if(!xtsible(Contributions))
+    stop("'Contributions' needs to be timeBased or xtsible." )
+  # Make sure period > frequency of C
+  err=FALSE
+  freq = periodicity(C)
+  switch(freq$scale,
+      minute = {stop("Data periodicity too high")},
+      hourly = {stop("Data periodicity too high")},
+      daily = {ifelse(!period %in% c("years", "quarters", "months", "weeks"), err <- TRUE,NA)},
+      weekly = {ifelse(!period %in% c("years", "quarters", "months"), err <- TRUE,NA)},
+      monthly = {ifelse(!period %in% c("years", "quarters"), err <- TRUE,NA)},
+      quarterly = {ifelse(!period %in% c("years"), err <- TRUE,NA)},
+      yearly = {stop("Data periodicity too low")}
+  )
+  if(err) stop("Period specified is higher than data periodicity.  Specify a lower frequency instead.")
   
   # Calculate period return of portfolio from contributions
   pret = rowSums(C)
@@ -30,5 +45,33 @@ to.period.contributions <- function(C, period = c("years", "quarters", "months",
   period.contrib = as.xts(period.contrib, order.by = dates)
   period.contrib = cbind(period.contrib, rowSums(period.contrib))
   colnames(period.contrib) = c(columnnames, "Portfolio Return")
+  period.contrib = reclass(period.contrib, x)
+
   return(period.contrib)
+  
 }
+
+to.weekly.contributions <- function(contributions) {
+  to.period.contributions(contributions = contributions, period = "weeks")
+}
+to.monthly.contributions <- function(contributions) {
+  to.period.contributions(contributions = contributions, period = "months")
+}
+to.quarterly.contributions <- function(contributions) {
+  to.period.contributions(contributions = contributions, period = "quarters")
+}
+to.yearly.contributions <- function(contributions) {
+  to.period.contributions(contributions = contributions, period = "years")
+}
+
+###############################################################################
+# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+#
+# Copyright (c) 2004-2014 Peter Carl and Brian G. Peterson
+#
+# This R package is distributed under the terms of the GNU Public License (GPL)
+# for full details see the file COPYING
+#
+# $Id: $
+#
+###############################################################################
