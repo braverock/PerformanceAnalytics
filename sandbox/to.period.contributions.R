@@ -69,11 +69,11 @@ to.period.contributions <- function(Contributions, period = c("years", "quarters
     if(i==1){
       span = paste0("::", dates[i])
     }else{
-      span = paste0(dates[i-1], "::", dates[i])
+      span = paste0(dates[i-1]+1, "::", dates[i])
     }
     period.contrib = rbind(period.contrib, colSums(wgt.contrib[span]/rep(head(lag.cum.ret[span],1),NCOL(wgt.contrib))))
   }
-  period.contrib = as.xts(period.contrib, order.by = dates)
+  period.contrib = xts(period.contrib, order.by = dates)
   period.contrib = cbind(period.contrib, rowSums(period.contrib))
   colnames(period.contrib) = c(columnnames, "Portfolio Return")
   period.contrib = reclass(period.contrib, x)
