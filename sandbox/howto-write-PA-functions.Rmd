@@ -1,0 +1,376 @@
+---
+title: "How to Contribute to Performance Analytics"
+author: "Peter Carl, Brian Peterson"
+date: "11/30/2014"
+output:
+  rmarkdown::tufte_handout: 
+#    toc: true
+#    toc_depth: 2
+#    number_sections: true
+---
+
+# Introduction
+This is a "how to" guide for writing and improving functions for packages that are being developed within the `returnanalytics` project on R-Forge.  It is primarily being developed with the `PerformanceAnalytics` package in mind, but many of the principles are carried into other packages as well.  The specifics and examples in this document, however, will focus on `PerformanceAnalytics`.
+
+`PerformanceAnalytics` is a collection of functionality for doing returns-based analysis in finance.  Most of what it does is focused on performance and risk evaluation.  Companion projects under development in the `returnsanalytics` projects on R-Forge include:
+
+- `PortfolioAnalytics`: focuses on portfolio construction and ex-ante analysis of portfolios;
+- `PortfolioAttribution`: calculates ex-post performance attribution of portfolios given returns and weights; and
+- `FactorAnalytics`: provides factor-based analysis of returns.
+
+If you are reading this document, you are likely already using `PerformanceAnalytics` or another of our packages.  Perhaps you have some code that you think would be relevant to include, or would like to collaborate on a project to develop ideas from your own or other research.  Maybe you've identified ways that the package can be improved or identified a bug.  If so, we appreciate you taking the time to help -- your participation is critical to us continuing to improve these packages.
+
+This document is written with two types of contributors in mind.  The first kind is one whose contribution is limited in scope - say, a bug fix to an existing function or a new function thought to be useful.  This document should be helpful for this type of contributor, but it may seem like overkill.  Be assured that we welcome contributions of all kinds -- not just 'finished' ones.  If you think you are in this camp, this document will hopefully answer some questions but please do not hesitate to contact us with ideas and snippets.
+
+The second type of contributor we have in mind is more the focus of this document.  This kind of contributor is working on a defined project around a body of research, porting existing code from another language, or developing an idea in collaboration with us.  We encourage this type of contribution and for many years have collaborated with students through the Google Summer of Code [add link] program.  This type of project-oriented collaboration requires more organization and structure -- sometimes there's a plan and a schedule, a mentor or three, maybe a book, a dissertation, or a few journal articles.
+
+Either way, this guide assembles the things that we've said in answer to questions over the years to those we've collaborated with.  We hope it provides a good foundation for you to get started, but please do not hesistate to ask for more detail or help where there isn't enough.  And finally, please don't let our strident list of requirements below prevent you from contributing -- we value hastily constructed, first-draft, proof-of-concept code, too.  
+
+## How to become a contributor
+As mentioned above, the easiest way to become a contributor is to email us.  We like to hear about what you are using the package for, answer any questions you might have, chase down bugs you encounter, or consider changes and additions that would improve the package.  
+
+We ask more of those seeking longer-term developer membership in the `returnanalytics` projects. Packages included in the R-Forge returnanalytics project are used by professionals and educators around the world.  As such, we are careful when vetting new members of the project.
+
+Typically, the process starts by you becoming a member of the community - perhaps asking good questions, identifying issues with the code or proposing new functionality.  The next step is usually for you to propose patches to existing code, but new additions, bug fixes, and adjustments to documentation are all welcome.  All patches are reviewed by one of the core team members.  After several accepted patches, and once we get to know you and your needs, then the core team will discuss adding another member to the team.
+
+We look forward to hearing more from you as you use and enhance the `returnanalytics` packages.  Hopefully you'll be able to join us as a contributor in the near future. 
+
+[ one paragraph on Copyrights and licensing? ]
+
+The remainder of this paper is in three sections.  The first provides a brief introduction to the tools we use, and might be generally helpful if you are newer to R.  The second section describes the principals we use to guide our development, and the third section discusses in more detail and with examples how to use these principles as you develop functions.  By the end of this document, you should have a good understanding about not only *how* but *why* we do things the way that we do. 
+
+# Getting Established
+This section introduces the tools we use for development.  While these aren't all required to be successfull, we find that it is easier to help people through issues when we are all working with the same tools.
+
+## How to create patches
+One of the easiest ways to become a contributor is to send us patches.  Patches are a text description of changes made to a function that will add a new feature, fix a bug, or add documentation.  To create a patch for a single file, use `diff` or a Windows-equivalent (either UnxUtils or WinMerge) to create a unified diff patch file.  For example, in a shell you might run something like:
+```
+diff -u original.R revised.R > original.patch
+```
+In a Linux shell, you can learn more by typing `man diff` or `man patch`.
+
+## Find the project on R-Forge
+This project uses R-Forge[1] for development.  R-Forge provides a set of tools for source code management (Subversion) and various web-based features.  To use Subversion (svn) on R-Forge you'll need to register as a site user[2] and then login[3].  If you are unfamiliar with R-Forge, you may want to review a copy of the User's Manual[4].    
+
+If you are interested in becoming a long-term contributor, we will need your r-forge id to get you set up with svn commit access on R-Forge. In addition, you should join the r-forge commit list for the project the code is being submitted into.  For example, go to the returnanalytics[7] project on R-Forge.  You’ll see a link for mailing lists, with one public mailing list called “returnanalytics-commits”.  Subscribe to that, and you’ll be notified by email of any commits made to the project.
+
+## Get proficient at using SVN
+R-Forge uses svn for version control, and it is very important for you to be adept at using svn.  For more specifics about how to use svn, take a look at the book Version Control with Subversion[5].  You will need to install the client of your choice (e.g., Tortoise SVN[6] on Windows or svnX on Mac OSX) and check out the repository.  Please do not hesitate to ask for help if you get stuck - this is a critical component of our workflow and will be important for keeping everyone up to date with current code.  
+
+If you want to commit to R-forge, it needs to be checked out using the instructions for developer checkout, via ssh, not the normal anonymous checkout.  If you’ve previously checked out the code anonymously, you’ll need to check it out again using your R-Forge id (and ssh key) before you’ll be able to commit your changes.  
+
+When making modifications or adding new functions, make frequent, small, tested commits.  Those are easier for us to stay on top of.  Please try to make commits to svn at least daily while coding.  If you make an improvement and it works - check it in.  This way we will be able to test code more frequently and we’ll know quickly if something is broken.  
+
+We believe that there are thousands of financial professionals around the world who regularly use and rely on `PerformanceAnalytics`.  When things break we hear about it, and often only minutes after a source commit.  All code has bugs, of course, and we work hard to fix bugs as we are made aware of them.  We also try as hard as we can to not introduce new bugs when we touch code.
+
+Make sure to test other behaviors beyond what you are working on to make sure that other functionality is unaffected by the changes you introduced.
+
+We suggest an iterative approach to development: first make it work, then make it work *correctly*, and finally make it work fast (if needed).  Do not try to make it perfect or even pretty before checking something in.  
+
+Make sure you provide a useful log message for each commit.  Look at the log of the repository you will be working with to get a feel for the logging style. 
+
+We do not have plans at this time to migrage to git, but thanks for asking.
+
+## Create a project structure
+Functions that are candidates for inclusion in `PerformanceAnalytics` should be checked into the `\sandbox` directory on R-Forge.  That directory is excluded from the production build testing, and is ideal for development.  When a function is complete, documented, and tested, we will move it into the package and generate the associated Roxygen documentation.
+
+If you are working with us on a project over a longer period of time or with multiple functions, you should set up a project directory structure in that same directory.  That will allow you arrange your code for compiling roxygen and testing that everything will build correctly without affecting the main package.  Such a structure would be:
+```
+sandbox/
+   [your directory]/
+     DESCRIPTION
+     R/
+     man/
+     src/
+     tests/
+     inst/
+     vignettes/
+```
+If you've already started, mse svn move to move your existing functions into the appropriate directories to preserve the history of their development.  Then try to build the roxygen documents.  
+
+This structure provides an easy way for you to test whether the functions will "build" correctly. The next section will describe how you should be able to use `R CMD check` on your "package", so that the check process runs all your examples and demonstrates that everything is working the way you expect.
+
+## Install build tools and use `R CMD check`
+Everyone should know how to build packages from source, although once-daily builds may be available on R-Forge.  R-Forge uses CRAN's stringent standards for creating builds, so when the code is not ready for distribution R-Forge will not build the package.  As a result, we recommend that you learn how to build packages in your own environment.
+
+A *nix machine should have everything needed (see Appendix A of ‘R Installation and Administration’[13]), but a regular Windows machine will not.  Windows users will need to install RTools [12], a collection of resources for building packages for R under Microsoft Windows (see Appendix D of ‘R Installation and Administration’[13]).  
+
+Once all tools are in place, you should be able to build a package by opening a shell, moving to the directory of the package, and typing ‘R CMD INSTALL packagename’.  The R-Forge Manual provides more detail in section 4.
+
+## Use `roxygen2` for documentation
+We either have or are currently converting all of our packages' documentation to `roxygen2`[8], an in-source 'literate programming'[9] documentation system for generating Rd, collation, and NAMESPACE files.  What that means is that the documentation will be in the same file as the functions (as comments before each function) which will make writing and synchronizing the documentation easier for everyone.  Every function file will have the documentation and roxygen tags in the file, and `roxygenize` will be run before the package build process to generate the Rd documentation files required by R.  `Roxygen2` is available on CRAN. 
+
+For more information on documentation and R package development in general, read 'Writing R Extensions'[10].
+
+## Use `xts` and `zoo` internally
+PerformanceAnalytics uses the xts package for managing time series data for several reasons. Besides being fast and efficient, xts includes functions that test the data for periodicity and draw attractive and readable time-based axes on charts. Another benefit is that xts provides compatability with Rmetrics' timeSeries, zoo and other time series classes, such that PerformanceAnalytics functions that return a time series will return the results in the same format as the object that was passed in. Jeff Ryan and Josh Ulrich, the authors of xts, have been extraordinarily helpful to the development of PerformanceAnalytics and we are very greatful for their contributions to the community. 
+
+The xts package extends the excellent zoo package written by Achim Zeileis and Gabor Grothendieck. zoo provides more general time series support, whereas xts provides functionality that is specifically aimed at users in finance.
+
+## Learn how to ask good questions
+This might be your most important tool. 
+
+If you're having trouble, try to provide a small, reproducible example that someone can actually run on easily available data. If more complex data structures are required, `dump("x", file=stdout())` will print an expression that will recreate the object `x`.
+
+A good place to ask questions is the r-sig-finance mailing list, where the authors and several contributors to our packages are known to hang out:
+https://stat.ethz.ch/mailman/listinfo/r-sig-finance
+Before asking a question, make sure to read the posting guide
+http://www.r-project.org/posting-guide.html
+and then read Eric Raymond's essay: 
+http://www.catb.org/~esr/faqs/smart-questions.html
+
+## Make your life easier with RStudio
+Although RStudio is not required for contributing to `PerformanceAnalytics`, it is worth pointing out that it is a very capable IDE for R and has a number of tools for automating some of the workflow described above.  Highly recommended.
+
+
+
+# Writing Calculation Functions
+This section discusses some of the key principles that we've tried to adhere to when writing functions for `PerformanceAnalytics` in the belief that they help make the package easier for users to adopt into their work.  With the principles in mind and tools in hand, we'll take a closer look at some specific examples.  These examples won't be exhaustive or complete, so take a look at similar functions in the package for alternative methods as well.
+
+## Provide useful analysis of returns
+`PerformanceAnalytics` is carefully scoped to focus on the analysis of returns rather than prices.  If you are concerned that a function may not fit the package for some reason, please reach out to us and we can discuss what to do.  We are authors of several other packages such as `quantstrat` and `blotter` that analyze prices and positions rather than returns and weights.
+
+It is important to note that `PerformanceAnalytics` does not aim to be exhaustive.  Instead, we see it as a well-curated package of useful functions.  We do not aspire to include every method ever conceived, but rather focus on functions that can affect investment decisions made by practitioners in real-world circumstances.
+
+`PerformanceAnalytics` is also not a reporting tool.  Other packages and tools should be expected to use functions in this package for creating reports, but that functionality is beyond the scope of this package.  For example, users wanting to export output to Excel have several packages to choose from, including `xlsx` or `XLConnect`.  Those wanting a more interactive browswer-based experience should look at `shiny`.
+
+## Write readable and maintainable code
+Although preferences for code style do vary, when there are a number of contributors to the package it can be important for readability and future maintainability of the code.  You should strive (as much as is practical) to match the style in the existing code.  When in doubt, rely on Google’s R Style Guide[11] or ask us.
+
+## Provide consistent and standard interfaces
+Given the number of users that PerformanceAnalytics has right now and the institutions in which they work, we try to be as 'stable' as possible for our users. That stability comes from allowing users to expect two things: that similar functions will work similarly to one another, and that interfaces to functions won't change without backward compatability and warning.
+
+For the first aspect, `PerformanceAnalytics` uses standardized argument names and calling conventions throughout the package.  For example, in every function where a time series of returns is used, the argument for the data is named `R`.  If two such series are used, such as an asset and a benchmark time series, they are referred to as `Ra` and `Rb`, respectively.  Several other similar conventions exist, such as using `p` for specifying the quantile parameter in `VaR`, `ES`, `CDaR`, and other similar functions.  When writing or modifying a function, please use argument names that match similar functions.
+
+Secondly, the public interfaces of functions must not change in ways that break the users' existing code.  In particular, do not change the names, the order of the arguments or the format of the results delivered if at all possible.  Exceptions that are made for good reason require warnings about deprecation and handling for backward compatibility.
+
+We prefer that new arguments be added after dots (`...`).  When arguments appear after dots, the user is required to pass the argument in explicitly, using the argument name.  That prevents users from being confused about the order of the inputs. [Needs more detail? See also?]
+
+Parameter inputs should be the same periodicity as the data provided.  For example, if a user is providing monthly returns data and specifying a "minimum acceptable return" (such as `MAR` in `DownsideDeviation`), the `MAR` parameter is assumed to also be a monthly return - the same periodicity as the input data.
+
+## Provide convenient analysis
+This largely means hiding complexity from the end user. For example, given how we expect the input data to be organized functions will handle multi-column input and provide a calculated result (or NA) for each column, with the outputs labeled completely and delivered in a rational data structure.
+
+Functions will use `xts` internally where possible, mainly because `xts` is fast, efficient, and makes it easy to merge and subset data.
+
+Where the output is a time series derived from a time series input, the function will provide the output in the same format as the input series.  See `?xts::reclass` for more information.
+
+## Write documentation first
+Document as you write.  It is really important to write the documentation as you write functions, perhaps even *before* you write the function, at least to describe what it should do.  
+
+When documenting a function:
+
+- make sure function and argument naming is consistent;
+- make sure equations are correct and cited;
+- make sure all user-facing functions have examples;
+- make sure you know the expected results of the examples (these will become tests);
+- make sure relevant literature is cited everywhere; and
+- apply a standard mathematical notation.  In most cases, follow the notation from the original paper.  
+
+Ideally, the documentation will go a step further to briefly describe how to interpret results.
+
+Make sure you use the author tag in roxygen with your name behind it.  Credit is yours, and we want to remember who wrote it so we can ask you questions later!  Also in the documentation, refer to any related code that is included, where it is, and how you matched it against known data to ensure it gives the same result.
+
+And think about see also tags in roxygen, linking charts and underlying functions in the documentation (such as `benchmarkSR` and its plot).
+
+Equations in documentation should have both full LaTeX code for printing in the PDF and a text representation that will be used in the console help. Use:
+```
+\eqn{\LaTeX}{ascii}
+```
+or
+```
+\deqn{\LaTeX}{ascii}
+```
+Greek letters will also be rendered in the HTML help.  However, the only way to get the full mathematical equation layout is in the PDF rendered from LaTeX.
+
+At a minimum, use the following template to start your documentation.  Feel free to add other tags as well.
+```
+#' A brief, one line description
+#'
+#' Detailed description, including equations
+#' \deqn{\LaTeX}{ascii}
+#' @param ...
+#' @author 
+#' @seealso \cr
+#' @references 
+#' @examples
+#' @aliases
+#' @export
+```
+There is more detail about the text formatting and tags in the `roxygen2` package.  A good place to start is with the vignette, which can be read by typing `vignette('roxygen2')` in an R session after loading the package.
+
+## Accept inputs generously
+Package functions will allow the user to provide input in any format.  Users are able to pass in a data object without being concerned that the internal calculation function requires a matrix, data.frame, vector, xts, or timeSeries object. 
+
+The functions within `PerformanceAnalytics` assume that input data is organized with asset returns in columns and dates represented in rows. All of the metrics are calculated by column and return values for each column in the results. This is the default arrangement of time series data in xts.
+
+Some sample data is available in the managers dataset.
+```{r}
+library(PerformanceAnalytics, verbose = FALSE, warn.conflicts = FALSE, quietly = TRUE)
+data(managers)
+head(managers)
+```
+The `managers` data is an xts object that contains columns of monthly returns for six hypothetical asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge fund index, the S&P 500 total returns, and total return series for the US Treasury 10-year bond and 3-month bill. Monthly returns for all series end in December 2006 and begin at different periods starting from January 1996. That data set is used extensively in our examples and should serve as a model for how to expect the user to provide data to your functions.
+
+As you can see from the sample, returns are represented as a decimal number, rather than as a whole number with a percentile sign.  
+
+`PerformanceAnalytics` provides a function, `checkData` that examines input data and coerces it into a specified format.  This function was created to make the different kinds of data classes at least seem more fungible to the end user. It allows the user to pass in a data object without being concerned that the underlying functions require a matrix, data.frame, vector, xts, or timeSeries object. 
+
+It allows the user to provide any type of data as input: a vector, matrix, data.frame, xts, timeSeries or zoo object.  `checkData` will identify and coerce the data into any of "xts" (the default), "zoo", "data.frame", "matrix", or "vector".  See `?checkData` for more details.
+
+## Handle missing data
+Calculations will be made with the appropriate handling for missing data.  Contributors should not assume that users will provide complete or equal length data sets.  If only equal length data sets are required for the calculation, users should be warned with a message describing how the data was truncated.
+
+## Warn the user when making assumptions
+If a function encounters an issue where there is a likely work-around to be applied or the function needs to make an assumption about what the user wants to do, the function should do so but inform the user by using `warning`.  For example, in `Return.rebalancing` the function warns the user that it zero-filled any missing data that it encountered.
+```
+Warning message:
+In Return.rebalancing(managers[, 1:4]) :
+  NA's detected: filling NA's with zeros
+```
+See `?warning` for more detail.
+
+## Provide clear error messages when stopping
+In cases where the function cannot continue with the inputs provided, it should stop and give a clear reason.  For example, when `Return.rebalancing` encounters a different number of assets and weights it will stop with the message "number of assets is greater than number of columns in return object".  
+
+## Provide multi-column support
+There is more than one way to provide multi-column support for calculation functions.  We'll give a couple of short examples here, but peruse the code for other cases.
+
+Sometimes, functions don't need to have explicit handling for columns.  See `Return.calculate` as an example.
+
+If the calculation is simple, use `apply`.  A generic example might have a form like:
+```
+exampleFunction <- function(R){
+  R = checkData(R)
+  foo <- function(x) 1+x
+  result = apply (R, FUN=foo, MARGIN=2)
+  result
+}
+```
+[is there an outside reference/tutorial for apply?]
+
+For functions that may encounter multiple assets and multiple benchmarks, `expand.grid` is useful.  `CAPM.alpha` shows an example of how the columns can be combined, then used with `apply`:
+```
+pairs = expand.grid(1:NCOL(Ra), 1:NCOL(Rb))
+result = apply(pairs, 1, FUN = function(n, xRa, xRb) alpha(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
+```
+If the calculation is more difficult, resort to simple `for` loops for columns.  Speed optimization can come later, if necessary.
+
+## Provide support for different frequencies of data
+Some functions should try to identify the periodicity of the returns data.  For example, `SharpeRatio.annualized` identifies the frequency of the returns data input, and selects the appropriate multiplier for the user (e.g., daily returns would use `252`, monthly `12`, etc.).  It also provides a parameter, `scale`, so that the user can directly specify the number of periods in a year if needed.  
+
+The following snippet shows how `xts::periodicity` can be used to find the frequency of the data, and a variable can be set depending on its outcome.
+```
+if(is.na(scale)) {
+    freq = periodicity(R)
+    switch(freq$scale,
+        minute = {stop("Data periodicity too high")},
+        hourly = {stop("Data periodicity too high")},
+        daily = {scale = 252},
+        weekly = {scale = 52},
+        monthly = {scale = 12},
+        quarterly = {scale = 4},
+        yearly = {scale = 1}
+    )
+}
+```
+The `scale` variable is then set by how `xts` detects the data frequency. 
+
+## Use reclass for time series output
+
+```
+result=reclass(result,match.to=R)
+return(result)
+```
+
+## Label outputs clearly
+Be clear about what the calculation has returned, labeling columns and rows of outputs as necessary, and using key input assumptions where useful.  For example, you might use something like:
+```
+rownames(result) = paste0("Modified Foo ratio (Risk free = ",Rf,")")
+```
+Although that might seem like overkill, conditioning the labels is frequently useful for keeping track of key assumptions.
+
+In some cases, it is important to keep data pairs straight.  For example, in functions where a set of returns and a set of benchmarks are possible inputs, individual results should be tagged with both the subject return name and the benchmark return name.  
+
+## Create good tests
+
+
+## How to pass functions and related arguments
+Example?
+the function is modify.args in quantstrat, in utils.R
+and you can see how it's called in applyIndicators in indicators.R
+
+# Writing Chart Functions
+## Use base graphics
+## Use plot.xts for time series charts
+## How to structure chart multiples
+## Do NOT use menu interactions
+## Writing to devices
+
+# Writing Table Functions
+## Output to data.frame
+## Formatting and displaying digits
+## Writing to devices
+
+# Summary
+## Thank you for contributing
+## Ask questions to the list
+Which list?
+
+# References
+[1] R-Forge
+
+http://r-forge.r-project.org
+
+[2] R-Forge registration
+
+https://r-forge.r-project.org/account/register.php
+
+[3] R-Forge login
+
+https://r-forge.r-project.org/account/login.php
+
+[4] R-Forge User Manual
+
+http://download.r-forge.r-project.org/R-Forge_Manual.pdf
+
+[5] SVN Book
+
+http://svnbook.red-bean.com
+
+[6] Tortoise SVN
+
+http://tortoisesvn.tigris.org
+
+[7] ReturnAnalytics on R-Forge
+
+https://r-forge.r-project.org/projects/returnanalytics/
+
+[8] roxygen2
+
+http://cran.r-project.org/web/packages/roxygen2/index.html
+
+[9] literate programming
+
+http://en.wikipedia.org/wiki/Literate_programming
+
+[10] Writing R Extensions
+
+http://cran.r-project.org/doc/manuals/R-exts.pdf
+
+[11] Google’s R style guide
+
+http://google-styleguide.googlecode.com/svn/trunk/google-r-style.html
+
+[12] Rtools
+
+http://cran.r-project.org/bin/windows/Rtools/
+
+[13] R Installation and Administration
+
+http://cran.r-project.org/doc/manuals/R-admin.pdf
+
+# Appendixes
+## Use foreach for parallel computations
+## Handle long labels when possible
+## Writing to spreadsheets
