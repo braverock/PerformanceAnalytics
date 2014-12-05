@@ -24,7 +24,7 @@ This document is written with two types of contributors in mind.  The first kind
 
 The second type of contributor we have in mind is more the focus of this document.  This kind of contributor is working on a defined project around a body of research, porting existing code from another language, or developing an idea in collaboration with us.  We encourage this type of contribution and for many years have collaborated with students through the Google Summer of Code [add link] program.  This type of project-oriented collaboration requires more organization and structure -- sometimes there's a plan and a schedule, a mentor or three, maybe a book, a dissertation, or a few journal articles.
 
-Either way, this guide assembles the things that we've said in answer to questions over the years to those we've collaborated with.  We hope it provides a good foundation for you to get started, but please do not hesistate to ask for more detail or help where there isn't enough.  And finally, please don't let our strident list of requirements below prevent you from contributing -- we value hastily constructed, first-draft, proof-of-concept code, too.  
+Either way, this guide assembles the things that we've said in answer to questions over the years to those we've collaborated with.  We hope it provides a good foundation for you to get started, but please do not hesitate to ask for more detail or help where there isn't enough.  And finally, please don't let our strident list of requirements below prevent you from contributing -- we value hastily constructed, first-draft, proof-of-concept code, too.  
 
 ## How to become a contributor
 As mentioned above, the easiest way to become a contributor is to email us.  We like to hear about what you are using the package for, answer any questions you might have, chase down bugs you encounter, or consider changes and additions that would improve the package.  
@@ -37,10 +37,10 @@ We look forward to hearing more from you as you use and enhance the `returnanaly
 
 [ one paragraph on Copyrights and licensing? ]
 
-The remainder of this paper is in three sections.  The first provides a brief introduction to the tools we use, and might be generally helpful if you are newer to R.  The second section describes the principals we use to guide our development, and the third section discusses in more detail and with examples how to use these principles as you develop functions.  By the end of this document, you should have a good understanding about not only *how* but *why* we do things the way that we do. 
+The remainder of this paper is in three sections.  The first provides a brief introduction to the tools we use, and might be generally helpful if you are newer to R.  The second section describes the principles we use to guide our development, and the third section discusses in more detail and with examples how to use these principles as you develop functions.  By the end of this document, you should have a good understanding about not only *how* but *why* we do things the way that we do. 
 
 # Getting Established
-This section introduces the tools we use for development.  While these aren't all required to be successfull, we find that it is easier to help people through issues when we are all working with the same tools.
+This section introduces the tools we use for development.  While these aren't all required to be successful, we find that it is easier to help people through issues when we are all working with the same tools.
 
 ## How to create patches
 One of the easiest ways to become a contributor is to send us patches.  Patches are a text description of changes made to a function that will add a new feature, fix a bug, or add documentation.  To create a patch for a single file, use `diff` or a Windows-equivalent (either UnxUtils or WinMerge) to create a unified diff patch file.  For example, in a shell you might run something like:
@@ -69,7 +69,7 @@ We suggest an iterative approach to development: first make it work, then make i
 
 Make sure you provide a useful log message for each commit.  Look at the log of the repository you will be working with to get a feel for the logging style. 
 
-We do not have plans at this time to migrage to git, but thanks for asking.
+We do not have plans at this time to migrate to git, but thanks for asking.
 
 ## Create a project structure
 Functions that are candidates for inclusion in `PerformanceAnalytics` should be checked into the `\sandbox` directory on R-Forge.  That directory is excluded from the production build testing, and is ideal for development.  When a function is complete, documented, and tested, we will move it into the package and generate the associated Roxygen documentation.
@@ -86,7 +86,7 @@ sandbox/
      inst/
      vignettes/
 ```
-If you've already started, mse svn move to move your existing functions into the appropriate directories to preserve the history of their development.  Then try to build the roxygen documents.  
+If you've already started, use svn move to move your existing functions into the appropriate directories to preserve the history of their development.  Then try to build the roxygen documents.  
 
 This structure provides an easy way for you to test whether the functions will "build" correctly. The next section will describe how you should be able to use `R CMD check` on your "package", so that the check process runs all your examples and demonstrates that everything is working the way you expect.
 
@@ -103,7 +103,7 @@ We either have or are currently converting all of our packages' documentation to
 For more information on documentation and R package development in general, read 'Writing R Extensions'[10].
 
 ## Use `xts` and `zoo` internally
-PerformanceAnalytics uses the xts package for managing time series data for several reasons. Besides being fast and efficient, xts includes functions that test the data for periodicity and draw attractive and readable time-based axes on charts. Another benefit is that xts provides compatability with Rmetrics' timeSeries, zoo and other time series classes, such that PerformanceAnalytics functions that return a time series will return the results in the same format as the object that was passed in. Jeff Ryan and Josh Ulrich, the authors of xts, have been extraordinarily helpful to the development of PerformanceAnalytics and we are very greatful for their contributions to the community. 
+PerformanceAnalytics uses the xts package for managing time series data for several reasons. Besides being fast and efficient, xts includes functions that test the data for periodicity and draw attractive and readable time-based axes on charts. Another benefit is that xts provides compatibility with Rmetrics' timeSeries, zoo and other time series classes, such that PerformanceAnalytics functions that return a time series will return the results in the same format as the object that was passed in. Jeff Ryan and Josh Ulrich, the authors of xts, have been extraordinarily helpful to the development of PerformanceAnalytics and we are very grateful for their contributions to the community. 
 
 The xts package extends the excellent zoo package written by Achim Zeileis and Gabor Grothendieck. zoo provides more general time series support, whereas xts provides functionality that is specifically aimed at users in finance.
 
@@ -132,13 +132,13 @@ This section discusses some of the key principles that we've tried to adhere to 
 
 It is important to note that `PerformanceAnalytics` does not aim to be exhaustive.  Instead, we see it as a well-curated package of useful functions.  We do not aspire to include every method ever conceived, but rather focus on functions that can affect investment decisions made by practitioners in real-world circumstances.
 
-`PerformanceAnalytics` is also not a reporting tool.  Other packages and tools should be expected to use functions in this package for creating reports, but that functionality is beyond the scope of this package.  For example, users wanting to export output to Excel have several packages to choose from, including `xlsx` or `XLConnect`.  Those wanting a more interactive browswer-based experience should look at `shiny`.
+`PerformanceAnalytics` is also not a reporting tool.  Other packages and tools should be expected to use functions in this package for creating reports, but that functionality is beyond the scope of this package.  For example, users wanting to export output to Excel have several packages to choose from, including `xlsx` or `XLConnect`.  Those wanting a more interactive browser-based experience should look at `shiny`.
 
 ## Write readable and maintainable code
 Although preferences for code style do vary, when there are a number of contributors to the package it can be important for readability and future maintainability of the code.  You should strive (as much as is practical) to match the style in the existing code.  When in doubt, rely on Google’s R Style Guide[11] or ask us.
 
 ## Provide consistent and standard interfaces
-Given the number of users that PerformanceAnalytics has right now and the institutions in which they work, we try to be as 'stable' as possible for our users. That stability comes from allowing users to expect two things: that similar functions will work similarly to one another, and that interfaces to functions won't change without backward compatability and warning.
+Given the number of users that PerformanceAnalytics has right now and the institutions in which they work, we try to be as 'stable' as possible for our users. That stability comes from allowing users to expect two things: that similar functions will work similarly to one another, and that interfaces to functions won't change without backward compatibility and warning.
 
 For the first aspect, `PerformanceAnalytics` uses standardized argument names and calling conventions throughout the package.  For example, in every function where a time series of returns is used, the argument for the data is named `R`.  If two such series are used, such as an asset and a benchmark time series, they are referred to as `Ra` and `Rb`, respectively.  Several other similar conventions exist, such as using `p` for specifying the quantile parameter in `VaR`, `ES`, `CDaR`, and other similar functions.  When writing or modifying a function, please use argument names that match similar functions.
 
@@ -181,7 +181,7 @@ or
 ```
 \deqn{\LaTeX}{ascii}
 ```
-Greek letters will also be rendered in the HTML help.  However, the only way to get the full mathematical equation layout is in the PDF rendered from LaTeX.
+Greek letters will also be rendered in the HTML help.  However, the only way to get the full mathematical equation layout is in the PDF rendered from \LaTeX.
 
 At a minimum, use the following template to start your documentation.  Feel free to add other tags as well.
 ```
@@ -204,11 +204,13 @@ Package functions will allow the user to provide input in any format.  Users are
 
 The functions within `PerformanceAnalytics` assume that input data is organized with asset returns in columns and dates represented in rows. All of the metrics are calculated by column and return values for each column in the results. This is the default arrangement of time series data in xts.
 
-Some sample data is available in the managers dataset.
+Some sample data is available in the managers data set.
 ```{r}
 library(PerformanceAnalytics, verbose = FALSE, warn.conflicts = FALSE, quietly = TRUE)
 data(managers)
+options(width=200)
 head(managers)
+options(width=80)
 ```
 The `managers` data is an xts object that contains columns of monthly returns for six hypothetical asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge fund index, the S&P 500 total returns, and total return series for the US Treasury 10-year bond and 3-month bill. Monthly returns for all series end in December 2006 and begin at different periods starting from January 1996. That data set is used extensively in our examples and should serve as a model for how to expect the user to provide data to your functions.
 
