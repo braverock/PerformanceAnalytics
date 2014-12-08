@@ -550,7 +550,7 @@ ES.historical = function(R,p) {
 
 ES.historical.portfolio = function(R,p,w)
 {
-    VaR = VaR.historical.portfolio(R,p,w)
+    hvar = as.numeric(VaR.historical.portfolio(R,p,w)$hVaR)
     T = dim(R)[1]
     N = dim(R)[2]
     c_exceed = 0;
@@ -560,17 +560,19 @@ ES.historical.portfolio = function(R,p,w)
     {
        rt = as.vector(R[t,])
        rp = sum(w*rt)
-       if(rp<= -VaR){
+       if(rp<= -hvar){
           c_exceed = c_exceed + 1;
           r_exceed = r_exceed + rp;
           for( i in c(1:N) ){
              realizedcontrib[i] =realizedcontrib[i] + w[i]*rt[i] }
        }
     }
-    realizedcontrib=as.numeric(realizedcontrib)/r_exceed ;
-    names(realizedcontrib)<-names(w)
-    ret <- list(-r_exceed/c_exceed,c_exceed,realizedcontrib) 
-    names(ret) <- c("-r_exceed/c_exceed","c_exceed","realizedcontrib")
+    pct.contrib=as.numeric(realizedcontrib)/r_exceed ;
+    names(pct.contrib)<-names(w)
+    # TODO construct realized contribution
+    
+    ret <- list(-r_exceed/c_exceed,c_exceed,pct.contrib) 
+    names(ret) <- c("-r_exceed/c_exceed","c_exceed","pct_contrib_hES")
     return(ret)
 }
 
@@ -589,18 +591,31 @@ VaR.historical = function(R,p)
     }
     colnames(result)<-colnames(R)
     return(result)
-}    
-VaR.historical.portfolio = function(R,p,w)
+} 
+
+VaR.historical.portfolio = function(R,p,w=NULL)
 {
-    alpha = .setalphaprob(p)
-    portret = c();
-    T = dim(R)[1]
-    N = dim(R)[2]
-    for( t in c(1:T) ){
-       portret = c(portret,sum(w*as.numeric(R[t,])))
-    }
-    hVaR = -1* sort(portret)[floor(alpha*T)]
-    return(hVaR)
+  alpha = .setalphaprob(p)
+  rp = Return.portfolio(R,w, contribution=TRUE)
+  hvar = -quantile(zerofill(rp$portfolio.returns),probs=alpha)
+  names(hvar) = paste0('hVaR ',100*(1-alpha),"%")
+
+  # extract negative periods, 
+  zl<-rp[rp$portfolio.returns<0,]
+
+  # and construct weighted contribution
+  zl.contrib <- colMeans(zl)[-1]
+  ratio <- -hvar/sum(colMeans(zl))
+  zl.contrib <- ratio * zl.contrib
+  
+  # and construct percent contribution
+  zl.pct.contrib <- (1/sum(zl.contrib))*zl.contrib
+  
+  ret=list(hVaR = hvar,
+           contribution = zl.contrib,
+           pct_contrib_hVaR = zl.pct.contrib)
+  
+  return(ret)
 }
 
 ###############################################################################
