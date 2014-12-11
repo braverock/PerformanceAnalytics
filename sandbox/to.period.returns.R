@@ -41,9 +41,12 @@ to.period.returns <- function(R, period = c("years", "quarters", "months", "week
   if(err) stop("Period specified is higher than data periodicity.  Specify a lower frequency instead.")
   
   # Calculate cumulative return for aggregation periods
-  period.apply(x, INDEX=endpoints(x, period), FUN=Return.cumulative, geometric=geometric)
-
-  return(period.ret)
+#   result=period.apply(x, INDEX=endpoints(x, period), FUN=Return.cumulative, geometric=geometric)
+  result=NULL
+  for(i in 1:NCOL(x)){
+    result = cbind(result,period.apply(x[,i], INDEX=endpoints(x, period), FUN=function(x, geometric) {ifelse(length(na.omit(x))==0, NA,  Return.cumulative(x, geometric) )}, geometric=geometric))
+  }
+  return(result)
   
 }
 #' @export
