@@ -237,10 +237,12 @@ Return.portfolio.arithmetic <- function(R,
   # bop = beginning of period
   # eop = end of period
   # Initialize objects
-  bop_weights = matrix(0, NROW(R), NCOL(R))
+  # portfolio returns are only accounted for after the first rebalancing date
+  R.idx = index(R[paste0(as.Date(index(weights[1,]))+1, "/")])
+  bop_weights = matrix(0, NROW(R.idx), NCOL(R))
   colnames(bop_weights) = colnames(R)
   eop_weights = period_contrib = bop_weights
-  ret = vector("numeric", NROW(R))
+  ret = vector("numeric", NROW(R.idx))
   
   # initialize counter
   k = 1
@@ -254,7 +256,6 @@ Return.portfolio.arithmetic <- function(R,
       to = as.Date(index(weights[(i+1),]))
     }
     returns = R[paste0(from, "::", to)]
-    
     # Only enter the loop if we have a valid returns object
     if(nrow(returns) >= 1){
       # inner loop counter
@@ -266,13 +267,11 @@ Return.portfolio.arithmetic <- function(R,
         period_contrib[k,] = coredata(returns[j,]) * bop_weights[k,]
         eop_weights[k,] = (period_contrib[k,] + bop_weights[k,]) / sum(c(period_contrib[k,], bop_weights[k,]))
         ret[k] = sum(period_contrib[k,])
-        
         # increment the counters
         k = k + 1
       }
     }
   }
-  R.idx = index(R)
   ret = xts(ret, R.idx)
   colnames(ret) = "portfolio.returns"
   
@@ -312,7 +311,9 @@ Return.portfolio.geometric <- function(R,
   # bop = beginning of period
   # eop = end of period
   # Initialize objects
-  bop_value = matrix(0, NROW(R), NCOL(R))
+  # portfolio returns are only accounted for after the first rebalancing date
+  R.idx = index(R[paste0(as.Date(index(weights[1,]))+1, "/")])
+  bop_value = matrix(0, NROW(R.idx), NCOL(R))
   colnames(bop_value) = colnames(R)
   eop_value = bop_value
   
@@ -323,7 +324,7 @@ Return.portfolio.geometric <- function(R,
       eop_weights = bop_value
     }
   }
-  ret = eop_value_total = bop_value_total = vector("numeric", NROW(R))
+  ret = eop_value_total = bop_value_total = vector("numeric", NROW(R.idx))
   
   # The end_value is the end of period total value from the prior period
   end_value <- value
@@ -340,7 +341,6 @@ Return.portfolio.geometric <- function(R,
       to = as.Date(index(weights[(i+1),]))
     }
     returns = R[paste0(from, "::", to)]
-    
     # Only enter the loop if we have a valid returns object
     if(nrow(returns) >= 1){
       # inner loop counter
@@ -385,7 +385,7 @@ Return.portfolio.geometric <- function(R,
       }
     }
   }
-  R.idx = index(R)
+  #R.idx = index(R)
   ret = xts(ret, R.idx)
   colnames(ret) = "portfolio.returns"
   
