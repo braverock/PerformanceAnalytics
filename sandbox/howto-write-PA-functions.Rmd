@@ -110,18 +110,12 @@ The xts package extends the excellent zoo package written by Achim Zeileis and G
 ## Learn how to ask good questions
 This might be your most important tool. 
 
-If you're having trouble, try to provide a small, reproducible example that someone can actually run on easily available data. If more complex data structures are required, `dump("x", file=stdout())` will print an expression that will recreate the object `x`.
+If you're having trouble, try to provide a small, reproducible example that someone can actually run on easily available data. If more complex data structures are required, `dump("x", file=stdout())` will print an expression that will recreate your data object, `x`.
 
-A good place to ask questions is the r-sig-finance mailing list, where the authors and several contributors to our packages are known to hang out:
-https://stat.ethz.ch/mailman/listinfo/r-sig-finance
-Before asking a question, make sure to read the posting guide
-http://www.r-project.org/posting-guide.html
-and then read Eric Raymond's essay: 
-http://www.catb.org/~esr/faqs/smart-questions.html
+A good place to ask questions is the r-sig-finance mailing list, where the authors and several contributors to our packages are known to hang out. Sign up here: https://stat.ethz.ch/mailman/listinfo/r-sig-finance.  Before asking a question, make sure to read the posting guide, found at: http://www.r-project.org/posting-guide.html.  And then, for good measure, read Eric Raymond's essay on how to ask a good question in forums like these: http://www.catb.org/~esr/faqs/smart-questions.html.  
 
 ## Make your life easier with RStudio
 Although RStudio is not required for contributing to `PerformanceAnalytics`, it is worth pointing out that it is a very capable IDE for R and has a number of tools for automating some of the workflow described above.  Highly recommended.
-
 
 
 # Writing Calculation Functions
@@ -223,6 +217,8 @@ It allows the user to provide any type of data as input: a vector, matrix, data.
 ## Handle missing data
 Calculations will be made with the appropriate handling for missing data.  Contributors should not assume that users will provide complete or equal length data sets.  If only equal length data sets are required for the calculation, users should be warned with a message describing how the data was truncated.
 
+Be careful how you use `na.omit` on time series data. [add more here]
+
 ## Warn the user when making assumptions
 If a function encounters an issue where there is a likely work-around to be applied or the function needs to make an assumption about what the user wants to do, the function should do so but inform the user by using `warning`.  For example, in `Return.rebalancing` the function warns the user that it zero-filled any missing data that it encountered.
 ```
@@ -279,10 +275,14 @@ if(is.na(scale)) {
 The `scale` variable is then set by how `xts` detects the data frequency. 
 
 ## Use reclass for time series output
-
+One of the key reasons to use `xts` internally is that it handles conversion to and from other data classes.  This allows us to accept a matrix, convert it to an xts object (assuming the row labels of the matrix are an identifiable date format), calculate something, and convert the result back to a matrix.  The `xts::as.xts` conversion in `checkData` paired with the `xts::reclass` function provide the conversion.  For example:
 ```
-result=reclass(result,match.to=R)
-return(result)
+foo <- function(R, ...) {
+  x = checkData(R)
+  result = x+1 # calculate something
+  result = reclass(result,match.to=R) # converts back to what the user provided
+  return(result) 
+}
 ```
 
 ## Label outputs clearly
@@ -295,7 +295,14 @@ Although that might seem like overkill, conditioning the labels is frequently us
 In some cases, it is important to keep data pairs straight.  For example, in functions where a set of returns and a set of benchmarks are possible inputs, individual results should be tagged with both the subject return name and the benchmark return name.  
 
 ## Create good tests
-
+    Can we contribute unit tests?
+    Are unit tests required?
+    If so, what coverage do you expect?
+    In addition to checking for correct results, what errors or failures should I test for?
+    What unit testing framework do you use?
+    Can you please show me an example or skeleton of a unit test?
+    Where may I put my test data?
+    Do you really expect me to test charting functions?
 
 ## How to pass functions and related arguments
 Example?
