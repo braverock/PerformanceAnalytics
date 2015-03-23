@@ -32,7 +32,7 @@
 #' chart.Drawdown(edhec[,c(1,2)], 
 #' 		main="Drawdown from Peak Equity Attained", 
 #' 		legend.loc="bottomleft")
-#' 
+#' @aliases Drawdowns
 #' @export 
 chart.Drawdown <-
 function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)

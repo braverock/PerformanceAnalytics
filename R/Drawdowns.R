@@ -1,3 +1,5 @@
+#' @export 
+
 Drawdowns <-
 function (R, geometric = TRUE, ...)
 { # @author Peter Carl
