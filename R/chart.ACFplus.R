@@ -29,7 +29,7 @@ chart.ACFplus <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, 
     if (is.null(maxlag)) 
         maxlag = ceiling(10 + sqrt(num))
     ACF = acf(data, maxlag, plot = FALSE)$acf[-1]
-    PACF = pacf(data, maxlag, plot = FALSE)$acf
+    PACF = t(as.matrix(pacf(data, maxlag, plot = FALSE)$acf))
     Lag = 1:length(ACF)/frequency(data)
     minA = min(ACF)
     minP = min(PACF)
@@ -47,16 +47,16 @@ chart.ACFplus <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, 
 
     # ACF chart
     par(mar=c(0.5,4,4,2) + 0.1)
-    plot(Lag, ACF, type = "h", ylim = c(minu,1), main = main, axes = FALSE, ...)
+    barplot(ACF, ylim = c(minu,1), main = main, axes = FALSE, ylab="acf", ...)
     box(col=elementcolor)
     axis(2, col = elementcolor, cex.axis = 0.8)
     abline(h=c(0,L,U), lty=c(1,2,2), col=c(1,4,4))
 
     # PACF chart
     par(mar=c(4,4,0.5,2)+ 0.1)
-    plot(Lag, PACF, type = "h", ylim = c(minu,1), axes = FALSE, ...)
+    barplot(PACF, ylim = c(minu,1), axes = FALSE, ylab="pacf", ...)
     box(col=elementcolor)
-    axis(1, col = elementcolor, cex.axis = 0.8)
+    axis(1, col = elementcolor, cex.axis = 0.8, xlab="lag")
     axis(2, col = elementcolor, cex.axis = 0.8)
     abline(h=c(0,L,U), lty=c(1,2,2), col=c(1,4,4))
 
