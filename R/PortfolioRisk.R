@@ -1,7 +1,7 @@
 ###############################################################################
-# Functions to peRform component risk calculations on portfolios of assets.
+# Functions to perform component risk calculations on portfolios of assets.
 #
-# Copyright (c) 2007-2009 Kris Boudt and Brian G. Peterson
+# Copyright (c) 2007-2015 Kris Boudt and Brian G. Peterson
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################

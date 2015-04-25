@@ -147,6 +147,7 @@
 #' @export 
 chart.TimeSeries <-
 function (R, 
+          ... , 
           auto.grid=TRUE, 
           xaxis = TRUE, 
           yaxis = TRUE, 
@@ -181,7 +182,7 @@ function (R,
           grid.color="lightgray", 
           grid.lty="dotted", 
           xaxis.labels = NULL,
-          dygraphPlot=FALSE,...)
+          dygraphPlot=FALSE)
 { # @author Peter Carl, Brian Peterson
 
     # DESCRIPTION:
