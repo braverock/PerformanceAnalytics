@@ -1,6 +1,6 @@
 Package: PerformanceAnalytics
 Type: Package
-Title: Econometric tools for performance and risk analysis
+Title: Econometric Tools for Performance and Risk Analysis
 Authors@R: c(
   person(given=c("Brian","G."),family="Peterson",role=c("cre","aut","cph"), email="brian@braverock.com")
   , person(given="Peter",family="Carl",role=c("aut","cph"), email="peter@braverock.com")
@@ -12,7 +12,7 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.4.3579
+Version: 1.4.3639
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid

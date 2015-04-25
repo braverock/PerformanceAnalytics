@@ -17,6 +17,10 @@
 #' asset returns
 #' @param top the number of drawdowns to include
 #' @param digits number of digits to round results to
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic 
+#' chaining (FALSE) to aggregate returns, default TRUE
+#' @param \dots any other passthru parameters
+#' 
 #' @author Peter Carl
 #' @seealso 
 #' \code{\link{DownsideDeviation}} \cr 
@@ -48,7 +52,7 @@
 #' 
 #' @export
 table.Drawdowns <-
-function (R, top = 5, digits = 4)
+function (R, top = 5, digits = 4, geometric=TRUE, ...)
 {# @author Peter Carl
 
     # DESCRIPTION
@@ -65,7 +69,7 @@ function (R, top = 5, digits = 4)
 
     R = checkData(R[,1,drop=FALSE])
     R = na.omit(R)
-    x = sortDrawdowns(findDrawdowns(R))
+    x = sortDrawdowns(findDrawdowns(R, geometric=geometric, ...))
 
     ndrawdowns = sum(x$return < 0)
     if (ndrawdowns < top){

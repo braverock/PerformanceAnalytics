@@ -25,7 +25,9 @@
 #' \code{\link{maxDrawdown}} \cr 
 #' \code{\link{table.Drawdowns}} \cr
 #' \code{\link{table.DownsideRisk}}
-###keywords ts
+#' 
+#' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
+#' Attribution}. Wiley. 2004. p. 88 \cr
 #' @examples
 #' 
 #' data(edhec)
