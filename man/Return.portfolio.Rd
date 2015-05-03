@@ -25,7 +25,10 @@ contributed by the asset in a given period. Default FALSE}
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic (FALSE)
 to aggregate returns. Default TRUE.}
 
-\item{rebalance_on}{Default "none"; alternatively "daily" "weekly" "monthly" "annual"  to specify calendar-period rebalancing supported by \code{\link[xts]{endpoints}}.}
+\item{rebalance_on}{Default "none"; alternatively "daily" "weekly" "monthly"
+"annual"  to specify calendar-period rebalancing supported by
+\code{\link[xts]{endpoints}}. Ignored if \code{weights} is an xts object
+that specifies the rebalancing dates.}
 
 \item{value}{The beginning of period total portfolio value. This is used for calculating position value.}
 
@@ -72,6 +75,11 @@ of the asset columns may be specified.  In either case, if no rebalancing period
 specified, the weights will be applied at the beginning of the asset time series
 and no further rebalancing will take place. If a rebalancing period is specified,
 the portfolio will be rebalanced to the starting weights at the interval specified.
+
+Note that if \code{weights} is an xts object, then any value passed to
+\code{rebalance_on} is ignored. The \code{weights} object specifies the
+rebalancing dates, therefore a regular rebalancing frequency provided via
+\code{rebalance_on} is not needed and ignored.
 
 \code{Return.portfolio} will work only on daily or lower frequencies. If you are
 rebalancing intraday, you should be using a trades/prices framework like
