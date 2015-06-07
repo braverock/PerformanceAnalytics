@@ -70,7 +70,7 @@ function(prices, method = c("discrete","log"))
 
     if(method=="simple" || method=='discrete'){
         #Returns = pr/pr[-nrow(pr), ] - 1
-        Returns = pr/lag(pr) - 1
+        Returns = pr/lag.xts(pr) - 1
         xtsAttributes(Returns) <- list(ret_type="discrete")
     }
     if(method=="compound" || method=='log') {
