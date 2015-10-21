@@ -30,7 +30,7 @@
 #' title(main="Statistics for EDHEC Indexes")
 #' 
 #' @rdname table.MonthlyReturns
-#' @export 
+#' @export
 table.Stats <-
 function (R, ci = 0.95, digits = 4)
 {# @author Peter Carl

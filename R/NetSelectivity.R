@@ -30,7 +30,7 @@
 #' print(NetSelectivity(managers['1996',1], managers['1996',8]))
 #' print(NetSelectivity(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 
 NetSelectivity <-
 function (Ra, Rb, Rf = 0, ...)

@@ -57,8 +57,8 @@
 #' CAPM.dynamic(managers[80:120,1:6], managers[80:120,8:7],
 #'               managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
 #' 
-#' @rdname CAPM.dynamic 
-#' @export CAPM.dynamic SFM.dynamic 
+#' @rdname CAPM.dynamic
+#' @export CAPM.dynamic SFM.dynamic
 CAPM.dynamic <- SFM.dynamic <- function (Ra, Rb, Rf = 0, Z, lags = 1, ...)
 { # @author Andrii Babii
     

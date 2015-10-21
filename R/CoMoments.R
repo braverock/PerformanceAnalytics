@@ -53,8 +53,8 @@
 #' data(managers)
 #' Return.centered(managers[,1:3,drop=FALSE])
 #' 
-#' @rdname centeredmoments 
-#' @export 
+#' @rdname centeredmoments
+#' @export
 Return.centered <-
 function (R,...)
 { # @author Peter Carl and Kris Boudt

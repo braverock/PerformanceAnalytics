@@ -32,7 +32,7 @@
 #' print(PainIndex(100*managers['1996']))
 #' print(PainIndex(100*managers['1996',1])) 
 #'
-#' @export 
+#' @export
 
 
 PainIndex <- function (R, ...) 

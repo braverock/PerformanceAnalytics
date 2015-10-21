@@ -16,7 +16,7 @@ CAPM.CML.slope <- SFM.CML.slope <- function (Rb, Rf = 0 )
 }
 
 #' @rdname CAPM.RiskPremium
-#' @export CAPM.CML SFM.CML 
+#' @export CAPM.CML SFM.CML
 CAPM.CML <- SFM.CML <-function (Ra, Rb, Rf = 0)
 { #@author Brian G. Peterson
 

@@ -25,8 +25,7 @@
 #' print(BernardoLedoitRatio(managers['1996']))
 #' print(BernardoLedoitRatio(managers['1996',1])) #expected 4.598
 #'
-#' @export 
-
+#' @export
 BernardoLedoitRatio <- function (R, ...)
 {
     R <- checkData(R)

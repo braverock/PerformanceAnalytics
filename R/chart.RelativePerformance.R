@@ -40,7 +40,7 @@
 #' 		colorset=rich8equal, legend.loc="bottomright", 
 #' 		main="Relative Performance to S&P")
 #' 
-#' @export 
+#' @export
 chart.RelativePerformance <-
 function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)
 { # @author Peter Carl

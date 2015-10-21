@@ -136,7 +136,7 @@
 #' chart.StackedBar(x$BOP.Value)
 #' 
 #' @rdname Return.portfolio
-#' @export Return.portfolio 
+#' @export Return.portfolio
 #' @export Return.rebalancing
 Return.portfolio <- Return.rebalancing <- function(R, 
                                                    weights=NULL,

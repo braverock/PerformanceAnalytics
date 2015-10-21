@@ -15,7 +15,7 @@
 #' data(managers)
 #' print(Frequency(managers['1996',1:5]))
 #'
-#' @export 
+#' @export
 
 Frequency <- function (R, ...)
 {

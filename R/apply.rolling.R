@@ -26,7 +26,6 @@
 #' apply.rolling(managers[,1,drop=FALSE], FUN="mean", width=36)
 #' 
 #' @export
-#' 
 apply.rolling <- function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean", ...)
 { # @author Peter Carl
 

@@ -24,7 +24,7 @@
 #' print(MeanAbsoluteDeviation(managers['1996']))
 #' print(MeanAbsoluteDeviation(managers['1996',1]))
 #'
-#' @export 
+#' @export
 
 MeanAbsoluteDeviation <- function (R, ...)
 {

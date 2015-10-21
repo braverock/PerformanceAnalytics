@@ -22,7 +22,6 @@
 #' apply.fromstart(managers[,1,drop=FALSE], FUN="mean", width=36)
 #' 
 #' @export
-#' 
 apply.fromstart <- function (R, FUN = "mean" , gap = 1, ...)
 { # @author Peter Carl
 

@@ -47,7 +47,7 @@
 #' print(Kappa(managers['1996'], MAR, l))
 #' print(Kappa(managers['1996',1], MAR, l)) #expected 1.493
 #'
-#' @export 
+#' @export
 
 Kappa <- function (R, MAR, l, ...)
 {

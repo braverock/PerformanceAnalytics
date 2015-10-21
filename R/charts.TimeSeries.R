@@ -1,5 +1,5 @@
 #' @rdname chart.TimeSeries
-#' @export 
+#' @export
 charts.TimeSeries <-
 function (R,  space = 0, main = "Returns", ...)
 { # @author Peter Carl

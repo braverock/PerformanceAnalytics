@@ -144,7 +144,7 @@
 #'                  event.labels = risk.labels, 
 #'                  event.color = "red", lwd = 2)
 #' 
-#' @export 
+#' @export
 chart.TimeSeries <-
 function (R, 
           ... , 

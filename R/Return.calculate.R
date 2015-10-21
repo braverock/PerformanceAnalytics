@@ -82,7 +82,7 @@ function(prices, method = c("discrete","log"))
 }
 
 #' @rdname Return.calculate
-#' @export 
+#' @export
 CalculateReturns <- 
 function(prices, method = c("discrete","log"))
 { # @ author Peter Carl

@@ -33,7 +33,7 @@
 #' print(DRatio(managers['1996']))
 #' print(DRatio(managers['1996',1])) #expected 0.0725
 #'
-#' @export 
+#' @export
 
 DRatio <- function (R, ...)
 {

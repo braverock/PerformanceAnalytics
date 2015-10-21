@@ -27,7 +27,7 @@
 #'                           main="Rolling 12-Month Performance", 
 #'                           legend.loc="topleft")
 #' 
-#' @export 
+#' @export
 charts.RollingPerformance <-
 function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NULL, ...)
 { # @author Peter Carl

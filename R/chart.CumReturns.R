@@ -34,7 +34,7 @@
 #' chart.CumReturns(managers,main="Cumulative Returns",begin="first")
 #' chart.CumReturns(managers,main="Cumulative Returns",begin="axis")
 #' 
-#' @export 
+#' @export
 chart.CumReturns <-
 function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
 { # @author Peter Carl

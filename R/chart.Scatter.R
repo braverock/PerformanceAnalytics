@@ -37,7 +37,7 @@
 #' data(edhec)
 #' chart.Scatter(edhec[,1],edhec[,2])
 #' 
-#' @export 
+#' @export
 chart.Scatter <-
 function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1, element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1, ...)
 { # @author Peter Carl

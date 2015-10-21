@@ -46,7 +46,7 @@
 #' chart.Boxplot(edhec)
 #' chart.Boxplot(edhec,as.Tufte=TRUE)
 #' 
-#' @export 
+#' @export
 chart.Boxplot <-
 function (R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl

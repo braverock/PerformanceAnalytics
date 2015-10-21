@@ -29,7 +29,7 @@
 #' 		colorset=rich8equal, legend.loc="bottomright", 
 #' 		width=24, main = "Rolling 12-Month Correlation")
 #' 
-#' @export 
+#' @export
 chart.RollingCorrelation <-
 function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12), ..., fill=NA)
 { # @author Peter Carl

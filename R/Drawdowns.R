@@ -1,4 +1,4 @@
-#' @export 
+#' @export
 #' @rdname chart.Drawdown
 Drawdowns <-
 function (R, geometric = TRUE, ...)

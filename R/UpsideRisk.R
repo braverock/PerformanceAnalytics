@@ -49,7 +49,7 @@
 #' print(UpsideRisk(managers['1996'], MAR, stat="risk"))
 #' print(UpsideRisk(managers['1996',1], MAR, stat="risk")) #expected 1.820
 #'
-#' @export 
+#' @export
 
 UpsideRisk <-
 function (R, MAR = 0, method=c("full","subset"), stat=c("risk","variance","potential"), ...)

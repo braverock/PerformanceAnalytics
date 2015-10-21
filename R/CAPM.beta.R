@@ -129,7 +129,7 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
 }
 
 #' @rdname CAPM.beta
-#' @export 
+#' @export
 CAPM.beta.bull <-
 function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
@@ -174,7 +174,7 @@ function (Ra, Rb, Rf = 0)
 }
 
 #' @rdname CAPM.beta
-#' @export 
+#' @export
 CAPM.beta.bear <-
 function (Ra, Rb, Rf = 0)
 { # @author Peter Carl
@@ -220,7 +220,7 @@ function (Ra, Rb, Rf = 0)
 
 
 #' @rdname CAPM.beta
-#' @export 
+#' @export
 TimingRatio <-
 function (Ra, Rb, Rf = 0)
 { # @author Peter Carl

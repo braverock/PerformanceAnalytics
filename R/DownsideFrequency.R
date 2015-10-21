@@ -30,7 +30,7 @@
 #' print(DownsideFrequency(managers['1996']))
 #' print(DownsideFrequency(managers['1996',1])) #expected 0.25
 #'
-#' @export 
+#' @export
 
 DownsideFrequency <- function (R, MAR = 0, ...)
 {

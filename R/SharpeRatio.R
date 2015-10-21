@@ -73,9 +73,8 @@
 #' SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
 #' SharpeRatio(edhec,Rf = .04/12)
 #' 
-#' @export 
+#' @export
 #' @rdname SharpeRatio
-#' 
 SharpeRatio <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , ...)
 { # @author Brian G. Peterson
@@ -172,7 +171,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     return (result)
 }
 
-#' @export 
+#' @export
 #' @rdname SharpeRatio
 SharpeRatio.modified <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {

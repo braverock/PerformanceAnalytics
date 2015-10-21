@@ -27,7 +27,7 @@
 #' print(Selectivity(managers['1996',1], managers['1996',8]))
 #' print(Selectivity(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 
 Selectivity <-
 function (Ra, Rb, Rf = 0, ...)

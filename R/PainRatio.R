@@ -27,7 +27,7 @@
 #' print(PainRatio(managers['1996']))
 #' print(PainRatio(managers['1996',1])) 
 #'
-#' @export 
+#' @export
 
 
 PainRatio <- function (R, Rf = 0, ...) 

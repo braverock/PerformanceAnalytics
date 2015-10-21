@@ -28,7 +28,7 @@
 #' table.ProbOutPerformance(edhec[,1],edhec[,2]) 
 #' title(main='Table of Convertible Arbitrage vs Benchmark')
 #'
-#' @export 
+#' @export
 table.ProbOutPerformance = function(R,Rb,period_lengths=c(1,3,6,9,12,18,36)){
   if(nrow(R)!=nrow(Rb)){
     stop("R and Rb must be the same length")

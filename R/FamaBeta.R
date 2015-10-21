@@ -27,7 +27,7 @@
 #' print(FamaBeta(managers['1996',1], managers['1996',8]))
 #' print(FamaBeta(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 FamaBeta <-
 function (Ra, Rb, ...)
 {

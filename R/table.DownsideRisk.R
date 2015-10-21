@@ -34,7 +34,7 @@
 #'          wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 #' title(main="Downside Risk Statistics")
 #'
-#' @export 
+#' @export
 table.DownsideRisk <-
 function (R, ci = 0.95, scale = NA, Rf = 0, MAR = .1/12, p= 0.95, digits = 4)
 {# @author Peter Carl

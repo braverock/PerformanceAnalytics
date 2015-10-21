@@ -37,7 +37,7 @@
 #' chart.ECDF(edhec[, 1, drop=FALSE])
 #' 
 #' 
-#' @export 
+#' @export
 chart.ECDF <-
 function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black", "#005AFF"), lwd = 1, lty = c(1,1), element.color = "darkgray", xaxis=TRUE, yaxis=TRUE, ...)
 { # @author Peter Carl

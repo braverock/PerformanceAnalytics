@@ -35,7 +35,7 @@
 #' 		main="Drawdown from Peak Equity Attained", 
 #' 		legend.loc="bottomleft")
 #' @aliases Drawdowns
-#' @export 
+#' @export
 chart.Drawdown <-
 function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
 { # @author Peter Carl

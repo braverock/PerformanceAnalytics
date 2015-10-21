@@ -83,10 +83,10 @@
 #' region when legend is placed by keyword.
 #' @seealso \code{\link[graphics]{legend}}
 #' @keywords internal
-#' @export 
-#' @export allsymbols bluefocus bluemono bond.dates bond.labels closedsymbols cycles.dates 
+#' @export legend
+#' @export allsymbols bluefocus bluemono bond.dates bond.labels closedsymbols cycles.dates
 #' @export dark6equal dark8equal equity.dates equity.labels fillsymbols greenfocus greenmono grey6mono
-#' @export grey8mono legend linesymbols macro.dates macro.labels opensymbols rainbow10equal 
+#' @export grey8mono legend linesymbols macro.dates macro.labels opensymbols rainbow10equal
 #' @export rainbow12equal rainbow6equal rainbow8equal redfocus redmono rich10equal rich12equal rich6equal
 #' @export rich8equal risk.dates risk.labels set6equal set8equal tim10equal tim12equal tim6equal tim8equal
 #' @export tol1qualitative tol2qualitative tol3qualitative tol4qualitative tol5qualitative tol6qualitative tol7qualitative tol8qualitative tol9qualitative tol10qualitative tol11qualitative tol12qualitative

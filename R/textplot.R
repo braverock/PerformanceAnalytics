@@ -96,11 +96,10 @@
 #' #
 #' # title(main="Calendar Returns")
 #'
-#' @S3method textplot default 
+#' @S3method textplot default
 #' @S3method textplot character
 #' @S3method textplot data.frame
 #' @S3method textplot matrix
-#' 
 #' @export
 textplot <- function(object, halign="center", valign="center", cex, 
                             max.cex = 1, cmar=2, rmar=0.5,

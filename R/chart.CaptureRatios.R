@@ -45,7 +45,7 @@
 #'     data(managers)
 #'     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
 #' 
-#' @export 
+#' @export
 chart.CaptureRatios <-
 function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Capture", ylab = "Upside Capture", colorset = 1, symbolset = 1, legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1, cex.axis=0.8, cex.main = 1, cex.lab = 1, element.color="darkgray", benchmark.color = "darkgray",...)
 { # @author Peter Carl

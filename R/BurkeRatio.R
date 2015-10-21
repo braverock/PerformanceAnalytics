@@ -33,8 +33,7 @@
 #' print(BurkeRatio(managers['1996'], modified = TRUE))
 #' print(BurkeRatio(managers['1996',1], modified = TRUE)) 
 #'
-#' @export 
-
+#' @export
 BurkeRatio <- function (R, Rf = 0, modified = FALSE, ...)
 {
     drawdown = c()

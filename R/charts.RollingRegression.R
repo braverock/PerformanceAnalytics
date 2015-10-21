@@ -1,5 +1,5 @@
 #' @rdname chart.RollingRegression
-#' @export 
+#' @export
 charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, legend.loc = NULL, event.labels=NULL, ...)
 { # @author Peter Carl
 

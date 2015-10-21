@@ -23,7 +23,7 @@
 #' data(managers)
 #' chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 #' 
-#' @export 
+#' @export
 chart.Correlation <-
 function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
 { # @author R Development Core Team

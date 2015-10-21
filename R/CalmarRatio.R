@@ -45,7 +45,7 @@
 #'     SterlingRatio(managers[,1,drop=FALSE])
 #'     SterlingRatio(managers[,1:6])
 #' 
-#' @export 
+#' @export
 #' @rdname CalmarRatio
 CalmarRatio <- function (R, scale = NA)
 { # @author Brian G. Peterson
@@ -80,7 +80,7 @@ CalmarRatio <- function (R, scale = NA)
     return(result)
 }
 
-#' @export 
+#' @export
 #' @rdname CalmarRatio
 SterlingRatio <-
 function (R, scale=NA, excess=.1)

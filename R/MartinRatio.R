@@ -27,7 +27,7 @@
 #' print(MartinRatio(managers['1996']))
 #' print(MartinRatio(managers['1996',1])) 
 #'
-#' @export 
+#' @export
 
 
 MartinRatio <- function (R, Rf = 0, ...) 

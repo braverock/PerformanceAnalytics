@@ -26,8 +26,7 @@
 #' print(AdjustedSharpeRatio(managers['1996']))
 #' print(AdjustedSharpeRatio(managers['1996',1])) 
 #'
-#' @export 
-
+#' @export
 AdjustedSharpeRatio <- function (R, Rf = 0, ...)
 {
     R = checkData(R)

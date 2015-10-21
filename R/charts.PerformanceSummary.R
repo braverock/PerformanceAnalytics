@@ -48,7 +48,7 @@
 #' data(edhec)
 #' charts.PerformanceSummary(edhec[,c(1,13)])
 #' 
-#' @export 
+#' @export
 charts.PerformanceSummary <-
 function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, event.labels = NULL, ylog = FALSE, wealth.index = FALSE, gap = 12, begin=c("first","axis"), legend.loc="topleft", p=0.95,...)
 { # @author Peter Carl

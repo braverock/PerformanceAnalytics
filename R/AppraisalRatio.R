@@ -41,8 +41,7 @@
 #' print(AppraisalRatio(managers['1996',1], managers['1996',8]))
 #' print(AppraisalRatio(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
-
+#' @export
 AppraisalRatio <-
 function (Ra, Rb, Rf = 0, method = c("appraisal", "modified", "alternative"), ...)
 {

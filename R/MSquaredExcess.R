@@ -31,7 +31,7 @@
 #' MSquaredExcess(managers['1996',1], managers['1996',8])
 #' MSquaredExcess(managers['1996',1:5], managers['1996',8])
 #'
-#' @export 
+#' @export
 MSquaredExcess <-
 function (Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"), ...)
 {

@@ -23,7 +23,7 @@
 #' data(edhec)
 #' chart.RollingMean(edhec[, 9, drop = FALSE])
 #' 
-#' @export 
+#' @export
 chart.RollingMean <-
 function (R, width = 12, xaxis = TRUE, ylim = NULL, lwd=c(2,1,1), ..., fill = NA)
 { # @author Peter Carl

@@ -32,7 +32,7 @@
 #' print(SystematicRisk(managers['1996',1], managers['1996',8]))
 #' print(SystematicRisk(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 SystematicRisk <-
 function (Ra, Rb, Rf = 0, scale = NA, ...)
 {

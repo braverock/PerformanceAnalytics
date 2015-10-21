@@ -12,7 +12,7 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.4.3662
+Version: 1.4.3998
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
@@ -23,7 +23,8 @@ Description: Collection of econometric functions for
     work with irregular return data as well, and increasing
     numbers of functions will work with P&L or price data
     where possible.
-Imports: zoo
+Imports:
+    zoo
 Depends:
     R (>= 3.0.0),
     xts (>= 0.9)
@@ -39,3 +40,4 @@ Suggests:
 License: GPL-2 | GPL-3
 URL: http://r-forge.r-project.org/projects/returnanalytics/
 Copyright: (c) 2004-2015
+RoxygenNote: 4.1.1.9001

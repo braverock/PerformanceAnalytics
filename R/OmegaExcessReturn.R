@@ -31,7 +31,7 @@
 #' print(OmegaExcessReturn(managers['1996',1], managers['1996',8], MAR))
 #' print(OmegaExcessReturn(managers['1996',1:5], managers['1996',8], MAR))
 #'
-#' @export 
+#' @export
 
 OmegaExcessReturn <-
 function (Ra, Rb, MAR = 0, ...)

@@ -90,7 +90,7 @@
 #' # for one row of data, use 'unstacked' for a better chart
 #' chart.StackedBar(weights[1,,drop=FALSE], unstacked=TRUE, las=3)
 #' 
-#' @export 
+#' @export
 chart.StackedBar <- 
 function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1, xaxis=TRUE, legend.loc="under",  element.color = "darkgray", unstacked = TRUE, xlab="Date", ylab="Value", ylim=NULL, date.format = "%b %y", major.ticks='auto', minor.ticks=TRUE, las = 0, xaxis.labels = NULL, ... ) 
 {

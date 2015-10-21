@@ -30,7 +30,7 @@
 #' data(edhec)
 #' chart.ACFplus(edhec[,1,drop=FALSE])
 #' 
-#' @export 
+#' @export
 chart.ACF <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 { # @author David Stoffer and Robert Shumway
     # @modifiedby Peter Carl

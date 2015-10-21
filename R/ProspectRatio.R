@@ -27,7 +27,7 @@
 #' print(ProspectRatio(managers['1996'], MAR))
 #' print(ProspectRatio(managers['1996',1], MAR))
 #'
-#' @export 
+#' @export
 
 ProspectRatio <- function (R, MAR, ...)
 {

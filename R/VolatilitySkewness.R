@@ -36,7 +36,7 @@
 #'# print(VolatilitySkewness(managers['1996'], MAR, stat="volatility"))
 #' print(VolatilitySkewness(managers['1996',1], MAR, stat="volatility"))
 #'
-#' @export 
+#' @export
 
 VolatilitySkewness <-
 function (R, MAR = 0, stat=c("volatility", "variability"), ...)

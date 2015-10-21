@@ -23,7 +23,7 @@
 #' print(SpecificRisk(managers['1996',1], managers['1996',8]))
 #' print(SpecificRisk(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 SpecificRisk <-
 function (Ra, Rb, Rf = 0,  ...)
 {

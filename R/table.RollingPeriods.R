@@ -3,12 +3,6 @@
 #' A table of estimates of rolling period return measures
 #' 
 #' 
-#' @aliases table.TrailingPeriods table.TrailingPeriodsRel table.RollingPeriods
-#' 
-#' @export 
-#' 
-#' @rdname table.RollingPeriods
-#' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -35,8 +29,11 @@
 #'                    wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 #' title(main="Trailing Period Statistics")
 #' 
-#' @export
-table.TrailingPeriods <-
+#' @aliases table.TrailingPeriods table.TrailingPeriodsRel table.RollingPeriods
+#' @export table.TrailingPeriods
+#' @export table.RollingPeriods
+#' @rdname table.RollingPeriods
+table.RollingPeriods<- table.TrailingPeriods <-
 function (R,  periods = subset(c(12,36,60), c(12,36,60)
 < length(as.matrix(R[,1]))), FUNCS=c("mean","sd"), funcs.names = c("Average", "Std Dev"), digits = 4, ...)
 {# @author Peter Carl
@@ -98,8 +95,14 @@ function (R,  periods = subset(c(12,36,60), c(12,36,60)
 
 #' @rdname table.RollingPeriods
 table.TrailingPeriodsRel <-
-function (R, Rb, periods = subset(c(12,36,60), c(12,36,60)
-< length(as.matrix(R[,1]))), FUNCS=c("cor","CAPM.beta"), funcs.names = c("Correlation", "Beta"), digits = 4, ...)
+function (R, 
+          Rb, 
+          periods = subset(c(12,36,60), c(12,36,60)< length(as.matrix(R[,1]))), 
+          FUNCS=c("cor","CAPM.beta"), 
+          funcs.names = c("Correlation", "Beta"), 
+          digits = 4, 
+          ...
+          )
 {# @author Peter Carl
 
     # DESCRIPTION:
@@ -113,8 +116,8 @@ function (R, Rb, periods = subset(c(12,36,60), c(12,36,60)
 
     # FUNCTION:
 
-    R = checkData(R)
-Rb=checkData(Rb)
+    R  = checkData(R)
+    Rb = checkData(Rb)
 
     # Set up dimensions and labels
     columns = ncol(R)
@@ -148,9 +151,7 @@ Rb=checkData(Rb)
     
         if(column == 1) {
             resultingtable = data.frame(Value = values, row.names = valueNames)
-        }
-
-        else {
+        } else {
             nextcolumn = data.frame(Value = values, row.names = valueNames)
             resultingtable = cbind(resultingtable, nextcolumn)
         }
@@ -160,7 +161,6 @@ Rb=checkData(Rb)
     colnames(resultingtable) = columnnames
     ans = base::round(resultingtable, digits)
     ans
-
 }
 
 ###############################################################################

@@ -30,7 +30,7 @@
 #' print(MSquaredExcess(managers['1996',1], managers['1996',8], MAR))
 #' print(MSquaredExcess(managers['1996',1:5], managers['1996',8], MAR))
 #'
-#' @export 
+#' @export
 M2Sortino <-
 function (Ra, Rb, MAR = 0, ...)
 {

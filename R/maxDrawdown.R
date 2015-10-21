@@ -40,7 +40,7 @@
 #' data(managers)
 #' t(round(maxDrawdown(managers),4))
 #' 
-#' @export 
+#' @export
 maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 { # @author Peter Carl
 	
@@ -102,7 +102,7 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 #' data(edhec)
 #' t(round(CDD(edhec),4))
 #' 
-#' @export 
+#' @export
 CDD <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, p=.95 ,  ...)
 {
     p=.setalphaprob(p)
@@ -174,7 +174,7 @@ function (R, ...) {
 #' asset returns
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
-#' @export 
+#' @export
 AverageDrawdown <-
 function (R, ...) {
 
@@ -208,7 +208,7 @@ function (R, ...) {
 #' asset returns
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
-#' @export 
+#' @export
 AverageRecovery <-
 function (R, ...) {
 
@@ -236,7 +236,7 @@ function (R, ...) {
 #' asset returns
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
-#' @export 
+#' @export
 AverageLength <-
 function (R, ...) {
 

@@ -29,7 +29,7 @@
 #' print(MSquared(managers['1996',1], managers['1996',8]))
 #' print(MSquared(managers['1996',1:5], managers['1996',8]))
 #'
-#' @export 
+#' @export
 MSquared <-
 function (Ra, Rb, Rf = 0, ...)
 {
