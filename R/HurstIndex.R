@@ -30,9 +30,8 @@
 #' @param \dots any other passthru parameters
 #' @references
 #' Clarkson, R. (2001) FARM: a financial actuarial risk model.  In Chapter
-#' 12 of Managing Downside Risk in Financial Markets, F. Sortino and S.
-#' 
-#' Satchel.  Butterworth-Heinemann Finance.
+#' 12 of Managing Downside Risk in Financial Markets, ed. Sortino, F.  
+#' and Satchel, S.  Woburn MA. Butterworth-Heinemann Finance.
 #' 
 #' Peters, E.E (1991) Chaos and Order in Capital Markets, New York: Wiley.
 #' 
