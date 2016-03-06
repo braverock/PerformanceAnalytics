@@ -194,6 +194,11 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
             columns<-ncol(rES)
             for(column in 1:columns) {
                 tmp=rES[,column]
+                if (!is.finite(tmp)) {
+                    message(c("ES calculation returned non-finite result for column: ", column, " : ", rES[, column]))
+                    # set ES to NA, since risk is unreasonable
+                    rES[, column] <- NA
+                } else
                 if (eval(0 > tmp)) { #eval added previously to get around Sweave bitching
                     message(c("ES calculation produces unreliable result (inverse risk) for column: ",column," : ",rES[,column]))
                     # set ES to NA, since inverse risk is unreasonable
