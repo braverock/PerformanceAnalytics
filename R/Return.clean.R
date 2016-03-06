@@ -214,10 +214,16 @@ function(R, alpha=.01 , trim=1e-3)
    MCD = robustbase::covMcd(as.matrix(R),alpha=1-alpha)
    mu = as.matrix(MCD$raw.center) #no reweighting
    sigma = MCD$raw.cov
-   invSigma = solve(sigma);
+   invSigma = try(solve(sigma), silent=TRUE)
    vd2t = c();
    cleaneddata = R
    outlierdate = c()
+
+   if(inherits(invSigma, "try-error")) {
+     warning("Returning original data; unable to clean data due to error:\n",
+       attr(invSigma, "condition")[["message"]])
+     return(list(cleaneddata,outlierdate))
+   }
 
    # 1. Sort the data in function of their extremeness
    # Extremeness is proxied by the robustly estimated squared Mahalanbobis distance
