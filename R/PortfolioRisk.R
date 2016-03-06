@@ -26,8 +26,8 @@ pvalJB = function(R)
    m2 = centeredmoment(R,2)
    m3 = centeredmoment(R,3)
    m4 = centeredmoment(R,4)
-   skew = m3 / m2^(3/2);
-   exkur = m4 / m2^(2) - 3;
+   skew = .skewEst(m3, m2)
+   exkur = .kurtEst(m4, m2)
    JB = ( length(R)/6 )*( skew^2 + (1/4)*(exkur^2) )
    out = 1-pchisq(JB,df=2)
 }
@@ -92,10 +92,8 @@ VaR.CornishFisher =  function(R,p)
         m2 = centeredmoment(r,2)
         m3 = centeredmoment(r,3)
         m4 = centeredmoment(r,4)
-        skew = m3 / m2^(3/2);
-        exkurt = m4 / m2^(2) - 3;
-        # skew=skewness(r)
-        # exkurt=kurtosis(r)
+        skew = .skewEst(m3, m2)
+        exkurt = .kurtEst(m4, m2)
 
         h = z + (1/6)*(z^2 -1)*skew + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2
         
@@ -128,8 +126,8 @@ ES.CornishFisher =  function(R,p,c=2)
 	m2 = centeredmoment(r,2)
 	m3 = centeredmoment(r,3)
 	m4 = centeredmoment(r,4)
-	skew = m3 / m2^(3/2);
-	exkurt = m4 / m2^(2) - 3;
+    skew = .skewEst(m3, m2)
+    exkurt = .kurtEst(m4, m2)
 
 	h = z + (1/6)*(z^2 -1)*skew
 	if(c==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
@@ -165,8 +163,8 @@ operES.CornishFisher =  function(R,p,c=2)
 	m2 = centeredmoment(r,2)
 	m3 = centeredmoment(r,3)
 	m4 = centeredmoment(r,4)
-	skew = m3 / m2^(3/2);
-	exkurt = m4 / m2^(2) - 3;
+    skew = .skewEst(m3, m2)
+    exkurt = .kurtEst(m4, m2)
 
 	h = z + (1/6)*(z^2 -1)*skew
 	if(c==2){ h = h + (1/24)*(z^3 - 3*z)*exkurt - (1/36)*(2*z^3 - 5*z)*skew^2};
@@ -341,8 +339,8 @@ VaR.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    pm4 = portm4(w,M4)
    dpm4 = as.vector( derportm4(w,M4) )
 
-   skew = pm3 / pm2^(3/2);
-   exkurt = pm4 / pm2^(2) - 3;
+   skew = .skewEst(pm3, pm2)
+   exkurt = .kurtEst(pm4, pm2)
 
    derskew = ( 2*(pm2^(3/2))*dpm3 - 3*pm3*sqrt(pm2)*dpm2 )/(2*pm2^3)
    derexkurt = ( (pm2)*dpm4 - 2*pm4*dpm2    )/(pm2^3)
@@ -426,8 +424,8 @@ ES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    pm4 = portm4(w,M4)
    dpm4 = as.vector( derportm4(w,M4) )
 
-   skew = pm3 / pm2^(3/2);
-   exkurt = pm4 / pm2^(2) - 3;
+   skew = .skewEst(pm3, pm2)
+   exkurt = .kurtEst(pm4, pm2)
 
    derskew = ( 2*(pm2^(3/2))*dpm3 - 3*pm3*sqrt(pm2)*dpm2 )/(2*pm2^3)
    derexkurt = ( (pm2)*dpm4 - 2*pm4*dpm2    )/(pm2^3)
@@ -480,8 +478,8 @@ operES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
    pm4 = portm4(w,M4)
    dpm4 = as.vector( derportm4(w,M4) )
 
-   skew = pm3 / pm2^(3/2);
-   exkurt = pm4 / pm2^(2) - 3;
+   skew = .skewEst(pm3, pm2)
+   exkurt = .kurtEst(pm4, pm2)
 
    derskew = ( 2*(pm2^(3/2))*dpm3 - 3*pm3*sqrt(pm2)*dpm2 )/(2*pm2^3)
    derexkurt = ( (pm2)*dpm4 - 2*pm4*dpm2    )/(pm2^3)
@@ -616,6 +614,22 @@ VaR.historical.portfolio = function(R,p,w=NULL)
            pct_contrib_hVaR = zl.pct.contrib)
   
   return(ret)
+}
+
+.skewEst <- function(m3, m2) {
+  if (isTRUE(all.equal(m2, 0.0))) {
+    return(0.0)
+  } else {
+    return(m3 / m2^(3/2))
+  }
+}
+
+.kurtEst <- function(m4, m2) {
+  if (isTRUE(all.equal(m2, 0.0))) {
+    return(0.0)
+  } else {
+    return(m4 / m2^2 - 3)
+  }
 }
 
 ###############################################################################
