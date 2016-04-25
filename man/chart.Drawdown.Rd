@@ -49,7 +49,6 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-
 \code{\link{plot}} \cr 
 \code{\link{chart.TimeSeries}} \cr
 \code{\link{findDrawdowns}} \cr 
@@ -57,6 +56,5 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{maxDrawdown}} \cr 
 \code{\link{table.Drawdowns}} \cr
 \code{\link{table.DownsideRisk}}
-
 }
 

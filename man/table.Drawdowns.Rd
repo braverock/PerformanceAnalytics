@@ -61,7 +61,6 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-
 \code{\link{DownsideDeviation}} \cr 
 \code{\link{maxDrawdown}} \cr
 \code{\link{findDrawdowns}} \cr 

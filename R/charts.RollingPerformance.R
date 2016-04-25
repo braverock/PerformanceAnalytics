@@ -14,6 +14,8 @@
 #' @param legend.loc places a legend into one of nine locations on the chart:
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center.
+#' @param yaxis.pct if TRUE, scale by 100 the y axis of
+#' the charts of returns and standard deviation.
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{chart.RollingPerformance}}
@@ -29,7 +31,7 @@
 #' 
 #' @export
 charts.RollingPerformance <-
-function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NULL, ...)
+function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NULL, yaxis.pct=FALSE, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -82,15 +84,15 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     par(mar=c(1,4,4,2))
 
     # The first row is the annualized returns
-    chart.RollingPerformance(R, width = width, main = main, xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, ...)
+    chart.RollingPerformance(R, width = width, main = main, xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
 
     # The second row is the annualized standard deviation
     par(mar=c(1,4,0,2))
-    chart.RollingPerformance(R, width = width, main = "", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, ...)
+    chart.RollingPerformance(R, width = width, main = "", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, ...)
 
-    # The third row is the annualized SR
+    # The third row is the annualized Sharpe Ratio
     par(mar=c(5,4,0,2))
-    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, ...)
+    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, ...)
 
     par(op)
 }

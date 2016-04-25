@@ -59,7 +59,6 @@ Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004.
 }
 \seealso{
-
 \code{\link{Return.annualized}}, \cr 
 \code{\link{maxDrawdown}}, \cr
 \code{\link{SharpeRatio.modified}}, \cr 

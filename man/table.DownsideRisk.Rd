@@ -47,7 +47,6 @@ title(main="Downside Risk Statistics")
 Peter Carl
 }
 \seealso{
-
 \code{\link{DownsideDeviation}} \cr 
 \code{\link{maxDrawdown}} \cr
 \code{\link{VaR}} \cr 

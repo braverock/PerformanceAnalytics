@@ -41,8 +41,6 @@ BetaCoKurtosis(managers[,1:6], managers[,8:7])
 Kris Boudt, Peter Carl, Brian Peterson
 }
 \references{
-
-
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and
 Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
 Journal of Risk. Winter.
@@ -128,6 +126,5 @@ the beta coskewness function tests the skewness and multiplies the result by
 the sign of the skewness.  That allows an analyst to review the metric and
 interpret it without needing additional information.  To use the more widely
 used metric, simply set the parameter \code{test = FALSE}.
-
 }
 

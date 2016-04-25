@@ -5,15 +5,18 @@
 \alias{ActiveReturn}
 \title{Active Premium or Active Return}
 \usage{
-ActiveReturn(Ra, Rb, scale = NA)
+ActiveReturn(Ra, Rb, scale = NA, ...)
 }
 \arguments{
 \item{Ra}{return vector of the portfolio}
 
 \item{Rb}{return vector of the benchmark asset}
 
-\item{scale}{number of periods in a year (daily scale = 252, monthly scale =
-12, quarterly scale = 4)}
+\item{scale}{number of periods in a year
+(daily scale = 252, monthly scale = 12, quarterly scale = 4)}
+
+\item{...}{any other passthru parameters to Return.annualized
+(e.g., \code{geometric=FALSE})}
 }
 \description{
 The return on an investment's annualized return minus the benchmark's
@@ -38,10 +41,10 @@ Peter Carl
 }
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
-Management},Fall 1994, 49-58.
+  Management}, Fall 1994, 49-58.
 }
 \seealso{
 \code{\link{InformationRatio}} \code{\link{TrackingError}}
-\code{\link{Return.annualized}}
+  \code{\link{Return.annualized}}
 }
 

@@ -38,6 +38,6 @@ Peter Martin's web page on UI: http://www.tangotools.com/ui/ui.htm
 http://www.tangotools.com/ui/UlcerIndex.xls
 }
 \author{
-Matthieu Lestel 
+Matthieu Lestel
 }
 

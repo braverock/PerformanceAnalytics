@@ -17,6 +17,5 @@ Drawdawn peak is for each return its drawdown since the previous peak
 }
 \author{
 Matthieu Lestel
-
 }
 

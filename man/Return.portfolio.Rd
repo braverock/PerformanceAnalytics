@@ -135,11 +135,9 @@ Across assets, those will sum to equal the geometric chained returns of the
 portfolio for that same time period.  The function does not do this directly, however.
 }
 \note{
-
 This function was previously two functions: \code{Return.portfolio} and 
 \code{Return.rebalancing}.  Both function names are still exported,
 but the code is now common, and \code{Return.portfolio} is probably to be preferred.
-
 }
 \examples{
 

@@ -141,6 +141,5 @@ expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
 \seealso{
 \code{\link{VaR}} \cr \code{\link{SharpeRatio.modified}} \cr
 \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
-
 }
 

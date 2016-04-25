@@ -1,3 +1,10 @@
+2016-04-21  pteetor
+
+  * New plotting parameter: 'yaxis.pct' (logical) forces the Y axis
+    of some returns-related plots to be displayed as percentages.
+  * R/ActivePremium - Pass thru the "..." parameters of ActivePremium
+    to Return.annualized, letting caller calculate non-geometric returns.
+
 2014-09-14  braverock
 
 	* DESCRIPTION: - add Diethelm to 'ctb' designation

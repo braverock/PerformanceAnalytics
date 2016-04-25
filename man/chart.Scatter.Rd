@@ -5,7 +5,7 @@
 \title{wrapper to draw scatter plot with sensible defaults}
 \usage{
 chart.Scatter(x, y, reference.grid = TRUE, main = "Title", ylab = NULL,
-  xlab = NULL, xlim = NA, ylim = NA, colorset = 1, symbolset = 1,
+  xlab = NULL, xlim = NULL, ylim = NULL, colorset = 1, symbolset = 1,
   element.color = "darkgray", cex.axis = 0.8, cex.legend = 0.8,
   cex.lab = 1, cex.main = 1, ...)
 }

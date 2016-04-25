@@ -30,7 +30,6 @@ the probability of outperformance on a N period basis.
 
 Returns a table that contains the counts and probabilities 
 of outperformance relative to benchmark for the various period_lengths
-
 }
 \examples{
 

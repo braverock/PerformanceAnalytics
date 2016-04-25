@@ -39,5 +39,5 @@ Suggests:
     gplots
 License: GPL-2 | GPL-3
 URL: http://r-forge.r-project.org/projects/returnanalytics/
-Copyright: (c) 2004-2015
-RoxygenNote: 4.1.1.9001
+Copyright: (c) 2004-2016
+RoxygenNote: 5.0.1

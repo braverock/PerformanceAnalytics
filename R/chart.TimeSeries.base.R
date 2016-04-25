@@ -34,7 +34,8 @@ function (R,
           minor.ticks=TRUE, 
           grid.color="lightgray", 
           grid.lty="dotted", 
-          xaxis.labels = NULL, ...)
+          xaxis.labels = NULL,
+          yaxis.pct = FALSE, ...)
 { # @author Peter Carl, Brian Peterson
 
     # DESCRIPTION:
@@ -196,11 +197,18 @@ function (R,
     }
 
     # set up y-axis
-    if (yaxis)
-        if(yaxis.right)
-            axis(4, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las)
-        else
-            axis(2, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las)
+    if (yaxis) {
+        yaxis.side = if (yaxis.right) 4 else 2
+        if(yaxis.pct) {
+            at = axTicks(yaxis.side, log=ylog)
+            labels = sprintf("%s", 100*at)
+        } else {
+            at = NULL
+            labels = TRUE
+        }
+        axis(yaxis.side, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las,
+             at=at, labels=labels)
+    }
     box(col = element.color)
 
     if(!is.null(legend.loc)){

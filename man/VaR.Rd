@@ -159,11 +159,10 @@ Hallerback, John. "Decomposing Portfolio Value-at-Risk: A General Analysis",
 Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and 
    Value-at-Risk: Their Estimation Error, Decomposition, and Optimization",
    Bank of Japan.
-     
 }
 \seealso{
 \code{\link{SharpeRatio.modified}} \cr
 \code{\link{chart.VaRSensitivity}} \cr
-\code{\link{Return.clean}} 
+\code{\link{Return.clean}}
 }
 

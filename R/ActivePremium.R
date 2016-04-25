@@ -10,13 +10,15 @@
 #'
 #' @param Ra return vector of the portfolio
 #' @param Rb return vector of the benchmark asset
-#' @param scale number of periods in a year (daily scale = 252, monthly scale =
-#' 12, quarterly scale = 4)
+#' @param scale number of periods in a year
+#'   (daily scale = 252, monthly scale = 12, quarterly scale = 4)
+#' @param ... any other passthru parameters to Return.annualized
+#'   (e.g., \code{geometric=FALSE})
 #' @author Peter Carl
 #' @seealso \code{\link{InformationRatio}} \code{\link{TrackingError}}
-#' \code{\link{Return.annualized}}
+#'   \code{\link{Return.annualized}}
 #' @references Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
-#' Management},Fall 1994, 49-58.
+#'   Management}, Fall 1994, 49-58.
 ###keywords ts multivariate distribution models
 #' @examples
 #'
@@ -30,7 +32,7 @@
 #' ActivePremium
 #' ActiveReturn
 #' @export ActiveReturn ActivePremium
-ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
+ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA, ...)
 { # @author Peter Carl
 
     # FUNCTION
@@ -55,16 +57,17 @@ ActiveReturn <- ActivePremium <- function (Ra, Rb, scale = NA)
         )
     }
 
-    ap <-function (Ra, Rb, scale)
+    ap <- function (Ra, Rb, scale)
     {
         merged = na.omit(merge(Ra, Rb)) # align
-        ap = (Return.annualized(merged[,1], scale = scale) - Return.annualized(merged[,2], scale = scale))
+        ap = (Return.annualized(merged[,1], scale = scale, ...)
+              - Return.annualized(merged[,2], scale = scale, ...))
         ap
     }
 
     result = apply(pairs, 1, FUN = function(n, Ra, Rb, scale) ap(Ra[,n[1]], Rb[,n[2]], scale), Ra = Ra, Rb = Rb, scale = scale)
 
-    if(length(result) ==1)
+    if(length(result) == 1)
         return(result)
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)

@@ -43,7 +43,7 @@ Modigliani(managers[,1:6], managers[,8:7], managers[,8,drop=FALSE])
 Andrii Babii, Brian G. Peterson
 }
 \references{
- J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio 
+J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio 
 Performance Measurement and Benchmarking}. 2009. McGraw-Hill, p. 97-99. \cr
 Franco Modigliani and Leah Modigliani, "Risk-Adjusted Performance: How to 
 Measure It and Why," \emph{Journal of Portfolio Management}, vol.23, no., 

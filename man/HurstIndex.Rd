@@ -39,14 +39,12 @@ behaviour' theories of economics, and suggests existence of a powerful
 memory' effect in share prices.
 }
 \references{
-
 Clarkson, R. (2001) FARM: a financial actuarial risk model.  In Chapter
 12 of Managing Downside Risk in Financial Markets, ed. Sortino, F.  
 and Satchel, S.  Woburn MA. Butterworth-Heinemann Finance.
 
 Peters, E.E (1991) Chaos and Order in Capital Markets, New York: Wiley.
 
-Bacon, Carl. (2008) Practical Portfolio Performance Measurement and Attribution, 2nd Edition. London: John Wiley & Sons. 
-
+Bacon, Carl. (2008) Practical Portfolio Performance Measurement and Attribution, 2nd Edition. London: John Wiley & Sons.
 }
 

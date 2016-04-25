@@ -30,6 +30,5 @@ Kyle Balkissoon \email{kylebalkisoon@gmail.com}
 Huffman S.P. & Moll C.R., 
 "The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures", 
 Algorithmic Finance 1, 2011 p. 79-93
-
 }
 

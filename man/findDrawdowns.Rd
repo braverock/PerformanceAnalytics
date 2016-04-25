@@ -51,7 +51,6 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-
 \code{\link{sortDrawdowns}} \cr 
 \code{\link{maxDrawdown}} \cr
 \code{\link{sortDrawdowns}} \cr 

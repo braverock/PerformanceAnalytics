@@ -27,7 +27,7 @@
 #' @param date.format re-format the dates for the xaxis; the default is "\%m/\%y"
 #' @param xlim set the x-axis limit, same as in \code{\link{plot}}
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
-#' @param event.lines If not null, vertical lines will be drawn to indicate
+#' @param event.lines if not null, vertical lines will be drawn to indicate
 #' that an event happened during that time period.  \code{event.lines} should
 #' be a list of dates (e.g., \code{c("09/03","05/06"))} formatted the same as
 #' date.format.  This function matches the re-formatted row names (dates) with
@@ -70,6 +70,7 @@
 #' NULL
 #' @param space default 0
 #' @param dygraphPlot Plot using dygraphs default FALSE
+#' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}, \code{\link{par}},
@@ -182,7 +183,8 @@ function (R,
           grid.color="lightgray", 
           grid.lty="dotted", 
           xaxis.labels = NULL,
-          dygraphPlot=FALSE)
+          dygraphPlot=FALSE,
+          yaxis.pct=FALSE)
 { # @author Peter Carl, Brian Peterson
 
     # DESCRIPTION:
@@ -285,7 +287,8 @@ function (R,
                           minor.ticks, 
                           grid.color, 
                           grid.lty, 
-                          xaxis.labels,...)
+                          xaxis.labels,
+                          yaxis.pct, ...)
     
     
     

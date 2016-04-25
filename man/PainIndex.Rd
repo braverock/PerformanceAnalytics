@@ -43,7 +43,6 @@ Matthieu Lestel
 }
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
-and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates 
-
+and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates
 }
 

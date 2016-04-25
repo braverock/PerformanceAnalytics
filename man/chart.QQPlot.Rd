@@ -130,7 +130,6 @@ John (2007) \emph{car: Companion to Applied Regression} \cr
 \url{http://socserv.socsci.mcmaster.ca/jfox/}
 }
 \seealso{
-
 \code{\link[stats]{qqplot}} \cr 
 \code{\link[car]{qq.plot}} \cr
 \code{\link{plot}}
