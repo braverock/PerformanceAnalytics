@@ -125,7 +125,6 @@ chart.TimeSeries.base <-
     p <- plot.xts(x = y, 
                   y = NULL, 
                   ..., 
-                  multi.panel = FALSE, 
                   col = colorset, 
                   type = type, 
                   lty = lty, 
@@ -138,7 +137,7 @@ chart.TimeSeries.base <-
                   minor.ticks = minor.ticks, 
                   grid.ticks.lty = grid.lty, 
                   grid.col = grid.color, 
-                  legend.loc = legend.loc, 
+                  legend.loc = NULL, 
                   pch = pch)
     
     if(!is.null(event.lines)) {
@@ -158,6 +157,7 @@ chart.TimeSeries.base <-
         # get bold event labels
         opar <- par(font = 1)
         par(font = 2)
+        p$Env$period.color <- period.color
         p <- addEventLines(xts(event.labels[number.event.labels], time(y)[event.ind]), 
                            srt = 90, offset = 1.2, pos = 2, lty = 2, ...)
         for(period in length(period.dat)) {
@@ -170,6 +170,7 @@ chart.TimeSeries.base <-
     }
     
     # Draw a solid reference line at zero
+    p$Env$element.color <- element.color
     p <- addSeries(xts(rep(0, rows), time(y)), col = element.color, on = 1)
     
     
@@ -184,9 +185,10 @@ chart.TimeSeries.base <-
       pch = rep(pch, length.out = columns)
     
     if(!is.null(legend.loc)) {
-      if(is.null(legend.names))
+      if(!hasArg(legend.names))
         legend.names <- columnnames
       # add legend
+      p$Env$cex.legend <- cex.legend
       p <- addLegend(legend.loc, legend.names, 
                      lty = lty, lwd = lwd, cex = cex.legend, ...)
     }
