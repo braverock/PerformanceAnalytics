@@ -31,27 +31,14 @@ function (R,  space = 0, main = "Returns", ...)
     # mar: a numerical vector of the form c(bottom, left, top, right) which
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
-    op <- par(oma = c(2,0,4,0), mar=c(0,4,0,4))
-    layout(matrix(c(1:columns), ncol = 1, byrow = TRUE), widths=1)
-    xaxis=FALSE
     yaxis=TRUE
-    for(i in 1:columns){
-         if(even(i))
-            yaxis.right=TRUE
-         else
-             yaxis.right=FALSE
-        if(i==columns)
-            xaxis = TRUE
-        chart.TimeSeries(R[,i,drop=FALSE],  xaxis=xaxis, main="", ylab=colnames(R)[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, ...)
-        if(i==1)
-            yaxis=FALSE
+    if(hasArg(space) || !isTRUE(space)) {
+      warning("The space argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
     }
-
-    mtext(main,
-        side = 3, outer = TRUE, 
-        font = 2, cex = 1.2, line=1)
-    par(op)
-    
+    chart.TimeSeries(R, multi.panel = TRUE, 
+                     main = main, 
+                     ylim = c(ymin, ymax), 
+                     yaxis = yaxis, ...)
 
 }
 
