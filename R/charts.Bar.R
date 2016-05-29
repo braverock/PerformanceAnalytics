@@ -31,8 +31,8 @@ function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
                           yaxis = yaxis, 
                           colorset = "darkgreen", 
                           lwd=2, ...)
-    for(panel in 1:(columns - 1)) {
-      p <- addSeries(xts(rep(0, nrow(R)), time(R)), on = (panel + 1), col = "darkgray")
+    for(panel in 1:columns) {
+      p <- addSeries(xts(rep(0, nrow(R)), time(R)), on = panel, col = "darkgray")
     }
     
     if(hasArg(cex.legend) || !isTRUE(cex.legend)) {
