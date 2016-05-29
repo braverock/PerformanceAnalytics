@@ -109,10 +109,10 @@ charts.PerformanceSummary <-
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
     
     # The first row is the cumulative returns line plot
-    p <- list()
+    result <- list()
     par(mfrow = c(3, 1))
     par(mar=c(1,4,4,2))
-    p[[1]] <- chart.CumReturns(x, main = main, xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
+    result[[1]] <- chart.CumReturns(x, main = main, xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
     
     freq = periodicity(x)
     
@@ -128,13 +128,13 @@ charts.PerformanceSummary <-
     )
     
     par(mar=c(1,4,0,2))
-    p[[2]] <- chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, ...)
+    result[[2]] <- chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, ...)
     
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    p[[3]] <- chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, ...)
+    result[[3]] <- chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, ...)
     
-    return(invisible(capture.output(print(p))))
+    invisible(capture.output(print(result)))
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))
     #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
