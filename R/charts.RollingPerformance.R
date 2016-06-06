@@ -74,6 +74,7 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
 
     # First, we lay out the graphic as a three row, one column format
 #    plot.new()
+    result <- list()
     layout(matrix(c(1,2,3)),heights=c(1,0.75,1),widths=1)
     # to see the resulting layout, use layout.show(3)
 
@@ -81,19 +82,21 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
-    par(mar=c(1,4,4,2))
+    par(oma=c(0, 0, 3, 0), mar=c(1,4,6,2))
 
     # The first row is the annualized returns
-    chart.RollingPerformance(R, width = width, main = main, xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
+    result[[1]] <- chart.RollingPerformance(R, width = width, main = "Annualized Return", xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
 
     # The second row is the annualized standard deviation
     par(mar=c(1,4,0,2))
-    chart.RollingPerformance(R, width = width, main = "", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, ...)
+    result[[2]] <- chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, ...)
 
     # The third row is the annualized Sharpe Ratio
     par(mar=c(5,4,0,2))
-    chart.RollingPerformance(R, width = width, main = "", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, ...)
+    result[[3]] <- chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, ...)
 
+    invisible(capture.output(result))
+    title(main, outer = TRUE)
     par(op)
 }
 

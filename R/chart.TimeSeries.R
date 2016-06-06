@@ -244,14 +244,7 @@ function (R,
 
     time.scale = periodicity(y)$scale
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
-
-    # If the Y-axis is ln
-    logaxis = ""
-    if(ylog) {
-        logaxis = "y"
-    }
-
-  
+    
   if(dygraphPlot==FALSE){
     chart.TimeSeries.base(R, 
                           auto.grid, 
@@ -260,29 +253,29 @@ function (R,
                           yaxis.right, 
                           type, 
                           lty, 
-                          lwd , 
-                          las ,
-                          main , 
+                          lwd, 
+                          las,
+                          main, 
                           ylab, 
                           xlab, 
                           date.format.in, 
-                          date.format , 
-                          xlim , 
-                          ylim , 
+                          date.format, 
+                          xlim, 
+                          ylim, 
                           element.color, 
                           event.lines, 
                           event.labels, 
                           period.areas, 
-                          event.color , 
-                          period.color , colorset , 
+                          event.color, 
+                          period.color, colorset, 
                           pch, 
-                          legend.loc , 
-                          ylog , 
+                          legend.loc, 
+                          ylog, 
                           cex.axis, 
-                          cex.legend , 
-                          cex.lab , 
+                          cex.legend, 
+                          cex.lab, 
                           cex.labels, 
-                          cex.main , 
+                          cex.main, 
                           major.ticks, 
                           minor.ticks, 
                           grid.color, 
@@ -293,7 +286,7 @@ function (R,
     
     
     
-    }else{
+    } else{
           if(is.null(main))
               main=columnnames[1]
           

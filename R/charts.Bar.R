@@ -22,40 +22,26 @@ function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
-    layout(matrix(c(1:columns), ncol = 1, byrow = TRUE), widths=1)
-    op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
-    xaxis=FALSE
     yaxis=TRUE
-    for(i in 1:columns){
-         if(even(i))
-            yaxis.right=TRUE
-         else
-             yaxis.right=FALSE
-        positives = R[,i,drop=FALSE]
-        for(row in 1:length(R[,i,drop=FALSE])){ 
-            positives[row,]=max(0,R[row,i])
-        }
-        negatives = R[,i,drop=FALSE]
-        for(row in 1:length(R[,i,drop=FALSE])){ 
-            negatives[row,]=min(0,R[row,i])
-        }
-        if(i==columns)
-            xaxis = TRUE
-        chart.TimeSeries(positives, type = "h", lend="butt", xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset="darkgreen", lwd=2, ...)
-        lines(1:length(R[,1]), negatives, type="h", lend="butt", colorset="darkred", lwd=2)
-        text(1, ymax, adj=c(0,1.2), cex = 0.8, labels = columnnames[i])
-
-#         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
-        if(i==1)
-            yaxis=FALSE
+    p <- chart.TimeSeries(R, multi.panel = TRUE, 
+                          type = "h", 
+                          lend = "butt", 
+                          main = main, 
+                          ylim = c(ymin,ymax), 
+                          yaxis = yaxis, 
+                          colorset = "darkgreen", 
+                          lwd=2, ...)
+    for(panel in 1:columns) {
+      p <- addSeries(xts(rep(0, nrow(R)), time(R)), on = panel, col = "darkgray")
     }
-
-    mtext(main,
-        side = 3, outer = TRUE, 
-        font = 2, cex = cex.main, line=1)
-    par(op)
     
-
+    if(hasArg(cex.legend) || !isTRUE(cex.legend)) {
+      warning("The cex.legend argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    return(p)
+    
+#         chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
 }
 
 ###############################################################################
