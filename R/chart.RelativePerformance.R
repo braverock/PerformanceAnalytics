@@ -89,6 +89,7 @@ columnnames = colnames(Result.calc)
         # That requires a different solution, but here's the quick fix
         p$Env$cex.legend <- cex.legend
         p$Env$colorset <- colorset
+        p$Env$columnnames <- columnnames
         p <- addLegend(legend.loc, columnnames, inset = 0.02, col = colorset, cex = cex.legend, lty = lty, lwd = 2, bg = "white")
     }
     return(p)
