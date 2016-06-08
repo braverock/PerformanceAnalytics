@@ -67,7 +67,7 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
     y = checkData(y, method = "vector")
 
     # pass in: cex.axis = cex.axis, cex.main = cex.main, cex.lab = cex.lab
-    plot(y ~ x, main = main, pch = symbolset, col=colorset,
+    plot(x, y, main = main, pch = symbolset, col=colorset,
          ylab = ylab, xlab = xlab, xlim = xlim, ylim = ylim,
          ## cex.axis = cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.main = cex.main,
          ...)
