@@ -80,7 +80,7 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
-    par(oma=c(0, 0, 3, 0), mar=c(1,4,6,2))
+    par(oma = c(2, 0, 2, 0), mar=c(1,4,4,2))
 
     # The first row is the annualized returns
     plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Return", xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
