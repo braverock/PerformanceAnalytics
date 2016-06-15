@@ -138,7 +138,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                           ylim = NA, 
                           lwd = 2, 
                           colorset = 1:12, 
-                          lty = c(1,2,4,5,6), 
+                          lty = c(1,2,3,4,5,6), 
                           ypad=0, 
                           legend.cex = 0.8 )
 { # @author Peter Carl
@@ -321,14 +321,25 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
     ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
     ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
   }
-  if(!show.greenredbars)
-    p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
-  else 
-    p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+  if(!show.greenredbars) {
+    if(hasArg(add)) {
+      p <- xts:::current.xts_chob()
+      p <- addSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+    }
+    else 
+      p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+  } else {
+    if(hasArg(add)) {
+      p <- xts:::current.xts_chob()
+      p <- addSeries(x.orig[,1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+    }
+    else 
+      p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+  }
   
-  
+  on = p$Env$frame/2
   if(show.clean) {
-    p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = 1)
+    p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = on)
   }
   
   #     symmetric = symmetric[-1]
@@ -346,14 +357,14 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
       col = colorset[column-1]
       p$Env$col = col
       if (show.symmetric && symmetric[column-1])
-        p <- addSeries(xts(-risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = 1)
+        p <- addSeries(xts(-risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
       
-      p <- addSeries(xts(risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = 1)
+      p <- addSeries(xts(risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
     }
     if(show.horizontal)
-      p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = 1)
+      p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
     if(show.endvalue){
-      points(rows, tail(risk[,2],1), col = colorset[1], pch=20, cex=.7)
+      p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
       mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
     }
   }

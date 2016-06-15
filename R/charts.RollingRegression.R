@@ -37,11 +37,9 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
 #    plot.new()
 
-    op <- par(no.readonly=TRUE)
-    result <- list()
 
-    layout(matrix(c(1,2,3)),heights=c(1.3,1,1.3),widths=1)
 
+    op <- par(no.readonly = TRUE)
     par(oma=c(0,0,4,0), mar=c(1,4,4,2))
     if(is.null(main)){
       freq = periodicity(Ra)
@@ -59,17 +57,17 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
       main = paste("Rolling ",width,"-",freq.lab," Regressions", sep="")
     }
 
-    result[[1]] <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = "Alpha", ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = "Alpha", ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
     par(mar=c(1,4,0,2))
 
-    result[[2]] <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", ylab = "Beta", xaxis = FALSE, event.labels = NULL, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", ylab = "Beta", xaxis = FALSE, event.labels = NULL, add = TRUE, ...)
 
     par(mar=c(5,4,0,2))
 
-    result[[3]] <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", ylab = "R-Squared", event.labels = NULL, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", ylab = "R-Squared", event.labels = NULL, add = TRUE, ...)
 
-    invisible(capture.output(result))
+    print(plot_object)
     title(main, outer = TRUE)
     par(op)
 }
