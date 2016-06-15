@@ -324,14 +324,20 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
   if(!show.greenredbars) {
     if(hasArg(add)) {
       p <- xts:::current.xts_chob()
-      p <- addSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+      p$Env$bar.color <- bar.color
+      plotargs <- list(...)
+      plotargs$add <- NULL
+      p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
     }
     else 
       p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
   } else {
     if(hasArg(add)) {
       p <- xts:::current.xts_chob()
-      p <- addSeries(x.orig[,1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+      p$Env$bar.color <- bar.color
+      plotargs <- list(...)
+      plotargs$add <- NULL
+      p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
     }
     else 
       p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
@@ -349,7 +355,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
   if(risk.line){
     risk.columns = ncol(risk)
     if(length(lty)==1)
-      lty = rep(lty, length.out = risk.columns)
+      lty = rep(lty, risk.columns)
     p$Env$lty = lty
     p$Env$colorset = colorset
     for(column in (risk.columns):2) {
@@ -360,20 +366,21 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         p <- addSeries(xts(-risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
       
       p <- addSeries(xts(risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
-    }
-    if(show.horizontal)
-      p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
-    if(show.endvalue){
-      p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
-      mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+      if(show.horizontal)
+        p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
+      if(show.endvalue){
+        p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
+        mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+      }
     }
   }
+  
   p$Env$legend.cex = legend.cex
   p$Env$legend.txt = legend.txt
   if(legend.txt[1] != "" & !is.null(legend.loc))
     p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty=lty, horiz=TRUE)
-  
   return(p)
+  
 }
 
 ###############################################################################
