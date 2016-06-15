@@ -39,8 +39,14 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
 
 
+
     op <- par(no.readonly = TRUE)
     par(oma=c(0,0,4,0), mar=c(1,4,4,2))
+
+    
+
+    par(oma = c(2, 0, 2, 0), mar=c(1,4,4,2))
+
     if(is.null(main)){
       freq = periodicity(Ra)
 
