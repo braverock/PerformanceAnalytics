@@ -74,13 +74,11 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     
     # Chart the drawdown level
     if(hasArg(add)) {
-      if(hasArg(main))
-        main = "Drawdown"
-      else
-        main = names(drawdown)[1]
+      plotargs <- list(...)
+      plotargs$add <- NULL
       p <- xts:::current.xts_chob()
       p$Env$colorset <- colorset
-      p <- addSeries(drawdown, col = colorset, legend.loc = legend.loc, main = main)
+      p <- addSeries(drawdown, col = colorset, legend.loc = legend.loc, main = plotargs$main)
     } else
       p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
     return(p)
