@@ -324,6 +324,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
     if(!show.greenredbars) {
       if(hasArg(add)) {
         p <- xts:::current.xts_chob()
+        p$Env$bar.color <- bar.color
         p <- addSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
       }
       else 
@@ -331,6 +332,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
     } else {
       if(hasArg(add)) {
         p <- xts:::current.xts_chob()
+        p$Env$bar.color <- bar.color
         p <- addSeries(x.orig[,1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
       }
       else 
