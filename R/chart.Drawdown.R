@@ -75,7 +75,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     # Chart the drawdown level
     if(hasArg(add)) {
       if(hasArg(main))
-        main = main
+        main = "Drawdown"
       else
         main = names(drawdown)[1]
       p <- xts:::current.xts_chob()
