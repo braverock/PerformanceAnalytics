@@ -325,7 +325,9 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
       if(hasArg(add)) {
         p <- xts:::current.xts_chob()
         p$Env$bar.color <- bar.color
-        p <- addSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        plotargs <- list(...)
+        plotargs$add <- NULL
+        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
       }
       else 
         p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
@@ -333,7 +335,9 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
       if(hasArg(add)) {
         p <- xts:::current.xts_chob()
         p$Env$bar.color <- bar.color
-        p <- addSeries(x.orig[,1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        plotargs <- list(...)
+        plotargs$add <- NULL
+        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
       }
       else 
         p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
