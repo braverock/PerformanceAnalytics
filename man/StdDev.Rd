@@ -8,7 +8,7 @@ calculates component contribution to standard deviation of a portfolio}
 StdDev(R, ..., clean = c("none", "boudt", "geltner"),
   portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
   sigma = NULL, use = "everything", method = c("pearson", "kendall",
-  "spearman"))
+  "spearman"), se.method = c("none", "IFiid", "IFcor", "BOOTiid", "BOOTcor"))
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -38,6 +38,10 @@ abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"},
 \item{method}{a character string indicating which correlation coefficient
 (or covariance) is to be computed.  One of \code{"pearson"} (default),
 \code{"kendall"}, or \code{"spearman"}, can be abbreviated.}
+
+\item{se.method}{a character string indicating which method should be used to compute
+the standard error of the estimated standard deviation. One of \code{"none"} (default),
+\code{"IFiid"}, \code{"IFcor"}, \code{"BOOTiid"}, \code{"BOOTcor"}}
 
 \item{\dots}{any other passthru parameters}
 }
