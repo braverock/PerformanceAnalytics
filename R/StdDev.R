@@ -55,6 +55,9 @@
 #' @param method a character string indicating which correlation coefficient
 #' (or covariance) is to be computed.  One of \code{"pearson"} (default),
 #' \code{"kendall"}, or \code{"spearman"}, can be abbreviated.
+#' @param se.method a character string indicating which method should be used to compute
+#' the standard error of the estimated standard deviation. One of \code{"none"} (default),
+#' \code{"IFiid"}, \code{"IFcor"}, \code{"BOOTiid"}, \code{"BOOTcor"}
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{Return.clean}} \code{sd}
 ###keywords ts multivariate distribution models
@@ -122,11 +125,12 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
              tsd=t(sd.xts(R, na.rm=TRUE))
              rownames(tsd)<-"StdDev"
              if(se.method=="IFiid"){
-               SE=SE.SD.iid.xts(R,na.rm=TRUE)/sqrt(length(R))
+               SE=SE.SD.iid.xts(R,na.rm=TRUE)
              }
              if(se.method=="IFcor"){
              }
              if(se.method=="BOOTiid"){
+               SE=SE.SD.iid.boot.xts(R,na.rm=TRUE)
              }
              if(se.method=="BOOTcor"){
              }
