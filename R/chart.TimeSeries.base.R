@@ -102,14 +102,14 @@ function (R,
         logaxis = "y"
     }
 
-    plot.new()
+    if(yaxis.pct)
+      y = y * 100
 
     if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
     if(is.null(ylim[1])){
         ylim = as.numeric(range(y, na.rm=TRUE))
     }
-    plot.window(xlim, ylim, xaxs = "r", log = logaxis)
 
     # par("usr"): A vector of the form 'c(x1, x2, y1, y2)' giving the extremes
     #           of the user coordinates of the plotting region.  When a
@@ -117,55 +117,65 @@ function (R,
     #           below), then the x-limits will be '10 ^ par("usr")[1:2]'.
     #           Similarly for the y-axis.
 
-    if(is.null(ylab)) {
-        if(ylog) 
-            ylab = "ln(Value)"
-
-        else 
-            ylab = "Value"
-    }
-
-    if(ylog)
-        dimensions=10^par("usr")
+    if(yaxis)
+      yaxis.left = TRUE
     else
-        dimensions = par("usr")
+      yaxis.left = FALSE
+    
+    # Add the other titles
+    if(is.null(main))
+      main=columnnames[1]
+    
+    p <- plot.xts(x = y, 
+                  y = NULL, 
+                  ..., 
+                  col = colorset, 
+                  type = type, 
+                  lty = lty, 
+                  lwd = lwd, 
+                  main = main, 
+                  ylim = ylim, 
+                  yaxis.left = yaxis.left, 
+                  yaxis.right = yaxis.right, 
+                  major.ticks = major.ticks, 
+                  minor.ticks = minor.ticks, 
+                  grid.ticks.lty = grid.lty, 
+                  grid.col = grid.color, 
+                  legend.loc = NULL, 
+                  pch = pch)
+    
+    if(!is.null(event.lines)) {
+      
+      event.ind = NULL
+      for(event in 1:length(event.lines)){
+        event.ind = c(event.ind, grep(event.lines[event], rownames))
+      }
+      number.event.labels = ((length(event.labels)-length(event.ind) + 1):length(event.labels))
 
     # Draw any areas in the background
     if(!is.null(period.areas)) {
         # build a list of specific dates to find from xts ranges given
         period.dat = lapply(period.areas,function(x,y) c(first(index(y[x])),last(index(y[x]))),y=y)
         period.ind = NULL
+        # add event lines
+        # get bold event labels
+        opar <- par(font = 1)
+        par(font = 2)
+        p$Env$period.color <- period.color
+        p <- addEventLines(xts(event.labels[number.event.labels], time(y)[event.ind]), 
+                           srt = 90, offset = 1.2, pos = 2, lty = 2, ...)
         for(period in 1:length(period.dat)){
-          if(!is.na(period.dat[[period]][1])){ 
-            period.ind = list(grep(period.dat[[period]][1], index(y)), grep(period.dat[[period]][2], index(y)))
-            rect(period.ind[1], dimensions[3], period.ind[2], dimensions[4], col = period.color, border=NA)
+          if(!is.na(period.dat[[period]][1]))
+            p <- addPolygon(xts(matrix(c(min(y), max(y), min(y), max(y)), ncol = 2, byrow = TRUE), 
+                                period.dat[[period]]), on = 1, col = period.color, ...)
           }
+          par(opar)
         }
-    }
-
-    # Draw the grid
-    if(auto.grid) {
-        abline(v=ep, col=grid.color, lty=grid.lty)
-        grid(NA, NULL, col = grid.color)
     }
 
     # Draw a solid reference line at zero
-    abline(h = 0, col = element.color)
-
-    # Add event.lines before drawing the data
-    # This only labels the dates it finds
-    if(!is.null(event.lines)) {
-        event.ind = NULL
-        for(event in 1:length(event.lines)){
-            event.ind = c(event.ind, grep(event.lines[event], rownames))
-        }
-        number.event.labels = ((length(event.labels)-length(event.ind) + 1):length(event.labels))
-
-        abline(v = event.ind, col = event.color, lty = 2)
-        if(!is.null(event.labels)) {
-            text(x=event.ind,y=ylim[2], label = event.labels[number.event.labels], offset = .2, pos = 2, cex = cex.labels, srt=90, col = event.color)
-        }
-    }
+    p$Env$element.color <- element.color
+    p <- addSeries(xts(rep(0, rows), time(y)), col = element.color, on = 1)
 
     # Expand the attributes to #columns if fewer values are passed in
     # (e.g., only one), to allow the user to pass in line, type, or
@@ -177,52 +187,52 @@ function (R,
     if(length(pch) < columns)
         pch = rep(pch,columns)
 
-    for(column in columns:1) {
-        lines(1:rows, y[,column], col = colorset[column], lwd = lwd[column], pch = pch[column], lty = lty[column], type = type, ...)
+    if(!is.null(legend.loc)) {
+      if(!hasArg(legend.names))
+        legend.names <- columnnames
+      # add legend
+      p$Env$cex.legend <- cex.legend
+      p <- addLegend(legend.loc, legend.names, 
+                     lty = lty, lwd = lwd, cex = cex.legend, ...)
     }
-
-    if (xaxis) {
-        if(minor.ticks)
-            axis(1, at=1:NROW(y), labels=FALSE, col='#BBBBBB', las=las)
-        label.height = cex.axis *(.5 + apply(t(names(ep)),1, function(X) max(strheight(X, units="in")/par('cin')[2]) ))
-        if(is.null(xaxis.labels))
-            xaxis.labels = names(ep)
-        else
-            ep = 1:length(xaxis.labels)
-        axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,label.height,0), cex.axis = cex.axis, las=las) 
-#         axis(1, at=ep, labels=xaxis.labels, las=1, lwd=1, mgp=c(3,2,0), cex.axis = cex.axis) 
-        #axis(1, at = lab.ind, lab=rownames[lab.ind], cex.axis = cex.axis, col = elementcolor)
-        title(xlab = xlab, cex = cex.lab)
-        # use axis(..., las=3) for vertical labels.
+    
+    # deprecated arguments
+    if(hasArg(auto.grid) || !isTRUE(auto.grid)) {
+      warning("The auto.grid argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
     }
-
-    # set up y-axis
-    if (yaxis) {
-        yaxis.side = if (yaxis.right) 4 else 2
-        if(yaxis.pct) {
-            at = axTicks(yaxis.side, log=ylog)
-            labels = sprintf("%s", 100*at)
-        } else {
-            at = NULL
-            labels = TRUE
-        }
-        axis(yaxis.side, cex.axis = cex.axis, col=element.color, ylog=ylog, las=las,
-             at=at, labels=labels)
+    
+    if(hasArg(las) || !isTRUE(las)) {
+      warning("The las argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
     }
-    box(col = element.color)
-
-    if(!is.null(legend.loc)){
-        # There's no good place to put this automatically, except under the graph.
-        # That requires a different solution, but here's the quick fix
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = cex.legend, border.col = element.color, lty = lty, lwd = 2, bg = "white", legend = columnnames, pch=pch)
+    
+    if(hasArg(ylab) || !isTRUE(ylab)) {
+      warning("The ylab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
     }
-
-    # Add the other titles
-    if(is.null(main))
-        main=columnnames[1]
-    title(ylab = ylab, cex.lab = cex.lab)
-    title(main = main, cex.main = cex.main)
-
+    
+    if(hasArg(xlab) || !isTRUE(xlab)) {
+      warning("The xlab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(cex.axis) || !isTRUE(cex.axis)) {
+      warning("The cex.axis argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(cex.lab) || !isTRUE(cex.lab)) {
+      warning("The cex.lab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(cex.labels) || !isTRUE(cex.labels)) {
+      warning("The cex.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(cex.main) || !isTRUE(cex.main)) {
+      warning("The cex.main argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(xaxis.labels) || !isTRUE(xaxis.labels)) {
+      warning("The xaxis.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    return(p)
 }
 
 ###############################################################################
