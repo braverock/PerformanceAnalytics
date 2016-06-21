@@ -12,7 +12,7 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.4.4000
+Version: 1.5.0
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
@@ -27,7 +27,7 @@ Imports:
     zoo
 Depends:
     R (>= 3.0.0),
-    xts (>= 0.9)
+    xts (>= 0.10.0)
 Suggests:
     Hmisc,
     MASS,
