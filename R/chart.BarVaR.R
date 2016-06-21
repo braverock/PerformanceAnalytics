@@ -138,7 +138,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                             ylim = NA, 
                             lwd = 2, 
                             colorset = 1:12, 
-                            lty = c(1,2,3,4,5,6), 
+                            lty = c(1,2,4,5,6),
                             ypad=0, 
                             legend.cex = 0.8 )
 { # @author Peter Carl
