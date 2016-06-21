@@ -138,7 +138,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                             ylim = NA, 
                             lwd = 2, 
                             colorset = 1:12, 
-                            lty = c(1,2,4,5,6), 
+                            lty = c(1,2,3,4,5,6), 
                             ypad=0, 
                             legend.cex = 0.8 )
 { # @author Peter Carl
@@ -321,24 +321,31 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
-    if(!show.greenredbars){
-    	chart.TimeSeries(x.orig[,1, drop=FALSE], type = "h", colorset = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+    if(!show.greenredbars) {
+      if(hasArg(add)) {
+        p <- xts:::current.xts_chob()
+        p$Env$bar.color <- bar.color
+        plotargs <- list(...)
+        plotargs$add <- NULL
+        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+      }
+      else 
+        p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+    } else {
+      if(hasArg(add)) {
+        p <- xts:::current.xts_chob()
+        p$Env$bar.color <- bar.color
+        plotargs <- list(...)
+        plotargs$add <- NULL
+        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+      }
+      else 
+        p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
     }
-    else {
-        positives = x.orig[,1,drop=FALSE]
-        for(row in 1:length(x.orig[,1,drop=FALSE])){ 
-            positives[row,]=max(0,x.orig[row,1])
-        }
-        negatives = x.orig[,1,drop=FALSE]
-        for(row in 1:length(x.orig[,1,drop=FALSE])){ 
-            negatives[row,]=min(0,x.orig[row,1])
-        }
-        chart.TimeSeries(positives, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", colorset="darkgreen", ...)
-        lines(1:length(x.orig[,1]), negatives, type="h", lend="butt", col="darkred", lwd=lwd)
-    }
-
+    
+    on = p$Env$frame/2
     if(show.clean) {
-        lines(1:rows, x[,1, drop=FALSE], type="h", col=colorset[1], lwd = lwd, lend="butt")
+      p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = on)
     }
 
 #     symmetric = symmetric[-1]
@@ -349,24 +356,30 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         risk.columns = ncol(risk)
         if(length(lty)==1)
             lty = rep(lty, risk.columns)
+        p$Env$lty = lty
+        p$Env$colorset = colorset
         for(column in (risk.columns):2) {
-            if (show.symmetric && symmetric[column-1]){
-                lines(1:rows, -risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
-            }
-        }
-        for(column in (risk.columns):2) {
-            lines(1:rows, risk[,column], col = colorset[column-1], lwd = 1, type = "l", lty=lty[column-1])
+          p$Env$column = column
+          col = colorset[column-1]
+          p$Env$col = col
+              if (show.symmetric && symmetric[column-1])
+                p <- addSeries(xts(-risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
+              
+              p <- addSeries(xts(risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
             if(show.horizontal)
-                lines(1:rows, rep(tail(risk[,2],1),rows), col = colorset[1], lwd=1, type="l", lty=1)
+              p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
 	    if(show.endvalue){
-		points(rows, tail(risk[,2],1), col = colorset[1], pch=20, cex=.7)
-		mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+	      p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
+	      mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
 	    }
         }
     }
 
+    p$Env$legend.cex = legend.cex
+    p$Env$legend.txt = legend.txt
     if(legend.txt[1] != "" & !is.null(legend.loc))
-        legend(legend.loc, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, border.col = "grey", lwd = 1, lty=lty, bty = "n", legend = legend.txt, horiz=TRUE)
+      p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty=lty, horiz=TRUE)
+    return(p)
 
 }
 

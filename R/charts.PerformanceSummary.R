@@ -108,7 +108,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # First, we lay out the graphic as a three row, one column format
 #    plot.new()
-    layout(matrix(c(1,2,3)),heights=c(2,1,1.3),widths=1)
+
     # to see the resulting layout, use layout.show(3)
 
     # mar: a numerical vector of the form c(bottom, left, top, right) which
@@ -116,8 +116,8 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
     # The first row is the cumulative returns line plot
-    par(mar=c(1,4,4,2))
-    chart.CumReturns(x, main = main, xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
+    par(oma = c(2, 0, 4, 0), mar=c(1,4,4,2))
+    plot_object <- chart.CumReturns(x, main = "Cumulative Return", xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -135,15 +135,17 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 	yearly = {date.label = "Annual"}
     )
 
-    chart.BarVaR(x, main = "", xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, ...)
+    plot_object <- chart.BarVaR(x, main = paste(date.label,"Return"), xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, add = TRUE, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    chart.Drawdown(x, geometric = geometric, main = "", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, ...)
+    plot_object <- chart.Drawdown(x, geometric = geometric, main = "Drawdown", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, add = TRUE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))
     #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
+    print(plot_object)
+    title(main, outer = TRUE)
     par(op)
 }
 
