@@ -87,13 +87,13 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Return", xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
 
     # The second row is the annualized standard deviation
-    par(mar=c(1,4,0,2))
     plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, add = TRUE, ...)
 
     # The third row is the annualized Sharpe Ratio
-    par(mar=c(5,4,0,2))
     plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, add = TRUE, ...)
 
+    panels = plot_object$get_frame()/2
+    plot_object$set_asp(asp = rep(c(1/panels, 5/panels), panels))
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
