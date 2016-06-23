@@ -337,7 +337,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         p$Env$bar.color <- bar.color
         plotargs <- list(...)
         plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
       }
       else 
         p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
