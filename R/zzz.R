@@ -21,6 +21,11 @@ sd.xts <- xts:::sd.xts
 
 #' @importFrom utils packageDescription
 #' @importFrom stats sd
+#' @importFrom grDevices adjustcolor colorRamp rgb xy.coords
+#' @importFrom utils tail
+#' @importFrom methods hasArg
+#' @import graphics
+#' @import stats
 #' @import xts
 #' @import zoo
 NULL

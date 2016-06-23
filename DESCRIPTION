@@ -12,7 +12,7 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.5.0
+Version: 1.5.01
 Date: $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
@@ -24,7 +24,10 @@ Description: Collection of econometric functions for
     numbers of functions will work with P&L or price data
     where possible.
 Imports:
-    zoo
+    zoo,
+    graphics,
+    stats,
+    methods
 Depends:
     R (>= 3.0.0),
     xts (>= 0.10.0)
