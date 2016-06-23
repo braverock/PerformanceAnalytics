@@ -167,7 +167,7 @@ function (R,
         for(period in 1:length(period.dat)){
           if(!is.na(period.dat[[period]][1]))
             p <- addPolygon(xts(matrix(c(min(y), max(y), min(y), max(y)), ncol = 2, byrow = TRUE), 
-                                period.dat[[period]]), on = 1, col = period.color, ...)
+                                period.dat[[period]]), on = 1, col = adjustcolor(period.color, alpha.f = 0.3), ...)
           }
           par(opar)
         }
