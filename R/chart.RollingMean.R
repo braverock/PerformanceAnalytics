@@ -25,7 +25,7 @@
 #' 
 #' @export
 chart.RollingMean <-
-function (R, width = 12, xaxis = TRUE, ylim = NULL, lwd=c(2,1,1), ..., fill = NA)
+function (R, width = 12, ylim = NULL, lwd=c(2,1,1), ..., fill = NA)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -73,7 +73,7 @@ function (R, width = 12, xaxis = TRUE, ylim = NULL, lwd=c(2,1,1), ..., fill = NA
     main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," Performance",sep="")
 
     # The first row is the annualized returns
-    chart.TimeSeries(result, ylim = ylim, xaxis = xaxis, ylab = "Return", lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main=main, ... = ...)
+    chart.TimeSeries(result, ylim = ylim, lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main=main, ... = ...)
 
 }
 

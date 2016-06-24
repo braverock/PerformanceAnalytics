@@ -140,6 +140,7 @@ function (R,
                   major.ticks = major.ticks, 
                   minor.ticks = minor.ticks, 
                   grid.ticks.lty = grid.lty, 
+                  grid.ticks.on = "years", 
                   grid.col = grid.color, 
                   legend.loc = NULL, 
                   pch = pch)
@@ -167,7 +168,7 @@ function (R,
         for(period in 1:length(period.dat)){
           if(!is.na(period.dat[[period]][1]))
             p <- addPolygon(xts(matrix(c(min(y), max(y), min(y), max(y)), ncol = 2, byrow = TRUE), 
-                                period.dat[[period]]), on = 1, col = period.color, ...)
+                                period.dat[[period]]), on = 1, col = adjustcolor(period.color, alpha.f = 0.3), ...)
           }
           par(opar)
         }
@@ -194,43 +195,6 @@ function (R,
       p$Env$cex.legend <- cex.legend
       p <- addLegend(legend.loc, legend.names, 
                      lty = lty, lwd = lwd, cex = cex.legend, ...)
-    }
-    
-    # deprecated arguments
-    if(hasArg(auto.grid) || !isTRUE(auto.grid)) {
-      warning("The auto.grid argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(las) || !isTRUE(las)) {
-      warning("The las argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(ylab) || !isTRUE(ylab)) {
-      warning("The ylab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xlab) || !isTRUE(xlab)) {
-      warning("The xlab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.axis) || !isTRUE(cex.axis)) {
-      warning("The cex.axis argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.lab) || !isTRUE(cex.lab)) {
-      warning("The cex.lab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.labels) || !isTRUE(cex.labels)) {
-      warning("The cex.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.main) || !isTRUE(cex.main)) {
-      warning("The cex.main argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xaxis.labels) || !isTRUE(xaxis.labels)) {
-      warning("The xaxis.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
     }
     return(p)
 }

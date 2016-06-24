@@ -42,7 +42,7 @@
 #' 
 #' @export
 chart.RelativePerformance <-
-function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)
+function (Ra, Rb, main = "Relative Performance", colorset = (1:12), legend.loc = NULL, ylog = FALSE, elementcolor = "darkgray", lty = 1, cex.legend=.7, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -81,7 +81,7 @@ function (Ra, Rb, main = "Relative Performance", xaxis = TRUE, colorset = (1:12)
         }
     }
 columnnames = colnames(Result.calc)
-    p <- chart.TimeSeries(Result.calc, xaxis = xaxis, main = main, colorset = colorset, ylog = ylog, lty = lty, ...)
+    p <- chart.TimeSeries(Result.calc, main = main, colorset = colorset, ylog = ylog, lty = lty, ...)
     p$Env$elementcolor <- elementcolor
     p <- addSeries(xts(rep(1, nrow(Result.calc)), time(Result.calc)), col = elementcolor, on = 1)
     if(!is.null(legend.loc)){

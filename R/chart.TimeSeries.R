@@ -245,6 +245,32 @@ function (R,
     time.scale = periodicity(y)$scale
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
   
+    
+    # deprecated arguments
+    if(hasArg(auto.grid)) {
+      warning("The auto.grid argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(ylab)) {
+      warning("The ylab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(xlab)) {
+      warning("The xlab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(cex.labels)) {
+      warning("The cex.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(xaxis)) {
+      warning("The xaxis argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
+    if(hasArg(xaxis.labels)) {
+      warning("The xaxis.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
+    }
+    
   if(dygraphPlot==FALSE){
     chart.TimeSeries.base(R, 
                           auto.grid, 
@@ -304,7 +330,7 @@ function (R,
               ylab = ylab))
       
     }
-
+    
 }
 
 ###############################################################################
