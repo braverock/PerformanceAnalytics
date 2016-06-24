@@ -117,7 +117,7 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 
     # The first row is the cumulative returns line plot
     par(oma = c(2, 0, 4, 0), mar=c(1,4,4,2))
-    plot_object <- chart.CumReturns(x, main = "Cumulative Return", xaxis = FALSE, legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ylab="Cumulative Return",...)
+    plot_object <- chart.CumReturns(x, main = "Cumulative Return", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ...)
 
     # The second row is the monthly returns bar plot
     par(mar=c(1,4,0,2))
@@ -135,11 +135,11 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 	yearly = {date.label = "Annual"}
     )
 
-    plot_object <- chart.BarVaR(x, main = paste(date.label,"Return"), xaxis = FALSE, width = width, ylab = paste(date.label,"Return"), methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, add = TRUE, ...)
+    plot_object <- chart.BarVaR(x, main = paste(date.label,"Return"), width = width, methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, add = TRUE, ...)
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    plot_object <- chart.Drawdown(x, geometric = geometric, main = "Drawdown", ylab = "Drawdown", event.labels = NULL, ylog=FALSE, add = TRUE, ...)
+    plot_object <- chart.Drawdown(x, geometric = geometric, main = "Drawdown", event.labels = NULL, ylog=FALSE, add = TRUE, ...)
 
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))

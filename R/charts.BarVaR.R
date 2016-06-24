@@ -42,7 +42,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	# mar: a numerical vector of the form c(bottom, left, top, right) which
 	# gives the number of lines of margin to be specified on the four sides
 	# of the plot. The default is c(5, 4, 4, 2) + 0.1
-	op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
+	op <- par(oma = c(2,0,2,0), mar=c(0,4,0,4))
 	if(show.yaxis == "none")
 	    yaxis = FALSE
 	else
@@ -57,9 +57,9 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	    else
 		  yaxis.right=FALSE
 	    if(i == 1) 
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
 	    else
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
 	    
 	# TODO: Add histogram at the end, turned on its side to line up with yaxis
 	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
@@ -67,6 +67,11 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 		yaxis=FALSE
 	} # loop for columns
 
+	panels = length(plot_object$get_ylim())/2
+	# get current asp
+	oasp <- plot_object$get_asp()
+	idx <- seq(1, length(oasp), 2)
+	plot_object$set_asp(asp = rep(c(sum(oasp[idx])/panels, sum(oasp[-idx])/panels), panels))
 	print(plot_object)
 	par(op)
 	

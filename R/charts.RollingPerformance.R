@@ -84,16 +84,19 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     par(oma = c(2, 0, 2, 0), mar=c(1,4,4,2))
 
     # The first row is the annualized returns
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Return", xaxis = FALSE, ylab = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
+    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
 
     # The second row is the annualized standard deviation
-    par(mar=c(1,4,0,2))
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", xaxis = FALSE, ylab = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, add = TRUE, ...)
+    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, add = TRUE, ...)
 
     # The third row is the annualized Sharpe Ratio
-    par(mar=c(5,4,0,2))
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", ylab = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, add = TRUE, ...)
+    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, add = TRUE, ...)
 
+    panels = length(plot_object$get_ylim())/2
+    # get current asp
+    oasp <- plot_object$get_asp()
+    idx <- seq(1, length(oasp), 2)
+    plot_object$set_asp(asp = rep(c(sum(oasp[idx])/panels, sum(oasp[-idx])/panels), panels))
     print(plot_object)
     title(main, outer = TRUE)
     par(op)

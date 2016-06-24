@@ -58,16 +58,17 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
       main = paste("Rolling ",width,"-",freq.lab," Regressions", sep="")
     }
 
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = "Alpha", ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", main = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
-    par(mar=c(1,4,0,2))
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", event.labels = NULL, add = TRUE, ...)
 
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", ylab = "Beta", xaxis = FALSE, event.labels = NULL, add = TRUE, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", event.labels = NULL, add = TRUE, ...)
 
-    par(mar=c(5,4,0,2))
-
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", ylab = "R-Squared", event.labels = NULL, add = TRUE, ...)
-
+    panels = length(plot_object$get_ylim())/2
+    # get current asp
+    oasp <- plot_object$get_asp()
+    idx <- seq(1, length(oasp), 2)
+    plot_object$set_asp(asp = rep(c(sum(oasp[idx])/panels, sum(oasp[-idx])/panels), panels))
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
