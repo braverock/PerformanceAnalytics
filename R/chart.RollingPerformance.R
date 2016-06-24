@@ -110,16 +110,18 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
 	
     plotargs$main=main
     plotargs$ylim=ylim
-    if(!exists("yaxis.pct"))
-      yaxis.pct=FALSE
     if(hasArg(add)){
-      if(yaxis.pct){
+      if(exists("plotargs$colorset"))
+        plotargs$col=plotargs$colorset
+      if(plotargs$yaxis.pct){
         plotargs$x=Return.calc*100
       }
       else
         plotargs$x=Return.calc
       plotargs$yaxis.pct=NULL
       plotargs$add=NULL
+      plotargs$colorset=NULL
+      plotargs$Rf=NULL
       do.call(addSeries,plotargs)
     }
     else{
