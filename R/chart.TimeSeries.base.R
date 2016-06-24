@@ -8,7 +8,6 @@ function (R,
           type = "l", 
           lty = 1, 
           lwd = 2, 
-          las = par("las"),
           main = NULL, 
           ylab=NULL, 
           xlab="", 
@@ -25,11 +24,8 @@ function (R,
           pch = (1:12), 
           legend.loc = NULL, 
           ylog = FALSE, 
-          cex.axis=0.8, 
           cex.legend = 0.8, 
-          cex.lab = 1, 
           cex.labels = 0.8, 
-          cex.main = 1, 
           major.ticks='auto', 
           minor.ticks=TRUE, 
           grid.color="lightgray", 
@@ -164,11 +160,11 @@ function (R,
         par(font = 2)
         p$Env$period.color <- period.color
         p <- addEventLines(xts(event.labels[number.event.labels], time(y)[event.ind]), 
-                           srt = 90, offset = 1.2, pos = 2, lty = 2, ...)
+                           srt = 90, offset = 1.2, pos = 2, lty = 2)
         for(period in 1:length(period.dat)){
           if(!is.na(period.dat[[period]][1]))
             p <- addPolygon(xts(matrix(c(min(y), max(y), min(y), max(y)), ncol = 2, byrow = TRUE), 
-                                period.dat[[period]]), on = 1, col = adjustcolor(period.color, alpha.f = 0.3), ...)
+                                period.dat[[period]]), on = 1, col = adjustcolor(period.color, alpha.f = 0.3))
           }
           par(opar)
         }
@@ -194,7 +190,7 @@ function (R,
       # add legend
       p$Env$cex.legend <- cex.legend
       p <- addLegend(legend.loc, legend.names, 
-                     lty = lty, lwd = lwd, cex = cex.legend, ...)
+                     lty = lty, lwd = lwd, cex = cex.legend)
     }
     return(p)
 }
