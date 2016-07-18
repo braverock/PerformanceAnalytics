@@ -105,6 +105,7 @@
 #'     ES.SE(edhec, p=.95, method="historical",se.method = "IFiid")
 #'
 #'     # Now do historical ES with correlated data
+#'     require(h2o)
 #'     h2o.init()
 #'     ES.SE(edhec, p=.95, method="historical",se.method = "IFcor")
 #'     h2o.shutdown(prompt=FALSE)
@@ -114,7 +115,7 @@
 #'
 #'
 #'     # and with tsboot
-#'
+#'     require(boot)
 #'     ES.SE(edhec, p=.95, method="historical",se.method = "BOOTcor")
 #'
 #'     # now use Gaussian

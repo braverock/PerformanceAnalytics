@@ -240,4 +240,18 @@ SE.ES.boot.cor = function(data, ...,alpha=0.05,segment.length=length(data)/5){
   return(mean(res))
 }
 
+#' Compute sample Expected Shortfall
+#'
+#' @param data Vector of data
+#' @param alpha Tail Probability
+#'
+#' @return sample ES
+#' @export
+#'
+#' @examples
+#' ES.hist(rnorm(10))
+ES.hist=function(data,alpha=0.1){
+  return(-mean(data[data<=quantile(data,alpha)]))
+}
+
 
