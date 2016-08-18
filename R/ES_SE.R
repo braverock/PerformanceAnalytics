@@ -36,7 +36,11 @@
 #' m4 is the cokurtosis matrix of the return series, default NULL, see Details
 #' @param invert TRUE/FALSE whether to invert the VaR measure.  see Details.
 #' @param operational TRUE/FALSE, default TRUE, see Details.
-#' @param \dots any other passthru parameters
+#' @param \dots any other passthru parameters. This include two types of parameters.
+#' The first type is parameters associated with the risk/performance measure, such as tail
+#' probability for VaR and ES. The second type is the parameters associated with the metohd
+#' used to compute the standard error. See \code{\link{SE.IF.iid}}, \code{\link{SE.IF.cor}},
+#' \code{\link{SE.BOOT.iid}}, \code{\link{SE.BOOT.cor}} for details.
 #' @param se.method a character string indicating which method should be used to compute
 #' the standard error of the estimated standard deviation. One of \code{"none"} (default),
 #' \code{"IFiid"}, \code{"IFcor"}, \code{"BOOTiid"}, \code{"BOOTcor"}. Currently, it works
@@ -70,7 +74,7 @@
 #' decompose total portfolio ES into the risk contributions of each of the
 #' portfolio components. For the above mentioned ES estimators, such a
 #' decomposition is possible in a financially meaningful way.
-#' @author Brian G. Peterson, Kris Boudt and Xin Chen
+#' @author Xin Chen, \email{chenx26@uw.edu}
 #' @seealso \code{\link{VaR}} \cr \code{\link{SharpeRatio.modified}} \cr
 #' \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
 #'
@@ -101,22 +105,12 @@
 #'
 #'     data(edhec)
 #'
-#'     # first do normal ES calc
-#'     ES.SE(edhec, p=.95, method="historical",se.method = "IFiid")
-#'
-#'     # Now do historical ES with correlated data
-#'     require(h2o)
+#'     # use more than one method at the same time
 #'     h2o.init()
-#'     ES.SE(edhec, p=.95, method="historical",se.method = "IFcor")
-#'     h2o.shutdown(prompt=FALSE)
-#'
-#'     # Now using iid bootstrapping
-#'     ES.SE(edhec, p=.95, method="historical",se.method = "BOOTiid")
-#'
-#'
-#'     # and with tsboot
-#'     require(boot)
-#'     ES.SE(edhec, p=.95, method="historical",se.method = "BOOTcor")
+#'     res=ES.SE(edhec, p=.95, method="historical",
+#'     se.method = c("IFiid","IFcor","BOOTiid","BOOTcor"))
+#'     # h2o.shutdown(prompt=FALSE)
+#'     printSE(res)
 #'
 #'     # now use Gaussian
 #'     ES.SE(edhec, p=.95, method="gaussian")
@@ -141,7 +135,7 @@ ETL.SE <- CVaR.SE <- ES.SE <- function (R=NULL , p=0.95, ...,
                                portfolio_method=c("single","component"),
                                weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL,
                                invert=TRUE, operational=TRUE,
-                               se.method=c("none","IFiid","IFcor","BOOTiid","BOOTcor"))
+                               se.method="none")
 { # @author Brian G. Peterson and Xin Chen
 
   # Descripion:
@@ -158,16 +152,12 @@ ETL.SE <- CVaR.SE <- ES.SE <- function (R=NULL , p=0.95, ...,
           weights=weights, mu=mu, sigma=sigma, m3=m3, m4=m4,
           invert=invert, operational=operational)
 
-  se.method=se.method[1]
-  SE=NULL
+  # se.method=se.method[1]
+  # SE=NULL
   method = method[1]
   clean = clean[1]
   portfolio_method = portfolio_method[1]
   if(portfolio_method == "single" & is.null(weights) & method == "historical"){
-    if (is.null(weights) & portfolio_method != "single"){
-      message("no weights passed in, assuming equal weighted portfolio")
-      weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    }
     if(!is.null(R)){
       R <- checkData(R, method="xts", ...)
       columns=colnames(R)
@@ -197,13 +187,16 @@ ETL.SE <- CVaR.SE <- ES.SE <- function (R=NULL , p=0.95, ...,
         stop("number of items in weights not equal to number of items in the mean vector")
       }
     }
-
-    SE=EstimatorSE(R, estimator.fun = "ES", se.method = se.method, alpha=1-p)
-  }
-  if(se.method == "none"){
-    return(myES)
-  } else {
-  return(list(ES = myES, SE = SE))
+    if(se.method == "none" & length(se.method)==1){
+      return(myES)
+    } else {
+      res=list(ES=myES)
+      # for each of the method specified in se.method, compute the standard error
+      for(mymethod in se.method){
+        res[[mymethod]]=EstimatorSE(R, estimator.fun = "ES", se.method = mymethod, alpha=1-p)
+      }
+      return(res)
+    }
   }
 } # end ES.SE wrapper function
 

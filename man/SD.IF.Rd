@@ -4,10 +4,12 @@
 \alias{SD.IF}
 \title{Influence Function of Standard Deviation}
 \usage{
-SD.IF(data)
+SD.IF(data, ...)
 }
 \arguments{
 \item{data}{Vector of the data}
+
+\item{...}{other parameters}
 }
 \value{
 IF of SD
@@ -17,5 +19,8 @@ Influence Function of Standard Deviation
 }
 \examples{
 SD.IF(rnorm(10))
+}
+\author{
+Xin Chen, \email{chenx26@uw.edu}
 }
 

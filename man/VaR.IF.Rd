@@ -4,10 +4,12 @@
 \alias{VaR.IF}
 \title{Compute the influence function of value-at-risk}
 \usage{
-VaR.IF(data, alpha = 0.1)
+VaR.IF(data, ..., alpha = 0.1)
 }
 \arguments{
 \item{data}{The vector of data}
+
+\item{...}{other parameters}
 
 \item{alpha}{The tail probability}
 }
@@ -19,5 +21,8 @@ Compute the influence function of value-at-risk
 }
 \examples{
 VaR.IF(rnorm(10))
+}
+\author{
+Xin Chen, \email{chenx26@uw.edu}
 }
 

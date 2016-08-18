@@ -26,8 +26,11 @@ Description: Collection of econometric functions for
 Imports:
     zoo
 Depends:
-    R (>= 3.0.0),
-    xts (>= 0.10.0)
+    R (>= 3.0.0), xts (>= 0.10.0),
+    zoo,
+    robustbase,
+    boot,
+    h2o
 Suggests:
     Hmisc,
     MASS,

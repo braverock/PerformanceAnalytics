@@ -4,10 +4,12 @@
 \alias{STARR.IF}
 \title{Influence Function of STARR Ratio}
 \usage{
-STARR.IF(data, alpha = 0.1, rf = 0)
+STARR.IF(data, ..., alpha = 0.1, rf = 0)
 }
 \arguments{
 \item{data}{Vector of data}
+
+\item{...}{other parameters}
 
 \item{alpha}{Tail Probability}
 
@@ -21,5 +23,8 @@ Influence Function of STARR Ratio
 }
 \examples{
 STARR.IF(rnorm(10))
+}
+\author{
+Xin Chen, \email{chenx26@uw.edu}
 }
 

@@ -11,8 +11,7 @@ ETL.SE(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
   "historical"), clean = c("none", "boudt", "geltner"),
   portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
   sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
-  operational = TRUE, se.method = c("none", "IFiid", "IFcor", "BOOTiid",
-  "BOOTcor"))
+  operational = TRUE, se.method = "none")
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -53,7 +52,11 @@ the standard error of the estimated standard deviation. One of \code{"none"} (de
 \code{"IFiid"}, \code{"IFcor"}, \code{"BOOTiid"}, \code{"BOOTcor"}. Currently, it works
 only when \code{method="historical"} and \code{portfolio_method="single"}.}
 
-\item{\dots}{any other passthru parameters}
+\item{\dots}{any other passthru parameters. This include two types of parameters.
+The first type is parameters associated with the risk/performance measure, such as tail
+probability for VaR and ES. The second type is the parameters associated with the metohd
+used to compute the standard error. See \code{\link{SE.IF.iid}}, \code{\link{SE.IF.cor}},
+\code{\link{SE.BOOT.iid}}, \code{\link{SE.BOOT.cor}} for details.}
 }
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at
@@ -99,22 +102,12 @@ decomposition is possible in a financially meaningful way.
 
     data(edhec)
 
-    # first do normal ES calc
-    ES.SE(edhec, p=.95, method="historical",se.method = "IFiid")
-
-    # Now do historical ES with correlated data
-    require(h2o)
+    # use more than one method at the same time
     h2o.init()
-    ES.SE(edhec, p=.95, method="historical",se.method = "IFcor")
-    h2o.shutdown(prompt=FALSE)
-
-    # Now using iid bootstrapping
-    ES.SE(edhec, p=.95, method="historical",se.method = "BOOTiid")
-
-
-    # and with tsboot
-    require(boot)
-    ES.SE(edhec, p=.95, method="historical",se.method = "BOOTcor")
+    res=ES.SE(edhec, p=.95, method="historical",
+    se.method = c("IFiid","IFcor","BOOTiid","BOOTcor"))
+    # h2o.shutdown(prompt=FALSE)
+    printSE(res)
 
     # now use Gaussian
     ES.SE(edhec, p=.95, method="gaussian")
@@ -134,7 +127,7 @@ decomposition is possible in a financially meaningful way.
     ES.SE(edhec, clean="boudt", portfolio_method="component")
 }
 \author{
-Brian G. Peterson, Kris Boudt and Xin Chen
+Xin Chen, \email{chenx26@uw.edu}
 }
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.

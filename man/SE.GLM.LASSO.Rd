@@ -25,6 +25,6 @@ Using GLM with L1 regularization to fit a polynomial from the periodogram then t
 require(h2o)
 h2o.init()
 SE.GLM.LASSO(rnorm(10))
-h2o.shutdown(prompt=FALSE)
+# h2o.shutdown(prompt=FALSE)
 }
 

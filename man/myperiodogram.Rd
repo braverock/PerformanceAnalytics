@@ -21,6 +21,6 @@ Compute the periodogram as defined in H&W 1981
 myperiodogram(rnorm(10))
 }
 \author{
-Xin Chen
+Xin Chen, \email{chenx26@uw.edu}
 }
 
