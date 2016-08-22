@@ -31,6 +31,15 @@ function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
                           yaxis = yaxis, 
                           colorset = "darkgreen", 
                           lwd=2, ...)
+    # pass title size
+    p$Env$cex.main <- cex.main
+    text.exp <- expression(text(xlim[1], 0.5, main, font = 2, col = theme$labels, 
+                                offset = 0, cex = cex.main, pos = 4), 
+                           text(xlim[2], 0.5, paste(start(xdata[xsubset]), end(xdata[xsubset]), sep = " / "), 
+                                col = theme$labels, adj = c(0, 0), pos = 2))
+    p$Env$actions[[5]] <- structure(structure(structure(text.exp, frame=1), clip=TRUE), env=p$Env)
+    # pass legend size
+    p$Env$cex.legend <- cex.legend
     for(panel in 1:columns) {
       p <- addSeries(xts(rep(0, nrow(R)), time(R)), on = panel, col = "darkgray")
     }
