@@ -35,10 +35,6 @@ function (R, main = "Returns", cex.legend = 0.8, cex.main=1, ...)
       p <- addSeries(xts(rep(0, nrow(R)), time(R)), on = panel, col = "darkgray")
     }
     
-    if(hasArg(cex.legend) || !isTRUE(cex.legend)) {
-      warning("The cex.legend argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
     return(p)
     
 

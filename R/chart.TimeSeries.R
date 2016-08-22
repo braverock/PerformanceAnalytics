@@ -244,35 +244,11 @@ function (R,
 
     time.scale = periodicity(y)$scale
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
-  
-    
-    # deprecated arguments
-    if(hasArg(auto.grid)) {
-      warning("The auto.grid argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(ylab)) {
-      warning("The ylab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xlab)) {
-      warning("The xlab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.labels)) {
-      warning("The cex.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xaxis)) {
-      warning("The xaxis argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xaxis.labels)) {
-      warning("The xaxis.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
     
   if(dygraphPlot==FALSE){
     chart.TimeSeries.base(R=R, 
+                          auto.grid=auto.grid,
+                          xaxis=xaxis,
                           yaxis=yaxis, 
                           yaxis.right=yaxis.right, 
                           type=type, 
@@ -280,6 +256,8 @@ function (R,
                           lwd=lwd , 
                           las=las ,
                           main=main , 
+                          ylab=ylab,
+                          xlab=xlab,
                           date.format.in=date.format.in, 
                           date.format=date.format , 
                           xlim=xlim , 
@@ -293,11 +271,8 @@ function (R,
                           pch=pch, 
                           legend.loc=legend.loc , 
                           ylog=ylog , 
-                          cex.axis=cex.axis, 
                           cex.legend=cex.legend , 
-                          cex.lab=cex.lab , 
                           cex.labels=cex.labels, 
-                          cex.main=cex.main , 
                           major.ticks=major.ticks, 
                           minor.ticks=minor.ticks, 
                           grid.color=grid.color, 

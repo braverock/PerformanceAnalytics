@@ -4,16 +4,14 @@
 \alias{chart.RollingMean}
 \title{chart the rolling mean return}
 \usage{
-chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL, lwd = c(2,
-  1, 1), ..., fill = NA)
+chart.RollingMean(R, width = 12, ylim = NULL, lwd = c(2, 1, 1), ...,
+  fill = NA)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 asset returns}
 
 \item{width}{number of periods to apply rolling function window over}
-
-\item{xaxis}{if true, draws the x axis}
 
 \item{ylim}{set the y-axis limit, same as in \code{\link{plot}}}
 
@@ -23,6 +21,8 @@ order of the main line and the two confidence bands.}
 \item{fill}{a three-component vector or list (recycled otherwise) providing 
 filling values at the left/within/to the right of the data range. See the 
 fill argument of \code{\link{na.fill}} for details.}
+
+\item{xaxis}{if true, draws the x axis}
 
 \item{\dots}{any other passthru parameters}
 }

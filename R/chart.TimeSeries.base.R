@@ -141,6 +141,70 @@ function (R,
                   legend.loc = NULL, 
                   pch = pch)
     
+    if(!auto.grid) {
+      # remove vertical grid lines
+      p$Env$actions[[1]] <- NULL
+      # remove horizontal grid lines
+      exp <- expression(
+        text(xlim[1] - xstep * 2/3 - max(strwidth(y_grid_lines(get_ylim()[[2]]))), 
+             y_grid_lines(get_ylim()[[2]]), 
+             noquote(format(y_grid_lines(get_ylim()[[2]]), 
+                            justify = "right")), col = theme$labels, srt = theme$srt, 
+             offset = 0, pos = 4, cex = theme$cex.axis, xpd = TRUE), 
+        text(xlim[2] + xstep * 2/3, y_grid_lines(get_ylim()[[2]]), 
+             noquote(format(y_grid_lines(get_ylim()[[2]]), 
+                            justify = "right")), col = theme$labels, srt = theme$srt, 
+             offset = 0, pos = 4, cex = theme$cex.axis, xpd = TRUE))
+      p$Env$actions[[5]] <- structure(structure(structure(exp, frame=2), clip=TRUE), env=p$Env)
+    }
+    
+    if(xlab!="") {
+      # reserve space to add x label
+      p$Env$mar <- c(5, 2, 0, 2)
+      p$Env$xlab <- xlab
+      text.exp <- expression(
+        mtext(xlab, side=1, cex=cex, col=theme$labels, line=3))
+      p$add(text.exp, env=p$Env, expr=TRUE)
+    }
+    if(!is.null(ylab)) {
+      # add y label
+      p$Env$ylab <- ylab
+      text.exp <- expression(
+        mtext(ylab, side=2, cex=cex, col=theme$labels, line=0.5))
+      p$add(text.exp, env=p$Env, expr=TRUE)
+    }
+    
+    p$Env$cex <- cex.labels
+    
+    if(!xaxis) {
+      exp <- expression(axt <- axTicksByTime(xdata[xsubset], ticks.on = major.ticks, 
+                                             format.labels = format.labels), 
+                        axis(1, at = xycoords$x[axt], 
+                             labels = FALSE, 
+                             las = theme$las, lwd.ticks = 1.5, mgp = c(3, 1.5, 0), 
+                             tcl = -0.4, cex.axis = theme$cex.axis, 
+                             col = theme$labels, col.axis = theme$labels))
+      if(!auto.grid)
+        p$Env$actions[[2]] <- structure(structure(structure(exp, frame=2), clip=TRUE), env=p$Env)
+      else
+        p$Env$actions[[3]] <- structure(structure(structure(exp, frame=2), clip=TRUE), env=p$Env)
+    }
+     
+    if(!is.null(xaxis.labels)) {
+      p$Env$xaxis.labels <- xaxis.labels
+      exp <- expression(axt <- axTicksByTime(xdata[xsubset], ticks.on = major.ticks, 
+                                             format.labels = format.labels), 
+                        axis(1, at = xycoords$x[axt], 
+                             labels = xaxis.labels, 
+                             las = theme$las, lwd.ticks = 1.5, mgp = c(3, 1.5, 0), 
+                             tcl = -0.4, cex.axis = theme$cex.axis, 
+                             col = theme$labels, col.axis = theme$labels))
+      if(!auto.grid)
+        p$Env$actions[[2]] <- structure(structure(structure(exp, frame=2), clip=TRUE), env=p$Env)
+      else
+        p$Env$actions[[3]] <- structure(structure(structure(exp, frame=2), clip=TRUE), env=p$Env)
+    }
+    
     if(!is.null(event.lines)) {
       
       event.ind = NULL

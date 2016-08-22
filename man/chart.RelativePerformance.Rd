@@ -5,7 +5,7 @@
 \title{relative performance chart between multiple return series}
 \usage{
 chart.RelativePerformance(Ra, Rb, main = "Relative Performance",
-  xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE,
+  colorset = (1:12), legend.loc = NULL, ylog = FALSE,
   elementcolor = "darkgray", lty = 1, cex.legend = 0.7, ...)
 }
 \arguments{
@@ -15,8 +15,6 @@ asset returns}
 \item{Rb}{return vector of the benchmark asset}
 
 \item{main}{set the chart title, same as in \code{plot}}
-
-\item{xaxis}{if true, draws the x axis}
 
 \item{colorset}{color palette to use, set by default to rational choices}
 
@@ -34,6 +32,8 @@ elements, such as the box lines, axis lines, etc. replaces \code{darken}}
 
 \item{cex.legend}{the magnification to be used for sizing the legend
 relative to the current setting of 'cex'.}
+
+\item{xaxis}{if true, draws the x axis}
 
 \item{\dots}{any other passthru parameters}
 }

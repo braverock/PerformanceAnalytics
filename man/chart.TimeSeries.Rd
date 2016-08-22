@@ -19,16 +19,15 @@ chart.TimeSeries(R, ..., auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE,
   xaxis.labels = NULL, dygraphPlot = FALSE, yaxis.pct = FALSE)
 
 chart.TimeSeries.base(R, auto.grid = TRUE, xaxis = TRUE, yaxis = TRUE,
-  yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, las = par("las"),
-  main = NULL, ylab = NULL, xlab = "", date.format.in = "\%Y-\%m-\%d",
+  yaxis.right = FALSE, type = "l", lty = 1, lwd = 2, main = NULL,
+  ylab = NULL, xlab = "", date.format.in = "\%Y-\%m-\%d",
   date.format = NULL, xlim = NULL, ylim = NULL,
   element.color = "darkgray", event.lines = NULL, event.labels = NULL,
   period.areas = NULL, event.color = "darkgray",
   period.color = "aliceblue", colorset = (1:12), pch = (1:12),
-  legend.loc = NULL, ylog = FALSE, cex.axis = 0.8, cex.legend = 0.8,
-  cex.lab = 1, cex.labels = 0.8, cex.main = 1, major.ticks = "auto",
-  minor.ticks = TRUE, grid.color = "lightgray", grid.lty = "dotted",
-  xaxis.labels = NULL, yaxis.pct = FALSE, ...)
+  legend.loc = NULL, ylog = FALSE, cex.legend = 0.8, cex.labels = 0.8,
+  major.ticks = "auto", minor.ticks = TRUE, grid.color = "lightgray",
+  grid.lty = "dotted", xaxis.labels = NULL, yaxis.pct = FALSE, ...)
 
 charts.TimeSeries(R, space = 0, main = "Returns", ...)
 }
