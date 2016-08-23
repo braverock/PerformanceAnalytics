@@ -58,12 +58,13 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
       main = paste("Rolling ",width,"-",freq.lab," Regressions", sep="")
     }
 
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", main = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
+    performance <- list(chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", main = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...))
 
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", event.labels = NULL, add = TRUE, ...)
+    performance <- c(performance, list(chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", event.labels = NULL, add = TRUE, ...)))
 
-    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", event.labels = NULL, add = TRUE, ...)
+    performance <- c(performance, list(chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", event.labels = NULL, add = TRUE, ...)))
 
+    plot_object <- xts:::current.xts_chob()
     panels = length(plot_object$get_ylim())/2
     # get current asp
     oasp <- plot_object$get_asp()
@@ -72,6 +73,8 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
+    names(performance) <- c("Alpha", "Beta", "R-Squared")
+    return(invisible(performance))
 }
 
 ###############################################################################

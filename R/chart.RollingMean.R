@@ -73,7 +73,9 @@ function (R, width = 12, ylim = NULL, lwd=c(2,1,1), ..., fill = NA)
     main = paste(columnnames[1], " Rolling ",width,"-",freq.lab," Performance",sep="")
 
     # The first row is the annualized returns
-    chart.TimeSeries(result, ylim = ylim, lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main=main, ...)
+    p <- chart.TimeSeries(result, ylim = ylim, lty = c(1,2,2), colorset = c("black","darkgray","darkgray"), main=main, ...)
+    print(p)
+    return(invisible(result))
 
 }
 

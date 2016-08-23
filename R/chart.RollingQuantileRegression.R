@@ -69,7 +69,9 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 
       main = paste("Rolling",freq.lab, attribute, sep=" ")
     }
-    chart.TimeSeries(Result.calc, main = main, ...)
+    p <- chart.TimeSeries(Result.calc, main = main, ...)
+    print(p)
+    return(invisible(Result.calc))
 
 }
 

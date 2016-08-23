@@ -126,8 +126,11 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
     }
     else{
       plotargs$R=Return.calc
-      do.call(chart.TimeSeries,plotargs)
+      p <- do.call(chart.TimeSeries,plotargs)
     }
+    if(environmentName(parent.frame()) == "R_GlobalEnv")
+      print(p)
+    return(invisible(Return.calc))
 }
 
 ###############################################################################

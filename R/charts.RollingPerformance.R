@@ -84,14 +84,15 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     par(oma = c(2, 0, 2, 0), mar=c(1,4,4,2))
 
     # The first row is the annualized returns
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...)
+    performance <- list(chart.RollingPerformance(R, width = width, main = "Annualized Return", FUN = "Return.annualized", legend.loc = legend.loc, event.labels = event.labels, yaxis.pct = yaxis.pct, ...))
 
     # The second row is the annualized standard deviation
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, add = TRUE, ...)
+    performance <- c(performance, list(chart.RollingPerformance(R, width = width, main = "Annualized Standard Deviation", FUN = "StdDev.annualized", event.labels= NULL, yaxis.pct = yaxis.pct, add = TRUE, ...)))
 
     # The third row is the annualized Sharpe Ratio
-    plot_object <- chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, add = TRUE, ...)
+    performance <- c(performance, list(chart.RollingPerformance(R, width = width, main = "Annualized Sharpe Ratio", Rf = Rf, FUN = "SharpeRatio.annualized", event.labels= NULL, yaxis.pct = FALSE, add = TRUE, ...)))
 
+    plot_object <- xts:::current.xts_chob()
     panels = length(plot_object$get_ylim())/2
     # get current asp
     oasp <- plot_object$get_asp()
@@ -100,6 +101,8 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
+    names(performance) <- c("Annualized Return", "Anualized Standard Deviation", "Annualized Sharpe Ratio")
+    return(invisible(performance))
 }
 
 ###############################################################################

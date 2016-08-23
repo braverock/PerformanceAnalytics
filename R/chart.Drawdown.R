@@ -78,10 +78,12 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
       plotargs$add <- NULL
       p <- xts:::current.xts_chob()
       p$Env$colorset <- colorset
-      p <- addSeries(drawdown, col = colorset, legend.loc = legend.loc, main = plotargs$main)
-    } else
+      p <- do.call(addSeries, list(drawdown, main = plotargs$main, col = colorset, legend.loc = legend.loc))
+    } else {
       p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
-    return(p)
+      print(p)
+    }
+    return(invisible(drawdown))
 
 }
 

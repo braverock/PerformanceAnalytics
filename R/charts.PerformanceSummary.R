@@ -116,11 +116,10 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
     # The first row is the cumulative returns line plot
-    par(oma = c(2, 0, 4, 0), mar=c(1,4,4,2))
-    plot_object <- chart.CumReturns(x, main = "Cumulative Return", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, ...)
+    par(oma = c(2, 0, 4, 0))
+    performance <- list(chart.CumReturns(x, main = "Cumulative Return", legend.loc = legend.loc, event.labels = event.labels, ylog = ylog, wealth.index = wealth.index, begin = begin, geometric = geometric, add=TRUE, ...))
 
     # The second row is the monthly returns bar plot
-    par(mar=c(1,4,0,2))
 
     freq = periodicity(x)
 
@@ -135,18 +134,21 @@ function (R, Rf = 0, main = NULL, geometric=TRUE, methods = "none", width = 0, e
 	yearly = {date.label = "Annual"}
     )
 
-    plot_object <- chart.BarVaR(x, main = paste(date.label,"Return"), width = width, methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, add = TRUE, ...)
+    performance <- c(performance, list(chart.BarVaR(x, main = paste(date.label,"Return"), width = width, methods = methods, event.labels = NULL, ylog=FALSE, gap = gap, p=p, add = TRUE, ...)))
 
     # The third row is the underwater plot
     par(mar=c(5,4,0,2))
-    plot_object <- chart.Drawdown(x, geometric = geometric, main = "Drawdown", event.labels = NULL, ylog=FALSE, add = TRUE, ...)
+    performance <- c(performance, list(chart.Drawdown(x, geometric = geometric, main = "Drawdown", event.labels = NULL, ylog=FALSE, add = TRUE, ...)))
 
     # If we wanted to add a fourth row with the table of monthly returns
     #par(mar=c(0,0,0,0))
     #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
+    plot_object <- xts:::current.xts_chob()
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
+    names(performance) <- c("Cumulative Return", paste(date.label, "Return"), "Drawdown")
+    return(invisible(performance))
 }
 
 ###############################################################################

@@ -122,9 +122,12 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
     }
     if(hasArg(add)){
       plot_object <- addSeries(Result.calc, main = main)
-    } else
+    } else {
       plot_object <- chart.TimeSeries(Result.calc, main = main, ...)
-    return(plot_object)
+    }
+    if(environmentName(parent.frame()) == "R_GlobalEnv")
+      print(plot_object)
+    return(invisible(Result.calc))
 
 }
 

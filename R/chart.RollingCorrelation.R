@@ -67,7 +67,9 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
         }
     }
 
-    chart.TimeSeries(Result.calc, colorset = colorset, xaxis = xaxis, legend.loc = legend.loc, ylim = c(-1,1), ...)
+    p <- chart.TimeSeries(Result.calc, colorset = colorset, xaxis = xaxis, legend.loc = legend.loc, ylim = c(-1,1), ...)
+    print(p)
+    return(invisible(Result.calc))
 
 }
 

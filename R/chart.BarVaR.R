@@ -327,7 +327,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         p$Env$bar.color <- bar.color
         plotargs <- list(...)
         plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        p <- do.call(addSeries, list(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"))
       }
       else 
         p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
@@ -337,7 +337,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         p$Env$bar.color <- bar.color
         plotargs <- list(...)
         plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        p <- do.call(addSeries, list(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"))
       }
       else 
         p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
@@ -385,7 +385,15 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
     p$Env$legend.txt = legend.txt
     if(legend.txt[1] != "" & !is.null(legend.loc))
       p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty=lty, horiz=TRUE)
-    return(p)
+
+    # should find another way to avoid printing unfinished chart if 
+    # chart.BarVaR is called by other funtions
+    if(environmentName(parent.frame()) == "R_GlobalEnv")
+      print(p)
+    if(!is.null(methods)) {
+      names(risk)[-1] <- methods
+      return(invisible(risk[,-1]))
+    }
 
 }
 

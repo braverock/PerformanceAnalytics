@@ -57,9 +57,9 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	    else
 		  yaxis.right=FALSE
 	    if(i == 1) 
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
+	      risk.list <- list(chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...))
 	    else
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
+	      risk.list <- append(risk.list, list(chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylim = c(ymin,ymax), lwd=2, legend.loc=legend.loc, add = TRUE,...)))
 	    
 	# TODO: Add histogram at the end, turned on its side to line up with yaxis
 	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
@@ -67,17 +67,22 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 		yaxis=FALSE
 	} # loop for columns
 
+	plot_object <- xts:::current.xts_chob()
 	panels = length(plot_object$get_ylim())/2
 	# get current asp
 	oasp <- plot_object$get_asp()
 	idx <- seq(1, length(oasp), 2)
 	plot_object$set_asp(asp = rep(c(sum(oasp[idx])/panels, sum(oasp[-idx])/panels), panels))
-	print(plot_object)
 	par(op)
 	
 	startcol = endcol+1
 	endcol = min(endcol+perpanel, columns)
     } # Loop for panels
+    
+    print(plot_object)
+    names(risk.list) <- columnnames
+    risk.list <- data.frame(risk.list)
+    return(invisible(risk.list))
 
 }
 

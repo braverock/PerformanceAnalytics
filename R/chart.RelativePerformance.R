@@ -92,7 +92,8 @@ columnnames = colnames(Result.calc)
       p$Env$columnnames <- columnnames
       p <- addLegend(legend.loc, columnnames, inset = 0.02, col = colorset, cex = cex.legend, lty = lty, lwd = 2, bg = "white")
     }
-    return(p)
+    print(p)
+    return(invisible(Result.calc))
 }
 
 ###############################################################################

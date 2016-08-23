@@ -116,8 +116,16 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
         Return.cumulative = as.xts(Return.cumulative)
     colnames(Return.cumulative) = columnnames
 
-    # Chart the cumulative returns series
-    chart.TimeSeries(Return.cumulative, colorset = colorset, legend.loc = legend.loc, ...)
+    if(hasArg(add)) {
+      plotargs <- list(...)
+      plotargs$add <- NULL
+      # Chart the cumulative returns series
+      p <- do.call(chart.TimeSeries, list(Return.cumulative, main = plotargs$main, colorset = colorset, legend.loc = legend.loc))
+    } else {
+      p <- chart.TimeSeries(Return.cumulative, colorset = colorset, legend.loc = legend.loc, ...)
+      print(p)
+    }
+    return(invisible(Return.cumulative))
 
 }
 
