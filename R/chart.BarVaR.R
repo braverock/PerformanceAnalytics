@@ -369,8 +369,14 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
             if(show.horizontal)
               p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
 	    if(show.endvalue){
-	      p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
-	      mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+	      p$set_frame(2*on)
+	      lenv <- new.env()
+	      lenv$risk <- risk
+	      exp <- expression(
+	        points(xlim[2], last(risk[,2]), col = colorset[1], pch=20, cex=1),
+	        mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=-.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
+	      )
+	      p$add(exp, env=c(lenv, p$Env), expr=TRUE)
 	    }
         }
     }
