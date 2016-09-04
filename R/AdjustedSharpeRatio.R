@@ -13,7 +13,8 @@
 #' asset returns
 #' @param Rf the risk free rate
 #' @param \dots any other passthru parameters
-#' @author Matthieu Lestel
+#' @author Matthieu Lestel, Brian G. Peterson
+#' @seealso \code{\link{SharpeRatio.annualized}}
 #' @references Carl Bacon, \emph{Practical portfolio performance measurement 
 #' and attribution}, second edition 2008 p.99
 #' 
@@ -24,43 +25,24 @@
 #'
 #' data(managers)
 #' print(AdjustedSharpeRatio(managers['1996']))
-#' print(AdjustedSharpeRatio(managers['1996',1])) 
-#'
 #' @export
 AdjustedSharpeRatio <- function (R, Rf = 0, ...)
 {
-    R = checkData(R)
-
-    if (ncol(R)==1 || is.null(R) || is.vector(R)) {
-       calcul = FALSE
-        for (i in (1:length(R))) {
-     	     if (!is.na(R[i])) {
-     	    	calcul = TRUE
-	     }
-        }		      
-        if(!calcul) {
-	  result = NA
-	}
-	else {
-	     period = Frequency(R)
-             R = na.omit(R)
-       	     n = length(R)
-       	     Rp = (prod(1+R/100)^(period/length(R))-1)*100
-       	     Sigp = sqrt(sum((R-mean(R))^2)/n)*sqrt(period)
-       	     SR = (Rp - Rf) / Sigp
-       	     K = kurtosis(R, method = "moment")
-       	     S = skewness(R)
-       	     result = SR*(1+(S/6)*SR-((K-3)/24)*SR^2)
-        }
-       return(result)
-    }  
-    else {
-        result = apply(R, MARGIN = 2, AdjustedSharpeRatio, Rf = Rf, period = period, ...)
-        result<-t(result)
-        colnames(result) = colnames(R)
-        rownames(result) = paste("Adjusted Sharpe ratio (Risk free = ",Rf,")", sep="")
-        return(result)
-    }
+  if (ncol(R)==1 || is.null(R) || is.vector(R)) {
+    R = na.omit(R)
+    if(length(R)<2) return(NA)
+    SR = SharpeRatio.annualized(R, Rf, ...)
+    K = kurtosis(R, method = "moment")
+    S = skewness(R)
+    result = SR*(1+(S/6)*SR-((K-3)/24)*SR^2)
+    return(result)
+  } else {
+    result = apply(R, MARGIN = 2, AdjustedSharpeRatio, Rf = Rf, ...)
+    result<-t(result)
+    colnames(result) = colnames(R)
+    rownames(result) = paste("Adjusted Sharpe ratio (Risk free = ",Rf,")", sep="")
+    return(result)
+  }
 }
 
 ###############################################################################
