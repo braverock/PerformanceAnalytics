@@ -26,18 +26,19 @@ where \eqn{SR} is the sharpe ratio with data annualized, \eqn{S} is the skewness
 }
 \examples{
 data(portfolio_bacon)
-print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.81
+print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.7591435
 
 data(managers)
 print(AdjustedSharpeRatio(managers['1996']))
-print(AdjustedSharpeRatio(managers['1996',1])) 
-
 }
 \author{
-Matthieu Lestel
+Matthieu Lestel, Brian G. Peterson
 }
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.99
+}
+\seealso{
+\code{\link{SharpeRatio.annualized}}
 }
 

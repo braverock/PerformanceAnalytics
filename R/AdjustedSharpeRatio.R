@@ -21,7 +21,7 @@
 ###keywords ts multivariate distribution models
 #' @examples
 #' data(portfolio_bacon)
-#' print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.81
+#' print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.7591435
 #'
 #' data(managers)
 #' print(AdjustedSharpeRatio(managers['1996']))
