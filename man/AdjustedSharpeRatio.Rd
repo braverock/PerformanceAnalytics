@@ -37,6 +37,10 @@ Matthieu Lestel, Brian G. Peterson
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.99
+
+Pezier, Jaques and White, Anthony. 2006. The Relative Merits of Investable 
+Hedge Fund Indices and of Funds of Hedge Funds in Optimal Passive Portfolios.
+\url{http://econpapers.repec.org/paper/rdgicmadp/icma-dp2006-10.htm}
 }
 \seealso{
 \code{\link{SharpeRatio.annualized}}
