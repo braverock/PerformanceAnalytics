@@ -67,16 +67,16 @@ to.period.contributions <- function(Contributions, period = c("years", "quarters
   period.contrib = NULL
   for(i in 1:length(dates)) {
     if(i==1){
-      span = paste0("::", dates[i])
+      span = (index(C) <= dates[[1]])
     }else{
-      span = paste0(dates[i-1]+1, "::", dates[i])
+      span = (dates[[i-1]] < index(C) & index(C) <= dates[[i]])
     }
     period.contrib = rbind(period.contrib, colSums(wgt.contrib[span]/rep(head(lag.cum.ret[span],1),NCOL(wgt.contrib))))
   }
   period.contrib = xts(period.contrib, order.by = dates)
   period.contrib = cbind(period.contrib, rowSums(period.contrib))
   colnames(period.contrib) = c(columnnames, "Portfolio Return")
-  period.contrib = reclass(period.contrib, x)
+  period.contrib = reclass(period.contrib, Contributions)
 
   return(period.contrib)
   
@@ -109,3 +109,4 @@ to.yearly.contributions <- function(contributions) {
 # $Id: $
 #
 ###############################################################################
+
