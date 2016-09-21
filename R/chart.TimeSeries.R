@@ -244,13 +244,6 @@ function (R,
 
     time.scale = periodicity(y)$scale
     ep = axTicksByTime(y,major.ticks, format.labels = date.format)
-
-    # If the Y-axis is ln
-    logaxis = ""
-    if(ylog) {
-        logaxis = "y"
-    }
-
   
   if(dygraphPlot==FALSE){
     chart.TimeSeries.base(R, 

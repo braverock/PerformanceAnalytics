@@ -43,8 +43,6 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	# gives the number of lines of margin to be specified on the four sides
 	# of the plot. The default is c(5, 4, 4, 2) + 0.1
 	op <- par(oma = c(5,0,4,0), mar=c(0,4,0,4))
-	layout(matrix(c(1:perpanel), ncol = 1, byrow = TRUE), widths=1)
-	xaxis=FALSE
 	if(show.yaxis == "none")
 	    yaxis = FALSE
 	else
@@ -58,19 +56,18 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 		yaxis.right=TRUE
 	    else
 		  yaxis.right=FALSE
-	    if(i==endcol)
-		xaxis = TRUE
-	    chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main="", ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, colorset=colorset[i], lwd=2, legend.loc=legend.loc, ...)
-	    text(1, 0.8*ymax, adj=c(0,1), cex = 1.1, labels = columnnames[i])#adj=c(0.5,1.2)
+	    if(i == 1) 
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
+	    else
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
+	    
 	# TODO: Add histogram at the end, turned on its side to line up with yaxis
 	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
 	    if((i==1 & show.yaxis == "firstonly") | show.yaxis == "none")
 		yaxis=FALSE
 	} # loop for columns
 
-	mtext(main,
-	    side = 3, outer = TRUE, 
-	    font = 2, cex = 1.2, line=1, las=0)
+	print(plot_object)
 	par(op)
 	
 	startcol = endcol+1

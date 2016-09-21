@@ -39,9 +39,9 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
     op <- par(no.readonly=TRUE)
 
-    layout(matrix(c(1,2,3)),heights=c(1.3,1,1.3),widths=1)
+    
 
-    par(mar=c(1,4,4,2))
+    par(oma = c(2, 0, 2, 0), mar=c(1,4,4,2))
     if(is.null(main)){
       freq = periodicity(Ra)
 
@@ -58,16 +58,18 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
       main = paste("Rolling ",width,"-",freq.lab," Regressions", sep="")
     }
 
-    chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = main, ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = "Alpha", ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
     par(mar=c(1,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "", ylab = "Beta", xaxis = FALSE, event.labels = NULL, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", ylab = "Beta", xaxis = FALSE, event.labels = NULL, add = TRUE, ...)
 
     par(mar=c(5,4,0,2))
 
-    chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "", ylab = "R-Squared", event.labels = NULL, ...)
+    plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", ylab = "R-Squared", event.labels = NULL, add = TRUE, ...)
 
+    print(plot_object)
+    title(main, outer = TRUE)
     par(op)
 }
 
