@@ -17,9 +17,16 @@
 #'
 #' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
-lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
-
-  R <- checkData(R)
+lpm <- function(y,n=2,threshold=0,about_mean=FALSE){
+  
+  
+  columns = ncol(y)
+  columnnames=colnames(y)
+  for(column in 1:columns){
+    ##Loop for calculating lpm for multiple columns
+    
+  R <- checkData(y[,column])
+    
   if(about_mean==TRUE){
     #Calculate Number of obs less than threshold
     nb = nrow(R[R<threshold,])
@@ -28,22 +35,50 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
     #subset data as less than threshold
     x_cond = R[R<threshold,]
     #Calculate LPM
-
+    
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+    ##print(LPM)
+    LPM=array(LPM)
+    if (column==1) {
+      #create data.frame
+      result=data.frame(LPM=LPM)
+    } else {
+      LPM=data.frame(LPM=LPM)
+      result=cbind(result,LPM)
+    }
   } else {
-
-  #Calculate Number of obs less than threshold
+    
+    #Calculate Number of obs less than threshold
     nb = nrow(R[R<threshold,])
     #Calculate mean of all obs less than threshold
     R_avg = threshold
     #subset data as less than threshold
     x_cond = R[R<threshold,]
     #Calculate LPM
-
+    
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
-
+    ##print(LPM)
+    LPM=array(LPM)
+    if (column==1) {
+      #create data.frame
+      result=data.frame(LPM=LPM)
+    } else {
+      LPM=data.frame(LPM=LPM)
+      result=cbind(result,LPM)
+    }
   }
-  return(LPM)
+  
+  }
+  if(ncol(result) == 1) {
+    # some backflips to name the single column zoo object
+    result = as.numeric(result)
+  }
+  else{
+    colnames(result) = columnnames
+    rownames(result) = "LPM"
+  }
+  result
+  
 }
 
 ###############################################################################
