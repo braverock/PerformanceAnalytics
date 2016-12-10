@@ -19,12 +19,12 @@
 #' @export
 lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
   
-  columns = 1:ncol(R)
-  columnnames=colnames(R)
-  for(column in seq_along(columns)){
+    columns = 1:ncol(R)
+    columnnames=colnames(R)
+    for(column in seq_along(columns)){
     ##Loop for calculating lpm for multiple columns
-  R1 <- checkData(R[,column])
-  if(about_mean==TRUE){
+    R1 <- checkData(R[,column])
+    if(about_mean==TRUE){
     #Calculate Number of obs less than threshold
     nb = nrow(R1[R1<threshold,])
     #Calculate mean of all obs less than threshold
@@ -42,7 +42,7 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
       LPM=data.frame(LPM=LPM)
       result=cbind(result,LPM)
     }
-  } else {    
+    } else {    
     #Calculate Number of obs less than threshold
     nb = nrow(R1[R1<threshold,])
     #Calculate mean of all obs less than threshold
@@ -58,20 +58,20 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
       result=data.frame(LPM=LPM)
     } else {
       LPM=data.frame(LPM=LPM)
-      result=cbind(result,LPM)
+      result[1,column]=LPM
     }
-  }  
-}
-  if(ncol(result) == 1) {
+    }  
+    } 
+    if(ncol(result) == 1) {
     # some backflips to name the single column zoo object
     result = as.numeric(result)
-  }
-  else{
+    }
+    else{
     colnames(result) = columnnames
     rownames(result) = "LPM"
-  }
-  result
-}
+    }
+    result
+    }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
