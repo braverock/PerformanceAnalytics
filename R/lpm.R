@@ -18,32 +18,65 @@
 #' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
 lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
-
-  R <- checkData(R)
+  
+  columns = ncol(R)
+  #Calculate number of columns
+  columnnames=colnames(R)
+  #Get columnnames
+  for(column in seq_len(columns)){
+  R1 <- checkData(R[,column])
+  #Passing single column to R1 from R 
+  #Changed variable name from R to R1,not visible to user API
   if(about_mean==TRUE){
     #Calculate Number of obs less than threshold
-    nb = nrow(R[R<threshold,])
+    nb = nrow(R1[R1<threshold,])
     #Calculate mean of all obs less than threshold
-    R_avg = mean(R[R<threshold,],na.rm=T)
+    R_avg = mean(R1[R1<threshold,],na.rm=T)
     #subset data as less than threshold
-    x_cond = R[R<threshold,]
+    x_cond = R1[R1<threshold,]
     #Calculate LPM
 
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+    LPM=array(LPM)
+    #Array of LPM
+    if (column==1) {
+    #Create data.frame
+    result=data.frame(LPM=LPM)
+    } else {
+    LPM=data.frame(LPM=LPM)
+    result[,column]=LPM
+    #Inserting the LPM values
+    }
   } else {
 
   #Calculate Number of obs less than threshold
-    nb = nrow(R[R<threshold,])
+    nb = nrow(R1[R1<threshold,])
     #Calculate mean of all obs less than threshold
     R_avg = threshold
     #subset data as less than threshold
-    x_cond = R[R<threshold,]
+    x_cond = R1[R1<threshold,]
     #Calculate LPM
 
     LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+    LPM=array(LPM)
+    #Array of LPM
+    if (column==1) {
+    #Create data.frame
+    result=data.frame(LPM=LPM)
+    } else {
+    LPM=data.frame(LPM=LPM)
+    result[,column]=LPM
+    #Inserting the LPM values
+    }
 
   }
-  return(LPM)
+    }
+    #Loop close
+    colnames(result) = columnnames
+    #Assign column names to the output 
+    rownames(result) = "LPM"
+    #Assign rowname to the output
+  return(result)
 }
 
 ###############################################################################
