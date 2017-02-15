@@ -135,11 +135,14 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     }
     sra <-function (R, ..., Rf, p, FUNC)
     {
-        if(FUNC == "StdDev")
-            FUNC = "StdDev.annualized"
-        FUNCT <- match.fun(FUNC)
+        if(FUNC == "StdDev") {
+            risk <- StdDev.annualized(x=R, ...)
+        } else {
+            FUNCT <- match.fun(FUNC)
+            risk <- FUNCT(R=R, p=p, ...=..., invert=FALSE)
+        }
         xR = Return.excess(R, Rf)
-        SRA = Return.annualized(xR)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
+        SRA = Return.annualized(xR)/risk
         SRA
     }
     
