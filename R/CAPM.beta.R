@@ -159,7 +159,13 @@ function (Ra, Rb, Rf = 0)
     xRb = Return.excess(Rb, Rf)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
-
+    
+    # patch: .beta fails if subset contains no positive values, !sum(Rb > 0) is true
+    if (!sum(xRb > 0)) {
+        message("Function CAPM.beta.bull: Cannot perform lm. All Rb values are negative.")
+        return(NA)
+    }
+    
     result = apply(pairs, 1, FUN = function(n, xRa, xRb)
         .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0), xRa = xRa, xRb = xRb)
 
@@ -204,7 +210,13 @@ function (Ra, Rb, Rf = 0)
     xRb = Return.excess(Rb, Rf)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
-
+    
+    # patch: .beta fails if subset contains no negative values, !sum(Rb < 0) is true
+    if (!sum(xRb < 0)) {
+        message("Function CAPM.beta.bear: Cannot perform lm. All Rb values are positive.")
+        return(NA)
+    }
+    
     result = apply(pairs, 1, FUN = function(n, xRa, xRb)
         .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0), xRa = xRa, xRb = xRb)
 
