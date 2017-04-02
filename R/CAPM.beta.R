@@ -160,9 +160,9 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
     
-    # patch: .beta fails if subset contains no positive values, !sum(Rb > 0) is true
-    if (!sum(xRb > 0)) {
-        message("Function CAPM.beta.bull: Cannot perform lm. All Rb values are negative.")
+    # .beta fails if subset contains no positive values, all(xRb <= 0) is true
+    if (all(xRb <= 0)) {
+        message("Function CAPM.beta.bull: Cannot perform lm. No positive Rb values (no bull periods).")
         return(NA)
     }
     
@@ -211,9 +211,9 @@ function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
     
-    # patch: .beta fails if subset contains no negative values, !sum(Rb < 0) is true
-    if (!sum(xRb < 0)) {
-        message("Function CAPM.beta.bear: Cannot perform lm. All Rb values are positive.")
+    # .beta fails if subset contains no negative values, all(xRb >= 0) is true
+    if (all(xRb >= 0)) {
+        message("Function CAPM.beta.bear: Cannot perform lm. No negative Rb values (no bear periods).")
         return(NA)
     }
     
