@@ -88,16 +88,13 @@ function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down")
         if(method == "Capture" & side == "Up") {
             UpRa = subset(merged.assets[,1], merged.assets[,2] > 0)
             UpRb = subset(merged.assets[,2], merged.assets[,2] > 0)
-            cumRa = sum(UpRa)
-            cumRb = sum(UpRb)
-            result = cumRa/cumRb
+            #Bacon defines this as a ratio of means, but the ratio of sums and means is the same, and this is more efficient
+            result = sum(UpRa)/sum(UpRb)
         }
         if(method == "Capture" & side == "Down") {
             DnRa = subset(merged.assets[,1], merged.assets[,2] <= 0)
             DnRb = subset(merged.assets[,2], merged.assets[,2] <= 0)
-            cumRa = sum(DnRa)
-            cumRb = sum(DnRb)
-            result = cumRa/cumRb
+            result = sum(DnRa)/sum(DnRb)
         }
 
         if(method == "Number" & side == "Up") {
