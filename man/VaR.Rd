@@ -16,6 +16,8 @@ asset returns}
 
 \item{p}{confidence level for calculation, default p=.95}
 
+\item{\dots}{any other passthru parameters}
+
 \item{method}{one of "modified","gaussian","historical", "kernel", see
 Details.}
 
@@ -28,21 +30,21 @@ whether to do univariate, component, or marginal calc, see Details.}
 \item{weights}{portfolio weighting vector, default NULL, see Details}
 
 \item{mu}{If univariate, mu is the mean of the series. Otherwise mu is the
-vector of means of the return series , default NULL, , see Details}
+vector of means of the return series, default NULL, see Details}
 
 \item{sigma}{If univariate, sigma is the variance of the series. Otherwise
-sigma is the covariance matrix of the return series , default NULL, see
+sigma is the covariance matrix of the return series, default NULL, see
 Details}
 
 \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is
-the coskewness matrix of the returns series, default NULL, see Details}
+the coskewness matrix (or vector with unique coskewness values) of the 
+returns series, default NULL, see Details}
 
 \item{m4}{If univariate, m4 is the excess kurtosis of the series. Otherwise
-m4 is the cokurtosis matrix of the return series, default NULL, see Details}
+m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
+return series, default NULL, see Details}
 
 \item{invert}{TRUE/FALSE whether to invert the VaR measure.  see Details.}
-
-\item{\dots}{any other passthru parameters}
 }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
@@ -81,6 +83,7 @@ to decompose total portfolio VaR into the risk contributions of each of the
 portfolio components.  For the above mentioned VaR estimators, such a
 decomposition is possible in a financially meaningful way.
 }
+
 \examples{
 
     data(edhec)
@@ -105,9 +108,6 @@ decomposition is possible in a financially meaningful way.
     # add Component VaR for the equal weighted portfolio
     VaR(edhec, clean="boudt", portfolio_method="component")
 
-}
-\author{
-Brian G. Peterson and Kris Boudt
 }
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
@@ -135,9 +135,9 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 v 5.
 
-Martellini, Lionel, and Volker Ziemann.  Improved Forecasts of Higher-Order
-Comoments and Implications for Portfolio Selection. 2007. EDHEC Risk and
-Asset Management Research Centre working paper.
+Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
+comoments and implications for portfolio selection. Review of Financial 
+Studies, 23(4):1467-1502.
 
 Return to RiskMetrics: Evolution of a Standard
 \url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
@@ -165,4 +165,6 @@ Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and
 \code{\link{chart.VaRSensitivity}} \cr
 \code{\link{Return.clean}}
 }
-
+\author{
+Brian G. Peterson and Kris Boudt
+}
