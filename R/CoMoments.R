@@ -36,9 +36,9 @@
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
 #' 
-#' Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
-#' Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
-#' and Asset Management Research Centre working paper.
+#' Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
+#' comoments and implications for portfolio selection. Review of Financial 
+#' Studies, 23(4):1467-1502.
 #' 
 #' Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From
 #' Two- to Four-Moment CAPM. SSRN eLibrary.
@@ -187,17 +187,22 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' index, benchmark, portfolio, or secondary asset returns to compare against
+#' @param unbiased TRUE/FALSE whether to use a correction to have an unbiased
+#' estimator, default FALSE
+#' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
+#' the vector with the unique elements (the latter is advised for speed), default
+#' TRUE
 #' @param \dots any other passthru parameters
-#' @author Kris Boudt, Peter Carl, Brian Peterson
+#' @author Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
 #' @seealso \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
 #' \code{\link{BetaCoMoments}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
 #' 
-#' Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
-#' Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
-#' and Asset Management Research Centre working paper.
+#' Martellini, L., & Ziemann, V. 2010. Improved estimates of higher-order 
+#' comoments and implications for portfolio selection. Review of Financial 
+#' Studies, 23(4), 1467-1502.
 #' 
 #' Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From
 #' Two- to Four-Moment CAPM. SSRN eLibrary.
