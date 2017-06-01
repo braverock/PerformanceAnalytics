@@ -491,8 +491,6 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
     }
   }
   if (as.mat) M3sh <- M3.vec2mat(M3sh, PP)
-  M3sh <- NULL
-  lambda <- NULL
   
   return (list("M3sh" = M3sh, "lambda" = lambda, "A" = A, "b" = b))
 }
