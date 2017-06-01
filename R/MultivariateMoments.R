@@ -266,6 +266,337 @@ M4.mat2vec <- function(M4) {
   .Call('M4mat2vec', as.numeric(M4), NROW(M4), PACKAGE="PerformanceAnalytics")
 }
 
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
+M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # computes the shrinkage estimator of the coskewness matrix as in Boudt, Cornilly and Verdonck (2017)
+  #
+  # Inputs:
+  # X         : numeric matrix of dimensions NN x PP
+  # targets   : vector of booleans determining which targets to take
+  #           : T1 : independent, unequal marginals
+  #           : T2 : independent, equal marginals
+  #           : T3 : 1-factor model of Martellini and Ziemann (2010)
+  #                : if multiple factors are provided, additionall 1-factor structured matrices are added the end
+  #           : T4 : constant-correlation model of Martellini and Ziemann (2010), symmetrized
+  #           : T5 : latent 1-factor model of Simaan (1993)
+  #           : T6 : central-symmetric coskewness matrix (all zeros)
+  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  #           : or a numeric matrix with columns as factors
+  # unbiasedMSE : boolean determining if bias is corrected when estimating the MSE loss function
+  # as.mat    : output as a matrix or as the vector with only unique coskewness eleements
+  #
+  # Outputs:
+  # M3sh      : the shrinkage estimator
+  # lambda    : vector with shrinkage intensities
+  # A         : A matrix in the QP
+  # b         : b vector in QP
+  
+  X <- coredata(R)
+  
+  # input checking
+  if (NCOL(X) < 2) stop("R must have at least 2 variables")
+  if (sum(targets) == 0) stop("No targets selected")
+  if (targets[3] & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if (unbiasedMSE & (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
+  
+  # prepare for additional factors if necessary
+  if (targets[3] & (NCOL(f) != 1)) {
+    nFactors <- NCOL(f)
+    if (nFactors > 1) {
+      f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
+      f <- f[, 1]
+      extraFactors <- TRUE
+      targets <- c(targets, rep(T, nFactors - 1))
+    } else {
+      f <- c(f)
+      extraFactors <- FALSE
+    }
+  } else {
+    extraFactors <- FALSE
+  }
+  
+  # compute useful variables
+  NN <- dim(X)[1]                                                   # number of observations
+  if (unbiasedMSE) {
+    if (NN < 6) stop("X should have at least 6 observations")
+  }
+  PP <- dim(X)[2]                                                   # number of assets
+  nT <- sum(targets)                                                # number of targets
+  ncosk <- PP * (PP + 1) * (PP + 2) / 6                             # number of unique coskewness elements
+  
+  Xc <- X - matrix(colMeans(X), nrow = NN, ncol = PP, byrow = TRUE) # center the observations
+  Xc2 <- Xc^2
+  m11 <- as.numeric(t(Xc) %*% Xc) / NN
+  m21 <- as.numeric(t(Xc2) %*% Xc) / NN
+  m22 <- as.numeric(t(Xc2) %*% Xc2) / NN
+  m31 <- as.numeric(t(Xc^3) %*% Xc) / NN
+  m42 <- as.numeric(t(Xc^4) %*% Xc2) / NN
+  m33 <- as.numeric(t(Xc^3) %*% Xc^3) / NN
+  
+  ### coskewness estimators
+  M3 <- M3.MM(X, unbiased = unbiasedMSE, as.mat = FALSE)
+  T3 <- matrix(NA, nrow = length(M3), ncol = nT)
+  iter <- 1
+  
+  if (targets[1]) {
+    # independent marginals
+    margskews <- colMeans(Xc^3)
+    if (unbiasedMSE) margskews <- margskews * NN^2 / ((NN - 1) * (NN - 2))
+    T3[, iter] <- .Call('M3_T23', margskews, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[2]) {
+    # independent and equally distributed marginals
+    margskews <- colMeans(Xc^3)
+    if (unbiasedMSE) margskews <- margskews * NN^2 / ((NN - 1) * (NN - 2))
+    margskews <- rep(mean(margskews), PP)
+    T3[, iter] <- .Call('M3_T23', margskews, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[3]) {
+    # 1-factor model (Martellini and Ziemann (2010))
+    margskews <- colMeans(Xc^3)
+    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+    fc <- f - mean(f)
+    fskew <- mean(fc^3)
+    T3[, iter] <- .Call('M3_1F', margskews, beta, fskew, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[4]) {
+    # constant-correlation (Martellini and Ziemann (2010)) (symmetrized version)
+    margvars <- colMeans(Xc^2)
+    margskews <- colMeans(Xc^3)
+    margkurts <- colMeans(Xc^4)
+    r_generalized <- .Call('M3_CCoefficients', margvars, margkurts, m21,
+                           m22, as.numeric(Xc), NN, PP, PACKAGE="PerformanceAnalytics")
+    T3[, iter] <- .Call('M3_CC', margvars, margskews, margkurts,
+                        r_generalized[1], r_generalized[2],
+                        r_generalized[3], PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[5]) {
+    # 1-factor model of Simaan (1993)
+    margskews <- colMeans(Xc^3)
+    margskewsroot <- sign(margskews) * abs(margskews)^(1 / 3)
+    T3[, iter] <- .Call('M3_Simaan', margskewsroot, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[6]) {
+    # central-symmetric
+    T3[, iter] <- rep(0, ncosk)
+    iter <- iter + 1
+  }
+  if (extraFactors) {
+    # 1-factor model (Martellini and Ziemann (2010)) - extra factors
+    for (ii in 1:(nFactors - 1)) {
+      f_bis <- f_other[, ii]
+      margskews <- colMeans(Xc^3)
+      beta_bis <- apply(Xc, 2, function(a) cov(a, f_bis) / var(f_bis))
+      fc_bis <- f_bis - mean(f_bis)
+      fskew_bis <- mean(fc_bis^3)
+      T3[, iter] <- .Call('M3_1F', margskews, beta_bis, fskew_bis, PP, PACKAGE="PerformanceAnalytics")
+      iter <- iter + 1
+    }
+  }
+  
+  ### build A for the QP
+  A <- matrix(NA, nrow = nT, ncol = nT)
+  for (ii in 1:nT) {
+    for (jj in ii:nT) {
+      A[ii, jj] <- A[jj, ii] <- .Call('M3innprod', T3[, ii] - M3, T3[, jj] - M3, PP, PACKAGE="PerformanceAnalytics")
+    }
+  }
+  
+  ### build b for the QP
+  if (unbiasedMSE) {
+    VM3vec <- .Call('VM3kstat', as.numeric(Xc), as.numeric(Xc2), m11 * NN, m21 * NN, m22 * NN, 
+                    m31 * NN, m42 * NN, m33 * NN, NN, PP, PACKAGE="PerformanceAnalytics")
+  } else {
+    VM3vec <- .Call('VM3', as.numeric(Xc), as.numeric(Xc2), m11, m21, m22, m31, m42,
+                    m33, NN, PP, PACKAGE="PerformanceAnalytics")
+  }
+  
+  b <- rep(VM3vec[1], nT)
+  iter <- 1
+  if (targets[1]) {
+    # independent marginals
+    b[iter] <- b[iter] - VM3vec[3]
+    iter <- iter + 1
+  }
+  if (targets[2]) {
+    # independent and equally distributed marginals
+    b[iter] <- b[iter] - VM3vec[2]
+    iter <- iter + 1
+  }
+  if (targets[3]) {
+    # 1-factor model (Martellini and Ziemann (2010))
+    fvar <- mean(fc^2)
+    b[iter] <- b[iter] - .Call('CM3_1F', as.numeric(Xc), as.numeric(Xc2),
+                               fc, fvar, fskew, m11, m21, m22, m42, NN, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[4]) {
+    # constant-correlation (Martellini and Ziemann (2010)) (symmetrized version)
+    marg5s <- colMeans(Xc^5)
+    marg6s <- colMeans(Xc^6)
+    m41 <- as.numeric(t(Xc^4) %*% Xc) / NN
+    m61 <- as.numeric(t(Xc^6) %*% Xc) / NN
+    m32 <- as.numeric(t(Xc^3) %*% Xc^2) / NN
+    b[iter] <- b[iter] - .Call('CM3_CC', as.numeric(Xc), as.numeric(Xc2), margvars, margskews, margkurts, 
+                               marg5s, marg6s, m11, m21, m31, m32, m41, m61, r_generalized[1], r_generalized[2],
+                               r_generalized[3], NN, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[5]) {
+    # 1-factor model of Simaan (1993)
+    margskewsroot <- margskewsroot^(-2)
+    m51 <- as.numeric(t(Xc^5) %*% Xc) / NN
+    b[iter] <- b[iter] - .Call('CM3_Simaan', as.numeric(Xc), as.numeric(Xc2), margskewsroot, m11, m21, m22, 
+                               m31, m42, m51, NN, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[6]) iter <- iter + 1
+  if (extraFactors) {
+    # 1-factor model (Martellini and Ziemann (2010)) - extra factors
+    for (ii in 1:(nFactors - 1)) {
+      f_bis <- f_other[, ii]
+      fc_bis <- f_bis - mean(f_bis)
+      fvar_bis <- mean(fc_bis^2)
+      fskew_bis <- mean(fc_bis^3)
+      b[iter] <- b[iter] - .Call('CM3_1F', as.numeric(Xc), as.numeric(Xc2), fc_bis, fvar_bis, fskew_bis, 
+                                 m11, m21, m22, m42, NN, PP, PACKAGE="PerformanceAnalytics")
+      iter <- iter + 1
+    }
+  }
+  
+  ### solve the QP
+  # if (nT == 1) {
+  #   # single-target shrinkage
+  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
+  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+  #   M3sh <- (1 - lambda) * M3 + lambda * T3                         # compute shrinkage estimator
+  # } else {
+  #   # multi-target shrinkage
+  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+  #   lambda <- solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution     # solve quadratic program
+  #   M3sh <- (1 - sum(lambda)) * M3                                  # initialize estimator at percentage of sample estimator
+  #   for (tt in 1:nT) {
+  #     M3sh <- M3sh + lambda[tt] * T3[, tt]                          # add the target matrices
+  #   }
+  # }
+  # if (as.mat) M3sh <- M3.vec2mat(M3sh, PP)
+  M3sh <- NULL
+  lambda <- NULL
+  
+  return (list("M3sh" = M3sh, "lambda" = lambda, "A" = A, "b" = b))
+}
+
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
+M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor", "CS"),
+                      f = NULL, unbiasedMarg = FALSE, as.mat = TRUE) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # computes different strutured coskewness estimators
+  #
+  # Inputs:
+  # X         : numeric matrix of dimensions NN x PP
+  # struct    : select the structured estimator
+  #           : Indep   : independent, unequal marginals
+  #           : IndepId : independent, equal marginals
+  #           : 1factor : 1-factor model of Martellini and Ziemann (2010)
+  #           : CC : constant-correlation model of Martellini and Ziemann (2010), symmetrized
+  #           : latent1factor : latent 1-factor model of Simaan (1993)
+  #           : CS : central-symmetric coskewness matrix (all zeros)
+  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  # unbiasedMarg : boolean determining if bias is corrected when estimating the marginals with
+  #              : methods "Indep" or "INdepID"
+  #
+  # Outputs:
+  # coskewness matrix (as matrix or as vector, depending on as.mat)
+  
+  X <- coredata(R)
+  
+  # input checking
+  struct <- struct[1]
+  if (NCOL(X) < 2) stop("R must have at least 2 variables")
+  if ((struct == "1factor") & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if (unbiasedMarg & !((struct == "Indep") | (struct == "IndepId"))) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
+  
+  # compute useful variables
+  NN <- dim(X)[1]                                                   # number of observations
+  if (unbiasedMarg) {
+    if (NN < 6) stop("X should have at least 6 observations")
+  }
+  PP <- dim(X)[2]                                                   # number of assets
+  ncosk <- PP * (PP + 1) * (PP + 2) / 6                             # number of unique coskewness elements
+  
+  Xc <- X - matrix(colMeans(X), nrow = NN, ncol = PP, byrow = TRUE) # center the observations
+  margskews <- colMeans(Xc^3)
+  
+  # compute the coskewness matrix
+  if (struct == "latent1factor") {
+    # 1-factor model of Simaan (1993)
+    margskewsroot <- sign(margskews) * abs(margskews)^(1 / 3)
+    T3 <- .Call('M3_Simaan', margskewsroot, PP, PACKAGE="PerformanceAnalytics")
+    if (as.mat) T3 <- M3.vec2mat(T3, PP)
+    return (T3)
+    
+  } else if (struct == "Indep") {
+    # independent marginals
+    if (unbiasedMarg) margskews <- margskews * NN^2 / ((NN - 1) * (NN - 2))
+    T3 <- .Call('M3_T23', margskews, PP, PACKAGE="PerformanceAnalytics")
+    if (as.mat) T3 <- M3.vec2mat(T3, PP)
+    return (T3)
+    
+  } else if (struct == "IndepId") {
+    # independent and equally distributed marginals
+    if (unbiasedMarg) margskews <- margskews * NN^2 / ((NN - 1) * (NN - 2))
+    margskews <- rep(mean(margskews), PP)
+    T3 <- .Call('M3_T23', margskews, PP, PACKAGE="PerformanceAnalytics")
+    if (as.mat) T3 <- M3.vec2mat(T3, PP)
+    return (T3)
+    
+  } else if (struct == "1factor") {
+    # 1-factor model (Martellini and Ziemann (2010))
+    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+    fc <- f - mean(f)
+    fskew <- mean(fc^3)
+    T3 <- .Call('M3_1F', margskews, beta, fskew, PP, PACKAGE="PerformanceAnalytics")
+    if (as.mat) T3 <- M3.vec2mat(T3, PP)
+    return (T3)
+    
+  } else if (struct == "CC") {
+    # constant-correlation (Martellini and Ziemann (2010)) (symmetrized version)
+    margvars <- colMeans(Xc^2)
+    margkurts <- colMeans(Xc^4)
+    m21 <- as.numeric(t(Xc^2) %*% Xc) / NN
+    m22 <- as.numeric(t(Xc^2) %*% Xc^2) / NN
+    r_generalized <- .Call('M3_CCoefficients', margvars, margkurts, m21,
+                           m22, as.numeric(Xc), NN, PP, PACKAGE="PerformanceAnalytics")
+    T3 <- .Call('M3_CC', margvars, margskews, margkurts, r_generalized[1], r_generalized[2],
+                r_generalized[3], PP, PACKAGE="PerformanceAnalytics")
+    if (as.mat) T3 <- M3.vec2mat(T3, PP)
+    return (T3)
+    
+  } else if (struct == "CS") {
+    # coskewness matrix under central-symmetry
+    return (rep(0, ncosk))
+    
+  } else {
+    stop("select a valid structure")
+  }
+}
+
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
