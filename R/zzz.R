@@ -21,6 +21,7 @@ sd.xts <- xts:::sd.xts
 
 #' @importFrom utils packageDescription
 #' @importFrom stats sd
+#' @importFrom quadprog solve.QP
 #' @import xts
 #' @import zoo
 NULL

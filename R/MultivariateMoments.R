@@ -475,22 +475,22 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   }
   
   ### solve the QP
-  # if (nT == 1) {
-  #   # single-target shrinkage
-  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
-  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
-  #   M3sh <- (1 - lambda) * M3 + lambda * T3                         # compute shrinkage estimator
-  # } else {
-  #   # multi-target shrinkage
-  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
-  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
-  #   lambda <- solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution     # solve quadratic program
-  #   M3sh <- (1 - sum(lambda)) * M3                                  # initialize estimator at percentage of sample estimator
-  #   for (tt in 1:nT) {
-  #     M3sh <- M3sh + lambda[tt] * T3[, tt]                          # add the target matrices
-  #   }
-  # }
-  # if (as.mat) M3sh <- M3.vec2mat(M3sh, PP)
+  if (nT == 1) {
+    # single-target shrinkage
+    lambda <- b / A                                                 # compute optimal shrinkage intensity
+    lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+    M3sh <- (1 - lambda) * M3 + lambda * T3                         # compute shrinkage estimator
+  } else {
+    # multi-target shrinkage
+    Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+    bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+    lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
+    M3sh <- (1 - sum(lambda)) * M3                                  # initialize estimator at percentage of sample estimator
+    for (tt in 1:nT) {
+      M3sh <- M3sh + lambda[tt] * T3[, tt]                          # add the target matrices
+    }
+  }
+  if (as.mat) M3sh <- M3.vec2mat(M3sh, PP)
   M3sh <- NULL
   lambda <- NULL
   
