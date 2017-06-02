@@ -13,7 +13,9 @@
 \alias{M3.MM}
 \alias{M4.MM}
 \alias{M3.shrink}
+\alias{M4.shrink}
 \alias{M3.struct}
+\alias{M4.struct}
 \title{Functions for calculating comoments of financial time series}
 \usage{
 CoSkewnessMatrix(R, ...)
@@ -30,11 +32,16 @@ M3.MM(R, unbiased = FALSE, as.mat = TRUE, ...)
 
 M4.MM(R, as.mat = TRUE, ...)
 
-M3.shrink(X, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
+M3.shrink(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
   as.mat = TRUE)
 
-M3.struct(X, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor",
+M4.shrink(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE)
+
+M3.struct(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor",
   "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
+
+M4.struct(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL,
+  as.mat = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
