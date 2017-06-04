@@ -181,7 +181,7 @@ Return.portfolio <- Return.rebalancing <- function(R,
       weights = xts(matrix(weights, nrow=1), order.by=as.Date(start_date))
     } else { # and endpoints are specified
       #  generate a time series of the given weights at the endpoints
-      weight_dates = c(as.Date(start_date), index(R[endpoints(R, on=rebalance_on)]))
+      weight_dates = c(as.Date(start_date), as.Date(index(R[endpoints(R, on=rebalance_on)])))
       weights = xts(matrix(rep(weights, length(weight_dates)), ncol=NCOL(R), byrow=TRUE), order.by=as.Date(weight_dates))
     }
     colnames(weights) = colnames(R)
