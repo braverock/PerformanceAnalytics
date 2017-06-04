@@ -705,3 +705,87 @@ SEXP  M4port_grad(SEXP WW, SEXP XX, SEXP PP){
   UNPROTECT(1);
   return kurt_grad;
 }
+
+
+// // //
+// // Multiplication of coskewness/cokurtosis vectors with a diagonal matrix
+// // //
+
+SEXP  M3timesDiag(SEXP XX, SEXP ww, SEXP PP){
+  /*
+  arguments
+  XX        : numeric vector with unique elements of a coskewness matrix
+  ww        : numeric vector with diagonal elements of the matrix
+  PP        : integer, number of assets
+  
+  Written by Dries Cornilly
+  */
+  
+  // // declare pointers for the vectors
+  double *X, *w;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  X = REAL(XX);
+  w = REAL(ww);
+  int P = asInteger(PP);
+  
+  // allocate and compute the new coskewness matrix
+  SEXP M3 = PROTECT(allocVector(REALSXP, P * (P + 1) * (P + 2) / 6));
+  double *rM3 = REAL(M3);
+  
+  int iter = 0;
+  // loop over the unique elements
+  for (int ii = 0; ii < P; ii++) {
+    for (int jj = ii; jj < P; jj++) {
+      for (int kk = jj; kk < P; kk++) {
+        // insert it into the matrix
+        rM3[iter] = X[iter] * w[ii] * w[jj] * w[kk];
+        iter++;
+      } // loop kk
+    } // loop jj
+  } // loop ii
+  
+  UNPROTECT(1);
+  return M3;
+}
+
+SEXP  M4timesDiag(SEXP XX, SEXP ww, SEXP PP){
+  /*
+  arguments
+  XX        : numeric vector with unique elements of a coskewness matrix
+  ww        : numeric vector with diagonal elements of the matrix
+  PP        : integer, number of assets
+  
+  Written by Dries Cornilly
+  */
+  
+  // // declare pointers for the vectors
+  double *X, *w;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  X = REAL(XX);
+  w = REAL(ww);
+  int P = asInteger(PP);
+  
+  // allocate and compute the new coskewness matrix
+  SEXP M4 = PROTECT(allocVector(REALSXP, P * (P + 1) * (P + 2) * (P + 3) / 24));
+  double *rM4 = REAL(M4);
+  
+  int iter = 0;
+  // loop over the unique elements
+  for (int ii = 0; ii < P; ii++) {
+    for (int jj = ii; jj < P; jj++) {
+      for (int kk = jj; kk < P; kk++) {
+        for (int ll = kk; ll < P; ll++) {
+          // insert it into the matrix
+          rM4[iter] = X[iter] * w[ii] * w[jj] * w[kk] * w[ll];
+          iter++;
+        } // loop ll
+      } // loop kk
+    } // loop jj
+  } // loop ii
+  
+  UNPROTECT(1);
+  return M4;
+}
+
