@@ -16,6 +16,9 @@
 \alias{M4.shrink}
 \alias{M3.struct}
 \alias{M4.struct}
+\alias{M2.ewma}
+\alias{M3.ewma}
+\alias{M4.ewma}
 \title{Functions for calculating comoments of financial time series}
 \usage{
 CoSkewnessMatrix(R, ...)
@@ -42,6 +45,12 @@ M3.struct(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor",
 
 M4.struct(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL,
   as.mat = TRUE)
+
+M2.ewma(R, lambda = 0.97, lambda_var = NULL)
+
+M3.ewma(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE)
+
+M4.ewma(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
