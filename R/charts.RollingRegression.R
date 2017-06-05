@@ -60,14 +60,14 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 
     plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Alpha", xaxis = FALSE, main = "Alpha", ylab = "Alpha", legend.loc=legend.loc, event.labels = event.labels, ...)
 
-    par(mar=c(1,4,0,2))
 
     plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "Beta", main = "Beta", ylab = "Beta", xaxis = FALSE, event.labels = NULL, add = TRUE, ...)
 
-    par(mar=c(5,4,0,2))
 
     plot_object <- chart.RollingRegression(Ra, Rb, width = width, Rf = Rf, attribute = "R-Squared", main = "R-Squared", ylab = "R-Squared", event.labels = NULL, add = TRUE, ...)
 
+    panels = plot_object$get_frame()/2
+    plot_object$set_asp(asp = rep(c(1/panels, 5/panels), panels))
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
