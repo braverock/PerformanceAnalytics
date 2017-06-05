@@ -298,7 +298,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if (targets[3] & is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
   if (targets[3] & (NCOL(f) != 1)) {
@@ -478,7 +478,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if (targets[3] & is.null(f)) stop("Provide the factor observations")
   if (unbiasedMSE & (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
   
   # prepare for additional factors if necessary
@@ -705,7 +705,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if (targets[3] & is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
   if (targets[3] & (NCOL(f) != 1)) {
@@ -847,22 +847,25 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   }
   
   ### solve the QP
-  if (nT == 1) {
-    # single-target shrinkage
-    lambda <- b / A                                                 # compute optimal shrinkage intensity
-    lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
-    M4sh <- (1 - lambda) * M4 + lambda * T4                         # compute shrinkage estimator
-  } else {
-    # multi-target shrinkage
-    Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
-    bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
-    lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
-    M4sh <- (1 - sum(lambda)) * M4                                  # initialize estimator at percentage of sample estimator
-    for (tt in 1:nT) {
-      M4sh <- M4sh + lambda[tt] * T4[, tt]                          # add the target matrices
-    }
-  }
-  if (as.mat) M4sh <- M4.vec2mat(M4sh, PP)
+  # if (nT == 1) {
+  #   # single-target shrinkage
+  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
+  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+  #   M4sh <- (1 - lambda) * M4 + lambda * T4                         # compute shrinkage estimator
+  # } else {
+  #   # multi-target shrinkage
+  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+  #   lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
+  #   M4sh <- (1 - sum(lambda)) * M4                                  # initialize estimator at percentage of sample estimator
+  #   for (tt in 1:nT) {
+  #     M4sh <- M4sh + lambda[tt] * T4[, tt]                          # add the target matrices
+  #   }
+  # }
+  # if (as.mat) M4sh <- M4.vec2mat(M4sh, PP)
+  M4sh <- NULL
+  lambda <- NULL
+  b <- c(b, VM4vec[1])
   
   return (list("M4sh" = M4sh, "lambda" = lambda, "A" = A, "b" = b))
 }
@@ -871,7 +874,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL) {
+M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -882,9 +885,9 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
   # struct    : select the structured estimator
   #           : Indep   : independent, unequal marginals (Ledoit and Wolf (2004))
   #           : IndepId : independent, equal marginals (Ledoit and Wolf (2003))
-  #           : 1factor : 1-factor model of (Ledoit and Wolf (2003))
-  #           : CC : constant-correlation model of (Ledoit and Wolf (2004)), symmetrized
-  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  #           : observedfactor : 1-factor or multi-factor linear model
+  #           : CC : constant-correlation model of (Ledoit and Wolf (2004))
+  # f         : numeric vector or matrix with factor observations
   #
   # Outputs:
   # covariance matrix
@@ -894,7 +897,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "1factor") & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -914,13 +917,22 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
     T2 <- mean(margvars) * diag(PP)
     return (T2)
     
-  } else if (struct == "1factor") {
-    # 1-factor model
-    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
-    fc <- f - mean(f)
-    fvar <- mean(fc^2)
-    T2 <- fvar * beta %*% t(beta)
-    diag(T2) <- margvars
+  } else if (struct == "observedfactor") {
+    # linear factor model
+    if (NCOL(f) == 1) {
+      beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+      fc <- f - mean(f)
+      fvar <- mean(fc^2)
+      T2 <- fvar * beta %*% t(beta)
+      diag(T2) <- margvars
+    } else {
+      mod <- stats::lm(X ~ f)
+      beta <- t(mod$coefficients[-1,])
+      fcov <- cov(f) * (n - 1) / n
+      T2 <- beta %*% fcov %*% t(beta)
+      epsvars <- colMeans(mod$residuals^2)
+      T2 <- T2 + diag(epsvars)
+    }
     return (T2)
     
   } else if (struct == "CC") {
@@ -943,7 +955,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor", "CS"),
+M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", "latent1factor", "CS"),
                       f = NULL, unbiasedMarg = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
   #
@@ -955,11 +967,11 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent
   # struct    : select the structured estimator
   #           : Indep   : independent, unequal marginals
   #           : IndepId : independent, equal marginals
-  #           : 1factor : 1-factor model of Martellini and Ziemann (2010)
+  #           : observedfactor : observed linear factor model
   #           : CC : constant-correlation model of Martellini and Ziemann (2010), symmetrized
   #           : latent1factor : latent 1-factor model of Simaan (1993)
   #           : CS : central-symmetric coskewness matrix (all zeros)
-  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  # f         : numeric vector with factor observations,
   # unbiasedMarg : boolean determining if bias is corrected when estimating the marginals with
   #              : methods "Indep" or "INdepID"
   #
@@ -971,8 +983,8 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "1factor") & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
-  if (unbiasedMarg & !((struct == "Indep") | (struct == "IndepId"))) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
+  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
+  if (unbiasedMarg & !((struct == "Indep") | (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1008,12 +1020,21 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent
     if (as.mat) T3 <- M3.vec2mat(T3, PP)
     return (T3)
     
-  } else if (struct == "1factor") {
-    # 1-factor model (Martellini and Ziemann (2010))
+  } else if (struct == "observedfactor") {
+    # observed factor model
+    if (NCOL(f) == 1) {
     beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
     fc <- f - mean(f)
     fskew <- mean(fc^3)
     T3 <- .Call('M3_1F', margskews, beta, fskew, PP, PACKAGE="PerformanceAnalytics")
+    } else {
+      mod <- stats::lm(X ~ f)
+      beta <- t(mod$coefficients[-1,])
+      M3_factor <- M3.MM(f, as.mat = FALSE)
+      M3_factor <- .Call('M3timesFull', M3_factor, beta, NCOL(beta), PP, PACKAGE="PerformanceAnalytics")
+      epsskews <- colMeans(mod$residuals^3)
+      T3 <- M3_factor + .Call('M3_T23', epsskews, PP, PACKAGE="PerformanceAnalytics")
+    }
     if (as.mat) T3 <- M3.vec2mat(T3, PP)
     return (T3)
     
@@ -1043,7 +1064,7 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M4.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL, as.mat = TRUE) {
+M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL, as.mat = TRUE) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -1054,9 +1075,9 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
   # struct    : select the structured estimator
   #           : Indep   : independent, unequal marginals
   #           : IndepId : independent, equal marginals
-  #           : 1factor : 1-factor model of Martellini and Ziemann (2010)
+  #           : observedfactor : linear factor model with observed factors
   #           : CC : constant-correlation model of Martellini and Ziemann (2010), symmetrized
-  # f         : numeric vector with factor observations, needed for 1-factor cokurtosis matrix of Martellini and Ziemann
+  # f         : numeric vector with factor observations
   #
   # Outputs:
   # cokurtosis matrix (as matrix or as vector, depending on as.mat)
@@ -1066,7 +1087,7 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "1factor") & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1091,14 +1112,26 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
     if (as.mat) T4 <- M4.vec2mat(T4, PP)
     return (T4)
     
-  } else if (struct == "1factor") {
-    # 1-factor model (Martellini and Ziemann (2010))
-    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
-    fc <- f - mean(f)
-    fvar <- mean(fc^2)
-    fkurt <- mean(fc^4)
-    epsvars <- margvars - beta^2 * fvar
-    T4 <- .Call('M4_1f', margkurts, fvar, fkurt, epsvars, beta, PP, PACKAGE="PerformanceAnalytics")
+  } else if (struct == "observedfactor") {
+    # linear factor model with observed factors
+    if (NCOL(f) == 1) {
+      beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+      fc <- f - mean(f)
+      fvar <- mean(fc^2)
+      fkurt <- mean(fc^4)
+      epsvars <- margvars - beta^2 * fvar
+      T4 <- .Call('M4_1f', margkurts, fvar, fkurt, epsvars, beta, PP, PACKAGE="PerformanceAnalytics")
+    } else {
+      mod <- stats::lm(X ~ f)
+      beta <- t(mod$coefficients[-1,])
+      M4_factor <- M4.MM(f, as.mat = FALSE)
+      M4_factor <- .Call('M4timesFull', M4_factor, beta, NCOL(beta), PP, PACKAGE="PerformanceAnalytics")
+      epskurts <- colMeans(mod$residuals^4)
+      epsvars <- colMeans(mod$residuals^2)
+      Stransf <- beta %*% cov(f) %*% t(beta) * (NN - 1) / NN
+      M4_factor <- M4_factor + .Call('M4_MFresid', as.numeric(Stransf), epsvars, PP, PACKAGE="PerformanceAnalytics")
+      T4 <- M4_factor + .Call('M4_T12', epskurts, epsvars, PP, PACKAGE="PerformanceAnalytics")
+    }
     if (as.mat) T4 <- M4.vec2mat(T4, PP)
     return (T4)
     

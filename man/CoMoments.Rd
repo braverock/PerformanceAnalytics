@@ -44,13 +44,14 @@ M3.shrink(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
 
 M4.shrink(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE)
 
-M2.struct(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL)
+M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
+  f = NULL)
 
-M3.struct(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor",
-  "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
+M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
+  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
 
-M4.struct(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL,
-  as.mat = TRUE)
+M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
+  f = NULL, as.mat = TRUE)
 
 M2.ewma(R, lambda = 0.97, lambda_var = NULL)
 

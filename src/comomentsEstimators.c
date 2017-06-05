@@ -1611,7 +1611,7 @@ SEXP  M4_1f(SEXP mmargkurts, SEXP ffvar, SEXP ffkurt, SEXP eepsvars, SEXP bbeta,
                   3.0 * beta[ii] * beta[jj] * fvar * epsvars[jj];
               } else {
                 // psi_ijjl
-                rM4[iter] = beta[ii] * beta[jj] * beta[kk] * beta[ll] * fkurt +
+                rM4[iter] = beta[ii] * beta[jj] * beta[jj] * beta[ll] * fkurt +
                   beta[ii] * beta[ll] * fvar * epsvars[jj];
               }
             } else {
@@ -1622,6 +1622,84 @@ SEXP  M4_1f(SEXP mmargkurts, SEXP ffvar, SEXP ffkurt, SEXP eepsvars, SEXP bbeta,
               } else {
                 // psi_ijkl
                 rM4[iter] = beta[ii] * beta[jj] * beta[kk] * beta[ll] * fkurt;
+              }
+            }
+          }
+          iter++;
+        } // loop ii
+      } // loop kk
+    } // loop jj
+  } // loop ii
+  
+  UNPROTECT(1);
+  return M4;
+}
+
+SEXP  M4_MFresid(SEXP SStransf, SEXP eepsvars, SEXP PP){
+  /*
+  arguments
+  SStransf  : contains the vectorized matrix B %*% S_F %*% t(B)
+  eepsvars  : numeric vector with the variances of the idiosyncratic term
+  PP        : integer, number of assets
+  
+  Written by Dries Cornilly
+  */
+  
+  // // declare pointers for the vector
+  double *Stransf, *epsvars;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  epsvars = REAL(eepsvars);
+  Stransf = REAL(SStransf);
+  int P = asInteger(PP);
+  
+  // allocate and compute the cokurtosis matrix
+  SEXP M4 = PROTECT(allocVector(REALSXP, P * (P + 1) * (P + 2) * (P + 3) / 24));
+  double *rM4 = REAL(M4);
+  
+  int iter = 0;
+  // loop over the unique indices i <= j <= k <= l
+  for (int ii = 0; ii < P; ii++) {
+    int iiP = ii * P;
+    for (int jj = ii; jj < P; jj++) {
+      for (int kk = jj; kk < P; kk++) {
+        int kkP = kk * P;
+        for (int ll = kk; ll < P; ll++) {
+          // compute and fill cokurtosis element
+          if (ii == jj) {
+            if (jj == kk) {
+              if (kk == ll) {
+                // psi_iiii
+                rM4[iter] = 6.0 * Stransf[iiP + ii] * epsvars[ii];
+              } else {
+                // psi_iiil
+                rM4[iter] = 3.0 * Stransf[iiP + ll] * epsvars[ii];
+              }
+            } else {
+              if (kk == ll) {
+                // psi_iikk
+                rM4[iter] = Stransf[iiP + ii] * epsvars[kk] + Stransf[kkP + kk] * epsvars[ii];
+              } else {
+                // psi_iikl
+                rM4[iter] = Stransf[kkP + ll] * epsvars[ii];
+              }
+            }
+          } else {
+            if (jj == kk) {
+              if (kk == ll) {
+                // psi_ijjj
+                rM4[iter] = 3.0 * Stransf[iiP + jj] * epsvars[jj];
+              } else {
+                // psi_ijjl
+                rM4[iter] = Stransf[iiP + ll] * epsvars[jj];
+              }
+            } else {
+              if (kk == ll) {
+                // psi_ijkk
+                rM4[iter] = Stransf[iiP + jj] * epsvars[kk];
+              } else {
+                // psi_ijkl
+                rM4[iter] = 0.0;
               }
             }
           }
@@ -2683,7 +2761,7 @@ SEXP  CM4_1F(SEXP XXc, SEXP XXc2, SEXP ffcobs, SEXP ffvar, SEXP ffskew, SEXP ffk
                   covXf[ii] * covXf[jj] * covXf[ll] * temp_kk +
                   covXf[ii] * covXf[jj] * covXf[kk] * temp_ll) * fkurt +
                   covXf[ii] * covXf[jj] * covXf[kk] * covXf[ll] * temp_kurt -
-                  4.0 * covXf[ii] * covXf[jj] * covXf[kk] * covXf[ll] * temp_var / fvar) / (N * fvar4);
+                  4.0 * covXf[ii] * covXf[jj] * covXf[kk] * covXf[ll] * fkurt * temp_var / fvar) / (N * fvar4);
               }
             }
           }
