@@ -18,34 +18,59 @@
 #' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
 lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
-
-  R <- checkData(R)
+  columns = ncol(R)
+  columnnames=colnames(R)
+  for(column in seq_len(columns)){
+  ##Loop for calculating lpm for multiple columns
+  R1 <- checkData(R[,column])
   if(about_mean==TRUE){
-    #Calculate Number of obs less than threshold
-    nb = nrow(R[R<threshold,])
-    #Calculate mean of all obs less than threshold
-    R_avg = mean(R[R<threshold,],na.rm=T)
-    #subset data as less than threshold
-    x_cond = R[R<threshold,]
-    #Calculate LPM
-
-    LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
-  } else {
-
   #Calculate Number of obs less than threshold
-    nb = nrow(R[R<threshold,])
-    #Calculate mean of all obs less than threshold
-    R_avg = threshold
-    #subset data as less than threshold
-    x_cond = R[R<threshold,]
-    #Calculate LPM
-
-    LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
-
+  nb = nrow(R1[R1<threshold,])
+  #Calculate mean of all obs less than threshold
+  R_avg = mean(R1[R1<threshold,],na.rm=T)
+  #subset data as less than threshold
+  x_cond = R1[R1<threshold,]
+  #Calculate LPM
+  LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+  ##print(LPM)
+  LPM=array(LPM)
+  if (column==1) {
+  #create data.frame
+  result=data.frame(LPM=LPM)
+  } else {
+  LPM=data.frame(LPM=LPM)
+  result=cbind(result,LPM)
   }
-  return(LPM)
-}
-
+  } else {    
+  #Calculate Number of obs less than threshold
+  nb = nrow(R1[R1<threshold,])
+  #Calculate mean of all obs less than threshold
+  R_avg = threshold
+  #subset data as less than threshold
+  x_cond = R1[R1<threshold,]
+  #Calculate LPM
+  LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+  ##print(LPM)
+  LPM=array(LPM)
+  if (column==1) {
+  #create data.frame
+  result=data.frame(LPM=LPM)
+  } else {
+  LPM=data.frame(LPM=LPM)
+  result[1,column]=LPM
+  }
+  }  
+  } 
+  if(ncol(result) == 1) {
+  # some backflips to name the single column zoo object
+  result = as.numeric(result)
+  }
+  else{
+  colnames(result) = columnnames
+  rownames(result) = "LPM"
+  }
+  result
+  }
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
