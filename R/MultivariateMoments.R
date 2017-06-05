@@ -269,6 +269,183 @@ M4.mat2vec <- function(M4) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
+M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # computes the shrinkage estimator of the covariance matrix
+  #
+  # Inputs:
+  # R         : numeric matrix of dimensions NN x PP
+  # targets   : vector of booleans determining which targets to take
+  #           : T1 : independent, unequal marginals, Ledoit and Wolf (2003)
+  #           : T2 : independent, equal marginals, Ledoit and Wolf (2003)
+  #           : T3 : 1-factor model of Ledoit and Wolf (2003)
+  #                : if multiple factors are provided, additionall 1-factor structured matrices are added the end
+  #           : T4 : constant-correlation model of Ledoit and Wolf (2004)
+  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  #           : or a numeric matrix with columns as factors
+  # as.mat    : output as a matrix or as the vector with only unique coskewness eleements
+  #
+  # Outputs:
+  # M2sh      : the shrinkage estimator
+  # lambda    : vector with shrinkage intensities
+  # A         : A matrix in the QP
+  # b         : b vector in QP
+  
+  X <- coredata(R)
+  
+  # input checking
+  if (NCOL(X) < 2) stop("R must have at least 2 variables")
+  if (sum(targets) == 0) stop("No targets selected")
+  if (targets[3] & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  
+  # prepare for additional factors if necessary
+  if (targets[3] & (NCOL(f) != 1)) {
+    nFactors <- NCOL(f)
+    if (nFactors > 1) {
+      f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
+      f <- f[, 1]
+      extraFactors <- TRUE
+      targets <- c(targets, rep(T, nFactors - 1))
+    } else {
+      f <- c(f)
+      extraFactors <- FALSE
+    }
+  } else {
+    extraFactors <- FALSE
+  }
+  
+  # compute useful variables
+  NN <- dim(X)[1]                                                   # number of observations
+  PP <- dim(X)[2]                                                   # number of assets
+  nT <- sum(targets)                                                # number of targets
+  
+  Xc <- X - matrix(colMeans(X), nrow = NN, ncol = PP, byrow = TRUE) # center the observations
+  Xc2 <- Xc^2
+  margvars <- colMeans(Xc2)
+  m11 <- as.numeric(t(Xc) %*% Xc) / NN
+  m22 <- as.numeric(t(Xc2) %*% Xc2) / NN
+  
+  ### coskewness estimators
+  M2 <- cov(X) * (NN - 1) / NN
+  T2 <- matrix(NA, nrow = PP * PP, ncol = nT)
+  iter <- 1
+  
+  if (targets[1]) {
+    # independent marginals
+    T2[, iter] <- c(diag(margvars))
+    iter <- iter + 1
+  }
+  if (targets[2]) {
+    # independent and equally distributed marginals
+    T2[, iter] <- c(mean(margvars) * diag(PP))
+    iter <- iter + 1
+  }
+  if (targets[3]) {
+    # 1-factor model (Ledoit and Wolf (2003))
+    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+    fc <- f - mean(f)
+    fvar <- mean(fc^2)
+    T2_1f <- fvar * beta %*% t(beta)
+    diag(T2_1f) <- margvars
+    T2[, iter] <- T2_1f
+    iter <- iter + 1
+  }
+  if (targets[4]) {
+    # constant-correlation (Ledoit and Wolf (2004))
+    sd_vec <- sqrt(margvars)
+    R2 <- diag(1 / sd_vec) %*% M2 %*% diag(1 / sd_vec)
+    rcoef <- mean(R2[upper.tri(R2)])
+    R2 <- matrix(rcoef, nrow = PP, ncol = PP)
+    diag(R2) <- 1
+    T2[, iter] <- diag(sd_vec) %*% R2 %*% diag(sd_vec)
+    iter <- iter + 1
+  }
+  if (extraFactors) {
+    # 1-factor model (Ledoit and Wolf (2003)) - extra factors
+    for (ii in 1:(nFactors - 1)) {
+      f_bis <- f_other[, ii]
+      beta_bis <- apply(Xc, 2, function(a) cov(a, f_bis) / var(f_bis))
+      fc_bis <- f_bis - mean(f_bis)
+      fvar_bis <- mean(fc_bis^2)
+      T2_1f <- fvar_bis * beta_bis %*% t(beta_bis)
+      diag(T2_1f) <- margvars
+      T2[, iter] <- T2_1f
+      iter <- iter + 1
+    }
+  }
+  
+  ### build A for the QP
+  A <- matrix(NA, nrow = nT, ncol = nT)
+  for (ii in 1:nT) {
+    for (jj in ii:nT) {
+      A[ii, jj] <- A[jj, ii] <- sum((T2[, ii] - M2) * (T2[, jj] - M2))
+    }
+  }
+  
+  ### build b for the QP
+  VM2vec <- .Call('VM2', m11, m22, NN, PP, PACKAGE="PerformanceAnalytics")
+  
+  b <- rep(VM2vec[1], nT)
+  iter <- 1
+  if (targets[1]) {
+    # independent marginals
+    b[iter] <- b[iter] - VM2vec[3]
+    iter <- iter + 1
+  }
+  if (targets[2]) {
+    # independent and equally distributed marginals
+    b[iter] <- b[iter] - VM2vec[2]
+    iter <- iter + 1
+  }
+  if (targets[3]) {
+    # 1-factor model (Ledoit and Wolf (2003))
+    b[iter] <- b[iter] - .Call('CM2_1F', as.numeric(Xc), fc, fvar, m11, m22, NN, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (targets[4]) {
+    # constant-correlation (Ledoit and Wolf (2004))
+    b[iter] <- b[iter] - .Call('CM2_CC', as.numeric(Xc), rcoef, m11, m22, NN, PP, PACKAGE="PerformanceAnalytics")
+    iter <- iter + 1
+  }
+  if (extraFactors) {
+    # 1-factor model (Ledoit and Wolf (2003)) - extra factors
+    for (ii in 1:(nFactors - 1)) {
+      f_bis <- f_other[, ii]
+      fc_bis <- f_bis - mean(f_bis)
+      fvar_bis <- mean(fc_bis^2)
+      b[iter] <- b[iter] - .Call('CM2_1F', as.numeric(Xc), fc_bis, fvar_bis, m11, m22, NN, PP, PACKAGE="PerformanceAnalytics")
+      iter <- iter + 1
+    }
+  }
+  
+  ### solve the QP
+  # if (nT == 1) {
+  #   # single-target shrinkage
+  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
+  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+  #   M2sh <- (1 - lambda) * M2 + lambda * T2[, 1]                    # compute shrinkage estimator
+  # } else {
+  #   # multi-target shrinkage
+  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+  #   lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
+  #   M2sh <- (1 - sum(lambda)) * M2                                  # initialize estimator at percentage of sample estimator
+  #   for (tt in 1:nT) {
+  #     M2sh <- M2sh + lambda[tt] * T2[, tt]                          # add the target matrices
+  #   }
+  # }
+  M2sh <- NULL
+  lambda <- NULL
+  b <- c(b, VM2vec[1])
+  
+  return (list("M2sh" = M2sh, "lambda" = lambda, "A" = A, "b" = b))
+}
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
 M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
   #
@@ -591,7 +768,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
     iter <- iter + 1
   }
   if (targets[4]) {
-    # constant-correlation (Martellini and Ziemann (2010)) (symmetrized version)
+    # constant-correlation (Martellini and Ziemann (2010)) 
     marg6s <- colMeans(Xc^6)
     r_generalized <- .Call('M4_CCoefficients', margvars, margkurts, marg6s,
                            m22, m31, as.numeric(Xc), NN, PP, PACKAGE="PerformanceAnalytics")
@@ -640,7 +817,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   }
   if (targets[3]) {
     # 1-factor model (Martellini and Ziemann (2010))
-    fskew <- mean(fc^2)
+    fskew <- mean(fc^3)
     b[iter] <- b[iter] - .Call('CM4_1F', as.numeric(Xc), as.numeric(Xc2), fc, fvar, fskew, fkurt, 
                                m11, m21, m22, m31, NN, PP, PACKAGE="PerformanceAnalytics")
     iter <- iter + 1
@@ -660,8 +837,8 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
     for (ii in 1:(nFactors - 1)) {
       f_bis <- f_other[, ii]
       fc_bis <- f_bis - mean(f_bis)
-      fvar_bis <- mean(fc_bis^3)
-      fskew_bis <- mean(fc_bis^2)
+      fvar_bis <- mean(fc_bis^2)
+      fskew_bis <- mean(fc_bis^3)
       fkurt_bis <- mean(fc_bis^4)
       b[iter] <- b[iter] - .Call('CM4_1F', as.numeric(Xc), as.numeric(Xc2), fc, fvar_bis, fskew_bis, fkurt_bis, 
                                  m11, m21, m22, m31, NN, PP, PACKAGE="PerformanceAnalytics")
@@ -688,6 +865,78 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   if (as.mat) M4sh <- M4.vec2mat(M4sh, PP)
   
   return (list("M4sh" = M4sh, "lambda" = lambda, "A" = A, "b" = b))
+}
+
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname CoMoments
+M2.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # computes different strutured covariance estimators
+  #
+  # Inputs:
+  # R         : numeric matrix of dimensions NN x PP
+  # struct    : select the structured estimator
+  #           : Indep   : independent, unequal marginals (Ledoit and Wolf (2004))
+  #           : IndepId : independent, equal marginals (Ledoit and Wolf (2003))
+  #           : 1factor : 1-factor model of (Ledoit and Wolf (2003))
+  #           : CC : constant-correlation model of (Ledoit and Wolf (2004)), symmetrized
+  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  #
+  # Outputs:
+  # covariance matrix
+  
+  X <- coredata(R)
+  
+  # input checking
+  struct <- struct[1]
+  if (NCOL(X) < 2) stop("R must have at least 2 variables")
+  if ((struct == "1factor") & is.null(f)) stop("Provide the factor observations for the 1-factor coskewness matrix")
+  
+  # compute useful variables
+  NN <- dim(X)[1]                                                   # number of observations
+  PP <- dim(X)[2]                                                   # number of assets
+  
+  Xc <- X - matrix(colMeans(X), nrow = NN, ncol = PP, byrow = TRUE) # center the observations
+  margvars <- colMeans(Xc^2)
+  
+  # compute the coskewness matrix
+  if (struct == "Indep") {
+    # independent marginals
+    T2 <- diag(margvars)
+    return (T2)
+    
+  } else if (struct == "IndepId") {
+    # independent and equally distributed marginals
+    T2 <- mean(margvars) * diag(PP)
+    return (T2)
+    
+  } else if (struct == "1factor") {
+    # 1-factor model
+    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+    fc <- f - mean(f)
+    fvar <- mean(fc^2)
+    T2 <- fvar * beta %*% t(beta)
+    diag(T2) <- margvars
+    return (T2)
+    
+  } else if (struct == "CC") {
+    # constant-correlation
+    sd_vec <- sqrt(margvars)
+    M2 <- t(Xc) %*% Xc / NN
+    R2 <- diag(1 / sd_vec) %*% M2 %*% diag(1 / sd_vec)
+    rcoef <- mean(R2[upper.tri(R2)])
+    R2 <- matrix(rcoef, nrow = PP, ncol = PP)
+    diag(R2) <- 1
+    T2 <- diag(sd_vec) %*% R2 %*% diag(sd_vec)
+    return (T2)
+    
+  } else {
+    stop("select a valid structure")
+  }
 }
 
 
@@ -807,10 +1056,10 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NU
   #           : IndepId : independent, equal marginals
   #           : 1factor : 1-factor model of Martellini and Ziemann (2010)
   #           : CC : constant-correlation model of Martellini and Ziemann (2010), symmetrized
-  # f         : numeric vector with factor observations, needed for 1-factor coskewness matrix of Martellini and Ziemann
+  # f         : numeric vector with factor observations, needed for 1-factor cokurtosis matrix of Martellini and Ziemann
   #
   # Outputs:
-  # coskewness matrix (as matrix or as vector, depending on as.mat)
+  # cokurtosis matrix (as matrix or as vector, depending on as.mat)
   
   X <- coredata(R)
   

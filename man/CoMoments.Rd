@@ -12,8 +12,10 @@
 \alias{CoKurtosis}
 \alias{M3.MM}
 \alias{M4.MM}
+\alias{M2.shrink}
 \alias{M3.shrink}
 \alias{M4.shrink}
+\alias{M2.struct}
 \alias{M3.struct}
 \alias{M4.struct}
 \alias{M2.ewma}
@@ -35,10 +37,14 @@ M3.MM(R, unbiased = FALSE, as.mat = TRUE, ...)
 
 M4.MM(R, as.mat = TRUE, ...)
 
+M2.shrink(R, targets = c(T, F, F, F), f = NULL)
+
 M3.shrink(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
   as.mat = TRUE)
 
 M4.shrink(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE)
+
+M2.struct(R, struct = c("Indep", "IndepId", "1factor", "CC"), f = NULL)
 
 M3.struct(R, struct = c("Indep", "IndepId", "1factor", "CC", "latent1factor",
   "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)

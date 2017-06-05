@@ -108,6 +108,212 @@ SEXP  M4sample(SEXP XX, SEXP NN, SEXP PP){
 
 
 // // //
+// // Shrinkage and structured estimators for covariance
+// // //
+
+SEXP  VM2(SEXP mm11, SEXP mm22, SEXP NN, SEXP PP){
+  /*
+   arguments
+   mm11      : numeric vector of t(Xc) %*% Xc / NN
+   mm22      : numeric vector of t(Xc^2) %*% Xc^2 / NN
+   NN        : integer, number of observations
+   PP        : integer, number of assets
+   
+   Written by Dries Cornilly
+   */
+  
+  // // declare pointers for the vector
+  double *m11, *m22;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  m11 = REAL(mm11);
+  m22 = REAL(mm22);
+  int P = asInteger(PP);
+  double N = asReal(NN);
+  
+  // allocate and compute the sample variance and covariances
+  SEXP VM2vec = PROTECT(allocVector(REALSXP, 3));
+  double *rVM2vec = REAL(VM2vec);
+  for (int ii = 0; ii < 3; ii++) {
+    rVM2vec[ii] = 0.0;
+  }
+  
+  // loop over the unique indices i <= j
+  for (int ii = 0; ii < P; ii++) {
+    int iiP = ii * P;
+    for (int jj = ii; jj < P; jj++) {
+      int jjP = jj * P;
+      if (ii == jj) {
+        // element s_ii
+        double temp = m22[iiP + ii] - m11[iiP + ii] * m11[iiP + ii];
+        rVM2vec[0] += temp / N;
+        rVM2vec[2] += temp / N;
+      } else {
+        // element s_ij
+        rVM2vec[0] += 2.0 * (m22[jjP + ii] - m11[jjP + ii] * m11[jjP + ii]) / N;
+      }
+    } // loop jj
+  } // loop ii
+  
+  // compute cov(T1, Sigma)
+  rVM2vec[1] = rVM2vec[2];
+  
+  for (int ii = 0; ii < P; ii++) {
+    int iiP = ii * P;
+    for (int jj = ii + 1; jj < P; jj++) {
+      int jjP = jj * P;
+      rVM2vec[1] += 2.0 * (m22[jjP + ii] - m11[iiP + ii] * m11[jjP + jj]) / N;
+    } // loop over jj
+  } // loop over ii
+  rVM2vec[1] /= P;
+  
+  UNPROTECT(1);
+  return VM2vec;
+}
+
+SEXP  CM2_1F(SEXP XXc, SEXP ffcobs, SEXP ffvar, SEXP mm11, SEXP mm22, SEXP NN, SEXP PP){
+  /*
+   arguments
+   XXc       : numeric vector with centered observations
+   ffcobs    : numeric vector with centered factor observations
+   ffvar     : double with factor variance
+   mm11      : numeric vector of t(Xc) %*% Xc / NN
+   mm22      : numeric vector of t(Xc^2) %*% Xc^2 / NN
+   NN        : integer, number of observations
+   PP        : integer, number of assets
+   
+   Written by Dries Cornilly
+   */
+  
+  // // declare pointers for the vector
+  double *Xc, *m11, *m22, *fcobs;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  Xc = REAL(XXc);
+  m11 = REAL(mm11);
+  m22 = REAL(mm22);
+  fcobs = REAL(ffcobs);
+  double fvar = asReal(ffvar);
+  double N = asReal(NN);
+  int n = asInteger(NN);
+  int P = asInteger(PP);
+  
+  // compute some helper variables for later on
+  double fvar2 = fvar * fvar;
+  double covXf[P];
+  for (int ii = 0; ii < P; ii++) {
+    int iiN = ii * n;
+    covXf[ii] = 0.0;
+    for (int tt = 0; tt < n; tt++) {
+      covXf[ii] += Xc[iiN + tt] * fcobs[tt];
+    }
+    covXf[ii] /= N;
+  }
+  
+  // allocate and compute the sample variance and covariances
+  SEXP CM2vec = PROTECT(allocVector(REALSXP, 1));
+  double *rCM2vec = REAL(CM2vec);
+  rCM2vec[0] = 0.0;
+  
+  // loop over the unique indices i <= j
+  for (int ii = 0; ii < P; ii++) {
+    int iiP = ii * P;
+    int iiN = ii * n;
+    for (int jj = ii; jj < P; jj++) {
+      int jjP = jj * P;
+      int jjN = jj * n;
+      if (ii == jj) {
+        // element s_ii
+        rCM2vec[0] += (m22[iiP + ii] - m11[iiP + ii] * m11[iiP + ii]) / N;
+      } else {
+        // element s_ij
+        double S211 = 0.0;
+        double S121 = 0.0;
+        double S112 = 0.0;
+        for (int tt = 0; tt < n; tt++) {
+          S211 += Xc[iiN + tt] * Xc[iiN + tt] * Xc[jjN + tt] * fcobs[tt];
+          S121 += Xc[iiN + tt] * Xc[jjN + tt] * Xc[jjN + tt] * fcobs[tt];
+          S112 += Xc[iiN + tt] * Xc[jjN + tt] * fcobs[tt] * fcobs[tt];
+        }
+        
+        double temp_i0 = S211 / N - m11[jjP + ii] * covXf[ii];
+        double temp_j0 = S121 / N - m11[jjP + ii] * covXf[jj];
+        double temp_var = S112 / N - m11[jjP + ii] * fvar;
+        
+        rCM2vec[0] += 2.0 * (covXf[jj] * temp_i0 / fvar + covXf[ii] * temp_j0 / fvar -
+          covXf[ii] * covXf[jj] * temp_var / fvar2) / N;
+      }
+    } // loop jj
+  } // loop ii
+  
+  UNPROTECT(1);
+  return CM2vec;
+}
+
+SEXP  CM2_CC(SEXP XXc, SEXP rrcoef, SEXP mm11, SEXP mm22, SEXP NN, SEXP PP){
+  /*
+   arguments
+   XXc       : numeric vector with centered observations
+   rrcoef     : double with factor variance
+   mm11      : numeric vector of t(Xc) %*% Xc / NN
+   mm22      : numeric vector of t(Xc^2) %*% Xc^2 / NN
+   NN        : integer, number of observations
+   PP        : integer, number of assets
+   
+   Written by Dries Cornilly
+   */
+  
+  // // declare pointers for the vector
+  double *Xc, *m11, *m22;
+  
+  // use REAL() to access the C array inside the numeric vector passed in from R
+  Xc = REAL(XXc);
+  m11 = REAL(mm11);
+  m22 = REAL(mm22);
+  double rcoef = asReal(rrcoef);
+  double N = asReal(NN);
+  int n = asInteger(NN);
+  int P = asInteger(PP);
+  
+  // allocate and compute the sample variance and covariances
+  SEXP CM2vec = PROTECT(allocVector(REALSXP, 1));
+  double *rCM2vec = REAL(CM2vec);
+  rCM2vec[0] = 0.0;
+  
+  // loop over the unique indices i <= j
+  for (int ii = 0; ii < P; ii++) {
+    int iiP = ii * P;
+    int iiN = ii * n;
+    for (int jj = ii; jj < P; jj++) {
+      int jjP = jj * P;
+      int jjN = jj * n;
+      if (ii == jj) {
+        // element s_ii
+        rCM2vec[0] += (m22[iiP + ii] - m11[iiP + ii] * m11[iiP + ii]) / N;
+      } else {
+        // element s_ij
+        double S31 = 0.0;
+        double S13 = 0.0;
+        for (int tt = 0; tt < n; tt++) {
+          S31 += Xc[iiN + tt] * Xc[iiN + tt] * Xc[iiN + tt] * Xc[jjN + tt];
+          S13 += Xc[iiN + tt] * Xc[jjN + tt] * Xc[jjN + tt] * Xc[jjN + tt];
+        }
+        
+        double temp_ii = S31 / N - m11[jjP + ii] * m11[iiP + ii];
+        double temp_jj = S13 / N - m11[jjP + ii] * m11[jjP + jj];
+        
+        rCM2vec[0] += rcoef * (sqrt(m11[jjP + jj] / m11[iiP + ii]) * temp_ii + 
+          sqrt(m11[iiP + ii] / m11[jjP + jj]) * temp_jj) / N;
+      }
+    } // loop jj
+  } // loop ii
+  
+  UNPROTECT(1);
+  return CM2vec;
+}
+
+
+// // //
 // // Shrinkage and structured estimators for coskewness
 // // //
 
@@ -532,8 +738,7 @@ SEXP  VM3kstat(SEXP XXc, SEXP XXc2,
   return VM3vec;
 }
 
-SEXP  VM3(SEXP XXc, SEXP XXc2,
-          SEXP mm11, SEXP mm21, SEXP mm22, SEXP mm31,
+SEXP  VM3(SEXP XXc, SEXP XXc2, SEXP mm11, SEXP mm21, SEXP mm22, SEXP mm31,
           SEXP mm42, SEXP mm33, SEXP NN, SEXP PP){
   /*
    arguments
@@ -770,21 +975,19 @@ SEXP  CM3_Simaan(SEXP XXc, SEXP XXc2, SEXP mmargskewsroot,
   return CM3vec;
 }
 
-SEXP  CM3_1F(SEXP XXc, SEXP XXc2, SEXP ffcobs,
-             SEXP ffvar, SEXP ffskew,
-             SEXP mm11, SEXP mm21, SEXP mm22,
-             SEXP mm42, SEXP NN, SEXP PP){
+SEXP  CM3_1F(SEXP XXc, SEXP XXc2, SEXP ffcobs, SEXP ffvar, SEXP ffskew,
+             SEXP mm11, SEXP mm21, SEXP mm22, SEXP mm42, SEXP NN, SEXP PP){
   /*
    arguments
    XXc       : numeric vector with centered observations
    XXc2      : numeric vector with centered and squared observations
-   ccovXf    : numeric vector with covariances between the assets and the factor
+   ffcobs    : numeric vector with centered factor observations
+   ffvar     : double with the factor variance
+   ffskew    : double with the factor skewness
    mm11      : numeric vector of t(Xc) %*% Xc / NN
    mm21      : numeric vector of t(Xc^2) %*% Xc / NN
    mm22      : numeric vector of t(Xc^2) %*% Xc^2 / NN
-   mm31      : numeric vector of t(Xc^3) %*% Xc / NN
    mm42      : numeric vector of t(Xc^4) %*% Xc^2 / NN
-   mm51      : numeric vector of t(Xc^5) %*% Xc / NN
    NN        : integer, number of observations
    PP        : integer, number of assets
    
@@ -857,8 +1060,8 @@ SEXP  CM3_1F(SEXP XXc, SEXP XXc2, SEXP ffcobs,
         if (ii == jj) {
           if (jj == kk) {
             // element phi_iii
-            rCM3vec[0] += (m42[iiP + ii] - m21[iiP + ii] * m21[iiP + ii] - 6.0 * m22[iiP + ii] * m11[iiP + ii] +
-              9.0 * m11[iiP + ii] * m11[iiP + ii] * m11[iiP + ii]);
+            rCM3vec[0] += m42[iiP + ii] - m21[iiP + ii] * m21[iiP + ii] - 6.0 * m22[iiP + ii] * m11[iiP + ii] +
+              9.0 * m11[iiP + ii] * m11[iiP + ii] * m11[iiP + ii];
           } else {
             // element phi_iik
             double S311 = 0.0;
@@ -1346,13 +1549,11 @@ SEXP  M4_CC(SEXP mmargvars, SEXP mmargkurts, SEXP mmarg6s,
 SEXP  M4_1f(SEXP mmargkurts, SEXP ffvar, SEXP ffkurt, SEXP eepsvars, SEXP bbeta, SEXP PP){
   /*
    arguments
-   mmargvars : vector of length PP with marginal variances
    mmargkurts : vector of length PP with marginal kurtosis values
-   mmarg6s   : vector of length PP with marginal 6th order central moments
-   rr3       : generalized correlation of order 3
-   rr5       : generalized correlation of order 5
-   rr6       : generalized correlation of order 6
-   rr7       : generalized correlation of order 7
+   ffvar     : double with the factor variance
+   ffkurt    : vector with the factor fourth order central moment
+   eepsvars  : numeric vector with the variances of the idiosyncratic term
+   bbeta     : regression coefficients (factor loadings)
    PP        : integer, number of assets
    
    Written by Dries Cornilly
