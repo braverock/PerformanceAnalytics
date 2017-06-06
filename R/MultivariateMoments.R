@@ -421,24 +421,21 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   }
   
   ### solve the QP
-  # if (nT == 1) {
-  #   # single-target shrinkage
-  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
-  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
-  #   M2sh <- (1 - lambda) * M2 + lambda * T2[, 1]                    # compute shrinkage estimator
-  # } else {
-  #   # multi-target shrinkage
-  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
-  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
-  #   lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
-  #   M2sh <- (1 - sum(lambda)) * M2                                  # initialize estimator at percentage of sample estimator
-  #   for (tt in 1:nT) {
-  #     M2sh <- M2sh + lambda[tt] * T2[, tt]                          # add the target matrices
-  #   }
-  # }
-  M2sh <- NULL
-  lambda <- NULL
-  b <- c(b, VM2vec[1])
+  if (nT == 1) {
+    # single-target shrinkage
+    lambda <- b / A                                                 # compute optimal shrinkage intensity
+    lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+    M2sh <- (1 - lambda) * M2 + lambda * T2[, 1]                    # compute shrinkage estimator
+  } else {
+    # multi-target shrinkage
+    Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+    bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+    lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
+    M2sh <- (1 - sum(lambda)) * M2                                  # initialize estimator at percentage of sample estimator
+    for (tt in 1:nT) {
+      M2sh <- M2sh + lambda[tt] * T2[, tt]                          # add the target matrices
+    }
+  }
   
   return (list("M2sh" = M2sh, "lambda" = lambda, "A" = A, "b" = b))
 }
@@ -847,25 +844,22 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   }
   
   ### solve the QP
-  # if (nT == 1) {
-  #   # single-target shrinkage
-  #   lambda <- b / A                                                 # compute optimal shrinkage intensity
-  #   lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
-  #   M4sh <- (1 - lambda) * M4 + lambda * T4                         # compute shrinkage estimator
-  # } else {
-  #   # multi-target shrinkage
-  #   Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
-  #   bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
-  #   lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
-  #   M4sh <- (1 - sum(lambda)) * M4                                  # initialize estimator at percentage of sample estimator
-  #   for (tt in 1:nT) {
-  #     M4sh <- M4sh + lambda[tt] * T4[, tt]                          # add the target matrices
-  #   }
-  # }
-  # if (as.mat) M4sh <- M4.vec2mat(M4sh, PP)
-  M4sh <- NULL
-  lambda <- NULL
-  b <- c(b, VM4vec[1])
+  if (nT == 1) {
+    # single-target shrinkage
+    lambda <- b / A                                                 # compute optimal shrinkage intensity
+    lambda <- max(0, min(1, lambda))                                # must be between 0 and 1
+    M4sh <- (1 - lambda) * M4 + lambda * T4                         # compute shrinkage estimator
+  } else {
+    # multi-target shrinkage
+    Aineq <- rbind(diag(nT), rep(-1, nT))                           # A matrix for inequalities quadratic program
+    bineq <- matrix(c(rep(0, nT), -1), ncol = 1)                    # b vector for inequalities quadratic program
+    lambda <- quadprog::solve.QP(A, b, t(Aineq), bineq, meq = 0)$solution # solve quadratic program
+    M4sh <- (1 - sum(lambda)) * M4                                  # initialize estimator at percentage of sample estimator
+    for (tt in 1:nT) {
+      M4sh <- M4sh + lambda[tt] * T4[, tt]                          # add the target matrices
+    }
+  }
+  if (as.mat) M4sh <- M4.vec2mat(M4sh, PP)
   
   return (list("M4sh" = M4sh, "lambda" = lambda, "A" = A, "b" = b))
 }
