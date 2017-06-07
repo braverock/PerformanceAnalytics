@@ -1017,10 +1017,10 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
   } else if (struct == "observedfactor") {
     # observed factor model
     if (NCOL(f) == 1) {
-    beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
-    fc <- f - mean(f)
-    fskew <- mean(fc^3)
-    T3 <- .Call('M3_1F', margskews, beta, fskew, PP, PACKAGE="PerformanceAnalytics")
+      beta <- apply(Xc, 2, function(a) cov(a, f) / var(f))
+      fc <- f - mean(f)
+      fskew <- mean(fc^3)
+      T3 <- .Call('M3_1F', margskews, beta, fskew, PP, PACKAGE="PerformanceAnalytics")
     } else {
       mod <- stats::lm(X ~ f)
       beta <- t(mod$coefficients[-1,])
@@ -1150,36 +1150,48 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M2.ewma <- function(R, lambda = 0.97, lambda_var = NULL) {
+M2.ewma <- function(R, lambda = 0.97, last.M2 = NULL, lambda_var = NULL) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the correlations
   # lambda_var : if not NULL, use lambda_var for the variances
   
   x <- coredata(R)
-  
   NN <- NROW(x)
   PP <- NCOL(x)
   
-  if (lambda > 1 - 1e-07) {
-    lambda_vec <- rep(1 / NN, NN)
-  } else {
-    lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
-  }
-  Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 2)
-  M2 <- t(Xc) %*% Xc
-  
-  if (!is.null(lambda_var)) {
-    sd_lambda <- sqrt(diag(M2))
-    R2 <- diag(1 / sd_lambda) %*% M2 %*% diag(1 / sd_lambda)
-    
-    if (lambda_var > 1 - 1e-07) {
-      lambda_var_vec <- rep(1 / NN, NN)
+  if (is.null(last.M2)) {
+    if (lambda > 1 - 1e-07) {
+      lambda_vec <- rep(1 / NN, NN)
     } else {
-      lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
     }
-    sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
-    M2 <- diag(sd_lambda_var) %*% R2 %*% diag(sd_lambda_var)
+    Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 2)
+    M2 <- t(Xc) %*% Xc
+    
+    if (!is.null(lambda_var)) {
+      sd_lambda <- sqrt(diag(M2))
+      R2 <- diag(1 / sd_lambda) %*% M2 %*% diag(1 / sd_lambda)
+      
+      if (lambda_var > 1 - 1e-07) {
+        lambda_var_vec <- rep(1 / NN, NN)
+      } else {
+        lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      }
+      sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+      M2 <- diag(sd_lambda_var) %*% R2 %*% diag(sd_lambda_var)
+    }
+  } else {
+    if (PP == 1) {
+      x <- matrix(x, nrow = 1)
+      NN <- 1
+    }
+    M2 <- last.M2
+    for (tt in 1:NN) {
+      xn <- matrix(x[tt,], nrow = 1)
+      new.M2 <- t(xn) %*% xn
+      M2 <- (1 - lambda) * new.M2 + lambda * M2
+    }
   }
   
   return( M2 )
@@ -1188,7 +1200,7 @@ M2.ewma <- function(R, lambda = 0.97, lambda_var = NULL) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M3.ewma <- function(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE) {
+M3.ewma <- function(R, lambda = 0.97, last.M3 = NULL, lambda_var = NULL, as.mat = TRUE) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the standardized coskewnesses
@@ -1196,30 +1208,44 @@ M3.ewma <- function(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE) {
   # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
   
   x <- coredata(R)
-  
   NN <- NROW(x)
   PP <- NCOL(x)
   
-  if (lambda > 1 - 1e-07) {
-    lambda_vec <- rep(1 / NN, NN)
-  } else {
-    lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
-  }
-  Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 3)
-  M3 <- .Call('M3sample', as.numeric(Xc), NN, PP, 1.0, PACKAGE="PerformanceAnalytics")
-  
-  if (!is.null(lambda_var)) {
-    sd_lambda <- sqrt(colSums(x^2 * matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE)))
-    R3 <- .Call('M3timesDiag', M3, 1 / sd_lambda, PP, PACKAGE="PerformanceAnalytics")
-    
-    if (lambda_var > 1 - 1e-07) {
-      lambda_var_vec <- rep(1 / NN, NN)
+  if (is.null(last.M3)) {
+    if (lambda > 1 - 1e-07) {
+      lambda_vec <- rep(1 / NN, NN)
     } else {
-      lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
     }
-    sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+    Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 3)
+    M3 <- .Call('M3sample', as.numeric(Xc), NN, PP, 1.0, PACKAGE="PerformanceAnalytics")
     
-    M3 <- .Call('M3timesDiag', R3, sd_lambda_var, PP, PACKAGE="PerformanceAnalytics")
+    if (!is.null(lambda_var)) {
+      sd_lambda <- sqrt(colSums(x^2 * matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+      R3 <- .Call('M3timesDiag', M3, 1 / sd_lambda, PP, PACKAGE="PerformanceAnalytics")
+      
+      if (lambda_var > 1 - 1e-07) {
+        lambda_var_vec <- rep(1 / NN, NN)
+      } else {
+        lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      }
+      sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+      
+      M3 <- .Call('M3timesDiag', R3, sd_lambda_var, PP, PACKAGE="PerformanceAnalytics")
+    }
+  } else {
+    if (PP == 1) {
+      x <- matrix(x, nrow = 1)
+      NN <- 1
+      PP <- ncol(x)
+    }
+    if (NROW(last.M3) == PP) last.M3 <- M3.mat2vec(last.M3)
+    M3 <- last.M3
+    for (tt in 1:NN) {
+      xn <- matrix(x[tt,], nrow = 1)
+      new.M3 <- M3.MM(xn, as.mat = FALSE, mu = rep(0, PP))
+      M3 <- (1 - lambda) * new.M3 + lambda * M3
+    }
   }
   
   if (as.mat) M3 <- M3.vec2mat(M3, PP)
@@ -1230,7 +1256,7 @@ M3.ewma <- function(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname CoMoments
-M4.ewma <- function(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE) {
+M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, lambda_var = NULL, as.mat = TRUE) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the standardized cokurtosisses
@@ -1238,30 +1264,44 @@ M4.ewma <- function(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE) {
   # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
   
   x <- coredata(R)
-  
   NN <- NROW(x)
   PP <- NCOL(x)
   
-  if (lambda > 1 - 1e-07) {
-    lambda_vec <- rep(1 / NN, NN)
-  } else {
-    lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
-  }
-  Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 4)
-  M4 <- .Call('M4sample', as.numeric(Xc), NN, PP, PACKAGE="PerformanceAnalytics") * NN
-  
-  if (!is.null(lambda_var)) {
-    sd_lambda <- sqrt(colSums(x^2 * matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE)))
-    R4 <- .Call('M4timesDiag', M4, 1 / sd_lambda, PP, PACKAGE="PerformanceAnalytics")
-    
-    if (lambda_var > 1 - 1e-07) {
-      lambda_var_vec <- rep(1 / NN, NN)
+  if (is.null(last.M4)) {
+    if (lambda > 1 - 1e-07) {
+      lambda_vec <- rep(1 / NN, NN)
     } else {
-      lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      lambda_vec <- (1 - lambda) / (1 - lambda^NN) * lambda^((NN - 1):0)
     }
-    sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+    Xc <- x * (matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE))^(1 / 4)
+    M4 <- .Call('M4sample', as.numeric(Xc), NN, PP, PACKAGE="PerformanceAnalytics") * NN
     
-    M4 <- .Call('M4timesDiag', R4, sd_lambda_var, PP, PACKAGE="PerformanceAnalytics")
+    if (!is.null(lambda_var)) {
+      sd_lambda <- sqrt(colSums(x^2 * matrix(lambda_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+      R4 <- .Call('M4timesDiag', M4, 1 / sd_lambda, PP, PACKAGE="PerformanceAnalytics")
+      
+      if (lambda_var > 1 - 1e-07) {
+        lambda_var_vec <- rep(1 / NN, NN)
+      } else {
+        lambda_var_vec <- (1 - lambda_var) / (1 - lambda_var^NN) * lambda_var^((NN - 1):0)
+      }
+      sd_lambda_var <- sqrt(colSums(x^2 * matrix(lambda_var_vec, nrow = NN, ncol = PP, byrow = FALSE)))
+      
+      M4 <- .Call('M4timesDiag', R4, sd_lambda_var, PP, PACKAGE="PerformanceAnalytics")
+    }
+  } else {
+    if (PP == 1) {
+      x <- matrix(x, nrow = 1)
+      NN <- 1
+      PP <- ncol(x)
+    }
+    if (NROW(last.M4) == PP) last.M4 <- M4.mat2vec(last.M4)
+    M4 <- last.M4
+    for (tt in 1:NN) {
+      xn <- matrix(x[tt,], nrow = 1)
+      new.M4 <- M4.MM(xn, as.mat = FALSE, mu = rep(0, PP))
+      M4 <- (1 - lambda) * new.M4 + lambda * M4
+    }
   }
   
   if (as.mat) M4 <- M4.vec2mat(M4, PP)

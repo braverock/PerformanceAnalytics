@@ -53,11 +53,13 @@ M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
 M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   f = NULL, as.mat = TRUE)
 
-M2.ewma(R, lambda = 0.97, lambda_var = NULL)
+M2.ewma(R, lambda = 0.97, last.M2 = NULL, lambda_var = NULL)
 
-M3.ewma(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE)
+M3.ewma(R, lambda = 0.97, last.M3 = NULL, lambda_var = NULL,
+  as.mat = TRUE)
 
-M4.ewma(R, lambda = 0.97, lambda_var = NULL, as.mat = TRUE)
+M4.ewma(R, lambda = 0.97, last.M4 = NULL, lambda_var = NULL,
+  as.mat = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
