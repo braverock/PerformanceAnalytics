@@ -195,7 +195,8 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' @param \dots any other passthru parameters
 #' @author Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
 #' @seealso \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
-#' \code{\link{BetaCoMoments}}
+#' \code{\link{BetaCoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+#' \cr \code{\link{StructuredMoments}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
