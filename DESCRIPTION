@@ -8,6 +8,7 @@ Authors@R: c(
   , person(given="Ross",family="Bennett",role="ctb")
   , person(given="Joshua",family="Ulrich",role="ctb")
   , person(given="Eric",family="Zivot",role="ctb")
+  , person(given="Dries",family="Cornilly",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
