@@ -3,6 +3,10 @@
 \name{ShrinkageMoments}
 \alias{ShrinkageMoments}
 \alias{M2.shrink}
+\alias{ShrinkageMoments,}
+\alias{M2.shrink,}
+\alias{M3.shrink,}
+\alias{M4.shrink}
 \alias{M3.shrink}
 \alias{M4.shrink}
 \title{Functions for calculating shrinkage-based comoments of financial time series}
@@ -69,10 +73,12 @@ data(edhec)
 # construct an underlying factor (market-factor, observed factor, PCA, ...)
 f <- rowSums(edhec)
 
-# multi-target shrinkage with targets 1, 3 and 4 - 'as.mat = F' would speed up calculations in higher dimensions
-sigma <- M2.shrink(edhec, c(T, F, T, T), f)$M2sh
-m3 <- M3.shrink(edhec, c(T, F, T, T), f)$M3sh
-m4 <- M4.shrink(edhec, c(T, F, T, T), f)$M4sh
+# multi-target shrinkage with targets 1, 3 and 4
+# as.mat = F' would speed up calculations in higher dimensions
+targets <- c(TRUE, FALSE, TRUE, TRUE)
+sigma <- M2.shrink(edhec, targets, f)$M2sh
+m3 <- M3.shrink(edhec, targets, f)$M3sh
+m4 <- M4.shrink(edhec, targets, f)$M4sh
 
 # compute equal-weighted portfolio modified ES
 mu <- colMeans(edhec)
@@ -104,11 +110,11 @@ finance, 10(5), 603-621.
 Ledoit, Olivier and Wolf, Michael. 2004. A well-conditioned estimator for large-dimensional 
 covariance matrices. Journal of multivariate analysis, 88(2), 365-411.
 
-Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
 comoments and implications for portfolio selection. Review of Financial 
 Studies, 23(4), 1467-1502.
 
-Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter framework. 
 Management Science, 39(5), 68-577.
 }
 \seealso{

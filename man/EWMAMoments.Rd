@@ -3,6 +3,10 @@
 \name{EWMAMoments}
 \alias{EWMAMoments}
 \alias{M2.ewma}
+\alias{EWMAMoments,}
+\alias{M2.ewma,}
+\alias{M3.ewma,}
+\alias{M4.ewma}
 \alias{M3.ewma}
 \alias{M4.ewma}
 \title{Functions for calculating EWMA comoments of financial time series}
@@ -19,14 +23,17 @@ asset returns (with mean zero)}
 
 \item{lambda}{decay coefficient}
 
-\item{last.M2}{last estimated covariance matrix before the observed returns R, similar for 
-last.M3 and last.M4}
+\item{last.M2}{last estimated covariance matrix before the observed returns R}
 
 \item{\dots}{any other passthru parameters}
+
+\item{last.M3}{last estimated coskewness matrix before the observed returns R}
 
 \item{as.mat}{TRUE/FALSE whether to return the full moment matrix or only
 the vector with the unique elements (the latter is advised for speed), default
 TRUE}
+
+\item{last.M4}{last estimated cokurtosis matrix before the observed returns R}
 }
 \description{
 calculates exponentially weighted moving average covariance, coskewness and cokurtosis matrices
@@ -46,11 +53,12 @@ order central moments
 data(edhec)
 
 # EWMA estimation
+# 'as.mat = F' would speed up calculations in higher dimensions
 sigma <- M2.ewma(edhec, 0.94)
 m3 <- M3.ewma(edhec, 0.94)
 m4 <- M4.ewma(edhec, 0.94)
 
-# compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+# compute equal-weighted portfolio modified ES 
 mu <- colMeans(edhec)
 p <- length(mu)
 ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
