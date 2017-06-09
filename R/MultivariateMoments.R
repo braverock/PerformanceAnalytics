@@ -266,9 +266,100 @@ M4.mat2vec <- function(M4) {
   .Call('M4mat2vec', as.numeric(M4), NROW(M4), PACKAGE="PerformanceAnalytics")
 }
 
-#'@useDynLib PerformanceAnalytics
-#'@export
-#'@rdname CoMoments
+#' Functions for calculating shrinkage-based comoments of financial time series
+#' 
+#' calculates covariance, coskewness and cokurtosis matrices using linear shrinkage
+#' between the sample estimator and a structured estimator
+#' 
+#' The coskewness and cokurtosis matrices are defined as the matrices of dimension 
+#' p x p^2 and p x p^3 containing the third and fourth order central moments. They
+#' are useful for measuring nonlinear dependence between different assets of the 
+#' portfolio and computing modified VaR and modified ES of a portfolio.
+#' 
+#' Shrinkage estimation for the covariance matrix was popularized by Ledoit and 
+#' Wolf (2003, 2004). An extension to coskewness and cokurtosis matrices by
+#' Martellini and Ziemann (2010) uses the 1-factor and constant-correlation structured
+#' comoment matrices as targets. In Boudt, Cornilly and Verdonck (2017) the framework
+#' of single-target shrinkage for the coskewness and cokurtosis matrices is 
+#' extended to a multi-target setting, making it possible to include several target matrices
+#' at once. Also, an option to enhance small sample performance for coskewness estimation
+#' was proposed, resulting in the option 'unbiasedMSE' present in the 'M3.shrink' function.
+#' 
+#' The first four target matrices of the 'M2.shrink', 'M3.shrink' and 'M4.shrink' 
+#' correspond to the models 'independent marginals', 'independent and identical marginals', 
+#' 'observed 1-factor model' and 'constant correlation'. Coskewness shrinkage includes two
+#' more options, target 5 corresponds to the latent 1-factor model proposed in Simaan (1993)
+#' and target 6 is the coskewness matrix under central-symmetry, a matrix full of zeros.
+#' For more details on the targets, we refer to Boudt, Cornilly and Verdonck (2017) and
+#' the supplementary appendix.
+#' 
+#' If f is a matrix containing multiple factors, then the shrinkage estimator will
+#' use each factor in a seperate single-factor model and use multi-target shrinkage
+#' to all targets matrices at once.
+#' @name ShrinkageMoments
+#' @concept co-moments
+#' @concept moments
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param targets vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
+#' structures are, in order: 'independent marginals', 'independent and identical marginals', 
+#' 'observed 1-factor model' and 'constant correlation'. See Details.
+#' @param f vector or matrix with observations of the factor, to be used with target 3. See Details.
+#' @param unbiasedMSE TRUE/FALSE whether to use a correction to have an unbiased
+#' estimator for the marginal skewness values, in case of targets 1 and/or 2, default FALSE
+#' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
+#' the vector with the unique elements (the latter is advised for speed), default
+#' TRUE
+#' @author Dries Cornilly
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+#' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
+#' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
+#' Returns. Journal of Risk. Winter.
+#' 
+#' Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+#' Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
+#' Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+#' 
+#' Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+#' of stock returns with an application to portfolio selection. Journal of empirical 
+#' finance, 10(5), 603-621.
+#' 
+#' Ledoit, Olivier and Wolf, Michael. 2004. A well-conditioned estimator for large-dimensional 
+#' covariance matrices. Journal of multivariate analysis, 88(2), 365-411.
+#' 
+#' Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+#' comoments and implications for portfolio selection. Review of Financial 
+#' Studies, 23(4), 1467-1502.
+#' 
+#' Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+#' Management Science, 39(5), 68-577.
+###keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' 
+#' # construct an underlying factor (market-factor, observed factor, PCA, ...)
+#' f <- rowSums(edhec)
+#' 
+#' # multi-target shrinkage with targets 1, 3 and 4 - 'as.mat = F' would speed up calculations in higher dimensions
+#' sigma <- M2.shrink(edhec, c(T, F, T, T), f)$M2sh
+#' m3 <- M3.shrink(edhec, c(T, F, T, T), f)$M3sh
+#' m4 <- M4.shrink(edhec, c(T, F, T, T), f)$M4sh
+#' 
+#' # compute equal-weighted portfolio modified ES
+#' mu <- colMeans(edhec)
+#' p <- length(mu)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' # compare to sample method
+#' sigma <- cov(edhec)
+#' m3 <- M3.MM(edhec)
+#' m4 <- M4.MM(edhec)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' @export M2.shrink
 M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   # @author Dries Cornilly
   #
@@ -442,7 +533,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
+#'@rdname ShrinkageMoments
 M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
   #
@@ -473,6 +564,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   X <- coredata(R)
   
   # input checking
+  if (length(targets < 6)) targets <- c(targets, rep(F, 6 - length(targets)))
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
   if (targets[3] & is.null(f)) stop("Provide the factor observations")
@@ -672,7 +764,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
+#'@rdname ShrinkageMoments
 M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   # @author Dries Cornilly
   #
@@ -865,9 +957,84 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 }
 
 
-#'@useDynLib PerformanceAnalytics
-#'@export
-#'@rdname CoMoments
+#' Functions for calculating structured comoments of financial time series
+#' 
+#' calculates covariance, coskewness and cokurtosis matrices as structured estimators
+#' 
+#' The coskewness and cokurtosis matrices are defined as the matrices of dimension 
+#' p x p^2 and p x p^3 containing the third and fourth order central moments. They
+#' are useful for measuring nonlinear dependence between different assets of the 
+#' portfolio and computing modified VaR and modified ES of a portfolio.
+#' 
+#' Structured estimation is based on the assumption that the underlying data-generating
+#' process is known, or at least resembles the assumption. The first four structured estimators correspond to the models 'independent marginals', 
+#' 'independent and identical marginals', 'observed multi-factor model' and 'constant correlation'. 
+#' Coskewness estimation includes an additional model based on the latent 1-factor model
+#' proposed in Simaan (1993).
+#' 
+#' The constant correlation and 1-factor coskewness and cokurtosis matrices can be found in 
+#' Martellini and Ziemann (2010). If f is a matrix containing multiple factors, 
+#' then the multi-factor model of Boudt, Lu and Peeters (2915) is used. For information
+#' about the other structured matrices, we refer to Boudt, Cornilly and Verdonck (2017)
+#' @name StructuredMoments
+#' @concept co-moments
+#' @concept moments
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param struct string containing the preferred method. See Details.
+#' @param f vector or matrix with observations of the factor, to be used with "observedfactor. See Details.
+#' @param unbiasedMarg TRUE/FALSE whether to use a correction to have an unbiased
+#' estimator for the marginal skewness values, in case of "Indep" or "IndepId", default FALSE
+#' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
+#' the vector with the unique elements (the latter is advised for speed), default
+#' TRUE
+#' @author Dries Cornilly
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
+#' models and asset allocation. Finance Research Letters, 13, 225-233.
+#' 
+#' Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
+#' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
+#' Returns. Journal of Risk. Winter.
+#' 
+#' Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+#' Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
+#' Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+#' 
+#' Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+#' of stock returns with an application to portfolio selection. Journal of empirical 
+#' finance, 10(5), 603-621.
+#' 
+#' Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+#' comoments and implications for portfolio selection. Review of Financial 
+#' Studies, 23(4), 1467-1502.
+#' 
+#' Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+#' Management Science, 39(5), 68-577.
+###keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' 
+#' # structured estimation with constant correlation model
+#' sigma <- M2.struct(edhec, "CC")
+#' m3 <- M3.struct(edhec, "CC")
+#' m4 <- M4.struct(edhec, "CC")
+#' 
+#' # compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+#' mu <- colMeans(edhec)
+#' p <- length(mu)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' # compare to sample method
+#' sigma <- cov(edhec)
+#' m3 <- M3.MM(edhec)
+#' m4 <- M4.MM(edhec)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' @export M2.struct
 M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL) {
   # @author Dries Cornilly
   #
@@ -948,7 +1115,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
+#'@rdname StructuredMoments
 M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", "latent1factor", "CS"),
                       f = NULL, unbiasedMarg = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
@@ -1057,7 +1224,7 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
+#'@rdname StructuredMoments
 M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL, as.mat = TRUE) {
   # @author Dries Cornilly
   #
@@ -1147,14 +1314,63 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 }
 
 
-#'@useDynLib PerformanceAnalytics
-#'@export
-#'@rdname CoMoments
-M2.ewma <- function(R, lambda = 0.97, last.M2 = NULL, lambda_var = NULL) {
+#' Functions for calculating EWMA comoments of financial time series
+#' 
+#' calculates exponentially weighted moving average covariance, coskewness and cokurtosis matrices
+#' 
+#' The coskewness and cokurtosis matrices are defined as the matrices of dimension 
+#' p x p^2 and p x p^3 containing the third and fourth order central moments. They
+#' are useful for measuring nonlinear dependence between different assets of the 
+#' portfolio and computing modified VaR and modified ES of a portfolio.
+#' 
+#' EWMA estimation of the covariance matrix was popularized by the RiskMetrics report in 1996.
+#' The M3.ewma and M4.ewma are straightforward extensions to the setting of third and fourth
+#' order central moments
+#' @name EWMAMoments
+#' @concept co-moments
+#' @concept moments
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns (with mean zero)
+#' @param lambda decay coefficient
+#' @param last.M2 last estimated covariance matrix before the observed returns R, similar for 
+#' last.M3 and last.M4
+#' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
+#' the vector with the unique elements (the latter is advised for speed), default
+#' TRUE
+#' @param \dots any other passthru parameters
+#' @author Dries Cornilly
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}
+#' @references 
+#' JP Morgan. Riskmetrics technical document. 1996.
+###keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(edhec)
+#' 
+#' # EWMA estimation
+#' sigma <- M2.ewma(edhec, 0.94)
+#' m3 <- M3.ewma(edhec, 0.94)
+#' m4 <- M4.ewma(edhec, 0.94)
+#' 
+#' # compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+#' mu <- colMeans(edhec)
+#' p <- length(mu)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' # compare to sample method
+#' sigma <- cov(edhec)
+#' m3 <- M3.MM(edhec)
+#' m4 <- M4.MM(edhec)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' @export M2.ewma
+M2.ewma <- function(R, lambda = 0.97, last.M2 = NULL, ...) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the correlations
-  # lambda_var : if not NULL, use lambda_var for the variances
+  if(hasArg(lambda_var)) lambda_var <- list(...)$lambda_var else lambda_var <- NULL
   
   x <- coredata(R)
   NN <- NROW(x)
@@ -1199,13 +1415,14 @@ M2.ewma <- function(R, lambda = 0.97, last.M2 = NULL, lambda_var = NULL) {
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
-M3.ewma <- function(R, lambda = 0.97, last.M3 = NULL, lambda_var = NULL, as.mat = TRUE) {
+#'@rdname EWMAMoments
+M3.ewma <- function(R, lambda = 0.97, last.M3 = NULL, as.mat = TRUE, ...) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the standardized coskewnesses
   # lambda_var : if not NULL, use lambda_var for the variances
   # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
+  if(hasArg(lambda_var)) lambda_var <- list(...)$lambda_var else lambda_var <- NULL
   
   x <- coredata(R)
   NN <- NROW(x)
@@ -1255,13 +1472,14 @@ M3.ewma <- function(R, lambda = 0.97, last.M3 = NULL, lambda_var = NULL, as.mat 
 
 #'@useDynLib PerformanceAnalytics
 #'@export
-#'@rdname CoMoments
-M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, lambda_var = NULL, as.mat = TRUE) {
+#'@rdname EWMAMoments
+M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
   # R         : numeric matrix of dimensions NN x PP; top of R are oldest observations, bottom are the newest
   #           : assumes a mean of zero
   # lambda    : decay parameter for the standardized cokurtosisses
   # lambda_var : if not NULL, use lambda_var for the variances
   # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
+  if(hasArg(lambda_var)) lambda_var <- list(...)$lambda_var else lambda_var <- NULL
   
   x <- coredata(R)
   NN <- NROW(x)

@@ -12,15 +12,6 @@
 \alias{CoKurtosis}
 \alias{M3.MM}
 \alias{M4.MM}
-\alias{M2.shrink}
-\alias{M3.shrink}
-\alias{M4.shrink}
-\alias{M2.struct}
-\alias{M3.struct}
-\alias{M4.struct}
-\alias{M2.ewma}
-\alias{M3.ewma}
-\alias{M4.ewma}
 \title{Functions for calculating comoments of financial time series}
 \usage{
 CoSkewnessMatrix(R, ...)
@@ -36,30 +27,6 @@ CoKurtosis(Ra, Rb)
 M3.MM(R, unbiased = FALSE, as.mat = TRUE, ...)
 
 M4.MM(R, as.mat = TRUE, ...)
-
-M2.shrink(R, targets = c(T, F, F, F), f = NULL)
-
-M3.shrink(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
-  as.mat = TRUE)
-
-M4.shrink(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE)
-
-M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL)
-
-M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
-  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
-
-M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL, as.mat = TRUE)
-
-M2.ewma(R, lambda = 0.97, last.M2 = NULL, lambda_var = NULL)
-
-M3.ewma(R, lambda = 0.97, last.M3 = NULL, lambda_var = NULL,
-  as.mat = TRUE)
-
-M4.ewma(R, lambda = 0.97, last.M4 = NULL, lambda_var = NULL,
-  as.mat = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -137,7 +104,8 @@ Preference for Moments of Higher Order than the Variance. Journal of Finance
 }
 \seealso{
 \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
-\code{\link{BetaCoMoments}}
+\code{\link{BetaCoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+\cr \code{\link{StructuredMoments}}
 }
 \author{
 Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
