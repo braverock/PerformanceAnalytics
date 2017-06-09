@@ -299,6 +299,7 @@ M4.mat2vec <- function(M4) {
 #' @name ShrinkageMoments
 #' @concept co-moments
 #' @concept moments
+#' @aliases ShrinkageMoments, M2.shrink, M3.shrink, M4.shrink
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param targets vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
@@ -327,11 +328,11 @@ M4.mat2vec <- function(M4) {
 #' Ledoit, Olivier and Wolf, Michael. 2004. A well-conditioned estimator for large-dimensional 
 #' covariance matrices. Journal of multivariate analysis, 88(2), 365-411.
 #' 
-#' Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+#' Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
 #' comoments and implications for portfolio selection. Review of Financial 
 #' Studies, 23(4), 1467-1502.
 #' 
-#' Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+#' Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter framework. 
 #' Management Science, 39(5), 68-577.
 ###keywords ts multivariate distribution models
 #' @examples
@@ -341,10 +342,12 @@ M4.mat2vec <- function(M4) {
 #' # construct an underlying factor (market-factor, observed factor, PCA, ...)
 #' f <- rowSums(edhec)
 #' 
-#' # multi-target shrinkage with targets 1, 3 and 4 - 'as.mat = F' would speed up calculations in higher dimensions
-#' sigma <- M2.shrink(edhec, c(T, F, T, T), f)$M2sh
-#' m3 <- M3.shrink(edhec, c(T, F, T, T), f)$M3sh
-#' m4 <- M4.shrink(edhec, c(T, F, T, T), f)$M4sh
+#' # multi-target shrinkage with targets 1, 3 and 4
+#' # as.mat = F' would speed up calculations in higher dimensions
+#' targets <- c(TRUE, FALSE, TRUE, TRUE)
+#' sigma <- M2.shrink(edhec, targets, f)$M2sh
+#' m3 <- M3.shrink(edhec, targets, f)$M3sh
+#' m4 <- M4.shrink(edhec, targets, f)$M4sh
 #' 
 #' # compute equal-weighted portfolio modified ES
 #' mu <- colMeans(edhec)
@@ -398,7 +401,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
       f <- f[, 1]
       extraFactors <- TRUE
-      targets <- c(targets, rep(T, nFactors - 1))
+      targets <- c(targets, rep(TRUE, nFactors - 1))
     } else {
       f <- c(f)
       extraFactors <- FALSE
@@ -564,7 +567,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   X <- coredata(R)
   
   # input checking
-  if (length(targets < 6)) targets <- c(targets, rep(F, 6 - length(targets)))
+  if (length(targets < 6)) targets <- c(targets, rep(FALSE, 6 - length(targets)))
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
   if (targets[3] & is.null(f)) stop("Provide the factor observations")
@@ -577,7 +580,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
       f <- f[, 1]
       extraFactors <- TRUE
-      targets <- c(targets, rep(T, nFactors - 1))
+      targets <- c(targets, rep(TRUE, nFactors - 1))
     } else {
       f <- c(f)
       extraFactors <- FALSE
@@ -803,7 +806,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
       f <- f[, 1]
       extraFactors <- TRUE
-      targets <- c(targets, rep(T, nFactors - 1))
+      targets <- c(targets, rep(TRUE, nFactors - 1))
     } else {
       f <- c(f)
       extraFactors <- FALSE
@@ -979,12 +982,13 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 #' @name StructuredMoments
 #' @concept co-moments
 #' @concept moments
+#' @aliases StructuredMoments, M2.struct, M3.struct, M4.struct
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param struct string containing the preferred method. See Details.
-#' @param f vector or matrix with observations of the factor, to be used with "observedfactor. See Details.
+#' @param f vector or matrix with observations of the factor, to be used with 'observedfactor'. See Details.
 #' @param unbiasedMarg TRUE/FALSE whether to use a correction to have an unbiased
-#' estimator for the marginal skewness values, in case of "Indep" or "IndepId", default FALSE
+#' estimator for the marginal skewness values, in case of 'Indep' or 'IndepId', default FALSE
 #' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
@@ -1005,11 +1009,11 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 #' of stock returns with an application to portfolio selection. Journal of empirical 
 #' finance, 10(5), 603-621.
 #' 
-#' Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+#' Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
 #' comoments and implications for portfolio selection. Review of Financial 
 #' Studies, 23(4), 1467-1502.
 #' 
-#' Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+#' Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter framework. 
 #' Management Science, 39(5), 68-577.
 ###keywords ts multivariate distribution models
 #' @examples
@@ -1017,11 +1021,12 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 #' data(edhec)
 #' 
 #' # structured estimation with constant correlation model
+#' # 'as.mat = F' would speed up calculations in higher dimensions
 #' sigma <- M2.struct(edhec, "CC")
 #' m3 <- M3.struct(edhec, "CC")
 #' m4 <- M4.struct(edhec, "CC")
 #' 
-#' # compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+#' # compute equal-weighted portfolio modified ES
 #' mu <- colMeans(edhec)
 #' p <- length(mu)
 #' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
@@ -1329,11 +1334,13 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #' @name EWMAMoments
 #' @concept co-moments
 #' @concept moments
+#' @aliases EWMAMoments, M2.ewma, M3.ewma, M4.ewma
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns (with mean zero)
 #' @param lambda decay coefficient
-#' @param last.M2 last estimated covariance matrix before the observed returns R, similar for 
-#' last.M3 and last.M4
+#' @param last.M2 last estimated covariance matrix before the observed returns R
+#' @param last.M3 last estimated coskewness matrix before the observed returns R
+#' @param last.M4 last estimated cokurtosis matrix before the observed returns R
 #' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
@@ -1348,11 +1355,12 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #' data(edhec)
 #' 
 #' # EWMA estimation
+#' # 'as.mat = F' would speed up calculations in higher dimensions
 #' sigma <- M2.ewma(edhec, 0.94)
 #' m3 <- M3.ewma(edhec, 0.94)
 #' m4 <- M4.ewma(edhec, 0.94)
 #' 
-#' # compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+#' # compute equal-weighted portfolio modified ES 
 #' mu <- colMeans(edhec)
 #' p <- length(mu)
 #' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 

@@ -3,6 +3,10 @@
 \name{StructuredMoments}
 \alias{StructuredMoments}
 \alias{M2.struct}
+\alias{StructuredMoments,}
+\alias{M2.struct,}
+\alias{M3.struct,}
+\alias{M4.struct}
 \alias{M3.struct}
 \alias{M4.struct}
 \title{Functions for calculating structured comoments of financial time series}
@@ -22,10 +26,10 @@ asset returns}
 
 \item{struct}{string containing the preferred method. See Details.}
 
-\item{f}{vector or matrix with observations of the factor, to be used with "observedfactor. See Details.}
+\item{f}{vector or matrix with observations of the factor, to be used with 'observedfactor'. See Details.}
 
 \item{unbiasedMarg}{TRUE/FALSE whether to use a correction to have an unbiased
-estimator for the marginal skewness values, in case of "Indep" or "IndepId", default FALSE}
+estimator for the marginal skewness values, in case of 'Indep' or 'IndepId', default FALSE}
 
 \item{as.mat}{TRUE/FALSE whether to return the full moment matrix or only
 the vector with the unique elements (the latter is advised for speed), default
@@ -56,11 +60,12 @@ about the other structured matrices, we refer to Boudt, Cornilly and Verdonck (2
 data(edhec)
 
 # structured estimation with constant correlation model
+# 'as.mat = F' would speed up calculations in higher dimensions
 sigma <- M2.struct(edhec, "CC")
 m3 <- M3.struct(edhec, "CC")
 m4 <- M4.struct(edhec, "CC")
 
-# compute equal-weighted portfolio modified ES - 'as.mat = F' would speed up calculations in higher dimensions
+# compute equal-weighted portfolio modified ES
 mu <- colMeans(edhec)
 p <- length(mu)
 ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
@@ -90,11 +95,11 @@ Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance m
 of stock returns with an application to portfolio selection. Journal of empirical 
 finance, 10(5), 603-621.
 
-Martellini, Lionel and Ziemann, Völker. 2010. Improved estimates of higher-order 
+Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
 comoments and implications for portfolio selection. Review of Financial 
 Studies, 23(4), 1467-1502.
 
-Simaan, Yusif. 1993. Portfolio selection and asset pricing—three-parameter framework. 
+Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter framework. 
 Management Science, 39(5), 68-577.
 }
 \seealso{
