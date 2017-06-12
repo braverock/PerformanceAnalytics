@@ -3,9 +3,7 @@
 \name{StructuredMoments}
 \alias{StructuredMoments}
 \alias{M2.struct}
-\alias{StructuredMoments,}
-\alias{M2.struct,}
-\alias{M3.struct,}
+\alias{M3.struct}
 \alias{M4.struct}
 \alias{M3.struct}
 \alias{M4.struct}
