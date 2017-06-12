@@ -3,9 +3,7 @@
 \name{EWMAMoments}
 \alias{EWMAMoments}
 \alias{M2.ewma}
-\alias{EWMAMoments,}
-\alias{M2.ewma,}
-\alias{M3.ewma,}
+\alias{M3.ewma}
 \alias{M4.ewma}
 \alias{M3.ewma}
 \alias{M4.ewma}

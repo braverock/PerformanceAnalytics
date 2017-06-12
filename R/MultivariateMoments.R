@@ -299,7 +299,7 @@ M4.mat2vec <- function(M4) {
 #' @name ShrinkageMoments
 #' @concept co-moments
 #' @concept moments
-#' @aliases ShrinkageMoments, M2.shrink, M3.shrink, M4.shrink
+#' @aliases ShrinkageMoments M2.shrink M3.shrink M4.shrink
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param targets vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
@@ -982,7 +982,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
 #' @name StructuredMoments
 #' @concept co-moments
 #' @concept moments
-#' @aliases StructuredMoments, M2.struct, M3.struct, M4.struct
+#' @aliases StructuredMoments M2.struct M3.struct M4.struct
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param struct string containing the preferred method. See Details.
@@ -1334,7 +1334,7 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #' @name EWMAMoments
 #' @concept co-moments
 #' @concept moments
-#' @aliases EWMAMoments, M2.ewma, M3.ewma, M4.ewma
+#' @aliases EWMAMoments M2.ewma M3.ewma M4.ewma
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns (with mean zero)
 #' @param lambda decay coefficient

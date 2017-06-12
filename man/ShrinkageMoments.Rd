@@ -3,9 +3,7 @@
 \name{ShrinkageMoments}
 \alias{ShrinkageMoments}
 \alias{M2.shrink}
-\alias{ShrinkageMoments,}
-\alias{M2.shrink,}
-\alias{M3.shrink,}
+\alias{M3.shrink}
 \alias{M4.shrink}
 \alias{M3.shrink}
 \alias{M4.shrink}
