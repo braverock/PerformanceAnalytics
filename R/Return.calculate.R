@@ -86,7 +86,9 @@ function(prices, method = c("discrete","log","difference"))
       # xtsAttributes(Returns) <- list(ret_type="diff")
       xtsAttributes(Returns) <- list(coredata_content = "difference")
     }
-
+    
+    #maybe set to pr in the body instead of Returns
+    xtsAttributes(pr)$coredata_content <- xtsAttributes(Returns)$coredata_content
     reclass(Returns,match.to=pr)
 }
 
