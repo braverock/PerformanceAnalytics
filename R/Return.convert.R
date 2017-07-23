@@ -14,6 +14,7 @@
 #' @seealso \code{\link{Return.calculate}}
 ###keywords ts multivariate distribution models
 #' @examples
+#' TBD
 #' 
 #' @export
 Return.convert <- function(R

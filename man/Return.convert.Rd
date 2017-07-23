@@ -2,7 +2,7 @@
 % Please edit documentation in R/Return.convert.R
 \name{Return.convert}
 \alias{Return.convert}
-\title{convert coredata content from one type of return to another}
+\title{Convert coredata content from one type of return to another}
 \usage{
 Return.convert(R, destinationType = c("discrete", "log", "difference",
   "level"), seedValue = NULL, initial = TRUE)
@@ -23,18 +23,8 @@ combinations of moving from one of 'discrete', 'log', 'difference' and 'level', 
 data type (from the same list) are permissible.
 }
 \examples{
+TBD
 
-  \dontrun{
-    require(quantmod)
-    prices = getSymbols("IBM", from = "1999-01-01", to = "2007-01-01")
-  }
-  \dontshow{
-    data(prices)
-  }
-R.IBM = Return.calculate(xts(prices), method="discrete")
-colnames(R.IBM)="IBM"
-chart.CumReturns(R.IBM,legend.loc="topleft", main="Cumulative Daily Returns for IBM")
-round(R.IBM,2)
 }
 \seealso{
 \code{\link{Return.calculate}}
