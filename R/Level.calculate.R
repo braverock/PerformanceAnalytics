@@ -1,4 +1,4 @@
-#' Calculate appropriate cumulative return series OR asset level (if providing a seed value) using xts attribute information
+#' Calculate appropriate cumulative return series or asset level using xts attribute information
 #' 
 #' This function calculates the time varying index level over 
 #' the entire period of available data.  It will work with arithmetic or log returns, using attribute information from an xts object.
@@ -40,26 +40,35 @@
 #' 
 #' @export
 Level.calculate <-
-  function(R, seedValue = 1, initial = TRUE)
+  function(R, seedValue = NULL, initial = TRUE)
   { # @author Erol Biceroglu
 
-    
-#Begin ERROR CHECKING
-  #Error check initial value before starting
-    if(seedValue != 1){
-      if(length(seedValue) > 1){
-        seedValue <- seedValue[1]
-        warning("seedValue length greater than 1, using first element only")
-      }
-      if(!is.numeric(seedValue)){
-        stop("Require a numeric value for seedValue")
-      }
-    }
-    
-    #if user somehow converts to zoo then runs checkData, it'll lose the coredata_content
-    if(length(attributes(R)$coredata_content) == 0){stop("object is missing coredata_content attribute")}
-    
-    #clean up NAs
+#     
+# #Begin ERROR CHECKING
+#     #if user somehow converts to zoo then runs checkData, it'll lose the coredata_content
+#     if(length(attributes(R)$coredata_content) == 0){stop("object is missing coredata_content attribute")}
+#     
+#   #Error check initial value before starting, so if no seedValue passed, set to 1 if it's not 'difference'
+#     if(is.null(seedValue) & (attributes(R)$coredata_content == "difference")){stop("When calculating levels using 'difference'(s), a seedValue must be provided")
+#     } else{
+#       if(is.null(seedValue) & !(attributes(R)$coredata_content == "difference")){seedValue <- 1}
+#       }
+#     
+#     #Now, if userpassed a value, make sure to default to first element
+#     #if(seedValue != 1){
+#     if(!is.null(seedValue)){
+#       if(length(seedValue) > 1){
+#         seedValue <- seedValue[1]
+#         warning("seedValue length greater than 1, using first element only")
+#       }
+#       if(!is.numeric(seedValue)){
+#         stop("Require a numeric value for seedValue")
+#       }
+#     }
+
+seedValue <- checkSeedValue(R = R, seedValue = seedValue)
+        
+  #clean up NAs
     #append estimated last date if first value not NA
     if(!is.na(R[1])){
       warning("Estimated start date/time based on periodicity of time series")
@@ -80,24 +89,37 @@ Level.calculate <-
 
 #calculate  result
 if(is.xts(R)){
-  if(attributes(R)$coredata_content %in% c("discreteReturn","logReturn")){
+  if(attributes(R)$coredata_content %in% c("discreteReturn","logReturn", "difference")){
     if(initial){
       result <- 
         switch(attributes(R)$coredata_content
                , discreteReturn = cumprod(1+R)
                , logReturn = exp(cumsum(R))   #this is faster than cumprod(exp(R))
+               , difference = cumsum(R) #+1
         )
     }else{
       #This could be refactored, but it's easier to follow like this
       step1 <-  switch(attributes(R)$coredata_content
                        , discreteReturn = (1+R)
                        , logReturn = exp(R)
+                       , difference = exp(-R)  #rev(cumsum(rev(-R)))
       )
+      
+      #difference is handled differently
+      if(attributes(R)$coredata_content != "difference"){
       step2 <- 1/step1
+      } else{
+        step2 <- step1
+      }
+      
       step3 <- unclass(step2)
       step4a <- rev(cumprod(rev(step3)))  #need to reverse the order to reconstruct from last to first
+      
+      #since we're using cumprod(), transform it back into cumsum()
+      if(attributes(R)$coredata_content == "difference"){step4a <- log(step4a)} #+ 1}
+      
         step4b <- step4a[-1]
-        step4 <- xts(x = c(step4b,1), order.by = index(step1))
+        step4 <- xts(x = c(step4b,1), order.by = zoo::index(step1))
 
       xts::xtsAttributes(step4) <- xts::xtsAttributes(step3)
       result <- step4
@@ -114,7 +136,15 @@ if(is.xts(R)){
 }
 
 #Here, the seedValue is appended to get "prices" or index levels
-result <- result * seedValue
+#result <- result * seedValue
+if(attributes(R)$coredata_content != "difference"){
+  result <- result * seedValue
+} else{
+  result <- result + seedValue #(seedValue - 1)
+}
+
+
+
 
     #set attributes
     attributes(result)$coredata_content <- "level"
