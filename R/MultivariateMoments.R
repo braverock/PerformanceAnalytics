@@ -1540,6 +1540,153 @@ M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
   return( M4 )
 }
 
+
+#' Functions for doing Moment Component Analysis (MCA) of financial time series
+#' 
+#' calculates MCA coskewness and cokurtosis matrices
+#' 
+#' The coskewness and cokurtosis matrices are defined as the matrices of dimension 
+#' p x p^2 and p x p^3 containing the third and fourth order central moments. They
+#' are useful for measuring nonlinear dependence between different assets of the 
+#' portfolio and computing modified VaR and modified ES of a portfolio.
+#' 
+#' MCA is a generalization of PCA to higher moments. The principal components in 
+#' MCA are the ones that maximize the coskewness and cokurtosis present when projecting
+#' onto these directions. It was introduced by CITE and applied to financial returns
+#' data by CITE.
+#' @name MCA
+#' @concept co-moments
+#' @concept moments
+#' @aliases MCA M3.MCA M4.MCA
+#' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns 
+#' @param lambda decay coefficient
+#' @param k the number of components to use
+#' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
+#' the vector with the unique elements (the latter is advised for speed), default
+#' TRUE
+#' @param \dots any other passthru parameters
+#' @author Dries Cornilly
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+#' @references 
+#' TODO
+#' @examples
+#' 
+#' data(edhec)
+#' 
+#' # EWMA estimation
+#' # 'as.mat = F' would speed up calculations in higher dimensions
+#' sigma <- M2.ewma(edhec, 0.94)
+#' m3 <- M3.ewma(edhec, 0.94)
+#' m4 <- M4.ewma(edhec, 0.94)
+#' 
+#' # compute equal-weighted portfolio modified ES 
+#' mu <- colMeans(edhec)
+#' p <- length(mu)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' # compare to sample method
+#' sigma <- cov(edhec)
+#' m3 <- M3.MM(edhec)
+#' m4 <- M4.MM(edhec)
+#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
+#'     sigma = sigma, m3 = m3, m4 = m4)
+#' 
+#' @export M3.MCA
+M3.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
+  
+  x <- coredata(R)
+  
+  if (hasArg(maxit)) maxit <- list(...)$maxit else maxit <- 1000
+  if (hasArg(abstol)) abstol <- list(...)$abstol else abstol <- 1e-05
+  
+  p <- NCOL(x)
+  n <- NROW(x)
+  
+  # initialize projection matrix and sample coskewness matrix
+  if (hasArg(M3)) {
+    M3 <- list(...)$M3
+    if (NROW(M3) == p) M3 <- M3.mat2vec(M3)
+  } else {
+    M3 <- M3.MM(x, as.mat = FALSE)
+  }
+  if (hasArg(U0)) U0 <- list(...)$U0 else U0 <- svd(M3.vec2mat(M3, p), nu = k, nv = 0)$u
+  
+  # iterate until convergence or maximum number of iterations is reached
+  iter <- 0
+  converged <- FALSE
+  while ((iter < maxit) & !converged) {
+    # project using the last projection matrix U0 and build new projection matrix U1
+    Z3 <- .Call('M3HOOIiterator', M3, as.numeric(U0), p, k, PACKAGE="PerformanceAnalytics")
+    U1 <- svd(Z3, nu = k, nv = 0)$u
+    
+    # check for convergence - absolute values are because the direction of the eigenvectors might alternate
+    if (sqrt(sum((abs(U1) - abs(U0))^2)) < abstol) converged <- TRUE
+    
+    # update U and the iterator
+    U0 <- U1
+    iter <- iter + 1
+  }
+  
+  # build estimated coskewness matrix from the projection matrix U0
+  C3 <- .Call('M3timesFull', M3, as.numeric(t(U0)), p, k, PACKAGE="PerformanceAnalytics")
+  M3mca <- .Call('M3timesFull', C3, as.numeric(U0), k, p, PACKAGE="PerformanceAnalytics")
+  
+  if (as.mat) M3mca <- M3.vec2mat(M3mca, p)
+  
+  return ( list("M3mca" = M3mca, "converged" = converged, "iter" = iter, "U" = U0) )
+}
+
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname MCA
+M4.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
+  
+  x <- coredata(R)
+  
+  if (hasArg(maxit)) maxit <- list(...)$maxit else maxit <- 1000
+  if (hasArg(abstol)) abstol <- list(...)$abstol else abstol <- 1e-05
+  
+  p <- NCOL(x)
+  n <- NROW(x)
+  
+  # initialize projection matrix and sample cokurtosis matrix
+  if (hasArg(M4)) {
+    M4 <- list(...)$M4
+    if (NROW(M4) == p) M4 <- M4.mat2vec(M4)
+  } else {
+    M4 <- M4.MM(x, as.mat = FALSE)
+  }
+  if (hasArg(U0)) U0 <- list(...)$U0 else U0 <- svd(M4.vec2mat(M4, p), nu = k, nv = 0)$u
+  
+  # iterate until convergence or maximum number of iterations is reached
+  iter <- 0
+  converged <- FALSE
+  while ((iter < maxit) & !converged) {
+    # project using the last projection matrix U0 and build new projection matrix U1
+    Z4 <- .Call('M4HOOIiterator', M4, as.numeric(U0), p, k, PACKAGE="PerformanceAnalytics")
+    U1 <- svd(Z4, nu = k, nv = 0)$u
+    
+    # check for convergence - absolute values are because the direction of the eigenvectors might alternate
+    if (sqrt(sum((abs(U1) - abs(U0))^2)) < abstol) converged <- TRUE
+    
+    # update U and the iterator
+    U0 <- U1
+    iter <- iter + 1
+  }
+  
+  # build estimated coskewness matrix from the projection matrix U0
+  C4 <- .Call('M4timesFull', M4, as.numeric(t(U0)), p, k, PACKAGE="PerformanceAnalytics")
+  M4mca <- .Call('M4timesFull', C4, as.numeric(U0), k, p, PACKAGE="PerformanceAnalytics")
+  
+  if (as.mat) M4mca <- M4.vec2mat(M4mca, p)
+  
+  return ( list("M4mca" = M4mca, "converged" = converged, "iter" = iter, "U" = U0) )
+}
+
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #

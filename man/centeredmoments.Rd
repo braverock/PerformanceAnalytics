@@ -4,6 +4,8 @@
 \alias{Return.centered}
 \alias{centeredcomoment}
 \alias{centeredmoment}
+\alias{centeredmoment}
+\alias{centeredcomoment}
 \title{calculate centered Returns}
 \usage{
 Return.centered(R, ...)
@@ -15,6 +17,8 @@ centeredcomoment(Ra, Rb, p1, p2, normalize = FALSE)
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 asset returns}
+
+\item{\dots}{any other passthru parameters}
 
 \item{power}{power or moment to calculate}
 
@@ -30,8 +34,6 @@ index, benchmark, portfolio, or secondary asset returns to compare against}
 
 \item{normalize}{whether to standardize the calculation to agree with common
 usage, or leave the default mathematical meaning}
-
-\item{\dots}{any other passthru parameters}
 }
 \description{
 the \eqn{n}-th centered moment is calculated as \deqn{ }{moment^n(R) =
@@ -58,17 +60,14 @@ data(managers)
 Return.centered(managers[,1:3,drop=FALSE])
 
 }
-\author{
-Kris Boudt and Brian Peterson
-}
 \references{
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 Returns. Journal of Risk. Winter.
 
-Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
-Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
-and Asset Management Research Centre working paper.
+Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
+comoments and implications for portfolio selection. Review of Financial 
+Studies, 23(4):1467-1502.
 
 Ranaldo, Angelo, and Laurent Favre Sr. 2005. How to Price Hedge Funds: From
 Two- to Four-Moment CAPM. SSRN eLibrary.
@@ -77,4 +76,6 @@ Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of
 Preference for Moments of Higher Order than the Variance. Journal of Finance
 35(4):915-919.
 }
-
+\author{
+Kris Boudt and Brian Peterson
+}
