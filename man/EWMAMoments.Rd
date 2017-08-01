@@ -74,7 +74,7 @@ ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu,
 JP Morgan. Riskmetrics technical document. 1996.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}
+\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
 }
 \author{
 Dries Cornilly
