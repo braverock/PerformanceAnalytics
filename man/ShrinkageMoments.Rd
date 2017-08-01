@@ -115,7 +115,7 @@ Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter fram
 Management Science, 39(5), 68-577.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+\code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
 }
 \author{
 Dries Cornilly

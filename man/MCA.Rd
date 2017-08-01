@@ -22,8 +22,6 @@ the vector with the unique elements (the latter is advised for speed), default
 TRUE}
 
 \item{\dots}{any other passthru parameters}
-
-\item{lambda}{decay coefficient}
 }
 \description{
 calculates MCA coskewness and cokurtosis matrices
@@ -36,35 +34,37 @@ portfolio and computing modified VaR and modified ES of a portfolio.
 
 MCA is a generalization of PCA to higher moments. The principal components in 
 MCA are the ones that maximize the coskewness and cokurtosis present when projecting
-onto these directions. It was introduced by CITE and applied to financial returns
-data by CITE.
+onto these directions. It was introduced by Lim and Morton (2007) and applied to financial returns
+data by Jondeau and Rockinger (2017)
 }
 \examples{
-
 data(edhec)
 
-# EWMA estimation
-# 'as.mat = F' would speed up calculations in higher dimensions
-sigma <- M2.ewma(edhec, 0.94)
-m3 <- M3.ewma(edhec, 0.94)
-m4 <- M4.ewma(edhec, 0.94)
+# coskewness matrix based on two components
+M3mca <- M3.MCA(edhec, k = 2)$M3mca
 
-# compute equal-weighted portfolio modified ES 
-mu <- colMeans(edhec)
-p <- length(mu)
-ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
-    sigma = sigma, m3 = m3, m4 = m4)
+# screeplot MCA 
+M3dist <- M4dist <- rep(NA, ncol(edhec))
+M3S <- M3.MM(edhec)  # sample coskewness estimator
+M4S <- M4.MM(edhec)  # sample cokurtosis estimator
+for (k in 1:ncol(edhec)) {
+  M3MCA_list <- M3.MCA(edhec, k)
+  M4MCA_list <- M4.MCA(edhec, k)
 
-# compare to sample method
-sigma <- cov(edhec)
-m3 <- M3.MM(edhec)
-m4 <- M4.MM(edhec)
-ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
-    sigma = sigma, m3 = m3, m4 = m4)
+  M3dist[k] <- sqrt(sum((M3S - M3MCA_list$M3mca)^2))
+  M4dist[k] <- sqrt(sum((M4S - M4MCA_list$M4mca)^2))
+}
+par(mfrow = c(2, 1))
+plot(1:ncol(edhec), M3dist)
+plot(1:ncol(edhec), M4dist)
+par(mfrow = c(1, 1))
 
 }
 \references{
-TODO
+Lim, Hek-Leng and Morton, Jason. 2007. Principal Cumulant Component Analysis. working paper
+
+Jondeau, Eric and Jurczenko, Emmanuel. 2017. Moment Component Analysis: An Illustration 
+With International Stock Markets. Journal of Business and Economic Statistics
 }
 \seealso{
 \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}

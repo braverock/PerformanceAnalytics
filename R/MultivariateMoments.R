@@ -312,7 +312,7 @@ M4.mat2vec <- function(M4) {
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
@@ -1004,7 +1004,7 @@ M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
 #' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
 #' models and asset allocation. Finance Research Letters, 13, 225-233.
 #' 
@@ -1351,7 +1351,7 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #' TRUE
 #' @param \dots any other passthru parameters
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
 #' @references 
 #' JP Morgan. Riskmetrics technical document. 1996.
 ###keywords ts multivariate distribution models
@@ -1552,15 +1552,14 @@ M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
 #' 
 #' MCA is a generalization of PCA to higher moments. The principal components in 
 #' MCA are the ones that maximize the coskewness and cokurtosis present when projecting
-#' onto these directions. It was introduced by CITE and applied to financial returns
-#' data by CITE.
+#' onto these directions. It was introduced by Lim and Morton (2007) and applied to financial returns
+#' data by Jondeau and Rockinger (2017)
 #' @name MCA
 #' @concept co-moments
 #' @concept moments
 #' @aliases MCA M3.MCA M4.MCA
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns 
-#' @param lambda decay coefficient
 #' @param k the number of components to use
 #' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
 #' the vector with the unique elements (the latter is advised for speed), default
@@ -1569,32 +1568,49 @@ M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
 #' @author Dries Cornilly
 #' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
 #' @references 
-#' TODO
-#' @examples
+#' Lim, Hek-Leng and Morton, Jason. 2007. Principal Cumulant Component Analysis. working paper
 #' 
+#' Jondeau, Eric and Jurczenko, Emmanuel. 2017. Moment Component Analysis: An Illustration 
+#' With International Stock Markets. Journal of Business and Economic Statistics
+#' @examples
 #' data(edhec)
 #' 
-#' # EWMA estimation
-#' # 'as.mat = F' would speed up calculations in higher dimensions
-#' sigma <- M2.ewma(edhec, 0.94)
-#' m3 <- M3.ewma(edhec, 0.94)
-#' m4 <- M4.ewma(edhec, 0.94)
+#' # coskewness matrix based on two components
+#' M3mca <- M3.MCA(edhec, k = 2)$M3mca
 #' 
-#' # compute equal-weighted portfolio modified ES 
-#' mu <- colMeans(edhec)
-#' p <- length(mu)
-#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
-#'     sigma = sigma, m3 = m3, m4 = m4)
+#' # screeplot MCA 
+#' M3dist <- M4dist <- rep(NA, ncol(edhec))
+#' M3S <- M3.MM(edhec)  # sample coskewness estimator
+#' M4S <- M4.MM(edhec)  # sample cokurtosis estimator
+#' for (k in 1:ncol(edhec)) {
+#'   M3MCA_list <- M3.MCA(edhec, k)
+#'   M4MCA_list <- M4.MCA(edhec, k)
 #' 
-#' # compare to sample method
-#' sigma <- cov(edhec)
-#' m3 <- M3.MM(edhec)
-#' m4 <- M4.MM(edhec)
-#' ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
-#'     sigma = sigma, m3 = m3, m4 = m4)
+#'   M3dist[k] <- sqrt(sum((M3S - M3MCA_list$M3mca)^2))
+#'   M4dist[k] <- sqrt(sum((M4S - M4MCA_list$M4mca)^2))
+#' }
+#' par(mfrow = c(2, 1))
+#' plot(1:ncol(edhec), M3dist)
+#' plot(1:ncol(edhec), M4dist)
+#' par(mfrow = c(1, 1))
 #' 
 #' @export M3.MCA
 M3.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # MCA on coskewness matrix
+  #
+  # Inputs:
+  # R         : numeric matrix of dimensions NN x PP
+  # k         : number of components to use
+  # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
+  #
+  # Outputs:
+  # M3mca     : coskewness matrix based on k factors
+  # converged : logical indicating convergence
+  # iter      : number of iterations at convergence / at end 
+  # U         : matrix with principal components
   
   x <- coredata(R)
   
@@ -1643,6 +1659,21 @@ M3.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
 #'@export
 #'@rdname MCA
 M4.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # MCA on cokurtosis matrix
+  #
+  # Inputs:
+  # R         : numeric matrix of dimensions NN x PP
+  # k         : number of components to use
+  # as.mat    : TRUE/FALSE whether or not the output is a matrix or not
+  #
+  # Outputs:
+  # M4mca     : cokurtosis matrix based on k factors
+  # converged : logical indicating convergence
+  # iter      : number of iterations at convergence / at end 
+  # U         : matrix with principal components
   
   x <- coredata(R)
   

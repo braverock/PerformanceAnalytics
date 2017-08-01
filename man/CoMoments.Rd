@@ -105,7 +105,7 @@ Preference for Moments of Higher Order than the Variance. Journal of Finance
 \seealso{
 \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
 \code{\link{BetaCoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
-\cr \code{\link{StructuredMoments}}
+\cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
 }
 \author{
 Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
