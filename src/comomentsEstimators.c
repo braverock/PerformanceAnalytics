@@ -344,7 +344,7 @@ SEXP  M3_T23(SEXP mmargskews, SEXP PP){
       for (int kk = jj; kk < P; kk++) {
         // compute coskewness element
         double elem = 0.0;
-        if ((ii == jj) & (jj == kk)) elem = margskews[ii];
+        if ((ii == jj) && (jj == kk)) elem = margskews[ii];
         
         // fill in the element and update the iterator
         rM3[iter] = elem;
@@ -423,7 +423,7 @@ SEXP  M3_1F(SEXP mmargskews, SEXP bbeta, SEXP ffskew, SEXP PP){
     for (int jj = ii; jj < P; jj++) {
       for (int kk = jj; kk < P; kk++) {
         // compute and fill coskewness element
-        if ((ii == jj) & (jj == kk)) {
+        if ((ii == jj) && (jj == kk)) {
           rM3[iter] = margskews[ii];
         } else {
           rM3[iter] = beta[ii] * beta[jj] * beta[kk] * fskew;
@@ -1362,8 +1362,8 @@ SEXP  M4_T12(SEXP mmargk_iiii, SEXP mmargk_iikk, SEXP PP){
         for (int ll = kk; ll < P; ll++) {
           // compute coskewness element
           double elem = 0.0;
-          if (((ii == jj) & (jj == kk)) & (kk == ll)) elem = margk_iiii[ii];
-          if (((ii == jj) & (kk == ll)) & (jj != kk)) elem = margk_iikk[ii] * margk_iikk[kk];
+          if (((ii == jj) && (jj == kk)) && (kk == ll)) elem = margk_iiii[ii];
+          if (((ii == jj) && (kk == ll)) && (jj != kk)) elem = margk_iikk[ii] * margk_iikk[kk];
           
           // fill in the element and update the iterator
           rM4[iter] = elem;
