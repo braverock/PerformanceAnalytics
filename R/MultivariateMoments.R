@@ -1061,7 +1061,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
@@ -1112,8 +1112,6 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     T2 <- diag(sd_vec) %*% R2 %*% diag(sd_vec)
     return (T2)
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
@@ -1147,7 +1145,7 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   if (unbiasedMarg && !((struct == "Indep") || (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
@@ -1221,8 +1219,6 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
     # coskewness matrix under central-symmetry
     return (rep(0, ncosk))
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
@@ -1251,7 +1247,7 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
@@ -1313,8 +1309,6 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     if (as.mat) T4 <- M4.vec2mat(T4, PP)
     return (T4)
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
