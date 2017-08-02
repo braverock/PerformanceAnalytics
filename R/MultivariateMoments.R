@@ -42,7 +42,7 @@ M3.MM <- function(R, unbiased = FALSE, as.mat = TRUE, ...) {
   Xc <- x - matrix(mu, nrow = NN, ncol = PP, byrow = TRUE)
   
   if (unbiased) {
-    if (NN < 3) stop("X should have at least 3 observations")
+    if (NN < 3) stop("R should have at least 3 observations")
     CC <- NN / ((NN - 1) * (NN - 2))
   } else {
     CC <- 1 / NN
@@ -200,12 +200,12 @@ M3.innprod <- function(p, M3_1, M3_2 = NULL) {
   # M3_1      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) / 6)
   # M3_2      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) / 6)
   
-  if (NCOL(M3_1) != 1) stop("M3_1 should only contain the unique coskewness elements (see M3mat2vec)")
+  if (NCOL(M3_1) != 1) stop("M3_1 should only contain the unique coskewness elements (see e.g. output of M3.MM(R, as.mat = FALSE))")
   
   if (is.null(M3_2)) {
     M3_2 <- M3_1
   } else {
-    if (length(M3_1) != length(M3_2)) stop("M3_2 should only contain the unique coskewness elements (see (M3mat2vec)")
+    if (length(M3_1) != length(M3_2)) stop("M3_2 should only contain the unique coskewness elements (see e.g. output of M3.MM(R, as.mat = FALSE))")
   }
   
   .Call('M3innprod', M3_1, M3_2, as.integer(p), PACKAGE="PerformanceAnalytics")
@@ -217,12 +217,12 @@ M4.innprod <- function(p, M4_1, M4_2 = NULL) {
   # M4_1      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) * (p + 3) / 24)
   # M4_2      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) * (p + 3) / 24)
   
-  if (NCOL(M4_1) != 1) stop("M4_1 should only contain the unique coskewness elements (see M4mat2vec)")
+  if (NCOL(M4_1) != 1) stop("M4_1 should only contain the unique coskewness elements (see e.g. output of M4.MM(R, as.mat = FALSE))")
   
   if (is.null(M4_2)) {
     M4_2 <- M4_1
   } else {
-    if (length(M4_1) != length(M4_2)) stop("M4_2 should only contain the unique coskewness elements (see (M4mat2vec)")
+    if (length(M4_1) != length(M4_2)) stop("M4_2 should only contain the unique coskewness elements (see e.g. output of M4.MM(R, as.mat = FALSE))")
   }
   
   .Call('M4innprod', M4_1, M4_2, as.integer(p), PACKAGE="PerformanceAnalytics")
@@ -302,7 +302,7 @@ M4.mat2vec <- function(M4) {
 #' @aliases ShrinkageMoments M2.shrink M3.shrink M4.shrink
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param targets vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
+#' @param targets vector of integers selecting the target matrices to shrink to. The first four
 #' structures are, in order: 'independent marginals', 'independent and identical marginals', 
 #' 'observed 1-factor model' and 'constant correlation'. See Details.
 #' @param f vector or matrix with observations of the factor, to be used with target 3. See Details.
@@ -344,7 +344,7 @@ M4.mat2vec <- function(M4) {
 #' 
 #' # multi-target shrinkage with targets 1, 3 and 4
 #' # as.mat = F' would speed up calculations in higher dimensions
-#' targets <- c(TRUE, FALSE, TRUE, TRUE)
+#' targets <- c(1, 3, 4)
 #' sigma <- M2.shrink(edhec, targets, f)$M2sh
 #' m3 <- M3.shrink(edhec, targets, f)$M3sh
 #' m4 <- M4.shrink(edhec, targets, f)$M4sh
@@ -363,7 +363,7 @@ M4.mat2vec <- function(M4) {
 #'     sigma = sigma, m3 = m3, m4 = m4)
 #' 
 #' @export M2.shrink
-M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
+M2.shrink <- function(R, targets = 1, f = NULL) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -371,7 +371,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals, Ledoit and Wolf (2003)
   #           : T2 : independent, equal marginals, Ledoit and Wolf (2003)
   #           : T3 : 1-factor model of Ledoit and Wolf (2003)
@@ -391,11 +391,15 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:4) == 0) stop("Select valid targets (out of 1, 2, 3, 4)")
+  tt <- rep(FALSE, 4)
+  tt[targets] <- TRUE
+  targets <- tt
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -537,7 +541,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname ShrinkageMoments
-M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
+M3.shrink <- function(R, targets = 1, f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -545,7 +549,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals
   #           : T2 : independent, equal marginals
   #           : T3 : 1-factor model of Martellini and Ziemann (2010)
@@ -567,14 +571,17 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   X <- coredata(R)
   
   # input checking
-  if (length(targets < 6)) targets <- c(targets, rep(FALSE, 6 - length(targets)))
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
-  if (unbiasedMSE & (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:6) == 0) stop("Select valid targets (out of 1, 2, 3, 4, 5, 6)")
+  tt <- rep(FALSE, 6)
+  tt[targets] <- TRUE
+  targets <- tt
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
+  if (unbiasedMSE && (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -592,7 +599,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
   if (unbiasedMSE) {
-    if (NN < 6) stop("X should have at least 6 observations")
+    if (NN < 6) stop("R should have at least 6 observations")
   }
   PP <- dim(X)[2]                                                   # number of assets
   nT <- sum(targets)                                                # number of targets
@@ -768,7 +775,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname ShrinkageMoments
-M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
+M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -776,7 +783,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals
   #           : T2 : independent, equal marginals
   #           : T3 : 1-factor model of Martellini and Ziemann (2010)
@@ -796,11 +803,15 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:4) == 0) stop("Select valid targets (out of 1, 2, 3, 4)")
+  tt <- rep(FALSE, 4)
+  tt[targets] <- TRUE
+  targets <- tt
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -1061,9 +1072,9 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1094,7 +1105,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     } else {
       mod <- stats::lm(X ~ f)
       beta <- t(mod$coefficients[-1,])
-      fcov <- cov(f) * (n - 1) / n
+      fcov <- cov(f) * (NN - 1) / NN
       T2 <- beta %*% fcov %*% t(beta)
       epsvars <- colMeans(mod$residuals^2)
       T2 <- T2 + diag(epsvars)
@@ -1112,8 +1123,6 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     T2 <- diag(sd_vec) %*% R2 %*% diag(sd_vec)
     return (T2)
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
@@ -1147,15 +1156,15 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
-  if (unbiasedMarg & !((struct == "Indep") | (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
+  if (unbiasedMarg && !((struct == "Indep") || (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
   if (unbiasedMarg) {
-    if (NN < 6) stop("X should have at least 6 observations")
+    if (NN < 6) stop("R should have at least 6 observations")
   }
   PP <- dim(X)[2]                                                   # number of assets
   ncosk <- PP * (PP + 1) * (PP + 2) / 6                             # number of unique coskewness elements
@@ -1221,8 +1230,6 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
     # coskewness matrix under central-symmetry
     return (rep(0, ncosk))
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
@@ -1251,9 +1258,9 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   X <- coredata(R)
   
   # input checking
-  struct <- struct[1]
+  struct <- match.arg(struct)
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1313,8 +1320,6 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     if (as.mat) T4 <- M4.vec2mat(T4, PP)
     return (T4)
     
-  } else {
-    stop("select a valid structure")
   }
 }
 
