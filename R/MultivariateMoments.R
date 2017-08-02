@@ -1094,7 +1094,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
     } else {
       mod <- stats::lm(X ~ f)
       beta <- t(mod$coefficients[-1,])
-      fcov <- cov(f) * (n - 1) / n
+      fcov <- cov(f) * (NN - 1) / NN
       T2 <- beta %*% fcov %*% t(beta)
       epsvars <- colMeans(mod$residuals^2)
       T2 <- T2 + diag(epsvars)
