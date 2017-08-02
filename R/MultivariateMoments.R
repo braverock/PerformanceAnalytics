@@ -392,10 +392,10 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -570,11 +570,11 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   if (length(targets < 6)) targets <- c(targets, rep(FALSE, 6 - length(targets)))
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
-  if (unbiasedMSE & (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
+  if (unbiasedMSE && (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -797,10 +797,10 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
   if (sum(targets) == 0) stop("No targets selected")
-  if (targets[3] & is.null(f)) stop("Provide the factor observations")
+  if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
-  if (targets[3] & (NCOL(f) != 1)) {
+  if (targets[3] && (NCOL(f) != 1)) {
     nFactors <- NCOL(f)
     if (nFactors > 1) {
       f_other <- matrix(f[, 2:nFactors], ncol = nFactors - 1)
@@ -1063,7 +1063,7 @@ M2.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1149,8 +1149,8 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
-  if (unbiasedMarg & !((struct == "Indep") | (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
+  if (unbiasedMarg && !((struct == "Indep") || (struct == "IndepId"))) stop("unbiasedMarg can only be combined with T2, T3 and T6")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
@@ -1253,7 +1253,7 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   # input checking
   struct <- struct[1]
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if ((struct == "observedfactor") & is.null(f)) stop("Provide the factor observations")
+  if ((struct == "observedfactor") && is.null(f)) stop("Provide the factor observations")
   
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
