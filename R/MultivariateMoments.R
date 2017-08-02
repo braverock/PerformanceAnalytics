@@ -363,7 +363,7 @@ M4.mat2vec <- function(M4) {
 #'     sigma = sigma, m3 = m3, m4 = m4)
 #' 
 #' @export M2.shrink
-M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
+M2.shrink <- function(R, targets = 1, f = NULL) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -371,7 +371,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals, Ledoit and Wolf (2003)
   #           : T2 : independent, equal marginals, Ledoit and Wolf (2003)
   #           : T3 : 1-factor model of Ledoit and Wolf (2003)
@@ -391,7 +391,11 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
   
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:4) == 0) stop("Select valid targets (out of 1, 2, 3, 4)")
+  tt <- rep(FALSE, 4)
+  tt[targets] <- TRUE
+  targets <- tt
   if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
@@ -537,7 +541,7 @@ M2.shrink <- function(R, targets = c(T, F, F, F), f = NULL) {
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname ShrinkageMoments
-M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
+M3.shrink <- function(R, targets = 1, f = NULL, unbiasedMSE = FALSE, as.mat = TRUE) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -545,7 +549,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals
   #           : T2 : independent, equal marginals
   #           : T3 : 1-factor model of Martellini and Ziemann (2010)
@@ -567,9 +571,12 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   X <- coredata(R)
   
   # input checking
-  if (length(targets < 6)) targets <- c(targets, rep(FALSE, 6 - length(targets)))
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:6) == 0) stop("Select valid targets (out of 1, 2, 3, 4, 5, 6)")
+  tt <- rep(FALSE, 6)
+  tt[targets] <- TRUE
+  targets <- tt
   if (targets[3] && is.null(f)) stop("Provide the factor observations")
   if (unbiasedMSE && (sum(targets[c(3, 4, 5)]) > 0)) stop("UnbiasedMSE can only be combined with T2, T3 and T6")
   
@@ -768,7 +775,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
 #'@useDynLib PerformanceAnalytics
 #'@export
 #'@rdname ShrinkageMoments
-M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
+M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -776,7 +783,7 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # targets   : vector of booleans determining which targets to take
+  # targets   : vector of integers indicating which targets to use
   #           : T1 : independent, unequal marginals
   #           : T2 : independent, equal marginals
   #           : T3 : 1-factor model of Martellini and Ziemann (2010)
@@ -796,7 +803,11 @@ M4.shrink <- function(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE) {
   
   # input checking
   if (NCOL(X) < 2) stop("R must have at least 2 variables")
-  if (sum(targets) == 0) stop("No targets selected")
+  if (length(targets) == 0) stop("No targets selected")
+  if (prod(targets %in% 1:4) == 0) stop("Select valid targets (out of 1, 2, 3, 4)")
+  tt <- rep(FALSE, 4)
+  tt[targets] <- TRUE
+  targets <- tt
   if (targets[3] && is.null(f)) stop("Provide the factor observations")
   
   # prepare for additional factors if necessary
