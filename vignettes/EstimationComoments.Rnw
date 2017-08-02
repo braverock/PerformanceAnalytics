@@ -317,52 +317,52 @@ In shrinkage estimation, the main choice to make is which structured estimator t
 The different coskewness and cokurtosis single-target shrinkage estimators can be accessed by
 <<ShrinkIndep,echo=T>>=
 # target "Indep"
-m3 <- M3.shrink(edhec, c(T, F, F, F))$M3sh
-m4 <- M4.shrink(edhec, c(T, F, F, F))$M4sh
+m3 <- M3.shrink(edhec, 1)$M3sh
+m4 <- M4.shrink(edhec, 1)$M4sh
 
 # target "IndepId"
-m3 <- M3.shrink(edhec, c(F, T, F, F))$M3sh
-m4 <- M4.shrink(edhec, c(F, T, F, F))$M4sh
+m3 <- M3.shrink(edhec, 2)$M3sh
+m4 <- M4.shrink(edhec, 2)$M4sh
 
 # target "1-factor"
-m3 <- M3.shrink(edhec, c(F, F, T, F), f)$M3sh
-m4 <- M4.shrink(edhec, c(F, F, T, F), f)$M4sh
+m3 <- M3.shrink(edhec, 3, f)$M3sh
+m4 <- M4.shrink(edhec, 3, f)$M4sh
 
 # target "constant correlation"
-m3 <- M3.shrink(edhec, c(F, F, F, T))$M3sh
-m4 <- M4.shrink(edhec, c(F, F, F, T))$M4sh
+m3 <- M3.shrink(edhec, 4)$M3sh
+m4 <- M4.shrink(edhec, 4)$M4sh
 
 # target "latent 1-factor model of Simaan (1993)"
-m3 <- M3.shrink(edhec, c(F, F, F, F, T, F))$M3sh
+m3 <- M3.shrink(edhec, 5)$M3sh
 
 # target "central-symmetry"
-m3 <- M3.shrink(edhec, c(F, F, F, F, F, T))$M3sh
+m3 <- M3.shrink(edhec, 6)$M3sh
 @
 <<ShrinkIndepsumm,echo=F>>=
-m3 <- M3.shrink(edhec, c(T, F, F, F))$M3sh
-m4 <- M4.shrink(edhec, c(T, F, F, F))$M4sh
+m3 <- M3.shrink(edhec, 1)$M3sh
+m4 <- M4.shrink(edhec, 1)$M4sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 m4port <- PerformanceAnalytics:::portm4(w, m4)
 summ_moms[7,] <- c(m3port, m4port)
-m3 <- M3.shrink(edhec, c(F, T, F, F))$M3sh
-m4 <- M4.shrink(edhec, c(F, T, F, F))$M4sh
+m3 <- M3.shrink(edhec, 2)$M3sh
+m4 <- M4.shrink(edhec, 2)$M4sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 m4port <- PerformanceAnalytics:::portm4(w, m4)
 summ_moms[8,] <- c(m3port, m4port)
-m3 <- M3.shrink(edhec, c(F, F, T, F), f)$M3sh
-m4 <- M4.shrink(edhec, c(F, F, T, F), f)$M4sh
+m3 <- M3.shrink(edhec, 3, f)$M3sh
+m4 <- M4.shrink(edhec, 3, f)$M4sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 m4port <- PerformanceAnalytics:::portm4(w, m4)
 summ_moms[9,] <- c(m3port, m4port)
-m3 <- M3.shrink(edhec, c(F, F, F, T), f)$M3sh
-m4 <- M4.shrink(edhec, c(F, F, F, T), f)$M4sh
+m3 <- M3.shrink(edhec, 4, f)$M3sh
+m4 <- M4.shrink(edhec, 4, f)$M4sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 m4port <- PerformanceAnalytics:::portm4(w, m4)
 summ_moms[10,] <- c(m3port, m4port)
-m3 <- M3.shrink(edhec, c(F, F, F, F, T, F))$M3sh
+m3 <- M3.shrink(edhec, 5)$M3sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 summ_moms[11,] <- c(m3port, NA)
-m3 <- M3.shrink(edhec, c(F, F, F, F, F, T))$M3sh
+m3 <- M3.shrink(edhec, 6)$M3sh
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 summ_moms[12,] <- c(m3port, NA)
 @
@@ -383,8 +383,8 @@ The optimization is done over all vectors $\bm{\lambda}$ satisfying $\lambda_k \
 
 To use the multi-target estimators, simply select the structured estimators you want to include. For example, suppose we want to mix the structured estimators \code{"Indep"}, \code{"observedfactor"} and \code{"CC"}. This is done by
 <<ShrinkMTb,echo=T>>=
-m3 <- M3.shrink(edhec, c(T, F, T, T), f)$M3sh
-m4 <- M4.shrink(edhec, c(T, F, T, T), f)$M4sh
+m3 <- M3.shrink(edhec, c(1, 3, 4), f)$M3sh
+m4 <- M4.shrink(edhec, c(1, 3, 4), f)$M4sh
 @
 <<ShrinkMTbsumm,echo=F>>=
 m3port <- PerformanceAnalytics:::portm3(w, m3)
@@ -397,7 +397,7 @@ summ_moms[13,] <- c(m3port, m4port)
 
 All the shrinkage estimators shown above use consistent, but biased estimators to estimate the MSE loss function determining the shrinkage intensities to use. \cite{boudt2017coskewness} derive bias-corrected estimators for shrinkage estimation of the coskewness matrix with structured matrices \code{"Indep"}, \code{"IndepId"} and \code{"CS"}. The bias-corrected estimators improve the MSE compared to the biased estimators when the sample size is rather small. The option of using the unbiased estimators can be selected by the argument \code{unbiasedMarg = T} whenever estimating the coskewness matrix with \code{M3.shrink} and any combination of the three targets given above. For example, multi-target shrinkage estimation of the coskewness matrix using bias-corrected estimators for the MSE loss function with all the available structured coskwenss matrices is done by
 <<ShrinkMTunb,echo=T>>=
-m3 <- M3.shrink(edhec, c(T, T, F, F, F, T), unbiasedMSE = T)$M3sh
+m3 <- M3.shrink(edhec, c(1, 2, 6), unbiasedMSE = T)$M3sh
 @
 <<ShrinkMTunbsumm,echo=F>>=
 m3port <- PerformanceAnalytics:::portm3(w, m3)
@@ -524,32 +524,32 @@ rm95[5, 1] <- temp$MVaR
 VaRcomp[5,] <- temp$pct_contrib_MVaR
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
-            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(T, F, F, F), as.mat = F)$M3sh, 
-            m4 = M4.shrink(edhec, c(T, F, F, F), as.mat = F)$M4sh)
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 1, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 1, as.mat = F)$M4sh)
 rm95[6, 1] <- temp$MVaR
 VaRcomp[6,] <- temp$pct_contrib_MVaR
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
-            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, T, F, F), as.mat = F)$M3sh, 
-            m4 = M4.shrink(edhec, c(F, T, F, F), as.mat = F)$M4sh)
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 2, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 2, as.mat = F)$M4sh)
 rm95[7, 1] <- temp$MVaR
 VaRcomp[7,] <- temp$pct_contrib_MVaR
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
-            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, F, T, F), f = f, as.mat = F)$M3sh, 
-            m4 = M4.shrink(edhec, c(F, F, T, F), f= f, as.mat = F)$M4sh)
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 3, f = f, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 3, f= f, as.mat = F)$M4sh)
 rm95[8, 1] <- temp$MVaR
 VaRcomp[8,] <- temp$pct_contrib_MVaR
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
-            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, F, F, T), as.mat = F)$M3sh, 
-            m4 = M4.shrink(edhec, c(F, F, F, T), as.mat = F)$M4sh)
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 4, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 4, as.mat = F)$M4sh)
 rm95[9, 1] <- temp$MVaR
 VaRcomp[9,] <- temp$pct_contrib_MVaR
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
-            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(T, F, T, T), f = f, as.mat = F)$M3sh, 
-            m4 = M4.shrink(edhec, c(T, F, T, T), f = f, as.mat = F)$M4sh)
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M4sh)
 rm95[10, 1] <- temp$MVaR
 VaRcomp[10,] <- temp$pct_contrib_MVaR
 
@@ -589,32 +589,32 @@ rm95[5, 2] <- temp$MES
 EScomp[5,] <- temp$pct_contrib_MES
 
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
-           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(T, F, F, F), as.mat = F)$M3sh, 
-           m4 = M4.shrink(edhec, c(T, F, F, F), as.mat = F)$M4sh)
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 1, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 1, as.mat = F)$M4sh)
 rm95[6, 2] <- temp$MES
 EScomp[6,] <- temp$pct_contrib_MES
 
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
-           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, T, F, F), as.mat = F)$M3sh, 
-           m4 = M4.shrink(edhec, c(F, T, F, F), as.mat = F)$M4sh)
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 2, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 2, as.mat = F)$M4sh)
 rm95[7, 2] <- temp$MES
 EScomp[7,] <- temp$pct_contrib_MES
 
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
-           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, F, T, F), f = f, as.mat = F)$M3sh, 
-           m4 = M4.shrink(edhec, c(F, F, T, F), f= f, as.mat = F)$M4sh)
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 3, f = f, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 3, f= f, as.mat = F)$M4sh)
 rm95[8, 2] <- temp$MES
 EScomp[8,] <- temp$pct_contrib_MES
 
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
-           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(F, F, F, T), as.mat = F)$M3sh, 
-           m4 = M4.shrink(edhec, c(F, F, F, T), as.mat = F)$M4sh)
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 4, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 4, as.mat = F)$M4sh)
 rm95[9, 2] <- temp$MES
 EScomp[9,] <- temp$pct_contrib_MES
 
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
-           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(T, F, T, T), f = f, as.mat = F)$M3sh, 
-           m4 = M4.shrink(edhec, c(T, F, T, T), f = f, as.mat = F)$M4sh)
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M4sh)
 rm95[10, 2] <- temp$MES
 EScomp[10,] <- temp$pct_contrib_MES
 
