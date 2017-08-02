@@ -42,7 +42,7 @@ M3.MM <- function(R, unbiased = FALSE, as.mat = TRUE, ...) {
   Xc <- x - matrix(mu, nrow = NN, ncol = PP, byrow = TRUE)
   
   if (unbiased) {
-    if (NN < 3) stop("X should have at least 3 observations")
+    if (NN < 3) stop("R should have at least 3 observations")
     CC <- NN / ((NN - 1) * (NN - 2))
   } else {
     CC <- 1 / NN
@@ -200,12 +200,12 @@ M3.innprod <- function(p, M3_1, M3_2 = NULL) {
   # M3_1      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) / 6)
   # M3_2      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) / 6)
   
-  if (NCOL(M3_1) != 1) stop("M3_1 should only contain the unique coskewness elements (see M3mat2vec)")
+  if (NCOL(M3_1) != 1) stop("M3_1 should only contain the unique coskewness elements (see e.g. output of M3.MM(R, as.mat = FALSE))")
   
   if (is.null(M3_2)) {
     M3_2 <- M3_1
   } else {
-    if (length(M3_1) != length(M3_2)) stop("M3_2 should only contain the unique coskewness elements (see (M3mat2vec)")
+    if (length(M3_1) != length(M3_2)) stop("M3_2 should only contain the unique coskewness elements (see e.g. output of M3.MM(R, as.mat = FALSE))")
   }
   
   .Call('M3innprod', M3_1, M3_2, as.integer(p), PACKAGE="PerformanceAnalytics")
@@ -217,12 +217,12 @@ M4.innprod <- function(p, M4_1, M4_2 = NULL) {
   # M4_1      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) * (p + 3) / 24)
   # M4_2      : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) * (p + 3) / 24)
   
-  if (NCOL(M4_1) != 1) stop("M4_1 should only contain the unique coskewness elements (see M4mat2vec)")
+  if (NCOL(M4_1) != 1) stop("M4_1 should only contain the unique coskewness elements (see e.g. output of M4.MM(R, as.mat = FALSE))")
   
   if (is.null(M4_2)) {
     M4_2 <- M4_1
   } else {
-    if (length(M4_1) != length(M4_2)) stop("M4_2 should only contain the unique coskewness elements (see (M4mat2vec)")
+    if (length(M4_1) != length(M4_2)) stop("M4_2 should only contain the unique coskewness elements (see e.g. output of M4.MM(R, as.mat = FALSE))")
   }
   
   .Call('M4innprod', M4_1, M4_2, as.integer(p), PACKAGE="PerformanceAnalytics")
@@ -592,7 +592,7 @@ M3.shrink <- function(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = 
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
   if (unbiasedMSE) {
-    if (NN < 6) stop("X should have at least 6 observations")
+    if (NN < 6) stop("R should have at least 6 observations")
   }
   PP <- dim(X)[2]                                                   # number of assets
   nT <- sum(targets)                                                # number of targets
@@ -1155,7 +1155,7 @@ M3.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC", 
   # compute useful variables
   NN <- dim(X)[1]                                                   # number of observations
   if (unbiasedMarg) {
-    if (NN < 6) stop("X should have at least 6 observations")
+    if (NN < 6) stop("R should have at least 6 observations")
   }
   PP <- dim(X)[2]                                                   # number of assets
   ncosk <- PP * (PP + 1) * (PP + 2) / 6                             # number of unique coskewness elements
