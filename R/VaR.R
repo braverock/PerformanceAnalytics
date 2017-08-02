@@ -181,8 +181,8 @@ VaR <-
         if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
         if (is.null(sigma)) { sigma = cov(R) }
         if(method=="modified"){
-          if (is.null(m3)) {m3 = M3.MM(R,as.mat=F)}
-          if (is.null(m4)) {m4 = M4.MM(R,as.mat=F)}
+          if (is.null(m3)) {m3 = M3.MM(R,as.mat=FALSE)}
+          if (is.null(m4)) {m4 = M4.MM(R,as.mat=FALSE)}
         }
       } 
     } else { 
