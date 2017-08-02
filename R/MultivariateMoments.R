@@ -302,7 +302,7 @@ M4.mat2vec <- function(M4) {
 #' @aliases ShrinkageMoments M2.shrink M3.shrink M4.shrink
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
-#' @param targets vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
+#' @param targets vector of integers selecting the target matrices to shrink to. The first four
 #' structures are, in order: 'independent marginals', 'independent and identical marginals', 
 #' 'observed 1-factor model' and 'constant correlation'. See Details.
 #' @param f vector or matrix with observations of the factor, to be used with target 3. See Details.
@@ -344,7 +344,7 @@ M4.mat2vec <- function(M4) {
 #' 
 #' # multi-target shrinkage with targets 1, 3 and 4
 #' # as.mat = F' would speed up calculations in higher dimensions
-#' targets <- c(TRUE, FALSE, TRUE, TRUE)
+#' targets <- c(1, 3, 4)
 #' sigma <- M2.shrink(edhec, targets, f)$M2sh
 #' m3 <- M3.shrink(edhec, targets, f)$M3sh
 #' m4 <- M4.shrink(edhec, targets, f)$M4sh

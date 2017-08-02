@@ -9,18 +9,17 @@
 \alias{M4.shrink}
 \title{Functions for calculating shrinkage-based comoments of financial time series}
 \usage{
-M2.shrink(R, targets = c(T, F, F, F), f = NULL)
+M2.shrink(R, targets = 1, f = NULL)
 
-M3.shrink(R, targets = c(T, F, F, F, F, F), f = NULL, unbiasedMSE = FALSE,
-  as.mat = TRUE)
+M3.shrink(R, targets = 1, f = NULL, unbiasedMSE = FALSE, as.mat = TRUE)
 
-M4.shrink(R, targets = c(T, F, F, F), f = NULL, as.mat = TRUE)
+M4.shrink(R, targets = 1, f = NULL, as.mat = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 asset returns}
 
-\item{targets}{vector of TRUE/FALSE selecting the target matrices to shrink to. The first four
+\item{targets}{vector of integers selecting the target matrices to shrink to. The first four
 structures are, in order: 'independent marginals', 'independent and identical marginals', 
 'observed 1-factor model' and 'constant correlation'. See Details.}
 
@@ -73,7 +72,7 @@ f <- rowSums(edhec)
 
 # multi-target shrinkage with targets 1, 3 and 4
 # as.mat = F' would speed up calculations in higher dimensions
-targets <- c(TRUE, FALSE, TRUE, TRUE)
+targets <- c(1, 3, 4)
 sigma <- M2.shrink(edhec, targets, f)$M2sh
 m3 <- M3.shrink(edhec, targets, f)$M3sh
 m4 <- M4.shrink(edhec, targets, f)$M4sh
