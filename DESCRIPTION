@@ -31,6 +31,7 @@ Depends:
     R (>= 3.0.0),
     xts (>= 0.10.0)
 Suggests:
+    dygraphs,
     Hmisc,
     MASS,
     quantmod,

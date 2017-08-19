@@ -299,10 +299,13 @@ function (R,
               }
       
       ##@TODO Get all the graphical parameters integrated with these two
-      dyRangeSelector(dygraph(y,main = main,
-              xlab = xlab,
-              ylab = ylab))
-      
+      if(requireNamespace("dygraphs", quietly = TRUE)) {
+        dygraphs::dyRangeSelector(
+          dygraphs::dygraph(y, main = main, xlab = xlab, ylab = ylab)
+        )
+      } else {
+        stop("Please install the dygraphs package to use dygraphPlot = TRUE")
+      }
     }
 
 }
