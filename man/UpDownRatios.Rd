@@ -51,11 +51,10 @@ UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Up", meth
 UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Down", method="Capture")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 47 \cr
 }
-
+\author{
+Peter Carl
+}

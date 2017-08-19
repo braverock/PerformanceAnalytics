@@ -120,9 +120,6 @@ chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95,
 #end examples
 
 }
-\author{
-John Fox, ported by Peter Carl
-}
 \references{
 main code forked/borrowed/ported from the excellent: \cr Fox,
 John (2007) \emph{car: Companion to Applied Regression} \cr
@@ -134,4 +131,6 @@ John (2007) \emph{car: Companion to Applied Regression} \cr
 \code{\link[car]{qq.plot}} \cr
 \code{\link{plot}}
 }
-
+\author{
+John Fox, ported by Peter Carl
+}

@@ -25,4 +25,3 @@ print(Frequency(managers['1996',1:5]))
 \author{
 Matthieu Lestel
 }
-

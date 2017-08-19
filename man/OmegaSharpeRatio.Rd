@@ -40,11 +40,10 @@ print(OmegaSharpeRatio(managers['1996'], MAR))
 print(OmegaSharpeRatio(managers['1996',1], MAR)) #expected 3.60
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008, p.95
 }
-
+\author{
+Matthieu Lestel
+}

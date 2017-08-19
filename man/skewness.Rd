@@ -52,9 +52,6 @@ data(managers)
 skewness(managers)
 
 }
-\author{
-Diethelm Wuertz, Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.83-84
@@ -62,4 +59,6 @@ and attribution}, second edition 2008 p.83-84
 \seealso{
 \code{\link{kurtosis}}
 }
-
+\author{
+Diethelm Wuertz, Matthieu Lestel
+}

@@ -48,9 +48,6 @@ data(managers)
 t(round(maxDrawdown(managers),4))
 
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
@@ -60,4 +57,6 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{table.Drawdowns}} \cr \code{\link{table.DownsideRisk}} \cr
 \code{\link{chart.Drawdown}} \cr
 }
-
+\author{
+Peter Carl
+}

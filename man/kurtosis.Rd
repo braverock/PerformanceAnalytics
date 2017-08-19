@@ -65,9 +65,6 @@ print(kurtosis(managers['1996'], method="sample"))
 print(kurtosis(managers['1996',1], method="sample"))
 
 }
-\author{
-Diethelm Wuertz, Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.84-85
@@ -75,4 +72,6 @@ and attribution}, second edition 2008 p.84-85
 \seealso{
 \code{\link{skewness}}.
 }
-
+\author{
+Diethelm Wuertz, Matthieu Lestel
+}

@@ -39,11 +39,10 @@ print(DRatio(managers['1996']))
 print(DRatio(managers['1996',1])) #expected 0.0725
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.95
 }
-
+\author{
+Matthieu Lestel
+}

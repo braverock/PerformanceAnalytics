@@ -53,9 +53,6 @@ chart.ECDF(edhec[, 1, drop=FALSE])
 
 
 }
-\author{
-Peter Carl
-}
 \references{
 Ruppert, David. \emph{Statistics and Finance, an Introduction}.
 Springer. 2004. Ch. 2 Fig. 2.5
@@ -65,4 +62,6 @@ Springer. 2004. Ch. 2 Fig. 2.5
 \seealso{
 \code{\link{plot}}, \code{\link{ecdf}}
 }
-
+\author{
+Peter Carl
+}

@@ -34,9 +34,6 @@ data(edhec)
 t(round(CDD(edhec),4))
 
 }
-\author{
-Brian G. Peterson
-}
 \references{
 Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
 Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
@@ -46,4 +43,6 @@ http://www.ise.ufl.edu/uryasev/drawdown.pdf
 \seealso{
 \code{\link{ES}} \code{\link{maxDrawdown}}
 }
-
+\author{
+Brian G. Peterson
+}

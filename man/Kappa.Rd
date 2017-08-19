@@ -53,11 +53,10 @@ print(Kappa(managers['1996'], MAR, l))
 print(Kappa(managers['1996',1], MAR, l)) #expected 1.493
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.96
 }
-
+\author{
+Matthieu Lestel
+}

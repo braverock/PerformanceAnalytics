@@ -3,6 +3,7 @@
 \name{chart.ACF}
 \alias{chart.ACF}
 \alias{chart.ACFplus}
+\alias{chart.ACFplus}
 \title{Create ACF chart or ACF with PACF two-panel chart}
 \usage{
 chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
@@ -44,10 +45,9 @@ data(edhec)
 chart.ACFplus(edhec[,1,drop=FALSE])
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

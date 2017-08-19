@@ -73,11 +73,10 @@ the DownCapture, and vice versa.
     chart.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{plot}}, \cr \code{\link{par}}, \cr
 \code{\link{UpDownRatios}}, \cr \code{\link{table.UpDownRatios}} \cr
 }
-
+\author{
+Peter Carl
+}

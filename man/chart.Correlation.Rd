@@ -33,10 +33,9 @@ data(managers)
 chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{table.Correlation}}
 }
-
+\author{
+Peter Carl
+}

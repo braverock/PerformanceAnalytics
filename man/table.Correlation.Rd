@@ -37,10 +37,9 @@ ctable = table.Correlation(managers[,1:6],managers[,8,drop=FALSE], conf.level=.9
 dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{cor.test}}
 }
-
+\author{
+Peter Carl
+}

@@ -151,10 +151,9 @@ Code inspired by a chart on: \cr
 			methods = c("add.density","add.centered","add.rug","add.risk"))
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link[graphics]{hist}}
 }
-
+\author{
+Peter Carl
+}

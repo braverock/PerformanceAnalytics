@@ -34,11 +34,10 @@ print(MartinRatio(managers['1996']))
 print(MartinRatio(managers['1996',1])) 
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.91
 }
-
+\author{
+Matthieu Lestel
+}

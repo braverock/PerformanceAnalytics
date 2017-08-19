@@ -74,9 +74,6 @@ chart.Boxplot(edhec)
 chart.Boxplot(edhec,as.Tufte=TRUE)
 
 }
-\author{
-Peter Carl
-}
 \references{
 Tufte, Edward R.  \emph{The Visual Display of Quantitative
 Information}. Graphics Press. 1983. p. 124-129
@@ -84,4 +81,6 @@ Information}. Graphics Press. 1983. p. 124-129
 \seealso{
 \code{\link[graphics]{boxplot}}
 }
-
+\author{
+Peter Carl
+}

@@ -30,10 +30,9 @@ data(managers)
 apply.fromstart(managers[,1,drop=FALSE], FUN="mean", width=36)
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link[zoo]{rollapply}}
 }
-
+\author{
+Peter Carl
+}

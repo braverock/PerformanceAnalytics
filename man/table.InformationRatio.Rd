@@ -35,9 +35,6 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Portfolio information ratio")
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.81
@@ -46,4 +43,6 @@ and attribution}, second edition 2008 p.81
 \code{\link{InformationRatio}}
 \cr \code{\link{TrackingError}}
 }
-
+\author{
+Matthieu Lestel
+}

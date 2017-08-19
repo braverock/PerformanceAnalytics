@@ -3,6 +3,7 @@
 \name{chart.BarVaR}
 \alias{chart.BarVaR}
 \alias{charts.BarVaR}
+\alias{charts.BarVaR}
 \title{Periodic returns in a bar chart with risk metric overlay}
 \usage{
 chart.BarVaR(R, width = 0, gap = 12, methods = c("none", "ModifiedVaR",
@@ -48,6 +49,8 @@ for more detail}
 \item{all}{if TRUE, calculates risk lines for each column given in R.  If
 FALSE, only calculates the risk line for the first column}
 
+\item{\dots}{any other passthru parameters to \code{\link{chart.TimeSeries}}}
+
 \item{show.clean}{if TRUE and a method for 'clean' is specified, overlays
 the actual data with the "cleaned" data.  See \code{\link{Return.clean}} for
 more detail}
@@ -91,8 +94,6 @@ when legend.loc="bottom".  See examples below.}
 
 \item{show.yaxis}{one of "all", "firstonly", "alternating", or "none" to
 control where y axis is plotted in multipanel charts}
-
-\item{\dots}{any other passthru parameters to \code{\link{chart.TimeSeries}}}
 }
 \description{
 Plots the periodic returns as a bar chart overlayed with a risk metric
@@ -159,11 +160,10 @@ chart.BarVaR(managers[,1,drop=FALSE],
 }
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
 \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
 }
-
+\author{
+Peter Carl
+}

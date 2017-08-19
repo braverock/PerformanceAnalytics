@@ -43,13 +43,12 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
 title(main="Downside Risk Statistics")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{DownsideDeviation}} \cr 
 \code{\link{maxDrawdown}} \cr
 \code{\link{VaR}} \cr 
 \code{\link{ES}} \cr
 }
-
+\author{
+Peter Carl
+}

@@ -53,9 +53,6 @@ result=table.Drawdowns(managers[,1,drop=FALSE])
 # title(main="Largest Drawdowns for HAM1")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
@@ -68,4 +65,6 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{chart.Drawdown}} \cr 
 \code{\link{table.DownsideRisk}}
 }
-
+\author{
+Peter Carl
+}

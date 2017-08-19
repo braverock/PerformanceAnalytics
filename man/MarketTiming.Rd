@@ -55,9 +55,6 @@ MarketTiming(managers[80:120,1:6], managers[80:120,7], managers[80:120,10])
 MarketTiming(managers[80:120,1:6], managers[80:120,8:7], managers[80:120,10], method = "TM")
 
 }
-\author{
-Andrii Babii, Peter Carl
-}
 \references{
 J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio 
 Performance Measurement and Benchmarking}. 2009. McGraw-Hill, p. 127-133.
@@ -70,4 +67,6 @@ Performance. II. Statistical Procedures for Evaluating Forecast Skills,"
 \seealso{
 \code{\link{CAPM.beta}}
 }
-
+\author{
+Andrii Babii, Peter Carl
+}

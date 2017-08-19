@@ -56,10 +56,9 @@ The parameter 'format.in' takes several values, including:
      }
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link[zoo]{read.zoo}}, \code{\link[utils]{read.table}}
 }
-
+\author{
+Peter Carl
+}

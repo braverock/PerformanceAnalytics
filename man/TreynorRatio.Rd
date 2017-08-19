@@ -49,9 +49,6 @@ print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
 print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE)) 
 
 }
-\author{
-Peter Carl, Matthieu Lestel
-}
 \references{
 \url{http://en.wikipedia.org/wiki/Treynor_ratio}, 
 Carl Bacon, \emph{Practical portfolio performance measurement 
@@ -61,4 +58,6 @@ and attribution}, second edition 2008 p.77
 \code{\link{SharpeRatio}} \code{\link{SortinoRatio}}
 \code{\link{CAPM.beta}}
 }
-
+\author{
+Peter Carl, Matthieu Lestel
+}

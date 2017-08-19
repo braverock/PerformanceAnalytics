@@ -63,10 +63,9 @@ data(edhec)
 chart.Scatter(edhec[,1],edhec[,2])
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

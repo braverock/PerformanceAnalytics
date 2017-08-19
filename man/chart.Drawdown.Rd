@@ -3,6 +3,7 @@
 \name{Drawdowns}
 \alias{Drawdowns}
 \alias{chart.Drawdown}
+\alias{Drawdowns}
 \title{Time series chart of drawdowns through time}
 \usage{
 Drawdowns(R, geometric = TRUE, ...)
@@ -17,13 +18,13 @@ asset returns}
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 default TRUE}
 
+\item{\dots}{any other passthru parameters}
+
 \item{legend.loc}{places a legend into one of nine locations on the chart:
 bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 center.}
 
 \item{colorset}{color palette to use, set by default to rational choices}
-
-\item{\dots}{any other passthru parameters}
 }
 \description{
 A time series chart demonstrating drawdowns from peak equity attained
@@ -41,9 +42,6 @@ chart.Drawdown(edhec[,c(1,2)],
 		main="Drawdown from Peak Equity Attained", 
 		legend.loc="bottomleft")
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
@@ -57,4 +55,6 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{table.Drawdowns}} \cr
 \code{\link{table.DownsideRisk}}
 }
-
+\author{
+Peter Carl
+}

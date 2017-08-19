@@ -43,9 +43,6 @@ Return.annualized(managers[,1:8])
 Return.annualized(managers[,1:8],geometric=FALSE)
 
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004. p. 6
@@ -53,4 +50,6 @@ and Attribution}. Wiley. 2004. p. 6
 \seealso{
 \code{\link{Return.cumulative}},
 }
-
+\author{
+Peter Carl
+}

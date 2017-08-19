@@ -97,9 +97,6 @@ consideration.
 This function and much of this text was originally written for Boudt,
 et. al, 2008
 }
-\author{
-Kris Boudt, Brian G. Peterson
-}
 \references{
 Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation and
 Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
@@ -119,4 +116,6 @@ Statistics and Its Applications, Volume B, pp. 283?297. Dordrecht-Reidel.
 \seealso{
 \code{\link{Return.clean}}
 }
-
+\author{
+Kris Boudt, Brian G. Peterson
+}

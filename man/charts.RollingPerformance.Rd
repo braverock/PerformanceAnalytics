@@ -43,10 +43,9 @@ charts.RollingPerformance(managers[,1:8],
                           legend.loc="topleft")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.RollingPerformance}}
 }
-
+\author{
+Peter Carl
+}
