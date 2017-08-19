@@ -202,7 +202,7 @@ function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson
 
    # set up by loading robustbase library
-   stopifnot("package:robustbase" %in% search() || require("robustbase",quietly=TRUE))
+   stopifnot(requireNamespace("robustbase",quietly=TRUE))
 
    # Function used to bound the effect of the most extreme returns on the downside
    # risk prediction.

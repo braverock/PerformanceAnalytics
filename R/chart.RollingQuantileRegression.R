@@ -5,7 +5,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 { # @author Peter Carl, Brian Peterson
 
     # Check to see if the required libraries are loaded
-    if(!require("quantreg", quietly=TRUE))
+    if(!requireNamespace("quantreg", quietly=TRUE))
         stop("package", sQuote("quantreg"), "is needed.  Stopping")
 
     # DESCRIPTION:

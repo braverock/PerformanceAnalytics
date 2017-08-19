@@ -211,7 +211,7 @@ function(R,
 #                 probability = TRUE
 #             },
             add.cauchy = {
-                stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
+                stopifnot(requireNamespace("MASS",quietly=TRUE))
                 # This uses a Maximum Likelihood method as shown on:
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and
@@ -223,14 +223,14 @@ function(R,
                 probability = TRUE
             },
             add.sst = {
-                stopifnot("package:gamlss" %in% search() || require("gamlss",quietly=TRUE))              
+                stopifnot(requireNamespace("gamlss",quietly=TRUE))
                 #stopifnot("package:gamlss.dist" %in% search() || require("gamlss",quietly=TRUE))              
                 fitted.sst = gamlss.dist::dST1(s, mu = fitted(fit)[1], sigma = fitted(fit, "sigma")[1], nu = fitted(fit, "nu")[1], tau = fitted(fit, "tau")[1])
                 yrange=c(yrange,max(fitted.sst))
                 probability = TRUE
             },
             add.lnorm = {
-                stopifnot("package:MASS" %in% search() || require("MASS",quietly=TRUE))
+                stopifnot(requireNamespace("MASS",quietly=TRUE))
                 fit = MASS::fitdistr(1+x,'log-normal')
                 fitted.lnorm = dlnorm(1+s, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]], log = FALSE)
                 yrange=c(yrange,max(fitted.lnorm))

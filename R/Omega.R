@@ -138,8 +138,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
             },
             interp = {
 
-                # require("Hmisc")
-                # stopifnot("package:Hmisc" %in% search() || require("Hmisc",quietly=TRUE))
+                stopifnot(requireNamespace("Hmisc",quietly=TRUE))
                 a = min(x)
                 b = max(x)
 
