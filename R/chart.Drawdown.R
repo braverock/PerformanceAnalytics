@@ -73,7 +73,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     }
     
     # Chart the drawdown level
-    if(hasArg(add)) {
+    if(hasArg("add")) {
       plotargs <- list(...)
       plotargs$add <- NULL
       p <- xts:::current.xts_chob()

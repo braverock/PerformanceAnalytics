@@ -120,7 +120,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 
       main = paste("Rolling ",width,"-",freq.lab," ", attribute, sep="")
     }
-    if(hasArg(add)){
+    if(hasArg("add")){
       plot_object <- addSeries(Result.calc, main = main)
     } else
       plot_object <- chart.TimeSeries(Result.calc, main = main, ...)

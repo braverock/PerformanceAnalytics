@@ -322,7 +322,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
     if(!show.greenredbars) {
-      if(hasArg(add)) {
+      if(hasArg("add")) {
         p <- xts:::current.xts_chob()
         p$Env$bar.color <- bar.color
         plotargs <- list(...)
@@ -332,7 +332,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
       else 
         p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
     } else {
-      if(hasArg(add)) {
+      if(hasArg("add")) {
         p <- xts:::current.xts_chob()
         p$Env$bar.color <- bar.color
         plotargs <- list(...)

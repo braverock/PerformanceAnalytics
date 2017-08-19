@@ -110,7 +110,7 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
 	
     plotargs$main=main
     plotargs$ylim=ylim
-    if(hasArg(add)){
+    if(hasArg("add")){
       plotargs$x=Return.calc
       plotargs$add=NULL
       do.call(addSeries,plotargs)
