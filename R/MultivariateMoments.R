@@ -1554,6 +1554,9 @@ M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
 #' MCA are the ones that maximize the coskewness and cokurtosis present when projecting
 #' onto these directions. It was introduced by Lim and Morton (2007) and applied to financial returns
 #' data by Jondeau and Rockinger (2017)
+#' 
+#' If a coskewness matrix (argument M3) or cokurtosis matrix (argument M4) is passed in using ..., then 
+#' MCA is performed on the given comoment matrix instead of the sample coskewness or cokurtosis matrix.
 #' @name MCA
 #' @concept co-moments
 #' @concept moments
