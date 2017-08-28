@@ -444,6 +444,26 @@ rownames(summary_momentestimates) <- c("sample", "struct - Indep", "struct - Ind
 summary_momentestimates <- 1e07 * summary_momentestimates
 @
 
+\subsubsection{MCA}
+
+A different approach to estimating the comoment matrices can be found in \cite{jondeau2017moment}. Here the aim is to find a subspace of $\mathbb R^p$ that explains most of observed coskewness or cokurtosis, much like PCA searches for the subspace explaining most of the variance. To make this formal, the methods seeks the $k$ dimensional subspace spanned by the columns of $\bm{U}$ obtained by
+\begin{equation}
+\begin{aligned}
+\bm{U}_3 &= \arg \max_{\bm{U}} \| \hat{\bm{\Phi}} - \bm{U} \bm{\Phi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2 \\
+\bm{U}_4 &= \arg \max_{\bm{U}} \| \hat{\bm{\Psi}} - \bm{U} \bm{\Psi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2,
+\end{aligned}
+\end{equation}
+where the optimization is done over matrices $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$. The matrices $\bm{\Phi}_{sub}$ and $\bm{\Psi}_{sub}$ are any valid coskewness and cokurtosis matrices and are part of the optimization procedure.
+
+By projecting the data onto the subspace spanned by the columns of $\bm{U}$, the data is represented by means of the $k$ principal coskewness / cokurtosis components. As with PCA, these components can be used to construct estimates of the comoment matrices, ignoring the information not embedded in the first $k$ components.
+
+To obtain these estimates for $k = 3$ components, do 
+<<EMWA,echo=T>>=
+m3 <- M3.MCA(edhec, k = 3)$M3mca
+m4 <- M4.MCA(edhec, k = 3)$M4mca
+@
+The MCA functions output the coskewness or cokurtosis matrix, a boolean indicating convergence, the number of iterations the optimization algorithm has gone through and the optimal $\bm{U}$.
+
 
 \subsubsection{Other approaches}
 
