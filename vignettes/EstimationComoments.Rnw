@@ -104,7 +104,7 @@ head(edhec[, 1:6], n = 5)
 
 In this section we cover the three main categories of estimation techniques implemented in
 \code{\link{PerformanceAnalytics}}, plug-in estimation, structured estimation and shrinkage estimation.
-This is not an exhaustive list and in the last subsection we refer the reader to other possibilities, such as EWMA estimation (also available in \code{\link{PerformanceAnalytics}}) or the GO-GARCH model in \code{\link{rmgarch}}.
+This is not an exhaustive list and in the last subsection we refer the reader to other possibilities, such as EWMA estimation and MCA estimation (both available in \code{\link{PerformanceAnalytics}}); or the GO-GARCH model in \code{\link{rmgarch}}.
 
 
 \subsection{Plug-in estimation}\label{sect:sample}
@@ -148,7 +148,7 @@ m4port_univ <- mean((portreturns - mean(portreturns))^4)
 c(m3port, m3port_univ, m4port, m4port_univ)
 @
 <<PluginPortsumm,echo=F>>=
-summ_moms <- matrix(NA, nrow = 15, ncol = 2)
+summ_moms <- matrix(NA, nrow = 17, ncol = 2)
 summ_moms[1,] <- c(m3port_univ, m4port_univ)
 @
 This will not be the case for the other estimators used in this vignette, explaining the use for better estimators of the multivariate coskewness and cokurtosis matrices in order to obtain a better univariate estimate of the portfolio skewness and kurtosis.
@@ -393,7 +393,7 @@ summ_moms[13,] <- c(m3port, m4port)
 @
 
 
-\subsection{Unbiased estimatino of the MSE loss function}
+\subsubsection{Unbiased estimatino of the MSE loss function}
 
 All the shrinkage estimators shown above use consistent, but biased estimators to estimate the MSE loss function determining the shrinkage intensities to use. \cite{boudt2017coskewness} derive bias-corrected estimators for shrinkage estimation of the coskewness matrix with structured matrices \code{"Indep"}, \code{"IndepId"} and \code{"CS"}. The bias-corrected estimators improve the MSE compared to the biased estimators when the sample size is rather small. The option of using the unbiased estimators can be selected by the argument \code{unbiasedMarg = T} whenever estimating the coskewness matrix with \code{M3.shrink} and any combination of the three targets given above. For example, multi-target shrinkage estimation of the coskewness matrix using bias-corrected estimators for the MSE loss function with all the available structured coskwenss matrices is done by
 <<ShrinkMTunb,echo=T>>=
@@ -435,34 +435,62 @@ In the above code we used the default value of $\lambda = 0.97$ which is recomme
 m3port <- PerformanceAnalytics:::portm3(w, m3)
 m4port <- PerformanceAnalytics:::portm4(w, m4)
 summ_moms[15,] <- c(m3port, m4port)
+# summary_momentestimates <- summ_moms
+# colnames(summary_momentestimates) <- c("m3 (1e-07)", "m4 (1e-07)")
+# rownames(summary_momentestimates) <- c("sample", "struct - Indep", "struct - IndepInd", "struct - 1f", "struct - CC",
+#                                        "struct - Simaan", "shrink - Indep", "shrink - IndepInd", "shrink - 1f",
+#                                        "shrink - CC", "shrink - Simaan", "shrink - CS", "shrink - Indep/1f/CC", 
+#                                        "shrink - Indep/IndepId/CS", "EWMA")
+# summary_momentestimates <- 1e07 * summary_momentestimates
+@
+
+\subsubsection{Moment Component Analysis}
+
+A different approach to estimating the comoment matrices can be found in \cite{jondeau2017moment}. Here the aim is to find a subspace of $\mathbb R^p$ that explains most of observed coskewness or cokurtosis, much like PCA searches for the subspace explaining most of the variance. To make this formal, the methods seeks the $k$ dimensional subspace spanned by the columns of $\bm{U}$ obtained by
+\begin{equation}\label{eq:MCAoptim}
+\begin{aligned}
+\bm{U}_3 &= \arg \min_{\bm{U}} \| \hat{\bm{\Phi}} - \bm{U} \bm{\Phi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2 \\
+\bm{U}_4 &= \arg \min_{\bm{U}} \| \hat{\bm{\Psi}} - \bm{U} \bm{\Psi}_{sub} (\bm{U} \otimes \bm{U} \otimes \bm{U})^\prime \|^2,
+\end{aligned}
+\end{equation}
+where the optimization is done over matrices $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$. The matrices $\bm{\Phi}_{sub}$ and $\bm{\Psi}_{sub}$ are any valid coskewness and cokurtosis matrices and are part of the optimization procedure. The optimisation in \eqref{eq:MCAoptim} is equivalent to finding $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$, maximizing
+\begin{equation}
+\begin{aligned}
+\bm{U}_3 &= \arg \max_{\bm{U}} \| \bm{U}^\prime \hat{\bm{\Phi}} (\bm{U} \otimes \bm{U}) \|^2 \\
+\bm{U}_4 &= \arg \max_{\bm{U}} \| \bm{U}^\prime \hat{\bm{\Psi}} (\bm{U} \otimes \bm{U} \otimes \bm{U}) \|^2,
+\end{aligned}
+\end{equation}
+
+By projecting the data onto the subspace spanned by the columns of $\bm{U}$, the data is represented by means of the $k$ principal coskewness / cokurtosis components. As with PCA, these components can be used to construct estimates of the comoment matrices, ignoring the information not embedded in the first $k$ components. This is done as follows
+\begin{equation}
+\begin{aligned}
+\hat{\bm{\Phi}}_{mca} &= \bm{U}_3 \left( \bm{U}_3^\prime \hat{\bm{\Phi}} (\bm{U}_3 \otimes \bm{U}_3) \right) (\bm{U}_3 \otimes \bm{U}_3)^\prime, \\
+\hat{\bm{\Psi}}_{mca} &= \bm{U}_4 \left( \bm{U}_4^\prime \hat{\bm{\Psi}} (\bm{U}_4 \otimes \bm{U}_4 \otimes \bm{U}_4) \right) (\bm{U}_4 \otimes \bm{U}_4 \otimes \bm{U}_4)^\prime.
+\end{aligned}
+\end{equation}
+We remark that the MCA procedure works on any estimates $\hat{\bm{\Phi}}$ and $\hat{\bm{\Psi}}$ of the coskewness and cokurtosis matrices, not only using the sample estimator.
+
+To obtain these estimates for $k = 3$ components, do 
+<<MCA,echo=T>>=
+m3 <- M3.MCA(edhec, k = 3)$M3mca
+m4 <- M4.MCA(edhec, k = 3)$M4mca
+@
+The MCA functions output the coskewness or cokurtosis matrix, a boolean indicating convergence, the number of iterations the optimization algorithm has gone through and the optimal $\bm{U}$.
+<<MCAsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[17,] <- c(m3port, m4port)
+m3port <- PerformanceAnalytics:::portm3(w, M3.MCA(edhec, k = 1, as.mat = FALSE)$M3mca)
+m4port <- PerformanceAnalytics:::portm4(w, M4.MCA(edhec, k = 1, as.mat = FALSE)$M4mca)
+summ_moms[16,] <- c(m3port, m4port)
 summary_momentestimates <- summ_moms
 colnames(summary_momentestimates) <- c("m3 (1e-07)", "m4 (1e-07)")
 rownames(summary_momentestimates) <- c("sample", "struct - Indep", "struct - IndepInd", "struct - 1f", "struct - CC",
                                        "struct - Simaan", "shrink - Indep", "shrink - IndepInd", "shrink - 1f",
                                        "shrink - CC", "shrink - Simaan", "shrink - CS", "shrink - Indep/1f/CC", 
-                                       "shrink - Indep/IndepId/CS", "EWMA")
+                                       "shrink - Indep/IndepId/CS", "EWMA", "MCA - 1 factor", "MCA - 3 factors")
 summary_momentestimates <- 1e07 * summary_momentestimates
 @
-
-\subsubsection{MCA}
-
-A different approach to estimating the comoment matrices can be found in \cite{jondeau2017moment}. Here the aim is to find a subspace of $\mathbb R^p$ that explains most of observed coskewness or cokurtosis, much like PCA searches for the subspace explaining most of the variance. To make this formal, the methods seeks the $k$ dimensional subspace spanned by the columns of $\bm{U}$ obtained by
-\begin{equation}
-\begin{aligned}
-\bm{U}_3 &= \arg \max_{\bm{U}} \| \hat{\bm{\Phi}} - \bm{U} \bm{\Phi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2 \\
-\bm{U}_4 &= \arg \max_{\bm{U}} \| \hat{\bm{\Psi}} - \bm{U} \bm{\Psi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2,
-\end{aligned}
-\end{equation}
-where the optimization is done over matrices $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$. The matrices $\bm{\Phi}_{sub}$ and $\bm{\Psi}_{sub}$ are any valid coskewness and cokurtosis matrices and are part of the optimization procedure.
-
-By projecting the data onto the subspace spanned by the columns of $\bm{U}$, the data is represented by means of the $k$ principal coskewness / cokurtosis components. As with PCA, these components can be used to construct estimates of the comoment matrices, ignoring the information not embedded in the first $k$ components.
-
-To obtain these estimates for $k = 3$ components, do 
-<<EMWA,echo=T>>=
-m3 <- M3.MCA(edhec, k = 3)$M3mca
-m4 <- M4.MCA(edhec, k = 3)$M4mca
-@
-The MCA functions output the coskewness or cokurtosis matrix, a boolean indicating convergence, the number of iterations the optimization algorithm has gone through and the optimal $\bm{U}$.
 
 
 \subsubsection{Other approaches}
@@ -510,9 +538,9 @@ ES95
 
 We gather the predicted $95\%$ VaR and ES as in Section \ref{sect:estim-summary} and summarize the results below,
 <<VaRestimates,echo=F>>=
-rm95 <- matrix(NA, nrow = 11, ncol = 2)
-VaRcomp <- matrix(NA, nrow = 11, ncol = 13)
-EScomp <- matrix(NA, nrow = 11, ncol = 13)
+rm95 <- matrix(NA, nrow = 13, ncol = 2)
+VaRcomp <- matrix(NA, nrow = 13, ncol = 13)
+EScomp <- matrix(NA, nrow = 13, ncol = 13)
 
 temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
             weights = w, mu = m, sigma = sigma, m3 = M3.MM(edhec, as.mat = F), m4 = M4.MM(edhec, as.mat = F))
@@ -579,6 +607,18 @@ temp <- VaR(p = p, method = "modified", portfolio_method = "component",
 rm95[11, 1] <- temp$MVaR
 VaRcomp[11,] <- temp$pct_contrib_MVaR
 
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 1, as.mat = F)$M3mca, 
+            m4 = M4.MCA(edhec, k = 1, as.mat = F)$M4mca)
+rm95[12, 1] <- temp$MVaR
+VaRcomp[12,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 3, as.mat = F)$M3mca, 
+            m4 = M4.MCA(edhec, k = 3, as.mat = F)$M4mca)
+rm95[13, 1] <- temp$MVaR
+VaRcomp[13,] <- temp$pct_contrib_MVaR
+
 temp <- ES(p = p, method = "modified", portfolio_method = "component", 
            weights = w, mu = m, sigma = sigma, m3 = M3.MM(edhec, as.mat = F), m4 = M4.MM(edhec, as.mat = F))
 rm95[1, 2] <- temp$MES
@@ -644,10 +684,22 @@ temp <- ES(p = p, method = "modified", portfolio_method = "component",
 rm95[11, 2] <- temp$MES
 EScomp[11,] <- temp$pct_contrib_MES
 
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 1, as.mat = F)$M3mca, 
+           m4 = M4.MCA(edhec, k = 1, as.mat = F)$M4mca)
+rm95[12, 2] <- temp$MES
+EScomp[12,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 3, as.mat = F)$M3mca, 
+           m4 = M4.MCA(edhec, k = 3, as.mat = F)$M4mca)
+rm95[13, 2] <- temp$MES
+EScomp[13,] <- temp$pct_contrib_MES
+
 colnames(rm95) <- c("VaR", "ES")
 rownames(rm95) <- c("sample", "struct - Indep", "struct - IndepId", "struct - 1f", "struct - CC",
                     "shrink - Indep", "shrink - IndepId", "shrink - 1f", "shrink - CC", 
-                    "shrink - Indep/1f/CC", "EWMA")
+                    "shrink - Indep/1f/CC", "EWMA", "MCA - 1 factor", "MCA - 3 factors")
 @
 <<EWMArm,echo=F>>=
 CCVaR <- VaR(p = p, method = "modified", portfolio_method = "component", 
