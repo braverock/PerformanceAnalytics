@@ -1635,7 +1635,7 @@ M3.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
   # iterate until convergence or maximum number of iterations is reached
   iter <- 0
   converged <- FALSE
-  while ((iter < maxit) & !converged) {
+  while ((iter < maxit) && !converged) {
     # project using the last projection matrix U0 and build new projection matrix U1
     Z3 <- .Call('M3HOOIiterator', M3, as.numeric(U0), p, k, PACKAGE="PerformanceAnalytics")
     U1 <- svd(Z3, nu = k, nv = 0)$u
@@ -1698,7 +1698,7 @@ M4.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
   # iterate until convergence or maximum number of iterations is reached
   iter <- 0
   converged <- FALSE
-  while ((iter < maxit) & !converged) {
+  while ((iter < maxit) && !converged) {
     # project using the last projection matrix U0 and build new projection matrix U1
     Z4 <- .Call('M4HOOIiterator', M4, as.numeric(U0), p, k, PACKAGE="PerformanceAnalytics")
     U1 <- svd(Z4, nu = k, nv = 0)$u
