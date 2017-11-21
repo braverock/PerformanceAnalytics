@@ -110,7 +110,7 @@ to.monthly.contributions <- function(Contributions) {
   to.period.contributions(Contributions = Contributions, period = "months")
 }
 #' @export
-to.quarterly.contributions <- function(contributions) {
+to.quarterly.contributions <- function(Contributions) {
   to.period.contributions(Contributions = Contributions, period = "quarters")
 }
 #' @export
