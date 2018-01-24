@@ -9,12 +9,13 @@ Authors@R: c(
   , person(given="Joshua",family="Ulrich",role="ctb")
   , person(given="Eric",family="Zivot",role="ctb")
   , person(given="Dries",family="Cornilly",role="ctb")
+  , person(given="Eric",family="Hung",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.5.1
-Date: 2016-09-04 $Date$
+Version: 1.5.2
+Date: 2018-01-24 $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
     practitioners and researchers in utilizing the latest
@@ -43,6 +44,6 @@ Suggests:
     gplots,
     testthat
 License: GPL-2 | GPL-3
-URL: http://r-forge.r-project.org/projects/returnanalytics/
-Copyright: (c) 2004-2016
-RoxygenNote: 6.0.1
+URL: https://github.com/braverock/PerformanceAnalytics
+Copyright: (c) 2004-2018
+RoxygenNote: 6.0.1.9000
