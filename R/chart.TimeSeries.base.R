@@ -238,11 +238,11 @@ function (R,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R 3579 2015-01-07 13:01:25Z braverock $
+# $Id: chart.TimeSeries.R 3579 2018-01-07 13:01:25Z braverock $
 #
 ###############################################################################

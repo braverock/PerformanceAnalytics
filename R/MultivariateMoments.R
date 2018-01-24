@@ -8,7 +8,7 @@
 # efficient when running against very large numbers of instruments or portfolios.
 #
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson for PerformanceAnalytics
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson for PerformanceAnalytics
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
@@ -1005,7 +1005,7 @@ M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
 #' TRUE
 #' @author Dries Cornilly
 #' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
-#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
+#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2018. Higher order comoments of multifactor 
 #' models and asset allocation. Finance Research Letters, 13, 225-233.
 #' 
 #' Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
@@ -1724,7 +1724,7 @@ M4.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
