@@ -47,7 +47,7 @@
 #' \eqn{\xi} implies more smoothing, and the upper bound of 1 implies no
 #' smoothing.
 #' 
-#' The "smoothing index," represented as \eqn{\xi}, is calculated the same way
+#' The "smoothing index", represented as \eqn{\xi}, is calculated the same way
 #' the Herfindahl index.  The Herfindal measure is well known in the industrial
 #' organization literature as a measure of the concentration of firms in a
 #' given industry where \eqn{y_j} represents the market share of firm \eqn{j}.
@@ -122,9 +122,9 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
         #
         # "Because of the scaling property Eq. (52) of the MA(k) likelihood function, a
         # simple procedure for obtaining estimates of our smoothing model with the
-        # normalization Eq. (49) is to transform estimates (θ; sigma) from standard
-        # MA(k) estimation packages such as SAS or RATS by dividing each θi by 1 + θ1 +
-        # θ2 ... θk and multiplying sigma by the same factor. The likelihood function
+        # normalization Eq. (49) is to transform estimates (\theta; sigma) from standard
+        # MA(k) estimation packages such as SAS or RATS by dividing each \theta_i by 1 + \theta_1 +
+        # \theta_2 ... \theta_k and multiplying sigma by the same factor. The likelihood function
         # remains unchanged but the transformed smoothing coefficients will now satisfy
         # Eq. (49)."
 
@@ -146,24 +146,24 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
 
         # This measure is well known in the industrial organization literature as the HeRfindahl
         # index, a measure of the concentration of firms in a given industry where yj represents the
-        # market share of firm j: Because theta_j A1⁄20; 1; x is also confined to the unit interval,
+        # market share of firm j: Because theta_j A1⁄20; 1; x is also confined to the unit interval,
         # and is minimized when all the theta_j ’s are identical, which implies a value of 1=ðk þ 1Þ
         # for x; and is maximized when one coefficient is 1 and the rest are 0, in which case x 1⁄4 1:
         # In the context of smoothed returns, a lower value of x implies more smoothing, and the upper bound
-        # of 1 implies no smoothing, hence we shall refer to x as a ‘‘smoothing index’’.
+        # of 1 implies no smoothing, hence we shall refer to x as a "smoothing index".
 
-        smoothing.index = sum(thetas^2) # Calc'd as HeRfindahl index would be, referred to as ξ, below
+        smoothing.index = sum(thetas^2) # Calc'd as Herfindahl index would be, referred to as \xi, below
 
         # The interpretation of this is tricky:
 
-        # "Because θj ∈ [0, 1], ξ is also confined to the unit interval, and is minimized when all
-        # the θj ’s are identical, which implies a value of 1/(k + 1) for ξ, and is maximized when
-        # one coefficient is 1 and the rest are 0, in which case ξ = 1. In the context of smoothed
-        # returns, a lower value of ξ implies more smoothing, and the upper bound of 1 implies no
-        # smoothing, hence we shall refer to ξ as a “smoothing index”."
+        # "Because \theta_j \varepsilon [0, 1], \xi is also confined to the unit interval, and is minimized when all
+        # the \theta_j ’s are identical, which implies a value of 1/(k + 1) for \xi, and is maximized when
+        # one coefficient is 1 and the rest are 0, in which case \xi = 1. In the context of smoothed
+        # returns, a lower value of \xi implies more smoothing, and the upper bound of 1 implies no
+        # smoothing, hence we shall refer to \xi as a "smoothing index"."
 
         # That's fine, except that this method (as described in the paper), does not enforce
-        # θj ∈ [0, 1], so ξ is not limited to that range either.  All we can say is that lower values
+        # \thetaj \varepsilon [0, 1], so \xi is not limited to that range either.  All we can say is that lower values
         # are "less liquid" and higher values are "more liquid" or mis-specified.
 
         if(verbose)
