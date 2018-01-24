@@ -104,7 +104,7 @@ Any risk measure should be viewed with suspicion if there are not a large number
 
 \section{Value at Risk - VaR}{
 \emph{Traditional mean-VaR}:
-In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to use a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what people are generally referring to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}} with \code{method="historical"}.  See \cite{Return to RiskMetrics: Evolution of a Standard} at \url{http://www.riskmetrics.com/r2rovv.html}. Parametric traditional VaR does a better job of accounting for the tails of the distribution by more precisely estimating the tails below the risk quantile.  It is still insufficient if the assets have a distribution that varies widely from normality.  That is available in \code{\link{VaR}} with \code{method="gaussian"}.
+In the early 90's, academic literature started referring to \dQuote{value at risk}, typically written as VaR. Take care to capitalize VaR in the commonly accepted manner, to avoid confusion with var (variance) and VAR (vector auto-regression).  With a sufficiently large data set, you may choose to use a non-parametric VaR estimation method using the historical distribution and the probability quantile of the distribution calculated using \code{\link{qnorm}}. The negative return at the correct quantile (usually 95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics parametric mean-VaR was published in 1994 and this methodology for estimating parametric mean-VaR has become what people are generally referring to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}} with \code{method="historical"}.  See \cite{Return to RiskMetrics: Evolution of a Standard} at \url{https://www.msci.com/publications/techdocs/r2rovv.html}. Parametric traditional VaR does a better job of accounting for the tails of the distribution by more precisely estimating the tails below the risk quantile.  It is still insufficient if the assets have a distribution that varies widely from normality.  That is available in \code{\link{VaR}} with \code{method="gaussian"}.
 
 The \R package VaR, now orphaned, contains methods for simulating and estimating lognormal \kbd{VaR.norm} and generalized Pareto \kbd{VaR.gpd} distributions to overcome some of the problems with nonparametric or parametric mean-VaR calculations on a limited sample size.  There is also a \kbd{VaR.backtest} function to apply simulation methods to create a more robust estimate of the potential distribution of losses.  The VaR package also provides plots for its functions.  We will attempt to incoporate this orphaned functionality in PerformanceAnalytics in an upcoming release.
 
@@ -193,7 +193,7 @@ Rolling performance is typically used as a way to assess stability of a return s
 
 \code{\link{chart.StackedBar}} creates a stacked column chart with time on the horizontal axis and values in categories.  This kind of chart is commonly used for showing portfolio 'weights' through time, although the function will plot any values by category. 
 
-We have been greatly inspired by other peoples' work, some of which is on display at \url{http://addictedtor.free.fr/}.  Particular inspiration came from Dirk Eddelbuettel and John Bollinger for their work at \url{http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65}. Those interested in price charting in \R should also look at the \code{quantmod} package.
+We have been greatly inspired by other peoples' work, some of which is on display at addictedtor.free.fr.  Particular inspiration came from Dirk Eddelbuettel and John Bollinger for their work at http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65. Those interested in price charting in \R should also look at the \code{quantmod} package.
 }
 
 \section{Wrapper and Utility Functions}{
@@ -248,11 +248,11 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
 }
 
 \seealso{
-    CRAN task view on Empirical Finance \cr \url{http://cran.r-project.org/src/contrib/Views/Econometrics.html}
+    CRAN task view on Empirical Finance \cr \url{https://cran.r-project.org/src/contrib/Views/Econometrics.html}
 
-    Grant Farnsworth's Econometrics in R \cr \url{http://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
+    Grant Farnsworth's Econometrics in R \cr \url{https://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
 
-    Collection of R charts and graphs \cr \url{http://addictedtor.free.fr/graphiques/}
+    Collection of R charts and graphs \cr http://addictedtor.free.fr/graphiques/
 
 }
 
