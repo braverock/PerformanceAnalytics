@@ -1005,7 +1005,7 @@ M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
 #' TRUE
 #' @author Dries Cornilly
 #' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
-#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2018. Higher order comoments of multifactor 
+#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
 #' models and asset allocation. Finance Research Letters, 13, 225-233.
 #' 
 #' Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
