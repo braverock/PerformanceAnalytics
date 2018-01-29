@@ -321,28 +321,23 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
-    if(!show.greenredbars) {
-      if(hasArg("add")) {
-        p <- xts:::current.xts_chob()
-        p$Env$bar.color <- bar.color
+    if(hasArg("add")) {
         plotargs <- list(...)
         plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
-      }
-      else 
-        p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+
+        if(show.greenredbars) {
+            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        } else {
+            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        }
     } else {
-      if(hasArg("add")) {
-        p <- xts:::current.xts_chob()
-        p$Env$bar.color <- bar.color
-        plotargs <- list(...)
-        plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
-      }
-      else 
-        p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        if(show.greenredbars) {
+            p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        } else {
+            p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        }
     }
-    
+
     on = p$Env$frame/2
     if(show.clean) {
       p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = on)
