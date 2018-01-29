@@ -123,7 +123,6 @@ chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95,
 \references{
 main code forked/borrowed/ported from the excellent: \cr Fox,
 John (2007) \emph{car: Companion to Applied Regression} \cr
-\url{http://www.r-project.org},
 \url{http://socserv.socsci.mcmaster.ca/jfox/}
 }
 \seealso{

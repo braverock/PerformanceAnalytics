@@ -28,7 +28,7 @@ specific defaults.
 }
 \note{
 Inspired by the website:
-\url{http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R} "...here's an R
+http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R "...here's an R
 function that will plot the ACF and PACF of a time series at the same time
 on the SAME SCALE, and it leaves out the zero lag in the ACF: acf2.R. If
 your time series is in x and you want the ACF and PACF of x to lag 50, the

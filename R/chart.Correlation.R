@@ -13,8 +13,7 @@
 #'           (or covariance) is to be computed.  One of "pearson"
 #'           (default), "kendall", or "spearman", can be abbreviated.
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
-#' @note based on plot at
-#' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+#' @note based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
 #' @author Peter Carl
 #' @seealso \code{\link{table.Correlation}}
 ###keywords ts multivariate distribution models hplot

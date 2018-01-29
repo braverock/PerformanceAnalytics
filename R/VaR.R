@@ -99,7 +99,7 @@
 #' Studies, 23(4):1467-1502.
 #' 
 #' Return to RiskMetrics: Evolution of a Standard
-#' \url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
+#' \url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}
 #' 
 #' Zangari, Peter. A VaR Methodology for Portfolios that include Options. 1996.
 #' RiskMetrics Monitor, First Quarter, 4-12.

@@ -56,8 +56,6 @@ chart.ECDF(edhec[, 1, drop=FALSE])
 \references{
 Ruppert, David. \emph{Statistics and Finance, an Introduction}.
 Springer. 2004. Ch. 2 Fig. 2.5
-
-\url{http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt}
 }
 \seealso{
 \code{\link{plot}}, \code{\link{ecdf}}

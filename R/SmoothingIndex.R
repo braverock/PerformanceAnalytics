@@ -146,9 +146,9 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
 
         # This measure is well known in the industrial organization literature as the HeRfindahl
         # index, a measure of the concentration of firms in a given industry where yj represents the
-        # market share of firm j: Because theta_j A1⁄20; 1; x is also confined to the unit interval,
-        # and is minimized when all the theta_j ’s are identical, which implies a value of 1=ðk þ 1Þ
-        # for x; and is maximized when one coefficient is 1 and the rest are 0, in which case x 1⁄4 1:
+        # market share of firm j: Because theta_j; 1; x is also confined to the unit interval,
+        # and is minimized when all the theta_j 's are identical, which implies a value of 1=\delta_k \phi 1 \phi
+        # for x; and is maximized when one coefficient is 1 and the rest are 0, in which case x 1/4 1:
         # In the context of smoothed returns, a lower value of x implies more smoothing, and the upper bound
         # of 1 implies no smoothing, hence we shall refer to x as a "smoothing index".
 
@@ -157,7 +157,7 @@ function (R, neg.thetas = FALSE, MAorder=2, verbose = FALSE, ...)
         # The interpretation of this is tricky:
 
         # "Because \theta_j \varepsilon [0, 1], \xi is also confined to the unit interval, and is minimized when all
-        # the \theta_j ’s are identical, which implies a value of 1/(k + 1) for \xi, and is maximized when
+        # the \theta_j 's are identical, which implies a value of 1/(k + 1) for \xi, and is maximized when
         # one coefficient is 1 and the rest are 0, in which case \xi = 1. In the context of smoothed
         # returns, a lower value of \xi implies more smoothing, and the upper bound of 1 implies no
         # smoothing, hence we shall refer to \xi as a "smoothing index"."
