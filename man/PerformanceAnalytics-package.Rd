@@ -248,7 +248,7 @@ Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus: second 
 }
 
 \seealso{
-    CRAN task view on Empirical Finance \cr \url{https://cran.r-project.org/web/views/Econometrics.html}
+    CRAN task view on Empirical Finance \cr \url{https://CRAN.R-project.org/view=Econometrics}
 
     Grant Farnsworth's Econometrics in R \cr \url{https://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
 
