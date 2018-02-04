@@ -57,9 +57,9 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	    else
 		  yaxis.right=FALSE
 	    if(i == 1) 
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc,  ...)
 	    else
-	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], xaxis=xaxis, main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
+	      plot_object <- chart.BarVaR(R[,i,drop=FALSE], main=columnnames[i], ylab="", ylim = c(ymin,ymax), yaxis=yaxis, yaxis.right=yaxis.right, lwd=2, legend.loc=legend.loc, add = TRUE,...)
 	    
 	# TODO: Add histogram at the end, turned on its side to line up with yaxis
 	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
