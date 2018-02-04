@@ -3,7 +3,6 @@
 \name{Drawdowns}
 \alias{Drawdowns}
 \alias{chart.Drawdown}
-\alias{Drawdowns}
 \title{Time series chart of drawdowns through time}
 \usage{
 Drawdowns(R, geometric = TRUE, ...)
