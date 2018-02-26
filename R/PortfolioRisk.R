@@ -201,7 +201,7 @@ operES.CornishFisher =  function(R,p,c=2)
 
 portm2 = function(w,sigma)
 {
-  return(t(w)%*%sigma%*%w) #t(w) for first item?
+  return(as.numeric(t(w)%*%sigma%*%w)) #t(w) for first item?
 }
 derportm2 = function(w,sigma)
 {
@@ -259,7 +259,7 @@ VaR.Gaussian.portfolio =  function(p,w,mu,sigma)
 {
   alpha = .setalphaprob(p)
   p=alpha
-  location = t(w)%*%mu
+  location = sum(w * mu)
   pm2 = portm2(w,sigma)
   dpm2 = derportm2(w,sigma)
   VaR = - location - qnorm(alpha)*sqrt(pm2)
@@ -323,7 +323,7 @@ ES.Gaussian.portfolio =  function(p,w,mu,sigma)
 {
   alpha = .setalphaprob(p)
   p=alpha
-  location = t(w)%*%mu
+  location = sum(w * mu)
   pm2 = portm2(w,sigma)
   dpm2 = derportm2(w,sigma)
   ES = - location + dnorm(qnorm(alpha))*sqrt(pm2)/alpha
@@ -345,7 +345,7 @@ VaR.CornishFisher.portfolio = function(p,w,mu,sigma,M3,M4)
   alpha = .setalphaprob(p)
   p=alpha
   z = qnorm(alpha)
-  location = t(w)%*%mu
+  location = sum(w * mu)
   pm2 = portm2(w,sigma)
   dpm2 = as.vector( derportm2(w,sigma) )
   pm3 = portm3(w,M3)
@@ -433,7 +433,7 @@ ES.CornishFisher.portfolio =  function(p,w,mu,sigma,M3,M4)
   alpha = .setalphaprob(p)
   p=alpha
   z = qnorm(alpha)
-  location = t(w)%*%mu
+  location = sum(w * mu)
   pm2 = portm2(w,sigma)
   dpm2 = as.vector( derportm2(w,sigma) )
   pm3 = portm3(w,M3)
@@ -494,7 +494,7 @@ operES.CornishFisher.portfolio = function(p,w,mu,sigma,M3,M4)
   alpha = .setalphaprob(p)
   p=alpha
   z = qnorm(alpha)
-  location = t(w)%*%mu
+  location = sum(w * mu)
   pm2 = portm2(w,sigma)
   dpm2 = as.vector( derportm2(w,sigma) )
   pm3 = portm3(w,M3)
