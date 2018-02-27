@@ -1,5 +1,5 @@
 #' @export
-#' @rdname chart.Drawdown
+#' @rdname findDrawdowns
 Drawdowns <-
 function (R, geometric = TRUE, ...)
 { # @author Peter Carl
