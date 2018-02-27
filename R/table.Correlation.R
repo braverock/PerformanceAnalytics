@@ -62,7 +62,7 @@ function (Ra, Rb, ...)
             merged.assets = merge(Ra[,column.a,drop=FALSE], Rb[,column.b,drop=FALSE])
             merged.assets = na.omit(merged.assets) # leaves the overlapping period
 
-            htest = cor.test(merged.assets[,1], merged.assets[,2], ...)
+            htest = cor.test(as.numeric(merged.assets[,1]), as.numeric(merged.assets[,2]), ...)
             values = cbind(htest$estimate, htest$p.value,htest$conf.int[1],htest$conf.int[2])
 
             if(column.a == 1 & column.b == 1) {

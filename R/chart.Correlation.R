@@ -45,7 +45,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
         txt <- paste(prefix, txt, sep="")
         if(missing(cex.cor)) cex <- 0.8/strwidth(txt)
 
-        test <- cor.test(x,y, method=method)
+        test <- cor.test(as.numeric(x),as.numeric(y), method=method)
         # borrowed from printCoefmat
         Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
                     cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
@@ -55,7 +55,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
         text(.8, .8, Signif, cex=cex, col=2)
     }
     f <- function(t) {
-    dnorm(t, mean=mean(x), sd=sd.xts(x) )
+        dnorm(t, mean=mean(x), sd=sd.xts(x) )
     }
     hist.panel = function (x, ...) {
         par(new = TRUE)
