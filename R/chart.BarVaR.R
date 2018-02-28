@@ -72,7 +72,7 @@
 #' \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' 
+#' \dontrun{ # not run on CRAN because of example time
 #' data(managers)
 #' # plain
 #' chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
@@ -81,18 +81,14 @@
 #' chart.BarVaR(managers[,1,drop=FALSE], 
 #' 		methods="HistoricalVaR", 
 #' 		main="... with Empirical VaR from Inception")
-#' 
+#' 		
 #' # with lines for all managers in the sample
-#' 
 #' chart.BarVaR(managers[,1:6], 
 #' 		methods="GaussianVaR", 
 #' 		all=TRUE, lty=1, lwd=2, 
 #' 		colorset= c("red", rep("gray", 5)), 
 #' 		main="... with Gaussian VaR and Estimates for Peers")
 #' 
-#' \dontrun{
-#' # not run on CRAN because of example time
-#'
 #' # with multiple methods
 #' chart.BarVaR(managers[,1,drop=FALSE],
 #' 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), 
