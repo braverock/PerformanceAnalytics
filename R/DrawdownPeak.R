@@ -11,6 +11,7 @@
 ###keywords ts multivariate distribution models
 ### #' @export
 
+
 DrawdownPeak <- function (R, ...)
 {
   R0 <- R
@@ -19,14 +20,13 @@ DrawdownPeak <- function (R, ...)
   if (ncol(R)==1 || is.null(R) || is.vector(R)) {
     calcul = FALSE
     for (i in (1:length(R))) {
-      if (!is.na(R[i])) {
+      if (any(!is.na(R))) {
         calcul = TRUE
       }
     }		      
     if (!calcul) {
       result = NaN
-    }
-    else {
+    } else {
       R = na.omit(R)
       drawdownpeak = rep(NA,length(R))
       peak = 0
@@ -39,18 +39,15 @@ DrawdownPeak <- function (R, ...)
         if (val > 1) {
           peak = i
           drawdownpeak[i] = 0
-        }
-        else {
+        } else {
           drawdownpeak[i] = (val-1)*100
         }
       }
+      result = drawdownpeak
     }
-    result = drawdownpeak
-    
     reclass(result, R0)	
     return(result)
-  }
-  else {
+  } else {
     R = checkData(R)
     result = apply(R, MARGIN = 2, DrawdownPeak, ...)
     result<-t(result)
