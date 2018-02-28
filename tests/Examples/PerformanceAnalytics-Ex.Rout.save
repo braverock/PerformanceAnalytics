@@ -8640,7 +8640,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > ###
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  56.049 26.576 68.739 0 0 
+Time elapsed:  56.534 27.527 69.528 0 0 
 > grDevices::dev.off()
 pdf 
   2 
