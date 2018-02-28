@@ -57,7 +57,13 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
     f <- function(t) {
         dnorm(t, mean=mean(x), sd=sd.xts(x) )
     }
-    hist.panel = function (x, ...) {
+    
+    #remove method from dotargs
+    dotargs <- list(...)
+    dotargs$method <- NULL
+    rm(method)
+    
+    hist.panel = function (x, ...=NULL ) {
         par(new = TRUE)
         hist(x,
              col = "light gray",
@@ -70,12 +76,13 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
               lwd = 1)
         #lines(f, col="blue", lwd=1, lty=1) how to add gaussian normal overlay?
         rug(x)
-      }
+    }
+    
     # Draw the chart
     if(histogram)
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, ...)
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel)
     else
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, ...) 
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor) 
 }
 
 ###############################################################################
