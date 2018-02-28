@@ -36,7 +36,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
     if(missing(method)) method=method[1] #only use one
 
     # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
-    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method, cex.cor, ...)
+    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method="pearson", cex.cor, ...)
     {
         usr <- par("usr"); on.exit(par(usr))
         par(usr = c(0, 1, 0, 1))
@@ -73,9 +73,9 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
       }
     # Draw the chart
     if(histogram)
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, method=method, ...)
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, ...)
     else
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, method=method, ...) 
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, ...) 
 }
 
 ###############################################################################
