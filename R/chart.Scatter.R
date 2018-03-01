@@ -33,9 +33,10 @@
 #' @seealso \code{\link{plot}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' 
-#' data(edhec)
-#' chart.Scatter(edhec[,1],edhec[,2])
+#' \dontrun{
+#'   data(edhec)
+#'   chart.Scatter(edhec[,1],edhec[,2])
+#' }
 #' 
 #' @export
 chart.Scatter <-
