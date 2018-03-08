@@ -72,7 +72,7 @@
 #' \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' 
+#' \dontrun{ # not run on CRAN because of example time
 #' data(managers)
 #' # plain
 #' chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
@@ -81,18 +81,14 @@
 #' chart.BarVaR(managers[,1,drop=FALSE], 
 #' 		methods="HistoricalVaR", 
 #' 		main="... with Empirical VaR from Inception")
-#' 
+#' 		
 #' # with lines for all managers in the sample
-#' 
 #' chart.BarVaR(managers[,1:6], 
 #' 		methods="GaussianVaR", 
 #' 		all=TRUE, lty=1, lwd=2, 
 #' 		colorset= c("red", rep("gray", 5)), 
 #' 		main="... with Gaussian VaR and Estimates for Peers")
 #' 
-#' \dontrun{
-#' # not run on CRAN because of example time
-#'
 #' # with multiple methods
 #' chart.BarVaR(managers[,1,drop=FALSE],
 #' 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), 
@@ -321,28 +317,23 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
-    if(!show.greenredbars) {
-      if(hasArg("add")) {
-        p <- xts:::current.xts_chob()
-        p$Env$bar.color <- bar.color
+    if(hasArg("add")) {
         plotargs <- list(...)
         plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
-      }
-      else 
-        p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+
+        if(show.greenredbars) {
+            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        } else {
+            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
+        }
     } else {
-      if(hasArg("add")) {
-        p <- xts:::current.xts_chob()
-        p$Env$bar.color <- bar.color
-        plotargs <- list(...)
-        plotargs$add <- NULL
-        p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
-      }
-      else 
-        p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        if(show.greenredbars) {
+            p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        } else {
+            p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+        }
     }
-    
+
     on = p$Env$frame/2
     if(show.clean) {
       p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = on)
@@ -386,7 +377,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

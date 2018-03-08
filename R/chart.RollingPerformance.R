@@ -113,18 +113,18 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
     if(hasArg("add")){
       plotargs$x=Return.calc
       plotargs$add=NULL
-      do.call(addSeries,plotargs)
+      suppressWarnings(do.call(addSeries,plotargs))
     }
     else{
       plotargs$R=Return.calc
-      do.call(chart.TimeSeries,plotargs)
+      suppressWarnings(do.call(chart.TimeSeries,plotargs))
     }
 }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

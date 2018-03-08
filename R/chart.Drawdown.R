@@ -34,7 +34,6 @@
 #' chart.Drawdown(edhec[,c(1,2)], 
 #' 		main="Drawdown from Peak Equity Attained", 
 #' 		legend.loc="bottomleft")
-#' @aliases Drawdowns
 #' @export
 chart.Drawdown <-
 function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
@@ -76,9 +75,9 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     if(hasArg("add")) {
       plotargs <- list(...)
       plotargs$add <- NULL
-      p <- xts:::current.xts_chob()
-      p$Env$colorset <- colorset
-      p <- addSeries(drawdown, col = colorset, legend.loc = legend.loc, main = plotargs$main)
+      plotcall <- match.call()
+      colset <- eval.parent(plotcall$colorset)
+      p <- addSeries(drawdown, col = colset, legend.loc = legend.loc, main = plotargs$main)
     } else
       p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
     return(p)
@@ -88,7 +87,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

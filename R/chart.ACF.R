@@ -12,7 +12,7 @@
 #' @param main title of the plot; uses the column name by default.
 #' @param \dots any other passthru parameters
 #' @note Inspired by the website:
-#' \url{http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R} "...here's an R
+#' http://www.stat.pitt.edu/stoffer/tsa2/Rcode/acf2.R "...here's an R
 #' function that will plot the ACF and PACF of a time series at the same time
 #' on the SAME SCALE, and it leaves out the zero lag in the ACF: acf2.R. If
 #' your time series is in x and you want the ACF and PACF of x to lag 50, the
@@ -44,7 +44,7 @@ chart.ACF <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     # at the same time on the SAME SCALE, and it leaves out the zero lag in the 
     # ACF: acf2.R. If your time series is in x and you want the ACF and PACF of 
     # x to lag 50, the call to the function is acf2(x,50). The number of lags 
-    # is optional, so acf2(x) will use a default number of lags [√n + 10, where 
+    # is optional, so acf2(x) will use a default number of lags [\sqrt n + 10, where 
     # n is the number of observations]."
 
     # This function uses those same defaults to print just the ACF chart.
@@ -80,7 +80,7 @@ chart.ACF <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

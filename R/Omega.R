@@ -142,7 +142,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
                 a = min(x)
                 b = max(x)
 
-                xcdf = Hmisc::Ecdf.default(x, pl=FALSE)
+                xcdf = Hmisc::Ecdf(x, pl=FALSE)
                 f <- approxfun(xcdf$x,xcdf$y,method="linear",ties="ordered")
 
                 if(output == "full") {
@@ -183,7 +183,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

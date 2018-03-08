@@ -7,7 +7,7 @@
         # not in test scripts
         MSG(paste("\nPackage ", pkg, " (",dsc$Version,") loaded.\n",
             # dsc$Title, "\n", 
-            "Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson, ", 
+            "Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson, ", 
             dsc$License, "\n", dsc$URL,
             "\n", sep=""))
     }
@@ -20,9 +20,9 @@ odd  <- function (x) x%%2==1
 sd.xts <- xts:::sd.xts
 
 #' @importFrom methods hasArg
-#' @importFrom utils packageDescription tail
+#' @importFrom utils head packageDescription tail
 #' @importFrom stats Box.test acf approxfun arima coef coefficients cor cor.test
-#'             cov dcauchy density dlnorm dnorm fitted frequency lm loess.smooth
+#'             cov dcauchy density dlnorm dnorm fitted frequency lag lm loess.smooth
 #'             median na.omit pacf pchisq pnorm ppoints predict qchisq qnorm
 #'             qqline qqnorm qt quantile sd start symnum time var window
 #' @importFrom graphics abline axis barplot box boxplot curve grid hist identify
@@ -38,7 +38,7 @@ NULL
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

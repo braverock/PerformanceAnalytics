@@ -33,7 +33,12 @@
 #'
 #' @examples
 #' data(managers, package="PerformanceAnalytics")
-#' res_qtr_rebal = Return.portfolio(managers["2002::",1:5], weights=c(.05,.1,.3,.4,.15), rebalance_on = "quarters", verbose=TRUE)
+#' 
+#' res_qtr_rebal = Return.portfolio(  managers["2002::",1:5]
+#'                                  , weights=c(.05,.1,.3,.4,.15)
+#'                                  , rebalance_on = "quarters"
+#'                                  , verbose=TRUE)
+#'                                  
 #' to.period.contributions(res_qtr_rebal$contribution, period="years")
 #' to.yearly.contributions(res_qtr_rebal$contribution)
 #'
@@ -122,7 +127,7 @@ to.yearly.contributions <- function(Contributions) {
 #
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2016 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL).
 # For full details see the file COPYING.

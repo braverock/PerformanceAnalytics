@@ -99,7 +99,7 @@
 #' Studies, 23(4):1467-1502.
 #' 
 #' Return to RiskMetrics: Evolution of a Standard
-#' \url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}
+#' \url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}
 #' 
 #' Zangari, Peter. A VaR Methodology for Portfolios that include Options. 1996.
 #' RiskMetrics Monitor, First Quarter, 4-12.
@@ -263,7 +263,7 @@ VaR <-
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

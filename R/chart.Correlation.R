@@ -13,8 +13,7 @@
 #'           (or covariance) is to be computed.  One of "pearson"
 #'           (default), "kendall", or "spearman", can be abbreviated.
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
-#' @note based on plot at
-#' \url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+#' @note based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
 #' @author Peter Carl
 #' @seealso \code{\link{table.Correlation}}
 ###keywords ts multivariate distribution models hplot
@@ -37,7 +36,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
     if(missing(method)) method=method[1] #only use one
 
     # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
-    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method, cex.cor, ...)
+    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method="pearson", cex.cor, ...)
     {
         usr <- par("usr"); on.exit(par(usr))
         par(usr = c(0, 1, 0, 1))
@@ -46,7 +45,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
         txt <- paste(prefix, txt, sep="")
         if(missing(cex.cor)) cex <- 0.8/strwidth(txt)
 
-        test <- cor.test(x,y, method=method)
+        test <- cor.test(as.numeric(x),as.numeric(y), method=method)
         # borrowed from printCoefmat
         Signif <- symnum(test$p.value, corr = FALSE, na = FALSE,
                     cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
@@ -56,9 +55,15 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
         text(.8, .8, Signif, cex=cex, col=2)
     }
     f <- function(t) {
-    dnorm(t, mean=mean(x), sd=sd.xts(x) )
+        dnorm(t, mean=mean(x), sd=sd.xts(x) )
     }
-    hist.panel = function (x, ...) {
+    
+    #remove method from dotargs
+    dotargs <- list(...)
+    dotargs$method <- NULL
+    rm(method)
+    
+    hist.panel = function (x, ...=NULL ) {
         par(new = TRUE)
         hist(x,
              col = "light gray",
@@ -71,18 +76,19 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
               lwd = 1)
         #lines(f, col="blue", lwd=1, lty=1) how to add gaussian normal overlay?
         rug(x)
-      }
+    }
+    
     # Draw the chart
     if(histogram)
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, method=method, ...)
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel)
     else
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, method=method, ...) 
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor) 
 }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

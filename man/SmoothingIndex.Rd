@@ -70,7 +70,7 @@ and the rest are 0.  In the context of smoothed returns, a lower value of
 \eqn{\xi} implies more smoothing, and the upper bound of 1 implies no
 smoothing.
 
-The "smoothing index," represented as \eqn{\xi}, is calculated the same way
+The "smoothing index", represented as \eqn{\xi}, is calculated the same way
 the Herfindahl index.  The Herfindal measure is well known in the industrial
 organization literature as a measure of the concentration of firms in a
 given industry where \eqn{y_j} represents the market share of firm \eqn{j}.
