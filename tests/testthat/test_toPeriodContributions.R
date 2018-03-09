@@ -95,15 +95,18 @@ test_that("one-period contributions are computed correctly", {
 
   # Check first API in underlying PerformanceAnalytics package
   computed_contribution_data = PerformanceAnalytics::Return.portfolio(one_period_returns, one_period_weights, contribution = TRUE)
-  expect_equal(coredata(expected_contribution_data), coredata(computed_contribution_data[,-1]), tolerance=epsilon)
+  expect_equal(coredata(expected_contribution_data), 
+               coredata(computed_contribution_data[,colnames(expected_contribution_data)]), tolerance=epsilon)
 
   # Check alternate API in underlying PerformanceAnalytics package
   computed_contribution_data = PerformanceAnalytics::Return.portfolio(one_period_returns, one_period_weights, verbose = TRUE)$contribution
-  expect_equal(coredata(expected_contribution_data), coredata(computed_contribution_data), tolerance=epsilon)
+  expect_equal(coredata(expected_contribution_data), 
+               coredata(computed_contribution_data[,colnames(expected_contribution_data)]), tolerance=epsilon)
 
   # Now check the actual API for multi-period contribution but with only one period of data passed in
   computed_multi_period_contribution_data = to.period.contributions(computed_contribution_data)
-  expect_equal(coredata(expected_contribution_data), coredata(computed_multi_period_contribution_data[,-ncol(computed_multi_period_contribution_data)]), tolerance=epsilon)
+  expect_equal(coredata(expected_contribution_data), 
+               coredata(computed_multi_period_contribution_data[,colnames(expected_contribution_data)]), tolerance=epsilon)
 
   })
 
@@ -117,13 +120,17 @@ test_that("multi-period contributions with a periodically rebalanced portfolio a
 
   # Check API in underlying PerformanceAnalytics package
   computed_contribution_data = PerformanceAnalytics::Return.portfolio(multi_period_returns, multi_period_weights, verbose = TRUE)$contribution
-  expect_equal(first_period_contribution_data, coredata(computed_contribution_data[1,]), tolerance=epsilon)
-  expect_equal(second_period_contribution_data, coredata(computed_contribution_data[2,]), tolerance=epsilon)
-  expect_equal(third_period_contribution_data, coredata(computed_contribution_data[3,]), tolerance=epsilon)
+  expect_equal(first_period_contribution_data, 
+               coredata(computed_contribution_data[1,colnames(first_period_contribution_data)]), tolerance=epsilon)
+  expect_equal(second_period_contribution_data, 
+               coredata(computed_contribution_data[2,colnames(second_period_contribution_data)]), tolerance=epsilon)
+  expect_equal(third_period_contribution_data, 
+               coredata(computed_contribution_data[3,colnames(third_period_contribution_data)]), tolerance=epsilon)
 
 
   # Now check the actual API for multi-period contribution
 
   computed_multi_period_contribution_data = to.period.contributions(computed_contribution_data)
-  expect_equal(coredata(expected_contribution_data), coredata(computed_multi_period_contribution_data[,-ncol(computed_multi_period_contribution_data)]), tolerance=epsilon)
+  expect_equal(coredata(expected_contribution_data), 
+               coredata(computed_multi_period_contribution_data[,colnames(expected_contribution_data)]), tolerance=epsilon)
 })

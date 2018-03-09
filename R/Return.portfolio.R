@@ -218,7 +218,6 @@ Return.portfolio <- Return.rebalancing <- function(R,
                                      weights=weights, 
                                      wealth.index=wealth.index, 
                                      contribution=contribution, 
-                                     rebalance_on=rebalance_on, 
                                      value=value, 
                                      verbose=verbose, 
                                      ...=...)
@@ -227,7 +226,6 @@ Return.portfolio <- Return.rebalancing <- function(R,
                                       weights=weights, 
                                       wealth.index=wealth.index, 
                                       contribution=contribution, 
-                                      rebalance_on=rebalance_on, 
                                       verbose=verbose, 
                                       ...=...)
   }
@@ -238,7 +236,6 @@ Return.portfolio.arithmetic <- function(R,
                                         weights=NULL,
                                         wealth.index=FALSE,
                                         contribution=FALSE,
-                                        rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
                                         verbose=FALSE,
                                         ...)
 {
@@ -311,11 +308,24 @@ Return.portfolio.geometric <- function(R,
                                        weights=NULL,
                                        wealth.index=FALSE,
                                        contribution=FALSE,
-                                       rebalance_on=c(NA, 'years', 'quarters', 'months', 'weeks', 'days'),
                                        value=1,
                                        verbose=FALSE,
                                        ...)
 {
+  if(!all(rowSums(weights) == 1)){
+    warning("The weights for one or more periods do not sum up to 1: assuming a return of 0 for the residual weights")
+    if(!"Residual" %in% colnames(weights)) {
+      weights$Residual = 1-rowSums(weights)
+    } else {
+      weights = cbind(weights, (1-rowSums(weights)))
+    }
+    if(!"Residual" %in% colnames(R)) {
+      R$Residual = 0
+    } else {
+      R = cbind(R, 0)
+    }
+    
+  }
   # bop = beginning of period
   # eop = end of period
   # Initialize objects
@@ -371,7 +381,7 @@ Return.portfolio.geometric <- function(R,
         
         if(contribution | verbose){
           # Compute period contribution
-          period_contrib[k,] = returns[j,] * bop_value[k,] / sum(bop_value[k,])
+          period_contrib[k,] = returns[j,] * bop_value[k,] / bop_value_total[k]
           if(verbose){
             # Compute bop and eop weights
             bop_weights[k,] = bop_value[k,] / bop_value_total[k]
