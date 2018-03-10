@@ -312,7 +312,7 @@ Return.portfolio.geometric <- function(R,
                                        verbose=FALSE,
                                        ...)
 {
-  if(!all(rowSums(weights) == 1)){
+  if(!isTRUE(all.equal(rowSums(weights), rep(1, NROW(weights))))){
     warning("The weights for one or more periods do not sum up to 1: assuming a return of 0 for the residual weights")
     if(!"Residual" %in% colnames(weights)) {
       weights$Residual = 1-rowSums(weights)
@@ -324,8 +324,8 @@ Return.portfolio.geometric <- function(R,
     } else {
       R = cbind(R, 0)
     }
-    
   }
+  
   # bop = beginning of period
   # eop = end of period
   # Initialize objects
