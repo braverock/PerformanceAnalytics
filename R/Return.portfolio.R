@@ -156,7 +156,8 @@ Return.portfolio <- Return.rebalancing <- function(R,
   rebalance_on = rebalance_on[1]
   
   # find the right unit to subtract from the first return date to create a start date
-  freq = periodicity(R)
+  extras <- list(...)
+  if (is.null(extras$freq)) freq = periodicity(R) else freq = list(scale=extras$freq)
   switch(freq$scale, 
          seconds = { stop("Use a returns series of daily frequency or higher.") },
          minute = { stop("Use a returns series of daily frequency or higher.") },
