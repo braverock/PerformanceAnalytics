@@ -178,7 +178,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         yearly = {freq.lab = "year"}
     )
 
-    time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
+    # time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
     if(methods[1]=="none"){
         methods=NULL
         risk.line=FALSE
