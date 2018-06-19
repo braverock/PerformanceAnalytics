@@ -8,8 +8,7 @@
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #' 
-###keywords ts multivariate distribution models
-### #' @export
+#' @export
 
 
 DrawdownPeak <- function (R, ...)

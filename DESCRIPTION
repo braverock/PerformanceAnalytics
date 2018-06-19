@@ -14,8 +14,8 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.5.2
-Date: 2018-02-28 $Date$
+Version: 1.5.2.1
+Date: 2018-06-19 $Date$
 Description: Collection of econometric functions for
     performance and risk analysis. This package aims to aid
     practitioners and researchers in utilizing the latest
