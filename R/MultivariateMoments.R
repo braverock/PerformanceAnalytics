@@ -943,7 +943,7 @@ M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
       fvar_bis <- mean(fc_bis^2)
       fskew_bis <- mean(fc_bis^3)
       fkurt_bis <- mean(fc_bis^4)
-      b[iter] <- b[iter] - .Call('CM4_1F', as.numeric(Xc), as.numeric(Xc2), fc, fvar_bis, fskew_bis, fkurt_bis, 
+      b[iter] <- b[iter] - .Call('CM4_1F', as.numeric(Xc), as.numeric(Xc2), fc_bis, fvar_bis, fskew_bis, fkurt_bis, 
                                  m11, m21, m22, m31, NN, PP, PACKAGE="PerformanceAnalytics")
       iter <- iter + 1
     }
