@@ -10,7 +10,8 @@
 ###############################################################################
 
 ### build objective function with gradient
-NCE_obj <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fskew, epsskew, fkurt, epskurt) {
+NCE_obj <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fskew, epsskew, fkurt, epskurt,
+                    W2 = NULL, W3 = NULL, W4 = NULL) {
   
   # model parameters
   nd <- 0
@@ -82,40 +83,68 @@ NCE_obj <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fskew, e
   
   nelem_mom <- c(p * (p + 1) / 2, p * (p + 1) * (p + 2) / 6, p * (p + 1) * (p + 2) * (p + 3) / 24)
   ### calculate objective value
-  if (NCOL(W) == 1) {
-    # case of diagonal W matrix
-    nd <- 0
+  if (!is.null(W)) { # single W matrix for all moments - either diagonal or full
+    if (NCOL(W) == 1) {
+      # case of diagonal W matrix
+      nd <- 0
+      objval <- 0
+      if (include.mom[1]) {
+        mdiff2w <- (m2 - mod2) * W[(nd + 1):(nd + nelem_mom[1])]
+        objval <- objval + sum(mdiff2w * (m2 - mod2))
+        nd <- nd + nelem_mom[1]
+      }
+      if (include.mom[2]) {
+        mdiff3w <- (m3 - mod3) * W[(nd + 1):(nd + nelem_mom[2])]
+        objval <- objval + sum(mdiff3w * (m3 - mod3))
+        nd <- nd + nelem_mom[2]
+      }
+      if (include.mom[3]) {
+        mdiff4w <- (m4 - mod4) * W[(nd + 1):(nd + nelem_mom[3])]
+        objval <- objval + sum(mdiff4w * (m4 - mod4))
+      }
+    } else {
+      # case of full W matrix
+      momdiff <- c(m2 - mod2, m3 - mod3, m4 - mod4)
+      mdiffw <- W %*% momdiff
+      objval <- sum(momdiff * mdiffw)
+      nd <- 0
+      if (include.mom[1]) {
+        mdiff2w <- mdiffw[(nd + 1):(nd + nelem_mom[1])]
+        nd <- nd + nelem_mom[1]
+      }
+      if (include.mom[2]) {
+        mdiff3w <- mdiffw[(nd + 1):(nd + nelem_mom[2])]
+        nd <- nd + nelem_mom[2]
+      }
+      if (include.mom[3]) {
+        mdiff4w <- mdiffw[(nd + 1):(nd + nelem_mom[3])]
+      }
+    }
+  } else { # seperate W matrices for covariance, coskewness or cokurtosis elements
     objval <- 0
     if (include.mom[1]) {
-      mdiff2w <- (m2 - mod2) * W[(nd + 1):(nd + nelem_mom[1])]
+      if (NCOL(W2) == 1) {
+        mdiff2w <- (m2 - mod2) * W2
+      } else {
+        mdiff2w <- W2 %*% (m2 - mod2)
+      }
       objval <- objval + sum(mdiff2w * (m2 - mod2))
-      nd <- nd + nelem_mom[1]
     }
     if (include.mom[2]) {
-      mdiff3w <- (m3 - mod3) * W[(nd + 1):(nd + nelem_mom[2])]
+      if (NCOL(W3) == 1) {
+        mdiff3w <- (m3 - mod3) * W3
+      } else {
+        mdiff3w <- W3 %*% (m3 - mod3)
+      }
       objval <- objval + sum(mdiff3w * (m3 - mod3))
-      nd <- nd + nelem_mom[2]
     }
     if (include.mom[3]) {
-      mdiff4w <- (m4 - mod4) * W[(nd + 1):(nd + nelem_mom[3])]
+      if (NCOL(W4) == 1) {
+        mdiff4w <- (m4 - mod4) * W4
+      } else {
+        mdiff4w <- W4 %*% (m4 - mod4)
+      }
       objval <- objval + sum(mdiff4w * (m4 - mod4))
-    }
-  } else {
-    # case of full W matrix
-    momdiff <- c(m2 - mod2, m3 - mod3, m4 - mod4)
-    mdiffw <- W %*% momdiff
-    objval <- sum(momdiff * mdiffw)
-    nd <- 0
-    if (include.mom[1]) {
-      mdiff2w <- mdiffw[(nd + 1):(nd + nelem_mom[1])]
-      nd <- nd + nelem_mom[1]
-    }
-    if (include.mom[2]) {
-      mdiff3w <- mdiffw[(nd + 1):(nd + nelem_mom[2])]
-      nd <- nd + nelem_mom[2]
-    }
-    if (include.mom[3]) {
-      mdiff4w <- mdiffw[(nd + 1):(nd + nelem_mom[3])]
     }
   }
   
@@ -307,7 +336,7 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
   # M4nce     : NCE cokurtosis matrix
   # optim.sol ; output of the optimizer
   
-  x <- coredata(R)
+  x <- zoo::coredata(R)
   n <- nrow(x)
   p <- ncol(x)
   
@@ -334,7 +363,20 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
   ### buil W matrix, if necessary
   nelem_mom <- c(p * (p + 1) / 2, p * (p + 1) * (p + 2) / 6, p * (p + 1) * (p + 2) * (p + 3) / 24)
   nelem <- sum(include.mom * nelem_mom)
-  if (hasArg(W)) W <- list(...)$W else W <- rep(1, nelem)
+  if (hasArg(W)) {
+    W <- list(...)$W 
+    if (is.list(W)) {
+      W2 <- W$W2
+      W3 <- W$W3
+      W4 <- W$W4
+      W <- NULL
+    } else {
+      W2 <- W3 <- W4 <- NULL
+    }
+  } else {
+    W <- rep(1, nelem)
+    W2 <- W3 <- W4 <- NULL
+  }
   
   ### prepare model parameters
   if (hasArg(B)) B <- list(...)$B else B <- NULL
@@ -365,7 +407,8 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
   }
   
   ### fit the model
-  if (k == 0) k <- 1
+  if (k == 0) k <- 1 # since B, fskew and fkurt are already initialised at zeros, these are not optimized;
+  # k=1 here tricks the objective function which requires at least one factor.
   if (hasArg(optimize_method)) optimize_method <- list(...)$optimize_method else optimize_method <- "nloptr"
   if (hasArg(include.ineq)) include.ineq <- list(...)$include.ineq else include.ineq <- FALSE
   if (hasArg(optscontrol)) {
@@ -392,12 +435,14 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
                             lb = lowerbound, ub = upperbound, opts = optscontrol,
                             p = p, k = k, W = W, m2 = m2, m3 = m3, m4 = m4,
                             include.mom = include.mom, B = B, epsvar = epsvar, fskew = fskew,
-                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt)
+                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
+                            W2 = W2, W3 = W3, W4 = W4)
     } else {
-      sol <- nloptr::nloptr(x0 = x0, eval_f = NCE_obj, lb = lowerbound, ub = upperbound,
+      sol <- nloptr::nloptr(x0 = x0, eval_f = PerformanceAnalytics:::NCE_obj, lb = lowerbound, ub = upperbound,
                             opts = optscontrol, p = p, k = k, W = W, m2 = m2, m3 = m3, m4 = m4,
                             include.mom = include.mom, B = B, epsvar = epsvar, fskew = fskew,
-                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt)
+                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
+                            W2 = W2, W3 = W3, W4 = W4)
     }
     theta <- sol$solution
   } else if (optimize_method == "genoud") {
@@ -466,12 +511,14 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
                             lb = lowerbound, ub = upperbound, opts = optscontrol,
                             p = p, k = k, W = W, m2 = m2, m3 = m3, m4 = m4,
                             include.mom = include.mom, B = B, epsvar = epsvar, fskew = fskew,
-                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt)
+                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
+                            W2 = W2, W3 = W3, W4 = W4)
     } else {
       sol <- nloptr::nloptr(x0 = sol$par, eval_f = NCE_obj, lb = lowerbound, ub = upperbound,
                             opts = optscontrol, p = p, k = k, W = W, m2 = m2, m3 = m3, m4 = m4,
                             include.mom = include.mom, B = B, epsvar = epsvar, fskew = fskew,
-                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt)
+                            epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
+                            W2 = W2, W3 = W3, W4 = W4)
     }
     theta <- sol$solution
   }
@@ -594,7 +641,7 @@ NCEconstructW <- function (X, Wid = "RidgeD", alpha = 0.1, include.mom = c(TRUE,
   nelem_mom <- c(p * (p + 1) / 2, p * (p + 1) * (p + 2) / 6, p * (p + 1) * (p + 2) * (p + 3) / 24)
   nelem <- sum(include.mom * nelem_mom)
   
-  if (Wid == "Id") {
+  if (length(Wid) == 1 && Wid == "Id") {
     # equal-weighted weight matrix
     W <- rep(1, nelem)
     Xi <- NULL
@@ -602,30 +649,59 @@ NCEconstructW <- function (X, Wid = "RidgeD", alpha = 0.1, include.mom = c(TRUE,
     # pseudo moment observations
     Xi_obs <- .Call("NCEAcov", as.numeric(m11), p, n, as.numeric(Xc),
                     include.mom[1], include.mom[2], include.mom[3], PACKAGE="PerformanceAnalytics")
-    if (Wid == "D") {
-      # variance weighted diagonal W
-      W <- apply(Xi_obs, 2, var) * (n - 1) / n
-      W <- 1 / W
-      Xi <- NULL
-    }
-    if ((Wid == "Opt") || ((Wid == "RidgeD") || (Wid == "RidgeI"))) {
-      Xi <- cov(Xi_obs) * (n - 1) / n
-      if (Wid == "Opt") {
-        if (n > nelem) {
-          W <- solve(Xi)
-        } else {
-          Wid <- "RidgeD"
+    if (length(Wid) == 1) {
+      if (Wid == "D") {
+        # variance weighted diagonal W
+        W <- apply(Xi_obs, 2, var) * (n - 1) / n
+        W <- 1 / W
+        Xi <- NULL
+      }
+      if ((Wid == "Opt") || ((Wid == "RidgeD") || (Wid == "RidgeI"))) {
+        Xi <- cov(Xi_obs) * (n - 1) / n
+        if (Wid == "Opt") {
+          if (n > nelem) {
+            W <- solve(Xi)
+          } else {
+            Wid <- "RidgeD"
+          }
         }
+        if (Wid == "RidgeD") {
+          toInvert <- (1 - alpha) * Xi + alpha * diag(diag(Xi))
+          W <- tryCatch(base::chol2inv(base::chol(toInvert)), 
+                        error = function(x) base::chol2inv(base::chol(0.9 * Xi + 0.1 * diag(diag(Xi)))))
+        }
+        if (Wid == "RidgeI") {
+          toInvert <- (1 - alpha) * Xi + alpha * diag(ncol(Xi))
+          W <- tryCatch(base::chol2inv(base::chol(toInvert)), 
+                        error = function(x) base::chol2inv(base::chol(0.9 * Xi + 0.1 * diag(ncol(Xi)))))
+        }
+        W <- 0.5 * (W + t(W))
       }
-      if (Wid == "RidgeD") {
-        toInvert <- (1 - alpha) * Xi + alpha * diag(diag(Xi))
-        W <- tryCatch(solve(toInvert), error = function(x) solve(0.9 * Xi + 0.1 * diag(diag(Xi))))
+    } else {
+      W <- vector('list', 3)
+      nd <- 0
+      for (ii in 1:3) {
+        if (include.mom[ii]) {
+          if (Wid[ii] == "D") {
+            W[[ii]] <- n / ((n - 1) * apply(Xi_obs[, (nd + 1):(nd + nelem_mom[ii])], 2, var))
+          } else if (Wid[ii] == "RidgeD") {
+            Xi <- cov(Xi_obs[, (nd + 1):(nd + nelem_mom[ii])]) * (n - 1) / n
+            toInvert <- (1 - alpha) * Xi + alpha * diag(diag(Xi))
+            W[[ii]] <- tryCatch(base::chol2inv(base::chol(toInvert)), 
+                                error = function(x) base::chol2inv(base::chol(0.9 * Xi + 0.1 * diag(diag(Xi)))))
+          } else if (Wid[ii] == "RidgeI") {
+            Xi <- cov(Xi_obs[, (nd + 1):(nd + nelem_mom[ii])]) * (n - 1) / n
+            toInvert <- (1 - alpha) * Xi + alpha * diag(ncol(Xi))
+            W[[ii]] <- tryCatch(base::chol2inv(base::chol(toInvert)), 
+                                error = function(x) base::chol2inv(base::chol(0.9 * Xi + 0.1 * diag(ncol(Xi)))))
+          } else {
+            W[[ii]] <- rep(1, nelem_mom[ii])
+          }
+        }
+        nd <- nd + include.mom[ii]
       }
-      if (Wid == "RidgeI") {
-        toInvert <- (1 - alpha) * Xi + alpha * diag(ncol(Xi))
-        W <- tryCatch(solve(toInvert), error = function(x) solve(0.9 * Xi + 0.1 * diag(ncol(Xi))))
-      }
-      W <- 0.5 * (W + t(W))
+      names(W) <- c("W2", "W3", "W4")
+      Xi <- NULL
     }
   }
   
