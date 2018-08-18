@@ -29,7 +29,7 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
     x_cond = R[R<threshold,]
     #Calculate LPM
 
-    LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+    LPM = (1/nb) * sum(pmax(0, R_avg - x_cond)^n)
   } else {
 
   #Calculate Number of obs less than threshold
@@ -40,7 +40,7 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
     x_cond = R[R<threshold,]
     #Calculate LPM
 
-    LPM = (1/nb) * sum(max(0,R_avg-x_cond)^n)
+    LPM = (1/nb) * sum(pmax(0, R_avg - x_cond)^n)
 
   }
   return(LPM)
