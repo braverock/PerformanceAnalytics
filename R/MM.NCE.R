@@ -300,7 +300,6 @@ NCE_obj_ineq <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fsk
 #' @aliases NCE MM.NCE
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns (with mean zero)
-#' @param include.mom select to compute covariance, coskewness or cokurtosis matrix
 #' @param as.mat TRUE/FALSE whether to return the full moment matrix or only
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
@@ -319,15 +318,14 @@ NCE_obj_ineq <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fsk
 #' TODO
 #' 
 #' @export MM.NCE
-MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
+MM.NCE <- function(R, as.mat = TRUE, ...) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
-  # computes the nearest comoment estimators as in Boudt, Cornilly and Verdonck (2017)
+  # computes the nearest comoment estimators as in Boudt, Cornilly and Verdonck (2018)
   #
   # Inputs:
   # R         : numeric matrix of dimensions NN x PP
-  # include.mom : select to compute covariance, coskewness or cokurtosis matrix
   # as.mat    : output as a matrix or as the vector with only unique coskewness eleements
   #
   # Outputs:
@@ -336,12 +334,15 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
   # M4nce     : NCE cokurtosis matrix
   # optim.sol ; output of the optimizer
   
-  x <- zoo::coredata(R)
+  x <- coredata(R)
   n <- nrow(x)
   p <- ncol(x)
   
   ### set number of factors to use
   if (hasArg(k)) k <- list(...)$k else k <- 1
+  
+  ### set moments to use
+  if (hasArg(include.mom)) include.mom <- list(...)$include.mom else include.mom <- rep(TRUE, 3)
   
   ### compute initial estimators, if necessary
   if (hasArg(m2)) {
