@@ -5,13 +5,11 @@
 \alias{MM.NCE}
 \title{Functions for calculating the nearest comoment estimator for financial time series}
 \usage{
-MM.NCE(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...)
+MM.NCE(R, as.mat = TRUE, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 asset returns (with mean zero)}
-
-\item{include.mom}{select to compute covariance, coskewness or cokurtosis matrix}
 
 \item{as.mat}{TRUE/FALSE whether to return the full moment matrix or only
 the vector with the unique elements (the latter is advised for speed), default
