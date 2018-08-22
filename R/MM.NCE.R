@@ -573,16 +573,17 @@ MM.NCE <- function(R, include.mom = c(TRUE, TRUE, TRUE), as.mat = TRUE, ...) {
     mod4 <- NULL
   }
   
+  ### return object
+  result <- list("M2nce" = mod2, "M3nce" = mod3, "M4nce" = mod4, "optim.sol" = sol)
+  
   ### return model parameters if necessary
   if (hasArg(model.par)) model.par <- list(...)$model.par else model.par <- FALSE
   if (model.par) {
-    model.par <- list("B" = B, "epsvar" = epsvar, "fskew" = fskew, 
-                      "epsskew" = epsskew, "fkurt" = fkurt, "epskurt" = epskurt)
-  } else {
-    model.par <- NULL
+    result$model.par <- list("B" = B, "epsvar" = epsvar, "fskew" = fskew, 
+                             "epsskew" = epsskew, "fkurt" = fkurt, "epskurt" = epskurt)
   }
   
-  return ( list("M2nce" = mod2, "M3nce" = mod3, "M4nce" = mod4, "optim.sol" = sol, "model.par" = model.par) )
+  return ( result )
 }
 
 
