@@ -375,7 +375,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
       W2 <- W3 <- W4 <- NULL
     }
   } else {
-    W <- rep(1, nelem)
+    W <- NCEconstructW(x, Wid = "D", include.mom = include.mom)$W
     W2 <- W3 <- W4 <- NULL
   }
   
