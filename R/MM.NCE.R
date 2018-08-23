@@ -362,15 +362,41 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
   }
   
   ### buil W matrix, if necessary
-  nelem_mom <- c(p * (p + 1) / 2, p * (p + 1) * (p + 2) / 6, p * (p + 1) * (p + 2) * (p + 3) / 24)
-  nelem <- sum(include.mom * nelem_mom)
+  # nelem_mom <- c(p * (p + 1) / 2, p * (p + 1) * (p + 2) / 6, p * (p + 1) * (p + 2) * (p + 3) / 24)
+  # nelem <- sum(include.mom * nelem_mom)
+  add_bootstrap_info <- FALSE
   if (hasArg(W)) {
     W <- list(...)$W 
     if (is.list(W)) {
-      W2 <- W$W2
-      W3 <- W$W3
-      W4 <- W$W4
-      W <- NULL
+      if ("W2" %in% names(W)) {
+        # seperate weight matrices for each order
+        W2 <- W$W2
+        W3 <- W$W3
+        W4 <- W$W4
+        W <- NULL
+      } else {
+        # bootstrapped or ridge weight matrix
+        Wid <- W$Wid
+        alpha <- W$alpha
+        if (is.null(alpha)) {
+          # bootstrapped alpha value
+          nW <- names(W)
+          if ("nb" %in% nW) nb <- W$nb else nb <- 100
+          if ("alphavec" %in% nW) alphavec <- W$alphavec else alphavec <- seq(0.2, 1, by = 0.2)
+          if ("optscontrol" %in% nW) optscontrol_B <- W$optscontrol else 
+            optscontrol_B <- list(algorithm = "NLOPT_LD_MMA", xtol_rel = 1e-5, ftol_rel = 1e-5, 
+                                  ftol_abs = 1e-5, maxeval = 5000, print_level = 0, check_derivatives = FALSE)
+          x0_B <- NCEinitMCA(x, k, include.mom = include.mom)
+          NC_temp <- MM.NCE(x, as.mat = FALSE, k = k, x0 = x0_B, include.mom = include.mom, optimize_method = "genoud")
+          x0_B <- NC_temp$optim.sol$solution
+          bootstrap_info <- bootstrap_alpha_Ridge(x, nb, alphavec, k, x0_B, optscontrol_B, 
+                                                  include.mom = include.mom, Wchoice = Wid)
+          add_bootstrap_info <- TRUE
+          alpha <- bootstrap_info$alpha_opt
+        }
+        W <- NCEconstructW(x, Wid = Wid, alpha = alpha, include.mom = include.mom)$W
+        W2 <- W3 <- W4 <- NULL
+      }
     } else {
       W2 <- W3 <- W4 <- NULL
     }
@@ -576,6 +602,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
   
   ### return object
   result <- list("M2nce" = mod2, "M3nce" = mod3, "M4nce" = mod4, "optim.sol" = sol)
+  if (add_bootstrap_info) result$bootstrap_info <- bootstrap_info
   
   ### return model parameters if necessary
   if (hasArg(model.par)) model.par <- list(...)$model.par else model.par <- FALSE
@@ -731,7 +758,7 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   # alpha_opt : optimal ridge coefficient
   # alphavec  : echo the grid of alpha values
   # sMSE      : simulated weighted MSE on the grid alphavec
-
+  
   n <- nrow(X)
   p <- ncol(X)
   idM2 <- lower.tri(diag(p), diag = TRUE)
@@ -769,6 +796,45 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   alpha_opt <- alphavec[which.min(sMSE)]
   
   return (list("alpha_opt" = alpha_opt, "alphavec" = alphavec, "sMSE" = sMSE))
+}
+
+
+NCEinitMCA <- function(X, k, include.mom = rep(TRUE, 3)) {
+  
+  if (k == 0) {
+    x <- X - matrix(colMeans(X), nrow = nrow(X), ncol = ncol(X), byrow = TRUE)
+    x0 <- matrix(c(colMeans(x^2), colMeans(x^3), colMeans(x^4)), nrow = 1)
+  }  else {
+    B <- M3.MCA(X, k, as.mat = FALSE)$U
+    proj <- solve(t(B) %*% B) %*% t(B)
+    f <- X %*% t(proj)
+    fc <- f - matrix(colMeans(f), nrow = nrow(f), ncol = k, byrow = TRUE)
+    eps <- X - f %*% t(B)
+    eps <- eps - matrix(colMeans(eps), nrow = nrow(X), ncol = ncol(X), byrow = TRUE)
+    x0M3 <- c(t(B), colMeans(eps^2), colMeans(fc^3), colMeans(eps^3), colMeans(fc^4), colMeans(eps^4))
+    
+    B <- M4.MCA(X, k, as.mat = FALSE)$U
+    proj <- solve(t(B) %*% B) %*% t(B)
+    f <- X %*% t(proj)
+    fc <- f - matrix(colMeans(f), nrow = nrow(f), ncol = k, byrow = TRUE)
+    eps <- X - f %*% t(B)
+    eps <- eps - matrix(colMeans(eps), nrow = nrow(X), ncol = ncol(X), byrow = TRUE)
+    x0M4 <- c(t(B), colMeans(eps^2), colMeans(fc^3), colMeans(eps^3), colMeans(fc^4), colMeans(eps^4))
+    
+    x0M2 <- PerformanceAnalytics:::NCEinitialPCA(X, k)$x0
+    x0 <- rbind(x0M2, x0M3, x0M4)
+  }
+  if (identical(include.mom, c(TRUE, TRUE, FALSE))) {
+    p <- ncol(X)
+    ncovcosk <- p * k + 2 * p + k
+    x0 <- x0[, 1:ncovcosk]
+  } else if (identical(include.mom, c(TRUE, FALSE, FALSE))) {
+    p <- ncol(X)
+    ncov <- p * k + p
+    x0 <- x0[, 1:ncov]
+  }
+  
+  return (x0)
 }
 
 
