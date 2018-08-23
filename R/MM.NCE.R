@@ -332,7 +332,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
   # M2nce     : NCE covariance matrix
   # M3nce     : NCE coskewness matrix
   # M4nce     : NCE cokurtosis matrix
-  # optim.sol ; output of the optimizer
+  # optim.sol : output of the optimizer
   
   x <- coredata(R)
   n <- nrow(x)
@@ -708,6 +708,67 @@ NCEconstructW <- function (X, Wid = "RidgeD", alpha = 0.1, include.mom = c(TRUE,
   }
   
   return (list("W" = W, "Xi" = Xi))
+}
+
+bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol, 
+                                  include.mom = rep(TRUE, 3), Wchoice = "RidgeD") {
+  # @author Dries Cornilly
+  #
+  # DESCRIPTION:
+  # computes optimal ridge parameter for NCE weight matrix as in Boudt, Cornilly and Verdonck (2018)
+  #
+  # Inputs:
+  # X         : numeric matrix of dimensions NN x PP
+  # nb        : number of bootstrap samples (typically 250)
+  # alphavec  : grid of alpha values on which to bootstrap
+  # k         : number of factors in the bootstrapped NC estimator
+  # x0        : starting values for the bootstrapped NC estimator
+  # optscontrol : optimization control parameters for the bootstrapped NC estimator
+  # include.mom : boolean vector of length 3 indicating which moment orders to include
+  # Wchoice   : "RidgeD" for ridge with optimal diagonal, "RidgeI" for ridge to identity
+  #
+  # Outputs:
+  # alpha_opt : optimal ridge coefficient
+  # alphavec  : echo the grid of alpha values
+  # sMSE      : simulated weighted MSE on the grid alphavec
+
+  n <- nrow(X)
+  p <- ncol(X)
+  idM2 <- lower.tri(diag(p), diag = TRUE)
+  M2mod <- cov(X)[idM2] * (n - 1) / n
+  if (include.mom[2]) M3mod <- M3.MM(X, as.mat = FALSE) else M3mod <- NULL
+  if (include.mom[3]) M4mod <- M4.MM(X, as.mat = FALSE) else M4mod <- NULL
+  
+  Dsq <- sqrt(1 / PerformanceAnalytics:::NCEconstructW(X, Wid = "D", alpha = 1, include.mom = include.mom)$W)
+  DsqM2 <- Dsq[1:(p * (p + 1) / 2)]
+  if (include.mom[2]) DsqM3 <- Dsq[(p * (p + 1) / 2 + 1):(p * (p + 1) / 2 + p * (p + 1) * (p + 2) / 6)]
+  if (include.mom[3]) {
+    if (include.mom[2]) {
+      DsqM4 <- Dsq[(p * (p + 1) / 2 + p * (p + 1) * (p + 2) / 6 + 1):length(Dsq)]
+    } else {
+      DsqM4 <- Dsq[(p * (p + 1) / 2 + 1):length(Dsq)]
+    }
+  }
+  
+  SEboot <- matrix(NA, nrow = nb, ncol = length(alphavec))
+  
+  for (ii in 1:nb) {
+    set.seed(ii)
+    Xboot <- X[sample(1:n, n, replace = TRUE),]
+    for (jj in 1:length(alphavec)) {
+      alpha <- alphavec[jj]
+      W <- PerformanceAnalytics:::NCEconstructW(X, Wid = Wchoice, alpha = alpha, include.mom = include.mom)$W
+      NCest <- MM.NCE(Xboot, include.mom = include.mom, as.mat = FALSE, 
+                      k = k, W = W, x0 = x0, optscontrol = optscontrol)
+      SEboot[ii, jj] <- mean(((NCest$M2nce[idM2] - M2mod) / DsqM2)^2)
+      if (include.mom[2]) SEboot[ii, jj] <- SEboot[ii, jj] + mean(((NCest$M3nce - M3mod) / DsqM3)^2)
+      if (include.mom[3]) SEboot[ii, jj] <- SEboot[ii, jj] + mean(((NCest$M4nce - M4mod) / DsqM4)^2)
+    }
+  }
+  sMSE <- colMeans(SEboot)
+  alpha_opt <- alphavec[which.min(sMSE)]
+  
+  return (list("alpha_opt" = alpha_opt, "alphavec" = alphavec, "sMSE" = sMSE))
 }
 
 
