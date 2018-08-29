@@ -15,7 +15,7 @@ asset returns (with mean zero)}
 the vector with the unique elements (the latter is advised for speed), default
 TRUE}
 
-\item{\dots}{any other passthru parameters}
+\item{\dots}{any other passthru parameters, see details.}
 }
 \description{
 calculates NCE covariance, coskewness and cokurtosis matrices
@@ -28,18 +28,37 @@ portfolio and computing modified VaR and modified ES of a portfolio.
 
 The nearest comoment estimator is a way to estimate the covariance, coskewness and
 cokurtosis matrix by means of a latent multi-factor model. The method is proposed in 
-CITE TODO.
+Boudt, Cornilly and Verdonck (2018).
+
+The optional arguments include the number of factors, given by `k` and the weight matrix
+`W`, see the examples.
 }
 \examples{
-
 data(edhec)
 
-# NCE estimation
-TODO
+# default estimator
+est_nc <- MM.NCE(edhec[, 1:3] * 100)
+
+# scree plot to determine number of factors
+obj <- rep(NA, 5)
+for (ii in 1:5) {
+    est_nc <- MM.NCE(edhec[, 1:5] * 100, k = ii - 1)
+    obj[ii] <- est_nc$optim.sol$objective * nrow(edhec[, 1:5])
+}
+plot(0:4, obj, type = 'b', xlab = "number of factors", 
+     ylab = "objective value", las = 1)
+     
+# bootstrapped estimator
+est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD",
+                 "alpha" = NULL, "nb" = 250, "alphavec" = seq(0.2, 1, by = 0.2)))
+                 
+# ridge weight matrix with alpha = 0.5
+est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD", "alpha" = 0.5))
 
 }
 \references{
-TODO
+Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2018. Nearest comoment estimation with unobserved
+factors. Submitted. Available at SSRN: https://ssrn.com/abstract=3087336
 }
 \seealso{
 \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}  
