@@ -484,7 +484,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
                             epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
                             W2 = W2, W3 = W3, W4 = W4)
     } else {
-      sol <- nloptr::nloptr(x0 = x0, eval_f = PerformanceAnalytics:::NCE_obj, lb = lowerbound, ub = upperbound,
+      sol <- nloptr::nloptr(x0 = x0, eval_f = NCE_obj, lb = lowerbound, ub = upperbound,
                             opts = optscontrol, p = p, k = k, W = W, m2 = m2, m3 = m3, m4 = m4,
                             include.mom = include.mom, B = B, epsvar = epsvar, fskew = fskew,
                             epsskew = epsskew, fkurt = fkurt, epskurt = epskurt,
@@ -655,7 +655,7 @@ NCEinitialPCA <- function (x, k) {
     f <- NULL
     
   } else {
-    pca <- princomp(x, cor = FALSE, scores = k)                         # compute PCA
+    pca <- stats::princomp(x, cor = FALSE, scores = k)                  # compute PCA
     
     x0list <- list()                                                    # initialize list of starting values
     f <- pca$scores[, 1:k]                                              # compute factor estimates
@@ -785,7 +785,7 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   if (include.mom[2]) M3mod <- M3.MM(X, as.mat = FALSE) else M3mod <- NULL
   if (include.mom[3]) M4mod <- M4.MM(X, as.mat = FALSE) else M4mod <- NULL
   
-  Dsq <- sqrt(1 / PerformanceAnalytics:::NCEconstructW(X, Wid = "D", alpha = 1, include.mom = include.mom)$W)
+  Dsq <- sqrt(1 / NCEconstructW(X, Wid = "D", alpha = 1, include.mom = include.mom)$W)
   DsqM2 <- Dsq[1:(p * (p + 1) / 2)]
   if (include.mom[2]) DsqM3 <- Dsq[(p * (p + 1) / 2 + 1):(p * (p + 1) / 2 + p * (p + 1) * (p + 2) / 6)]
   if (include.mom[3]) {
@@ -803,7 +803,7 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
     Xboot <- X[sample(1:n, n, replace = TRUE),]
     for (jj in 1:length(alphavec)) {
       alpha <- alphavec[jj]
-      W <- PerformanceAnalytics:::NCEconstructW(X, Wid = Wchoice, alpha = alpha, include.mom = include.mom)$W
+      W <- NCEconstructW(X, Wid = Wchoice, alpha = alpha, include.mom = include.mom)$W
       NCest <- MM.NCE(Xboot, include.mom = include.mom, as.mat = FALSE, 
                       k = k, W = W, x0 = x0, optscontrol = optscontrol)
       SEboot[ii, jj] <- mean(((NCest$M2nce[idM2] - M2mod) / DsqM2)^2)
@@ -840,7 +840,7 @@ NCEinitMCA <- function(X, k, include.mom = rep(TRUE, 3)) {
     eps <- eps - matrix(colMeans(eps), nrow = nrow(X), ncol = ncol(X), byrow = TRUE)
     x0M4 <- c(t(B), colMeans(eps^2), colMeans(fc^3), colMeans(eps^3), colMeans(fc^4), colMeans(eps^4))
     
-    x0M2 <- PerformanceAnalytics:::NCEinitialPCA(X, k)$x0
+    x0M2 <- NCEinitialPCA(X, k)$x0
     x0 <- rbind(x0M2, x0M3, x0M4)
   }
   if (identical(include.mom, c(TRUE, TRUE, FALSE))) {
