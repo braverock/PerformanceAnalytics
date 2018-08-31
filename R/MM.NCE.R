@@ -401,15 +401,17 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
           # bootstrapped alpha value
           nW <- names(W)
           if ("nb" %in% nW) nb <- W$nb else nb <- 100
+          if ("seed" %in% nW) seed <- W$seed else seed <- NULL
           if ("alphavec" %in% nW) alphavec <- W$alphavec else alphavec <- seq(0.2, 1, by = 0.2)
           if ("optscontrol" %in% nW) optscontrol_B <- W$optscontrol else 
             optscontrol_B <- list(algorithm = "NLOPT_LD_MMA", xtol_rel = 1e-5, ftol_rel = 1e-5, 
                                   ftol_abs = 1e-5, maxeval = 5000, print_level = 0, check_derivatives = FALSE)
           x0_B <- NCEinitMCA(x, k, include.mom = include.mom)
-          NC_temp <- MM.NCE(x, as.mat = FALSE, k = k, x0 = x0_B, include.mom = include.mom, optimize_method = "genoud")
+          NC_temp <- MM.NCE(x, as.mat = FALSE, k = k, x0 = x0_B, include.mom = include.mom, 
+                            optimize_method = "genoud", optscontrol_genoud = list("seed_genoud" = seed))
           x0_B <- NC_temp$optim.sol$solution
           bootstrap_info <- bootstrap_alpha_Ridge(x, nb, alphavec, k, x0_B, optscontrol_B, 
-                                                  include.mom = include.mom, Wchoice = Wid)
+                                                  include.mom = include.mom, Wchoice = Wid, seed = seed)
           add_bootstrap_info <- TRUE
           alpha <- bootstrap_info$alpha_opt
         }
@@ -526,23 +528,25 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
     
     if (hasArg(optscontrol_genoud)) {
       optscontrol_genoud <- list(...)$optscontrol_genoud
-      pop.size <- optscontrol_genoud$pop.size
-      max.generations <- optscontrol_genoud$max.generations
-      print.level <- optscontrol_genoud$print.level
+      ng <- names(optscontrol_genoud)
     } else {
-      pop.size <- 500
-      max.generations <- 100
-      print.level <- 0
+      ng <- NULL
     }
+    if ("pop.size" %in% ng) pop.size <- optscontrol_genoud$pop.size else pop.size <- 500
+    if ("max.generations" %in% ng) max.generations <- optscontrol_genoud$max.generations else max.generations <- 100
+    if ("print.level" %in% ng) print.level <- optscontrol_genoud$print.level else print.level <- 0
+    if ("seed_genoud" %in% ng) seed_genoud <- optscontrol_genoud$seed_genoud else seed_genoud <- round(runif(1, 1, 2147483647L))
+    
     
     options(warn = -1)
+    set.seed(seed_genoud)
     sol <- rgenoud::genoud(fn = NCE_objDE, nvars = nvars, max = FALSE, pop.size = pop.size,
                            max.generations = max.generations, wait.generations = 10, hard.generation.limit = TRUE,
                            starting.values = x0, MemoryMatrix = TRUE, Domains = cbind(lowerbound2, upperbound2),
                            solution.tolerance = 0.001, gr = NCE_objDE_grad,
                            boundary.enforcement = 2, lexical = FALSE, gradient.check = FALSE,
                            BFGS = TRUE, data.type.int = FALSE, hessian = FALSE,
-                           unif.seed = 812821, int.seed = 53058, print.level = print.level, share.type = 0,
+                           print.level = print.level, share.type = 0,
                            instance.number = 0, output.path = "stdout", output.append = FALSE, project.path = NULL,
                            P1 = 50, P2 = 50, P3 = 50, P4 = 50, P5 = 50, P6 = 50, P7 = 50, P8 = 50, P9 = 0,
                            P9mix = NULL, BFGSburnin = 0, BFGSfn = NULL, BFGShelp = NULL,
@@ -757,7 +761,7 @@ NCEconstructW <- function (X, Wid = "RidgeD", alpha = 0.1, include.mom = c(TRUE,
 }
 
 bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol, 
-                                  include.mom = rep(TRUE, 3), Wchoice = "RidgeD") {
+                                  include.mom = rep(TRUE, 3), Wchoice = "RidgeD", seed = NULL) {
   # @author Dries Cornilly
   #
   # DESCRIPTION:
@@ -777,6 +781,9 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   # alpha_opt : optimal ridge coefficient
   # alphavec  : echo the grid of alpha values
   # sMSE      : simulated weighted MSE on the grid alphavec
+  
+  if (is.null(seed)) seed <- round(runif(1, 1, 2147483647L))
+  set.seed(seed)
   
   n <- nrow(X)
   p <- ncol(X)
