@@ -478,6 +478,8 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
   if (optimize_method == "nloptr") {
     stopifnot("package:nloptr" %in% search() || requireNamespace("nloptr", quietly = TRUE))
     
+    x0 <- pmin(pmax(x0, lowerbound), upperbound)
+    
     if (include.ineq) {
       sol <- nloptr::nloptr(x0 = x0, eval_f = NCE_obj, eval_g_ineq = NCE_obj_ineq,
                             lb = lowerbound, ub = upperbound, opts = optscontrol,
