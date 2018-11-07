@@ -82,11 +82,6 @@ to.period.contributions <- function(Contributions, period = c("years", "quarters
   }
   dates = index(C)[ep]
 
-  # Summarize weighted contributions by period
-  period.wgt.contrib = apply(wgt.contrib, 2, function (x, ep) period.apply(x, INDEX=ep, FUN=sum), ep=ep)
-  period.wgt.contrib = matrix(period.wgt.contrib, nrow = length(dates))
-  period.wgt.contrib = as.xts(period.wgt.contrib, order.by=dates)
-
   # Normalize to the beginning of period value
   period.contrib = NULL
   for(i in 1:length(dates)) {
