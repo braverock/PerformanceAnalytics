@@ -34,9 +34,10 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
     x = checkData(R, method="matrix")
     
     if(missing(method)) method=method[1] #only use one
+    cormeth <- method
 
     # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
-    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method="pearson", cex.cor, ...)
+    panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method=cormeth, cex.cor, ...)
     {
         usr <- par("usr"); on.exit(par(usr))
         par(usr = c(0, 1, 0, 1))
