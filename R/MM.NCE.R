@@ -785,8 +785,7 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   # sMSE      : simulated weighted MSE on the grid alphavec
   
   if (is.null(seed)) seed <- round(runif(1, 1, 2147483647L))
-  set.seed(seed)
-  
+
   n <- nrow(X)
   p <- ncol(X)
   idM2 <- lower.tri(diag(p), diag = TRUE)
@@ -808,7 +807,7 @@ bootstrap_alpha_Ridge <- function(X, nb, alphavec, k, x0, optscontrol,
   SEboot <- matrix(NA, nrow = nb, ncol = length(alphavec))
   
   for (ii in 1:nb) {
-    set.seed(ii)
+    set.seed(seed + ii)
     Xboot <- X[sample(1:n, n, replace = TRUE),]
     for (jj in 1:length(alphavec)) {
       alpha <- alphavec[jj]
