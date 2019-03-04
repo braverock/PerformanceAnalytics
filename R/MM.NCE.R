@@ -458,6 +458,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
   if (k == 0) k <- 1 # since B, fskew and fkurt are already initialised at zeros, these are not optimized;
   # k=1 here tricks the objective function which requires at least one factor.
   if (hasArg(optimize_method)) optimize_method <- list(...)$optimize_method else optimize_method <- "nloptr"
+  if (NCOL(x0) > 1) optimize_method <- "genoud"
   if (hasArg(include.ineq)) include.ineq <- list(...)$include.ineq else include.ineq <- FALSE
   if (hasArg(optscontrol)) {
     optscontrol <- list(...)$optscontrol
