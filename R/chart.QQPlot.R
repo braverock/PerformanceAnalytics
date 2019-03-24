@@ -60,8 +60,8 @@
 #' John (2007) \emph{car: Companion to Applied Regression} \cr
 #' \url{http://socserv.socsci.mcmaster.ca/jfox/}
 ###keywords ts multivariate distribution models hplot
-#' @examples
 #' 
+#' @examples
 #' library(MASS) 
 #' library(PerformanceAnalytics)
 #' data(managers)
@@ -97,20 +97,17 @@
 #' 		xlab = "quantilesSymmetricTdistEst",line = c("quartiles"),
 #' 		envelope = .95, distribution = 't', distributionParameter='df=fit.tSN$dp[3]',pch = 20)
 #' 
-#' 
 #' # Panel 5: Skewed t distribution
 #' fit.st = st.mple(as.matrix(rep(1,n)),x)
 #' # fit.st = st.mple(y=x)  Produces same result as line above
 #' names(fit.st$dp) = c("location","scale","skew","dof")
 #' round(fit.st$dp,3)
-#' chart.QQPlot(x, main = "MO Returns Skewed t-Distribution QQPlot",\dontrun{
-#' 		xlab = "quantilesSkewedTdistEst",line = c("quartiles"),# Panel 6: Stable Parietian
-#' 		envelope = .95, distribution = 'st',distributionParameter = 'xi = fit.st$dp[1],library(fBasics)
-#' 				omega = fit.st$dp[2],alpha = fit.st$dp[3],fit.stable = stableFit(x,doplot=FALSE)
-#' 				nu=fit.st$dp[4]',pch = 20)chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, 
-#'              distribution = 'stable', distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
-#'              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
-#'              delta = fit(stable.fit)$estimate[[4]], pm = 0')
+#' 
+#' chart.QQPlot(x, main = "MO Returns Skewed t-Distribution QQPlot",
+#' 		xlab = "quantilesSkewedTdistEst",line = c("quartiles"),
+#' 		envelope = .95, distribution = 'st',distributionParameter = 'xi = fit.st$dp[1],
+#' 				omega = fit.st$dp[2],alpha = fit.st$dp[3],
+#' 				nu=fit.st$dp[4]',pch = 20)
 #' 
 #' \dontrun{ 
 #' # Panel 6: Stable Parietian
@@ -121,9 +118,10 @@
 #'              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
 #'              delta = fit(stable.fit)$estimate[[4]], pm = 0')
 #' }
+#' 
 #' #end examples
+#' 
 #' @export 
-
 chart.QQPlot <- 
 		function (R, distribution = "norm", ylab = NULL, xlab = paste(distribution, 
 						"Quantiles"), main = NULL, las = par("las"), envelope = FALSE, 
