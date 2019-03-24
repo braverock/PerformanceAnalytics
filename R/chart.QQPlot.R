@@ -72,6 +72,7 @@
 #' 		line=c("quartiles"), distribution = 'norm',  
 #' 		envelope=0.95)
 #' 
+#' 
 #' # Panel 2, Log-Normal distribution
 #' fit = fitdistr(1+x, 'lognormal')
 #' chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]]')
@@ -84,8 +85,8 @@
 #' 		line=c("quartiles"), distribution = 'norMix',  distributionParameter='obj',
 #' 		envelope=0.95)
 #' 
-#' # Panel 4: Symmetric t distribution
 #' 
+#' # Panel 4: Symmetric t distribution
 #' library(sn)
 #' n = length(x)
 #' fit.tSN = st.mple(as.matrix(rep(1,n)),x,symmetr = TRUE)
@@ -111,6 +112,14 @@
 #'              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
 #'              delta = fit(stable.fit)$estimate[[4]], pm = 0')
 #' 
+#' \dontrun{ 
+#' # Panel 6: Stable Parietian
+#' library(fBasics)
+#' fit.stable = stableFit(x,doplot=FALSE)
+#' chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, 
+#'              distribution = 'stable', distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
+#'              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
+#'              delta = fit(stable.fit)$estimate[[4]], pm = 0')
 #' }
 #' #end examples
 #' @export 
