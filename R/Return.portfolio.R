@@ -191,13 +191,15 @@ Return.portfolio <- Return.rebalancing <- function(R,
     # make sure that frequency(weights)<frequency(R) ?
     
     # make sure the number of assets in R matches the number of assets in weights
-    # Should we also check the names of R and names of weights?
+    # We also check the names of R and names of weights
     if(NCOL(R) != NCOL(weights)){
-      if(NCOL(R) > NCOL(weights)){
+      if(NCOL(weights)>NCOL(R)){
+        stop("number of assets is greater than number of columns in returns object")
+      } else if(length(intersect(colnames(R), colnames(weights)))!=0){
+        R = R[ , intersect(colnames(R), colnames(weights))]
+      } else{
         R = R[, 1:NCOL(weights)]
         warning("number of assets in beginning_weights is less than number of columns in returns, so subsetting returns.")
-      } else {
-        stop("number of assets is greater than number of columns in returns object")
       }
     }
   } # we should have good weights objects at this point
