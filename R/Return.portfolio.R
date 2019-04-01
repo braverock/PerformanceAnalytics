@@ -195,8 +195,10 @@ Return.portfolio <- Return.rebalancing <- function(R,
     if(NCOL(R) != NCOL(weights)){
       if(NCOL(weights)>NCOL(R)){
         stop("number of assets is greater than number of columns in returns object")
-      } else if(length(intersect(colnames(R), colnames(weights)))!=0){
-        R = R[ , intersect(colnames(R), colnames(weights))]
+      } else if(is.matrix(weights)&&length(intersect(names(R), colnames(weights)))!=0){
+        R = R[ , intersect(names(R), colnames(weights))]
+      } else if(!is.matrix(weights)&&length(intersect(names(R), names(weights)))!=0){
+        R = R[ , intersect(names(R), names(weights))]
       } else{
         R = R[, 1:NCOL(weights)]
         warning("number of assets in beginning_weights is less than number of columns in returns, so subsetting returns.")
