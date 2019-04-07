@@ -21,7 +21,7 @@
 #' \deqn{R_{p}-R_{f}=\alpha+\beta (R_{b}-R_{f})+\gamma D+\varepsilon_{p}}{Rp - 
 #' Rf = alpha + beta * (Rb - Rf) + gamma * D + epsilonp}
 #' where all variables are familiar from the CAPM model, except for the 
-#' up-market return \eqn{D=max(0,R_{b}-R_{f})}{D = max(0, Rb - Rf)} and market 
+#' up-market return \eqn{D=max(0,R_{f}-R_{b})}{D = max(0, Rf - Rb)} and market 
 #' timing abilities \eqn{\gamma}{gamma}
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' the asset returns
@@ -68,7 +68,7 @@ MarketTiming <- function (Ra, Rb, Rf = 0, method = c("TM", "HM"))
     mt <- function (xRa, xRb)
     {
       switch(method,
-             "HM" = { S = xRb > 0 },
+             "HM" = { S = -xRb > 0 },
              "TM" = { S = xRb }
       )
       R = merge(xRa, xRb, xRb*S)
