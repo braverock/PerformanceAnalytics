@@ -36,9 +36,6 @@ TrackingError(managers[,1:6], managers[,8,drop=FALSE])
 TrackingError(managers[,1:6], managers[,8:7,drop=FALSE])
 
 }
-\author{
-Peter Carl
-}
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
 Management},Fall 1994, 49-58.
@@ -46,4 +43,6 @@ Management},Fall 1994, 49-58.
 \seealso{
 \code{\link{InformationRatio}} \code{\link{TrackingError}}
 }
-
+\author{
+Peter Carl
+}

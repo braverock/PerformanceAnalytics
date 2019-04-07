@@ -196,53 +196,17 @@ function (R,
                      lty = lty, lwd = lwd, cex = cex.legend, ...)
     }
     
-    # deprecated arguments
-    if(hasArg(auto.grid) || !isTRUE(auto.grid)) {
-      warning("The auto.grid argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(las) || !isTRUE(las)) {
-      warning("The las argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(ylab) || !isTRUE(ylab)) {
-      warning("The ylab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xlab) || !isTRUE(xlab)) {
-      warning("The xlab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.axis) || !isTRUE(cex.axis)) {
-      warning("The cex.axis argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.lab) || !isTRUE(cex.lab)) {
-      warning("The cex.lab argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.labels) || !isTRUE(cex.labels)) {
-      warning("The cex.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(cex.main) || !isTRUE(cex.main)) {
-      warning("The cex.main argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
-    
-    if(hasArg(xaxis.labels) || !isTRUE(xaxis.labels)) {
-      warning("The xaxis.labels argument of chart.TimeSeries has been deprecated, and may be removed in a future release, see help('chart.TimeSeries') for more information.")
-    }
     return(p)
 }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 #
-# $Id: chart.TimeSeries.R 3579 2015-01-07 13:01:25Z braverock $
+# $Id: chart.TimeSeries.R 3579 2018-01-07 13:01:25Z braverock $
 #
 ###############################################################################

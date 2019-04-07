@@ -58,15 +58,15 @@ Most inputs are the same as "\code{\link{plot}}" and are principally
 included so that some sensible defaults could be set.
 }
 \examples{
-
-data(edhec)
-chart.Scatter(edhec[,1],edhec[,2])
-
+\dontrun{
+  data(edhec)
+  chart.Scatter(edhec[,1],edhec[,2])
 }
-\author{
-Peter Carl
+
 }
 \seealso{
 \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

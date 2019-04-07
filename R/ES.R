@@ -24,15 +24,17 @@
 #' whether to do univariate, component, or marginal calc, see Details.
 #' @param weights portfolio weighting vector, default NULL, see Details
 #' @param mu If univariate, mu is the mean of the series. Otherwise mu is the
-#' vector of means of the return series , default NULL, , see Details
+#' vector of means of the return series, default NULL, see Details
 #' @param sigma If univariate, sigma is the variance of the series. Otherwise
-#' sigma is the covariance matrix of the return series , default NULL, see
+#' sigma is the covariance matrix of the return series, default NULL, see
 #' Details
 #' @param m3 If univariate, m3 is the skewness of the series. Otherwise m3 is
-#' the coskewness matrix of the returns series, default NULL, see Details
+#' the coskewness matrix (or vector with unique coskewness values) of the 
+#' returns series, default NULL, see Details
 #' @param m4 If univariate, m4 is the excess kurtosis of the series. Otherwise
-#' m4 is the cokurtosis matrix of the return series, default NULL, see Details
-#' @param invert TRUE/FALSE whether to invert the VaR measure.  see Details.
+#' m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
+#' return series, default NULL, see Details
+#' @param invert TRUE/FALSE whether to invert the VaR measure, see Details.
 #' @param operational TRUE/FALSE, default TRUE, see Details.
 #' @param \dots any other passthru parameters
 #' @note The option to \code{invert} the ES measure should appease both
@@ -80,9 +82,9 @@
 #' Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 #' v 5.
 #' 
-#' Martellini, Lionel, and Volker Ziemann.  Improved Forecasts of Higher-Order
-#' Comoments and Implications for Portfolio Selection. 2007. EDHEC Risk and
-#' Asset Management Research Centre working paper.
+#' Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
+#' comoments and implications for portfolio selection. Review of Financial 
+#' Studies, 23(4):1467-1502.
 #' 
 #' Pflug, G. Ch.  Some remarks on the value-at-risk and the conditional
 #' value-at-risk. In S. Uryasev, ed., Probabilistic Constrained Optimization:
@@ -155,8 +157,8 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
             if (is.null(mu)) { mu =  apply(R,2,'mean' ) }
             if (is.null(sigma)) { sigma = cov(R) }
             if(method=="modified"){
-                if (is.null(m3)) {m3 = M3.MM(R,mu=mu)}
-                if (is.null(m4)) {m4 = M4.MM(R,mu=mu)}
+                if (is.null(m3)) {m3 = M3.MM(R,as.mat=FALSE,mu=mu)}
+                if (is.null(m4)) {m4 = M4.MM(R,as.mat=FALSE,mu=mu)}
             }
         } 
     } else { 
@@ -241,7 +243,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

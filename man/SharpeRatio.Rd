@@ -3,6 +3,7 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
+\alias{SharpeRatio.modified}
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
@@ -81,9 +82,6 @@ SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
 SharpeRatio(edhec,Rf = .04/12)
 
 }
-\author{
-Brian G. Peterson
-}
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
 Management},Fall 1994, 49-58.
@@ -98,4 +96,6 @@ v 5.
 \code{\link{ActivePremium}} \cr \code{\link{SortinoRatio}} \cr
 \code{\link{VaR}} \cr \code{\link{ES}} \cr
 }
-
+\author{
+Brian G. Peterson
+}

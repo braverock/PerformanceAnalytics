@@ -19,4 +19,3 @@ preferred.  Barring that, filling a small percentage of results in the
 middle of a large set is unlikely to cause problems. Barring that, realize
 that this will skew your results.
 }
-

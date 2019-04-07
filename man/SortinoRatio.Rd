@@ -13,9 +13,9 @@ asset returns}
 \item{MAR}{Minimum Acceptable Return, in the same periodicity as your
 returns}
 
-\item{weights}{portfolio weighting vector, default NULL}
-
 \item{\dots}{any other passthru parameters}
+
+\item{weights}{portfolio weighting vector, default NULL}
 }
 \description{
 Sortino proposed an improvement on the Sharpe Ratio to better account for
@@ -48,9 +48,6 @@ round(SortinoRatio(managers[, 1]),4)
 round(SortinoRatio(managers[, 1:8]),4)
 
 }
-\author{
-Brian G. Peterson
-}
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside
 Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
@@ -60,4 +57,6 @@ Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 \code{\link{SemiVariance}} \cr \code{\link{SemiDeviation}} \cr
 \code{\link{InformationRatio}}
 }
-
+\author{
+Brian G. Peterson
+}

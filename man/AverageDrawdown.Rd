@@ -20,4 +20,3 @@ d = total number of drawdowns in the entire period
 \author{
 Peter Carl
 }
-

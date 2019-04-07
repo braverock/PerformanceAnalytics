@@ -53,7 +53,7 @@
 #' round(R.IBM,2)
 #' @export
 Return.calculate <-
-function(prices, method = c("discrete","log"))
+function(prices, method = c("discrete","log","difference"))
 { # @ author Peter Carl
 
     #  Calculate returns from a price stream
@@ -68,16 +68,27 @@ function(prices, method = c("discrete","log"))
     method = method[1]
     pr = checkData(prices, method = "xts")
 
-    if(method=="simple" || method=='discrete'){
+    if(method=="simple" || method=='discrete' || method=="arithmetic"){
         #Returns = pr/pr[-nrow(pr), ] - 1
         Returns = pr/lag.xts(pr) - 1
         xtsAttributes(Returns) <- list(ret_type="discrete")
+        #EB: I think this should be more abstract, to cover "level" (e.g. Price), "difference", "residuals", etc.
+        xtsAttributes(Returns) <- list(coredata_content = "discreteReturn")
+        
     }
-    if(method=="compound" || method=='log') {
+    if(method=="compound" || method=='log' || method == "continuous") {
         Returns = diff(log(pr))
         xtsAttributes(Returns) <- list(ret_type="log")
+        xtsAttributes(Returns) <- list(coredata_content = "logReturn")
     }
-
+    if(method=="diff" || method=='difference') {
+      Returns = diff(pr)
+      # xtsAttributes(Returns) <- list(ret_type="diff")
+      xtsAttributes(Returns) <- list(coredata_content = "difference")
+    }
+    
+    #maybe set to pr in the body instead of Returns
+    xtsAttributes(pr)$coredata_content <- xtsAttributes(Returns)$coredata_content
     reclass(Returns,match.to=pr)
 }
 
@@ -91,7 +102,7 @@ function(prices, method = c("discrete","log"))
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

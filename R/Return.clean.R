@@ -202,7 +202,7 @@ function(R, alpha=.01 , trim=1e-3)
 {# @author Kris Boudt, Brian Peterson
 
    # set up by loading robustbase library
-   stopifnot("package:robustbase" %in% search() || require("robustbase",quietly=TRUE))
+   stopifnot(requireNamespace("robustbase",quietly=TRUE))
 
    # Function used to bound the effect of the most extreme returns on the downside
    # risk prediction.
@@ -212,7 +212,7 @@ function(R, alpha=.01 , trim=1e-3)
    T=dim(R)[1]; date=c(1:T)
    N=dim(R)[2];
    MCD = robustbase::covMcd(as.matrix(R),alpha=1-alpha)
-   mu = as.matrix(MCD$raw.center) #no reweighting
+   mu = as.numeric(MCD$raw.center) #no reweighting
    sigma = MCD$raw.cov
    invSigma = try(solve(sigma), silent=TRUE)
    vd2t = c();
@@ -264,7 +264,7 @@ function(R, alpha=.01 , trim=1e-3)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

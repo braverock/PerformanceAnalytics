@@ -73,9 +73,6 @@ chart.VaRSensitivity(managers[,1,drop=FALSE],
 		colorset=bluefocus, lwd=2)
 
 }
-\author{
-Peter Carl
-}
 \references{
 Boudt, K., Peterson, B. G., Croux, C., 2008. Estimation and
 Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
@@ -84,4 +81,6 @@ Journal of Risk, forthcoming.
 \seealso{
 \code{\link{VaR}} \cr \code{\link{ES}}
 }
-
+\author{
+Peter Carl
+}

@@ -3,6 +3,7 @@
 \name{table.CaptureRatios}
 \alias{table.CaptureRatios}
 \alias{table.UpDownRatios}
+\alias{table.UpDownRatios}
 \title{Calculate and display a table of capture ratio and related statistics}
 \usage{
 table.CaptureRatios(Ra, Rb, digits = 4)
@@ -43,10 +44,9 @@ textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9,
 title(main="Capture Ratios for EDHEC LS EQ")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{UpDownRatios}}, \code{\link{chart.CaptureRatios}}
 }
-
+\author{
+Peter Carl
+}

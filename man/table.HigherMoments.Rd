@@ -42,9 +42,6 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
 title(main="Higher Co-Moments with SP500 TR")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Martellini L., Vaissie M., Ziemann V. Investing in Hedge Funds:
 Adding Value through Active Style Allocation Decisions. October 2005. Edhec
@@ -56,4 +53,6 @@ Risk and Asset Management Research Centre.
 \code{\link{BetaCoKurtosis}} \cr \code{\link{skewness}} \cr
 \code{\link{kurtosis}}
 }
-
+\author{
+Peter Carl
+}

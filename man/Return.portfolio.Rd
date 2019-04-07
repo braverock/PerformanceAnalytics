@@ -153,9 +153,6 @@ chart.StackedBar(x$BOP.Weight)
 chart.StackedBar(x$BOP.Value)
 
 }
-\author{
-Peter Carl, Ross Bennett, Brian Peterson
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. Chapter 2\cr
@@ -163,4 +160,6 @@ Attribution}. Wiley. 2004. Chapter 2\cr
 \seealso{
 \code{\link{Return.calculate}} \code{\link[xts]{endpoints}} \cr
 }
-
+\author{
+Peter Carl, Ross Bennett, Brian Peterson
+}

@@ -39,9 +39,6 @@ data(managers)
 head(Return.Geltner(managers[,1:3]),n=20)
 
 }
-\author{
-Brian Peterson
-}
 \references{
 "Edhec Funds of Hedge Funds Reporting Survey : A Return-Based
 Approach to Funds of Hedge Funds Reporting",Edhec Risk and Asset Management
@@ -54,4 +51,6 @@ Geltner, David, 1993, Estimating Market Values from Appraised Values without
 Assuming an Efficient Market, Journal of Real Estate Research, Vol.8,
 p.325-345.
 }
-
+\author{
+Brian Peterson
+}

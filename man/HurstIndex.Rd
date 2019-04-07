@@ -47,4 +47,3 @@ Peters, E.E (1991) Chaos and Order in Capital Markets, New York: Wiley.
 
 Bacon, Carl. (2008) Practical Portfolio Performance Measurement and Attribution, 2nd Edition. London: John Wiley & Sons.
 }
-

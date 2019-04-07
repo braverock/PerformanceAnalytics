@@ -5,7 +5,7 @@
 \title{rolling performance chart}
 \usage{
 charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL,
-  event.labels = NULL, legend.loc = NULL, yaxis.pct = FALSE, ...)
+  event.labels = NULL, legend.loc = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -24,9 +24,6 @@ for historical market shock events}
 bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 center.}
 
-\item{yaxis.pct}{if TRUE, scale by 100 the y axis of
-the charts of returns and standard deviation.}
-
 \item{\dots}{any other passthru parameters}
 }
 \description{
@@ -43,10 +40,9 @@ charts.RollingPerformance(managers[,1:8],
                           legend.loc="topleft")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.RollingPerformance}}
 }
-
+\author{
+Peter Carl
+}

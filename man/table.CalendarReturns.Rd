@@ -52,4 +52,3 @@ title(main="Calendar Returns")
 \author{
 Peter Carl
 }
-

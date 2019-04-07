@@ -31,11 +31,10 @@ print(BernardoLedoitRatio(managers['1996']))
 print(BernardoLedoitRatio(managers['1996',1])) #expected 4.598
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.95
 }
-
+\author{
+Matthieu Lestel
+}

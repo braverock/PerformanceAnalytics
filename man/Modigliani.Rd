@@ -39,9 +39,6 @@ Modigliani(managers[,1:6], managers[,8,drop=FALSE], managers[,8,drop=FALSE])
 Modigliani(managers[,1:6], managers[,8:7], managers[,8,drop=FALSE])
 
 }
-\author{
-Andrii Babii, Brian G. Peterson
-}
 \references{
 J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio 
 Performance Measurement and Benchmarking}. 2009. McGraw-Hill, p. 97-99. \cr
@@ -52,4 +49,6 @@ Winter 1997, pp.45-54 \cr
 \seealso{
 \code{\link{SharpeRatio}}, \code{\link{TreynorRatio}}
 }
-
+\author{
+Andrii Babii, Brian G. Peterson
+}

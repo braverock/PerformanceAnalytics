@@ -33,7 +33,12 @@
 #'
 #' @examples
 #' data(managers, package="PerformanceAnalytics")
-#' res_qtr_rebal = Return.portfolio(managers["2002::",1:5], weights=c(.05,.1,.3,.4,.15), rebalance_on = "quarters", verbose=TRUE)
+#' 
+#' res_qtr_rebal = Return.portfolio(  managers["2002::",1:5]
+#'                                  , weights=c(.05,.1,.3,.4,.15)
+#'                                  , rebalance_on = "quarters"
+#'                                  , verbose=TRUE)
+#'                                  
 #' to.period.contributions(res_qtr_rebal$contribution, period="years")
 #' to.yearly.contributions(res_qtr_rebal$contribution)
 #'
@@ -77,11 +82,6 @@ to.period.contributions <- function(Contributions, period = c("years", "quarters
   }
   dates = index(C)[ep]
 
-  # Summarize weighted contributions by period
-  period.wgt.contrib = apply(wgt.contrib, 2, function (x, ep) period.apply(x, INDEX=ep, FUN=sum), ep=ep)
-  period.wgt.contrib = matrix(period.wgt.contrib, nrow = length(dates))
-  period.wgt.contrib = as.xts(period.wgt.contrib, order.by=dates)
-
   # Normalize to the beginning of period value
   period.contrib = NULL
   for(i in 1:length(dates)) {
@@ -110,7 +110,7 @@ to.monthly.contributions <- function(Contributions) {
   to.period.contributions(Contributions = Contributions, period = "months")
 }
 #' @export
-to.quarterly.contributions <- function(contributions) {
+to.quarterly.contributions <- function(Contributions) {
   to.period.contributions(Contributions = Contributions, period = "quarters")
 }
 #' @export
@@ -122,7 +122,7 @@ to.yearly.contributions <- function(Contributions) {
 #
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2016 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL).
 # For full details see the file COPYING.

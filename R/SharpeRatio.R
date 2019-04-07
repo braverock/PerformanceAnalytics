@@ -135,11 +135,14 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     }
     sra <-function (R, ..., Rf, p, FUNC)
     {
-        if(FUNC == "StdDev")
-            FUNC = "StdDev.annualized"
-        FUNCT <- match.fun(FUNC)
+        if(FUNC == "StdDev") {
+            risk <- StdDev.annualized(x=R, ...)
+        } else {
+            FUNCT <- match.fun(FUNC)
+            risk <- FUNCT(R=R, p=p, ...=..., invert=FALSE)
+        }
         xR = Return.excess(R, Rf)
-        SRA = Return.annualized(xR)/FUNCT(R=R, p=p, ...=..., invert=FALSE)
+        SRA = Return.annualized(xR)/risk
         SRA
     }
     
@@ -183,7 +186,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

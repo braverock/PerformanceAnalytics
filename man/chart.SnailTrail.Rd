@@ -91,13 +91,12 @@ chart.SnailTrail(managers[,c("HAM2","SP500 TR"),drop=FALSE],
 
 
 }
-\author{
-Peter Carl
-}
 \references{
 ~put references to the literature/web site here ~
 }
 \seealso{
 \code{\link{chart.RiskReturnScatter}}
 }
-
+\author{
+Peter Carl
+}

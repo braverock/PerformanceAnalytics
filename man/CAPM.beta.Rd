@@ -2,9 +2,12 @@
 % Please edit documentation in R/CAPM.beta.R
 \name{CAPM.beta}
 \alias{CAPM.beta}
-\alias{CAPM.beta.bear}
 \alias{CAPM.beta.bull}
+\alias{CAPM.beta.bear}
+\alias{TimingRatio}
 \alias{SFM.beta}
+\alias{CAPM.beta.bull}
+\alias{CAPM.beta.bear}
 \alias{TimingRatio}
 \title{calculate single factor model (CAPM) beta}
 \usage{
@@ -97,9 +100,6 @@ data(managers)
 			main="Conditional Beta")
   		
 }
-\author{
-Peter Carl
-}
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market
 equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -111,4 +111,6 @@ performance measurement and attribution}. Wiley. 2004. \cr
 \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
 \code{\link{CAPM.utils}}
 }
-
+\author{
+Peter Carl
+}

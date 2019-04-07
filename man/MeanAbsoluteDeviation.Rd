@@ -30,11 +30,10 @@ print(MeanAbsoluteDeviation(managers['1996']))
 print(MeanAbsoluteDeviation(managers['1996',1]))
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.62
 }
-
+\author{
+Matthieu Lestel
+}

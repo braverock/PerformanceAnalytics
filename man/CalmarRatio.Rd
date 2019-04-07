@@ -3,6 +3,7 @@
 \name{CalmarRatio}
 \alias{CalmarRatio}
 \alias{SterlingRatio}
+\alias{SterlingRatio}
 \title{calculate a Calmar or Sterling reward/risk ratio
  
 Calmar and Sterling Ratios are yet another method of creating a
@@ -51,9 +52,6 @@ should be preferred to the Calmar or Sterling Ratio.
     SterlingRatio(managers[,1:6])
 
 }
-\author{
-Brian G. Peterson
-}
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004.
@@ -64,4 +62,6 @@ and Attribution}. Wiley. 2004.
 \code{\link{SharpeRatio.modified}}, \cr 
 \code{\link{UpsidePotentialRatio}}
 }
-
+\author{
+Brian G. Peterson
+}

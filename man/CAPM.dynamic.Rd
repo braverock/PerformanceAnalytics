@@ -66,9 +66,6 @@ CAPM.dynamic(managers[80:120,1:6], managers[80:120,8:7],
               managers[80:120,10,drop=FALSE], Z=managers[80:120, 9:10])
 
 }
-\author{
-Andrii Babii
-}
 \references{
 J. Christopherson, D. Carino, W. Ferson. \emph{Portfolio 
 Performance Measurement and Benchmarking}. 2009. McGraw-Hill. Chapter 12. 
@@ -79,4 +76,6 @@ vol. 51, 1996, pp.425-462 \cr
 \seealso{
 \code{\link{CAPM.beta}}
 }
-
+\author{
+Andrii Babii
+}

@@ -120,7 +120,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 
       main = paste("Rolling ",width,"-",freq.lab," ", attribute, sep="")
     }
-    if(hasArg(add)){
+    if(hasArg("add")){
       plot_object <- addSeries(Result.calc, main = main)
     } else
       plot_object <- chart.TimeSeries(Result.calc, main = main, ...)
@@ -131,7 +131,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

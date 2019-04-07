@@ -54,4 +54,3 @@ head(x)
 \author{
 Peter Carl
 }
-

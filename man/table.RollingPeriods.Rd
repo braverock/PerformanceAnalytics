@@ -4,6 +4,7 @@
 \alias{table.RollingPeriods}
 \alias{table.TrailingPeriods}
 \alias{table.TrailingPeriodsRel}
+\alias{table.TrailingPeriodsRel}
 \title{Rolling Periods Summary: Statistics and Stylized Facts}
 \usage{
 table.RollingPeriods(R, periods = subset(c(12, 36, 60), c(12, 36, 60) <
@@ -27,10 +28,10 @@ asset returns}
 
 \item{digits}{number of digits to round results to}
 
+\item{\dots}{any other passthru parameters for functions specified in FUNCS}
+
 \item{Rb}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 index, benchmark, portfolio, or secondary asset returns to compare against}
-
-\item{\dots}{any other passthru parameters for functions specified in FUNCS}
 }
 \description{
 A table of estimates of rolling period return measures
@@ -49,10 +50,9 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
 title(main="Trailing Period Statistics")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link[zoo]{rollapply}}
 }
-
+\author{
+Peter Carl
+}

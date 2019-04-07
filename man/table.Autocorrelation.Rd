@@ -38,9 +38,6 @@ textplot(result, rmar = 0.8, cmar = 2,  max.cex=.9, halign = "center",
 title(main="Autocorrelation")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Lo, Andrew W. 2001. Risk Management for Hedge Funds:
 Introduction and Overview. SSRN eLibrary.
@@ -48,4 +45,6 @@ Introduction and Overview. SSRN eLibrary.
 \seealso{
 \code{\link{Box.test}}, \code{\link{acf}}
 }
-
+\author{
+Peter Carl
+}

@@ -42,4 +42,3 @@ title(main='Table of Convertible Arbitrage vs Benchmark')
 \author{
 Kyle Balkissoon
 }
-

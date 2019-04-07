@@ -77,9 +77,6 @@ which can be found on CRAN.
     Omega(edhec[,13],method="interp",output="full")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Keating, J. and Shadwick, W.F. The Omega Function. working
 paper. Finance Development Center, London. 2002. Kazemi, Schneeweis, and
@@ -88,4 +85,6 @@ Gupta. Omega as a Performance Measure. 2003.
 \seealso{
 \code{\link[Hmisc]{Ecdf}}
 }
-
+\author{
+Peter Carl
+}

@@ -37,11 +37,10 @@ print(DownsideFrequency(managers['1996']))
 print(DownsideFrequency(managers['1996',1])) #expected 0.25
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.94
 }
-
+\author{
+Matthieu Lestel
+}

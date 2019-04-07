@@ -49,9 +49,6 @@ SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE])
 SharpeRatio.annualized(managers[,1:6], Rf = managers[,10,drop=FALSE],geometric=FALSE)
 
 }
-\author{
-Peter Carl
-}
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
 Management},Fall 1994, 49-58.
@@ -61,4 +58,6 @@ Management},Fall 1994, 49-58.
 \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
 \code{\link{SortinoRatio}}
 }
-
+\author{
+Peter Carl
+}

@@ -41,11 +41,10 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
 title(main="Annualized Performance")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{Return.annualized}} \cr \code{\link{StdDev.annualized}}
 \cr \code{\link{SharpeRatio.annualized}}
 }
-
+\author{
+Peter Carl
+}

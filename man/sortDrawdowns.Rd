@@ -28,10 +28,6 @@ findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
 sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 
 }
-\author{
-Peter Carl \cr modified with permission from prototype function by
-Sankalp Upadhyay
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
@@ -42,4 +38,7 @@ Attribution}. Wiley. 2004. p. 88 \cr
 \code{\link{chart.Drawdown}} \cr \code{\link{table.Drawdowns}} \cr
 \code{\link{table.DownsideRisk}}
 }
-
+\author{
+Peter Carl \cr modified with permission from prototype function by
+Sankalp Upadhyay
+}

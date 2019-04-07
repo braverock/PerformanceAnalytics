@@ -17,6 +17,9 @@ asset returns}
 (e.g., rolling \code{\link{CAPM.beta}} won't work, but
 \code{\link{Return.annualized}} will)}
 
+\item{\dots}{any other passthru parameters to \code{\link{plot}} or the
+function specified}
+
 \item{ylim}{set the y-axis limit, same as in \code{\link{plot}}}
 
 \item{main}{set the chart title, same as in \code{\link{plot}}}
@@ -24,9 +27,6 @@ asset returns}
 \item{fill}{a three-component vector or list (recycled otherwise) providing 
 filling values at the left/within/to the right of the data range. See the 
 fill argument of \code{\link{na.fill}} for details.}
-
-\item{\dots}{any other passthru parameters to \code{\link{plot}} or the
-function specified}
 }
 \description{
 A wrapper to create a chart of rolling performance metrics in a line chart
@@ -49,11 +49,10 @@ chart.RollingPerformance(edhec[, 1:3],
 		main = "Rolling 24-Month Sharpe Ratio")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{charts.RollingPerformance}},
 \code{\link[zoo]{rollapply}}
 }
-
+\author{
+Peter Carl
+}

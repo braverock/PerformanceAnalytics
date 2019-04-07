@@ -41,10 +41,9 @@ data(managers)
 apply.rolling(managers[,1,drop=FALSE], FUN="mean", width=36)
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{apply}} \cr \code{\link[zoo]{rollapply}}
 }
-
+\author{
+Peter Carl
+}

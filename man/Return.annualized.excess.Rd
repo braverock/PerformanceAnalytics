@@ -48,9 +48,6 @@ data(managers)
 Return.annualized.excess(Rp = managers[,1], Rb = managers[,8])
 
 }
-\author{
-Andrii Babii
-}
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004. p. 206-207
@@ -58,4 +55,6 @@ and Attribution}. Wiley. 2004. p. 206-207
 \seealso{
 \code{\link{Return.annualized}},
 }
-
+\author{
+Andrii Babii
+}

@@ -55,7 +55,7 @@ function (Rp, Rb, scale = NA, geometric = TRUE )
              minute = {stop("Data periodicity too high")},
              hourly = {stop("Data periodicity too high")},
              daily = {scale = 252},
-             eekly = {scale = 52},
+             weekly = {scale = 52},
              monthly = {scale = 12},
              quarterly = {scale = 4},
              yearly = {scale = 1}

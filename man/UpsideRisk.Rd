@@ -58,11 +58,10 @@ print(UpsideRisk(managers['1996'], MAR, stat="risk"))
 print(UpsideRisk(managers['1996',1], MAR, stat="risk")) #expected 1.820
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008
 }
-
+\author{
+Matthieu Lestel
+}

@@ -41,11 +41,10 @@ print(SystematicRisk(managers['1996',1], managers['1996',8]))
 print(SystematicRisk(managers['1996',1:5], managers['1996',8]))
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.75
 }
-
+\author{
+Matthieu Lestel
+}
