@@ -3,6 +3,7 @@
 \name{chart.Bar}
 \alias{chart.Bar}
 \alias{charts.Bar}
+\alias{charts.Bar}
 \title{wrapper for barchart of returns}
 \usage{
 chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)
@@ -19,6 +20,8 @@ center}
 
 \item{colorset}{color palette to use, set by default to rational choices}
 
+\item{\dots}{any other passthru parameters, see \code{plot}}
+
 \item{main}{sets the title text, such as in \code{\link{chart.TimeSeries}}}
 
 \item{cex.legend}{sets the legend text size, such as in
@@ -26,8 +29,6 @@ center}
 
 \item{cex.main}{sets the title text size, such as in
 \code{\link{chart.TimeSeries}}}
-
-\item{\dots}{any other passthru parameters, see \code{plot}}
 }
 \description{
 A wrapper to create a chart of periodic returns in a bar chart.  This is a
@@ -47,10 +48,9 @@ data(edhec)
 chart.Bar(edhec[,"Funds of Funds"], main="Monthly Returns")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

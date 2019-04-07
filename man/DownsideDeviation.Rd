@@ -2,6 +2,9 @@
 % Please edit documentation in R/DownsideDeviation.R, R/SemiDeviation.R
 \name{DownsideDeviation}
 \alias{DownsideDeviation}
+\alias{SemiDeviation}
+\alias{SemiVariance}
+\alias{DownsidePotential}
 \alias{DownsidePotential}
 \alias{SemiDeviation}
 \alias{SemiVariance}
@@ -27,10 +30,10 @@ returns}
 length of the full series or the length of the subset of the series below
 the MAR as the denominator, defaults to "full"}
 
+\item{\dots}{any other passthru parameters}
+
 \item{potential}{if TRUE, calculate downside potential instead, default
 FALSE}
-
-\item{\dots}{any other passthru parameters}
 }
 \description{
 Downside deviation, semideviation, and semivariance are measures of downside
@@ -107,9 +110,6 @@ SemiVariance (managers[,1,drop=FALSE])
 SemiVariance (managers[,1:6]) #calculated using method="subset"
 
 }
-\author{
-Peter Carl, Brian G. Peterson, Matthieu Lestel
-}
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside
 Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr 
@@ -124,4 +124,6 @@ on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July
 
 \url{http://en.wikipedia.org/wiki/Semivariance}
 }
-
+\author{
+Peter Carl, Brian G. Peterson, Matthieu Lestel
+}

@@ -36,9 +36,6 @@ InformationRatio(managers[,1:6], managers[,8,drop=FALSE])
 InformationRatio(managers[,1:6], managers[,8:7])
 
 }
-\author{
-Peter Carl
-}
 \references{
 Sharpe, W.F. The Sharpe Ratio,\emph{Journal of Portfolio
 Management},Fall 1994, 49-58.
@@ -47,4 +44,6 @@ Management},Fall 1994, 49-58.
 \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
 \code{\link{SharpeRatio}}
 }
-
+\author{
+Peter Carl
+}

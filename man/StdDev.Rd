@@ -14,6 +14,8 @@ StdDev(R, ..., clean = c("none", "boudt", "geltner"),
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
 returns}
 
+\item{\dots}{any other passthru parameters}
+
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
 Current options are "none", "boudt", or "geltner".}
 
@@ -38,8 +40,6 @@ abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"},
 \item{method}{a character string indicating which correlation coefficient
 (or covariance) is to be computed.  One of \code{"pearson"} (default),
 \code{"kendall"}, or \code{"spearman"}, can be abbreviated.}
-
-\item{\dots}{any other passthru parameters}
 }
 \description{
 calculates Standard Deviation for univariate and multivariate series, also
@@ -85,10 +85,9 @@ deviation.
 
 
 }
-\author{
-Brian G. Peterson and Kris Boudt
-}
 \seealso{
 \code{\link{Return.clean}} \code{sd}
 }
-
+\author{
+Brian G. Peterson and Kris Boudt
+}

@@ -31,9 +31,6 @@ print(AdjustedSharpeRatio(portfolio_bacon[,1])) #expected 0.7591435
 data(managers)
 print(AdjustedSharpeRatio(managers['1996']))
 }
-\author{
-Matthieu Lestel, Brian G. Peterson
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.99
@@ -45,4 +42,6 @@ Hedge Fund Indices and of Funds of Hedge Funds in Optimal Passive Portfolios.
 \seealso{
 \code{\link{SharpeRatio.annualized}}
 }
-
+\author{
+Matthieu Lestel, Brian G. Peterson
+}

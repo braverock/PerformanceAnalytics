@@ -18,4 +18,3 @@ Similar to \code{\link{AverageDrawdown}}, which calculates the average depth of 
 \author{
 Peter Carl
 }
-

@@ -1,0 +1,729 @@
+\documentclass[12pt,letterpaper,english]{article}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\IfFileExists{url.sty}{\usepackage{url}}
+{\newcommand{\url}{\texttt}}
+
+\usepackage{babel}
+\usepackage{Rd}
+
+\usepackage[round]{natbib}
+
+\usepackage{bm}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+
+\usepackage{Sweave}
+\SweaveOpts{engine=R,eps=FALSE}
+%\VignetteIndexEntry{Estimation of Higher Order Moments}
+%\VignetteDepends{PerformanceAnalytics}
+%\VignetteKeywords{higher order moments, risk, portfolio}
+%\VignettePackage{PerformanceAnalytics}
+
+\DeclareMathOperator{\E}{\mathbb E}
+
+\renewcommand{\hat}{\widehat}
+
+%%%%%%%%%%%%%%%%%%%%%% End Setup Lines 
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\author {Dries Cornilly and Brian G. Peterson}
+
+\title{\pkg{PerformanceAnalytics} Estimation of Higher Order Moments}
+
+
+\makeatletter
+\makeatother
+\maketitle
+
+\begin{abstract}
+This vignette gives a an overview of the estimation methods for coskewness and 
+cokurtosis matrices contained in \pkg{PerformanceAnalytics}. We focus on explaining 
+the different assumptions underlying each of the estimators and how to use them in \pkg{R}. The concepts are
+shown using the \texttt{edhec} dataset included in the package.
+\end{abstract}
+
+\tableofcontents
+
+
+\section{Introduction}
+
+The \code{\link{PerformanceAnalytics}} package was built to evaluate the performance and 
+risk characteristics of financial assets or funds. Two important risk measurement functions
+are Value-at-Risk (VaR) and Expected Shortfall (ES). The modified versions, see \cite{zangari1996var} and 
+\cite{boudt2008estimation}, incorporate departure from normality in the return series. In the univariate setting, this departure from normality is measured by skewness and kurtosis. 
+
+The portfolio third and fourth order central moments depend on the joint third and fourth order central moments of all underlying assets, these are gathered in the coskewness and cokurtosis matrices. Consider the random 
+vector $\bm{R}$ with mean $\bm{\mu}$ and finite fourth order moments, then
+the coskewness matrix $\bm{\Phi}$ and cokurtosis matrix $\bm{\Psi}$ are defined by
+\begin{equation}\label{eq:cosk-cokurt}
+\begin{aligned}
+\bm{\Phi} &= \E [(\bm{R} - \bm{\mu}) (\bm{R} - \bm{\mu})^\prime \otimes (\bm{R} - \bm{\mu})^\prime], \\
+\bm{\Psi} &= \E [(\bm{R} - \bm{\mu}) (\bm{R} - \bm{\mu})^\prime \otimes (\bm{R} - \bm{\mu})^\prime \otimes (\bm{R} - \bm{\mu})^\prime],
+\end{aligned}
+\end{equation}
+where $\otimes$ denotes the Kronecker product.
+
+For any portfolio with portfolio vector $\bm{w}$, the third and fourth order central moment are then given by
+\begin{equation}\label{eq:skew-kurt-portfolio}
+\begin{aligned}
+\E[(\bm{w}^\prime \bm{R} - \bm{w}^\prime \bm{\mu})^3] &= \bm{w}^\prime \bm{\Phi} (\bm{w} \otimes \bm{w}), \\
+\E[(\bm{w}^\prime \bm{R} - \bm{w}^\prime \bm{\mu})^4] &= \bm{w}^\prime \bm{\Psi} (\bm{w} \otimes \bm{w} \otimes \bm{w}),
+\end{aligned}
+\end{equation}
+which can then be used to compute the standardized skewness and excess kurtosis of the portfolio.
+
+In addition, the contribution of each asset to the modified VaR (mVaR) or modified ES (mES) of the portfolio
+depends on the derivative with respect to the weights vector, which is also a function of the
+coskewness and cokurtosis matrices measuring the relationships between all assets.
+
+Hence, the idea of improving the estimation of the higher order comoment matrices is that eventually we
+obtain more accurate estimates of mVaR and mES, or any other application involving the higher
+order comoment matrices.
+
+In the next section we explain the underlying assumptions for all the estimation methods available
+in \code{\link{PerformanceAnalytics}} and demonstrate how to use them on the dataset
+\code{edhec} included in the package. In Section 3 we show how the different estimation techniques impacts
+the mVaR and mES values. It is not our aim however to draw any conclusions about which method is
+preferred.
+
+Before starting, load the package and the dataset \code{edhec}. Below, the different asset names are shown, as well as the head of the dataset for the first six columns. As you can see, the data consists of monthly returns. All the examples in this vignette will make use of this dataset.
+
+<<LoadData,echo=T>>=
+library(PerformanceAnalytics)
+data(edhec)
+colnames(edhec)
+head(edhec[, 1:6], n = 5)
+@
+
+
+\section{Estimation of the Coskewness and Cokurtosis matrices}
+
+In this section we cover the three main categories of estimation techniques implemented in
+\code{\link{PerformanceAnalytics}}, plug-in estimation, structured estimation and shrinkage estimation.
+This is not an exhaustive list and in the last subsection we refer the reader to other possibilities, such as EWMA estimation and MCA estimation (both available in \code{\link{PerformanceAnalytics}}); or the GO-GARCH model in \code{\link{rmgarch}}.
+
+
+\subsection{Plug-in estimation}\label{sect:sample}
+
+Consider a sample $(\bm{r}_1, \bm{r}_2, \dots, \bm{r}_n)$ of $p$-dimensional observations of the return variable $\bm{R}$.
+The most straightforward way of estimating the coskewness and cokurtosis matrices given in \eqref{eq:cosk-cokurt} consists of replacing each expectation by a sample average, i.e. the sample coskewness and cokurtosis matrices $\hat{\bm{\Phi}}$ and $\hat{\bm{\Psi}}$ have as elements
+\begin{equation}
+\begin{aligned}
+\hat{\phi}_{ijk} &= \frac 1n \sum_{t=1}^n (r_{ti} - \overline{r}_i)(r_{tj} - \overline{r}_j)(r_{tk} - \overline{r}_k), \\
+\hat{\psi}_{ijkl} &= \frac 1n \sum_{t=1}^n (r_{ti} - \overline{r}_i)(r_{tj} - \overline{r}_j)(r_{tk} - \overline{r}_k)(r_{tl} - \overline{r}_l),
+\end{aligned}
+\end{equation}
+where $\overline{\bm{r}}$ denotes the sample average. The way to estimate the plug-in sample coskewness and cokurtosis estimators is as follows
+<<Plugin,echo=T>>=
+m3 <- M3.MM(edhec)
+m4 <- M4.MM(edhec)
+dim(m3)
+dim(m4)
+@
+The dimension of the matrices is correct, at $p \times p^2$ for the coskewness matrix and $p \times p^3$ for the cokurtosis matrix.
+
+As shown in Equation \eqref{eq:skew-kurt-portfolio}, the portfolio third and fourth order central moment are easily obtained by left and right multiplication with the weight vector $w$. In the vignette we consider the equal weighted portfolio. In code, the moments are computed as
+<<PluginPort,echo=T>>=
+p <- ncol(edhec)
+w <- rep(1 / p, p)
+m3port <- t(w) %*% m3 %*% (w %x% w)
+m4port <- t(w) %*% m4 %*% (w %x% w %x% w)
+@
+Computing the third and fourth order central moment of the portfolio can also be done by directly using the functions \code{portm3} and \code{portm4} in the \code{\link{PerformanceAnalytics}} package. This has the advantage that these functions also accept the reduced form vector with unique coskewness and cokurtosis elements, as obtained by setting the option \code{as.mat = F} in any of the estimators shown in this vignette, as shown below for the coskewness matrix. Computing the reduced form has the advantage of a faster computation time because it heavily reduces the memory burden and avoids unnecessary computations for the portfolio moments, especially in higher dimensions.
+<<PluginPortHidden,echo=T>>=
+m3port_2 <- PerformanceAnalytics:::portm3(w, M3.MM(edhec))
+m3port_3 <- PerformanceAnalytics:::portm3(w, M3.MM(edhec, as.mat = F))
+c(m3port, m3port_2, m3port_3)
+@
+
+One of the properties of the sample estimator is that computing the portfolio third and fourth order central moment from the plug-in sample coskewness and cokurtosis matrices is equivalent to directly computing the third and fourth order central moment on the portfolio returns, as shown below.
+<<PluginPort2,echo=T>>=
+portreturns <- edhec %*% w
+m3port_univ <- mean((portreturns - mean(portreturns))^3)
+m4port_univ <- mean((portreturns - mean(portreturns))^4)
+c(m3port, m3port_univ, m4port, m4port_univ)
+@
+<<PluginPortsumm,echo=F>>=
+summ_moms <- matrix(NA, nrow = 17, ncol = 2)
+summ_moms[1,] <- c(m3port_univ, m4port_univ)
+@
+This will not be the case for the other estimators used in this vignette, explaining the use for better estimators of the multivariate coskewness and cokurtosis matrices in order to obtain a better univariate estimate of the portfolio skewness and kurtosis.
+
+Similar to the difference in $1/n$ and $1/(n-1)$ for covariance estimation, the plug-in sample coskewness estimator can be bias-corrected by using a different factor in front:
+\begin{equation}
+\hat{\phi}_{ijk}^{(\text{unb})} = \frac{n}{(n-1)(n-2)} \sum_{t=1}^n (r_{ti} - \overline{r}_i)(r_{tj} - \overline{r}_j)(r_{tk} - \overline{r}_k).
+\end{equation}
+The option is easily selected in \code{M3.MM} by adding \code{unbiased = T} to the arguments. Below we provide a small simulation study demonstrating unbiasedness by estimating the third order central moment of a standard Exponential random variable. We do $200\,000$ replications of sample size $50$. The true value equals $2$.
+<<PluginUnb,echo=T>>=
+m3 <- M3.MM(edhec, unbiased = TRUE)
+
+set.seed(201706)
+x <- matrix(rexp(10000000), nrow = 50)
+xc <- x - matrix(colMeans(x), nrow = 50, ncol = 200000, byrow = TRUE)
+skews_plugin <- colMeans(xc^3)
+mean(skews_plugin)
+mean(skews_plugin) * 50^2 / (49 * 48)
+@
+
+
+
+\subsection{Structured estimation}\label{sect:struct}
+
+The basis of structured estimation is to assume a certain data-generating process for the returns. Under a chosen process, the coskewness and cokurtosis matrices will be constrained structurally, for example by zero elements or other relations between the different elements. First, we take a look at the strong assumption of independence, followed by a more realistic multi-factor model. Additionally, the constant-correlation model proposed in \cite{martellini2010improved} is implemented and some additional coskewness structuresare shown at the end.
+
+
+\subsubsection{Independence}
+
+Though the assumption of independence might be unrealistic, it nicely demonstrates the effect that choosing a structure or data-generating process has on the coskewness and cokurtosis matrices. Define the marginal variances $\sigma_i^2$, then for $i < j k < l$, under the assumption of independence,
+\begin{equation}
+\begin{aligned}
+\phi_{iij} &= 0, \\
+\phi_{ijk} &= 0, \\
+\psi_{iiil} &= 0, \\
+\psi_{iikk} &= \sigma_i^2 \sigma_k^2, \\
+\psi_{ijkk} &= 0, \\
+\psi_{ijkl} &= 0,
+\end{aligned}
+\end{equation}
+and similar for permuations of the indices. Hence, only the elements $\phi_{iii}, \psi_{iiii}$ and $\psi_{iikk}$ are non-zero. Estimating the portfolio third and fourth order central moments by inserting zeros at the appropriate places and using the sample estimators for the non-zero elements clearly gives different results than before,
+<<StructIndep,echo=T>>=
+m3 <- M3.struct(edhec, "Indep")
+m4 <- M4.struct(edhec, "Indep")
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+c(m3port_univ, m3port, m4port_univ, m4port)
+@
+<<StructIndepsumm,echo=F>>=
+summ_moms[2,] <- c(m3port, m4port)
+@
+This will be the case for all estimators to come. Hence, we will not show the different estimates each time but summarize them at the end of this section.
+
+An even stronger assumption to make is assuming that the marginal distributions are independent and identical, then $\phi_{iii} = \phi$, $\psi_{iiii} = \psi$ and $\sigma^2_i = \sigma^2$ for all $i$. The common moments are estimated by taking the mean over the sample values, i.e.
+\begin{equation}
+\begin{aligned}
+\hat{\phi}^{(\text{IndepId})}_{iiii} &= \frac 1p \sum_{j = 1}^p \hat{\phi}_{jjjj}, \\
+\hat{\psi}^{(\text{IndepId})}_{iikk} &= \frac 1p \sum_{j = 1}^p (\hat{\sigma}_j^2)^2.
+\end{aligned}
+\end{equation}
+
+This estimator is available by the option \code{struct = "IndepId"} for both the coskewness and cokurtosis matrices.
+<<StructIndepInd,echo=T>>=
+m3 <- M3.struct(edhec, "IndepId")
+m4 <- M4.struct(edhec, "IndepId")
+@
+<<StructIndepIndsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[3,] <- c(m3port, m4port)
+@
+
+As demonstrated before, the plug-in sample coskewness matrix can be bias-corrected by using an alternative standardization constant. For the targets. The option to estimate the marginal third order central moment using the unbiased sample estimators is available by specifying \code{unbiasedMarg = T} as an option in the function \code{M3.struct}.
+
+
+\subsubsection{Factor model}\label{sect:struct-multifactor}
+
+In economics, linear factor models are very popular, e.g. the three-factor Fama-French model for explaining asset returns (\cite{fama1988permanent}). The data-generating process of a multi-factor model is defined as follows
+\begin{equation}
+\bm{R} = \bm{B} \bm{F} + \bm{\varepsilon},
+\end{equation}
+with $\bm{F}$ the random vector with factors, $\bm{B}$ the matrix with factor loadings and $\bm{\varepsilon}$ the idiosyncratic term. Ususally, the components of $\bm{\varepsilon}$ are considered independent and independent from the factors. It is well known that under these assumptions, the covariance matrix of the observed returns can be decomposed as
+\begin{equation}
+\bm{\Sigma}_{\bm{R}} = \bm{B} \bm{\Sigma}_{\bm{F}} \bm{B}^\prime + \bm{\Delta},
+\end{equation}
+with $\bm{\Sigma}_{\bm{F}}$ the covariance matrix of the factors and $\bm{\Delta}$ the covariance matrix of the idiosyncratic term.
+
+A similar decomposition can be made for the coskewness and cokurtosis matrices. \cite{boudt2015higher} derives the following expressions
+\begin{equation}\label{eq:struct-multifactor}
+\begin{aligned}
+\bm{\Phi}_{\bm{R}} &= \bm{B} \bm{\Phi}_{\bm{F}} (\bm{B}^\prime \otimes \bm{B}^\prime) + \bm{\Omega}, \\
+\bm{\Psi}_{\bm{R}} &= \bm{B} \bm{\Psi}_{\bm{F}} (\bm{B}^\prime \otimes \bm{B}^\prime \otimes \bm{B}^\prime + \bm{\Gamma}),
+\end{aligned}
+\end{equation}
+with $\bm{\Phi}_{\bm{F}}$ and $\bm{\Psi}_{\bm{F}}$ the coskewness and cokurtosis matrices of the factors and $\bm{\Omega}$ and $\bm{\Gamma}$ sparse residual matrices. For their exact definition we refer to \cite{boudt2015higher}.
+
+Estimation of the factor coskewness and cokurtosis matrices is done by first estimating the factor loadings $\bm{B}$ and the residuals $\bm{\varepsilon}$ using Ordinary Least Squares (OLS). These estimates are then combined through Equation \eqref{eq:struct-multifactor} with the factor coskewness and cokurtosis matrices estimated by the plug-in sample estimators. The \code{M3.struct} and \code{M4.struct} functions do this by specifying \code{struct = "observedfactor"} and providing the factor observations in \code{f}. Below we use the equal-weighted portfolio as the observed factor.
+<<Struct1f,echo=T>>=
+f <- rowMeans(edhec)
+m3 <- M3.struct(edhec, "observedfactor", f)
+m4 <- M4.struct(edhec, "observedfactor", f)
+@
+<<Struct1fsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[4,] <- c(m3port, m4port)
+@
+
+
+\subsubsection{Constant correlation}
+
+The constant correlation model for the covariance matrix, proposed in \cite{elton1973estimating}, assumes that the covariance matrix has off-diagonal terms given by
+\begin{equation}
+\sigma_{ij} = \rho \sqrt{\sigma_{ii} \sigma_{jj}},
+\end{equation}
+and thus the correlation $\rho$ between all the assets is equal. \cite{martellini2010improved} propose extended correlation coefficients for third and fourth order dependence between assets. The constant correlation coskewness and cokurtosis matrices are then constructed by assuming these extended correlations are constant, similar to the constant correlation covariance matrix. These estimators are accessible as follows
+<<structCC,echo=T>>=
+m3 <- M3.struct(edhec, "CC")
+m4 <- M4.struct(edhec, "CC")
+@
+<<structCCsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[5,] <- c(m3port, m4port)
+@
+
+
+\subsubsection{Additional structured coskewness options}
+
+In Section \ref{sect:struct-multifactor}, the coskewness matrix under a multi-factor model was shown. When considering the more simple model of a one-factor model with an idiosyncratic term following an elliptical distribution, \cite{simaan1993portfolio} derive a way to estimate the coskewness matrix without needing the factor observations. All the skewness and coskewness observed in the returns can be explained by a single underlying factor, since the idiosyncratic term does not contribute to the overall skewness and coskewness.
+<<structSim,echo=T>>=
+m3 <- M3.struct(edhec, "latent1factor")
+@
+<<structSimsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+summ_moms[6,] <- c(m3port, NA)
+@
+
+In general, a central-symmetric random variable (in particular elliptically distributed) has a coskewness matrix consisting of only zeros. This is the reason why the idiosyncratic term does not contribute to the coskewness matrix in the model of \cite{simaan1993portfolio}. This extremely restricted coskewness matrix is obtained by
+<<structSim,echo=T>>=
+m3 <- M3.struct(edhec, "CS")
+@
+
+
+\subsection{Shrinkage estimation}\label{sect:shrink}
+
+We introduced the sample estimator in Section \ref{sect:sample} and several structured estimators in \ref{sect:struct}. The sample estimators have a small bias (or unbiased), but a larger estimation variance and the structured estimators usually have a smaller estimation variance, but possibly a large bias. The bias of the structured models depends on how close the true data-generating process is to the one you assume it to be. Hence, combining both types of estimators could reduce the total mean squared error of estimation (MSE).
+
+This is exactly the idea of shrinkage estimation. It was introduced in the literature of covariance estimation by \cite{ledoit2003improved}. \cite{martellini2010improved} generalized their approach to estimation of coskewness and cokurtosis matrices. In \cite{boudt2017coskewness}, the authors improve the estimators for the shrinkage intensity proposed in \cite{martellini2010improved} for the coskewness matrix and extend the methodology to a multi-target shrinkage setting, as explained later in Section \ref{sect:MTS}.
+
+Let $\hat{\bm{\Phi}}$ be the plug-in sample estimator and $\hat{\bm{T}}$ some structured coskewness estimator. The true coskewness matrix is denoted by $\bm{\Phi}$. The shrinkage estimator combining the two is a convex combination of both estimators, i.e.
+\begin{equation}
+\hat{\bm{\Phi}}^{(\text{ST})}(\lambda) = (1 - \lambda) \hat{\bm{\Phi}} +  \lambda \hat{\bm{T}},
+\end{equation}
+with $\lambda \in [0, 1]$. The value of $\lambda$ is optimized using some criterion. In the literature, minimizing the MSE is popular, this results in 
+\begin{equation}
+\lambda^\star = \arg \min_{\lambda \in [0, 1]} \E \left[ \| \hat{\bm{\Phi}}^{(\text{ST})}(\lambda) - \bm{\Phi} \|^2 \right].
+\end{equation}
+The MSE loss function can be estimated consistently, and even in some cases unbiasedly, as shown in \cite{boudt2017coskewness}.
+
+
+\subsubsection{Single-target shrinkage estimation}
+
+In shrinkage estimation, the main choice to make is which structured estimator to use. The functions \code{M3.shrink} and \code{M4.shrink} incorporate all the structured estiamtors given in Section \ref{sect:struct}. Besides the estimated coskewness and cokurtois matrices, the functions return the estimated shrinkage intensity and the estimated coefficients of the MSE loss function determining the shrinkage intensity. For more information about these coefficients we refer to \cite{ledoit2003improved} and \cite{boudt2017coskewness}.
+
+The different coskewness and cokurtosis single-target shrinkage estimators can be accessed by
+<<ShrinkIndep,echo=T>>=
+# target "Indep"
+m3 <- M3.shrink(edhec, 1)$M3sh
+m4 <- M4.shrink(edhec, 1)$M4sh
+
+# target "IndepId"
+m3 <- M3.shrink(edhec, 2)$M3sh
+m4 <- M4.shrink(edhec, 2)$M4sh
+
+# target "1-factor"
+m3 <- M3.shrink(edhec, 3, f)$M3sh
+m4 <- M4.shrink(edhec, 3, f)$M4sh
+
+# target "constant correlation"
+m3 <- M3.shrink(edhec, 4)$M3sh
+m4 <- M4.shrink(edhec, 4)$M4sh
+
+# target "latent 1-factor model of Simaan (1993)"
+m3 <- M3.shrink(edhec, 5)$M3sh
+
+# target "central-symmetry"
+m3 <- M3.shrink(edhec, 6)$M3sh
+@
+<<ShrinkIndepsumm,echo=F>>=
+m3 <- M3.shrink(edhec, 1)$M3sh
+m4 <- M4.shrink(edhec, 1)$M4sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[7,] <- c(m3port, m4port)
+m3 <- M3.shrink(edhec, 2)$M3sh
+m4 <- M4.shrink(edhec, 2)$M4sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[8,] <- c(m3port, m4port)
+m3 <- M3.shrink(edhec, 3, f)$M3sh
+m4 <- M4.shrink(edhec, 3, f)$M4sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[9,] <- c(m3port, m4port)
+m3 <- M3.shrink(edhec, 4, f)$M3sh
+m4 <- M4.shrink(edhec, 4, f)$M4sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[10,] <- c(m3port, m4port)
+m3 <- M3.shrink(edhec, 5)$M3sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+summ_moms[11,] <- c(m3port, NA)
+m3 <- M3.shrink(edhec, 6)$M3sh
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+summ_moms[12,] <- c(m3port, NA)
+@
+We remark that only shrinking towards an observed one-factor model is possible. If $\bm{T}_3$ is selected and multiple factor observations are provided, then a single-factor model is estimated for each of the factors and all the single-factor coskewness matrices are used as targets in a multi-target shrinkage estimator, as detailled in Section \ref{sect:MTS}. The reason for accessing the targets estimators by a vector of \code{TRUE/FALSE} will become clear in Section \ref{sect:MTS}.
+
+
+\subsubsection{Multi-target shrinkage estimation}\label{sect:MTS}
+
+Single-target shrinkage has the nice property that it reduces the MSE of estimation, but requires the user to choose a single structured estimator. In \cite{boudt2017coskewness} the possibility of using multiple structured coskewness and cokurtosis estimators at once is explored. The multi-target shrinkage estimator of the coskewness matrix is then defined as
+\begin{equation}
+\hat{\bm{\Phi}}^{(\text{MT})}(\bm{\lambda}) = \left(1 - \sum_{k = 1}^K \lambda_k\right) \hat{\bm{\Phi}} +  \sum_{k = 1}^K \lambda_k \hat{\bm{T}}_k,
+\end{equation}
+with the vector of shrinkage intensities $\bm{\lambda}$ again minimizing the MSE between the estimator and the true coskewness matrix
+\begin{equation}
+\bm{\lambda}^\star = \arg \min_{\bm{\lambda}} \E \left[ \| \hat{\bm{\Phi}}^{(\text{MT})}(\bm{\lambda}) - \bm{\Phi} \|^2 \right].
+\end{equation}
+The optimization is done over all vectors $\bm{\lambda}$ satisfying $\lambda_k \geq 0$ and $\sum_{k = 1}^K \lambda_k \leq 1$.
+
+To use the multi-target estimators, simply select the structured estimators you want to include. For example, suppose we want to mix the structured estimators \code{"Indep"}, \code{"observedfactor"} and \code{"CC"}. This is done by
+<<ShrinkMTb,echo=T>>=
+m3 <- M3.shrink(edhec, c(1, 3, 4), f)$M3sh
+m4 <- M4.shrink(edhec, c(1, 3, 4), f)$M4sh
+@
+<<ShrinkMTbsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[13,] <- c(m3port, m4port)
+@
+
+
+\subsubsection{Unbiased estimatino of the MSE loss function}
+
+All the shrinkage estimators shown above use consistent, but biased estimators to estimate the MSE loss function determining the shrinkage intensities to use. \cite{boudt2017coskewness} derive bias-corrected estimators for shrinkage estimation of the coskewness matrix with structured matrices \code{"Indep"}, \code{"IndepId"} and \code{"CS"}. The bias-corrected estimators improve the MSE compared to the biased estimators when the sample size is rather small. The option of using the unbiased estimators can be selected by the argument \code{unbiasedMarg = T} whenever estimating the coskewness matrix with \code{M3.shrink} and any combination of the three targets given above. For example, multi-target shrinkage estimation of the coskewness matrix using bias-corrected estimators for the MSE loss function with all the available structured coskwenss matrices is done by
+<<ShrinkMTunb,echo=T>>=
+m3 <- M3.shrink(edhec, c(1, 2, 6), unbiasedMSE = T)$M3sh
+@
+<<ShrinkMTunbsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+summ_moms[14,] <- c(m3port, NA)
+@
+
+
+\subsection{Other estimation techniques}
+
+\subsubsection{EWMA estimators}
+
+All the comoment estimators in Sections \ref{sect:sample}, \ref{sect:struct} and \ref{sect:shrink} implicitely assume independent and identically distributed observations. However, especially when using portfolio returns, this is a strong assumption to make. To address the issue of time-variability, using a rolling window when estimating the moments is a frequently used approach.
+
+An alternative approach popularized by \cite{jpmorgan1996riskmetrics} for covariance estimation is using exponentially decaying weights. Assume $\bm{\varepsilon}$ to denote the excess portfolio returns, thus having a mean of zero. Then the covariance estimate at time $t$ is updated by the observed excess returns at time $t$ as
+\begin{equation}
+\hat{\bm{\Sigma}}^{(\text{EWMA})}_t = (1 - \lambda) \bm{\varepsilon}_t \bm{\varepsilon}_t^\prime + \lambda \hat{\bm{\Sigma}}^{(\text{EWMA})}_{t-1},
+\end{equation}
+with $\lambda \in (0, 1)$ the parameter governing how fast the covariance estimate adapts to new observations.
+
+Straightforward extensions to coskewness and cokurtosis can be defined as
+\begin{equation}
+\begin{aligned}
+\hat{\bm{\Phi}}^{(\text{EWMA})}_t &= (1 - \lambda) \bm{\varepsilon}_t \bm{\varepsilon}_t^\prime \otimes \bm{\varepsilon}_t^\prime + \lambda \hat{\bm{\Phi}}^{(\text{EWMA})}_{t-1}, \\
+\hat{\bm{\Psi}}^{(\text{EWMA})}_t &= (1 - \lambda) \bm{\varepsilon}_t \bm{\varepsilon}_t^\prime \otimes \bm{\varepsilon}_t^\prime \otimes \bm{\varepsilon}_t^\prime + \lambda \hat{\bm{\Psi}}^{(\text{EWMA})}_{t-1}
+\end{aligned}
+\end{equation}
+
+The functions \code{M3.ewma} and \code{M4.ewma} give the option to estimate the EWMA-comoments when providing a dataset with excess returns $R$, or updating the last known comoment matrix with the new observations in $R$ using the option \code{last.M3 = T} in case of the coskewness matrix or \code{last.M4 = T} for the cokurtosis matrix. The functions take both the full comoment matrices or the vectors with unique elements as input and return the full matrices by default or the vectors with only the unique elements by adding the option \code{as.mat = F} as for all the previously discussed estimators.
+<<EMWA,echo=T>>=
+m3 <- M3.ewma(edhec, lambda = 0.97)
+m4 <- M4.ewma(edhec, lambda = 0.97)
+@
+In the above code we used the default value of $\lambda = 0.97$ which is recommended for monthly returns by \cite{jpmorgan1996riskmetrics}.
+<<EWMAsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[15,] <- c(m3port, m4port)
+# summary_momentestimates <- summ_moms
+# colnames(summary_momentestimates) <- c("m3 (1e-07)", "m4 (1e-07)")
+# rownames(summary_momentestimates) <- c("sample", "struct - Indep", "struct - IndepInd", "struct - 1f", "struct - CC",
+#                                        "struct - Simaan", "shrink - Indep", "shrink - IndepInd", "shrink - 1f",
+#                                        "shrink - CC", "shrink - Simaan", "shrink - CS", "shrink - Indep/1f/CC", 
+#                                        "shrink - Indep/IndepId/CS", "EWMA")
+# summary_momentestimates <- 1e07 * summary_momentestimates
+@
+
+\subsubsection{Moment Component Analysis}
+
+A different approach to estimating the comoment matrices can be found in \cite{jondeau2017moment}. Here the aim is to find a subspace of $\mathbb R^p$ that explains most of observed coskewness or cokurtosis, much like PCA searches for the subspace explaining most of the variance. To make this formal, the methods seeks the $k$ dimensional subspace spanned by the columns of $\bm{U}$ obtained by
+\begin{equation}\label{eq:MCAoptim}
+\begin{aligned}
+\bm{U}_3 &= \arg \min_{\bm{U}} \| \hat{\bm{\Phi}} - \bm{U} \bm{\Phi}_{sub} (\bm{U} \otimes \bm{U})^\prime \|^2 \\
+\bm{U}_4 &= \arg \min_{\bm{U}} \| \hat{\bm{\Psi}} - \bm{U} \bm{\Psi}_{sub} (\bm{U} \otimes \bm{U} \otimes \bm{U})^\prime \|^2,
+\end{aligned}
+\end{equation}
+where the optimization is done over matrices $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$. The matrices $\bm{\Phi}_{sub}$ and $\bm{\Psi}_{sub}$ are any valid coskewness and cokurtosis matrices and are part of the optimization procedure. The optimisation in \eqref{eq:MCAoptim} is equivalent to finding $\bm{U} \in \mathbb R^{p \times k}$ such that $\bm{U}^\prime \bm{U} = \bm{I}$, maximizing
+\begin{equation}
+\begin{aligned}
+\bm{U}_3 &= \arg \max_{\bm{U}} \| \bm{U}^\prime \hat{\bm{\Phi}} (\bm{U} \otimes \bm{U}) \|^2 \\
+\bm{U}_4 &= \arg \max_{\bm{U}} \| \bm{U}^\prime \hat{\bm{\Psi}} (\bm{U} \otimes \bm{U} \otimes \bm{U}) \|^2,
+\end{aligned}
+\end{equation}
+
+By projecting the data onto the subspace spanned by the columns of $\bm{U}$, the data is represented by means of the $k$ principal coskewness / cokurtosis components. As with PCA, these components can be used to construct estimates of the comoment matrices, ignoring the information not embedded in the first $k$ components. This is done as follows
+\begin{equation}
+\begin{aligned}
+\hat{\bm{\Phi}}_{mca} &= \bm{U}_3 \left( \bm{U}_3^\prime \hat{\bm{\Phi}} (\bm{U}_3 \otimes \bm{U}_3) \right) (\bm{U}_3 \otimes \bm{U}_3)^\prime, \\
+\hat{\bm{\Psi}}_{mca} &= \bm{U}_4 \left( \bm{U}_4^\prime \hat{\bm{\Psi}} (\bm{U}_4 \otimes \bm{U}_4 \otimes \bm{U}_4) \right) (\bm{U}_4 \otimes \bm{U}_4 \otimes \bm{U}_4)^\prime.
+\end{aligned}
+\end{equation}
+We remark that the MCA procedure works on any estimates $\hat{\bm{\Phi}}$ and $\hat{\bm{\Psi}}$ of the coskewness and cokurtosis matrices, not only using the sample estimator.
+
+To obtain these estimates for $k = 3$ components, do 
+<<MCA,echo=T>>=
+m3 <- M3.MCA(edhec, k = 3)$M3mca
+m4 <- M4.MCA(edhec, k = 3)$M4mca
+@
+The MCA functions output the coskewness or cokurtosis matrix, a boolean indicating convergence, the number of iterations the optimization algorithm has gone through and the optimal $\bm{U}$.
+<<MCAsumm,echo=F>>=
+m3port <- PerformanceAnalytics:::portm3(w, m3)
+m4port <- PerformanceAnalytics:::portm4(w, m4)
+summ_moms[17,] <- c(m3port, m4port)
+m3port <- PerformanceAnalytics:::portm3(w, M3.MCA(edhec, k = 1, as.mat = FALSE)$M3mca)
+m4port <- PerformanceAnalytics:::portm4(w, M4.MCA(edhec, k = 1, as.mat = FALSE)$M4mca)
+summ_moms[16,] <- c(m3port, m4port)
+summary_momentestimates <- summ_moms
+colnames(summary_momentestimates) <- c("m3 (1e-07)", "m4 (1e-07)")
+rownames(summary_momentestimates) <- c("sample", "struct - Indep", "struct - IndepInd", "struct - 1f", "struct - CC",
+                                       "struct - Simaan", "shrink - Indep", "shrink - IndepInd", "shrink - 1f",
+                                       "shrink - CC", "shrink - Simaan", "shrink - CS", "shrink - Indep/1f/CC", 
+                                       "shrink - Indep/IndepId/CS", "EWMA", "MCA - 1 factor", "MCA - 3 factors")
+summary_momentestimates <- 1e07 * summary_momentestimates
+@
+
+
+\subsubsection{Other approaches}
+
+The other models available in \code{\link{R}} we are aware of were implemented by Alexios Ghalanos. The GO-GARCH model of \cite{vanderweide2002go} is available in the \code{\link{rmgarch}} package, for details see see \cite{ghalanos2015rmgarch}. The model allows for explicit extraction of fitted and forecasted coskewness and cokurtosis matrices. However, the model does not explicitely model the higher order moments. 
+
+Contrary to this, the IFACD model of \cite{ghalanos2015independent} does model the coskewness and cokurtosis matrices explicitely. Though the code is only available for the univariate model through the package \code{\link{racd}}, as far as we are aware.
+
+
+\subsection{Summary of estimated portfolio moments}\label{sect:estim-summary}
+
+All the methods implemented in \code{\link{PerformanceAnalytics}} and presented above provide different estimates of the third and fourth order central moments of the portfolio. A summary is given below:
+<<giveSummary,echo=T>>=
+summary_momentestimates
+@
+As you can see from the results, the shrinkage estimators are usually a compromise between the values obtained by the sample estimator and the structured estimators. 
+
+
+\section{Impact on risk measures}
+
+When using the risk measures \code{VaR} or \code{ES} in \code{\link{PerformanceAnalytics}} there is the option of providing the coskewness and cokurtosis matrices explicitely. This is especially useful when we are interested in the risk measure at portfolio level and the component contribution of each asset.
+
+In the previous section we have demonstrated all available estimation techniques in \code{\link{PerformanceAnalytics}} for the coskewness and cokurtosis matrices. The estimated portfolio third and fourth order central moments differed largely depending on which approach was used. It is thus logical to look at the impact this possibly has on the portfolio VaR and portfolio ES.
+
+Though the functions \code{M2.struct}, \code{M2.shrink} and \code{M2.ewma} provide the structured, shrinkage and EWMA estimators for the covariance matrix, we will use the sample covariance matrix \code{cov} in the comparison. The reason for this is to isolate the influence of the coskewness and cokurtosis matrix in this example.
+
+The $95\%$ VaR estimate of the equal-weighted portfolio when using sample estimators is computed by
+<<VaRsample,echo=T>>=
+w <- rep(1 / ncol(edhec), ncol(edhec))
+p <- 0.95
+m <- colMeans(edhec)
+sigma <- cov(edhec)
+m3 <- M3.MM(edhec)
+m4 <- M4.MM(edhec)
+VaR95 <- VaR(p = p, method = "modified", portfolio_method = "component", 
+             weights = w, mu = m, sigma = sigma, m3 = m3, m4 = m4)
+VaR95
+@
+and similarly for the $95\%$ ES
+<<VaRsample,echo=T>>=
+ES95 <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = m3, m4 = m4)
+ES95
+@
+
+We gather the predicted $95\%$ VaR and ES as in Section \ref{sect:estim-summary} and summarize the results below,
+<<VaRestimates,echo=F>>=
+rm95 <- matrix(NA, nrow = 13, ncol = 2)
+VaRcomp <- matrix(NA, nrow = 13, ncol = 13)
+EScomp <- matrix(NA, nrow = 13, ncol = 13)
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.MM(edhec, as.mat = F), m4 = M4.MM(edhec, as.mat = F))
+rm95[1, 1] <- temp$MVaR
+VaRcomp[1,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "Indep", as.mat = F), 
+            m4 = M4.struct(edhec, "Indep", as.mat = F))
+rm95[2, 1] <- temp$MVaR
+VaRcomp[2,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "IndepId", as.mat = F), 
+            m4 = M4.struct(edhec, "IndepId", as.mat = F))
+rm95[3, 1] <- temp$MVaR
+VaRcomp[3,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "observedfactor", f = f, as.mat = F), 
+            m4 = M4.struct(edhec, "observedfactor", f = f, as.mat = F))
+rm95[4, 1] <- temp$MVaR
+VaRcomp[4,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "CC", as.mat = F), 
+            m4 = M4.struct(edhec, "CC", as.mat = F))
+rm95[5, 1] <- temp$MVaR
+VaRcomp[5,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 1, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 1, as.mat = F)$M4sh)
+rm95[6, 1] <- temp$MVaR
+VaRcomp[6,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 2, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 2, as.mat = F)$M4sh)
+rm95[7, 1] <- temp$MVaR
+VaRcomp[7,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 3, f = f, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 3, f= f, as.mat = F)$M4sh)
+rm95[8, 1] <- temp$MVaR
+VaRcomp[8,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 4, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, 4, as.mat = F)$M4sh)
+rm95[9, 1] <- temp$MVaR
+VaRcomp[9,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M3sh, 
+            m4 = M4.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M4sh)
+rm95[10, 1] <- temp$MVaR
+VaRcomp[10,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.ewma(edhec, as.mat = F), 
+            m4 = M4.ewma(edhec, as.mat = F))
+rm95[11, 1] <- temp$MVaR
+VaRcomp[11,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 1, as.mat = F)$M3mca, 
+            m4 = M4.MCA(edhec, k = 1, as.mat = F)$M4mca)
+rm95[12, 1] <- temp$MVaR
+VaRcomp[12,] <- temp$pct_contrib_MVaR
+
+temp <- VaR(p = p, method = "modified", portfolio_method = "component", 
+            weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 3, as.mat = F)$M3mca, 
+            m4 = M4.MCA(edhec, k = 3, as.mat = F)$M4mca)
+rm95[13, 1] <- temp$MVaR
+VaRcomp[13,] <- temp$pct_contrib_MVaR
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.MM(edhec, as.mat = F), m4 = M4.MM(edhec, as.mat = F))
+rm95[1, 2] <- temp$MES
+EScomp[1,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "Indep", as.mat = F), 
+           m4 = M4.struct(edhec, "Indep", as.mat = F))
+rm95[2, 2] <- temp$MES
+EScomp[2,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "IndepId", as.mat = F), 
+           m4 = M4.struct(edhec, "IndepId", as.mat = F))
+rm95[3, 2] <- temp$MES
+EScomp[3,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "observedfactor", f = f, as.mat = F), 
+           m4 = M4.struct(edhec, "observedfactor", f = f, as.mat = F))
+rm95[4, 2] <- temp$MES
+EScomp[4,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.struct(edhec, "CC", as.mat = F), 
+           m4 = M4.struct(edhec, "CC", as.mat = F))
+rm95[5, 2] <- temp$MES
+EScomp[5,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 1, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 1, as.mat = F)$M4sh)
+rm95[6, 2] <- temp$MES
+EScomp[6,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 2, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 2, as.mat = F)$M4sh)
+rm95[7, 2] <- temp$MES
+EScomp[7,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 3, f = f, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 3, f= f, as.mat = F)$M4sh)
+rm95[8, 2] <- temp$MES
+EScomp[8,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, 4, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, 4, as.mat = F)$M4sh)
+rm95[9, 2] <- temp$MES
+EScomp[9,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M3sh, 
+           m4 = M4.shrink(edhec, c(1, 3, 4), f = f, as.mat = F)$M4sh)
+rm95[10, 2] <- temp$MES
+EScomp[10,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.ewma(edhec, as.mat = F), 
+           m4 = M4.ewma(edhec, as.mat = F))
+rm95[11, 2] <- temp$MES
+EScomp[11,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 1, as.mat = F)$M3mca, 
+           m4 = M4.MCA(edhec, k = 1, as.mat = F)$M4mca)
+rm95[12, 2] <- temp$MES
+EScomp[12,] <- temp$pct_contrib_MES
+
+temp <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = sigma, m3 = M3.MCA(edhec, k = 3, as.mat = F)$M3mca, 
+           m4 = M4.MCA(edhec, k = 3, as.mat = F)$M4mca)
+rm95[13, 2] <- temp$MES
+EScomp[13,] <- temp$pct_contrib_MES
+
+colnames(rm95) <- c("VaR", "ES")
+rownames(rm95) <- c("sample", "struct - Indep", "struct - IndepId", "struct - 1f", "struct - CC",
+                    "shrink - Indep", "shrink - IndepId", "shrink - 1f", "shrink - CC", 
+                    "shrink - Indep/1f/CC", "EWMA", "MCA - 1 factor", "MCA - 3 factors")
+@
+<<EWMArm,echo=F>>=
+CCVaR <- VaR(p = p, method = "modified", portfolio_method = "component", 
+             weights = w, mu = m, sigma = M2.struct(edhec, "CC"), m3 = M3.struct(edhec, "CC", as.mat = F), 
+             m4 = M4.struct(edhec, "CC", as.mat = F))$MVaR
+CCES <- ES(p = p, method = "modified", portfolio_method = "component", 
+           weights = w, mu = m, sigma = M2.struct(edhec, "CC"), m3 = M3.struct(edhec, "CC", as.mat = F), 
+           m4 = M4.struct(edhec, "CC", as.mat = F))$MES
+@
+<<EWMArm,echo=T>>=
+rm95
+@
+Clearly, the constant correlation estimators for the coskewness and cokurtosis matrices are no good in combination with the sample covariance estimator. When using \code{M2.struct(edhec, "CC")}, then the $95\%$ VaR and ES estimates under the constant correlation estimators becomes \code{0.00739374} and \code{0.00739374} respectively, still unable to account for the difference between VaR and ES.
+
+The differences in estimated risk measures are noticable. We let the reader decide whether or not the differences are large or small.
+
+
+\section{Conclusion}
+This vignette demonstrated how to use all the coskewness and cokurtosis estimators available in \code{\link{PerformanceAnalytics}}. We also showed the influence a certain choice of estimator actually has on the resulting portfolio moments and as a consequence on Value-at-Risk and Expected Shortfall predictions.
+
+Since the purpose of this vignette is to illustrate the implemented estimators, we do not make any claim about which estimator is `better' or which values to trust more. This depends on the application, the type of data and other factors.
+
+
+\bibliographystyle{abbrvnat}
+\bibliography{PA}
+
+\end{document}

@@ -38,11 +38,10 @@ print(PainIndex(100*managers['1996']))
 print(PainIndex(100*managers['1996',1])) 
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates
 }
-
+\author{
+Matthieu Lestel
+}

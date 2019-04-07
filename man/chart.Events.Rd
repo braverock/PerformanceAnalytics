@@ -57,11 +57,10 @@ chart.Events(Drawdowns(managers[,2,drop=FALSE]),
 		main = "Worst Drawdowns")
 }
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.TimeSeries}}, \cr \code{\link{plot}}, \cr
 \code{\link{par}}
 }
-
+\author{
+Peter Carl
+}

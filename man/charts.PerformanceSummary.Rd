@@ -71,11 +71,10 @@ data(edhec)
 charts.PerformanceSummary(edhec[,c(1,13)])
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.CumReturns}} \cr \code{\link{chart.BarVaR}} \cr
 \code{\link{chart.Drawdown}}
 }
-
+\author{
+Peter Carl
+}

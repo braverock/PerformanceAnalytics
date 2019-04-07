@@ -23,12 +23,11 @@ Lower partial moments capture negative deviation from a reference point.
 That reference point may be the mean, or some specified threshold that
 has other meaning for the investor.
 }
-\author{
-Kyle Balkissoon \email{kylebalkisoon@gmail.com}
-}
 \references{
 Huffman S.P. & Moll C.R., 
 "The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures", 
 Algorithmic Finance 1, 2011 p. 79-93
 }
-
+\author{
+Kyle Balkissoon \email{kylebalkisoon@gmail.com}
+}

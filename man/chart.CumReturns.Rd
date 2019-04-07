@@ -47,9 +47,6 @@ chart.CumReturns(managers,main="Cumulative Returns",begin="first")
 chart.CumReturns(managers,main="Cumulative Returns",begin="axis")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004. \cr
@@ -57,4 +54,6 @@ and Attribution}. Wiley. 2004. \cr
 \seealso{
 \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

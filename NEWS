@@ -1,3 +1,23 @@
+PerformanceAnalytics 1.5 Release Notes
+
+The major functional change in v1.5 is in the higher moment code.  Dries Cornilly
+of Belgium contributed sparse matrix code in GSoC 2017 to make calcualtion of
+higher moments and comonments much faster and more robust.  
+
+Additionally, PerformanceAnalytics has been updated to use the new plot.xts,
+which should signficiantly decrease the amount of maintenance required, and 
+increase the flexibility in plotting.  Thanks to Eric Hung for that GSoC work.
+
+PerformanceAnalytics moved to github in 2016 after the release of v1.4
+https://github.com/braverock/PerformanceAnalytics
+
+Most of the commits leading up to release are the result of continued 
+tightening and drift in CRAN standards, most should not have user-visible
+results.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
 PerformanceAnalytics 1.4 Release Notes
 
 We've completely re-written Return.portfolio to make more of the

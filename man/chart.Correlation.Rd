@@ -24,8 +24,7 @@ correlation plus the result of the cor.test as stars. On bottom, the
 bivariate scatterplots, with a fitted line
 }
 \note{
-based on plot at
-\url{http://addictedtor.free.fr/graphiques/sources/source_137.R}
+based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
 }
 \examples{
 
@@ -33,10 +32,9 @@ data(managers)
 chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{table.Correlation}}
 }
-
+\author{
+Peter Carl
+}

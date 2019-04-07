@@ -36,9 +36,6 @@ col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 title(main="Drawdowns ratio statistics")
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.93
@@ -48,4 +45,6 @@ and attribution}, second edition 2008 p.93
 \cr \code{\link{PainIndex}} \cr \code{\link{UlcerIndex}} \cr 
 \code{\link{PainRatio}} \cr \code{\link{MartinRatio}}
 }
-
+\author{
+Matthieu Lestel
+}

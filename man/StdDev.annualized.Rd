@@ -2,8 +2,8 @@
 % Please edit documentation in R/StdDev.annualized.R
 \name{StdDev.annualized}
 \alias{StdDev.annualized}
-\alias{sd.annualized}
 \alias{sd.multiperiod}
+\alias{sd.annualized}
 \title{calculate a multiperiod or annualized Standard Deviation}
 \usage{
 StdDev.annualized(x, scale = NA, ...)
@@ -51,9 +51,6 @@ suspicion if the number of observations is small.
     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
 
 }
-\author{
-Brian G. Peterson
-}
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 27 \cr
@@ -62,4 +59,6 @@ Attribution}. Wiley. 2004. p. 27 \cr
 \code{\link[stats]{sd}} \cr
 \url{http://wikipedia.org/wiki/inverse-square_law}
 }
-
+\author{
+Brian G. Peterson
+}

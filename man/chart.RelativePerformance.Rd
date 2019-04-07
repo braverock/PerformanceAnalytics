@@ -60,10 +60,9 @@ chart.RelativePerformance(managers[, 1:6, drop=FALSE],
 		main="Relative Performance to S&P")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{Return.relative}}
 }
-
+\author{
+Peter Carl
+}

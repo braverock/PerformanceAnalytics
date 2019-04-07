@@ -40,4 +40,3 @@ http://www.tangotools.com/ui/UlcerIndex.xls
 \author{
 Matthieu Lestel
 }
-

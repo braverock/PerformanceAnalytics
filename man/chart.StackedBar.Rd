@@ -119,9 +119,6 @@ chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
 chart.StackedBar(weights[1,,drop=FALSE], unstacked=TRUE, las=3)
 
 }
-\author{
-Peter Carl
-}
 \references{
 Cleveland, W.S. (1994), The Elements of Graphing Data, Summit,
 NJ: Hobart Press.
@@ -133,4 +130,6 @@ http://www.edwardtufte.com for this and other references.
 \seealso{
 \code{\link{barplot}}, \code{\link{par}}
 }
-
+\author{
+Peter Carl
+}

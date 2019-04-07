@@ -51,9 +51,6 @@ comparing an asset to any arbitrary benchmark.
 			Rf = managers[,10,drop=FALSE])
   		
 }
-\author{
-Peter Carl
-}
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market
 equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -63,4 +60,6 @@ Introduction}. Springer. 2004. \cr
 \seealso{
 \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 }
-
+\author{
+Peter Carl
+}

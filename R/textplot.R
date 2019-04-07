@@ -96,10 +96,6 @@
 #' #
 #' # title(main="Calendar Returns")
 #'
-#' @S3method textplot default
-#' @S3method textplot character
-#' @S3method textplot data.frame
-#' @S3method textplot matrix
 #' @export
 textplot <- function(object, halign="center", valign="center", cex, 
                             max.cex = 1, cmar=2, rmar=0.5,
@@ -493,7 +489,7 @@ textplot.character <- function (object,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

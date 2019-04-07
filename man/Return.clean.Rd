@@ -48,10 +48,9 @@ head(Return.clean(managers[,1:4]),n=20)
 chart.BarVaR(managers[,1,drop=FALSE], show.clean=TRUE, clean="boudt", lwd=2, methods="ModifiedVaR")
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{clean.boudt}} \cr \code{\link{Return.Geltner}} \cr
 }
-
+\author{
+Peter Carl
+}

@@ -41,11 +41,10 @@ print(BurkeRatio(managers['1996'], modified = TRUE))
 print(BurkeRatio(managers['1996',1], modified = TRUE)) 
 
 }
-\author{
-Matthieu Lestel
-}
 \references{
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.90-91
 }
-
+\author{
+Matthieu Lestel
+}

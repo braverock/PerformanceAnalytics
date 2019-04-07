@@ -84,9 +84,6 @@ chart.Regression(managers[, 1:2, drop = FALSE],
 		legend.loc = "topleft")
 
 }
-\author{
-Peter Carl
-}
 \references{
 Chapter 7 of Ruppert(2004) gives an extensive overview of CAPM,
 its assumptions and deficiencies.
@@ -94,4 +91,6 @@ its assumptions and deficiencies.
 \seealso{
 \code{\link{plot}}
 }
-
+\author{
+Peter Carl
+}

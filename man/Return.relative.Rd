@@ -27,10 +27,9 @@ data(managers)
 head(Return.relative(managers[,1:3], managers[,8,drop=FALSE]),n=20)
 
 }
-\author{
-Peter Carl
-}
 \seealso{
 \code{\link{chart.RelativePerformance}}
 }
-
+\author{
+Peter Carl
+}

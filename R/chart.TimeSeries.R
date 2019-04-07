@@ -140,7 +140,7 @@
 #' chart.TimeSeries(Return.cumulative, colorset = "darkblue", 
 #'                  legend.loc = "bottomright", 
 #'                  period.areas = cycles.dates, 
-#'                  period.color = "lightblue", 
+#'                  period.color = rgb(204/255, 204/255, 204/255, alpha=0.25), 
 #'                  event.lines = risk.dates, 
 #'                  event.labels = risk.labels, 
 #'                  event.color = "red", lwd = 2)
@@ -299,10 +299,13 @@ function (R,
               }
       
       ##@TODO Get all the graphical parameters integrated with these two
-      dyRangeSelector(dygraph(y,main = main,
-              xlab = xlab,
-              ylab = ylab))
-      
+      if(requireNamespace("dygraphs", quietly = TRUE)) {
+        dygraphs::dyRangeSelector(
+          dygraphs::dygraph(y, main = main, xlab = xlab, ylab = ylab)
+        )
+      } else {
+        stop("Please install the dygraphs package to use dygraphPlot = TRUE")
+      }
     }
 
 }
@@ -310,7 +313,7 @@ function (R,
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2015 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

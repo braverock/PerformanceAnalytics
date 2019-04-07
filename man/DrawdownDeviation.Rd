@@ -18,4 +18,3 @@ D_j = jth drawdown over the entire period
 d = total number of drawdowns in entire period
 n = number of observations
 }
-
