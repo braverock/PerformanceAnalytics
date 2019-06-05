@@ -199,6 +199,29 @@ function (R,
     return(p)
 }
 
+
+chart.TimeSeriesgg.base <-
+  function(passon_list){
+    y = passon_list[[1]]
+    
+    print(class(y))
+    main = passon_list[[2]]
+    xlim = passon_list[[3]]
+    ylim = passon_list[[4]]
+    
+    xlab = passon_list[[5]]
+    ylab = passon_list[[6]]
+    gridline = passon_list[[7]]
+    grid.color = passon_list[[8]]
+    grid.thick = passon_list[[9]]
+    
+    plot <- ggplot(y, aes(x = date, y = value)) + 
+      geom_line(aes(color = variable), size = 1) +
+      ggtitle(main)
+    
+    return(plot)
+  }
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #

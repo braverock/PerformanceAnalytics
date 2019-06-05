@@ -310,6 +310,64 @@ function (R,
 
 }
 
+
+# Function with multi-engine option
+chart.TimeSeries.multi_engine <-
+  function (R,
+            main = "",
+            xaxis = TRUE,
+            xlim = NULL,
+            xlab = NULL,
+            yaxis = TRUE,
+            ylim = NULL,
+            ylab = NULL,
+            gridline = TRUE,
+            grid.color = 'lightgray',
+            grid.thick = 1,
+            date.format.in="%Y-%m-%d", 
+            date.format = NULL)
+{
+    
+    y = checkData(R,method='xts')
+    
+    # Set up dimensions and labels
+    #legacy code from original chart.TimeSeries function
+    columns = ncol(y)
+    rows = nrow(y)
+    columnnames = colnames(y)
+    
+    if (is.null(date.format)){
+      freq = periodicity(y)
+      yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
+      switch(freq$scale,
+             seconds = { date.format = "%H:%M"},
+             minute = { date.format = "%H:%M"},
+             hourly = {date.format = "%d %H"},
+             daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+             weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+             monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
+             quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
+             yearly = {date.format = "%Y"}
+      )
+    }
+    # Needed for finding aligned dates for event lines and period areas
+    rownames = as.Date(time(y))
+    rownames = format(strptime(rownames,format = date.format.in), date.format)
+    
+    # transform the input data into data frame, so that multi-dimension data can be compressed
+    y = data.frame(date=index(data),coredata(data))
+    y <- y %>%
+      gather(key = "variable", value = "value", -date)
+    
+    #pack for delivery
+    passon_list = list(y,main,xlim,ylim,xlab,ylab,
+                       gridline,grid.color,grid.thick)
+    
+    invisible(passon_list)
+    
+    return(chart.TimeSeriesgg.multi_engine.base(passon_list))
+  }
+
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
