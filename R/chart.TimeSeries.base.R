@@ -205,7 +205,7 @@ chart.TimeSeriesgg.base <-
   function(passon_list){
     y = passon_list[[1]]
     
-    print(class(y))
+    # print(class(y))
     main = passon_list[[2]]
     xlim = passon_list[[3]]
     ylim = passon_list[[4]]
@@ -215,12 +215,29 @@ chart.TimeSeriesgg.base <-
     gridline = passon_list[[7]]
     grid.color = passon_list[[8]]
     grid.thick = passon_list[[9]]
+    plot_engine = passon_list[[10]]
     
-    plot <- ggplot(y, aes(x = date, y = value)) + 
-      geom_line(aes(color = variable), size = 1) +
-      ggtitle(main)
     
-    return(plot)
+    if(plot_engine == "ggplot"){
+      plot <- ggplot(y, aes(x = date, y = value)) + 
+        geom_line(aes(color = variable), size = 1) +
+        ggtitle(main)
+    
+      return(plot)
+    }
+    
+    if(plot_engine == "dyplotGraph"){
+      p <- plot.xts(x = y, 
+                    y = NULL, 
+                    ..., 
+                    col = colorset, 
+                    main = main, 
+                    ylim = ylim, 
+                    yaxis.left = yaxis.left, 
+                    yaxis.right = yaxis.right, 
+                    grid.col = grid.color, 
+                    legend.loc = NULL)
+    }
   }
 
 ###############################################################################
