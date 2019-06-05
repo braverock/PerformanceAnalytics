@@ -200,6 +200,7 @@ function (R,
 }
 
 
+# New base function for multi-engine selection
 chart.TimeSeriesgg.base <-
   function(passon_list){
     y = passon_list[[1]]
