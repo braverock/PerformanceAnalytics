@@ -386,7 +386,7 @@ chart.TimeSeries.multi_engine <-
     
     #pack for delivery
     passon_list = list(y,main,xlim,ylim,xlab,ylab,
-                       gridline,grid.color,grid.thick)
+                       gridline,grid.color,grid.thick,plot_engine)
     
     invisible(passon_list)
     

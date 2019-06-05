@@ -203,19 +203,49 @@ function (R,
 # New base function for multi-engine selection
 chart.TimeSeriesgg.base <-
   function(passon_list){
+    
     y = passon_list[[1]]
     
     # print(class(y))
-    main = passon_list[[2]]
-    xlim = passon_list[[3]]
-    ylim = passon_list[[4]]
+    auto.grid = passon_list[[2]]
+    xaxis = passon_list[[3]]
+    yaxis = passon_list[[4]]
+    yaxis.right = passon_list[[5]]
+    type = passon_list[[6]]
+    lty = passon_list[[7]]
+    lwd = passon_list[[8]]
+    las = passon_list[[9]]
+    main = passon_list[[10]]
+    ylab = passon_list[[11]]
+    xlab = passon_list[[12]] 
+    date.format.in = passon_list[[13]] 
+    date.format = passon_list[[14]]
+    xlim = passon_list[[15]]
+    ylim = passon_list[[16]]
+    element.color = passon_list[[17]] 
+    event.lines = passon_list[[18]]
+    event.labels = passon_list[[19]]
+    period.areas = passon_list[[20]]
     
-    xlab = passon_list[[5]]
-    ylab = passon_list[[6]]
-    gridline = passon_list[[7]]
-    grid.color = passon_list[[8]]
-    grid.thick = passon_list[[9]]
-    plot_engine = passon_list[[10]]
+    event.color = passon_list[[21]]
+    period.color = passon_list[[22]]
+    colorset = passon_list[[23]]
+    
+    pch = passon_list[[24]]
+    legend.loc = passon_list[[25]] 
+    ylog = passon_list[[26]] 
+    cex.axis = passon_list[[27]]
+    cex.legend = passon_list[[28]] 
+    cex.lab = passon_list[[29]]
+    cex.labels = passon_list[[30]]
+    cex.main = passon_list[[31]]
+    major.ticks = passon_list[[32]]
+    minor.ticks = passon_list[[33]]
+    grid.color = passon_list[[34]] 
+    grid.lty = passon_list[[35]]
+    xaxis.labels = passon_list[[36]]
+    plot_engine = passon_list[[37]]
+    yaxis.pct = passon_list[[38]]
     
     
     if(plot_engine == "ggplot"){
