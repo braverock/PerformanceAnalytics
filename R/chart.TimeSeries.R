@@ -361,6 +361,7 @@ chart.TimeSeries.multi_engine <-
     rows = nrow(y)
     columnnames = colnames(y)
     
+    # Date standarization if format is not specified
     if (is.null(date.format)){
       freq = periodicity(y)
       yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
@@ -379,14 +380,49 @@ chart.TimeSeries.multi_engine <-
     rownames = as.Date(time(y))
     rownames = format(strptime(rownames,format = date.format.in), date.format)
     
-    # transform the input data into data frame, so that multi-dimension data can be compressed
+    # Transform the input data into data frame, so that multi-dimension data can be compressed
     y = data.frame(date=index(data),coredata(data))
     y <- y %>%
       gather(key = "variable", value = "value", -date)
     
-    #pack for delivery
-    passon_list = list(y,main,xlim,ylim,xlab,ylab,
-                       gridline,grid.color,grid.thick,plot_engine)
+    # Pack for delivery
+    passon_list = list(y,
+                       auto.grid, 
+                       xaxis, yaxis, 
+                       yaxis.right, 
+                       type, 
+                       lty, 
+                       lwd, 
+                       las,
+                       main, 
+                       ylab, 
+                       xlab, 
+                       date.format.in, 
+                       date.format, 
+                       xlim, 
+                       ylim, 
+                       element.color, 
+                       event.lines, 
+                       event.labels, 
+                       period.areas, 
+                       event.color, 
+                       period.color, 
+                       colorset, 
+                       pch, 
+                       legend.loc, 
+                       ylog, 
+                       cex.axis, 
+                       cex.legend, 
+                       cex.lab, 
+                       cex.labels, 
+                       cex.main, 
+                       major.ticks, 
+                       minor.ticks, 
+                       grid.color, 
+                       grid.lty, 
+                       xaxis.labels,
+                       plot_engine,
+                       yaxis.pct)
     
     invisible(passon_list)
     

@@ -200,13 +200,13 @@ function (R,
 }
 
 
-# New base function for multi-engine selection
+# New plotting engine function
 chart.TimeSeriesgg.base <-
   function(passon_list){
     
+    # Unpack the passed on data from main function
     y = passon_list[[1]]
     
-    # print(class(y))
     auto.grid = passon_list[[2]]
     xaxis = passon_list[[3]]
     yaxis = passon_list[[4]]
