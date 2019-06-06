@@ -45,8 +45,8 @@
 #' values are \code{"o"} (the default) and \code{"n"}.
 #' @param bg the background color for the legend box.  (Note that this is only
 #' used if \code{bty != "n"}.)
-#' @param box.lty,box.lwd the line type and width for the legend box.
-#' @param border.lty,border.lwd the line type and width for the legend border.
+#' @param box.col,box.lty,box.lwd the color, line type and width for the legend box.
+#' @param border.col,border.lty,border.lwd the color, line type and width for the legend border.
 #' @param pt.bg the background color for the \code{\link{points}},
 #' corresponding to its argument \code{bg}.
 #' @param cex character expansion factor \bold{relative} to current
