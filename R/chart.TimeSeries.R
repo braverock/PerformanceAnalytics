@@ -146,6 +146,10 @@
 #'                  event.color = "red", lwd = 2)
 #' 
 #' @export
+#' 
+
+source("D:/GSOC/PerformanceAnalytics/R/chart.TimeSeries.base.R")
+
 chart.TimeSeries <-
 function (R, 
           ... , 
@@ -225,18 +229,18 @@ function (R,
     columnnames = colnames(y)
 
     if (is.null(date.format)){
-	freq = periodicity(y)
-	yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
-	switch(freq$scale,
-	    seconds = { date.format = "%H:%M"},
-	    minute = { date.format = "%H:%M"},
-	    hourly = {date.format = "%d %H"},
-	    daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-	    weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-	    monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-	    quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-	    yearly = {date.format = "%Y"}
-	)
+    	freq = periodicity(y)
+    	yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
+    	switch(freq$scale,
+    	    seconds = { date.format = "%H:%M"},
+    	    minute = { date.format = "%H:%M"},
+    	    hourly = {date.format = "%d %H"},
+    	    daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+    	    weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
+    	    monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
+    	    quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
+    	    yearly = {date.format = "%Y"}
+    	)
     }
     # Needed for finding aligned dates for event lines and period areas
     rownames = as.Date(time(y))
@@ -354,31 +358,7 @@ chart.TimeSeries.multi_engine <-
 {
     
     y = checkData(R,method='xts')
-    
-    # Set up dimensions and labels
-    #legacy code from original chart.TimeSeries function
-    columns = ncol(y)
-    rows = nrow(y)
-    columnnames = colnames(y)
-    
-    # Date standarization if format is not specified
-    if (is.null(date.format)){
-      freq = periodicity(y)
-      yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
-      switch(freq$scale,
-             seconds = { date.format = "%H:%M"},
-             minute = { date.format = "%H:%M"},
-             hourly = {date.format = "%d %H"},
-             daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-             weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-             monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-             quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-             yearly = {date.format = "%Y"}
-      )
-    }
-    # Needed for finding aligned dates for event lines and period areas
-    rownames = as.Date(time(y))
-    rownames = format(strptime(rownames,format = date.format.in), date.format)
+
     
     # Transform the input data into data frame, so that multi-dimension data can be compressed
     y = data.frame(date=index(data),coredata(data))
@@ -426,7 +406,8 @@ chart.TimeSeries.multi_engine <-
     
     invisible(passon_list)
     
-    return(chart.TimeSeriesgg.multi_engine.base(passon_list))
+    
+    return(chart.TimeSeries.multi_engine.base(passon_list))
   }
 
 ###############################################################################
