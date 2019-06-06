@@ -142,7 +142,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     else nx <- 0
     xlog <- par("xlog")
     ylog <- par("ylog")
-    rect2 <- function(left, top, dx, dy, density = NULL, angle, border = border.col, lty = border.lty, lwd = border.lwd, ...) {
+    rect2 <- function(left, top, dx, dy, density = NULL, angle, border = box.col, lty = box.lty, lwd = box.lwd, ...) {
         r <- left + dx
         if (xlog) {
             left <- 10^left
@@ -289,7 +289,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
         if (trace)
             catn("  rect2(", left, ",", top, ", w=", w, ", h=",
                 h, ", ...)", sep = "")
-        rect2(left, top, dx = w, dy = h, col = bg, density = NULL, border = border.col)#added border = border.col
+        rect2(left, top, dx = w, dy = h, col = bg, density = NULL, border = box.col)
     }
     xt <- left + xchar + xextra + (w0 * rep.int(0:(ncol - 1),
         rep.int(n.legpercol, ncol)))[1:n.leg]
@@ -300,7 +300,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
             fill <- rep(fill, length.out = n.leg)
             rect2(left = xt, top = yt + ybox/2, dx = xbox, dy = ybox,
                 col = fill, density = density, angle = angle,
-                border = box.col) #removed internal border
+                border = border.col, lty = border.lty, lwd = border.lwd) 
         }
         xt <- xt + dx.fill
     }
