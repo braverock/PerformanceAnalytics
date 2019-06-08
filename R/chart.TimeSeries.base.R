@@ -250,6 +250,11 @@ chart.TimeSeries.multi_engine.base <-
     
     
     if(plot_engine == "ggplot"){
+      # Transform the input data into data frame, so that multi-dimension data can be compressed
+      y = data.frame(date=index(data),coredata(data))
+      y <- y %>%
+        gather(key = "variable", value = "value", -date)
+      
       plot <- ggplot(y, aes(x = date, y = value)) + 
         geom_line(aes(color = variable), size = 1) +
         ggtitle(main)

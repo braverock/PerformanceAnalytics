@@ -360,11 +360,6 @@ chart.TimeSeries.multi_engine <-
     y = checkData(R,method='xts')
 
     
-    # Transform the input data into data frame, so that multi-dimension data can be compressed
-    y = data.frame(date=index(data),coredata(data))
-    y <- y %>%
-      gather(key = "variable", value = "value", -date)
-    
     # Pack for delivery
     passon_list = list(y,
                        auto.grid, 
