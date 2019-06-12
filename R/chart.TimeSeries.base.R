@@ -258,9 +258,27 @@ chart.TimeSeries.multi_engine.base <-
       plot <- ggplot(y, aes(x = date, y = value)) + 
         geom_line(aes(color = variable), size = 1) +
         ggtitle(main)
+      
+      plot + theme(
+        panel.grid = element_line(colour = grid.color, linetype = grid.lty)
+        legend.position = legend.loc
+      )
+      
+      plot + xlim(xlim) + ylim(ylim)
+      plot + xlab(xlab) +ylab(ylab)
     
       return(plot)
     }
+    
+    # if(plot_engine == "plotly"){
+    #   y = data.frame(date=index(data),coredata(data))
+    #   # y <- y %>%
+    #   #   gather(key = "variable", value = "value", -date)
+    #   # 
+    #   plot <- plot_ly(y = ~y,x = ~date)
+    #   
+    #   return(plot)
+    # }
     
     
     if(plot_engine == "dyplotGraph"){
