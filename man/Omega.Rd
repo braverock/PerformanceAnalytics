@@ -4,8 +4,8 @@
 \alias{Omega}
 \title{calculate Omega for a return series}
 \usage{
-Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"),
-  output = c("point", "full"), Rf = 0, ...)
+Omega(R, L = 0, method = c("simple", "interp", "binomial",
+  "blackscholes"), output = c("point", "full"), Rf = 0, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

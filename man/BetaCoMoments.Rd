@@ -5,8 +5,6 @@
 \alias{BetaCoVariance}
 \alias{BetaCoSkewness}
 \alias{BetaCoKurtosis}
-\alias{BetaCoSkewness}
-\alias{BetaCoKurtosis}
 \title{Functions to calculate systematic or beta co-moments of return series}
 \usage{
 BetaCoVariance(Ra, Rb)
@@ -54,10 +52,8 @@ and Asset Management Research Centre working paper.
 \author{
 Kris Boudt, Peter Carl, Brian Peterson
 }
-\concept{
-beta co-moments
-
-moments
+\concept{beta co-moments}
+\concept{moments
 
 The co-moments, including covariance, coskewness, and cokurtosis, do not
 allow the marginal impact of an asset on a portfolio to be directly
@@ -127,5 +123,4 @@ slightly.  To make the interpretation consistent across all three measures,
 the beta coskewness function tests the skewness and multiplies the result by
 the sign of the skewness.  That allows an analyst to review the metric and
 interpret it without needing additional information.  To use the more widely
-used metric, simply set the parameter \code{test = FALSE}.
-}
+used metric, simply set the parameter \code{test = FALSE}.}

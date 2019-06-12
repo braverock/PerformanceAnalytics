@@ -6,9 +6,6 @@
 \alias{mean.UCL}
 \alias{mean.LCL}
 \alias{mean.stderr}
-\alias{mean.stderr}
-\alias{mean.LCL}
-\alias{mean.UCL}
 \title{calculate attributes relative to the mean of the observation series given,
 including geometric, stderr, LCL and UCL}
 \usage{

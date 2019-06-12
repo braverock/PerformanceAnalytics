@@ -4,10 +4,7 @@
 \alias{CoMoments}
 \alias{CoSkewnessMatrix}
 \alias{CoKurtosisMatrix}
-\alias{CoMoments}
 \alias{CoVariance}
-\alias{CoSkewness}
-\alias{CoKurtosis}
 \alias{CoSkewness}
 \alias{CoKurtosis}
 \alias{M3.MM}
@@ -110,8 +107,5 @@ Preference for Moments of Higher Order than the Variance. Journal of Finance
 \author{
 Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

@@ -52,13 +52,14 @@ function (R, scale = NA, digits = 4)
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
+        scale=freq$scale
     }
 
     # for each column, do the following:
     for(column in 1:columns) {
         z = c(StdDev.annualized(y[,column,drop=FALSE])/sqrt(scale), skewness(y[,column,drop=FALSE], method = "moment"), kurtosis(y[,column,drop=FALSE], method = "moment"), kurtosis(y[,column,drop=FALSE], method = "excess"), skewness(y[,column,drop=FALSE], method = "sample"), kurtosis(y[,column,drop=FALSE], method = "sample_excess"))
 
-        znames = c("Monthly Std Dev", "Skewness",  "Kurtosis", "Excess kurtosis", "Sample skewness", "Sample excess kurtosis")
+        znames = c(paste(scale,"Std Dev"), "Skewness",  "Kurtosis", "Excess kurtosis", "Sample skewness", "Sample excess kurtosis")
 
 
         if(column == 1) {

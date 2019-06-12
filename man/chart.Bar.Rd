@@ -3,7 +3,6 @@
 \name{chart.Bar}
 \alias{chart.Bar}
 \alias{charts.Bar}
-\alias{charts.Bar}
 \title{wrapper for barchart of returns}
 \usage{
 chart.Bar(R, legend.loc = NULL, colorset = (1:12), ...)

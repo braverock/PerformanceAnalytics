@@ -4,9 +4,10 @@
 \alias{Return.read}
 \title{Read returns data with different date formats}
 \usage{
-Return.read(filename = stop("Please specify a filename"), frequency = c("d",
-  "m", "q", "i", "o"), format.in = c("ISO8601", "excel", "oo", "gnumeric"),
-  sep = ",", header = TRUE, check.names = FALSE, ...)
+Return.read(filename = stop("Please specify a filename"),
+  frequency = c("d", "m", "q", "i", "o"), format.in = c("ISO8601",
+  "excel", "oo", "gnumeric"), sep = ",", header = TRUE,
+  check.names = FALSE, ...)
 }
 \arguments{
 \item{filename}{the name of the file to be read}

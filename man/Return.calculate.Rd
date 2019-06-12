@@ -3,7 +3,6 @@
 \name{Return.calculate}
 \alias{Return.calculate}
 \alias{CalculateReturns}
-\alias{CalculateReturns}
 \title{calculate simple or compound returns from prices}
 \usage{
 Return.calculate(prices, method = c("discrete", "log", "difference"))

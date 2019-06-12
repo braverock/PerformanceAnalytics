@@ -5,12 +5,12 @@
 \title{scatter chart of returns vs risk for comparing multiple instruments}
 \usage{
 chart.RiskReturnScatter(R, Rf = 0, main = "Annualized Return and Risk",
-  add.names = TRUE, xlab = "Annualized Risk", ylab = "Annualized Return",
-  method = "calc", geometric = TRUE, scale = NA, add.sharpe = c(1, 2,
-  3), add.boxplots = FALSE, colorset = 1, symbolset = 1,
-  element.color = "darkgray", legend.loc = NULL, xlim = NULL,
-  ylim = NULL, cex.legend = 1, cex.axis = 0.8, cex.main = 1,
-  cex.lab = 1, ...)
+  add.names = TRUE, xlab = "Annualized Risk",
+  ylab = "Annualized Return", method = "calc", geometric = TRUE,
+  scale = NA, add.sharpe = c(1, 2, 3), add.boxplots = FALSE,
+  colorset = 1, symbolset = 1, element.color = "darkgray",
+  legend.loc = NULL, xlim = NULL, ylim = NULL, cex.legend = 1,
+  cex.axis = 0.8, cex.main = 1, cex.lab = 1, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

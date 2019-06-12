@@ -3,15 +3,14 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
-\alias{SharpeRatio.modified}
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
 SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
   weights = NULL, annualize = FALSE, ...)
 
-SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
-  weights = NULL, ...)
+SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR",
+  "ES"), weights = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
