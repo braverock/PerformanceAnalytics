@@ -353,7 +353,7 @@ chart.TimeSeries.multi_engine <-
             grid.color="lightgray", 
             grid.lty="dotted", 
             xaxis.labels = NULL,
-            plot_engine = "dyplotGraph",
+            plot_engine = "built-in",
             yaxis.pct=FALSE)
 {
     

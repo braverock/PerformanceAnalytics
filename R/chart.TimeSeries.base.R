@@ -255,14 +255,31 @@ chart.TimeSeries.multi_engine.base <-
       y <- y %>%
         gather(key = "variable", value = "value", -date)
       
+      # adjust of yaxis if in percentage
+      if(yaxis.pct)
+        y = y * 100
+      
+      # format xlim and ylim
+      if(is.null(xlim[1])) # is.na or is.null?
+        xlim = c(1,rows)
+      if(is.null(ylim[1])){
+        ylim = as.numeric(range(y, na.rm=TRUE))
+      }
+      
+      
+      #draw lines and add title
       plot <- ggplot(y, aes(x = date, y = value)) + 
-        geom_line(aes(color = variable), size = 1) +
+        geom_line(aes(color = variable), size = lwd, type = ) +
         ggtitle(main)
       
+      # grid line format
       plot + theme(
-        panel.grid = element_line(colour = grid.color, linetype = grid.lty)
-        legend.position = legend.loc
+        panel.grid = element_line(colour = grid.color, 
+                                  linetype = grid.lty)
       )
+      
+      # set legend position
+      plot + theme(legend.position = legend.loc)
       
       plot + xlim(xlim) + ylim(ylim)
       plot + xlab(xlab) +ylab(ylab)
@@ -281,7 +298,7 @@ chart.TimeSeries.multi_engine.base <-
     # }
     
     
-    if(plot_engine == "dyplotGraph"){
+    if(plot_engine == "built-in"){
       
       print("in function")
       
@@ -289,7 +306,7 @@ chart.TimeSeries.multi_engine.base <-
       rows = nrow(y)
       columnnames = colnames(y)
       
-      print("parameters extracted")
+      # print("parameters extracted")
       
       # Date standarization if format is not specified
       if (is.null(date.format)){
@@ -307,7 +324,7 @@ chart.TimeSeries.multi_engine.base <-
         )
       }
 
-      print("date formatted")
+      # print("date formatted")
 
       # Needed for finding aligned dates for event lines and period areas
       rownames = as.Date(time(y))
