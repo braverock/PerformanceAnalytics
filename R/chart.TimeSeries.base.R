@@ -248,29 +248,40 @@ chart.TimeSeries.multi_engine.base <-
     plot_engine = passon_list[[37]]
     yaxis.pct = passon_list[[38]]
     
+
     
     if(plot_engine == "ggplot"){
       # Transform the input data into data frame, so that multi-dimension data can be compressed
+      columns = ncol(y)
+      rows = nrow(y)
+      columnnames = colnames(y)
+
+      
       y = data.frame(date=index(data),coredata(data))
       y <- y %>%
         gather(key = "variable", value = "value", -date)
+      print("got")
+      
+      plot <- ggplot(y, aes(x = date, y = value)) + 
+        geom_line(aes(color = variable), size = lwd) +
+        ggtitle(main)
+      
+      print("get")
       
       # adjust of yaxis if in percentage
       if(yaxis.pct)
         y = y * 100
       
       # format xlim and ylim
-      if(is.null(xlim[1])) # is.na or is.null?
-        xlim = c(1,rows)
-      if(is.null(ylim[1])){
-        ylim = as.numeric(range(y, na.rm=TRUE))
+      if(!is.null(xlim[1])) # is.na or is.null?
+        plot+xlim(xlim)
+      if(!is.null(ylim[1])){
+        plot+ylim(ylim)
       }
       
+      print("gothere")
       
       #draw lines and add title
-      plot <- ggplot(y, aes(x = date, y = value)) + 
-        geom_line(aes(color = variable), size = lwd, type = ) +
-        ggtitle(main)
       
       # grid line format
       plot + theme(
@@ -280,23 +291,22 @@ chart.TimeSeries.multi_engine.base <-
       
       # set legend position
       plot + theme(legend.position = legend.loc)
-      
-      plot + xlim(xlim) + ylim(ylim)
       plot + xlab(xlab) +ylab(ylab)
     
       return(plot)
     }
     
-    # if(plot_engine == "plotly"){
-    #   y = data.frame(date=index(data),coredata(data))
-    #   # y <- y %>%
-    #   #   gather(key = "variable", value = "value", -date)
-    #   # 
-    #   plot <- plot_ly(y = ~y,x = ~date)
-    #   
-    #   return(plot)
-    # }
     
+    if(plot_engine == "plotly"){
+      y = data.frame(date=index(data),coredata(data))
+      y <- y %>%
+         gather(key = "variable", value = "value", -date)
+
+      plot <- plot_ly(y,y=~value,x=~date, mode = 'lines')
+
+      return(plot)
+    }
+
     
     if(plot_engine == "built-in"){
       
