@@ -42,7 +42,7 @@ function (R, scale = NA, digits = 4)
 
     #set up frequency
     if(is.na(scale)) {
-        freq = periodicity(R)
+        freq = periodicity(y)
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -52,7 +52,6 @@ function (R, scale = NA, digits = 4)
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
-        scale=freq$scale
     }
 
     # for each column, do the following:
