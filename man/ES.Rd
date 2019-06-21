@@ -9,8 +9,8 @@ univariate and component, using a variety of analytical methods.}
 \usage{
 ETL(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
   "historical"), clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
-  sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
+  portfolio_method = c("single", "component"), weights = NULL,
+  mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
   operational = TRUE)
 }
 \arguments{

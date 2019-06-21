@@ -14,17 +14,15 @@ Authors@R: c(
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   )
-Version: 1.5.2.2
-Date: 2018-06-19 $Date$
-Description: Collection of econometric functions for
-    performance and risk analysis. This package aims to aid
-    practitioners and researchers in utilizing the latest
-    research in analysis of non-normal return streams.  In
-    general, it is most tested on return (rather than
-    price) data on a regular scale, but most functions will
-    work with irregular return data as well, and increasing
-    numbers of functions will work with P&L or price data
-    where possible.
+Version: 1.5.3
+Date: 2019-06-12 $Date$
+Description: Collection of econometric functions for performance and risk 
+    analysis. In addition to standard risk and performance metrics, this 
+    package aims to aid practitioners and researchers in utilizing the latest
+    research in analysis of non-normal return streams.  In general, it is most 
+    tested on return (rather than price) data on a regular scale, but most 
+    functions will work with irregular return data as well, and increasing
+    numbers of functions will work with P&L or price data where possible.
 Imports:
     methods,
     quadprog,
@@ -44,6 +42,7 @@ Suggests:
     gplots,
     testthat
 License: GPL-2 | GPL-3
+Encoding: UTF-8
 URL: https://github.com/braverock/PerformanceAnalytics
-Copyright: (c) 2004-2018
-RoxygenNote: 6.0.1.9000
+Copyright: (c) 2004-2019
+RoxygenNote: 6.1.1.9000

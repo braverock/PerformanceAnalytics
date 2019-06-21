@@ -156,7 +156,8 @@ Return.portfolio <- Return.rebalancing <- function(R,
   rebalance_on = rebalance_on[1]
   
   # find the right unit to subtract from the first return date to create a start date
-  freq = periodicity(R)
+  dots <- list(...)
+  if (is.null(dots$freq)) freq = periodicity(R) else freq = list(scale=dots$freq)
   switch(freq$scale, 
          seconds = { stop("Use a returns series of daily frequency or higher.") },
          minute = { stop("Use a returns series of daily frequency or higher.") },
@@ -191,13 +192,17 @@ Return.portfolio <- Return.rebalancing <- function(R,
     # make sure that frequency(weights)<frequency(R) ?
     
     # make sure the number of assets in R matches the number of assets in weights
-    # Should we also check the names of R and names of weights?
+    # We also check the names of R and names of weights
     if(NCOL(R) != NCOL(weights)){
-      if(NCOL(R) > NCOL(weights)){
+      if(NCOL(weights)>NCOL(R)){
+        stop("number of assets is greater than number of columns in returns object")
+      } else if(is.matrix(weights)&&length(intersect(names(R), colnames(weights)))!=0){
+        R = R[ , intersect(names(R), colnames(weights))]
+      } else if(!is.matrix(weights)&&length(intersect(names(R), names(weights)))!=0){
+        R = R[ , intersect(names(R), names(weights))]
+      } else {
         R = R[, 1:NCOL(weights)]
         warning("number of assets in beginning_weights is less than number of columns in returns, so subsetting returns.")
-      } else {
-        stop("number of assets is greater than number of columns in returns object")
       }
     }
   } # we should have good weights objects at this point

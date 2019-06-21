@@ -4,17 +4,16 @@
 \name{chart.RollingQuantileRegression}
 \alias{chart.RollingQuantileRegression}
 \alias{chart.RollingRegression}
-\alias{chart.RollingQuantileRegression}
-\alias{charts.RollingRegression}
 \alias{charts.RollingRegression}
 \title{A wrapper to create charts of relative regression performance through time}
 \usage{
 chart.RollingQuantileRegression(Ra, Rb, width = 12, Rf = 0,
-  attribute = c("Beta", "Alpha", "R-Squared"), main = NULL, na.pad = TRUE,
-  ...)
+  attribute = c("Beta", "Alpha", "R-Squared"), main = NULL,
+  na.pad = TRUE, ...)
 
-chart.RollingRegression(Ra, Rb, width = 12, Rf = 0, attribute = c("Beta",
-  "Alpha", "R-Squared"), main = NULL, na.pad = TRUE, ...)
+chart.RollingRegression(Ra, Rb, width = 12, Rf = 0,
+  attribute = c("Beta", "Alpha", "R-Squared"), main = NULL,
+  na.pad = TRUE, ...)
 
 charts.RollingRegression(Ra, Rb, width = 12, Rf = 0, main = NULL,
   legend.loc = NULL, event.labels = NULL, ...)

@@ -6,7 +6,8 @@
 \title{Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
 measure}
 \usage{
-CDD(R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ...)
+CDD(R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95,
+  ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

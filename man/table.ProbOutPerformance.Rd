@@ -4,7 +4,8 @@
 \alias{table.ProbOutPerformance}
 \title{Outperformance Report of Asset vs Benchmark}
 \usage{
-table.ProbOutPerformance(R, Rb, period_lengths = c(1, 3, 6, 9, 12, 18, 36))
+table.ProbOutPerformance(R, Rb, period_lengths = c(1, 3, 6, 9, 12, 18,
+  36))
 }
 \arguments{
 \item{R}{an xts, timeSeries or zoo object of asset returns}

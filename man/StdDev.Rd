@@ -6,9 +6,9 @@
 calculates component contribution to standard deviation of a portfolio}
 \usage{
 StdDev(R, ..., clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
-  sigma = NULL, use = "everything", method = c("pearson", "kendall",
-  "spearman"))
+  portfolio_method = c("single", "component"), weights = NULL,
+  mu = NULL, sigma = NULL, use = "everything",
+  method = c("pearson", "kendall", "spearman"))
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset

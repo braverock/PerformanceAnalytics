@@ -6,8 +6,9 @@
 \title{Calculate weighted returns for a portfolio of assets}
 \usage{
 Return.portfolio(R, weights = NULL, wealth.index = FALSE,
-  contribution = FALSE, geometric = TRUE, rebalance_on = c(NA, "years",
-  "quarters", "months", "weeks", "days"), value = 1, verbose = FALSE, ...)
+  contribution = FALSE, geometric = TRUE, rebalance_on = c(NA,
+  "years", "quarters", "months", "weeks", "days"), value = 1,
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{R}{An xts, vector, matrix, data frame, timeSeries or zoo object of

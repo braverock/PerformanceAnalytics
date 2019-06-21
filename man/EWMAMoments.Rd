@@ -5,8 +5,6 @@
 \alias{M2.ewma}
 \alias{M3.ewma}
 \alias{M4.ewma}
-\alias{M3.ewma}
-\alias{M4.ewma}
 \title{Functions for calculating EWMA comoments of financial time series}
 \usage{
 M2.ewma(R, lambda = 0.97, last.M2 = NULL, ...)
@@ -79,8 +77,5 @@ JP Morgan. Riskmetrics technical document. 1996.
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}
