@@ -23,7 +23,7 @@ combinations of moving from one of 'discrete', 'log', 'difference' and 'level', 
 data type (from the same list) are permissible.
 }
 \examples{
-TBD
+# TBD
 
 }
 \seealso{
