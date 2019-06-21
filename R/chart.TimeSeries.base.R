@@ -205,7 +205,7 @@ chart.TimeSeries.multi_engine.base <-
   function(passon_list){
     
     # Unpack the passed on data from main function
-    y = passon_list[[1]]
+    R = passon_list[[1]]
     
     auto.grid = passon_list[[2]]
     xaxis = passon_list[[3]]
@@ -252,6 +252,8 @@ chart.TimeSeries.multi_engine.base <-
     
     if(plot_engine == "ggplot"){
       # Transform the input data into data frame, so that multi-dimension data can be compressed
+      y = checkData(R,method='xts')
+      
       columns = ncol(y)
       rows = nrow(y)
       columnnames = colnames(y)
@@ -260,13 +262,10 @@ chart.TimeSeries.multi_engine.base <-
       y = data.frame(date=index(data),coredata(data))
       y <- y %>%
         gather(key = "variable", value = "value", -date)
-      print("got")
       
       plot <- ggplot(y, aes(x = date, y = value)) + 
         geom_line(aes(color = variable), size = lwd) +
         ggtitle(main)
-      
-      print("get")
       
       # adjust of yaxis if in percentage
       if(yaxis.pct)
@@ -279,10 +278,7 @@ chart.TimeSeries.multi_engine.base <-
         plot+ylim(ylim)
       }
       
-      print("gothere")
-      
       #draw lines and add title
-      
       # grid line format
       plot + theme(
         panel.grid = element_line(colour = grid.color, 
@@ -298,19 +294,24 @@ chart.TimeSeries.multi_engine.base <-
     
     
     if(plot_engine == "plotly"){
-      y = data.frame(date=index(data),coredata(data))
-      y <- y %>%
-         gather(key = "variable", value = "value", -date)
+      y = data.frame(date=index(R),coredata(R))
 
-      plot <- plot_ly(y,y=~value,x=~date, mode = 'lines')
+      nline = ncol(y)
+      plot <- plot_ly(y, mode = 'lines')
+      
+      for(i in 2:nline){
+        plot <- add_trace(plot,
+                          x = y[[1]],
+                          y = y[[i]],
+                          mode = 'lines')
+      }
 
       return(plot)
     }
 
     
-    if(plot_engine == "built-in"){
-      
-      print("in function")
+    if(plot_engine == "dyplot"){
+      y = checkData(R,method='xts')
       
       columns = ncol(y)
       rows = nrow(y)

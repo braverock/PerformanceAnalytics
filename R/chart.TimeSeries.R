@@ -353,15 +353,15 @@ chart.TimeSeries.multi_engine <-
             grid.color="lightgray", 
             grid.lty="dotted", 
             xaxis.labels = NULL,
-            plot_engine = "built-in",
+            plot_engine = "dyplot",
             yaxis.pct=FALSE)
 {
-    
-    y = checkData(R,method='xts')
-
-    
+    if(hasArg(dygraphPlot) && (!hasArg(plot_engine) plot_engine<-'dygraph')){
+      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, please use plot_engine="dygraph" instead')
+    }
+  
     # Pack for delivery
-    passon_list = list(y,
+    passon_list = list(R,
                        auto.grid, 
                        xaxis, yaxis, 
                        yaxis.right, 
@@ -401,6 +401,7 @@ chart.TimeSeries.multi_engine <-
     
     invisible(passon_list)
     
+
     
     return(chart.TimeSeries.multi_engine.base(passon_list))
   }
