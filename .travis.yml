@@ -22,12 +22,15 @@ r_check_args: "--no-build-vignettes --ignore-vignettes --as-cran"
 
 # Binaries from Michael Rutter's ppa
 r_binary_packages:
+ - car
  - gplots
  - Hmisc
  - quadprog
  - RColorBrewer
  - robustbase
  - testthat
+ - timeseries
+ - tseries
  - xts
  - zoo
  
