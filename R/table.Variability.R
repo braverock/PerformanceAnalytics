@@ -1,6 +1,6 @@
 #' Variability Summary: Statistics and Stylized Facts
 #' 
-#' Table of Mean absolute difference, Monthly standard deviation and annualised
+#' Table of Mean absolute difference, period standard deviation and annualised
 #' standard deviation
 #' 
 #' 
@@ -61,7 +61,7 @@ function (R, scale = NA, geometric = TRUE, digits = 4)
     for(column in 1:columns) {
         z = c(MeanAbsoluteDeviation(y[,column,drop=FALSE]), StdDev.annualized(y[,column,drop=FALSE], scale = scale)/sqrt(scale), StdDev.annualized(y[,column,drop=FALSE], scale = scale))
 
-        znames = c("Mean Absolute deviation", "Monthly Std Dev", "Annualized Std Dev")
+        znames = c("Mean Absolute deviation", paste0(freq$scale," Std Dev"), "Annualized Std Dev")
 
 
         if(column == 1) {
