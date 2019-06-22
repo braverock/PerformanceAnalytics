@@ -22,23 +22,23 @@ r_check_args: "--no-build-vignettes --ignore-vignettes --as-cran"
 
 # Binaries from Michael Rutter's ppa
 r_binary_packages:
- - methods
- - quadprog
- - zoo
- - robustbase
- - Hmisc
- - MASS
- - testthat
  - gplots
- - dygraphs
+ - Hmisc
+ - quadprog
  - RColorBrewer
+ - robustbase
+ - testthat
+ - xts
+ - zoo
+ 
+# Done via install.packages
+r_packages:
+ - dygraphs
  - gamlss
  - gamlss.dist
- - xts
+ - MASS
 
-# Done via install.packages
-#r_packages:
-
+   
 # Install the bleeding edge version of a package from github (eg to pick
 # up a not-yet-released bugfix)
 #r_github_packages:
