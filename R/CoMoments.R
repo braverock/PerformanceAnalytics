@@ -256,10 +256,6 @@ CoVariance<- function(Ra,Rb)
 #' 
 #' calculate higher co-moment betas, or 'systematic' variance, skewness, and
 #' kurtosis
-#' @name BetaCoMoments
-#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-#' @concept beta co-moments
-#' @concept moments
 #' 
 #' The co-moments, including covariance, coskewness, and cokurtosis, do not
 #' allow the marginal impact of an asset on a portfolio to be directly
@@ -323,16 +319,17 @@ CoVariance<- function(Ra,Rb)
 #' the portfolio is positive, then the condition is that the third moment beta
 #' is greater than, as opposed to lower than, one.
 #' 
-#' %Because the interpretation of beta coskewness is made difficult by the need
+#' Because the interpretation of beta coskewness is made difficult by the need
 #' to condition on it's skewness, we deviate from the more widely used measure
 #' slightly.  To make the interpretation consistent across all three measures,
 #' the beta coskewness function tests the skewness and multiplies the result by
 #' the sign of the skewness.  That allows an analyst to review the metric and
 #' interpret it without needing additional information.  To use the more widely
 #' used metric, simply set the parameter \code{test = FALSE}.
-#' 
-#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-#' SystematicSkewness SystematicKurtosis
+#' @name BetaCoMoments
+#' @concept beta co-moments
+#' @concept moments
+#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis SystematicSkewness SystematicKurtosis
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
