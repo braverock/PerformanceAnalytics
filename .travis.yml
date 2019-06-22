@@ -1,0 +1,47 @@
+language: r
+
+dist: trusty
+
+# need sudo
+sudo: true
+
+# cache packages because devtools is a beast
+cache: packages
+
+# Be strict when checking our package
+warnings_are_errors: false
+
+# don't build the vignette
+r_build_args: "--no-build-vignettes"
+r_check_args: "--no-build-vignettes --ignore-vignettes --as-cran"
+
+# System dependencies
+#apt_packages:
+# - libcurl4-openssl-dev
+# - libxml2-dev
+
+# Binaries from Michael Rutter's ppa
+r_binary_packages:
+ - methods
+ - quadprog
+ - zoo
+ - robustbase
+ - Hmisc
+ - MASS
+ - testthat
+ - gplots
+ - dygraphs
+ - RColorBrewer
+ - gamlss
+ - gamlss.dist
+ - xts
+
+# Done via install.packages
+#r_packages:
+
+# Install the bleeding edge version of a package from github (eg to pick
+# up a not-yet-released bugfix)
+#r_github_packages:
+# - joshuaulrich/xts
+# - braverock/blotter
+# - ramnathv/rCharts
