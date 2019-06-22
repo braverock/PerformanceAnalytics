@@ -174,7 +174,8 @@ chart.QQPlot <-
 	n <- length(ord.x)
 	P <- ppoints(n)
 #	z <- q.function(P, ...)
-	
+	z <- NULL
+
 	eval(parse(text=paste("	z <- q.function(P,", distributionParameter,",...)")))
 	
 	plot(z, ord.x, xlab = xlab, ylab = ylab, main = main, las = las, 
@@ -183,6 +184,7 @@ chart.QQPlot <-
 	if (line == "quartiles") {
 		Q.x <- quantile(ord.x, c(0.25, 0.75))
 		
+		Q.z<-NULL
 		eval(parse(text=paste("	Q.z <- q.function(c(0.25, 0.75),", distributionParameter,",...)")))
 #		Q.z <- q.function(c(0.25, 0.75), ...)
 		b <- (Q.x[2] - Q.x[1])/(Q.z[2] - Q.z[1])
@@ -198,6 +200,8 @@ chart.QQPlot <-
 	}
 	if (line != "none" & envelope != FALSE) {
 		zz <- qnorm(1 - (1 - envelope)/2)
+		
+		SE<-NULL
 		eval(parse(text=paste("	SE <- (b/d.function(z,", distributionParameter,",...))* sqrt(P * (1 - P)/n)")))
 		
 #		SE <- (b/d.function(z, ...)) * sqrt(P * (1 - P)/n)
