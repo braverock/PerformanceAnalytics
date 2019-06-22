@@ -66,25 +66,6 @@ The prototype of the univariate Cornish Fisher VaR function was completed by
 Prof. Diethelm Wuertz.  All corrections to the calculation and error
 handling are the fault of Brian Peterson.
 }
-\section{Background}{
- This function provides several estimation methods for
-the Value at Risk (typically written as VaR) of a return series and the
-Component VaR of a portfolio. Take care to capitalize VaR in the commonly
-accepted manner, to avoid confusion with var (variance) and VAR (vector
-auto-regression).  VaR is an industry standard for measuring downside risk.
-For a return series, VaR is defined as the high quantile (e.g. ~a 95% or 99%
-quantile) of the negative value of the returns. This quantile needs to be
-estimated.  With a sufficiently large data set, you may choose to utilize
-the empirical quantile calculated using \code{\link{quantile}}.  More
-efficient estimates of VaR are obtained if a (correct) assumption is made on
-the return distribution, such as the normal distribution.  If your return
-series is skewed and/or has excess kurtosis, Cornish-Fisher estimates of VaR
-can be more appropriate.  For the VaR of a portfolio, it is also of interest
-to decompose total portfolio VaR into the risk contributions of each of the
-portfolio components.  For the above mentioned VaR estimators, such a
-decomposition is possible in a financially meaningful way.
-}
-
 \examples{
 
     data(edhec)
