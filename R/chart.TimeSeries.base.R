@@ -370,28 +370,10 @@ chart.TimeSeries.multi_engine.base <-
     
     
     if(plot_engine == "dygraph"){
+      y = data.frame(date=index(R),coredata(R))
+      plot <- dygraph(y)
       
-      y = checkData(R,method='xts')
-      
-      if(is.null(main))
-        main=columnnames[1]
-      
-      if(is.null(ylab)) {
-        if(ylog) 
-          ylab = "ln(Value)"
-        
-        else 
-          ylab = "Value"
-      }
-      
-      ##@TODO Get all the graphical parameters integrated with these two
-      if(requireNamespace("dygraphs", quietly = TRUE)) {
-        dygraphs::dyRangeSelector(
-          dygraphs::dygraph(y, main = main, xlab = xlab, ylab = ylab)
-        )
-      } else {
-        stop("Please install the dygraphs package to use dygraphPlot = TRUE")
-      }
+      return(plot)
     }
 
     

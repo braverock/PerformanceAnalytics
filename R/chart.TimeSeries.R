@@ -311,6 +311,7 @@ function (R,
         stop("Please install the dygraphs package to use dygraphPlot = TRUE")
       }
     }
+    
 
 }
 
@@ -356,10 +357,13 @@ chart.TimeSeries.multi_engine <-
             plot_engine = "default",
             yaxis.pct=FALSE)
 {
-    if(hasArg(dygraphPlot) && (!hasArg(plot_engine) plot_engine<-'dygraph')){
-      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, please use plot_engine="dygraph" instead')
+    if(hasArg(dygraphPlot)){
+      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, please use engine="dygraph" instead')
     }
-  
+
+    
+    
+
     # Pack for delivery
     passon_list = list(R,
                        auto.grid, 
