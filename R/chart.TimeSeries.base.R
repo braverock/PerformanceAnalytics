@@ -248,76 +248,14 @@ chart.TimeSeries.multi_engine.base <-
     plot_engine = passon_list[[37]]
     yaxis.pct = passon_list[[38]]
     
-
     
-    if(plot_engine == "ggplot"){
-      # Transform the input data into data frame, so that multi-dimension data can be compressed
-      y = checkData(R,method='xts')
-      
-      columns = ncol(y)
-      rows = nrow(y)
-      columnnames = colnames(y)
-
-      
-      y = data.frame(date=index(data),coredata(data))
-      y <- y %>%
-        gather(key = "variable", value = "value", -date)
-      
-      plot <- ggplot(y, aes(x = date, y = value)) + 
-        geom_line(aes(color = variable), size = lwd) +
-        ggtitle(main)
-      
-      # adjust of yaxis if in percentage
-      if(yaxis.pct)
-        y = y * 100
-      
-      # format xlim and ylim
-      if(!is.null(xlim[1])) # is.na or is.null?
-        plot+xlim(xlim)
-      if(!is.null(ylim[1])){
-        plot+ylim(ylim)
-      }
-      
-      #draw lines and add title
-      # grid line format
-      plot + theme(
-        panel.grid = element_line(colour = grid.color, 
-                                  linetype = grid.lty)
-      )
-      
-      # set legend position
-      plot + theme(legend.position = legend.loc)
-      plot + xlab(xlab) +ylab(ylab)
-    
-      return(plot)
-    }
-    
-    
-    if(plot_engine == "plotly"){
-      y = data.frame(date=index(R),coredata(R))
-
-      nline = ncol(y)
-      plot <- plot_ly(y, mode = 'lines')
-      
-      for(i in 2:nline){
-        plot <- add_trace(plot,
-                          x = y[[1]],
-                          y = y[[i]],
-                          mode = 'lines')
-      }
-
-      return(plot)
-    }
-
-    
-    if(plot_engine == "dyplot"){
+    if(plot_engine == "default"){
       y = checkData(R,method='xts')
       
       columns = ncol(y)
       rows = nrow(y)
       columnnames = colnames(y)
       
-      # print("parameters extracted")
       
       # Date standarization if format is not specified
       if (is.null(date.format)){
@@ -334,34 +272,33 @@ chart.TimeSeries.multi_engine.base <-
                yearly = {date.format = "%Y"}
         )
       }
-
-      # print("date formatted")
-
+      
+      
       # Needed for finding aligned dates for event lines and period areas
       rownames = as.Date(time(y))
       rownames = format(strptime(rownames,format = date.format.in), date.format)
-
+      
       # If the Y-axis is ln
       logaxis = ""
       if(ylog) {
         logaxis = "y"
       }
-
+      
       if(yaxis.pct)
         y = y * 100
-
+      
       if(is.null(xlim[1])) # is.na or is.null?
         xlim = c(1,rows)
       if(is.null(ylim[1])){
         ylim = as.numeric(range(y, na.rm=TRUE))
       }
-
+      
       # Check for y axis
       if(yaxis)
         yaxis.left = TRUE
       else
         yaxis.left = FALSE
-
+      
       # Add the other titles
       if(is.null(main))
         main=columnnames[1]
@@ -429,6 +366,92 @@ chart.TimeSeries.multi_engine.base <-
       }
       
       return(p)
+    }
+    
+    
+    if(plot_engine == "dygraph"){
+      
+      y = checkData(R,method='xts')
+      
+      if(is.null(main))
+        main=columnnames[1]
+      
+      if(is.null(ylab)) {
+        if(ylog) 
+          ylab = "ln(Value)"
+        
+        else 
+          ylab = "Value"
+      }
+      
+      ##@TODO Get all the graphical parameters integrated with these two
+      if(requireNamespace("dygraphs", quietly = TRUE)) {
+        dygraphs::dyRangeSelector(
+          dygraphs::dygraph(y, main = main, xlab = xlab, ylab = ylab)
+        )
+      } else {
+        stop("Please install the dygraphs package to use dygraphPlot = TRUE")
+      }
+    }
+
+    
+    if(plot_engine == "ggplot"){
+      # Transform the input data into data frame, so that multi-dimension data can be compressed
+      y = checkData(R,method='xts')
+      
+      columns = ncol(y)
+      rows = nrow(y)
+      columnnames = colnames(y)
+
+      
+      y = data.frame(date=index(data),coredata(data))
+      y <- y %>%
+        gather(key = "variable", value = "value", -date)
+      
+      plot <- ggplot(y, aes(x = date, y = value)) + 
+        geom_line(aes(color = variable), size = lwd) +
+        ggtitle(main)
+      
+      # adjust of yaxis if in percentage
+      if(yaxis.pct)
+        y = y * 100
+      
+      # format xlim and ylim
+      if(!is.null(xlim[1])) # is.na or is.null?
+        plot+xlim(xlim)
+      if(!is.null(ylim[1])){
+        plot+ylim(ylim)
+      }
+      
+      #draw lines and add title
+      # grid line format
+      plot + theme(
+        panel.grid = element_line(colour = grid.color, 
+                                  linetype = grid.lty)
+      )
+      
+      # set legend position
+      plot + theme(legend.position = legend.loc)
+      plot + xlab(xlab) +ylab(ylab)
+    
+      return(plot)
+    }
+    
+    
+    if(plot_engine == "plotly"){
+      y = data.frame(date=index(R),coredata(R))
+
+      nline = ncol(y)
+      plot <- plot_ly(y, mode = 'lines')
+      
+      for(i in 2:nline){
+        plot <- add_trace(plot,
+                          x = y[[1]],
+                          y = y[[i]],
+                          mode = 'lines')
+      }
+
+      return(plot)
     }
   }
 

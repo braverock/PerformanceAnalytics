@@ -353,7 +353,7 @@ chart.TimeSeries.multi_engine <-
             grid.color="lightgray", 
             grid.lty="dotted", 
             xaxis.labels = NULL,
-            plot_engine = "dyplot",
+            plot_engine = "default",
             yaxis.pct=FALSE)
 {
     if(hasArg(dygraphPlot) && (!hasArg(plot_engine) plot_engine<-'dygraph')){
