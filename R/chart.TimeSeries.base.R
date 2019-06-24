@@ -370,7 +370,12 @@ chart.TimeSeries.multi_engine.base <-
     
     
     if(plot_engine == "dygraph"){
-      y = data.frame(date=index(R),coredata(R))
+      y = checkData(R,method='xts')
+      
+      # y = data.frame(date=index(R),coredata(R))
+      # y <- y %>%
+      #   gather(key = "variable", value = "value", -date)
+      # 
       plot <- dygraph(y)
       
       return(plot)
