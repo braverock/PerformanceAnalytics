@@ -429,14 +429,19 @@ chart.TimeSeries.multi_engine.base <-
       y = data.frame(date=index(R),coredata(R))
 
       nline = ncol(y)
-      plot <- plot_ly(y, mode = 'lines')
+      plot <- plot_ly(y, mode = 'lines')%>% layout(title=main)
+      col_names = colnames(y)
+      
       
       for(i in 2:nline){
         plot <- add_trace(plot,
-                          x = y[[1]],
+                          x = y[["date"]],
                           y = y[[i]],
-                          mode = 'lines')
+                          mode = 'lines',
+                          name = col_names[i])
       }
+      
+      
 
       return(plot)
     }

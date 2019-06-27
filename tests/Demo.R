@@ -18,12 +18,19 @@ data <- xts(data[1:48,-1], order.by = as.Date(as.character(data[1:48,1]), format
 # # y <- y %>%
 # #   gather(key = "variable", value = "value", -date)
 # 
-# dygraph(data)
+# y = data.frame(date=index(data),coredata(data))
+# 
+# 
+# nline = ncol(y)
+# plot <- plot_ly(y, mode = 'lines')
+# 
+# for(i in 2:nline){
+#   plot <- add_trace(plot,
+#                     x = y[["date"]],
+#                     y = y[[i]],
+#                     mode = 'lines')
+# }
 
-# plot <- plot_ly(y,mode="lines")
-# plot <- add_trace(plot, x=~date,y = y[[2]],mode="lines")
-# plot <- add_trace(plot, x=~date,y = y[[3]],mode="lines")
 
-
-chart.TimeSeries.multi_engine(data,plot_engine = "plotly")
+chart.TimeSeries.multi_engine(data,plot_engine = "plotly",main="hello")
 
