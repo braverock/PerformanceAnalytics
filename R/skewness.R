@@ -94,7 +94,7 @@ skewness <-
             if (n < 3)
                 skewness = NA
             else
-                skewness = ((sqrt(n*(n-1))/(n-2))*(sum(x^3)/n))/((sum(x^2)/n)^(3/2))
+                skewness = ((sqrt(n*(n-1))/(n-2))*(sum((x-mean(x))^3)/n)) / ((sum((x-mean(x))^2)/n)^(3/2))
         }
 	if (method == "sample") {
             skewness = sum((x-mean(x))^3/sqrt(var(x)*(n-1)/n)^3)*n/((n-1)*(n-2))
