@@ -25,5 +25,7 @@ data <- xts(data[1:48,-1], order.by = as.Date(as.character(data[1:48,1]), format
 # plot <- add_trace(plot, x=~date,y = y[[3]],mode="lines")
 
 
-chart.TimeSeries.multi_engine(data,plot_engine = "plotly")
+chart.TimeSeries.multi_engine(data,plot_engine = "googlevis",
+                              main="Demo",
+                              xlab="date")
 

@@ -440,6 +440,20 @@ chart.TimeSeries.multi_engine.base <-
 
       return(plot)
     }
+    
+    if(plot_engine == "googlevis"){
+      y = data.frame(date=index(R),coredata(R))
+      
+      plot <- gvisLineChart(y,
+                            options=list(
+                              gvis.editor="Edit",
+                              xvar=xlab,
+                              yvar=ylab,
+                              title=main)
+                            )
+      
+      plot(plot)
+    }
   }
 
 ###############################################################################
