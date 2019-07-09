@@ -229,19 +229,14 @@ chart.TimeSeries.base <-
       y = data.frame(date=index(R),coredata(R))
 
       nline = ncol(y)
-      plot <- plot_ly(y, mode = 'lines')%>% layout(title=main)
-      col_names = colnames(y)
-      
+      plot <- plot_ly(y, mode = 'lines')
       
       for(i in 2:nline){
         plot <- add_trace(plot,
-                          x = y[["date"]],
+                          x = y[[1]],
                           y = y[[i]],
-                          mode = 'lines',
-                          name = col_names[i])
+                          mode = 'lines')
       }
-      
-      
 
       return(plot)
     }
