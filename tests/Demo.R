@@ -9,6 +9,8 @@ library(tidyr)
 library(dplyr)
 library(plotly)
 library(dygraphs)
+library(googleVis)
+
 
 #easy test & package validation
 data <- read.csv('C:/Users/yz_ze/Box/2019 Spring - ChicagoAlphaModelingLLC/Week11/expandData.csv')
@@ -31,6 +33,6 @@ y = data.frame(date=index(data),coredata(data))
 #                     mode = 'lines')
 # }
 
-chart.TimeSeries.multi_engine(data,plot_engine = "googlevis",
+chart.TimeSeries(data,plot_engine = "googlevis",
                               main="Demo",
                               xlab="date")
