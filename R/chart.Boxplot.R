@@ -48,8 +48,9 @@
 #' 
 #' @export
 chart.Boxplot <-
-function (R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
+function (R, names = TRUE, as.Tufte = FALSE, plot_engine = "Default",sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
+  # @author Zenith Zhou
 
     # DESCRIPTION:
     # A wrapper to create box and whiskers plot, but with some sensible defaults
@@ -64,7 +65,9 @@ function (R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median",
     columns = ncol(R)
     rows = nrow(R)
     columnnames = colnames(R)
-
+    
+    if(plot_engine == "Default")
+    {
     column.order = NULL
 
     sort.by = sort.by[1]
@@ -142,7 +145,15 @@ function (R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean", "median",
 
     abline(v=0, lty="solid",col=element.color)
 
-    par(op)
+    par(op)}
+    
+    if(plot_engine == "ggplot"){
+      
+      require(reshape2)
+      p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
+        geom_boxplot(aes(fill=variable))
+      return (p)
+    }
 }
 
 ###############################################################################
