@@ -162,7 +162,7 @@ chart.TimeSeries.base <-
         # add legend
         p$Env$cex.legend <- cex.legend
         p <- addLegend(legend.loc, legend.names, 
-                       lty = lty, lwd = lwd, cex = cex.legend, ...)
+                       lty = lty, lwd = lwd, cex = cex.legend)
       }
       
       return(p)

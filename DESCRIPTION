@@ -28,7 +28,10 @@ Description: Collection of econometric functions for
 Imports:
     methods,
     quadprog,
-    zoo
+    zoo,
+    ggplot2,
+    googleVis,
+    plotly
 Depends:
     R (>= 3.0.0),
     xts (>= 0.10.0)
