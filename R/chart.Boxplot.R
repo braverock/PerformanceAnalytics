@@ -148,11 +148,19 @@ function (R, names = TRUE, as.Tufte = FALSE, plot_engine = "Default",sort.by = c
     par(op)}
     
     if(plot_engine == "ggplot"){
-      
       require(reshape2)
       p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
         geom_boxplot(aes(fill=variable))
       return (p)
+    }
+    
+    if(plot_engine == "plotly"){
+      p <- plot_ly(type = "box")
+      for(i in 1:columns){
+        p <- add_boxplot(p,R[[i]],name = columnnames[i])
+      }
+      
+      return(p)
     }
 }
 
