@@ -48,7 +48,7 @@
 #' 
 #' @export
 chart.Boxplot <-
-function (R, names = TRUE, as.Tufte = FALSE, plot_engine = "Default",sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
+function (R, names = TRUE, as.Tufte = FALSE, plot_engine = "default",sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
   # @author Zenith Zhou
 
@@ -66,7 +66,7 @@ function (R, names = TRUE, as.Tufte = FALSE, plot_engine = "Default",sort.by = c
     rows = nrow(R)
     columnnames = colnames(R)
     
-    if(plot_engine == "Default")
+    if(plot_engine == "default")
     {
     column.order = NULL
 

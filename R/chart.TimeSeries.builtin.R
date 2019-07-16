@@ -37,7 +37,6 @@ chart.TimeSeries.builtin <-
            grid.color, 
            grid.lty, 
            xaxis.labels,
-           plot_engine,
            yaxis.pct){
     
     y = checkData(R,method='xts')
