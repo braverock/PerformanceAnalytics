@@ -224,7 +224,7 @@ chart.TimeSeries.base <-
       return(plot)
     }
     
-    
+    5
     if(plot_engine == "plotly"){
       y = data.frame(date=index(R),coredata(R))
 
