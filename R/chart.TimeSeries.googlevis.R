@@ -2,7 +2,9 @@
 #' 
 
 chart.TimeSeries.googlevis <-
-  function(R){
+  function(R,
+           xlab,ylab,
+           main){
     y = data.frame(date=index(R),coredata(R))
     
     plot <- gvisLineChart(y,

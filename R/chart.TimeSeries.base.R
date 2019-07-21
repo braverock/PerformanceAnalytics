@@ -347,7 +347,7 @@ chart.TimeSeries.base1 <-
            },
            ggplot = {
              plot = 
-               chart.TimeSeries.builtin(R=R,
+               chart.TimeSeries.ggplot(R=R,
                                         auto.grid=auto.grid, 
                                         xaxis=xaxis, yaxis=yaxis, 
                                         yaxis.right=yaxis.right, 
@@ -385,10 +385,14 @@ chart.TimeSeries.base1 <-
                                         yaxis.pct=yaxis.pct)
            },
            plotly = {
-             plot = chart.TimeSeries.plotly(R=R)
+             plot = chart.TimeSeries.plotly(R=R,
+                                            main=main)
            },
            googlevis = {
-             chart.TimeSeries.googlevis(R=R)
+             chart.TimeSeries.googlevis(R=R,
+                                        xlab=xlab,
+                                        ylab=ylab,
+                                        main=main)
            },
            dygraph = {
              plot = chart.TimeSeries.dygraph(R=R)

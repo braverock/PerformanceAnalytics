@@ -2,20 +2,24 @@
 #' 
 
 chart.TimeSeries.plotly <-
-  function(R){
-    R = checkData(R, method="data.frame")
+  function(R,main){
+    R = checkData(R, method="xts")
     
     columns = ncol(R)
     rows = nrow(R)
     columnnames = colnames(R)
     
-    plot <- plot_ly(R, mode = 'lines')
+    date = index(R)
     
-    for(i in 1:nline){
+    R = checkData(R, method="data.frame")
+    plot <- plot_ly(R, mode = 'lines',name=main)
+    
+    for(i in 1:columns){
       plot <- add_trace(plot,
-                        R[[i]],
-                        name = colnames[i],
-                        mode = 'lines')
+                        y = R[[i]],
+                        x = date,
+                        mode = 'lines',
+                        name=columnnames[i])
     }
     
     return(plot)
