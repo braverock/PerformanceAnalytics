@@ -12,7 +12,8 @@ chart.TimeSeries.plotly <-
     date = index(R)
     
     R = checkData(R, method="data.frame")
-    plot <- plot_ly(R, mode = 'lines',name=main)
+    plot <- plot_ly(R, mode = 'lines')%>%
+      layout(title = main)
     
     for(i in 1:columns){
       plot <- add_trace(plot,

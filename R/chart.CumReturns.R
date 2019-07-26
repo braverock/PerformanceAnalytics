@@ -19,7 +19,9 @@
 #' @param begin Align shorter series to: \itemize{ \item first - prior value of
 #' the first column given for the reference or longer series or, \item axis -
 #' the initial value (1 or zero) of the axis.  }
+#' @param 
 #' @param \dots any other passthru parameters
+#' 
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
@@ -36,7 +38,7 @@
 #' 
 #' @export
 chart.CumReturns <-
-function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
+function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), plot_engine = "default",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -117,7 +119,7 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
     colnames(Return.cumulative) = columnnames
 
     # Chart the cumulative returns series
-    chart.TimeSeries(Return.cumulative, colorset = colorset, legend.loc = legend.loc, ...)
+    chart.TimeSeries(Return.cumulative, colorset = colorset, plot_engine, legend.loc = legend.loc, ...)
 
 }
 

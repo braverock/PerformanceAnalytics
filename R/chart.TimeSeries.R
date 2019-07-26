@@ -70,7 +70,6 @@
 #' NULL
 #' @param space default 0
 #' @param plot_engine Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"
-#' @param dygraphPlot Plot using dygraphs default FALSE
 #' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
