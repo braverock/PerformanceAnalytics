@@ -47,36 +47,37 @@ chart.TimeSeries.ggplot<-
     rows = nrow(y)
     columnnames = colnames(y)
     
-    
-    y = data.frame(date=index(data),coredata(data))
+
+    y = data.frame(date=index(y),coredata(y))
     y <- y %>%
       gather(key = "variable", value = "value", -date)
-    
-    plot <- ggplot(y, aes(x = date, y = value)) + 
+
+    plot <- ggplot(y, aes(x = date, y = value)) +
       geom_line(aes(color = variable), size = lwd) +
       ggtitle(main)
-    
+
     # adjust of yaxis if in percentage
     if(yaxis.pct)
       y = y * 100
-    
+
     # format xlim and ylim
     if(!is.null(xlim[1])) # is.na or is.null?
       plot+xlim(xlim)
     if(!is.null(ylim[1])){
       plot+ylim(ylim)
     }
-    
+
     #draw lines and add title
     # grid line format
     plot + theme(
-      panel.grid = element_line(colour = grid.color, 
+      panel.grid = element_line(colour = grid.color,
                                 linetype = grid.lty)
     )
-    
+
     # set legend position
     plot + theme(legend.position = legend.loc)
     plot + xlab(xlab) +ylab(ylab)
-    
+
+
     return(plot)
   }

@@ -119,7 +119,7 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
     colnames(Return.cumulative) = columnnames
 
     # Chart the cumulative returns series
-    chart.TimeSeries(Return.cumulative, colorset = colorset, plot_engine, legend.loc = legend.loc, ...)
+    chart.TimeSeries(Return.cumulative, colorset = colorset, plot_engine = plot_engine, legend.loc = legend.loc, ...)
 
 }
 

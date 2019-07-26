@@ -15,6 +15,7 @@
 #' @param legend.loc places a legend into one of nine locations on the chart:
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center.
+#' @param plot_engine Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso
@@ -36,7 +37,7 @@
 #' 		legend.loc="bottomleft")
 #' @export
 chart.Drawdown <-
-function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
+function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine = "default",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -79,7 +80,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
       colset <- eval.parent(plotcall$colorset)
       p <- addSeries(drawdown, col = colset, legend.loc = legend.loc, main = plotargs$main)
     } else
-      p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
+      p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, plot_engine = plot_engine,...)
     return(p)
 
 }
