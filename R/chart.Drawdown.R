@@ -80,7 +80,11 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine
       colset <- eval.parent(plotcall$colorset)
       p <- addSeries(drawdown, col = colset, legend.loc = legend.loc, main = plotargs$main)
     } else
-      p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, plot_engine = plot_engine,...)
+      p <- chart.TimeSeries(drawdown, 
+                            colorset = colorset, 
+                            legend.loc = legend.loc, 
+                            plot_engine = plot_engine,
+                            ...)
     return(p)
 
 }
