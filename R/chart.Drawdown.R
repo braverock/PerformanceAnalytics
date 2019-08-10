@@ -73,7 +73,9 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine
     }
     
     # Chart the drawdown level
-    if(hasArg("add")) {
+    
+    if(plot_engine == "default"){
+      if(hasArg("add")) {
       plotargs <- list(...)
       plotargs$add <- NULL
       plotcall <- match.call()
@@ -84,7 +86,12 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine
                             colorset = colorset, 
                             legend.loc = legend.loc, 
                             plot_engine = plot_engine,
+                            ...)}
+    else{
+      p <- chart.TimeSeries(drawdown,
+                            plot_engine = plot_engine,
                             ...)
+    }
     return(p)
 
 }

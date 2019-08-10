@@ -202,7 +202,7 @@ function (R, Rf = 0,
             #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
             print(plot_object)
             title(main, outer = TRUE)
-            par(op)}
+            par(op)},
           
           ggplot = 
             {
@@ -218,19 +218,19 @@ function (R, Rf = 0,
                                         ylab="Cumulative Return",
                                         plot_engine = "ggplot",
                                         ...)
-            
-            plot_object_BarVar <- chart.BarVaR(x, 
-                                        main = paste(date.label,"Return"), 
-                                        xaxis = FALSE, 
-                                        width = width, 
-                                        ylab = paste(date.label,"Return"), 
-                                        methods = methods, 
-                                        event.labels = NULL, 
-                                        ylog=FALSE, 
-                                        gap = gap, p=p, 
-                                        add = TRUE,
-                                        plot_engine = "ggplot",
-                                        ...)
+            # 
+            # plot_object_BarVar <- chart.BarVaR(x, 
+            #                             main = paste(date.label,"Return"), 
+            #                             xaxis = FALSE, 
+            #                             width = width, 
+            #                             ylab = paste(date.label,"Return"), 
+            #                             methods = methods, 
+            #                             event.labels = NULL, 
+            #                             ylog=FALSE, 
+            #                             gap = gap, p=p, 
+            #                             add = TRUE,
+            #                             plot_engine = "ggplot",
+            #                             ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 
                                         geometric = geometric, 
@@ -242,53 +242,53 @@ function (R, Rf = 0,
                                         plot_engine = "ggplot",
                                         ...)
             
-            plot_object = grid.arrange(plot_object_CumReturn, 
-                                       plot_object_BarVar,
-                                       plot_object_Drawdown,
-                                       nrow = 3)
+            # plot_object = grid.arrange(plot_object_CumReturn, 
+            #                            plot_object_BarVar,
+            #                            plot_object_Drawdown,
+            #                            nrow = 3)
             
-            return(plot_object)
-            }
+            return(plot_object_Drawdown)
+            },
           
           plotly = 
             {
             plot_object_CumReturn <- chart.CumReturns(x, 
                                         main = "Cumulative Return", 
-                                        xaxis = FALSE, 
-                                        legend.loc = legend.loc, 
-                                        event.labels = event.labels, 
-                                        ylog = ylog, 
-                                        wealth.index = wealth.index, 
-                                        begin = begin, 
-                                        geometric = geometric, 
+                                        xaxis = FALSE,
+                                        legend.loc = legend.loc,
+                                        event.labels = event.labels,
+                                        ylog = ylog,
+                                        wealth.index = wealth.index,
+                                        begin = begin,
+                                        geometric = geometric,
                                         ylab="Cumulative Return",
                                         plot_engine = "plotly",
                                         ...)
             
-            plot_object_BarVar <- chart.BarVaR(x, 
-                                         main = paste(date.label,"Return"), 
-                                         xaxis = FALSE, 
-                                         width = width, 
-                                         ylab = paste(date.label,"Return"), 
-                                         methods = methods, 
-                                         event.labels = NULL, 
-                                         ylog=FALSE, 
-                                         gap = gap, p=p, 
+            # plot_object_BarVar <- chart.BarVaR(x, 
+            #                              main = paste(date.label,"Return"), 
+            #                              xaxis = FALSE, 
+            #                              width = width, 
+            #                              ylab = paste(date.label,"Return"), 
+            #                              methods = methods, 
+            #                              event.labels = NULL, 
+            #                              ylog=FALSE, 
+            #                              gap = gap, p=p, 
+            #                              add = TRUE,
+            #                              plot_engine = "plotly",
+            #                              ...)
+            
+            plot_object_Drawdown <- chart.Drawdown(x, 
+                                         geometric = geometric,
+                                         main = "Drawdown",
+                                         ylab = "Drawdown",
+                                         event.labels = NULL,
+                                         ylog=FALSE,
                                          add = TRUE,
                                          plot_engine = "plotly",
                                          ...)
             
-            plot_object_Drawdown <- chart.Drawdown(x, 
-                                         geometric = geometric, 
-                                         main = "Drawdown", 
-                                         ylab = "Drawdown", 
-                                         event.labels = NULL, 
-                                         ylog=FALSE, 
-                                         add = TRUE, 
-                                         plot_engine = "plotly",
-                                         ...)
-            
-            plot_object = subplot(nrows = 3, shareX = TRUE)
+            plot_object = subplot(nrows= 3, shareX = TRUE)
             
             return(plot_object)
             }
