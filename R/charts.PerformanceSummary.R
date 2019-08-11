@@ -242,12 +242,12 @@ function (R, Rf = 0,
                                         plot_engine = "ggplot",
                                         ...)
             
-            # plot_object = grid.arrange(plot_object_CumReturn, 
-            #                            plot_object_BarVar,
-            #                            plot_object_Drawdown,
-            #                            nrow = 3)
-            
-            return(plot_object_Drawdown)
+            plot_object <- grid.arrange(plot_object_CumReturn,
+                                       # plot_object_BarVar,
+                                    plot_object_Drawdown,
+                                    nrow = 3)
+
+            return(plot_object)
             },
           
           plotly = 
@@ -288,7 +288,7 @@ function (R, Rf = 0,
                                          plot_engine = "plotly",
                                          ...)
             
-            plot_object = subplot(nrows= 3, shareX = TRUE)
+            plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,nrows= 3, shareX = TRUE)
             
             return(plot_object)
             }
