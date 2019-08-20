@@ -218,7 +218,7 @@ function (R, Rf = 0,
                                         ylab="Cumulative Return",
                                         plot_engine = "ggplot",
                                         ...)
-            # 
+
             # plot_object_BarVar <- chart.BarVaR(x, 
             #                             main = paste(date.label,"Return"), 
             #                             xaxis = FALSE, 
@@ -245,7 +245,7 @@ function (R, Rf = 0,
             plot_object <- grid.arrange(plot_object_CumReturn,
                                        # plot_object_BarVar,
                                     plot_object_Drawdown,
-                                    nrow = 3)
+                                    nrow = 2)
 
             return(plot_object)
             },
@@ -253,7 +253,6 @@ function (R, Rf = 0,
           plotly = 
             {
             plot_object_CumReturn <- chart.CumReturns(x, 
-                                        main = "Cumulative Return", 
                                         xaxis = FALSE,
                                         legend.loc = legend.loc,
                                         event.labels = event.labels,
@@ -280,7 +279,6 @@ function (R, Rf = 0,
             
             plot_object_Drawdown <- chart.Drawdown(x, 
                                          geometric = geometric,
-                                         main = "Drawdown",
                                          ylab = "Drawdown",
                                          event.labels = NULL,
                                          ylog=FALSE,
@@ -288,7 +286,8 @@ function (R, Rf = 0,
                                          plot_engine = "plotly",
                                          ...)
             
-            plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,nrows= 3, shareX = TRUE)
+            plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,
+                                  nrows = 2)
             
             return(plot_object)
             }

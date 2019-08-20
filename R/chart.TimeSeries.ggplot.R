@@ -46,7 +46,6 @@ chart.TimeSeries.ggplot<-
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
-    
 
     y = data.frame(date=index(y),coredata(y))
     y <- y %>%
