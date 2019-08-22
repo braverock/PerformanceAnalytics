@@ -36,7 +36,8 @@
 #' @param legend.loc sets the legend location in the top chart.  Can be set to
 #' NULL or nine locations on the chart: bottomright, bottom, bottomleft, left,
 #' topleft, top, topright, right, or center.
-#' @param plot_engine set the engine used to generate the summary plot for the 
+#' @param plot.engine choose the plot engine you wish to use"
+#' ggplot, plotly, and default
 #' @param \dots any other passthru parameters
 #' @note Most inputs are the same as "\code{\link{plot}}" and are principally
 #' included so that some sensible defaults could be set.
@@ -63,7 +64,7 @@ function (R, Rf = 0,
           begin=c("first","axis"), 
           legend.loc="topleft", 
           p=0.95,
-          plot_engine="default",
+          plot.engine="default",
           ...)
 { # @author Peter Carl
 
@@ -155,7 +156,7 @@ function (R, Rf = 0,
     
     # Plot the above processed charts
     
-    switch(plot_engine,
+    switch(plot.engine,
            
            default=
             {# Plot the cumulative returns
@@ -169,7 +170,7 @@ function (R, Rf = 0,
                                             begin = begin, 
                                             geometric = geometric, 
                                             ylab="Cumulative Return",
-                                            plot_engine = "default",
+                                            plot.engine = "default",
                                             ...)
             
             # Plot the BarVar diagrams
@@ -183,7 +184,7 @@ function (R, Rf = 0,
                                         ylog=FALSE, 
                                         gap = gap, p=p, 
                                         add = TRUE,
-                                        plot_engine = "default",
+                                        plot.engine = "default",
                                         ...)
             
             # Plot the Underwater plot
@@ -194,7 +195,7 @@ function (R, Rf = 0,
                                           event.labels = NULL, 
                                           ylog=FALSE, 
                                           add = TRUE, 
-                                          plot_engine = "default",
+                                          plot.engine = "default",
                                           ...)
             
             # If we wanted to add a fourth row with the table of monthly returns
@@ -216,7 +217,7 @@ function (R, Rf = 0,
                                         begin = begin, 
                                         geometric = geometric, 
                                         ylab="Cumulative Return",
-                                        plot_engine = "ggplot",
+                                        plot.engine = "ggplot",
                                         ...)
 
             # plot_object_BarVar <- chart.BarVaR(x, 
@@ -239,13 +240,12 @@ function (R, Rf = 0,
                                         event.labels = NULL, 
                                         ylog=FALSE, 
                                         add = TRUE, 
-                                        plot_engine = "ggplot",
+                                        plot.engine = "ggplot",
                                         ...)
             
             plot_object <- grid.arrange(plot_object_CumReturn,
-                                       # plot_object_BarVar,
-                                    plot_object_Drawdown,
-                                    nrow = 2)
+                                        plot_object_Drawdown,
+                                        nrow = 2)
 
             return(plot_object)
             },
@@ -261,7 +261,7 @@ function (R, Rf = 0,
                                         begin = begin,
                                         geometric = geometric,
                                         ylab="Cumulative Return",
-                                        plot_engine = "plotly",
+                                        plot.engine = "plotly",
                                         ...)
             
             # plot_object_BarVar <- chart.BarVaR(x, 
@@ -283,7 +283,7 @@ function (R, Rf = 0,
                                          event.labels = NULL,
                                          ylog=FALSE,
                                          add = TRUE,
-                                         plot_engine = "plotly",
+                                         plot.engine = "plotly",
                                          ...)
             
             plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,

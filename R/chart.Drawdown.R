@@ -15,7 +15,8 @@
 #' @param legend.loc places a legend into one of nine locations on the chart:
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center.
-#' @param plot_engine Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"
+#' @param plot.engine choose the plot engine you wish to use:
+#' ggplot, plotly,dygraph,googlevis and default
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso
@@ -37,7 +38,7 @@
 #' 		legend.loc="bottomleft")
 #' @export
 chart.Drawdown <-
-function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine = "default",...)
+function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot.engine = "default",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -74,7 +75,7 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine
     
     # Chart the drawdown level
     
-    if(plot_engine == "default"){
+    if(plot.engine == "default"){
       if(hasArg("add")) {
       plotargs <- list(...)
       plotargs$add <- NULL
@@ -85,11 +86,11 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot_engine
       p <- chart.TimeSeries(drawdown, 
                             colorset = colorset, 
                             legend.loc = legend.loc, 
-                            plot_engine = plot_engine,
+                            plot.engine = plot.engine,
                             ...)}
     else{
       p <- chart.TimeSeries(drawdown,
-                            plot_engine = plot_engine,
+                            plot.engine = plot.engine,
                             ...)
     }
     return(p)

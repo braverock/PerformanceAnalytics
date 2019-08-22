@@ -38,12 +38,12 @@ chart.TimeSeries.base <-
            grid.color,
            grid.lty,
            xaxis.labels,
-           plot_engine,
+           plot.engine,
            yaxis.pct,
            ...){
     
     #Switch to check for plot engine and direct to respective sub-functions
-    switch(plot_engine,
+    switch(plot.engine,
            default = {
              plot = 
              chart.TimeSeries.builtin(R=R,

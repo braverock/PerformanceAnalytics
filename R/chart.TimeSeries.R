@@ -69,7 +69,9 @@
 #' @param xaxis.labels Allows for non-date labeling of date axes, default is
 #' NULL
 #' @param space default 0
-#' @param plot_engine Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"
+#' @param plot.engine choose the plot engine you wish to use:
+#' ggplot, plotly,dygraph,googlevis and default
+#' 
 #' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
@@ -187,7 +189,7 @@ chart.TimeSeries <-
             grid.color="lightgray", 
             grid.lty="dotted", 
             xaxis.labels = NULL,
-            plot_engine = "default",
+            plot.engine = "default",
             yaxis.pct=FALSE)
 {
     if(hasArg(dygraphPlot)){
@@ -231,7 +233,7 @@ chart.TimeSeries <-
                                  grid.color,
                                  grid.lty,
                                  xaxis.labels,
-                                 plot_engine,
+                                 plot.engine,
                                  yaxis.pct,
                                  ...))
   }
