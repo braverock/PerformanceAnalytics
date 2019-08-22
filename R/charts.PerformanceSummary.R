@@ -93,6 +93,21 @@ function (R, Rf = 0,
     x = checkData(R)
     colnames = colnames(x)
     ncols = ncol(x)
+    
+    #Argument Check
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+        warning('Please use correct arguments:
+              "default","dygraph","ggplot","plotly","googlevis".
+              
+              Ploting chart using built-in engine now.')
+        
+        plot.engine = "default"
+    }
+    
 
 # This repeats a bit of code from chart.CumReturns, but it's intended
 # to align the start dates of all three charts.  Basically, it assumes

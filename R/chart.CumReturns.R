@@ -61,6 +61,21 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
     # FUNCTION:
 
     # Transform input data to a matrix
+  
+  
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+                "default","dygraph","ggplot","plotly","googlevis".
+                
+                Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
+    }
+  
     begin = begin[1]
     x = checkData(R)
 

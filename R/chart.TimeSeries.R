@@ -192,8 +192,24 @@ chart.TimeSeries <-
             plot.engine = "default",
             yaxis.pct=FALSE)
 {
+    #Check Arguments
     if(hasArg(dygraphPlot)){
-      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, please use engine="dygraph" instead')
+      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, 
+              please use plot.engine="dygraph" instead.')
+      plot.engine = "dygraph"
+    }
+    
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+              "default","dygraph","ggplot","plotly","googlevis".
+              
+              Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
     }
 
     

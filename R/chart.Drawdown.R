@@ -64,6 +64,20 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot.engine
     # FUNCTION:
 
     # Calculate drawdown level
+  
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+                "default","dygraph","ggplot","plotly","googlevis".
+                
+                Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
+    }
+  
     drawdown = Drawdowns(R, geometric)
 
     # workaround provided by Samuel Le to handle single-column input
