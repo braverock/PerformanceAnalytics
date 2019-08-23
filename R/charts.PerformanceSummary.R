@@ -245,7 +245,7 @@ function (R, Rf = 0,
             #                             ylog=FALSE, 
             #                             gap = gap, p=p, 
             #                             add = TRUE,
-            #                             plot_engine = "ggplot",
+            #                             plot_engine = "ggplot2",
             #                             ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 
@@ -255,7 +255,7 @@ function (R, Rf = 0,
                                         event.labels = NULL, 
                                         ylog=FALSE, 
                                         add = TRUE, 
-                                        plot.engine = "ggplot",
+                                        plot.engine = "ggplot2",
                                         ...)
             
             plot_object <- grid.arrange(plot_object_CumReturn,

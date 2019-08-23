@@ -34,7 +34,7 @@
 #' @param element.color specify the color of chart elements.  Default is
 #' "darkgray"
 #' @param plot.engine choose the plot engine you wish to use:
-#' ggplot, plotly, and default
+#' ggplot2, plotly, googlevis and default
 #' @param \dots any other passthru parameters
 #' @return box plot of returns
 #' @author Peter Carl
@@ -52,7 +52,6 @@
 chart.Boxplot <-
 function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c(NULL, "mean", "median", "variance"), colorset = "black", symbol.color = "red", mean.symbol = 1, median.symbol = "|", outlier.symbol = 1, show.data = NULL, add.mean = TRUE, sort.ascending = FALSE, xlab="Return", main = "Return Distribution Comparison", element.color = "darkgray", ...)
 { # @author Peter Carl
-  # @author Zenith Zhou
 
     # DESCRIPTION:
     # A wrapper to create box and whiskers plot, but with some sensible defaults
@@ -62,6 +61,18 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
     # gives the number of lines of margin to be specified on the four sides
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
+    if(plot.engine != "default"&&
+       plot.engine != "ggplot2"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+                "default","ggplot2","plotly","googlevis".
+                
+                Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
+    }
+    
     R = checkData(R, method="data.frame")
 
     columns = ncol(R)
@@ -149,7 +160,7 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       
       par(op)}
     
-    if(plot.engine == "ggplot"){
+    if(plot.engine == "ggplot2"){
       require(reshape2)
       p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
         geom_boxplot(aes(fill=variable))
