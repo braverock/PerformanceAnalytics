@@ -83,9 +83,9 @@ chart.TimeSeries.base <-
                                       xaxis.labels=xaxis.labels,
                                       yaxis.pct=yaxis.pct)
            },
-           ggplot = {
+           ggplot2 = {
              plot = 
-               chart.TimeSeries.ggplot(R=R,
+               chart.TimeSeries.ggplot2(R=R,
                                         auto.grid=auto.grid, 
                                         xaxis=xaxis, yaxis=yaxis, 
                                         yaxis.right=yaxis.right, 
@@ -124,13 +124,15 @@ chart.TimeSeries.base <-
            },
            plotly = {
              plot = chart.TimeSeries.plotly(R=R,
-                                            main=main)
+                                            main=main,
+                                            ...)
            },
            googlevis = {
              chart.TimeSeries.googlevis(R=R,
                                         xlab=xlab,
                                         ylab=ylab,
-                                        main=main)
+                                        main=main,
+                                        ...)
            },
            dygraph = {
              plot = chart.TimeSeries.dygraph(R=R)

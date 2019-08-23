@@ -163,7 +163,7 @@ chart.TimeSeries <-
             lty = 1, 
             lwd = 2, 
             las = par("las"),
-            main = NULL, 
+            main = "", 
             ylab=NULL, 
             xlab="", 
             date.format.in="%Y-%m-%d", 

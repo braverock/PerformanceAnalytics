@@ -20,7 +20,7 @@
 #' the first column given for the reference or longer series or, \item axis -
 #' the initial value (1 or zero) of the axis.  }
 #' @param plot.engine choose the plot engine you wish to use"
-#' ggplot, plotly,dygraph,googlevis and default
+#' ggplot2, plotly,dygraph,googlevis and default
 #' 
 #' @param \dots any other passthru parameters
 #' 

@@ -1,7 +1,7 @@
 #' @rdname chart.TimeSeries
 #' 
 
-chart.TimeSeries.ggplot<-
+chart.TimeSeries.ggplot2<-
    function(R,
             auto.grid, 
             xaxis, yaxis, 
