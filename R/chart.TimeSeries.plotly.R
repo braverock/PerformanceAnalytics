@@ -5,8 +5,8 @@ chart.TimeSeries.plotly <-
   function(R,
            main,
            ...){
+
     R = checkData(R, method="xts")
-    
     print(main)
     columns = ncol(R)
     rows = nrow(R)
@@ -15,8 +15,9 @@ chart.TimeSeries.plotly <-
     date = index(R)
     
     R = checkData(R, method="data.frame")
-    plot <- plot_ly(R, mode = 'lines')%>%
-      layout(title = main)
+    
+    plot <- plot_ly(R, mode = 'lines') %>%
+      plotly::layout(title=main)
     
     for(i in 1:columns){
       plot <- add_trace(plot,
