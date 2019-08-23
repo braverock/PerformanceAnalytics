@@ -70,7 +70,7 @@
 #' NULL
 #' @param space default 0
 #' @param plot.engine choose the plot engine you wish to use:
-#' ggplot, plotly,dygraph,googlevis and default
+#' ggplot2, plotly,dygraph,googlevis and default
 #' 
 #' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
@@ -164,7 +164,7 @@ chart.TimeSeries <-
             lwd = 2, 
             las = par("las"),
             main = "", 
-            ylab=NULL, 
+            ylab="", 
             xlab="", 
             date.format.in="%Y-%m-%d", 
             date.format = NULL, 
@@ -201,11 +201,11 @@ chart.TimeSeries <-
     
     if(plot.engine != "default"&&
        plot.engine != "dygraph"&&
-       plot.engine != "ggplot"&&
+       plot.engine != "ggplot2"&&
        plot.engine != "plotly"&&
        plot.engine != "googlevis"){
       warning('Please use correct arguments:
-              "default","dygraph","ggplot","plotly","googlevis".
+              "default","dygraph","ggplot2","plotly","googlevis".
               
               Ploting chart using built-in engine now.')
       

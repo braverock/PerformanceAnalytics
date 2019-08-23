@@ -37,7 +37,7 @@
 #' NULL or nine locations on the chart: bottomright, bottom, bottomleft, left,
 #' topleft, top, topright, right, or center.
 #' @param plot.engine choose the plot engine you wish to use"
-#' ggplot, plotly, and default
+#' ggplot2, plotly, and default
 #' @param \dots any other passthru parameters
 #' @note Most inputs are the same as "\code{\link{plot}}" and are principally
 #' included so that some sensible defaults could be set.
@@ -97,11 +97,11 @@ function (R, Rf = 0,
     #Argument Check
     if(plot.engine != "default"&&
        plot.engine != "dygraph"&&
-       plot.engine != "ggplot"&&
+       plot.engine != "ggplot2"&&
        plot.engine != "plotly"&&
        plot.engine != "googlevis"){
         warning('Please use correct arguments:
-              "default","dygraph","ggplot","plotly","googlevis".
+              "default","ggplot2","plotly".
               
               Ploting chart using built-in engine now.')
         
@@ -220,7 +220,7 @@ function (R, Rf = 0,
             title(main, outer = TRUE)
             par(op)},
           
-          ggplot = 
+          ggplot2 = 
             {
             plot_object_CumReturn <- chart.CumReturns(x, 
                                         main = "Cumulative Return", 
@@ -232,7 +232,7 @@ function (R, Rf = 0,
                                         begin = begin, 
                                         geometric = geometric, 
                                         ylab="Cumulative Return",
-                                        plot.engine = "ggplot",
+                                        plot.engine = "ggplot2",
                                         ...)
 
             # plot_object_BarVar <- chart.BarVaR(x, 

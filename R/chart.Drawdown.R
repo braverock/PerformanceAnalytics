@@ -16,7 +16,7 @@
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center.
 #' @param plot.engine choose the plot engine you wish to use:
-#' ggplot, plotly,dygraph,googlevis and default
+#' ggplot2, plotly,dygraph,googlevis and default
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso
@@ -67,11 +67,11 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot.engine
   
     if(plot.engine != "default"&&
        plot.engine != "dygraph"&&
-       plot.engine != "ggplot"&&
+       plot.engine != "ggplot2"&&
        plot.engine != "plotly"&&
        plot.engine != "googlevis"){
       warning('Please use correct arguments:
-                "default","dygraph","ggplot","plotly","googlevis".
+                "default","dygraph","ggplot2","plotly","googlevis".
                 
                 Ploting chart using built-in engine now.')
       

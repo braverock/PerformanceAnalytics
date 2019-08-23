@@ -2,9 +2,12 @@
 #' 
 
 chart.TimeSeries.plotly <-
-  function(R,main){
+  function(R,
+           main,
+           ...){
     R = checkData(R, method="xts")
     
+    print(main)
     columns = ncol(R)
     rows = nrow(R)
     columnnames = colnames(R)

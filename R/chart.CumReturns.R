@@ -65,11 +65,11 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
   
     if(plot.engine != "default"&&
        plot.engine != "dygraph"&&
-       plot.engine != "ggplot"&&
+       plot.engine != "ggplot2"&&
        plot.engine != "plotly"&&
        plot.engine != "googlevis"){
       warning('Please use correct arguments:
-                "default","dygraph","ggplot","plotly","googlevis".
+                "default","dygraph","ggplot2","plotly","googlevis".
                 
                 Ploting chart using built-in engine now.')
       
