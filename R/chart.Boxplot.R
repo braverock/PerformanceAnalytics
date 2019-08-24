@@ -63,10 +63,9 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
 
     if(plot.engine != "default"&&
        plot.engine != "ggplot2"&&
-       plot.engine != "plotly"&&
-       plot.engine != "googlevis"){
+       plot.engine != "plotly"){
       warning('Please use correct arguments:
-                "default","ggplot2","plotly","googlevis".
+                "default","ggplot2","plotly".
                 
                 Ploting chart using built-in engine now.')
       

@@ -45,7 +45,7 @@ chart.TimeSeries.base <-
     #Switch to check for plot engine and direct to respective sub-functions
     switch(plot.engine,
            default = {
-             plot = 
+             p = 
              chart.TimeSeries.builtin(R=R,
                                       auto.grid=auto.grid, 
                                       xaxis=xaxis, yaxis=yaxis, 
@@ -84,8 +84,7 @@ chart.TimeSeries.base <-
                                       yaxis.pct=yaxis.pct)
            },
            ggplot2 = {
-             plot = 
-               chart.TimeSeries.ggplot2(R=R,
+             p = chart.TimeSeries.ggplot2(R=R,
                                         auto.grid=auto.grid, 
                                         xaxis=xaxis, yaxis=yaxis, 
                                         yaxis.right=yaxis.right, 
@@ -123,25 +122,26 @@ chart.TimeSeries.base <-
                                         yaxis.pct=yaxis.pct)
            },
            plotly = {
-             plot = chart.TimeSeries.plotly(R=R,
-                                            main=main,
-                                            ...)
+             p = chart.TimeSeries.plotly(R=R,
+                                        main=main,
+                                        ...)
            },
            googlevis = {
-             chart.TimeSeries.googlevis(R=R,
+             p_g = chart.TimeSeries.googlevis(R=R,
                                         xlab=xlab,
                                         ylab=ylab,
                                         main=main,
                                         ...)
+             plot(p_g)
            },
            dygraph = {
-             plot = chart.TimeSeries.dygraph(R=R)
+             p = chart.TimeSeries.dygraph(R=R)
            }
     )
     
     #End Switch
     
-    return(plot)
+    return(p)
 }
 
 

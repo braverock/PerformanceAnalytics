@@ -15,5 +15,5 @@ chart.TimeSeries.googlevis <-
                             title=main)
     )
     
-    plot(plot)
+    return(plot)
   }
