@@ -82,7 +82,9 @@ ProbSharpeRatio<-
     if(!is.null(dim(Rf))){
       Rf = checkData(Rf)
     }
-    num_of_cols = ncol(x)
+    
+    if(exists("x")) num_of_cols = ncol(x)
+    
     #If the Reference Sharpe Ratio is greater than the Obserred Sharpe Ratio an error is displayed
     index_of_higher_tr = which(refSR>sr)
     if(length(index_of_higher_tr)!=0){
