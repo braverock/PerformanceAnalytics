@@ -3,7 +3,6 @@
 \name{table.CaptureRatios}
 \alias{table.CaptureRatios}
 \alias{table.UpDownRatios}
-\alias{table.UpDownRatios}
 \title{Calculate and display a table of capture ratio and related statistics}
 \usage{
 table.CaptureRatios(Ra, Rb, digits = 4)

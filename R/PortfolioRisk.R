@@ -298,8 +298,8 @@ VaR.kernel.portfolio =  function( R, p, w )
   #print( sum(CVaR) ) ; print( sum( weights*portfolioreturn)  )
   CVaR = CVaR/sum(CVaR)*VaR
   pct_contrib = CVaR/VaR
-  colnames(CVaR)<-colnames(R)
-  colnames(pct_contrib)<-colnames(R)
+  names(CVaR)<-colnames(R)
+  names(pct_contrib)<-colnames(R)
   ret= list( VaR  ,  CVaR  , pct_contrib  )
   names(ret) = c("VaR","contribution","pct_contrib_VaR")
   return(ret)

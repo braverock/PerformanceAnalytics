@@ -46,7 +46,10 @@
 #' provide the option, and set the default to TRUE to keep the return
 #' consistent with prior versions of PerformanceAnalytics, but make no value
 #' judgement on which approach is preferable.
-#' @section Background: This function provides several estimation methods for
+#' 
+#' @section Background: 
+#' 
+#' This function provides several estimation methods for
 #' the Expected Shortfall (ES) (also called Expected Tail Loss (ETL)
 #' or Conditional Value at Risk (CVaR)) of a return series and the Component ES
 #' (ETL/CVaR) of a portfolio.
@@ -66,6 +69,120 @@
 #' decompose total portfolio ES into the risk contributions of each of the
 #' portfolio components. For the above mentioned ES estimators, such a
 #' decomposition is possible in a financially meaningful way.
+#' 
+#' @section Univariate estimation of ES:
+#' 
+#' The ES at a probability level \eqn{p} (e.g. 95\%) is  the negative value of
+#' the expected value of the return when the return is less than its
+#' \eqn{c=1-p} quantile. In a set of returns for which sufficently long history
+#' exists, the per-period ES can be estimated by the negative value of the
+#' sample average of all returns below the quantile. This method is also
+#' sometimes called \dQuote{historical ES}, as it is by definition \emph{ex
+#' post} analysis of the return distribution, and may be accessed with
+#' \code{method="historical"}.
+#' 
+#' When you don't have a sufficiently long set of returns to use non-parametric
+#' or historical ES, or wish to more closely model an ideal distribution, it is
+#' common to us a parmetric estimate based on the distribution. Parametric ES
+#' does a better job of accounting for the tails of the distribution by more
+#' precisely estimating shape of the distribution tails of the risk quantile.
+#' The most common estimate is a normal (or Gaussian) distribution  \eqn{R\sim
+#' N(\mu,\sigma)} for the return series. In this case, estimation of ES requires
+#' the mean return  \eqn{\bar{R}}, the return distribution and the variance of
+#' the returns  \eqn{\sigma}. In the most common case, parametric VaR is thus
+#' calculated by
+#' 
+#' \deqn{\sigma=variance(R)}{sigma=var(R)}
+#' 
+#' \deqn{ES=-\bar{R} + \sqrt{\sigma} \cdot \frac{1}{c}\phi(z_{c}) }{VaR= -mean(R) + sqrt(sigma)*dnorm(z_c)/c}
+#' 
+#' where  \eqn{z_{c}} is the  \eqn{c}-quantile of the standard normal
+#' distribution. Represented in \R by \code{qnorm(c)}, and may be accessed with
+#' \code{method="gaussian"}. The function \eqn{\phi}{dnorm} is the Gaussian
+#' density function.
+#' 
+#' 
+#' The limitations of Gaussian ES are well covered in the literature, since most
+#' financial return series are non-normal. Boudt, Peterson and Croux (2008)
+#' provide a modified ES calculation that takes the higher moments of non-normal
+#' distributions (skewness, kurtosis) into account through the use of a
+#' Cornish-Fisher expansion, and collapses to standard (traditional) Gaussian ES
+#' if the return stream follows a standard distribution. More precisely, for a
+#' loss probability \eqn{c}, modified ES is defined as the negative of the
+#' expected value of all returns below the \eqn{c} Cornish-Fisher quantile and
+#' where the expectation is computed under the second order Edgeworth expansion
+#' of the true distribution function.
+#' 
+#' Modified expected shortfall should always be larger than modified Value at
+#' Risk. Due to estimation problems, this might not always be the case. Set
+#' Operational = TRUE to replace modified ES with modified VaR in the
+#' (exceptional) case where the modified ES is smaller than modified VaR.
+#' 
+#' @section Component ES
+#' 
+#' By setting \code{portfolio_method="component"} you may calculate the ES
+#' contribution of each element of the portfolio. The return from the function in
+#' this case will be a list with three components: the univariate portfolio ES,
+#' the scalar contribution of each component to the portfolio ES (these will sum
+#' to the portfolio ES), and a percentage risk contribution (which will sum to
+#' 100\%).
+#' 
+#' Both the numerical and percentage component contributions to ES may contain
+#' both positive and negative contributions. A negative contribution to Component
+#' ES indicates a portfolio risk diversifier. Increasing the position weight will
+#' reduce overall portoflio ES.
+#' 
+#' If a weighting vector is not passed in via \code{weights}, the function will
+#' assume an equal weighted (neutral) portfolio.
+#' 
+#' Multiple risk decomposition approaches have been suggested in the literature.
+#' A naive approach is to set the risk contribution equal to the stand-alone
+#' risk. This approach is overly simplistic and neglects important
+#' diversification effects of the units being exposed differently to the
+#' underlying risk factors. An alternative approach is to measure the ES
+#' contribution as the weight of the position in the portfolio times the partial
+#' derivative of the portfolio ES with respect to the component weight. \deqn{C_i
+#' \mbox{ES} = w_i \frac{ \partial \mbox{ES} }{\partial w_i}.}{C[i]ES =
+#' w[i]*(dES/dw[i]).} Because the portfolio ES is linear in position size, we
+#' have that by Euler's theorem the portfolio VaR is the sum of these risk
+#' contributions. Scaillet (2002) shows that for ES, this mathematical
+#' decomposition of portfolio risk has a financial meaning. It equals the
+#' negative value of the asset's expected contribution to the portfolio return
+#' when the portfolio return is less or equal to the negative portfolio VaR:
+#' 
+#'     \deqn{C_i \mbox{ES} = = -E\left[ w_i r_{i} | r_{p} \leq - \mbox{VaR}\right]}{C[i]ES = -E( w[i]r[i]|rp<=-VaR ) }
+#' 
+#' For the decomposition of Gaussian ES, the estimated mean and covariance
+#' matrix are needed. For the decomposition of modified ES, also estimates of
+#' the coskewness and cokurtosis matrices are needed. If \eqn{r} denotes the
+#' \eqn{Nx1} return vector and \eqn{mu} is the mean vector, then the \eqn{N
+#' \times N^2} co-skewness matrix is
+#
+#' \deqn{ m3 = E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\right]}{m3 = E[ (r - mu)(r - mu)' \%x\%  (r - \mu)']}
+#' 
+#' The \eqn{N \times N^3} co-kurtosis matrix is
+#' 
+#' \deqn{ m_{4} =
+#'     E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
+#' \right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']} 
+#' 
+#' where \eqn{\otimes}{\%x\%} stands for the Kronecker product. The matrices can
+#' be estimated through the functions \code{skewness.MM} and \code{kurtosis.MM}.
+#' More efficient estimators were proposed by Martellini and Ziemann (2007) and
+#' will be implemented in the future.
+#' 
+#' As discussed among others in Cont, Deguest and Scandolo (2007), it is
+#' important that the estimation of the ES measure is robust to single outliers.
+#' This is especially the case for  modified VaR and its decomposition, since
+#' they use higher order moments. By default, the portfolio moments are
+#' estimated by their sample counterparts. If \code{clean="boudt"} then the
+#' \eqn{1-p} most extreme observations are winsorized if they are detected as
+#' being outliers. For more information, see Boudt, Peterson and Croux (2008)
+#' and \code{\link{Return.clean}}.  If your data consist of returns for highly
+#' illiquid assets, then \code{clean="geltner"} may be more appropriate to
+#' reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}}
+#' for details.
+#' 
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{VaR}} \cr \code{\link{SharpeRatio.modified}} \cr
 #' \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
@@ -116,6 +233,7 @@
 #' 
 #'     # add Component ES for the equal weighted portfolio
 #'     ES(edhec, clean="boudt", portfolio_method="component")
+#'     
 #' @export ETL CVaR ES
 ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ..., 
         method=c("modified","gaussian","historical"), 

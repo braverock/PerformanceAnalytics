@@ -1,4 +1,9 @@
 # PerformanceAnalytics: Econometric tools for performance and risk analysis.
+
+[![Travis Build
+Status](https://travis-ci.org/braverock/PerformanceAnalytics.svg?branch=master)](https://travis-ci.org/braverock/PerformanceAnalytics)
+[![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
+
 `PerformanceAnalytics` provides an R package of econometric functions
 for performance and risk analysis of financial instruments or portfolios.
 This package aims to aid practitioners and researchers in using the latest research for

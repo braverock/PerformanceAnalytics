@@ -6,14 +6,14 @@
 \usage{
 chart.Histogram(R, breaks = "FD", main = NULL, xlab = "Returns",
   ylab = "Frequency", methods = c("none", "add.density", "add.normal",
-  "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk", "add.qqplot"),
-  show.outliers = TRUE, colorset = c("lightgray", "#00008F", "#005AFF",
-  "#23FFDC", "#ECFF13", "#FF4A00", "#800000"), border.col = "white",
-  lwd = 2, xlim = NULL, ylim = NULL, element.color = "darkgray",
-  note.lines = NULL, note.labels = NULL, note.cex = 0.7,
-  note.color = "darkgray", probability = FALSE, p = 0.95,
-  cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1, cex.main = 1,
-  xaxis = TRUE, yaxis = TRUE, ...)
+  "add.centered", "add.cauchy", "add.sst", "add.rug", "add.risk",
+  "add.qqplot"), show.outliers = TRUE, colorset = c("lightgray",
+  "#00008F", "#005AFF", "#23FFDC", "#ECFF13", "#FF4A00", "#800000"),
+  border.col = "white", lwd = 2, xlim = NULL, ylim = NULL,
+  element.color = "darkgray", note.lines = NULL, note.labels = NULL,
+  note.cex = 0.7, note.color = "darkgray", probability = FALSE,
+  p = 0.95, cex.axis = 0.8, cex.legend = 0.8, cex.lab = 1,
+  cex.main = 1, xaxis = TRUE, yaxis = TRUE, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

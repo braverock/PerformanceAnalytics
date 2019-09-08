@@ -4,8 +4,8 @@
 \alias{apply.rolling}
 \title{calculate a function over a rolling window}
 \usage{
-apply.rolling(R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean",
-  ...)
+apply.rolling(R, width, trim = TRUE, gap = 12, by = 1,
+  FUN = "mean", ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

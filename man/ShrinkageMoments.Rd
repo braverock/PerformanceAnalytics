@@ -5,13 +5,12 @@
 \alias{M2.shrink}
 \alias{M3.shrink}
 \alias{M4.shrink}
-\alias{M3.shrink}
-\alias{M4.shrink}
 \title{Functions for calculating shrinkage-based comoments of financial time series}
 \usage{
 M2.shrink(R, targets = 1, f = NULL)
 
-M3.shrink(R, targets = 1, f = NULL, unbiasedMSE = FALSE, as.mat = TRUE)
+M3.shrink(R, targets = 1, f = NULL, unbiasedMSE = FALSE,
+  as.mat = TRUE)
 
 M4.shrink(R, targets = 1, f = NULL, as.mat = TRUE)
 }
@@ -120,8 +119,5 @@ Management Science, 39(5), 68-577.
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

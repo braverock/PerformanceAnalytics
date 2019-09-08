@@ -1,6 +1,6 @@
 
-R version 3.4.3 (2017-11-30) -- "Kite-Eating Tree"
-Copyright (C) 2017 The R Foundation for Statistical Computing
+R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -51,6 +51,7 @@ The following object is masked from ‘package:graphics’:
 
 > 
 > base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
 > cleanEx()
 > nameEx("ActivePremium")
 > ### * ActivePremium
@@ -194,7 +195,6 @@ Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
 > ### Title: Functions to calculate systematic or beta co-moments of return
 > ###   series
 > ### Aliases: BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-> ###   BetaCoSkewness BetaCoKurtosis
 > 
 > ### ** Examples
 > 
@@ -275,9 +275,9 @@ Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125948      Inf
 > ### Name: CAPM.CML.slope
 > ### Title: utility functions for single factor (CAPM) CML, SML, and
 > ###   RiskPremium
-> ### Aliases: CAPM.CML.slope CAPM.CML CAPM.RiskPremium CAPM.utils CAPM.CML
-> ###   CAPM.CML.slope CAPM.SML.slope SFM.utils SFM.RiskPremium SFM.CML
-> ###   SFM.CML.slope SFM.SML.slope CAPM.SML.slope
+> ### Aliases: CAPM.CML.slope CAPM.CML CAPM.RiskPremium CAPM.utils
+> ###   CAPM.SML.slope SFM.utils SFM.RiskPremium SFM.CML SFM.CML.slope
+> ###   SFM.SML.slope
 > 
 > ### ** Examples
 > 
@@ -375,7 +375,6 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > ### Name: CAPM.beta
 > ### Title: calculate single factor model (CAPM) beta
 > ### Aliases: CAPM.beta CAPM.beta.bull CAPM.beta.bear TimingRatio SFM.beta
-> ###   CAPM.beta.bull CAPM.beta.bear TimingRatio
 > 
 > ### ** Examples
 > 
@@ -651,7 +650,7 @@ Funds of Funds                          0.0563
 > ### Title: calculate a Calmar or Sterling reward/risk ratio Calmar and
 > ###   Sterling Ratios are yet another method of creating a risk-adjusted
 > ###   measure for ranking investments similar to the 'SharpeRatio'.
-> ### Aliases: CalmarRatio SterlingRatio SterlingRatio
+> ### Aliases: CalmarRatio SterlingRatio
 > 
 > ### ** Examples
 > 
@@ -686,8 +685,8 @@ Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CoMoments
 > ### Title: Functions for calculating comoments of financial time series
-> ### Aliases: CoMoments CoSkewnessMatrix CoKurtosisMatrix CoMoments
-> ###   CoVariance CoSkewness CoKurtosis CoSkewness CoKurtosis M3.MM M4.MM
+> ### Aliases: CoMoments CoSkewnessMatrix CoKurtosisMatrix CoVariance
+> ###   CoSkewness CoKurtosis M3.MM M4.MM
 > 
 > ### ** Examples
 > 
@@ -746,7 +745,6 @@ d ratio 0.04607631  1.361501        0
 > ### Name: DownsideDeviation
 > ### Title: downside risk (deviation, variance) of the return distribution
 > ### Aliases: DownsideDeviation SemiDeviation SemiVariance DownsidePotential
-> ###   DownsidePotential SemiDeviation SemiVariance
 > 
 > ### ** Examples
 > 
@@ -939,6 +937,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
         Funds of Funds 
             0.13337499 
 
+>     
 > 
 > 
 > 
@@ -954,7 +953,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > ### Name: EWMAMoments
 > ### Title: Functions for calculating EWMA comoments of financial time
 > ###   series
-> ### Aliases: EWMAMoments M2.ewma M3.ewma M4.ewma M3.ewma M4.ewma
+> ### Aliases: EWMAMoments M2.ewma M3.ewma M4.ewma
 > 
 > ### ** Examples
 > 
@@ -1214,7 +1213,7 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > ### Name: MCA
 > ### Title: Functions for doing Moment Component Analysis (MCA) of financial
 > ###   time series
-> ### Aliases: MCA M3.MCA M4.MCA M4.MCA
+> ### Aliases: MCA M3.MCA M4.MCA
 > 
 > ### ** Examples
 > 
@@ -1329,8 +1328,8 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > data(managers)
 > MarketTiming(managers[,1], managers[,8], Rf=.035/12, method = "HM")
-                       Alpha      Beta      Gamma
-HAM1 to SP500 TR 0.008275839 0.4555824 -0.1344417
+                       Alpha      Beta     Gamma
+HAM1 to SP500 TR 0.008275839 0.3211407 0.1344417
 > MarketTiming(managers[80:120,1:6], managers[80:120,7], managers[80:120,10])
                             Alpha      Beta     Gamma
 HAM1 to EDHEC LS EQ -0.0005755802 1.3121058 -0.405150
@@ -1942,7 +1941,7 @@ Annualized Return 0.03718883
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.calculate
 > ### Title: calculate simple or compound returns from prices
-> ### Aliases: Return.calculate CalculateReturns CalculateReturns
+> ### Aliases: Return.calculate CalculateReturns
 > 
 > ### ** Examples
 > 
@@ -4023,6 +4022,26 @@ Annualized Return 0.03718883
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("Return.clean", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
+> nameEx("Return.convert")
+> ### * Return.convert
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: Return.convert
+> ### Title: Convert coredata content from one type of return to another
+> ### Aliases: Return.convert
+> 
+> ### ** Examples
+> 
+> # TBD
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.convert", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("Return.cumulative")
 > ### * Return.cumulative
 > 
@@ -4420,7 +4439,7 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > ### Name: SharpeRatio
 > ### Title: calculate a traditional or modified Sharpe Ratio of Return over
 > ###   StdDev or VaR or ES
-> ### Aliases: SharpeRatio SharpeRatio.modified SharpeRatio.modified
+> ### Aliases: SharpeRatio SharpeRatio.modified
 > 
 > ### ** Examples
 > 
@@ -4556,8 +4575,7 @@ Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
 > ### Name: ShrinkageMoments
 > ### Title: Functions for calculating shrinkage-based comoments of financial
 > ###   time series
-> ### Aliases: ShrinkageMoments M2.shrink M3.shrink M4.shrink M3.shrink
-> ###   M4.shrink
+> ### Aliases: ShrinkageMoments M2.shrink M3.shrink M4.shrink
 > 
 > ### ** Examples
 > 
@@ -4886,8 +4904,7 @@ Annualized Standard Deviation   0.03178395
 > ### Name: StructuredMoments
 > ### Title: Functions for calculating structured comoments of financial time
 > ###   series
-> ### Aliases: StructuredMoments M2.struct M3.struct M4.struct M3.struct
-> ###   M4.struct
+> ### Aliases: StructuredMoments M2.struct M3.struct M4.struct
 > 
 > ### ** Examples
 > 
@@ -5626,8 +5643,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.centered
 > ### Title: calculate centered Returns
-> ### Aliases: Return.centered centeredcomoment centeredmoment centeredmoment
-> ###   centeredcomoment
+> ### Aliases: Return.centered centeredcomoment centeredmoment
 > 
 > ### ** Examples
 > 
@@ -5783,7 +5799,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.ACF
 > ### Title: Create ACF chart or ACF with PACF two-panel chart
-> ### Aliases: chart.ACF chart.ACFplus chart.ACFplus
+> ### Aliases: chart.ACF chart.ACFplus
 > 
 > ### ** Examples
 > 
@@ -5805,7 +5821,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Bar
 > ### Title: wrapper for barchart of returns
-> ### Aliases: chart.Bar charts.Bar charts.Bar
+> ### Aliases: chart.Bar charts.Bar
 > 
 > ### ** Examples
 > 
@@ -5827,7 +5843,7 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.BarVaR
 > ### Title: Periodic returns in a bar chart with risk metric overlay
-> ### Aliases: chart.BarVaR charts.BarVaR charts.BarVaR
+> ### Aliases: chart.BarVaR charts.BarVaR
 > 
 > ### ** Examples
 > 
@@ -6110,38 +6126,71 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > ### ** Examples
 > 
-> 
-> library(MASS)
+> library(MASS) 
+> library(PerformanceAnalytics)
 > data(managers)
-> 
 > x = checkData(managers[,2, drop = FALSE], na.rm = TRUE, method = "vector")
 > 
-> #layout(rbind(c(1,2),c(3,4)))
+> # Panel 1: Normal distribution
+> chart.QQPlot(x, main = "Normal Distribution",
++ 		line=c("quartiles"), distribution = 'norm',  
++ 		envelope=0.95)
 > 
-> # Panel 1, Normal distribution
-> chart.QQPlot(x, main = "Normal Distribution", distribution = 'norm', envelope=0.95)
+> 
 > # Panel 2, Log-Normal distribution
 > fit = fitdistr(1+x, 'lognormal')
-> chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, distribution='lnorm')
-> #other options could include
-> #, meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]])
+> chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, 
++     distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], 
++     sdlog = fit$estimate[[2]]')
+> 
 > 
 > ## Not run: 
-> ##D # Panel 3, Skew-T distribution
-> ##D library(sn)
-> ##D fit = st.mle(y=x)
-> ##D chart.QQPlot(x, main = "Skew T Distribution", envelope=0.95, 
-> ##D              distribution = 'st', location = fit$dp[[1]], 
-> ##D              scale = fit$dp[[2]], shape = fit$dp[[3]], df=fit$dp[[4]])
+> ##D  
+> ##D # Panel 3: Mixture Normal distribution
+> ##D library(nor1mix)
+> ##D obj = norMixEM(x,m=2)
+> ##D chart.QQPlot(x, main = "Normal Mixture Distribution",
+> ##D 		line=c("quartiles"), distribution = 'norMix',  distributionParameter='obj',
+> ##D 		envelope=0.95)
 > ##D 
-> ##D #Panel 4: Stable Parietian
+> ##D 
+> ##D # Panel 4: Symmetric t distribution
+> ##D library(sn)
+> ##D n = length(x)
+> ##D fit.tSN = st.mple(as.matrix(rep(1,n)),x,symmetr = TRUE)
+> ##D names(fit.tSN$dp) = c("location","scale","dof")
+> ##D round(fit.tSN$dp,3)
+> ##D 
+> ##D chart.QQPlot(x, main = "MO Symmetric t-Distribution QQPlot",
+> ##D 		xlab = "quantilesSymmetricTdistEst",line = c("quartiles"),
+> ##D 		envelope = .95, distribution = 't', 
+> ##D 		distributionParameter='df=fit.tSN$dp[3]',pch = 20)
+> ##D 
+> ##D # Panel 5: Skewed t distribution
+> ##D fit.st = st.mple(as.matrix(rep(1,n)),x)
+> ##D # fit.st = st.mple(y=x)  Produces same result as line above
+> ##D names(fit.st$dp) = c("location","scale","skew","dof")
+> ##D round(fit.st$dp,3)
+> ##D 
+> ##D chart.QQPlot(x, main = "MO Returns Skewed t-Distribution QQPlot",
+> ##D 		xlab = "quantilesSkewedTdistEst",line = c("quartiles"),
+> ##D 		envelope = .95, distribution = 'st',
+> ##D 		distributionParameter = 'xi = fit.st$dp[1],
+> ##D 				omega = fit.st$dp[2],alpha = fit.st$dp[3],
+> ##D 				nu=fit.st$dp[4]',
+> ##D 		pch = 20)
+> ##D 
+> ##D # Panel 6: Stable Parietian
 > ##D library(fBasics)
 > ##D fit.stable = stableFit(x,doplot=FALSE)
 > ##D chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, 
-> ##D              distribution = 'stable', alpha = fit(stable.fit)$estimate[[1]], 
-> ##D              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
-> ##D              delta = fit(stable.fit)$estimate[[4]], pm = 0)
+> ##D              distribution = 'stable', 
+> ##D              distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
+> ##D                  beta = fit(stable.fit)$estimate[[2]], 
+> ##D                  gamma = fit(stable.fit)$estimate[[3]], 
+> ##D                  delta = fit(stable.fit)$estimate[[4]], pm = 0')
 > ## End(Not run)
+> 
 > #end examples
 > 
 > 
@@ -6318,7 +6367,6 @@ detaching ‘package:MASS’
 > ### Title: A wrapper to create charts of relative regression performance
 > ###   through time
 > ### Aliases: chart.RollingQuantileRegression chart.RollingRegression
-> ###   chart.RollingQuantileRegression charts.RollingRegression
 > ###   charts.RollingRegression
 > 
 > ### ** Examples
@@ -6357,9 +6405,10 @@ detaching ‘package:MASS’
 > 
 > ### ** Examples
 > 
-> 
-> data(edhec)
-> chart.Scatter(edhec[,1],edhec[,2])
+> ## Not run: 
+> ##D   data(edhec)
+> ##D   chart.Scatter(edhec[,1],edhec[,2])
+> ## End(Not run)
 > 
 > 
 > 
@@ -6866,7 +6915,7 @@ detaching ‘package:MASS’
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Drawdowns
 > ### Title: Find the drawdowns and drawdown levels in a timeseries.
-> ### Aliases: Drawdowns findDrawdowns Drawdowns
+> ### Aliases: Drawdowns findDrawdowns
 > 
 > ### ** Examples
 > 
@@ -7113,7 +7162,6 @@ US 3m TR            0.0000
 > ### Title: calculate attributes relative to the mean of the observation
 > ###   series given, including geometric, stderr, LCL and UCL
 > ### Aliases: mean.geometric mean.utils mean.UCL mean.LCL mean.stderr
-> ###   mean.stderr mean.LCL mean.UCL
 > 
 > ### ** Examples
 > 
@@ -7375,7 +7423,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.AnnualizedReturns(managers[,1:8], Rf=.04/12))
 > 
@@ -7567,7 +7615,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.CalendarReturns(managers[,c(1,8)]))
 > 
@@ -7599,7 +7647,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > ### Name: table.CaptureRatios
 > ### Title: Calculate and display a table of capture ratio and related
 > ###   statistics
-> ### Aliases: table.CaptureRatios table.UpDownRatios table.UpDownRatios
+> ### Aliases: table.CaptureRatios table.UpDownRatios
 > 
 > ### ** Examples
 > 
@@ -7686,7 +7734,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
 +          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
@@ -7723,14 +7771,14 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(managers)
 > table.Distributions(managers[,1:8])
                           HAM1   HAM2   HAM3    HAM4   HAM5    HAM6 EDHEC LS EQ
-Monthly Std Dev         0.0256 0.0367 0.0365  0.0532 0.0457  0.0238      0.0205
+monthly  Std Dev        0.0256 0.0367 0.0365  0.0532 0.0457  0.0238      0.0205
 Skewness               -0.6588 1.4580 0.7908 -0.4311 0.0738 -0.2800      0.0177
 Kurtosis                5.3616 5.3794 5.6829  3.8632 5.3143  2.6511      3.9105
 Excess kurtosis         2.3616 2.3794 2.6829  0.8632 2.3143 -0.3489      0.9105
 Sample skewness        -0.6741 1.4937 0.8091 -0.4410 0.0768 -0.2936      0.0182
 Sample excess kurtosis  2.5004 2.5270 2.8343  0.9437 2.5541 -0.2778      1.0013
                        SP500 TR
-Monthly Std Dev          0.0433
+monthly  Std Dev         0.0433
 Skewness                -0.5531
 Kurtosis                 3.5598
 Excess kurtosis          0.5598
@@ -7748,7 +7796,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.Distributions(managers[,1:8]))
 > 
@@ -7868,7 +7916,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
 +          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
@@ -7902,7 +7950,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(managers)
 > table.DownsideRiskRatio(managers[,1:8])
                            HAM1   HAM2   HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ
-Monthly downside risk    0.0145 0.0116 0.0174 0.0341 0.0304 0.0121      0.0098
+monthly downside risk    0.0145 0.0116 0.0174 0.0341 0.0304 0.0121      0.0098
 Annualised downside risk 0.0504 0.0401 0.0601 0.1180 0.1054 0.0421      0.0341
 Downside potential       0.0051 0.0061 0.0079 0.0159 0.0145 0.0054      0.0041
 Omega                    3.1907 3.3041 2.5803 1.6920 1.2816 3.0436      3.3186
@@ -7911,7 +7959,7 @@ Upside potential         0.0162 0.0203 0.0203 0.0269 0.0186 0.0165      0.0137
 Upside potential ratio   0.7503 2.2078 1.0852 0.8009 0.7557 1.0003      1.1136
 Omega-sharpe ratio       2.1907 2.3041 1.5803 0.6920 0.2816 2.0436      2.3186
                          SP500 TR
-Monthly downside risk      0.0283
+monthly downside risk      0.0283
 Annualised downside risk   0.0980
 Downside potential         0.0132
 Omega                      1.6581
@@ -7931,7 +7979,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.DownsideRiskRatio(managers[,1:8]))
 > 
@@ -8039,7 +8087,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.DrawdownsRatio(managers[,1:8], Rf=.04/12))
 > 
@@ -8093,7 +8141,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
 +          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
@@ -8146,7 +8194,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.InformationRatio(managers[,1:8], managers[,8]))
 > 
@@ -8268,7 +8316,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, cdec=c(rep(1,2),rep(3,14))), 
 +          rmar = 0.8, cmar = 1.5,  max.cex=.9, halign = "center", valign = "top", 
@@ -8334,7 +8382,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > ### Name: table.RollingPeriods
 > ### Title: Rolling Periods Summary: Statistics and Stylized Facts
 > ### Aliases: table.RollingPeriods table.TrailingPeriods
-> ###   table.TrailingPeriodsRel table.TrailingPeriodsRel
+> ###   table.TrailingPeriodsRel
 > 
 > ### ** Examples
 > 
@@ -8368,7 +8416,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
 +                    cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
@@ -8417,7 +8465,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.SpecificRisk(managers[,1:8], managers[,8], Rf=.04/12))
 > 
@@ -8454,11 +8502,11 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > table.Variability(managers[,1:8])
                           HAM1   HAM2   HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ
 Mean Absolute deviation 0.0182 0.0268 0.0268 0.0410 0.0329 0.0187      0.0159
-Monthly Std Dev         0.0256 0.0367 0.0365 0.0532 0.0457 0.0238      0.0205
+monthly Std Dev         0.0256 0.0367 0.0365 0.0532 0.0457 0.0238      0.0205
 Annualized Std Dev      0.0888 0.1272 0.1265 0.1843 0.1584 0.0825      0.0708
                         SP500 TR
 Mean Absolute deviation   0.0333
-Monthly Std Dev           0.0433
+monthly Std Dev           0.0433
 Annualized Std Dev        0.1500
 > 
 > require("Hmisc")
@@ -8472,7 +8520,7 @@ Attaching package: ‘Hmisc’
 
 The following objects are masked from ‘package:base’:
 
-    format.pval, round.POSIXt, trunc.POSIXt, units
+    format.pval, units
 
 > result = t(table.Variability(managers[,1:8]))
 > 
@@ -8501,9 +8549,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > ### Name: replaceTabs.inner
 > ### Title: Display text information in a graphics plot.
 > ### Aliases: replaceTabs.inner replaceTabs textplot textplot.default
-> ###   textplot.character textplot.matrix textplot.data.frame replaceTabs
-> ###   textplot.default textplot.data.frame textplot.matrix
-> ###   textplot.character
+> ###   textplot.character textplot.matrix textplot.data.frame
 > 
 > ### ** Examples
 > 
@@ -8638,9 +8684,10 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > base::cat("weights", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > ### * <FOOTER>
 > ###
+> cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  56.534 27.527 69.528 0 0 
+Time elapsed:  56.949 2.201 64.861 0.001 0.004 
 > grDevices::dev.off()
 pdf 
   2 

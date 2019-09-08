@@ -1,6 +1,6 @@
 #' Downside Summary: Statistics and ratios
 #' 
-#' Table of Monthly downside risk, Annualised downside risk, Downside potential,
+#' Table of downside risk, Annualised downside risk, Downside potential,
 #' Omega, Sortino ratio, Upside potential, Upside potential ratio and
 #' Omega-Sharpe ratio
 #' 
@@ -61,7 +61,7 @@ function (R, MAR = 0, scale = NA, digits = 4)
     for(column in 1:columns) {
         z = c(DownsideDeviation(y[,column,drop=FALSE], MAR = MAR), DownsideDeviation(y[,column,drop=FALSE], MAR = MAR)*sqrt(scale), DownsidePotential(y[,column,drop=FALSE], MAR = MAR), UpsideRisk(y[,column,drop=FALSE], MAR = MAR, stat = "potential")/DownsidePotential(y[,column,drop=FALSE], MAR = MAR), SortinoRatio(y[,column,drop=FALSE], MAR = MAR), UpsideRisk(y[,column,drop=FALSE], MAR = MAR, stat = "potential"), UpsidePotentialRatio(y[,column,drop=FALSE], MAR = MAR), OmegaSharpeRatio(y[,column,drop=FALSE], MAR = MAR))
 
-        znames = c("Monthly downside risk", "Annualised downside risk", "Downside potential", "Omega", "Sortino ratio", "Upside potential", "Upside potential ratio", "Omega-sharpe ratio")
+        znames = c(paste0(freq$scale," downside risk"), "Annualised downside risk", "Downside potential", "Omega", "Sortino ratio", "Upside potential", "Upside potential ratio", "Omega-sharpe ratio")
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
         }

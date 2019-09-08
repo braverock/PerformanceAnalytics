@@ -6,9 +6,6 @@
 \alias{CAPM.beta.bear}
 \alias{TimingRatio}
 \alias{SFM.beta}
-\alias{CAPM.beta.bull}
-\alias{CAPM.beta.bear}
-\alias{TimingRatio}
 \title{calculate single factor model (CAPM) beta}
 \usage{
 CAPM.beta(Ra, Rb, Rf = 0)

@@ -18,7 +18,7 @@ returns}
 \item{digits}{number of digits to round results to}
 }
 \description{
-Table of Monthly downside risk, Annualised downside risk, Downside potential,
+Table of downside risk, Annualised downside risk, Downside potential,
 Omega, Sortino ratio, Upside potential, Upside potential ratio and
 Omega-Sharpe ratio
 }

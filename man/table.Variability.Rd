@@ -19,7 +19,7 @@ default TRUE}
 \item{digits}{number of digits to round results to}
 }
 \description{
-Table of Mean absolute difference, Monthly standard deviation and annualised
+Table of Mean absolute difference, period standard deviation and annualised
 standard deviation
 }
 \examples{

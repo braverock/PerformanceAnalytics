@@ -1,0 +1,18 @@
+#' Sample sector returns for use by unit tests
+#'
+#' A dataset containing returns for 10 sectors over 5 month-end periods.
+#'
+#' @format A data frame with 5 rows and 10 variables:
+#' \describe{
+#'   \item{Sector1}{returns for Sector1, numeric}
+#'   \item{Sector2}{returns for Sector2, numeric}
+#'   \item{Sector3}{returns for Sector3, numeric}
+#'   \item{Sector4}{returns for Sector4, numeric}
+#'   \item{Sector5}{returns for Sector5, numeric}
+#'   \item{Sector6}{returns for Sector6, numeric}
+#'   \item{Sector7}{returns for Sector7, numeric}
+#'   \item{Sector8}{returns for Sector8, numeric}
+#'   \item{Sector9}{returns for Sector9, numeric}
+#'   \item{Sector10}{returns for Sector10, numeric}
+#' }
+"test_returns"
