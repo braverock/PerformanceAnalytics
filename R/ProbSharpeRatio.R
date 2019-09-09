@@ -25,7 +25,7 @@
 #' @return A list containing the below
 #' \itemize{  \item The probability that the observed Sharpe Ratio is higher than the reference one 
 #'  \item The p-level confidence interval of the Sharpe Ratio}
-#' @references Marcos Lopez de Prado. 2018. <em>Advances in Financial Machine Learning</em> (1st ed.). Wiley Publishing.
+#' @references Marcos Lopez de Prado. 2018. Advances in Financial Machine Learning (1st ed.). Wiley Publishing.
 #' 
 #'
 #' @examples
