@@ -33,16 +33,17 @@ MinTrackRecord(R = NULL, Rf = 0, refSR, p = 0.95, weights = NULL,
 }
 \value{
 A list containing the below
-\itemize{  \item min_TRL:           the minimum track record length value (periodicity follows R)
- \item IS_SR_SIGNIFICANT:           TRUE if the sharpe ratio is statistically significant, FALSE otherwise 
- \item num_of_extra_obs_needed:     If the sharpe ratio is not statistically significant, how many more observations are needed so as to achieve this}
+\itemize{  \item min_TRL:       The minimum track record length value (periodicity follows R)
+ \item IS_SR_SIGNIFICANT:       TRUE if the sharpe ratio is statistically significant, FALSE otherwise 
+ \item num_of_extra_obs_needed: If the sharpe ratio is not statistically significant, how many more observations are needed so as to achieve this}
 }
 \description{
 The Minimum Track Record Length responds to the following question: "How long should a track record be in 
 order to have a p-level statistical confidence that its Sharpe ratio is above a given threshold?".
 Obviously, the main assumption is the returns will continue displaying the same statistical properties out-of-sample.
-For example, if the input contains fifty observations and the Minimum Track Record is forty, then for the next ten observations the relevant measures (sharpe ratio,
-skewness and kyrtosis) need to remain the same as the input so to achieve statistical significance after exactly ten time points.
+For example, if the input contains fifty observations and the Minimum Track Record is forty, then for the next ten observations
+the relevant measures (sharpe ratio, skewness and kyrtosis) need to remain the same as the input so to achieve 
+statistical significance after exactly ten time points.
 }
 \examples{
 
