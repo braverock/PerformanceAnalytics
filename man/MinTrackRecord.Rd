@@ -41,6 +41,7 @@ A list containing the below
 The Minimum Track Record Length responds to the following question: "How long should a track record be in 
 order to have a p-level statistical confidence that its Sharpe ratio is above a given threshold?".
 Obviously, the main assumption is the returns will continue displaying the same statistical properties out-of-sample.
+
 For example, if the input contains fifty observations and the Minimum Track Record is forty, then for the next ten observations
 the relevant measures (sharpe ratio, skewness and kyrtosis) need to remain the same as the input so to achieve 
 statistical significance after exactly ten time points.
