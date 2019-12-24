@@ -43,14 +43,23 @@ chart.TimeSeries.ggplot2<-
 {
     y = checkData(R,method='xts')
   
+    # Extract basic info
     columns = ncol(y)
     rows = nrow(y)
     columnnames = colnames(y)
-
+    
     y = data.frame(date=index(y),coredata(y))
-    y <- y %>%
-      gather(key = "variable", value = "value", -date)
+    
+    # Stack columns as rows and add variable role
+    y = data.frame(y[1], stack(y[2:ncol(y)]))
+    col_names = colnames(y)
+    
+    col_names[2] = "value"
+    col_names[3] = "variable"
+    
+    colnames(y) = col_names
 
+    # Plotting
     plot <- ggplot(y, aes(x = date, y = value)) +
       geom_line(aes(color = variable), size = lwd) +
       ggtitle(main)
