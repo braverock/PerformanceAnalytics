@@ -6,10 +6,13 @@
 \alias{mean.UCL}
 \alias{mean.LCL}
 \alias{mean.stderr}
+\alias{mean.arithmetic}
 \title{calculate attributes relative to the mean of the observation series given,
 including geometric, stderr, LCL and UCL}
 \usage{
 \method{mean}{geometric}(x, ...)
+
+\method{mean}{arithmetic}(x, SE = FALSE, SE.control = NULL, ...)
 
 \method{mean}{stderr}(x, ...)
 
@@ -22,6 +25,11 @@ including geometric, stderr, LCL and UCL}
 modified mean statistic over}
 
 \item{\dots}{any other passthru parameters}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for  \code{\link{mean.arithmetic}}.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
+Only available for \code{\link{mean.arithmetic}}.}
 
 \item{ci}{the confidence interval to use}
 }

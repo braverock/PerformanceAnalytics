@@ -37,6 +37,8 @@
 #' @param invert TRUE/FALSE whether to invert the VaR measure, see Details.
 #' @param operational TRUE/FALSE, default TRUE, see Details.
 #' @param \dots any other passthru parameters
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @note The option to \code{invert} the ES measure should appease both
 #' academics and practitioners.  The mathematical definition of ES as the
 #' negative value of extreme losses will (usually) produce a positive number.
@@ -240,7 +242,8 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
         clean=c("none","boudt", "geltner"),  
         portfolio_method=c("single","component"), 
         weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, 
-        invert=TRUE, operational=TRUE)
+        invert=TRUE, operational=TRUE,
+        SE=FALSE, SE.control=NULL)
 { # @author Brian G. Peterson
 
     # Descripion:
@@ -258,7 +261,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
         weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     }
     if(!is.null(R)){
-        R <- checkData(R, method="xts", ...)
+        R <- checkData(R, method="xts")
         columns=colnames(R)
         if (!is.null(weights) & portfolio_method != "single") {
             if ( length(weights) != ncol(R)) {
@@ -285,6 +288,40 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
         if ( length(weights) != length(mu)) {
             stop("number of items in weights not equal to number of items in the mean vector")
         }
+    }
+    
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Checking all parameters
+      if(portfolio_method!="single")
+        warning("For SE computation, the \"portfolio_method\" should be \"single\" for a sensible output.")
+      if(method!="historical")
+        warning("For SE computation, the \"method\" should be \"historical\" for a sensible output.")
+      if(isTRUE(invert))
+        warning("For SE computation, the \"invert\" should be FALSE for a sensible output.")
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="ES")
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "ES", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           p=p, # Additional parameter
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
     }
     
     switch(portfolio_method,
@@ -332,7 +369,10 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
             } # end reasonableness checks
             if(invert) rES <- -rES
             rownames(rES) <- "ES"
-            return(rES)
+            
+            if(SE) # Check if SE computation
+              return(rbind(rES, ses)) else
+                return(rES)
 
         }, # end single portfolio switch
         component = {

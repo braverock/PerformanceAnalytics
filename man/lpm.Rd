@@ -4,7 +4,8 @@
 \alias{lpm}
 \title{calculate a lower partial moment for a time series}
 \usage{
-lpm(R, n = 2, threshold = 0, about_mean = FALSE)
+lpm(R, n = 2, threshold = 0, about_mean = FALSE, SE = FALSE,
+  SE.control = NULL, ...)
 }
 \arguments{
 \item{R}{xts data}
@@ -14,6 +15,10 @@ lpm(R, n = 2, threshold = 0, about_mean = FALSE)
 \item{threshold}{threshold can be the mean or any point as desired}
 
 \item{about_mean}{TRUE/FALSE calculate LPM about the mean under the threshold or use the threshold to calculate the LPM around (if FALSE)}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Caclulate a Lower Partial Moment around the mean or a specified threshold.

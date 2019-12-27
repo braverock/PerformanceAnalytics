@@ -8,11 +8,11 @@
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
 DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
-  potential = FALSE)
+  potential = FALSE, SE = TRUE, SE.control = NULL)
 
 DownsidePotential(R, MAR = 0)
 
-SemiDeviation(R)
+SemiDeviation(R, SE = FALSE, SE.control = NULL, ...)
 
 SemiVariance(R)
 }
@@ -30,6 +30,9 @@ the MAR as the denominator, defaults to "full"}
 \item{\dots}{any other passthru parameters}
 
 \item{potential}{if TRUE, calculate downside potential instead, default
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 FALSE}
 }
 \description{

@@ -11,7 +11,7 @@ ETL(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
   "historical"), clean = c("none", "boudt", "geltner"),
   portfolio_method = c("single", "component"), weights = NULL,
   mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
-  operational = TRUE)
+  operational = TRUE, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -50,6 +50,10 @@ return series, default NULL, see Details}
 \item{invert}{TRUE/FALSE whether to invert the VaR measure, see Details.}
 
 \item{operational}{TRUE/FALSE, default TRUE, see Details.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at

@@ -55,6 +55,9 @@
 #' @param method a character string indicating which correlation coefficient
 #' (or covariance) is to be computed.  One of \code{"pearson"} (default),
 #' \code{"kendall"}, or \code{"spearman"}, can be abbreviated.
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
+
 #' @author Brian G. Peterson and Kris Boudt
 #' @seealso \code{\link{Return.clean}} \code{sd}
 ###keywords ts multivariate distribution models
@@ -75,7 +78,10 @@
 #' 
 #' 
 #' @export
-StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), weights=NULL, mu=NULL, sigma=NULL, use="everything", method=c("pearson", "kendall", "spearman"))
+StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), 
+                    weights=NULL, mu=NULL, sigma=NULL, use="everything", 
+                    method=c("pearson", "kendall", "spearman"),
+                    SE=FALSE, SE.control=NULL)
 { # @author Brian G. Peterson
     
     # Descripion:
@@ -113,6 +119,36 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
         R = as.matrix(Return.clean(R, method=clean))
     }
     
+    # Option to check if RPESE is installed if SE=TRUE
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Checking all parameters
+      if(portfolio_method!="single")
+        stop("For SE computation, the portfolio method must be \"single\" to return an output.")
+
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="SD")
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SD", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
+    
     switch(portfolio_method,
             single = {
                 if (is.null(weights)) {
@@ -121,9 +157,13 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
                 } else {
                     #do the multivariate calc with weights
                     if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use, method=method[1])
-                    tsd<-StdDev.MM(w=weights,sigma=sigma)
+                    tsd <- StdDev.MM(w=weights,sigma=sigma)
                 }
-                return(tsd)
+              
+              if(SE) # Check if computation of SE
+                return(rbind(tsd, ses)) else
+                  return(ses)
+              
             }, # end single portfolio switch
             component = {
                 # @TODO: need to add another loop here for subsetting, I think, when weights is a timeseries

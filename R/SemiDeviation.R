@@ -1,7 +1,9 @@
 #' @rdname DownsideDeviation
 #' @export
-SemiDeviation <-
-function (R)
+SemiDeviation <- SemiSD <-
+function (R,
+          SE=FALSE, SE.control=NULL,
+          ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -10,6 +12,31 @@ function (R)
     # see below
 
     # FUNCTION:
+  
+  if(isTRUE(SE)){
+    if(!requireNamespace("RPESE", quietly = TRUE)){
+      stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+           call. = FALSE)
+    }
+    
+    # Setting the control parameters
+    if(is.null(SE.control))
+      SE.control <- RPESE.control(measure="SemiSD")
+    
+    # Computation of SE (optional)
+    ses=list()
+    # For each of the method specified in se.method, compute the standard error
+    for(mymethod in SE.control$se.method){
+      ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SemiSD", se.method = mymethod, 
+                                         cleanOutliers=SE.control$cleanOutliers,
+                                         fitting.method=SE.control$fitting.method,
+                                         freq.include=SE.control$freq.include,
+                                         freq.par=SE.control$freq.par,
+                                         a=SE.control$a, b=SE.control$b,
+                                         ...)
+    }
+    ses <- t(data.frame(ses))
+  }
 
     if (is.vector(R)) {
         R = na.omit(R)
@@ -20,8 +47,12 @@ function (R)
         result = apply(R, 2, SemiDeviation)
         result = matrix(result, nrow=1)
         colnames(result) = colnames(R)
-        rownames(result) = "Semi-Deviation"
-        return(result)
+        if(SE) # Name if SE computation
+          rownames(result) <- "Semi-Standard Deviation" else
+            rownames(result) = "Semi-Deviation"
+        if(SE) # Check if SE computation
+          return(rbind(result, ses)) else
+            return (result)
     }
 }
 

@@ -14,10 +14,14 @@
 #' @param n the n-th moment to return
 #' @param threshold threshold can be the mean or any point as desired
 #' @param about_mean TRUE/FALSE calculate LPM about the mean under the threshold or use the threshold to calculate the LPM around (if FALSE)
-#'
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
+
 #' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
-lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
+lpm <- function(R, n=2, threshold=0, about_mean=FALSE,
+                SE=FALSE, SE.control=NULL,
+                ...){
   
   columns = ncol(R)
   #Calculate number of columns
@@ -69,13 +73,41 @@ lpm <- function(R,n=2,threshold=0,about_mean=FALSE){
     }
 
   }
+  }
+  
+  # Option to check if RPESE is installed if SE=TRUE
+  if(isTRUE(SE)){
+    if(!requireNamespace("RPESE", quietly = TRUE)){
+      stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+           call. = FALSE)
     }
-    #Loop close
-    colnames(result) = columnnames
-    #Assign column names to the output 
-    rownames(result) = "LPM"
-    #Assign rowname to the output
-  return(result)
+    
+    # Setting the control parameters
+    if(is.null(SE.control))
+      SE.control <- RPESE.control(measure="LPM")
+    
+    # Computation of SE (optional)
+    ses=list()
+    # For each of the method specified in se.method, compute the standard error
+    for(mymethod in SE.control$se.method){
+      ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "LPM", se.method = mymethod, 
+                                         cleanOutliers=SE.control$cleanOutliers,
+                                         fitting.method=SE.control$fitting.method,
+                                         freq.include=SE.control$freq.include,
+                                         freq.par=SE.control$freq.par,
+                                         a=SE.control$a, b=SE.control$b,
+                                         ...)
+    }
+    ses <- t(data.frame(ses))
+  }
+  #Loop close
+  colnames(result) = columnnames
+  #Assign column names to the output 
+  rownames(result) = "LPM"
+  #Assign rowname to the output
+  if(SE) # Check if SE computation
+    return(rbind(result, ses)) else
+      return(result)
 }
 
 ###############################################################################
