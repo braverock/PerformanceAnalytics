@@ -1,4 +1,5 @@
 #' @rdname DownsideDeviation
+#' @aliases SemiSD
 #' @export
 SemiDeviation <- SemiSD <-
 function (R,

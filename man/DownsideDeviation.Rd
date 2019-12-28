@@ -5,6 +5,7 @@
 \alias{SemiDeviation}
 \alias{SemiVariance}
 \alias{DownsidePotential}
+\alias{SemiSD}
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
 DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
