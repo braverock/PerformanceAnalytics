@@ -63,8 +63,6 @@
 #' the MAR as the denominator, defaults to "full"
 #' @param \dots any other passthru parameters
 #' @param potential if TRUE, calculate downside potential instead, default
-#' #' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
-#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' FALSE
 #' @author Peter Carl, Brian G. Peterson, Matthieu Lestel
 #' @references Sortino, F. and Price, L. Performance Measurement in a Downside
@@ -102,8 +100,7 @@
 #'
 #' @export
 DownsideDeviation <-
-function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE,
-          SE=TRUE, SE.control=NULL)
+function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 { # @author Peter Carl, Matthieu Lestel
 
     # DESCRIPTION:
@@ -118,32 +115,6 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE,
 
     method = method[1] 
     R = checkData(R, method="matrix")
-    
-    if(isTRUE(SE)){
-      if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
-      }
-      
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="SemiSD")
-      
-      # Computation of SE (optional)
-      ses=list()
-      # For each of the method specified in se.method, compute the standard error
-      for(mymethod in SE.control$se.method){
-        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SemiSD", se.method = mymethod, 
-                                           cleanOutliers=SE.control$cleanOutliers,
-                                           fitting.method=SE.control$fitting.method,
-                                           freq.include=SE.control$freq.include,
-                                           freq.par=SE.control$freq.par,
-                                           a=SE.control$a, b=SE.control$b,
-                                           ...)
-      }
-      ses <- t(data.frame(ses))
-    }
-    
 
     if (ncol(R)==1 || is.vector(R) || is.null(R)) {
         R = na.omit(R)
@@ -187,14 +158,8 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE,
             rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
         else
             rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR),1),"%)", sep="")
-        
-        if(SE) # SemiSD if SE computation
-          rownames(result) = "Semi-Standard Deviation" else
-            rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
-        
-        if(SE) # Check if SE computation
-          return(rbind(result, ses)) else
-            return (result)
+      
+        return (result)
     }
 }
 

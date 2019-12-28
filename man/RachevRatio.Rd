@@ -4,7 +4,7 @@
 \alias{RachevRatio}
 \title{Standard Error Estimate for Rachev Ratio of Returns}
 \usage{
-RachevRatio(R, alpha = 0.1, beta = 0.1, rf = 0, SE = TRUE,
+RachevRatio(R, alpha = 0.1, beta = 0.1, rf = 0, SE = FALSE,
   SE.control = NULL, ...)
 }
 \arguments{

@@ -31,7 +31,7 @@
 #'                fitting.method=c("Exponential", "Gamma")[1])
 #'
 RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
-                        SE=TRUE, SE.control=NULL,
+                        SE=FALSE, SE.control=NULL,
                         ...){
   
   

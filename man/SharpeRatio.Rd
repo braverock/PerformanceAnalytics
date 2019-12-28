@@ -7,7 +7,7 @@
 VaR or ES}
 \usage{
 SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
-  weights = NULL, annualize = FALSE, SE = TRUE, SE.control = NULL,
+  weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL,
   ...)
 
 SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR",

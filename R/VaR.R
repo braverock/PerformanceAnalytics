@@ -324,7 +324,7 @@ VaR <-
             clean=c("none","boudt","geltner","locScaleRob"),  
             portfolio_method=c("single","component","marginal"), 
             weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE,
-            SE=TRUE, SE.control=NULL)
+            SE=FALSE, SE.control=NULL)
   { # @author Brian G. Peterson
     
     # Descripion:

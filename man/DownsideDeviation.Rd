@@ -9,7 +9,7 @@
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
 DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
-  potential = FALSE, SE = TRUE, SE.control = NULL)
+  potential = FALSE)
 
 DownsidePotential(R, MAR = 0)
 
@@ -31,9 +31,6 @@ the MAR as the denominator, defaults to "full"}
 \item{\dots}{any other passthru parameters}
 
 \item{potential}{if TRUE, calculate downside potential instead, default
-#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
-
-\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 FALSE}
 }
 \description{

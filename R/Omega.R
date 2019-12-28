@@ -72,7 +72,7 @@
 Omega <-
 function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), 
          output = c("point", "full"), Rf = 0, 
-         SE=TRUE, SE.control=NULL,
+         SE=FALSE, SE.control=NULL,
          ...)
 { # @author Peter Carl
 

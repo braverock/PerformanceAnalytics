@@ -79,7 +79,7 @@
 #' @rdname SharpeRatio
 SharpeRatio <-
 function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , 
-          SE=TRUE, SE.control=NULL,
+          SE=FALSE, SE.control=NULL,
           ...)
 { # @author Brian G. Peterson
 
