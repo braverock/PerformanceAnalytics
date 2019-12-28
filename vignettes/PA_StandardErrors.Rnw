@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{pdfpages}
-%\VignetteIndexEntry{author2019mypaper}
+%\VignetteIndexEntry{PA_StandardErrors}
 
 \begin{document}
 \includepdf[pages=-, fitpaper=true]{PA_StandardErrors.pdf}

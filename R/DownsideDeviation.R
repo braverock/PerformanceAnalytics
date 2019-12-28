@@ -143,10 +143,6 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 	}
         
         result <- matrix(result, ncol=1)
-        if(SE)
-          rownames(result) = "Semi-Standard Deviation" else # SemiSD if SE computation
-            rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
-        colnames(result) = colnames(R)
         return (result)
     }
     else {
