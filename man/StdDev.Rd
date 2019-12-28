@@ -5,7 +5,7 @@
 \title{calculates Standard Deviation for univariate and multivariate series, also
 calculates component contribution to standard deviation of a portfolio}
 \usage{
-StdDev(R, ..., clean = c("none", "boudt", "geltner"),
+StdDev(R, ..., clean = c("none", "boudt", "geltner", "locScaleRob"),
   portfolio_method = c("single", "component"), weights = NULL,
   mu = NULL, sigma = NULL, use = "everything",
   method = c("pearson", "kendall", "spearman"), SE = FALSE,
@@ -18,7 +18,7 @@ returns}
 \item{\dots}{any other passthru parameters}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component" defining whether to do
 univariate/multivariate or component calc, see Details.}

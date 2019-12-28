@@ -6,10 +6,10 @@
 \title{calculate various Value at Risk (VaR) measures}
 \usage{
 VaR(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical", "kernel"), clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component", "marginal"),
-  weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL,
-  invert = TRUE, SE = TRUE, SE.control = NULL)
+  "historical", "kernel"), clean = c("none", "boudt", "geltner",
+  "locScaleRob"), portfolio_method = c("single", "component",
+  "marginal"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
+  m4 = NULL, invert = TRUE, SE = TRUE, SE.control = NULL)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -23,7 +23,7 @@ asset returns}
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component","marginal" defining
 whether to do univariate, component, or marginal calc, see Details.}

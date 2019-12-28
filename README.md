@@ -30,6 +30,7 @@ The package documentation includes sections on
 * Summary Tabular Data
 * Charts and Graphs
 * Wrapper and Utility Functions
+* Standard Errors for Risk and Performance Estimators
 
 It also includes some thoughts on work yet to be done,
 acknowledgments,

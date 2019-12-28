@@ -19,7 +19,7 @@
 #' @param method one of "modified","gaussian","historical", "kernel", see
 #' Details.
 #' @param clean method for data cleaning through \code{\link{Return.clean}}.
-#' Current options are "none", "boudt", or "geltner".
+#' Current options are "none", "boudt", "geltner", or "locScaleRob".
 #' @param portfolio_method one of "single","component","marginal" defining
 #' whether to do univariate, component, or marginal calc, see Details.
 #' @param weights portfolio weighting vector, default NULL, see Details
@@ -321,7 +321,7 @@
 #' @export
 VaR <-
   function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), 
-            clean=c("none","boudt","geltner"),  
+            clean=c("none","boudt","geltner","locScaleRob"),  
             portfolio_method=c("single","component","marginal"), 
             weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE,
             SE=TRUE, SE.control=NULL)
@@ -391,6 +391,15 @@ VaR <-
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(measure="VaR")
+      
+      # Check if robust cleaning parameters are the same
+      if(clean=="none"){
+        if(SE.control$cleanOutliers!=FALSE)
+          warning("A robust cleaning method was not used for the computation of the estimate, but was used for the compuation of the SE.")
+      } else if(clean!="none"){
+        if(clean!="locScaleRob")
+          warning("The robust cleaning method for the estimate was not the same was the one for the SE computation. It is preferred to use \"locScaleRob\" for both of them.")
+      }
       
       # Computation of SE (optional)
       ses=list()

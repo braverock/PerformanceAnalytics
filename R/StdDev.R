@@ -38,7 +38,7 @@
 #' returns
 #' @param \dots any other passthru parameters
 #' @param clean method for data cleaning through \code{\link{Return.clean}}.
-#' Current options are "none", "boudt", or "geltner".
+#' Current options are "none", "boudt", "geltner", or "locScaleRob".
 #' @param portfolio_method one of "single","component" defining whether to do
 #' univariate/multivariate or component calc, see Details.
 #' @param weights portfolio weighting vector, default NULL, see Details
@@ -78,7 +78,7 @@
 #' 
 #' 
 #' @export
-StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_method=c("single","component"), 
+StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  portfolio_method=c("single","component"), 
                     weights=NULL, mu=NULL, sigma=NULL, use="everything", 
                     method=c("pearson", "kendall", "spearman"),
                     SE=FALSE, SE.control=NULL)
@@ -134,6 +134,15 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
       if(is.null(SE.control))
         SE.control <- RPESE.control(measure="SD")
       
+      # Check if robust cleaning parameters are the same
+      if(clean=="none"){
+        if(SE.control$cleanOutliers!=FALSE)
+          warning("A robust cleaning method was not used for the computation of the estimate, but was used for the compuation of the SE.")
+      } else if(clean!="none"){
+          if(clean!="locScaleRob")
+            warning("The robust cleaning method for the estimate was not the same was the one for the SE computation. It is preferred to use \"locScaleRob\" for both of them.")
+      }
+      
       # Computation of SE (optional)
       ses=list()
       # For each of the method specified in se.method, compute the standard error
@@ -162,7 +171,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner"),  portfolio_metho
               
               if(SE) # Check if computation of SE
                 return(rbind(tsd, ses)) else
-                  return(ses)
+                  return(tsd)
               
             }, # end single portfolio switch
             component = {
