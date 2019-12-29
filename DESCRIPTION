@@ -41,7 +41,9 @@ Suggests:
     quantreg,
     gplots,
     testthat,
-    RPESE
+    RPESE,
+    R.rsp
+VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 URL: https://github.com/braverock/PerformanceAnalytics
