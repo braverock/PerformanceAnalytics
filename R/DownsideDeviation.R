@@ -53,7 +53,7 @@
 #' future, we'll add a fitted option to this function, and would be happy to
 #' accept a contribution of this nature.
 #' 
-#' @aliases DownsideDeviation SemiDeviation SemiVariance DownsidePotential
+#' @aliases DownsideDeviation SemiDeviation SemiVariance DownsidePotential SemiSD
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param MAR Minimum Acceptable Return, in the same periodicity as your

@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage{pdfpages}
-%\VignetteIndexEntry{PA_StandardErrors}
+%\VignetteIndexEntry{Standard Errors For Risk and Performance Estimators}
 
 \begin{document}
 \includepdf[pages=-, fitpaper=true]{PA_StandardErrors.pdf}

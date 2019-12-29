@@ -331,6 +331,17 @@ VaR <-
     
     # wrapper for univariate and multivariate VaR functions.
     
+    # Fix parameters if SE=TRUE
+    if(SE){
+      # Fix the method
+      method="historical"
+      portfolio_method="single"
+      invert=FALSE
+      if(SE.control$cleanOutliers)
+        clean="locScaleRob" else
+          clean="none"
+    }
+    
     # Setup:
     #if(exists(modified)({if( modified == TRUE) { method="modified" }}
     #if(method == TRUE or is.null(method) ) { method="modified" }
@@ -380,26 +391,9 @@ VaR <-
              call. = FALSE)
       }
       
-      # Checking all parameters
-      if(portfolio_method!="single")
-        warning("For SE computation, the \"portfolio_method\" should be \"single\" for a sensible output.")
-      if(method!="historical")
-        warning("For SE computation, the \"method\" should be \"historical\" for a sensible output.")
-      if(isTRUE(invert))
-        warning("For SE computation, the \"invert\" should be FALSE for a sensible output.")
-      
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(measure="VaR")
-      
-      # Check if robust cleaning parameters are the same
-      if(clean=="none"){
-        if(SE.control$cleanOutliers!=FALSE)
-          warning("A robust cleaning method was not used for the computation of the estimate, but was used for the compuation of the SE.")
-      } else if(clean!="none"){
-        if(clean!="locScaleRob")
-          warning("The robust cleaning method for the estimate was not the same was the one for the SE computation. It is preferred to use \"locScaleRob\" for both of them.")
-      }
       
       # Computation of SE (optional)
       ses=list()

@@ -87,6 +87,15 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
     # Descripion:
     
     # wrapper for univariate and multivariate standard deviation functions.
+  
+    # Fix parameters if SE=TRUE
+    if(SE){
+      # Fix the method
+      portfolio_method="single"
+      if(SE.control$cleanOutliers)
+        clean="locScaleRob" else
+          clean="none"
+    }
     
     # Setup:
     portfolio_method = portfolio_method[1]
@@ -126,6 +135,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
              call. = FALSE)
       }
       
+      
       # Checking all parameters
       if(portfolio_method!="single")
         stop("For SE computation, the portfolio method must be \"single\" to return an output.")
@@ -133,15 +143,6 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(measure="SD")
-      
-      # Check if robust cleaning parameters are the same
-      if(clean=="none"){
-        if(SE.control$cleanOutliers!=FALSE)
-          warning("A robust cleaning method was not used for the computation of the estimate, but was used for the compuation of the SE.")
-      } else if(clean!="none"){
-          if(clean!="locScaleRob")
-            warning("The robust cleaning method for the estimate was not the same was the one for the SE computation. It is preferred to use \"locScaleRob\" for both of them.")
-      }
       
       # Computation of SE (optional)
       ses=list()

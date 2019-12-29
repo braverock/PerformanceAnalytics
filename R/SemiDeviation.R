@@ -1,7 +1,9 @@
 #' @rdname DownsideDeviation
 #' @aliases SemiSD
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @export
-SemiDeviation <- SemiSD <-
+SemiDeviation <- 
 function (R,
           SE=FALSE, SE.control=NULL,
           ...)
@@ -56,6 +58,66 @@ function (R,
             return (result)
     }
 }
+
+#' @rdname DownsideDeviation
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
+#' @export
+SemiSD <-
+  function (R,
+            SE=FALSE, SE.control=NULL,
+            ...)
+  { # @author Peter Carl
+    
+    # DESCRIPTION:
+    # This function is just a wrapper of DownsideDeviation with
+    # MAR = mean(x)
+    # see below
+    
+    # FUNCTION:
+    
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="SemiSD")
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SemiSD", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
+    
+    if (is.vector(R)) {
+      R = na.omit(R)
+      return(DownsideDeviation(R, MAR=mean(R), method="full"))
+    }
+    else {
+      R = checkData(R, method = "matrix")
+      result = apply(R, 2, SemiDeviation)
+      result = matrix(result, nrow=1)
+      colnames(result) = colnames(R)
+      if(SE) # Name if SE computation
+        rownames(result) <- "Semi-Standard Deviation" else
+          rownames(result) = "Semi-Deviation"
+      if(SE) # Check if SE computation
+        return(rbind(result, ses)) else
+          return (result)
+    }
+  }
 
 #' @rdname DownsideDeviation
 #' @export
