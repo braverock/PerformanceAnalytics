@@ -42,7 +42,8 @@ Suggests:
     gplots,
     testthat,
     RPESE,
-    R.rsp
+    R.rsp,
+    RobStatTM
 VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8

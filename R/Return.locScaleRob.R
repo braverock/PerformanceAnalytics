@@ -1,11 +1,10 @@
-#' @import RobStatTM
 #'
 #' @title Robust Filter for Time Series Returns
 #'
 #' @description \code{Return.locScaleRob} returns the data after passing through a robust location and scale filter.
 #'
 #' @param R Data of returns for assets or portfolios.
-#' @param alpha Tuning parameter for the robust filter.
+#' @param alpha.robust Tuning parameter for the robust filter.
 #' @param normal.efficiency Normal efficiency for robust filter.
 #' @param ... Additional parameters.
 #'
@@ -25,7 +24,7 @@
 #'                  "ED", "FIA", "GM", "LS", "MA",
 #'                  "RV", "SS", "FOF")
 #' # Cleaning the returns time series for manager data
-#' outRob <- robust.cleaning(edhec$CA)
+#' outRob <- Return.locScaleRob(edhec$CA)
 #'
 # Implementation of the robust filter for the IF TS
 Return.locScaleRob <- function(R, alpha.robust=0.05, normal.efficiency=0.99){

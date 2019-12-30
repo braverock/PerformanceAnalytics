@@ -1,7 +1,5 @@
 #' @rdname DownsideDeviation
 #' @aliases SemiSD
-#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
-#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @export
 SemiDeviation <- 
 function (R,
@@ -60,8 +58,6 @@ function (R,
 }
 
 #' @rdname DownsideDeviation
-#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
-#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @export
 SemiSD <-
   function (R,

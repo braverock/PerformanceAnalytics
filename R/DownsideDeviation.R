@@ -64,6 +64,8 @@
 #' @param \dots any other passthru parameters
 #' @param potential if TRUE, calculate downside potential instead, default
 #' FALSE
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for \code{\link{SemiDeviation}} and \code{\link{SemiSD}}
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @author Peter Carl, Brian G. Peterson, Matthieu Lestel
 #' @references Sortino, F. and Price, L. Performance Measurement in a Downside
 #' Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr 

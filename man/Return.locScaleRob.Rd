@@ -9,9 +9,9 @@ Return.locScaleRob(R, alpha.robust = 0.05, normal.efficiency = 0.99)
 \arguments{
 \item{R}{Data of returns for assets or portfolios.}
 
-\item{normal.efficiency}{Normal efficiency for robust filter.}
+\item{alpha.robust}{Tuning parameter for the robust filter.}
 
-\item{alpha}{Tuning parameter for the robust filter.}
+\item{normal.efficiency}{Normal efficiency for robust filter.}
 
 \item{...}{Additional parameters.}
 }
@@ -30,7 +30,7 @@ names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
                  "ED", "FIA", "GM", "LS", "MA",
                  "RV", "SS", "FOF")
 # Cleaning the returns time series for manager data
-outRob <- robust.cleaning(edhec$CA)
+outRob <- Return.locScaleRob(edhec$CA)
 
 }
 \author{

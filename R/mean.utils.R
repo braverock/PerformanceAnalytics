@@ -14,13 +14,13 @@
 #' \code{\link{mean.UCL}} \tab upper confidence level (UCL) of the mean \cr }
 #' 
 #' 
-#' @aliases mean.utils mean.geometric mean.UCL mean.LCL mean.stderr
+#' @aliases mean.utils mean.geometric mean.UCL mean.LCL mean.stderr Mean.arithmetic
 #' @param x a vector, matrix, data frame, or time series to calculate the
 #' modified mean statistic over
 #' @param ci the confidence interval to use
-#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for  \code{\link{mean.arithmetic}}.
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for  \code{\link{Mean.arithmetic}}.
 #' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
-#' Only available for \code{\link{mean.arithmetic}}.
+#' Only available for \code{\link{Mean.arithmetic}}.
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
@@ -65,9 +65,9 @@ function (x, ...)
 }
 
 #' @rdname mean.geometric
-#' @method mean arithmetic
-#' @export mean.arithmetic
-mean.arithmetic <-
+#' @method Mean arithmetic
+#' @export Mean.arithmetic
+Mean.arithmetic <-
   function (x,
             SE=FALSE, SE.control=NULL, ...)
   {# @author Peter Carl
@@ -112,11 +112,11 @@ mean.arithmetic <-
     # FUNCTION:
     if (is.vector(x)) {
       x = na.omit(x)
-      mean.arithmetic = mean(x)
+      Mean.arithmetic = mean(x)
       
       if(SE) # Check if computation of SE
-        return(rbind(mean.arithmetic, ses)) else
-          return(mean.arithmetic)
+        return(rbind(Mean.arithmetic, ses)) else
+          return(Mean.arithmetic)
     }
     else {
       x = checkData(x, method = "matrix", ... = ...)

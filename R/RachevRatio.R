@@ -2,7 +2,7 @@
 #'
 #' @description \code{RachevRatio.SE} computes the standard error of the Rachev ratio of the returns.
 #'
-#' @param data Data of returns for one or multiple assets or portfolios.
+#' @param R Data of returns for one or multiple assets or portfolios.
 #' @param alpha Lower tail probability.
 #' @param beta Upper tail probability.
 #' @param rf Risk-free interest rate.
@@ -24,11 +24,8 @@
 #' names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
 #'                  "ED", "FIA", "GM", "LS", "MA",
 #'                  "RV", "SS", "FOF")
-#' # Computing the standard errors for
-#' # the two influence functions based approaches
-#' RachevRatio.SE(edhec, se.method=c("IFiid","IFcorAdapt"),
-#'                cleanOutliers=FALSE,
-#'                fitting.method=c("Exponential", "Gamma")[1])
+#' # Compute Rachev ratio for managers data
+#' RachevRatio(edhec)
 #'
 RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
                         SE=FALSE, SE.control=NULL,

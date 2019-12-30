@@ -16,7 +16,8 @@
 #' @param about_mean TRUE/FALSE calculate LPM about the mean under the threshold or use the threshold to calculate the LPM around (if FALSE)
 #' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
 #' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
-
+#' @param ... Additional parameters.
+#' 
 #' @author Kyle Balkissoon \email{kylebalkisoon@@gmail.com}
 #' @export
 lpm <- function(R, n=2, threshold=0, about_mean=FALSE,

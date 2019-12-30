@@ -19,6 +19,8 @@ lpm(R, n = 2, threshold = 0, about_mean = FALSE, SE = FALSE,
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 
 \item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
+
+\item{...}{Additional parameters.}
 }
 \description{
 Caclulate a Lower Partial Moment around the mean or a specified threshold.
