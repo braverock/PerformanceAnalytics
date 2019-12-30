@@ -256,7 +256,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
       method="historical"
       portfolio_method="single"
       invert=FALSE
-      if(SE.control$cleanOutliers)
+      if(SE.control$cleanOutliers=="locScaleRob")
         clean="locScaleRob" else
           clean="none"
     }

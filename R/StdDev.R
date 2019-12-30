@@ -92,7 +92,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
     if(SE){
       # Fix the method
       portfolio_method="single"
-      if(SE.control$cleanOutliers)
+      if(SE.control$cleanOutliers=="locScaleRob")
         clean="locScaleRob" else
           clean="none"
     }
