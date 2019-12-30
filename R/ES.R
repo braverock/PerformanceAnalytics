@@ -252,6 +252,11 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
   
     # Fix parameters if SE=TRUE
     if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="ES")
+      
       # Fix the method
       method="historical"
       portfolio_method="single"
@@ -307,10 +312,6 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
              call. = FALSE)
       }
       
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="ES")
-
       # Computation of SE (optional)
       ses=list()
       # For each of the method specified in se.method, compute the standard error

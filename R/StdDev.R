@@ -90,6 +90,11 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
   
     # Fix parameters if SE=TRUE
     if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="SD")
+      
       # Fix the method
       portfolio_method="single"
       if(SE.control$cleanOutliers=="locScaleRob")
@@ -139,10 +144,6 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
       # Checking all parameters
       if(portfolio_method!="single")
         stop("For SE computation, the portfolio method must be \"single\" to return an output.")
-
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="SD")
       
       # Computation of SE (optional)
       ses=list()

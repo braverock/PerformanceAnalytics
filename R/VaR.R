@@ -333,6 +333,11 @@ VaR <-
     
     # Fix parameters if SE=TRUE
     if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(measure="SD")
+      
       # Fix the method
       method="historical"
       portfolio_method="single"
@@ -390,10 +395,6 @@ VaR <-
         stop("Package \"pkg\" needed for standard errors computation. Please install it.",
              call. = FALSE)
       }
-      
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="VaR")
       
       # Computation of SE (optional)
       ses=list()
