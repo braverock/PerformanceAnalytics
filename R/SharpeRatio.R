@@ -175,7 +175,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure=SR.measure)
+        SE.control <- RPESE.control(estimator=SR.measure)
       
       # Computation of SE (optional)
       ses=list()

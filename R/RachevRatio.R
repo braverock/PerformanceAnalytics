@@ -42,7 +42,7 @@ RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
     
     # Setting the control parameters
     if(is.null(SE.control))
-      SE.control <- RPESE.control(measure="RachevRatio")
+      SE.control <- RPESE.control(estimator="RachevRatio")
     
     # Computation of SE (optional)
     ses=list()

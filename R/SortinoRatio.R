@@ -85,7 +85,7 @@ function (R, MAR = 0,...,
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="SoR")
+        SE.control <- RPESE.control(estimator="SoR")
       
       # Setting the threshold parameter
       if(threshold=="MAR")

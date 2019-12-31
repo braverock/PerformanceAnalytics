@@ -1,9 +1,9 @@
-#' @title Controls Function for the Computation of Standard Errors for Risk and Performance Measures
+#' @title Controls Function for the Computation of Standard Errors for Risk and Performance estimators
 #'
 #' @description \code{RPESE.controls} sets the different control parameters used in 
-#' the compuation of standard errors for risk and performance measures.
+#' the compuation of standard errors for risk and performance estimators.
 #'
-#' @param measure Risk or performance measure used to set default control parameters. Default is "Mean" measure.
+#' @param estimator Risk or performance estimator used to set default control parameters. Default is "Mean" estimator.
 #' @param se.method A character string indicating which method should be used to compute
 #' the standard error of the estimated standard deviation. One or a combination of:
 #' \code{"IFiid"} (default), \code{"IFcor"} (default), \code{"IFcorPW"}, \code{"IFcorAdapt"},
@@ -23,15 +23,15 @@
 #'
 #' @examples
 #' # Case where we want the default parameters for the ES
-#' ES.control <- RPESE.control(measure="ES")
+#' ES.control <- RPESE.control(estimator="ES")
 #' # Case where we also set additional parameters manually
-#' ES.control.2 <- RPESE.control(measure="ES", se.method=c("IFcor", "BOOTiid"),
+#' ES.control.2 <- RPESE.control(estimator="ES", se.method=c("IFcor", "BOOTiid"),
 #'                               cleanOutliers=TRUE, freq.include="Decimate")
 #' # These lists can be passed onto the functions (e.g., ES) to control the parameters
 #' # for computing and returning standard errors.
 #' 
 # Function to set the control parameters for standard errors computation
-RPESE.control <- function(measure=c("Mean","SD","VaR","ES","SR","SoR",
+RPESE.control <- function(estimator=c("Mean","SD","VaR","ES","SR","SoR",
                                     "ESratio", "VaRratio", "SoR", "LPM", 
                                     "OmegaRatio", "SemiSD", "RachevRatio")[1], 
                                     se.method=NULL, 
@@ -45,16 +45,18 @@ RPESE.control <- function(measure=c("Mean","SD","VaR","ES","SR","SoR",
   # Available estimator functions
   estimators.available <- c("Mean","SD","VaR","ES","SR","SoR",
                             "ESratio", "VaRratio", "SoR", "LPM", "OmegaRatio", "SemiSD", "RachevRatio")
-  # Checking if the specified risk measure is available
-  if(!(measure %in% estimators.available))
+  # Checking if the specified risk estimator is available
+  if(!(estimator %in% estimators.available))
     stop("The specified estimator function is not available.")
   
   # Setting the SE method (based on risk or performance)
-  if(measure %in% c("SD", "SemiSD", "LPM", "ES", "VaR"))
-    se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[1:2] else 
-      if(measure %in% c("Mean", "VaR", "SR", "SoR", "ESratio", "VaRratio", "OmegaRatio", "RachevRatio"))
-        se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[c(1,3)]
-  
+  if(is.null(se.method)){
+    if(estimator %in% c("SD", "SemiSD", "LPM", "ES", "VaR"))
+      se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[1:2] else 
+        if(estimator %in% c("Mean", "VaR", "SR", "SoR", "ESratio", "VaRratio", "OmegaRatio", "RachevRatio"))
+          se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[c(1,3)]
+  }
+
   # Setting the outlier cleaning option
   if(is.null(cleanOutliers))
     cleanOutliers <- FALSE

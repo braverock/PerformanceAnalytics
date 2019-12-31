@@ -336,7 +336,7 @@ VaR <-
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="SD")
+        SE.control <- RPESE.control(estimator="SD")
       
       # Fix the method
       method="historical"

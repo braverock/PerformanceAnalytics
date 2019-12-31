@@ -92,7 +92,7 @@ Mean.arithmetic <-
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="Mean")
+        SE.control <- RPESE.control(estimator="Mean")
       
       # Computation of SE (optional)
       ses=list()

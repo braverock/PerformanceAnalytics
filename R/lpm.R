@@ -85,7 +85,7 @@ lpm <- function(R, n=2, threshold=0, about_mean=FALSE,
     
     # Setting the control parameters
     if(is.null(SE.control))
-      SE.control <- RPESE.control(measure="LPM")
+      SE.control <- RPESE.control(estimator="LPM")
     
     # Computation of SE (optional)
     ses=list()

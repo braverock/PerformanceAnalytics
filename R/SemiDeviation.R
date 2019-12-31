@@ -22,7 +22,7 @@ function (R,
     
     # Setting the control parameters
     if(is.null(SE.control))
-      SE.control <- RPESE.control(measure="SemiSD")
+      SE.control <- RPESE.control(estimator="SemiSD")
     
     # Computation of SE (optional)
     ses=list()
@@ -80,7 +80,7 @@ SemiSD <-
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="SemiSD")
+        SE.control <- RPESE.control(estimator="SemiSD")
       
       # Computation of SE (optional)
       ses=list()

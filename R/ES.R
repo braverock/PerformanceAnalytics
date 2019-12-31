@@ -255,7 +255,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="ES")
+        SE.control <- RPESE.control(estimator="ES")
       
       # Fix the method
       method="historical"

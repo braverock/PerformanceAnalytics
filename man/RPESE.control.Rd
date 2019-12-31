@@ -2,16 +2,16 @@
 % Please edit documentation in R/RPESE.control.R
 \name{RPESE.control}
 \alias{RPESE.control}
-\title{Controls Function for the Computation of Standard Errors for Risk and Performance Measures}
+\title{Controls Function for the Computation of Standard Errors for Risk and Performance estimators}
 \usage{
-RPESE.control(measure = c("Mean", "SD", "VaR", "ES", "SR", "SoR",
+RPESE.control(estimator = c("Mean", "SD", "VaR", "ES", "SR", "SoR",
   "ESratio", "VaRratio", "SoR", "LPM", "OmegaRatio", "SemiSD",
   "RachevRatio")[1], se.method = NULL, cleanOutliers = NULL,
   fitting.method = NULL, freq.include = NULL, freq.par = NULL,
   a = NULL, b = NULL)
 }
 \arguments{
-\item{measure}{Risk or performance measure used to set default control parameters. Default is "Mean" measure.}
+\item{estimator}{Risk or performance estimator used to set default control parameters. Default is "Mean" estimator.}
 
 \item{se.method}{A character string indicating which method should be used to compute
 the standard error of the estimated standard deviation. One or a combination of:
@@ -35,13 +35,13 @@ A list of different control parameters for the computation of standard errors.
 }
 \description{
 \code{RPESE.controls} sets the different control parameters used in 
-the compuation of standard errors for risk and performance measures.
+the compuation of standard errors for risk and performance estimators.
 }
 \examples{
 # Case where we want the default parameters for the ES
-ES.control <- RPESE.control(measure="ES")
+ES.control <- RPESE.control(estimator="ES")
 # Case where we also set additional parameters manually
-ES.control.2 <- RPESE.control(measure="ES", se.method=c("IFcor", "BOOTiid"),
+ES.control.2 <- RPESE.control(estimator="ES", se.method=c("IFcor", "BOOTiid"),
                               cleanOutliers=TRUE, freq.include="Decimate")
 # These lists can be passed onto the functions (e.g., ES) to control the parameters
 # for computing and returning standard errors.

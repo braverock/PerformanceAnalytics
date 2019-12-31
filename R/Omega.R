@@ -132,7 +132,7 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"),
       
       # Setting the control parameters
       if(is.null(SE.control))
-        SE.control <- RPESE.control(measure="OmegaRatio")
+        SE.control <- RPESE.control(estimator="OmegaRatio")
       
       # Computation of SE (optional)
       ses=list()
