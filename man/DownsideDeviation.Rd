@@ -5,6 +5,7 @@
 \alias{SemiDeviation}
 \alias{SemiVariance}
 \alias{DownsidePotential}
+\alias{SemiSD}
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
 DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
@@ -12,7 +13,9 @@ DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
 
 DownsidePotential(R, MAR = 0)
 
-SemiDeviation(R)
+SemiDeviation(R, SE = FALSE, SE.control = NULL, ...)
+
+SemiSD(R, SE = FALSE, SE.control = NULL, ...)
 
 SemiVariance(R)
 }
@@ -31,6 +34,10 @@ the MAR as the denominator, defaults to "full"}
 
 \item{potential}{if TRUE, calculate downside potential instead, default
 FALSE}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for \code{\link{SemiDeviation}} and \code{\link{SemiSD}}}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Downside deviation, semideviation, and semivariance are measures of downside

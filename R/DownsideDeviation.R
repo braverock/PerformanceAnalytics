@@ -53,7 +53,7 @@
 #' future, we'll add a fitted option to this function, and would be happy to
 #' accept a contribution of this nature.
 #' 
-#' @aliases DownsideDeviation SemiDeviation SemiVariance DownsidePotential
+#' @aliases DownsideDeviation SemiDeviation SemiVariance DownsidePotential SemiSD
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param MAR Minimum Acceptable Return, in the same periodicity as your
@@ -64,6 +64,8 @@
 #' @param \dots any other passthru parameters
 #' @param potential if TRUE, calculate downside potential instead, default
 #' FALSE
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for \code{\link{SemiDeviation}} and \code{\link{SemiSD}}
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @author Peter Carl, Brian G. Peterson, Matthieu Lestel
 #' @references Sortino, F. and Price, L. Performance Measurement in a Downside
 #' Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr 
@@ -141,7 +143,9 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 	else {
 	     result = sqrt(sum((MAR - r)^2/len))
 	}
-        return(result)
+        
+        result <- matrix(result, ncol=1)
+        return (result)
     }
     else {
         R = checkData(R)
@@ -152,7 +156,8 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
             rownames(result) = paste("Downside Potential (MAR = ", round(mean(MAR),1),"%)", sep="")
         else
             rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR),1),"%)", sep="")
-        return(result)
+      
+        return (result)
     }
 }
 

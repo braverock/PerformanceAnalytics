@@ -8,10 +8,10 @@
 univariate and component, using a variety of analytical methods.}
 \usage{
 ETL(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical"), clean = c("none", "boudt", "geltner"),
+  "historical"), clean = c("none", "boudt", "geltner", "locScaleRob"),
   portfolio_method = c("single", "component"), weights = NULL,
   mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
-  operational = TRUE)
+  operational = TRUE, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -25,7 +25,7 @@ returns}
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component","marginal" defining
 whether to do univariate, component, or marginal calc, see Details.}
@@ -50,6 +50,10 @@ return series, default NULL, see Details}
 \item{invert}{TRUE/FALSE whether to invert the VaR measure, see Details.}
 
 \item{operational}{TRUE/FALSE, default TRUE, see Details.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at

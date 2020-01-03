@@ -57,7 +57,7 @@ ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness =
 
 }
 \references{
-Marcos Lopez de Prado. 2018. <em>Advances in Financial Machine Learning</em> (1st ed.). Wiley Publishing.
+Marcos Lopez de Prado. 2018. Advances in Financial Machine Learning (1st ed.). Wiley Publishing.
 }
 \author{
 Tasos Grivas <tasos@openriskcalculator.com>, Pulkit Mehrotra

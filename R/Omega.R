@@ -52,6 +52,8 @@
 #' @param method one of: simple, interp, binomial, blackscholes
 #' @param output one of: point (in time), or full (distribution of Omega)
 #' @param Rf risk free rate, as a single number
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link[Hmisc]{Ecdf}}
@@ -68,7 +70,10 @@
 #' 
 #' @export
 Omega <-
-function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), output = c("point", "full"), Rf = 0, ...)
+function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), 
+         output = c("point", "full"), Rf = 0, 
+         SE=FALSE, SE.control=NULL,
+         ...)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -118,6 +123,32 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
     # FUNCTION
     method = method[1]
     output = output[1]
+    
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator="OmegaRatio")
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "OmegaRatio", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           const = L, # Additional Parameter
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
 
     if (is.vector(R)) {
         x = na.omit(R)
@@ -160,7 +191,6 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
         ) # end method switch
 
         result = omega
-        return(result)
     }
     else {
         if(length(Rf)>1) Rf<-mean(Rf)
@@ -176,7 +206,10 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), o
             rownames(result) = paste("Omega (L = ", round(L*100,1),"%)", sep="")
         }
         colnames(result) = colnames(R)
-        return(result)
+        
+        if(SE) # Check if SE computation
+          return(rbind(result, ses)) else
+            return(result)
     }
 }
 

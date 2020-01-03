@@ -19,7 +19,7 @@
 #' @param method one of "modified","gaussian","historical", "kernel", see
 #' Details.
 #' @param clean method for data cleaning through \code{\link{Return.clean}}.
-#' Current options are "none", "boudt", or "geltner".
+#' Current options are "none", "boudt", "geltner", or "locScaleRob".
 #' @param portfolio_method one of "single","component","marginal" defining
 #' whether to do univariate, component, or marginal calc, see Details.
 #' @param weights portfolio weighting vector, default NULL, see Details
@@ -35,6 +35,8 @@
 #' m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
 #' return series, default NULL, see Details
 #' @param invert TRUE/FALSE whether to invert the VaR measure.  see Details.
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters
 #' @note The option to \code{invert} the VaR measure should appease both
 #' academics and practitioners.  The mathematical definition of VaR as the
@@ -318,12 +320,32 @@
 #' 
 #' @export
 VaR <-
-  function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt","geltner"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE)
+  function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), 
+            clean=c("none","boudt","geltner","locScaleRob"),  
+            portfolio_method=c("single","component","marginal"), 
+            weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE,
+            SE=FALSE, SE.control=NULL)
   { # @author Brian G. Peterson
     
     # Descripion:
     
     # wrapper for univariate and multivariate VaR functions.
+    
+    # Fix parameters if SE=TRUE
+    if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator="SD")
+      
+      # Fix the method
+      method="historical"
+      portfolio_method="single"
+      invert=FALSE
+      if(SE.control$cleanOutliers=="locScaleRob")
+        clean="locScaleRob" else
+          clean="none"
+    }
     
     # Setup:
     #if(exists(modified)({if( modified == TRUE) { method="modified" }}
@@ -368,6 +390,29 @@ VaR <-
     if (!is.null(R)){
     }
     
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "VaR", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           p=p, # Additional Parameter
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
+    
+    
     switch(portfolio_method,
            single = {
              if(is.null(weights)){
@@ -406,7 +451,10 @@ VaR <-
              } # end reasonableness checks
              if(invert) rVaR <- -rVaR
              rownames(rVaR)<-"VaR"
-             return(rVaR)
+             
+             if(SE) # Check if SE computation
+               return(rbind(rVaR,ses)) else
+                 return(rVaR)
            }, # end single portfolio switch
            component = {
              # @todo need to add another loop here for subsetting, I think, when weights is a timeseries
@@ -430,7 +478,7 @@ VaR <-
            }  # end marginal portfolio switch
     )
     
-  } # end VaR wrapper function
+    } # end VaR wrapper function
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis

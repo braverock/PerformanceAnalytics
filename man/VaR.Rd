@@ -6,10 +6,10 @@
 \title{calculate various Value at Risk (VaR) measures}
 \usage{
 VaR(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical", "kernel"), clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component", "marginal"),
-  weights = NULL, mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL,
-  invert = TRUE)
+  "historical", "kernel"), clean = c("none", "boudt", "geltner",
+  "locScaleRob"), portfolio_method = c("single", "component",
+  "marginal"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
+  m4 = NULL, invert = TRUE, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -23,7 +23,7 @@ asset returns}
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component","marginal" defining
 whether to do univariate, component, or marginal calc, see Details.}
@@ -46,6 +46,10 @@ m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the
 return series, default NULL, see Details}
 
 \item{invert}{TRUE/FALSE whether to invert the VaR measure.  see Details.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
