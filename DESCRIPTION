@@ -13,6 +13,8 @@ Authors@R: c(
   , person(given="Matthieu",family="Lestel",role="ctb")
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
+  , person(given="Anthony",family="Christidis",role="ctb")  
+  , person(given="Doug",family="Martin",role="ctb")  
   )
 Version: 1.5.3
 Date: 2019-06-22 $Date$
