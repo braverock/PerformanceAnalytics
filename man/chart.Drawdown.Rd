@@ -5,7 +5,7 @@
 \title{Time series chart of drawdowns through time}
 \usage{
 chart.Drawdown(R, geometric = TRUE, legend.loc = NULL,
-  colorset = (1:12), ...)
+  colorset = (1:12), plot.engine = "default", ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -19,6 +19,9 @@ bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 center.}
 
 \item{colorset}{color palette to use, set by default to rational choices}
+
+\item{plot.engine}{choose the plot engine you wish to use:
+ggplot2, plotly,dygraph,googlevis and default}
 
 \item{\dots}{any other passthru parameters}
 }
