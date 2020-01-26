@@ -4,8 +4,8 @@
 \alias{chart.Drawdown}
 \title{Time series chart of drawdowns through time}
 \usage{
-chart.Drawdown(R, geometric = TRUE, legend.loc = NULL, colorset = (1:12),
-  ...)
+chart.Drawdown(R, geometric = TRUE, legend.loc = NULL,
+  colorset = (1:12), ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

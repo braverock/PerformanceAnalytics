@@ -102,9 +102,12 @@ chart.QQPlot(x, main = "Normal Distribution",
 
 # Panel 2, Log-Normal distribution
 fit = fitdistr(1+x, 'lognormal')
-chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]]')
+chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, 
+    distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], 
+    sdlog = fit$estimate[[2]]')
 
 
+\dontrun{ 
 # Panel 3: Mixture Normal distribution
 library(nor1mix)
 obj = norMixEM(x,m=2)
@@ -122,7 +125,8 @@ round(fit.tSN$dp,3)
 
 chart.QQPlot(x, main = "MO Symmetric t-Distribution QQPlot",
 		xlab = "quantilesSymmetricTdistEst",line = c("quartiles"),
-		envelope = .95, distribution = 't', distributionParameter='df=fit.tSN$dp[3]',pch = 20)
+		envelope = .95, distribution = 't', 
+		distributionParameter='df=fit.tSN$dp[3]',pch = 20)
 
 # Panel 5: Skewed t distribution
 fit.st = st.mple(as.matrix(rep(1,n)),x)
@@ -132,18 +136,21 @@ round(fit.st$dp,3)
 
 chart.QQPlot(x, main = "MO Returns Skewed t-Distribution QQPlot",
 		xlab = "quantilesSkewedTdistEst",line = c("quartiles"),
-		envelope = .95, distribution = 'st',distributionParameter = 'xi = fit.st$dp[1],
+		envelope = .95, distribution = 'st',
+		distributionParameter = 'xi = fit.st$dp[1],
 				omega = fit.st$dp[2],alpha = fit.st$dp[3],
-				nu=fit.st$dp[4]',pch = 20)
+				nu=fit.st$dp[4]',
+		pch = 20)
 
-\dontrun{ 
 # Panel 6: Stable Parietian
 library(fBasics)
 fit.stable = stableFit(x,doplot=FALSE)
 chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, 
-             distribution = 'stable', distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
-             beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
-             delta = fit(stable.fit)$estimate[[4]], pm = 0')
+             distribution = 'stable', 
+             distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
+                 beta = fit(stable.fit)$estimate[[2]], 
+                 gamma = fit(stable.fit)$estimate[[3]], 
+                 delta = fit(stable.fit)$estimate[[4]], pm = 0')
 }
 
 #end examples

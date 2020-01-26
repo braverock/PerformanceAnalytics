@@ -5,15 +5,12 @@
 \alias{CAPM.CML}
 \alias{CAPM.RiskPremium}
 \alias{CAPM.utils}
-\alias{CAPM.CML}
-\alias{CAPM.CML.slope}
 \alias{CAPM.SML.slope}
 \alias{SFM.utils}
 \alias{SFM.RiskPremium}
 \alias{SFM.CML}
 \alias{SFM.CML.slope}
 \alias{SFM.SML.slope}
-\alias{CAPM.SML.slope}
 \title{utility functions for single factor (CAPM) CML, SML, and RiskPremium}
 \usage{
 CAPM.CML.slope(Rb, Rf = 0)

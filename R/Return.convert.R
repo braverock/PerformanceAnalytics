@@ -14,9 +14,8 @@
 #' @seealso \code{\link{Return.calculate}}
 ###keywords ts multivariate distribution models
 #' @examples
-#' TBD
+#' # TBD
 #' 
-#' @export
 Return.convert <- function(R
                            , destinationType = c("discrete","log","difference", "level")
                            , seedValue = NULL, initial = TRUE

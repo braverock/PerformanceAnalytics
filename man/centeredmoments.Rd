@@ -4,8 +4,6 @@
 \alias{Return.centered}
 \alias{centeredcomoment}
 \alias{centeredmoment}
-\alias{centeredmoment}
-\alias{centeredcomoment}
 \title{calculate centered Returns}
 \usage{
 Return.centered(R, ...)

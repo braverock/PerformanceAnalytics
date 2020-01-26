@@ -4,7 +4,6 @@
 \alias{MCA}
 \alias{M3.MCA}
 \alias{M4.MCA}
-\alias{M4.MCA}
 \title{Functions for doing Moment Component Analysis (MCA) of financial time series}
 \usage{
 M3.MCA(R, k = 1, as.mat = TRUE, ...)
@@ -75,8 +74,5 @@ With International Stock Markets. Journal of Business and Economic Statistics
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

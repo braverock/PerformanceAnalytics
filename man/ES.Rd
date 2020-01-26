@@ -8,10 +8,10 @@
 univariate and component, using a variety of analytical methods.}
 \usage{
 ETL(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical"), clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
-  sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
-  operational = TRUE)
+  "historical"), clean = c("none", "boudt", "geltner", "locScaleRob"),
+  portfolio_method = c("single", "component"), weights = NULL,
+  mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE,
+  operational = TRUE, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -25,7 +25,7 @@ returns}
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component","marginal" defining
 whether to do univariate, component, or marginal calc, see Details.}
@@ -50,6 +50,10 @@ return series, default NULL, see Details}
 \item{invert}{TRUE/FALSE whether to invert the VaR measure, see Details.}
 
 \item{operational}{TRUE/FALSE, default TRUE, see Details.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at
@@ -68,7 +72,9 @@ consistent with prior versions of PerformanceAnalytics, but make no value
 judgement on which approach is preferable.
 }
 \section{Background}{
- This function provides several estimation methods for
+ 
+
+This function provides several estimation methods for
 the Expected Shortfall (ES) (also called Expected Tail Loss (ETL)
 or Conditional Value at Risk (CVaR)) of a return series and the Component ES
 (ETL/CVaR) of a portfolio.
@@ -88,6 +94,56 @@ more appropriate. For the ES of a portfolio, it is also of interest to
 decompose total portfolio ES into the risk contributions of each of the
 portfolio components. For the above mentioned ES estimators, such a
 decomposition is possible in a financially meaningful way.
+}
+
+\section{Univariate estimation of ES}{
+
+
+The ES at a probability level \eqn{p} (e.g. 95\%) is  the negative value of
+the expected value of the return when the return is less than its
+\eqn{c=1-p} quantile. In a set of returns for which sufficently long history
+exists, the per-period ES can be estimated by the negative value of the
+sample average of all returns below the quantile. This method is also
+sometimes called \dQuote{historical ES}, as it is by definition \emph{ex
+post} analysis of the return distribution, and may be accessed with
+\code{method="historical"}.
+
+When you don't have a sufficiently long set of returns to use non-parametric
+or historical ES, or wish to more closely model an ideal distribution, it is
+common to us a parmetric estimate based on the distribution. Parametric ES
+does a better job of accounting for the tails of the distribution by more
+precisely estimating shape of the distribution tails of the risk quantile.
+The most common estimate is a normal (or Gaussian) distribution  \eqn{R\sim
+N(\mu,\sigma)} for the return series. In this case, estimation of ES requires
+the mean return  \eqn{\bar{R}}, the return distribution and the variance of
+the returns  \eqn{\sigma}. In the most common case, parametric VaR is thus
+calculated by
+
+\deqn{\sigma=variance(R)}{sigma=var(R)}
+
+\deqn{ES=-\bar{R} + \sqrt{\sigma} \cdot \frac{1}{c}\phi(z_{c}) }{VaR= -mean(R) + sqrt(sigma)*dnorm(z_c)/c}
+
+where  \eqn{z_{c}} is the  \eqn{c}-quantile of the standard normal
+distribution. Represented in \R by \code{qnorm(c)}, and may be accessed with
+\code{method="gaussian"}. The function \eqn{\phi}{dnorm} is the Gaussian
+density function.
+
+
+The limitations of Gaussian ES are well covered in the literature, since most
+financial return series are non-normal. Boudt, Peterson and Croux (2008)
+provide a modified ES calculation that takes the higher moments of non-normal
+distributions (skewness, kurtosis) into account through the use of a
+Cornish-Fisher expansion, and collapses to standard (traditional) Gaussian ES
+if the return stream follows a standard distribution. More precisely, for a
+loss probability \eqn{c}, modified ES is defined as the negative of the
+expected value of all returns below the \eqn{c} Cornish-Fisher quantile and
+where the expectation is computed under the second order Edgeworth expansion
+of the true distribution function.
+
+Modified expected shortfall should always be larger than modified Value at
+Risk. Due to estimation problems, this might not always be the case. Set
+Operational = TRUE to replace modified ES with modified VaR in the
+(exceptional) case where the modified ES is smaller than modified VaR.
 }
 
 \examples{
@@ -113,6 +169,7 @@ decomposition is possible in a financially meaningful way.
 
     # add Component ES for the equal weighted portfolio
     ES(edhec, clean="boudt", portfolio_method="component")
+    
 }
 \references{
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.

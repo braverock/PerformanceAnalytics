@@ -5,15 +5,14 @@
 \alias{M2.struct}
 \alias{M3.struct}
 \alias{M4.struct}
-\alias{M3.struct}
-\alias{M4.struct}
 \title{Functions for calculating structured comoments of financial time series}
 \usage{
 M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   f = NULL)
 
 M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
-  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
+  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE,
+  as.mat = TRUE)
 
 M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
   f = NULL, as.mat = TRUE)
@@ -106,8 +105,5 @@ Management Science, 39(5), 68-577.
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

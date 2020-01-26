@@ -5,3 +5,4 @@ ChangeLog
 ^.*\.Rproj$
 ^\.Rproj\.user$
 codeblock.txt
+^\.travis.yml

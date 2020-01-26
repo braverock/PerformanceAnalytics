@@ -5,7 +5,8 @@
 \title{Cumulates and graphs a set of periodic returns}
 \usage{
 chart.CumReturns(R, wealth.index = FALSE, geometric = TRUE,
-  legend.loc = NULL, colorset = (1:12), begin = c("first", "axis"), ...)
+  legend.loc = NULL, colorset = (1:12), begin = c("first", "axis"),
+  ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

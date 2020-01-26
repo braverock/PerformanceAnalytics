@@ -3,15 +3,15 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
-\alias{SharpeRatio.modified}
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
 SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
-  weights = NULL, annualize = FALSE, ...)
+  weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL,
+  ...)
 
-SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
-  weights = NULL, ...)
+SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR",
+  "ES"), weights = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -27,6 +27,10 @@ asset returns}
 \code{\link{VaR}}}
 
 \item{annualize}{if TRUE, annualize the measure, default FALSE}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 
 \item{\dots}{any other passthru parameters to the VaR or ES functions}
 }

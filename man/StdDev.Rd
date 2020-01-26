@@ -5,10 +5,11 @@
 \title{calculates Standard Deviation for univariate and multivariate series, also
 calculates component contribution to standard deviation of a portfolio}
 \usage{
-StdDev(R, ..., clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component"), weights = NULL, mu = NULL,
-  sigma = NULL, use = "everything", method = c("pearson", "kendall",
-  "spearman"))
+StdDev(R, ..., clean = c("none", "boudt", "geltner", "locScaleRob"),
+  portfolio_method = c("single", "component"), weights = NULL,
+  mu = NULL, sigma = NULL, use = "everything",
+  method = c("pearson", "kendall", "spearman"), SE = FALSE,
+  SE.control = NULL)
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset
@@ -17,7 +18,7 @@ returns}
 \item{\dots}{any other passthru parameters}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component" defining whether to do
 univariate/multivariate or component calc, see Details.}
@@ -40,6 +41,10 @@ abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"},
 \item{method}{a character string indicating which correlation coefficient
 (or covariance) is to be computed.  One of \code{"pearson"} (default),
 \code{"kendall"}, or \code{"spearman"}, can be abbreviated.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 calculates Standard Deviation for univariate and multivariate series, also

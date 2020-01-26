@@ -75,9 +75,12 @@
 #' 
 #' # Panel 2, Log-Normal distribution
 #' fit = fitdistr(1+x, 'lognormal')
-#' chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], sdlog = fit$estimate[[2]]')
+#' chart.QQPlot(1+x, main = "Log-Normal Distribution", envelope=0.95, 
+#'     distribution='lnorm',distributionParameter='meanlog = fit$estimate[[1]], 
+#'     sdlog = fit$estimate[[2]]')
 #' 
 #' 
+#' \dontrun{ 
 #' # Panel 3: Mixture Normal distribution
 #' library(nor1mix)
 #' obj = norMixEM(x,m=2)
@@ -95,7 +98,8 @@
 #' 
 #' chart.QQPlot(x, main = "MO Symmetric t-Distribution QQPlot",
 #' 		xlab = "quantilesSymmetricTdistEst",line = c("quartiles"),
-#' 		envelope = .95, distribution = 't', distributionParameter='df=fit.tSN$dp[3]',pch = 20)
+#' 		envelope = .95, distribution = 't', 
+#' 		distributionParameter='df=fit.tSN$dp[3]',pch = 20)
 #' 
 #' # Panel 5: Skewed t distribution
 #' fit.st = st.mple(as.matrix(rep(1,n)),x)
@@ -105,18 +109,21 @@
 #' 
 #' chart.QQPlot(x, main = "MO Returns Skewed t-Distribution QQPlot",
 #' 		xlab = "quantilesSkewedTdistEst",line = c("quartiles"),
-#' 		envelope = .95, distribution = 'st',distributionParameter = 'xi = fit.st$dp[1],
+#' 		envelope = .95, distribution = 'st',
+#' 		distributionParameter = 'xi = fit.st$dp[1],
 #' 				omega = fit.st$dp[2],alpha = fit.st$dp[3],
-#' 				nu=fit.st$dp[4]',pch = 20)
+#' 				nu=fit.st$dp[4]',
+#' 		pch = 20)
 #' 
-#' \dontrun{ 
 #' # Panel 6: Stable Parietian
 #' library(fBasics)
 #' fit.stable = stableFit(x,doplot=FALSE)
 #' chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95, 
-#'              distribution = 'stable', distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
-#'              beta = fit(stable.fit)$estimate[[2]], gamma = fit(stable.fit)$estimate[[3]], 
-#'              delta = fit(stable.fit)$estimate[[4]], pm = 0')
+#'              distribution = 'stable', 
+#'              distributionParameter = 'alpha = fit(stable.fit)$estimate[[1]], 
+#'                  beta = fit(stable.fit)$estimate[[2]], 
+#'                  gamma = fit(stable.fit)$estimate[[3]], 
+#'                  delta = fit(stable.fit)$estimate[[4]], pm = 0')
 #' }
 #' 
 #' #end examples
@@ -167,7 +174,8 @@ chart.QQPlot <-
 	n <- length(ord.x)
 	P <- ppoints(n)
 #	z <- q.function(P, ...)
-	
+	z <- NULL
+
 	eval(parse(text=paste("	z <- q.function(P,", distributionParameter,",...)")))
 	
 	plot(z, ord.x, xlab = xlab, ylab = ylab, main = main, las = las, 
@@ -176,6 +184,7 @@ chart.QQPlot <-
 	if (line == "quartiles") {
 		Q.x <- quantile(ord.x, c(0.25, 0.75))
 		
+		Q.z<-NULL
 		eval(parse(text=paste("	Q.z <- q.function(c(0.25, 0.75),", distributionParameter,",...)")))
 #		Q.z <- q.function(c(0.25, 0.75), ...)
 		b <- (Q.x[2] - Q.x[1])/(Q.z[2] - Q.z[1])
@@ -191,6 +200,8 @@ chart.QQPlot <-
 	}
 	if (line != "none" & envelope != FALSE) {
 		zz <- qnorm(1 - (1 - envelope)/2)
+		
+		SE<-NULL
 		eval(parse(text=paste("	SE <- (b/d.function(z,", distributionParameter,",...))* sqrt(P * (1 - P)/n)")))
 		
 #		SE <- (b/d.function(z, ...)) * sqrt(P * (1 - P)/n)

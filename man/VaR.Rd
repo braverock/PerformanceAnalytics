@@ -6,9 +6,10 @@
 \title{calculate various Value at Risk (VaR) measures}
 \usage{
 VaR(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical", "kernel"), clean = c("none", "boudt", "geltner"),
-  portfolio_method = c("single", "component", "marginal"), weights = NULL,
-  mu = NULL, sigma = NULL, m3 = NULL, m4 = NULL, invert = TRUE)
+  "historical", "kernel"), clean = c("none", "boudt", "geltner",
+  "locScaleRob"), portfolio_method = c("single", "component",
+  "marginal"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
+  m4 = NULL, invert = TRUE, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -22,7 +23,7 @@ asset returns}
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
-Current options are "none", "boudt", or "geltner".}
+Current options are "none", "boudt", "geltner", or "locScaleRob".}
 
 \item{portfolio_method}{one of "single","component","marginal" defining
 whether to do univariate, component, or marginal calc, see Details.}
@@ -45,6 +46,10 @@ m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the
 return series, default NULL, see Details}
 
 \item{invert}{TRUE/FALSE whether to invert the VaR measure.  see Details.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
@@ -65,25 +70,6 @@ The prototype of the univariate Cornish Fisher VaR function was completed by
 Prof. Diethelm Wuertz.  All corrections to the calculation and error
 handling are the fault of Brian Peterson.
 }
-\section{Background}{
- This function provides several estimation methods for
-the Value at Risk (typically written as VaR) of a return series and the
-Component VaR of a portfolio. Take care to capitalize VaR in the commonly
-accepted manner, to avoid confusion with var (variance) and VAR (vector
-auto-regression).  VaR is an industry standard for measuring downside risk.
-For a return series, VaR is defined as the high quantile (e.g. ~a 95% or 99%
-quantile) of the negative value of the returns. This quantile needs to be
-estimated.  With a sufficiently large data set, you may choose to utilize
-the empirical quantile calculated using \code{\link{quantile}}.  More
-efficient estimates of VaR are obtained if a (correct) assumption is made on
-the return distribution, such as the normal distribution.  If your return
-series is skewed and/or has excess kurtosis, Cornish-Fisher estimates of VaR
-can be more appropriate.  For the VaR of a portfolio, it is also of interest
-to decompose total portfolio VaR into the risk contributions of each of the
-portfolio components.  For the above mentioned VaR estimators, such a
-decomposition is possible in a financially meaningful way.
-}
-
 \examples{
 
     data(edhec)

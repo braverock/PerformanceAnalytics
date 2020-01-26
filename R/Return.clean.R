@@ -76,7 +76,10 @@ function(R, method = c("none","boudt","geltner"), alpha=.01, ...)
             },
 	    geltner = {
 		R.clean = Return.Geltner(R[,column])
-	    }
+	    },
+		locScaleRob = {
+		  R.clean = Return.locScaleRob(R[,column], ...)
+		}
         )
 
         if(column == 1) {

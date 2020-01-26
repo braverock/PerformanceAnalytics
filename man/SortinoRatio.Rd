@@ -4,7 +4,8 @@
 \alias{SortinoRatio}
 \title{calculate Sortino Ratio of performance over downside risk}
 \usage{
-SortinoRatio(R, MAR = 0, ..., weights = NULL)
+SortinoRatio(R, MAR = 0, ..., weights = NULL, threshold = c("MAR",
+  "mean")[1], SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -16,6 +17,12 @@ returns}
 \item{\dots}{any other passthru parameters}
 
 \item{weights}{portfolio weighting vector, default NULL}
+
+\item{threshold}{Parameter to determine whether we use a "MAR" (default) or "mean" threshold.}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Sortino proposed an improvement on the Sharpe Ratio to better account for

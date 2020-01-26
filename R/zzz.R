@@ -1,17 +1,3 @@
-.onLoad <- function(lib, pkg)
-{   
-    # Startup Mesage and Desription:
-    MSG <- if(getRversion() >= "2.5") packageStartupMessage else message
-    dsc <- packageDescription(pkg)
-    if(interactive() || getOption("verbose")) { 
-        # not in test scripts
-        MSG(paste("\nPackage ", pkg, " (",dsc$Version,") loaded.\n",
-            # dsc$Title, "\n", 
-            "Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson, ", 
-            dsc$License, "\n", dsc$URL,
-            "\n", sep=""))
-    }
-}
 
 even <- function (x) x%%2==0
 

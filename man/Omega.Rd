@@ -4,8 +4,9 @@
 \alias{Omega}
 \title{calculate Omega for a return series}
 \usage{
-Omega(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"),
-  output = c("point", "full"), Rf = 0, ...)
+Omega(R, L = 0, method = c("simple", "interp", "binomial",
+  "blackscholes"), output = c("point", "full"), Rf = 0, SE = FALSE,
+  SE.control = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -19,6 +20,10 @@ a benchmark index, or an absolute rate of return - any specified level}
 \item{output}{one of: point (in time), or full (distribution of Omega)}
 
 \item{Rf}{risk free rate, as a single number}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 
 \item{\dots}{any other passthru parameters}
 }
