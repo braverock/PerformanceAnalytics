@@ -25,13 +25,11 @@ The engines added onto the functions are:
 
 A demo of different plot engines in different functions will be shown as below:
 
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 library(PerformanceAnalytics)
 library(xts)
 library(zoo)
 library(ggplot2)
-library(tidyr) #check whether can use data.table to substitute
-library(dplyr) #check if can take out
 library(plotly)
 library(dygraphs)
 library(googleVis)
@@ -45,12 +43,12 @@ data("edhec")
 This function includes plotting engine: "ggplot2","plotly".
 
 ## ggplot2
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.Boxplot(edhec,plot.engine = "ggplot2",main="demo")
 ```
 
 ## plotly
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.Boxplot(edhec,plot.engine = "plotly",main="demo")
 ```
 
@@ -60,17 +58,17 @@ chart.Boxplot(edhec,plot.engine = "plotly",main="demo")
 This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
 
 ## ggplot2
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.TimeSeries(edhec,plot.engine = "ggplot2",main="demo")
 ```
 
 ## plotly
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.TimeSeries(edhec,plot.engine = "plotly",main="demo")
 ```
 
 ## dygraphPlot
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.TimeSeries(edhec,plot.engine = "dygraph",main="demo")
 ```
 
@@ -80,17 +78,17 @@ chart.TimeSeries(edhec,plot.engine = "dygraph",main="demo")
 This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
 
 ## ggplot2
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.CumReturns(edhec,plot.engine = "ggplot2",main="demo")
 ```
 
 ## plotly
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.CumReturns(edhec,plot.engine = "plotly",main="demo")
 ```
 
 ## dygraphPlot
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.CumReturns(edhec,plot.engine = "dygraph",main="demo")
 ```
 
@@ -100,17 +98,17 @@ chart.CumReturns(edhec,plot.engine = "dygraph",main="demo")
 This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
 
 ## ggplot2
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.Drawdown(edhec,plot.engine = "ggplot2",main="demo")
 ```
 
 ## plotly
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.Drawdown(edhec,plot.engine = "plotly",main="demo")
 ```
 
 ## dygraphPlot
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 chart.Drawdown(edhec,plot.engine = "dygraph",main="demo")
 ```
 
@@ -120,16 +118,16 @@ chart.Drawdown(edhec,plot.engine = "dygraph",main="demo")
 This function includes plotting engine: "ggplot2","plotly"
 
 ## ggplot2
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 charts.PerformanceSummary(edhec,plot.engine = "ggplot2",main="demo")
 ```
 
 ## plotly
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 charts.PerformanceSummary(edhec,plot.engine = "plotly",main="demo")
 ```
 
 ## dygraphPlot
-```{r echo = FALSE， warning = FALSE, message = FALSE, error=FALSE}
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 charts.PerformanceSummary(edhec,plot.engine = "dygraph",main="demo")
 ```
