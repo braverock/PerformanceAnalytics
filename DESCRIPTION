@@ -47,7 +47,7 @@ Suggests:
     googleVis,
     plotly,
     gridExtra,
-    ggpubr
+    ggpubr,
     RPESE,
     R.rsp,
     RobStatTM
