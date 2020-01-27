@@ -61,7 +61,7 @@ chart.TimeSeries.ggplot2<-
 
     # Plotting
     plot <- ggplot2::ggplot(y, ggplot2::aes(x = date, y = value)) +
-      ggplot2::geom_line(ggplot2::aes(color = variable), size = lwd) +
+      ggplot2::geom_line(ggplot2::aes(color = colorset), size = lwd) +
       ggplot2::ggtitle(main)
 
     # adjust of yaxis if in percentage
