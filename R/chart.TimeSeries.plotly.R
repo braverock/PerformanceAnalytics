@@ -15,11 +15,11 @@ chart.TimeSeries.plotly <-
     
     R = checkData(R, method="data.frame")
     
-    plot <- plotly::layout(plot_ly(R, mode = 'lines'), title=main)
+    plot <- plotly::layout(plotly::plot_ly(R, mode = 'lines'), title=main)
     
     
     for(i in 1:columns){
-      plot <- add_trace(plot,
+      plot <- plotly::add_trace(plot,
                         y = R[[i]],
                         x = date,
                         mode = 'lines',

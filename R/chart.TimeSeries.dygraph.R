@@ -4,7 +4,7 @@
 chart.TimeSeries.dygraph <-
   function(R){
     y = checkData(R,method='xts')
-    plot <- dygraph(y)
+    plot <- dygraphs::dygraph(y)
     
     return(plot)
   }

@@ -176,9 +176,9 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
     }
     
     if(plot.engine == "plotly"){
-      p <- plot_ly(type = "box")
+      p <- plotly::plot_ly(type = "box")
       for(i in 1:columns){
-        p <- add_boxplot(p,R[[i]],name = columnnames[i])
+        p <- plotly::add_boxplot(p,R[[i]],name = columnnames[i])
       }
       
       return(p)

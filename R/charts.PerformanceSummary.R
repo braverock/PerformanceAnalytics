@@ -243,7 +243,7 @@ function (R, Rf = 0,
             #                             ylog=FALSE, 
             #                             gap = gap, p=p, 
             #                             add = TRUE,
-            #                             plot_engine = "ggplot2",
+            #                             plot.engine = "ggplot2",
             #                             ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 
@@ -256,9 +256,9 @@ function (R, Rf = 0,
                                         plot.engine = "ggplot2",
                                         ...)
             
-            plot_object <- grid.arrange(plot_object_CumReturn,
-                                        plot_object_Drawdown,
-                                        nrow = 2)
+            plot_object <- gridExtra::grid.arrange(plot_object_CumReturn,
+                                                   plot_object_Drawdown,
+                                                   nrow = 2)
 
             return(plot_object)
             },
@@ -288,7 +288,7 @@ function (R, Rf = 0,
             #                              ylog=FALSE, 
             #                              gap = gap, p=p, 
             #                              add = TRUE,
-            #                              plot_engine = "plotly",
+            #                              plot.engine = "plotly",
             #                              ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 
@@ -300,8 +300,9 @@ function (R, Rf = 0,
                                          plot.engine = "plotly",
                                          ...)
             
-            plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,
-                                  nrows = 2)
+            plot_object = plotly::subplot(plot_object_CumReturn, 
+                                          plot_object_Drawdown,
+                                          nrows = 2)
             
             return(plot_object)
             }

@@ -37,7 +37,7 @@ chart.TimeSeries.ggplot2<-
             grid.color, 
             grid.lty, 
             xaxis.labels,
-            plot_engine,
+            plot.engine,
             yaxis.pct)
 
 {
@@ -51,7 +51,7 @@ chart.TimeSeries.ggplot2<-
     y = data.frame(date=index(y),coredata(y))
     
     # Stack columns as rows and add variable role
-    y = data.frame(y[1], stack(y[2:ncol(y)]))
+    y = data.frame(y[1], utils::stack(y[2:ncol(y)]))
     col_names = colnames(y)
     
     col_names[2] = "value"
@@ -60,9 +60,9 @@ chart.TimeSeries.ggplot2<-
     colnames(y) = col_names
 
     # Plotting
-    plot <- ggplot(y, aes(x = date, y = value)) +
-      geom_line(aes(color = variable), size = lwd) +
-      ggtitle(main)
+    plot <- ggplot2::ggplot(y, ggplot2::aes(x = date, y = value)) +
+      ggplot2::geom_line(ggplot2::aes(color = variable), size = lwd) +
+      ggplot2::ggtitle(main)
 
     # adjust of yaxis if in percentage
     if(yaxis.pct)
@@ -77,13 +77,13 @@ chart.TimeSeries.ggplot2<-
 
     #draw lines and add title
     # grid line format
-    plot + theme(
-      panel.grid = element_line(colour = grid.color,
-                                linetype = grid.lty)
+    plot + ggplot2::theme(
+      panel.grid = ggplot2::element_line(colour = grid.color,
+                                         linetype = grid.lty)
     )
 
     # set legend position
-    plot + theme(legend.position = legend.loc)
+    plot + ggplot2::theme(legend.position = legend.loc)
     plot + xlab(xlab) +ylab(ylab)
 
 
