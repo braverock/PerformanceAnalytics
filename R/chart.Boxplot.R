@@ -160,7 +160,17 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       par(op)}
     
     if(plot.engine == "ggplot2"){
-      p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
+      R = data.frame(date=index(R),coredata(R))
+      
+      # Stack columns as rows and add variable role
+      R = data.frame(R[1], stack(R[2:ncol(R)]))
+      col_names = colnames(R)
+      
+      col_names[2] = "value"
+      col_names[3] = "variable"
+      
+      colnames(R) = col_names
+      p <- ggplot(data = R, aes(x=variable, y=value)) + 
         geom_boxplot(aes(fill=variable))
       return (p)
     }

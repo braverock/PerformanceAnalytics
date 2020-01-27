@@ -113,7 +113,7 @@ chart.Drawdown(edhec,plot.engine = "dygraph",main="demo")
 ```
 
 
-# charts.Performance
+# charts.PerformanceSummary
 
 This function includes plotting engine: "ggplot2","plotly"
 
@@ -125,9 +125,4 @@ charts.PerformanceSummary(edhec,plot.engine = "ggplot2",main="demo")
 ## plotly
 ```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
 charts.PerformanceSummary(edhec,plot.engine = "plotly",main="demo")
-```
-
-## dygraphPlot
-```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
-charts.PerformanceSummary(edhec,plot.engine = "dygraph",main="demo")
 ```

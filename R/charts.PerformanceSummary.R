@@ -96,10 +96,8 @@ function (R, Rf = 0,
     
     #Argument Check
     if(plot.engine != "default"&&
-       plot.engine != "dygraph"&&
        plot.engine != "ggplot2"&&
-       plot.engine != "plotly"&&
-       plot.engine != "googlevis"){
+       plot.engine != "plotly"){
         warning('Please use correct arguments:
               "default","ggplot2","plotly".
               
@@ -279,6 +277,7 @@ function (R, Rf = 0,
                                         plot.engine = "plotly",
                                         ...)
             
+            # Legacy code of BarVar
             # plot_object_BarVar <- chart.BarVaR(x, 
             #                              main = paste(date.label,"Return"), 
             #                              xaxis = FALSE, 
