@@ -163,15 +163,15 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       R = data.frame(date=index(R),coredata(R))
       
       # Stack columns as rows and add variable role
-      R = data.frame(R[1], stack(R[2:ncol(R)]))
+      R = data.frame(R[1], utils::stack(R[2:ncol(R)]))
       col_names = colnames(R)
       
       col_names[2] = "value"
       col_names[3] = "variable"
       
       colnames(R) = col_names
-      p <- ggplot(data = R, aes(x=variable, y=value)) + 
-        geom_boxplot(aes(fill=variable))
+      p <- ggplot2::ggplot(data = R, ggplot2::aes(x=variable, y=value)) + 
+                           ggplot2::geom_boxplot(aes(fill=variable))
       return (p)
     }
     
