@@ -258,9 +258,9 @@ function (R, Rf = 0,
                                         plot.engine = "ggplot2",
                                         ...)
             
-            plot_object <- grid.arrange(plot_object_CumReturn,
-                                        plot_object_Drawdown,
-                                        nrow = 2)
+            plot_object <- gridExtra::grid.arrange(plot_object_CumReturn,
+                                                   plot_object_Drawdown,
+                                                   nrow = 2)
 
             return(plot_object)
             },
