@@ -301,8 +301,9 @@ function (R, Rf = 0,
                                          plot.engine = "plotly",
                                          ...)
             
-            plot_object = subplot(plot_object_CumReturn, plot_object_Drawdown,
-                                  nrows = 2)
+            plot_object = plotly::subplot(plot_object_CumReturn, 
+                                          plot_object_Drawdown,
+                                          nrows = 2)
             
             return(plot_object)
             }

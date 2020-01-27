@@ -160,15 +160,15 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       par(op)}
     
     if(plot.engine == "ggplot2"){
-      p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
-        geom_boxplot(aes(fill=variable))
+      p <- ggplot2::ggplot(data = melt(R), ggplot2::aes(x=variable, y=value)) + 
+                           ggplot2::geom_boxplot(aes(fill=variable))
       return (p)
     }
     
     if(plot.engine == "plotly"){
-      p <- plot_ly(type = "box")
+      p <- plotly::plot_ly(type = "box")
       for(i in 1:columns){
-        p <- add_boxplot(p,R[[i]],name = columnnames[i])
+        p <- plotly::add_boxplot(p,R[[i]],name = columnnames[i])
       }
       
       return(p)
