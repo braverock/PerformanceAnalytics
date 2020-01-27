@@ -48,7 +48,7 @@ chart.TimeSeries.ggplot2(R, auto.grid, xaxis, yaxis, yaxis.right, type,
   element.color, event.lines, event.labels, period.areas, event.color,
   period.color, colorset, pch, legend.loc, ylog, cex.axis, cex.legend,
   cex.lab, cex.labels, cex.main, major.ticks, minor.ticks, grid.color,
-  grid.lty, xaxis.labels, plot_engine, yaxis.pct)
+  grid.lty, xaxis.labels, yaxis.pct)
 
 chart.TimeSeries.googlevis(R, xlab, ylab, main)
 

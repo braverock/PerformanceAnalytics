@@ -160,7 +160,6 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       par(op)}
     
     if(plot.engine == "ggplot2"){
-      require(reshape2)
       p <- ggplot(data = melt(R), aes(x=variable, y=value)) + 
         geom_boxplot(aes(fill=variable))
       return (p)
