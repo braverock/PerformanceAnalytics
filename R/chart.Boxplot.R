@@ -171,7 +171,7 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       
       colnames(R) = col_names
       p <- ggplot2::ggplot(data = R, ggplot2::aes(x=variable, y=value)) + 
-                           ggplot2::geom_boxplot(aes(fill=variable))
+                           ggplot2::geom_boxplot(ggplot2::aes(fill=variable))
       return (p)
     }
     
