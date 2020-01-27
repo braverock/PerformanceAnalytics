@@ -245,7 +245,7 @@ function (R, Rf = 0,
             #                             ylog=FALSE, 
             #                             gap = gap, p=p, 
             #                             add = TRUE,
-            #                             plot_engine = "ggplot2",
+            #                             plot.engine = "ggplot2",
             #                             ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 
@@ -289,7 +289,7 @@ function (R, Rf = 0,
             #                              ylog=FALSE, 
             #                              gap = gap, p=p, 
             #                              add = TRUE,
-            #                              plot_engine = "plotly",
+            #                              plot.engine = "plotly",
             #                              ...)
             
             plot_object_Drawdown <- chart.Drawdown(x, 

@@ -37,7 +37,7 @@ chart.TimeSeries.ggplot2<-
             grid.color, 
             grid.lty, 
             xaxis.labels,
-            plot_engine,
+            plot.engine,
             yaxis.pct)
 
 {
