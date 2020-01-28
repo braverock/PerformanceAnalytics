@@ -41,34 +41,36 @@ chart.TimeSeries.ggplot2<-
             yaxis.pct)
 
 {
-    y = checkData(R,method='xts')
-  
+    
+    require(ggplot2) 
+    R = checkData(R,method='xts')
+    
     # Extract basic info
-    columns = ncol(y)
-    rows = nrow(y)
-    columnnames = colnames(y)
+    columns = ncol(R)
+    rows = nrow(R)
+    columnnames = colnames(R)
     
-    y = data.frame(date=index(y),coredata(y))
+    R = data.frame(date=index(R),coredata(R))
     
-    # Stack columns as rows and add variable role
-    y = data.frame(y[1], utils::stack(y[2:ncol(y)]))
-    col_names = colnames(y)
+    # Stack columns as rows and add security role
+    R = data.frame(R[1], utils::stack(R[2:ncol(R)]))
+    col_names = colnames(R)
     
-    col_names[2] = "value"
-    col_names[3] = "variable"
+    col_names[2] = "returns"
+    col_names[3] = "security"
     
-    colnames(y) = col_names
+    colnames(R) = col_names
 
-    value = y[,"value"]
-    date = y[,"date"]
-    variable = y[,"variable"]
+    returns = R[,"returns"]
+    date = R[,"date"]
+    security = R[,"security"]
     
     # adjust of yaxis if in percentage
     if(yaxis.pct)
-      value = value * 100
+      returns = returns * 100
     # Plotting
-    plot <- ggplot2::ggplot(y, ggplot2::aes(x = date, y = value)) +
-      ggplot2::geom_line(ggplot2::aes(color = variable), size = lwd) +
+    plot <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns)) +
+      ggplot2::geom_line(ggplot2::aes(color = security), size = lwd) +
       ggplot2::ggtitle(main)
 
 
