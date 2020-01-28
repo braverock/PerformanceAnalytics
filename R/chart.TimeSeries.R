@@ -161,7 +161,7 @@ chart.TimeSeries <-
             yaxis.right = FALSE, 
             type = "l", 
             lty = 1, 
-            lwd = 2, 
+            lwd = 1, 
             las = par("las"),
             main = "", 
             ylab="", 
@@ -193,12 +193,12 @@ chart.TimeSeries <-
             plot.engine = "default",
             yaxis.pct=FALSE)
 {
-    #Check Arguments
-    if(hasArg(dygraphPlot)){
-      warning('dygraphPlot argument to chart.TimeSeries has been deprecated, 
-              please use plot.engine="dygraph" instead.')
-      plot.engine = "dygraph"
-    }
+    #Check Arguments for dygraphPlot
+    # if(hasArg(dygraphPlot)){
+    #   warning('dygraphPlot argument to chart.TimeSeries has been deprecated, 
+    #           please use plot.engine="dygraph" instead.')
+    #   plot.engine = "dygraph"
+    # }
     
     if(plot.engine != "default"&&
        plot.engine != "dygraph"&&

@@ -59,14 +59,19 @@ chart.TimeSeries.ggplot2<-
     
     colnames(y) = col_names
 
-    # Plotting
-    plot <- ggplot2::ggplot(y, ggplot2::aes(x = date, y = value)) +
-      ggplot2::geom_line(ggplot2::aes(color = colorset), size = lwd) +
-      ggplot2::ggtitle(main)
-
+    value = y[,"value"]
+    date = y[,"date"]
+    variable = y[,"variable"]
+    
     # adjust of yaxis if in percentage
     if(yaxis.pct)
-      y = y * 100
+      value = value * 100
+    # Plotting
+    plot <- ggplot2::ggplot(y, ggplot2::aes(x = date, y = value)) +
+      ggplot2::geom_line(ggplot2::aes(color = variable), size = lwd) +
+      ggplot2::ggtitle(main)
+
+
 
     # format xlim and ylim
     if(!is.null(xlim[1])) # is.na or is.null?

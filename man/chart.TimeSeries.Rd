@@ -16,7 +16,7 @@
 \usage{
 chart.TimeSeries(R, ..., auto.grid = TRUE, xaxis = TRUE,
   yaxis = TRUE, yaxis.right = FALSE, type = "l", lty = 1,
-  lwd = 2, las = par("las"), main = "", ylab = "", xlab = "",
+  lwd = 1, las = par("las"), main = "", ylab = "", xlab = "",
   date.format.in = "\%Y-\%m-\%d", date.format = NULL, xlim = NULL,
   ylim = NULL, element.color = "darkgray", event.lines = NULL,
   event.labels = NULL, period.areas = NULL, event.color = "darkgray",

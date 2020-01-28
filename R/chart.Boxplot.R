@@ -159,6 +159,7 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       
       par(op)}
     
+    
     if(plot.engine == "ggplot2"){
       R = data.frame(date=index(R),coredata(R))
       
@@ -170,10 +171,15 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       col_names[3] = "variable"
       
       colnames(R) = col_names
+      
+      variable = R[,"variable"]
+      value = R[,"value"]
+      
       p <- ggplot2::ggplot(data = R, ggplot2::aes(x=variable, y=value)) + 
-                           ggplot2::geom_boxplot(ggplot2::aes(fill=variable))
+                           ggplot2::geom_boxplot(ggplot2::aes(colour=variable))
       return (p)
     }
+    
     
     if(plot.engine == "plotly"){
       p <- plotly::plot_ly(type = "box")
