@@ -44,6 +44,7 @@ Suggests:
     gplots,
     testthat,
     ggplot2,
+    RColorBrewer
     googleVis,
     plotly,
     gridExtra,
