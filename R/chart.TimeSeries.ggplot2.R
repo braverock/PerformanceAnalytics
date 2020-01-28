@@ -64,30 +64,34 @@ chart.TimeSeries.ggplot2<-
     if(yaxis.pct)
       returns = returns * 100
     # Plotting
-    plot <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns, color = security)) +
+    p <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns, color = security)) +
                                ggplot2::geom_line(size = lwd) +
                                ggplot2::ggtitle(main)
 
 
 
+    if(mode(colorset) == "character"){
+      p <- p + scale_color_brewer(palette=colorset)
+    }
+    
     # format xlim and ylim
     if(!is.null(xlim[1])) # is.na or is.null?
-      plot+xlim(xlim)
+      p <- p+xlim(xlim)
     if(!is.null(ylim[1])){
-      plot+ylim(ylim)
+      p <- p+ylim(ylim)
     }
 
     #draw lines and add title
     # grid line format
-    plot + ggplot2::theme(
+    p <- p + ggplot2::theme(
                     panel.grid = ggplot2::element_line(colour = grid.color,
                                                         linetype = grid.lty)
                         )
 
     # set legend position
-    plot + ggplot2::theme(legend.position = legend.loc)
-    plot + xlab(xlab) +ylab(ylab)
+    p <-p + ggplot2::theme(legend.position = legend.loc)
+    p <- p + xlab(xlab) +ylab(ylab)
 
 
-    return(plot)
+    return(p)
   }
