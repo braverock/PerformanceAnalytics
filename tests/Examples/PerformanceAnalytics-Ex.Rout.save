@@ -1,5 +1,5 @@
 
-R version 3.6.0 (2019-04-26) -- "Planting of a Tree"
+R version 3.6.2 (2019-12-12) -- "Dark and Stormy Night"
 Copyright (C) 2019 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -195,6 +195,7 @@ Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
 > ### Title: Functions to calculate systematic or beta co-moments of return
 > ###   series
 > ### Aliases: BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
+> ###   SystematicSkewness SystematicKurtosis
 > 
 > ### ** Examples
 > 
@@ -620,19 +621,19 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > data(edhec)
 > t(round(CDD(edhec),4))
                        Conditional Drawdown 5%
-Convertible Arbitrage                   0.0927
-CTA Global                              0.0548
-Distressed Securities                   0.0695
-Emerging Markets                        0.3433
-Equity Market Neutral                   0.0111
-Event Driven                            0.0813
-Fixed Income Arbitrage                  0.1086
-Global Macro                            0.0407
-Long/Short Equity                       0.0842
-Merger Arbitrage                        0.0527
-Relative Value                          0.0439
-Short Selling                           0.4293
-Funds of Funds                          0.0563
+Convertible Arbitrage                   0.0656
+CTA Global                              0.0743
+Distressed Securities                   0.1020
+Emerging Markets                        0.1889
+Equity Market Neutral                   0.0332
+Event Driven                            0.0960
+Fixed Income Arbitrage                  0.0254
+Global Macro                            0.0355
+Long/Short Equity                       0.0880
+Merger Arbitrage                        0.0263
+Relative Value                          0.0418
+Short Selling                           0.6322
+Funds of Funds                          0.0711
 > 
 > 
 > 
@@ -745,6 +746,7 @@ d ratio 0.04607631  1.361501        0
 > ### Name: DownsideDeviation
 > ### Title: downside risk (deviation, variance) of the return distribution
 > ### Aliases: DownsideDeviation SemiDeviation SemiVariance DownsidePotential
+> ###   SemiSD
 > 
 > ### ** Examples
 > 
@@ -754,9 +756,11 @@ d ratio 0.04607631  1.361501        0
 > data(portfolio_bacon)
 > MAR = 0.005
 > DownsideDeviation(portfolio_bacon[,1], MAR) #expected 0.0255
-[1] 0.02553674
+           [,1]
+[1,] 0.02553674
 > DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.0137
-[1] 0.01370833
+           [,1]
+[1,] 0.01370833
 > 
 > #with data of managers
 > 
@@ -845,97 +849,97 @@ Downside Frequency (MAR = 0%)         NaN 0.1666667 0.5833333        0
 >     # first do normal ES calc
 >     ES(edhec, p=.95, method="historical")
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES             -0.048775 -0.04527143             -0.042725        -0.089225
+ES              -0.03655 -0.04126429           -0.03669286      -0.07236429
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES             -0.018775   -0.0443375             -0.0423375   -0.0230375
+ES           -0.01687857  -0.03856429            -0.02825714  -0.02062857
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES         -0.043975        -0.024625        -0.0311     -0.110575
+ES       -0.04220714      -0.01914286       -0.02465   -0.09682143
    Funds of Funds
-ES     -0.0390375
+ES    -0.03320714
 > 
 >     # now use Gaussian
 >     ES(edhec, p=.95, method="gaussian")
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES            -0.0348072 -0.04517756           -0.02976848      -0.07105359
+ES           -0.02805438 -0.04349352           -0.02814382      -0.05988918
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.01251258  -0.03010467            -0.02490408  -0.02731855
+ES           -0.01216634  -0.02818551             -0.0190427  -0.02449257
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.03782765      -0.01617616    -0.02042584    -0.1091181
+ES       -0.03460069      -0.01418426    -0.01759393   -0.09817171
    Funds of Funds
-ES    -0.03152384
+ES    -0.02741963
 > 
 >     # now use modified Cornish Fisher calc to take non-normal distribution into account
 >     ES(edhec, p=.95, method="modified")
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES           -0.09954768 -0.04284185           -0.06087217        -0.127887
+ES           -0.08948631 -0.04116413           -0.05170691       -0.1156719
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.04290042  -0.05909659            -0.05951833  -0.01983308
+ES           -0.03786594  -0.05128337            -0.05001278  -0.01638037
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.04709136      -0.03326371    -0.04888118   -0.09022777
+ES       -0.04377715      -0.02992712    -0.04417445   -0.07076187
    Funds of Funds
-ES    -0.04618555
+ES    -0.03971531
 > 
 >     # now use p=.99
 >     ES(edhec, p=.99)
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES            -0.1009223 -0.05572595           -0.06533764       -0.1397195
+ES            -0.1000841 -0.05291369            -0.0569937       -0.1268931
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.04404136  -0.06385154            -0.05850228  -0.02437999
+ES           -0.04015133  -0.05641814            -0.06110717  -0.02205432
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES        -0.0695714      -0.03630211      -0.050531    -0.1697459
+ES       -0.06338613      -0.03270324      -0.046211    -0.1637158
    Funds of Funds
-ES    -0.05500037
+ES    -0.04956566
 >     # or the equivalent alpha=.01
 >     ES(edhec, p=.01)
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES            -0.1009223 -0.05572595           -0.06533764       -0.1397195
+ES            -0.1000841 -0.05291369            -0.0569937       -0.1268931
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.04404136  -0.06385154            -0.05850228  -0.02437999
+ES           -0.04015133  -0.05641814            -0.06110717  -0.02205432
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES        -0.0695714      -0.03630211      -0.050531    -0.1697459
+ES       -0.06338613      -0.03270324      -0.046211    -0.1637158
    Funds of Funds
-ES    -0.05500037
+ES    -0.04956566
 > 
 >     # now with outliers squished
 >     ES(edhec, clean="boudt")
    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES           -0.03562699 -0.04284185           -0.04112811      -0.08155407
+ES           -0.02932819 -0.04116413           -0.03258727      -0.06989079
    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.01328429  -0.04757418            -0.04399325   -0.0207825
+ES           -0.01352863   -0.0322658            -0.03303559  -0.01778232
    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.04580446      -0.02084536    -0.02768213    -0.1011923
+ES        -0.0412464      -0.01754395    -0.02048723   -0.08760907
    Funds of Funds
-ES    -0.04509196
+ES    -0.03612647
 > 
 >     # add Component ES for the equal weighted portfolio
 >     ES(edhec, clean="boudt", portfolio_method="component")
 no weights passed in, assuming equal weighted portfolio
 $MES
-[1] 0.02370317
+[1] 0.01802146
 
 $contribution
  Convertible Arbitrage             CTA Global  Distressed Securities 
-          0.0029965453          -0.0019497564           0.0029213753 
+          0.0023173115          -0.0007628382           0.0022869133 
       Emerging Markets  Equity Market Neutral           Event Driven 
-          0.0052308852           0.0007126061           0.0033861122 
+          0.0043177630           0.0007071321           0.0022753610 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-          0.0030269713           0.0009179870           0.0032207618 
+          0.0016376263           0.0008665011           0.0027708304 
       Merger Arbitrage         Relative Value          Short Selling 
-          0.0011805805           0.0020665511          -0.0031688562 
+          0.0009625944           0.0015044225          -0.0034071301 
         Funds of Funds 
-          0.0031614105 
+          0.0025449680 
 
 $pct_contrib_MES
  Convertible Arbitrage             CTA Global  Distressed Securities 
-            0.12641958            -0.08225719             0.12324827 
+            0.12858626            -0.04232945             0.12689948 
       Emerging Markets  Equity Market Neutral           Event Driven 
-            0.22068290             0.03006374             0.14285480 
+            0.23959014             0.03923835             0.12625845 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-            0.12770321             0.03872844             0.13587893 
+            0.09087092             0.04808164             0.15375176 
       Merger Arbitrage         Relative Value          Short Selling 
-            0.04980685             0.08718457            -0.13368911 
+            0.05341380             0.08347953            -0.18905966 
         Funds of Funds 
-            0.13337499 
+            0.14121878 
 
 >     
 > 
@@ -972,17 +976,17 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.03593744
+[1] 0.007012076
 
 $contribution
- [1]  0.0079979527 -0.0023398485  0.0040806253  0.0079165121  0.0007909966
- [6]  0.0039465684  0.0048861335  0.0008662255  0.0041314124  0.0012537442
-[11]  0.0039907892 -0.0058159612  0.0042322857
+ [1]  5.100126e-04  8.122383e-04  5.699841e-04  1.613916e-03  3.320468e-05
+ [6]  1.155741e-03  9.687210e-05  4.808274e-04  1.371705e-03  1.440565e-04
+[11]  3.572778e-04 -1.046913e-03  9.131534e-04
 
 $pct_contrib_MES
- [1]  0.22255212 -0.06510894  0.11354804  0.22028595  0.02201038  0.10981775
- [7]  0.13596222  0.02410371  0.11496124  0.03488686  0.11104825 -0.16183573
-[13]  0.11776816
+ [1]  0.072733470  0.115834207  0.081286065  0.230162329  0.004735357
+ [6]  0.164821533  0.013815038  0.068571336  0.195620389  0.020544059
+[11]  0.050951783 -0.149301389  0.130225824
 
 > 
 > # compare to sample method
@@ -992,17 +996,17 @@ $pct_contrib_MES
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.03241585
+[1] 0.02755224
 
 $contribution
- [1]  0.0074750513 -0.0028125166  0.0039422674  0.0069376579  0.0008077760
- [6]  0.0037114666  0.0043125937  0.0007173036  0.0036152960  0.0013693293
-[11]  0.0037650911 -0.0048178690  0.0033924063
+ [1]  0.0066193322 -0.0029204094  0.0035391088  0.0062298642  0.0007584470
+ [6]  0.0033786777  0.0039691984  0.0002599126  0.0031036429  0.0013410015
+[11]  0.0033762935 -0.0051263847  0.0030235549
 
 $pct_contrib_MES
- [1]  0.23059863 -0.08676361  0.12161541  0.21402052  0.02491917  0.11449542
- [7]  0.13303965  0.02212817  0.11152864  0.04224258  0.11614968 -0.14862694
-[13]  0.10465269
+ [1]  0.240246613 -0.105995357  0.128450859  0.226110992  0.027527598
+ [6]  0.122628060  0.144060829  0.009433446  0.112645758  0.048671234
+[11]  0.122541527 -0.186060547  0.109738989
 
 > 
 > 
@@ -1423,6 +1427,101 @@ Mean absolute deviation         NaN  0.02225 0.01611653  0.00021
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("MeanAbsoluteDeviation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
+> nameEx("MinTrackRecord")
+> ### * MinTrackRecord
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: MinTrackRecord
+> ### Title: Minimum Track Record Length
+> ### Aliases: MinTrackRecord
+> 
+> ### ** Examples
+> 
+> 
+> data(edhec)
+> MinTrackRecord(edhec[,1],refSR = 0.23) 
+$min_TRL
+                                       Convertible Arbitrage (SR > 0.23 )
+Minimum Track Record Length (p= 95 %):                           457.7379
+
+$IS_SR_SIGNIFICANT
+[1] FALSE
+
+$num_of_extra_obs_needed
+[1] 183
+
+> MinTrackRecord(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78,n=59)
+$min_TRL
+[1] 52.37369
+
+$IS_SR_SIGNIFICANT
+[1] TRUE
+
+$num_of_extra_obs_needed
+[1] 0
+
+> 
+> ### Higher moments are data intensive, kurtosis shouldn't be used for short timeseries
+> MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+Warning in MinTrackRecord(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$min_TRL
+[1] 2081.282
+
+$IS_SR_SIGNIFICANT
+[1] FALSE FALSE
+
+$num_of_extra_obs_needed
+[1] 1807 1807
+
+> MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
+Warning in MinTrackRecord(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$min_TRL
+[1] 1597.195 1597.195
+
+$IS_SR_SIGNIFICANT
+[1] FALSE FALSE
+
+$num_of_extra_obs_needed
+[1] 1323 1323
+
+> MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
+Warning in MinTrackRecord(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = TRUE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$min_TRL
+[1] 865.6524 865.6524
+
+$IS_SR_SIGNIFICANT
+[1] FALSE FALSE
+
+$num_of_extra_obs_needed
+[1] 591 591
+
+> 
+> MinTrackRecord(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+$min_TRL
+                                       portfolio.returns (SR > 0.26 )
+Minimum Track Record Length (p= 95 %):                       334.9625
+
+$IS_SR_SIGNIFICANT
+[1] FALSE
+
+$num_of_extra_obs_needed
+[1] 60
+
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MinTrackRecord", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("Modigliani")
 > ### * Modigliani
 > 
@@ -1506,159 +1605,223 @@ Net Selectivity (Risk free = 0) 0.01333906   NA 0.1745397 -0.03249043   NA
 >     data(edhec)
 >     Omega(edhec)
                Convertible Arbitrage CTA Global Distressed Securities
-Omega (L = 0%)              2.602138   1.936841              3.230443
+Omega (L = 0%)               2.79388   1.573902              2.794442
                Emerging Markets Equity Market Neutral Event Driven
-Omega (L = 0%)         1.765435              6.213714     2.999655
+Omega (L = 0%)         1.700861              4.499562     2.636198
                Fixed Income Arbitrage Global Macro Long/Short Equity
-Omega (L = 0%)               2.585943     3.516616          2.438064
+Omega (L = 0%)               3.312118     2.834636          2.253459
                Merger Arbitrage Relative Value Short Selling Funds of Funds
-Omega (L = 0%)         4.595886       3.815368      1.228785       2.460153
+Omega (L = 0%)         4.203125       3.809174     0.8914069       2.140616
 >     Omega(edhec[,13],method="interp",output="point")
                Funds of Funds
-Omega (L = 0%)       5.265408
+Omega (L = 0%)       5.059274
 >     Omega(edhec[,13],method="interp",output="full")
         Funds of Funds
--0.0618    151.0000000
--0.0618    151.0000000
--0.0616    113.0000000
--0.06       85.8571429
--0.0272     68.0909091
--0.0269     56.0000000
--0.0264     47.3636364
--0.0262     40.9310345
--0.0222     35.9729730
--0.0205     32.0434783
--0.0192     28.8571429
--0.0156     26.2238806
--0.0149     24.0126582
--0.0148     22.1304348
--0.0142     20.5094340
--0.0141     19.0991736
--0.014      17.8613139
--0.0133     16.7662338
--0.0122     15.7906977
--0.0119     14.9162304
--0.0104     14.1279621
--0.0099     13.4137931
--0.0095     12.7637795
--0.0089     12.1696751
--0.0082     11.6245847
--0.0077     11.1226994
--0.0072     10.6590909
--0.0069     10.2295515
--0.0068      9.7775061
--0.0063      9.3636364
--0.0049      8.9830508
--0.0044      8.6316832
--0.004       8.3061224
--0.0037      7.9878261
--0.0036      7.6928105
--0.0034      7.4184615
--0.0033      7.1625544
--0.0031      6.9231824
--0.0028      6.6987013
--0.0022      6.4876847
--0.0015      6.2888889
--0.001       6.1012236
--7e-04       5.9237288
--5e-04       5.7555556
--4e-04       5.5959499
--3e-04       5.4442396
--2e-04       5.2998236
-6e-04        5.1621622
-8e-04        5.0307692
-9e-04        4.9052059
-0.0013       4.7850746
-0.0018       4.6700143
-0.0019       4.5596963
-0.0021       4.4538206
-0.0024       4.3521127
-0.0025       4.2543210
-0.0028       4.1602144
-0.003        4.0695802
-0.0031       3.9822222
-0.0034       3.8979592
-0.0037       3.8141225
-0.0039       3.7332998
-0.004        3.6553233
-0.0041       3.5800377
-0.0043       3.5072993
-0.005        3.4369748
-0.0051       3.3689404
-0.0052       3.3012901
-0.0058       3.2358643
-0.006        3.1725490
-0.0066       3.1112381
-0.0068       3.0503331
-0.007        2.9913669
-0.0072       2.9342427
-0.0077       2.8788704
-0.0078       2.8251656
-0.0079       2.7730496
-0.008        2.7224490
-0.0082       2.6732946
-0.0088       2.6255218
-0.0089       2.5790698
-0.009        2.5338815
-0.0092       2.4899032
-0.0095       2.4470842
-0.0096       2.4044796
-0.0097       2.3630049
-0.0099       2.3217784
-0.0104       2.2816487
-0.0106       2.2417925
-0.0111       2.2029970
-0.0113       2.1652174
-0.0119       2.1284116
-0.0121       2.0918635
-0.0125       2.0562567
-0.013        2.0215526
-0.0131       1.9877150
-0.0133       1.9547094
-0.0134       1.9219302
-0.0136       1.8899558
-0.0139       1.8587549
-0.0142       1.8282977
-0.0145       1.7985560
-0.0147       1.7695029
-0.0152       1.7411132
-0.0153       1.7133628
-0.0156       1.6862287
-0.016        1.6596893
-0.0163       1.6333013
-0.0164       1.6074913
-0.0169       1.5822394
-0.0171       1.5575261
-0.0172       1.5333333
-0.0175       1.5096435
-0.0185       1.4864399
-0.0191       1.4637068
-0.0199       1.4414290
-0.0202       1.4195918
-0.0204       1.3981816
-0.0205       1.3771849
-0.0213       1.3565891
-0.022        1.3363821
-0.0222       1.3165522
-0.0223       1.2970881
-0.0225       1.2779792
-0.0244       1.2592152
-0.0256       1.2407862
-0.0267       1.2226828
-0.0275       1.2048957
-0.0282       1.1874163
-0.0286       1.1702361
-0.0303       1.1533470
-0.0311       1.1367412
-0.0312       1.1204112
-0.0317       1.1043496
-0.0334       1.0885496
-0.0373       1.0730044
-0.04         1.0577075
-0.0435       1.0426526
-0.0483       1.0278338
-0.0622       1.0132450
-0.0666       0.9988808
+-0.0618    274.0000000
+-0.0618    274.0000000
+-0.0616    205.2500000
+-0.06      156.1428571
+-0.0272    113.5833333
+-0.0269     85.8421053
+-0.0266     70.2962963
+-0.0264     60.1111111
+-0.0262     51.6595745
+-0.0252     45.6101695
+-0.0222     41.0138889
+-0.0205     37.3720930
+-0.0202     34.3960396
+-0.0192     31.9059829
+-0.0176     29.7835821
+-0.0163     27.9473684
+-0.0156     26.3391813
+-0.0149     24.9162304
+-0.0148     23.6462264
+-0.0142     22.5042735
+-0.0141     21.4708171
+-0.014      20.4539007
+-0.0138     19.5357143
+-0.0133     18.6428571
+-0.0127     17.8356164
+-0.0126     17.1012658
+-0.0122     16.4295775
+-0.0119     15.8122271
+-0.0116     15.2423625
+-0.0108     14.7142857
+-0.0104     14.2232143
+-0.0099     13.7651007
+-0.0095     13.3364929
+-0.0093     12.9344262
+-0.0089     12.5563380
+-0.0083     12.2000000
+-0.0082     11.8634640
+-0.0079     11.5450180
+-0.0077     11.2431507
+-0.0074     10.9565217
+-0.0072     10.6839378
+-0.0071     10.4130435
+-0.007      10.1556604
+-0.0069      9.9107304
+-0.0068      9.6497418
+-0.0063      9.3944125
+-0.0062      9.1531815
+-0.0059      8.9248120
+-0.0054      8.7082133
+-0.0049      8.5024188
+-0.0044      8.3003979
+-0.004       8.1024825
+-0.0037      7.8980464
+-0.0036      7.6994728
+-0.0034      7.5115363
+-0.0033      7.3198271
+-0.0031      7.1386293
+-0.0028      6.9670330
+-0.0027      6.8042328
+-0.0025      6.6495132
+-0.0022      6.4988824
+-0.0021      6.3554789
+-0.0018      6.2187500
+-0.0015      6.0881998
+-0.0012      5.9633814
+-0.001       5.8438914
+-9e-04       5.7293645
+-7e-04       5.6171267
+-6e-04       5.5094340
+-5e-04       5.4059900
+-4e-04       5.3065245
+-3e-04       5.2107905
+-2e-04       5.1185614
+1e-04        5.0296296
+6e-04        4.9420916
+8e-04        4.8576233
+9e-04        4.7760502
+0.0013       4.6941864
+0.0015       4.6151460
+0.0017       4.5387714
+0.0018       4.4635762
+0.0019       4.3908678
+0.0021       4.3192729
+0.0022       4.2476147
+0.0024       4.1783341
+0.0025       4.1101988
+0.0026       4.0442758
+0.0028       3.9804487
+0.003        3.9186093
+0.0031       3.8586572
+0.0032       3.8004988
+0.0033       3.7440465
+0.0034       3.6883593
+0.0035       3.6342775
+0.0037       3.5801192
+0.0039       3.5267490
+0.004        3.4741697
+0.0041       3.4223827
+0.0043       3.3713873
+0.0046       3.3218608
+0.005        3.2737344
+0.0051       3.2269439
+0.0052       3.1808118
+0.0053       3.1359364
+0.0057       3.0922619
+0.0058       3.0497360
+0.0059       3.0083095
+0.006        2.9679359
+0.0064       2.9285714
+0.0066       2.8896747
+0.0067       2.8517350
+0.0068       2.8137692
+0.0069       2.7762790
+0.007        2.7397113
+0.0071       2.7035953
+0.0072       2.6683533
+0.0073       2.6335404
+0.0075       2.5991571
+0.0076       2.5652032
+0.0077       2.5320561
+0.0078       2.4996845
+0.0079       2.4680587
+0.008        2.4364523
+0.0082       2.4052327
+0.0083       2.3743987
+0.0085       2.3442718
+0.0086       2.3148254
+0.0088       2.2860344
+0.0089       2.2578749
+0.009        2.2297407
+0.0091       2.2019376
+0.0092       2.1747420
+0.0093       2.1481322
+0.0094       2.1220876
+0.0095       2.0963303
+0.0096       2.0708597
+0.0097       2.0454288
+0.0099       2.0202945
+0.0104       1.9956897
+0.0106       1.9713668
+0.0108       1.9475485
+0.0109       1.9239985
+0.0111       1.9009295
+0.0113       1.8781161
+0.0114       1.8555571
+0.0119       1.8334510
+0.0121       1.8115871
+0.0125       1.7899644
+0.0126       1.7687682
+0.0127       1.7479848
+0.013        1.7276012
+0.0131       1.7076046
+0.0133       1.6879831
+0.0134       1.6683889
+0.0136       1.6491610
+0.0137       1.6302882
+0.0139       1.6117597
+0.014        1.5935653
+0.0142       1.5756951
+0.0145       1.5581395
+0.0147       1.5407437
+0.0148       1.5236504
+0.0152       1.5068508
+0.0153       1.4903368
+0.0156       1.4741003
+0.0157       1.4581336
+0.016        1.4424294
+0.0163       1.4268530
+0.0164       1.4115297
+0.0169       1.3964527
+0.0171       1.3812538
+0.0172       1.3663015
+0.0175       1.3515891
+0.0185       1.3371105
+0.0191       1.3228593
+0.0199       1.3088298
+0.0202       1.2950163
+0.0204       1.2814131
+0.0205       1.2679106
+0.0206       1.2546117
+0.0209       1.2415113
+0.0213       1.2286045
+0.0219       1.2158866
+0.022        1.2033529
+0.0222       1.1909991
+0.0223       1.1788209
+0.0225       1.1668141
+0.0233       1.1549748
+0.0244       1.1432990
+0.0256       1.1317829
+0.0267       1.1204231
+0.0275       1.1092158
+0.0282       1.0981578
+0.0286       1.0872457
+0.0303       1.0764763
+0.0311       1.0658465
+0.0312       1.0553532
+0.0317       1.0449936
+0.0334       1.0347648
+0.0373       1.0246641
+0.04         1.0146887
+0.0435       1.0048361
+0.0483       0.9951038
+0.0622       0.9854893
+0.0666       0.9759902
 > 
 > 
 > 
@@ -1682,12 +1845,14 @@ Omega (L = 0%)       5.265408
 > data(portfolio_bacon)
 > MAR = 0.005
 > print(OmegaExcessReturn(portfolio_bacon[,1], portfolio_bacon[,2], MAR)) #expected 0.0805
-[1] 0.08053795
+           [,1]
+[1,] 0.08053795
 > 
 > data(managers)
 > MAR = 0
 > print(OmegaExcessReturn(managers['1996',1], managers['1996',8], MAR))
-[1] 0.1325302
+          [,1]
+[1,] 0.1325302
 > print(OmegaExcessReturn(managers['1996',1:5], managers['1996',8], MAR))
                                    HAM1 HAM2      HAM3      HAM4 HAM5
 Omega Excess Return (MAR = 0) 0.1325302   NA 0.3991416 0.1985718   NA
@@ -1714,7 +1879,8 @@ Omega Excess Return (MAR = 0) 0.1325302   NA 0.3991416 0.1985718   NA
 > data(portfolio_bacon)
 > MAR = 0.005
 > print(OmegaSharpeRatio(portfolio_bacon[,1], MAR)) #expected 0.29
-[1] 0.2917933
+          [,1]
+[1,] 0.2917933
 > 
 > MAR = 0
 > data(managers)
@@ -1724,7 +1890,8 @@ OmegaSharpeRatio (MAR = 0%) 3.598338 2374 5.482813 2.615074   NA   NA
                             EDHEC LS EQ SP500 TR  US 10Y TR US 3m TR
 OmegaSharpeRatio (MAR = 0%)          NA 3.340625 0.02827709      Inf
 > print(OmegaSharpeRatio(managers['1996',1], MAR)) #expected 3.60
-[1] 3.598338
+         [,1]
+[1,] 3.598338
 > 
 > 
 > 
@@ -1798,6 +1965,89 @@ Pain Index 36.7226
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("PainRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
+> nameEx("ProbSharpeRatio")
+> ### * ProbSharpeRatio
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: ProbSharpeRatio
+> ### Title: Probabilistic Sharpe Ratio
+> ### Aliases: ProbSharpeRatio
+> 
+> ### ** Examples
+> 
+> 
+> data(edhec)
+> ProbSharpeRatio(edhec[,1],refSR = 0.23) 
+$sr_prob
+                                     Convertible Arbitrage (SR > 0.23 )
+Probabilistic Sharpe Ratio(p= 95 %):                          0.8986681
+
+$sr_confidence_interval
+                      Lower Bound Sharpe Ratio Upper Bound
+Convertible Arbitrage      0.1987       0.3375      0.4763
+
+> ProbSharpeRatio(refSR = 1/12^0.5,Rf = 0,p=0.95,sr = 2/12^0.5,sk=-0.72,kr=5.78,n=59)
+$sr_prob
+[1] 0.9597434
+
+$sr_confidence_interval
+  Lower Bound Sharpe Ratio Upper Bound
+1      0.3057       0.5774       0.849
+
+> 
+> ### Higher moments are data intensive, kurtosis shouldn't be used for short timeseries
+> ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+Warning in ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$sr_prob
+[1] 0.7247312
+
+$sr_confidence_interval
+  Lower Bound Sharpe Ratio Upper Bound
+1       0.179       0.3375       0.496
+
+> ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
+Warning in ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$sr_prob
+[1] 0.7522193 0.7522193
+
+$sr_confidence_interval
+  Lower Bound Sharpe Ratio Upper Bound     NA     NA
+1      0.1987       0.1987      0.3375 0.4763 0.4763
+
+> ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
+Warning in ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = TRUE,  :
+  The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of:  NA 
+
+$sr_prob
+[1] 0.8227608 0.8227608
+
+$sr_confidence_interval
+  Lower Bound Sharpe Ratio Upper Bound     NA     NA
+1      0.2353       0.2353      0.3375 0.4397 0.4397
+
+> 
+> ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+$sr_prob
+                                     portfolio.returns (SR > 0.26 )
+Probabilistic Sharpe Ratio(p= 95 %):                      0.9318732
+
+$sr_confidence_interval
+                  Lower Bound Sharpe Ratio Upper Bound
+portfolio.returns      0.2495       0.3608       0.472
+
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ProbSharpeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("ProspectRatio")
 > ### * ProspectRatio
 > 
@@ -1813,7 +2063,8 @@ Pain Index 36.7226
 > data(portfolio_bacon)
 > MAR = 0.05
 > print(ProspectRatio(portfolio_bacon[,1], MAR)) #expected -0.134
-[1] -0.1347065
+           [,1]
+[1,] -0.1347065
 > 
 > data(managers)
 > MAR = 0
@@ -1823,13 +2074,74 @@ Prospect ratio (MAR = 0%) 0.9737463 442.1359 1.725605 0.5960639   NA   NA
                           EDHEC LS EQ  SP500 TR  US 10Y TR US 3m TR
 Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
 > print(ProspectRatio(managers['1996',1], MAR))
-[1] 0.9737463
+          [,1]
+[1,] 0.9737463
 > 
 > 
 > 
 > 
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("ProspectRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("RPESE.control")
+> ### * RPESE.control
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: RPESE.control
+> ### Title: Controls Function for the Computation of Standard Errors for
+> ###   Risk and Performance estimators
+> ### Aliases: RPESE.control
+> 
+> ### ** Examples
+> 
+> # Case where we want the default parameters for the ES
+> ES.control <- RPESE.control(estimator="ES")
+> # Case where we also set additional parameters manually
+> ES.control.2 <- RPESE.control(estimator="ES", se.method=c("IFcor", "BOOTiid"),
++                               cleanOutliers=TRUE, freq.include="Decimate")
+> # These lists can be passed onto the functions (e.g., ES) to control the parameters
+> # for computing and returning standard errors.
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("RPESE.control", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("RachevRatio")
+> ### * RachevRatio
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: RachevRatio
+> ### Title: Standard Error Estimate for Rachev Ratio of Returns
+> ### Aliases: RachevRatio
+> 
+> ### ** Examples
+> 
+> # Loading data from PerformanceAnalytics
+> data(edhec, package = "PerformanceAnalytics")
+> class(edhec)
+[1] "xts" "zoo"
+> # Changing the data colnames
+> names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
++                  "ED", "FIA", "GM", "LS", "MA",
++                  "RV", "SS", "FOF")
+> # Compute Rachev ratio for managers data
+> RachevRatio(edhec)
+                  CA      CTA      DIS       EM      EMN       ED      FIA
+RachevRatio 1.197104 1.321245 1.192859 1.006934 1.515148 1.088371 1.060762
+                  GM       LS       MA       RV      SS      FOF
+RachevRatio 2.042855 1.219365 1.487931 1.242879 1.13534 1.242028
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("RachevRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.Geltner")
 > ### * Return.Geltner
@@ -4135,6 +4447,35 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
 > base::cat("Return.excess", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
+> nameEx("Return.locScaleRob")
+> ### * Return.locScaleRob
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: Return.locScaleRob
+> ### Title: Robust Filter for Time Series Returns
+> ### Aliases: Return.locScaleRob
+> 
+> ### ** Examples
+> 
+> # Loading data from PerformanceAnalytics
+> data(edhec, package = "PerformanceAnalytics")
+> class(edhec)
+[1] "xts" "zoo"
+> # Changing the data colnames
+> names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
++                  "ED", "FIA", "GM", "LS", "MA",
++                  "RV", "SS", "FOF")
+> # Cleaning the returns time series for manager data
+> outRob <- Return.locScaleRob(edhec$CA)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.locScaleRob", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
 > nameEx("Return.portfolio")
 > ### * Return.portfolio
 > 
@@ -4322,7 +4663,67 @@ $EOP.Value
 > # with a weights object
 > data(weights) # rebalance at the beginning of the year to various weights through time
 > chart.StackedBar(weights)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > x <- Return.portfolio(edhec["2000::",1:11], weights=weights,verbose=TRUE)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > chart.CumReturns(x$returns)
 > chart.StackedBar(x$BOP.Weight)
 > chart.StackedBar(x$BOP.Value)
@@ -4467,16 +4868,16 @@ StdDev Sharpe (Rf=0.3%, p=95%): 0.0354554 0.3785371
 > data(edhec)
 > SharpeRatio(edhec[, 6, drop = FALSE], FUN="VaR")
                            Event Driven
-VaR Sharpe (Rf=0%, p=95%):    0.2710161
+VaR Sharpe (Rf=0%, p=95%):    0.2440286
 > SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR")
                              Event Driven
-VaR Sharpe (Rf=0.3%, p=95%):    0.1524982
+VaR Sharpe (Rf=0.3%, p=95%):    0.1131758
 > SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR" , method="gaussian")
                              Event Driven
-VaR Sharpe (Rf=0.3%, p=95%):    0.1909461
+VaR Sharpe (Rf=0.3%, p=95%):    0.1358865
 > SharpeRatio(edhec[, 6, drop = FALSE], FUN="ES")
                           Event Driven
-ES Sharpe (Rf=0%, p=95%):    0.1289815
+ES Sharpe (Rf=0%, p=95%):     0.121216
 > 
 > # and all the methods
 > SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
@@ -4494,29 +4895,29 @@ VaR Sharpe (Rf=0.3%, p=95%):    0.03741555
 ES Sharpe (Rf=0.3%, p=95%):     0.02610548
 > SharpeRatio(edhec,Rf = .04/12)
                                 Convertible Arbitrage CTA Global
-StdDev Sharpe (Rf=0.3%, p=95%):            0.15339751 0.12558803
-VaR Sharpe (Rf=0.3%, p=95%):               0.09469804 0.09337063
-ES Sharpe (Rf=0.3%, p=95%):                0.03089192 0.07366957
+StdDev Sharpe (Rf=0.3%, p=95%):            0.13297157 0.03564047
+VaR Sharpe (Rf=0.3%, p=95%):               0.08829811 0.02514184
+ES Sharpe (Rf=0.3%, p=95%):                0.02421633 0.02003804
                                 Distressed Securities Emerging Markets
-StdDev Sharpe (Rf=0.3%, p=95%):            0.25179740       0.12736677
-VaR Sharpe (Rf=0.3%, p=95%):               0.16804482       0.07720662
-ES Sharpe (Rf=0.3%, p=95%):                0.07589603       0.03841453
+StdDev Sharpe (Rf=0.3%, p=95%):            0.19475713       0.09067343
+VaR Sharpe (Rf=0.3%, p=95%):               0.13174607       0.05581458
+ES Sharpe (Rf=0.3%, p=95%):                0.06359855       0.02517886
                                 Equity Market Neutral Event Driven
-StdDev Sharpe (Rf=0.3%, p=95%):             0.2963971   0.23372885
-VaR Sharpe (Rf=0.3%, p=95%):                0.2352556   0.15249824
-ES Sharpe (Rf=0.3%, p=95%):                 0.0622208   0.07257669
+StdDev Sharpe (Rf=0.3%, p=95%):            0.12744129   0.17254993
+VaR Sharpe (Rf=0.3%, p=95%):               0.09650946   0.11317579
+ES Sharpe (Rf=0.3%, p=95%):                0.02700756   0.05621765
                                 Fixed Income Arbitrage Global Macro
-StdDev Sharpe (Rf=0.3%, p=95%):             0.06333844    0.2549431
-VaR Sharpe (Rf=0.3%, p=95%):                0.03637036    0.2802548
-ES Sharpe (Rf=0.3%, p=95%):                 0.01508086    0.2187777
+StdDev Sharpe (Rf=0.3%, p=95%):             0.08246359    0.1409259
+VaR Sharpe (Rf=0.3%, p=95%):                0.05360047    0.1540261
+ES Sharpe (Rf=0.3%, p=95%):                 0.01866674    0.1248131
                                 Long/Short Equity Merger Arbitrage
-StdDev Sharpe (Rf=0.3%, p=95%):        0.19962891        0.3090483
-VaR Sharpe (Rf=0.3%, p=95%):           0.14572983        0.2321344
-ES Sharpe (Rf=0.3%, p=95%):            0.09399888        0.1037628
+StdDev Sharpe (Rf=0.3%, p=95%):        0.14747393       0.20713226
+VaR Sharpe (Rf=0.3%, p=95%):           0.10513391       0.15892178
+ES Sharpe (Rf=0.3%, p=95%):            0.06685374       0.06547219
                                 Relative Value Short Selling Funds of Funds
-StdDev Sharpe (Rf=0.3%, p=95%):     0.25525305   0.015024743     0.14194452
-VaR Sharpe (Rf=0.3%, p=95%):        0.17482979   0.011139811     0.10328569
-ES Sharpe (Rf=0.3%, p=95%):         0.06890142   0.009175123     0.05597178
+StdDev Sharpe (Rf=0.3%, p=95%):     0.20927720   -0.11269614     0.05832093
+VaR Sharpe (Rf=0.3%, p=95%):        0.14938310   -0.08183856     0.04218569
+ES Sharpe (Rf=0.3%, p=95%):         0.05360016   -0.07444002     0.02257277
 > 
 > 
 > 
@@ -4598,17 +4999,17 @@ Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.03418537
+[1] 0.02831801
 
 $contribution
- [1]  0.0052837933 -0.0002137705  0.0035375067  0.0072299562  0.0010344300
- [6]  0.0034968193  0.0032865974  0.0017118492  0.0036208050  0.0014452126
-[11]  0.0029590724 -0.0025796747  0.0033727718
+ [1]  0.0045028986 -0.0002406338  0.0032683423  0.0062820081  0.0009521819
+ [6]  0.0032656659  0.0027557054  0.0012768311  0.0032699580  0.0013088755
+[11]  0.0026246040 -0.0039092360  0.0029608098
 
 $pct_contrib_MES
- [1]  0.154563005 -0.006253274  0.103480140  0.211492707  0.030259437
- [6]  0.102289940  0.096140469  0.050075493  0.105916804  0.042275764
-[11]  0.086559616 -0.075461369  0.098661268
+ [1]  0.159011827 -0.008497553  0.115415675  0.221837901  0.033624604
+ [6]  0.115321161  0.097312816  0.045089011  0.115472730  0.046220602
+[11]  0.092683204 -0.138047692  0.104555713
 
 > 
 > # compare to sample method
@@ -4618,17 +5019,17 @@ $pct_contrib_MES
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.03241585
+[1] 0.02755224
 
 $contribution
- [1]  0.0074750513 -0.0028125166  0.0039422674  0.0069376579  0.0008077760
- [6]  0.0037114666  0.0043125937  0.0007173036  0.0036152960  0.0013693293
-[11]  0.0037650911 -0.0048178690  0.0033924063
+ [1]  0.0066193322 -0.0029204094  0.0035391088  0.0062298642  0.0007584470
+ [6]  0.0033786777  0.0039691984  0.0002599126  0.0031036429  0.0013410015
+[11]  0.0033762935 -0.0051263847  0.0030235549
 
 $pct_contrib_MES
- [1]  0.23059863 -0.08676361  0.12161541  0.21402052  0.02491917  0.11449542
- [7]  0.13303965  0.02212817  0.11152864  0.04224258  0.11614968 -0.14862694
-[13]  0.10465269
+ [1]  0.240246613 -0.105995357  0.128450859  0.226110992  0.027527598
+ [6]  0.122628060  0.144060829  0.009433446  0.112645758  0.048671234
+[11]  0.122541527 -0.186060547  0.109738989
 
 > 
 > 
@@ -4694,13 +5095,13 @@ Smoothing Index 0.621107 0.4920349 0.6629845 0.6710542    1 0.4929217
 Smoothing Index   0.5378922 0.9528486
 > SmoothingIndex(edhec)
                 Convertible Arbitrage CTA Global Distressed Securities
-Smoothing Index             0.3898075  0.8174769             0.4040996
+Smoothing Index             0.4125174  0.9580045             0.4454533
                 Emerging Markets Equity Market Neutral Event Driven
-Smoothing Index        0.5190247             0.4377353    0.4537911
+Smoothing Index         0.562781             0.4722181    0.4989713
                 Fixed Income Arbitrage Global Macro Long/Short Equity
-Smoothing Index              0.4197945    0.6234125         0.5182359
+Smoothing Index              0.4258737    0.6608979         0.5735716
                 Merger Arbitrage Relative Value Short Selling Funds of Funds
-Smoothing Index        0.4791138      0.4227911     0.7532756      0.4914581
+Smoothing Index        0.5051785      0.4473306     0.7575219      0.5240699
 > 
 > 
 > 
@@ -4787,64 +5188,64 @@ Specific Risk =  0.04977046   NA 0.06225051 0.0857627   NA
 >     # first do normal StdDev calc
 >     StdDev(edhec)
        Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev            0.02004739  0.0251309            0.01834791       0.03857144
+StdDev            0.01629694 0.02314359            0.01688505        0.0321206
        Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev           0.009005818   0.01835047             0.01417129   0.01701962
+StdDev            0.00802461   0.01670838             0.01132107   0.01450752
        Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.02217382       0.01116827     0.01319468    0.05509917
+StdDev        0.01984532      0.009459627     0.01131398    0.04674087
        Funds of Funds
-StdDev     0.01821196
+StdDev     0.01537158
 >     # or the equivalent
 >     StdDev(edhec, portfolio_method="single")
        Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev            0.02004739  0.0251309            0.01834791       0.03857144
+StdDev            0.01629694 0.02314359            0.01688505        0.0321206
        Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev           0.009005818   0.01835047             0.01417129   0.01701962
+StdDev            0.00802461   0.01670838             0.01132107   0.01450752
        Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.02217382       0.01116827     0.01319468    0.05509917
+StdDev        0.01984532      0.009459627     0.01131398    0.04674087
        Funds of Funds
-StdDev     0.01821196
+StdDev     0.01537158
 > 
 >     # now with outliers squished
 >     StdDev(edhec, clean="boudt")
        Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev             0.0158664  0.0251309            0.01687269        0.0355635
+StdDev            0.01348809 0.02314359            0.01572588       0.02985534
        Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev           0.007367818   0.01760712             0.01189823   0.01667315
+StdDev           0.007060607   0.01552132            0.008991831   0.01416932
        Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.02206307       0.01041944     0.01170342    0.05326087
+StdDev        0.01959556      0.008908155     0.01009998    0.04479053
        Funds of Funds
-StdDev     0.01813736
+StdDev     0.01518511
 > 
 >     # add Component StdDev for the equal weighted portfolio
 >     StdDev(edhec, clean="boudt", portfolio_method="component")
 no weights passed in, assuming equal weighted portfolio
 $StdDev
-[1] 0.01048561
+[1] 0.009325917
 
 $contribution
  Convertible Arbitrage             CTA Global  Distressed Securities 
-          0.0008658123           0.0006049525           0.0010509579 
+          0.0007585836           0.0006873297           0.0009746614 
       Emerging Markets  Equity Market Neutral           Event Driven 
-          0.0021479823           0.0004348643           0.0011469074 
+          0.0018145551           0.0004069524           0.0010089543 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-          0.0006822007           0.0010512230           0.0013150652 
+          0.0004972070           0.0008967015           0.0011954578 
       Merger Arbitrage         Relative Value          Short Selling 
-          0.0005428396           0.0007548481          -0.0013277224 
+          0.0004679488           0.0006602732          -0.0010665165 
         Funds of Funds 
-          0.0012156837 
+          0.0010238087 
 
 $pct_contrib_StdDev
  Convertible Arbitrage             CTA Global  Distressed Securities 
-            0.08257143             0.05769357             0.10022854 
+            0.08134145             0.07370104             0.10451105 
       Emerging Markets  Equity Market Neutral           Event Driven 
-            0.20485039             0.04147247             0.10937913 
+            0.19457123             0.04363672             0.10818821 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-            0.06506063             0.10025383             0.12541613 
+            0.05331454             0.09615156             0.12818663 
       Merger Arbitrage         Relative Value          Short Selling 
-            0.05176994             0.07198892            -0.12662322 
+            0.05017724             0.07079981            -0.11436050 
         Funds of Funds 
-            0.11593824 
+            0.10978102 
 
 > 
 > 
@@ -4870,24 +5271,24 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 >     data(edhec)
 >     sd.annualized(edhec)
                               Convertible Arbitrage CTA Global
-Annualized Standard Deviation            0.06944619 0.08705599
+Annualized Standard Deviation            0.05645427 0.08017175
                               Distressed Securities Emerging Markets
-Annualized Standard Deviation            0.06355903        0.1336154
+Annualized Standard Deviation            0.05849154         0.111269
                               Equity Market Neutral Event Driven
-Annualized Standard Deviation            0.03119707   0.06356791
+Annualized Standard Deviation            0.02779807   0.05787954
                               Fixed Income Arbitrage Global Macro
-Annualized Standard Deviation              0.0490908    0.0589577
+Annualized Standard Deviation             0.03921732   0.05025553
                               Long/Short Equity Merger Arbitrage Relative Value
-Annualized Standard Deviation        0.07681236       0.03868803     0.04570772
+Annualized Standard Deviation        0.06874619       0.03276911     0.03919277
                               Short Selling Funds of Funds
-Annualized Standard Deviation     0.1908691     0.06308807
+Annualized Standard Deviation     0.1619151     0.05324871
 >     sd.annualized(edhec[,6,drop=FALSE])
                               Event Driven
-Annualized Standard Deviation   0.06356791
+Annualized Standard Deviation   0.05787954
 >     # now for three periods:
 >     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
                               Event Driven
-Annualized Standard Deviation   0.03178395
+Annualized Standard Deviation   0.02893977
 > 
 > 
 > 
@@ -4923,17 +5324,17 @@ Annualized Standard Deviation   0.03178395
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.00739374
+[1] 0.005563373
 
 $contribution
- [1] -2.174737e-04  1.037324e-03 -1.412870e-04  2.366756e-03 -6.847000e-04
- [6] -1.394153e-04 -4.406927e-04 -6.668250e-05  4.277083e-04 -4.898553e-04
-[11] -4.792436e-04  6.212463e-03  8.838070e-06
+ [1] -5.127821e-04  1.093165e-03 -7.662159e-05  1.748454e-03 -5.798140e-04
+ [6] -8.915962e-05 -7.056094e-04 -1.164491e-04  3.750994e-04 -4.712518e-04
+[11] -5.210511e-04  5.496529e-03 -7.713568e-05
 
 $pct_contrib_MES
- [1] -0.029413215  0.140297582 -0.019109000  0.320102752 -0.092605373
- [6] -0.018855859 -0.059603495 -0.009018778  0.057847360 -0.066252706
-[11] -0.064817489  0.840232875  0.001195345
+ [1] -0.09217107  0.19649318 -0.01377251  0.31427948 -0.10421986 -0.01602618
+ [7] -0.12683122 -0.02093139  0.06742302 -0.08470613 -0.09365741  0.98798499
+[13] -0.01386491
 
 > 
 > # compare to sample method
@@ -4943,17 +5344,17 @@ $pct_contrib_MES
 > ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu, 
 +     sigma = sigma, m3 = m3, m4 = m4)
 $MES
-[1] 0.03241585
+[1] 0.02755224
 
 $contribution
- [1]  0.0074750513 -0.0028125166  0.0039422674  0.0069376579  0.0008077760
- [6]  0.0037114666  0.0043125937  0.0007173036  0.0036152960  0.0013693293
-[11]  0.0037650911 -0.0048178690  0.0033924063
+ [1]  0.0066193322 -0.0029204094  0.0035391088  0.0062298642  0.0007584470
+ [6]  0.0033786777  0.0039691984  0.0002599126  0.0031036429  0.0013410015
+[11]  0.0033762935 -0.0051263847  0.0030235549
 
 $pct_contrib_MES
- [1]  0.23059863 -0.08676361  0.12161541  0.21402052  0.02491917  0.11449542
- [7]  0.13303965  0.02212817  0.11152864  0.04224258  0.11614968 -0.14862694
-[13]  0.10465269
+ [1]  0.240246613 -0.105995357  0.128450859  0.226110992  0.027527598
+ [6]  0.122628060  0.144060829  0.009433446  0.112645758  0.048671234
+[11]  0.122541527 -0.186060547  0.109738989
 
 > 
 > 
@@ -5212,14 +5613,14 @@ Upside Frequency (MAR = 0%) 0.8333333 0.4166667        1
 > data(edhec)
 > UpsidePotentialRatio(edhec[, 6], MAR=.05/12) #5 percent/yr MAR
                               Event Driven
-Upside Potential (MAR = 0.4%)    0.5376613
+Upside Potential (MAR = 0.4%)    0.5840163
 > UpsidePotentialRatio(edhec[, 1:6], MAR=0)
                             Convertible Arbitrage CTA Global
-Upside Potential (MAR = 0%)             0.4450702   1.174942
+Upside Potential (MAR = 0%)             0.5033798   1.044531
                             Distressed Securities Emerging Markets
-Upside Potential (MAR = 0%)              0.646571        0.5684649
+Upside Potential (MAR = 0%)             0.7762396        0.6001397
                             Equity Market Neutral Event Driven
-Upside Potential (MAR = 0%)             0.5200563    0.6294689
+Upside Potential (MAR = 0%)             0.6009753    0.6748791
 > 
 > 
 > 
@@ -5282,97 +5683,97 @@ Upside Risk (MAR = 0%)           0 0.03204533 0.01397565 0.004324785
 >     # first do normal VaR calc
 >     VaR(edhec, p=.95, method="historical")
     Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-VaR              -0.01916    -0.0354             -0.018875        -0.044605
+VaR              -0.01492   -0.03163              -0.01976         -0.04229
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR             -0.006385     -0.02254               -0.00929     -0.01624
+VaR              -0.00778     -0.02549               -0.00709     -0.01493
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR          -0.02544        -0.013455      -0.013175      -0.07848
+VaR          -0.02619         -0.01029       -0.01138      -0.06741
     Funds of Funds
-VaR      -0.021265
+VaR       -0.02029
 > 
 >     # now use Gaussian
 >     VaR(edhec, p=.95, method="gaussian")
     Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR           -0.02645782 -0.03471098            -0.0221269      -0.05498927
+VaR           -0.02125694 -0.03384036           -0.02110108      -0.04649171
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR          -0.008761813  -0.02246202            -0.01900198  -0.02023018
+VaR          -0.008819289  -0.02121647             -0.0143207   -0.0184415
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.02859264      -0.01152478    -0.01493049   -0.08617027
+VaR       -0.02632324      -0.01023866    -0.01287488   -0.07867615
     Funds of Funds
-VaR    -0.02393888
+VaR    -0.02100817
 > 
 >     # now use modified Cornish Fisher calc to take non-normal distribution into account
 >     VaR(edhec, p=.95, method="modified")
-    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR           -0.03247395 -0.03380228            -0.0274924      -0.06363081
+    Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+VaR            -0.0245422 -0.0328078           -0.02496078      -0.05218143
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.01134637  -0.02812515             -0.0246791  -0.01548247
+VaR           -0.01059654  -0.02547391             -0.0174173  -0.01327363
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.03037494      -0.01486869    -0.01926435   -0.07431463
+VaR       -0.02783751       -0.0123293    -0.01585024   -0.06436471
     Funds of Funds
-VaR    -0.02502852
+VaR    -0.02125092
 > 
 >     # now use p=.99
 >     VaR(edhec, p=.99)
     Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR            -0.1009223 -0.04847019           -0.06533764       -0.1397195
+VaR            -0.1000841 -0.04637473            -0.0569937       -0.1268931
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.04404136  -0.06385154            -0.05850228  -0.02437999
+VaR           -0.04015133  -0.05641814            -0.06110717  -0.02205432
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.05508705      -0.03630211      -0.050531     -0.122236
+VaR        -0.0511693      -0.03270324      -0.046211    -0.1089009
     Funds of Funds
-VaR    -0.05500037
+VaR    -0.04956566
 >     # or the equivalent alpha=.01
 >     VaR(edhec, p=.01)
     Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR            -0.1009223 -0.04847019           -0.06533764       -0.1397195
+VaR            -0.1000841 -0.04637473            -0.0569937       -0.1268931
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.04404136  -0.06385154            -0.05850228  -0.02437999
+VaR           -0.04015133  -0.05641814            -0.06110717  -0.02205432
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.05508705      -0.03630211      -0.050531     -0.122236
+VaR        -0.0511693      -0.03270324      -0.046211    -0.1089009
     Funds of Funds
-VaR    -0.05500037
+VaR    -0.04956566
 > 
 >     # now with outliers squished
 >     VaR(edhec, clean="boudt")
-    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR            -0.0192821 -0.03380228           -0.02281122      -0.05335613
+    Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
+VaR           -0.01603466 -0.0328078            -0.0210253      -0.04503341
     Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR          -0.006583541  -0.02588255            -0.01947099  -0.01612116
+VaR          -0.007626519  -0.02157645            -0.01228341  -0.01417238
     Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.02997413      -0.01255334     -0.0147671   -0.07881339
+VaR       -0.02725545      -0.01049149    -0.01193651   -0.07019385
     Funds of Funds
-VaR    -0.02474761
+VaR    -0.02050145
 > 
 >     # add Component VaR for the equal weighted portfolio
 >     VaR(edhec, clean="boudt", portfolio_method="component")
 no weights passed in, assuming equal weighted portfolio
 $MVaR
-[1] 0.01206124
+[1] 0.01084104
 
 $contribution
  Convertible Arbitrage             CTA Global  Distressed Securities 
-          1.189614e-03           7.392667e-05           1.380388e-03 
+          0.0010092186           0.0004903554           0.0012835448 
       Emerging Markets  Equity Market Neutral           Event Driven 
-          3.044882e-03           3.255042e-04           1.633369e-03 
+          0.0025735180           0.0003700333           0.0013705614 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-          1.122597e-03           9.551128e-04           1.725166e-03 
+          0.0006306300           0.0008432148           0.0016349444 
       Merger Arbitrage         Relative Value          Short Selling 
-          5.594788e-04           9.422577e-04          -2.647415e-03 
+          0.0004780464           0.0007845666          -0.0021050419 
         Funds of Funds 
-          1.756359e-03 
+          0.0014774456 
 
 $pct_contrib_MVaR
  Convertible Arbitrage             CTA Global  Distressed Securities 
-           0.098631120            0.006129276            0.114448260 
+            0.09309244             0.04523141             0.11839686 
       Emerging Markets  Equity Market Neutral           Event Driven 
-           0.252451840            0.026987629            0.135422963 
+            0.23738669             0.03413265             0.12642345 
 Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-           0.093074804            0.079188612            0.143033874 
+            0.05817063             0.07777990             0.15081070 
       Merger Arbitrage         Relative Value          Short Selling 
-           0.046386511            0.078122792           -0.219497771 
+            0.04409601             0.07237007            -0.19417348 
         Funds of Funds 
-           0.145620091 
+            0.13628268 
 
 > 
 > 
@@ -5397,15 +5798,18 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > data(portfolio_bacon)
 > MAR = 0.005
 > print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="volatility")) #expected 1.32
-[1] 1.323046
+         [,1]
+[1,] 1.323046
 > print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="variability")) #expected 1.15
-[1] 1.150238
+         [,1]
+[1,] 1.150238
 > 
 > MAR = 0
 > data(managers)
 > # print(VolatilitySkewness(managers['1996'], MAR, stat="volatility"))
 > print(VolatilitySkewness(managers['1996',1], MAR, stat="volatility"))
-[1] 6.149423
+         [,1]
+[1,] 6.149423
 > 
 > 
 > 
@@ -6459,6 +6863,9 @@ detaching ‘package:MASS’
 > 
 > data(weights)
 > head(weights)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
            Convertible Arbitrage CTA Global Distressed Securities
 2000-01-01            0.02500000 0.14601749             0.0250000
 2001-01-01            0.15785710 0.19577551             0.0250000
@@ -6490,12 +6897,96 @@ detaching ‘package:MASS’
 > 
 > # With the legend "under" the chart
 > chart.StackedBar(weights, date.format="%Y", cex.legend = 0.7, colorset=rainbow12equal)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > # Without the legend
 > chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > # for one row of data, use 'unstacked' for a better chart
 > chart.StackedBar(weights[1,,drop=FALSE], unstacked=TRUE, las=3)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
@@ -6511,7 +7002,10 @@ detaching ‘package:MASS’
 > base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.TimeSeries
 > ### Title: Creates a time series chart with some extensions.
-> ### Aliases: chart.TimeSeries chart.TimeSeries.base charts.TimeSeries
+> ### Aliases: chart.TimeSeries chart.TimeSeries.base
+> ###   chart.TimeSeries.builtin chart.TimeSeries.dygraph
+> ###   chart.TimeSeries.ggplot2 chart.TimeSeries.googlevis
+> ###   chart.TimeSeries.plotly charts.TimeSeries
 > 
 > ### ** Examples
 > 
@@ -6712,33 +7206,33 @@ detaching ‘package:MASS’
 1997-06-30           0.0231         0.0198       -0.0065         0.0225
 > tail(x)
            Convertible Arbitrage CTA Global Distressed Securities
-2009-03-31                0.0235    -0.0180                0.0022
-2009-04-30                0.0500    -0.0140                0.0387
-2009-05-31                0.0578     0.0213                0.0504
-2009-06-30                0.0241    -0.0147                0.0198
-2009-07-31                0.0611    -0.0012                0.0311
-2009-08-31                0.0315     0.0054                0.0244
+2019-06-30                0.0089     0.0240                0.0075
+2019-07-31                0.0032     0.0206               -0.0032
+2019-08-31                0.0019     0.0300               -0.0089
+2019-09-30                0.0023    -0.0273               -0.0022
+2019-10-31                0.0032    -0.0204               -0.0033
+2019-11-30                0.0060     0.0058               -0.0043
            Emerging Markets Equity Market Neutral Event Driven
-2009-03-31           0.0350                0.0021       0.0117
-2009-04-30           0.0663               -0.0012       0.0337
-2009-05-31           0.0884                0.0146       0.0442
-2009-06-30           0.0013                0.0036       0.0123
-2009-07-31           0.0451                0.0042       0.0291
-2009-08-31           0.0166                0.0070       0.0207
+2019-06-30           0.0315                0.0038       0.0158
+2019-07-31           0.0044                0.0029       0.0028
+2019-08-31          -0.0348                0.0009      -0.0139
+2019-09-30           0.0076               -0.0027       0.0008
+2019-10-31           0.0204               -0.0014       0.0027
+2019-11-30          -0.0008                0.0004       0.0090
            Fixed Income Arbitrage Global Macro Long/Short Equity
-2009-03-31                 0.0057       0.0048            0.0188
-2009-04-30                 0.0221       0.0127            0.0375
-2009-05-31                 0.0365       0.0348            0.0516
-2009-06-30                 0.0126      -0.0076            0.0009
-2009-07-31                 0.0322       0.0166            0.0277
-2009-08-31                 0.0202       0.0050            0.0157
+2019-06-30                 0.0008       0.0221            0.0193
+2019-07-31                 0.0031       0.0065            0.0046
+2019-08-31                -0.0033       0.0126           -0.0100
+2019-09-30                 0.0028      -0.0064           -0.0007
+2019-10-31                 0.0034      -0.0056            0.0104
+2019-11-30                 0.0041      -0.0017            0.0138
            Merger Arbitrage Relative Value Short Selling Funds of Funds
-2009-03-31           0.0125         0.0100       -0.0462         0.0008
-2009-04-30           0.0081         0.0342       -0.0820         0.0092
-2009-05-31           0.0107         0.0392        0.0008         0.0312
-2009-06-30           0.0104         0.0101       -0.0094         0.0024
-2009-07-31           0.0068         0.0260       -0.0596         0.0153
-2009-08-31           0.0102         0.0162       -0.0165         0.0113
+2019-06-30           0.0044         0.0075       -0.0073         0.0137
+2019-07-31           0.0057         0.0039       -0.0033         0.0037
+2019-08-31          -0.0003        -0.0031        0.0004        -0.0063
+2019-09-30           0.0037         0.0054       -0.0035        -0.0033
+2019-10-31           0.0052         0.0012       -0.0028         0.0035
+2019-11-30           0.0053         0.0068       -0.0140         0.0071
 > # Note that passing in a single column loses the row and column names
 > x = checkData(edhec[,1])
 > class(x)
@@ -6856,51 +7350,51 @@ detaching ‘package:MASS’
 > #summary period statistics
 > summary(edhec)
      Index            Convertible Arbitrage   CTA Global       
- Min.   :1997-01-31   Min.   :-0.123700     Min.   :-0.054300  
- 1st Qu.:2000-03-23   1st Qu.: 0.000925     1st Qu.:-0.011500  
- Median :2003-05-15   Median : 0.009200     Median : 0.005250  
- Mean   :2003-05-16   Mean   : 0.006409     Mean   : 0.006489  
- 3rd Qu.:2006-07-07   3rd Qu.: 0.014600     3rd Qu.: 0.022675  
- Max.   :2009-08-31   Max.   : 0.061100     Max.   : 0.069100  
+ Min.   :1997-01-31   Min.   :-0.12370      Min.   :-0.056800  
+ 1st Qu.:2002-10-15   1st Qu.:-0.00005      1st Qu.:-0.011900  
+ Median :2008-06-30   Median : 0.00640      Median : 0.002000  
+ Mean   :2008-06-30   Mean   : 0.00550      Mean   : 0.004158  
+ 3rd Qu.:2014-03-15   3rd Qu.: 0.01340      3rd Qu.: 0.020250  
+ Max.   :2019-11-30   Max.   : 0.06110      Max.   : 0.069100  
  Distressed Securities Emerging Markets    Equity Market Neutral
  Min.   :-0.083600     Min.   :-0.192200   Min.   :-0.058700    
- 1st Qu.:-0.000175     1st Qu.:-0.011400   1st Qu.: 0.002400    
- Median : 0.009700     Median : 0.013650   Median : 0.006300    
- Mean   : 0.007953     Mean   : 0.008246   Mean   : 0.006003    
- 3rd Qu.: 0.018225     3rd Qu.: 0.028875   3rd Qu.: 0.010125    
+ 1st Qu.:-0.002150     1st Qu.:-0.009750   1st Qu.: 0.001050    
+ Median : 0.008600     Median : 0.009100   Median : 0.004700    
+ Mean   : 0.006622     Mean   : 0.006246   Mean   : 0.004356    
+ 3rd Qu.: 0.017500     3rd Qu.: 0.025600   3rd Qu.: 0.008100    
  Max.   : 0.050400     Max.   : 0.123000   Max.   : 0.025300    
   Event Driven       Fixed Income Arbitrage  Global Macro      
  Min.   :-0.088600   Min.   :-0.086700      Min.   :-0.031300  
- 1st Qu.:-0.000025   1st Qu.: 0.002275      1st Qu.:-0.003600  
- Median : 0.010150   Median : 0.006000      Median : 0.006200  
- Mean   : 0.007622   Mean   : 0.004231      Mean   : 0.007672  
- 3rd Qu.: 0.018650   3rd Qu.: 0.009950      3rd Qu.: 0.016450  
+ 1st Qu.:-0.001450   1st Qu.: 0.001550      1st Qu.:-0.003950  
+ Median : 0.008300   Median : 0.005400      Median : 0.003800  
+ Mean   : 0.006216   Mean   : 0.004267      Mean   : 0.005378  
+ 3rd Qu.: 0.015900   3rd Qu.: 0.009250      3rd Qu.: 0.012400  
  Max.   : 0.044200   Max.   : 0.036500      Max.   : 0.073800  
  Long/Short Equity  Merger Arbitrage    Relative Value      Short Selling      
  Min.   :-0.06750   Min.   :-0.054400   Min.   :-0.069200   Min.   :-0.134000  
- 1st Qu.:-0.00370   1st Qu.: 0.001775   1st Qu.: 0.001850   1st Qu.:-0.025450  
- Median : 0.01015   Median : 0.007700   Median : 0.008450   Median :-0.000200  
- Mean   : 0.00776   Mean   : 0.006785   Mean   : 0.006701   Mean   : 0.004161  
- 3rd Qu.: 0.02145   3rd Qu.: 0.013725   3rd Qu.: 0.014500   3rd Qu.: 0.035925  
+ 1st Qu.:-0.00475   1st Qu.: 0.000600   1st Qu.: 0.001000   1st Qu.:-0.026450  
+ Median : 0.00790   Median : 0.005800   Median : 0.006400   Median :-0.005300  
+ Mean   : 0.00626   Mean   : 0.005293   Mean   : 0.005701   Mean   :-0.001934  
+ 3rd Qu.: 0.01910   3rd Qu.: 0.011000   3rd Qu.: 0.012750   3rd Qu.: 0.018200  
  Max.   : 0.07450   Max.   : 0.027200   Max.   : 0.039200   Max.   : 0.246300  
- Funds of Funds     
- Min.   :-0.061800  
- 1st Qu.:-0.003325  
- Median : 0.006800  
- Mean   : 0.005918  
- 3rd Qu.: 0.015225  
- Max.   : 0.066600  
+ Funds of Funds    
+ Min.   :-0.06180  
+ 1st Qu.:-0.00350  
+ Median : 0.00520  
+ Mean   : 0.00423  
+ 3rd Qu.: 0.01200  
+ Max.   : 0.06660  
 > 
 > #cumulative index returns
 > tail(cumprod(1+edhec),1)
            Convertible Arbitrage CTA Global Distressed Securities
-2009-08-31              2.559585   2.550288              3.249667
+2019-11-30              4.354959    2.91094              5.905411
            Emerging Markets Equity Market Neutral Event Driven
-2009-08-31         3.106494              2.468271     3.091342
+2019-11-30         4.799286              3.275437     5.290018
            Fixed Income Arbitrage Global Macro Long/Short Equity
-2009-08-31               1.870396        3.128          3.120998
+2019-11-30                3.16749     4.248922          5.272646
            Merger Arbitrage Relative Value Short Selling Funds of Funds
-2009-08-31         2.768785       2.723671      1.502321        2.39178
+2019-11-30         4.218276       4.691544     0.4372135       3.091029
 > 
 > 
 > 
@@ -6928,62 +7422,72 @@ $return
 [13]  0.00000000 -0.00150000  0.00000000 -0.02601701  0.00000000 -0.00040000
 [19]  0.00000000 -0.01742180  0.00000000 -0.01843796  0.00000000 -0.01490000
 [25]  0.00000000 -0.01655473  0.00000000 -0.02220000  0.00000000 -0.20591447
+[31]  0.00000000 -0.00400000  0.00000000 -0.00739256  0.00000000 -0.07837768
+[37]  0.00000000 -0.00070000  0.00000000 -0.05932734
 
 $from
  [1]   1   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76
-[20]  88  95  99 103 106 107 113 118 128 130 131
+[20]  88  95  99 103 106 107 113 118 128 130 131 210 211 212 213 215 222 248 251
+[39] 252 254
 
 $trough
  [1]   1   3   5  11  14  22  27  41  44  47  54  57  60  62  63  70  74  75  76
-[20]  92  95 100 103 106 107 115 118 128 130 144
+[20]  92  95 100 103 106 107 115 118 128 130 144 210 211 212 214 215 230 248 251
+[39] 252 264
 
 $to
  [1]   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76  88
-[20]  95  99 103 106 107 113 118 128 130 131 153
+[20]  95  99 103 106 107 113 118 128 130 131 210 211 212 213 215 222 248 251 252
+[39] 254 276
 
 $length
  [1]  3  3  6  5  4 11 14  5  2 10  2  6  3  2  4  9  2  2 13  8  5  5  4  2  7
-[26]  6 11  3  2 23
+[26]  6 11  3  2 80  2  2  2  3  8 27  4  2  3 23
 
 $peaktotrough
  [1]  1  1  1  2  1  6  1  2  1  3  1  3  1  1  1  5  1  1  1  5  1  2  1  1  1
-[26]  3  1  1  1 14
+[26]  3  1  1  1 14  1  1  1  2  1  9  1  1  1 11
 
 $recovery
  [1]  2  2  5  3  3  5 13  3  1  7  1  3  2  1  3  4  1  1 12  3  4  3  3  1  6
-[26]  3 10  2  1  9
+[26]  3 10  2  1 66  1  1  1  1  7 18  3  1  2 12
 
 > sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 $return
- [1] -0.20591447 -0.07069135 -0.03877182 -0.03737506 -0.02601701 -0.02220000
- [7] -0.01843796 -0.01742180 -0.01655473 -0.01627767 -0.01490000 -0.01326634
-[13] -0.00770000 -0.00150000 -0.00040000  0.00000000  0.00000000  0.00000000
-[19]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+ [1] -0.20591447 -0.07837768 -0.07069135 -0.05932734 -0.03877182 -0.03737506
+ [7] -0.02601701 -0.02220000 -0.01843796 -0.01742180 -0.01655473 -0.01627767
+[13] -0.01490000 -0.01326634 -0.00770000 -0.00739256 -0.00400000 -0.00150000
+[19] -0.00070000 -0.00040000  0.00000000  0.00000000  0.00000000  0.00000000
 [25]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+[31]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+[37]  0.00000000  0.00000000  0.00000000  0.00000000
 
 $from
- [1] 131  17  40  45  66 128  99  88 113  55 106  10   3  62  75   1   5  14  27
-[20]  44  54  60  63  74  76  95 103 107 118 130
+ [1] 131 222  17 254  40  45  66 128  99  88 113  55 106  10   3 213 211  62 251
+[20]  75   1   5  14  27  44  54  60  63  74  76  95 103 107 118 130 210 212 215
+[39] 248 252
 
 $trough
- [1] 144  22  41  47  70 128 100  92 115  57 106  11   3  62  75   1   5  14  27
-[20]  44  54  60  63  74  76  95 103 107 118 130
+ [1] 144 230  22 264  41  47  70 128 100  92 115  57 106  11   3 214 211  62 251
+[20]  75   1   5  14  27  44  54  60  63  74  76  95 103 107 118 130 210 212 215
+[39] 248 252
 
 $to
- [1] 153  27  44  54  74 130 103  95 118  60 107  14   5  63  76   3  10  17  40
-[20]  45  55  62  66  75  88  99 106 113 128 131
+ [1] 210 248  27 276  44  54  74 130 103  95 118  60 107  14   5 215 212  63 252
+[20]  76   3  10  17  40  45  55  62  66  75  88  99 106 113 128 131 211 213 222
+[39] 251 254
 
 $length
- [1] 23 11  5 10  9  3  5  8  6  6  2  5  3  2  2  3  6  4 14  2  2  3  4  2 13
-[26]  5  4  7 11  2
+ [1] 80 27 11 23  5 10  9  3  5  8  6  6  2  5  3  3  2  2  2  2  3  6  4 14  2
+[26]  2  3  4  2 13  5  4  7 11  2  2  2  8  4  3
 
 $peaktotrough
- [1] 14  6  2  3  5  1  2  5  3  3  1  2  1  1  1  1  1  1  1  1  1  1  1  1  1
-[26]  1  1  1  1  1
+ [1] 14  9  6 11  2  3  5  1  2  5  3  3  1  2  1  2  1  1  1  1  1  1  1  1  1
+[26]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
 
 $recovery
- [1]  9  5  3  7  4  2  3  3  3  3  1  3  2  1  1  2  5  3 13  1  1  2  3  1 12
-[26]  4  3  6 10  1
+ [1] 66 18  5 12  3  7  4  2  3  3  3  3  1  3  2  1  1  1  1  1  2  5  3 13  1
+[26]  1  2  3  1 12  4  3  6 10  1  1  1  7  3  2
 
 > 
 > 
@@ -7162,6 +7666,7 @@ US 3m TR            0.0000
 > ### Title: calculate attributes relative to the mean of the observation
 > ###   series given, including geometric, stderr, LCL and UCL
 > ### Aliases: mean.geometric mean.utils mean.UCL mean.LCL mean.stderr
+> ###   Mean.arithmetic
 > 
 > ### ** Examples
 > 
@@ -7169,16 +7674,16 @@ US 3m TR            0.0000
 > data(edhec)
 > mean.geometric(edhec[,"Funds of Funds"])
                Funds of Funds
-Geometric Mean    0.005753581
+Geometric Mean    0.004112082
 > mean.stderr(edhec[,"Funds of Funds"])
                Funds of Funds
-Standard Error    0.001477185
+Standard Error   0.0009269411
 > mean.UCL(edhec[,"Funds of Funds"])
                        Funds of Funds
-Upper Confidence Level    0.008837041
+Upper Confidence Level     0.00605465
 > mean.LCL(edhec[,"Funds of Funds"])
                        Funds of Funds
-Lower Confidence Level    0.002999801
+Lower Confidence Level    0.002404987
 > 
 > 
 > 
@@ -7203,7 +7708,7 @@ Lower Confidence Level    0.002999801
 > #preview the data
 > head(portfolio_bacon)
 Warning: index class is Date, which does not support timezones.
-Expected 'UTC' timezone, but indexTZ is ''
+Expected 'UTC' timezone, but tzone is ‘’
            portfolio.monthly.return.... benchmark.return....
 2000-01-30                        0.003                0.002
 2000-02-27                        0.026                0.025
@@ -7225,7 +7730,7 @@ Expected 'UTC' timezone, but indexTZ is ''
 > #cumulative returns
 > tail(cumprod(1+portfolio_bacon),1)
 Warning: index class is Date, which does not support timezones.
-Expected 'UTC' timezone, but indexTZ is ''
+Expected 'UTC' timezone, but tzone is ‘’
            portfolio.monthly.return.... benchmark.return....
 2001-12-30                     1.218106             1.249887
 > 
@@ -7324,62 +7829,72 @@ $return
 [13]  0.00000000 -0.00150000  0.00000000 -0.02601701  0.00000000 -0.00040000
 [19]  0.00000000 -0.01742180  0.00000000 -0.01843796  0.00000000 -0.01490000
 [25]  0.00000000 -0.01655473  0.00000000 -0.02220000  0.00000000 -0.20591447
+[31]  0.00000000 -0.00400000  0.00000000 -0.00739256  0.00000000 -0.07837768
+[37]  0.00000000 -0.00070000  0.00000000 -0.05932734
 
 $from
  [1]   1   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76
-[20]  88  95  99 103 106 107 113 118 128 130 131
+[20]  88  95  99 103 106 107 113 118 128 130 131 210 211 212 213 215 222 248 251
+[39] 252 254
 
 $trough
  [1]   1   3   5  11  14  22  27  41  44  47  54  57  60  62  63  70  74  75  76
-[20]  92  95 100 103 106 107 115 118 128 130 144
+[20]  92  95 100 103 106 107 115 118 128 130 144 210 211 212 214 215 230 248 251
+[39] 252 264
 
 $to
  [1]   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76  88
-[20]  95  99 103 106 107 113 118 128 130 131 153
+[20]  95  99 103 106 107 113 118 128 130 131 210 211 212 213 215 222 248 251 252
+[39] 254 276
 
 $length
  [1]  3  3  6  5  4 11 14  5  2 10  2  6  3  2  4  9  2  2 13  8  5  5  4  2  7
-[26]  6 11  3  2 23
+[26]  6 11  3  2 80  2  2  2  3  8 27  4  2  3 23
 
 $peaktotrough
  [1]  1  1  1  2  1  6  1  2  1  3  1  3  1  1  1  5  1  1  1  5  1  2  1  1  1
-[26]  3  1  1  1 14
+[26]  3  1  1  1 14  1  1  1  2  1  9  1  1  1 11
 
 $recovery
  [1]  2  2  5  3  3  5 13  3  1  7  1  3  2  1  3  4  1  1 12  3  4  3  3  1  6
-[26]  3 10  2  1  9
+[26]  3 10  2  1 66  1  1  1  1  7 18  3  1  2 12
 
 > sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
 $return
- [1] -0.20591447 -0.07069135 -0.03877182 -0.03737506 -0.02601701 -0.02220000
- [7] -0.01843796 -0.01742180 -0.01655473 -0.01627767 -0.01490000 -0.01326634
-[13] -0.00770000 -0.00150000 -0.00040000  0.00000000  0.00000000  0.00000000
-[19]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+ [1] -0.20591447 -0.07837768 -0.07069135 -0.05932734 -0.03877182 -0.03737506
+ [7] -0.02601701 -0.02220000 -0.01843796 -0.01742180 -0.01655473 -0.01627767
+[13] -0.01490000 -0.01326634 -0.00770000 -0.00739256 -0.00400000 -0.00150000
+[19] -0.00070000 -0.00040000  0.00000000  0.00000000  0.00000000  0.00000000
 [25]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+[31]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+[37]  0.00000000  0.00000000  0.00000000  0.00000000
 
 $from
- [1] 131  17  40  45  66 128  99  88 113  55 106  10   3  62  75   1   5  14  27
-[20]  44  54  60  63  74  76  95 103 107 118 130
+ [1] 131 222  17 254  40  45  66 128  99  88 113  55 106  10   3 213 211  62 251
+[20]  75   1   5  14  27  44  54  60  63  74  76  95 103 107 118 130 210 212 215
+[39] 248 252
 
 $trough
- [1] 144  22  41  47  70 128 100  92 115  57 106  11   3  62  75   1   5  14  27
-[20]  44  54  60  63  74  76  95 103 107 118 130
+ [1] 144 230  22 264  41  47  70 128 100  92 115  57 106  11   3 214 211  62 251
+[20]  75   1   5  14  27  44  54  60  63  74  76  95 103 107 118 130 210 212 215
+[39] 248 252
 
 $to
- [1] 153  27  44  54  74 130 103  95 118  60 107  14   5  63  76   3  10  17  40
-[20]  45  55  62  66  75  88  99 106 113 128 131
+ [1] 210 248  27 276  44  54  74 130 103  95 118  60 107  14   5 215 212  63 252
+[20]  76   3  10  17  40  45  55  62  66  75  88  99 106 113 128 131 211 213 222
+[39] 251 254
 
 $length
- [1] 23 11  5 10  9  3  5  8  6  6  2  5  3  2  2  3  6  4 14  2  2  3  4  2 13
-[26]  5  4  7 11  2
+ [1] 80 27 11 23  5 10  9  3  5  8  6  6  2  5  3  3  2  2  2  2  3  6  4 14  2
+[26]  2  3  4  2 13  5  4  7 11  2  2  2  8  4  3
 
 $peaktotrough
- [1] 14  6  2  3  5  1  2  5  3  3  1  2  1  1  1  1  1  1  1  1  1  1  1  1  1
-[26]  1  1  1  1  1
+ [1] 14  9  6 11  2  3  5  1  2  5  3  3  1  2  1  2  1  1  1  1  1  1  1  1  1
+[26]  1  1  1  1  1  1  1  1  1  1  1  1  1  1  1
 
 $recovery
- [1]  9  5  3  7  4  2  3  3  3  3  1  3  2  1  1  2  5  3 13  1  1  2  3  1 12
-[26]  4  3  6 10  1
+ [1] 66 18  5 12  3  7  4  2  3  3  3  3  1  3  2  1  1  1  1  1  2  5  3 13  1
+[26]  1  2  3  1 12  4  3  6 10  1  1  1  7  3  2
 
 > 
 > 
@@ -7463,23 +7978,23 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > table.Arbitrary(edhec,metrics=c("VaR", "ES"),
 +                 metricsNames=c("Modified VaR","Modified Expected Shortfall"))
                             Convertible Arbitrage  CTA Global
-Modified VaR                          -0.03247395 -0.03380228
-Modified Expected Shortfall           -0.09954768 -0.04284185
+Modified VaR                          -0.02454220 -0.03280780
+Modified Expected Shortfall           -0.08948631 -0.04116413
                             Distressed Securities Emerging Markets
-Modified VaR                          -0.02749240      -0.06363081
-Modified Expected Shortfall           -0.06087217      -0.12788702
+Modified VaR                          -0.02496078      -0.05218143
+Modified Expected Shortfall           -0.05170691      -0.11567185
                             Equity Market Neutral Event Driven
-Modified VaR                          -0.01134637  -0.02812515
-Modified Expected Shortfall           -0.04290042  -0.05909659
+Modified VaR                          -0.01059654  -0.02547391
+Modified Expected Shortfall           -0.03786594  -0.05128337
                             Fixed Income Arbitrage Global Macro
-Modified VaR                           -0.02467910  -0.01548247
-Modified Expected Shortfall            -0.05951833  -0.01983308
+Modified VaR                           -0.01741730  -0.01327363
+Modified Expected Shortfall            -0.05001278  -0.01638037
                             Long/Short Equity Merger Arbitrage Relative Value
-Modified VaR                      -0.03037494      -0.01486869    -0.01926435
-Modified Expected Shortfall       -0.04709136      -0.03326371    -0.04888118
+Modified VaR                      -0.02783751      -0.01232930    -0.01585024
+Modified Expected Shortfall       -0.04377715      -0.02992712    -0.04417445
                             Short Selling Funds of Funds
-Modified VaR                  -0.07431463    -0.02502852
-Modified Expected Shortfall   -0.09022777    -0.04618555
+Modified VaR                  -0.06436471    -0.02125092
+Modified Expected Shortfall   -0.07076187    -0.03971531
 > 
 > 
 > 
@@ -7832,77 +8347,77 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(edhec)
 > table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95)
                             Convertible Arbitrage CTA Global
-Semi Deviation                             0.0167     0.0173
-Gain Deviation                             0.0104     0.0169
-Loss Deviation                             0.0256     0.0135
-Downside Deviation (MAR=5%)                0.0159     0.0159
-Downside Deviation (Rf=4%)                 0.0157     0.0155
-Downside Deviation (0%)                    0.0147     0.0137
-Maximum Drawdown                           0.2927     0.1168
-Historical VaR (95%)                      -0.0192    -0.0354
-Historical ES (95%)                       -0.0488    -0.0453
-Modified VaR (95%)                        -0.0325    -0.0338
-Modified ES (95%)                         -0.0995    -0.0428
+Semi Deviation                             0.0132     0.0159
+Gain Deviation                             0.0094     0.0153
+Loss Deviation                             0.0194     0.0124
+Downside Deviation (MAR=5%)                0.0127     0.0159
+Downside Deviation (Rf=4%)                 0.0124     0.0154
+Downside Deviation (0%)                    0.0114     0.0136
+Maximum Drawdown                           0.2927     0.1256
+Historical VaR (95%)                      -0.0149    -0.0316
+Historical ES (95%)                       -0.0366    -0.0413
+Modified VaR (95%)                        -0.0245    -0.0328
+Modified ES (95%)                         -0.0895    -0.0412
                             Distressed Securities Emerging Markets
-Semi Deviation                             0.0148           0.0304
-Gain Deviation                             0.0104           0.0208
-Loss Deviation                             0.0193           0.0340
-Downside Deviation (MAR=5%)                0.0133           0.0287
-Downside Deviation (Rf=4%)                 0.0130           0.0283
-Downside Deviation (0%)                    0.0119           0.0269
+Semi Deviation                             0.0132           0.0249
+Gain Deviation                             0.0097           0.0186
+Loss Deviation                             0.0148           0.0278
+Downside Deviation (MAR=5%)                0.0121           0.0239
+Downside Deviation (Rf=4%)                 0.0118           0.0236
+Downside Deviation (0%)                    0.0105           0.0222
 Maximum Drawdown                           0.2292           0.3598
-Historical VaR (95%)                      -0.0189          -0.0446
-Historical ES (95%)                       -0.0427          -0.0892
-Modified VaR (95%)                        -0.0275          -0.0636
-Modified ES (95%)                         -0.0609          -0.1279
+Historical VaR (95%)                      -0.0198          -0.0423
+Historical ES (95%)                       -0.0367          -0.0724
+Modified VaR (95%)                        -0.0250          -0.0522
+Modified ES (95%)                         -0.0517          -0.1157
                             Equity Market Neutral Event Driven
-Semi Deviation                             0.0074       0.0149
-Gain Deviation                             0.0053       0.0098
-Loss Deviation                             0.0135       0.0191
-Downside Deviation (MAR=5%)                0.0068       0.0135
-Downside Deviation (Rf=4%)                 0.0065       0.0132
-Downside Deviation (0%)                    0.0057       0.0121
+Semi Deviation                             0.0064       0.0133
+Gain Deviation                             0.0050       0.0093
+Loss Deviation                             0.0094       0.0153
+Downside Deviation (MAR=5%)                0.0063       0.0124
+Downside Deviation (Rf=4%)                 0.0060       0.0120
+Downside Deviation (0%)                    0.0049       0.0108
 Maximum Drawdown                           0.1108       0.2008
-Historical VaR (95%)                      -0.0064      -0.0225
-Historical ES (95%)                       -0.0188      -0.0443
-Modified VaR (95%)                        -0.0113      -0.0281
-Modified ES (95%)                         -0.0429      -0.0591
+Historical VaR (95%)                      -0.0078      -0.0255
+Historical ES (95%)                       -0.0169      -0.0386
+Modified VaR (95%)                        -0.0106      -0.0255
+Modified ES (95%)                         -0.0379      -0.0513
                             Fixed Income Arbitrage Global Macro
-Semi Deviation                              0.0127       0.0108
-Gain Deviation                              0.0056       0.0139
-Loss Deviation                              0.0231       0.0075
-Downside Deviation (MAR=5%)                 0.0126       0.0089
-Downside Deviation (Rf=4%)                  0.0124       0.0084
-Downside Deviation (0%)                     0.0116       0.0068
+Semi Deviation                              0.0098       0.0091
+Gain Deviation                              0.0054       0.0120
+Loss Deviation                              0.0176       0.0065
+Downside Deviation (MAR=5%)                 0.0098       0.0084
+Downside Deviation (Rf=4%)                  0.0096       0.0079
+Downside Deviation (0%)                     0.0087       0.0062
 Maximum Drawdown                            0.1788       0.0792
-Historical VaR (95%)                       -0.0093      -0.0162
-Historical ES (95%)                        -0.0423      -0.0230
-Modified VaR (95%)                         -0.0247      -0.0155
-Modified ES (95%)                          -0.0595      -0.0198
+Historical VaR (95%)                       -0.0071      -0.0149
+Historical ES (95%)                        -0.0283      -0.0206
+Modified VaR (95%)                         -0.0174      -0.0133
+Modified ES (95%)                          -0.0500      -0.0164
                             Long/Short Equity Merger Arbitrage Relative Value
-Semi Deviation                         0.0164           0.0091         0.0110
-Gain Deviation                         0.0139           0.0064         0.0070
-Loss Deviation                         0.0152           0.0120         0.0159
-Downside Deviation (MAR=5%)            0.0147           0.0080         0.0100
-Downside Deviation (Rf=4%)             0.0143           0.0077         0.0097
-Downside Deviation (0%)                0.0128           0.0067         0.0087
+Semi Deviation                         0.0147           0.0074         0.0091
+Gain Deviation                         0.0124           0.0058         0.0066
+Loss Deviation                         0.0140           0.0088         0.0121
+Downside Deviation (MAR=5%)            0.0137           0.0069         0.0085
+Downside Deviation (Rf=4%)             0.0133           0.0066         0.0082
+Downside Deviation (0%)                0.0118           0.0054         0.0071
 Maximum Drawdown                       0.2182           0.0563         0.1594
-Historical VaR (95%)                  -0.0254          -0.0135        -0.0132
-Historical ES (95%)                   -0.0440          -0.0246        -0.0311
-Modified VaR (95%)                    -0.0304          -0.0149        -0.0193
-Modified ES (95%)                     -0.0471          -0.0333        -0.0489
+Historical VaR (95%)                  -0.0262          -0.0103        -0.0114
+Historical ES (95%)                   -0.0422          -0.0191        -0.0246
+Modified VaR (95%)                    -0.0278          -0.0123        -0.0159
+Modified ES (95%)                     -0.0438          -0.0299        -0.0442
                             Short Selling Funds of Funds
-Semi Deviation                     0.0365         0.0134
-Gain Deviation                     0.0418         0.0122
-Loss Deviation                     0.0321         0.0146
-Downside Deviation (MAR=5%)        0.0365         0.0126
-Downside Deviation (Rf=4%)         0.0360         0.0122
-Downside Deviation (0%)            0.0342         0.0109
-Maximum Drawdown                   0.4956         0.2059
-Historical VaR (95%)              -0.0785        -0.0213
-Historical ES (95%)               -0.1106        -0.0390
-Modified VaR (95%)                -0.0743        -0.0250
-Modified ES (95%)                 -0.0902        -0.0462
+Semi Deviation                     0.0301         0.0113
+Gain Deviation                     0.0381         0.0103
+Loss Deviation                     0.0271         0.0120
+Downside Deviation (MAR=5%)        0.0337         0.0112
+Downside Deviation (Rf=4%)         0.0332         0.0108
+Downside Deviation (0%)            0.0312         0.0094
+Maximum Drawdown                   0.7687         0.2059
+Historical VaR (95%)              -0.0674        -0.0203
+Historical ES (95%)               -0.0968        -0.0332
+Modified VaR (95%)                -0.0644        -0.0213
+Modified ES (95%)                 -0.0708        -0.0397
 > 
 > result=t(table.DownsideRisk(edhec, Rf=.04/12, MAR =.05/12, p=.95))
 > require("Hmisc")
@@ -8015,16 +8530,16 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(edhec)
 > table.Drawdowns(edhec[,1,drop=FALSE])
         From     Trough         To   Depth Length To Trough Recovery
-1 2007-11-30 2008-11-30       <NA> -0.2927     23        13       NA
+1 2007-11-30 2008-11-30 2009-09-30 -0.2927     23        13       10
 2 2004-05-31 2005-05-31 2006-02-28 -0.0822     22        13        9
 3 1998-08-31 1998-10-31 1999-03-31 -0.0712      8         3        5
-4 2003-06-30 2003-08-31 2003-10-31 -0.0215      5         3        2
-5 2007-07-31 2007-08-31 2007-10-31 -0.0197      4         2        2
+4 2015-06-30 2016-02-29 2016-07-31 -0.0527     14         9        5
+5 2011-05-31 2011-09-30 2012-03-31 -0.0516     11         5        6
 > table.Drawdowns(edhec[,12,drop=FALSE])
         From     Trough         To   Depth Length To Trough Recovery
-1 1998-09-30 2000-08-31 2002-09-30 -0.4956     49        24       25
-2 2002-10-31 2007-05-31 2009-02-28 -0.3630     77        56       21
-3 2009-03-31 2009-08-31       <NA> -0.1972      7         6       NA
+1 2009-03-31 2017-11-30       <NA> -0.7687    130       105       NA
+2 1998-09-30 2000-08-31 2002-09-30 -0.4956     49        24       25
+3 2002-10-31 2007-05-31 2009-02-28 -0.3630     77        56       21
 4 1997-04-30 1997-09-30 1998-03-31 -0.1502     12         6        6
 5 1997-01-31 1997-01-31 1997-02-28 -0.0166      2         1        1
 > data(managers)
@@ -8230,79 +8745,79 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(edhec)
 > table.Stats(edhec[,1:3])
                 Convertible Arbitrage CTA Global Distressed Securities
-Observations                 152.0000   152.0000              152.0000
+Observations                 275.0000   275.0000              275.0000
 NAs                            0.0000     0.0000                0.0000
-Minimum                       -0.1237    -0.0543               -0.0836
-Quartile 1                     0.0009    -0.0115               -0.0002
-Median                         0.0092     0.0052                0.0097
-Arithmetic Mean                0.0064     0.0065                0.0080
-Geometric Mean                 0.0062     0.0062                0.0078
-Quartile 3                     0.0146     0.0227                0.0182
+Minimum                       -0.1237    -0.0568               -0.0836
+Quartile 1                     0.0000    -0.0119               -0.0022
+Median                         0.0064     0.0020                0.0086
+Arithmetic Mean                0.0055     0.0042                0.0066
+Geometric Mean                 0.0054     0.0039                0.0065
+Quartile 3                     0.0134     0.0202                0.0175
 Maximum                        0.0611     0.0691                0.0504
-SE Mean                        0.0016     0.0020                0.0015
-LCL Mean (0.95)                0.0032     0.0025                0.0050
-UCL Mean (0.95)                0.0096     0.0105                0.0109
-Variance                       0.0004     0.0006                0.0003
-Stdev                          0.0200     0.0251                0.0183
-Skewness                      -2.6837     0.1345               -1.6746
-Kurtosis                      16.1782    -0.1133                6.4390
+SE Mean                        0.0010     0.0014                0.0010
+LCL Mean (0.95)                0.0036     0.0014                0.0046
+UCL Mean (0.95)                0.0074     0.0069                0.0086
+Variance                       0.0003     0.0005                0.0003
+Stdev                          0.0163     0.0231                0.0169
+Skewness                      -2.6495     0.1593               -1.2475
+Kurtosis                      20.7792    -0.0524                4.7755
 > t(table.Stats(edhec))
                        Observations NAs Minimum Quartile 1  Median
-Convertible Arbitrage           152   0 -0.1237     0.0009  0.0092
-CTA Global                      152   0 -0.0543    -0.0115  0.0052
-Distressed Securities           152   0 -0.0836    -0.0002  0.0097
-Emerging Markets                152   0 -0.1922    -0.0114  0.0136
-Equity Market Neutral           152   0 -0.0587     0.0024  0.0063
-Event Driven                    152   0 -0.0886     0.0000  0.0102
-Fixed Income Arbitrage          152   0 -0.0867     0.0023  0.0060
-Global Macro                    152   0 -0.0313    -0.0036  0.0062
-Long/Short Equity               152   0 -0.0675    -0.0037  0.0102
-Merger Arbitrage                152   0 -0.0544     0.0018  0.0077
-Relative Value                  152   0 -0.0692     0.0018  0.0084
-Short Selling                   152   0 -0.1340    -0.0254 -0.0002
-Funds of Funds                  152   0 -0.0618    -0.0033  0.0068
+Convertible Arbitrage           275   0 -0.1237     0.0000  0.0064
+CTA Global                      275   0 -0.0568    -0.0119  0.0020
+Distressed Securities           275   0 -0.0836    -0.0022  0.0086
+Emerging Markets                275   0 -0.1922    -0.0098  0.0091
+Equity Market Neutral           275   0 -0.0587     0.0010  0.0047
+Event Driven                    275   0 -0.0886    -0.0015  0.0083
+Fixed Income Arbitrage          275   0 -0.0867     0.0016  0.0054
+Global Macro                    275   0 -0.0313    -0.0040  0.0038
+Long/Short Equity               275   0 -0.0675    -0.0047  0.0079
+Merger Arbitrage                275   0 -0.0544     0.0006  0.0058
+Relative Value                  275   0 -0.0692     0.0010  0.0064
+Short Selling                   275   0 -0.1340    -0.0264 -0.0053
+Funds of Funds                  275   0 -0.0618    -0.0035  0.0052
                        Arithmetic Mean Geometric Mean Quartile 3 Maximum
-Convertible Arbitrage           0.0064         0.0062     0.0146  0.0611
-CTA Global                      0.0065         0.0062     0.0227  0.0691
-Distressed Securities           0.0080         0.0078     0.0182  0.0504
-Emerging Markets                0.0082         0.0075     0.0289  0.1230
-Equity Market Neutral           0.0060         0.0060     0.0101  0.0253
-Event Driven                    0.0076         0.0075     0.0186  0.0442
-Fixed Income Arbitrage          0.0042         0.0041     0.0100  0.0365
-Global Macro                    0.0077         0.0075     0.0165  0.0738
-Long/Short Equity               0.0078         0.0075     0.0214  0.0745
-Merger Arbitrage                0.0068         0.0067     0.0137  0.0272
-Relative Value                  0.0067         0.0066     0.0145  0.0392
-Short Selling                   0.0042         0.0027     0.0359  0.2463
-Funds of Funds                  0.0059         0.0058     0.0152  0.0666
+Convertible Arbitrage           0.0055         0.0054     0.0134  0.0611
+CTA Global                      0.0042         0.0039     0.0202  0.0691
+Distressed Securities           0.0066         0.0065     0.0175  0.0504
+Emerging Markets                0.0062         0.0057     0.0256  0.1230
+Equity Market Neutral           0.0044         0.0043     0.0081  0.0253
+Event Driven                    0.0062         0.0061     0.0159  0.0442
+Fixed Income Arbitrage          0.0043         0.0042     0.0093  0.0365
+Global Macro                    0.0054         0.0053     0.0124  0.0738
+Long/Short Equity               0.0063         0.0061     0.0191  0.0745
+Merger Arbitrage                0.0053         0.0052     0.0110  0.0272
+Relative Value                  0.0057         0.0056     0.0128  0.0392
+Short Selling                  -0.0019        -0.0030     0.0182  0.2463
+Funds of Funds                  0.0042         0.0041     0.0120  0.0666
                        SE Mean LCL Mean (0.95) UCL Mean (0.95) Variance  Stdev
-Convertible Arbitrage   0.0016          0.0032          0.0096   0.0004 0.0200
-CTA Global              0.0020          0.0025          0.0105   0.0006 0.0251
-Distressed Securities   0.0015          0.0050          0.0109   0.0003 0.0183
-Emerging Markets        0.0031          0.0021          0.0144   0.0015 0.0386
-Equity Market Neutral   0.0007          0.0046          0.0074   0.0001 0.0090
-Event Driven            0.0015          0.0047          0.0106   0.0003 0.0184
-Fixed Income Arbitrage  0.0011          0.0020          0.0065   0.0002 0.0142
-Global Macro            0.0014          0.0049          0.0104   0.0003 0.0170
-Long/Short Equity       0.0018          0.0042          0.0113   0.0005 0.0222
-Merger Arbitrage        0.0009          0.0050          0.0086   0.0001 0.0112
-Relative Value          0.0011          0.0046          0.0088   0.0002 0.0132
-Short Selling           0.0045         -0.0047          0.0130   0.0030 0.0551
-Funds of Funds          0.0015          0.0030          0.0088   0.0003 0.0182
+Convertible Arbitrage   0.0010          0.0036          0.0074   0.0003 0.0163
+CTA Global              0.0014          0.0014          0.0069   0.0005 0.0231
+Distressed Securities   0.0010          0.0046          0.0086   0.0003 0.0169
+Emerging Markets        0.0019          0.0024          0.0101   0.0010 0.0321
+Equity Market Neutral   0.0005          0.0034          0.0053   0.0001 0.0080
+Event Driven            0.0010          0.0042          0.0082   0.0003 0.0167
+Fixed Income Arbitrage  0.0007          0.0029          0.0056   0.0001 0.0113
+Global Macro            0.0009          0.0037          0.0071   0.0002 0.0145
+Long/Short Equity       0.0012          0.0039          0.0086   0.0004 0.0198
+Merger Arbitrage        0.0006          0.0042          0.0064   0.0001 0.0095
+Relative Value          0.0007          0.0044          0.0070   0.0001 0.0113
+Short Selling           0.0028         -0.0075          0.0036   0.0022 0.0467
+Funds of Funds          0.0009          0.0024          0.0061   0.0002 0.0154
                        Skewness Kurtosis
-Convertible Arbitrage   -2.6837  16.1782
-CTA Global               0.1345  -0.1133
-Distressed Securities   -1.6746   6.4390
-Emerging Markets        -1.2575   5.1026
-Equity Market Neutral   -2.7476  17.4073
-Event Driven            -1.7184   6.1131
-Fixed Income Arbitrage  -3.7072  19.5102
-Global Macro             0.8153   1.7658
-Long/Short Equity       -0.3818   1.2465
-Merger Arbitrage        -1.6474   5.7932
-Relative Value          -2.1019   9.1646
-Short Selling            0.5778   2.2486
-Funds of Funds          -0.4594   3.2993
+Convertible Arbitrage   -2.6495  20.7792
+CTA Global               0.1593  -0.0524
+Distressed Securities   -1.2475   4.7755
+Emerging Markets        -1.1631   6.3307
+Equity Market Neutral   -2.0743  14.2186
+Event Driven            -1.3627   4.8163
+Fixed Income Arbitrage  -3.9677  27.6570
+Global Macro             0.9892   2.8388
+Long/Short Equity       -0.3837   1.4801
+Merger Arbitrage        -1.3119   5.9056
+Relative Value          -1.7977   9.2593
+Short Selling            0.7969   3.3845
+Funds of Funds          -0.3572   4.1281
 > 
 > result=t(table.Stats(edhec))
 > require("Hmisc")
@@ -8350,21 +8865,21 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > table.ProbOutPerformance(edhec[,1],edhec[,2]) 
   period_lengths Convertible Arbitrage CTA Global total periods
-1              1                    83         69           152
-2              3                    86         64           150
-3              6                    82         65           147
-4              9                    77         67           144
-5             12                    69         72           141
-6             18                    61         74           135
-7             36                    52         65           117
+1              1                   150        125           275
+2              3                   171        102           273
+3              6                   170        100           270
+4              9                   170         97           267
+5             12                   164        100           264
+6             18                   164         94           258
+7             36                   141         99           240
   prob_Convertible Arbitrage_outperformance prob_CTA Global_outperformance
-1                                 0.5460526                      0.4539474
-2                                 0.5733333                      0.4266667
-3                                 0.5578231                      0.4421769
-4                                 0.5347222                      0.4652778
-5                                 0.4893617                      0.5106383
-6                                 0.4518519                      0.5481481
-7                                 0.4444444                      0.5555556
+1                                 0.5454545                      0.4545455
+2                                 0.6263736                      0.3736264
+3                                 0.6296296                      0.3703704
+4                                 0.6367041                      0.3632959
+5                                 0.6212121                      0.3787879
+6                                 0.6356589                      0.3643411
+7                                 0.5875000                      0.4125000
 > title(main='Table of Convertible Arbitrage vs Benchmark')
 > 
 > 
@@ -8390,19 +8905,19 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > data(edhec)
 > table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
                       Merger Arbitrage Relative Value Short Selling
-Last 12 month Average           0.0025         0.0003        0.0026
-Last 24 month Average           0.0024         0.0006        0.0079
-Last 36 month Average           0.0049         0.0034        0.0036
-Last 12 month Std Dev           0.0141         0.0331        0.0537
-Last 24 month Std Dev           0.0126         0.0246        0.0460
-Last 36 month Std Dev           0.0121         0.0207        0.0403
+Last 12 month Average           0.0039         0.0037       -0.0070
+Last 24 month Average           0.0034         0.0019        0.0007
+Last 36 month Average           0.0035         0.0030       -0.0100
+Last 12 month Std Dev           0.0048         0.0065        0.0096
+Last 24 month Std Dev           0.0060         0.0062        0.0263
+Last 36 month Std Dev           0.0057         0.0055        0.0315
                       Funds of Funds
-Last 12 month Average        -0.0067
-Last 24 month Average        -0.0043
-Last 36 month Average         0.0002
-Last 12 month Std Dev         0.0284
-Last 24 month Std Dev         0.0242
-Last 36 month Std Dev         0.0217
+Last 12 month Average         0.0035
+Last 24 month Average         0.0011
+Last 36 month Average         0.0027
+Last 12 month Std Dev         0.0107
+Last 24 month Std Dev         0.0112
+Last 36 month Std Dev         0.0096
 > 
 > result=table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
 > require("Hmisc")
@@ -8648,6 +9163,9 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > #preview the data
 > head(weights)
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
+Warning in tzone.xts(x) : index does not have a ‘tzone’ attribute
+Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
            Convertible Arbitrage CTA Global Distressed Securities
 2000-01-01            0.02500000 0.14601749             0.0250000
 2001-01-01            0.15785710 0.19577551             0.0250000
@@ -8687,7 +9205,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  56.949 2.201 64.861 0.001 0.004 
+Time elapsed:  59.396 2.061 63.125 0.003 0 
 > grDevices::dev.off()
 pdf 
   2 
