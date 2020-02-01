@@ -43,8 +43,6 @@ chart.TimeSeries.ggplot2<-
 {
     
     R <- checkData(R, method='xts')
-    
-    require(ggplot2) 
   
     # Stack columns as rows and add security role
     R <- data.frame(date=index(R), coredata(R))
@@ -71,7 +69,7 @@ chart.TimeSeries.ggplot2<-
 
 
     if(mode(colorset) == "character"){
-      p <- p + scale_color_brewer(palette=colorset)
+      p <- p + ggplot2::scale_color_brewer(palette=colorset)
     }
     
     # format xlim and ylim
