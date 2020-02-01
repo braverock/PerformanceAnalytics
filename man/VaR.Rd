@@ -126,7 +126,7 @@ RiskMetrics parametric mean-VaR was published in 1994 and this methodology
 for estimating parametric mean-VaR has become what most literature generally
 refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}}.
 See \cite{Return to RiskMetrics: Evolution of a
-Standard}\url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}.
+Standard}\url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}.
 
 
 Parametric mean-VaR does a better job of accounting for the tails of the
@@ -146,14 +146,15 @@ and may be accessed with \code{method="gaussian"}.
 
 Other forms of parametric mean-VaR estimation utilize a different
 distribution for the distribution of losses to better account for the
-possible fat-tailed nature of downside risk. The package \code{VaR} contains
-methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}}
-and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome
-some of the problems with nonparametric or parametric mean-VaR calculations
-on a limited sample size or on potentially fat-tailed distributions. There is
-also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods
-to create a more robust estimate of the potential distribution of losses.
-Less commonly a covariance matrix of multiple risk factors may be applied.
+possible fat-tailed nature of downside risk. The now-archived package
+\code{VaR} contained methods for simulating and estimating lognormal and
+generalized Pareto distributions to overcome some of the problems with
+nonparametric or parametric mean-VaR calculations on a limited sample size or
+on potentially fat-tailed distributions. There was also a
+VaR.backtest function to apply simulation methods to create a more robust
+estimate of the potential distribution of losses. Less commonly a covariance
+matrix of multiple risk factors may be applied. This functionality should 
+probably be 
 
 The limitations of mean Value-at-Risk are well covered in the literature.
 The limitations of traditional mean-VaR are all related to the use of a
