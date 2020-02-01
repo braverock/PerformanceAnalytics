@@ -43,6 +43,12 @@ Suggests:
     quantreg,
     gplots,
     testthat,
+    ggplot2,
+    RColorBrewer,
+    googleVis,
+    plotly,
+    gridExtra,
+    ggpubr,
     RPESE,
     R.rsp,
     RobStatTM

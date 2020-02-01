@@ -15,6 +15,8 @@
 #' @param legend.loc places a legend into one of nine locations on the chart:
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center.
+#' @param plot.engine choose the plot engine you wish to use:
+#' ggplot2, plotly,dygraph,googlevis and default
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso
@@ -36,7 +38,7 @@
 #' 		legend.loc="bottomleft")
 #' @export
 chart.Drawdown <-
-function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
+function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), plot.engine = "default",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -62,6 +64,20 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     # FUNCTION:
 
     # Calculate drawdown level
+  
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot2"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+                "default","dygraph","ggplot2","plotly","googlevis".
+                
+                Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
+    }
+  
     drawdown = Drawdowns(R, geometric)
 
     # workaround provided by Samuel Le to handle single-column input
@@ -72,14 +88,25 @@ function (R, geometric = TRUE, legend.loc = NULL, colorset = (1:12), ...)
     }
     
     # Chart the drawdown level
-    if(hasArg("add")) {
+    
+    if(plot.engine == "default"){
+      if(hasArg("add")) {
       plotargs <- list(...)
       plotargs$add <- NULL
       plotcall <- match.call()
       colset <- eval.parent(plotcall$colorset)
       p <- addSeries(drawdown, col = colset, legend.loc = legend.loc, main = plotargs$main)
     } else
-      p <- chart.TimeSeries(drawdown, colorset = colorset, legend.loc = legend.loc, ...)
+      p <- chart.TimeSeries(drawdown, 
+                            colorset = colorset, 
+                            legend.loc = legend.loc, 
+                            plot.engine = plot.engine,
+                            ...)}
+    else{
+      p <- chart.TimeSeries(drawdown,
+                            plot.engine = plot.engine,
+                            ...)
+    }
     return(p)
 
 }

@@ -19,7 +19,11 @@
 #' @param begin Align shorter series to: \itemize{ \item first - prior value of
 #' the first column given for the reference or longer series or, \item axis -
 #' the initial value (1 or zero) of the axis.  }
+#' @param plot.engine choose the plot engine you wish to use"
+#' ggplot2, plotly,dygraph,googlevis and default
+#' 
 #' @param \dots any other passthru parameters
+#' 
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}}
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
@@ -36,7 +40,7 @@
 #' 
 #' @export
 chart.CumReturns <-
-function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), ...)
+function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset = (1:12), begin = c("first","axis"), plot.engine = "default",...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -57,6 +61,21 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
     # FUNCTION:
 
     # Transform input data to a matrix
+  
+  
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot2"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+                "default","dygraph","ggplot2","plotly","googlevis".
+                
+                Ploting chart using built-in engine now.')
+      
+      plot.engine = "default"
+    }
+  
     begin = begin[1]
     x = checkData(R)
 
@@ -117,7 +136,7 @@ function (R, wealth.index = FALSE, geometric = TRUE, legend.loc = NULL, colorset
     colnames(Return.cumulative) = columnnames
 
     # Chart the cumulative returns series
-    chart.TimeSeries(Return.cumulative, colorset = colorset, legend.loc = legend.loc, ...)
+    chart.TimeSeries(Return.cumulative, colorset = colorset, plot.engine = plot.engine, legend.loc = legend.loc, ...)
 
 }
 

@@ -69,7 +69,9 @@
 #' @param xaxis.labels Allows for non-date labeling of date axes, default is
 #' NULL
 #' @param space default 0
-#' @param dygraphPlot Plot using dygraphs default FALSE
+#' @param plot.engine choose the plot engine you wish to use:
+#' ggplot2, plotly,dygraph,googlevis and default
+#' 
 #' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
@@ -146,169 +148,112 @@
 #'                  event.color = "red", lwd = 2)
 #' 
 #' @export
+#' 
+
+
+# New Function with multi-engine option
 chart.TimeSeries <-
-function (R, 
-          ... , 
-          auto.grid=TRUE, 
-          xaxis = TRUE, 
-          yaxis = TRUE, 
-          yaxis.right = FALSE, 
-          type = "l", 
-          lty = 1, 
-          lwd = 2, 
-          las = par("las"),
-          main = NULL, 
-          ylab=NULL, 
-          xlab="", 
-          date.format.in="%Y-%m-%d", 
-          date.format = NULL, 
-          xlim = NULL, 
-          ylim = NULL, 
-          element.color="darkgray", 
-          event.lines = NULL, 
-          event.labels = NULL, 
-          period.areas = NULL, 
-          event.color = "darkgray", 
-          period.color = "aliceblue", colorset = (1:12), 
-          pch = (1:12), 
-          legend.loc = NULL, 
-          ylog = FALSE, 
-          cex.axis=0.8, 
-          cex.legend = 0.8, 
-          cex.lab = 1, 
-          cex.labels = 0.8, 
-          cex.main = 1, 
-          major.ticks='auto', 
-          minor.ticks=TRUE, 
-          grid.color="lightgray", 
-          grid.lty="dotted", 
-          xaxis.labels = NULL,
-          dygraphPlot=FALSE,
-          yaxis.pct=FALSE)
-{ # @author Peter Carl, Brian Peterson
-
-    # DESCRIPTION:
-    # Draws a line chart and labels the x-axis with the appropriate dates.
-    # This is really a "primitive", since it constructs the elements of a plot
-    # to provide lines for each column of data provided.  
-
-    # Inputs:
-    # R = assumes that data is a regular time series, not irregular.  Can take
-    # any type of object, whether a matrix, data frame, or timeSeries.
-    # date.format: allows passing of a date format for the xaxis
-    # legend.loc = use this to locate the legend, e.g., "topright"
-    # colorset = use the name of any of the palattes above
-    # reference.grid = if true, draws a grid aligned with the points on the
-    #    x and y axes.
-    # xaxis = if true, draws the x axis.
-    # event.lines = if not null, will draw vertical lines indicating that an
-    #    event happened during that time period.  event.lines should be a list
-    #    of dates (e.g., c("09/03","05/06")) formatted the same as date.format.
-    #    This function matches the re-formatted row names (dates) with the
-    #    events.list, so to get a match the formatting needs to be correct.
-    # event.labels = if not null and event.lines is not null, this will apply
-    #    labels to the vertical lines drawn.
-
-    # All other inputs are the same as "plot" and are principally included
-    # so that some sensible defaults could be set.
-
-    # Output:
-    # Draws a timeseries graph of type "line" with some sensible defaults.
-
-    # FUNCTION:
-
-    y = checkData(R)
-
-    # Set up dimensions and labels
-    columns = ncol(y)
-    rows = nrow(y)
-    columnnames = colnames(y)
-
-    if (is.null(date.format)){
-	freq = periodicity(y)
-	yr_eq <- ifelse(format(index(first(y)),format="%Y")==format(index(last(y)),format="%Y"),TRUE,FALSE) 
-	switch(freq$scale,
-	    seconds = { date.format = "%H:%M"},
-	    minute = { date.format = "%H:%M"},
-	    hourly = {date.format = "%d %H"},
-	    daily = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-	    weekly = {if (yr_eq) date.format = "%b %d" else date.format = "%Y-%m-%d"},
-	    monthly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-	    quarterly = {if (yr_eq) date.format = "%b" else date.format = "%b %y"},
-	    yearly = {date.format = "%Y"}
-	)
-    }
-    # Needed for finding aligned dates for event lines and period areas
-    rownames = as.Date(time(y))
-    rownames = format(strptime(rownames,format = date.format.in), date.format)
-
-    time.scale = periodicity(y)$scale
-    ep = axTicksByTime(y,major.ticks, format.labels = date.format)
-  
-  if(dygraphPlot==FALSE){
-    chart.TimeSeries.base(R, 
-                          auto.grid, 
-                          xaxis, 
-                          yaxis, 
-                          yaxis.right, 
-                          type, 
-                          lty, 
-                          lwd , 
-                          las ,
-                          main , 
-                          ylab, 
-                          xlab, 
-                          date.format.in, 
-                          date.format , 
-                          xlim , 
-                          ylim , 
-                          element.color, 
-                          event.lines, 
-                          event.labels, 
-                          period.areas, 
-                          event.color , 
-                          period.color , colorset , 
-                          pch, 
-                          legend.loc , 
-                          ylog , 
-                          cex.axis, 
-                          cex.legend , 
-                          cex.lab , 
-                          cex.labels, 
-                          cex.main , 
-                          major.ticks, 
-                          minor.ticks, 
-                          grid.color, 
-                          grid.lty, 
-                          xaxis.labels,
-                          yaxis.pct, ...)
+  function (R, 
+            ... , 
+            auto.grid=TRUE, 
+            xaxis = TRUE, 
+            yaxis = TRUE, 
+            yaxis.right = FALSE, 
+            type = "l", 
+            lty = 1, 
+            lwd = 1, 
+            las = par("las"),
+            main = "", 
+            ylab="", 
+            xlab="", 
+            date.format.in="%Y-%m-%d", 
+            date.format = NULL, 
+            xlim = NULL, 
+            ylim = NULL, 
+            element.color="darkgray", 
+            event.lines = NULL, 
+            event.labels = NULL, 
+            period.areas = NULL, 
+            event.color = "darkgray", 
+            period.color = "aliceblue", 
+            colorset = (1:12), 
+            pch = (1:12), 
+            legend.loc = NULL, 
+            ylog = FALSE, 
+            cex.axis=0.8, 
+            cex.legend = 0.8, 
+            cex.lab = 1, 
+            cex.labels = 0.8, 
+            cex.main = 1, 
+            major.ticks='auto', 
+            minor.ticks=TRUE, 
+            grid.color="lightgray", 
+            grid.lty="dotted", 
+            xaxis.labels = NULL,
+            plot.engine = "default",
+            yaxis.pct=FALSE)
+{
+    #Check Arguments for dygraphPlot
+    # if(hasArg(dygraphPlot)){
+    #   warning('dygraphPlot argument to chart.TimeSeries has been deprecated, 
+    #           please use plot.engine="dygraph" instead.')
+    #   plot.engine = "dygraph"
+    # }
     
-    
-    
-    
-    }else{
-          if(is.null(main))
-              main=columnnames[1]
-          
-              if(is.null(ylab)) {
-                  if(ylog) 
-                      ylab = "ln(Value)"
-          
-                  else 
-                      ylab = "Value"
-              }
+    if(plot.engine != "default"&&
+       plot.engine != "dygraph"&&
+       plot.engine != "ggplot2"&&
+       plot.engine != "plotly"&&
+       plot.engine != "googlevis"){
+      warning('Please use correct arguments:
+              "default","dygraph","ggplot2","plotly","googlevis".
+              
+              Ploting chart using built-in engine now.')
       
-      ##@TODO Get all the graphical parameters integrated with these two
-      if(requireNamespace("dygraphs", quietly = TRUE)) {
-        dygraphs::dyRangeSelector(
-          dygraphs::dygraph(y, main = main, xlab = xlab, ylab = ylab)
-        )
-      } else {
-        stop("Please install the dygraphs package to use dygraphPlot = TRUE")
-      }
+      plot.engine = "default"
     }
 
-}
+    
+    
+    return(chart.TimeSeries.base(R,
+                                 auto.grid,
+                                 xaxis, yaxis,
+                                 yaxis.right,
+                                 type,
+                                 lty,
+                                 lwd,
+                                 las,
+                                 main,
+                                 ylab,
+                                 xlab,
+                                 date.format.in,
+                                 date.format,
+                                 xlim,
+                                 ylim,
+                                 element.color,
+                                 event.lines,
+                                 event.labels,
+                                 period.areas,
+                                 event.color,
+                                 period.color,
+                                 colorset,
+                                 pch,
+                                 legend.loc,
+                                 ylog,
+                                 cex.axis,
+                                 cex.legend,
+                                 cex.lab,
+                                 cex.labels,
+                                 cex.main,
+                                 major.ticks,
+                                 minor.ticks,
+                                 grid.color,
+                                 grid.lty,
+                                 xaxis.labels,
+                                 plot.engine,
+                                 yaxis.pct,
+                                 ...))
+  }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis

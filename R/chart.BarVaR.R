@@ -67,6 +67,7 @@
 #' @param main sets the title text, such as in \code{\link{chart.TimeSeries}}
 #' @param colorset color palette to use, such as in
 #' \code{\link{chart.TimeSeries}}
+#' @param plot.engine Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
 #' \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
@@ -136,7 +137,8 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                             colorset = 1:12, 
                             lty = c(1,2,4,5,6),
                             ypad=0, 
-                            legend.cex = 0.8 )
+                            legend.cex = 0.8,
+										        plot.engine = "default")
 { # @author Peter Carl
 
     # DESCRIPTION:

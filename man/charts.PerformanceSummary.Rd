@@ -7,7 +7,7 @@
 charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric = TRUE,
   methods = "none", width = 0, event.labels = NULL, ylog = FALSE,
   wealth.index = FALSE, gap = 12, begin = c("first", "axis"),
-  legend.loc = "topleft", p = 0.95, ...)
+  legend.loc = "topleft", p = 0.95, plot.engine = "default", ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -54,6 +54,9 @@ NULL or nine locations on the chart: bottomright, bottom, bottomleft, left,
 topleft, top, topright, right, or center.}
 
 \item{p}{confidence level for calculation, default p=.95}
+
+\item{plot.engine}{choose the plot engine you wish to use"
+ggplot2, plotly, and default}
 
 \item{\dots}{any other passthru parameters}
 }

@@ -12,7 +12,8 @@ chart.BarVaR(R, width = 0, gap = 12, methods = c("none",
   show.horizontal = FALSE, show.symmetric = FALSE,
   show.endvalue = FALSE, show.greenredbars = FALSE,
   legend.loc = "bottomleft", ylim = NA, lwd = 2, colorset = 1:12,
-  lty = c(1, 2, 4, 5, 6), ypad = 0, legend.cex = 0.8)
+  lty = c(1, 2, 4, 5, 6), ypad = 0, legend.cex = 0.8,
+  plot.engine = "default")
 
 charts.BarVaR(R, main = "Returns", cex.legend = 0.8, colorset = 1:12,
   ylim = NA, ..., perpanel = NULL, show.yaxis = c("all", "firstonly",
@@ -83,6 +84,8 @@ when legend.loc="bottom".  See examples below.}
 
 \item{legend.cex}{sets the legend text size, such as in
 \code{\link{chart.TimeSeries}}}
+
+\item{plot.engine}{Choose the engine for plotting, including "default","dygraph","ggplot","plotly" and "googleVis"}
 
 \item{main}{sets the title text, such as in \code{\link{chart.TimeSeries}}}
 
