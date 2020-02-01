@@ -1,7 +1,7 @@
 ###############################################################################
 # Functions to perform component risk calculations on portfolios of assets.
 #
-# Copyright (c) 2007-2018 Kris Boudt and Brian G. Peterson
+# Copyright (c) 2004-2020 Kris Boudt and Brian G. Peterson
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
@@ -667,7 +667,7 @@ VaR.historical.portfolio = function(R,p,w=NULL)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
