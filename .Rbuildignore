@@ -6,3 +6,4 @@ ChangeLog
 ^\.Rproj\.user$
 codeblock.txt
 ^\.travis.yml
+cran-comments.md
