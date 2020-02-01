@@ -4,11 +4,17 @@
 \alias{RPESE.control}
 \title{Controls Function for the Computation of Standard Errors for Risk and Performance estimators}
 \usage{
-RPESE.control(estimator = c("Mean", "SD", "VaR", "ES", "SR", "SoR",
-  "ESratio", "VaRratio", "SoR", "LPM", "OmegaRatio", "SemiSD",
-  "RachevRatio")[1], se.method = NULL, cleanOutliers = NULL,
-  fitting.method = NULL, freq.include = NULL, freq.par = NULL,
-  a = NULL, b = NULL)
+RPESE.control(
+  estimator = c("Mean", "SD", "VaR", "ES", "SR", "SoR", "ESratio", "VaRratio", "SoR",
+    "LPM", "OmegaRatio", "SemiSD", "RachevRatio")[1],
+  se.method = NULL,
+  cleanOutliers = NULL,
+  fitting.method = NULL,
+  freq.include = NULL,
+  freq.par = NULL,
+  a = NULL,
+  b = NULL
+)
 }
 \arguments{
 \item{estimator}{Risk or performance estimator used to set default control parameters. Default is "Mean" estimator.}

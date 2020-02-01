@@ -7,15 +7,22 @@
 \alias{M4.struct}
 \title{Functions for calculating structured comoments of financial time series}
 \usage{
-M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL)
+M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL)
 
-M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
-  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE,
-  as.mat = TRUE)
+M3.struct(
+  R,
+  struct = c("Indep", "IndepId", "observedfactor", "CC", "latent1factor", "CS"),
+  f = NULL,
+  unbiasedMarg = FALSE,
+  as.mat = TRUE
+)
 
-M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL, as.mat = TRUE)
+M4.struct(
+  R,
+  struct = c("Indep", "IndepId", "observedfactor", "CC"),
+  f = NULL,
+  as.mat = TRUE
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

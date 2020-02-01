@@ -4,8 +4,12 @@
 \alias{chart.Correlation}
 \title{correlation matrix chart}
 \usage{
-chart.Correlation(R, histogram = TRUE, method = c("pearson", "kendall",
-  "spearman"), ...)
+chart.Correlation(
+  R,
+  histogram = TRUE,
+  method = c("pearson", "kendall", "spearman"),
+  ...
+)
 }
 \arguments{
 \item{R}{data for the x axis, can take matrix,vector, or timeseries}

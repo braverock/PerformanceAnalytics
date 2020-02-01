@@ -4,8 +4,13 @@
 \alias{UpsideRisk}
 \title{upside risk, variance and potential of the return distribution}
 \usage{
-UpsideRisk(R, MAR = 0, method = c("full", "subset"), stat = c("risk",
-  "variance", "potential"), ...)
+UpsideRisk(
+  R,
+  MAR = 0,
+  method = c("full", "subset"),
+  stat = c("risk", "variance", "potential"),
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

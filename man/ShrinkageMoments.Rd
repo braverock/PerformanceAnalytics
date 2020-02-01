@@ -9,8 +9,7 @@
 \usage{
 M2.shrink(R, targets = 1, f = NULL)
 
-M3.shrink(R, targets = 1, f = NULL, unbiasedMSE = FALSE,
-  as.mat = TRUE)
+M3.shrink(R, targets = 1, f = NULL, unbiasedMSE = FALSE, as.mat = TRUE)
 
 M4.shrink(R, targets = 1, f = NULL, as.mat = TRUE)
 }

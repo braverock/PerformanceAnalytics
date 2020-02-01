@@ -4,8 +4,15 @@
 \alias{SortinoRatio}
 \title{calculate Sortino Ratio of performance over downside risk}
 \usage{
-SortinoRatio(R, MAR = 0, ..., weights = NULL, threshold = c("MAR",
-  "mean")[1], SE = FALSE, SE.control = NULL)
+SortinoRatio(
+  R,
+  MAR = 0,
+  ...,
+  weights = NULL,
+  threshold = c("MAR", "mean")[1],
+  SE = FALSE,
+  SE.control = NULL
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

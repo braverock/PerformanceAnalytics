@@ -7,16 +7,38 @@
 \alias{charts.RollingRegression}
 \title{A wrapper to create charts of relative regression performance through time}
 \usage{
-chart.RollingQuantileRegression(Ra, Rb, width = 12, Rf = 0,
-  attribute = c("Beta", "Alpha", "R-Squared"), main = NULL,
-  na.pad = TRUE, ...)
+chart.RollingQuantileRegression(
+  Ra,
+  Rb,
+  width = 12,
+  Rf = 0,
+  attribute = c("Beta", "Alpha", "R-Squared"),
+  main = NULL,
+  na.pad = TRUE,
+  ...
+)
 
-chart.RollingRegression(Ra, Rb, width = 12, Rf = 0,
-  attribute = c("Beta", "Alpha", "R-Squared"), main = NULL,
-  na.pad = TRUE, ...)
+chart.RollingRegression(
+  Ra,
+  Rb,
+  width = 12,
+  Rf = 0,
+  attribute = c("Beta", "Alpha", "R-Squared"),
+  main = NULL,
+  na.pad = TRUE,
+  ...
+)
 
-charts.RollingRegression(Ra, Rb, width = 12, Rf = 0, main = NULL,
-  legend.loc = NULL, event.labels = NULL, ...)
+charts.RollingRegression(
+  Ra,
+  Rb,
+  width = 12,
+  Rf = 0,
+  main = NULL,
+  legend.loc = NULL,
+  event.labels = NULL,
+  ...
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

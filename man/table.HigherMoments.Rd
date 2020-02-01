@@ -4,8 +4,7 @@
 \alias{table.HigherMoments}
 \title{Higher Moments Summary: Statistics and Stylized Facts}
 \usage{
-table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4,
-  method = "moment")
+table.HigherMoments(Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

@@ -4,10 +4,23 @@
 \alias{charts.PerformanceSummary}
 \title{Create combined wealth index, period performance, and drawdown chart}
 \usage{
-charts.PerformanceSummary(R, Rf = 0, main = NULL, geometric = TRUE,
-  methods = "none", width = 0, event.labels = NULL, ylog = FALSE,
-  wealth.index = FALSE, gap = 12, begin = c("first", "axis"),
-  legend.loc = "topleft", p = 0.95, plot.engine = "default", ...)
+charts.PerformanceSummary(
+  R,
+  Rf = 0,
+  main = NULL,
+  geometric = TRUE,
+  methods = "none",
+  width = 0,
+  event.labels = NULL,
+  ylog = FALSE,
+  wealth.index = FALSE,
+  gap = 12,
+  begin = c("first", "axis"),
+  legend.loc = "topleft",
+  p = 0.95,
+  plot.engine = "default",
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

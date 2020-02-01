@@ -39,7 +39,8 @@
 #' ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
 #' ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
 #' 
-#' ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+#' ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), 
+#'                 ignore_skewness = FALSE, ignore_kurtosis = FALSE)
 #' 
 #'@export
 

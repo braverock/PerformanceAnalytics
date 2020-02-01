@@ -46,25 +46,25 @@ an asset.
 Higher moment betas are defined as proportional to the derivative of the
 covariance, coskewness and cokurtosis of the second, third and fourth
 portfolio moment with respect to the portfolio weights. The beta co-variance
-is calculated as:
+is calculated as: 
 
 \deqn{ BetaCoV(Ra,Rb) = \beta^{(2)}_{a,b} =
 \frac{CoV(R_a,R_b)}{\mu^{(2)}(R_b)} }{BetaCoV(Ra,Rb) =
-CoV(Ra,Rb)/centeredmoment(Rb,2)}
+CoV(Ra,Rb)/centeredmoment(Rb,2)} 
 
-Beta co-skewness is given as:
+Beta co-skewness is given as: 
 
 \deqn{ BetaCoS(Ra,Rb) = \beta^{(3)}_{a,b}= \frac{CoS(R_a,R_b)}{\mu^{(3)}(R_b)} }{BetaCoS(Ra,Rb) =
-CoS(Ra,Rb)/centeredmoment(Rb,3)}
+CoS(Ra,Rb)/centeredmoment(Rb,3)} 
 
-Beta co-kurtosis is:
+Beta co-kurtosis is: 
 
 \deqn{ BetaCoK(Ra,Rb)=\beta^{(4)}_{a,b}
 = \frac{CoK(R_a,R_b)}{\mu^{(4)}(R_b)} }{BetaCoK(Ra,Rb) =
-CoK(Ra,Rb)/centeredmoment(Rb,4)}
+CoK(Ra,Rb)/centeredmoment(Rb,4)} 
 
 where the \eqn{n}-th centered moment is
-calculated as
+calculated as 
 
 \deqn{ \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack }{moment^n(R) = E[R-E(R)^n]}
 

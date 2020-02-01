@@ -4,8 +4,15 @@
 \alias{charts.RollingPerformance}
 \title{rolling performance chart}
 \usage{
-charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL,
-  event.labels = NULL, legend.loc = NULL, ...)
+charts.RollingPerformance(
+  R,
+  width = 12,
+  Rf = 0,
+  main = NULL,
+  event.labels = NULL,
+  legend.loc = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

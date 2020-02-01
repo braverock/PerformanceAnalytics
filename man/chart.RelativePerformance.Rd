@@ -4,9 +4,19 @@
 \alias{chart.RelativePerformance}
 \title{relative performance chart between multiple return series}
 \usage{
-chart.RelativePerformance(Ra, Rb, main = "Relative Performance",
-  xaxis = TRUE, colorset = (1:12), legend.loc = NULL, ylog = FALSE,
-  elementcolor = "darkgray", lty = 1, cex.legend = 0.7, ...)
+chart.RelativePerformance(
+  Ra,
+  Rb,
+  main = "Relative Performance",
+  xaxis = TRUE,
+  colorset = (1:12),
+  legend.loc = NULL,
+  ylog = FALSE,
+  elementcolor = "darkgray",
+  lty = 1,
+  cex.legend = 0.7,
+  ...
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

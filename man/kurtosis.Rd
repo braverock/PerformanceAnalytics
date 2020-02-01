@@ -4,8 +4,12 @@
 \alias{kurtosis}
 \title{Kurtosis}
 \usage{
-kurtosis(x, na.rm = FALSE, method = c("excess", "moment", "fisher",
-  "sample", "sample_excess"), ...)
+kurtosis(
+  x,
+  na.rm = FALSE,
+  method = c("excess", "moment", "fisher", "sample", "sample_excess"),
+  ...
+)
 }
 \arguments{
 \item{x}{a numeric vector or object.}
@@ -38,6 +42,7 @@ except for the addition of \code{\link{checkData}} and additional labeling.
 \deqn{Kurtosis(sample) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4 }{kurtosis(sample) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3))}
 \deqn{Kurtosis(fisher) = \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}\frac{(r_i)^4}{n}}{(\sum^{n}_{i=1}(\frac{(r_i)^2}{n})^2} - \frac{3*(n-1)}{n+1})}{kurtosis (fisher) = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 - (3*(n-1))/(n+1)))/((n-2)*(n-3))}
 \deqn{Kurtosis(sample excess) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4  - \frac{3*(n-1)^2}{(n-2)*(n-3)}}{kurtosis(sample excess) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3)) - 3*(n-1)^2/((n-2)*(n-3))}
+
 
 where \eqn{n} is the number of return, \eqn{\overline{r}} is the mean of the return
 distribution, \eqn{\sigma_P} is its standard deviation and \eqn{\sigma_{S_P}} is its

@@ -19,7 +19,7 @@ by the standard deviation of the observations,
 so this approach is commonly referred to as rescaled range (R/S) analysis.
 }
 \details{
-\deqn{H = log(m)/log(n)}
+\deqn{H = log(m)/log(n)} 
 
 where
 \eqn{m = [max(r_i) - min(r_i)]/sigma_p} and

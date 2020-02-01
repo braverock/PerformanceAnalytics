@@ -5,11 +5,22 @@
 \alias{VaR.CornishFisher}
 \title{calculate various Value at Risk (VaR) measures}
 \usage{
-VaR(R = NULL, p = 0.95, ..., method = c("modified", "gaussian",
-  "historical", "kernel"), clean = c("none", "boudt", "geltner",
-  "locScaleRob"), portfolio_method = c("single", "component",
-  "marginal"), weights = NULL, mu = NULL, sigma = NULL, m3 = NULL,
-  m4 = NULL, invert = TRUE, SE = FALSE, SE.control = NULL)
+VaR(
+  R = NULL,
+  p = 0.95,
+  ...,
+  method = c("modified", "gaussian", "historical", "kernel"),
+  clean = c("none", "boudt", "geltner", "locScaleRob"),
+  portfolio_method = c("single", "component", "marginal"),
+  weights = NULL,
+  mu = NULL,
+  sigma = NULL,
+  m3 = NULL,
+  m4 = NULL,
+  invert = TRUE,
+  SE = FALSE,
+  SE.control = NULL
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

@@ -4,8 +4,7 @@
 \alias{Return.clean}
 \title{clean returns in a time series to to provide more robust risk estimates}
 \usage{
-Return.clean(R, method = c("none", "boudt", "geltner"), alpha = 0.01,
-  ...)
+Return.clean(R, method = c("none", "boudt", "geltner"), alpha = 0.01, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

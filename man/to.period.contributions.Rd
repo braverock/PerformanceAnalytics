@@ -8,8 +8,10 @@
 \alias{to.yearly.contributions}
 \title{Aggregate contributions through time}
 \usage{
-to.period.contributions(Contributions, period = c("years", "quarters",
-  "months", "weeks", "all"))
+to.period.contributions(
+  Contributions,
+  period = c("years", "quarters", "months", "weeks", "all")
+)
 }
 \arguments{
 \item{Contributions}{a time series of the per period contribution to portfolio return of each asset}

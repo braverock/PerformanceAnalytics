@@ -4,12 +4,29 @@
 \alias{chart.StackedBar}
 \title{create a stacked bar plot}
 \usage{
-chart.StackedBar(w, colorset = NULL, space = 0.2, cex.axis = 0.8,
-  cex.legend = 0.8, cex.lab = 1, cex.labels = 0.8, cex.main = 1,
-  xaxis = TRUE, legend.loc = "under", element.color = "darkgray",
-  unstacked = TRUE, xlab = "Date", ylab = "Value", ylim = NULL,
-  date.format = "\%b \%y", major.ticks = "auto", minor.ticks = TRUE,
-  las = 0, xaxis.labels = NULL, ...)
+chart.StackedBar(
+  w,
+  colorset = NULL,
+  space = 0.2,
+  cex.axis = 0.8,
+  cex.legend = 0.8,
+  cex.lab = 1,
+  cex.labels = 0.8,
+  cex.main = 1,
+  xaxis = TRUE,
+  legend.loc = "under",
+  element.color = "darkgray",
+  unstacked = TRUE,
+  xlab = "Date",
+  ylab = "Value",
+  ylim = NULL,
+  date.format = "\%b \%y",
+  major.ticks = "auto",
+  minor.ticks = TRUE,
+  las = 0,
+  xaxis.labels = NULL,
+  ...
+)
 }
 \arguments{
 \item{w}{a matrix, data frame or zoo object of values to be plotted.
@@ -110,7 +127,7 @@ data(weights)
 head(weights)
 
 # With the legend "under" the chart
-chart.StackedBar(weights, date.format="\\\%Y", cex.legend = 0.7, colorset=rainbow12equal)
+chart.StackedBar(weights, date.format="\\%Y", cex.legend = 0.7, colorset=rainbow12equal)
 
 # Without the legend
 chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)

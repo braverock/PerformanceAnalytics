@@ -5,11 +5,19 @@
 \title{calculates Standard Deviation for univariate and multivariate series, also
 calculates component contribution to standard deviation of a portfolio}
 \usage{
-StdDev(R, ..., clean = c("none", "boudt", "geltner", "locScaleRob"),
-  portfolio_method = c("single", "component"), weights = NULL,
-  mu = NULL, sigma = NULL, use = "everything",
-  method = c("pearson", "kendall", "spearman"), SE = FALSE,
-  SE.control = NULL)
+StdDev(
+  R,
+  ...,
+  clean = c("none", "boudt", "geltner", "locScaleRob"),
+  portfolio_method = c("single", "component"),
+  weights = NULL,
+  mu = NULL,
+  sigma = NULL,
+  use = "everything",
+  method = c("pearson", "kendall", "spearman"),
+  SE = FALSE,
+  SE.control = NULL
+)
 }
 \arguments{
 \item{R}{a vector, matrix, data frame, timeSeries or zoo object of asset

@@ -4,8 +4,15 @@
 \alias{lpm}
 \title{calculate a lower partial moment for a time series}
 \usage{
-lpm(R, n = 2, threshold = 0, about_mean = FALSE, SE = FALSE,
-  SE.control = NULL, ...)
+lpm(
+  R,
+  n = 2,
+  threshold = 0,
+  about_mean = FALSE,
+  SE = FALSE,
+  SE.control = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{xts data}

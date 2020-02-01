@@ -6,12 +6,26 @@
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
-SharpeRatio(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES"),
-  weights = NULL, annualize = FALSE, SE = FALSE, SE.control = NULL,
-  ...)
+SharpeRatio(
+  R,
+  Rf = 0,
+  p = 0.95,
+  FUN = c("StdDev", "VaR", "ES"),
+  weights = NULL,
+  annualize = FALSE,
+  SE = FALSE,
+  SE.control = NULL,
+  ...
+)
 
-SharpeRatio.modified(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR",
-  "ES"), weights = NULL, ...)
+SharpeRatio.modified(
+  R,
+  Rf = 0,
+  p = 0.95,
+  FUN = c("StdDev", "VaR", "ES"),
+  weights = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

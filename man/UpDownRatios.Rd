@@ -4,8 +4,12 @@
 \alias{UpDownRatios}
 \title{calculate metrics on up and down markets for the benchmark asset}
 \usage{
-UpDownRatios(Ra, Rb, method = c("Capture", "Number", "Percent"),
-  side = c("Up", "Down"))
+UpDownRatios(
+  Ra,
+  Rb,
+  method = c("Capture", "Number", "Percent"),
+  side = c("Up", "Down")
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

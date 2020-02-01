@@ -4,8 +4,7 @@
 \alias{skewness}
 \title{Skewness}
 \usage{
-skewness(x, na.rm = FALSE, method = c("moment", "fisher", "sample"),
-  ...)
+skewness(x, na.rm = FALSE, method = c("moment", "fisher", "sample"), ...)
 }
 \arguments{
 \item{x}{a numeric vector or object.}

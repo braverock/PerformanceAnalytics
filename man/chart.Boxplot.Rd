@@ -4,13 +4,25 @@
 \alias{chart.Boxplot}
 \title{box whiskers plot wrapper}
 \usage{
-chart.Boxplot(R, names = TRUE, as.Tufte = FALSE,
-  plot.engine = "default", sort.by = c(NULL, "mean", "median",
-  "variance"), colorset = "black", symbol.color = "red",
-  mean.symbol = 1, median.symbol = "|", outlier.symbol = 1,
-  show.data = NULL, add.mean = TRUE, sort.ascending = FALSE,
-  xlab = "Return", main = "Return Distribution Comparison",
-  element.color = "darkgray", ...)
+chart.Boxplot(
+  R,
+  names = TRUE,
+  as.Tufte = FALSE,
+  plot.engine = "default",
+  sort.by = c(NULL, "mean", "median", "variance"),
+  colorset = "black",
+  symbol.color = "red",
+  mean.symbol = 1,
+  median.symbol = "|",
+  outlier.symbol = 1,
+  show.data = NULL,
+  add.mean = TRUE,
+  sort.ascending = FALSE,
+  xlab = "Return",
+  main = "Return Distribution Comparison",
+  element.color = "darkgray",
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

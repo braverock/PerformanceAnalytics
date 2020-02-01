@@ -4,8 +4,15 @@
 \alias{chart.RollingPerformance}
 \title{wrapper to create a chart of rolling performance metrics in a line chart}
 \usage{
-chart.RollingPerformance(R, width = 12, FUN = "Return.annualized", ...,
-  ylim = NULL, main = NULL, fill = NA)
+chart.RollingPerformance(
+  R,
+  width = 12,
+  FUN = "Return.annualized",
+  ...,
+  ylim = NULL,
+  main = NULL,
+  fill = NA
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

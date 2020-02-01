@@ -4,8 +4,15 @@
 \alias{RachevRatio}
 \title{Standard Error Estimate for Rachev Ratio of Returns}
 \usage{
-RachevRatio(R, alpha = 0.1, beta = 0.1, rf = 0, SE = FALSE,
-  SE.control = NULL, ...)
+RachevRatio(
+  R,
+  alpha = 0.1,
+  beta = 0.1,
+  rf = 0,
+  SE = FALSE,
+  SE.control = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{Data of returns for one or multiple assets or portfolios.}
