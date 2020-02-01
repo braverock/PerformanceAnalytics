@@ -120,7 +120,7 @@
 #' Operational = TRUE to replace modified ES with modified VaR in the
 #' (exceptional) case where the modified ES is smaller than modified VaR.
 #' 
-#' @section Component ES
+#' @section Component ES:
 #' 
 #' By setting \code{portfolio_method="component"} you may calculate the ES
 #' contribution of each element of the portfolio. The return from the function in

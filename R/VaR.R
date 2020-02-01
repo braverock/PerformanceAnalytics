@@ -51,7 +51,8 @@
 #' The prototype of the univariate Cornish Fisher VaR function was completed by
 #' Prof. Diethelm Wuertz.  All corrections to the calculation and error
 #' handling are the fault of Brian Peterson.
-#' @section Background
+#' 
+#' @section Background :
 #' 
 #' This function provides several estimation methods for
 #' the Value at Risk (typically written as VaR) of a return series and the
@@ -70,7 +71,7 @@
 #' portfolio components.  For the above mentioned VaR estimators, such a
 #' decomposition is possible in a financially meaningful way.
 #' 
-#' @section Univariate VaR estimation methods
+#' @section Univariate VaR estimation methods :
 #' 
 #' The VaR at a probability level \eqn{p} (e.g. 95\%) is the \eqn{p}-quantile of
 #' the negative returns, or equivalently, is the negative value of the
@@ -156,7 +157,7 @@
 #' return/risk measure for their portfolio optimization analysis, see
 #' \code{\link{SharpeRatio.modified}} for more information.
 #' 
-#' @section Component VaR 
+#' @section Component VaR :
 #' 
 #' By setting \code{portfolio_method="component"} you may calculate the risk
 #' contribution of each element of the portfolio.  The return from the function
@@ -223,7 +224,7 @@
 #' component risk contributions, which is available via \code{method="kernel"} 
 #' and \code{portfolio_method="component"}.
 #' 
-#' @section Marginal VaR
+#' @section Marginal VaR :
 #' 
 #' Different papers call this different things.  In the Denton and Jayaraman
 #' paper referenced here, this calculation is called Incremental VaR. We have
