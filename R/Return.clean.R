@@ -33,9 +33,11 @@
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
+#' \dontrun{ # CRAN doesn't like how long this takes (>5 secs)
 #' data(managers)
 #' head(Return.clean(managers[,1:4]),n=20)
 #' chart.BarVaR(managers[,1,drop=FALSE], show.clean=TRUE, clean="boudt", lwd=2, methods="ModifiedVaR")
+#' }
 #' 
 #' @export
 Return.clean <-
