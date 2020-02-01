@@ -1,3 +1,24 @@
+PerformanceAnalytics 2.0.0 Release Notes
+
+The majore functional changes in v 2.0.0 are the addition of standard errors 
+and additional plotting engines.
+
+This release adds support for plotting engines dygraphs, plotly,
+gridExtra, ggplot2, and googleVis to all charting functions that
+are able to support those engines via the use of a new plot engine
+argument.  This work was predominantly completed by Ziheng 'Zenith'
+Zhou and Justin Shea as part of Google Summer of Code 2019.
+    
+This release additionally adds support for multiple methods of
+standard error calculations derived from the robust statistics
+work of R. Douglas Martin. The code was primarily written by
+Anthony-Alexander Cristidis during Google Summer of Code 2018 and following,
+and is mostly included by reference to packages RobStatTM and
+RPESE if the user desires to utilize the standard errors functionality.
+
+... and the usual minor things that get changed and updated in the general 
+course of maintenance.
+
 PerformanceAnalytics 1.5 Release Notes
 
 The major functional change in v1.5 is in the higher moment code.  Dries Cornilly
