@@ -15,9 +15,11 @@ Authors@R: c(
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   , person(given="Anthony",family="Christidis",role="ctb")  
   , person(given="Doug",family="Martin",role="ctb")  
+  , person(given="Zeheng 'Zenith'",family="Zhou",role="ctb")  
+  , person(given="Justin",family="Shea",role="ctb")   
   )
-Version: 1.5.3
-Date: 2019-06-22 $Date$
+Version: 2.0.0
+Date: 2020-02-01
 Description: Collection of econometric functions for performance and risk 
     analysis. In addition to standard risk and performance metrics, this 
     package aims to aid practitioners and researchers in utilizing the latest
@@ -56,5 +58,5 @@ VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 URL: https://github.com/braverock/PerformanceAnalytics
-Copyright: (c) 2004-2019
+Copyright: (c) 2004-2020
 RoxygenNote: 6.1.1.9000
