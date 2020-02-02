@@ -44,7 +44,6 @@ Suggests:
     robustbase,
     quantreg,
     gplots,
-    testthat,
     ggplot2,
     RColorBrewer,
     googleVis,
@@ -53,7 +52,8 @@ Suggests:
     ggpubr,
     RPESE,
     R.rsp,
-    RobStatTM
+    RobStatTM,
+    tinytest
 VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8
