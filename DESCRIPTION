@@ -16,7 +16,7 @@ Authors@R: c(
   , person(given="Anthony",family="Christidis",role="ctb")  
   , person(given="Doug",family="Martin",role="ctb")  
   , person(given="Zeheng 'Zenith'",family="Zhou",role="ctb")  
-  , person(given="Justin",family="Shea",role="ctb")   
+  , person(given=c("Justin", "M."),family="Shea",role="ctb")   
   )
 Version: 2.0.0
 Date: 2020-02-01
