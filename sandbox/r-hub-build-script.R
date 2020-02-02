@@ -5,11 +5,20 @@ rhub::validate_email()
 rhub::platforms()
 rhub::platforms()$name
 
-rhub::check(platform = rhub::platforms()$name[1]) # debian-clang-devel
-rhub::check(platform = rhub::platforms()$name[2]) # debian-gcc-devel
-rhub::check(platform = rhub::platforms()$name[5]) # debian-gcc-release
-rhub::check(platform = rhub::platforms()$name[10]) # linux-x86_64-rocker-gcc-san  
-rhub::check(platform = rhub::platforms()$name[11]) # mac macos-elcapitan-release
-rhub::check(platform = rhub::platforms()$name[16]) # windows-x86_64-devel
-rhub::check(platform = rhub::platforms()$name[20]) # windows-x86_64-release 
+#  Debian Linux, R-devel, clang, ISO-8859-15 locale
+rhub::check(platform = "debian-clang-devel")  
+#  Debian Linux, R-devel, GCC
+rhub::check(platform = "debian-gcc-devel")
+#  Debian Linux, R-release, GCC
+rhub::check(platform = " debian-gcc-release")
+#  Debian Linux, R-devel, GCC ASAN/UBSAN
+rhub::check(platform = "linux-x86_64-rocker-gcc-san")
+#  macOS 10.11 El Capitan, R-release (experimental)
+rhub::check(platform = "mac macos-elcapitan-release")
+#  Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+rhub::check(platform = "windows-x86_64-devel")
+# Windows Server 2012, R-devel, Rtools4.0, 32/64 bit (experimental)
+rhub::check(platform = "windows-x86_64-devel-rtools4") 
+#  Windows Server 2008 R2 SP1, R-release, 32/64 bit
+rhub::check(platform = "windows-x86_64-release") 
 
