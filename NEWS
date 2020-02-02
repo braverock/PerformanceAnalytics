@@ -1,6 +1,6 @@
-PerformanceAnalytics 2.0.0 Release Notes
+PerformanceAnalytics 2.0.1 Release Notes
 
-The majore functional changes in v 2.0.0 are the addition of standard errors 
+The major functional changes in v 2.0.0 are the addition of standard errors 
 and additional plotting engines.
 
 This release adds support for plotting engines dygraphs, plotly,
@@ -15,6 +15,9 @@ work of R. Douglas Martin. The code was primarily written by
 Anthony-Alexander Cristidis during Google Summer of Code 2018 and following,
 and is mostly included by reference to packages RobStatTM and
 RPESE if the user desires to utilize the standard errors functionality.
+
+changed test infrastructure to tinytest from testthat after unreproducible
+traceback results on only some Windows platforms in testthat.
 
 ... and the usual minor things that get changed and updated in the general 
 course of maintenance.
