@@ -2,6 +2,8 @@
 # Test environments passing
 * Local: R version 3.6.2 (2019-12-12), x86_64-pc-linux-gnu (64-bit), 
 Ubuntu 18.04.3 LTS
+* Local: R version 3.6.2 (2019-12-12), x86_64-pc-linux-gnu (64-bit), 
+Ubuntu 19.10
 * travis-ci: R version 3.6.2 (2017-01-27), Platform: x86_64-pc-linux-gnu (64-bit), 
 Ubuntu 14.04.5 LTS
 * R-hub: using R version 3.6.2 (2019-12-12), x86_64-apple-darwin15.6.0 (64-bit), 
@@ -17,7 +19,12 @@ Windows Server 2012, R-devel, Rtools4.0, 32/64 bit (experimental)
 x86_64-w64-mingw32 (64-bit)
 
 
-## Local R CMD check results
+## Local 18.03.3 LTS R CMD check --as-cran results
+R CMD check results
+Status: OK
+R CMD check succeeded
+
+## Local 19.10 R CMD check --as-cran results
 R CMD check results
 Status: OK
 R CMD check succeeded
