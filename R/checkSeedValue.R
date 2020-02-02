@@ -30,7 +30,7 @@ checkSeedValue <- function(R, seedValue){
   }
   
   #if passed an xts object, convert to scalar
-  if(class(seedValue)[1]=="xts"){seedValue <- as.vector(zoo::coredata(seedValue))}
+  if(inherits(seedValue, "xts")){seedValue <- as.vector(zoo::coredata(seedValue))}
   
   return(seedValue)
   
