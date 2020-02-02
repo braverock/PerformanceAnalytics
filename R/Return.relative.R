@@ -51,7 +51,7 @@ function (Ra, Rb, ...)
             cumulative = cumprod(1+na.omit(merged.columns))
             column.calc = cumulative[,1,drop=FALSE]/cumulative[,2,drop=FALSE]
             colnames(column.calc) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = "/")
-            if(column.a == 1 & column.b == 1)
+            if(column.a == 1 && column.b == 1)
                 Result.calc = column.calc
             else
                 Result.calc = merge(Result.calc,column.calc)

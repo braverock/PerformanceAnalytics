@@ -139,7 +139,7 @@ function (Ra, Rb, Rf = 0, excess.returns = FALSE, reference.grid = TRUE, main = 
             merged.assets.df = as.data.frame(na.omit(merged.assets))
 
 
-            if(column.a == 1 & column.b == 1){
+            if(column.a == 1 && column.b == 1){
                 plot(merged.assets.df[,2], merged.assets.df[,1], col = colorset[color.tic], pch = symbolset[color.tic], xlim = xlim, ylim = ylim, xlab = xlab, ylab = ylab, main = main, axes = FALSE, cex = cex, ...)
             }
             else {

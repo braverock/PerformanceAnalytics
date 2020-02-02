@@ -11,9 +11,9 @@ checkSeedValue <- function(R, seedValue){
   if(length(attributes(R)$coredata_content) == 0){stop("object is missing coredata_content attribute")}
   
   #Error check initial value before starting, so if no seedValue passed, set to 1 if it's not 'difference'
-  if(is.null(seedValue) & (attributes(R)$coredata_content == "difference")){stop("When calculating levels using 'difference'(s), a seedValue must be provided")
+  if(is.null(seedValue) && (attributes(R)$coredata_content == "difference")){stop("When calculating levels using 'difference'(s), a seedValue must be provided")
   } else{
-    if(is.null(seedValue) & !(attributes(R)$coredata_content == "difference")){seedValue <- 1}
+    if(is.null(seedValue) && !(attributes(R)$coredata_content == "difference")){seedValue <- 1}
   }
   
   #Now, if userpassed a value, make sure to default to first element

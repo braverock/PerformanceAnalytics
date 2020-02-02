@@ -198,14 +198,14 @@ calculateImpliedDate <-
               #day
               impliedDay <- xts::.indexmday(tsObject)[1]
               #from leap to non-leap
-              if((isLeap(impliedYear + 1) == TRUE) & (isLeap(impliedYear) == FALSE)){
-                impliedDay <- ifelse(impliedMonth == 2 & impliedDay == 29,28,impliedDay)
+              if((isLeap(impliedYear + 1) == TRUE) && (isLeap(impliedYear) == FALSE)){
+                impliedDay <- ifelse(impliedMonth == 2 && impliedDay == 29,28,impliedDay)
               }
               
               
               #from non-leap to leap
-              if((isLeap(impliedYear + 1) == FALSE) & (isLeap(impliedYear) == TRUE)){
-                impliedDay <- ifelse(impliedMonth == 2 & impliedDay == 28,29,impliedDay)
+              if((isLeap(impliedYear + 1) == FALSE) && (isLeap(impliedYear) == TRUE)){
+                impliedDay <- ifelse(impliedMonth == 2 && impliedDay == 28,29,impliedDay)
               }
               
               impliedDate <- base::as.Date(paste(impliedYear,impliedMonth,impliedDay,sep = "-"))

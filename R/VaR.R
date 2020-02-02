@@ -355,21 +355,21 @@ VaR <-
     clean = clean[1]
     method = method[1]
     portfolio_method = portfolio_method[1]
-    if (is.null(weights) & portfolio_method != "single"){
+    if (is.null(weights) && portfolio_method != "single"){
       message("no weights passed in, assuming equal weighted portfolio")
       weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     }
     if(!is.null(R)){
       R <- checkData(R, method="xts", ...)
       columns=colnames(R)
-      if (!is.null(weights) & portfolio_method != "single") {
+      if (!is.null(weights) && portfolio_method != "single") {
         if ( length(weights) != ncol(R)) {
           stop("number of items in weights not equal to number of columns in R")
         }
       }
       # weights = checkData(weights, method="matrix", ...) #is this necessary?
       # TODO check for date overlap with R and weights
-      if(clean!="none" & is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
+      if(clean!="none" && is.null(mu)){ # the assumption here is that if you've passed in any moments, we'll leave R alone
         R = as.matrix(Return.clean(R, method=clean))
       }
       if(portfolio_method != "single"){

@@ -85,35 +85,35 @@ function(Ra, Rb, method = c("Capture","Number","Percent"), side = c("Up","Down")
     {
         merged.assets = na.omit(merge(Ra, Rb))
 
-        if(method == "Capture" & side == "Up") {
+        if(method == "Capture" && side == "Up") {
             UpRa = subset(merged.assets[,1], merged.assets[,2] > 0)
             UpRb = subset(merged.assets[,2], merged.assets[,2] > 0)
             #Bacon defines this as a ratio of means, but the ratio of sums and means is the same, and this is more efficient
             result = sum(UpRa)/sum(UpRb)
         }
-        if(method == "Capture" & side == "Down") {
+        if(method == "Capture" && side == "Down") {
             DnRa = subset(merged.assets[,1], merged.assets[,2] <= 0)
             DnRb = subset(merged.assets[,2], merged.assets[,2] <= 0)
             result = sum(DnRa)/sum(DnRb)
         }
 
-        if(method == "Number" & side == "Up") {
+        if(method == "Number" && side == "Up") {
             UpRi = length(subset(merged.assets[,1], (merged.assets[,1] > 0) & (merged.assets[,2] > 0)))
             UpRb = length(subset(merged.assets[,2], merged.assets[,2] > 0))
             result = UpRi/UpRb
         }
-        if(method == "Number" & side == "Down") {
+        if(method == "Number" && side == "Down") {
             DnRi = length(subset(merged.assets[,1], (merged.assets[,1] < 0) & (merged.assets[,2] < 0)))
             DnRb = length(subset(merged.assets[,2], merged.assets[,2] < 0))
             result = DnRi/DnRb
         }
 
-        if(method == "Percent" & side == "Up") {
+        if(method == "Percent" && side == "Up") {
             UpRi = length(subset(merged.assets[,1], (merged.assets[,1] > merged.assets[,2]) & (merged.assets[,2] > 0)))
             UpRb = length(subset(merged.assets[,2], merged.assets[,2] > 0))
             result = UpRi/UpRb
         }
-        if(method == "Percent" & side == "Down") {
+        if(method == "Percent" && side == "Down") {
             DnRi = length(subset(merged.assets[,1], (merged.assets[,1] > merged.assets[,2]) & (merged.assets[,2] < 0)))
             DnRb = length(subset(merged.assets[,2], merged.assets[,2] < 0))
             result = DnRi/DnRb

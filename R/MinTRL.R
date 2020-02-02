@@ -72,12 +72,12 @@ MinTrackRecord<-function(R = NULL, Rf=0,refSR,p = 0.95, weights = NULL,n = NULL,
     
     
     column_names = colnames(x)
-    if(is.null(weights) & length(refSR)!=num_of_cols){      stop("Reference Sharpe Ratio should be given for each series")}
+    if(is.null(weights) && length(refSR)!=num_of_cols){      stop("Reference Sharpe Ratio should be given for each series")}
     
     
   }else{
     
-    if(is.null(sr) | is.null(sk) | is.null(kr) | is.null(n)){
+    if(is.null(sr) || is.null(sk) || is.null(kr) || is.null(n)){
       stop("You must either pass R or the Sharpe ratio, Skewness, Kurtosis,n etc")
     }
   }

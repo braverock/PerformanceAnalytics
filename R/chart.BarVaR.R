@@ -370,7 +370,7 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
 
     p$Env$legend.cex = legend.cex
     p$Env$legend.txt = legend.txt
-    if(legend.txt[1] != "" & !is.null(legend.loc))
+    if(legend.txt[1] != "" && !is.null(legend.loc))
       p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty=lty, horiz=TRUE)
     return(p)
 

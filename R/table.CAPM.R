@@ -128,7 +128,7 @@ table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
                     "Treynor Ratio"
                     )
 
-            if(column.a == 1 & column.b == 1) {
+            if(column.a == 1 && column.b == 1) {
                 result.df = data.frame(Value = z, row.names = znames)
                 colnames(result.df) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
             }

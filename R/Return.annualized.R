@@ -55,7 +55,7 @@ function (R, scale = NA, geometric = TRUE )
 
     # @todo: don't calculate for returns less than 1 year
 
-    if(!xtsible(R) & is.na(scale))
+    if(!xtsible(R) && is.na(scale))
         stop("'R' needs to be timeBased or xtsible, or scale must be specified." )
     if(is.na(scale)) {
         freq = periodicity(R)

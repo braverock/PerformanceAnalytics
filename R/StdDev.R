@@ -108,7 +108,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
     R <- checkData(R, method="xts", ...)
     columns=colnames(R)
 
-    if (is.null(weights) & portfolio_method != "single"){
+    if (is.null(weights) && portfolio_method != "single"){
         message("no weights passed in, assuming equal weighted portfolio")
         weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
     }
@@ -167,7 +167,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
                     rownames(tsd)<-"StdDev"
                 } else {
                     #do the multivariate calc with weights
-                    if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use, method=method[1])
+                    if(!hasArg(sigma) || is.null(sigma)) sigma=cov(R, use=use, method=method[1])
                     tsd <- StdDev.MM(w=weights,sigma=sigma)
                 }
               

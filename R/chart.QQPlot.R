@@ -198,7 +198,7 @@ chart.QQPlot <-
 		b <- coef[2]
 		abline(a, b, col = col[2])
 	}
-	if (line != "none" & envelope != FALSE) {
+	if (line != "none" && envelope != FALSE) {
 		zz <- qnorm(1 - (1 - envelope)/2)
 		
 		SE<-NULL
@@ -211,7 +211,7 @@ chart.QQPlot <-
 		lines(z, upper, lty = 2, lwd = lwd/2, col = col[2])
 		lines(z, lower, lty = 2, lwd = lwd/2, col = col[2])
 	}
-	if (labels[1] == TRUE & length(labels) == 1) 
+	if (labels[1] == TRUE && length(labels) == 1) 
 		labels <- seq(along = z)
 	if (labels[1] != FALSE) {
 		selected <- identify(z, ord.x, labels[good][ord])

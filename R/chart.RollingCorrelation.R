@@ -60,7 +60,7 @@ function (Ra, Rb, width = 12, xaxis = TRUE, legend.loc = NULL, colorset = (1:12)
             colnames(column.calc.tmp) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
             column.calc = xts(column.calc.tmp, order.by = time(column.calc))
 
-            if(column.a == 1 & column.b == 1)
+            if(column.a == 1 && column.b == 1)
                 Result.calc = column.calc
             else
                 Result.calc = merge(Result.calc, column.calc)

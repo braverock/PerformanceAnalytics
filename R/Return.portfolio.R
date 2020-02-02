@@ -340,7 +340,7 @@ Return.portfolio.geometric <- function(R,
   colnames(bop_value) = colnames(R)
   eop_value = bop_value
   
-  if(verbose | contribution){
+  if(verbose || contribution){
     period_contrib = bop_value
     if(verbose){
       bop_weights = bop_value
@@ -384,7 +384,7 @@ Return.portfolio.geometric <- function(R,
         eop_value[k,] = (1 + coredata(returns[j,])) * bop_value[k,]
         eop_value_total[k] = sum(eop_value[k,])
         
-        if(contribution | verbose){
+        if(contribution || verbose){
           # Compute period contribution
           period_contrib[k,] = returns[j,] * bop_value[k,] / bop_value_total[k]
           if(verbose){

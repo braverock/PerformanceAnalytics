@@ -70,7 +70,7 @@ function (x, scale = NA, ...)
         #scale standard deviation by multiplying by the square root of the number of periods to scale by
         sqrt(scale)*sd(x, na.rm=TRUE)
     } else { 
-        if(!xtsible(x) & is.na(scale))
+        if(!xtsible(x) && is.na(scale))
             stop("'x' needs to be timeBased or xtsible, or scale must be specified." )
         x = checkData (x)
                 

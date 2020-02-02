@@ -52,7 +52,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 		legend.loc="bottomleft"
 	    else
 		legend.loc=NULL
-	    if(even(i) & show.yaxis=="alternating")
+	    if(even(i) && show.yaxis=="alternating")
 		yaxis.right=TRUE
 	    else
 		  yaxis.right=FALSE
@@ -63,7 +63,7 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	    
 	# TODO: Add histogram at the end, turned on its side to line up with yaxis
 	# chart.Histogram(R[,i,drop=FALSE], xlim=c(ymin,ymax), main="", axes=FALSE)
-	    if((i==1 & show.yaxis == "firstonly") | show.yaxis == "none")
+	    if((i==1 && show.yaxis == "firstonly") || show.yaxis == "none")
 		yaxis=FALSE
 	} # loop for columns
 

@@ -30,7 +30,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
     columns.a = ncol(Ra)
     columns.b = ncol(Rb)
 
-#     if(columns.a > 1 | columns.b > 1)
+#     if(columns.a > 1 || columns.b > 1)
 #         legend.loc = "topleft"
 #     else
 #         legend.loc = NULL

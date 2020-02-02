@@ -98,7 +98,7 @@ function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"
             colnames(column.result.tmp) = paste(columnnames.a[column.a], columnnames.b[column.b], sep = " to ")
             column.result = xts(column.result.tmp, order.by = time(column.result))
 
-            if(column.a == 1 & column.b == 1)
+            if(column.a == 1 && column.b == 1)
                 Result.calc = column.result
             else
                 Result.calc = merge(Result.calc, column.result)
