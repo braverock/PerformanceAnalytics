@@ -74,9 +74,9 @@ chart.TimeSeries.ggplot2<-
 
     # format xlim and ylim
     if(!is.null(xlim[1])) # is.na or is.null?
-      p <- p+xlim(xlim)
+      p <- p + ggplot2::xlim(xlim)
     if(!is.null(ylim[1])){
-      p <- p+ylim(ylim)
+      p <- p + ggplot2::ylim(ylim)
     }
 
     #draw lines and add title
