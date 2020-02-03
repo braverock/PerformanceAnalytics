@@ -82,6 +82,7 @@ chart.TimeSeries.base <-
                                       grid.lty=grid.lty, 
                                       xaxis.labels=xaxis.labels,
                                       yaxis.pct=yaxis.pct)
+             return(p)
            },
            ggplot2 = {
              p = chart.TimeSeries.ggplot2(R=R,
@@ -120,11 +121,13 @@ chart.TimeSeries.base <-
                                         grid.lty=grid.lty, 
                                         xaxis.labels=xaxis.labels,
                                         yaxis.pct=yaxis.pct)
+             return(p)
            },
            plotly = {
              p = chart.TimeSeries.plotly(R=R,
                                         main=main,
                                         ...)
+             return(p)
            },
            googlevis = {
              p_g = chart.TimeSeries.googlevis(R=R,
@@ -136,12 +139,11 @@ chart.TimeSeries.base <-
            },
            dygraph = {
              p = chart.TimeSeries.dygraph(R=R)
+             return(p)
            }
     )
     
     #End Switch
-    
-    return(p)
 }
 
 
