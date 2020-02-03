@@ -40,6 +40,8 @@
 #' @param weights portfolio weighting vector, default NULL, see Details in
 #' \code{\link{VaR}}
 #' @param annualize if TRUE, annualize the measure, default FALSE
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters to the VaR or ES functions
 #' @author Brian G. Peterson
 #' @seealso \code{\link{SharpeRatio.annualized}} \cr
@@ -76,7 +78,9 @@
 #' @export
 #' @rdname SharpeRatio
 SharpeRatio <-
-function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , ...)
+function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , 
+          SE=FALSE, SE.control=NULL,
+          ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -157,6 +161,38 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     
     tmprownames=vector()
     
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Setting the measure
+      if(FUN=="StdDev")
+        SR.measure <- "SR" else if(FUN=="ES")
+          SR.measure <- "ESratio" else if(FUN=="VaR")
+            SR.measure <- "VaRratio"
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator=SR.measure)
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = SR.measure, se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           p=p, Rf=Rf, # Additional Parameters
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
+    
     for (FUNCT in FUN){
         if (is.null(weights)){
             if(annualize)
@@ -171,7 +207,10 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
         i=i+1 #increment counter
     }
     rownames(result)=tmprownames
-    return (result)
+    
+    if(SE) # Check if SE computation
+      return(rbind(result, ses)) else
+        return(result)
 }
 
 #' @export
@@ -186,7 +225,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

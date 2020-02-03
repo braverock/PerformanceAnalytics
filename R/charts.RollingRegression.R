@@ -76,7 +76,7 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

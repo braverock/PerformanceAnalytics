@@ -4,8 +4,15 @@
 \alias{table.DownsideRisk}
 \title{Downside Risk Summary: Statistics and Stylized Facts}
 \usage{
-table.DownsideRisk(R, ci = 0.95, scale = NA, Rf = 0, MAR = 0.1/12,
-  p = 0.95, digits = 4)
+table.DownsideRisk(
+  R,
+  ci = 0.95,
+  scale = NA,
+  Rf = 0,
+  MAR = 0.1/12,
+  p = 0.95,
+  digits = 4
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

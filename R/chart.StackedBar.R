@@ -56,10 +56,10 @@
 #' @param xlab the x-axis label, which defaults to 'NULL'.
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param \dots arguments to be passed to \code{\link{barplot}}.
-#' @note The 'w' attribute is so named because this is a popular way to show
-#' portfolio weights through time.  That being said, this function isn't
-#' limited to any particular values and doesn't provide any normalization, so
-#' that the chart can be used more generally.
+#' @note The "w" attribute is so named because this is a popular way to show
+#' portfolio weights through time.  That being said, this function is not
+#' limited to portfolio weight values and does not provide any normalization 
+#' so that the chart can be used more generally with different data.
 #' 
 #' The principal drawback of stacked column charts is that it is very difficult
 #' for the reader to judge size of 2nd, 3rd, etc., data series because they do
@@ -82,7 +82,7 @@
 #' head(weights)
 #' 
 #' # With the legend "under" the chart
-#' chart.StackedBar(weights, date.format="\%Y", cex.legend = 0.7, colorset=rainbow12equal)
+#' chart.StackedBar(weights, date.format="%Y", cex.legend = 0.7, colorset=rainbow12equal)
 #' 
 #' # Without the legend
 #' chart.StackedBar(weights, colorset=rainbow12equal, legend.loc=NULL)
@@ -293,7 +293,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

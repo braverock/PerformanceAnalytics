@@ -5,8 +5,12 @@
 \alias{statsTable}
 \title{wrapper function for combining arbitrary function list into a table}
 \usage{
-table.Arbitrary(R, metrics = c("mean", "sd"),
-  metricsNames = c("Average Return", "Standard Deviation"), ...)
+table.Arbitrary(
+  R,
+  metrics = c("mean", "sd"),
+  metricsNames = c("Average Return", "Standard Deviation"),
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

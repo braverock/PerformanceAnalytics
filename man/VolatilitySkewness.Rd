@@ -4,8 +4,7 @@
 \alias{VolatilitySkewness}
 \title{Volatility and variability of the return distribution}
 \usage{
-VolatilitySkewness(R, MAR = 0, stat = c("volatility", "variability"),
-  ...)
+VolatilitySkewness(R, MAR = 0, stat = c("volatility", "variability"), ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

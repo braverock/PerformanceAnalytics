@@ -4,8 +4,13 @@
 \alias{checkData}
 \title{check input data type and format and coerce to the desired output type}
 \usage{
-checkData(x, method = c("xts", "zoo", "data.frame", "matrix", "vector"),
-  na.rm = TRUE, quiet = TRUE, ...)
+checkData(
+  x,
+  method = c("xts", "zoo", "data.frame", "matrix", "vector"),
+  na.rm = TRUE,
+  quiet = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{a vector, matrix, data.frame, xts, timeSeries or zoo object to be

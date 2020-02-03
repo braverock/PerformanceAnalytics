@@ -5,14 +5,22 @@
 \alias{SemiDeviation}
 \alias{SemiVariance}
 \alias{DownsidePotential}
+\alias{SemiSD}
 \title{downside risk (deviation, variance) of the return distribution}
 \usage{
-DownsideDeviation(R, MAR = 0, method = c("full", "subset"), ...,
-  potential = FALSE)
+DownsideDeviation(
+  R,
+  MAR = 0,
+  method = c("full", "subset"),
+  ...,
+  potential = FALSE
+)
 
 DownsidePotential(R, MAR = 0)
 
-SemiDeviation(R)
+SemiDeviation(R, SE = FALSE, SE.control = NULL, ...)
+
+SemiSD(R, SE = FALSE, SE.control = NULL, ...)
 
 SemiVariance(R)
 }
@@ -31,6 +39,10 @@ the MAR as the denominator, defaults to "full"}
 
 \item{potential}{if TRUE, calculate downside potential instead, default
 FALSE}
+
+\item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for \code{\link{SemiDeviation}} and \code{\link{SemiSD}}}
+
+\item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
 }
 \description{
 Downside deviation, semideviation, and semivariance are measures of downside
@@ -48,6 +60,7 @@ To calculate it, we take the subset of returns that are less than the target
 (or Minimum Acceptable Returns (MAR)) returns and take the differences of
 those to the target.  We sum the squares and divide by the total number of
 returns to get a below-target semi-variance.
+
 
 \deqn{DownsideDeviation(R , MAR) = \delta_{MAR} = \sqrt{\sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}}{DownsideDeviation(R, MAR) = sqrt(1/n * sum(t=1..n)((min(R(t)-MAR, 0))^2))}
 

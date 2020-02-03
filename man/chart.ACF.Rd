@@ -7,8 +7,7 @@
 \usage{
 chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 
-chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL,
-  ...)
+chart.ACFplus(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

@@ -4,8 +4,13 @@
 \alias{AppraisalRatio}
 \title{Appraisal ratio of the return distribution}
 \usage{
-AppraisalRatio(Ra, Rb, Rf = 0, method = c("appraisal", "modified",
-  "alternative"), ...)
+AppraisalRatio(
+  Ra,
+  Rb,
+  Rf = 0,
+  method = c("appraisal", "modified", "alternative"),
+  ...
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

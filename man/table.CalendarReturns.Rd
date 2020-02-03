@@ -5,8 +5,7 @@
 \alias{table.Returns}
 \title{Monthly and Calendar year Return table}
 \usage{
-table.CalendarReturns(R, digits = 1, as.perc = TRUE,
-  geometric = TRUE)
+table.CalendarReturns(R, digits = 1, as.perc = TRUE, geometric = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

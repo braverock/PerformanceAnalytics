@@ -59,15 +59,44 @@
 \alias{tol21rainbow}
 \title{internal functions for setting useful defaults for graphs}
 \usage{
-legend(x, y = NULL, legend, fill = NULL, col = par("col"), lty, lwd,
-  pch, angle = 45, density = NULL, bty = "o", bg = par("bg"),
-  pt.bg = NA, cex = 1, pt.cex = cex, pt.lwd = lwd, xjust = 0,
-  yjust = 1, x.intersp = 1, y.intersp = 1, adj = c(0, 0.5),
-  text.width = NULL, text.col = par("col"), merge = do.lines &&
-  has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE,
-  title = NULL, inset = 0, border.col = NULL, border.lwd = 1,
-  border.lty = "solid", box.col = NULL, box.lwd = 1,
-  box.lty = "solid")
+legend(
+  x,
+  y = NULL,
+  legend,
+  fill = NULL,
+  col = par("col"),
+  lty,
+  lwd,
+  pch,
+  angle = 45,
+  density = NULL,
+  bty = "o",
+  bg = par("bg"),
+  pt.bg = NA,
+  cex = 1,
+  pt.cex = cex,
+  pt.lwd = lwd,
+  xjust = 0,
+  yjust = 1,
+  x.intersp = 1,
+  y.intersp = 1,
+  adj = c(0, 0.5),
+  text.width = NULL,
+  text.col = par("col"),
+  merge = do.lines && has.pch,
+  trace = FALSE,
+  plot = TRUE,
+  ncol = 1,
+  horiz = FALSE,
+  title = NULL,
+  inset = 0,
+  border.col = NULL,
+  border.lwd = 1,
+  border.lty = "solid",
+  box.col = NULL,
+  box.lwd = 1,
+  box.lty = "solid"
+)
 }
 \arguments{
 \item{x, y}{the x and y co-ordinates to be used to position the legend.  They

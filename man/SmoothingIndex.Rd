@@ -4,8 +4,7 @@
 \alias{SmoothingIndex}
 \title{calculate Normalized Getmansky Smoothing Index}
 \usage{
-SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose = FALSE,
-  ...)
+SmoothingIndex(R, neg.thetas = FALSE, MAorder = 2, verbose = FALSE, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

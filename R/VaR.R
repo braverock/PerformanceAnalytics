@@ -19,7 +19,7 @@
 #' @param method one of "modified","gaussian","historical", "kernel", see
 #' Details.
 #' @param clean method for data cleaning through \code{\link{Return.clean}}.
-#' Current options are "none", "boudt", or "geltner".
+#' Current options are "none", "boudt", "geltner", or "locScaleRob".
 #' @param portfolio_method one of "single","component","marginal" defining
 #' whether to do univariate, component, or marginal calc, see Details.
 #' @param weights portfolio weighting vector, default NULL, see Details
@@ -35,6 +35,8 @@
 #' m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
 #' return series, default NULL, see Details
 #' @param invert TRUE/FALSE whether to invert the VaR measure.  see Details.
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters
 #' @note The option to \code{invert} the VaR measure should appease both
 #' academics and practitioners.  The mathematical definition of VaR as the
@@ -49,7 +51,8 @@
 #' The prototype of the univariate Cornish Fisher VaR function was completed by
 #' Prof. Diethelm Wuertz.  All corrections to the calculation and error
 #' handling are the fault of Brian Peterson.
-#' @section Background
+#' 
+#' @section Background :
 #' 
 #' This function provides several estimation methods for
 #' the Value at Risk (typically written as VaR) of a return series and the
@@ -68,7 +71,7 @@
 #' portfolio components.  For the above mentioned VaR estimators, such a
 #' decomposition is possible in a financially meaningful way.
 #' 
-#' @section Univariate VaR estimation methods
+#' @section Univariate VaR estimation methods :
 #' 
 #' The VaR at a probability level \eqn{p} (e.g. 95\%) is the \eqn{p}-quantile of
 #' the negative returns, or equivalently, is the negative value of the
@@ -91,7 +94,7 @@
 #' for estimating parametric mean-VaR has become what most literature generally
 #' refers to as \dQuote{VaR} and what we have implemented as \code{\link{VaR}}.
 #' See \cite{Return to RiskMetrics: Evolution of a
-#' Standard}\url{http://www.riskmetrics.com/publications/techdocs/r2rovv.html}.
+#' Standard}\url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}.
 #' 
 #' 
 #' Parametric mean-VaR does a better job of accounting for the tails of the
@@ -111,14 +114,15 @@
 #' 
 #' Other forms of parametric mean-VaR estimation utilize a different
 #' distribution for the distribution of losses to better account for the
-#' possible fat-tailed nature of downside risk. The package \code{VaR} contains
-#' methods for simulating and estimating lognormal \code{\link[VaR]{VaR.norm}}
-#' and generalized Pareto \code{\link[VaR]{VaR.gpd}} distributions to overcome
-#' some of the problems with nonparametric or parametric mean-VaR calculations
-#' on a limited sample size or on potentially fat-tailed distributions. There is
-#' also a \code{\link[VaR]{VaR.backtest}} function to apply simulation methods
-#' to create a more robust estimate of the potential distribution of losses.
-#' Less commonly a covariance matrix of multiple risk factors may be applied.
+#' possible fat-tailed nature of downside risk. The now-archived package
+#' \code{VaR} contained methods for simulating and estimating lognormal and
+#' generalized Pareto distributions to overcome some of the problems with
+#' nonparametric or parametric mean-VaR calculations on a limited sample size or
+#' on potentially fat-tailed distributions. There was also a
+#' VaR.backtest function to apply simulation methods to create a more robust
+#' estimate of the potential distribution of losses. Less commonly a covariance
+#' matrix of multiple risk factors may be applied. This functionality should 
+#' probably be 
 #' 
 #' The limitations of mean Value-at-Risk are well covered in the literature.
 #' The limitations of traditional mean-VaR are all related to the use of a
@@ -154,7 +158,7 @@
 #' return/risk measure for their portfolio optimization analysis, see
 #' \code{\link{SharpeRatio.modified}} for more information.
 #' 
-#' @section Component VaR 
+#' @section Component VaR :
 #' 
 #' By setting \code{portfolio_method="component"} you may calculate the risk
 #' contribution of each element of the portfolio.  The return from the function
@@ -221,7 +225,7 @@
 #' component risk contributions, which is available via \code{method="kernel"} 
 #' and \code{portfolio_method="component"}.
 #' 
-#' @section Marginal VaR
+#' @section Marginal VaR :
 #' 
 #' Different papers call this different things.  In the Denton and Jayaraman
 #' paper referenced here, this calculation is called Incremental VaR. We have
@@ -318,12 +322,32 @@
 #' 
 #' @export
 VaR <-
-  function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), clean=c("none","boudt","geltner"),  portfolio_method=c("single","component","marginal"), weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE)
+  function (R=NULL , p=0.95, ..., method=c("modified","gaussian","historical", "kernel"), 
+            clean=c("none","boudt","geltner","locScaleRob"),  
+            portfolio_method=c("single","component","marginal"), 
+            weights=NULL, mu=NULL, sigma=NULL, m3=NULL, m4=NULL, invert=TRUE,
+            SE=FALSE, SE.control=NULL)
   { # @author Brian G. Peterson
     
     # Descripion:
     
     # wrapper for univariate and multivariate VaR functions.
+    
+    # Fix parameters if SE=TRUE
+    if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator="SD")
+      
+      # Fix the method
+      method="historical"
+      portfolio_method="single"
+      invert=FALSE
+      if(SE.control$cleanOutliers=="locScaleRob")
+        clean="locScaleRob" else
+          clean="none"
+    }
     
     # Setup:
     #if(exists(modified)({if( modified == TRUE) { method="modified" }}
@@ -368,6 +392,29 @@ VaR <-
     if (!is.null(R)){
     }
     
+    if(isTRUE(SE)){
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+             call. = FALSE)
+      }
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "VaR", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           p=p, # Additional Parameter
+                                           ...)
+      }
+      ses <- t(data.frame(ses))
+    }
+    
+    
     switch(portfolio_method,
            single = {
              if(is.null(weights)){
@@ -406,7 +453,10 @@ VaR <-
              } # end reasonableness checks
              if(invert) rVaR <- -rVaR
              rownames(rVaR)<-"VaR"
-             return(rVaR)
+             
+             if(SE) # Check if SE computation
+               return(rbind(rVaR,ses)) else
+                 return(rVaR)
            }, # end single portfolio switch
            component = {
              # @todo need to add another loop here for subsetting, I think, when weights is a timeseries
@@ -430,12 +480,12 @@ VaR <-
            }  # end marginal portfolio switch
     )
     
-  } # end VaR wrapper function
+    } # end VaR wrapper function
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

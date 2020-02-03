@@ -4,9 +4,19 @@
 \alias{chart.ECDF}
 \title{Create an ECDF overlaid with a Normal CDF}
 \usage{
-chart.ECDF(R, main = "Empirical CDF", xlab = "x", ylab = "F(x)",
-  colorset = c("black", "#005AFF"), lwd = 1, lty = c(1, 1),
-  element.color = "darkgray", xaxis = TRUE, yaxis = TRUE, ...)
+chart.ECDF(
+  R,
+  main = "Empirical CDF",
+  xlab = "x",
+  ylab = "F(x)",
+  colorset = c("black", "#005AFF"),
+  lwd = 1,
+  lty = c(1, 1),
+  element.color = "darkgray",
+  xaxis = TRUE,
+  yaxis = TRUE,
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

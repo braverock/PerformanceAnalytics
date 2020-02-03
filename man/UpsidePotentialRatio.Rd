@@ -36,6 +36,7 @@ function, Upside Potential Ratio, was a further improvement, extending the
 measurement of only upside on the numerator, and only downside of the
 denominator of the ratio equation.
 
+
 Sortino contends that risk should be measured in terms of not meeting the
 investment goal.  This gives rise to the notion of \dQuote{Minimum
 Acceptable Return} or MAR.  All of Sortino's proposed measures include the

@@ -4,9 +4,19 @@
 \alias{MinTrackRecord}
 \title{Minimum Track Record Length}
 \usage{
-MinTrackRecord(R = NULL, Rf = 0, refSR, p = 0.95, weights = NULL,
-  n = NULL, sr = NULL, sk = NULL, kr = NULL,
-  ignore_skewness = FALSE, ignore_kurtosis = TRUE)
+MinTrackRecord(
+  R = NULL,
+  Rf = 0,
+  refSR,
+  p = 0.95,
+  weights = NULL,
+  n = NULL,
+  sr = NULL,
+  sk = NULL,
+  kr = NULL,
+  ignore_skewness = FALSE,
+  ignore_kurtosis = TRUE
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of the returns input}
@@ -57,7 +67,8 @@ MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore
 MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
 MinTrackRecord(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
 
-MinTrackRecord(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+MinTrackRecord(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), 
+               ignore_skewness = FALSE, ignore_kurtosis = FALSE)
 
 }
 \references{

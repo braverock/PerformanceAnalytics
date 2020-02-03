@@ -4,8 +4,12 @@
 \alias{Return.convert}
 \title{Convert coredata content from one type of return to another}
 \usage{
-Return.convert(R, destinationType = c("discrete", "log", "difference",
-  "level"), seedValue = NULL, initial = TRUE)
+Return.convert(
+  R,
+  destinationType = c("discrete", "log", "difference", "level"),
+  seedValue = NULL,
+  initial = TRUE
+)
 }
 \arguments{
 \item{R}{an xts object}

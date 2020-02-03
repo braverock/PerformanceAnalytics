@@ -4,9 +4,19 @@
 \alias{ProbSharpeRatio}
 \title{Probabilistic Sharpe Ratio}
 \usage{
-ProbSharpeRatio(R = NULL, Rf = 0, refSR, p = 0.95, weights = NULL,
-  n = NULL, sr = NULL, sk = NULL, kr = NULL,
-  ignore_skewness = FALSE, ignore_kurtosis = TRUE)
+ProbSharpeRatio(
+  R = NULL,
+  Rf = 0,
+  refSR,
+  p = 0.95,
+  weights = NULL,
+  n = NULL,
+  sr = NULL,
+  sk = NULL,
+  kr = NULL,
+  ignore_skewness = FALSE,
+  ignore_kurtosis = TRUE
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of the returns input}
@@ -53,7 +63,8 @@ ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignor
 ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
 ProbSharpeRatio(edhec[,1:2],refSR = c(0.28,0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
 
-ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
+ProbSharpeRatio(edhec[,1:2],refSR = 0.26,weights = c(0.5,0.5), 
+                ignore_skewness = FALSE, ignore_kurtosis = FALSE)
 
 }
 \references{

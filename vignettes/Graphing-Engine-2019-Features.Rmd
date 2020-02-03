@@ -1,0 +1,128 @@
+---
+title: "GSOC2019 Added Feature"
+output: html_document
+always_allow_html: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Multiple Plotting Engine
+
+The main purpose of this update is to add multiple plotting engines into the current plotting functions. Functions modified for now are:
+- chart.Boxplot
+- chart.TimeSeries
+- chart.CumReturns
+- chart.Drawdown
+- charts.PerformanceSummary
+
+The engines added onto the functions are:
+- ggplot2 (plot.engine = "ggplot2")
+- dygraphPlot (plot.engine  = "dygraph")
+- googleVis (plot.engine = "googlevis")
+- plotly (plotly)
+
+A demo of different plot engines in different functions will be shown as below:
+
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+library(PerformanceAnalytics)
+library(xts)
+library(zoo)
+library(ggplot2)
+library(plotly)
+library(dygraphs)
+library(googleVis)
+library(gridExtra)
+
+data("edhec")
+```
+
+# chart.Boxplot
+
+This function includes plotting engine: "ggplot2","plotly".
+
+## ggplot2
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.Boxplot(edhec,plot.engine = "ggplot2",main="demo")
+```
+
+## plotly
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.Boxplot(edhec,plot.engine = "plotly",main="demo")
+```
+
+
+# chart.TimeSeries
+
+This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
+
+## ggplot2
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.TimeSeries(edhec,plot.engine = "ggplot2",main="demo")
+```
+
+## plotly
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.TimeSeries(edhec,plot.engine = "plotly",main="demo")
+```
+
+## dygraphPlot
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.TimeSeries(edhec,plot.engine = "dygraph",main="demo")
+```
+
+
+# chart.CumReturns
+
+This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
+
+## ggplot2
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.CumReturns(edhec,plot.engine = "ggplot2",main="demo")
+```
+
+## plotly
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.CumReturns(edhec,plot.engine = "plotly",main="demo")
+```
+
+## dygraphPlot
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.CumReturns(edhec,plot.engine = "dygraph",main="demo")
+```
+
+
+# chart.Drawdown
+
+This function includes plotting engine: "ggplot2","plotly","googlevis","dygraph"
+
+## ggplot2
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.Drawdown(edhec,plot.engine = "ggplot2",main="demo")
+```
+
+## plotly
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.Drawdown(edhec,plot.engine = "plotly",main="demo")
+```
+
+## dygraphPlot
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+chart.Drawdown(edhec,plot.engine = "dygraph",main="demo")
+```
+
+
+# charts.PerformanceSummary
+
+This function includes plotting engine: "ggplot2","plotly"
+
+## ggplot2
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+charts.PerformanceSummary(edhec,plot.engine = "ggplot2",main="demo")
+```
+
+## plotly
+```{r echo = FALSE, warning = FALSE, message = FALSE, error=FALSE}
+charts.PerformanceSummary(edhec,plot.engine = "plotly",main="demo")
+```

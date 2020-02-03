@@ -4,8 +4,15 @@
 \alias{chart.RollingMean}
 \title{chart the rolling mean return}
 \usage{
-chart.RollingMean(R, width = 12, xaxis = TRUE, ylim = NULL,
-  lwd = c(2, 1, 1), ..., fill = NA)
+chart.RollingMean(
+  R,
+  width = 12,
+  xaxis = TRUE,
+  ylim = NULL,
+  lwd = c(2, 1, 1),
+  ...,
+  fill = NA
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

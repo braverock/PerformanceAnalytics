@@ -4,8 +4,7 @@
 \alias{MSquaredExcess}
 \title{M squared excess of the return distribution}
 \usage{
-MSquaredExcess(Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"),
-  ...)
+MSquaredExcess(Ra, Rb, Rf = 0, Method = c("geometric", "arithmetic"), ...)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
