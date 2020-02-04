@@ -1,5 +1,7 @@
 ---
-title: "GSOC2019 Added Feature"
+title: "**PerformanceAnalytics** Plotting Using Additional Plotting Engines"
+subtitle: "features added in GSoC 2019"
+author: "Zeheng 'Zenith' Zhou, Justin M. Shea, and Brian G. Peterson"
 output: html_document
 always_allow_html: yes
 ---
