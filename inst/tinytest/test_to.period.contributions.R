@@ -57,19 +57,24 @@ expect_error(to.period.contributions(),
              info = "Missing 'Contributions' data handled correctly")
 
   if(
-     expect_error(to.period.contributions(contribution, "daily")) &&
-     expect_error(to.period.contributions(x)) 
-     ){ print("Invalid periodicity parameters are handled correctly") }
+     expect_error(to.period.contributions(contribution, "daily"),
+                  info = "Invalid periodicity parameters are handled correctly")
+  ) { expect_error(to.period.contributions(x),
+                   info="Invalid periodicity parameters are handled correctly") 
+    }
 
   if(
-  expect_error(to.period.contributions(contribution, "weeks")) &&
-  expect_error(to.period.contributions(contribution, "months"))
-  ){ print("Incompatible periodicity parameters are handled correctly") }
+  expect_error(to.period.contributions(contribution, "weeks"),
+               info="Incompatible periodicity parameters are handled correctly") 
+
+  ){   expect_error(to.period.contributions(contribution, "months"),
+                    info="Incompatible periodicity parameters are handled correctly")}
 
   if(
-  expect_error(to.period.contributions(minute_contribution)) &&
-  expect_error(to.period.contributions(hourly_contribution))
-  ){ print("Data with too high a periodicity is handled correctly") }
+  expect_error(to.period.contributions(minute_contribution),
+               info="Data with too high a periodicity is handled correctly")
+  ){   expect_error(to.period.contributions(hourly_contribution),
+                    info="Data with too high a periodicity is handled correctly")}
 
 
 
@@ -89,8 +94,6 @@ expect_error(to.period.contributions(),
   expect_equivalent(periodicity(to.monthly.contributions(weekly_contribution))$scale, 
                     "monthly", 
                     info = "the main function and periodic versions do not throw an error")
-  
-  
   expect_equivalent(periodicity(to.quarterly.contributions(weekly_contribution))$scale, 
                     "quarterly", 
                     info = "the main function and periodic versions do not throw an error")
