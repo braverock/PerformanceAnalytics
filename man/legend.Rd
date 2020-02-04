@@ -95,7 +95,8 @@ legend(
   border.lty = "solid",
   box.col = NULL,
   box.lwd = 1,
-  box.lty = "solid"
+  box.lty = "solid",
+  ...
 )
 }
 \arguments{
@@ -185,6 +186,8 @@ region when legend is placed by keyword.}
 \item{border.lty, border.lwd}{the line type and width for the legend border.}
 
 \item{box.lty, box.lwd}{the line type and width for the legend box.}
+
+\item{\dots}{any other passthrough parameters}
 }
 \description{
 Internal functions and data objects to make graphs easier to read, and

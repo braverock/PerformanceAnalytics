@@ -81,6 +81,7 @@
 #' be placed at the top of the legend.
 #' @param inset inset distance(s) from the margins as a fraction of the plot
 #' region when legend is placed by keyword.
+#' @param \dots any other passthrough parameters
 #' @seealso \code{\link[graphics]{legend}}
 #' @keywords internal
 #' @export legend
@@ -98,7 +99,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     yjust = 1, x.intersp = 1, y.intersp = 1, adj = c(0, 0.5),
     text.width = NULL, text.col = par("col"), merge = do.lines &&
         has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE,
-    title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid", box.col = NULL, box.lwd = 1, box.lty = "solid")
+    title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid", box.col = NULL, box.lwd = 1, box.lty = "solid", ...)
 {
     # Modifications to core graphics legend() function
     # @author R Core Dev Team
