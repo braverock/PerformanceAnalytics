@@ -20,6 +20,18 @@ Type 'q()' to quit R.
 > pkgname <- "PerformanceAnalytics"
 > source(file.path(R.home("share"), "R", "examples-header.R"))
 > options(warn = 1)
+> base::assign(".ExTimings", "PerformanceAnalytics-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
 > library('PerformanceAnalytics')
 Loading required package: xts
 Loading required package: zoo
@@ -46,6 +58,7 @@ The following object is masked from ‘package:graphics’:
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ActiveReturn
 > ### Title: Active Premium or Active Return
 > ### Aliases: ActiveReturn ActivePremium
@@ -73,12 +86,15 @@ Active Premium: EDHEC LS EQ -0.03237453 0.05463574
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ActivePremium", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("AdjustedSharpeRatio")
 > ### * AdjustedSharpeRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: AdjustedSharpeRatio
 > ### Title: Adjusted Sharpe ratio of the return distribution
 > ### Aliases: AdjustedSharpeRatio
@@ -101,12 +117,15 @@ Adjusted Sharpe ratio (Risk free = 0) -576.9696
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("AdjustedSharpeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("AppraisalRatio")
 > ### * AppraisalRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: AppraisalRatio
 > ### Title: Appraisal ratio of the return distribution
 > ### Aliases: AppraisalRatio
@@ -132,12 +151,15 @@ Appraisal ratio (Risk free = 0) 1.623025   NA 3.527723 0.7070483   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("AppraisalRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("BernardoLedoitRatio")
 > ### * BernardoLedoitRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: BernardoLedoitRatio
 > ### Title: Bernardo and Ledoit ratio of the return distribution
 > ### Aliases: BernardoLedoitRatio
@@ -160,12 +182,15 @@ Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("BernardoLedoitRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("BetaCoMoments")
 > ### * BetaCoMoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: BetaCoMoments
 > ### Title: Functions to calculate systematic or beta co-moments of return
 > ###   series
@@ -199,12 +224,15 @@ Beta Cokurtosis: EDHEC LS EQ 0.8618328
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("BetaCoMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("BurkeRatio")
 > ### * BurkeRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: BurkeRatio
 > ### Title: Burke ratio of the return distribution
 > ### Aliases: BurkeRatio
@@ -236,12 +264,15 @@ Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125948      Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("BurkeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.RiskPremium")
 > ### * CAPM.RiskPremium
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.CML.slope
 > ### Title: utility functions for single factor (CAPM) CML, SML, and
 > ###   RiskPremium
@@ -271,12 +302,15 @@ Security Market Line: SP500 TR 115.4023
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.RiskPremium", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.alpha")
 > ### * CAPM.alpha
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.alpha
 > ### Title: calculate single factor model (CAPM) alpha
 > ### Aliases: CAPM.alpha SFM.alpha
@@ -330,12 +364,15 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.alpha", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.beta")
 > ### * CAPM.beta
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.beta
 > ### Title: calculate single factor model (CAPM) beta
 > ### Aliases: CAPM.beta CAPM.beta.bull CAPM.beta.bear TimingRatio SFM.beta
@@ -409,12 +446,15 @@ Alpha: EDHEC LS EQ -0.002255793 0.004212371
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.beta", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.dynamic")
 > ### * CAPM.dynamic
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.dynamic
 > ### Title: Time-varying conditional single factor model beta
 > ### Aliases: CAPM.dynamic SFM.dynamic
@@ -499,12 +539,15 @@ HAM6 to EDHEC LS EQ              -11.035136              343.52891
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.dynamic", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.epsilon")
 > ### * CAPM.epsilon
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.epsilon
 > ### Title: Regression epsilon of the return distribution
 > ### Aliases: CAPM.epsilon SFM.epsilon
@@ -528,12 +571,15 @@ Regression epsilon (Risk free = 0)   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.epsilon", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CAPM.jensenAlpha")
 > ### * CAPM.jensenAlpha
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CAPM.jensenAlpha
 > ### Title: Jensen's alpha of the return distribution
 > ### Aliases: CAPM.jensenAlpha SFM.jensenAlpha
@@ -555,12 +601,15 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CAPM.jensenAlpha", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CDD")
 > ### * CDD
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CDD
 > ### Title: Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD
 > ###   or CDaR) measure
@@ -589,12 +638,15 @@ Funds of Funds                          0.0711
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CDD", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CalmarRatio")
 > ### * CalmarRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CalmarRatio
 > ### Title: calculate a Calmar or Sterling reward/risk ratio Calmar and
 > ###   Sterling Ratios are yet another method of creating a risk-adjusted
@@ -623,12 +675,15 @@ Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CalmarRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("CoMoments")
 > ### * CoMoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: CoMoments
 > ### Title: Functions for calculating comoments of financial time series
 > ### Aliases: CoMoments CoSkewnessMatrix CoKurtosisMatrix CoVariance
@@ -648,12 +703,15 @@ Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("CoMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DRatio")
 > ### * DRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DRatio
 > ### Title: d ratio of the return distribution
 > ### Aliases: DRatio
@@ -676,12 +734,15 @@ d ratio 0.04607631  1.361501        0
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("DRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DownsideDeviation")
 > ### * DownsideDeviation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DownsideDeviation
 > ### Title: downside risk (deviation, variance) of the return distribution
 > ### Aliases: DownsideDeviation SemiDeviation SemiVariance DownsidePotential
@@ -733,12 +794,15 @@ Semi-Variance 0.02698249 0.02580294 0.03186006 0.05763839 0.04558371 0.02602228
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("DownsideDeviation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("DownsideFrequency")
 > ### * DownsideFrequency
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: DownsideFrequency
 > ### Title: downside frequency of the return distribution
 > ### Aliases: DownsideFrequency
@@ -762,12 +826,15 @@ Downside Frequency (MAR = 0%)         NaN 0.1666667 0.5833333        0
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("DownsideFrequency", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ES")
 > ### * ES
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ETL
 > ### Title: calculates Expected Shortfall(ES) (or Conditional
 > ###   Value-at-Risk(CVaR) for univariate and component, using a variety of
@@ -777,75 +844,32 @@ Downside Frequency (MAR = 0%)         NaN 0.1666667 0.5833333        0
 > ### ** Examples
 > 
 > 
->     data(edhec)
-> 
->     # first do normal ES calc
->     ES(edhec, p=.95, method="historical")
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES              -0.03655 -0.04126429           -0.03669286      -0.07236429
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.01687857  -0.03856429            -0.02825714  -0.02062857
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.04220714      -0.01914286       -0.02465   -0.09682143
-   Funds of Funds
-ES    -0.03320714
-> 
->     # now use Gaussian
->     ES(edhec, p=.95, method="gaussian")
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES           -0.02805438 -0.04349352           -0.02814382      -0.05988918
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.01216634  -0.02818551             -0.0190427  -0.02449257
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.03460069      -0.01418426    -0.01759393   -0.09817171
-   Funds of Funds
-ES    -0.02741963
-> 
->     # now use modified Cornish Fisher calc to take non-normal distribution into account
->     ES(edhec, p=.95, method="modified")
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES           -0.08948631 -0.04116413           -0.05170691       -0.1156719
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.03786594  -0.05128337            -0.05001278  -0.01638037
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.04377715      -0.02992712    -0.04417445   -0.07076187
-   Funds of Funds
-ES    -0.03971531
-> 
->     # now use p=.99
->     ES(edhec, p=.99)
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES            -0.1000841 -0.05291369            -0.0569937       -0.1268931
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.04015133  -0.05641814            -0.06110717  -0.02205432
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.06338613      -0.03270324      -0.046211    -0.1637158
-   Funds of Funds
-ES    -0.04956566
->     # or the equivalent alpha=.01
->     ES(edhec, p=.01)
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES            -0.1000841 -0.05291369            -0.0569937       -0.1268931
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.04015133  -0.05641814            -0.06110717  -0.02205432
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES       -0.06338613      -0.03270324      -0.046211    -0.1637158
-   Funds of Funds
-ES    -0.04956566
-> 
->     # now with outliers squished
->     ES(edhec, clean="boudt")
-   Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-ES           -0.02932819 -0.04116413           -0.03258727      -0.06989079
-   Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-ES           -0.01352863   -0.0322658            -0.03303559  -0.01778232
-   Long/Short Equity Merger Arbitrage Relative Value Short Selling
-ES        -0.0412464      -0.01754395    -0.02048723   -0.08760907
-   Funds of Funds
-ES    -0.03612647
-> 
->     # add Component ES for the equal weighted portfolio
->     ES(edhec, clean="boudt", portfolio_method="component")
+> if(!( Sys.info()[['sysname']]=="Windows") ){
++ # if on Windows, cut and paste this example
++ 
++     data(edhec)
++ 
++     # first do normal ES calc
++     ES(edhec, p=.95, method="historical")
++ 
++     # now use Gaussian
++     ES(edhec, p=.95, method="gaussian")
++ 
++     # now use modified Cornish Fisher calc to take non-normal distribution into account
++     ES(edhec, p=.95, method="modified")
++ 
++     # now use p=.99
++     ES(edhec, p=.99)
++     # or the equivalent alpha=.01
++     ES(edhec, p=.01)
++ 
++     # now with outliers squished
++     ES(edhec, clean="boudt")
++ 
++     # add Component ES for the equal weighted portfolio
++     ES(edhec, clean="boudt", portfolio_method="component")
++ 
++ } # end CRAN Windows check
 no weights passed in, assuming equal weighted portfolio
 $MES
 [1] 0.01802146
@@ -878,12 +902,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ES", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("EWMAMoments")
 > ### * EWMAMoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: EWMAMoments
 > ### Title: Functions for calculating EWMA comoments of financial time
 > ###   series
@@ -942,12 +969,15 @@ $pct_contrib_MES
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("EWMAMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("FamaBeta")
 > ### * FamaBeta
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: FamaBeta
 > ### Title: Fama beta of the return distribution
 > ### Aliases: FamaBeta
@@ -971,12 +1001,15 @@ Fama Beta  0.5351217   NA 1.007084 1.037632   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("FamaBeta", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Frequency")
 > ### * Frequency
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Frequency
 > ### Title: Frequency of the return distribution
 > ### Aliases: Frequency
@@ -994,12 +1027,15 @@ Frequency   12   12   12   12   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Frequency", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("InformationRatio")
 > ### * InformationRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: InformationRatio
 > ### Title: InformationRatio = ActivePremium/TrackingError
 > ### Aliases: InformationRatio
@@ -1026,12 +1062,15 @@ Information Ratio: EDHEC LS EQ -0.2277438 0.9667207
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("InformationRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Kappa")
 > ### * Kappa
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Kappa
 > ### Title: Kappa of the return distribution
 > ### Aliases: Kappa
@@ -1058,12 +1097,15 @@ kappa (MAR = 0%) 1.274332 0.01674457      Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Kappa", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("KellyRatio")
 > ### * KellyRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: KellyRatio
 > ### Title: calculate Kelly criterion ratio (leverage or bet size) for a
 > ###   strategy
@@ -1086,12 +1128,15 @@ Kelly Ratio 6.010854 4.069873 3.458124 1.376354 0.3876476 7.948295
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("KellyRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("M2Sortino")
 > ### * M2Sortino
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: M2Sortino
 > ### Title: M squared for Sortino of the return distribution
 > ### Aliases: M2Sortino
@@ -1117,12 +1162,15 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("M2Sortino", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MCA")
 > ### * MCA
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MCA
 > ### Title: Functions for doing Moment Component Analysis (MCA) of financial
 > ###   time series
@@ -1154,6 +1202,8 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MCA", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > graphics::par(get("par.postscript", pos = 'CheckExEnv'))
 > cleanEx()
 > nameEx("MSquared")
@@ -1161,6 +1211,7 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MSquared
 > ### Title: M squared of the return distribution
 > ### Aliases: MSquared
@@ -1184,12 +1235,15 @@ MSquared (Risk free = 0) 0.2544876   NA 0.4028725 0.1982483   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MSquared", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MSquaredExcess")
 > ### * MSquaredExcess
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MSquaredExcess
 > ### Title: M squared excess of the return distribution
 > ### Aliases: MSquaredExcess
@@ -1217,12 +1271,15 @@ MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MSquaredExcess", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MarketTiming")
 > ### * MarketTiming
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MarketTiming
 > ### Title: Market timing models
 > ### Aliases: MarketTiming
@@ -1260,12 +1317,15 @@ HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.4434281
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MarketTiming", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MartinRatio")
 > ### * MartinRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MartinRatio
 > ### Title: Martin ratio of the return distribution
 > ### Aliases: MartinRatio
@@ -1290,12 +1350,15 @@ Ulcer Index 15.49888
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MartinRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MeanAbsoluteDeviation")
 > ### * MeanAbsoluteDeviation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MeanAbsoluteDeviation
 > ### Title: Mean absolute deviation of the return distribution
 > ### Aliases: MeanAbsoluteDeviation
@@ -1318,12 +1381,15 @@ Mean absolute deviation         NaN  0.02225 0.01611653  0.00021
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MeanAbsoluteDeviation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("MinTrackRecord")
 > ### * MinTrackRecord
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: MinTrackRecord
 > ### Title: Minimum Track Record Length
 > ### Aliases: MinTrackRecord
@@ -1411,12 +1477,15 @@ $num_of_extra_obs_needed
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("MinTrackRecord", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Modigliani")
 > ### * Modigliani
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Modigliani
 > ### Title: Modigliani-Modigliani measure
 > ### Aliases: Modigliani
@@ -1443,12 +1512,15 @@ Modigliani-Modigliani measure: EDHEC LS EQ 0.00956933 0.009546295 0.01328426
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Modigliani", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("NetSelectivity")
 > ### * NetSelectivity
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: NetSelectivity
 > ### Title: Net selectivity of the return distribution
 > ### Aliases: NetSelectivity
@@ -1472,12 +1544,15 @@ Net Selectivity (Risk free = 0) 0.01333906   NA 0.1745397 -0.03249043   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("NetSelectivity", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Omega")
 > ### * Omega
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Omega
 > ### Title: calculate Omega for a return series
 > ### Aliases: Omega
@@ -1709,12 +1784,15 @@ Omega (L = 0%)       5.059274
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Omega", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("OmegaExcessReturn")
 > ### * OmegaExcessReturn
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: OmegaExcessReturn
 > ### Title: Omega excess return of the return distribution
 > ### Aliases: OmegaExcessReturn OmegaExessReturn
@@ -1740,12 +1818,15 @@ Omega Excess Return (MAR = 0) 0.1325302   NA 0.3991416 0.1985718   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("OmegaExcessReturn", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("OmegaSharpeRatio")
 > ### * OmegaSharpeRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: OmegaSharpeRatio
 > ### Title: Omega-Sharpe ratio of the return distribution
 > ### Aliases: OmegaSharpeRatio
@@ -1773,12 +1854,15 @@ OmegaSharpeRatio (MAR = 0%)          NA 3.340625 0.02827709      Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("OmegaSharpeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("PainIndex")
 > ### * PainIndex
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: PainIndex
 > ### Title: Pain index of the return distribution
 > ### Aliases: PainIndex
@@ -1803,12 +1887,15 @@ Pain Index 0.3714087
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("PainIndex", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("PainRatio")
 > ### * PainRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: PainRatio
 > ### Title: Pain ratio of the return distribution
 > ### Aliases: PainRatio
@@ -1833,12 +1920,15 @@ Pain Index 36.7226
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("PainRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ProbSharpeRatio")
 > ### * ProbSharpeRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ProbSharpeRatio
 > ### Title: Probabilistic Sharpe Ratio
 > ### Aliases: ProbSharpeRatio
@@ -1914,12 +2004,15 @@ portfolio.returns      0.2495       0.3608       0.472
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ProbSharpeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ProspectRatio")
 > ### * ProspectRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ProspectRatio
 > ### Title: Prospect ratio of the return distribution
 > ### Aliases: ProspectRatio
@@ -1946,12 +2039,15 @@ Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ProspectRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("RPESE.control")
 > ### * RPESE.control
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: RPESE.control
 > ### Title: Controls Function for the Computation of Standard Errors for
 > ###   Risk and Performance estimators
@@ -1970,12 +2066,15 @@ Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("RPESE.control", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("RachevRatio")
 > ### * RachevRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: RachevRatio
 > ### Title: Standard Error Estimate for Rachev Ratio of Returns
 > ### Aliases: RachevRatio
@@ -2000,12 +2099,15 @@ RachevRatio 2.042855 1.219365 1.487931 1.242879 1.13534 1.242028
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("RachevRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.Geltner")
 > ### * Return.Geltner
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.Geltner
 > ### Title: calculate Geltner liquidity-adjusted return series
 > ### Aliases: Return.Geltner
@@ -2040,12 +2142,15 @@ RachevRatio 2.042855 1.219365 1.487931 1.242879 1.13534 1.242028
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.Geltner", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.annualized")
 > ### * Return.annualized
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.annualized
 > ### Title: calculate an annualized return for comparing instruments with
 > ###   different length history
@@ -2072,12 +2177,15 @@ Annualized Return     0.11454 0.1039841
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.annualized", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.annualized.excess")
 > ### * Return.annualized.excess
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.annualized.excess
 > ### Title: calculates an annualized excess return for comparing instruments
 > ###   with different length history
@@ -2093,12 +2201,15 @@ Annualized Return 0.03718883
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.annualized.excess", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.calculate")
 > ### * Return.calculate
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.calculate
 > ### Title: calculate simple or compound returns from prices
 > ### Aliases: Return.calculate CalculateReturns
@@ -4134,12 +4245,15 @@ Annualized Return 0.03718883
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.calculate", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.clean")
 > ### * Return.clean
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.clean
 > ### Title: clean returns in a time series to to provide more robust risk
 > ###   estimates
@@ -4158,12 +4272,15 @@ Annualized Return 0.03718883
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.clean", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.convert")
 > ### * Return.convert
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.convert
 > ### Title: Convert coredata content from one type of return to another
 > ### Aliases: Return.convert
@@ -4175,12 +4292,15 @@ Annualized Return 0.03718883
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.convert", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.cumulative")
 > ### * Return.cumulative
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.cumulative
 > ### Title: calculate a compounded (geometric) cumulative return
 > ### Aliases: Return.cumulative
@@ -4204,12 +4324,15 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.cumulative", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.excess")
 > ### * Return.excess
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.excess
 > ### Title: Calculates the returns of an asset in excess of the given risk
 > ###   free rate
@@ -4262,12 +4385,15 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.excess", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.locScaleRob")
 > ### * Return.locScaleRob
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.locScaleRob
 > ### Title: Robust Filter for Time Series Returns
 > ### Aliases: Return.locScaleRob
@@ -4288,12 +4414,15 @@ Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.locScaleRob", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.portfolio")
 > ### * Return.portfolio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.portfolio
 > ### Title: Calculate weighted returns for a portfolio of assets
 > ### Aliases: Return.portfolio Return.rebalancing
@@ -4543,12 +4672,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.portfolio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.read")
 > ### * Return.read
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.read
 > ### Title: Read returns data with different date formats
 > ### Aliases: Return.read
@@ -4564,12 +4696,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.read", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Return.relative")
 > ### * Return.relative
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.relative
 > ### Title: calculate the relative return of one asset to another
 > ### Aliases: Return.relative
@@ -4604,12 +4739,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Return.relative", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("Selectivity")
 > ### * Selectivity
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Selectivity
 > ### Title: Selectivity of the return distribution
 > ### Aliases: Selectivity
@@ -4631,12 +4769,15 @@ Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("Selectivity", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SharpeRatio")
 > ### * SharpeRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SharpeRatio
 > ### Title: calculate a traditional or modified Sharpe Ratio of Return over
 > ###   StdDev or VaR or ES
@@ -4722,12 +4863,15 @@ ES Sharpe (Rf=0.3%, p=95%):         0.05360016   -0.07444002     0.02257277
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SharpeRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SharpeRatio.annualized")
 > ### * SharpeRatio.annualized
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SharpeRatio.annualized
 > ### Title: calculate annualized Sharpe Ratio
 > ### Aliases: SharpeRatio.annualized
@@ -4761,12 +4905,15 @@ Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SharpeRatio.annualized", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("ShrinkageMoments")
 > ### * ShrinkageMoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: ShrinkageMoments
 > ### Title: Functions for calculating shrinkage-based comoments of financial
 > ###   time series
@@ -4829,12 +4976,15 @@ $pct_contrib_MES
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("ShrinkageMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SkewnessKurtosisRatio")
 > ### * SkewnessKurtosisRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SkewnessKurtosisRatio
 > ### Title: Skewness-Kurtosis ratio of the return distribution
 > ### Aliases: SkewnessKurtosisRatio Skewness-KurtosisRatio
@@ -4858,12 +5008,15 @@ SkewnessKurtosisRatio          NA -0.03981589 -0.01634447 -0.2626715
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SkewnessKurtosisRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SmoothingIndex")
 > ### * SmoothingIndex
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SmoothingIndex
 > ### Title: calculate Normalized Getmansky Smoothing Index
 > ### Aliases: SmoothingIndex
@@ -4894,12 +5047,15 @@ Smoothing Index        0.5051785      0.4473306     0.7575219      0.5240699
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SmoothingIndex", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SortinoRatio")
 > ### * SortinoRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SortinoRatio
 > ### Title: calculate Sortino Ratio of performance over downside risk
 > ### Aliases: SortinoRatio
@@ -4920,12 +5076,15 @@ Sortino Ratio (MAR = 0%)   0.3064
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SortinoRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SpecificRisk")
 > ### * SpecificRisk
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SpecificRisk
 > ### Title: Specific risk of the return distribution
 > ### Aliases: SpecificRisk
@@ -4947,12 +5106,15 @@ Specific Risk =  0.04977046   NA 0.06225051 0.0857627   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SpecificRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("StdDev")
 > ### * StdDev
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: StdDev
 > ### Title: calculates Standard Deviation for univariate and multivariate
 > ###   series, also calculates component contribution to standard deviation
@@ -4962,42 +5124,23 @@ Specific Risk =  0.04977046   NA 0.06225051 0.0857627   NA
 > ### ** Examples
 > 
 > 
->     data(edhec)
-> 
->     # first do normal StdDev calc
->     StdDev(edhec)
-       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev            0.01629694 0.02314359            0.01688505        0.0321206
-       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev            0.00802461   0.01670838             0.01132107   0.01450752
-       Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.01984532      0.009459627     0.01131398    0.04674087
-       Funds of Funds
-StdDev     0.01537158
->     # or the equivalent
->     StdDev(edhec, portfolio_method="single")
-       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev            0.01629694 0.02314359            0.01688505        0.0321206
-       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev            0.00802461   0.01670838             0.01132107   0.01450752
-       Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.01984532      0.009459627     0.01131398    0.04674087
-       Funds of Funds
-StdDev     0.01537158
-> 
->     # now with outliers squished
->     StdDev(edhec, clean="boudt")
-       Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-StdDev            0.01348809 0.02314359            0.01572588       0.02985534
-       Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-StdDev           0.007060607   0.01552132            0.008991831   0.01416932
-       Long/Short Equity Merger Arbitrage Relative Value Short Selling
-StdDev        0.01959556      0.008908155     0.01009998    0.04479053
-       Funds of Funds
-StdDev     0.01518511
-> 
->     # add Component StdDev for the equal weighted portfolio
->     StdDev(edhec, clean="boudt", portfolio_method="component")
+> if(!( Sys.info()[['sysname']]=="Windows") ){
++ # if on Windows, cut and paste this example
++ 
++     data(edhec)
++ 
++     # first do normal StdDev calc
++     StdDev(edhec)
++     # or the equivalent
++     StdDev(edhec, portfolio_method="single")
++ 
++     # now with outliers squished
++     StdDev(edhec, clean="boudt")
++ 
++     # add Component StdDev for the equal weighted portfolio
++     StdDev(edhec, clean="boudt", portfolio_method="component")
++ 
++ } # end CRAN Windows check
 no weights passed in, assuming equal weighted portfolio
 $StdDev
 [1] 0.009325917
@@ -5030,13 +5173,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
-> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("StdDev", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("StdDev.annualized")
 > ### * StdDev.annualized
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: StdDev.annualized
 > ### Title: calculate a multiperiod or annualized Standard Deviation
 > ### Aliases: StdDev.annualized sd.multiperiod sd.annualized
@@ -5069,12 +5214,15 @@ Annualized Standard Deviation   0.02893977
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("StdDev.annualized", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("StructuredMoments")
 > ### * StructuredMoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: StructuredMoments
 > ### Title: Functions for calculating structured comoments of financial time
 > ###   series
@@ -5133,12 +5281,15 @@ $pct_contrib_MES
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("StructuredMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("SystematicRisk")
 > ### * SystematicRisk
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: SystematicRisk
 > ### Title: Systematic risk of the return distribution
 > ### Aliases: SystematicRisk
@@ -5162,12 +5313,15 @@ Systematic Risk to SP500 TR (Rf = 0)   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("SystematicRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("TotalRisk")
 > ### * TotalRisk
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: TotalRisk
 > ### Title: Total risk of the return distribution
 > ### Aliases: TotalRisk
@@ -5189,12 +5343,15 @@ Total Risk =  0.05627721   NA 0.1079938 0.1099375   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("TotalRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("TrackingError")
 > ### * TrackingError
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: TrackingError
 > ### Title: Calculate Tracking Error of returns against a benchmark
 > ### Aliases: TrackingError
@@ -5221,12 +5378,15 @@ Tracking Error: EDHEC LS EQ 0.1421533 0.05651657
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("TrackingError", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("TreynorRatio")
 > ### * TreynorRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: TreynorRatio
 > ### Title: calculate Treynor Ratio or modified Treynor Ratio of excess
 > ###   return over CAPM beta
@@ -5268,12 +5428,15 @@ Treynor Ratio: SP500 TR 5.184256 9.129899 4.597618 2.990718   NA
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("TreynorRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("UpDownRatios")
 > ### * UpDownRatios
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: UpDownRatios
 > ### Title: calculate metrics on up and down markets for the benchmark asset
 > ### Aliases: UpDownRatios
@@ -5319,12 +5482,15 @@ SP500 TR Down Capture 0.2076304
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("UpDownRatios", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("UpsideFrequency")
 > ### * UpsideFrequency
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: UpsideFrequency
 > ### Title: upside frequency of the return distribution
 > ### Aliases: UpsideFrequency
@@ -5348,12 +5514,15 @@ Upside Frequency (MAR = 0%) 0.8333333 0.4166667        1
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("UpsideFrequency", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("UpsidePotentialRatio")
 > ### * UpsidePotentialRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: UpsidePotentialRatio
 > ### Title: calculate Upside Potential Ratio of upside performance over
 > ###   downside risk
@@ -5376,12 +5545,15 @@ Upside Potential (MAR = 0%)             0.6009753    0.6748791
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("UpsidePotentialRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("UpsideRisk")
 > ### * UpsideRisk
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: UpsideRisk
 > ### Title: upside risk, variance and potential of the return distribution
 > ### Aliases: UpsideRisk
@@ -5411,12 +5583,15 @@ Upside Risk (MAR = 0%)           0 0.03204533 0.01397565 0.004324785
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("UpsideRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("VaR")
 > ### * VaR
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: VaR
 > ### Title: calculate various Value at Risk (VaR) measures
 > ### Aliases: VaR VaR.CornishFisher
@@ -5424,75 +5599,32 @@ Upside Risk (MAR = 0%)           0 0.03204533 0.01397565 0.004324785
 > ### ** Examples
 > 
 > 
->     data(edhec)
-> 
->     # first do normal VaR calc
->     VaR(edhec, p=.95, method="historical")
-    Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-VaR              -0.01492   -0.03163              -0.01976         -0.04229
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR              -0.00778     -0.02549               -0.00709     -0.01493
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR          -0.02619         -0.01029       -0.01138      -0.06741
-    Funds of Funds
-VaR       -0.02029
-> 
->     # now use Gaussian
->     VaR(edhec, p=.95, method="gaussian")
-    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR           -0.02125694 -0.03384036           -0.02110108      -0.04649171
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR          -0.008819289  -0.02121647             -0.0143207   -0.0184415
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.02632324      -0.01023866    -0.01287488   -0.07867615
-    Funds of Funds
-VaR    -0.02100817
-> 
->     # now use modified Cornish Fisher calc to take non-normal distribution into account
->     VaR(edhec, p=.95, method="modified")
-    Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-VaR            -0.0245422 -0.0328078           -0.02496078      -0.05218143
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.01059654  -0.02547391             -0.0174173  -0.01327363
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.02783751       -0.0123293    -0.01585024   -0.06436471
-    Funds of Funds
-VaR    -0.02125092
-> 
->     # now use p=.99
->     VaR(edhec, p=.99)
-    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR            -0.1000841 -0.04637473            -0.0569937       -0.1268931
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.04015133  -0.05641814            -0.06110717  -0.02205432
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR        -0.0511693      -0.03270324      -0.046211    -0.1089009
-    Funds of Funds
-VaR    -0.04956566
->     # or the equivalent alpha=.01
->     VaR(edhec, p=.01)
-    Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-VaR            -0.1000841 -0.04637473            -0.0569937       -0.1268931
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR           -0.04015133  -0.05641814            -0.06110717  -0.02205432
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR        -0.0511693      -0.03270324      -0.046211    -0.1089009
-    Funds of Funds
-VaR    -0.04956566
-> 
->     # now with outliers squished
->     VaR(edhec, clean="boudt")
-    Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-VaR           -0.01603466 -0.0328078            -0.0210253      -0.04503341
-    Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-VaR          -0.007626519  -0.02157645            -0.01228341  -0.01417238
-    Long/Short Equity Merger Arbitrage Relative Value Short Selling
-VaR       -0.02725545      -0.01049149    -0.01193651   -0.07019385
-    Funds of Funds
-VaR    -0.02050145
-> 
->     # add Component VaR for the equal weighted portfolio
->     VaR(edhec, clean="boudt", portfolio_method="component")
+> if(!( Sys.info()[['sysname']]=="Windows") ){
++ # if on Windows, cut and paste this example
++ 
++     data(edhec)
++ 
++     # first do normal VaR calc
++     VaR(edhec, p=.95, method="historical")
++ 
++     # now use Gaussian
++     VaR(edhec, p=.95, method="gaussian")
++ 
++     # now use modified Cornish Fisher calc to take non-normal distribution into account
++     VaR(edhec, p=.95, method="modified")
++ 
++     # now use p=.99
++     VaR(edhec, p=.99)
++     # or the equivalent alpha=.01
++     VaR(edhec, p=.01)
++ 
++     # now with outliers squished
++     VaR(edhec, clean="boudt")
++ 
++     # add Component VaR for the equal weighted portfolio
++     VaR(edhec, clean="boudt", portfolio_method="component")
++ 
++ } # end Windows check
 no weights passed in, assuming equal weighted portfolio
 $MVaR
 [1] 0.01084104
@@ -5525,12 +5657,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("VaR", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("VolatilitySkewness")
 > ### * VolatilitySkewness
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: VolatilitySkewness
 > ### Title: Volatility and variability of the return distribution
 > ### Aliases: VolatilitySkewness
@@ -5557,12 +5692,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("VolatilitySkewness", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("apply.fromstart")
 > ### * apply.fromstart
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: apply.fromstart
 > ### Title: calculate a function over an expanding window always starting
 > ###   from the beginning of the series
@@ -5621,12 +5759,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("apply.fromstart", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("apply.rolling")
 > ### * apply.rolling
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: apply.rolling
 > ### Title: calculate a function over a rolling window
 > ### Aliases: apply.rolling
@@ -5773,12 +5914,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("apply.rolling", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("centeredmoments")
 > ### * centeredmoments
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Return.centered
 > ### Title: calculate centered Returns
 > ### Aliases: Return.centered centeredcomoment centeredmoment
@@ -5926,12 +6070,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("centeredmoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.ACF")
 > ### * chart.ACF
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.ACF
 > ### Title: Create ACF chart or ACF with PACF two-panel chart
 > ### Aliases: chart.ACF chart.ACFplus
@@ -5945,12 +6092,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.ACF", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Bar")
 > ### * chart.Bar
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Bar
 > ### Title: wrapper for barchart of returns
 > ### Aliases: chart.Bar charts.Bar
@@ -5964,12 +6114,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Bar", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.BarVaR")
 > ### * chart.BarVaR
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.BarVaR
 > ### Title: Periodic returns in a bar chart with risk metric overlay
 > ### Aliases: chart.BarVaR charts.BarVaR
@@ -6023,12 +6176,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.BarVaR", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Boxplot")
 > ### * chart.Boxplot
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Boxplot
 > ### Title: box whiskers plot wrapper
 > ### Aliases: chart.Boxplot
@@ -6043,12 +6199,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Boxplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.CaptureRatios")
 > ### * chart.CaptureRatios
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.CaptureRatios
 > ### Title: Chart of Capture Ratios against a benchmark
 > ### Aliases: chart.CaptureRatios
@@ -6062,12 +6221,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.CaptureRatios", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Correlation")
 > ### * chart.Correlation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Correlation
 > ### Title: correlation matrix chart
 > ### Aliases: chart.Correlation
@@ -6081,12 +6243,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Correlation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.CumReturns")
 > ### * chart.CumReturns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.CumReturns
 > ### Title: Cumulates and graphs a set of periodic returns
 > ### Aliases: chart.CumReturns
@@ -6104,12 +6269,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.CumReturns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Drawdown")
 > ### * chart.Drawdown
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Drawdown
 > ### Title: Time series chart of drawdowns through time
 > ### Aliases: chart.Drawdown
@@ -6124,12 +6292,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Drawdown", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.ECDF")
 > ### * chart.ECDF
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.ECDF
 > ### Title: Create an ECDF overlaid with a Normal CDF
 > ### Aliases: chart.ECDF
@@ -6144,12 +6315,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.ECDF", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Events")
 > ### * chart.Events
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Events
 > ### Title: Plots a time series with event dates aligned
 > ### Aliases: chart.Events
@@ -6169,12 +6343,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Events", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Histogram")
 > ### * chart.Histogram
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Histogram
 > ### Title: histogram of returns
 > ### Aliases: chart.Histogram
@@ -6216,12 +6393,15 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Histogram", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.QQPlot")
 > ### * chart.QQPlot
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.QQPlot
 > ### Title: Plot a QQ chart
 > ### Aliases: chart.QQPlot
@@ -6298,6 +6478,8 @@ Fixed Income Arbitrage           Global Macro      Long/Short Equity
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.QQPlot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:MASS’
@@ -6307,6 +6489,7 @@ detaching ‘package:MASS’
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Regression
 > ### Title: Takes a set of returns and relates them to a market benchmark in
 > ###   a scatterplot
@@ -6325,12 +6508,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Regression", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RelativePerformance")
 > ### * chart.RelativePerformance
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RelativePerformance
 > ### Title: relative performance chart between multiple return series
 > ### Aliases: chart.RelativePerformance
@@ -6347,12 +6533,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RelativePerformance", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RiskReturnScatter")
 > ### * chart.RiskReturnScatter
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RiskReturnScatter
 > ### Title: scatter chart of returns vs risk for comparing multiple
 > ###   instruments
@@ -6368,12 +6557,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RiskReturnScatter", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RollingCorrelation")
 > ### * chart.RollingCorrelation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RollingCorrelation
 > ### Title: chart rolling correlation fo multiple assets
 > ### Aliases: chart.RollingCorrelation
@@ -6391,12 +6583,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RollingCorrelation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RollingMean")
 > ### * chart.RollingMean
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RollingMean
 > ### Title: chart the rolling mean return
 > ### Aliases: chart.RollingMean
@@ -6410,12 +6605,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RollingMean", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RollingPerformance")
 > ### * chart.RollingPerformance
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RollingPerformance
 > ### Title: wrapper to create a chart of rolling performance metrics in a
 > ###   line chart
@@ -6423,27 +6621,32 @@ detaching ‘package:MASS’
 > 
 > ### ** Examples
 > 
-> 
-> data(edhec)
-> chart.RollingPerformance(edhec[, 1:3], width = 24)
-> chart.RollingPerformance(edhec[, 1:3], 
+> if(!( Sys.info()[['sysname']]=="Windows") ){
++ # if on Windows, cut and paste this example
++ data(edhec)
++ chart.RollingPerformance(edhec[, 1:3], width = 24)
++ chart.RollingPerformance(edhec[, 1:3], 
 + 		FUN = 'mean', width = 24, colorset = rich8equal, 
 + 		lwd = 2, legend.loc = "topleft", 
 + 		main = "Rolling 24-Month Mean Return")
-> chart.RollingPerformance(edhec[, 1:3], 
++ chart.RollingPerformance(edhec[, 1:3], 
 + 		FUN = 'SharpeRatio.annualized', width = 24, 
 + 		colorset = rich8equal, lwd = 2, legend.loc = "topleft", 
 + 		main = "Rolling 24-Month Sharpe Ratio")
++ }
 > 
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RollingPerformance", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.RollingRegression")
 > ### * chart.RollingRegression
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.RollingQuantileRegression
 > ### Title: A wrapper to create charts of relative regression performance
 > ###   through time
@@ -6471,12 +6674,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.RollingRegression", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.Scatter")
 > ### * chart.Scatter
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.Scatter
 > ### Title: wrapper to draw scatter plot with sensible defaults
 > ### Aliases: chart.Scatter
@@ -6491,12 +6697,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.Scatter", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.SnailTrail")
 > ### * chart.SnailTrail
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.SnailTrail
 > ### Title: chart risk versus return over rolling time periods
 > ### Aliases: chart.SnailTrail
@@ -6516,12 +6725,15 @@ detaching ‘package:MASS’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.SnailTrail", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.StackedBar")
 > ### * chart.StackedBar
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.StackedBar
 > ### Title: create a stacked bar plot
 > ### Aliases: chart.StackedBar
@@ -6659,12 +6871,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.StackedBar", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.TimeSeries")
 > ### * chart.TimeSeries
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.TimeSeries
 > ### Title: Creates a time series chart with some extensions.
 > ### Aliases: chart.TimeSeries chart.TimeSeries.base
@@ -6745,12 +6960,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.TimeSeries", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("chart.VaRSensitivity")
 > ### * chart.VaRSensitivity
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: chart.VaRSensitivity
 > ### Title: show the sensitivity of Value-at-Risk or Expected Shortfall
 > ###   estimates
@@ -6767,12 +6985,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("chart.VaRSensitivity", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("charts.PerformanceSummary")
 > ### * charts.PerformanceSummary
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: charts.PerformanceSummary
 > ### Title: Create combined wealth index, period performance, and drawdown
 > ###   chart
@@ -6787,35 +7008,44 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("charts.PerformanceSummary", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("charts.RollingPerformance")
 > ### * charts.RollingPerformance
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: charts.RollingPerformance
 > ### Title: rolling performance chart
 > ### Aliases: charts.RollingPerformance
 > 
 > ### ** Examples
 > 
-> 
-> data(managers)
-> charts.RollingPerformance(managers[,1:8], 
+> if(!( Sys.info()[['sysname']]=="Windows") ){
++ # if on Windows, cut and paste this example
++ 
++ data(managers)
++ charts.RollingPerformance(managers[,1:8], 
 +                           Rf=managers[,10,drop=FALSE], 
 +                           colorset=tim8equal, 
 +                           main="Rolling 12-Month Performance", 
 +                           legend.loc="topleft")
++ }
 > 
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("charts.RollingPerformance", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("checkData")
 > ### * checkData
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: checkData
 > ### Title: check input data type and format and coerce to the desired
 > ###   output type
@@ -6951,12 +7181,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("checkData", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("edhec")
 > ### * edhec
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: edhec
 > ### Title: EDHEC-Risk Hedge Fund Style Indices
 > ### Aliases: edhec
@@ -7048,12 +7281,15 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("edhec", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("findDrawdowns")
 > ### * findDrawdowns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: Drawdowns
 > ### Title: Find the drawdowns and drawdown levels in a timeseries.
 > ### Aliases: Drawdowns findDrawdowns
@@ -7140,12 +7376,15 @@ $recovery
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("findDrawdowns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("kurtosis")
 > ### * kurtosis
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: kurtosis
 > ### Title: Kurtosis
 > ### Aliases: kurtosis
@@ -7189,12 +7428,15 @@ Excess Kurtosis 4.893647  3.250776 4.817395
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("kurtosis", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("managers")
 > ### * managers
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: managers
 > ### Title: Hypothetical Alternative Asset Manager and Benchmark Data
 > ### Aliases: managers
@@ -7257,12 +7499,15 @@ Excess Kurtosis 4.893647  3.250776 4.817395
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("managers", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("maxDrawdown")
 > ### * maxDrawdown
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: maxDrawdown
 > ### Title: caclulate the maximum drawdown from peak equity
 > ### Aliases: maxDrawdown
@@ -7291,12 +7536,15 @@ US 3m TR            0.0000
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("maxDrawdown", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("mean.geometric")
 > ### * mean.geometric
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: mean.geometric
 > ### Title: calculate attributes relative to the mean of the observation
 > ###   series given, including geometric, stderr, LCL and UCL
@@ -7322,12 +7570,15 @@ Lower Confidence Level    0.002404987
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("mean.geometric", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("portfolio_bacon")
 > ### * portfolio_bacon
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: portfolio_bacon
 > ### Title: Bacon(2008) Data
 > ### Aliases: portfolio_bacon
@@ -7368,12 +7619,15 @@ Expected 'UTC' timezone, but tzone is ‘’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("portfolio_bacon", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("prices")
 > ### * prices
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: prices
 > ### Title: Selected Price Series Example Data
 > ### Aliases: prices
@@ -7396,12 +7650,15 @@ Expected 'UTC' timezone, but tzone is ‘’
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("prices", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("skewness")
 > ### * skewness
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: skewness
 > ### Title: Skewness
 > ### Aliases: skewness
@@ -7431,12 +7688,15 @@ Skewness  0.01773013 -0.5531032 -0.4048722 -0.328171
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("skewness", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("sortDrawdowns")
 > ### * sortDrawdowns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: sortDrawdowns
 > ### Title: order list of drawdowns from worst to best
 > ### Aliases: sortDrawdowns
@@ -7523,12 +7783,15 @@ $recovery
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("sortDrawdowns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.AnnualizedReturns")
 > ### * table.AnnualizedReturns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.AnnualizedReturns
 > ### Title: Annualized Returns Summary: Statistics and Stylized Facts
 > ### Aliases: table.AnnualizedReturns
@@ -7573,6 +7836,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.AnnualizedReturns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -7583,6 +7848,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Arbitrary
 > ### Title: wrapper function for combining arbitrary function list into a
 > ###   table
@@ -7616,12 +7882,15 @@ Modified Expected Shortfall   -0.07076187    -0.03971531
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Arbitrary", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.Autocorrelation")
 > ### * table.Autocorrelation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Autocorrelation
 > ### Title: table for calculating the first six autocorrelation coefficients
 > ###   and significance
@@ -7655,12 +7924,15 @@ US 3m TR     0.9224  0.9081  0.8968  0.8746  0.8363  0.8127       0.0000
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Autocorrelation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.CAPM")
 > ### * table.CAPM
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.SFM
 > ### Title: Single Factor Asset-Pricing Model Summary: Statistics and
 > ###   Stylized Facts
@@ -7694,12 +7966,15 @@ Treynor Ratio                 0.2428           0.3883           0.1956
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.CAPM", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.CalendarReturns")
 > ### * table.CalendarReturns
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.CalendarReturns
 > ### Title: Monthly and Calendar year Return table
 > ### Aliases: table.CalendarReturns table.Returns
@@ -7754,6 +8029,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.CalendarReturns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -7764,6 +8041,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.CaptureRatios
 > ### Title: Calculate and display a table of capture ratio and related
 > ###   statistics
@@ -7808,12 +8086,15 @@ HAM6 to EDHEC LS EQ       0.4762
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.CaptureRatios", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.Correlation")
 > ### * table.Correlation
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Correlation
 > ### Title: calculate correlalations of multicolumn data
 > ### Aliases: table.Correlation
@@ -7865,6 +8146,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Correlation", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -7875,6 +8158,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Distributions
 > ### Title: Distributions Summary: Statistics and Stylized Facts
 > ### Aliases: table.Distributions
@@ -7923,6 +8207,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Distributions", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -7933,6 +8219,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.DownsideRisk
 > ### Title: Downside Risk Summary: Statistics and Stylized Facts
 > ### Aliases: table.DownsideRisk
@@ -8038,6 +8325,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.DownsideRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8048,6 +8337,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.DownsideRiskRatio
 > ### Title: Downside Summary: Statistics and ratios
 > ### Aliases: table.DownsideRiskRatio
@@ -8100,6 +8390,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.DownsideRiskRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8110,6 +8402,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Drawdowns
 > ### Title: Worst Drawdowns Summary: Statistics and Stylized Facts
 > ### Aliases: table.Drawdowns
@@ -8154,12 +8447,15 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Drawdowns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.DrawdownsRatio")
 > ### * table.DrawdownsRatio
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.DrawdownsRatio
 > ### Title: Drawdowns Summary: Statistics and ratios
 > ### Aliases: table.DrawdownsRatio
@@ -8202,6 +8498,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.DrawdownsRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8212,6 +8510,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.HigherMoments
 > ### Title: Higher Moments Summary: Statistics and Stylized Facts
 > ### Aliases: table.HigherMoments
@@ -8251,6 +8550,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.HigherMoments", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8261,6 +8562,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.InformationRatio
 > ### Title: Information ratio Summary: Statistics and Stylized Facts
 > ### Aliases: table.InformationRatio
@@ -8303,6 +8605,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.InformationRatio", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8313,6 +8617,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Stats
 > ### Title: Returns Summary: Statistics and Stylized Facts
 > ### Aliases: table.Stats table.MonthlyReturns
@@ -8419,6 +8724,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.MonthlyReturns", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8429,6 +8736,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.ProbOutPerformance
 > ### Title: Outperformance Report of Asset vs Benchmark
 > ### Aliases: table.ProbOutPerformance
@@ -8460,12 +8768,15 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.ProbOutPerformance", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("table.RollingPeriods")
 > ### * table.RollingPeriods
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.RollingPeriods
 > ### Title: Rolling Periods Summary: Statistics and Stylized Facts
 > ### Aliases: table.RollingPeriods table.TrailingPeriods
@@ -8514,6 +8825,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.RollingPeriods", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8524,6 +8837,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.SpecificRisk
 > ### Title: Specific risk Summary: Statistics and Stylized Facts
 > ### Aliases: table.SpecificRisk
@@ -8562,6 +8876,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.SpecificRisk", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8572,6 +8888,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: table.Variability
 > ### Title: Variability Summary: Statistics and Stylized Facts
 > ### Aliases: table.Variability
@@ -8614,6 +8931,8 @@ The following objects are masked from ‘package:base’:
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("table.Variability", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 
 detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
@@ -8624,6 +8943,7 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: replaceTabs.inner
 > ### Title: Display text information in a graphics plot.
 > ### Aliases: replaceTabs.inner replaceTabs textplot textplot.default
@@ -8652,12 +8972,15 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("textplot", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("to.period.contributions")
 > ### * to.period.contributions
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: to.period.contributions
 > ### Title: Aggregate contributions through time
 > ### Aliases: to.period.contributions to.monthly.contributions
@@ -8703,12 +9026,15 @@ detaching ‘package:Hmisc’, ‘package:ggplot2’, ‘package:Formula’,
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("to.period.contributions", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > cleanEx()
 > nameEx("weights")
 > ### * weights
 > 
 > flush(stderr()); flush(stdout())
 > 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
 > ### Name: weights
 > ### Title: Selected Portfolio Weights Data
 > ### Aliases: weights
@@ -8755,12 +9081,14 @@ Warning in tclass.xts(x) : index does not have a ‘tclass’ attribute
 > 
 > 
 > 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("weights", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
 > ### * <FOOTER>
 > ###
 > cleanEx()
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  39.277 2.098 42.879 0.002 0.002 
+Time elapsed:  55.801 32.515 48.638 0 0 
 > grDevices::dev.off()
 pdf 
   2 
