@@ -1,13 +1,15 @@
-PerformanceAnalytics 2.0.1 Release Notes
+PerformanceAnalytics 2.0.2 Release Notes
 
-The major functional changes in v 2.0.0 are the addition of standard errors 
+The major functional changes in v 2.0.0-2.0.2 are the addition of standard errors 
 and additional plotting engines.
 
 This release adds support for plotting engines dygraphs, plotly,
 gridExtra, ggplot2, and googleVis to all charting functions that
-are able to support those engines via the use of a new plot engine
+are able to support those engines via the use of a new plot.engine
 argument.  This work was predominantly completed by Ziheng 'Zenith'
 Zhou and Justin Shea as part of Google Summer of Code 2019.
+This functionality is working, but consider it experimental for now, it may
+change in the future as we receive feedback and patches from users.
     
 This release additionally adds support for multiple methods of
 standard error calculations derived from the robust statistics
@@ -19,13 +21,16 @@ RPESE if the user desires to utilize the standard errors functionality.
 changed test infrastructure to tinytest from testthat after unreproducible
 traceback results on only some Windows platforms in testthat.
 
+Note that some examples are disabled on Windows because of runtime issues with 
+the Rtools4 'experimental' toolchain.  Users may still run this code, of course.
+
 ... and the usual minor things that get changed and updated in the general 
 course of maintenance.
 
 PerformanceAnalytics 1.5 Release Notes
 
 The major functional change in v1.5 is in the higher moment code.  Dries Cornilly
-of Belgium contributed sparse matrix code in GSoC 2017 to make calcualtion of
+of Belgium contributed sparse matrix code in GSoC 2017 to make calculation of
 higher moments and comonments much faster and more robust.  
 
 Additionally, PerformanceAnalytics has been updated to use the new plot.xts,
