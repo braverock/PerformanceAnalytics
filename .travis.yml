@@ -23,7 +23,6 @@ r_check_args: "--no-build-vignettes --ignore-vignettes --as-cran"
 # Binaries from Michael Rutter's ppa
 r_binary_packages:
  - car
- - gplots
  - Hmisc
  - quadprog
  - RColorBrewer
@@ -33,14 +32,17 @@ r_binary_packages:
  - tseries
  - xts
  - zoo
+ - jsonlite
+ - htmltools
+ - htmlwidgets
+ - dygraphs
+ - mass
  
 # Done via install.packages
 r_packages:
- - dygraphs
  - gamlss
  - gamlss.dist
- - MASS
-
+ 
    
 # Install the bleeding edge version of a package from github (eg to pick
 # up a not-yet-released bugfix)
