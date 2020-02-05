@@ -53,11 +53,9 @@ checking Rd cross-references ... NOTE
 Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
 
 ## * Win-builder R-devel ATC (alternative toolchain):
-Status: 1 NOTE
-checking Rd cross-references ... NOTE
-Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
+* DONE
+Status: OK
 
 ** running examples for arch 'x64' ... [204s] NOTE
-Status: 1 NOTE
-checking Rd cross-references ... NOTE
-Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
+* DONE
+Status: OK
