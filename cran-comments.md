@@ -53,22 +53,11 @@ checking Rd cross-references ... NOTE
 Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
 
 ## * Win-builder R-devel ATC (alternative toolchain):
-Status: 2 NOTEs
-
-** running examples for arch 'i386' ... [191s] NOTE
-Examples with CPU (user + system) or elapsed time > 10s
-                           user system elapsed
-chart.RollingPerformance  25.60   0.02   25.73
-charts.RollingPerformance 19.21   0.01   19.31
-ES                        11.79   0.02   11.99
-VaR                       10.95   0.02   10.98
-StdDev                    10.44   0.02   10.63
+Status: 1 NOTE
+checking Rd cross-references ... NOTE
+Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
 
 ** running examples for arch 'x64' ... [204s] NOTE
-Examples with CPU (user + system) or elapsed time > 10s
-                           user system elapsed
-chart.RollingPerformance  23.94   0.02   24.15
-charts.RollingPerformance 21.23   0.05   21.29
-StdDev                    13.62   0.01   13.68
-ES                        13.60   0.01   14.65
-VaR                       13.32   0.02   13.31
+Status: 1 NOTE
+checking Rd cross-references ... NOTE
+Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
