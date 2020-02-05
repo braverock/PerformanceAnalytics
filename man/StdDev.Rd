@@ -83,6 +83,9 @@ deviation.
 }
 \examples{
 
+if(!( Sys.info()[['sysname']]=="Windows") ){
+# if on Windows, cut and paste this example
+
     data(edhec)
 
     # first do normal StdDev calc
@@ -96,6 +99,7 @@ deviation.
     # add Component StdDev for the equal weighted portfolio
     StdDev(edhec, clean="boudt", portfolio_method="component")
 
+} # end CRAN Windows check
 
 }
 \seealso{

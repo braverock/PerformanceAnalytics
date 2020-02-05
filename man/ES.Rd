@@ -226,6 +226,9 @@ for details.
 
 \examples{
 
+if(!( Sys.info()[['sysname']]=="Windows") ){
+# if on Windows, cut and paste this example
+
     data(edhec)
 
     # first do normal ES calc
@@ -247,6 +250,8 @@ for details.
 
     # add Component ES for the equal weighted portfolio
     ES(edhec, clean="boudt", portfolio_method="component")
+
+} # end CRAN Windows check
     
 }
 \references{

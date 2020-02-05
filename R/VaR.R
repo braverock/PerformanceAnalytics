@@ -298,6 +298,9 @@
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
+#' if(!( Sys.info()[['sysname']]=="Windows") ){
+#' # if on Windows, cut and paste this example
+#' 
 #'     data(edhec)
 #' 
 #'     # first do normal VaR calc
@@ -319,6 +322,8 @@
 #' 
 #'     # add Component VaR for the equal weighted portfolio
 #'     VaR(edhec, clean="boudt", portfolio_method="component")
+#' 
+#' } # end Windows check
 #' 
 #' @export
 VaR <-

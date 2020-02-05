@@ -43,7 +43,8 @@ The parameter \code{na.pad} has been deprecated; use \code{fill = NA} instead of
 or \code{fill = NULL} instead of \code{na.pad = FALSE}.
 }
 \examples{
-
+if(!( Sys.info()[['sysname']]=="Windows") ){
+# if on Windows, cut and paste this example
 data(edhec)
 chart.RollingPerformance(edhec[, 1:3], width = 24)
 chart.RollingPerformance(edhec[, 1:3], 
@@ -54,6 +55,7 @@ chart.RollingPerformance(edhec[, 1:3],
 		FUN = 'SharpeRatio.annualized', width = 24, 
 		colorset = rich8equal, lwd = 2, legend.loc = "topleft", 
 		main = "Rolling 24-Month Sharpe Ratio")
+}
 
 }
 \seealso{

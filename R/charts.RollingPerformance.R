@@ -19,6 +19,8 @@
 #' @seealso \code{\link{chart.RollingPerformance}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
+#' if(!( Sys.info()[['sysname']]=="Windows") ){
+#' # if on Windows, cut and paste this example
 #' 
 #' data(managers)
 #' charts.RollingPerformance(managers[,1:8], 
@@ -26,6 +28,7 @@
 #'                           colorset=tim8equal, 
 #'                           main="Rolling 12-Month Performance", 
 #'                           legend.loc="topleft")
+#' }
 #' 
 #' @export
 charts.RollingPerformance <-

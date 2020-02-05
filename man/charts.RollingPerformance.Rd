@@ -38,6 +38,8 @@ A wrapper to create a rolling annualized returns chart, rolling annualized
 standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
 \examples{
+if(!( Sys.info()[['sysname']]=="Windows") ){
+# if on Windows, cut and paste this example
 
 data(managers)
 charts.RollingPerformance(managers[,1:8], 
@@ -45,6 +47,7 @@ charts.RollingPerformance(managers[,1:8],
                           colorset=tim8equal, 
                           main="Rolling 12-Month Performance", 
                           legend.loc="topleft")
+}
 
 }
 \seealso{

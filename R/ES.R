@@ -214,6 +214,9 @@
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
+#' if(!( Sys.info()[['sysname']]=="Windows") ){
+#' # if on Windows, cut and paste this example
+#' 
 #'     data(edhec)
 #' 
 #'     # first do normal ES calc
@@ -235,6 +238,8 @@
 #' 
 #'     # add Component ES for the equal weighted portfolio
 #'     ES(edhec, clean="boudt", portfolio_method="component")
+#' 
+#' } # end CRAN Windows check
 #'     
 #' @export ETL CVaR ES
 ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ..., 
