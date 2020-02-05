@@ -4,7 +4,7 @@
 \alias{MarketTiming}
 \title{Market timing models}
 \usage{
-MarketTiming(Ra, Rb, Rf = 0, method = c("TM", "HM"))
+MarketTiming(Ra, Rb, Rf = 0, method = c("TM", "HM"), ...)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

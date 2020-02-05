@@ -4,7 +4,7 @@
 \alias{Return.locScaleRob}
 \title{Robust Filter for Time Series Returns}
 \usage{
-Return.locScaleRob(R, alpha.robust = 0.05, normal.efficiency = 0.99)
+Return.locScaleRob(R, alpha.robust = 0.05, normal.efficiency = 0.99, ...)
 }
 \arguments{
 \item{R}{Data of returns for assets or portfolios.}
@@ -13,7 +13,7 @@ Return.locScaleRob(R, alpha.robust = 0.05, normal.efficiency = 0.99)
 
 \item{normal.efficiency}{Normal efficiency for robust filter.}
 
-\item{...}{Additional parameters.}
+\item{\dots}{any other passthrough parameters}
 }
 \value{
 A vector of the cleaned data.

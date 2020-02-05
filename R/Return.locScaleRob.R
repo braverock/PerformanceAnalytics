@@ -6,7 +6,7 @@
 #' @param R Data of returns for assets or portfolios.
 #' @param alpha.robust Tuning parameter for the robust filter.
 #' @param normal.efficiency Normal efficiency for robust filter.
-#' @param ... Additional parameters.
+#' @param \dots any other passthrough parameters
 #'
 #' @return A vector of the cleaned data.
 #'
@@ -27,7 +27,7 @@
 #' outRob <- Return.locScaleRob(edhec$CA)
 #'
 # Implementation of the robust filter for the IF TS
-Return.locScaleRob <- function(R, alpha.robust=0.05, normal.efficiency=0.99){
+Return.locScaleRob <- function(R, alpha.robust=0.05, normal.efficiency=0.99, ...){
   
   if(!requireNamespace("RobStatTM", quietly = TRUE)) {
     stop("Package \"pkg\" needed for this function to work. Please install it.",

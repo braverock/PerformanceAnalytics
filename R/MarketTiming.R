@@ -49,7 +49,7 @@
 #' MarketTiming(managers[80:120,1:6], managers[80:120,8:7], managers[80:120,10], method = "TM")
 #'
 #' @export
-MarketTiming <- function (Ra, Rb, Rf = 0, method = c("TM", "HM"))
+MarketTiming <- function (Ra, Rb, Rf = 0, method = c("TM", "HM"), ...)
 { # @author Andrii Babii, Peter Carl
   
     # FUNCTION
