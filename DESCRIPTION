@@ -43,7 +43,6 @@ Suggests:
     gamlss.dist,
     robustbase,
     quantreg,
-    gplots,
     tinytest,
     ggplot2,
     RColorBrewer,
