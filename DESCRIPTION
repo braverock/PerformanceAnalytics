@@ -18,7 +18,7 @@ Authors@R: c(
   , person(given=c("Zeheng", "'Zenith'"),family="Zhou",role="ctb")  
   , person(given=c("Justin", "M."),family="Shea",role="ctb")   
   )
-Version: 2.0.1
+Version: 2.0.2
 Date: 2020-02-02
 Description: Collection of econometric functions for performance and risk 
     analysis. In addition to standard risk and performance metrics, this 
