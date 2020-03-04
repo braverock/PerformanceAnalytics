@@ -189,6 +189,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
                                            a=SE.control$a, b=SE.control$b,
                                            p=p, Rf=Rf, # Additional Parameters
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }

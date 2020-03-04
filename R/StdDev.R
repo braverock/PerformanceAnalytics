@@ -160,6 +160,7 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
                                            freq.par=SE.control$freq.par,
                                            a=SE.control$a, b=SE.control$b,
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }

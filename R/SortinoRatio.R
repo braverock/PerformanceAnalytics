@@ -105,6 +105,7 @@ function (R, MAR = 0,...,
                                            threshold = threshold.temp, # Parameter for threshold in RPEIF
                                            const=MAR, # Parameter for threshold in RPEIF
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }

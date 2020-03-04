@@ -98,6 +98,7 @@ lpm <- function(R, n=2, threshold=0, about_mean=FALSE,
                                          freq.par=SE.control$freq.par,
                                          a=SE.control$a, b=SE.control$b,
                                          ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
     }
     ses <- t(data.frame(ses))
   }

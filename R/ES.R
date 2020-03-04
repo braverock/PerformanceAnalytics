@@ -329,6 +329,7 @@ ETL <- CVaR <- ES <- function (R=NULL , p=0.95, ...,
                                            a=SE.control$a, b=SE.control$b,
                                            p=p, # Additional parameter
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }

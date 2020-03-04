@@ -56,6 +56,7 @@ RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
                                          a=SE.control$a, b=SE.control$b,
                                          alpha=alpha, beta=beta, rf=rf, # Additional Parameters
                                          ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
     }
     ses <- t(data.frame(ses))
   }
