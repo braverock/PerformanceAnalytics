@@ -550,7 +550,7 @@ SEXP  M3_CC(SEXP mmargvars, SEXP mmargskews, SEXP mmargkurts,
             rM3[iter] = margskews[ii];
           } else {
             // phi_iik
-            rM3[iter] = r2 * sqrt(margkurts[kk] * margvars[ii]);
+            rM3[iter] = r2 * sqrt(margvars[kk] * margkurts[ii]);
           }
         } else {
           if (jj == kk) {
