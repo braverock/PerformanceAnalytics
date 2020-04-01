@@ -494,9 +494,9 @@ SEXP  M3_CCoefficients(SEXP mmargvars, SEXP mmargkurts,
           m111 += Xc[iiN + tt] * Xc[jjN + tt] * Xc[kkN + tt];
         }
         m111 /= N;
-        double nc = sqrt(margvars[ii] * rCCoef[2] * sqrt(margkurts[jj] * margkurts[kk])) +
+        double nc = (sqrt(margvars[ii] * rCCoef[2] * sqrt(margkurts[jj] * margkurts[kk])) +
           sqrt(margvars[jj] * rCCoef[2] * sqrt(margkurts[ii] * margkurts[kk])) +
-          sqrt(margvars[kk] * rCCoef[2] * sqrt(margkurts[ii] * margkurts[jj]));
+          sqrt(margvars[kk] * rCCoef[2] * sqrt(margkurts[ii] * margkurts[jj]))) / 3.0;
         rCCoef[1] += m111 / nc;
       }
     }
