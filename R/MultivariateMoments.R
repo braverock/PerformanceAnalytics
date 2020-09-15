@@ -239,7 +239,7 @@ M4.innprod <- function(p, M4_1, M4_2 = NULL) {
 #' ?CoMoments. Both the full matrices and reduced form can be the output of
 #' M3.MM and M4.MM, depending on the optional argument as.mat.
 #' 
-#' @name uniaue-comoments
+#' @name unique-comoments
 #' @concept co-moments
 #' @concept moments
 #' @param M3 matrix of dimension p x p^2, or a vector with 
