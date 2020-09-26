@@ -536,7 +536,7 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
     if ("pop.size" %in% ng) pop.size <- optscontrol_genoud$pop.size else pop.size <- 500
     if ("max.generations" %in% ng) max.generations <- optscontrol_genoud$max.generations else max.generations <- 100
     if ("print.level" %in% ng) print.level <- optscontrol_genoud$print.level else print.level <- 0
-    if ("seed_genoud" %in% ng) seed_genoud <- optscontrol_genoud$seed_genoud else seed_genoud <- round(runif(1, 1, 2147483647L))
+    if ("seed_genoud" %in% ng) seed_genoud <- optscontrol_genoud$seed_genoud else seed_genoud <- round(stats::runif(1, 1, 2147483647L))
     
     
     options(warn = -1)
