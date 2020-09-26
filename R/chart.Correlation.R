@@ -24,7 +24,7 @@
 #'
 #' @export
 chart.Correlation <-
-function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
+function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), pch=1, ...)
 { # @author R Development Core Team
   # @author modified by Peter Carl
     # Visualization of a Correlation Matrix. On top the (absolute) value of the
@@ -81,9 +81,9 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), ...)
 
     # Draw the chart
     if(histogram)
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, ...)
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, diag.panel=hist.panel, pch=pch, ...)
     else
-        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, ...)
+        pairs(x, gap=0, lower.panel=panel.smooth, upper.panel=panel.cor, pch=pch, ...)
 }
 
 ###############################################################################
