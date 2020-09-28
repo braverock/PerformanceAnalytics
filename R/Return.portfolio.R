@@ -273,7 +273,11 @@ Return.portfolio.arithmetic <- function(R,
       for(j in 1:nrow(returns)){
         # For arithmetic returns, the beginning of period weights are always 
         # equal to the rebalance weights
-        bop_weights[k,] = weights[i,]
+        if (j == 1) {
+          bop_weights[k, ] = weights[i, ]
+        } else {
+          bop_weights[k, ] = eop_weights[k - 1, ]
+        }
         period_contrib[k,] = coredata(returns[j,]) * bop_weights[k,]
         eop_weights[k,] = (period_contrib[k,] + bop_weights[k,]) / sum(c(period_contrib[k,], bop_weights[k,]))
         ret[k] = sum(period_contrib[k,])
