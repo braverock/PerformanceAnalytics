@@ -93,7 +93,7 @@ RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
   }
   
   # Computation of Rachev Ratio
-  myRachevRatio = t(apply(R, 2, RachevRatioFN, alpha=0.1, beta=0.1, rf=0))
+  myRachevRatio = t(apply(R, 2, RachevRatioFN, alpha=alpha, beta=beta, rf=rf))
   rownames(myRachevRatio) = "RachevRatio"
   
   if(SE) # Check if SE computation

@@ -198,33 +198,103 @@ operES.CornishFisher =  function(R,p,c=2)
 #----------------------------------------------------------------------------------------------------------------
 
 
-
-portm2 = function(w,sigma)
+#' Portfolio moments
+#' 
+#' computes the portfolio second, third and fourth central moments given the 
+#' multivariate comoments and the portfolio weights. The gradient functions
+#' compute the gradient of the portfolio central moment with respect to the
+#' portfolio weights, evaluated in the portfolio weights.
+#' 
+#' For documentation on the coskewness and cokurtosis matrices, we refer to
+#' ?CoMoments. Both the full matrices and reduced form can be the used as
+#' input for the function related to the portfolio third and fourth central
+#' moments.
+#' 
+#' @name portfolio-moments
+#' @concept co-moments
+#' @concept moments
+#' @param w vector of length p with portfolio weights
+#' @param sigma portfolio covariance matrix of dimension p x p
+#' @param M3 matrix of dimension p x p^2, or a vector with 
+#' (p * (p + 1) * (p + 2) / 6) unique coskewness elements
+#' @param M4 matrix of dimension p x p^3, or a vector with 
+#' (p * (p + 1) * (p + 2) * (p + 3) / 12) unique coskewness elements
+#' @author Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+#' \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
+###keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(managers)
+#' 
+#' # equal weighted portfolio of managers
+#' p <- ncol(edhec)
+#' w <- rep(1 / p, p)
+#' 
+#' # portfolio variance and its gradient with respect to the portfolio weights
+#' sigma <- cov(edhec)
+#' pm2 <- portm2(w, sigma)
+#' dpm2 <- derportm2(w, sigma)
+#' 
+#' # portfolio third central moment and its gradient with respect to the portfolio weights
+#' m3 <- M3.MM(edhec)
+#' pm3 <- portm3(w, m3)
+#' dpm3 <- derportm3(w, m3)
+#' 
+#' # portfolio fourth central moment and its gradient with respect to the portfolio weights
+#' m4 <- M4.MM(edhec)
+#' pm4 <- portm4(w, m4)
+#' dpm4 <- derportm4(w, m4)
+#' 
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
+portm2 <- function(w, sigma)
 {
   return(as.numeric(t(w)%*%sigma%*%w)) #t(w) for first item?
 }
-derportm2 = function(w,sigma)
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
+derportm2 <- function(w, sigma)
 {
   return(2*sigma%*%w)
 }
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
 portm3 <- function(w, M3)
 {
   w <- as.numeric(w)
   if (NCOL(M3) != 1) M3 <- M3.mat2vec(M3)
   .Call('M3port', w, M3, length(w), PACKAGE="PerformanceAnalytics")
 }
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
 derportm3 <- function(w, M3)
 {
   w <- as.numeric(w)
   if (NCOL(M3) != 1) M3 <- M3.mat2vec(M3)
   as.matrix(.Call('M3port_grad', w, M3, length(w), PACKAGE="PerformanceAnalytics"), ncol = 1)
 }
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
 portm4 <- function(w, M4)
 {
   w <- as.numeric(w)
   if (NCOL(M4) != 1) M4 <- M4.mat2vec(M4)
   .Call('M4port', w, M4, length(w), PACKAGE="PerformanceAnalytics")
 }
+
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname portfolio-moments
 derportm4 <- function(w, M4)
 {
   w <- as.numeric(w)

@@ -50,6 +50,8 @@ Suggests:
     plotly,
     gridExtra,
     ggpubr,
+    nloptr,
+    rgenoud,
     RPESE,
     R.rsp,
     RobStatTM
