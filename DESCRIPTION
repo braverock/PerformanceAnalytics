@@ -59,4 +59,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
 Copyright: (c) 2004-2020
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
