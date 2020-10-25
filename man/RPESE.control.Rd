@@ -5,8 +5,8 @@
 \title{Controls Function for the Computation of Standard Errors for Risk and Performance estimators}
 \usage{
 RPESE.control(
-  estimator = c("Mean", "SD", "VaR", "ES", "SR", "SoR", "ESratio", "VaRratio", "SoR",
-    "LPM", "OmegaRatio", "SemiSD", "RachevRatio")[1],
+  estimator = c("Mean", "SD", "VaR", "ES", "SR", "DSR", "SoR", "ESratio", "VaRratio",
+    "SoR", "LPM", "OmegaRatio", "SemiSD", "RachevRatio")[1],
   se.method = NULL,
   cleanOutliers = NULL,
   fitting.method = NULL,

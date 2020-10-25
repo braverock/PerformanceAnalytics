@@ -77,11 +77,18 @@ function (R, MAR = 0,...,
         SR
     }
     
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
+      SE.check <- TRUE
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
       }
+    }
+    
+    # SE Computation
+    if(isTRUE(SE)){
       
       # Setting the control parameters
       if(is.null(SE.control))
@@ -103,7 +110,7 @@ function (R, MAR = 0,...,
                                            freq.par=SE.control$freq.par,
                                            a=SE.control$a, b=SE.control$b,
                                            threshold = threshold.temp, # Parameter for threshold in RPEIF
-                                           const=MAR, # Parameter for threshold in RPEIF
+                                           const=MAR,
                                            ...)
         ses[[mymethod]]=ses[[mymethod]]$se
       }

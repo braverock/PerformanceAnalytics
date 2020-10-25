@@ -13,7 +13,9 @@ DownsideDeviation(
   MAR = 0,
   method = c("full", "subset"),
   ...,
-  potential = FALSE
+  potential = FALSE,
+  SE = FALSE,
+  SE.control = NULL
 )
 
 DownsidePotential(R, MAR = 0)

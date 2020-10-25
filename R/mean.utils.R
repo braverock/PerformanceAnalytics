@@ -14,13 +14,13 @@
 #' \code{\link{mean.UCL}} \tab upper confidence level (UCL) of the mean \cr }
 #' 
 #' 
-#' @aliases mean.utils mean.geometric mean.UCL mean.LCL mean.stderr Mean.arithmetic
+#' @aliases mean.utils mean.geometric mean.UCL mean.LCL mean.stderr mean.arithmetic
 #' @param x a vector, matrix, data frame, or time series to calculate the
 #' modified mean statistic over
 #' @param ci the confidence interval to use
-#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for  \code{\link{Mean.arithmetic}}.
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE. Only available for  \code{\link{mean.arithmetic}}.
 #' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
-#' Only available for \code{\link{Mean.arithmetic}}.
+#' Only available for \code{\link{mean.arithmetic}}.
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link[stats]{sd}} \cr \code{\link[base]{mean}}
@@ -65,11 +65,11 @@ function (x, ...)
 }
 
 #' @rdname mean.geometric
-#' @method Mean arithmetic
-#' @export Mean.arithmetic
-Mean.arithmetic <-
+#' @method mean arithmetic
+#' @export mean.arithmetic
+mean.arithmetic <-
   function (x,
-            SE=FALSE, SE.control=NULL, ...)
+            SE = FALSE, SE.control = NULL, ...)
   {# @author Peter Carl
     
     # DESCRIPTION
@@ -83,27 +83,31 @@ Mean.arithmetic <-
     # Output:
     # Returns the geometric return
     
-    # Option to check if RPESE is installed if SE=TRUE
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
              call. = FALSE)
+        SE <- FALSE
       }
+    }
+    
+    # SE Computation
+    if(SE){
       
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(estimator="Mean")
       
-      # Computation of SE (optional)
       ses=list()
       # For each of the method specified in se.method, compute the standard error
       for(mymethod in SE.control$se.method){
         ses[[mymethod]]=RPESE::EstimatorSE(x, estimator.fun = "Mean", se.method = mymethod, 
-                                           cleanOutliers=SE.control$cleanOutliers,
-                                           fitting.method=SE.control$fitting.method,
-                                           freq.include=SE.control$freq.include,
-                                           freq.par=SE.control$freq.par,
-                                           a=SE.control$a, b=SE.control$b,
+                                           cleanOutliers = SE.control$cleanOutliers,
+                                           fitting.method = SE.control$fitting.method,
+                                           freq.include = SE.control$freq.include,
+                                           freq.par = SE.control$freq.par,
+                                           a = SE.control$a, b = SE.control$b,
                                            ...)
         ses[[mymethod]]=ses[[mymethod]]$se
       }
@@ -113,11 +117,11 @@ Mean.arithmetic <-
     # FUNCTION:
     if (is.vector(x)) {
       x = na.omit(x)
-      Mean.arithmetic = mean(x)
+      mean.arithmetic = mean(x)
       
       if(SE) # Check if computation of SE
-        return(rbind(Mean.arithmetic, ses)) else
-          return(Mean.arithmetic)
+        return(rbind(mean.arithmetic, ses)) else
+          return(mean.arithmetic)
     }
     else {
       x = checkData(x, method = "matrix", ... = ...)

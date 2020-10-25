@@ -31,7 +31,7 @@
 #' periodicity of the data being input (e.g., monthly data -> monthly SR)
 #' 
 #' 
-#' @aliases SharpeRatio.modified SharpeRatio
+#' @aliases SharpeRatio.modified SharpeRatio DownsideSharpeRatio
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf risk free rate, in same period as your returns
@@ -78,7 +78,7 @@
 #' @export
 #' @rdname SharpeRatio
 SharpeRatio <-
-function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , 
+function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES", "SemiSD"), weights=NULL, annualize = FALSE , 
           SE=FALSE, SE.control=NULL,
           ...)
 { # @author Brian G. Peterson
@@ -161,56 +161,72 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     
     tmprownames=vector()
     
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
+      
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
       }
-      
-      # Setting the measure
-      if(FUN=="StdDev")
-        SR.measure <- "SR" else if(FUN=="ES")
-          SR.measure <- "ESratio" else if(FUN=="VaR")
-            SR.measure <- "VaRratio"
-      
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(estimator=SR.measure)
-      
-      # Computation of SE (optional)
-      ses=list()
-      # For each of the method specified in se.method, compute the standard error
-      for(mymethod in SE.control$se.method){
-        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = SR.measure, se.method = mymethod, 
-                                           cleanOutliers=SE.control$cleanOutliers,
-                                           fitting.method=SE.control$fitting.method,
-                                           freq.include=SE.control$freq.include,
-                                           freq.par=SE.control$freq.par,
-                                           a=SE.control$a, b=SE.control$b,
-                                           p=p, Rf=Rf, # Additional Parameters
-                                           ...)
-        ses[[mymethod]]=ses[[mymethod]]$se
-      }
-      ses <- t(data.frame(ses))
+      ses.full <- matrix(ncol=ncol(R), nrow=0)
     }
     
-    for (FUNCT in FUN){
-        if (is.null(weights)){
-            if(annualize)
-                result[i,] = sapply(R, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
-            else
-                result[i,] = sapply(R, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+    result.final <- matrix(nrow=ncol(R))
+    for(FUNCT in FUN){
+    
+      # SE Computation
+      if(SE){
+        
+          # Setting the measure
+          if(FUNCT=="StdDev")
+            SR.measure <- "SR" else if(FUNCT=="ES")
+              SR.measure <- "ESratio" else if(FUNCT=="VaR")
+                SR.measure <- "VaRratio" else if(FUNCT=="SemiSD")
+                  SR.measure <- "DSR"
+          
+          # Setting the control parameters
+          if(is.null(SE.control))
+            SE.control <- RPESE.control(estimator=SR.measure)
+          
+          # Computation of SE (optional)
+          ses=list()
+          # For each of the method specified in se.method, compute the standard error
+          for(mymethod in SE.control$se.method){
+            ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = SR.measure, se.method = mymethod, 
+                                               cleanOutliers=SE.control$cleanOutliers,
+                                               fitting.method=SE.control$fitting.method,
+                                               freq.include=SE.control$freq.include,
+                                               freq.par=SE.control$freq.par,
+                                               a=SE.control$a, b=SE.control$b,
+                                               alpha=1-p, rf=Rf, 
+                                               ...)
+            ses[[mymethod]]=ses[[mymethod]]$se
+          }
+          ses.full <- rbind(ses.full, t(data.frame(ses)))
         }
-        else { # TODO FIX this calculation, currently broken
-            result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+    
+        if(SR.measure=="DSR")
+          result[i,] <- DownsideSharpeRatio(R, rf=Rf, ...) else{
+            
+          if (is.null(weights)){
+              if(annualize)
+                  result[i,] = sapply(R, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
+              else
+                  result[i,] = sapply(R, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+          }
+          else { # TODO FIX this calculation, currently broken
+              result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+          }
         }
         tmprownames = c(tmprownames, paste(if(annualize) "Annualized ", FUNCT, " Sharpe", " (Rf=", round(scale*mean(Rf)*100,1), "%, p=", round(p*100,1),"%):", sep=""))
+
         i=i+1 #increment counter
     }
     rownames(result)=tmprownames
     
-    if(SE) # Check if SE computation
-      return(rbind(result, ses)) else
+    if(SE)
+      return(rbind(result, ses.full)) else
         return(result)
 }
 

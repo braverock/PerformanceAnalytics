@@ -3,6 +3,7 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
+\alias{DownsideSharpeRatio}
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
@@ -10,7 +11,7 @@ SharpeRatio(
   R,
   Rf = 0,
   p = 0.95,
-  FUN = c("StdDev", "VaR", "ES"),
+  FUN = c("StdDev", "VaR", "ES", "SemiSD"),
   weights = NULL,
   annualize = FALSE,
   SE = FALSE,

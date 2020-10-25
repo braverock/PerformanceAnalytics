@@ -84,11 +84,11 @@ Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 Returns. Journal of Risk. Winter.
 
-Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+Journal of Financial Econometrics, 18(1), 1-23.
 
-Martellini, L., & Ziemann, V. 2010. Improved estimates of higher-order 
+Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 comoments and implications for portfolio selection. Review of Financial 
 Studies, 23(4), 1467-1502.
 
@@ -102,7 +102,7 @@ Preference for Moments of Higher Order than the Variance. Journal of Finance
 \seealso{
 \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
 \code{\link{BetaCoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
-\cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
+\cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}} \cr \code{\link{NCE}}
 }
 \author{
 Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson

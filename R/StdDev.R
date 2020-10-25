@@ -88,112 +88,121 @@ StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  
                     SE=FALSE, SE.control=NULL)
 { # @author Brian G. Peterson
     
-    # Descripion:
-    
-    # wrapper for univariate and multivariate standard deviation functions.
+  # Descripion:
   
-    # Fix parameters if SE=TRUE
-    if(SE){
-      
-      # Setting the control parameters
-      if(is.null(SE.control))
-        SE.control <- RPESE.control(estimator="SD")
-      
-      # Fix the method
-      portfolio_method="single"
-      if(SE.control$cleanOutliers=="locScaleRob")
-        clean="locScaleRob" else
-          clean="none"
+  # wrapper for univariate and multivariate standard deviation functions.
+  
+  # Setup:
+  portfolio_method = portfolio_method[1]
+  clean = clean[1]
+  R <- checkData(R, method="xts", ...)
+  columns=colnames(R)
+  
+  # Checking input if SE = TRUE
+  if(SE){
+    SE.check <- TRUE
+    if(!requireNamespace("RPESE", quietly = TRUE)){
+      warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+              call. = FALSE)
+      SE <- FALSE
     }
+    if(!(clean %in% c("none", "locScaleRob"))){
+      warning("To return SEs, \"clean\" must be one of \"locScaleRob\" or \"none\".",
+              call. = FALSE)
+      SE.check <- FALSE
+    }
+    if(!(portfolio_method %in% c("single"))){
+      warning("To return SEs, \"portfolio_method\" must be \"single\".",
+              call. = FALSE)
+      SE.check <- FALSE
+    }
+  }
+  
+  # SE Computation
+  if(SE){
     
-    # Setup:
-    portfolio_method = portfolio_method[1]
-    clean = clean[1]
-    R <- checkData(R, method="xts", ...)
-    columns=colnames(R)
+    # Setting the control parameters
+    if(is.null(SE.control))
+      SE.control <- RPESE.control(estimator="SD")
+    
+    # Computation of SE (optional)
+    ses=list()
+    # For each of the method specified in se.method, compute the standard error
+    for(mymethod in SE.control$se.method){
+      ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SD", se.method = mymethod, 
+                                         cleanOutliers=SE.control$cleanOutliers,
+                                         fitting.method=SE.control$fitting.method,
+                                         freq.include=SE.control$freq.include,
+                                         freq.par=SE.control$freq.par,
+                                         a=SE.control$a, b=SE.control$b,
+                                         ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
+    }
+    ses <- t(data.frame(ses))
+    # Removing SE output if inappropriate arguments
+    if(!SE.check){
+      ses.rownames <- rownames(ses)
+      ses.colnames <- colnames(ses)
+      ses <- matrix(NA, nrow=nrow(ses), ncol=ncol(ses))
+      rownames(ses) <- ses.rownames
+      colnames(ses) <- ses.colnames
+    }
+  }
 
-    if (is.null(weights) & portfolio_method != "single"){
-        message("no weights passed in, assuming equal weighted portfolio")
-        weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
-    }
-    
-    # check weights options
-    if (!is.null(weights)) {
-        if (is.vector(weights)){
-            # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
-            if (length (weights)!=ncol(R)) {
-                stop("number of items in weighting vector not equal to number of columns in R")
-            }
-        } else {
-            weights = checkData(weights, method="matrix", ...)
-            if (ncol(weights) != ncol(R)) {
-                stop("number of columns in weighting timeseries not equal to number of columns in R")
-            }
-            #@todo: check for date overlap with R and weights
-        }
-    } # end weight checks
-    
-    if(clean!="none"){
-        R = as.matrix(Return.clean(R, method=clean))
-    }
-    
-    # Option to check if RPESE is installed if SE=TRUE
-    if(isTRUE(SE)){
-      if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+  if (is.null(weights) & portfolio_method != "single"){
+      message("no weights passed in, assuming equal weighted portfolio")
+      weights=t(rep(1/dim(R)[[2]], dim(R)[[2]]))
+  }
+  
+  # check weights options
+  if (!is.null(weights)) {
+      if (is.vector(weights)){
+          # message("weights are a vector, will use same weights for entire time series") # remove this warning if you call function recursively
+          if (length (weights)!=ncol(R)) {
+              stop("number of items in weighting vector not equal to number of columns in R")
+          }
+      } else {
+          weights = checkData(weights, method="matrix", ...)
+          if (ncol(weights) != ncol(R)) {
+              stop("number of columns in weighting timeseries not equal to number of columns in R")
+          }
+          #@todo: check for date overlap with R and weights
       }
-      
-      
-      # Checking all parameters
-      if(portfolio_method!="single")
-        stop("For SE computation, the portfolio method must be \"single\" to return an output.")
-      
-      # Computation of SE (optional)
-      ses=list()
-      # For each of the method specified in se.method, compute the standard error
-      for(mymethod in SE.control$se.method){
-        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SD", se.method = mymethod, 
-                                           cleanOutliers=SE.control$cleanOutliers,
-                                           fitting.method=SE.control$fitting.method,
-                                           freq.include=SE.control$freq.include,
-                                           freq.par=SE.control$freq.par,
-                                           a=SE.control$a, b=SE.control$b,
-                                           ...)
-        ses[[mymethod]]=ses[[mymethod]]$se
-      }
-      ses <- t(data.frame(ses))
-    }
-    
-    switch(portfolio_method,
-            single = {
-                if (is.null(weights)) {
-                    tsd=t(sd.xts(R, na.rm=TRUE))
-                    rownames(tsd)<-"StdDev"
-                } else {
-                    #do the multivariate calc with weights
-                    if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use, method=method[1])
-                    tsd <- StdDev.MM(w=weights,sigma=sigma)
-                }
+  } # end weight checks
+  
+  if(clean!="none"){
+      R = as.matrix(Return.clean(R, method=clean))
+  }
+  
+  switch(portfolio_method,
+          single = {
+              if (is.null(weights)) {
+                  tsd=t(sd.xts(R, na.rm=TRUE))
+                  rownames(tsd)<-"StdDev"
+              } else {
+                  #do the multivariate calc with weights
+                  if(!hasArg(sigma)|is.null(sigma)) sigma=cov(R, use=use, method=method[1])
+                  tsd <- StdDev.MM(w=weights,sigma=sigma)
+              }
+            
+            if(SE) # Check if computation of SE
+              return(rbind(tsd, ses)) else
+                return(tsd)
+            
+          }, # end single portfolio switch
+          component = {
+              # @TODO: need to add another loop here for subsetting, I think, when weights is a timeseries
+              #if (mu=NULL or sigma=NULL) {
+              #     pfolioret = Return.portfolio(R, weights, wealth.index = FALSE, contribution=FALSE, method = c("simple"))
+              #}
+              # for now, use as.vector
+              weights=as.vector(weights)
+              names(weights)<-colnames(R)
+              if (is.null(sigma)) { sigma = cov(R, use=use, method=method[1]) }
               
-              if(SE) # Check if computation of SE
-                return(rbind(tsd, ses)) else
-                  return(tsd)
-              
-            }, # end single portfolio switch
-            component = {
-                # @TODO: need to add another loop here for subsetting, I think, when weights is a timeseries
-                #if (mu=NULL or sigma=NULL) {
-                #     pfolioret = Return.portfolio(R, weights, wealth.index = FALSE, contribution=FALSE, method = c("simple"))
-                #}
-                # for now, use as.vector
-                weights=as.vector(weights)
-                names(weights)<-colnames(R)
-                if (is.null(sigma)) { sigma = cov(R, use=use, method=method[1]) }
-                
-                return(Portsd(w=weights,sigma))
-            } # end component portfolio switch           
-    )
+              return(Portsd(w=weights,sigma))
+          } # end component portfolio switch           
+  )
     
 } # end StdDev wrapper function
 
