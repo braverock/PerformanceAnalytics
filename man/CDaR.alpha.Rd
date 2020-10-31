@@ -4,8 +4,7 @@
 \alias{CDaR.alpha}
 \title{Conditional Drawdown alpha}
 \usage{
-CDaR.alpha(R, Rm, p = 0.95, weights = NULL, geometric = TRUE,
-  type = NULL, ...)
+CDaR.alpha(R, Rm, p = 0.95, weights = NULL, geometric = TRUE, type = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns}

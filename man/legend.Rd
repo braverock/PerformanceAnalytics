@@ -183,9 +183,9 @@ be placed at the top of the legend.}
 \item{inset}{inset distance(s) from the margins as a fraction of the plot
 region when legend is placed by keyword.}
 
-\item{border.lty, border.lwd}{the line type and width for the legend border.}
+\item{border.col, border.lty, border.lwd}{the color, line type and width for the legend border.}
 
-\item{box.lty, box.lwd}{the line type and width for the legend box.}
+\item{box.col, box.lty, box.lwd}{the color, line type and width for the legend box.}
 
 \item{\dots}{any other passthrough parameters}
 }

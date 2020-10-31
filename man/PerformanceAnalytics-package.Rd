@@ -93,6 +93,225 @@ Finally, see the function \code{\link{Return.calculate}} for calculating
 returns from prices.
 }
 
+\section{Risk Analysis}{
+
+
+Many methods have been proposed to measure, monitor, and control the risks of
+a diversified portfolio. Perhaps a few definitions are in order on how
+different risks are generally classified. \emph{Market Risk} is the risk to
+the portfolio from a decline in the market price of instruments in the
+portfolio.  \emph{Liquidity Risk} is the risk that the holder of an
+instrument will find that a position is illiquid, and will incur extra costs
+in unwinding the position resulting in a less favorable price for the
+instrument. In  extreme cases of liquidity risk, the seller may be unable to
+find a buyer for the instrument at all, making the value unknowable or zero.
+\emph{Credit Risk} encompasses \emph{Default Risk}, or the risk that promised
+payments on a loan or bond will not be made, or that a convertible instrument
+will not be converted in a timely manner or at all.  There are also
+\emph{Counterparty Risks} in over the counter markets, such as those for
+complex derivatives.  Tools have evolved to measure all these different
+components of risk.  Processes must be put into place inside a firm to
+monitor the changing risks in a portfolio, and to control the magnitude of
+risks.  For an extensive treatment of these topics, see Litterman, Gumerlock,
+et. al.(1998).  For our purposes, \kbd{PerformanceAnalytics} tends to focus
+on market and liquidity risk.
+
+The simplest risk measure in common use is volatility, usually modeled
+quantitatively with a univariate standard deviation on a portfolio.  See
+\code{\link[stats]{sd}}.  Volatility or Standard Deviation is an appropriate
+risk measure when the distribution of returns is normal or resembles a random
+walk, and may be annualized using \code{\link{sd.annualized}}, or the
+equivalent function \code{\link{sd.multiperiod}} for scaling to an arbitrary
+number of periods.  Many assets, including hedge funds, commodities, options,
+and even most common stocks over a sufficiently long period, do not follow a
+normal distribution.  For such common but non-normally distributed assets, a
+more sophisticated approach than standard deviation/volatility is required to
+adequately model the risk.
+
+Markowitz, in his Nobel acceptance speech and in several papers, proposed
+that \code{\link{SemiVariance}} would be a better measure of risk than
+variance.  See \cite{Zin, Markowitz, Zhao (2006)}.  This measure is also
+called \code{\link{SemiDeviation}}.  The more general case is
+\code{\link{DownsideDeviation}}, as proposed by \cite{Sortino and
+Price(1994)}, where the minimum acceptable return (MAR) is a parameter to the
+function.  It is interesting to note that variance and mean return can
+produce a smoothly elliptical efficient frontier for portfolio optimization
+using \code{\link[quadprog]{solve.QP}} or
+\code{\link[tseries]{portfolio.optim}} or \kbd{fPortfolio}. Use of
+semivariance or many other risk measures will not necessarily create a smooth
+ellipse, causing significant additional difficulties for the portfolio
+manager trying to build an optimal portfolio.  We'll leave a more complete
+treatment and implementation of portfolio optimization techniques for another
+time.
+
+Another very widely used downside risk measures is analysis of drawdowns, or
+loss from peak value achieved. The simplest method is to check the
+\code{\link{maxDrawdown}}, as this will tell you the worst cumulative loss
+ever sustained by the asset.  If you want to look at all the drawdowns, you
+can \code{\link{findDrawdowns}} and \code{\link{sortDrawdowns}} in order from
+worst/major to smallest/minor. The \code{\link{UpDownRatios}} function will
+give you some insight into the impacts of the skewness and kurtosis of the
+returns, and letting you know how length and magnitude of up or down moves
+compare to each other.  You can also plot drawdowns with
+\code{\link{chart.Drawdown}}.
+
+One of the newer statistical methods developed for analyzing the risk of
+financial instruments is \code{\link{Omega}}.  Omega analytically constructs
+a cumulative distribution function, in a manner similar to
+\code{\link{chart.QQPlot}}, but then extracts additional information from the
+location and slope of the derived function at the point indicated by the risk
+quantile that the researcher is interested in.  Omega seeks to combine a
+large amount of data about the shape, magnitude, and slope of the
+distribution into one method.  The academic literature is still exploring the
+best manner to use Omega in a risk measurement and control process, or in
+portfolio construction.
+
+Any risk measure should be viewed with suspicion if there are not a large
+number of historical observations of returns for the asset in question
+available.  Depending on the measure, the number of observations required
+will vary greatly from a statistical standpoint.  As a heuristic rule,
+ideally you will have data available on how the instrument performed through
+several economic cycles and shocks.  When such a long history is not
+available, the investor or researcher has several options.  A full discussion
+of the various approaches is beyond the scope of this introduction, so we
+will merely touch on several areas that an interested party may wish to
+explore in additional detail. Examining the returns of assets with a similar
+style, industry, or asset class to which the asset in question is highly
+correlated and shares other characteristics can be quite informative.  Factor
+analysis may be used to uncover specific risk factors where transparency is
+not available. Various resampling (see \code{\link[tseries]{tsbootstrap}})
+and simulation methods are available in \R to construct an artificially long
+distribution for testing.  If you use a method such as Monte Carlo simulation
+or the bootstrap, it is often valuable to use \code{\link{chart.Boxplot}} to
+visualize the different estimates of the risk measure produced by the
+simulation, to see how small (or wide) a range the estimates cover, and thus
+gain a level of confidence with the results.  Proceed with extreme caution
+when your historical data is lacking.  Problems with lack of historical data
+are a major reason why many institutional investors will not invest in an
+alternative asset without several years of historical return data available.
+}
+
+\section{Value at Risk (VaR) and Expected Shortfall (ES, ETL, CVaR)}{
+
+
+\emph{Traditional mean-VaR}:
+In the early 90's, academic literature started referring to \dQuote{value at
+risk}, typically written as VaR. Take care to capitalize VaR in the commonly
+accepted manner, to avoid confusion with var (variance) and VAR (vector
+auto-regression).  With a sufficiently large data set, you may choose to use
+a non-parametric VaR estimation method using the historical distribution and
+the probability quantile of the distribution calculated using
+\code{\link{qnorm}}. The negative return at the correct quantile (usually
+95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics
+parametric mean-VaR was published in 1994 and this methodology for estimating
+parametric mean-VaR has become what people are generally referring to as
+\dQuote{VaR} and what we have implemented as \code{\link{VaR}} with
+\code{method="historical"}.  See \cite{Return to RiskMetrics: Evolution of a
+Standard} at
+\url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}.
+Parametric traditional VaR does a better job of accounting for the tails of
+the distribution by more precisely estimating the tails below the risk
+quantile.  It is still insufficient if the assets have a distribution that
+varies widely from normality.  That is available in \code{\link{VaR}} with
+\code{method="gaussian"}.
+
+The \R package VaR, now orphaned, contains methods for simulating and
+estimating lognormal \kbd{VaR.norm} and generalized Pareto \kbd{VaR.gpd}
+distributions to overcome some of the problems with nonparametric or
+parametric mean-VaR calculations on a limited sample size.  There is also a
+\kbd{VaR.backtest} function to apply simulation methods to create a more
+robust estimate of the potential distribution of losses.  The VaR package
+also provides plots for its functions.  We will attempt to incorporate this
+orphaned functionality in PerformanceAnalytics in an upcoming release, and 
+would welcome patches or pull requests in this direction.
+
+\emph{Modified Cornish-Fisher VaR}:
+The limitations of traditional mean-VaR are all related to the use of a
+symmetrical distribution function.  Use of simulations, resampling, or Pareto
+distributions all help in making a more accurate prediction, but they are
+still flawed for assets with significantly non-normal (skewed and/or
+kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
+(2002)} propose to overcome this extensively documented failing of
+traditional VaR by directly incorporating the higher moments of the return
+distribution into the VaR calculation.
+
+This VaR measure incorporates skewness and kurtosis via an analytical
+estimation using a Cornish-Fisher (special case of a Taylor) expansion. The
+resulting measure is referred to variously as \dQuote{Cornish-Fisher VaR} or
+\dQuote{Modified VaR}.  We provide this measure in function \code{\link{VaR}}
+with \code{method="modified"}.  Modified VaR produces the same results as
+traditional mean-VaR when the return distribution is normal, so it may be
+used as a direct replacement.  Many papers in the finance literature have
+reached the conclusion that Modified VaR is a superior measure, and may be
+substituted in any case where mean-VaR would previously have been used.
+Note that estimates for Cornish Fisher modified VaR and ES may be unstable
+with small sample sizes.  See Martin and Arora (2017) for more details.
+
+\emph{Conditional VaR and Expected Shortfall}:
+We have implemented Conditional Value at Risk, also called Expected Tail Loss 
+or Expected Shortfall
+(not to be confused with shortfall probability, which is much less useful),
+in function \code{\link{ES}}.  Expected Shortfall attempts to measure the
+magnitude of the average loss exceeding the traditional mean-VaR. Expected
+Shortfall has proven to be a reasonable risk predictor for many asset
+classes.  We have provided traditional historical, Gaussian and modified
+Cornish-Fisher measures of Expected Shortfall by using
+\code{method="historical"}, \code{method="gaussian"} or
+\code{method="modified"}. See \cite{Uryasev(2000)} and \cite{Sherer and
+Martin(2005)} for more information on Conditional Value at Risk and Expected
+Shortfall.  Please note that your mileage will vary; expect that values
+obtained from the normal distribution may differ radically from the real
+situation, depending on the assets under analysis.
+
+\emph{Multivariate extensions to risk measures}:
+We have extended all moments calculations to work in a multivariate portfolio
+context.  In a portfolio context the multivariate moments are generally to be
+preferred to their univariate counterparts, so that all information is
+available to subsequent calculations.  Both the \code{\link{VaR}} and
+\code{\link{ES}} functions allow calculation of metrics in a portfolio
+context when \code{weights} and a \code{portfolio_method} are passed into the
+function call.
+
+\emph{Marginal, Incremental, and Component VaR}:
+Marginal VaR is the difference between the VaR of the portfolio without the
+asset in question and the entire portfolio.  The \code{\link{VaR}} function
+calculates Marginal VaR for all instruments in the portfolio if you set
+\code{method="marginal"}. Marginal VaR as provided here may use traditional
+mean-VaR or Modified VaR for the calculation. Per \cite{Artzner,et.al.(1997)}
+properties of a coherent risk measure include subadditivity (risks of the
+portfolio should not exceed the sum of the risks of individual components) as
+a significantly desirable trait.  VaR measures, including Marginal VaR, on
+individual components of a portfolio are \emph{not} subadditive.
+
+Clearly, a general subadditive risk measure for downside risk is required.
+In Incremental or Component VaR, the Component VaR value for each element of
+the portfolio will sum to the total VaR of the portfolio.  Several EDHEC
+papers suggest using Modified VaR instead of mean-VaR in the Incremental and
+Component VaR calculation.  We have succeeded in implementing Component VaR
+and ES calculations that use Modified Cornish-Fisher VaR, historical
+decomposition, and kernel estimators.  You may access these with
+\code{\link{VaR}} or \code{\link{ES}} by setting the appropriate
+\code{portfolio_method} and \code{method} arguments.
+
+The \code{\link{chart.VaRSensitivity}} function creates a chart of
+Value-at-Risk or Expected Shortfall estimates by confidence interval for
+multiple methods. Useful for comparing a calculated VaR or ES method to the
+historical VaR or ES, it may also be used to visually examine whether the VaR
+method \dQuote{breaks down} or gives nonsense results at a certain threshold.
+
+Which VaR or ES measure to use will depend greatly on the portfolio and instruments
+being analyzed.  If there is any generalization to be made on VaR measures,
+we agree with \cite{Bali and Gokcan(2004)} who conclude that \dQuote{the VaR
+estimations based on the generalized Pareto distribution and the
+Cornish-Fisher approximation perform best}.
+
+Most risk professionals are moving from using VaR to using Expected Shortfall
+preferentially.  This preference has been endorsed by the Bank of International 
+Settlements (BIS) and the Basel accord risk committee.  In most cases, an ES
+measure with an appropriate probability target for your asset horizin will be 
+more appropriate than a VaR measure.
+}
+
 \section{Performance Analysis}{
 
 
@@ -236,6 +455,33 @@ portfolio in positive or 'bull' markets.  Alternatively,
 returns. The \code{\link{TimingRatio}} uses the ratio of those to help
 assess whether the manager has shown evidence that of timing skill.
 
+\emph{Performance/Risk Ratios:}
+
+In many cases, an analyst will be looking to find a measure or performance 
+relative to the risk of the asset under study.  PerformanceAnalytics has many 
+functions of this type.
+
+One of the most commonly used and cited measures of the risk/reward tradeoff
+of an investment or portfolio is the \code{\link{SharpeRatio}}, which
+measures return over standard deviation.  If you are comparing multiple
+assets using Sharpe, you should use \code{\link{SharpeRatio.annualized}}. It
+is important to note that William Sharpe now recommends
+\code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
+The \code{\link{SortinoRatio}} uses mean return over
+\code{\link{DownsideDeviation}} below the MAR as the risk measure to produce
+a similar ratio that is more sensitive to downside risk. Sortino later
+enhanced his ideas to use upside returns for the numerator and
+\code{\link{DownsideDeviation}} as the denominator in
+\code{\link{UpsidePotentialRatio}}. \cite{Favre and Galeano(2002)} propose
+using the ratio of expected excess return over the Cornish-Fisher
+\code{\link{VaR}} to produce \code{\link{SharpeRatio.modified}}.
+\code{\link{TreynorRatio}} is also similar to the Sharpe Ratio, except it
+uses \code{\link{CAPM.beta}} in place of the volatility measure to produce
+the ratio of the investment's excess return over the beta. Use of the downside 
+semivariance as the denominator creates the .  Use of the upside expected tail 
+return over the ETL creates the \code{\link{RachevRatio}}.  Utilizing the 
+downside semivariance as the denominator produces the Downside Sharpe Ratio.
+
 The performance premium provided by an investment over a passive strategy
 (the benchmark) is provided by \code{\link{ActivePremium}}, which is the
 investment's annualized return minus the benchmark's annualized return. A
@@ -266,270 +512,6 @@ rankings, so that the \dQuote{buckets} of target instruments will have
 significant overlap.  This observation specifically supports the point made
 early in this document regarding \dQuote{accretion of the evidence} for a
 positive or negative investment decision.
-}
-
-\section{Style Analysis}{
-
-
-Style analysis is one way to help determine a fund's exposures to the changes
-in returns of major asset classes or other factors.
-\kbd{PerformanceAnalytics} previously had a few functions that calculate
-style weights using an asset class style model as described in detail in
-Sharpe (1992).
-
-These functions have been moved to \kbd{R-Forge} in package
-\kbd{FactorAnalytics} as part of a collaboration with Eric Zivot at the
-University of Washington. The functions combine to calculate effective style
-weights and display the results in a bar chart.  \code{chart.Style}
-calculates and displays style weights calculated over a single period.
-\code{chart.RollingStyle} calculates and displays those weights in rolling
-windows through time.  \code{style.fit} manages the calculation of the
-weights by method, and \code{style.QPfit} calculates the specific constraint
-case that requires quadratic programming.  [note: these functions do not
-currently appear in the development codebase, but should reappear as a
-supported method at some point]
-
-There is a significant amount of academic literature on identifying and
-attributing sources of risk or returns.  Much of it falls into the field of
-\dQuote{factor analysis} where \dQuote{risk factors} are used to
-retrospectively explain sources of risk, and through regression and other
-analytical methods \emph{predict} future period returns and risk based on
-factor drivers.  These are well covered in chapters on factor analysis in
-\cite{Zivot and Wang(2006)} and also in the \R functions
-\code{\link{factanal}} for basic factor analysis and \code{\link{princomp}}
-for Principal Component Analysis.  The authors feel that financial engineers
-and analysts would benefit from some wrapping of this functionality focused
-on finance, but the capabilities already available from the base functions
-are quite powerful.  We are hopeful that our new collaboration Prof. Zivot 
-will provide additional functionality in the future.
-}
-
-\section{Risk Analysis}{
-
-
-Many methods have been proposed to measure, monitor, and control the risks of
-a diversified portfolio. Perhaps a few definitions are in order on how
-different risks are generally classified. \emph{Market Risk} is the risk to
-the portfolio from a decline in the market price of instruments in the
-portfolio.  \emph{Liquidity Risk} is the risk that the holder of an
-instrument will find that a position is illiquid, and will incur extra costs
-in unwinding the position resulting in a less favorable price for the
-instrument. In  extreme cases of liquidity risk, the seller may be unable to
-find a buyer for the instrument at all, making the value unknowable or zero.
-\emph{Credit Risk} encompasses \emph{Default Risk}, or the risk that promised
-payments on a loan or bond will not be made, or that a convertible instrument
-will not be converted in a timely manner or at all.  There are also
-\emph{Counterparty Risks} in over the counter markets, such as those for
-complex derivatives.  Tools have evolved to measure all these different
-components of risk.  Processes must be put into place inside a firm to
-monitor the changing risks in a portfolio, and to control the magnitude of
-risks.  For an extensive treatment of these topics, see Litterman, Gumerlock,
-et. al.(1998).  For our purposes, \kbd{PerformanceAnalytics} tends to focus
-on market and liquidity risk.
-
-The simplest risk measure in common use is volatility, usually modeled
-quantitatively with a univariate standard deviation on a portfolio.  See
-\code{\link[stats]{sd}}.  Volatility or Standard Deviation is an appropriate
-risk measure when the distribution of returns is normal or resembles a random
-walk, and may be annualized using \code{\link{sd.annualized}}, or the
-equivalent function \code{\link{sd.multiperiod}} for scaling to an arbitrary
-number of periods.  Many assets, including hedge funds, commodities, options,
-and even most common stocks over a sufficiently long period, do not follow a
-normal distribution.  For such common but non-normally distributed assets, a
-more sophisticated approach than standard deviation/volatility is required to
-adequately model the risk.
-
-Markowitz, in his Nobel acceptance speech and in several papers, proposed
-that \code{\link{SemiVariance}} would be a better measure of risk than
-variance.  See \cite{Zin, Markowitz, Zhao (2006)}.  This measure is also
-called \code{\link{SemiDeviation}}.  The more general case is
-\code{\link{DownsideDeviation}}, as proposed by \cite{Sortino and
-Price(1994)}, where the minimum acceptable return (MAR) is a parameter to the
-function.  It is interesting to note that variance and mean return can
-produce a smoothly elliptical efficient frontier for portfolio optimization
-using \code{\link[quadprog]{solve.QP}} or
-\code{\link[tseries]{portfolio.optim}} or \kbd{fPortfolio}. Use of
-semivariance or many other risk measures will not necessarily create a smooth
-ellipse, causing significant additional difficulties for the portfolio
-manager trying to build an optimal portfolio.  We'll leave a more complete
-treatment and implementation of portfolio optimization techniques for another
-time.
-
-Another very widely used downside risk measures is analysis of drawdowns, or
-loss from peak value achieved. The simplest method is to check the
-\code{\link{maxDrawdown}}, as this will tell you the worst cumulative loss
-ever sustained by the asset.  If you want to look at all the drawdowns, you
-can \code{\link{findDrawdowns}} and \code{\link{sortDrawdowns}} in order from
-worst/major to smallest/minor. The \code{\link{UpDownRatios}} function will
-give you some insight into the impacts of the skewness and kurtosis of the
-returns, and letting you know how length and magnitude of up or down moves
-compare to each other.  You can also plot drawdowns with
-\code{\link{chart.Drawdown}}.
-
-One of the most commonly used and cited measures of the risk/reward tradeoff
-of an investment or portfolio is the \code{\link{SharpeRatio}}, which
-measures return over standard deviation.  If you are comparing multiple
-assets using Sharpe, you should use \code{\link{SharpeRatio.annualized}}. It
-is important to note that William Sharpe now recommends
-\code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
-The \code{\link{SortinoRatio}} uses mean return over
-\code{\link{DownsideDeviation}} below the MAR as the risk measure to produce
-a similar ratio that is more sensitive to downside risk. Sortino later
-enhanced his ideas to use upside returns for the numerator and
-\code{\link{DownsideDeviation}} as the denominator in
-\code{\link{UpsidePotentialRatio}}. \cite{Favre and Galeano(2002)} propose
-using the ratio of expected excess return over the Cornish-Fisher
-\code{\link{VaR}} to produce \code{\link{SharpeRatio.modified}}.
-\code{\link{TreynorRatio}} is also similar to the Sharpe Ratio, except it
-uses \code{\link{CAPM.beta}} in place of the volatility measure to produce
-the ratio of the investment's excess return over the beta.
-
-One of the newer statistical methods developed for analyzing the risk of
-financial instruments is \code{\link{Omega}}.  Omega analytically constructs
-a cumulative distribution function, in a manner similar to
-\code{\link{chart.QQPlot}}, but then extracts additional information from the
-location and slope of the derived function at the point indicated by the risk
-quantile that the researcher is interested in.  Omega seeks to combine a
-large amount of data about the shape, magnitude, and slope of the
-distribution into one method.  The academic literature is still exploring the
-best manner to use Omega in a risk measurement and control process, or in
-portfolio construction.
-
-Any risk measure should be viewed with suspicion if there are not a large
-number of historical observations of returns for the asset in question
-available.  Depending on the measure, the number of observations required
-will vary greatly from a statistical standpoint.  As a heuristic rule,
-ideally you will have data available on how the instrument performed through
-several economic cycles and shocks.  When such a long history is not
-available, the investor or researcher has several options.  A full discussion
-of the various approaches is beyond the scope of this introduction, so we
-will merely touch on several areas that an interested party may wish to
-explore in additional detail. Examining the returns of assets with a similar
-style, industry, or asset class to which the asset in question is highly
-correlated and shares other characteristics can be quite informative.  Factor
-analysis may be used to uncover specific risk factors where transparency is
-not available. Various resampling (see \code{\link[tseries]{tsbootstrap}})
-and simulation methods are available in \R to construct an artificially long
-distribution for testing.  If you use a method such as Monte Carlo simulation
-or the bootstrap, it is often valuable to use \code{\link{chart.Boxplot}} to
-visualize the different estimates of the risk measure produced by the
-simulation, to see how small (or wide) a range the estimates cover, and thus
-gain a level of confidence with the results.  Proceed with extreme caution
-when your historical data is lacking.  Problems with lack of historical data
-are a major reason why many institutional investors will not invest in an
-alternative asset without several years of historical return data available.
-}
-
-\section{Value at Risk - VaR}{
-
-
-\emph{Traditional mean-VaR}:
-In the early 90's, academic literature started referring to \dQuote{value at
-risk}, typically written as VaR. Take care to capitalize VaR in the commonly
-accepted manner, to avoid confusion with var (variance) and VAR (vector
-auto-regression).  With a sufficiently large data set, you may choose to use
-a non-parametric VaR estimation method using the historical distribution and
-the probability quantile of the distribution calculated using
-\code{\link{qnorm}}. The negative return at the correct quantile (usually
-95\% or 99\%), is the non-parametric VaR estimate.  J.P. Morgan's RiskMetrics
-parametric mean-VaR was published in 1994 and this methodology for estimating
-parametric mean-VaR has become what people are generally referring to as
-\dQuote{VaR} and what we have implemented as \code{\link{VaR}} with
-\code{method="historical"}.  See \cite{Return to RiskMetrics: Evolution of a
-Standard} at
-\url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}.
-Parametric traditional VaR does a better job of accounting for the tails of
-the distribution by more precisely estimating the tails below the risk
-quantile.  It is still insufficient if the assets have a distribution that
-varies widely from normality.  That is available in \code{\link{VaR}} with
-\code{method="gaussian"}.
-
-The \R package VaR, now orphaned, contains methods for simulating and
-estimating lognormal \kbd{VaR.norm} and generalized Pareto \kbd{VaR.gpd}
-distributions to overcome some of the problems with nonparametric or
-parametric mean-VaR calculations on a limited sample size.  There is also a
-\kbd{VaR.backtest} function to apply simulation methods to create a more
-robust estimate of the potential distribution of losses.  The VaR package
-also provides plots for its functions.  We will attempt to incorporate this
-orphaned functionality in PerformanceAnalytics in an upcoming release, and 
-would welcome patches or pull requests in this direction.
-
-\emph{Modified Cornish-Fisher VaR}:
-The limitations of traditional mean-VaR are all related to the use of a
-symmetrical distribution function.  Use of simulations, resampling, or Pareto
-distributions all help in making a more accurate prediction, but they are
-still flawed for assets with significantly non-normal (skewed and/or
-kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
-(2002)} propose to overcome this extensively documented failing of
-traditional VaR by directly incorporating the higher moments of the return
-distribution into the VaR calculation.
-
-This VaR measure incorporates skewness and kurtosis via an analytical
-estimation using a Cornish-Fisher (special case of a Taylor) expansion. The
-resulting measure is referred to variously as \dQuote{Cornish-Fisher VaR} or
-\dQuote{Modified VaR}.  We provide this measure in function \code{\link{VaR}}
-with \code{method="modified"}.  Modified VaR produces the same results as
-traditional mean-VaR when the return distribution is normal, so it may be
-used as a direct replacement.  Many papers in the finance literature have
-reached the conclusion that Modified VaR is a superior measure, and may be
-substituted in any case where mean-VaR would previously have been used.
-
-\emph{Conditional VaR and Expected Shortfall}:
-We have implemented Conditional Value at Risk, also called Expected Shortfall
-(not to be confused with shortfall probability, which is much less useful),
-in function \code{\link{ES}}.  Expected Shortfall attempts to measure the
-magnitude of the average loss exceeding the traditional mean-VaR. Expected
-Shortfall has proven to be a reasonable risk predictor for many asset
-classes.  We have provided traditional historical, Gaussian and modified
-Cornish-Fisher measures of Expected Shortfall by using
-\code{method="historical"}, \code{method="gaussian"} or
-\code{method="modified"}. See \cite{Uryasev(2000)} and \cite{Sherer and
-Martin(2005)} for more information on Conditional Value at Risk and Expected
-Shortfall.  Please note that your milage will vary; expect that values
-obtained from the normal distribution may differ radically from the real
-situation, depending on the assets under analysis.
-
-\emph{Multivariate extensions to risk measures}:
-We have extened all moments calculations to work in a multivariate portfolio
-context.  In a portfolio context the multivariate moments are generally to be
-preferred to their univariate counterparts, so that all information is
-available to subsequent calculations.  Both the \code{\link{VaR}} and
-\code{\link{ES}} functions allow calculation of metrics in a portfolio
-context when \code{weights} and a \code{portfolio_method} are passed into the
-function call.
-
-\emph{Marginal, Incremental, and Component VaR}:
-Marginal VaR is the difference between the VaR of the portfolio without the
-asset in question and the entire portfolio.  The \code{\link{VaR}} function
-calculates Marginal VaR for all instruments in the portfolio if you set
-\code{method="marginal"}. Marginal VaR as provided here may use traditional
-mean-VaR or Modified VaR for the calculation. Per \cite{Artzner,et.al.(1997)}
-properties of a coherent risk measure include subadditivity (risks of the
-portfolio should not exceed the sum of the risks of individual components) as
-a significantly desirable trait.  VaR measures, including Marginal VaR, on
-individual components of a portfolio are \emph{not} subadditive.
-
-Clearly, a general subadditive risk measure for downside risk is required.
-In Incremental or Component VaR, the Component VaR value for each element of
-the portfolio will sum to the total VaR of the portfolio.  Several EDHEC
-papers suggest using Modified VaR instead of mean-VaR in the Incremental and
-Component VaR calculation.  We have succeeded in implementing Component VaR
-and ES calculations that use Modified Cornish-Fisher VaR, historical
-decomposition, and kernel estimators.  You may access these with
-\code{\link{VaR}} or \code{\link{ES}} by setting the appropriate
-\code{portfolio_method} and \code{method} arguments.
-
-The \code{\link{chart.VaRSensitivity}} function creates a chart of
-Value-at-Risk or Expected Shortfall estimates by confidence interval for
-multiple methods. Useful for comparing a calculated VaR or ES method to the
-historical VaR or ES, it may also be used to visually examine whether the VaR
-method \dQuote{breaks down} or gives nonsense results at a certain threshold.
-
-Which VaR measure to use will depend greatly on the portfolio and instruments
-being analyzed.  If there is any generalization to be made on VaR measures,
-we agree with \cite{Bali and Gokcan(2004)} who conclude that \dQuote{the VaR
-estimations based on the generalized Pareto distribution and the
-Cornish-Fisher approximation perform best}.
 }
 
 \section{Moments and Co-moments}{
@@ -771,8 +753,7 @@ provided prototypes of modified VaR and skewness and kurtosis functions
 (and was of course the maintainer of the RMetrics suite of pricing and
 optimization functions).  Diethelm also contributed prototypes for many
 other functions from Bacon's book that were incorporated into
-PerformanceAnalytics by Matthieu Lestel.  Any errors are, of course, our
-own.
+PerformanceAnalytics by Matthieu Lestel.  
 
 Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early
 versions of these functions, and to Khanh Nguyen, Tobias Verbeke, H. Felix
@@ -789,6 +770,8 @@ Mohan, who worked with us during the summer of 2013.
 Thanks to the R-SIG-Finance community without whom this package would not
 be possible.  We are indebted to the R-SIG-Finance community for many
 helpful suggestions, bugfixes, and requests.
+
+Any errors are, of course, our own.
 }
 
 \references{
@@ -813,13 +796,16 @@ Martellini, Lionel, and Volker Ziemann. \emph{Improved Forecasts of
 Higher-Order Comoments and Implications for Portfolio Selection.} EDHEC Risk
 and Asset Management Research Centre working paper. 2007. \cr
 
+Martin, R. Douglas, and Arora, Rohit. \emph{Inefficiency and bias of modified value-at-risk
+and expected shortfall}. 2017. Journal of Risk 19(6), 59–84 \cr
+
 Ranaldo, Angelo, and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
 Two- to Four-Moment CAPM.} SSRN eLibrary. 2005.
 
 Murrel, P. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 
-Ruppert, D. \emph{Statistics and Finance, an Introduction}. Springer. 2004.
-\cr
+Ruppert, David, and Matteson, David. \emph{Statistics and Data Analysis for 
+Financial Engineering, with R Examples. Second Edition}. Springer. 2015. \cr
 
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer.
 2005. \cr

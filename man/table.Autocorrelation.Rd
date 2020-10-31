@@ -5,13 +5,15 @@
 \title{table for calculating the first six autocorrelation coefficients and
 significance}
 \usage{
-table.Autocorrelation(R, digits = 4)
+table.Autocorrelation(R, digits = 4, max.lag = 6)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
 asset returns}
 
 \item{digits}{number of digits to round results to for display}
+
+\item{max.lag}{the maximum autocorrelation lag to include in the table}
 }
 \description{
 Produces data table of autocorrelation coefficients \eqn{\rho}{rho} and

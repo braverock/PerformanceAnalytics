@@ -8,6 +8,7 @@ chart.Correlation(
   R,
   histogram = TRUE,
   method = c("pearson", "kendall", "spearman"),
+  pch = 1,
   ...
 )
 }
