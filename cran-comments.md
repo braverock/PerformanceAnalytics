@@ -56,6 +56,6 @@ Packages unavailable to check Rd xrefs: 'timeSeries', 'tseries', 'car'
 * DONE
 Status: OK
 
-** running examples for arch 'x64' ... [204s] NOTE
+** running examples for arch 'x64' ... 
 * DONE
 Status: OK
