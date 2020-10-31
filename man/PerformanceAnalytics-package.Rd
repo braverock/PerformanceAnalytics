@@ -78,6 +78,37 @@ We have also included a function to compute the \code{\link{KellyRatio}}.  The K
 These metrics and others such as \code{\link{SharpeRatio}}, \code{\link{SortinoRatio}}, \code{\link{UpsidePotentialRatio}}, Spearman rank correlation (see \code{\link[Hmisc]{rcorr}}), etc., are all methods of rank-ordering relative performance. \cite{Alexander and Dimitriu (2004) in \dQuote{The Art of Investing in Hedge Funds}} show that relative rankings across multiple pricing methodologies may be positively correlated with each other and with expected returns.  This is quite an important finding because it shows that multiple methods of predicting returns and risk which have underlying measures and factors that are not directly correlated to another measure or factor will still produce widely similar quantile rankings, so that the \dQuote{buckets} of target instruments will have significant overlap.  This observation specifically supports the point made early in this document regarding \dQuote{accretion of the evidence} for a positive or negative investment decision.
 }
 
+\section{Standard Errors for Risk and Performance Estimators}{
+
+While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators, until now there has been no convenient way to accurately compute standard errors of the estimates for independent and identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns are serially dependent as well as when returns are independent and identically distributed. The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated into \kbd{PerformanceAnalytics}.
+
+Standard errors can be easily computed using the \kbd{PerformanceAnalytics} risk estimator functions
+\cr
+\tabular{ll}{
+\code{\link{StdDev}}  \tab  Sample standard deviation \cr
+\code{\link{SemiSD}} \tab Semi-standard deviation \cr
+\code{\link{lpm}} with argument \code{n=1} or \code{n=2} \tab Lower partial moment of order 1 or 2 \cr
+\code{\link{ES}} \tab Expected shortfall with tail probability \eqn{\alpha} \cr
+\code{\link{VaR}} \tab Value-at-risk with tail probability \eqn{\alpha} \cr
+}
+and performance estimator functions 
+\cr
+\tabular{ll}{
+\code{\link{mean.arithmetic}}  \tab  Sample mean \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="StdDev"} \tab Sharpe ratio \cr
+\code{\link{DownsideSharpeRatio}} or \code{\link{SharpeRatio}} with argument \code{FUN="SemiSD"}  \tab Downside Sharpe ratio \cr
+\code{\link{SortinoRatio}} \tab Sortino ratio with threshold a constant \eqn{c} or the mean \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="ES"} \tab Mean excess return to ES ratio with tail probability \eqn{\alpha} \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="VaR"} \tab Mean excess return to VaR ratio with tail probability \eqn{\alpha} \cr
+\code{\link{RachevRatio}} \tab Rachev ratio with lower upper tail probabilities \eqn{\alpha} and \eqn{\beta} \cr
+\code{\link{Omega}} \tab Omega ratio with threshold \eqn{c} \cr
+}
+where the first columns give the names of the estimators in the \kbd{RPESE} package and the second column give the names of the \kbd{PerformanceAnalytics} function to be used to compute the estimate and its standard error.
+
+Each of the PerformanceAnalytics functions listed in the above two tables have an optional argument with default \code{SE = FALSE}. By changing this default to \code{SE = TRUE}, the user obtains not only risk or performance estimate, but also a standard error for the esimate. Further details concerning the computation of standard errors for the risk and performance estimators in \kbd{PerformanceAnalytics} can be found in the Vignette "Standard Errors for Risk and Performance Estimators in PerformanceAnalytics" available at \kbd{CRAN}, where a reference to the underlying theory due to Chen and Martin (2020) may be found.
+
+}
+
 \section{Style Analysis}{
 Style analysis is one way to help determine a fund's exposures to the changes in returns of major asset classes or other factors.  \kbd{PerformanceAnalytics} previously had a few functions that calculate style weights using an asset class style model as described in detail in Sharpe (1992).
 
