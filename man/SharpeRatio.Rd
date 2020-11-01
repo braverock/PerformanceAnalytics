@@ -3,7 +3,6 @@
 \name{SharpeRatio}
 \alias{SharpeRatio}
 \alias{SharpeRatio.modified}
-\alias{DownsideSharpeRatio}
 \title{calculate a traditional or modified Sharpe Ratio of Return over StdDev or
 VaR or ES}
 \usage{
@@ -70,12 +69,18 @@ A number of papers now recommend using a "modified Sharpe" ratio using a
 Modified Cornish-Fisher VaR or CVaR/Expected Shortfall as the measure of
 Risk.
 
-We have recently extended this concept to create multivariate modified
+We have extended this concept to create multivariate modified
 Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR,
 Gaussian Expected Shortfall, and modified Expected Shortfall. See
 \code{\link{VaR}} and \code{\link{ES}}.  You can pass additional arguments
 to \code{\link{VaR}} and \code{\link{ES}} via \dots{} The most important is
 probably the 'method' argument/
+
+Most recently, we have added Downside Sharpe Ratio (DSR) (see \code{\link{DownsideSharpeRatio}}), a short name for what Ziemba (2005) 
+called the "Symmetric Downside Risk Sharpe Ratio" and is defined as the ratio of the mean return 
+to the square root of lower semivariance:
+ 
+ \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
 
 This function returns a traditional or modified Sharpe ratio for the same
 periodicity of the data being input (e.g., monthly data -> monthly SR)
@@ -108,6 +113,9 @@ Management},Fall 1994, 49-58.
 Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 v 5.
+
+Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of 
+Portfolio Management, 32(1), 108-122.
 }
 \seealso{
 \code{\link{SharpeRatio.annualized}} \cr

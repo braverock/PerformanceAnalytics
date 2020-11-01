@@ -1,4 +1,11 @@
 #' @title Downside Sharpe Ratio
+#' 
+#' @details 
+#' 
+#' The Downside Sharpe Ratio (DSR) is a short name for what Ziemba (2005) called the "Symmetric Downside Risk Sharpe Ratio" and is
+#' defined as the ratio of the mean return to the square root of lower semivariance:
+#'  
+#'  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
 #'
 #' @description \code{DownsideSharpeRatio} computation with standard errors
 #'
@@ -13,6 +20,10 @@
 #' @export
 #'
 #' @author Anthony-Alexander Christidis, \email{anthony.christidis@stat.ubc.ca}
+#' 
+#' @references 
+#' 
+#' Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of Portfolio Management, 32(1), 108-122.
 #'
 #' @examples
 #' # Loading data from PerformanceAnalytics

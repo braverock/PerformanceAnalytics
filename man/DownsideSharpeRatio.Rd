@@ -23,6 +23,12 @@ A vector or a list depending on \code{se.method}.
 \description{
 \code{DownsideSharpeRatio} computation with standard errors
 }
+\details{
+The Downside Sharpe Ratio (DSR) is a short name for what Ziemba (2005) called the "Symmetric Downside Risk Sharpe Ratio" and is
+defined as the ratio of the mean return to the square root of lower semivariance:
+ 
+ \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
+}
 \examples{
 # Loading data from PerformanceAnalytics
 data(edhec, package = "PerformanceAnalytics")
@@ -34,6 +40,9 @@ names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
 # Compute Rachev ratio for managers data
 DownsideSharpeRatio(edhec)
 
+}
+\references{
+Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of Portfolio Management, 32(1), 108-122.
 }
 \author{
 Anthony-Alexander Christidis, \email{anthony.christidis@stat.ubc.ca}

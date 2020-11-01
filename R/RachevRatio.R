@@ -1,6 +1,16 @@
 #' @title Rachev Ratio
 #'
 #' @description \code{RachevRatio} computation with standard errors.
+#' 
+#' @details 
+#' 
+#' The Rachev ratio, introducted in Rachev et al. (2008), is a measure of  of the upper tail reward potential relative to the lower tail 
+#' risk in a non-Gaussian setting. In essence, it is a measure of the potential of extreme positive returns to risk of extremel negative returns.
+#' 
+#' For lower tail parameter \eqn{\alpha} and lower tail parameter \eqn{\beta}, the Rachev ratio is given by 
+#' 
+#' \deqn{\frac{ETL_{\alpha}(R_{f}-R_{a})}{ETL_{\beta}(R_{a}-R_{f})}}.
+#' 
 #'
 #' @param R Data of returns for one or multiple assets or portfolios.
 #' @param alpha Lower tail probability.
@@ -15,6 +25,11 @@
 #' @export
 #'
 #' @author Anthony-Alexander Christidis, \email{anthony.christidis@stat.ubc.ca}
+#' 
+#' @references 
+#' 
+#' Rachev, Svetlozar T. et al. (2008). Advanced Stochastic Models, 
+#' Risk Assessment, and Portfolio Optimization (1st ed.)
 #'
 #' @examples
 #' # Loading data from PerformanceAnalytics
