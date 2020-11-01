@@ -36,7 +36,8 @@ in the tools available to a financial engineer or analyst.
 }
 \section{Time Series Data}{
 
-
+  
+  
 Not all, but many of the measures in this package
 require time series data.  \kbd{PerformanceAnalytics} uses the
 \code{\link[xts]{xts}} package for managing time series data for several
@@ -94,6 +95,7 @@ returns from prices.
 }
 
 \section{Risk Analysis}{
+
 
 
 Many methods have been proposed to measure, monitor, and control the risks of
@@ -193,9 +195,10 @@ alternative asset without several years of historical return data available.
 
 \section{Value at Risk (VaR) and Expected Shortfall (ES, ETL, CVaR)}{
 
-
+  
+  
 \emph{Traditional mean-VaR}:
-In the early 90's, academic literature started referring to \dQuote{value at
+  In the early 90's, academic literature started referring to \dQuote{value at
 risk}, typically written as VaR. Take care to capitalize VaR in the commonly
 accepted manner, to avoid confusion with var (variance) and VAR (vector
 auto-regression).  With a sufficiently large data set, you may choose to use
@@ -207,7 +210,7 @@ parametric mean-VaR was published in 1994 and this methodology for estimating
 parametric mean-VaR has become what people are generally referring to as
 \dQuote{VaR} and what we have implemented as \code{\link{VaR}} with
 \code{method="historical"}.  See \cite{Return to RiskMetrics: Evolution of a
-Standard} at
+  Standard} at
 \url{https://www.msci.com/documents/10199/dbb975aa-5dc2-4441-aa2d-ae34ab5f0945}.
 Parametric traditional VaR does a better job of accounting for the tails of
 the distribution by more precisely estimating the tails below the risk
@@ -248,7 +251,7 @@ Note that estimates for Cornish Fisher modified VaR and ES may be unstable
 with small sample sizes.  See Martin and Arora (2017) for more details.
 
 \emph{Conditional VaR and Expected Shortfall}:
-We have implemented Conditional Value at Risk, also called Expected Tail Loss 
+  We have implemented Conditional Value at Risk, also called Expected Tail Loss 
 or Expected Shortfall
 (not to be confused with shortfall probability, which is much less useful),
 in function \code{\link{ES}}.  Expected Shortfall attempts to measure the
@@ -258,13 +261,13 @@ classes.  We have provided traditional historical, Gaussian and modified
 Cornish-Fisher measures of Expected Shortfall by using
 \code{method="historical"}, \code{method="gaussian"} or
 \code{method="modified"}. See \cite{Uryasev(2000)} and \cite{Sherer and
-Martin(2005)} for more information on Conditional Value at Risk and Expected
+  Martin(2005)} for more information on Conditional Value at Risk and Expected
 Shortfall.  Please note that your mileage will vary; expect that values
 obtained from the normal distribution may differ radically from the real
 situation, depending on the assets under analysis.
 
 \emph{Multivariate extensions to risk measures}:
-We have extended all moments calculations to work in a multivariate portfolio
+  We have extended all moments calculations to work in a multivariate portfolio
 context.  In a portfolio context the multivariate moments are generally to be
 preferred to their univariate counterparts, so that all information is
 available to subsequent calculations.  Both the \code{\link{VaR}} and
@@ -273,13 +276,13 @@ context when \code{weights} and a \code{portfolio_method} are passed into the
 function call.
 
 \emph{Marginal, Incremental, and Component VaR}:
-Marginal VaR is the difference between the VaR of the portfolio without the
+  Marginal VaR is the difference between the VaR of the portfolio without the
 asset in question and the entire portfolio.  The \code{\link{VaR}} function
 calculates Marginal VaR for all instruments in the portfolio if you set
 \code{method="marginal"}. Marginal VaR as provided here may use traditional
 mean-VaR or Modified VaR for the calculation. Per \cite{Artzner,et.al.(1997)}
 properties of a coherent risk measure include subadditivity (risks of the
-portfolio should not exceed the sum of the risks of individual components) as
+                                                             portfolio should not exceed the sum of the risks of individual components) as
 a significantly desirable trait.  VaR measures, including Marginal VaR, on
 individual components of a portfolio are \emph{not} subadditive.
 
@@ -302,8 +305,8 @@ method \dQuote{breaks down} or gives nonsense results at a certain threshold.
 Which VaR or ES measure to use will depend greatly on the portfolio and instruments
 being analyzed.  If there is any generalization to be made on VaR measures,
 we agree with \cite{Bali and Gokcan(2004)} who conclude that \dQuote{the VaR
-estimations based on the generalized Pareto distribution and the
-Cornish-Fisher approximation perform best}.
+  estimations based on the generalized Pareto distribution and the
+  Cornish-Fisher approximation perform best}.
 
 Most risk professionals are moving from using VaR to using Expected Shortfall
 preferentially.  This preference has been endorsed by the Bank of International 
@@ -314,7 +317,7 @@ more appropriate than a VaR measure.
 
 \section{Performance Analysis}{
 
-
+  
 The literature around the subject of performance analysis seems to have
 exploded with the popularity of alternative assets such as hedge funds,
 managed futures, commodities, and structured products. Simpler tools that
@@ -324,9 +327,9 @@ nearly inseparable from performance assessment, has become
 multi-dimensional and multi-moment while trying to answer a simple
 question: \dQuote{How much could I lose?} Portfolio construction and risk
 budgeting are two sides of the same coin: \dQuote{How do I maximize my
-expected gain and avoid going broke?}  But before we can approach those
+  expected gain and avoid going broke?}  But before we can approach those
 questions we first have to ask: \dQuote{Is this something I might want in
-my portfolio?}
+  my portfolio?}
 
 With the the increasing availability of complicated alternative investment
 strategies to both retail and institutional investors, and the broad
@@ -406,7 +409,7 @@ methods of calculating kurtosis than \code{method="excess"} will set the
 normal distribution at a value of 3.  In general a rational investor should
 prefer an asset with a low to negative excess kurtosis, as this will
 indicate more predictable returns (the major exception is generally a
-combination of high positive skewness and high excess kurtosis).  If you
+                                   combination of high positive skewness and high excess kurtosis).  If you
 find yourself needing to analyze the distribution of complex or non-smooth
 asset distributions, the \code{nortest} package has several advanced
 statistical tests for analyzing the normality of a distribution.
@@ -434,7 +437,7 @@ passive investment in the benchmark asset.
 
 The Capital Market Line \code{\link{CAPM.CML}} relates the excess expected
 return on an efficient market portfolio to its risk (represented in CAPM by
-\code{\link[stats]{sd}}).  The slope of the CML,
+                                                     \code{\link[stats]{sd}}).  The slope of the CML,
 \code{\link{CAPM.CML.slope}}, is the Sharpe Ratio for the market portfolio.
 The Security Market Line is constructed by calculating the line of
 \code{\link{CAPM.RiskPremium}} over \code{\link{CAPM.beta}}.  For the
@@ -514,7 +517,50 @@ early in this document regarding \dQuote{accretion of the evidence} for a
 positive or negative investment decision.
 }
 
+\section{Standard Errors for Risk and Performance Estimators}{
+
+
+
+While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators, 
+until now there has been no convenient way to accurately compute standard errors of the estimates for independent and 
+identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no 
+longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns 
+are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and 
+Martin (2019) at \url{https://ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. 
+The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram 
+based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk 
+and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://ssrn.com/abstract=3415903}. 
+The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated 
+into \kbd{PerformanceAnalytics}.
+
+Standard errors can be easily computed using the \kbd{PerformanceAnalytics} risk estimator functions
+\cr
+\tabular{ll}{
+\code{\link{StdDev}}  \tab  Sample standard deviation \cr
+\code{\link{SemiSD}} \tab Semi-standard deviation \cr
+\code{\link{lpm}} with argument \code{n=1} or \code{n=2} \tab Lower partial moment of order 1 or 2 \cr
+\code{\link{ES}} \tab Expected shortfall with tail probability \eqn{\alpha} \cr
+\code{\link{VaR}} \tab Value-at-risk with tail probability \eqn{\alpha} \cr
+}
+and performance estimator functions 
+\cr
+\tabular{ll}{
+\code{\link{mean.arithmetic}}  \tab  Sample mean \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="StdDev"} \tab Sharpe ratio \cr
+\code{\link{DownsideSharpeRatio}} or \code{\link{SharpeRatio}} with argument \code{FUN="SemiSD"}  \tab Downside Sharpe ratio \cr
+\code{\link{SortinoRatio}} \tab Sortino ratio with threshold \code{MAR} \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="ES"} \tab Mean excess return to ES ratio with tail probability \eqn{\alpha} \cr
+\code{\link{SharpeRatio}} with argument \code{FUN="VaR"} \tab Mean excess return to VaR ratio with tail probability \eqn{\alpha} \cr
+\code{\link{RachevRatio}} \tab Rachev ratio with lower upper tail probabilities \eqn{\alpha} and \eqn{\beta} \cr
+\code{\link{Omega}} \tab Omega ratio with threshold \eqn{c} \cr
+}
+where the first columns gives the names of the functions in the \kbd{PerformanceAnalytics} package to compute the estimate and its standard error.
+
+Each of the \kbd{PerformanceAnalytics} functions listed above have an optional argument with default \code{SE = FALSE}. By changing this default to \code{SE = TRUE}, the user obtains not only risk or performance estimate, but also a standard error for the esimate. Further details concerning the computation of standard errors for the risk and performance estimators in \kbd{PerformanceAnalytics} can be found in the Vignette "Standard Errors for Risk and Performance Estimators in PerformanceAnalytics" available at \kbd{CRAN}, where a reference to the underlying theory due to Chen and Martin (2020) may be found.
+}
+
 \section{Moments and Co-moments}{
+
 
 
 Analysis of financial time series often involves evaluating their
@@ -558,6 +604,7 @@ only in terms of normal risk (i.e. volatility) but also the risk of assymetry
 \section{Robust Data Cleaning}{
 
 
+
 The functions \code{\link{Return.clean}} and \code{\link{clean.boudt}}
 implement statistically robust data cleaning methods tuned to portfolio
 construction and risk analysis and prediction in financial time series while
@@ -578,7 +625,8 @@ particular combination of assets under consideration.
 
 \section{Summary Tabular Data}{
 
-  
+
+
 Summary statistics are then the necessary aggregation and reduction of
 (potentially thousands) of periodic return numbers. Usually these statistics
 are most palatable when organized into a table of related statistics,
@@ -599,22 +647,23 @@ Other tables for comparison of related groupings of statistics discussed
 elsewhere:
 
 \tabular{rl}{
-    
-    \code{\link{table.Stats}} \tab Basic statistics and stylized facts \cr
-    \code{\link{table.TrailingPeriods}} \tab Statistics and stylized facts compared over different trailing periods \cr
-    \code{\link{table.AnnualizedReturns}} \tab Annualized return, standard deviation, and Sharpe ratio \cr
-    \code{\link{table.CalendarReturns}} \tab Monthly and calendar year return table \cr
-    \code{\link{table.CAPM}} \tab CAPM-related measures \cr
-    \code{\link{table.Correlation}} \tab Comparison of correlalations and significance statistics \cr
-    \code{\link{table.DownsideRisk}} \tab Downside risk metrics and statistics \cr
-    \code{\link{table.Drawdowns}} \tab Ordered list of drawdowns and when they occurred \cr
-    \code{\link{table.Autocorrelation}} \tab The first six autocorrelation coefficients and significance \cr
-    \code{\link{table.HigherMoments}} \tab Higher co-moments and beta co-moments \cr
-    \code{\link{table.Arbitrary}} \tab Combines a function list into a table \cr
+
+\code{\link{table.Stats}} \tab Basic statistics and stylized facts \cr
+\code{\link{table.TrailingPeriods}} \tab Statistics and stylized facts compared over different trailing periods \cr
+\code{\link{table.AnnualizedReturns}} \tab Annualized return, standard deviation, and Sharpe ratio \cr
+\code{\link{table.CalendarReturns}} \tab Monthly and calendar year return table \cr
+\code{\link{table.CAPM}} \tab CAPM-related measures \cr
+\code{\link{table.Correlation}} \tab Comparison of correlalations and significance statistics \cr
+\code{\link{table.DownsideRisk}} \tab Downside risk metrics and statistics \cr
+\code{\link{table.Drawdowns}} \tab Ordered list of drawdowns and when they occurred \cr
+\code{\link{table.Autocorrelation}} \tab The first six autocorrelation coefficients and significance \cr
+\code{\link{table.HigherMoments}} \tab Higher co-moments and beta co-moments \cr
+\code{\link{table.Arbitrary}} \tab Combines a function list into a table \cr
 }
 }
 
 \section{Charts and Graphs}{
+
 
 
 Graphs and charts can also help to organize the information visually. Our
@@ -697,7 +746,8 @@ package.
 
 \section{Wrapper and Utility Functions}{
 
-
+  
+  
 \R is a very powerful environment for manipulating data.  It can also be
 quite confusing to a user more accustomed to Excel or even MatLAB.  As such,
 we have written some wrapper functions that may aid you in coercing data into
@@ -718,6 +768,7 @@ easier.
 
 \section{Further Work}{
 
+  
 
 We have attempted to standardize function parameters and variable names, but
 more work exists to be done here.
@@ -730,6 +781,7 @@ package.
 }
 
 \section{Acknowledgments}{
+
 
 
 Data series \code{\link{edhec}} used in \kbd{PerformanceAnalytics} and
@@ -776,36 +828,39 @@ Any errors are, of course, our own.
 
 \references{
 Amenc, N. and Le Sourd, V. \emph{Portfolio Theory and
-Performance Analysis}. Wiley. 2003. \cr
+  Performance Analysis}. Wiley. 2003. \cr
 
 Pfaff, B. \emph{Financial Risk Modeling and Portfolio Optimization with R, 
-Second Edition}. Wiley. 2016. \cr
+  Second Edition}. Wiley. 2016. \cr
 
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
-Attribution}. Wiley. 2004. \cr
+  Attribution}. Wiley. 2004. \cr
 
 Canto, V. \emph{Understanding Asset Allocation}. FT Prentice Hall. 2006. \cr
+
+Chen, X. and Martin, R. D. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
+  Returns}. SSRN eLibrary. 2019. \cr
 
 Lhabitant, F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
 
 Litterman, R., Gumerlock R., et. al. \emph{The Practice of Risk Management:
-Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998.
+    Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998.
 \cr
 
-Martellini, Lionel, and Volker Ziemann. \emph{Improved Forecasts of
-Higher-Order Comoments and Implications for Portfolio Selection.} EDHEC Risk
+Martellini, L., and Volker, Z. \emph{Improved Forecasts of
+  Higher-Order Comoments and Implications for Portfolio Selection.} EDHEC Risk
 and Asset Management Research Centre working paper. 2007. \cr
 
 Martin, R. Douglas, and Arora, Rohit. \emph{Inefficiency and bias of modified value-at-risk
-and expected shortfall}. 2017. Journal of Risk 19(6), 59–84 \cr
+  and expected shortfall}. 2017. Journal of Risk 19(6), 59–84 \cr
 
-Ranaldo, Angelo, and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
-Two- to Four-Moment CAPM.} SSRN eLibrary. 2005.
+Ranaldo, A., and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
+  Two- to Four-Moment CAPM.} SSRN eLibrary. 2005.
 
 Murrel, P. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 
-Ruppert, David, and Matteson, David. \emph{Statistics and Data Analysis for 
-Financial Engineering, with R Examples. Second Edition}. Springer. 2015. \cr
+Ruppert, D., and Matteson, D \emph{Statistics and Data Analysis for 
+  Financial Engineering, with R Examples. Second Edition}. Springer. 2015. \cr
 
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer.
 2005. \cr
@@ -815,7 +870,12 @@ Applications, with R examples}, Springer, 2006. \cr
 
 Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
 
-Zin, Markowitz, Zhao A Note on Semivariance. Mathematical Finance, Vol. 16,
+Chen, X. and Martin, R. D. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
+Returns}. SSRN eLibrary. 2019. \cr
+
+Zhang, S., Martin, R. Douglas., and Christidis, A. \emph{Influence Functions for Risk and Performance Estimators}. SSRN eLibrary. 2020. \cr
+
+Zin, M., Zhao. A Note on Semivariance. Mathematical Finance, Vol. 16,
 No. 1, pp. 53-61, January 2006
 
 Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus:

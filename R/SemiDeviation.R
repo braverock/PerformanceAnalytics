@@ -14,11 +14,17 @@ function (R,
 
     # FUNCTION:
   
-  if(isTRUE(SE)){
+  # Checking input if SE = TRUE
+  if(SE){
     if(!requireNamespace("RPESE", quietly = TRUE)){
-      stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-           call. = FALSE)
+      warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+              call. = FALSE)
+      SE <- FALSE
     }
+  }
+  
+  # Option to check if RPESE is installed if SE=TRUE
+  if(SE){
     
     # Setting the control parameters
     if(is.null(SE.control))
@@ -35,26 +41,27 @@ function (R,
                                          freq.par=SE.control$freq.par,
                                          a=SE.control$a, b=SE.control$b,
                                          ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
     }
     ses <- t(data.frame(ses))
   }
 
-    if (is.vector(R)) {
-        R = na.omit(R)
-        return(DownsideDeviation(R, MAR=mean(R), method="full"))
-    }
-    else {
-        R = checkData(R, method = "matrix")
-        result = apply(R, 2, SemiDeviation)
-        result = matrix(result, nrow=1)
-        colnames(result) = colnames(R)
-        if(SE) # Name if SE computation
-          rownames(result) <- "Semi-Standard Deviation" else
-            rownames(result) = "Semi-Deviation"
-        if(SE) # Check if SE computation
-          return(rbind(result, ses)) else
-            return (result)
-    }
+  if (is.vector(R)) {
+      R = na.omit(R)
+      return(DownsideDeviation(R, MAR=mean(R), method="full"))
+  }
+  else {
+      R = checkData(R, method = "matrix")
+      result = apply(R, 2, SemiDeviation)
+      result = matrix(result, nrow=1)
+      colnames(result) = colnames(R)
+      if(SE) # Name if SE computation
+        rownames(result) <- "Semi-Standard Deviation" else
+          rownames(result) = "Semi-Deviation"
+      if(SE) # Check if SE computation
+        return(rbind(result, ses)) else
+          return (result)
+  }
 }
 
 #' @rdname DownsideDeviation
@@ -72,11 +79,17 @@ SemiSD <-
     
     # FUNCTION:
     
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
       }
+    }
+    
+    # Option to check if RPESE is installed if SE=TRUE
+    if(SE){
       
       # Setting the control parameters
       if(is.null(SE.control))
@@ -93,6 +106,7 @@ SemiSD <-
                                            freq.par=SE.control$freq.par,
                                            a=SE.control$a, b=SE.control$b,
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }

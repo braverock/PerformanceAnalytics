@@ -76,12 +76,23 @@ lpm <- function(R, n=2, threshold=0, about_mean=FALSE,
   }
   }
   
-  # Option to check if RPESE is installed if SE=TRUE
-  if(isTRUE(SE)){
+  # Checking input if SE = TRUE
+  if(SE){
+    SE.check <- TRUE
     if(!requireNamespace("RPESE", quietly = TRUE)){
-      stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-           call. = FALSE)
+      warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+              call. = FALSE)
+      SE <- FALSE
     }
+    if(about_mean){
+      warning("To return SEs, \"about_mean\" must be FALSE.",
+              call. = FALSE)
+      SE.check <- FALSE
+    }
+  }
+  
+  # SE Computation
+  if(SE){
     
     # Setting the control parameters
     if(is.null(SE.control))
@@ -97,10 +108,22 @@ lpm <- function(R, n=2, threshold=0, about_mean=FALSE,
                                          freq.include=SE.control$freq.include,
                                          freq.par=SE.control$freq.par,
                                          a=SE.control$a, b=SE.control$b,
+                                         const=threshold, order=n,
                                          ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
     }
     ses <- t(data.frame(ses))
+    # Removing SE output if inappropriate arguments
+    if(!SE.check){
+      ses.rownames <- rownames(ses)
+      ses.colnames <- colnames(ses)
+      ses <- matrix(NA, nrow=nrow(ses), ncol=ncol(ses))
+      rownames(ses) <- ses.rownames
+      colnames(ses) <- ses.colnames
+    }
   }
+  if(SE)
+    colnames(ses) <- columnnames
   #Loop close
   colnames(result) = columnnames
   #Assign column names to the output 

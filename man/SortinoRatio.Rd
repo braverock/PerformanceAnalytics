@@ -4,15 +4,7 @@
 \alias{SortinoRatio}
 \title{calculate Sortino Ratio of performance over downside risk}
 \usage{
-SortinoRatio(
-  R,
-  MAR = 0,
-  ...,
-  weights = NULL,
-  threshold = c("MAR", "mean")[1],
-  SE = FALSE,
-  SE.control = NULL
-)
+SortinoRatio(R, MAR = 0, ..., weights = NULL, SE = FALSE, SE.control = NULL)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -24,8 +16,6 @@ returns}
 \item{\dots}{any other passthru parameters}
 
 \item{weights}{portfolio weighting vector, default NULL}
-
-\item{threshold}{Parameter to determine whether we use a "MAR" (default) or "mean" threshold.}
 
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 

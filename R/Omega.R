@@ -124,12 +124,29 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"),
     method = method[1]
     output = output[1]
     
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
+      SE.check <- TRUE
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
       }
-      
+      if(!(method %in% c("simple"))){
+        warning("To return SEs, \"method\" must be \"simple\".",
+                call. = FALSE)
+        SE.check <- FALSE
+      }
+      if(!(output %in% c("point"))){
+        warning("To return SEs, \"output\" must be \"point\".",
+                call. = FALSE)
+        SE.check <- FALSE
+      }
+    }
+    
+    # SE Computation
+    if(SE){
+
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(estimator="OmegaRatio")
@@ -144,10 +161,19 @@ function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"),
                                            freq.include=SE.control$freq.include,
                                            freq.par=SE.control$freq.par,
                                            a=SE.control$a, b=SE.control$b,
-                                           const = L, # Additional Parameter
+                                           const = L,
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
+      # Removing SE output if inappropriate arguments
+      if(!SE.check){
+        ses.rownames <- rownames(ses)
+        ses.colnames <- colnames(ses)
+        ses <- matrix(NA, nrow=nrow(ses), ncol=ncol(ses))
+        rownames(ses) <- ses.rownames
+        colnames(ses) <- ses.colnames
+      }
     }
 
     if (is.vector(R)) {

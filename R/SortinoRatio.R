@@ -28,7 +28,6 @@
 #' returns
 #' @param \dots any other passthru parameters
 #' @param weights portfolio weighting vector, default NULL
-#' @param threshold Parameter to determine whether we use a "MAR" (default) or "mean" threshold.
 #' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
 #' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @author Brian G. Peterson
@@ -48,7 +47,6 @@
 SortinoRatio <-
 function (R, MAR = 0,...,
           weights=NULL,
-          threshold = c("MAR", "mean")[1],
           SE=FALSE, SE.control=NULL)
 { # @author Brian G. Peterson
   # modified from function by Sankalp Upadhyay <sankalp.upadhyay [at] gmail [dot] com> with permission
@@ -62,10 +60,6 @@ function (R, MAR = 0,...,
     # Function:
     R = checkData(R)
     
-    # Check if mean threshold
-    if(threshold=="mean")
-      MAR = apply(R, 2, mean)
-        
     #if we have a weights vector, use it
     if(!is.null(weights)){
         R=Return.portfolio(R,weights,...)
@@ -77,21 +71,23 @@ function (R, MAR = 0,...,
         SR
     }
     
-    if(isTRUE(SE)){
+    # Checking input if SE = TRUE
+    if(SE){
+      SE.check <- TRUE
       if(!requireNamespace("RPESE", quietly = TRUE)){
-        stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-             call. = FALSE)
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
       }
+    }
+    
+    # SE Computation
+    if(isTRUE(SE)){
       
       # Setting the control parameters
       if(is.null(SE.control))
         SE.control <- RPESE.control(estimator="SoR")
-      
-      # Setting the threshold parameter
-      if(threshold=="MAR")
-        threshold.temp <- "const" else if(threshold=="mean")
-          threshold.temp <- "mean"
-      
+
       # Computation of SE (optional)
       ses=list()
       # For each of the method specified in se.method, compute the standard error
@@ -102,28 +98,19 @@ function (R, MAR = 0,...,
                                            freq.include=SE.control$freq.include,
                                            freq.par=SE.control$freq.par,
                                            a=SE.control$a, b=SE.control$b,
-                                           threshold = threshold.temp, # Parameter for threshold in RPEIF
-                                           const=MAR, # Parameter for threshold in RPEIF
+                                           threshold = "const", const=MAR,
                                            ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
       }
       ses <- t(data.frame(ses))
     }
 
     # apply across multi-column data if we have it
-    if(threshold=="MAR"){
-      result = apply(R, MARGIN = 2, sr, MAR = MAR)
-      dim(result) = c(1,NCOL(R))
-      colnames(result) = colnames(R)
-      rownames(result) = paste("Sortino Ratio (MAR = ", round(mean(MAR)*100,3),"%)", sep="")
-    } else if(threshold=="mean"){
-      result <- numeric(ncol(R))
-      for(col in 1:ncol(R)){
-        result[col] <- sr(R[,col], MAR[col])
-      }
-      result <- matrix(result, ncol=ncol(R))
-      colnames(result) = colnames(R)
-      rownames(result) <- paste("Sortino Ratio (Mean Threshold)", sep="")
-    }
+    result = apply(R, MARGIN = 2, sr, MAR = MAR)
+    dim(result) = c(1,NCOL(R))
+    colnames(result) = colnames(R)
+    rownames(result) = paste("Sortino Ratio (MAR = ", round(mean(MAR)*100,3),"%)", sep="")
+    
     if(SE) # Check if SE computation
       return(rbind(result, ses)) else
         return (result)

@@ -31,7 +31,7 @@
 #' # for computing and returning standard errors.
 #' 
 # Function to set the control parameters for standard errors computation
-RPESE.control <- function(estimator=c("Mean","SD","VaR","ES","SR","SoR",
+RPESE.control <- function(estimator=c("Mean", "SD", "VaR", "ES", "SR", "DSR", "SoR",
                                     "ESratio", "VaRratio", "SoR", "LPM", 
                                     "OmegaRatio", "SemiSD", "RachevRatio")[1], 
                                     se.method=NULL, 
@@ -43,7 +43,7 @@ RPESE.control <- function(estimator=c("Mean","SD","VaR","ES","SR","SoR",
                                     b=NULL){
   
   # Available estimator functions
-  estimators.available <- c("Mean","SD","VaR","ES","SR","SoR",
+  estimators.available <- c("Mean", "SD", "VaR", "ES", "SR", "DSR", "SoR",
                             "ESratio", "VaRratio", "SoR", "LPM", "OmegaRatio", "SemiSD", "RachevRatio")
   # Checking if the specified risk estimator is available
   if(!(estimator %in% estimators.available))
@@ -53,7 +53,7 @@ RPESE.control <- function(estimator=c("Mean","SD","VaR","ES","SR","SoR",
   if(is.null(se.method)){
     if(estimator %in% c("SD", "SemiSD", "LPM", "ES", "VaR"))
       se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[1:2] else 
-        if(estimator %in% c("Mean", "VaR", "SR", "SoR", "ESratio", "VaRratio", "OmegaRatio", "RachevRatio"))
+        if(estimator %in% c("Mean", "VaR", "SR", "DSR", "SoR", "ESratio", "VaRratio", "OmegaRatio", "RachevRatio"))
           se.method <- c("IFiid","IFcor","IFcorAdapt","IFcorPW","BOOTiid","BOOTcor")[c(1,3)]
   }
 

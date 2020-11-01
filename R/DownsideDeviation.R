@@ -102,7 +102,8 @@
 #'
 #' @export
 DownsideDeviation <-
-function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
+function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE,
+          SE=FALSE, SE.control=NULL)
 { # @author Peter Carl, Matthieu Lestel
 
     # DESCRIPTION:
@@ -117,6 +118,56 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 
     method = method[1] 
     R = checkData(R, method="matrix")
+    
+    # Checking input if SE = TRUE
+    if(SE){
+      SE.check <- TRUE
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
+      }
+      if(!(method %in% c("full"))){
+        warning("To return SEs, \"method\" must be \"full\".",
+                call. = FALSE)
+        SE.check <- FALSE
+      }
+      if(potential){
+        warning("To return SEs, \"potential\" must be FALSE.",
+                call. = FALSE)
+        SE.check <- FALSE
+      }
+    }
+    
+    # SE Computation
+    if(SE){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator="SemiSD")
+      
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SemiSD", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
+      }
+      ses <- t(data.frame(ses))
+      if(!SE.check){
+        ses.rownames <- rownames(ses)
+        ses.colnames <- colnames(ses)
+        ses <- matrix(NA, nrow=nrow(ses), ncol=ncol(ses))
+        rownames(ses) <- ses.rownames
+        colnames(ses) <- ses.colnames
+      }
+    }
 
     if (ncol(R)==1 || is.vector(R) || is.null(R)) {
         R = na.omit(R)
@@ -145,7 +196,9 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
 	}
         
         result <- matrix(result, ncol=1)
-        return (result)
+        if(SE) # Check if computation of SE
+          return(rbind(result, ses)) else
+            return(result)
     }
     else {
         R = checkData(R)
@@ -157,7 +210,9 @@ function (R, MAR = 0, method=c("full","subset"), ..., potential=FALSE)
         else
             rownames(result) = paste("Downside Deviation (MAR = ", round(mean(MAR),1),"%)", sep="")
       
-        return (result)
+        if(SE) # Check if computation of SE
+          return(rbind(result, ses)) else
+            return(result)
     }
 }
 
