@@ -224,12 +224,12 @@
 #' would welcome patches or pull requests in this direction.
 #' 
 #' \emph{Modified Cornish-Fisher VaR}:
-#'   The limitations of traditional mean-VaR are all related to the use of a
+#' The limitations of traditional mean-VaR are all related to the use of a
 #' symmetrical distribution function.  Use of simulations, resampling, or Pareto
 #' distributions all help in making a more accurate prediction, but they are
 #' still flawed for assets with significantly non-normal (skewed and/or
-#'                                                        kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
-#'                                                          (2002)} propose to overcome this extensively documented failing of
+#' kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
+#' (2002)} propose to overcome this extensively documented failing of
 #' traditional VaR by directly incorporating the higher moments of the return
 #' distribution into the VaR calculation.
 #' 
@@ -310,8 +310,7 @@
 #' more appropriate than a VaR measure.
 #' 
 #' 
-#' @section Performance Analysis
-#'   
+#' @section Performance Analysis:
 #'   
 #' The literature around the subject of performance analysis seems to have
 #' exploded with the popularity of alternative assets such as hedge funds,

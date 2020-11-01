@@ -229,12 +229,12 @@ orphaned functionality in PerformanceAnalytics in an upcoming release, and
 would welcome patches or pull requests in this direction.
 
 \emph{Modified Cornish-Fisher VaR}:
-  The limitations of traditional mean-VaR are all related to the use of a
+The limitations of traditional mean-VaR are all related to the use of a
 symmetrical distribution function.  Use of simulations, resampling, or Pareto
 distributions all help in making a more accurate prediction, but they are
 still flawed for assets with significantly non-normal (skewed and/or
-                                                       kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
-                                                         (2002)} propose to overcome this extensively documented failing of
+kurtotic) distributions. \cite{Huisman (1999)} and \cite{Favre and Galleano
+(2002)} propose to overcome this extensively documented failing of
 traditional VaR by directly incorporating the higher moments of the return
 distribution into the VaR calculation.
 
@@ -313,6 +313,208 @@ preferentially.  This preference has been endorsed by the Bank of International
 Settlements (BIS) and the Basel accord risk committee.  In most cases, an ES
 measure with an appropriate probability target for your asset horizin will be 
 more appropriate than a VaR measure.
+}
+
+\section{Performance Analysis}{
+
+  
+The literature around the subject of performance analysis seems to have
+exploded with the popularity of alternative assets such as hedge funds,
+managed futures, commodities, and structured products. Simpler tools that
+may have seemed appropriate in a relative investment world seem
+inappropriate for an absolute return world.  Risk measurement, which is
+nearly inseparable from performance assessment, has become
+multi-dimensional and multi-moment while trying to answer a simple
+question: \dQuote{How much could I lose?} Portfolio construction and risk
+budgeting are two sides of the same coin: \dQuote{How do I maximize my
+  expected gain and avoid going broke?}  But before we can approach those
+questions we first have to ask: \dQuote{Is this something I might want in
+  my portfolio?}
+
+With the the increasing availability of complicated alternative investment
+strategies to both retail and institutional investors, and the broad
+availability of financial data, an engaging debate about performance
+analysis and evaluation is as important as ever.  There won't be one
+\emph{right} answer delivered in these metrics and charts.  What there will
+be is an accretion of evidence, organized to \emph{assist} a decision maker
+in answering a specific question that is pertinent to the decision at hand.
+Using such tools to uncover information and ask better questions will, in
+turn, create a more informed investor.
+
+Performance measurement starts with returns.  Traders may object,
+complaining that \dQuote{You can't eat returns,} and will prefer to look
+for numbers with currency signs.  To some extent, they have a point - the
+normalization inherent in calculating returns can be deceiving.  Most of
+the recent work in performance analysis, however, is focused on returns
+rather than prices and sometimes called "returns-based analysis" or RBA.
+This \dQuote{price per unit of investment} standardization is important for
+two reasons - first, it helps the decision maker to compare opportunities,
+and second, it has some useful statistical qualities.  As a result, the
+\kbd{PerformanceAnalytics} package focuses on returns.  See
+\code{\link{Return.calculate}} for converting net asset values or prices
+into returns, either discrete or continuous.  Many papers and theories
+refer to \dQuote{excess returns}: we implement a simple function for
+aligning time series and calculating excess returns in
+\code{\link{Return.excess}}.
+
+\code{\link{Return.portfolio}} can be used to calculate weighted returns
+for a portfolio of assets.  The function was recently changed to support
+several use-cases: a single weighting vector, an equal weighted portfolio,
+periodic rebalancing, or irregular rebalancing.  That replaces
+functionality that had been split between that function and
+\code{\link{Return.rebalancing}}.  The function will subset the return
+series to only include returns for assets for which \code{\link{weights}}
+are provided.
+
+Returns and risk may be annualized as a way to simplify comparison over
+longer time periods.  Although it requires a bit of estimating, such
+aggregation is popular because it offers a reference point for easy
+comparison.  Examples are in \code{\link{Return.annualized}},
+\code{\link{sd.annualized}}, and \code{\link{SharpeRatio.annualized}}.
+
+Basic measures of performance tend to treat returns as independent
+observations.  In this case, the entirety of R's base is applicable to such
+analysis.  Some basic statistics we have collected in
+\code{\link{table.Stats}} include: \cr \tabular{ll}{ \code{\link{mean}}
+\tab  arithmetic mean \cr \code{\link{mean.geometric}} \tab geometric mean
+\cr \code{\link{mean.stderr}} \tab standard error of the mean (S.E. mean)
+\cr \code{\link{mean.LCL}} \tab lower confidence level (LCL) of the mean
+\cr \code{\link{mean.UCL}} \tab upper confidence level (UCL) of the mean
+\cr \code{\link{quantile}}  \tab for calculating various quantiles of the
+distribution \cr \code{\link{min}}  \tab minimum return \cr
+\code{\link{max}}  \tab maximum return \cr \code{\link{range}} \tab range
+of returns \cr \code{length(R)}  \tab number of observations \cr
+\code{sum(is.na(R))} \tab number of NA's \cr }
+
+It is often valuable when evaluating an investment to know whether the
+instrument that you are examining follows a normal distribution.  One of
+the first methods to determine how close the asset is to a normal or
+log-normal distribution is to visually look at your data.  Both
+\code{\link{chart.QQPlot}} and \code{\link{chart.Histogram}} will quickly
+give you a feel for whether or not you are looking at a normally
+distributed return history.  Differences between \code{\link{var}} and
+\code{\link{SemiVariance}} will help you identify \code{\link{skewness}} in
+the returns.  Skewness measures the degree of asymmetry in the return
+distribution.  Positive skewness indicates that more of the returns are
+positive, negative skewness indicates that more of the returns are
+negative.  An investor should in most cases prefer a positively skewed
+asset to a similar (style, industry, region) asset that has a negative
+skewness.
+
+Kurtosis measures the concentration of the returns in any given part of the
+distribution (as you should see visually in a histogram).  The
+\code{\link{kurtosis}} function will by default return what is referred to
+as \dQuote{excess kurtosis}, where 0 is a normal distribution, other
+methods of calculating kurtosis than \code{method="excess"} will set the
+normal distribution at a value of 3.  In general a rational investor should
+prefer an asset with a low to negative excess kurtosis, as this will
+indicate more predictable returns (the major exception is generally a
+                                   combination of high positive skewness and high excess kurtosis).  If you
+find yourself needing to analyze the distribution of complex or non-smooth
+asset distributions, the \code{nortest} package has several advanced
+statistical tests for analyzing the normality of a distribution.
+
+\emph{Modern Portfolio Theory (MPT)} is the collection of tools and
+techniques by which a risk-averse investor may construct an
+\dQuote{optimal} portfolio.  It was pioneered by Markowitz's
+ground-breaking 1952 paper \cite{Portfolio Selection}.  It also encompasses
+CAPM, below, the efficient market hypothesis, and all forms of quantitative
+portfolio construction and optimization.
+
+\emph{The Capital Asset Pricing Model (CAPM)}, initially developed by
+William Sharpe in 1964, provides a justification for passive or index
+investing by positing that assets that are not on the efficient frontier
+will either rise or fall in price until they are. The
+\code{\link{CAPM.RiskPremium}} is the measure of how much the asset's
+performance differs from the risk free rate.  Negative Risk Premium
+generally indicates that the investment is a bad investment, and the money
+should be allocated to the risk free asset or to a different asset with a
+higher risk premium.  \code{\link{CAPM.alpha}} is the degree to which the
+assets returns are not due to the return that could be captured from the
+market. Conversely, \code{\link{CAPM.beta}} describes the portions of the
+returns of the asset that could be directly attributed to the returns of a
+passive investment in the benchmark asset.
+
+The Capital Market Line \code{\link{CAPM.CML}} relates the excess expected
+return on an efficient market portfolio to its risk (represented in CAPM by
+                                                     \code{\link[stats]{sd}}).  The slope of the CML,
+\code{\link{CAPM.CML.slope}}, is the Sharpe Ratio for the market portfolio.
+The Security Market Line is constructed by calculating the line of
+\code{\link{CAPM.RiskPremium}} over \code{\link{CAPM.beta}}.  For the
+benchmark asset this will be 1 over the risk premium of the benchmark
+asset. The slope of the SML, primarily for plotting purposes, is given by
+\code{\link{CAPM.SML.slope}}. CAPM is a market equilibrium model or a
+general equilibrium theory of the relation of prices to risk, but it is
+usually applied to partial equilibrium portfolios, which can create
+(sometimes serious) problems in valuation.
+
+One extension to the CAPM contemplates evaluating an active manager's
+ability to time the market.  Two other functions apply the same notion of
+best fit to positive and negative market returns, separately.  The
+\code{\link{CAPM.beta.bull}} is a regression for only positive market
+returns, which can be used to understand the behavior of the asset or
+portfolio in positive or 'bull' markets.  Alternatively,
+\code{\link{CAPM.beta.bear}} provides the calculation on negative market
+returns. The \code{\link{TimingRatio}} uses the ratio of those to help
+assess whether the manager has shown evidence that of timing skill.
+
+\emph{Performance/Risk Ratios:}
+
+In many cases, an analyst will be looking to find a measure or performance 
+relative to the risk of the asset under study.  PerformanceAnalytics has many 
+functions of this type.
+
+One of the most commonly used and cited measures of the risk/reward tradeoff
+of an investment or portfolio is the \code{\link{SharpeRatio}}, which
+measures return over standard deviation.  If you are comparing multiple
+assets using Sharpe, you should use \code{\link{SharpeRatio.annualized}}. It
+is important to note that William Sharpe now recommends
+\code{\link{InformationRatio}} preferentially to the original Sharpe Ratio.
+The \code{\link{SortinoRatio}} uses mean return over
+\code{\link{DownsideDeviation}} below the MAR as the risk measure to produce
+a similar ratio that is more sensitive to downside risk. Sortino later
+enhanced his ideas to use upside returns for the numerator and
+\code{\link{DownsideDeviation}} as the denominator in
+\code{\link{UpsidePotentialRatio}}. \cite{Favre and Galeano(2002)} propose
+using the ratio of expected excess return over the Cornish-Fisher
+\code{\link{VaR}} to produce \code{\link{SharpeRatio.modified}}.
+\code{\link{TreynorRatio}} is also similar to the Sharpe Ratio, except it
+uses \code{\link{CAPM.beta}} in place of the volatility measure to produce
+the ratio of the investment's excess return over the beta. Use of the downside 
+semivariance as the denominator creates the .  Use of the upside expected tail 
+return over the ETL creates the \code{\link{RachevRatio}}.  Utilizing the 
+downside semivariance as the denominator produces the Downside Sharpe Ratio.
+
+The performance premium provided by an investment over a passive strategy
+(the benchmark) is provided by \code{\link{ActivePremium}}, which is the
+investment's annualized return minus the benchmark's annualized return. A
+closely related measure is the \code{\link{TrackingError}}, which  measures
+the unexplained portion of the investment's performance relative to a
+benchmark. The \code{\link{InformationRatio}} of an investment in a MPT or
+CAPM framework is the Active Premium divided by the Tracking Error.
+Information Ratio may be used to rank investments in a relative fashion.
+
+We have also included a function to compute the \code{\link{KellyRatio}}.
+The Kelly criterion applied to position sizing will maximize log-utility of
+returns and avoid risk of ruin.  For our purposes, it can also be used as a
+stack-ranking method like \code{\link{InformationRatio}} to describe the
+\dQuote{edge} an investment would have over a random strategy or
+distribution.
+
+These metrics and others such as \code{\link{SharpeRatio}},
+\code{\link{SortinoRatio}}, \code{\link{UpsidePotentialRatio}}, Spearman
+rank correlation (see \code{\link[Hmisc]{rcorr}}), etc., are all methods of
+rank-ordering relative performance. \cite{Alexander and Dimitriu (2004) in
+\dQuote{The Art of Investing in Hedge Funds}} show that relative rankings
+across multiple pricing methodologies may be positively correlated with
+each other and with expected returns.  This is quite an important finding
+because it shows that multiple methods of predicting returns and risk which
+have underlying measures and factors that are not directly correlated to
+another measure or factor will still produce widely similar quantile
+rankings, so that the \dQuote{buckets} of target instruments will have
+significant overlap.  This observation specifically supports the point made
+early in this document regarding \dQuote{accretion of the evidence} for a
+positive or negative investment decision.
 }
 
 \section{Standard Errors for Risk and Performance Estimators}{
