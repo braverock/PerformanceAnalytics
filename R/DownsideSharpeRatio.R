@@ -43,6 +43,12 @@ DownsideSharpeRatio <- function(R, rf=0,
   
   R = checkData(R, method="matrix")
   
+  # Adjusting the returns if rf is a vector of same length
+  if(length(rf)>1){
+    R <- apply(R, 2, function(x, rf) return(x-as.numeric(rf)), rf=rf)
+    rf <- 0
+  }
+  
   # Checking input if SE = TRUE
   if(SE){
     SE.check <- TRUE
@@ -94,8 +100,8 @@ DownsideSharpeRatio <- function(R, rf=0,
   }
   
   # Computation of Rachev Ratio
-  myDSR = t(apply(R, 2, DSR, rf=rf))
-  rownames(myDSR) = "Downside Sharpe Ratio"
+  myDSR <- t(apply(R, 2, DSR, rf=rf))
+  rownames(myDSR) <- "Downside Sharpe Ratio"
   
   if(SE) # Check if SE computation
     return(rbind(myDSR, ses)) else
