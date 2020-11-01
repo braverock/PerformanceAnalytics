@@ -515,7 +515,17 @@
 #' @section Standard Errors for Risk and Performance Estimators:
 #' 
 #' 
-#' While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators, until now there has been no convenient way to accurately compute standard errors of the estimates for independent and identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and Martin (2019) at \url{https://ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://ssrn.com/abstract=3415903}. The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated into \kbd{PerformanceAnalytics}.
+#' While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators, 
+#' until now there has been no convenient way to accurately compute standard errors of the estimates for independent and 
+#' identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no 
+#' longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns 
+#' are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and 
+#' Martin (2019) at \url{https://ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. 
+#' The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram 
+#' based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk 
+#' and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://ssrn.com/abstract=3415903}. 
+#' The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated 
+#' into \kbd{PerformanceAnalytics}.
 #' 
 #' Standard errors can be easily computed using the \kbd{PerformanceAnalytics} risk estimator functions
 #' \cr
@@ -532,15 +542,15 @@
 #' \code{\link{mean.arithmetic}}  \tab  Sample mean \cr
 #' \code{\link{SharpeRatio}} with argument \code{FUN="StdDev"} \tab Sharpe ratio \cr
 #' \code{\link{DownsideSharpeRatio}} or \code{\link{SharpeRatio}} with argument \code{FUN="SemiSD"}  \tab Downside Sharpe ratio \cr
-#' \code{\link{SortinoRatio}} \tab Sortino ratio with threshold a constant \eqn{c} or the mean \cr
+#' \code{\link{SortinoRatio}} \tab Sortino ratio with threshold \code{MAR} \cr
 #' \code{\link{SharpeRatio}} with argument \code{FUN="ES"} \tab Mean excess return to ES ratio with tail probability \eqn{\alpha} \cr
 #' \code{\link{SharpeRatio}} with argument \code{FUN="VaR"} \tab Mean excess return to VaR ratio with tail probability \eqn{\alpha} \cr
 #' \code{\link{RachevRatio}} \tab Rachev ratio with lower upper tail probabilities \eqn{\alpha} and \eqn{\beta} \cr
 #' \code{\link{Omega}} \tab Omega ratio with threshold \eqn{c} \cr
 #' }
-#' where the first columns give the names of the estimators in the \kbd{RPESE} package and the second column give the names of the \kbd{PerformanceAnalytics} function to be used to compute the estimate and its standard error.
+#' where the first columns gives the names of the functions in the \kbd{PerformanceAnalytics} package to compute the estimate and its standard error.
 #' 
-#' Each of the PerformanceAnalytics functions listed in the above two tables have an optional argument with default \code{SE = FALSE}. By changing this default to \code{SE = TRUE}, the user obtains not only risk or performance estimate, but also a standard error for the esimate. Further details concerning the computation of standard errors for the risk and performance estimators in \kbd{PerformanceAnalytics} can be found in the Vignette "Standard Errors for Risk and Performance Estimators in PerformanceAnalytics" available at \kbd{CRAN}, where a reference to the underlying theory due to Chen and Martin (2020) may be found.
+#' Each of the \kbd{PerformanceAnalytics} functions listed above have an optional argument with default \code{SE = FALSE}. By changing this default to \code{SE = TRUE}, the user obtains not only risk or performance estimate, but also a standard error for the esimate. Further details concerning the computation of standard errors for the risk and performance estimators in \kbd{PerformanceAnalytics} can be found in the Vignette "Standard Errors for Risk and Performance Estimators in PerformanceAnalytics" available at \kbd{CRAN}, where a reference to the underlying theory due to Chen and Martin (2020) may be found.
 #' 
 #' 
 #' 
@@ -822,7 +832,7 @@
 #' 
 #' Canto, V. \emph{Understanding Asset Allocation}. FT Prentice Hall. 2006. \cr
 #' 
-#' Chen, X. and Martin, R. Douglas. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
+#' Chen, X. and Martin, R. D. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
 #'   Returns}. SSRN eLibrary. 2019. \cr
 #' 
 #' Lhabitant, F. \emph{Hedge Funds: Quantitative Insights}. Wiley. 2004. \cr
@@ -831,19 +841,19 @@
 #'     Implementing Processes for Managing Firm-Wide Market Risk}. Euromoney. 1998.
 #' \cr
 #' 
-#' Martellini, Lionel, and Volker Ziemann. \emph{Improved Forecasts of
+#' Martellini, L., and Volker, Z. \emph{Improved Forecasts of
 #'   Higher-Order Comoments and Implications for Portfolio Selection.} EDHEC Risk
 #' and Asset Management Research Centre working paper. 2007. \cr
 #' 
 #' Martin, R. Douglas, and Arora, Rohit. \emph{Inefficiency and bias of modified value-at-risk
 #'   and expected shortfall}. 2017. Journal of Risk 19(6), 59–84 \cr
 #' 
-#' Ranaldo, Angelo, and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
+#' Ranaldo, A., and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
 #'   Two- to Four-Moment CAPM.} SSRN eLibrary. 2005.
 #' 
 #' Murrel, P. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 #' 
-#' Ruppert, David, and Matteson, David. \emph{Statistics and Data Analysis for 
+#' Ruppert, D., and Matteson, D \emph{Statistics and Data Analysis for 
 #'   Financial Engineering, with R Examples. Second Edition}. Springer. 2015. \cr
 #' 
 #' Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer.
@@ -853,12 +863,13 @@
 #' Applications, with R examples}, Springer, 2006. \cr
 #' 
 #' Tsay, R. \emph{Analysis of Financial Time Series}. Wiley. 2001. \cr
-#' Chen, X. and Martin, R. Douglas,. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
+#' 
+#' Chen, X. and Martin, R. D. \emph{Standard Errors of Risk and Performance Measure Estimators for Serially Correlated
 #' Returns}. SSRN eLibrary. 2019. \cr
 #' 
-#' Zhang, S., Martin, R. Douglas., et al. \emph{Influence Functions for Risk and Performance Estimators}. SSRN eLibrary. 2020. \cr
+#' Zhang, S., Martin, R. Douglas., and Christidis, A. \emph{Influence Functions for Risk and Performance Estimators}. SSRN eLibrary. 2020. \cr
 #' 
-#' Zin, Markowitz, Zhao A Note on Semivariance. Mathematical Finance, Vol. 16,
+#' Zin, M., Zhao. A Note on Semivariance. Mathematical Finance, Vol. 16,
 #' No. 1, pp. 53-61, January 2006
 #' 
 #' Zivot, E. and Wang, Z. \emph{Modeling Financial Time Series with S-Plus:

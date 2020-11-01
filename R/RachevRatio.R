@@ -4,8 +4,9 @@
 #' 
 #' @details 
 #' 
-#' The Rachev ratio, introducted in Rachev et al. (2008), is a measure of  of the upper tail reward potential relative to the lower tail 
-#' risk in a non-Gaussian setting. In essence, it is a measure of the potential of extreme positive returns to risk of extremel negative returns.
+#' The Rachev ratio, introducted in Rachev et al. (2008), is a non-parametric estimator of the upper tail reward potential relative to the 
+#' lower tail risk in a non-Gaussian setting, and as such, it is particularly useful when returns have a fat-tailed and possibly skewed distribution.
+#' For small \eqn{\alpha} and \eqn{\beta}, it is a measure of the potential of extreme positive returns to risk of extremel negative returns.
 #' 
 #' For lower tail parameter \eqn{\alpha} and lower tail parameter \eqn{\beta}, the Rachev ratio is given by 
 #' 

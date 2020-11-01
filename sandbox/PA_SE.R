@@ -53,7 +53,7 @@ out <- Omega(edhec, SE = TRUE)
 t(out)
 
 # SortinoRatio
-out <- SortinoRatio(edhec, SE = TRUE)
+out <- SortinoRatio(edhec, SE = TRUE, MAR = 0.005)
 t(out)
 
 # Downside Sharpe Ratio

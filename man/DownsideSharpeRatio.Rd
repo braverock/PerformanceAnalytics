@@ -25,7 +25,7 @@ A vector or a list depending on \code{se.method}.
 }
 \details{
 The Downside Sharpe Ratio (DSR) is a short name for what Ziemba (2005) called the "Symmetric Downside Risk Sharpe Ratio" and is
-defined as the ratio of the mean return to the square root of lower semivariance:
+defined as the ratio of the mean excess return to the square root of lower semivariance:
  
  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
 }
