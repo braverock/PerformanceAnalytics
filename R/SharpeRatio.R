@@ -184,16 +184,16 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES", "SemiSD"), weights=NU
     
     result.final <- matrix(nrow=ncol(R))
     for(FUNCT in FUN){
+      
+      # Setting the measure
+      if(FUNCT=="StdDev")
+        SR.measure <- "SR" else if(FUNCT=="ES")
+          SR.measure <- "ESratio" else if(FUNCT=="VaR")
+            SR.measure <- "VaRratio" else if(FUNCT=="SemiSD")
+              SR.measure <- "DSR"
     
       # SE Computation
       if(SE){
-        
-          # Setting the measure
-          if(FUNCT=="StdDev")
-            SR.measure <- "SR" else if(FUNCT=="ES")
-              SR.measure <- "ESratio" else if(FUNCT=="VaR")
-                SR.measure <- "VaRratio" else if(FUNCT=="SemiSD")
-                  SR.measure <- "DSR"
           
           # Setting the control parameters
           if(is.null(SE.control))
@@ -216,7 +216,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES", "SemiSD"), weights=NU
           ses.full <- rbind(ses.full, t(data.frame(ses)))
         }
     
-        if(SR.measure=="DSR")
+        if(FUNCT=="SemiSD")
           result[i,] <- DownsideSharpeRatio(R, rf=Rf, ...) else{
             
           if (is.null(weights)){
