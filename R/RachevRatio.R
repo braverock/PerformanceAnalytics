@@ -1,6 +1,17 @@
-#' @title Standard Error Estimate for Rachev Ratio of Returns
+#' @title Rachev Ratio
 #'
-#' @description \code{RachevRatio.SE} computes the standard error of the Rachev ratio of the returns.
+#' @description \code{RachevRatio} computation with standard errors.
+#' 
+#' @details 
+#' 
+#' The Rachev ratio, introducted in Rachev et al. (2008), is a non-parametric estimator of the upper tail reward potential relative to the 
+#' lower tail risk in a non-Gaussian setting, and as such, it is particularly useful when returns have a fat-tailed and possibly skewed distribution.
+#' For small \eqn{\alpha} and \eqn{\beta}, it is a measure of the potential of extreme positive returns to risk of extremel negative returns.
+#' 
+#' For lower tail parameter \eqn{\alpha} and lower tail parameter \eqn{\beta}, the Rachev ratio is given by 
+#' 
+#' \deqn{\frac{ETL_{\alpha}(R_{f}-R_{a})}{ETL_{\beta}(R_{a}-R_{f})}}.
+#' 
 #'
 #' @param R Data of returns for one or multiple assets or portfolios.
 #' @param alpha Lower tail probability.
@@ -15,6 +26,11 @@
 #' @export
 #'
 #' @author Anthony-Alexander Christidis, \email{anthony.christidis@stat.ubc.ca}
+#' 
+#' @references 
+#' 
+#' Rachev, Svetlozar T. et al. (2008). Advanced Stochastic Models, 
+#' Risk Assessment, and Portfolio Optimization (1st ed.)
 #'
 #' @examples
 #' # Loading data from PerformanceAnalytics
@@ -34,12 +50,19 @@ RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
   
   R = checkData(R, method="matrix")
   
-  if(isTRUE(SE)){
+  # Checking input if SE = TRUE
+  if(SE){
+    SE.check <- TRUE
     if(!requireNamespace("RPESE", quietly = TRUE)){
-      stop("Package \"pkg\" needed for standard errors computation. Please install it.",
-           call. = FALSE)
+      warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+              call. = FALSE)
+      SE <- FALSE
     }
-    
+  }
+  
+  # SE Computation
+  if(isTRUE(SE)){
+
     # Setting the control parameters
     if(is.null(SE.control))
       SE.control <- RPESE.control(estimator="RachevRatio")
@@ -54,8 +77,9 @@ RachevRatio <- function(R, alpha=0.1, beta=0.1, rf=0,
                                          freq.include=SE.control$freq.include,
                                          freq.par=SE.control$freq.par,
                                          a=SE.control$a, b=SE.control$b,
-                                         alpha=alpha, beta=beta, rf=rf, # Additional Parameters
+                                         alpha=alpha, beta=beta, rf=rf, 
                                          ...)
+      ses[[mymethod]]=ses[[mymethod]]$se
     }
     ses <- t(data.frame(ses))
   }

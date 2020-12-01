@@ -22,7 +22,7 @@ see \url{http://www.edhec-risk.com/about_us}
 \source{\url{http://www.edhec-risk.com/indexes/pure_style}}
 \references{
 About EDHEC Alternative Indexes. December 16, 2003. EDHEC-Risk. \cr
-\url{http://www.edhec-risk.com/indexes/pure_style/about}
+\url{https://risk.edhec.edu/about-edhec-risk-alternative-indexes}
 
 Vaissie Mathieu. A Detailed Analysis of the Construction Methods and Management Principles of Hedge Fund Indices. October 2003. EDHEC. \cr
 \url{http://www.edhec-risk.com/site_edhecrisk/public/indexes/EDHEC_Publications/RISKReview1072705188065793513}
