@@ -1,5 +1,5 @@
 ---
-title: "How to Contribute to Performance Analytics"
+title: "How to Contribute to PerformanceAnalytics"
 author: "Peter Carl, Brian Peterson"
 date: "04/01/2021"
 output:
@@ -92,14 +92,13 @@ For more information on documentation and R package development in general, read
 
 ## Use `xts` and `zoo` internally
 
-PerformanceAnalytics uses the xts package for managing time series data for several reasons. Besides being fast and efficient, xts includes functions that test the data for periodicity and draw attractive and readable time-based axes on charts. Another benefit is that xts provides compatibility with Rmetrics' timeSeries, zoo and other time series classes, such that PerformanceAnalytics functions that return a time series will return the results in the same format as the object that was passed in. Jeff Ryan and Josh Ulrich, the authors of xts, have been extraordinarily helpful to the development of PerformanceAnalytics and we are very grateful for their contributions to the community. 
+`PerformanceAnalytics` uses the xts package for managing time series data for several reasons. Besides being fast and efficient, `xts` includes functions that test the data for periodicity and draw attractive and readable time-based axes on charts. Another benefit is that `xts` provides compatibility with Rmetrics' `timeSeries`, `zoo` and other time series classes, such that `PerformanceAnalytics` functions that return a time series will return the results in the same format as the object that was passed in. Jeff Ryan and Josh Ulrich, the authors of `xts`, have been extraordinarily helpful to the development of `PerformanceAnalytics` and we are very grateful for their contributions to the community. 
 
-The xts package extends the excellent zoo package written by Achim Zeileis and Gabor Grothendieck. zoo provides more general time series support, whereas xts provides functionality that is specifically aimed at users in finance.
+The `xts` package extends the excellent `zoo` package written by Achim Zeileis and Gabor Grothendieck. `zoo` provides more general time series support, whereas `xts` provides functionality that is specifically aimed at users in finance.
 
 ## Learn how to ask good questions
-This might be your most important tool. 
 
-If you're having trouble, try to provide a small, reproducible example that someone can actually run on easily available data. If more complex data structures are required, `dump("x", file=stdout())` will print an expression that will recreate your data object, `x`.
+This might be your most important tool. If you're having trouble, try to provide a small, reproducible example that someone can actually run on easily available data. If more complex data structures are required, `dump("x", file=stdout())` will print an expression that will recreate your data object, `x`.
 
 A good place to ask questions is the [r-sig-finance](https://stat.ethz.ch/mailman/listinfo/r-sig-finance) mailing list, where the authors and several contributors to our packages are known to hang out. Before asking a question, make sure to read the [posting guide](http://www.r-project.org/posting-guide.html).  And then, for good measure, read [Eric Raymond's essay](http://www.catb.org/~esr/faqs/smart-questions.html) about how to ask a good question in forums like these.   
 
@@ -138,13 +137,13 @@ Although preferences for code style do vary, when there are a number of contribu
 
 ## Provide consistent and standard interfaces
 
-Given the number of users that PerformanceAnalytics has right now and the institutions in which they work, we try to be as 'stable' as possible for our users. That stability comes from allowing users to expect two things: that similar functions will work similarly to one another, and that interfaces to functions won't change without backward compatibility and warning.
+Given the number of users that `PerformanceAnalytics` has right now and the institutions in which they work, we try to be as 'stable' as possible for our users. That stability comes from allowing users to expect two things: that similar functions will work similarly to one another, and that interfaces to functions won't change without backward compatibility and warning.
 
 For the first aspect, `PerformanceAnalytics` uses standardized argument names and calling conventions throughout the package.  For example, in every function where a time series of returns is used, the argument for the data is named `R`.  If two such series are used, such as an asset and a benchmark time series, they are referred to as `Ra` and `Rb`, respectively.  Several other similar conventions exist, such as using `p` for specifying the quantile parameter in `VaR`, `ES`, `CDaR`, and other similar functions.  When writing or modifying a function, please use argument names that match similar functions.
 
 Secondly, the public interfaces of functions must not change in ways that break the users' existing code.  In particular, do not change the names, the order of the arguments or the format of the results delivered if at all possible.  Exceptions that are made for good reason require warnings about deprecation and handling for backward compatibility.
 
-We prefer that new arguments be added after dots (`...`).  When arguments appear after dots, the user is required to pass the argument in explicitly, using the argument name.  That prevents users from being confused about the order of the inputs. [Needs more detail? See also?]
+We prefer that new arguments be added after dots (`...`).  When arguments appear after dots, the user is required to pass the argument in explicitly, using the argument name.  That prevents users from being confused about the order of the inputs. 
 
 Parameter inputs should be the same periodicity as the data provided.  For example, if a user is providing monthly returns data and specifying a "minimum acceptable return" (such as `MAR` in `DownsideDeviation`), the `MAR` parameter is assumed to also be a monthly return - the same periodicity as the input data.
 
@@ -219,15 +218,15 @@ The `managers` data is an xts object that contains columns of monthly returns fo
 
 As you can see from the sample, returns are represented as a decimal number, rather than as a whole number with a percentile sign.  
 
-`PerformanceAnalytics` provides a function, `checkData` that examines input data and coerces it into a specified format.  This function was created to make the different kinds of data classes at least seem more fungible to the end user. It allows the user to pass in a data object without being concerned that the underlying functions require a matrix, data.frame, vector, xts, or timeSeries object. 
+`PerformanceAnalytics` provides a function, `checkData` that examines input data and coerces it into a specified format.  This function was created to make the different kinds of data classes at least seem more fungible to the end user. It allows the user to pass in a data object without being concerned that the underlying functions require a matrix, data.frame, vector, `xts`, or `timeSeries` object. 
 
-It allows the user to provide any type of data as input: a vector, matrix, data.frame, xts, timeSeries or zoo object.  `checkData` will identify and coerce the data into any of "xts" (the default), "zoo", "data.frame", "matrix", or "vector".  See `?checkData` for more details.
+It allows the user to provide any type of data as input: a vector, matrix, data.frame, `xts`, `timeSeries` or `zoo` object.  `checkData` will identify and coerce the data into any of `xts` (the default), `zoo`, "data.frame", "matrix", or "vector".  See `?checkData` for more details.
 
 ## Handle missing data
 
 Calculations will be made with the appropriate handling for missing data.  Contributors should not assume that users will provide complete or equal length data sets.  If only equal length data sets are required for the calculation, users should be warned with a message describing how the data was truncated.
 
-Be careful how you use `na.omit` on time series data. [add more here]
+Be careful how you use `na.omit` on time series data. That function removes rows with missing data, which may not be the outcome you want when dealing with time series data -- for example, missing data in one series may affect perfectly good data in another.
 
 ## Warn the user when making assumptions
 
