@@ -17,8 +17,6 @@ jobs:
     name: ${{ matrix.config.os }} (${{ matrix.config.r }})
     if: "! contains(github.event.head_commit.message, '[ci skip]')"
     runs-on: ${{ matrix.config.os }}
-    
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
 
     strategy:
       fail-fast: false
@@ -30,7 +28,6 @@ jobs:
           - {os: ubuntu-20.04, r: 'devel', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      _R_CHECK_FORCE_SUGGESTS_: false
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
@@ -44,6 +41,8 @@ jobs:
         shell: Rscript {0}
         
       - name: Check
+        env: 
+          _R_CHECK_FORCE_SUGGESTS_: false
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", build_args = c("--no-manual", "--no-build-vignettes"))
