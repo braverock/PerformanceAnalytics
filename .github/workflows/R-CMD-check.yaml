@@ -41,8 +41,10 @@ jobs:
           install.packages(c("remotes", "rcmdcheck"))
           remotes::install_deps(dependencies = TRUE)
         shell: Rscript {0}
+        
       - name: Check
-        env: _R_CHECK_FORCE_SUGGESTS_: false
+        env: 
+          _R_CHECK_FORCE_SUGGESTS_: false
         run: |
           options(crayon.enabled = TRUE)
           rcmdcheck::rcmdcheck(args = "--no-manual", error_on = "error", build_args = c("--no-manual", "--no-build-vignettes"))
