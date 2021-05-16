@@ -7,3 +7,4 @@ ChangeLog
 codeblock.txt
 ^\.travis.yml
 cran-comments.md
+^\.github$
