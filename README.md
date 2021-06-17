@@ -1,5 +1,6 @@
 # PerformanceAnalytics: Econometric tools for performance and risk analysis.
 
+![R-CMD-check](https://github.com/jaindhairyahere/PerformanceAnalytics/actions/workflows/slack-notify-build.yml/badge.svg)
 [![Travis Build
 Status](https://travis-ci.org/braverock/PerformanceAnalytics.svg?branch=master)](https://travis-ci.org/braverock/PerformanceAnalytics)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
