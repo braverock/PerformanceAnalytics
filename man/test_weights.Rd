@@ -4,7 +4,8 @@
 \name{test_weights}
 \alias{test_weights}
 \title{Sample sector weights for use by unit tests}
-\format{A data frame with 5 rows and 10 variables:
+\format{
+A data frame with 5 rows and 10 variables:
 \describe{
   \item{Sector1}{weight in Sector1, numeric}
   \item{Sector2}{weight in Sector2, numeric}
@@ -16,7 +17,8 @@
   \item{Sector8}{weight in Sector8, numeric}
   \item{Sector9}{weight in Sector9, numeric}
   \item{Sector10}{weight in Sector10, numeric}
-}}
+}
+}
 \usage{
 test_weights
 }

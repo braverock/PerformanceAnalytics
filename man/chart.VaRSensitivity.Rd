@@ -6,8 +6,8 @@
 \usage{
 chart.VaRSensitivity(
   R,
-  methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES", "ModifiedES",
-    "HistoricalES"),
+  methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES",
+    "ModifiedES", "HistoricalES"),
   clean = c("none", "boudt", "geltner"),
   elementcolor = "darkgray",
   reference.grid = TRUE,
