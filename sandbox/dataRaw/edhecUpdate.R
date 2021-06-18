@@ -25,10 +25,14 @@ attr(formated.returns, "dimnames") <- list(NULL,
 ## create xts object with formated date index and return matrix
 library(xts)
 updated.edhec <- xts(x = formated.returns, order.by = formated.date)
+# should have NO NA's
+sum(is.na(updated.edhec))
 
 # Test against previous edhec data for continuity
 subset.updated.edhec <- updated.edhec[paste(index(edhec[1]), index(edhec[nrow(edhec)]), sep="/")]
 all.equal(subset.updated.edhec, edhec)
+all.equal(names(edhec), names(subset.updated.edhec)) 
+
 ## TRUE test passed ##
 
 ## rename and write to folder as .rda file.
