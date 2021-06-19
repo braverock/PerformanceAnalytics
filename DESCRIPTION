@@ -30,7 +30,8 @@ Description: Collection of econometric functions for performance and risk
 Imports:
     methods,
     quadprog,
-    zoo
+    zoo,
+    R.rsp
 Depends:
     R (>= 3.5.0),
     xts (>= 0.10.0)
@@ -53,7 +54,6 @@ Suggests:
     nloptr,
     rgenoud,
     RPESE,
-    R.rsp,
     RobStatTM
 VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
