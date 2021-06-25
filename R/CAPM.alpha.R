@@ -15,7 +15,18 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @author Peter Carl
+#' @param \dots Parameters like method, family and other parameters like max.it or bb 
+#' for lmrobdetMM regression.
+#' @param method (Optional): string representing linear regression model, "LS" for Least Squares
+#'                    and "Rob" for robust      
+#' @param family (Optional): 
+#'         If method == "Rob": 
+#'           This is a string specifying the name of the family of loss function
+#'           to be used (current valid options are "bisquare", "opt" and "mopt").
+#'           Incomplete entries will be matched to the current valid options. 
+#'           Defaults to "mopt".
+#'         Else: the parameter is ignored
+#' @author Peter Carl, Dhairya Jain
 #' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -31,10 +42,21 @@
 #' 			Rf=.035/12) 
 #'     CAPM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, method="LS") 
+#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
+#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf = managers[,10,drop=FALSE],
+#' 			method="Rob", family="mopt")
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)
+#'     CAPM.alpha(managers[,1:6], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, method="Rob", 
+#' 			family="bisquare", bb=0.25, max.it=200)
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
@@ -44,11 +66,15 @@
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
+#'     CAPM.alpha(managers[,1:6], 
+#' 			managers[,8:7,drop=FALSE], 
+#' 			Rf = managers[,10,drop=FALSE],method="Rob", 
+#' 			family="bisquare", bb=0.25, max.it=200)
 #'   		
 #' @rdname CAPM.alpha
 #' @export SFM.alpha CAPM.alpha
-CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
-{ # @author Peter Carl
+CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
+    # @author Peter Carl, Dhairya
 
     # DESCRIPTION:
     # This is a wrapper for calculating a CAPM alpha.
@@ -59,7 +85,17 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
     # R and Rb are assumed to be matching periods
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as R and y.
-
+    #  , method="LS", family="mopt"
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Rob" for robust      
+    # family (Optional): 
+    #         If method == "Rob": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    
     # Output:
     # CAPM alpha
 
@@ -77,16 +113,11 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    alpha <-function (xRa, xRb)
-    {
-        merged = as.data.frame(na.omit(cbind(xRa, xRb)))
-        model.lm = lm(merged[,1] ~ merged[,2], merged)
-        alpha = coef(model.lm)[[1]]
-        alpha
-    }
-
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) alpha(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
-
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
+        xRb = xRb, ...=...)
+    result = result.all[[1]]$intercept
+        
     if(length(result) ==1)
         return(result)
     else {

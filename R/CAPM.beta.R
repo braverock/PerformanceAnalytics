@@ -36,7 +36,18 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @author Peter Carl
+#' @param \dots Parameters like method, family and other parameters like max.it or bb 
+#' for lmrobdetMM regression.
+#' @param method (Optional): string representing linear regression model, "LS" for Least Squares
+#'                    and "Rob" for robust      
+#' @param family (Optional): 
+#'         If method == "Rob": 
+#'           This is a string specifying the name of the family of loss function
+#'           to be used (current valid options are "bisquare", "opt" and "mopt").
+#'           Incomplete entries will be matched to the current valid options. 
+#'           Defaults to "mopt".
+#'         Else: the parameter is ignored
+#' @author Peter Carl, Dhairya Jain
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
 #' \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
@@ -50,34 +61,54 @@
 #' data(managers)
 #'     CAPM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12) 
+#' 			Rf=.035/12)
 #'     CAPM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
+#' 			Rf=.035/12, method="LS") 
+#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf = managers[,10,drop=FALSE],
+#' 			method="Rob", family="mopt")
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12)
+#' 			Rf=.035/12, method="Rob", 
+#' 			family="bisquare", bb=0.25, max.it=200)
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
-#' 			Rf=.035/12) 
+#' 			Rf=.035/12, method="Rob", family="mopt") 
 #'     CAPM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
 #'     CAPM.beta(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#' 	   CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE])
 #'     CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			method="Rob", family="bisquare",
+#' 			bb=0.25, max.it=200)
+#' 	   CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
 #'     CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			method="Rob", family="bisquare",
+#' 			bb=0.25, max.it=200)
 #'     TimingRatio(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#' 	   TimingRatio(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			method="Rob", family="bisquare",
+#' 			bb=0.25, max.it=200)	
 #'     chart.Regression(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE], 
@@ -86,8 +117,8 @@
 #'   		
 #' @rdname CAPM.beta
 #' @export CAPM.beta SFM.beta
-CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
-{ # @author Peter Carl
+CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
+{ # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
     # This is a wrapper for calculating a CAPM beta.
@@ -97,7 +128,17 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
     # Rb: vector of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
-
+    #   , method="LS", family="mopt"
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Rob" for robust      
+    # family (Optional): 
+    #         If method == "Rob": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    
     # Output:
     # 
 
@@ -115,9 +156,12 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
-        .beta(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
-
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
+        xRb = xRb, ...)
+    
+    result = result.all[[1]]$beta
+    
     if(length(result) ==1)
         return(result)
     else {
@@ -131,7 +175,7 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0)
 #' @rdname CAPM.beta
 #' @export
 CAPM.beta.bull <-
-function (Ra, Rb, Rf = 0)
+function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -142,7 +186,17 @@ function (Ra, Rb, Rf = 0)
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as x and y.
-
+    #  , method="LS", family="mopt"
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Rob" for robust      
+    # family (Optional): 
+    #         If method == "Rob": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    #
     # Output:
     # Bear market beta
 
@@ -166,9 +220,12 @@ function (Ra, Rb, Rf = 0)
         return(NA)
     }
     
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
-        .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0), xRa = xRa, xRb = xRb)
-
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0, ...), 
+        xRa = xRa, xRb = xRb, ...)
+    
+    result = result.all[[1]]$beta
+    
     if(length(result) ==1)
         return(result)
     else {
@@ -182,7 +239,7 @@ function (Ra, Rb, Rf = 0)
 #' @rdname CAPM.beta
 #' @export
 CAPM.beta.bear <-
-function (Ra, Rb, Rf = 0)
+function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -193,7 +250,17 @@ function (Ra, Rb, Rf = 0)
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as Ra and Rb.
-
+    #  , method="LS", family="mopt"
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Rob" for robust      
+    # family (Optional): 
+    #         If method == "Rob": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    
     # Output:
     # Bear market beta
 
@@ -217,9 +284,11 @@ function (Ra, Rb, Rf = 0)
         return(NA)
     }
     
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb)
-        .beta(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0), xRa = xRa, xRb = xRb)
-
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0, ...), 
+        xRa = xRa, xRb = xRb, ...)
+    
+    result = result.all[[1]]$beta
     if(length(result) ==1)
         return(result)
     else {
@@ -234,14 +303,14 @@ function (Ra, Rb, Rf = 0)
 #' @rdname CAPM.beta
 #' @export
 TimingRatio <-
-function (Ra, Rb, Rf = 0)
+function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl
 
     # DESCRIPTION:
     # This function calculates the ratio of the two conditional CAPM betas (up and down).
 
-    beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf)
-    beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf)
+    beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf, ...)
+    beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf, ...)
     result = beta.bull/beta.bear
 
     if(length(result) ==1)
@@ -253,26 +322,6 @@ function (Ra, Rb, Rf = 0)
     }
 }
 
-.beta <- function (xRa, xRb, subset) {
-    # subset is assumed to be a logical vector
-    if(missing(subset))
-        subset <- TRUE
-    # check columns
-    if(NCOL(xRa)!=1L || NCOL(xRb)!=1L || NCOL(subset)!=1L)
-        stop("all arguments must have only one column")
-    # merge, drop NA
-    merged <- as.data.frame(na.omit(cbind(xRa, xRb, subset)))
-    # return NA if no non-NA values
-    if(NROW(merged)==0)
-        return(NA)
-    # add column names and convert subset back to logical
-    colnames(merged) <- c("xRa","xRb","subset")
-    merged$subset <- as.logical(merged$subset)
-    # calculate beta
-    model.lm = lm(xRa ~ xRb, data=merged, subset=merged$subset)
-    beta = coef(model.lm)[[2]]
-    beta
-}
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
