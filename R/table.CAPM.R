@@ -85,11 +85,21 @@ table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             merged.assets = as.data.frame(na.omit(merged.assets)) # leaves the overlapping period
             # these should probably call CAPM.alpha and CAPM.beta for consistency (not performance)
-            model.lm = lm(merged.assets[,1] ~ merged.assets[,2])
-            alpha = coef(model.lm)[[1]]
-            beta = coef(model.lm)[[2]]
-            CAPMbull = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
-            CAPMbear = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
+            models = CAPM.coefficients(merged.assets[,1], merged.assets[,2], method="Both")
+            model.lm = models[[1]]$ordinary[[1]]$model
+            model.lmRobDetMM = models[[1]]$robust[[1]]$model
+            
+            alpha.lm = coef(model.lm)[[1]]
+            beta.lm = coef(model.lm)[[2]]
+            alpha.rob = coef(model.lmRobDetMM)[[1]]
+            beta.rob = coef(model.lmRobDetMM)[[2]]
+            
+            CAPMbull.lm = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
+            CAPMbear.lm = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
+            
+            CAPMbull.rob = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf,method="mOpt") #inefficient, recalcs excess returns and intercept
+            CAPMbear.rob = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf,method="mOpt") #inefficient, recalcs excess returns and intercept
+            
             htest = cor.test(as.numeric(merged.assets[,1]), as.numeric(merged.assets[,2]))
             #active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
             active.premium = ActivePremium(Ra=Ra[,column.a],Rb=Rb[,column.b], scale = scale)
@@ -99,12 +109,18 @@ table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
             treynor.ratio = TreynorRatio(Ra=Ra[,column.a], Rb=Rb[,column.b], Rf = Rf, scale = scale)
 
             z = c(
-                    alpha,
-                    beta,
-                    CAPMbull,
-                    CAPMbear,
+                    alpha.lm,
+                    beta.lm,
+                    alpha.rob,
+                    beta.rob,
+                    CAPMbull.lm,
+                    CAPMbear.lm,
+                    CAPMbull.rob,
+                    CAPMbear.rob,
+                    
                     summary(model.lm)$r.squared,
-                    ((1+alpha)^scale - 1),
+                    summary(model.lmRobDetMM)$r.squared,
+                    ((1+alpha.lm)^scale - 1),
                     htest$estimate,
                     htest$p.value,
                     tracking.error,
@@ -116,9 +132,14 @@ table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
             znames = c(
                     "Alpha",
                     "Beta",
+                    "Alpha Robust",
+                    "Beta Robust",
                     "Beta+",
                     "Beta-",
+                    "Beta+ Robust",
+                    "Beta- Robust",
                     "R-squared",
+                    "R-squared Robust",
                     "Annualized Alpha",
                     "Correlation",
                     "Correlation p-value",

@@ -5,7 +5,7 @@
 \alias{SFM.alpha}
 \title{calculate single factor model (CAPM) alpha}
 \usage{
-CAPM.alpha(Ra, Rb, Rf = 0)
+CAPM.alpha(Ra, Rb, Rf = 0, ...)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -61,5 +61,5 @@ Introduction}. Springer. 2004. \cr
 \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 }
 \author{
-Peter Carl
+Peter Carl, Dhairya Jain
 }
