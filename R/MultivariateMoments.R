@@ -8,7 +8,7 @@
 # efficient when running against very large numbers of instruments or portfolios.
 #
 # Copyright (c) 2008 Kris Boudt and Brian G. Peterson
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson for PerformanceAnalytics
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson for PerformanceAnalytics
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
 ###############################################################################
@@ -228,8 +228,50 @@ M4.innprod <- function(p, M4_1, M4_2 = NULL) {
   .Call('M4innprod', M4_1, M4_2, as.integer(p), PACKAGE="PerformanceAnalytics")
 }
 
-# Wrapper function for casting the vector with unique coskewness elements into the matrix format
+#' Helper function for comoment matrices
+#' 
+#' transforms vector with unique coskewness or cokurtosis elements to the full
+#' coskewness and cokurtosis matrix. Also works in the reverse direction by 
+#' extracting the unique coskewness and cokurtosis elements from full the 
+#' coskewness or cokurtosis matrices.
+#' 
+#' For documentation on the coskewness and cokurtosis matrices, we refer to
+#' ?CoMoments. Both the full matrices and reduced form can be the output of
+#' M3.MM and M4.MM, depending on the optional argument as.mat.
+#' 
+#' @name unique-comoments
+#' @concept co-moments
+#' @concept moments
+#' @param M3 matrix of dimension p x p^2, or a vector with 
+#' (p * (p + 1) * (p + 2) / 6) unique coskewness elements
+#' @param M4 matrix of dimension p x p^3, or a vector with 
+#' (p * (p + 1) * (p + 2) * (p + 3) / 12) unique coskewness elements
+#' @param p number of variables; the number of instruments for which the
+#' coskewness or cokurtosis matrix/vector was computed
+#' @author Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
+#' \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}} \cr \code{\link{NCE}}
+###keywords ts multivariate distribution models
+#' @examples
+#' 
+#' data(managers)
+#' p <- ncol(edhec)
+#' 
+#' # transform coskewness between matrix and vector format
+#' m3 <- M3.MM(edhec, as.mat=TRUE)
+#' m3bis <- M3.vec2mat(M3.MM(edhec, as.mat=FALSE), p)
+#' sum((m3 - m3bis)^2)
+#' 
+#' # transform cokurtosis between matrix and vector format
+#' m4 <- M4.MM(edhec, as.mat=FALSE)
+#' m4bis <- M4.mat2vec(M4.MM(edhec, as.mat=TRUE))
+#' sum((m4 - m4bis)^2)
+#' 
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname unique-comoments
 M3.vec2mat <- function(M3, p) {
+  # Wrapper function for casting the vector with unique coskewness elements into the matrix format
   # M3        : numeric vector with unique coskewness elements (p * (p + 1) * (p + 2) / 6)
   # p         : dimension of the data
   
@@ -238,8 +280,11 @@ M3.vec2mat <- function(M3, p) {
   .Call('M3vec2mat', M3, as.integer(p), PACKAGE="PerformanceAnalytics")
 }
 
-# Wrapper function for casting the coskewness matrix into the vector of unique elements
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname unique-comoments
 M3.mat2vec <- function(M3) {
+  # Wrapper function for casting the coskewness matrix into the vector of unique elements
   # M3        : numeric matrix of dimension p x p^2
   
   if (is.null(dim(M3))) stop("M3 must be a matrix")
@@ -247,8 +292,11 @@ M3.mat2vec <- function(M3) {
   .Call('M3mat2vec', as.numeric(M3), NROW(M3), PACKAGE="PerformanceAnalytics")
 }
 
-# Wrapper function for casting the vector with unique cokurtosis elements into the matrix format
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname unique-comoments
 M4.vec2mat <- function(M4, p) {
+  # Wrapper function for casting the vector with unique cokurtosis elements into the matrix format
   # M4        : numeric vector with unique cokurtosis elements (p * (p + 1) * (p + 2) * (p + 3) / 24)
   # p         : dimension of the data
   
@@ -257,8 +305,11 @@ M4.vec2mat <- function(M4, p) {
   .Call('M4vec2mat', M4, as.integer(p), PACKAGE="PerformanceAnalytics")
 }
 
-# Wrapper function for casting the cokurtosis matrix into the vector of unique elements
+#'@useDynLib PerformanceAnalytics
+#'@export
+#'@rdname unique-comoments
 M4.mat2vec <- function(M4) {
+  # Wrapper function for casting the cokurtosis matrix into the vector of unique elements
   # M4        : numeric matrix of dimension p x p^3
   
   if (is.null(dim(M4))) stop("M4 must be a matrix")
@@ -312,23 +363,24 @@ M4.mat2vec <- function(M4) {
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} 
+#' \cr \code{\link{MCA}} \cr \code{\link{NCE}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
 #' 
-#' Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+#' Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 #' Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-#' Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+#' Journal of Financial Econometrics, 18(1), 1-23.
 #' 
-#' Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+#' Ledoit, Olivier and Michael Wolf. 2003. Improved estimation of the covariance matrix 
 #' of stock returns with an application to portfolio selection. Journal of empirical 
 #' finance, 10(5), 603-621.
 #' 
-#' Ledoit, Olivier and Wolf, Michael. 2004. A well-conditioned estimator for large-dimensional 
+#' Ledoit, Olivier and Michael Wolf. 2004. A well-conditioned estimator for large-dimensional 
 #' covariance matrices. Journal of multivariate analysis, 88(2), 365-411.
 #' 
-#' Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
+#' Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 #' comoments and implications for portfolio selection. Review of Financial 
 #' Studies, 23(4), 1467-1502.
 #' 
@@ -1004,23 +1056,24 @@ M4.shrink <- function(R, targets = 1, f = NULL, as.mat = TRUE) {
 #' the vector with the unique elements (the latter is advised for speed), default
 #' TRUE
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
-#' @references Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
-#' models and asset allocation. Finance Research Letters, 13, 225-233.
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} 
+#' \cr \code{\link{MCA}} \cr \code{\link{NCE}}
+#' @references Boudt, Kris, Wanbo Lu and Benedict Peeters. 2015. Higher order comoments 
+#' of multifactor models and asset allocation. Finance Research Letters, 13, 225-233.
 #' 
 #' Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
 #' 
-#' Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+#' Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 #' Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-#' Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+#' Journal of Financial Econometrics, 18(1), 1-23.
 #' 
-#' Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+#' Ledoit, Olivier and Michael Wolf. 2003. Improved estimation of the covariance matrix 
 #' of stock returns with an application to portfolio selection. Journal of empirical 
 #' finance, 10(5), 603-621.
 #' 
-#' Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
+#' Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 #' comoments and implications for portfolio selection. Review of Financial 
 #' Studies, 23(4), 1467-1502.
 #' 
@@ -1351,7 +1404,8 @@ M4.struct <- function(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
 #' TRUE
 #' @param \dots any other passthru parameters
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} 
+#' \cr \code{\link{MCA}} \cr \code{\link{NCE}}
 #' @references 
 #' JP Morgan. Riskmetrics technical document. 1996.
 ###keywords ts multivariate distribution models
@@ -1569,12 +1623,13 @@ M4.ewma <- function(R, lambda = 0.97, last.M4 = NULL, as.mat = TRUE, ...) {
 #' TRUE
 #' @param \dots any other passthru parameters
 #' @author Dries Cornilly
-#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+#' @seealso \code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} 
+#' \cr \code{\link{EWMAMoments}} \cr \code{\link{NCE}}
 #' @references 
 #' Lim, Hek-Leng and Morton, Jason. 2007. Principal Cumulant Component Analysis. working paper
 #' 
-#' Jondeau, Eric and Jurczenko, Emmanuel. 2017. Moment Component Analysis: An Illustration 
-#' With International Stock Markets. Journal of Business and Economic Statistics
+#' Jondeau, Eric and Jurczenko, Emmanuel. 2018. Moment Component Analysis: An Illustration 
+#' With International Stock Markets. Journal of Business and Economic Statistics, 36(4), 576-598.
 #' @examples
 #' data(edhec)
 #' 
@@ -1724,7 +1779,7 @@ M4.MCA <- function(R, k = 1, as.mat = TRUE, ...) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson and Kris Boudt
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson and Kris Boudt
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

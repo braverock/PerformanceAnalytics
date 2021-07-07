@@ -4,8 +4,16 @@
 \alias{chart.RollingCorrelation}
 \title{chart rolling correlation fo multiple assets}
 \usage{
-chart.RollingCorrelation(Ra, Rb, width = 12, xaxis = TRUE,
-  legend.loc = NULL, colorset = (1:12), ..., fill = NA)
+chart.RollingCorrelation(
+  Ra,
+  Rb,
+  width = 12,
+  xaxis = TRUE,
+  legend.loc = NULL,
+  colorset = (1:12),
+  ...,
+  fill = NA
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of

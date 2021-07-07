@@ -4,8 +4,15 @@
 \alias{charts.RollingPerformance}
 \title{rolling performance chart}
 \usage{
-charts.RollingPerformance(R, width = 12, Rf = 0, main = NULL,
-  event.labels = NULL, legend.loc = NULL, ...)
+charts.RollingPerformance(
+  R,
+  width = 12,
+  Rf = 0,
+  main = NULL,
+  event.labels = NULL,
+  legend.loc = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -31,6 +38,8 @@ A wrapper to create a rolling annualized returns chart, rolling annualized
 standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
 \examples{
+if(!( Sys.info()[['sysname']]=="Windows") ){
+# if on Windows, cut and paste this example
 
 data(managers)
 charts.RollingPerformance(managers[,1:8], 
@@ -38,6 +47,7 @@ charts.RollingPerformance(managers[,1:8],
                           colorset=tim8equal, 
                           main="Rolling 12-Month Performance", 
                           legend.loc="topleft")
+}
 
 }
 \seealso{

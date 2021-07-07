@@ -16,7 +16,7 @@ asset returns}
 \item{digits}{number of digits to round results to}
 }
 \description{
-Table of Monthly standard deviation, Skewness, Sample standard deviation,
+Table of standard deviation, Skewness, Sample standard deviation,
 Kurtosis, Excess kurtosis, Sample Skweness and Sample excess kurtosis
 }
 \examples{

@@ -13,24 +13,27 @@ Authors@R: c(
   , person(given="Matthieu",family="Lestel",role="ctb")
   , person(given="Kyle",family="Balkissoon",role="ctb")  
   , person(given="Diethelm",family="Wuertz",role="ctb")  
+  , person(given=c("Anthony","Alexander"),family="Christidis",role="ctb")  
+  , person(given="R. Douglas",family="Martin",role="ctb")  
+  , person(given=c("Zeheng", "'Zenith'"),family="Zhou",role="ctb")  
+  , person(given=c("Justin", "M."),family="Shea",role="ctb")   
   )
-Version: 1.5.2.2
-Date: 2018-06-19 $Date$
-Description: Collection of econometric functions for
-    performance and risk analysis. This package aims to aid
-    practitioners and researchers in utilizing the latest
-    research in analysis of non-normal return streams.  In
-    general, it is most tested on return (rather than
-    price) data on a regular scale, but most functions will
-    work with irregular return data as well, and increasing
-    numbers of functions will work with P&L or price data
-    where possible.
+Version: 2.0.5
+Date: 2020-03-03
+Description: Collection of econometric functions for performance and risk 
+    analysis. In addition to standard risk and performance metrics, this 
+    package aims to aid practitioners and researchers in utilizing the latest
+    research in analysis of non-normal return streams.  In general, it is most 
+    tested on return (rather than price) data on a regular scale, but most 
+    functions will work with irregular return data as well, and increasing
+    numbers of functions will work with P&L or price data where possible.
 Imports:
     methods,
     quadprog,
-    zoo
+    zoo,
+    R.rsp
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.5.0),
     xts (>= 0.10.0)
 Suggests:
     dygraphs,
@@ -41,9 +44,21 @@ Suggests:
     gamlss.dist,
     robustbase,
     quantreg,
-    gplots,
-    testthat
+    tinytest,
+    ggplot2,
+    RColorBrewer,
+    googleVis,
+    plotly,
+    gridExtra,
+    ggpubr,
+    nloptr,
+    rgenoud,
+    RPESE,
+    RobStatTM
+VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
+Encoding: UTF-8
+LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
-Copyright: (c) 2004-2018
-RoxygenNote: 6.0.1.9000
+Copyright: (c) 2004-2020
+RoxygenNote: 7.1.1

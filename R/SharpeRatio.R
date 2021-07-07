@@ -20,12 +20,18 @@
 #' Modified Cornish-Fisher VaR or CVaR/Expected Shortfall as the measure of
 #' Risk.
 #' 
-#' We have recently extended this concept to create multivariate modified
+#' We have extended this concept to create multivariate modified
 #' Sharpe-like Ratios for standard deviation, Gaussian VaR, modified VaR,
 #' Gaussian Expected Shortfall, and modified Expected Shortfall. See
 #' \code{\link{VaR}} and \code{\link{ES}}.  You can pass additional arguments
 #' to \code{\link{VaR}} and \code{\link{ES}} via \dots{} The most important is
 #' probably the 'method' argument/
+#' 
+#' Most recently, we have added Downside Sharpe Ratio (DSR) (see \code{\link{DownsideSharpeRatio}}), a short name for what Ziemba (2005) 
+#' called the "Symmetric Downside Risk Sharpe Ratio" and is defined as the ratio of the mean return 
+#' to the square root of lower semivariance:
+#'  
+#'  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
 #' 
 #' This function returns a traditional or modified Sharpe ratio for the same
 #' periodicity of the data being input (e.g., monthly data -> monthly SR)
@@ -40,6 +46,8 @@
 #' @param weights portfolio weighting vector, default NULL, see Details in
 #' \code{\link{VaR}}
 #' @param annualize if TRUE, annualize the measure, default FALSE
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters to the VaR or ES functions
 #' @author Brian G. Peterson
 #' @seealso \code{\link{SharpeRatio.annualized}} \cr
@@ -52,6 +60,10 @@
 #' Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 #' Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 #' v 5.
+#' 
+#' Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of 
+#' Portfolio Management, 32(1), 108-122.
+#' 
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
@@ -76,7 +88,9 @@
 #' @export
 #' @rdname SharpeRatio
 SharpeRatio <-
-function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annualize = FALSE , ...)
+function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES", "SemiSD"), weights=NULL, annualize = FALSE , 
+          SE=FALSE, SE.control=NULL,
+          ...)
 { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -157,21 +171,73 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, annual
     
     tmprownames=vector()
     
-    for (FUNCT in FUN){
-        if (is.null(weights)){
-            if(annualize)
-                result[i,] = sapply(R, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
-            else
-                result[i,] = sapply(R, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+    # Checking input if SE = TRUE
+    if(SE){
+      
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
+      }
+      ses.full <- matrix(ncol=ncol(R), nrow=0)
+    }
+    
+    result.final <- matrix(nrow=ncol(R))
+    for(FUNCT in FUN){
+      
+      # Setting the measure
+      if(FUNCT=="StdDev")
+        SR.measure <- "SR" else if(FUNCT=="ES")
+          SR.measure <- "ESratio" else if(FUNCT=="VaR")
+            SR.measure <- "VaRratio" else if(FUNCT=="SemiSD")
+              SR.measure <- "DSR"
+    
+      # SE Computation
+      if(SE){
+          
+          # Setting the control parameters
+          if(is.null(SE.control))
+            SE.control <- RPESE.control(estimator=SR.measure)
+          
+          # Computation of SE (optional)
+          ses=list()
+          # For each of the method specified in se.method, compute the standard error
+          for(mymethod in SE.control$se.method){
+            ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = SR.measure, se.method = mymethod, 
+                                               cleanOutliers=SE.control$cleanOutliers,
+                                               fitting.method=SE.control$fitting.method,
+                                               freq.include=SE.control$freq.include,
+                                               freq.par=SE.control$freq.par,
+                                               a=SE.control$a, b=SE.control$b,
+                                               alpha=1-p, rf=Rf, 
+                                               ...)
+            ses[[mymethod]]=ses[[mymethod]]$se
+          }
+          ses.full <- rbind(ses.full, t(data.frame(ses)))
         }
-        else { # TODO FIX this calculation, currently broken
-            result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+    
+        if(FUNCT=="SemiSD")
+          result[i,] <- DownsideSharpeRatio(R, rf=Rf, ...) else{
+            
+          if (is.null(weights)){
+              if(annualize)
+                  result[i,] = sapply(R, FUN=sra, Rf=Rf, p=p, FUNC=FUNCT, ...)
+              else
+                  result[i,] = sapply(R, FUN=srm, Rf=Rf, p=p, FUNC=FUNCT, ...)
+          }
+          else { # TODO FIX this calculation, currently broken
+              result[i,] = mean(R%*%weights,na.rm=TRUE)/match.fun(FUNCT)(R, Rf=Rf, p=p, weights=weights, portfolio_method="single", ...=...)
+          }
         }
         tmprownames = c(tmprownames, paste(if(annualize) "Annualized ", FUNCT, " Sharpe", " (Rf=", round(scale*mean(Rf)*100,1), "%, p=", round(p*100,1),"%):", sep=""))
+
         i=i+1 #increment counter
     }
     rownames(result)=tmprownames
-    return (result)
+    
+    if(SE)
+      return(rbind(result, ses.full)) else
+        return(result)
 }
 
 #' @export
@@ -186,7 +252,7 @@ function (R, Rf = 0, p = 0.95, FUN=c("StdDev", "VaR","ES"), weights=NULL, ...) {
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

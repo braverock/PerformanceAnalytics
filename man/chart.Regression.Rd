@@ -5,13 +5,32 @@
 \title{Takes a set of returns and relates them to a market benchmark in a
 scatterplot}
 \usage{
-chart.Regression(Ra, Rb, Rf = 0, excess.returns = FALSE,
-  reference.grid = TRUE, main = "Title", ylab = NULL, xlab = NULL,
-  xlim = NA, colorset = 1:12, symbolset = 1:12,
-  element.color = "darkgray", legend.loc = NULL, ylog = FALSE,
-  fit = c("loess", "linear", "conditional", "quadratic"), span = 2/3,
-  degree = 1, family = c("symmetric", "gaussian"), ylim = NA,
-  evaluation = 50, legend.cex = 0.8, cex = 0.8, lwd = 2, ...)
+chart.Regression(
+  Ra,
+  Rb,
+  Rf = 0,
+  excess.returns = FALSE,
+  reference.grid = TRUE,
+  main = "Title",
+  ylab = NULL,
+  xlab = NULL,
+  xlim = NA,
+  colorset = 1:12,
+  symbolset = 1:12,
+  element.color = "darkgray",
+  legend.loc = NULL,
+  ylog = FALSE,
+  fit = c("loess", "linear", "conditional", "quadratic"),
+  span = 2/3,
+  degree = 1,
+  family = c("symmetric", "gaussian"),
+  ylim = NA,
+  evaluation = 50,
+  legend.cex = 0.8,
+  cex = 0.8,
+  lwd = 2,
+  ...
+)
 }
 \arguments{
 \item{Ra}{a vector of returns to test, e.g., the asset to be examined}

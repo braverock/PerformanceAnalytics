@@ -3,7 +3,6 @@
 \name{Return.calculate}
 \alias{Return.calculate}
 \alias{CalculateReturns}
-\alias{CalculateReturns}
 \title{calculate simple or compound returns from prices}
 \usage{
 Return.calculate(prices, method = c("discrete", "log", "difference"))
@@ -20,13 +19,13 @@ calculate simple or compound returns from prices
 }
 \details{
 Two requirements should be made clear.  First, the function
-\code{Return.calculate} assumes regular price data.  In this case, we
+\code{Return.calculate} assumes regular price data.  In the example, we
 downloaded monthly close prices.  Prices can be for any time scale, such as
 daily, weekly, monthly or annual, as long as the data consists of regular
 observations.  Irregular observations require time period scaling to be
 comparable.  Fortunately, \code{\link[xts]{to.period}} in the \code{xts}
-package, or the \code{\link[zoo]{aggregate.zoo}} in the \code{zoo} package
-supports supports management and conversion of irregular time series.
+package, or \code{\link[zoo]{aggregate.zoo}} in the \code{zoo} package
+support management and conversion of irregular time series to regular time series.
 
 Second, if corporate actions, dividends, or other adjustments such as time-
 or money-weighting are to be taken into account, those calculations must be
@@ -37,21 +36,29 @@ up with "price returns" instead of "total returns".  This can lead to
 significant underestimation of the return series over longer time periods.
 To use adjusted returns, specify \code{quote="AdjClose"} in
 \code{\link[tseries]{get.hist.quote}}, which is found in package
-\code{tseries}.
+\code{tseries}, or use the \code{\link[quantmod]{Ad}} function.
 
-We have changes the default arguments and settings for \code{method}
-from \code{compound} and \code{simple} to \code{discrete} and 
-\code{log} and \code{discrete} to avoid confusing between the return type
-and the chaining method.  In most of the rest of \code{PerformanceAnalytics},
-compound and simple are used to refer to the \emph{return chaining} method used for the returns.
+We have changed the default arguments and settings for \code{method}
+from \code{compound} and \code{simple} to \code{discrete} and \code{log} 
+an \code{difference} to avoid confusion between the return type (discrete, log, difference)
+and the chaining method (compound or arithmetic/simple).  In most of the rest of \code{PerformanceAnalytics},
+compound and simple are used to refer to the \emph{return chaining} method which is used with the returns.
 The default for this function is to use discrete returns, because most other package 
-functions use compound chaining by default.
+functions use compound chaining by default.  
+
+Other \code{method} argument formulations also work for clarity and backwards compatibility:
+
+\code{method='discrete'} has equivalent arguments \code{simple} and \code{arithmetic}
+
+\code{method='log'} has equivalent argument \code{compound} and \code{continuous}
+
+\code{method='difference'} has equivalent argument \code{diff}
 }
 \examples{
 
   \dontrun{
     require(quantmod)
-    prices = getSymbols("IBM", from = "1999-01-01", to = "2007-01-01")
+    prices = Cl(getSymbols("IBM", from = "1999-01-01", to = "2007-01-01"))
   }
   \dontshow{
     data(prices)

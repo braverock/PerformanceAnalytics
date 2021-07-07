@@ -1,6 +1,6 @@
 #' Distributions Summary: Statistics and Stylized Facts
 #' 
-#' Table of Monthly standard deviation, Skewness, Sample standard deviation,
+#' Table of standard deviation, Skewness, Sample standard deviation,
 #' Kurtosis, Excess kurtosis, Sample Skweness and Sample excess kurtosis 
 #' 
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -42,7 +42,7 @@ function (R, scale = NA, digits = 4)
 
     #set up frequency
     if(is.na(scale)) {
-        freq = periodicity(R)
+        freq = periodicity(y)
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -58,7 +58,7 @@ function (R, scale = NA, digits = 4)
     for(column in 1:columns) {
         z = c(StdDev.annualized(y[,column,drop=FALSE])/sqrt(scale), skewness(y[,column,drop=FALSE], method = "moment"), kurtosis(y[,column,drop=FALSE], method = "moment"), kurtosis(y[,column,drop=FALSE], method = "excess"), skewness(y[,column,drop=FALSE], method = "sample"), kurtosis(y[,column,drop=FALSE], method = "sample_excess"))
 
-        znames = c("Monthly Std Dev", "Skewness",  "Kurtosis", "Excess kurtosis", "Sample skewness", "Sample excess kurtosis")
+        znames = c(paste(freq$scale," Std Dev"), "Skewness",  "Kurtosis", "Excess kurtosis", "Sample skewness", "Sample excess kurtosis")
 
 
         if(column == 1) {
@@ -77,7 +77,7 @@ function (R, scale = NA, digits = 4)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

@@ -35,11 +35,11 @@ portfolios are allowed to change with market conditions:
 \details{
 \deqn{\beta_{p}(z_{t})=b_{0p}+B_{p}'z_{t}}{beta(zt) = b0 + Bp'zt}
 
-where \eqn{z_{t}=Z_{t}-E[Z]}{zt = Zt - E[Z]}
+where \eqn{z_{t}=Z_{t}-E[Z]}{zt = Zt - E[Z]} 
 
-- a normalized vector of the deviations of \eqn{Z_{t}}{Zt}, \eqn{B_{p}}{Bp}
+- a normalized vector of the deviations of \eqn{Z_{t}}{Zt}, \eqn{B_{p}}{Bp} 
 
-- a vector with the same dimension as \eqn{Z_{t}}{Zt}.
+- a vector with the same dimension as \eqn{Z_{t}}{Zt}. 
 
 The coefficient \eqn{b_{0p}}{b0} can be 
 interpreted as the "average beta" or the beta when all infromation variables

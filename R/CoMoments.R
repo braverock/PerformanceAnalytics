@@ -196,16 +196,16 @@ centeredcomoment = function(Ra,Rb,p1,p2,normalize=FALSE)
 #' @author Kris Boudt, Peter Carl, Dries Cornilly, Brian Peterson
 #' @seealso \code{\link{BetaCoSkewness}} \cr \code{\link{BetaCoKurtosis}} \cr
 #' \code{\link{BetaCoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}}
-#' \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
+#' \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}} \cr \code{\link{NCE}}
 #' @references Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 #' Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 #' Returns. Journal of Risk. Winter.
 #' 
-#' Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+#' Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 #' Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-#' Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+#' Journal of Financial Econometrics, 18(1), 1-23.
 #' 
-#' Martellini, L., & Ziemann, V. 2010. Improved estimates of higher-order 
+#' Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 #' comoments and implications for portfolio selection. Review of Financial 
 #' Studies, 23(4), 1467-1502.
 #' 
@@ -256,10 +256,6 @@ CoVariance<- function(Ra,Rb)
 #' 
 #' calculate higher co-moment betas, or 'systematic' variance, skewness, and
 #' kurtosis
-#' @name BetaCoMoments
-#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-#' @concept beta co-moments
-#' @concept moments
 #' 
 #' The co-moments, including covariance, coskewness, and cokurtosis, do not
 #' allow the marginal impact of an asset on a portfolio to be directly
@@ -323,16 +319,17 @@ CoVariance<- function(Ra,Rb)
 #' the portfolio is positive, then the condition is that the third moment beta
 #' is greater than, as opposed to lower than, one.
 #' 
-#' %Because the interpretation of beta coskewness is made difficult by the need
+#' Because the interpretation of beta coskewness is made difficult by the need
 #' to condition on it's skewness, we deviate from the more widely used measure
 #' slightly.  To make the interpretation consistent across all three measures,
 #' the beta coskewness function tests the skewness and multiplies the result by
 #' the sign of the skewness.  That allows an analyst to review the metric and
 #' interpret it without needing additional information.  To use the more widely
 #' used metric, simply set the parameter \code{test = FALSE}.
-#' 
-#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis
-#' SystematicSkewness SystematicKurtosis
+#' @name BetaCoMoments
+#' @concept beta co-moments
+#' @concept moments
+#' @aliases BetaCoMoments BetaCoVariance BetaCoSkewness BetaCoKurtosis SystematicSkewness SystematicKurtosis
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -528,7 +525,7 @@ BetaCoKurtosis <- function(Ra,Rb)
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

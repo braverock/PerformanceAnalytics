@@ -3,7 +3,6 @@
 \name{Drawdowns}
 \alias{Drawdowns}
 \alias{findDrawdowns}
-\alias{Drawdowns}
 \title{Find the drawdowns and drawdown levels in a timeseries.}
 \usage{
 Drawdowns(R, geometric = TRUE, ...)

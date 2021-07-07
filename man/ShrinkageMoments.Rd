@@ -5,8 +5,6 @@
 \alias{M2.shrink}
 \alias{M3.shrink}
 \alias{M4.shrink}
-\alias{M3.shrink}
-\alias{M4.shrink}
 \title{Functions for calculating shrinkage-based comoments of financial time series}
 \usage{
 M2.shrink(R, targets = 1, f = NULL)
@@ -96,18 +94,18 @@ Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 Returns. Journal of Risk. Winter.
 
-Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+Journal of Financial Econometrics, 18(1), 1-23.
 
-Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+Ledoit, Olivier and Michael Wolf. 2003. Improved estimation of the covariance matrix 
 of stock returns with an application to portfolio selection. Journal of empirical 
 finance, 10(5), 603-621.
 
-Ledoit, Olivier and Wolf, Michael. 2004. A well-conditioned estimator for large-dimensional 
+Ledoit, Olivier and Michael Wolf. 2004. A well-conditioned estimator for large-dimensional 
 covariance matrices. Journal of multivariate analysis, 88(2), 365-411.
 
-Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
+Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 comoments and implications for portfolio selection. Review of Financial 
 Studies, 23(4), 1467-1502.
 
@@ -115,13 +113,11 @@ Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter fram
 Management Science, 39(5), 68-577.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
+\code{\link{CoMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}} 
+\cr \code{\link{MCA}} \cr \code{\link{NCE}}
 }
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

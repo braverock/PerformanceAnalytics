@@ -1,4 +1,12 @@
 # PerformanceAnalytics: Econometric tools for performance and risk analysis.
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/braverock/PerformanceAnalytics/workflows/R-CMD-check/badge.svg)](https://github.com/braverock/PerformanceAnalytics/actions)
+[![Travis Build
+Status](https://travis-ci.org/braverock/PerformanceAnalytics.svg?branch=master)](https://travis-ci.org/braverock/PerformanceAnalytics)
+[![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
+<!-- badges: end -->
+
 `PerformanceAnalytics` provides an R package of econometric functions
 for performance and risk analysis of financial instruments or portfolios.
 This package aims to aid practitioners and researchers in using the latest research for
@@ -25,6 +33,7 @@ The package documentation includes sections on
 * Summary Tabular Data
 * Charts and Graphs
 * Wrapper and Utility Functions
+* Standard Errors for Risk and Performance Estimators
 
 It also includes some thoughts on work yet to be done,
 acknowledgments,

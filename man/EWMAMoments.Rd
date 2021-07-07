@@ -5,8 +5,6 @@
 \alias{M2.ewma}
 \alias{M3.ewma}
 \alias{M4.ewma}
-\alias{M3.ewma}
-\alias{M4.ewma}
 \title{Functions for calculating EWMA comoments of financial time series}
 \usage{
 M2.ewma(R, lambda = 0.97, last.M2 = NULL, ...)
@@ -74,13 +72,11 @@ ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu,
 JP Morgan. Riskmetrics technical document. 1996.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{MCA}}
+\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} 
+\cr \code{\link{MCA}} \cr \code{\link{NCE}}
 }
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

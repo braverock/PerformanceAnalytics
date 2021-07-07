@@ -45,8 +45,8 @@
 #' values are \code{"o"} (the default) and \code{"n"}.
 #' @param bg the background color for the legend box.  (Note that this is only
 #' used if \code{bty != "n"}.)
-#' @param box.lty,box.lwd the line type and width for the legend box.
-#' @param border.lty,border.lwd the line type and width for the legend border.
+#' @param box.col,box.lty,box.lwd the color, line type and width for the legend box.
+#' @param border.col,border.lty,border.lwd the color, line type and width for the legend border.
 #' @param pt.bg the background color for the \code{\link{points}},
 #' corresponding to its argument \code{bg}.
 #' @param cex character expansion factor \bold{relative} to current
@@ -81,6 +81,7 @@
 #' be placed at the top of the legend.
 #' @param inset inset distance(s) from the margins as a fraction of the plot
 #' region when legend is placed by keyword.
+#' @param \dots any other passthrough parameters
 #' @seealso \code{\link[graphics]{legend}}
 #' @keywords internal
 #' @export legend
@@ -98,7 +99,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     yjust = 1, x.intersp = 1, y.intersp = 1, adj = c(0, 0.5),
     text.width = NULL, text.col = par("col"), merge = do.lines &&
         has.pch, trace = FALSE, plot = TRUE, ncol = 1, horiz = FALSE,
-    title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid", box.col = NULL, box.lwd = 1, box.lty = "solid")
+    title = NULL, inset = 0, border.col = NULL, border.lwd = 1, border.lty = "solid", box.col = NULL, box.lwd = 1, box.lty = "solid", ...)
 {
     # Modifications to core graphics legend() function
     # @author R Core Dev Team
@@ -142,7 +143,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     else nx <- 0
     xlog <- par("xlog")
     ylog <- par("ylog")
-    rect2 <- function(left, top, dx, dy, density = NULL, angle, border = border.col, lty = border.lty, lwd = border.lwd, ...) {
+    rect2 <- function(left, top, dx, dy, density = NULL, angle, border = box.col, lty = box.lty, lwd = box.lwd, ...) {
         r <- left + dx
         if (xlog) {
             left <- 10^left
@@ -289,7 +290,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
         if (trace)
             catn("  rect2(", left, ",", top, ", w=", w, ", h=",
                 h, ", ...)", sep = "")
-        rect2(left, top, dx = w, dy = h, col = bg, density = NULL, border = border.col)#added border = border.col
+        rect2(left, top, dx = w, dy = h, col = bg, density = NULL, border = box.col)
     }
     xt <- left + xchar + xextra + (w0 * rep.int(0:(ncol - 1),
         rep.int(n.legpercol, ncol)))[1:n.leg]
@@ -300,7 +301,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
             fill <- rep(fill, length.out = n.leg)
             rect2(left = xt, top = yt + ybox/2, dx = xbox, dy = ybox,
                 col = fill, density = density, angle = angle,
-                border = box.col) #removed internal border
+                border = border.col, lty = border.lty, lwd = border.lwd) 
         }
         xt <- xt + dx.fill
     }
@@ -538,7 +539,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

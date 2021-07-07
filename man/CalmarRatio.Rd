@@ -3,7 +3,6 @@
 \name{CalmarRatio}
 \alias{CalmarRatio}
 \alias{SterlingRatio}
-\alias{SterlingRatio}
 \title{calculate a Calmar or Sterling reward/risk ratio
  
 Calmar and Sterling Ratios are yet another method of creating a

@@ -4,13 +4,26 @@
 \alias{chart.VaRSensitivity}
 \title{show the sensitivity of Value-at-Risk or Expected Shortfall estimates}
 \usage{
-chart.VaRSensitivity(R, methods = c("GaussianVaR", "ModifiedVaR",
-  "HistoricalVaR", "GaussianES", "ModifiedES", "HistoricalES"),
-  clean = c("none", "boudt", "geltner"), elementcolor = "darkgray",
-  reference.grid = TRUE, xlab = "Confidence Level",
-  ylab = "Value at Risk", type = "l", lty = c(1, 2, 4), lwd = 1,
-  colorset = (1:12), pch = (1:12), legend.loc = "bottomleft",
-  cex.legend = 0.8, main = NULL, ylim = NULL, ...)
+chart.VaRSensitivity(
+  R,
+  methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR", "GaussianES",
+    "ModifiedES", "HistoricalES"),
+  clean = c("none", "boudt", "geltner"),
+  elementcolor = "darkgray",
+  reference.grid = TRUE,
+  xlab = "Confidence Level",
+  ylab = "Value at Risk",
+  type = "l",
+  lty = c(1, 2, 4),
+  lwd = 1,
+  colorset = (1:12),
+  pch = (1:12),
+  legend.loc = "bottomleft",
+  cex.legend = 0.8,
+  main = NULL,
+  ylim = NULL,
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

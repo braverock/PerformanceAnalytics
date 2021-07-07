@@ -25,20 +25,20 @@
 #' @author Erol Biceroglu
 #' @seealso \code{\link{Return.calculate}}
 #' 
-#' @examples
-#' 
-#' data(managers)
-#' managers <- managers[,1:6] #equities only
-#' xtsAttributes(managers) <- list(coredata_content = "discreteReturn") #append attribute
-#' chart.CumReturns(managers) #here is baseline
-#' managersL <- Level.calculate(R = managers)
-#' plot(managersL-1)
-#' 
-#' #Here they are equal
-#' Return.cumulative(managers)  #Baseline
-#' last(managersL-1) #This function
-#' 
-#' @export
+# @examples
+# 
+# ### pcc: removed examples until documentation is complete
+# data(managers)
+# managers <- managers[,1:6] #equities only
+# xtsAttributes(managers) <- list(coredata_content = "discreteReturn") #append attribute
+# chart.CumReturns(managers) #here is baseline
+# managersL <- Level.calculate(R = managers)
+# plot(managersL-1)
+# 
+# #Here they are equal
+# Return.cumulative(managers)  #Baseline
+# last(managersL-1) #This function
+
 Level.calculate <-
   function(R, seedValue = NULL, initial = TRUE)
   { # @author Erol Biceroglu
@@ -132,9 +132,9 @@ if(attributes(R)$coredata_content != "difference"){
     return(result)
 }
 
-
-#' @rdname Level.calculate
-#'
+# pcc: removed until documentation is complete
+# @rdname Level.calculate
+#
 isLeap <- function(yearNumber){
   #pulled formula from this link: https://support.microsoft.com/en-sg/help/214019/method-to-determine-whether-a-year-is-a-leap-year
   ifelse(
@@ -145,8 +145,9 @@ isLeap <- function(yearNumber){
   )
 }
 
-#' @rdname Level.calculate
-#'
+# pcc: removed until documentation is complete
+# @rdname Level.calculate
+#
 calculateImpliedDate <- 
   function(tsObject){
 

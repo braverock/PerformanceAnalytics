@@ -4,8 +4,16 @@
 \alias{chart.CumReturns}
 \title{Cumulates and graphs a set of periodic returns}
 \usage{
-chart.CumReturns(R, wealth.index = FALSE, geometric = TRUE,
-  legend.loc = NULL, colorset = (1:12), begin = c("first", "axis"), ...)
+chart.CumReturns(
+  R,
+  wealth.index = FALSE,
+  geometric = TRUE,
+  legend.loc = NULL,
+  colorset = (1:12),
+  begin = c("first", "axis"),
+  plot.engine = "default",
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -26,6 +34,9 @@ center.}
 \item{begin}{Align shorter series to: \itemize{ \item first - prior value of
 the first column given for the reference or longer series or, \item axis -
 the initial value (1 or zero) of the axis.  }}
+
+\item{plot.engine}{choose the plot engine you wish to use"
+ggplot2, plotly,dygraph,googlevis and default}
 
 \item{\dots}{any other passthru parameters}
 }

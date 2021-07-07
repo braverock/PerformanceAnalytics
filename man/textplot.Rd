@@ -8,54 +8,135 @@
 \alias{textplot.character}
 \alias{textplot.matrix}
 \alias{textplot.data.frame}
-\alias{replaceTabs}
-\alias{textplot.default}
-\alias{textplot.data.frame}
-\alias{textplot.matrix}
-\alias{textplot.character}
 \title{Display text information in a graphics plot.}
 \usage{
 replaceTabs.inner(text, width = 8)
 
 replaceTabs(text, width = 8)
 
-textplot(object, halign = "center", valign = "center", cex, max.cex = 1,
-  cmar = 2, rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE,
-  hadj = 1, vadj = NULL, row.valign = "center",
-  heading.valign = "bottom", mar = c(0, 0, 0, 0) + 0.1,
-  col.data = par("col"), col.rownames = par("col"),
-  col.colnames = par("col"), wrap = TRUE, wrap.colnames = 10,
-  wrap.rownames = 10, ...)
+textplot(
+  object,
+  halign = "center",
+  valign = "center",
+  cex,
+  max.cex = 1,
+  cmar = 2,
+  rmar = 0.5,
+  show.rownames = TRUE,
+  show.colnames = TRUE,
+  hadj = 1,
+  vadj = NULL,
+  row.valign = "center",
+  heading.valign = "bottom",
+  mar = c(0, 0, 0, 0) + 0.1,
+  col.data = par("col"),
+  col.rownames = par("col"),
+  col.colnames = par("col"),
+  wrap = TRUE,
+  wrap.colnames = 10,
+  wrap.rownames = 10,
+  ...
+)
 
-\method{textplot}{default}(object, halign = c("center", "left", "right"),
-  valign = c("center", "top", "bottom"), cex, max.cex, cmar, rmar,
-  show.rownames, show.colnames, hadj, vadj, row.valign, heading.valign, mar,
-  col.data, col.rownames, col.colnames, wrap, wrap.colnames, wrap.rownames, ...)
+\method{textplot}{default}(
+  object,
+  halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"),
+  cex,
+  max.cex,
+  cmar,
+  rmar,
+  show.rownames,
+  show.colnames,
+  hadj,
+  vadj,
+  row.valign,
+  heading.valign,
+  mar,
+  col.data,
+  col.rownames,
+  col.colnames,
+  wrap,
+  wrap.colnames,
+  wrap.rownames,
+  ...
+)
 
-\method{textplot}{data.frame}(object, halign = c("center", "left", "right"),
-  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
-  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-  vadj = NULL, row.valign = "center", heading.valign = "bottom",
-  mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"),
-  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
-  wrap.colnames = 10, wrap.rownames = 10, ...)
+\method{textplot}{data.frame}(
+  object,
+  halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"),
+  cex,
+  max.cex = 1,
+  cmar = 2,
+  rmar = 0.5,
+  show.rownames = TRUE,
+  show.colnames = TRUE,
+  hadj = 1,
+  vadj = NULL,
+  row.valign = "center",
+  heading.valign = "bottom",
+  mar = c(0, 0, 0, 0) + 0.1,
+  col.data = par("col"),
+  col.rownames = par("col"),
+  col.colnames = par("col"),
+  wrap = TRUE,
+  wrap.colnames = 10,
+  wrap.rownames = 10,
+  ...
+)
 
-\method{textplot}{matrix}(object, halign = c("center", "left", "right"),
-  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
-  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-  vadj = NULL, row.valign = "center", heading.valign = "bottom",
-  mar = c(0, 0, 0, 0) + 0.1, col.data = par("col"),
-  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
-  wrap.colnames = 10, wrap.rownames = 10, ...)
+\method{textplot}{matrix}(
+  object,
+  halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"),
+  cex,
+  max.cex = 1,
+  cmar = 2,
+  rmar = 0.5,
+  show.rownames = TRUE,
+  show.colnames = TRUE,
+  hadj = 1,
+  vadj = NULL,
+  row.valign = "center",
+  heading.valign = "bottom",
+  mar = c(0, 0, 0, 0) + 0.1,
+  col.data = par("col"),
+  col.rownames = par("col"),
+  col.colnames = par("col"),
+  wrap = TRUE,
+  wrap.colnames = 10,
+  wrap.rownames = 10,
+  ...
+)
 
-\method{textplot}{character}(object, halign = c("center", "left", "right"),
-  valign = c("center", "top", "bottom"), cex, max.cex = 1, cmar = 2,
-  rmar = 0.5, show.rownames = TRUE, show.colnames = TRUE, hadj = 1,
-  vadj = NULL, row.valign = "center", heading.valign = "bottom",
-  mar = c(0, 0, 3, 0) + 0.1, col.data = par("col"),
-  col.rownames = par("col"), col.colnames = par("col"), wrap = TRUE,
-  wrap.colnames = 10, wrap.rownames = 10, fixed.width = TRUE,
-  cspace = 1, lspace = 1, tab.width = 8, ...)
+\method{textplot}{character}(
+  object,
+  halign = c("center", "left", "right"),
+  valign = c("center", "top", "bottom"),
+  cex,
+  max.cex = 1,
+  cmar = 2,
+  rmar = 0.5,
+  show.rownames = TRUE,
+  show.colnames = TRUE,
+  hadj = 1,
+  vadj = NULL,
+  row.valign = "center",
+  heading.valign = "bottom",
+  mar = c(0, 0, 3, 0) + 0.1,
+  col.data = par("col"),
+  col.rownames = par("col"),
+  col.colnames = par("col"),
+  wrap = TRUE,
+  wrap.colnames = 10,
+  wrap.rownames = 10,
+  fixed.width = TRUE,
+  cspace = 1,
+  lspace = 1,
+  tab.width = 8,
+  ...
+)
 }
 \arguments{
 \item{text}{in the function 'replaceTabs', the text string to be processed}

@@ -5,9 +5,17 @@
 \alias{Return.rebalancing}
 \title{Calculate weighted returns for a portfolio of assets}
 \usage{
-Return.portfolio(R, weights = NULL, wealth.index = FALSE,
-  contribution = FALSE, geometric = TRUE, rebalance_on = c(NA, "years",
-  "quarters", "months", "weeks", "days"), value = 1, verbose = FALSE, ...)
+Return.portfolio(
+  R,
+  weights = NULL,
+  wealth.index = FALSE,
+  contribution = FALSE,
+  geometric = TRUE,
+  rebalance_on = c(NA, "years", "quarters", "months", "weeks", "days"),
+  value = 1,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{R}{An xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -67,7 +75,7 @@ returns of the portfolio, the calculation must track changes in the notional val
 the assets and portfolio.  For example, contribution during a quarter will be 
 calculated as the change in value of the position through those three months, divided 
 by the original value of the portfolio.  Approaching it this way makes the 
-calculation robust to weight changes as well. c_pi = V_(t-p)i - V_t)/V_ti
+calculation robust to weight changes as well. c_pi = V_(t-p)i - V_t)/V_ti  
 
 If the user does not specify weights, an equal weight portfolio is assumed.  
 Alternatively, a vector or single-row matrix of weights that matches the length 

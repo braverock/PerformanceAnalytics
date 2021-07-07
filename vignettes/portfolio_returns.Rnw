@@ -8,6 +8,7 @@
 %\VignettePackage{PerformanceAnalytics}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \begin{abstract}
 This vignette provides an overview of calculating portfolio returns through time with an emphasis on the math used to develop the \verb"Return.portfolio" function in \pkg{PerformanceAnalytics}. We first introduce some basic definitions, then give simple examples of computing portfolio returns in a prices and shares framework as well as a returns and weights framework. We then introduce \verb"Return.portfolio" and demonstrate the function with a few examples.

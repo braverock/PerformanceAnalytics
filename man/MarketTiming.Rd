@@ -4,7 +4,7 @@
 \alias{MarketTiming}
 \title{Market timing models}
 \usage{
-MarketTiming(Ra, Rb, Rf = 0, method = c("TM", "HM"))
+MarketTiming(Ra, Rb, Rf = 0, method = c("TM", "HM"), ...)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -44,7 +44,7 @@ is above zero:
 \deqn{R_{p}-R_{f}=\alpha+\beta (R_{b}-R_{f})+\gamma D+\varepsilon_{p}}{Rp - 
 Rf = alpha + beta * (Rb - Rf) + gamma * D + epsilonp}
 where all variables are familiar from the CAPM model, except for the 
-up-market return \eqn{D=max(0,R_{b}-R_{f})}{D = max(0, Rb - Rf)} and market 
+up-market return \eqn{D=max(0,R_{f}-R_{b})}{D = max(0, Rf - Rb)} and market 
 timing abilities \eqn{\gamma}{gamma}
 }
 \examples{

@@ -3,7 +3,6 @@
 \name{chart.ACF}
 \alias{chart.ACF}
 \alias{chart.ACFplus}
-\alias{chart.ACFplus}
 \title{Create ACF chart or ACF with PACF two-panel chart}
 \usage{
 chart.ACF(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)

@@ -19,6 +19,8 @@
 #' @seealso \code{\link{chart.RollingPerformance}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
+#' if(!( Sys.info()[['sysname']]=="Windows") ){
+#' # if on Windows, cut and paste this example
 #' 
 #' data(managers)
 #' charts.RollingPerformance(managers[,1:8], 
@@ -26,6 +28,7 @@
 #'                           colorset=tim8equal, 
 #'                           main="Rolling 12-Month Performance", 
 #'                           legend.loc="topleft")
+#' }
 #' 
 #' @export
 charts.RollingPerformance <-
@@ -100,7 +103,7 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

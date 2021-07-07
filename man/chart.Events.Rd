@@ -4,8 +4,7 @@
 \alias{chart.Events}
 \title{Plots a time series with event dates aligned}
 \usage{
-chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL,
-  ...)
+chart.Events(R, dates, prior = 12, post = 12, main = NULL, xlab = NULL, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

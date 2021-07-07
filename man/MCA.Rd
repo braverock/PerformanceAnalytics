@@ -4,7 +4,6 @@
 \alias{MCA}
 \alias{M3.MCA}
 \alias{M4.MCA}
-\alias{M4.MCA}
 \title{Functions for doing Moment Component Analysis (MCA) of financial time series}
 \usage{
 M3.MCA(R, k = 1, as.mat = TRUE, ...)
@@ -66,17 +65,15 @@ par(mfrow = c(1, 1))
 \references{
 Lim, Hek-Leng and Morton, Jason. 2007. Principal Cumulant Component Analysis. working paper
 
-Jondeau, Eric and Jurczenko, Emmanuel. 2017. Moment Component Analysis: An Illustration 
-With International Stock Markets. Journal of Business and Economic Statistics
+Jondeau, Eric and Jurczenko, Emmanuel. 2018. Moment Component Analysis: An Illustration 
+With International Stock Markets. Journal of Business and Economic Statistics, 36(4), 576-598.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} \cr \code{\link{EWMAMoments}}
+\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}} 
+\cr \code{\link{EWMAMoments}} \cr \code{\link{NCE}}
 }
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

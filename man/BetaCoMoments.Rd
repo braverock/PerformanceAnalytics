@@ -5,8 +5,8 @@
 \alias{BetaCoVariance}
 \alias{BetaCoSkewness}
 \alias{BetaCoKurtosis}
-\alias{BetaCoSkewness}
-\alias{BetaCoKurtosis}
+\alias{SystematicSkewness}
+\alias{SystematicKurtosis}
 \title{Functions to calculate systematic or beta co-moments of return series}
 \usage{
 BetaCoVariance(Ra, Rb)
@@ -28,37 +28,7 @@ index, benchmark, or secondary asset returns to compare against}
 calculate higher co-moment betas, or 'systematic' variance, skewness, and
 kurtosis
 }
-\examples{
-
-data(managers)
-
-BetaCoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
-BetaCoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
-BetaCoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
-BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
-BetaCoKurtosis(managers[,1:6], managers[,8:7])
-
-}
-\references{
-Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and
-Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
-Journal of Risk. Winter.
-
-Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
-Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
-and Asset Management Research Centre working paper.
-}
-\seealso{
-\code{\link{CoMoments}}
-}
-\author{
-Kris Boudt, Peter Carl, Brian Peterson
-}
-\concept{
-beta co-moments
-
-moments
-
+\details{
 The co-moments, including covariance, coskewness, and cokurtosis, do not
 allow the marginal impact of an asset on a portfolio to be directly
 measured.  Instead, Martellini and Zieman (2007) develop a framework that
@@ -121,7 +91,7 @@ skewness when the third moment beta is lower than one. When the skewness of
 the portfolio is positive, then the condition is that the third moment beta
 is greater than, as opposed to lower than, one.
 
-%Because the interpretation of beta coskewness is made difficult by the need
+Because the interpretation of beta coskewness is made difficult by the need
 to condition on it's skewness, we deviate from the more widely used measure
 slightly.  To make the interpretation consistent across all three measures,
 the beta coskewness function tests the skewness and multiplies the result by
@@ -129,3 +99,31 @@ the sign of the skewness.  That allows an analyst to review the metric and
 interpret it without needing additional information.  To use the more widely
 used metric, simply set the parameter \code{test = FALSE}.
 }
+\examples{
+
+data(managers)
+
+BetaCoVariance(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoSkewness(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoKurtosis(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE])
+BetaCoKurtosis(managers[,1:6], managers[,8,drop=FALSE])
+BetaCoKurtosis(managers[,1:6], managers[,8:7])
+
+}
+\references{
+Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008. Estimation and
+Decomposition of Downside Risk for Portfolios with Non-Normal Returns.
+Journal of Risk. Winter.
+
+Martellini, Lionel, and Volker Ziemann. 2007. Improved Forecasts of
+Higher-Order Comoments and Implications for Portfolio Selection. EDHEC Risk
+and Asset Management Research Centre working paper.
+}
+\seealso{
+\code{\link{CoMoments}}
+}
+\author{
+Kris Boudt, Peter Carl, Brian Peterson
+}
+\concept{beta co-moments}
+\concept{moments}

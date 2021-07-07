@@ -4,8 +4,7 @@
 \alias{table.AnnualizedReturns}
 \title{Annualized Returns Summary: Statistics and Stylized Facts}
 \usage{
-table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE,
-  digits = 4)
+table.AnnualizedReturns(R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of

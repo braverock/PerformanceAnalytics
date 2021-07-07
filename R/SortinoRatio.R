@@ -28,6 +28,8 @@
 #' returns
 #' @param \dots any other passthru parameters
 #' @param weights portfolio weighting vector, default NULL
+#' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
+#' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @author Brian G. Peterson
 #' @seealso \code{\link{SharpeRatio}} \cr \code{\link{DownsideDeviation}} \cr
 #' \code{\link{SemiVariance}} \cr \code{\link{SemiDeviation}} \cr
@@ -43,7 +45,9 @@
 #' 
 #' @export
 SortinoRatio <-
-function (R, MAR = 0,...,weights=NULL)
+function (R, MAR = 0,...,
+          weights=NULL,
+          SE=FALSE, SE.control=NULL)
 { # @author Brian G. Peterson
   # modified from function by Sankalp Upadhyay <sankalp.upadhyay [at] gmail [dot] com> with permission
 
@@ -63,8 +67,42 @@ function (R, MAR = 0,...,weights=NULL)
     
     sr <-function (R, MAR)
     {
-        SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR, ...)
+        SR = mean(Return.excess(R, MAR), na.rm=TRUE)/DownsideDeviation(R, MAR)
         SR
+    }
+    
+    # Checking input if SE = TRUE
+    if(SE){
+      SE.check <- TRUE
+      if(!requireNamespace("RPESE", quietly = TRUE)){
+        warning("Package \"RPESE\" needed for standard errors computation. Please install it.",
+                call. = FALSE)
+        SE <- FALSE
+      }
+    }
+    
+    # SE Computation
+    if(isTRUE(SE)){
+      
+      # Setting the control parameters
+      if(is.null(SE.control))
+        SE.control <- RPESE.control(estimator="SoR")
+
+      # Computation of SE (optional)
+      ses=list()
+      # For each of the method specified in se.method, compute the standard error
+      for(mymethod in SE.control$se.method){
+        ses[[mymethod]]=RPESE::EstimatorSE(R, estimator.fun = "SoR", se.method = mymethod, 
+                                           cleanOutliers=SE.control$cleanOutliers,
+                                           fitting.method=SE.control$fitting.method,
+                                           freq.include=SE.control$freq.include,
+                                           freq.par=SE.control$freq.par,
+                                           a=SE.control$a, b=SE.control$b,
+                                           threshold = "const", const=MAR,
+                                           ...)
+        ses[[mymethod]]=ses[[mymethod]]$se
+      }
+      ses <- t(data.frame(ses))
     }
 
     # apply across multi-column data if we have it
@@ -72,13 +110,16 @@ function (R, MAR = 0,...,weights=NULL)
     dim(result) = c(1,NCOL(R))
     colnames(result) = colnames(R)
     rownames(result) = paste("Sortino Ratio (MAR = ", round(mean(MAR)*100,3),"%)", sep="")
-    return (result)
+    
+    if(SE) # Check if SE computation
+      return(rbind(result, ses)) else
+        return (result)
 }
 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

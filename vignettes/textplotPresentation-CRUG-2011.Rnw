@@ -106,6 +106,7 @@
 
 %\beamerdefaultoverlayspecification{<+->}
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 %\right] \right\rbrace \right\rangle \right( \begin{document}
 % this has to be after \begin{document} to work
 \setkeys{Gin}{width=1\textwidth}
@@ -210,7 +211,7 @@ ham1.downside
 %%% Section --------------------------------------------------
 
 \begin{frame}
-  \frametitle{\texttt{gplots:::textplot}}
+  \frametitle{\texttt{textplot}}
 Gregory R. Warnes' package, \texttt{gplots}, includes the \texttt{textplot} function
       \begin{itemize}
         \item
@@ -221,18 +222,19 @@ Gregory R. Warnes' package, \texttt{gplots}, includes the \texttt{textplot} func
   Creates a new \texttt{plot} and displays a table using the largest font that will fit in the plotting region
         \item
   Several other good things in the package, too
+        \item
+  testplot function ddded to PerformanceAnalytics
       \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{\texttt{gplots:::textplot} example}
+  \frametitle{\texttt{textplot} example}
   \begin{figure}
     \centering
     \begin{scriptsize}
 <<gplotstextplot,echo=TRUE,fig=TRUE>>=
-library(gplots)
-#args(gplots:::textplot)
-gplots:::textplot(ham1.downside); box(col="lightblue")
+#args(textplot)
+textplot(ham1.downside); box(col="lightblue")
 @
     \end{scriptsize}
   \end{figure}

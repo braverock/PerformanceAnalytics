@@ -4,12 +4,25 @@
 \alias{chart.Boxplot}
 \title{box whiskers plot wrapper}
 \usage{
-chart.Boxplot(R, names = TRUE, as.Tufte = FALSE, sort.by = c(NULL, "mean",
-  "median", "variance"), colorset = "black", symbol.color = "red",
-  mean.symbol = 1, median.symbol = "|", outlier.symbol = 1,
-  show.data = NULL, add.mean = TRUE, sort.ascending = FALSE,
-  xlab = "Return", main = "Return Distribution Comparison",
-  element.color = "darkgray", ...)
+chart.Boxplot(
+  R,
+  names = TRUE,
+  as.Tufte = FALSE,
+  plot.engine = "default",
+  sort.by = c(NULL, "mean", "median", "variance"),
+  colorset = "black",
+  symbol.color = "red",
+  mean.symbol = 1,
+  median.symbol = "|",
+  outlier.symbol = 1,
+  show.data = NULL,
+  add.mean = TRUE,
+  sort.ascending = FALSE,
+  xlab = "Return",
+  main = "Return Distribution Comparison",
+  element.color = "darkgray",
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -19,6 +32,9 @@ asset returns}
 
 \item{as.Tufte}{logical. default FALSE. if TRUE use method derived for Tufte
 for limiting chartjunk}
+
+\item{plot.engine}{choose the plot engine you wish to use:
+ggplot2, plotly, googlevis and default}
 
 \item{sort.by}{one of "NULL", "mean", "median", "variance"}
 

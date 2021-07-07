@@ -55,25 +55,26 @@ function (R, scale = NA, geometric = TRUE )
 
     # @todo: don't calculate for returns less than 1 year
 
+    if(!xtsible(R) & is.na(scale))
+        stop("'R' needs to be timeBased or xtsible, or scale must be specified." )
+    if(is.na(scale)) {
+        freq = periodicity(R)
+        switch(freq$scale,
+               minute = {stop("Data periodicity too high")},
+               hourly = {stop("Data periodicity too high")},
+               daily = {scale = 252},
+               weekly = {scale = 52},
+               monthly = {scale = 12},
+               quarterly = {scale = 4},
+               yearly = {scale = 1}
+        )
+    }
+    
     # FUNCTION:
     if (is.vector(R)) {
         R = checkData (R)
         R = na.omit(R)
         n = length(R)
-        if(!xtsible(R) & is.na(scale))
-            stop("'R' needs to be timeBased or xtsible, or scale must be specified." )
-        if(is.na(scale)) {
-            freq = periodicity(R)
-            switch(freq$scale,
-                minute = {stop("Data periodicity too high")},
-                hourly = {stop("Data periodicity too high")},
-                daily = {scale = 252},
-                weekly = {scale = 52},
-                monthly = {scale = 12},
-                quarterly = {scale = 4},
-                yearly = {scale = 1}
-            )
-        }
         #do the correct thing for geometric or simple returns
         if (geometric) {
             # geometric returns
@@ -97,7 +98,7 @@ function (R, scale = NA, geometric = TRUE )
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING

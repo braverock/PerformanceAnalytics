@@ -5,18 +5,24 @@
 \alias{M2.struct}
 \alias{M3.struct}
 \alias{M4.struct}
-\alias{M3.struct}
-\alias{M4.struct}
 \title{Functions for calculating structured comoments of financial time series}
 \usage{
-M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL)
+M2.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"), f = NULL)
 
-M3.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC",
-  "latent1factor", "CS"), f = NULL, unbiasedMarg = FALSE, as.mat = TRUE)
+M3.struct(
+  R,
+  struct = c("Indep", "IndepId", "observedfactor", "CC", "latent1factor", "CS"),
+  f = NULL,
+  unbiasedMarg = FALSE,
+  as.mat = TRUE
+)
 
-M4.struct(R, struct = c("Indep", "IndepId", "observedfactor", "CC"),
-  f = NULL, as.mat = TRUE)
+M4.struct(
+  R,
+  struct = c("Indep", "IndepId", "observedfactor", "CC"),
+  f = NULL,
+  as.mat = TRUE
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -78,22 +84,22 @@ ES(p = 0.95, portfolio_method = "component", weights = rep(1 / p, p), mu = mu,
 
 }
 \references{
-Boudt, Kris, Lu, Wanbo and Peeters, Benedict. 2015. Higher order comoments of multifactor 
-models and asset allocation. Finance Research Letters, 13, 225-233.
+Boudt, Kris, Wanbo Lu and Benedict Peeters. 2015. Higher order comoments 
+of multifactor models and asset allocation. Finance Research Letters, 13, 225-233.
 
 Boudt, Kris, Brian G. Peterson, and Christophe Croux. 2008.
 Estimation and Decomposition of Downside Risk for Portfolios with Non-Normal
 Returns. Journal of Risk. Winter.
 
-Boudt, Kris, Cornilly, Dries and Verdonck, Tim. 2017. A Coskewness Shrinkage 
+Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020 A Coskewness Shrinkage 
 Approach for Estimating the Skewness of Linear Combinations of Random Variables. 
-Submitted. Available at SSRN: https://ssrn.com/abstract=2839781
+Journal of Financial Econometrics, 18(1), 1-23.
 
-Ledoit, Olivier and Wolf, Michael. 2003. Improved estimation of the covariance matrix 
+Ledoit, Olivier and Michael Wolf. 2003. Improved estimation of the covariance matrix 
 of stock returns with an application to portfolio selection. Journal of empirical 
 finance, 10(5), 603-621.
 
-Martellini, Lionel and Ziemann, V\"olker. 2010. Improved estimates of higher-order 
+Martellini, Lionel, and Volker Ziemann. 2010. Improved estimates of higher-order 
 comoments and implications for portfolio selection. Review of Financial 
 Studies, 23(4), 1467-1502.
 
@@ -101,13 +107,11 @@ Simaan, Yusif. 1993. Portfolio selection and asset pricing: three-parameter fram
 Management Science, 39(5), 68-577.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
+\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{EWMAMoments}} 
+\cr \code{\link{MCA}} \cr \code{\link{NCE}}
 }
 \author{
 Dries Cornilly
 }
-\concept{
-co-moments
-
-moments
-}
+\concept{co-moments}
+\concept{moments}

@@ -23,7 +23,8 @@
 #' \code{\link[zoo]{rollapply}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' 
+#' if(!( Sys.info()[['sysname']]=="Windows") ){
+#' # if on Windows, cut and paste this example
 #' data(edhec)
 #' chart.RollingPerformance(edhec[, 1:3], width = 24)
 #' chart.RollingPerformance(edhec[, 1:3], 
@@ -34,6 +35,7 @@
 #' 		FUN = 'SharpeRatio.annualized', width = 24, 
 #' 		colorset = rich8equal, lwd = 2, legend.loc = "topleft", 
 #' 		main = "Rolling 24-Month Sharpe Ratio")
+#' }
 #' 
 #' @export
 chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", ...,  ylim = NULL, main = NULL, fill = NA)
@@ -124,7 +126,7 @@ chart.RollingPerformance <- function (R, width = 12, FUN = "Return.annualized", 
 ###############################################################################
 # R (http://r-project.org/) Econometrics for Performance and Risk Analysis
 #
-# Copyright (c) 2004-2018 Peter Carl and Brian G. Peterson
+# Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #
 # This R package is distributed under the terms of the GNU Public License (GPL)
 # for full details see the file COPYING
