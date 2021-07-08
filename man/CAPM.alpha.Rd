@@ -14,6 +14,20 @@ asset returns}
 \item{Rb}{return vector of the benchmark asset}
 
 \item{Rf}{risk free rate, in same period as your returns}
+
+\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
+for lmrobdetMM regression.}
+
+\item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
+and "Rob" for robust}
+
+\item{family}{(Optional): 
+If method == "Rob": 
+  This is a string specifying the name of the family of loss function
+  to be used (current valid options are "bisquare", "opt" and "mopt").
+  Incomplete entries will be matched to the current valid options. 
+  Defaults to "mopt".
+Else: the parameter is ignored}
 }
 \description{
 This is a wrapper for calculating a single factor model (CAPM) alpha.
@@ -36,10 +50,21 @@ comparing an asset to any arbitrary benchmark.
 			Rf=.035/12) 
     CAPM.alpha(managers[,1,drop=FALSE], 
 			managers[,8,drop=FALSE], 
+			Rf=.035/12, method="LS") 
+    CAPM.alpha(managers[,1,drop=FALSE], 
+			managers[,8,drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1,drop=FALSE], 
+			managers[,8,drop=FALSE], 
+			Rf = managers[,10,drop=FALSE],
+			method="Rob", family="mopt")
     CAPM.alpha(managers[,1:6], 
 			managers[,8,drop=FALSE], 
 			Rf=.035/12)
+    CAPM.alpha(managers[,1:6], 
+			managers[,8,drop=FALSE], 
+			Rf=.035/12, method="Rob", 
+			family="bisquare", bb=0.25, max.it=200)
     CAPM.alpha(managers[,1:6], 
 			managers[,8,drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
@@ -49,6 +74,10 @@ comparing an asset to any arbitrary benchmark.
     CAPM.alpha(managers[,1:6], 
 			managers[,8:7,drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
+    CAPM.alpha(managers[,1:6], 
+			managers[,8:7,drop=FALSE], 
+			Rf = managers[,10,drop=FALSE],method="Rob", 
+			family="bisquare", bb=0.25, max.it=200)
   		
 }
 \references{

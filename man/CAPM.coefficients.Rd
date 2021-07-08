@@ -3,25 +3,45 @@
 \name{CAPM.coefficients}
 \alias{CAPM.coefficients}
 \alias{SFM.coefficients}
-\title{calculate single factor model (CAPM) alpha and beta coefficients}
+\title{Calculate single factor model (CAPM) alpha and beta coefficients}
 \usage{
-CAPM.coefficients(xRa, xRb, subset, ..., method = "LS", family = "mOpt")
+CAPM.coefficients(Ra, Rb, subset = TRUE, Rf = 0, ...)
 }
 \arguments{
-\item{xRa}{an xts, vector, matrix, data frame, timeSeries or zoo object of
-excess asset returns}
+\item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
+asset returns}
 
-\item{xRb}{excess return vector of the benchmark asset}
+\item{Rb}{return vector of the benchmark asset}
+
+\item{Rf}{risk free rate, in same period as your returns}
+
+\item{...}{}
+
+\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
+for lmrobdetMM regression.}
+
+\item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
+and "Rob" for robust}
+
+\item{family}{(Optional): 
+If method == "Rob": 
+  This is a string specifying the name of the family of loss function
+  to be used (current valid options are "bisquare", "opt" and "mopt").
+  Incomplete entries will be matched to the current valid options. 
+  Defaults to "mopt".
+Else: the parameter is ignored}
 }
 \description{
-The single factor model or CAPM is the (alpha,beta) of an asset to the variance 
-and covariance of an initial portfolio.  Used to determine diversification potential.
+The single factor model or CAPM is the beta of an asset to the variance 
+and covariance of an initial portfolio. Used to determine diversification potential.
+"Alpha" purports to be a measure of a manager's skill by measuring the
+portion of the managers returns that are not attributable to "Beta", or the
+portion of performance attributable to a benchmark.
 }
 \details{
-This function uses a linear intercept model to achieve the same results as
-the symbolic model used by \code{\link{BetaCoVariance}}. This function is designed to
-be used a a wrapper for SFM's regression models. Using this, one can easily fit different
-types of linear models (Ordinary Least Squares as well as Robust Linear Regression).
+This function is designed to be used a a wrapper for SFM's regression models. 
+Using this, one can easily fit different types of linear models 
+like Ordinary Least Squares or Robust Estimators like Huber.
 
 \deqn{\beta_{a,b}=\frac{CoV_{a,b}}{\sigma_{b}}=\frac{\sum((R_{a}-\bar{R_{a}})(R_{b}-\bar{R_{b}}))}{\sum(R_{b}-\bar{R_{b}})^{2}}}{beta
 = cov(Ra,Rb)/var(R)}
@@ -34,41 +54,32 @@ slope can be used to determine the risk premium or excess expected return
 \examples{
 
 data(managers)
-    CAPM.coefficients(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE]) 
-    CAPM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    CAPM.alpha(managers[,1:6], 
-			managers[,8,drop=FALSE], 
-			Rf=.035/12)
-    CAPM.alpha(managers[,1:6], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    CAPM.alpha(managers[,1:6], 
-			managers[,8:7,drop=FALSE], 
-			Rf=.035/12) 
-    CAPM.alpha(managers[,1:6], 
-			managers[,8:7,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    CAPM.beta(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
-    CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
-    CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
-    TimingRatio(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
-    chart.Regression(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE], 
-			fit="conditional", 
-			main="Conditional Beta")
-  		
+     CAPM.coefficients(managers[,1,drop=FALSE], 
+			     managers[,8,drop=FALSE], method="Rob" 
+			     family="bisquare")
+     CAPM.coefficients(managers[,1,drop=FALSE], 
+			     managers[,8,drop=FALSE])
+     CAPM.coefficients(managers[,1,drop=FALSE], 
+			     managers[,8,drop=FALSE], method="Both") 
+			CAPM.coefficients(managers[,1,drop=FALSE], 
+			     managers[,8,drop=FALSE]
+			     Rf = managers[,10,drop=FALSE],
+			     method="Both")
+     CAPM.coefficients(managers[,1,drop=FALSE], 
+			     managers[,8,drop=FALSE], 
+			     Rf = managers[,10,drop=FALSE],
+			     method="Rob", family="mopt")
+     CAPM.coefficients(managers[,1], 
+			     managers[,8,drop=FALSE], 
+			     Rf=.035/12, method="Rob", 
+			     family="bisquare", bb=0.25, 
+			     max.it=200)
+     CAPM.coefficients(managers[,1], 
+			     managers[,8,drop=FALSE], 
+			     Rf=.035/12, method="Both", 
+			     family="opt") 
+		 
+  	  
 }
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market
@@ -82,5 +93,5 @@ performance measurement and attribution}. Wiley. 2004. \cr
 \code{\link{CAPM.utils}} \code{\link{CAPM.beta}}
 }
 \author{
-Peter Carl
+Dhairya Jain
 }

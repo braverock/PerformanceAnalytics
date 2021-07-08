@@ -23,6 +23,20 @@ asset returns}
 \item{Rb}{return vector of the benchmark asset}
 
 \item{Rf}{risk free rate, in same period as your returns}
+
+\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
+for lmrobdetMM regression.}
+
+\item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
+and "Rob" for robust}
+
+\item{family}{(Optional): 
+If method == "Rob": 
+  This is a string specifying the name of the family of loss function
+  to be used (current valid options are "bisquare", "opt" and "mopt").
+  Incomplete entries will be matched to the current valid options. 
+  Defaults to "mopt".
+Else: the parameter is ignored}
 }
 \description{
 The single factor model or CAPM Beta is the beta of an asset to the variance 
@@ -60,36 +74,56 @@ comparing an asset to any arbitrary benchmark.
 \examples{
 
 data(managers)
-    CAPM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
-			Rf=.035/12) 
-    CAPM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    CAPM.alpha(managers[,1:6], 
+    CAPM.beta(managers[,1,drop=FALSE], 
 			managers[,8,drop=FALSE], 
 			Rf=.035/12)
-    CAPM.alpha(managers[,1:6], 
+    CAPM.beta(managers[,1,drop=FALSE], 
+			managers[,8,drop=FALSE], 
+			Rf=.035/12, method="LS") 
+    CAPM.beta(managers[,1,drop=FALSE], 
+			managers[,8,drop=FALSE], 
+			Rf = managers[,10,drop=FALSE],
+			method="Rob", family="mopt")
+    CAPM.beta(managers[,1:6], 
+			managers[,8,drop=FALSE], 
+			Rf=.035/12, method="Rob", 
+			family="bisquare", bb=0.25, max.it=200)
+    CAPM.beta(managers[,1:6], 
 			managers[,8,drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
-    CAPM.alpha(managers[,1:6], 
+    CAPM.beta(managers[,1:6], 
 			managers[,8:7,drop=FALSE], 
-			Rf=.035/12) 
-    CAPM.alpha(managers[,1:6], 
+			Rf=.035/12, method="Rob", family="mopt") 
+    CAPM.beta(managers[,1:6], 
 			managers[,8:7,drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
     CAPM.beta(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
 			Rf = managers[, "US 3m TR", drop=FALSE])
+	   CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+			managers[, "SP500 TR", drop=FALSE], 
+			Rf = managers[, "US 3m TR", drop=FALSE])
     CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+			managers[, "SP500 TR", drop=FALSE], 
+			Rf = managers[, "US 3m TR", drop=FALSE],
+			method="Rob", family="bisquare",
+			bb=0.25, max.it=200)
+	   CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
 			Rf = managers[, "US 3m TR", drop=FALSE])
     CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
+			Rf = managers[, "US 3m TR", drop=FALSE],
+			method="Rob", family="bisquare",
+			bb=0.25, max.it=200)
     TimingRatio(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
 			Rf = managers[, "US 3m TR", drop=FALSE])
+	   TimingRatio(managers[, "HAM2", drop=FALSE], 
+			managers[, "SP500 TR", drop=FALSE], 
+			Rf = managers[, "US 3m TR", drop=FALSE],
+			method="Rob", family="bisquare",
+			bb=0.25, max.it=200)	
     chart.Regression(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
 			Rf = managers[, "US 3m TR", drop=FALSE], 
@@ -109,5 +143,5 @@ performance measurement and attribution}. Wiley. 2004. \cr
 \code{\link{CAPM.utils}}
 }
 \author{
-Peter Carl
+Peter Carl, Dhairya Jain
 }
