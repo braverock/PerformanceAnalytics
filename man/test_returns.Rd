@@ -4,7 +4,8 @@
 \name{test_returns}
 \alias{test_returns}
 \title{Sample sector returns for use by unit tests}
-\format{A data frame with 5 rows and 10 variables:
+\format{
+A data frame with 5 rows and 10 variables:
 \describe{
   \item{Sector1}{returns for Sector1, numeric}
   \item{Sector2}{returns for Sector2, numeric}
@@ -16,7 +17,8 @@
   \item{Sector8}{returns for Sector8, numeric}
   \item{Sector9}{returns for Sector9, numeric}
   \item{Sector10}{returns for Sector10, numeric}
-}}
+}
+}
 \usage{
 test_returns
 }

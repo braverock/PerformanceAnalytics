@@ -21,6 +21,8 @@ chart.Correlation(
 (or covariance) is to be computed.  One of "pearson"
 (default), "kendall", or "spearman", can be abbreviated.}
 
+\item{pch}{See \code{\link{par}}}
+
 \item{\dots}{any other passthru parameters into \code{\link{pairs}}}
 }
 \description{
@@ -38,7 +40,7 @@ chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
 
 }
 \seealso{
-\code{\link{table.Correlation}}
+\code{\link{table.Correlation}} \code{\link{par}}
 }
 \author{
 Peter Carl

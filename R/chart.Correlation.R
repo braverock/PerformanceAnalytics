@@ -12,10 +12,12 @@
 #' @param method a character string indicating which correlation coefficient
 #'           (or covariance) is to be computed.  One of "pearson"
 #'           (default), "kendall", or "spearman", can be abbreviated.
+#' @param pch See \code{\link{par}}
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
 #' @note based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
 #' @author Peter Carl
-#' @seealso \code{\link{table.Correlation}}
+#' @seealso \code{\link{table.Correlation}} \code{\link{par}}
+#' 
 ###keywords ts multivariate distribution models hplot
 #' @examples
 #'
