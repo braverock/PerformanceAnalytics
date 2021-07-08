@@ -16,27 +16,40 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     CAPM.fit.models(managers[,1,drop=FALSE], 
+#'     CAPM.fit.models(managers[,1], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf = managers[,10,drop=FALSE])
+#'     CAPM.fit.models(managers[,6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12) 
-#'     CAPM.fit.models(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
+#' 		 CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#' 		CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = 0.035/12)
+#' 		CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.fit.models(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12)
-#'     CAPM.fit.models(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.fit.models(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf=.035/12) 
-#'     CAPM.fit.models(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     
+#' 		
+#' @rdname CAPM.fit.models
+#' @export CAPM.fit.models SFM.fit.models
 CAPM.fit.models <- SFM.fit.models <-
 function(Ra, Rb, Rf=0){
+  # @author Dhairya Jain
+  
+  # DESCRIPTION:
+  # Function to compare robust CAPM estimation model vs OLS CAPM estimates 
+  
+  # Inputs:
+  # Ra: time series of returns for the asset being tested
+  # Rb: time series of returns for the benchmark the asset is being gauged against
+  # Rf: risk free rate in the same periodicity as the returns.  May be a time series
+  #     of the same length as x and y.
+  #
+  # Output:
+  # Graphs comparing models
+  
   # FUNCTION:
   Ra = checkData(Ra)
   Rb = checkData(Rb)
@@ -48,11 +61,12 @@ function(Ra, Rb, Rf=0){
   
   # Step 2: tell fit.models lmrobdetMM can be compared to lm
   fmclass.add.class("lmfm", "lmrobdetMM")
-  xRa = Return.excess(Ra, Rf)
-  xRb = Return.excess(Rb, Rf)
+
+  models <- CAPM.coefficients(Ra, Rb, Rf=Rf, method="Both")
+  LmFit  <- models$robust$model
+  LmRobFit <- models$ordinary$model
+  fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
   
-  models <- CAPM.coefficients(xRa, xRb, method="Both")
-  fmLSrob <- fit.models::fit.models(models$robust, models$ordinary)
   class(fmLSrob)
   names(fmLSrob)
   coef(fmLSrob)

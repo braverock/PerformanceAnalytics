@@ -70,11 +70,19 @@
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE],method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
-#'   		
+#'     CAPM.alpha(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#'     CAPM.alpha(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			method="Rob", family="bisquare",
+#' 			bb=0.25, max.it=200)
+#' 	   
 #' @rdname CAPM.alpha
 #' @export SFM.alpha CAPM.alpha
 CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
-    # @author Peter Carl, Dhairya
+    # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
     # This is a wrapper for calculating a CAPM alpha.
@@ -99,6 +107,10 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     # Output:
     # CAPM alpha
 
+    # .coefficients fails if method is "Both"
+    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+        stop("Method can't be 'Both' while using CAPM.alpha")
+    }
     # FUNCTION:
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -115,11 +127,14 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
 
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
-        xRb = xRb, ...=...)
-    result = result.all[[1]]$intercept
-        
+        xRb = xRb, ...)
+    
+    result = list()
+    for (res in result.all) {
+        result[[length(result)+1]] <- res$intercept
+    }
     if(length(result) ==1)
-        return(result)
+        return(result[[1]])
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
         colnames(result) = paste("Alpha:", colnames(Rb))

@@ -19,16 +19,22 @@
 #' (see Eq. 7.9 and 7.10, p. 230-231).
 #'
 #' @aliases SFM.coefficients
-#' @param xRa an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' excess asset returns
-#' @param xRb excess return vector of the benchmark asset
-#' @param subset a logical vector
+#' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' asset returns
+#' @param Rb return vector of the benchmark asset
+#' @param Rf risk free rate, in same period as your returns
 #' @param ... 
-#' @param method Which linear model to use for SFM regression
-#' @param family If method is "Rob", then this is a string specifying the 
-#' name of the family of loss function to be used (current valid options are 
-#' "bisquare", "opt" and "mopt"). Incomplete entries will be matched to the 
-#' current valid options. Defaults to "mopt".
+#' @param \dots Parameters like method, family and other parameters like max.it or bb 
+#' for lmrobdetMM regression.
+#' @param method (Optional): string representing linear regression model, "LS" for Least Squares
+#'                    and "Rob" for robust      
+#' @param family (Optional): 
+#'         If method == "Rob": 
+#'           This is a string specifying the name of the family of loss function
+#'           to be used (current valid options are "bisquare", "opt" and "mopt").
+#'           Incomplete entries will be matched to the current valid options. 
+#'           Defaults to "mopt".
+#'         Else: the parameter is ignored
 #' @author Dhairya Jain
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
 #' \code{\link{CAPM.utils}} \code{\link{CAPM.beta}}
@@ -41,59 +47,159 @@
 #' @examples
 #' 
 #' data(managers)
-#'     CAPM.coefficients(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], family="bisquare") 
-#'   		
+#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#' 			     managers[,8,drop=FALSE], method="Rob" 
+#' 			     family="bisquare")
+#'      CAPM.coefficients(managers[,1:6,drop=FALSE], 
+#' 			     managers[,8:7,drop=FALSE])
+#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#' 			     managers[,8:7,drop=FALSE], method="Both") 
+#' 			CAPM.coefficients(managers[,1:9,drop=FALSE], 
+#' 			     managers[,8:10,drop=FALSE]
+#' 			     Rf = managers[,10,drop=FALSE],
+#' 			     method="Both")
+#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#' 			     managers[,8,drop=FALSE], 
+#' 			     Rf = managers[,10,drop=FALSE],
+#' 			     method="Rob", family="mopt")
+#' 			CAPM.coefficients(managers[,1:3], 
+#' 			     managers[,8:7,drop=FALSE], 
+#' 			     Rf=.035/12, method="Rob", 
+#' 			     family="opt", bb=0.25, 
+#' 			     max.it=200)
+#'      CAPM.coefficients(managers[,1:3], 
+#' 			     managers[,8:7,drop=FALSE], 
+#' 			     Rf=.035/12, method="Rob", 
+#' 			     family="bisquare", bb=0.25, 
+#' 			     max.it=200)
+#'      CAPM.coefficients(managers[,1], 
+#' 			     managers[,8,drop=FALSE], 
+#' 			     Rf=.035/12, method="Both", 
+#' 			     family="opt") 
+#' 		 
+#'   	  
 #' @rdname CAPM.coefficients
 #' @export CAPM.coefficients SFM.coefficients
-CAPM.coefficients <- SFM.coefficients <- .coefficients <- 
-function(xRa, xRb, subset, ..., method ="LS", family="mopt"){
-  # subset is assumed to be a logical vector
-  if(missing(subset))
-    subset <-TRUE
-  # check columns
-  if(NCOL(xRa)!= 1L || NCOL(xRb)!= 1L || NCOL(subset)!= 1L)
-    stop("all arguments must have only one column")
-  # merge, drop NA
-  merged <- as.data.frame(na.omit(cbind(xRa, xRb, subset)))
-  # return NA if no non-NA values
-  if(NROW(merged)== 0)
-    return (NA)
-  # add column names and convert subset back to logical
-  colnames(merged) <- c("xRa", "xRb", "subset")
-  merged$subset <- as.logical(merged$subset)
-  switch(method,
-    LS = {
-      model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
-      return (list(intercept=coef(model.lm)[[1]],
-                   beta=coef(model.lm)[[2]],
-                   model= model.lm))
-      },
-    Rob = {
-      model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged, 
-                                subset=subset, 
-                                control = lmrobdet.control(family=family, ...))
-      return (list(intercept=coef(model.rob.lm)[[1]],
-                   beta=coef(model.rob.lm)[[2]],
-                   model= model.rob.lm))
-      },
-    Both = {
-      model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged,
-                                subset=subset)
-      model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
-      return (list(robust=(list(intercept=coef(model.rob.lm)[[1]],
-                                beta=coef(model.rob.lm)[[2]],
-                                model=model.rob.lm
-                                )
-                           ),
-                   ordinary=(list(intercept=coef(model.lm)[[1]],
-                                  beta=coef(model.lm)[[2]],
-                                  model=model.lm
-                                  )
-                             )
-                   )
-      )
-      },
-    
-  )
+CAPM.coefficients <- SFM.coefficients <- 
+function(Ra, Rb, subset=TRUE, Rf=0, ...)
+{# @author Peter Carl, Dhairya Jain
+  
+  # DESCRIPTION:
+  # This is a wrapper for calculating a CAPM coefficients.
+  
+  # Inputs:
+  # Ra: vector of returns for the asset being tested
+  # Rb: vector of returns for the benchmark the asset is being gauged against
+  # subset: a logical vector
+  # Rf: risk free rate in the same periodicity as the returns.  May be a vector
+  #     of the same length as x and y.
+  #   , method="LS", family="mopt"
+  # method (Optional): string representing linear regression model, "LS" for Least Squares
+  #                    and "Rob" for robust      
+  # family (Optional): 
+  #         If method == "Rob": 
+  #           This is a string specifying the name of the family of loss function
+  #           to be used (current valid options are "bisquare", "opt" and "mopt").
+  #           Incomplete entries will be matched to the current valid options. 
+  #           Defaults to "mopt".
+  #         Else: the parameter is ignored
+  
+  # Output:
+  # 
+  
+  # FUNCTION:
+  Ra = checkData(Ra)
+  Rb = checkData(Rb)
+  if(!is.null(dim(Rf)))
+    Rf = checkData(Rf)
+  
+  Ra.ncols = NCOL(Ra) 
+  Rb.ncols = NCOL(Rb)
+  
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
+  
+  pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
+  
+  result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, subset, ...)
+    .coefficients(xRa[,n[1]], xRb[,n[2]], subset, ...), 
+    xRa = xRa, xRb = xRb, subset = subset, ...)
+  
+  if(length(result.all) ==1)
+    return(result.all[[1]])
+  else {
+    dim(result.all) = c(Ra.ncols, Rb.ncols)
+    colnames(result.all) = paste("Intercept, Beta, Model:", colnames(Rb))
+    rownames(result.all) = colnames(Ra)
+    return(t(result.all))
+  }
 }
+
+
+#' Wrapper for SFM's regression models.
+#' 
+#' This is intended to be called using CAPM.coefficients function, and
+#' not directly.
+#'
+#' @param xRa an xts, vector, matrix, data frame, timeSeries or zoo object of
+#' excess asset returns
+#' @param xRb excess return vector of the benchmark asset
+#' @param subset a logical vector
+#' @param ... 
+#' @param method Which linear model to use for SFM regression
+#' @param family If method is "Rob", then this is a string specifying the 
+#' name of the family of loss function to be used (current valid options are 
+#' "bisquare", "opt" and "mopt"). Incomplete entries will be matched to the 
+#' current valid options. Defaults to "mopt".
+#' @author Dhairya Jain
+.coefficients <- 
+  function(xRa, xRb, subset, ..., method ="LS", family="mopt"){
+    # subset is assumed to be a logical vector
+    if(missing(subset))
+      subset <-TRUE
+    # check columns
+    if(NCOL(xRa)!= 1L || NCOL(xRb)!= 1L || NCOL(subset)!= 1L)
+      stop("all arguments must have only one column")
+    # merge, drop NA
+    merged <- as.data.frame(na.omit(cbind(xRa, xRb, subset)))
+    # return NA if no non-NA values
+    if(NROW(merged)== 0)
+      return (NA)
+    # add column names and convert subset back to logical
+    colnames(merged) <- c("xRa", "xRb", "subset")
+    merged$subset <- as.logical(merged$subset)
+    switch(method,
+           LS = {
+             model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
+             return (list(intercept=coef(model.lm)[[1]],
+                          beta=coef(model.lm)[[2]],
+                          model= model.lm))
+           },
+           Rob = {
+             model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged, 
+                                       subset=subset, 
+                                       control = lmrobdet.control(family=family, ...))
+             return (list(intercept=coef(model.rob.lm)[[1]],
+                          beta=coef(model.rob.lm)[[2]],
+                          model= model.rob.lm))
+           },
+           Both = {
+             model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged,
+                                       subset=subset)
+             model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
+             return (list(robust=(list(intercept=coef(model.rob.lm)[[1]],
+                                       beta=coef(model.rob.lm)[[2]],
+                                       model=model.rob.lm
+             )
+             ),
+             ordinary=(list(intercept=coef(model.lm)[[1]],
+                            beta=coef(model.lm)[[2]],
+                            model=model.lm
+             )
+             )
+             )
+             )
+           },
+           stop("CAPM.coefficients.helper:- Please enter a valid value (\"LS\",\"Rob\",\"Both\") for the parameter \"method\"")
+    )
+  }

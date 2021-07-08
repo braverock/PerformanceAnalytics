@@ -59,27 +59,27 @@
 #' @examples
 #' 
 #' data(managers)
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     CAPM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     CAPM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="LS") 
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     CAPM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE],
 #' 			method="Rob", family="mopt")
-#'     CAPM.alpha(managers[,1:6], 
+#'     CAPM.beta(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
-#'     CAPM.alpha(managers[,1:6], 
+#'     CAPM.beta(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1:6], 
+#'     CAPM.beta(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf=.035/12, method="Rob", family="mopt") 
-#'     CAPM.alpha(managers[,1:6], 
+#'     CAPM.beta(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
 #'     CAPM.beta(managers[, "HAM2", drop=FALSE], 
@@ -128,7 +128,6 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
     # Rb: vector of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
-    #   , method="LS", family="mopt"
     # method (Optional): string representing linear regression model, "LS" for Least Squares
     #                    and "Rob" for robust      
     # family (Optional): 
@@ -143,6 +142,11 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
     # 
 
     # FUNCTION:
+    
+    # .coefficients fails if method is "Both"
+    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+        stop("Method can't be 'Both' while using CAPM.beta")
+    }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
     if(!is.null(dim(Rf)))
@@ -159,11 +163,12 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
         xRb = xRb, ...)
-    
-    result = result.all[[1]]$beta
-    
+    result = list()
+    for (res in result.all) {
+        result[[length(result)+1]] <- res$beta
+    }
     if(length(result) ==1)
-        return(result)
+        return(result[[1]])
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
         colnames(result) = paste("Beta:", colnames(Rb))
@@ -186,7 +191,6 @@ function (Ra, Rb, Rf = 0, ...)
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as x and y.
-    #  , method="LS", family="mopt"
     # method (Optional): string representing linear regression model, "LS" for Least Squares
     #                    and "Rob" for robust      
     # family (Optional): 
@@ -198,9 +202,14 @@ function (Ra, Rb, Rf = 0, ...)
     #         Else: the parameter is ignored
     #
     # Output:
-    # Bear market beta
+    # Bull market beta
 
     # FUNCTION:
+    
+    # .coefficients fails if method is "Both"
+    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+        stop("Method can't be 'Both' while using CAPM.beta.bull")
+    }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
     if(!is.null(dim(Rf)))
@@ -214,7 +223,7 @@ function (Ra, Rb, Rf = 0, ...)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
     
-    # .beta fails if subset contains no positive values, all(xRb <= 0) is true
+    # .coefficients fails if subset contains no positive values, all(xRb <= 0) is true
     if (all(xRb <= 0)) {
         message("Function CAPM.beta.bull: Cannot perform lm. No positive Rb values (no bull periods).")
         return(NA)
@@ -224,10 +233,13 @@ function (Ra, Rb, Rf = 0, ...)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0, ...), 
         xRa = xRa, xRb = xRb, ...)
     
-    result = result.all[[1]]$beta
+    result = list()
+    for (res in result.all) {
+        result[[length(result)+1]] <- res$beta
+    }
     
     if(length(result) ==1)
-        return(result)
+        return(result[[1]])
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
         colnames(result) = paste("Bull Beta:", colnames(Rb))
@@ -250,7 +262,6 @@ function (Ra, Rb, Rf = 0, ...)
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as Ra and Rb.
-    #  , method="LS", family="mopt"
     # method (Optional): string representing linear regression model, "LS" for Least Squares
     #                    and "Rob" for robust      
     # family (Optional): 
@@ -265,6 +276,11 @@ function (Ra, Rb, Rf = 0, ...)
     # Bear market beta
 
     # FUNCTION:
+    
+    # .coefficients fails if method is "Both"
+    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+        stop("Method can't be 'Both' while using CAPM.beta.bear")
+    }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
     if(!is.null(dim(Rf)))
@@ -278,7 +294,7 @@ function (Ra, Rb, Rf = 0, ...)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
     
-    # .beta fails if subset contains no negative values, all(xRb >= 0) is true
+    # .coefficients fails if subset contains no negative values, all(xRb >= 0) is true
     if (all(xRb >= 0)) {
         message("Function CAPM.beta.bear: Cannot perform lm. No negative Rb values (no bear periods).")
         return(NA)
@@ -288,9 +304,12 @@ function (Ra, Rb, Rf = 0, ...)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0, ...), 
         xRa = xRa, xRb = xRb, ...)
     
-    result = result.all[[1]]$beta
+    result = list()
+    for (res in result.all) {
+        result[[length(result)+1]] <- res$beta
+    }
     if(length(result) ==1)
-        return(result)
+        return(result[[1]])
     else {
         dim(result) = c(Ra.ncols, Rb.ncols)
         colnames(result) = paste("Bear Beta:", colnames(Rb))
@@ -311,6 +330,7 @@ function (Ra, Rb, Rf = 0, ...)
 
     beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf, ...)
     beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf, ...)
+    
     result = beta.bull/beta.bear
 
     if(length(result) ==1)
