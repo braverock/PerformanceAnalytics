@@ -1,4 +1,4 @@
-#' calculate single factor model (CAPM) beta
+#' Calculate single factor model (CAPM) beta
 #' 
 #' The single factor model or CAPM Beta is the beta of an asset to the variance 
 #' and covariance of an initial portfolio.  Used to determine diversification potential.
@@ -15,10 +15,10 @@
 #' (see Eq. 7.9 and 7.10, p. 230-231).
 #' 
 #' Two other functions apply the same notion of best fit to positive and
-#' negative market returns, separately.  The \code{CAPM.beta.bull} is a
+#' negative market returns, separately.  The \code{SFM.beta.bull} is a
 #' regression for only positive market returns, which can be used to understand
 #' the behavior of the asset or portfolio in positive or 'bull' markets.
-#' Alternatively, \code{CAPM.beta.bear} provides the calculation on negative
+#' Alternatively, \code{SFM.beta.bear} provides the calculation on negative
 #' market returns.
 #' 
 #' The \code{TimingRatio} may help assess whether the manager is a good timer
@@ -31,7 +31,7 @@
 #' literature, it is an example of a simple single factor model, 
 #' comparing an asset to any arbitrary benchmark.
 #'  
-#' @aliases CAPM.beta CAPM.beta.bull CAPM.beta.bear TimingRatio SFM.beta
+#' @aliases CAPM.beta CAPM.beta.bull CAPM.beta.bear TimingRatio
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
@@ -59,44 +59,44 @@
 #' @examples
 #' 
 #' data(managers)
-#'     CAPM.beta(managers[,1,drop=FALSE], 
+#'     SFM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)
-#'     CAPM.beta(managers[,1,drop=FALSE], 
+#'     SFM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="LS") 
-#'     CAPM.beta(managers[,1,drop=FALSE], 
+#'     SFM.beta(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE],
 #' 			method="Rob", family="mopt")
-#'     CAPM.beta(managers[,1:6], 
+#'     SFM.beta(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
-#'     CAPM.beta(managers[,1:6], 
+#'     SFM.beta(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.beta(managers[,1:6], 
+#'     SFM.beta(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf=.035/12, method="Rob", family="mopt") 
-#'     CAPM.beta(managers[,1:6], 
+#'     SFM.beta(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.beta(managers[, "HAM2", drop=FALSE], 
+#'     SFM.beta(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#' 	   CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+#' 	   SFM.beta.bull(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#'     CAPM.beta.bull(managers[, "HAM2", drop=FALSE], 
+#'     SFM.beta.bull(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE],
 #' 			method="Rob", family="bisquare",
 #' 			bb=0.25, max.it=200)
-#' 	   CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
+#' 	   SFM.beta.bear(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#'     CAPM.beta.bear(managers[, "HAM2", drop=FALSE], 
+#'     SFM.beta.bear(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE],
 #' 			method="Rob", family="bisquare",
@@ -115,9 +115,9 @@
 #' 			fit="conditional", 
 #' 			main="Conditional Beta")
 #'   		
-#' @rdname CAPM.beta
-#' @export CAPM.beta SFM.beta
-CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
+#' @rdname SFM.beta
+#' @export SFM.beta CAPM.beta
+SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -145,7 +145,7 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
     
     # .coefficients fails if method is "Both"
     if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using CAPM.beta")
+        stop("Method can't be 'Both' while using SFM.beta")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -177,9 +177,9 @@ CAPM.beta <- SFM.beta <- function (Ra, Rb, Rf = 0, ...)
     }
 }
 
-#' @rdname CAPM.beta
-#' @export
-CAPM.beta.bull <-
+#' @rdname SFM.beta
+#' @export SFM.beta.bull CAPM.beta.bull
+SFM.beta.bull <- CAPM.beta.bull <-
 function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl
 
@@ -208,7 +208,7 @@ function (Ra, Rb, Rf = 0, ...)
     
     # .coefficients fails if method is "Both"
     if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using CAPM.beta.bull")
+        stop("Method can't be 'Both' while using SFM.beta.bull")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -225,7 +225,7 @@ function (Ra, Rb, Rf = 0, ...)
     
     # .coefficients fails if subset contains no positive values, all(xRb <= 0) is true
     if (all(xRb <= 0)) {
-        message("Function CAPM.beta.bull: Cannot perform lm. No positive Rb values (no bull periods).")
+        message("Function SFM.beta.bull: Cannot perform lm. No positive Rb values (no bull periods).")
         return(NA)
     }
     
@@ -248,9 +248,9 @@ function (Ra, Rb, Rf = 0, ...)
     }
 }
 
-#' @rdname CAPM.beta
-#' @export
-CAPM.beta.bear <-
+#' @rdname SFM.beta
+#' @export SFM.beta.bear CAPM.beta.bear
+SFM.beta.bear <- CAPM.beta.bear <-
 function (Ra, Rb, Rf = 0, ...)
 { # @author Peter Carl
 
@@ -279,7 +279,7 @@ function (Ra, Rb, Rf = 0, ...)
     
     # .coefficients fails if method is "Both"
     if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using CAPM.beta.bear")
+        stop("Method can't be 'Both' while using SFM.beta.bear")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -296,7 +296,7 @@ function (Ra, Rb, Rf = 0, ...)
     
     # .coefficients fails if subset contains no negative values, all(xRb >= 0) is true
     if (all(xRb >= 0)) {
-        message("Function CAPM.beta.bear: Cannot perform lm. No negative Rb values (no bear periods).")
+        message("Function SFM.beta.bear: Cannot perform lm. No negative Rb values (no bear periods).")
         return(NA)
     }
     
@@ -319,7 +319,7 @@ function (Ra, Rb, Rf = 0, ...)
 }
 
 
-#' @rdname CAPM.beta
+#' @rdname SFM.beta
 #' @export
 TimingRatio <-
 function (Ra, Rb, Rf = 0, ...)
@@ -328,8 +328,8 @@ function (Ra, Rb, Rf = 0, ...)
     # DESCRIPTION:
     # This function calculates the ratio of the two conditional CAPM betas (up and down).
 
-    beta.bull = CAPM.beta.bull(Ra, Rb, Rf = Rf, ...)
-    beta.bear = CAPM.beta.bear(Ra, Rb, Rf = Rf, ...)
+    beta.bull = SFM.beta.bull(Ra, Rb, Rf = Rf, ...)
+    beta.bear = SFM.beta.bear(Ra, Rb, Rf = Rf, ...)
     
     result = beta.bull/beta.bear
 

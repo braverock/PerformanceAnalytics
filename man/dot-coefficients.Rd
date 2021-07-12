@@ -24,7 +24,7 @@ name of the family of loss function to be used (current valid options are
 current valid options. Defaults to "mopt".}
 }
 \description{
-This is intended to be called using CAPM.coefficients function, and
+This is intended to be called using SFM.coefficients function, and
 not directly.
 }
 \author{

@@ -18,12 +18,11 @@
 #' slope can be used to determine the risk premium or excess expected return
 #' (see Eq. 7.9 and 7.10, p. 230-231).
 #'
-#' @aliases SFM.coefficients
+#' @aliases CAPM.coefficients
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @param ... 
 #' @param \dots Parameters like method, family and other parameters like max.it or bb 
 #' for lmrobdetMM regression.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
@@ -36,8 +35,8 @@
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
 #' @author Dhairya Jain
-#' @seealso \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
-#' \code{\link{CAPM.utils}} \code{\link{CAPM.beta}}
+#' @seealso \code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
+#' \code{\link{CAPM.utils}} \code{\link{SFM.beta}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
 #' 1964, 425-442. \cr Ruppert, David. \emph{Statistics and Finance, an
@@ -47,45 +46,45 @@
 #' @examples
 #' 
 #' data(managers)
-#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#'      SFM.coefficients(managers[,1,drop=FALSE], 
 #' 			     managers[,8,drop=FALSE], method="Rob" 
 #' 			     family="bisquare")
-#'      CAPM.coefficients(managers[,1:6,drop=FALSE], 
+#'      SFM.coefficients(managers[,1:6,drop=FALSE], 
 #' 			     managers[,8:7,drop=FALSE])
-#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#'      SFM.coefficients(managers[,1,drop=FALSE], 
 #' 			     managers[,8:7,drop=FALSE], method="Both") 
-#' 			CAPM.coefficients(managers[,1:9,drop=FALSE], 
+#' 			SFM.coefficients(managers[,1:9,drop=FALSE], 
 #' 			     managers[,8:10,drop=FALSE]
 #' 			     Rf = managers[,10,drop=FALSE],
 #' 			     method="Both")
-#'      CAPM.coefficients(managers[,1,drop=FALSE], 
+#'      SFM.coefficients(managers[,1,drop=FALSE], 
 #' 			     managers[,8,drop=FALSE], 
 #' 			     Rf = managers[,10,drop=FALSE],
 #' 			     method="Rob", family="mopt")
-#' 			CAPM.coefficients(managers[,1:3], 
+#' 			SFM.coefficients(managers[,1:3], 
 #' 			     managers[,8:7,drop=FALSE], 
 #' 			     Rf=.035/12, method="Rob", 
 #' 			     family="opt", bb=0.25, 
 #' 			     max.it=200)
-#'      CAPM.coefficients(managers[,1:3], 
+#'      SFM.coefficients(managers[,1:3], 
 #' 			     managers[,8:7,drop=FALSE], 
 #' 			     Rf=.035/12, method="Rob", 
 #' 			     family="bisquare", bb=0.25, 
 #' 			     max.it=200)
-#'      CAPM.coefficients(managers[,1], 
+#'      SFM.coefficients(managers[,1], 
 #' 			     managers[,8,drop=FALSE], 
 #' 			     Rf=.035/12, method="Both", 
 #' 			     family="opt") 
 #' 		 
 #'   	  
-#' @rdname CAPM.coefficients
-#' @export CAPM.coefficients SFM.coefficients
-CAPM.coefficients <- SFM.coefficients <- 
+#' @rdname SFM.coefficients
+#' @export SFM.coefficients CAPM.coefficients
+SFM.coefficients <- CAPM.coefficients <- 
 function(Ra, Rb, subset=TRUE, Rf=0, ...)
 {# @author Peter Carl, Dhairya Jain
   
   # DESCRIPTION:
-  # This is a wrapper for calculating a CAPM coefficients.
+  # This is a wrapper for calculating a SFM coefficients.
   
   # Inputs:
   # Ra: vector of returns for the asset being tested
@@ -138,7 +137,7 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
 
 #' Wrapper for SFM's regression models.
 #' 
-#' This is intended to be called using CAPM.coefficients function, and
+#' This is intended to be called using SFM.coefficients function, and
 #' not directly.
 #'
 #' @param xRa an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -200,6 +199,6 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
              )
              )
            },
-           stop("CAPM.coefficients.helper:- Please enter a valid value (\"LS\",\"Rob\",\"Both\") for the parameter \"method\"")
+           stop("SFM.coefficients:- Please enter a valid value (\"LS\",\"Rob\",\"Both\") for the parameter \"method\"")
     )
   }

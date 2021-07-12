@@ -1,4 +1,4 @@
-#' calculate single factor model (CAPM) alpha
+#' Calculate single factor model (CAPM) alpha
 #' 
 #' This is a wrapper for calculating a single factor model (CAPM) alpha.
 #' 
@@ -10,7 +10,7 @@
 #' literature, it is an example of a simple single factor model, 
 #' comparing an asset to any arbitrary benchmark.
 #'  
-#' @aliases SFM.alpha
+#' @aliases CAPM.alpha
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
@@ -37,55 +37,55 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     SFM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12) 
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     SFM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="LS") 
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     SFM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
+#'     SFM.alpha(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE],
 #' 			method="Rob", family="mopt")
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12, method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf=.035/12) 
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1:6], 
+#'     SFM.alpha(managers[,1:6], 
 #' 			managers[,8:7,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE],method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
-#'     CAPM.alpha(managers[, "HAM2", drop=FALSE], 
+#'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#'     CAPM.alpha(managers[, "HAM2", drop=FALSE], 
+#'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE],
 #' 			method="Rob", family="bisquare",
 #' 			bb=0.25, max.it=200)
 #' 	   
-#' @rdname CAPM.alpha
+#' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
-    # This is a wrapper for calculating a CAPM alpha.
+    # This is a wrapper for calculating a SFM alpha.
 
     # Inputs:
     # R: vector of returns for the asset being tested
@@ -105,11 +105,11 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     #         Else: the parameter is ignored
     
     # Output:
-    # CAPM alpha
+    # SFM alpha
 
     # .coefficients fails if method is "Both"
     if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using CAPM.alpha")
+        stop("Method can't be 'Both' while using SFM.alpha")
     }
     # FUNCTION:
     Ra = checkData(Ra)
@@ -126,7 +126,7 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
+        SFM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
         xRb = xRb, ...)
     
     result = list()

@@ -1,7 +1,7 @@
 #' Compare CAPM estimated using robust estimators with that estimated by OLS 
 #'
 #' This function provies a simple plug and play option for user to compare the
-#' CAPM estimates by lm and lmrobdetMM functions, using the fit.models framework.
+#' SFM estimates by lm and lmrobdetMM functions, using the fit.models framework.
 #' This will allow for an easier comparison using charts and tables
 #' 
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -10,36 +10,34 @@
 #' @param Rf risk free rate, in same period as your returns
 #'
 #' @author Dhairya Jain
-#' @export CAPM.fit.models SFM.fit.models
-#'
 #' @examples 
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     CAPM.fit.models(managers[,1], 
+#'     SFM.fit.models(managers[,1], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.fit.models(managers[,6], 
+#'     SFM.fit.models(managers[,6], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12) 
-#' 		 CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 		 SFM.fit.models(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#' 		CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = 0.035/12)
-#' 		CAPM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
 #' 		
-#' @rdname CAPM.fit.models
-#' @export CAPM.fit.models SFM.fit.models
-CAPM.fit.models <- SFM.fit.models <-
+#' @rdname SFM.fit.models
+#' @export SFM.fit.models CAPM.fit.models
+SFM.fit.models <- CAPM.fit.models <-
 function(Ra, Rb, Rf=0){
   # @author Dhairya Jain
   
   # DESCRIPTION:
-  # Function to compare robust CAPM estimation model vs OLS CAPM estimates 
+  # Function to compare robust SFM estimation model vs OLS SFM estimates 
   
   # Inputs:
   # Ra: time series of returns for the asset being tested
@@ -62,7 +60,7 @@ function(Ra, Rb, Rf=0){
   # Step 2: tell fit.models lmrobdetMM can be compared to lm
   fmclass.add.class("lmfm", "lmrobdetMM")
 
-  models <- CAPM.coefficients(Ra, Rb, Rf=Rf, method="Both")
+  models <- SFM.coefficients(Ra, Rb, Rf=Rf, method="Both")
   LmFit  <- models$robust$model
   LmRobFit <- models$ordinary$model
   fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
