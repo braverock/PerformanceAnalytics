@@ -38,8 +38,6 @@
 #'CDaR.alpha(edhec[,1],edhec[,2],type="average") 
 #'
 #'@export
-
-
 CDaR.alpha<-function(R,Rm,p=0.95,weights = NULL,geometric = TRUE,type= NULL,...){
 
   R = na.omit(R)
@@ -59,7 +57,7 @@ CDaR.alpha<-function(R,Rm,p=0.95,weights = NULL,geometric = TRUE,type= NULL,...)
     if(is.null(weights)) {
       alpha=matrix(nrow=1,ncol=ncol(R))
       for(i in 1:ncol(R) ) {
-        beta[i]<-CDaR.beta(R[,i,drop=FALSE],p=p, geometric=geometric, invert=invert, ...=...)
+        beta[i]<-CDaR.beta(R[,i,drop=FALSE],p=p, geometric=geometric, ...=...)
       }
       dim(alpha) = c(1,NCOL(R))
       colnames(alpha) = colnames(R)
