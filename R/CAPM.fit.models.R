@@ -49,6 +49,17 @@ function(Ra, Rb, Rf=0){
   # Graphs comparing models
   
   # FUNCTION:
+  if (!require("fit.models")){
+    
+    c = readline(prompt = "You need to install package fit.models to use this function. Do you want to install it? (y|N): "); 
+    if(c=="y" || c=="Y"){
+      install.packages("fit.models");
+      library("fit.models");
+    }
+    else{
+      stop("Aborted")
+    }
+  }
   Ra = checkData(Ra)
   Rb = checkData(Rb)
   if(!is.null(dim(Rf)))
