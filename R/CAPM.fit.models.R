@@ -76,14 +76,14 @@ function(Ra, Rb, Rf=0){
   LmRobFit <- models$ordinary$model
   fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
   
-  class(fmLSrob)
-  names(fmLSrob)
-  coef(fmLSrob)
-  summary(fmLSrob)
-  help(plot.lmfm)
-  plot(fmLSrob) 
-  plot(fmLSrob, which.plots = 1)
-  plot(fmLSrob, which.plots = 2)
-  plot(fmLSrob, which.plots = c(1,2))
+  # class(fmLSrob)
+  # names(fmLSrob)
+  # coef(fmLSrob)
+  # summary(fmLSrob)
+  # help(plot.lmfm)
+  # plot(fmLSrob) 
+  # plot(fmLSrob, which.plots = 1)
+  # plot(fmLSrob, which.plots = 2)
+  # plot(fmLSrob, which.plots = c(1,2))
   plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
 }

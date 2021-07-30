@@ -4,7 +4,7 @@
 #' SFM estimates by lm and lmrobdetMM functions, using the fit.models framework.
 #' This will allow for an easier comparison using charts and tables
 #'  
-#' @aliases CAPM.compare
+#' @aliases chart.CAPM
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
@@ -29,32 +29,38 @@
 #' @examples
 #' 
 #' data(managers)
-#'     SFM.compare(managers[,1,drop=FALSE], 
+#'     chart.SFM(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)	
-#' @rdname SFM.compare
-#' @export SFM.compare CAPM.compare
-SFM.compare <- CAPM.compare <- 
-function(Ra, Rb, Rf=0, mainText = NULL, ylimits = NULL, family="mopt",
-                                legendPos = "topleft", goodOutlier = F, makePct = FALSE)
+#'
+#' @rdname chart.SFM
+#' @export chart.SFM chart.CAPM
+chart.SFM <- chart.CAPM <- 
+function(Ra, Rb, Rf = 0, fit.models.chart = F, main = "Title", ylim = NULL, family = c("mopt", "opt", "bisquare"),
+                                legend.loc = "topleft", goodOutlier = F, makePct = FALSE)
 {
   if (dim(Ra)[2]!=1 || dim(Rb)[2]!=1)
-    stop("Both Ra and Rb should be uni-dimentional vectors")    
-  Ra = checkData(Ra)
-  Rb = checkData(Rb)
-  if(!is.null(dim(Rf)))
-    Rf = checkData(Rf)
-  
-  xRa = Return.excess(Ra,Rf)
-  xRb = Return.excess(Rb,Rf)
-  if (makePct) {
-    xRb = xRb * 100
-    xRa = xRa * 100
+    stop("Both Ra and Rb should be uni-dimentional vectors")
+  if (fit.models.chart){
+    SFM.fit.models(Ra, Rb, Rf)
   }
-  x = array(xRb)
-  y = array(xRa)
-  models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95,family=family, method="Both")
-  .plot_models(x, y, models, mainText, ylimits, family, legendPos, goodOutlier, makePct)
+  else{
+    Ra = checkData(Ra)
+    Rb = checkData(Rb)
+    if(!is.null(dim(Rf)))
+      Rf = checkData(Rf)
+    
+    xRa = Return.excess(Ra,Rf)
+    xRb = Return.excess(Rb,Rf)
+    if (makePct) {
+      xRb = xRb * 100
+      xRa = xRa * 100
+    }
+    x = array(xRb)
+    y = array(xRa)
+    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95,family=family, method="Both")
+    .plot_models(x, y, models, main, ylim, family, legend.loc, goodOutlier, makePct)
+  }
 }
 
 .plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, family = "mopt",
@@ -62,9 +68,15 @@ function(Ra, Rb, Rf=0, mainText = NULL, ylimits = NULL, family="mopt",
                         goodOutlier = F, makePct = FALSE){
   fit.mOpt <- models$robust$model
   fit.ls <- models$ordinary$model
-  plot(x,y, xlab="Market Returns (%)", ylab="Returns (%)", type="n",
+  xlab <- "Benchmark Returns"
+  ylab <- "Asset Returns"
+  if (makePct){
+    xlab = xlab + " (%)"
+    ylab = ylab + " (%)"
+  }
+  plot(x,y, xlab = xlab, ylab = ylab, type = "n",
        ylim = ylimits, main = mainText, 
-       cex.main =1.5, cex.lab=1.5)
+       cex.main = 1.5, cex.lab = 1.5)
   abline(a = fit.mOpt$coefficients[[1]], b = fit.mOpt$coefficients[[2]], col="black", lty=1, lwd=2)
   abline(fit.ls, col="red", lty=2, lwd=2)
   abline(fit.mOpt$coef[1]+3*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
