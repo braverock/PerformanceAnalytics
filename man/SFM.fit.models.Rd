@@ -4,7 +4,13 @@
 \alias{SFM.fit.models}
 \title{Compare CAPM estimated using robust estimators with that estimated by OLS}
 \usage{
-SFM.fit.models(Ra, Rb, Rf = 0)
+SFM.fit.models(
+  Ra,
+  Rb,
+  Rf = 0,
+  family = c("mopt", "opt", "bisquare"),
+  which.plots = NULL
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -13,6 +19,9 @@ asset returns}
 \item{Rb}{return vector of the benchmark asset}
 
 \item{Rf}{risk free rate, in same period as your returns}
+
+\item{which.plots}{specify the plot numbers that you want to see. Default
+option is that program will ask you to choose a plot}
 }
 \description{
 This function provies a simple plug and play option for user to compare the
@@ -38,7 +47,19 @@ This will allow for an easier comparison using charts and tables
 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
 			managers[, "SP500 TR", drop=FALSE], 
 			Rf = managers[,10,drop=FALSE])
-		
+   SFM.fit.models(managers[,6], 
+			managers[,8,drop=FALSE], 
+			Rf=.035/12, 
+			family = "bisquare", 
+			which.plots = c(1,2)) 
+		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
+			managers[, "SP500 TR", drop=FALSE], 
+			Rf = managers[, "US 3m TR", drop=FALSE],
+			family = "opt",
+			which.plots = c(1,2,6,7))
+		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
+			managers[, "SP500 TR", drop=FALSE], 
+			Rf = 0.035/12, which.plots = NULL)
 }
 \author{
 Dhairya Jain
