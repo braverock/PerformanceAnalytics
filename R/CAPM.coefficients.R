@@ -194,7 +194,8 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
            },
            Both = {
              model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged,
-                                       subset=subset)
+                                       subset=subset,
+                                       control = lmrobdet.control(family=family))
              model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
              return (list(robust=(list(intercept=coef(model.rob.lm)[[1]],
                                        beta=coef(model.rob.lm)[[2]],

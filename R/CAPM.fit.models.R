@@ -8,7 +8,8 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#'
+#' @param which.plots specify the plot numbers that you want to see. Default
+#'        option is that program will ask you to choose a plot
 #' @author Dhairya Jain
 #' @examples 
 #' 
@@ -29,11 +30,23 @@
 #' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
 #' 			managers[, "SP500 TR", drop=FALSE], 
 #' 			Rf = managers[,10,drop=FALSE])
-#' 		
+#'    SFM.fit.models(managers[,6], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, 
+#' 			family = "bisquare", 
+#' 			which.plots = c(1,2)) 
+#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			family = "opt",
+#' 			which.plots = c(1,2,6,7))
+#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
+#' 			managers[, "SP500 TR", drop=FALSE], 
+#' 			Rf = 0.035/12, which.plots = NULL)
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models CAPM.fit.models
 SFM.fit.models <- CAPM.fit.models <-
-function(Ra, Rb, Rf=0){
+function(Ra, Rb, Rf=0, family = c("mopt", "opt", "bisquare"), which.plots = NULL){
   # @author Dhairya Jain
   
   # DESCRIPTION:
@@ -44,7 +57,15 @@ function(Ra, Rb, Rf=0){
   # Rb: time series of returns for the benchmark the asset is being gauged against
   # Rf: risk free rate in the same periodicity as the returns.  May be a time series
   #     of the same length as x and y.
-  #
+  # family (Optional): 
+  #         If method == "Rob": 
+  #           This is a string specifying the name of the family of loss function
+  #           to be used (current valid options are "bisquare", "opt" and "mopt").
+  #           Incomplete entries will be matched to the current valid options. 
+  #           Defaults to "mopt".
+  #         Else: the parameter is ignored
+  # which.plots: specify the plot numbers that you want to see. Default
+  #              option is that program will ask you to choose a plot
   # Output:
   # Graphs comparing models
   
@@ -71,19 +92,16 @@ function(Ra, Rb, Rf=0){
   # Step 2: tell fit.models lmrobdetMM can be compared to lm
   fmclass.add.class("lmfm", "lmrobdetMM")
 
-  models <- SFM.coefficients(Ra, Rb, Rf=Rf, method="Both")
+  models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=family, method="Both")
   LmFit  <- models$robust$model
   LmRobFit <- models$ordinary$model
   fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
   
-  # class(fmLSrob)
-  # names(fmLSrob)
-  # coef(fmLSrob)
-  # summary(fmLSrob)
-  # help(plot.lmfm)
-  # plot(fmLSrob) 
-  # plot(fmLSrob, which.plots = 1)
-  # plot(fmLSrob, which.plots = 2)
-  # plot(fmLSrob, which.plots = c(1,2))
-  plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
+  if(is.null(which.plots)){
+    plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
+  }
+  else {
+    plot(fmLSrob, which.plots = which.plots)
+  }
+  
 }
