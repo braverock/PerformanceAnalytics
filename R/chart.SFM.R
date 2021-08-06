@@ -9,16 +9,22 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns   
+#' @param fit.models.chart option to output charts using fit.models package. Defaults to False
+#' @param which.plots If fit.models.chart is set to TRUE, then this is a list of 
+#' the plots that the user wants to see
+#' @param main Title of the generated plot. Defaults to "lm vs lmRobdetMM"
+#' @param ylim Limits on the y-axis of the plots. Defaults to min-max
+#' @param xlim Limits on the x-axis of the plots. Defaults to min-max
 #' @param family (Optional): 
 #'         This is a string specifying the name of the family of loss function
 #'         to be used (current valid options are "bisquare", "opt" and "mopt").
 #'         Incomplete entries will be matched to the current valid options. 
 #'         Defaults to "mopt".
-#' @param ylimits Limits on the y-axis of the plots. Defaults to min-max
-#' @param mainText MainText for the plot
-#' @param legendPos Position of legends. See plot() function for more info.
+#' @param legend.loc Position of legends. See plot() function for more info.
 #' @param makePct If Returns should be converted to percentage. Defaults to False
-#' @param goodOutlier
+#' @param lm.outliers If outlier boundaries are to be shown with respect to lm model,
+#' then set this to true. Defaults to false and outlier boundaries are shown wrt
+#' lmrobdetMM model
 #' @author Doug Martin, Dan Xia, Dhairya Jain
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -32,17 +38,88 @@
 #'     chart.SFM(managers[,1,drop=FALSE], 
 #' 			managers[,8,drop=FALSE], 
 #' 			Rf=.035/12)	
-#'
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=managers[,10,drop=FALSE], 
+#' 			fit.models.chart=T)	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, fit.models.chart=T)	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], Rf=.035/12, 
+#' 			fit.models.chart=T, which.plots=c(1,5,6))
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=managers[,10,drop=FALSE], 
+#' 			fit.models.chart=T, which.plots=c(1,5,6))	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, legend.loc="bottomright")	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, main = "OLS vs MM estimator",
+#' 			legend.loc="bottomleft")	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, main = "OLS vs MM estimator",
+#' 			ylim=c(-1,1), xlim=c(-0.5,0.5),
+#' 			legend.loc="bottomleft")	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, main = "OLS vs MM estimator",
+#' 			ylim=c(-1,1), xlim=c(-0.5,0.5),
+#' 			family="opt", legend.loc="bottomleft")	
+#'    chart.SFM(managers[,1,drop=FALSE], 
+#' 			managers[,8,drop=FALSE], 
+#' 			Rf=.035/12, makePct=T, 
+#' 			family = "b", lm.outliers=T)	
+#'    
 #' @rdname chart.SFM
 #' @export chart.SFM chart.CAPM
 chart.SFM <- chart.CAPM <- 
-function(Ra, Rb, Rf = 0, fit.models.chart = F, main = "Title", ylim = NULL, family = c("mopt", "opt", "bisquare"),
-                                legend.loc = "topleft", goodOutlier = F, makePct = FALSE)
-{
+function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = "lm vs lmRobdetMM", 
+         ylim = NULL, xlim = NULL, family = c("mopt", "opt", "bisquare"),
+         legend.loc = "topleft", makePct = FALSE, lm.outliers=F){
+  # @author Dhairya Jain
+  
+  # DESCRIPTION:
+  # Wrapper Function to graph robust SFM estimation model vs OLS SFM estimates.
+  
+  # Inputs:
+  # Ra: time series of returns for the asset being tested
+  # Rb: time series of returns for the benchmark the asset is being gauged against
+  # Rf: risk free rate in the same periodicity as the returns.  May be a time series
+  #     of the same length as x and y.
+  # family (Optional): 
+  #         If method == "Rob": 
+  #           This is a string specifying the name of the family of loss function
+  #           to be used (current valid options are "bisquare", "opt" and "mopt").
+  #           Incomplete entries will be matched to the current valid options. 
+  #           Defaults to "mopt".
+  #         Else: the parameter is ignored
+  # fit.models.chart: option to output charts using fit.models package. Defaults to False
+  # which.plots: If fit.models.chart is set to TRUE, then this is a list of 
+  #              the plots that the user wants to see
+  # main: Title of the generated plot. Defaults to "lm vs lmRobdetMM"
+  # ylim: Limits on the y-axis of the plots. Defaults to min-max
+  # xlim: Limits on the x-axis of the plots. Defaults to min-max
+  # family (Optional): 
+  #   This is a string specifying the name of the family of loss function
+  #   to be used (current valid options are "bisquare", "opt" and "mopt").
+  #   Incomplete entries will be matched to the current valid options. 
+  #   Defaults to "mopt".
+  # legend.loc: Position of legends. See plot() function for more info.
+  # makePct: If Returns should be converted to percentage. Defaults to False
+  # lm.outliers: If outlier boundaries are to be shown with respect to lm model,
+  #              then set this to true. Defaults to false and outlier boundaries are shown wrt
+  #              lmrobdetMM model
+  # Output:
+  # Graphs comparing models
+  
   if (dim(Ra)[2]!=1 || dim(Rb)[2]!=1)
     stop("Both Ra and Rb should be uni-dimentional vectors")
   if (fit.models.chart){
-    SFM.fit.models(Ra, Rb, Rf)
+    SFM.fit.models(Ra, Rb, Rf, family, which.plots)
   }
   else{
     Ra = checkData(Ra)
@@ -58,29 +135,39 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, main = "Title", ylim = NULL, fami
     }
     x = array(xRb)
     y = array(xRa)
-    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95,family=family, method="Both")
-    .plot_models(x, y, models, main, ylim, family, legend.loc, goodOutlier, makePct)
+    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95, family=family, method="Both")
+    .plot_models(x, y, models, main, ylim, xlim, family, legend.loc, makePct, lm.outliers)
   }
 }
 
-.plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, family = "mopt",
-                        legendPos = "topleft", 
-                        goodOutlier = F, makePct = FALSE){
+.plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, xlimits = NULL, family = "mopt",
+                        legendPos = "topleft", makePct = FALSE, lm.outliers=F){
   fit.mOpt <- models$robust$model
   fit.ls <- models$ordinary$model
   xlab <- "Benchmark Returns"
   ylab <- "Asset Returns"
+  f <- 3
+  g <- 1
   if (makePct){
-    xlab = xlab + " (%)"
-    ylab = ylab + " (%)"
+    xlab = paste(xlab," (%)")
+    ylab = paste(ylab," (%)")
+    f = f*100
+    g = g*100
   }
   plot(x,y, xlab = xlab, ylab = ylab, type = "n",
-       ylim = ylimits, main = mainText, 
+       ylim = ylimits, xlim = xlimits, main = mainText, 
        cex.main = 1.5, cex.lab = 1.5)
-  abline(a = fit.mOpt$coefficients[[1]], b = fit.mOpt$coefficients[[2]], col="black", lty=1, lwd=2)
+  # abline(a = fit.mOpt$coefficients[[1]], b = fit.mOpt$coefficients[[2]], col="black", lty=1, lwd=2)
+  abline(fit.mOpt, col="black", lty=1, lwd=2)
   abline(fit.ls, col="red", lty=2, lwd=2)
-  abline(fit.mOpt$coef[1]+3*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
-  abline(fit.mOpt$coef[1]-3*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
+  if (lm.outliers){
+    abline(g*fit.ls$coef[1]+f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
+    abline(g*fit.ls$coef[1]-f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
+  }
+  else{
+    abline(g*fit.mOpt$coef[1]+f*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
+    abline(g*fit.mOpt$coef[1]-f*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
+  }
   ids=which(fit.mOpt$rweights==0)
   if (length(ids) == 0) {
     points(x, y, pch = 20)
