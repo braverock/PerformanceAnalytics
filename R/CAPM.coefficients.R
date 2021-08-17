@@ -23,6 +23,7 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
+#' @param subset a logical vector representing the set of observations to be used in regression
 #' @param \dots Parameters like method, family and other parameters like max.it or bb 
 #' for lmrobdetMM regression.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
@@ -46,36 +47,94 @@
 #' @examples
 #' 
 #' data(managers)
-#'      SFM.coefficients(managers[,1,drop=FALSE], 
-#' 			     managers[,8,drop=FALSE], method="Rob" 
-#' 			     family="bisquare")
-#'      SFM.coefficients(managers[,1:6,drop=FALSE], 
-#' 			     managers[,8:7,drop=FALSE])
-#'      SFM.coefficients(managers[,1,drop=FALSE], 
-#' 			     managers[,8:7,drop=FALSE], method="Both") 
-#' 			SFM.coefficients(managers[,1:9,drop=FALSE], 
-#' 			     managers[,8:10,drop=FALSE]
-#' 			     Rf = managers[,10,drop=FALSE],
+#'      SFM.coefficients(managers[,1], 
+#' 			     managers[,8], method="Rob", 
+#' 			     family="mopt")
+#'      SFM.coefficients(managers[,1], 
+#' 			     managers[,8:9], method="Both") 
+#'      SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9], 
+#' 			     Rf = managers[,10])
+#' 			SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9],
+#' 			     Rf = managers[,10],
 #' 			     method="Both")
-#'      SFM.coefficients(managers[,1,drop=FALSE], 
-#' 			     managers[,8,drop=FALSE], 
-#' 			     Rf = managers[,10,drop=FALSE],
-#' 			     method="Rob", family="mopt")
-#' 			SFM.coefficients(managers[,1:3], 
-#' 			     managers[,8:7,drop=FALSE], 
+#' 			SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9], 
 #' 			     Rf=.035/12, method="Rob", 
 #' 			     family="opt", bb=0.25, 
 #' 			     max.it=200)
-#'      SFM.coefficients(managers[,1:3], 
-#' 			     managers[,8:7,drop=FALSE], 
-#' 			     Rf=.035/12, method="Rob", 
-#' 			     family="bisquare", bb=0.25, 
-#' 			     max.it=200)
-#'      SFM.coefficients(managers[,1], 
-#' 			     managers[,8,drop=FALSE], 
-#' 			     Rf=.035/12, method="Both", 
-#' 			     family="opt") 
-#' 		 
+#'      SFM.coefficients(managers[, "HAM2"], 
+#'           managers[, "SP500 TR"], 
+#' 			     Rf = managers[,10],
+#' 			     method="Rob", family="mopt")
+#' 			     
+#'      sfmRob <- SFM.coefficients(managers[, "HAM2"], 
+#'           managers[, "SP500 TR"], 
+#' 			     Rf=.035/12, method="Rob", family="opt", 
+#' 			     bb=0.25, max.it=200)
+#' 			     sfmRob$beta
+#' 			     sfmRob$intercept
+#' 			     sfmRob$model
+#' 			     
+#'      sfmLSRob <- SFM.coefficients(managers[, "HAM2"], 
+#'           managers[, "SP500 TR"], 
+#'           Rf = managers[, "US 3m TR"], 
+#'           method="Both", family="opt") 
+#'           sfmLSRob$robust
+#'           sfmLSRob$ordinary
+#'           sfmLSRob$robust$beta
+#'           sfmLSRob$robust$intercept
+#'           sfmLSRob$robust$model
+#'           sfmLSRob$ordinary$beta
+#'           sfmLSRob$ordinary$intercept
+#'           sfmLSRob$ordinary$model
+#'           
+#' 		  table <- SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9],
+#' 			     Rf = managers[,10],
+#' 			     method="LS")
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$beta
+#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$intercept
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model$residuals
+#'   	  
+#'   	  table <- SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9], Rf = managers[,10],
+#' 			     method="Rob", family="opt")
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$beta
+#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$intercept
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model$residuals
+#'   	  
+#'   	  table <- SFM.coefficients(managers[,1:6], 
+#' 			     managers[,8:9],
+#' 			     Rf = managers[,10],
+#' 			     method="Both")
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$beta
+#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$intercept
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$model
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$beta
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$intercept
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$model
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"]
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$beta
+#'  	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$intercept
+#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$model
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$beta
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$intercept
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$model
+#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary
+#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust
 #'   	  
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients CAPM.coefficients

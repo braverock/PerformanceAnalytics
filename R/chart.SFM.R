@@ -35,50 +35,54 @@
 #' @examples
 #' 
 #' data(managers)
-#'     chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12)	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=managers[,10,drop=FALSE], 
-#' 			fit.models.chart=T)	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, fit.models.chart=T)	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], Rf=.035/12, 
-#' 			fit.models.chart=T, which.plots=c(1,5,6))
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=managers[,10,drop=FALSE], 
-#' 			fit.models.chart=T, which.plots=c(1,5,6))	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, legend.loc="bottomright")	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, main = "OLS vs MM estimator",
-#' 			legend.loc="bottomleft")	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, main = "OLS vs MM estimator",
-#' 			ylim=c(-1,1), xlim=c(-0.5,0.5),
-#' 			legend.loc="bottomleft")	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, main = "OLS vs MM estimator",
-#' 			ylim=c(-1,1), xlim=c(-0.5,0.5),
-#' 			family="opt", legend.loc="bottomleft")	
-#'    chart.SFM(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, makePct=T, 
-#' 			family = "b", lm.outliers=T)	
+#'    chart.SFM(managers[,1], 
+#' 			        managers[,8], 
+#' 			        Rf=.035/12)	
+#'    chart.SFM(managers[,1], 
+#' 			        managers[,8], 
+#' 			        Rf=managers[,10], 
+#' 			        fit.models.chart=T)	
+#'    chart.SFM(managers[,"HAM1"], 
+#' 			        managers[,"SP500 TR"], 
+#' 			        Rf=.035/12, fit.models.chart=T)	
+#'    chart.SFM(managers[,"HAM1"], 
+#' 			        managers[,"SP500 TR"], Rf=.035/12, 
+#' 			        fit.models.chart=T, which.plots=c(1,5,6))
+#'    chart.SFM(managers[,"HAM1"], 
+#' 			        managers[,"SP500 TR"], 
+#' 			        Rf=managers[,10], 
+#' 			        fit.models.chart=T, which.plots=c(1,5,6))	
+#'    chart.SFM(managers[,1], 
+#' 			        managers[,8], 
+#' 			        Rf=.035/12, legend.loc="bottomright")	
+#'    chart.SFM(managers[,"HAM1"], 
+#' 			        managers[,"SP500 TR"], 
+#' 			        Rf=.035/12, main = "OLS vs MM estimator",
+#' 			        legend.loc="bottomleft")	
+#'    chart.SFM(managers[,1], 
+#' 			        managers[,8], 
+#' 			        Rf=.035/12, main = "OLS vs MM estimator",
+#' 			        ylim=c(-1,1), xlim=c(-0.5,0.5),
+#' 			        legend.loc="bottomleft")	
+#'    chart.SFM(managers[,1], 
+#' 			        managers[,8], 
+#' 			        Rf=.035/12, main = "OLS vs MM estimator",
+#' 			        ylim=c(-1,1), xlim=c(-0.5,0.5),
+#' 			        family="opt", legend.loc="bottomleft")	
+#'    chart.SFM(managers[,"HAM4"], 
+#'              managers[,"SP500 TR"],  
+#'              Rf=.035/12, makePct=T, 
+#'              lm.outliers=T)	
+#'    chart.SFM(managers[,"HAM4"], 
+#'              managers[,"SP500 TR"], 
+#'              Rf=.035/12, makePct=T, 
+#'              family = "b", lm.outliers=F)
 #'    
 #' @rdname chart.SFM
 #' @export chart.SFM chart.CAPM
 chart.SFM <- chart.CAPM <- 
 function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = "lm vs lmRobdetMM", 
-         ylim = NULL, xlim = NULL, family = c("mopt", "opt", "bisquare"),
+         ylim = NULL, xlim = NULL, family = "mopt",
          legend.loc = "topleft", makePct = FALSE, lm.outliers=F){
   # @author Dhairya Jain
   

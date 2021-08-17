@@ -4,13 +4,7 @@
 \alias{SFM.fit.models}
 \title{Compare CAPM estimated using robust estimators with that estimated by OLS}
 \usage{
-SFM.fit.models(
-  Ra,
-  Rb,
-  Rf = 0,
-  family = c("mopt", "opt", "bisquare"),
-  which.plots = NULL
-)
+SFM.fit.models(Ra, Rb, Rf = 0, family = "mopt", which.plots = NULL)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -32,34 +26,34 @@ This will allow for an easier comparison using charts and tables
 
 # First we load the data
     data(managers)
-    SFM.fit.models(managers[,1], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    SFM.fit.models(managers[,6], 
-			managers[,8,drop=FALSE], 
-			Rf=.035/12) 
-		 SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
-		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = 0.035/12)
-		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-   SFM.fit.models(managers[,6], 
-			managers[,8,drop=FALSE], 
-			Rf=.035/12, 
-			family = "bisquare", 
-			which.plots = c(1,2)) 
-		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE],
-			family = "opt",
-			which.plots = c(1,2,6,7))
-		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = 0.035/12, which.plots = NULL)
+      SFM.fit.models(managers[,1], 
+		   	    managers[,8], 
+		   	    Rf = managers[,10])
+      SFM.fit.models(managers[,6], 
+		   	    managers[,8], 
+		   	    Rf=.035/12) 
+		   SFM.fit.models(managers[, "HAM2"], 
+		   	    managers[, "SP500 TR"], 
+		   	    Rf = managers[, "US 3m TR"])
+		   SFM.fit.models(managers[, "HAM2"], 
+		   	    managers[, "SP500 TR"], 
+		   	    Rf = 0.035/12)
+		   SFM.fit.models(managers[, "HAM2"], 
+		   	    managers[, "SP500 TR"], 
+		   	    Rf = managers[,10])
+      SFM.fit.models(managers[,6], 
+			    managers[,8], 
+			    Rf=.035/12, 
+			    family = "mopt", 
+			    which.plots = c(1,2)) 
+		   SFM.fit.models(managers[, "HAM2"], 
+			    managers[, "SP500 TR"], 
+			    Rf = managers[, "US 3m TR"],
+			    family = "opt",
+			    which.plots = c(1,2,6,7))
+		   SFM.fit.models(managers[, "HAM2"], 
+			    managers[, "SP500 TR"], 
+			    Rf = 0.035/12, which.plots = NULL)
 }
 \author{
 Dhairya Jain

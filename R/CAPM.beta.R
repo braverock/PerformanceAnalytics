@@ -59,59 +59,59 @@
 #' @examples
 #' 
 #' data(managers)
-#'     SFM.beta(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
+#'     SFM.beta(managers[,1], 
+#' 			managers[,8], 
 #' 			Rf=.035/12)
-#'     SFM.beta(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
+#'     SFM.beta(managers[,1], 
+#' 			managers[,8], 
 #' 			Rf=.035/12, method="LS") 
-#'     SFM.beta(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE],
+#'     SFM.beta(managers[,1], 
+#' 			managers[,8], 
+#' 			Rf = managers[,10],
 #' 			method="Rob", family="mopt")
 #'     SFM.beta(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
+#' 			managers[,8], 
 #' 			Rf=.035/12, method="Rob", 
-#' 			family="bisquare", bb=0.25, max.it=200)
+#' 			family="opt", bb=0.25, max.it=200)
 #'     SFM.beta(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
+#' 			managers[,8], 
+#' 			Rf = managers[,10])
 #'     SFM.beta(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
+#' 			managers[,8:7], 
 #' 			Rf=.035/12, method="Rob", family="mopt") 
 #'     SFM.beta(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     SFM.beta(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#' 	   SFM.beta.bull(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#'     SFM.beta.bull(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE],
+#' 			managers[,8:7], 
+#' 			Rf = managers[,10])
+#'     SFM.beta(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"])
+#' 	   SFM.beta.bull(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"])
+#'     SFM.beta.bull(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"],
+#' 			method="Rob", family="opt",
+#' 			bb=0.25, max.it=200)
+#' 	   SFM.beta.bear(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"])
+#'     SFM.beta.bear(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"],
 #' 			method="Rob", family="bisquare",
 #' 			bb=0.25, max.it=200)
-#' 	   SFM.beta.bear(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#'     SFM.beta.bear(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE],
-#' 			method="Rob", family="bisquare",
-#' 			bb=0.25, max.it=200)
-#'     TimingRatio(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#' 	   TimingRatio(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE],
-#' 			method="Rob", family="bisquare",
+#'     TimingRatio(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"])
+#' 	   TimingRatio(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"],
+#' 			method="Rob", family="opt",
 #' 			bb=0.25, max.it=200)	
-#'     chart.Regression(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE], 
+#'     chart.Regression(managers[, "HAM2"], 
+#' 			managers[, "SP500 TR"], 
+#' 			Rf = managers[, "US 3m TR"], 
 #' 			fit="conditional", 
 #' 			main="Conditional Beta")
 #'   		

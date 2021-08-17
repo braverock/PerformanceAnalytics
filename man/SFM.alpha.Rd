@@ -3,7 +3,7 @@
 \name{SFM.alpha}
 \alias{SFM.alpha}
 \alias{CAPM.alpha}
-\title{calculate single factor model (SFM) alpha}
+\title{Calculate single factor model (CAPM) alpha}
 \usage{
 SFM.alpha(Ra, Rb, Rf = 0, ...)
 }
@@ -30,14 +30,14 @@ If method == "Rob":
 Else: the parameter is ignored}
 }
 \description{
-This is a wrapper for calculating a single factor model (SFM) alpha.
+This is a wrapper for calculating a single factor model (CAPM) alpha.
 }
 \details{
 "Alpha" purports to be a measure of a manager's skill by measuring the
 portion of the managers returns that are not attributable to "Beta", or the
 portion of performance attributable to a benchmark.
 
-While the classical SFM has been almost completely discredited by the 
+While the classical CAPM has been almost completely discredited by the 
 literature, it is an example of a simple single factor model, 
 comparing an asset to any arbitrary benchmark.
 }
@@ -45,47 +45,47 @@ comparing an asset to any arbitrary benchmark.
 
 # First we load the data
     data(managers)
-    SFM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
+    SFM.alpha(managers[,1], 
+			managers[,8], 
 			Rf=.035/12) 
-    SFM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
+    SFM.alpha(managers[,1], 
+			managers[,8], 
 			Rf=.035/12, method="LS") 
-    SFM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
-    SFM.alpha(managers[,1,drop=FALSE], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE],
+    SFM.alpha(managers[,1], 
+			managers[,8], 
+			Rf = managers[,10])
+    SFM.alpha(managers[,1], 
+			managers[,8], 
+			Rf = managers[,10],
 			method="Rob", family="mopt")
     SFM.alpha(managers[,1:6], 
-			managers[,8,drop=FALSE], 
+			managers[,8], 
 			Rf=.035/12)
     SFM.alpha(managers[,1:6], 
-			managers[,8,drop=FALSE], 
+			managers[,8], 
 			Rf=.035/12, method="Rob", 
 			family="bisquare", bb=0.25, max.it=200)
     SFM.alpha(managers[,1:6], 
-			managers[,8,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
+			managers[,8], 
+			Rf = managers[,10])
     SFM.alpha(managers[,1:6], 
-			managers[,8:7,drop=FALSE], 
+			managers[,8:9], 
 			Rf=.035/12) 
     SFM.alpha(managers[,1:6], 
-			managers[,8:7,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE])
+			managers[,8:9], 
+			Rf = managers[,10])
     SFM.alpha(managers[,1:6], 
-			managers[,8:7,drop=FALSE], 
-			Rf = managers[,10,drop=FALSE],method="Rob", 
-			family="bisquare", bb=0.25, max.it=200)
+              managers[,8:9], 
+              Rf = managers[,10],method="Rob", 
+              family="mopt", bb=0.25, max.it=200)
     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE])
+              managers[, "SP500 TR", drop=FALSE], 
+              Rf = managers[, "US 3m TR", drop=FALSE])
     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-			managers[, "SP500 TR", drop=FALSE], 
-			Rf = managers[, "US 3m TR", drop=FALSE],
-			method="Rob", family="bisquare",
-			bb=0.25, max.it=200)
+              managers[, "SP500 TR", drop=FALSE], 
+              Rf = managers[, "US 3m TR", drop=FALSE],
+              method="Rob", family="opt",
+              bb=0.25, max.it=200)
 	   
 }
 \references{
@@ -95,7 +95,7 @@ equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
 Introduction}. Springer. 2004. \cr
 }
 \seealso{
-\code{\link{SFM.beta}} \code{\link{SFM.utils}}
+\code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 }
 \author{
 Peter Carl, Dhairya Jain

@@ -15,38 +15,38 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     SFM.fit.models(managers[,1], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     SFM.fit.models(managers[,6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12) 
-#' 		 SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
-#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = 0.035/12)
-#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'    SFM.fit.models(managers[,6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12, 
-#' 			family = "bisquare", 
-#' 			which.plots = c(1,2)) 
-#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE],
-#' 			family = "opt",
-#' 			which.plots = c(1,2,6,7))
-#' 		SFM.fit.models(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = 0.035/12, which.plots = NULL)
+#'       SFM.fit.models(managers[,1], 
+#' 		   	    managers[,8], 
+#' 		   	    Rf = managers[,10])
+#'       SFM.fit.models(managers[,6], 
+#' 		   	    managers[,8], 
+#' 		   	    Rf=.035/12) 
+#' 		   SFM.fit.models(managers[, "HAM2"], 
+#' 		   	    managers[, "SP500 TR"], 
+#' 		   	    Rf = managers[, "US 3m TR"])
+#' 		   SFM.fit.models(managers[, "HAM2"], 
+#' 		   	    managers[, "SP500 TR"], 
+#' 		   	    Rf = 0.035/12)
+#' 		   SFM.fit.models(managers[, "HAM2"], 
+#' 		   	    managers[, "SP500 TR"], 
+#' 		   	    Rf = managers[,10])
+#'       SFM.fit.models(managers[,6], 
+#' 			    managers[,8], 
+#' 			    Rf=.035/12, 
+#' 			    family = "mopt", 
+#' 			    which.plots = c(1,2)) 
+#' 		   SFM.fit.models(managers[, "HAM2"], 
+#' 			    managers[, "SP500 TR"], 
+#' 			    Rf = managers[, "US 3m TR"],
+#' 			    family = "opt",
+#' 			    which.plots = c(1,2,6,7))
+#' 		   SFM.fit.models(managers[, "HAM2"], 
+#' 			    managers[, "SP500 TR"], 
+#' 			    Rf = 0.035/12, which.plots = NULL)
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models CAPM.fit.models
 SFM.fit.models <- CAPM.fit.models <-
-function(Ra, Rb, Rf=0, family = c("mopt", "opt", "bisquare"), which.plots = NULL){
+function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL){
   # @author Dhairya Jain
   
   # DESCRIPTION:
@@ -91,10 +91,15 @@ function(Ra, Rb, Rf=0, family = c("mopt", "opt", "bisquare"), which.plots = NULL
   
   # Step 2: tell fit.models lmrobdetMM can be compared to lm
   fmclass.add.class("lmfm", "lmrobdetMM")
-
-  models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=family, method="Both")
+  fam <- family
+  models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=fam, method="Both")
   LmFit  <- models$robust$model
   LmRobFit <- models$ordinary$model
+  #if (fmclass %in% names(e$fmreg)) {
+  #  message(fmclass, " is already registered in the fit.models registry")
+  #  return(invisible())
+  #}
+  #print(names(e$fmreg))
   fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
   
   if(is.null(which.plots)){
@@ -103,5 +108,4 @@ function(Ra, Rb, Rf=0, family = c("mopt", "opt", "bisquare"), which.plots = NULL
   else {
     plot(fmLSrob, which.plots = which.plots)
   }
-  
 }

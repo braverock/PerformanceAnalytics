@@ -37,47 +37,47 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     SFM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
+#'     SFM.alpha(managers[,1], 
+#' 			managers[,8], 
 #' 			Rf=.035/12) 
-#'     SFM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
+#'     SFM.alpha(managers[,1], 
+#' 			managers[,8], 
 #' 			Rf=.035/12, method="LS") 
-#'     SFM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     SFM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE],
+#'     SFM.alpha(managers[,1], 
+#' 			managers[,8], 
+#' 			Rf = managers[,10])
+#'     SFM.alpha(managers[,1], 
+#' 			managers[,8], 
+#' 			Rf = managers[,10],
 #' 			method="Rob", family="mopt")
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
+#' 			managers[,8], 
 #' 			Rf=.035/12)
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
+#' 			managers[,8], 
 #' 			Rf=.035/12, method="Rob", 
 #' 			family="bisquare", bb=0.25, max.it=200)
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
+#' 			managers[,8], 
+#' 			Rf = managers[,10])
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
+#' 			managers[,8:9], 
 #' 			Rf=.035/12) 
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
+#' 			managers[,8:9], 
+#' 			Rf = managers[,10])
 #'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE],method="Rob", 
-#' 			family="bisquare", bb=0.25, max.it=200)
+#'               managers[,8:9], 
+#'               Rf = managers[,10],method="Rob", 
+#'               family="mopt", bb=0.25, max.it=200)
 #'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE])
+#'               managers[, "SP500 TR", drop=FALSE], 
+#'               Rf = managers[, "US 3m TR", drop=FALSE])
 #'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-#' 			managers[, "SP500 TR", drop=FALSE], 
-#' 			Rf = managers[, "US 3m TR", drop=FALSE],
-#' 			method="Rob", family="bisquare",
-#' 			bb=0.25, max.it=200)
+#'               managers[, "SP500 TR", drop=FALSE], 
+#'               Rf = managers[, "US 3m TR", drop=FALSE],
+#'               method="Rob", family="opt",
+#'               bb=0.25, max.it=200)
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
