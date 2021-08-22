@@ -90,7 +90,7 @@ function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL){
   Rb.ncols = NCOL(Rb)
   
   # Step 2: tell fit.models lmrobdetMM can be compared to lm
-  fmclass.add.class("lmfm", "lmrobdetMM")
+  fmclass.add.class("lmfm", "lmrobdetMM", warn=FALSE)
   fam <- family
   models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=fam, method="Both")
   LmFit  <- models$robust$model

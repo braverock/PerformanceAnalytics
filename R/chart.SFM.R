@@ -167,12 +167,16 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = "lm vs
   if (lm.outliers){
     abline(g*fit.ls$coef[1]+f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
     abline(g*fit.ls$coef[1]-f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
+    define_line <- function(X){
+      return (g*fit.ls$coef[1] + X*fit.ls$coef[2])
+    }
+    ids = which(abs(y - define_line(x))> f*summary.lm(fit.ls)$sigma[1]) 
   }
   else{
-    abline(g*fit.mOpt$coef[1]+f*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
-    abline(g*fit.mOpt$coef[1]-f*fit.mOpt$scale, fit.mOpt$coef[2], lty=3, col="black")
+    abline(g*fit.mOpt$coef[1]+f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
+    abline(g*fit.mOpt$coef[1]-f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
+    ids=which(fit.mOpt$rweights==0)
   }
-  ids=which(fit.mOpt$rweights==0)
   if (length(ids) == 0) {
     points(x, y, pch = 20)
   } else {
