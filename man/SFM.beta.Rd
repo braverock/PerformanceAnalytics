@@ -145,5 +145,5 @@ performance measurement and attribution}. Wiley. 2004. \cr
 \code{\link{CAPM.utils}}
 }
 \author{
-Peter Carl, Dhairya Jain
+Dhairya Jain, Peter Carl
 }

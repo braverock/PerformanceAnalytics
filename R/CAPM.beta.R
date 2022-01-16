@@ -47,7 +47,7 @@
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
-#' @author Peter Carl, Dhairya Jain
+#' @author Dhairya Jain, Peter Carl 
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
 #' \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
