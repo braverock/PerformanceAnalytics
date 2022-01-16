@@ -11,10 +11,12 @@ chart.SFM(
   Rf = 0,
   fit.models.chart = F,
   which.plots = NULL,
-  main = "lm vs lmRobdetMM",
+  main = NULL,
   ylim = NULL,
   xlim = NULL,
   family = "mopt",
+  xlab = NULL,
+  ylab = NULL,
   legend.loc = "topleft",
   makePct = FALSE,
   lm.outliers = F
@@ -45,6 +47,10 @@ to be used (current valid options are "bisquare", "opt" and "mopt").
 Incomplete entries will be matched to the current valid options. 
 Defaults to "mopt".}
 
+\item{xlab}{Title of the x-axis of the plots. Defaults to "Benchmark Returns"}
+
+\item{ylab}{Title of the y-axis of the plots. Defaults to "Asset Returns"}
+
 \item{legend.loc}{Position of legends. See plot() function for more info.}
 
 \item{makePct}{If Returns should be converted to percentage. Defaults to False}
@@ -54,64 +60,56 @@ then set this to true. Defaults to false and outlier boundaries are shown wrt
 lmrobdetMM model}
 }
 \description{
-This function provies a simple plug and play option for user to compare the
-SFM estimates by lm and lmrobdetMM functions, using the fit.models framework.
-This will allow for an easier comparison using charts and tables
+This function for single factor models (SFM’s) with a slope  and intercept 
+allows the user to easily make a scatter plot of asset returns versus benchmark 
+returns, such as the SP500, with two overlaid straight-line fits, one obtained 
+using least squares (LS), which can be very adversely influenced by outliers, 
+and one obtained using a highly robust regression estimate that is not much 
+influenced by outliers.  The plot allows the user to see immediately whether 
+or not any outliers result in a distorted LS fit that does not fit the bulk 
+of the data, while the robust estimator results In a good fit to the bulk of
+the data.  The plot contains a legend with LS slope estimate and the robust 
+slope estimate, with estimate standard errors in parentheses.
+}
+\details{
+The function chart.SFM computes the robust fit with the function 
+lmrobdetMM contained in the  package RobStatTM available at CRAN. The function 
+lmrobdetMM has a default robust regression estimate called the mopt estimate, 
+which is used by chart.SFM. For details on lmrobdetMM, see reference [1]. The 
+plot made by chart.SFM has two parallel dotted lines that define a strip in 
+the asset returns versus benchmark returns space, and data points that fall 
+outside that strip are defined as outliers, and as such are rejected, i.e., 
+deleted by the lmrobdetMM estimator.
 }
 \examples{
-
-data(managers)
-   chart.SFM(managers[,1], 
-			        managers[,8], 
-			        Rf=.035/12)	
-   chart.SFM(managers[,1], 
-			        managers[,8], 
-			        Rf=managers[,10], 
-			        fit.models.chart=T)	
-   chart.SFM(managers[,"HAM1"], 
-			        managers[,"SP500 TR"], 
-			        Rf=.035/12, fit.models.chart=T)	
+   data(managers)
+   
+		mgrs <- managers["2002/"]  # So that all have managers have complete history
+   names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
+   plot.zoo(mgrs)
+   
+   chart.SFM(mgrs$HAM1, 
+			        mgrs$SP500, 
+			        Rf=mgrs$RF)	
+			        
+   for(k in 1:7){
+        chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = T,
+                       main = names(mgrs[,k]))
+   }
+   
    chart.SFM(managers[,"HAM1"], 
 			        managers[,"SP500 TR"], Rf=.035/12, 
 			        fit.models.chart=T, which.plots=c(1,5,6))
-   chart.SFM(managers[,"HAM1"], 
-			        managers[,"SP500 TR"], 
-			        Rf=managers[,10], 
-			        fit.models.chart=T, which.plots=c(1,5,6))	
-   chart.SFM(managers[,1], 
-			        managers[,8], 
-			        Rf=.035/12, legend.loc="bottomright")	
-   chart.SFM(managers[,"HAM1"], 
-			        managers[,"SP500 TR"], 
-			        Rf=.035/12, main = "OLS vs MM estimator",
-			        legend.loc="bottomleft")	
-   chart.SFM(managers[,1], 
-			        managers[,8], 
-			        Rf=.035/12, main = "OLS vs MM estimator",
-			        ylim=c(-1,1), xlim=c(-0.5,0.5),
-			        legend.loc="bottomleft")	
-   chart.SFM(managers[,1], 
-			        managers[,8], 
-			        Rf=.035/12, main = "OLS vs MM estimator",
-			        ylim=c(-1,1), xlim=c(-0.5,0.5),
-			        family="opt", legend.loc="bottomleft")	
-   chart.SFM(managers[,"HAM4"], 
-             managers[,"SP500 TR"],  
-             Rf=.035/12, makePct=T, 
-             lm.outliers=T)	
-   chart.SFM(managers[,"HAM4"], 
-             managers[,"SP500 TR"], 
-             Rf=.035/12, makePct=T, 
-             family = "b", lm.outliers=F)
    
 }
 \references{
-Sharpe, W.F. Capital Asset Prices: A theory of market
+Martin, R. D. and Xia, D. Z. (2021).  Robust Time Series Factor Models, 
+SSRN: https://ssrn.com/abstract=3905345. \emph{To appear in the Journal of Asset Management in 2022} 
+\cr Ruppert, David. \emph{Statistics and Finance, an
+Introduction}. Springer. 2004. \cr Sharpe, W.F. Capital Asset Prices: A theory of market
 equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
-1964, 425-442. \cr Ruppert, David. \emph{Statistics and Finance, an
-Introduction}. Springer. 2004. \cr Bacon, Carl. \emph{Practical portfolio
-performance measurement and attribution}. Wiley. 2004. \cr
+1964, 425-442. \cr
 }
 \author{
-Doug Martin, Dan Xia, Dhairya Jain
+Dhairya Jain, Doug Martin, Dan Xia
 }
