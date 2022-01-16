@@ -4,7 +4,14 @@
 \alias{SFM.fit.models}
 \title{Compare CAPM estimated using robust estimators with that estimated by OLS}
 \usage{
-SFM.fit.models(Ra, Rb, Rf = 0, family = "mopt", which.plots = NULL)
+SFM.fit.models(
+  Ra,
+  Rb,
+  Rf = 0,
+  family = "mopt",
+  which.plots = NULL,
+  plots = TRUE
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -16,6 +23,8 @@ asset returns}
 
 \item{which.plots}{specify the plot numbers that you want to see. Default
 option is that program will ask you to choose a plot}
+
+\item{plots}{Boolean to output plots after the function. Defaults to TRUE}
 }
 \description{
 This function provies a simple plug and play option for user to compare the
@@ -26,34 +35,22 @@ This will allow for an easier comparison using charts and tables
 
 # First we load the data
     data(managers)
-      SFM.fit.models(managers[,1], 
-		   	    managers[,8], 
-		   	    Rf = managers[,10])
-      SFM.fit.models(managers[,6], 
-		   	    managers[,8], 
-		   	    Rf=.035/12) 
-		   SFM.fit.models(managers[, "HAM2"], 
-		   	    managers[, "SP500 TR"], 
-		   	    Rf = managers[, "US 3m TR"])
-		   SFM.fit.models(managers[, "HAM2"], 
-		   	    managers[, "SP500 TR"], 
-		   	    Rf = 0.035/12)
-		   SFM.fit.models(managers[, "HAM2"], 
-		   	    managers[, "SP500 TR"], 
-		   	    Rf = managers[,10])
-      SFM.fit.models(managers[,6], 
-			    managers[,8], 
-			    Rf=.035/12, 
-			    family = "mopt", 
-			    which.plots = c(1,2)) 
-		   SFM.fit.models(managers[, "HAM2"], 
-			    managers[, "SP500 TR"], 
-			    Rf = managers[, "US 3m TR"],
-			    family = "opt",
-			    which.plots = c(1,2,6,7))
-		   SFM.fit.models(managers[, "HAM2"], 
-			    managers[, "SP500 TR"], 
-			    Rf = 0.035/12, which.plots = NULL)
+    mgrs <- managers["2002/"]  # So that all have managers have complete history
+    names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
+    
+    fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF)
+    coef(fitModels)
+    summary(fitModels)
+    class(fitModels)
+    
+    SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF)
+    
+    SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12) 
+    
+    SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2)) 
+		 
+		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt")
+
 }
 \author{
 Dhairya Jain

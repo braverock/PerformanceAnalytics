@@ -10,43 +10,32 @@
 #' @param Rf risk free rate, in same period as your returns
 #' @param which.plots specify the plot numbers that you want to see. Default
 #'        option is that program will ask you to choose a plot
+#' @param plots Boolean to output plots after the function. Defaults to TRUE
 #' @author Dhairya Jain
 #' @examples 
 #' 
 #' # First we load the data
 #'     data(managers)
-#'       SFM.fit.models(managers[,1], 
-#' 		   	    managers[,8], 
-#' 		   	    Rf = managers[,10])
-#'       SFM.fit.models(managers[,6], 
-#' 		   	    managers[,8], 
-#' 		   	    Rf=.035/12) 
-#' 		   SFM.fit.models(managers[, "HAM2"], 
-#' 		   	    managers[, "SP500 TR"], 
-#' 		   	    Rf = managers[, "US 3m TR"])
-#' 		   SFM.fit.models(managers[, "HAM2"], 
-#' 		   	    managers[, "SP500 TR"], 
-#' 		   	    Rf = 0.035/12)
-#' 		   SFM.fit.models(managers[, "HAM2"], 
-#' 		   	    managers[, "SP500 TR"], 
-#' 		   	    Rf = managers[,10])
-#'       SFM.fit.models(managers[,6], 
-#' 			    managers[,8], 
-#' 			    Rf=.035/12, 
-#' 			    family = "mopt", 
-#' 			    which.plots = c(1,2)) 
-#' 		   SFM.fit.models(managers[, "HAM2"], 
-#' 			    managers[, "SP500 TR"], 
-#' 			    Rf = managers[, "US 3m TR"],
-#' 			    family = "opt",
-#' 			    which.plots = c(1,2,6,7))
-#' 		   SFM.fit.models(managers[, "HAM2"], 
-#' 			    managers[, "SP500 TR"], 
-#' 			    Rf = 0.035/12, which.plots = NULL)
+#'     mgrs <- managers["2002/"]  # So that all have managers have complete history
+#'     names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
+#'     
+#'     fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF)
+#'     coef(fitModels)
+#'     summary(fitModels)
+#'     class(fitModels)
+#'     
+#'     SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF)
+#'     
+#'     SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12) 
+#'     
+#'     SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2)) 
+#' 		 
+#' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt")
+#'
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models CAPM.fit.models
 SFM.fit.models <- CAPM.fit.models <-
-function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL){
+function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL, plots=TRUE){
   # @author Dhairya Jain
   
   # DESCRIPTION:
@@ -66,8 +55,9 @@ function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL){
   #         Else: the parameter is ignored
   # which.plots: specify the plot numbers that you want to see. Default
   #              option is that program will ask you to choose a plot
+  # plots: Boolean to output plots after the function. Defaults to TRUE
   # Output:
-  # Graphs comparing models
+  # Optional Graphs comparing models, and returns a fitted object
   
   # FUNCTION:
   if (!require("fit.models")){
@@ -93,19 +83,16 @@ function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL){
   fmclass.add.class("lmfm", "lmrobdetMM", warn=FALSE)
   fam <- family
   models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=fam, method="Both")
-  LmFit  <- models$robust$model
-  LmRobFit <- models$ordinary$model
-  #if (fmclass %in% names(e$fmreg)) {
-  #  message(fmclass, " is already registered in the fit.models registry")
-  #  return(invisible())
-  #}
-  #print(names(e$fmreg))
-  fmLSrob <- fit.models::fit.models(LmFit, LmRobFit)
-  
-  if(is.null(which.plots)){
-    plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
+  LSFit  <- models$robust$model
+  RobFit <- models$ordinary$model
+  fmLSrob <- fit.models::fit.models(LSFit, RobFit)
+  if (plots==TRUE){
+    if(is.null(which.plots)){
+      plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
+    }
+    else {
+      plot(fmLSrob, which.plots = which.plots)
+    }
   }
-  else {
-    plot(fmLSrob, which.plots = which.plots)
-  }
+  return(fmLSrob);
 }
