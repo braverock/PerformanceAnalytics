@@ -26,8 +26,7 @@ asset returns}
 
 \item{Rf}{risk free rate, in same period as your returns}
 
-\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
-for lmrobdetMM regression.}
+\item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
 and "Rob" for robust. Defaults to "LS"}

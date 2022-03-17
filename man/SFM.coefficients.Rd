@@ -25,8 +25,7 @@ asset returns}
 
 \item{subset}{a logical vector representing the set of observations to be used in regression}
 
-\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
-for lmrobdetMM regression.}
+\item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
 and "Rob" for robust}
@@ -97,13 +96,13 @@ data(managers)
           Rf = managers[, "US 3m TR"], 
           method="Both", family="opt") 
           sfmLSRob$robust
-          sfmLSRob$ordinary
+          sfmLSRob$LS
           sfmLSRob$robust$beta
           sfmLSRob$robust$intercept
           sfmLSRob$robust$model
-          sfmLSRob$ordinary$beta
-          sfmLSRob$ordinary$intercept
-          sfmLSRob$ordinary$model
+          sfmLSRob$LS$beta
+          sfmLSRob$LS$intercept
+          sfmLSRob$LS$model
           
 		  table <- SFM.coefficients(managers[,1:6], 
 			     managers[,8:9],
@@ -132,23 +131,23 @@ data(managers)
 			     method="Both")
 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
-		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$beta
- 	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$intercept
-	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$model
+		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$beta
+ 	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$intercept
+	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$model
 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$beta
 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$intercept
 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$model
-	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary
+	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS
 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust
 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"]
 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]
-		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$beta
- 	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$intercept
-	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$model
+		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$beta
+ 	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$intercept
+	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$model
 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$beta
 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$intercept
 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$model
-	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary
+	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS
 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust
   	  
 }

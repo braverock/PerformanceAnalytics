@@ -81,13 +81,13 @@
 #'           Rf = managers[, "US 3m TR"], 
 #'           method="Both", family="opt") 
 #'           sfmLSRob$robust
-#'           sfmLSRob$ordinary
+#'           sfmLSRob$LS
 #'           sfmLSRob$robust$beta
 #'           sfmLSRob$robust$intercept
 #'           sfmLSRob$robust$model
-#'           sfmLSRob$ordinary$beta
-#'           sfmLSRob$ordinary$intercept
-#'           sfmLSRob$ordinary$model
+#'           sfmLSRob$LS$beta
+#'           sfmLSRob$LS$intercept
+#'           sfmLSRob$LS$model
 #'           
 #' 		  table <- SFM.coefficients(managers[,1:6], 
 #' 			     managers[,8:9],
@@ -116,23 +116,23 @@
 #' 			     method="Both")
 #' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
 #' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$beta
-#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$intercept
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary$model
+#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$beta
+#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$intercept
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$model
 #' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$beta
 #' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$intercept
 #' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$model
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$ordinary
+#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS
 #' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust
 #' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"]
 #' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$beta
-#'  	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$intercept
-#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary$model
+#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$beta
+#'  	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$intercept
+#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$model
 #' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$beta
 #' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$intercept
 #' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$model
-#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$ordinary
+#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS
 #' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust
 #'   	  
 #' @rdname SFM.coefficients
@@ -262,7 +262,7 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
                                        model=model.rob.lm
              )
              ),
-             ordinary=(list(intercept=coef(model.lm)[[1]],
+             LS=(list(intercept=coef(model.lm)[[1]],
                             beta=coef(model.lm)[[2]],
                             model=model.lm
              )
