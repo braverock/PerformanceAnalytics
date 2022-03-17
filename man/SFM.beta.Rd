@@ -10,11 +10,11 @@
 \alias{SFM.beta.bear}
 \title{Calculate single factor model (CAPM) beta}
 \usage{
-SFM.beta(Ra, Rb, Rf = 0, ...)
+SFM.beta(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
 
-SFM.beta.bull(Ra, Rb, Rf = 0, ...)
+SFM.beta.bull(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
 
-SFM.beta.bear(Ra, Rb, Rf = 0, ...)
+SFM.beta.bear(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
 
 TimingRatio(Ra, Rb, Rf = 0, ...)
 }
@@ -30,7 +30,7 @@ asset returns}
 for lmrobdetMM regression.}
 
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
-and "Rob" for robust}
+and "Rob" for robust. Defaults to "LS"}
 
 \item{family}{(Optional): 
 If method == "Rob": 
@@ -141,7 +141,7 @@ Introduction}. Springer. 2004. \cr Bacon, Carl. \emph{Practical portfolio
 performance measurement and attribution}. Wiley. 2004. \cr
 }
 \seealso{
-\code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
+\code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
 \code{\link{CAPM.utils}}
 }
 \author{

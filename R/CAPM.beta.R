@@ -36,10 +36,9 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @param \dots Parameters like method, family and other parameters like max.it or bb 
-#' for lmrobdetMM regression.
+#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Rob" for robust      
+#'                    and "Rob" for robust. Defaults to "LS"      
 #' @param family (Optional): 
 #'         If method == "Rob": 
 #'           This is a string specifying the name of the family of loss function
@@ -48,7 +47,7 @@
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
 #' @author Dhairya Jain, Peter Carl 
-#' @seealso \code{\link{BetaCoVariance}} \code{\link{CAPM.alpha}}
+#' @seealso \code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
 #' \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -117,7 +116,7 @@
 #'   		
 #' @rdname SFM.beta
 #' @export SFM.beta CAPM.beta
-SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
+SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -129,7 +128,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust      
+    #                    and "Rob" for robust. Defaults to "LS"      
     # family (Optional): 
     #         If method == "Rob": 
     #           This is a string specifying the name of the family of loss function
@@ -144,7 +143,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
     # FUNCTION:
     
     # .coefficients fails if method is "Both"
-    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+    if (method == "Both"){
         stop("Method can't be 'Both' while using SFM.beta")
     }
     Ra = checkData(Ra)
@@ -160,9 +159,9 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
-        xRb = xRb, ...)
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family), 
+        xRa = xRa, xRb = xRb, ..., method = method, family = family)
     result = list()
     for (res in result.all) {
         result[[length(result)+1]] <- res$beta
@@ -180,7 +179,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ...)
 #' @rdname SFM.beta
 #' @export SFM.beta.bull CAPM.beta.bull
 SFM.beta.bull <- CAPM.beta.bull <-
-function (Ra, Rb, Rf = 0, ...)
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -192,7 +191,7 @@ function (Ra, Rb, Rf = 0, ...)
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as x and y.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust      
+    #                    and "Rob" for robust. Defaults to "LS"      
     # family (Optional): 
     #         If method == "Rob": 
     #           This is a string specifying the name of the family of loss function
@@ -207,8 +206,8 @@ function (Ra, Rb, Rf = 0, ...)
     # FUNCTION:
     
     # .coefficients fails if method is "Both"
-    if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using SFM.beta.bull")
+    if (method == "Both"){
+        stop("Method can't be 'Both' while using SFM.beta")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -233,6 +232,10 @@ function (Ra, Rb, Rf = 0, ...)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0, ...), 
         xRa = xRa, xRb = xRb, ...)
     
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset = xRb[,n[2]] > 0, ..., 
+                          method = method, family = family), 
+        xRa = xRa, xRb = xRb, ..., method = method, family = family)
     result = list()
     for (res in result.all) {
         result[[length(result)+1]] <- res$beta
@@ -251,7 +254,7 @@ function (Ra, Rb, Rf = 0, ...)
 #' @rdname SFM.beta
 #' @export SFM.beta.bear CAPM.beta.bear
 SFM.beta.bear <- CAPM.beta.bear <-
-function (Ra, Rb, Rf = 0, ...)
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -263,7 +266,7 @@ function (Ra, Rb, Rf = 0, ...)
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as Ra and Rb.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust      
+    #                    and "Rob" for robust. Defaults to "LS"   
     # family (Optional): 
     #         If method == "Rob": 
     #           This is a string specifying the name of the family of loss function
@@ -278,8 +281,8 @@ function (Ra, Rb, Rf = 0, ...)
     # FUNCTION:
     
     # .coefficients fails if method is "Both"
-    if (!is.null(list(...)$method) && list(...)$method == "Both"){
-        stop("Method can't be 'Both' while using SFM.beta.bear")
+    if (method == "Both"){
+        stop("Method can't be 'Both' while using SFM.beta")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -300,9 +303,10 @@ function (Ra, Rb, Rf = 0, ...)
         return(NA)
     }
     
-    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] < 0, ...), 
-        xRa = xRa, xRb = xRb, ...)
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset = xRb[,n[2]] < 0, ..., 
+                          method = method, family = family), 
+        xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
     result = list()
     for (res in result.all) {

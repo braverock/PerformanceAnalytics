@@ -9,8 +9,6 @@ chart.SFM(
   Ra,
   Rb,
   Rf = 0,
-  fit.models.chart = F,
-  which.plots = NULL,
   main = NULL,
   ylim = NULL,
   xlim = NULL,
@@ -18,8 +16,7 @@ chart.SFM(
   xlab = NULL,
   ylab = NULL,
   legend.loc = "topleft",
-  makePct = FALSE,
-  lm.outliers = F
+  makePct = FALSE
 )
 }
 \arguments{
@@ -29,11 +26,6 @@ asset returns}
 \item{Rb}{return vector of the benchmark asset}
 
 \item{Rf}{risk free rate, in same period as your returns}
-
-\item{fit.models.chart}{option to output charts using fit.models package. Defaults to False}
-
-\item{which.plots}{If fit.models.chart is set to TRUE, then this is a list of 
-the plots that the user wants to see}
 
 \item{main}{Title of the generated plot. Defaults to "lm vs lmRobdetMM"}
 
@@ -54,10 +46,6 @@ Defaults to "mopt".}
 \item{legend.loc}{Position of legends. See plot() function for more info.}
 
 \item{makePct}{If Returns should be converted to percentage. Defaults to False}
-
-\item{lm.outliers}{If outlier boundaries are to be shown with respect to lm model,
-then set this to true. Defaults to false and outlier boundaries are shown wrt
-lmrobdetMM model}
 }
 \description{
 This function for single factor models (SFM’s) with a slope  and intercept 
@@ -88,18 +76,12 @@ deleted by the lmrobdetMM estimator.
    names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
    plot.zoo(mgrs)
    
-   chart.SFM(mgrs$HAM1, 
-			        mgrs$SP500, 
-			        Rf=mgrs$RF)	
+   chart.SFM(mgrs$HAM1, mgrs$SP500, Rf=mgrs$RF)	
 			        
    for(k in 1:7){
         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = T,
                        main = names(mgrs[,k]))
    }
-   
-   chart.SFM(managers[,"HAM1"], 
-			        managers[,"SP500 TR"], Rf=.035/12, 
-			        fit.models.chart=T, which.plots=c(1,5,6))
    
 }
 \references{

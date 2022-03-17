@@ -22,10 +22,7 @@
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
-#' @param Rf risk free rate, in same period as your returns   
-#' @param fit.models.chart option to output charts using fit.models package. Defaults to False
-#' @param which.plots If fit.models.chart is set to TRUE, then this is a list of 
-#' the plots that the user wants to see
+#' @param Rf risk free rate, in same period as your returns
 #' @param main Title of the generated plot. Defaults to "lm vs lmRobdetMM"
 #' @param ylim Limits on the y-axis of the plots. Defaults to min-max
 #' @param xlim Limits on the x-axis of the plots. Defaults to min-max
@@ -39,9 +36,6 @@
 #' @param ylab Title of the y-axis of the plots. Defaults to "Asset Returns"
 #' @param legend.loc Position of legends. See plot() function for more info.
 #' @param makePct If Returns should be converted to percentage. Defaults to False
-#' @param lm.outliers If outlier boundaries are to be shown with respect to lm model,
-#' then set this to true. Defaults to false and outlier boundaries are shown wrt
-#' lmrobdetMM model
 #' @author Dhairya Jain, Doug Martin, Dan Xia
 #' @references Martin, R. D. and Xia, D. Z. (2021).  Robust Time Series Factor Models, 
 #' SSRN: https://ssrn.com/abstract=3905345. \emph{To appear in the Journal of Asset Management in 2022} 
@@ -57,25 +51,18 @@
 #'    names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
 #'    plot.zoo(mgrs)
 #'    
-#'    chart.SFM(mgrs$HAM1, 
-#' 			        mgrs$SP500, 
-#' 			        Rf=mgrs$RF)	
+#'    chart.SFM(mgrs$HAM1, mgrs$SP500, Rf=mgrs$RF)	
 #' 			        
 #'    for(k in 1:7){
 #'         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = T,
 #'                        main = names(mgrs[,k]))
 #'    }
 #'    
-#'    chart.SFM(managers[,"HAM1"], 
-#' 			        managers[,"SP500 TR"], Rf=.035/12, 
-#' 			        fit.models.chart=T, which.plots=c(1,5,6))
-#'    
 #' @rdname chart.SFM
 #' @export chart.SFM chart.CAPM
 chart.SFM <- chart.CAPM <- 
-function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = NULL, 
-         ylim = NULL, xlim = NULL, family = "mopt", xlab = NULL, ylab = NULL,
-         legend.loc = "topleft", makePct = FALSE, lm.outliers=F){
+function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, family = "mopt",
+         xlab = NULL, ylab = NULL, legend.loc = "topleft", makePct = FALSE){
   # @author Dhairya Jain
   
   # DESCRIPTION:
@@ -93,9 +80,6 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = NULL,
   #           Incomplete entries will be matched to the current valid options. 
   #           Defaults to "mopt".
   #         Else: the parameter is ignored
-  # fit.models.chart: option to output charts using fit.models package. Defaults to False
-  # which.plots: If fit.models.chart is set to TRUE, then this is a list of 
-  #              the plots that the user wants to see
   # main: Title of the generated plot. Defaults to " xlab ~ ylab "
   # ylim: Limits on the y-axis of the plots. Defaults to min-max
   # xlim: Limits on the x-axis of the plots. Defaults to min-max
@@ -108,19 +92,13 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = NULL,
   # ylab Title of the y-axis of the plots. Defaults to "Asset Returns"
   # legend.loc: Position of legends. See plot() function for more info.
   # makePct: If Returns should be converted to percentage. Defaults to False
-  # lm.outliers: If outlier boundaries are to be shown with respect to lm model,
-  #              then set this to true. Defaults to false and outlier boundaries are shown wrt
-  #              lmrobdetMM model
   # Output:
   # Graphs comparing models
-  xlab <- ifelse(is.null(xlab), names(Ra), xlab)
-  ylab <- ifelse(is.null(ylab), names(Rb), ylab)
+  xlab <- ifelse(is.null(xlab), names(Rb), xlab)
+  ylab <- ifelse(is.null(ylab), names(Ra), ylab)
   if (dim(Ra)[2]!=1 || dim(Rb)[2]!=1)
     stop("Both Ra and Rb should be uni-dimentional vectors")
-  if (fit.models.chart){
-    SFM.fit.models(Ra, Rb, Rf, family, which.plots)
-  }
-  else{
+  
     Ra = checkData(Ra)
     Rb = checkData(Rb)
     if(!is.null(dim(Rf)))
@@ -135,16 +113,23 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = NULL,
     x = array(xRb)
     y = array(xRa)
     models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95, family=family, method="Both")
-    .plot_models(x, y, models, main, ylim, xlim, family, xlab, ylab, legend.loc, makePct, lm.outliers)
-  }
+    .plot_models(x, y, models, main, ylim, xlim, family, xlab, ylab, legend.loc, makePct, F)
 }
 
 .plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, xlimits = NULL, family = "mopt",
                         xlab = NULL, ylab = NULL, legendPos = "topleft", makePct = FALSE, lm.outliers=F){
+  
   fit.mOpt <- models$robust$model
   fit.ls <- models$ordinary$model
   xlab <- ifelse(is.null(xlab), "Benchmark Returns", xlab)
   ylab <- ifelse(is.null(ylab), "Asset Returns", ylab)
+  mxY = max(y, na.rm = F)
+  mnY = min(y, na.rm = F)
+  mxX = max(x, na.rm = F)
+  mnX = min(x, na.rm = F)
+  #print(range(mnX:mxX))
+  #xlimits <- ifelse(is.null(xlimits), range(mnX:mxX), xlimits)
+  #ylimits <- ifelse(is.null(ylimits), range(mxY:mxY), ylimits)
   mainText <- ifelse(is.null(mainText), paste(xlab, "~", ylab), mainText)
   f <- 3
   g <- 1
@@ -170,8 +155,12 @@ function(Ra, Rb, Rf = 0, fit.models.chart = F, which.plots = NULL, main = NULL,
   }
   else{
     abline(g*fit.mOpt$coef[1]+f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
-    abline(g*fit.mOpt$coef[1]-f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
-    ids=which(fit.mOpt$rweights==0)
+    abline(fit.mOpt$coef[1]-f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
+    define_line <- function(X){
+      return (fit.mOpt$coef[1] + X*fit.mOpt$coef[2])
+    }
+    #ids=which(fit.mOpt$rweights==0)
+    ids = which(abs(y - define_line(x))> f*fit.mOpt$scale.S) 
   }
   if (length(ids) == 0) {
     points(x, y, pch = 20)

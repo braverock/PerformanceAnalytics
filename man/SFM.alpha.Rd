@@ -5,7 +5,7 @@
 \alias{CAPM.alpha}
 \title{Calculate single factor model (CAPM) alpha}
 \usage{
-SFM.alpha(Ra, Rb, Rf = 0, ...)
+SFM.alpha(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -15,8 +15,7 @@ asset returns}
 
 \item{Rf}{risk free rate, in same period as your returns}
 
-\item{\dots}{Parameters like method, family and other parameters like max.it or bb 
-for lmrobdetMM regression.}
+\item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
 and "Rob" for robust}
@@ -98,5 +97,5 @@ Introduction}. Springer. 2004. \cr
 \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 }
 \author{
-Peter Carl, Dhairya Jain
+Dhairya Jain, Peter Carl
 }

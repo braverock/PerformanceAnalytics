@@ -15,8 +15,7 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @param \dots Parameters like method, family and other parameters like max.it or bb 
-#' for lmrobdetMM regression.
+#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
 #'                    and "Rob" for robust      
 #' @param family (Optional): 
@@ -26,7 +25,7 @@
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
-#' @author Peter Carl, Dhairya Jain
+#' @author Dhairya Jain, Peter Carl
 #' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -81,7 +80,7 @@
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ...){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt"){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -93,9 +92,8 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     # R and Rb are assumed to be matching periods
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as R and y.
-    #  , method="LS", family="mopt"
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust      
+    #                    and "Rob" for robust. Defaults to "LS      
     # family (Optional): 
     #         If method == "Rob": 
     #           This is a string specifying the name of the family of loss function
@@ -108,7 +106,7 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ...){
     # SFM alpha
 
     # .coefficients fails if method is "Both"
-    if (!is.null(list(...)$method) && list(...)$method == "Both"){
+    if (method == "Both"){
         stop("Method can't be 'Both' while using SFM.alpha")
     }
     # FUNCTION:
@@ -125,9 +123,9 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ...){
 
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
-    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
-        SFM.coefficients(xRa[,n[1]], xRb[,n[2]], ...), xRa = xRa, 
-        xRb = xRb, ...)
+    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family), 
+        xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
     result = list()
     for (res in result.all) {

@@ -5,7 +5,15 @@
 \alias{CAPM.coefficients}
 \title{Calculate single factor model (CAPM) alpha and beta coefficients}
 \usage{
-SFM.coefficients(Ra, Rb, subset = TRUE, Rf = 0, ...)
+SFM.coefficients(
+  Ra,
+  Rb,
+  Rf = 0,
+  subset = TRUE,
+  ...,
+  method = "LS",
+  family = "mopt"
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -13,9 +21,9 @@ asset returns}
 
 \item{Rb}{return vector of the benchmark asset}
 
-\item{subset}{a logical vector representing the set of observations to be used in regression}
-
 \item{Rf}{risk free rate, in same period as your returns}
+
+\item{subset}{a logical vector representing the set of observations to be used in regression}
 
 \item{\dots}{Parameters like method, family and other parameters like max.it or bb 
 for lmrobdetMM regression.}

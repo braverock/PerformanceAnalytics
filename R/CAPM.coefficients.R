@@ -24,8 +24,7 @@
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
 #' @param subset a logical vector representing the set of observations to be used in regression
-#' @param \dots Parameters like method, family and other parameters like max.it or bb 
-#' for lmrobdetMM regression.
+#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
 #'                    and "Rob" for robust      
 #' @param family (Optional): 
@@ -139,7 +138,7 @@
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients CAPM.coefficients
 SFM.coefficients <- CAPM.coefficients <- 
-function(Ra, Rb, subset=TRUE, Rf=0, ...)
+function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
 {# @author Peter Carl, Dhairya Jain
   
   # DESCRIPTION:
@@ -148,12 +147,12 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
   # Inputs:
   # Ra: vector of returns for the asset being tested
   # Rb: vector of returns for the benchmark the asset is being gauged against
-  # subset: a logical vector
   # Rf: risk free rate in the same periodicity as the returns.  May be a vector
   #     of the same length as x and y.
   #   , method="LS", family="mopt"
+  # subset: a logical vector
   # method (Optional): string representing linear regression model, "LS" for Least Squares
-  #                    and "Rob" for robust      
+  #                    and "Rob" for robust. Defaults to "LS"      
   # family (Optional): 
   #         If method == "Rob": 
   #           This is a string specifying the name of the family of loss function
@@ -179,9 +178,9 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
   
   pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
   
-  result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, subset, ...)
-    .coefficients(xRa[,n[1]], xRb[,n[2]], subset, ...), 
-    xRa = xRa, xRb = xRb, subset = subset, ...)
+  result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, subset, method, family, ...)
+    .coefficients(xRa[,n[1]], xRb[,n[2]], subset, method = method, family = family, ...), 
+    xRa = xRa, xRb = xRb, subset = subset, method = method, family = family, ...)
   
   if(length(result.all) ==1)
     return(result.all[[1]])
@@ -234,17 +233,19 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
     if(NROW(merged)== 0)
       return (NA)
     # add column names and convert subset back to logical
-    colnames(merged) <- c("xRa", "xRb", "subset")
+    colnames(merged) <- c("Alpha", "Beta", "subset")
     merged$subset <- as.logical(merged$subset)
+    Alpha <- xRa
+    Beta <- xRb
     switch(method,
            LS = {
-             model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
+             model.lm = lm(Alpha ~ Beta, data=merged, subset=subset)
              return (list(intercept=coef(model.lm)[[1]],
                           beta=coef(model.lm)[[2]],
                           model= model.lm))
            },
            Rob = {
-             model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged, 
+             model.rob.lm = lmrobdetMM(Alpha ~ Beta, data=merged, 
                                        subset=subset, 
                                        control = lmrobdet.control(family=family, ...))
              return (list(intercept=coef(model.rob.lm)[[1]],
@@ -252,10 +253,10 @@ function(Ra, Rb, subset=TRUE, Rf=0, ...)
                           model= model.rob.lm))
            },
            Both = {
-             model.rob.lm = lmrobdetMM(xRa ~ xRb, data=merged,
+             model.rob.lm = lmrobdetMM(Alpha ~ Beta, data=merged,
                                        subset=subset,
                                        control = lmrobdet.control(family=family))
-             model.lm = lm(xRa ~ xRb, data=merged, subset=subset)
+             model.lm = lm(Alpha ~ Beta, data=merged, subset=subset)
              return (list(robust=(list(intercept=coef(model.rob.lm)[[1]],
                                        beta=coef(model.rob.lm)[[2]],
                                        model=model.rob.lm
