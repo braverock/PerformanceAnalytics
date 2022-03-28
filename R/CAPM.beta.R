@@ -116,7 +116,7 @@
 #'   		
 #' @rdname SFM.beta
 #' @export SFM.beta CAPM.beta
-SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
+SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
 { # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -160,11 +160,15 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family), 
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
+    
     result = list()
     for (res in result.all) {
-        result[[length(result)+1]] <- res$beta
+        if (round.by>0)
+            result[[length(result)+1]] <- round(res$beta, round.by)
+        else
+            result[[length(result)+1]] <- res$beta
     }
     if(length(result) ==1)
         return(result[[1]])
@@ -179,7 +183,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
 #' @rdname SFM.beta
 #' @export SFM.beta.bull CAPM.beta.bull
 SFM.beta.bull <- CAPM.beta.bull <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -228,17 +232,16 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
         return(NA)
     }
     
-    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ...)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], xRb[,n[2]] > 0, ...), 
-        xRa = xRa, xRb = xRb, ...)
-    
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset = xRb[,n[2]] > 0, ..., 
-                          method = method, family = family), 
+                          method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     result = list()
     for (res in result.all) {
-        result[[length(result)+1]] <- res$beta
+        if (round.by>0)
+            result[[length(result)+1]] <- round(res$beta, round.by)
+        else
+            result[[length(result)+1]] <- res$beta
     }
     
     if(length(result) ==1)
@@ -254,7 +257,7 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 #' @rdname SFM.beta
 #' @export SFM.beta.bear CAPM.beta.bear
 SFM.beta.bear <- CAPM.beta.bear <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -305,12 +308,15 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
     
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset = xRb[,n[2]] < 0, ..., 
-                          method = method, family = family), 
+                          method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
     result = list()
     for (res in result.all) {
-        result[[length(result)+1]] <- res$beta
+        if (round.by>0)
+            result[[length(result)+1]] <- round(res$beta, round.by)
+        else
+            result[[length(result)+1]] <- res$beta
     }
     if(length(result) ==1)
         return(result[[1]])

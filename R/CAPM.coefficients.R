@@ -24,7 +24,9 @@
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
 #' @param subset a logical vector representing the set of observations to be used in regression
-#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
+#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression. Another
+#' interesting parameter is round.by.alphas, and round.by.betas which can be set to round off the 
+#' returned values, otherwise the values 
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
 #'                    and "Rob" for robust      
 #' @param family (Optional): 
@@ -34,6 +36,7 @@
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
+#' 
 #' @author Dhairya Jain
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
 #' \code{\link{CAPM.utils}} \code{\link{SFM.beta}}
@@ -46,48 +49,33 @@
 #' @examples
 #' 
 #' data(managers)
-#'      SFM.coefficients(managers[,1], 
-#' 			     managers[,8], method="Rob", 
-#' 			     family="mopt")
-#'      SFM.coefficients(managers[,1], 
-#' 			     managers[,8:9], method="Both") 
-#'      SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9], 
-#' 			     Rf = managers[,10])
-#' 			SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9],
-#' 			     Rf = managers[,10],
-#' 			     method="Both")
-#' 			SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9], 
+#'      SFM.coefficients(managers[,1], managers[,8]) 
+#'      SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
+#' 			SFM.coefficients(managers[,1:6], managers[,8:9], 
 #' 			     Rf=.035/12, method="Rob", 
-#' 			     family="opt", bb=0.25, 
+#' 			     family="mopt", bb=0.25, 
 #' 			     max.it=200)
-#'      SFM.coefficients(managers[, "HAM2"], 
-#'           managers[, "SP500 TR"], 
-#' 			     Rf = managers[,10],
-#' 			     method="Rob", family="mopt")
-#' 			     
+#' 			      			     
 #'      sfmRob <- SFM.coefficients(managers[, "HAM2"], 
 #'           managers[, "SP500 TR"], 
 #' 			     Rf=.035/12, method="Rob", family="opt", 
 #' 			     bb=0.25, max.it=200)
-#' 			     sfmRob$beta
-#' 			     sfmRob$intercept
-#' 			     sfmRob$model
+#' 			  sfmRob$beta
+#' 			  sfmRob$intercept
+#' 			  sfmRob$model
 #' 			     
 #'      sfmLSRob <- SFM.coefficients(managers[, "HAM2"], 
 #'           managers[, "SP500 TR"], 
 #'           Rf = managers[, "US 3m TR"], 
 #'           method="Both", family="opt") 
-#'           sfmLSRob$robust
-#'           sfmLSRob$LS
-#'           sfmLSRob$robust$beta
-#'           sfmLSRob$robust$intercept
-#'           sfmLSRob$robust$model
-#'           sfmLSRob$LS$beta
-#'           sfmLSRob$LS$intercept
-#'           sfmLSRob$LS$model
+#'        sfmLSRob$robust
+#'        sfmLSRob$LS
+#'        sfmLSRob$robust$beta
+#'        sfmLSRob$robust$intercept
+#'        sfmLSRob$robust$model
+#'        sfmLSRob$LS$beta
+#'        sfmLSRob$LS$intercept
+#'        sfmLSRob$LS$model
 #'           
 #' 		  table <- SFM.coefficients(managers[,1:6], 
 #' 			     managers[,8:9],
@@ -138,8 +126,8 @@
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients CAPM.coefficients
 SFM.coefficients <- CAPM.coefficients <- 
-function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
-{# @author Peter Carl, Dhairya Jain
+function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=F)
+{# @author  Dhairya Jain
   
   # DESCRIPTION:
   # This is a wrapper for calculating a SFM coefficients.
@@ -152,7 +140,7 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
   #   , method="LS", family="mopt"
   # subset: a logical vector
   # method (Optional): string representing linear regression model, "LS" for Least Squares
-  #                    and "Rob" for robust. Defaults to "LS"      
+  #                    and "Rob" for robust. Defaults to "Rob"      
   # family (Optional): 
   #         If method == "Rob": 
   #           This is a string specifying the name of the family of loss function
@@ -162,7 +150,11 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
   #         Else: the parameter is ignored
   
   # Output:
-  # 
+  #         When method=="Both" or ret.Model==T, returns a matrix of list(intercept, beta, model)
+  #                     Otherwise
+  #         When method!="Both" and ret.Model==F, and both Ra, Rb are single columns, 
+  #             returns a list (intercept, beta, model)
+  #         When method!="Both" and ret.Model==F, return a list of matrix (intercepts, betas)
   
   # FUNCTION:
   Ra = checkData(Ra)
@@ -172,6 +164,15 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
   
   Ra.ncols = NCOL(Ra) 
   Rb.ncols = NCOL(Rb)
+  round.by.alphas = ifelse(is.null(list(...)$round.by.alphas), -1, list(...)$round.by.alphas)
+  round.by.betas = ifelse(is.null(list(...)$round.by.betas), -1, list(...)$round.by.betas)
+  if (ret.Model==F && method!="Both" && (Ra.ncols>1 || Rb.ncols>1)){
+    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, round.by = round.by.betas)
+    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, round.by = round.by.alphas)
+    ret = list(alphas=alphaTable, betas=betaTable)
+    class(ret) = "SFM.both"
+    return(ret)
+  }
   
   xRa = Return.excess(Ra, Rf)
   xRb = Return.excess(Rb, Rf)
@@ -181,17 +182,21 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="LS", family="mopt")
   result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, subset, method, family, ...)
     .coefficients(xRa[,n[1]], xRb[,n[2]], subset, method = method, family = family, ...), 
     xRa = xRa, xRb = xRb, subset = subset, method = method, family = family, ...)
-  
   if(length(result.all) ==1)
     return(result.all[[1]])
   else {
-    dim(result.all) = c(Ra.ncols, Rb.ncols)
-    colnames(result.all) = paste("Intercept, Beta, Model:", colnames(Rb))
-    rownames(result.all) = colnames(Ra)
-    return(t(result.all))
+    if(ret.Model || method=="Both"){
+      dim(result.all) = c(Ra.ncols, Rb.ncols)
+      colnames(result.all) = paste("Intercept, Beta, Model:", colnames(Rb))
+      rownames(result.all) = colnames(Ra)
+      return(t(result.all))
+    }
+    else{
+      stop("Bad Input. Support for method=='Both' is supported only when both
+           Ra and Rb are single column objects")
+    }
   }
 }
-
 
 #' Wrapper for SFM's regression models.
 #' 

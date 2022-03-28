@@ -80,7 +80,7 @@
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt"){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt", round.by=-1){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -124,12 +124,15 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
     pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
 
     result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family), 
+        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family, ret.Model=T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
     result = list()
     for (res in result.all) {
-        result[[length(result)+1]] <- res$intercept
+        if (round.by>0)
+            result[[length(result)+1]] <- round(res$intercept, round.by)
+        else
+            result[[length(result)+1]] <- res$intercept
     }
     if(length(result) ==1)
         return(result[[1]])
