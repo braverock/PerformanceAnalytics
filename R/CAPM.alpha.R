@@ -80,7 +80,7 @@
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt", round.by=-1){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt"){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -107,7 +107,7 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
 
     # .coefficients fails if method is "Both"
     if (method == "Both"){
-        stop("Method can't be 'Both' while using SFM.alpha")
+        warning("Using 'Both' while using SFM.alpha will lead to string formatted output")
     }
     # FUNCTION:
     Ra = checkData(Ra)
@@ -127,13 +127,19 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family, ret.Model=T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
-    result = list()
+    result = matrix(nrow=Ra.ncols, ncol=Rb.ncols)
+    i = 1
+    j = 1
     for (res in result.all) {
-        if (round.by>0)
-            result[[length(result)+1]] <- round(res$intercept, round.by)
-        else
-            result[[length(result)+1]] <- res$intercept
+        if (method!="Both")
+            result[i,j] <- res$intercept
+        else{
+            result[i,j] <- paste(res$LS$intercept,",", res$robust$intercept)}
+        
+        j = j+1
+        if (j>Rb.ncols){i=i+1; j=1}
     }
+    
     if(length(result) ==1)
         return(result[[1]])
     else {

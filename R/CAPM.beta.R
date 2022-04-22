@@ -116,7 +116,7 @@
 #'   		
 #' @rdname SFM.beta
 #' @export SFM.beta CAPM.beta
-SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
+SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -144,7 +144,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
     
     # .coefficients fails if method is "Both"
     if (method == "Both"){
-        stop("Method can't be 'Both' while using SFM.beta")
+        warning("Using 'Both' while using SFM.beta will lead to string formatted output")
     }
     Ra = checkData(Ra)
     Rb = checkData(Rb)
@@ -163,13 +163,19 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
-    result = list()
+    result = matrix(nrow=Ra.ncols, ncol=Rb.ncols)
+    i = 1
+    j = 1
     for (res in result.all) {
-        if (round.by>0)
-            result[[length(result)+1]] <- round(res$beta, round.by)
-        else
-            result[[length(result)+1]] <- res$beta
+        if (method!="Both")
+            result[i,j] <- res$beta
+        else{
+            result[i,j] <- paste(res$LS$beta,",", res$robust$beta)}
+        
+        j = j+1
+        if (j>Rb.ncols){i=i+1; j=1}
     }
+    
     if(length(result) ==1)
         return(result[[1]])
     else {
@@ -183,7 +189,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
 #' @rdname SFM.beta
 #' @export SFM.beta.bull CAPM.beta.bull
 SFM.beta.bull <- CAPM.beta.bull <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -236,12 +242,18 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
         CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset = xRb[,n[2]] > 0, ..., 
                           method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
-    result = list()
+    
+    result = matrix(nrow=Ra.ncols, ncol=Rb.ncols)
+    i = 1
+    j = 1
     for (res in result.all) {
-        if (round.by>0)
-            result[[length(result)+1]] <- round(res$beta, round.by)
-        else
-            result[[length(result)+1]] <- res$beta
+        if (method!="Both")
+            result[i,j] <- res$beta
+        else{
+            result[i,j] <- paste(res$LS$beta,",", res$robust$beta)}
+        
+        j = j+1
+        if (j>Rb.ncols){i=i+1; j=1}
     }
     
     if(length(result) ==1)
@@ -257,7 +269,7 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
 #' @rdname SFM.beta
 #' @export SFM.beta.bear CAPM.beta.bear
 SFM.beta.bear <- CAPM.beta.bear <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
+function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -311,13 +323,19 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", round.by=-1)
                           method = method, family = family, ret.Model = T), 
         xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
-    result = list()
+    result = matrix(nrow=Ra.ncols, ncol=Rb.ncols)
+    i = 1
+    j = 1
     for (res in result.all) {
-        if (round.by>0)
-            result[[length(result)+1]] <- round(res$beta, round.by)
-        else
-            result[[length(result)+1]] <- res$beta
+        if (method!="Both")
+            result[i,j] <- res$beta
+        else{
+            result[i,j] <- paste(res$LS$beta,",", res$robust$beta)}
+        
+        j = j+1
+        if (j>Rb.ncols){i=i+1; j=1}
     }
+    
     if(length(result) ==1)
         return(result[[1]])
     else {

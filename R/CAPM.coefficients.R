@@ -55,14 +55,6 @@
 #' 			     Rf=.035/12, method="Rob", 
 #' 			     family="mopt", bb=0.25, 
 #' 			     max.it=200)
-#' 			      			     
-#'      sfmRob <- SFM.coefficients(managers[, "HAM2"], 
-#'           managers[, "SP500 TR"], 
-#' 			     Rf=.035/12, method="Rob", family="opt", 
-#' 			     bb=0.25, max.it=200)
-#' 			  sfmRob$beta
-#' 			  sfmRob$intercept
-#' 			  sfmRob$model
 #' 			     
 #'      sfmLSRob <- SFM.coefficients(managers[, "HAM2"], 
 #'           managers[, "SP500 TR"], 
@@ -164,13 +156,11 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=
   
   Ra.ncols = NCOL(Ra) 
   Rb.ncols = NCOL(Rb)
-  round.by.alphas = ifelse(is.null(list(...)$round.by.alphas), -1, list(...)$round.by.alphas)
-  round.by.betas = ifelse(is.null(list(...)$round.by.betas), -1, list(...)$round.by.betas)
-  if (ret.Model==F && method!="Both" && (Ra.ncols>1 || Rb.ncols>1)){
-    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, round.by = round.by.betas)
-    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, round.by = round.by.alphas)
+  
+  if (ret.Model==F && (Ra.ncols>1 || Rb.ncols>1)){
+    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family)
+    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family)
     ret = list(alphas=alphaTable, betas=betaTable)
-    class(ret) = "SFM.both"
     return(ret)
   }
   
