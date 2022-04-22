@@ -112,7 +112,7 @@ function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, family = "mopt",
     }
     x = array(xRb)
     y = array(xRa)
-    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95, family=family, method="Both")
+    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95, family=family, method="Both", ret.Model = T)
     .plot_models(x, y, models, main, ylim, xlim, family, xlab, ylab, legend.loc, makePct, F)
 }
 
@@ -120,7 +120,7 @@ function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, family = "mopt",
                         xlab = NULL, ylab = NULL, legendPos = "topleft", makePct = FALSE, lm.outliers=F){
   
   fit.mOpt <- models$robust$model
-  fit.ls <- models$ordinary$model
+  fit.ls <- models$LS$model
   xlab <- ifelse(is.null(xlab), "Benchmark Returns", xlab)
   ylab <- ifelse(is.null(ylab), "Asset Returns", ylab)
   mxY = max(y, na.rm = F)
