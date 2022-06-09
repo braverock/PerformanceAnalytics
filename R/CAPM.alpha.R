@@ -80,7 +80,7 @@
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt"){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt", warn=T){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -105,49 +105,32 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
     # Output:
     # SFM alpha
 
-    # .coefficients fails if method is "Both"
-    if (method == "Both"){
-        warning("Using 'Both' while using SFM.alpha will lead to string formatted output")
-    }
     # FUNCTION:
-    Ra = checkData(Ra)
-    Rb = checkData(Rb)
-    if(!is.null(dim(Rf)))
-        Rf = checkData(Rf)
-
-    Ra.ncols = NCOL(Ra)	
-    Rb.ncols = NCOL(Rb)
-
-    xRa = Return.excess(Ra, Rf)
-    xRb = Return.excess(Rb, Rf)
-
-    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
-
-    result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, ..., method, family)
-        CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], ..., method = method, family = family, ret.Model=T), 
-        xRa = xRa, xRb = xRb, ..., method = method, family = family)
     
-    result = matrix(nrow=Ra.ncols, ncol=Rb.ncols)
-    i = 1
-    j = 1
-    for (res in result.all) {
-        if (method!="Both")
-            result[i,j] <- res$intercept
-        else{
-            result[i,j] <- paste(res$LS$intercept,",", res$robust$intercept)}
-        
-        j = j+1
-        if (j>Rb.ncols){i=i+1; j=1}
+    # .coefficients fails if method is "Both"
+    if (warn && method == "Both"){
+        warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
     }
     
-    if(length(result) ==1)
-        return(result[[1]])
-    else {
-        dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = paste("Alpha:", colnames(Rb))
-        rownames(result) = colnames(Ra)
-        return(t(result))
-    }
+    # Get the NCOL and colnames from Ra, and Rb
+    Ra.ncols <- NCOL(Ra);
+    Rb.ncols <- NCOL(Rb);
+    Ra.colnames <- colnames(Ra);
+    Rb.colnames <- colnames(Rb)
+    
+    # Get the excess returns of Ra, Rb over Rf
+    xR <- excessReturns(Ra, Rb, Rf);
+    xRa <- xR[[1]];
+    xRb <- xR[[2]];
+    
+    # Get the result matrix
+    result.all <- getResults(xRa=xRa, xRb=xRb, 
+                             Ra.ncols=Ra.ncols, Rb.ncols=Rb.ncols, 
+                             method = method, family = family, ...);
+    
+    # Process the results and return them
+    return (processResults(result.all, "intercept", Ra.ncols, Rb.ncols, 
+                           Ra.colnames, Rb.colnames, method, "Alpha"))
 }
 
 ###############################################################################

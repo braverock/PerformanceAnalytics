@@ -118,7 +118,7 @@
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients CAPM.coefficients
 SFM.coefficients <- CAPM.coefficients <- 
-function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=F)
+function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=F, warn=T)
 {# @author  Dhairya Jain
   
   # DESCRIPTION:
@@ -149,33 +149,40 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=
   #         When method!="Both" and ret.Model==F, return a list of matrix (intercepts, betas)
   
   # FUNCTION:
-  Ra = checkData(Ra)
-  Rb = checkData(Rb)
-  if(!is.null(dim(Rf)))
-    Rf = checkData(Rf)
   
-  Ra.ncols = NCOL(Ra) 
-  Rb.ncols = NCOL(Rb)
+  # Get the NCOL and colnames from Ra, and Rb
+  Ra.ncols <- NCOL(Ra);
+  Rb.ncols <- NCOL(Rb);
+  Ra.colnames <- colnames(Ra);
+  Rb.colnames <- colnames(Rb)
   
-  if (ret.Model==F && (Ra.ncols>1 || Rb.ncols>1)){
-    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family)
-    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family)
-    ret = list(alphas=alphaTable, betas=betaTable)
+  # ret.Model == TRUE means internal usage. Hence, if not internal usage
+  if (ret.Model==F){
+    if (warn && method=="Both"){
+      warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
+    }
+    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warn = F)
+    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warn = F)
+    ret = rbind(alphaTable, betaTable)
     return(ret)
   }
   
-  xRa = Return.excess(Ra, Rf)
-  xRb = Return.excess(Rb, Rf)
+  # Get the excess returns of Ra, Rb over Rf
+  xR <- excessReturns(Ra, Rb, Rf);
+  xRa <- xR[[1]];
+  xRb <- xR[[2]];
+  
   
   pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
   
   result.all = apply(pairs, 1, FUN = function(n, xRa, xRb, subset, method, family, ...)
     .coefficients(xRa[,n[1]], xRb[,n[2]], subset, method = method, family = family, ...), 
     xRa = xRa, xRb = xRb, subset = subset, method = method, family = family, ...)
+  
   if(length(result.all) ==1)
     return(result.all[[1]])
   else {
-    if(ret.Model || method=="Both"){
+    if(ret.Model){
       dim(result.all) = c(Ra.ncols, Rb.ncols)
       colnames(result.all) = paste("Intercept, Beta, Model:", colnames(Rb))
       rownames(result.all) = colnames(Ra)
