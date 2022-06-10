@@ -34,7 +34,6 @@ jobs:
       - uses: r-lib/actions/check-r-package@v1
         with:
           args: '"--no-manual", "--no-build-vignettes"'
-          build_args: '"--no-manual", "--no-build-vignettes"'
 
       - name: Show testthat output
         if: always()
