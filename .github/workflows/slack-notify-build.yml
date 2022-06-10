@@ -12,16 +12,16 @@ jobs:
       R_KEEP_PKG_SOURCE: yes
 
     steps:
-      - name: Notify slack success
-        if: success()
-        id: slack # IMPORTANT: reference this step ID value in future Slack steps
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          channel_id: C023D5FGS5U
-          status: STARTING
-          color: warning
+      # - name: Notify slack success
+      #   if: success()
+      #   id: slack # IMPORTANT: reference this step ID value in future Slack steps
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      #   uses: voxmedia/github-action-slack-notify-build@v1
+      #   with:
+      #     channel_id: C023D5FGS5U
+      #     status: STARTING
+      #     color: warning
 
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
@@ -31,36 +31,9 @@ jobs:
         with:
           extra-packages: rcmdcheck
 
-      # - uses: r-lib/actions/check-r-package@v1
-      # https://github.com/r-lib/actions/blob/master/check-r-package/action.yaml
-      - name: "check-r-package""
-        description: 'Action to check R package with rcmdcheck. Assumes that rcmdcheck has already been installed.'
-        author: 'Jim Hester'
-        inputs:
-          args:
-            description: 'Arguments to pass to the `args` parameter of rcmdcheck'
-            default: '"--no-manual", "--as-cran"'
-          build_args:
-            description: 'Arguments to pass to the `build_args` parameter of rcmdcheck'
-            default: '"--no-manual", "--no-build-vignettes"'
-          error-on:
-            description: 'What type of result should cause a build error?'
-            default: '"warning"'
-          check-dir:
-            description: 'Where should the check output go?'
-            default: '"check"'
-          working-directory:
-            description: 'Using the working-directory keyword, you can specify the working directory of where "rcmdcheck::rcmdcheck" is run.'
-            default: '.'
-
-      - name: Check
-        env:
-          _R_CHECK_CRAN_INCOMING_: false
-        run: |
-          options(crayon.enabled = TRUE)
-          rcmdcheck::rcmdcheck(args = c(${{ inputs.args }}), build_args = c(${{ inputs.build_args }}), error_on = ${{ inputs.error-on }}, check_dir = ${{ inputs.check-dir }})
-        shell: Rscript {0}
-        working-directory: ${{ inputs.working-directory }}
+      - uses: r-lib/actions/check-r-package@v1
+        with:
+          build_args: '"--no-manual", "--no-build-vignettes"'
 
       - name: Show testthat output
         if: always()
@@ -74,27 +47,27 @@ jobs:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
 
-      - name: Notify slack success
-        if: success()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          # Updates existing message from the first step
-          message_id: ${{ steps.slack.outputs.message_id }}
-          channel_id: C023D5FGS5U
-          status: SUCCESS
-          color: good
+      # - name: Notify slack success
+      #   if: success()
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      #   uses: voxmedia/github-action-slack-notify-build@v1
+      #   with:
+      #     # Updates existing message from the first step
+      #     message_id: ${{ steps.slack.outputs.message_id }}
+      #     channel_id: C023D5FGS5U
+      #     status: SUCCESS
+      #     color: good
 
-      - name: Notify slack fail
-        if: failure()
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1
-        with:
-          # Updates existing message from the first step
-          message_id: ${{ steps.slack.outputs.message_id }}
-          channel_id: C023D5FGS5U
-          status: FAILED
-          color: danger
+      # - name: Notify slack fail
+      #   if: failure()
+      #   env:
+      #     SLACK_BOT_TOKEN: ${{ secrets.SLACK_NOTIFICATIONS_BOT_TOKEN }}
+      #   uses: voxmedia/github-action-slack-notify-build@v1
+      #   with:
+      #     # Updates existing message from the first step
+      #     message_id: ${{ steps.slack.outputs.message_id }}
+      #     channel_id: C023D5FGS5U
+      #     status: FAILED
+      #     color: danger
 
