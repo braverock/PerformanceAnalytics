@@ -50,3 +50,4 @@ jobs:
           upload-snapshots: true
           args: 'c("--no-manual", "--as-cran", "--ignore-vignettes")'
           build_args: 'c("--no-manual", "--no-build-vignettes")'
+          error-on: '"error"'
