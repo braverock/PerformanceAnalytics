@@ -58,8 +58,8 @@ jobs:
       - uses: r-lib/actions/check-r-package@v2
         with:
           upload-snapshots: true
-          args: '"--no-manual", "--ignore-vignettes"'
-          build_args: '"--no-manual", "--no-build-vignettes"'
+          args: 'c("--no-manual", "--ignore-vignettes")'
+          build_args: 'c("--no-manual", "--no-build-vignettes")'
           error-on: '"error"'
 
       # - name: Notify slack success
