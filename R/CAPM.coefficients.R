@@ -165,9 +165,15 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", family="mopt", digits=
     alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warning = F, digits=digits, benchmarkCols=benchmarkCols)
     if (benchmarkCols){
       ret = cbind(alphaTable, betaTable)
+      if (Ra.ncols==1 && Rb.ncols==1 && method!="Both"){
+        colnames(ret) <- c("Alpha", "Beta")
+      }
     }
     else{
       ret = rbind(alphaTable, betaTable)
+      if (Ra.ncols==1 && Rb.ncols==1 && method!="Both"){
+        rownames(ret) <- c("Alpha", "Beta")
+      }
     }
     return(round(ret,digits))
   }
