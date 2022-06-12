@@ -118,7 +118,7 @@
 
 #' @rdname SFM.beta
 #' @export SFM.beta CAPM.beta
-SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt", warn=T)
+SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="mopt", warning=T)
 { # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -145,7 +145,7 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
     # FUNCTION:
     
     # .coefficients fails if method is "Both"
-    if (warn && method == "Both"){
+    if (warning && method == "Both"){
         warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
     }
     
@@ -167,13 +167,14 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., method="LS", family="mop
 
     # Process the results and return them
     return (processResults(result.all, "beta", Ra.ncols, Rb.ncols, 
-                           Ra.colnames, Rb.colnames, method, "Beta"))
+                           Ra.colnames, Rb.colnames, method, "Beta",
+                           digits, benchmarkCols))
 }
 
 #' @rdname SFM.beta
 #' @export SFM.beta.bull CAPM.beta.bull
 SFM.beta.bull <- CAPM.beta.bull <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
+function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -201,15 +202,14 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
     if (!is.null(list(...)$subset)){
         stop("Can't pass subset in the optional parameters")
     }
-    
-    return (SFM.beta(Ra, Rb, Rf, subset="Bull", method=method, family=family, ...))
-    
+    # 
+    return (SFM.beta(Ra, Rb, Rf, subset="Bull", digits=digits, benchmarkCols=benchmarkCols, method=method, family=family, ...))
 }
 
 #' @rdname SFM.beta
 #' @export SFM.beta.bear CAPM.beta.bear
 SFM.beta.bear <- CAPM.beta.bear <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
+function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="mopt")
 { # @author Peter Carl
 
     # DESCRIPTION:
@@ -240,7 +240,7 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
         stop("Can't pass subset in the optional parameters")
     }
     
-    return (SFM.beta(Ra, Rb, Rf, subset="Bear", method=method, family=family, ...))
+    return (SFM.beta(Ra, Rb, Rf, subset="Bear", digits=digits, benchmarkCols=benchmarkCols, method=method, family=family, ...))
 }
 
 

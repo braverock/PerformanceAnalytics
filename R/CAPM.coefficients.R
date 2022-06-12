@@ -118,7 +118,7 @@
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients CAPM.coefficients
 SFM.coefficients <- CAPM.coefficients <- 
-function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=F, warn=T)
+function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", family="mopt", digits=3, benchmarkCols=T, Model=F, warning=T)
 {# @author  Dhairya Jain
   
   # DESCRIPTION:
@@ -157,14 +157,19 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=
   Rb.colnames <- colnames(Rb)
   
   # ret.Model == TRUE means internal usage. Hence, if not internal usage
-  if (ret.Model==F){
-    if (warn && method=="Both"){
+  if (Model==F){
+    if (warning && method=="Both"){
       warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
     }
-    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warn = F)
-    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warn = F)
-    ret = rbind(alphaTable, betaTable)
-    return(ret)
+    betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warning = F, digits=digits, benchmarkCols=benchmarkCols)
+    alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warning = F, digits=digits, benchmarkCols=benchmarkCols)
+    if (benchmarkCols){
+      ret = cbind(alphaTable, betaTable)
+    }
+    else{
+      ret = rbind(alphaTable, betaTable)
+    }
+    return(round(ret,digits))
   }
   
   # Get the excess returns of Ra, Rb over Rf
@@ -182,7 +187,7 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=
   if(length(result.all) ==1)
     return(result.all[[1]])
   else {
-    if(ret.Model){
+    if(Model){
       dim(result.all) = c(Ra.ncols, Rb.ncols)
       colnames(result.all) = paste("Intercept, Beta, Model:", colnames(Rb))
       rownames(result.all) = colnames(Ra)
@@ -246,7 +251,7 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Rob", family="mopt", ret.Model=
                           beta=coef(model.lm)[[2]],
                           model= model.lm))
            },
-           Rob = {
+           Robust = {
              model.rob.lm = lmrobdetMM(Alpha ~ Beta, data=merged, 
                                        subset=subset, 
                                        control = lmrobdet.control(family=family, ...))

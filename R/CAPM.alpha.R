@@ -80,7 +80,7 @@
 #' 	   
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="mopt", warn=T){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCols=T, method="LS", family="mopt", warning=T){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -108,7 +108,7 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
     # FUNCTION:
     
     # .coefficients fails if method is "Both"
-    if (warn && method == "Both"){
+    if (warning && method == "Both"){
         warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
     }
     
@@ -130,7 +130,8 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., method="LS", family="
     
     # Process the results and return them
     return (processResults(result.all, "intercept", Ra.ncols, Rb.ncols, 
-                           Ra.colnames, Rb.colnames, method, "Alpha"))
+                           Ra.colnames, Rb.colnames, method, "Alpha",
+                           digits, benchmarkCols))
 }
 
 ###############################################################################
