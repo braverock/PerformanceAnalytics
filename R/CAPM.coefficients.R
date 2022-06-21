@@ -159,7 +159,7 @@ function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", family="mopt", digits=
   # ret.Model == TRUE means internal usage. Hence, if not internal usage
   if (Model==F){
     if (warning && method=="Both"){
-      warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
+      warning("Using 'Both' while using SFM.Coefficients will lead to ill-formatted output");
     }
     betaTable = SFM.beta(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warning = F, digits=digits, benchmarkCols=benchmarkCols)
     alphaTable = SFM.alpha(Ra, Rb, Rf = Rf, subset = subset, ..., method = method, family = family, warning = F, digits=digits, benchmarkCols=benchmarkCols)
