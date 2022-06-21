@@ -60,32 +60,47 @@ function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL, plots=TRUE){
   # Optional Graphs comparing models, and returns a fitted object
   
   # FUNCTION:
+  
+  # Sort the dependencies
   if (!require("fit.models")){
-    
     c = readline(prompt = "You need to install package fit.models to use this function. Do you want to install it? (y|N): "); 
     if(c=="y" || c=="Y"){
+      # Install the package
       install.packages("fit.models");
-      library("fit.models");
+      
+      # Load the library fit.models
+      library("fit.models")
     }
     else{
-      stop("Aborted")
+      stop("Aborted");
     }
   }
-  Ra = checkData(Ra)
-  Rb = checkData(Rb)
-  if(!is.null(dim(Rf)))
-    Rf = checkData(Rf)
   
-  Ra.ncols = NCOL(Ra) 
-  Rb.ncols = NCOL(Rb)
+  # Get the NCOL and colnames from Ra, and Rb
+  Ra.ncols <- NCOL(Ra);
+  Rb.ncols <- NCOL(Rb);
+  Ra.colnames <- colnames(Ra);
+  Rb.colnames <- colnames(Rb)
   
-  # Step 2: tell fit.models lmrobdetMM can be compared to lm
+  # Get the excess returns of Ra, Rb over Rf
+  xR <- excessReturns(Ra, Rb, Rf);
+  xRa <- xR[[1]];
+  xRb <- xR[[2]];
+  
+  # Get the models
+  models <- getResults(xRa, xRb, Ra.ncols, Rb.ncols, family=family, method="Both", subset=T)[[1]]
+
+  # Get the LS and Rob models
+  RobFit  <- models$robust$model
+  LSFit <- models$LS$model
+  
+  # Tell fit.models lmrobdetMM can be compared to lm
   fmclass.add.class("lmfm", "lmrobdetMM", warn=FALSE)
-  fam <- family
-  models <- SFM.coefficients(Ra, Rb, Rf=Rf, family=fam, method="Both")
-  LSFit  <- models$robust$model
-  RobFit <- models$ordinary$model
+  
+  # Fit both the models
   fmLSrob <- fit.models::fit.models(LSFit, RobFit)
+  
+  # Plot the fit.models object if asked
   if (plots==TRUE){
     if(is.null(which.plots)){
       plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
@@ -94,5 +109,7 @@ function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL, plots=TRUE){
       plot(fmLSrob, which.plots = which.plots)
     }
   }
+  
+  # Return the fitted object to the user
   return(fmLSrob);
 }
