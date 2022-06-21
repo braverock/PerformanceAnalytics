@@ -93,84 +93,116 @@ function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, family = "mopt",
   # legend.loc: Position of legends. See plot() function for more info.
   # makePct: If Returns should be converted to percentage. Defaults to False
   # Output:
+  if (dim(Ra)[2]!=1 || dim(Rb)[2]!=1){
+    stop("Both Ra and Rb should be uni-dimentional vectors")
+  }
   # Graphs comparing models
   xlab <- ifelse(is.null(xlab), names(Rb), xlab)
   ylab <- ifelse(is.null(ylab), names(Ra), ylab)
-  if (dim(Ra)[2]!=1 || dim(Rb)[2]!=1)
-    stop("Both Ra and Rb should be uni-dimentional vectors")
   
-    Ra = checkData(Ra)
-    Rb = checkData(Rb)
-    if(!is.null(dim(Rf)))
-      Rf = checkData(Rf)
-    
-    xRa = Return.excess(Ra,Rf)
-    xRb = Return.excess(Rb,Rf)
-    if (makePct) {
-      xRb = xRb * 100
-      xRa = xRa * 100
-    }
-    x = array(xRb)
-    y = array(xRa)
-    models <- SFM.coefficients(Ra, Rb, Rf, efficiency=0.95, family=family, method="Both", ret.Model = T)
-    .plot_models(x, y, models, main, ylim, xlim, family, xlab, ylab, legend.loc, makePct, F)
+  # Get the NCOL and colnames from Ra, and Rb
+  Ra.ncols <- NCOL(Ra);
+  Rb.ncols <- NCOL(Rb);
+  Ra.colnames <- colnames(Ra);
+  Rb.colnames <- colnames(Rb)
+  
+  # Get the excess returns of Ra, Rb over Rf
+  xR <- excessReturns(Ra, Rb, Rf);
+  xRa <- xR[[1]];
+  xRb <- xR[[2]];
+  
+  # Scale the values to percentages if required
+  if(makePct){
+    xRa = xRa*100
+    xRb = xRb*100
+  }
+  
+  # Evaluate the model
+  models <- getResults(xRa, xRb, Ra.ncols, Rb.ncols, family=family, method="Both", subset=T)
+  
+  # Initialize the xAxis and yAxis data
+  x = array(xRb)
+  y = array(xRa)
+  
+  # Plot the model
+  .plot_models(x, y, models[[1]], main, ylim, xlim, family, xlab, ylab, legend.loc, makePct, F)
 }
 
 .plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, xlimits = NULL, family = "mopt",
                         xlab = NULL, ylab = NULL, legendPos = "topleft", makePct = FALSE, lm.outliers=F){
+  # Define some constants
+  g <- 1
+  f <- 3
   
-  fit.mOpt <- models$robust$model
+  # Get the robust and linear models 
+  fit.Rob <- models$robust$model
   fit.ls <- models$LS$model
+  
+  # Set the xLabels and yLabels
   xlab <- ifelse(is.null(xlab), "Benchmark Returns", xlab)
   ylab <- ifelse(is.null(ylab), "Asset Returns", ylab)
-  mxY = max(y, na.rm = F)
-  mnY = min(y, na.rm = F)
-  mxX = max(x, na.rm = F)
-  mnX = min(x, na.rm = F)
-  #print(range(mnX:mxX))
-  #xlimits <- ifelse(is.null(xlimits), range(mnX:mxX), xlimits)
-  #ylimits <- ifelse(is.null(ylimits), range(mxY:mxY), ylimits)
+
+  # Set the Title of the plot
   mainText <- ifelse(is.null(mainText), paste(xlab, "~", ylab), mainText)
-  f <- 3
-  g <- 1
+  
+  # Change the xLabels and yLabels to percentage if required (After setting the title)
   if (makePct){
     xlab = paste(xlab," (%)")
     ylab = paste(ylab," (%)")
-    f = f*100
-    g = g*100
   }
+  
+  # Plot the data points
   plot(x,y, xlab = xlab, ylab = ylab, type = "n",
        ylim = ylimits, xlim = xlimits, main = mainText, 
        cex.main = 1.5, cex.lab = 1.5)
-  # abline(a = fit.mOpt$coefficients[[1]], b = fit.mOpt$coefficients[[2]], col="black", lty=1, lwd=2)
-  abline(fit.mOpt, col="black", lty=1, lwd=2)
+  
+  # Plot the respective lines for LS and Rob
+  abline(fit.Rob, col="black", lty=1, lwd=2)
   abline(fit.ls, col="red", lty=2, lwd=2)
+
+  # Plot the outlier Lines and get the points that lie within the boundaries
   if (lm.outliers){
+    # The upper outlier line
     abline(g*fit.ls$coef[1]+f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
+    # The lower outlier line  
     abline(g*fit.ls$coef[1]-f*summary.lm(fit.ls)$sigma[1], fit.ls$coef[2], lty=3, col="black")
+    # Get the line equation 
     define_line <- function(X){
       return (g*fit.ls$coef[1] + X*fit.ls$coef[2])
     }
+    # Find the outlier data points
     ids = which(abs(y - define_line(x))> f*summary.lm(fit.ls)$sigma[1]) 
   }
   else{
-    abline(g*fit.mOpt$coef[1]+f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
-    abline(fit.mOpt$coef[1]-f*fit.mOpt$scale.S, fit.mOpt$coef[2], lty=3, col="black")
+    # The upper outlier line
+    abline(g*fit.Rob$coef[1]+f*fit.Rob$scale.S, fit.Rob$coef[2], lty=3, col="black")
+    # The lower outlier line  
+    abline(g*fit.Rob$coef[1]-f*fit.Rob$scale.S, fit.Rob$coef[2], lty=3, col="black")
+    # Get the line equation 
     define_line <- function(X){
-      return (fit.mOpt$coef[1] + X*fit.mOpt$coef[2])
+      return (g*fit.Rob$coef[1] + X*fit.Rob$coef[2])
     }
-    #ids=which(fit.mOpt$rweights==0)
-    ids = which(abs(y - define_line(x))> f*fit.mOpt$scale.S) 
+    # Find the outlier data points
+    ids = which(abs(y - define_line(x))> f*fit.Rob$scale.S) 
+    # ids=which(fit.Rob$rweights==0) # This was used perviously, but gives wrong output
   }
+  
+  # Make the non-outliers to be small dark circles
   if (length(ids) == 0) {
+    # Case of no outliers, all are dark circles
     points(x, y, pch = 20)
-  } else {
+  } 
+  else {
+    # Non outliers are small dark circles
     points(x[-ids], y[-ids], pch = 19)
+    # Outliers are light big circles
     points(x[ids], y[ids], pch = 1, cex = 2.0)
   }
+  
+  # Create the legend for the model Lines
   legend(x = legendPos,
-         legend = as.expression(c(bquote(" "~.(family)~"  " ~ hat(beta) == .(round(summary(fit.mOpt)$coefficients[2, 1], 2)) ~
-                                           "(" ~ .(round(summary(fit.mOpt)$coefficients[2, 2], 2)) ~ ")"),
+         legend = as.expression(c(bquote(" "~.(family)~"  " ~ hat(beta) == .(round(summary(fit.Rob)$coefficients[2, 1], 2)) ~
+                                           "(" ~ .(round(summary(fit.Rob)$coefficients[2, 2], 2)) ~ ")"),
                                   bquote("  LS       " ~ hat(beta) == .(round(summary(fit.ls)$coefficients[2, 1], 2)) ~
                                            "(" ~ .(round(summary(fit.ls)$coefficients[2, 2], 2)) ~ ")"))),
          lty=c(1,2), col=c("black", "red"), bty="n", cex=1.5 )
