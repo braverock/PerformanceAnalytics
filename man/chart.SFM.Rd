@@ -2,8 +2,7 @@
 % Please edit documentation in R/chart.SFM.R
 \name{chart.SFM}
 \alias{chart.SFM}
-\alias{chart.CAPM}
-\title{Compare CAPM estimated using robust estimators with that estimated by OLS}
+\title{Compare SFM estimated using robust estimators with that estimated by OLS}
 \usage{
 chart.SFM(
   Ra,

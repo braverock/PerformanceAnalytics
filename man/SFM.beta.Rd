@@ -10,11 +10,39 @@
 \alias{SFM.beta.bear}
 \title{Calculate single factor model (CAPM) beta}
 \usage{
-SFM.beta(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
+SFM.beta(
+  Ra,
+  Rb,
+  Rf = 0,
+  ...,
+  digits = 3,
+  benchmarkCols = T,
+  method = "LS",
+  family = "mopt",
+  warning = T
+)
 
-SFM.beta.bull(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
+SFM.beta.bull(
+  Ra,
+  Rb,
+  Rf = 0,
+  ...,
+  digits = 3,
+  benchmarkCols = T,
+  method = "LS",
+  family = "mopt"
+)
 
-SFM.beta.bear(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
+SFM.beta.bear(
+  Ra,
+  Rb,
+  Rf = 0,
+  ...,
+  digits = 3,
+  benchmarkCols = T,
+  method = "LS",
+  family = "mopt"
+)
 
 TimingRatio(Ra, Rb, Rf = 0, ...)
 }
@@ -28,16 +56,22 @@ asset returns}
 
 \item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
+\item{digits}{(Optional): Number of digits to round the results to. Defaults to 3.}
+
+\item{benchmarkCols}{(Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.}
+
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
-and "Rob" for robust. Defaults to "LS"}
+and "Robust" for robust. Defaults to "LS}
 
 \item{family}{(Optional): 
-If method == "Rob": 
+If method == "Robust": 
   This is a string specifying the name of the family of loss function
   to be used (current valid options are "bisquare", "opt" and "mopt").
   Incomplete entries will be matched to the current valid options. 
   Defaults to "mopt".
 Else: the parameter is ignored}
+
+\item{warning}{(Optional): Boolean to show warnings or not. Defaults to TRUE.}
 }
 \description{
 The single factor model or CAPM Beta is the beta of an asset to the variance 
@@ -75,61 +109,47 @@ comparing an asset to any arbitrary benchmark.
 \examples{
 
 data(managers)
-    SFM.beta(managers[,1], 
-			managers[,8], 
-			Rf=.035/12)
-    SFM.beta(managers[,1], 
-			managers[,8], 
-			Rf=.035/12, method="LS") 
-    SFM.beta(managers[,1], 
-			managers[,8], 
-			Rf = managers[,10],
-			method="Rob", family="mopt")
-    SFM.beta(managers[,1:6], 
-			managers[,8], 
-			Rf=.035/12, method="Rob", 
-			family="opt", bb=0.25, max.it=200)
-    SFM.beta(managers[,1:6], 
-			managers[,8], 
-			Rf = managers[,10])
-    SFM.beta(managers[,1:6], 
-			managers[,8:7], 
-			Rf=.035/12, method="Rob", family="mopt") 
-    SFM.beta(managers[,1:6], 
-			managers[,8:7], 
-			Rf = managers[,10])
-    SFM.beta(managers[, "HAM2"], 
-			managers[, "SP500 TR"], 
-			Rf = managers[, "US 3m TR"])
+    SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+    SFM.beta(managers[,1:3], managers[,8:10], Rf=.035/12) 
+    SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+
+    betas <- SFM.beta(managers[,1:6], 
+			managers[,8:10], 
+			Rf=.035/12, method="Robust", 
+			family="opt", bb=0.25, max.it=200, digits=4)
+	     betas["HAM1", ]
+	     betas[, "Beta : SP500 TR"]
+	     
 	   SFM.beta.bull(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"])
     SFM.beta.bull(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"],
-			method="Rob", family="opt",
-			bb=0.25, max.it=200)
+			method="Robust")
+			
 	   SFM.beta.bear(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"])
     SFM.beta.bear(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"],
-			method="Rob", family="bisquare",
-			bb=0.25, max.it=200)
+			method="Robust")
+			
     TimingRatio(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"])
 	   TimingRatio(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"],
-			method="Rob", family="opt",
-			bb=0.25, max.it=200)	
+			method="Robust", family="mopt")
+
     chart.Regression(managers[, "HAM2"], 
 			managers[, "SP500 TR"], 
 			Rf = managers[, "US 3m TR"], 
 			fit="conditional", 
 			main="Conditional Beta")
+  		
   		
 }
 \references{

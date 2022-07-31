@@ -16,15 +16,19 @@
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
 #' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
+#' @param digits (Optional): Number of digits to round the results to. Defaults to 3.
+#' @param benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Rob" for robust      
+#'                    and "Robust" for robust. Defaults to "LS      
 #' @param family (Optional): 
-#'         If method == "Rob": 
+#'         If method == "Robust": 
 #'           This is a string specifying the name of the family of loss function
 #'           to be used (current valid options are "bisquare", "opt" and "mopt").
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
+#' @param warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+#' 
 #' @author Dhairya Jain, Peter Carl
 #' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
@@ -36,51 +40,20 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     SFM.alpha(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf=.035/12) 
-#'     SFM.alpha(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf=.035/12, method="LS") 
-#'     SFM.alpha(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf = managers[,10])
-#'     SFM.alpha(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf = managers[,10],
-#' 			method="Rob", family="mopt")
-#'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8], 
-#' 			Rf=.035/12)
-#'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8], 
-#' 			Rf=.035/12, method="Rob", 
-#' 			family="bisquare", bb=0.25, max.it=200)
-#'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8], 
-#' 			Rf = managers[,10])
-#'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8:9], 
-#' 			Rf=.035/12) 
-#'     SFM.alpha(managers[,1:6], 
-#' 			managers[,8:9], 
-#' 			Rf = managers[,10])
-#'     SFM.alpha(managers[,1:6], 
-#'               managers[,8:9], 
-#'               Rf = managers[,10],method="Rob", 
-#'               family="mopt", bb=0.25, max.it=200)
-#'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-#'               managers[, "SP500 TR", drop=FALSE], 
-#'               Rf = managers[, "US 3m TR", drop=FALSE])
-#'     SFM.alpha(managers[, "HAM2", drop=FALSE], 
-#'               managers[, "SP500 TR", drop=FALSE], 
-#'               Rf = managers[, "US 3m TR", drop=FALSE],
-#'               method="Rob", family="opt",
-#'               bb=0.25, max.it=200)
-#' 	   
+#'     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+#'     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
+#'     SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+#'
+#'     alphas <- SFM.alpha(managers[,1:6], 
+#' 			managers[,8:10], 
+#' 			Rf=.035/12, method="Robust", 
+#' 			family="opt", bb=0.25, max.it=200, digits=4)
+#' 	     alphas["HAM1", ]
+#' 	     alphas[, "Alpha : SP500 TR"]
+#' 
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCols=T, method="LS", family="mopt", warning=T){
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCols = T, method="LS", family="mopt", warning=T){
     # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
@@ -92,15 +65,18 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCo
     # R and Rb are assumed to be matching periods
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as R and y.
+    # digits (Optional): Number of digits to round the results to. Defaults to 3.
+    # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust. Defaults to "LS      
+    #                    and "Robust" for robust. Defaults to "LS      
     # family (Optional): 
-    #         If method == "Rob": 
+    #         If method == "Robust": 
     #           This is a string specifying the name of the family of loss function
     #           to be used (current valid options are "bisquare", "opt" and "mopt").
     #           Incomplete entries will be matched to the current valid options. 
     #           Defaults to "mopt".
     #         Else: the parameter is ignored
+    # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
     
     # Output:
     # SFM alpha

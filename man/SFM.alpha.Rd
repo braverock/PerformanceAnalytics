@@ -5,7 +5,17 @@
 \alias{CAPM.alpha}
 \title{Calculate single factor model (CAPM) alpha}
 \usage{
-SFM.alpha(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
+SFM.alpha(
+  Ra,
+  Rb,
+  Rf = 0,
+  ...,
+  digits = 3,
+  benchmarkCols = T,
+  method = "LS",
+  family = "mopt",
+  warning = T
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -17,16 +27,22 @@ asset returns}
 
 \item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
+\item{digits}{(Optional): Number of digits to round the results to. Defaults to 3.}
+
+\item{benchmarkCols}{(Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.}
+
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
-and "Rob" for robust}
+and "Robust" for robust. Defaults to "LS}
 
 \item{family}{(Optional): 
-If method == "Rob": 
+If method == "Robust": 
   This is a string specifying the name of the family of loss function
   to be used (current valid options are "bisquare", "opt" and "mopt").
   Incomplete entries will be matched to the current valid options. 
   Defaults to "mopt".
 Else: the parameter is ignored}
+
+\item{warning}{(Optional): Boolean to show warnings or not. Defaults to TRUE.}
 }
 \description{
 This is a wrapper for calculating a single factor model (CAPM) alpha.
@@ -44,48 +60,17 @@ comparing an asset to any arbitrary benchmark.
 
 # First we load the data
     data(managers)
-    SFM.alpha(managers[,1], 
-			managers[,8], 
-			Rf=.035/12) 
-    SFM.alpha(managers[,1], 
-			managers[,8], 
-			Rf=.035/12, method="LS") 
-    SFM.alpha(managers[,1], 
-			managers[,8], 
-			Rf = managers[,10])
-    SFM.alpha(managers[,1], 
-			managers[,8], 
-			Rf = managers[,10],
-			method="Rob", family="mopt")
-    SFM.alpha(managers[,1:6], 
-			managers[,8], 
-			Rf=.035/12)
-    SFM.alpha(managers[,1:6], 
-			managers[,8], 
-			Rf=.035/12, method="Rob", 
-			family="bisquare", bb=0.25, max.it=200)
-    SFM.alpha(managers[,1:6], 
-			managers[,8], 
-			Rf = managers[,10])
-    SFM.alpha(managers[,1:6], 
-			managers[,8:9], 
-			Rf=.035/12) 
-    SFM.alpha(managers[,1:6], 
-			managers[,8:9], 
-			Rf = managers[,10])
-    SFM.alpha(managers[,1:6], 
-              managers[,8:9], 
-              Rf = managers[,10],method="Rob", 
-              family="mopt", bb=0.25, max.it=200)
-    SFM.alpha(managers[, "HAM2", drop=FALSE], 
-              managers[, "SP500 TR", drop=FALSE], 
-              Rf = managers[, "US 3m TR", drop=FALSE])
-    SFM.alpha(managers[, "HAM2", drop=FALSE], 
-              managers[, "SP500 TR", drop=FALSE], 
-              Rf = managers[, "US 3m TR", drop=FALSE],
-              method="Rob", family="opt",
-              bb=0.25, max.it=200)
-	   
+    SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+    SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
+    SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+
+    alphas <- SFM.alpha(managers[,1:6], 
+			managers[,8:10], 
+			Rf=.035/12, method="Robust", 
+			family="opt", bb=0.25, max.it=200, digits=4)
+	     alphas["HAM1", ]
+	     alphas[, "Alpha : SP500 TR"]
+
 }
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market

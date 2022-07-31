@@ -1,4 +1,4 @@
-#' Compare CAPM estimated using robust estimators with that estimated by OLS 
+#' Compare SFM estimated using robust estimators with that estimated by OLS 
 #'
 #' This function provies a simple plug and play option for user to compare the
 #' SFM estimates by lm and lmrobdetMM functions, using the fit.models framework.
@@ -47,7 +47,7 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   # Rf: risk free rate in the same periodicity as the returns.  May be a time series
   #     of the same length as x and y.
   # family (Optional): 
-  #         If method == "Rob": 
+  #         If method == "Robust": 
   #           This is a string specifying the name of the family of loss function
   #           to be used (current valid options are "bisquare", "opt" and "mopt").
   #           Incomplete entries will be matched to the current valid options. 

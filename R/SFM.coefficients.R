@@ -1,6 +1,6 @@
-#' Calculate single factor model (CAPM) alpha and beta coefficients
+#' Calculate single factor model alpha and beta coefficients
 #' 
-#' The single factor model or CAPM is the beta of an asset to the variance 
+#' The single factor model is the beta of an asset to the variance 
 #' and covariance of an initial portfolio. Used to determine diversification potential.
 #' "Alpha" purports to be a measure of a manager's skill by measuring the
 #' portion of the managers returns that are not attributable to "Beta", or the
@@ -18,7 +18,6 @@
 #' slope can be used to determine the risk premium or excess expected return
 #' (see Eq. 7.9 and 7.10, p. 230-231).
 #'
-#' @aliases CAPM.coefficients
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
@@ -28,14 +27,18 @@
 #' interesting parameter is round.by.alphas, and round.by.betas which can be set to round off the 
 #' returned values, otherwise the values 
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Rob" for robust      
+#'                    and "Robust" for robust. Defaults to "LS      
 #' @param family (Optional): 
-#'         If method == "Rob": 
+#'         If method == "Robust": 
 #'           This is a string specifying the name of the family of loss function
 #'           to be used (current valid options are "bisquare", "opt" and "mopt").
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
+#' @param digits (Optional): Number of digits to round the results to. Defaults to 3.
+#' @param benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
+#' @param Model (Optional): Boolean to return the fitted model. Defaults to FALSE
+#' @param warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
 #' 
 #' @author Dhairya Jain
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
@@ -56,64 +59,6 @@
 #' 			     family="mopt", bb=0.25, 
 #' 			     max.it=200)
 #' 			     
-#'      sfmLSRob <- SFM.coefficients(managers[, "HAM2"], 
-#'           managers[, "SP500 TR"], 
-#'           Rf = managers[, "US 3m TR"], 
-#'           method="Both", family="opt") 
-#'        sfmLSRob$robust
-#'        sfmLSRob$LS
-#'        sfmLSRob$robust$beta
-#'        sfmLSRob$robust$intercept
-#'        sfmLSRob$robust$model
-#'        sfmLSRob$LS$beta
-#'        sfmLSRob$LS$intercept
-#'        sfmLSRob$LS$model
-#'           
-#' 		  table <- SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9],
-#' 			     Rf = managers[,10],
-#' 			     method="LS")
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$beta
-#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$intercept
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model$residuals
-#'   	  
-#'   	  table <- SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9], Rf = managers[,10],
-#' 			     method="Rob", family="opt")
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$beta
-#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$intercept
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$model$residuals
-#'   	  
-#'   	  table <- SFM.coefficients(managers[,1:6], 
-#' 			     managers[,8:9],
-#' 			     Rf = managers[,10],
-#' 			     method="Both")
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$beta
-#'  	       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$intercept
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS$model
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$beta
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$intercept
-#' 		       table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust$model
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$LS
-#' 	         table["Intercept, Beta, Model: SP500 TR","HAM1"][[1]]$robust
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"]
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$beta
-#'  	       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$intercept
-#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS$model
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$beta
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$intercept
-#' 		       table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust$model
-#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$LS
-#' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust
 #'   	  
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients
@@ -133,21 +78,23 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
   #   , method="LS", family="mopt"
   # subset: a logical vector
   # method (Optional): string representing linear regression model, "LS" for Least Squares
-  #                    and "Rob" for robust. Defaults to "Rob"      
+  #                    and "Robust" for robust. Defaults to "LS      
   # family (Optional): 
-  #         If method == "Rob": 
+  #         If method == "Robust": 
   #           This is a string specifying the name of the family of loss function
   #           to be used (current valid options are "bisquare", "opt" and "mopt").
   #           Incomplete entries will be matched to the current valid options. 
   #           Defaults to "mopt".
   #         Else: the parameter is ignored
+  # digits (Optional): Number of digits to round the results to. Defaults to 3.
+  # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
+  # Model (Optional): Boolean to return the fitted model. Defaults to FALSE
+  # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
   
   # Output:
-  #         When method=="Both" or ret.Model==T, returns a matrix of list(intercept, beta, model)
+  #         When Model==T, returns a list(intercept, beta, model)
   #                     Otherwise
-  #         When method!="Both" and ret.Model==F, and both Ra, Rb are single columns, 
-  #             returns a list (intercept, beta, model)
-  #         When method!="Both" and ret.Model==F, return a list of matrix (intercepts, betas)
+  #         Returns a matrix of data.
   
   # FUNCTION:
   
@@ -284,6 +231,6 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
              )
              )
            },
-           stop("SFM.coefficients:- Please enter a valid value (\"LS\",\"Rob\",\"Both\") for the parameter \"method\"")
+           stop("SFM.coefficients:- Please enter a valid value (\"LS\",\"Robust\",\"Both\") for the parameter \"method\"")
     )
   }

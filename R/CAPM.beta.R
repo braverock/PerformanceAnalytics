@@ -37,15 +37,19 @@
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
 #' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
+#' @param digits (Optional): Number of digits to round the results to. Defaults to 3.
+#' @param benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Rob" for robust. Defaults to "LS"      
+#'                    and "Robust" for robust. Defaults to "LS      
 #' @param family (Optional): 
-#'         If method == "Rob": 
+#'         If method == "Robust": 
 #'           This is a string specifying the name of the family of loss function
 #'           to be used (current valid options are "bisquare", "opt" and "mopt").
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
+#' @param warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+#' 
 #' @author Dhairya Jain, Peter Carl 
 #' @seealso \code{\link{BetaCoVariance}} \code{\link{SFM.alpha}}
 #' \code{\link{CAPM.utils}}
@@ -58,56 +62,41 @@
 #' @examples
 #' 
 #' data(managers)
-#'     SFM.beta(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf=.035/12)
-#'     SFM.beta(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf=.035/12, method="LS") 
-#'     SFM.beta(managers[,1], 
-#' 			managers[,8], 
-#' 			Rf = managers[,10],
-#' 			method="Rob", family="mopt")
-#'     SFM.beta(managers[,1:6], 
-#' 			managers[,8], 
-#' 			Rf=.035/12, method="Rob", 
-#' 			family="opt", bb=0.25, max.it=200)
-#'     SFM.beta(managers[,1:6], 
-#' 			managers[,8], 
-#' 			Rf = managers[,10])
-#'     SFM.beta(managers[,1:6], 
-#' 			managers[,8:7], 
-#' 			Rf=.035/12, method="Rob", family="mopt") 
-#'     SFM.beta(managers[,1:6], 
-#' 			managers[,8:7], 
-#' 			Rf = managers[,10])
-#'     SFM.beta(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"])
+#'     SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+#'     SFM.beta(managers[,1:3], managers[,8:10], Rf=.035/12) 
+#'     SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+#'
+#'     betas <- SFM.beta(managers[,1:6], 
+#' 			managers[,8:10], 
+#' 			Rf=.035/12, method="Robust", 
+#' 			family="opt", bb=0.25, max.it=200, digits=4)
+#' 	     betas["HAM1", ]
+#' 	     betas[, "Beta : SP500 TR"]
+#' 	     
 #' 	   SFM.beta.bull(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"])
 #'     SFM.beta.bull(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"],
-#' 			method="Rob", family="opt",
-#' 			bb=0.25, max.it=200)
+#' 			method="Robust")
+#' 			
 #' 	   SFM.beta.bear(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"])
 #'     SFM.beta.bear(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"],
-#' 			method="Rob", family="bisquare",
-#' 			bb=0.25, max.it=200)
+#' 			method="Robust")
+#' 			
 #'     TimingRatio(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"])
 #' 	   TimingRatio(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"],
-#' 			method="Rob", family="opt",
-#' 			bb=0.25, max.it=200)	
+#' 			method="Robust", family="mopt")
+#' 
 #'     chart.Regression(managers[, "HAM2"], 
 #' 			managers[, "SP500 TR"], 
 #' 			Rf = managers[, "US 3m TR"], 
@@ -129,18 +118,21 @@ SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=
     # Rb: vector of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as x and y.
+    # digits (Optional): Number of digits to round the results to. Defaults to 3.
+    # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust. Defaults to "LS"      
+    #                    and "Robust" for robust. Defaults to "LS      
     # family (Optional): 
-    #         If method == "Rob": 
+    #         If method == "Robust": 
     #           This is a string specifying the name of the family of loss function
     #           to be used (current valid options are "bisquare", "opt" and "mopt").
     #           Incomplete entries will be matched to the current valid options. 
     #           Defaults to "mopt".
     #         Else: the parameter is ignored
-    
-    # Output:
+    # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
     # 
+    # Output:
+    # Market Beta
 
     # FUNCTION:
     
@@ -185,15 +177,18 @@ function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="m
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as x and y.
+    # digits (Optional): Number of digits to round the results to. Defaults to 3.
+    # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust. Defaults to "LS"      
+    #                    and "Robust" for robust. Defaults to "LS      
     # family (Optional): 
-    #         If method == "Rob": 
+    #         If method == "Robust": 
     #           This is a string specifying the name of the family of loss function
     #           to be used (current valid options are "bisquare", "opt" and "mopt").
     #           Incomplete entries will be matched to the current valid options. 
     #           Defaults to "mopt".
     #         Else: the parameter is ignored
+    # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
     #
     # Output:
     # Bull market beta
@@ -220,16 +215,19 @@ function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="m
     # Rb: time series of returns for the benchmark the asset is being gauged against
     # Rf: risk free rate in the same periodicity as the returns.  May be a time series
     #     of the same length as Ra and Rb.
+    # digits (Optional): Number of digits to round the results to. Defaults to 3.
+    # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
     # method (Optional): string representing linear regression model, "LS" for Least Squares
-    #                    and "Rob" for robust. Defaults to "LS"   
+    #                    and "Robust" for robust. Defaults to "LS      
     # family (Optional): 
-    #         If method == "Rob": 
+    #         If method == "Robust": 
     #           This is a string specifying the name of the family of loss function
     #           to be used (current valid options are "bisquare", "opt" and "mopt").
     #           Incomplete entries will be matched to the current valid options. 
     #           Defaults to "mopt".
     #         Else: the parameter is ignored
-    
+    # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+    #
     # Output:
     # Bear market beta
 
