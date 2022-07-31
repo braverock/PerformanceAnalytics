@@ -24,7 +24,7 @@ getResults <- function(xRa, xRb, Ra.ncols, Rb.ncols, ..., subset=TRUE){
       else{
         subset <- TRUE;
       }
-      CAPM.coefficients(xRa[,n[1]], xRb[,n[2]], subset=subset, ..., method = method, family = family, Model = T)
+      SFM.coefficients(xRa[,n[1]], xRb[,n[2]], subset=subset, ..., method = method, family = family, Model = T)
     }, 
     xRa = xRa, xRb = xRb, subset=subset, ...
   )

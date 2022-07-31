@@ -116,10 +116,11 @@
 #' 	         table["Intercept, Beta, Model: US 10Y TR","HAM2"][[1]]$robust
 #'   	  
 #' @rdname SFM.coefficients
-#' @export SFM.coefficients CAPM.coefficients
-SFM.coefficients <- CAPM.coefficients <- 
-function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", family="mopt", digits=3, benchmarkCols=T, Model=F, warning=T)
-{# @author  Dhairya Jain
+#' @export SFM.coefficients
+SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", 
+                             family="mopt", digits=3, benchmarkCols=T, Model=F, 
+                             warning=T){
+  # @author  Dhairya Jain
   
   # DESCRIPTION:
   # This is a wrapper for calculating a SFM coefficients.

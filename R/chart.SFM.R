@@ -59,10 +59,10 @@
 #'    }
 #'    
 #' @rdname chart.SFM
-#' @export chart.SFM chart.CAPM
-chart.SFM <- chart.CAPM <- 
-function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, family = "mopt",
-         xlab = NULL, ylab = NULL, legend.loc = "topleft", makePct = FALSE){
+#' @export chart.SFM
+chart.SFM <- function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, 
+                      family = "mopt", xlab = NULL, ylab = NULL, 
+                      legend.loc = "topleft", makePct = FALSE){
   # @author Dhairya Jain
   
   # DESCRIPTION:

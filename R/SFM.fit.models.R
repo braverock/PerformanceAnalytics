@@ -33,9 +33,9 @@
 #' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt")
 #'
 #' @rdname SFM.fit.models
-#' @export SFM.fit.models CAPM.fit.models
-SFM.fit.models <- CAPM.fit.models <-
-function(Ra, Rb, Rf=0, family = "mopt", which.plots = NULL, plots=TRUE){
+#' @export SFM.fit.models
+SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt", 
+                           which.plots = NULL, plots=TRUE){
   # @author Dhairya Jain
   
   # DESCRIPTION:
