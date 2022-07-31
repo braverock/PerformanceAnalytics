@@ -63,11 +63,11 @@ processResults <- function(result.all, attribute, Ra.ncols, Rb.ncols,
       dim(result) = c(Rb.ncols, Ra.ncols)
       colnames(result) = Ra.colnames
       rownames(result) = paste(paste(attribute.alias,":"), Rb.colnames)
-      if (!is.null(digits)){
-        result = round(result, digits);
-      }
       if(benchmarkCols){
         result = t(result);
+      }
+      if (!is.null(digits)){
+        result = round(result, digits);
       }
       return(result)
     }
