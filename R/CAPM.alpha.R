@@ -95,9 +95,8 @@ SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCo
     Rb.colnames <- colnames(Rb)
     
     # Get the excess returns of Ra, Rb over Rf
-    xR <- excessReturns(Ra, Rb, Rf);
-    xRa <- xR[[1]];
-    xRb <- xR[[2]];
+    xRa = Return.excess(Ra, Rf)
+    xRb = Return.excess(Rb, Rf)
     
     # Get the result matrix
     result.all <- getResults(xRa=xRa, xRb=xRb, 

@@ -83,9 +83,8 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   Rb.colnames <- colnames(Rb)
   
   # Get the excess returns of Ra, Rb over Rf
-  xR <- excessReturns(Ra, Rb, Rf);
-  xRa <- xR[[1]];
-  xRb <- xR[[2]];
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
   
   # Get the models
   models <- getResults(xRa, xRb, Ra.ncols, Rb.ncols, family=family, method="Both", subset=T)[[1]]

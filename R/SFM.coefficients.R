@@ -127,9 +127,8 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
   }
   
   # Get the excess returns of Ra, Rb over Rf
-  xR <- excessReturns(Ra, Rb, Rf);
-  xRa <- xR[[1]];
-  xRb <- xR[[2]];
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
   
   
   pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)

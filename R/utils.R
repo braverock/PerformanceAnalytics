@@ -1,15 +1,3 @@
-
-excessReturns <- function(Ra, Rb, Rf){
-  Ra = checkData(Ra)
-  Rb = checkData(Rb)
-  if(!is.null(dim(Rf)))
-    Rf = checkData(Rf)
-  
-  xRa = Return.excess(Ra, Rf)
-  xRb = Return.excess(Rb, Rf)
-  return (list(xRa, xRb));
-}
-
 getResults <- function(xRa, xRb, Ra.ncols, Rb.ncols, ..., subset=TRUE){
   pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
   result = apply(

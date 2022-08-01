@@ -107,9 +107,8 @@ chart.SFM <- function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL,
   Rb.colnames <- colnames(Rb)
   
   # Get the excess returns of Ra, Rb over Rf
-  xR <- excessReturns(Ra, Rb, Rf);
-  xRa <- xR[[1]];
-  xRb <- xR[[2]];
+  xRa = Return.excess(Ra, Rf)
+  xRb = Return.excess(Rb, Rf)
   
   # Scale the values to percentages if required
   if(makePct){
