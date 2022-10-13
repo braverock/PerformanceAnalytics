@@ -14,22 +14,22 @@ xRb = PerformanceAnalytics::Return.excess(Rb, Rf)
 # Test the coefficients API
 
 # 1. Ordinary Least Squares
-model.lm = PerformanceAnalytics::CAPM.coefficients(xRa, xRb)
-expect_equal(model.lm$intercept,0.005774729)
-expect_equal(model.lm$beta,0.3900712)
+model.lm = PerformanceAnalytics::SFM.coefficients(xRa, xRb, method="LS")
+expect_equal(model.lm[1],0.006)
+expect_equal(model.lm[2],0.39)
 
 # 2. Robust Estimators (from RobStatTM)
-model.lmRob.mOpt = PerformanceAnalytics::CAPM.coefficients(xRa, xRb, method="Rob", family="mopt")
-expect_equal(model.lmRob.mOpt$intercept,0.006108399)
-expect_equal(model.lmRob.mOpt$beta,0.3314739)
+model.lmRob.mOpt = PerformanceAnalytics::SFM.coefficients(xRa, xRb, method="Robust", family="mopt")
+expect_equal(model.lmRob.mOpt[1],0.006)
+expect_equal(model.lmRob.mOpt[2],0.331)
 
-model.lmRob.opt = PerformanceAnalytics::CAPM.coefficients(xRa, xRb, method="Rob", family="opt")
-expect_equal(model.lmRob.opt$intercept, 0.006104901)
-expect_equal(model.lmRob.opt$beta,0.3317913)
+model.lmRob.opt = PerformanceAnalytics::SFM.coefficients(xRa, xRb, method="Robust", family="opt")
+expect_equal(model.lmRob.opt[1], 0.006)
+expect_equal(model.lmRob.opt[2],0.332)
 
-model.lmRob.bisq = PerformanceAnalytics::CAPM.coefficients(xRa, xRb, method="Rob", family="bisquare")
-expect_equal(model.lmRob.bisq$intercept,0.005452889)
-expect_equal(model.lmRob.bisq$beta,0.364639)
+model.lmRob.bisq = PerformanceAnalytics::SFM.coefficients(xRa, xRb, method="Robust", family="bisquare")
+expect_equal(model.lmRob.bisq$intercept,0.005)
+expect_equal(model.lmRob.bisq$beta,0.365)
 
 # Tests for backward compatibility of CAPM lm() based functions
 
@@ -39,11 +39,11 @@ model.lm.beta.bear = PerformanceAnalytics::CAPM.beta.bear(Ra, Rb, Rf)
 model.lm.beta.bull = PerformanceAnalytics::CAPM.beta.bull(Ra, Rb, Rf)
 model.lm.timingRatio = PerformanceAnalytics::TimingRatio(Ra,Rb,Rf)
 
-expect_equal(model.lm.beta,0.3900712)
+expect_equal(model.lm.beta, 0.390071248399483)
 expect_equal(model.lm.beta.bear,0.4264215)
-expect_equal(model.lm.beta.bull,0.3005461)
-expect_equal(model.lm.timingRatio,0.7048099)
+expect_equal(model.lm.beta.bull, 0.300546080919799)
+expect_equal(model.lm.timingRatio, 0.704809869142456)
 
 # 2. Functions inside CAPM.alpha.R 
-model.lm.alpha = PerformanceAnalytics::CAPM.beta(Ra, Rb, Rf)
-expect_equal(model.lm.alpha,0.005774729)
+model.lm.alpha = PerformanceAnalytics::SFM.beta(Ra, Rb, Rf)
+expect_equal(model.lm.alpha, 0.00577472877485089)
