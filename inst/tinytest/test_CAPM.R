@@ -28,8 +28,8 @@ expect_equal(model.lmRob.opt[1], 0.006)
 expect_equal(model.lmRob.opt[2],0.332)
 
 model.lmRob.bisq = PerformanceAnalytics::SFM.coefficients(xRa, xRb, method="Robust", family="bisquare")
-expect_equal(model.lmRob.bisq$intercept,0.005)
-expect_equal(model.lmRob.bisq$beta,0.365)
+expect_equal(model.lmRob.bisq[1],0.005)
+expect_equal(model.lmRob.bisq[2],0.365)
 
 # Tests for backward compatibility of CAPM lm() based functions
 
@@ -45,5 +45,5 @@ expect_equal(model.lm.beta.bull, 0.300546080919799)
 expect_equal(model.lm.timingRatio, 0.704809869142456)
 
 # 2. Functions inside CAPM.alpha.R 
-model.lm.alpha = PerformanceAnalytics::SFM.beta(Ra, Rb, Rf)
+model.lm.alpha = PerformanceAnalytics::CAPM.alpha(Ra, Rb, Rf)
 expect_equal(model.lm.alpha, 0.00577472877485089)
