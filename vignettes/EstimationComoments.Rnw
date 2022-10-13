@@ -90,15 +90,18 @@ in \code{\link{PerformanceAnalytics}} and demonstrate how to use them on the dat
 the mVaR and mES values. It is not our aim however to draw any conclusions about which method is
 preferred.
 
-Before starting, load the package and the dataset \code{edhec}. Below, the different asset names are shown, as well as the head of the dataset for the first six columns. As you can see, the data consists of monthly returns. All the examples in this vignette will make use of this dataset.
+Before starting, load the package and the dataset \code{edhec}. Below, the different asset names are shown, as well as the head and tail for select hedge fund style indices. As you can see, the data consists of monthly returns. 
 
-<<LoadData,echo=T>>=
+<<LoadData,echo=F>>=
 library(PerformanceAnalytics)
+@
+<<LoadData,echo=T>>=
 data(edhec)
 colnames(edhec)
-head(edhec[, 1:6], n = 5)
+head(edhec[, c(2,4,5,6,8,9,11,12)], n = 3)
+tail(edhec[, c(2,4,5,6,8,9,11,12)], n = 3)
 @
-
+This data sometimes has missing values (NaN), as recently observed in the `Short Selling` style indice. We choose to handle this by zero imputation, as we have very few. See the edhec documentation files. This will allow multi-target shrinkage estimators, among other computations to run smoothly in our examples.
 
 \section{Estimation of the Coskewness and Cokurtosis matrices}
 
@@ -247,7 +250,7 @@ with $\bm{\Phi}_{\bm{F}}$ and $\bm{\Psi}_{\bm{F}}$ the coskewness and cokurtosis
 
 Estimation of the factor coskewness and cokurtosis matrices is done by first estimating the factor loadings $\bm{B}$ and the residuals $\bm{\varepsilon}$ using Ordinary Least Squares (OLS). These estimates are then combined through Equation \eqref{eq:struct-multifactor} with the factor coskewness and cokurtosis matrices estimated by the plug-in sample estimators. The \code{M3.struct} and \code{M4.struct} functions do this by specifying \code{struct = "observedfactor"} and providing the factor observations in \code{f}. Below we use the equal-weighted portfolio as the observed factor.
 <<Struct1f,echo=T>>=
-f <- rowMeans(edhec)
+f <- rowMeans(edhec, na.rm = TRUE)
 m3 <- M3.struct(edhec, "observedfactor", f)
 m4 <- M4.struct(edhec, "observedfactor", f)
 @

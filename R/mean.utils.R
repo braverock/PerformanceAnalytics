@@ -33,7 +33,7 @@
 #' mean.UCL(edhec[,"Funds of Funds"])
 #' mean.LCL(edhec[,"Funds of Funds"])
 #' @rdname mean.geometric
-## @method mean geometric
+#' @method mean geometric
 #' @export mean.geometric
 mean.geometric <-
 function (x, ...)
@@ -66,7 +66,7 @@ function (x, ...)
 
 #' @rdname mean.geometric
 #' @method mean arithmetic
-#' @export mean.arithmetic
+#' @export
 mean.arithmetic <-
   function (x,
             SE = FALSE, SE.control = NULL, ...)

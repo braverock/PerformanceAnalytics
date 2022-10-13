@@ -461,7 +461,7 @@ VaR <-
                switch(method,
                       modified = { rVaR=mVaR.MM(w=weights, mu=mu, sigma=sigma, M3=m3 , M4=m4 , p=p) }, 
                       gaussian = { rVaR=GVaR.MM(w=weights, mu=mu, sigma=sigma, p=p) },
-                      historical = { rVaR = VaR.historical(R=R,p=p) %*% weights } # note that this is weighting the univariate calc by the weights
+                      historical = { rVaR = as.matrix(VaR.historical(R=R,p=p)) * weights } # note that this is weighting the univariate calc by the weights
                ) # end multivariate method
              }
              columns<-ncol(rVaR)

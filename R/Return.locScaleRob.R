@@ -30,7 +30,7 @@
 Return.locScaleRob <- function(R, alpha.robust=0.05, normal.efficiency=0.99, ...){
   
   if(!requireNamespace("RobStatTM", quietly = TRUE)) {
-    stop("Package \"pkg\" needed for this function to work. Please install it.",
+    stop("Package \"RobStatTM\" needed for this function to work. Please install it.",
          call. = FALSE)
   }
   

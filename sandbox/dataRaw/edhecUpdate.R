@@ -22,11 +22,13 @@ attr(formated.returns, "dimnames") <- list(NULL,
                                              "Merger Arbitrage", "Relative Value", "Short Selling",
                                              "Funds of Funds"))
 
-## create xts object with formated date index and return matrix
+## create xts object with formatted date index and return matrix
 library(xts)
 updated.edhec <- xts(x = formated.returns, order.by = formated.date)
-# should have NO NA's
+# Does it have NAs?
 sum(is.na(updated.edhec))
+# Zero fill and make sure to document this for dates and times!
+updated.edhec <- PerformanceAnalytics::zerofill(updated.edhec)
 
 # Test against previous edhec data for continuity
 subset.updated.edhec <- updated.edhec[paste(index(edhec[1]), index(edhec[nrow(edhec)]), sep="/")]
