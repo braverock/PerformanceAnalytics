@@ -1,4 +1,4 @@
-#' calculate single factor model (CAPM) alpha
+#' Calculate single factor model (CAPM) alpha
 #' 
 #' This is a wrapper for calculating a single factor model (CAPM) alpha.
 #' 
@@ -10,12 +10,26 @@
 #' literature, it is an example of a simple single factor model, 
 #' comparing an asset to any arbitrary benchmark.
 #'  
-#' @aliases SFM.alpha
+#' @aliases CAPM.alpha
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
-#' @author Peter Carl
+#' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
+#' @param digits (Optional): Number of digits to round the results to. Defaults to 3.
+#' @param benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
+#' @param method (Optional): string representing linear regression model, "LS" for Least Squares
+#'                    and "Robust" for robust. Defaults to "LS      
+#' @param family (Optional): 
+#'         If method == "Robust": 
+#'           This is a string specifying the name of the family of loss function
+#'           to be used (current valid options are "bisquare", "opt" and "mopt").
+#'           Incomplete entries will be matched to the current valid options. 
+#'           Defaults to "mopt".
+#'         Else: the parameter is ignored
+#' @param warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+#' 
+#' @author Dhairya Jain, Peter Carl
 #' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
 #' @references Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,
@@ -26,32 +40,24 @@
 #' 
 #' # First we load the data
 #'     data(managers)
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12) 
-#'     CAPM.alpha(managers[,1,drop=FALSE], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf=.035/12)
-#'     CAPM.alpha(managers[,1:6], 
-#' 			managers[,8,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'     CAPM.alpha(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf=.035/12) 
-#'     CAPM.alpha(managers[,1:6], 
-#' 			managers[,8:7,drop=FALSE], 
-#' 			Rf = managers[,10,drop=FALSE])
-#'   		
-#' @rdname CAPM.alpha
+#'     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+#'     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
+#'     SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+#'
+#'     alphas <- SFM.alpha(managers[,1:6], 
+#' 			managers[,8:10], 
+#' 			Rf=.035/12, method="Robust", 
+#' 			family="opt", bb=0.25, max.it=200, digits=4)
+#' 	     alphas["HAM1", ]
+#' 	     alphas[, "Alpha : SP500 TR"]
+#' 
+#' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
-CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
-{ # @author Peter Carl
+SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCols = T, method="LS", family="mopt", warning=T){
+    # @author Peter Carl, Dhairya Jain
 
     # DESCRIPTION:
-    # This is a wrapper for calculating a CAPM alpha.
+    # This is a wrapper for calculating a SFM alpha.
 
     # Inputs:
     # R: vector of returns for the asset being tested
@@ -59,42 +65,48 @@ CAPM.alpha <- SFM.alpha <- function (Ra, Rb, Rf = 0)
     # R and Rb are assumed to be matching periods
     # Rf: risk free rate in the same periodicity as the returns.  May be a vector
     #     of the same length as R and y.
-
+    # digits (Optional): Number of digits to round the results to. Defaults to 3.
+    # benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Robust" for robust. Defaults to "LS      
+    # family (Optional): 
+    #         If method == "Robust": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    # warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+    
     # Output:
-    # CAPM alpha
+    # SFM alpha
 
     # FUNCTION:
-    Ra = checkData(Ra)
-    Rb = checkData(Rb)
-    if(!is.null(dim(Rf)))
-        Rf = checkData(Rf)
-
-    Ra.ncols = NCOL(Ra)	
-    Rb.ncols = NCOL(Rb)
-
+    
+    # .coefficients fails if method is "Both"
+    if (warning && method == "Both"){
+        warning("Using 'Both' while using SFM.beta will lead to ill-formatted output");
+    }
+    
+    # Get the NCOL and colnames from Ra, and Rb
+    Ra.ncols <- NCOL(Ra);
+    Rb.ncols <- NCOL(Rb);
+    Ra.colnames <- colnames(Ra);
+    Rb.colnames <- colnames(Rb)
+    
+    # Get the excess returns of Ra, Rb over Rf
     xRa = Return.excess(Ra, Rf)
     xRb = Return.excess(Rb, Rf)
-
-    pairs = expand.grid(1:Ra.ncols, 1:Rb.ncols)
-
-    alpha <-function (xRa, xRb)
-    {
-        merged = as.data.frame(na.omit(cbind(xRa, xRb)))
-        model.lm = lm(merged[,1] ~ merged[,2], merged)
-        alpha = coef(model.lm)[[1]]
-        alpha
-    }
-
-    result = apply(pairs, 1, FUN = function(n, xRa, xRb) alpha(xRa[,n[1]], xRb[,n[2]]), xRa = xRa, xRb = xRb)
-
-    if(length(result) ==1)
-        return(result)
-    else {
-        dim(result) = c(Ra.ncols, Rb.ncols)
-        colnames(result) = paste("Alpha:", colnames(Rb))
-        rownames(result) = colnames(Ra)
-        return(t(result))
-    }
+    
+    # Get the result matrix
+    result.all <- getResults(xRa=xRa, xRb=xRb, 
+                             Ra.ncols=Ra.ncols, Rb.ncols=Rb.ncols, 
+                             method = method, family = family, ...);
+    
+    # Process the results and return them
+    return (processResults(result.all, "intercept", Ra.ncols, Rb.ncols, 
+                           Ra.colnames, Rb.colnames, method, "Alpha",
+                           digits, benchmarkCols))
 }
 
 ###############################################################################
