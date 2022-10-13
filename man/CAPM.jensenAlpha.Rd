@@ -5,7 +5,7 @@
 \alias{SFM.jensenAlpha}
 \title{Jensen's alpha of the return distribution}
 \usage{
-CAPM.jensenAlpha(Ra, Rb, Rf = 0, ...)
+CAPM.jensenAlpha(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -15,7 +15,18 @@ asset returns}
 
 \item{Rf}{risk free rate, in same period as your returns}
 
-\item{\dots}{any other passthru parameters}
+\item{\dots}{any other pass thru parameters}
+
+\item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
+and "Rob" for robust}
+
+\item{family}{(Optional): 
+If method == "Rob": 
+  This is a string specifying the name of the family of loss function
+  to be used (current valid options are "bisquare", "opt" and "mopt").
+  Incomplete entries will be matched to the current valid options. 
+  Defaults to "mopt".
+Else: the parameter is ignored}
 }
 \description{
 The Jensen's alpha is the intercept of the regression equation in the Capital
@@ -42,5 +53,5 @@ Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.72
 }
 \author{
-Matthieu Lestel
+Matthieu Lestel, Dhairya Jain
 }
