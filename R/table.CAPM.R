@@ -85,26 +85,26 @@ table.SFM <- table.CAPM <- function (Ra, Rb, scale = NA, Rf = 0, digits = 4)
             merged.assets = merge(Ra.excess[,column.a,drop=FALSE], Rb.excess[,column.b,drop=FALSE])
             merged.assets = as.data.frame(na.omit(merged.assets)) # leaves the overlapping period
             # these should probably call CAPM.alpha and CAPM.beta for consistency (not performance)
-            models = CAPM.coefficients(merged.assets[,1], merged.assets[,2], method="Both")
-            model.lm = models[[1]]$ordinary[[1]]$model
-            model.lmRobDetMM = models[[1]]$robust[[1]]$model
+            models = SFM.coefficients(merged.assets[,1] ,merged.assets[,2], method="Both", Model=T)
+            model.lm = models$LS$model
+            model.lmRobDetMM = models$robust$model
             
             alpha.lm = coef(model.lm)[[1]]
             beta.lm = coef(model.lm)[[2]]
             alpha.rob = coef(model.lmRobDetMM)[[1]]
             beta.rob = coef(model.lmRobDetMM)[[2]]
             
-            CAPMbull.lm = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
-            CAPMbear.lm = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf) #inefficient, recalcs excess returns and intercept
+            CAPMbull.lm = CAPM.beta.bull(Ra[,column.a], Rb[,column.b], Rf) #inefficient, recalcs excess returns and intercept
+            CAPMbear.lm = CAPM.beta.bear(Ra[,column.a], Rb[,column.b], Rf) #inefficient, recalcs excess returns and intercept
             
-            CAPMbull.rob = CAPM.beta.bull(Ra[,column.a], Rb[,column.b],Rf,method="mOpt") #inefficient, recalcs excess returns and intercept
-            CAPMbear.rob = CAPM.beta.bear(Ra[,column.a], Rb[,column.b],Rf,method="mOpt") #inefficient, recalcs excess returns and intercept
+            CAPMbull.rob = CAPM.beta.bull(Ra[,column.a], Rb[,column.b], Rf, method="Robust") #inefficient, recalcs excess returns and intercept
+            CAPMbear.rob = CAPM.beta.bear(Ra[,column.a], Rb[,column.b], Rf, method="Robust") #inefficient, recalcs excess returns and intercept
             
             htest = cor.test(as.numeric(merged.assets[,1]), as.numeric(merged.assets[,2]))
             #active.premium = (Return.annualized(merged.assets[,1,drop=FALSE], scale = scale) - Return.annualized(merged.assets[,2,drop=FALSE], scale = scale))
-            active.premium = ActivePremium(Ra=Ra[,column.a],Rb=Rb[,column.b], scale = scale)
+            active.premium = ActivePremium(Ra=Ra[,column.a], Rb=Rb[,column.b], scale = scale)
             #tracking.error = sqrt(sum(merged.assets[,1] - merged.assets[,2])^2/(length(merged.assets[,1])-1)) * sqrt(scale)
-            tracking.error = TrackingError(Ra[,column.a], Rb[,column.b],scale=scale)
+            tracking.error = TrackingError(Ra[,column.a], Rb[,column.b], scale=scale)
             #treynor.ratio = Return.annualized(merged.assets[,1,drop=FALSE], scale = scale)/beta
             treynor.ratio = TreynorRatio(Ra=Ra[,column.a], Rb=Rb[,column.b], Rf = Rf, scale = scale)
 
