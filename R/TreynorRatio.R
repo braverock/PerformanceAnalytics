@@ -39,8 +39,8 @@
 #'
 #' print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #expected 0.7975 
 #'
-#' print(TreynorRatio(managers['1996',1], managers['1996',8], modified = TRUE))
-#' print(TreynorRatio(managers['1996',1:5], managers['1996',8], modified = TRUE)) 
+#' print(TreynorRatio(managers['2002',1], managers['2002',8], modified = TRUE))
+#' print(TreynorRatio(managers['2002',1:5], managers['2002',8], modified = TRUE)) 
 #' 
 #' @export
 

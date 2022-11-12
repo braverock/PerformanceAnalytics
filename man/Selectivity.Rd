@@ -31,8 +31,8 @@ data(portfolio_bacon)
 print(Selectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.0141
 
 data(managers)
-print(Selectivity(managers['1996',1], managers['1996',8]))
-print(Selectivity(managers['1996',1:5], managers['1996',8]))
+print(Selectivity(managers['2002',1], managers['2002',8]))
+print(Selectivity(managers['2002',1:5], managers['2002',8]))
 
 }
 \references{

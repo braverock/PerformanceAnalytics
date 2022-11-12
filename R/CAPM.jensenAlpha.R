@@ -58,7 +58,7 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
         } 
     
         if (calcul) {
-            result = Rp - Rf - CAPM.beta(Ra,Rb,Rf,...) * (Rpb - Rf) 
+            result = Rp - Rf - CAPM.beta(Ra,Rb,Rf,...,method=method,family=family) * (Rpb - Rf) 
         }    
         else {
             result = NA
@@ -67,7 +67,8 @@ function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
     }
     else {
         Ra = checkData(Ra)
-        result = apply(Ra, MARGIN = 2, CAPM.jensenAlpha, Rb = Rb, Rf = Rf, ...)
+        result = apply(Ra, MARGIN = 2, CAPM.jensenAlpha, Rb = Rb, Rf = Rf,
+                       method = method, family = family, ...)
         result<-t(result)
         colnames(result) = colnames(Ra)
         rownames(result) = paste("Jensen's Alpha (Risk free = ",Rf,")", sep="")

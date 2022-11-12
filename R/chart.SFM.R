@@ -54,7 +54,7 @@
 #'    chart.SFM(mgrs$HAM1, mgrs$SP500, Rf=mgrs$RF)	
 #' 			        
 #'    for(k in 1:7){
-#'         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = T,
+#'         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = TRUE,
 #'                        main = names(mgrs[,k]))
 #'    }
 #'    
@@ -129,6 +129,9 @@ chart.SFM <- function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL,
 
 .plot_models = function(x, y, models, mainText = NULL, ylimits = NULL, xlimits = NULL, family = "mopt",
                         xlab = NULL, ylab = NULL, legendPos = "topleft", makePct = FALSE, lm.outliers=F){
+  
+  requireNamespace("stats",quietly=TRUE)
+  
   # Define some constants
   g <- 1
   f <- 3
