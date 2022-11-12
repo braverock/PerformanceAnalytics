@@ -77,7 +77,7 @@ data(managers)
      SFM.coefficients(managers[,1], managers[,8]) 
      SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
 			SFM.coefficients(managers[,1:6], managers[,8:9], 
-			     Rf=.035/12, method="Rob", 
+			     Rf=.035/12, method="Robust", 
 			     family="mopt", bb=0.25, 
 			     max.it=200)
 			     

@@ -62,7 +62,7 @@ comparing an asset to any arbitrary benchmark.
     data(managers)
     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
-    SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+    SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
 
     alphas <- SFM.alpha(managers[,1:6], 
 			managers[,8:10], 

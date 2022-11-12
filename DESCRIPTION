@@ -16,7 +16,8 @@ Authors@R: c(
   , person(given=c("Anthony","Alexander"),family="Christidis",role="ctb")  
   , person(given="R. Douglas",family="Martin",role="ctb")  
   , person(given=c("Zeheng", "'Zenith'"),family="Zhou",role="ctb")  
-  , person(given=c("Justin", "M."),family="Shea",role="ctb")   
+  , person(given=c("Justin", "M."),family="Shea",role="ctb")
+  , person(given="Dhairya",family="Jain",role="ctb")
   )
 Version: 2.0.6
 Date: 2020-03-03
@@ -54,11 +55,12 @@ Suggests:
     nloptr,
     rgenoud,
     RPESE,
-    RobStatTM
+    RobStatTM,
+    fit.models
 VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
-Copyright: (c) 2004-2020
+Copyright: (c) 2004-2022
 RoxygenNote: 7.1.2

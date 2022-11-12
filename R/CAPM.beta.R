@@ -64,7 +64,7 @@
 #' data(managers)
 #'     SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
 #'     SFM.beta(managers[,1:3], managers[,8:10], Rf=.035/12) 
-#'     SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=F) 
+#'     SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
 #'
 #'     betas <- SFM.beta(managers[,1:6], 
 #' 			managers[,8:10], 

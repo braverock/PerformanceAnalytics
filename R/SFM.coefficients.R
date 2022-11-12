@@ -55,7 +55,7 @@
 #'      SFM.coefficients(managers[,1], managers[,8]) 
 #'      SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
 #' 			SFM.coefficients(managers[,1:6], managers[,8:9], 
-#' 			     Rf=.035/12, method="Rob", 
+#' 			     Rf=.035/12, method="Robust", 
 #' 			     family="mopt", bb=0.25, 
 #' 			     max.it=200)
 #' 			     
@@ -171,11 +171,34 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
 #' @author Dhairya Jain
 .coefficients <- 
   function(xRa, xRb, subset, ..., method ="LS", family="mopt"){
-    if (!require("RobStatTM")){
+    # @author  Dhairya Jain
+    
+    # DESCRIPTION:
+    # This is the main function calculating the regression.
+    
+    # Inputs:
+    # xRa: vector of excess returns for the asset being tested
+    # xRb: vector of excess returns for the benchmark the asset is being gauged against
+    # subset: a logical vector
+    # method (Optional): string representing linear regression model, "LS" for Least Squares
+    #                    and "Robust" for robust. Defaults to "LS      
+    # family (Optional): 
+    #         If method == "Robust": 
+    #           This is a string specifying the name of the family of loss function
+    #           to be used (current valid options are "bisquare", "opt" and "mopt").
+    #           Incomplete entries will be matched to the current valid options. 
+    #           Defaults to "mopt".
+    #         Else: the parameter is ignored
+    
+    # Output:
+    #         Returns a list(intercept, beta, model)
+    
+    # FUNCTION:
+    
+    if (!requireNamespace("RobStatTM", quietly=TRUE)){
       c = readline(prompt = "You need to install package RobStatTM to use this function. Do you want to install it? (y|N): "); 
       if(c=="y" || c=="Y"){
-        install.packages("RobStatTM");
-        library("RobStatTM");
+        utils::install.packages("RobStatTM")
       }
       else{
         stop("Aborted")
@@ -205,17 +228,17 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
                           model= model.lm))
            },
            Robust = {
-             model.rob.lm = lmrobdetMM(Alpha ~ Beta, data=merged, 
+             model.rob.lm = RobStatTM::lmrobdetMM(Alpha ~ Beta, data=merged, 
                                        subset=subset, 
-                                       control = lmrobdet.control(family=family, ...))
+                                       control = RobStatTM::lmrobdet.control(family=family, ...))
              return (list(intercept=coef(model.rob.lm)[[1]],
                           beta=coef(model.rob.lm)[[2]],
                           model= model.rob.lm))
            },
            Both = {
-             model.rob.lm = lmrobdetMM(Alpha ~ Beta, data=merged,
+             model.rob.lm = RobStatTM::lmrobdetMM(Alpha ~ Beta, data=merged,
                                        subset=subset,
-                                       control = lmrobdet.control(family=family))
+                                       control = RobStatTM::lmrobdet.control(family=family))
              model.lm = lm(Alpha ~ Beta, data=merged, subset=subset)
              return (list(robust=(list(intercept=coef(model.rob.lm)[[1]],
                                        beta=coef(model.rob.lm)[[2]],

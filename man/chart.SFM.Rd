@@ -78,7 +78,7 @@ deleted by the lmrobdetMM estimator.
    chart.SFM(mgrs$HAM1, mgrs$SP500, Rf=mgrs$RF)	
 			        
    for(k in 1:7){
-        chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = T,
+        chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = TRUE,
                        main = names(mgrs[,k]))
    }
    

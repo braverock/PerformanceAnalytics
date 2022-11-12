@@ -8,6 +8,13 @@
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
+#' @param family (Optional): 
+#'         If method == "Robust": 
+#'           This is a string specifying the name of the family of loss function
+#'           to be used (current valid options are "bisquare", "opt" and "mopt").
+#'           Incomplete entries will be matched to the current valid options. 
+#'           Defaults to "mopt".
+#'         Else: the parameter is ignored
 #' @param which.plots specify the plot numbers that you want to see. Default
 #'        option is that program will ask you to choose a plot
 #' @param plots Boolean to output plots after the function. Defaults to TRUE
@@ -19,18 +26,20 @@
 #'     mgrs <- managers["2002/"]  # So that all have managers have complete history
 #'     names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
 #'     
-#'     fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF)
+#'     # NOTE: Use plots=TRUE to be able to see plots
+#'
+#'     fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF, plots=FALSE)
 #'     coef(fitModels)
 #'     summary(fitModels)
 #'     class(fitModels)
 #'     
-#'     SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF)
+#'     SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF, plots=FALSE)
 #'     
-#'     SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12) 
+#'     SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12, plots=FALSE) 
 #'     
-#'     SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2)) 
+#'     SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2), plots=FALSE) 
 #' 		 
-#' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt")
+#' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", plots=FALSE)
 #'
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models
@@ -62,14 +71,11 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   # FUNCTION:
   
   # Sort the dependencies
-  if (!require("fit.models")){
+  if (!requireNamespace("fit.models", quietly=TRUE)){
     c = readline(prompt = "You need to install package fit.models to use this function. Do you want to install it? (y|N): "); 
     if(c=="y" || c=="Y"){
       # Install the package
-      install.packages("fit.models");
-      
-      # Load the library fit.models
-      library("fit.models")
+      utils::install.packages("fit.models")
     }
     else{
       stop("Aborted");
@@ -94,7 +100,7 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   LSFit <- models$LS$model
   
   # Tell fit.models lmrobdetMM can be compared to lm
-  fmclass.add.class("lmfm", "lmrobdetMM", warn=FALSE)
+  fit.models::fmclass.add.class("lmfm", "lmrobdetMM", warn=FALSE)
   
   # Fit both the models
   fmLSrob <- fit.models::fit.models(LSFit, RobFit)

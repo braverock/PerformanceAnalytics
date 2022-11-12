@@ -21,6 +21,14 @@ asset returns}
 
 \item{Rf}{risk free rate, in same period as your returns}
 
+\item{family}{(Optional): 
+If method == "Robust": 
+  This is a string specifying the name of the family of loss function
+  to be used (current valid options are "bisquare", "opt" and "mopt").
+  Incomplete entries will be matched to the current valid options. 
+  Defaults to "mopt".
+Else: the parameter is ignored}
+
 \item{which.plots}{specify the plot numbers that you want to see. Default
 option is that program will ask you to choose a plot}
 
@@ -38,18 +46,20 @@ This will allow for an easier comparison using charts and tables
     mgrs <- managers["2002/"]  # So that all have managers have complete history
     names(mgrs)[7:10] <- c("LSEQ","SP500","Bond10Yr","RF") # Short names for last 3
     
-    fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF)
+    # NOTE: Use plots=TRUE to be able to see plots
+
+    fitModels <- SFM.fit.models(mgrs$HAM1,mgrs$SP500,Rf = mgrs$RF, plots=FALSE)
     coef(fitModels)
     summary(fitModels)
     class(fitModels)
     
-    SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF)
+    SFM.fit.models(mgrs$HAM1, mgrs$SP500, Rf = mgrs$RF, plots=FALSE)
     
-    SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12) 
+    SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12, plots=FALSE) 
     
-    SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2)) 
+    SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2), plots=FALSE) 
 		 
-		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt")
+		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", plots=FALSE)
 
 }
 \author{
