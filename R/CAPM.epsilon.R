@@ -37,30 +37,30 @@ function (Ra, Rb, Rf = 0, ...)
     Rb = checkData(Rb, method="matrix")
 
     if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-    calcul = FALSE
-       for (i in (1:length(Ra))) {
-          if (!is.na(Ra[i])) {
-             calcul = TRUE
+        calcul = FALSE
+        for (i in (1:length(Ra))) {
+            if (!is.na(Ra[i])) {
+                calcul = TRUE
           }
         }
-     Ra = na.omit(Ra)
-     Rb = na.omit(Rb)
+        Ra = na.omit(Ra)
+        Rb = na.omit(Rb)
 
         if (calcul) {
-	   period = Frequency(Ra)
-           Rp = (prod(1 + Ra))^(period / length(Ra)) - 1
-           Rpb = (prod(1 + Rb))^(period / length(Rb)) - 1
-           result = Rf + Rp - CAPM.alpha(Ra,Rb,Rf) - (Rpb - Rf) * CAPM.beta(Ra,Rb,Rf) 
+	        period = Frequency(Ra)
+            Rp = (prod(1 + Ra))^(period / length(Ra)) - 1
+            Rpb = (prod(1 + Rb))^(period / length(Rb)) - 1
+            result = Rf + Rp - CAPM.alpha(Ra, Rb, Rf, ...) - (Rpb - Rf) * CAPM.beta(Ra, Rb, Rf, ...) 
         }   
         else {
-           result = NA
+            result = NA
         }
         return(result)
     }
     else {
     	Ra = checkData(Ra)
         result = apply(Ra, MARGIN = 2, CAPM.epsilon, Rb = Rb, Rf = Rf, ...)
-        result<-t(result)
+        result <-t(result)
         colnames(result) = colnames(Ra)
         rownames(result) = paste("Regression epsilon (Risk free = ",Rf,")", sep="")
         return(result)
