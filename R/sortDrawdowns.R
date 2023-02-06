@@ -36,7 +36,7 @@ sortDrawdowns <- function (runs) {
     
     # this version provided by H. Felix Wittman < hfwittmann <at> googlemail <dot> com >
     
-    index.sorted <- sort(runs$return, index=T)$ix # das kleinste zu erst
+    index.sorted <- sort(runs$return, index.return = TRUE)$ix # das kleinste zu erst
     runs.sorted <- lapply(runs, function(x) x <- x[index.sorted])
     
     return(runs.sorted)

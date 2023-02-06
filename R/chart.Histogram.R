@@ -254,7 +254,7 @@ function(R,
 
     # Draw the plot
     if(probability == TRUE) maxyhist = max(hist(x, breaks = breaks, plot = FALSE)$density)
-    else maxyhist = max(hist(x, breaks = breaks, plot = FALSE)$count)
+    else maxyhist = max(hist(x, breaks = breaks, plot = FALSE)$counts)
     yrange = c(yrange, maxyhist*1.1)
 	if(is.null(ylim))
 		ylim = c(0,ceiling(max(yrange)))
