@@ -162,7 +162,7 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
 #' excess asset returns
 #' @param xRb excess return vector of the benchmark asset
 #' @param subset a logical vector
-#' @param ... 
+#' @param \dots arguments passed to other methods
 #' @param method Which linear model to use for SFM regression
 #' @param family If method is "Rob", then this is a string specifying the 
 #' name of the family of loss function to be used (current valid options are 

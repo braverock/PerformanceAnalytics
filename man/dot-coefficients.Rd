@@ -14,7 +14,7 @@ excess asset returns}
 
 \item{subset}{a logical vector}
 
-\item{...}{}
+\item{\dots}{arguments passed to other methods}
 
 \item{method}{Which linear model to use for SFM regression}
 
