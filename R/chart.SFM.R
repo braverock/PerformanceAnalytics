@@ -58,6 +58,8 @@
 #'                        main = names(mgrs[,k]))
 #'    }
 #'    
+#'   
+#' @importFrom stats summary.lm
 #' @rdname chart.SFM
 #' @export chart.SFM
 chart.SFM <- function(Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, 

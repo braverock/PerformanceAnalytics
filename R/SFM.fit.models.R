@@ -37,9 +37,11 @@
 #'     
 #'     SFM.fit.models(mgrs[,6], mgrs[,8], Rf=.035/12, plots=FALSE) 
 #'     
-#'     SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", which.plots = c(1,2), plots=FALSE) 
+#'     SFM.fit.models(mgrs$HAM6, mgrs$SP500, Rf=.035/12, family = "mopt", 
+#'                    which.plots = c(1,2), plots=FALSE) 
 #' 		 
-#' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", plots=FALSE)
+#' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", 
+#' 		                plots=FALSE)
 #'
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models

@@ -31,8 +31,7 @@ Description: Collection of econometric functions for performance and risk
 Imports:
     methods,
     quadprog,
-    zoo,
-    R.rsp
+    zoo
 Depends:
     R (>= 3.5.0),
     xts (>= 0.10.0)
@@ -56,11 +55,12 @@ Suggests:
     rgenoud,
     RPESE,
     RobStatTM,
-    fit.models
+    fit.models,
+    R.rsp
 VignetteBuilder: R.rsp
 License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
 Copyright: (c) 2004-2022
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
