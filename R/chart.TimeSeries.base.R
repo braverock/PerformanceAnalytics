@@ -81,7 +81,8 @@ chart.TimeSeries.base <-
                                       grid.color=grid.color, 
                                       grid.lty=grid.lty, 
                                       xaxis.labels=xaxis.labels,
-                                      yaxis.pct=yaxis.pct)
+                                      yaxis.pct=yaxis.pct,
+                                      ...)
              return(p)
            },
            ggplot2 = {
