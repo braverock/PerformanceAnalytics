@@ -37,7 +37,8 @@ chart.TimeSeries.builtin <-
            grid.color, 
            grid.lty, 
            xaxis.labels,
-           yaxis.pct){
+           yaxis.pct,
+           ...){
     
     y = checkData(R,method='xts')
     
@@ -100,7 +101,8 @@ chart.TimeSeries.builtin <-
                   yaxis.left = yaxis.left, 
                   yaxis.right = yaxis.right, 
                   grid.col = grid.color, 
-                  legend.loc = NULL)
+                  legend.loc = NULL,
+                  ...)
     
     if(!is.null(event.lines)) {
       

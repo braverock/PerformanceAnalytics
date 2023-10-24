@@ -135,7 +135,8 @@ chart.TimeSeries.builtin(
   grid.color,
   grid.lty,
   xaxis.labels,
-  yaxis.pct
+  yaxis.pct,
+  ...
 )
 
 chart.TimeSeries.dygraph(R)
