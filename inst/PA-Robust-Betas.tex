@@ -1,8 +1,56 @@
-\batchmode
+%% LyX 2.3.7 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[11pt]{extarticle}\usepackage[]{graphicx}\usepackage[]{xcolor}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
-\def\input@path{{C:/Users/dhairyajain/Downloads/}}
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
 \makeatother
-\documentclass[11pt]{extarticle}
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{geometry}
@@ -50,7 +98,7 @@
 \setlength{\bibitemsep}{0.5\baselineskip}
 \DeclareNameAlias{sortname}{last-first}
 
-\addbibresource{C:/Users/marti/Dropbox/DougDhairya/Vignette/robregJAM.bib}
+\addbibresource{robregJAM.bib}
 \renewcommand\cite{\citet}
 
 %\renewcommand*{\nameyeardelim}{\addspace}
@@ -63,49 +111,676 @@
 \hypersetup{pdfstartview={XYZ null null 1.00}}
 
 \makeatother
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
 
+\title{Robust Betas for PerformanceAnalytics}
+\maketitle
+\begin{center}
+R. Douglas Martin and Dhairya Jain
+\par\end{center}
+
+\tableofcontents{}
+
+\section{Introduction}
+
+A time series Single Factor Model (SFM) has the general form
+
+\begin{equation}
+r_{t}=\alpha+\beta f_{t}+\epsilon_{t}\,t=1,2,\cdots,T\label{eq: singleFactorModel}
+\end{equation}
+
+where $r_{t}$ is a time series of asset returns, such as those for
+a stock, an ETF or a hedge fund, $f_{t}$ is a factor return, $\epsilon_{t}$
+is the error term, and $\alpha$ and $\beta$ are unknown intercept
+and slope coefficients that need to be estimated based on observed
+asset and factor returns. The factor return $f_{t}$ is typically
+either: (1) a market proxy $f_{M,t}$, such as the CRSP value-weighted
+market index $f_{M,t}=f_{CRSP,t}$ in the context of the Capital Asset
+Pricing Model (CAPM), or (2) an active manager's index benchmark such
+as the S\&P500, Russell 1000, Russell 2000, and Russell 3000, among
+others.
+
+The SFM errors for arbitrary intercept $a$ and slope $b$ values
+are defined as:
+
+\begin{equation}
+\epsilon_{t}(a,b)=r_{t}-a-bf_{t},\,t=1,2,\cdots,T.\label{eq: errors}
+\end{equation}
+
+For estimates $a=\hat{\alpha}$ and $b=\hat{\beta}$, the above errors
+become the fitted model \emph{residuals}
+
+\begin{equation}
+\hat{\epsilon}_{t}=\epsilon_{t}(\hat{\alpha},\hat{\beta})=r_{t}-\hat{\alpha}-\hat{\beta}f_{t}\label{eq: residuals}
+\end{equation}
+
+and one has the fit-plus-residuals representation of the asset return:
+
+\begin{equation}
+r_{t}=\hat{\alpha}-\hat{\beta}f_{t}+\hat{\epsilon}_{t}.\label{eq: fitPlusResiduals}
+\end{equation}
+
+The unknown coefficients $\alpha$ and $\beta$ are currently almost
+universally estimated using the method of least squares (LS), which
+is computed by minimizing the sum of the squared errors $\sum_{t=1}^{T}\epsilon_{t}^{2}(a,b)$
+with respect to $a$ and $b$. Unfortunately, both asset returns and
+factor returns often contain outliers which adversely influence the
+LS intercept and slope estimates, and one needs a robust alternative
+which is computed as a complement to LS, or a replacement for LS,
+depending on the context.
+
+In this Vignette we describe and illustrate the use of a highly robust
+estimator of SFM slope and intercept parameters. This estimator called
+the \emph{mOpt} estimator (the Robust estimator), and it has an intuitive
+weighted-least-squares (WLS) interpretation that it minimizes the
+weighted sum of squared regression residuals $\sum_{t=1}^{T}w_{t}(a,b)\epsilon_{t}^{2}(a,b)$,
+where $w_{t}(a,b)$ is a special data-dependent weight function described
+in Section \ref{sec: mOpEstimatorDetails}.
+
+The \emph{mOpt} estimator was recently introduced for time series
+factor models in \citet{MartinXiaTS2022}, who used it to study the
+performance of mOpt relative to LS in estimating CAPM betas for the
+cross-section of liquid U.S. stocks from 1963 to 2018, and for fitting
+multifactor time series models such as the Fama-French 3 factor model.\footnote{This paper appeared in the March 2022 issue of The Journal of Asset
+Management, and is available in opens source form at \url{https://link.springer.com/content/pdf/10.1057/s41260-022-00258-0.pdf}.} The study revealed extensive adverse influence of outliers on the
+LS betas. In particular, it was shown that the LS and mOpt betas differ
+in absolute values by at least 0.3 for roughly 26\% of microcap stocks,
+14\% of smallcaps and 7\% of bigcaps, and by at least 0.5 for roughly
+12\% of microcap stocks, 5\% of smallcaps and 2\% of bigcaps.
+
+Section 2 introduces the Robust SFM fitting functions in the PerformanceAnalytics
+R package, and illustrates their use for package \texttt{managers}
+data set. Section 3 provides some mathematical details for the mOpt
+Robust estimator, and Section 4 provides concluding comments.
+
+\section{The PerformanceAnalytics Robust Betas Functions}
+
+PerformanceAnalytics package contains the following two main functions
+for computing LS and mOpt (Robust) SFM model fits:
+\begin{itemize}
+\item \texttt{chart.SFM}
+\item \texttt{SFM.fit.models}
+\end{itemize}
+The \texttt{chart.SFM} function computes both LS and Robust alphas
+and betas and overlays the corresponding straight line fits to a scatter
+plot of asset returns versus benchmark or market proxy returns. The
+\texttt{SFM.fit.models} function also computes both LS and Robust
+SFM fits, in order to provide: (a) a comparative tabular display of
+the LS and Robust alphas, betas, and related statistics, and (b) an
+optional display of any subset of 10 different comparative graphical
+displays of the LS and Robust SFM fits.
+
+In addition the following function allows the user to compute either
+mOpt or LS robust SFM fits, with mOpt the default, for any combination
+of one or more sets of asset returns and one or more benchmarks:
+\begin{itemize}
+\item \texttt{SFM.coefficients}
+\end{itemize}
+In order to use these functions, an R user needs to first install
+the current version of PerformanceAnalytics from CRAN (\url{https://cran.r-project.org/web/packages/PerformanceAnalytics/index.html}),
+and load it with:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(PerformanceAnalytics)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
 
+\subsection{The \texttt{managers} Data Set}
+
+The following examples will use the \texttt{xts} time series data
+set \texttt{managers} included with PerformanceAnalytics, so we first
+load this data set and determine its class, dimensions, and names
+with the code:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(managers)}
+\hlkwd{class}\hlstd{(managers)}
+\end{alltt}
+\begin{verbatim}
+## [1] "xts" "zoo"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dim}\hlstd{(managers)}
+\end{alltt}
+\begin{verbatim}
+## [1] 132  10
+\end{verbatim}
+\begin{alltt}
+\hlkwd{names}\hlstd{(managers)}
+\end{alltt}
+\begin{verbatim}
+##  [1] "HAM1"        "HAM2"        "HAM3"        "HAM4"        "HAM5"       
+##  [6] "HAM6"        "EDHEC LS EQ" "SP500 TR"    "US 10Y TR"   "US 3m TR"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+The results show that \texttt{managers} is an \texttt{xts} data object
+consisting of 10 time series for 132 months. Now we replace the last
+4 names of \texttt{managers} with shorter convenient names with no
+spaces:
 
 
 
+Next we use the function \texttt{tsPlotMP} from the PCRA package to
+create the time series plots shown in Figure \ref{fig: mgrsTseries}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+
+\hlstd{PCRA}\hlopt{::}\hlkwd{tsPlotMP}\hlstd{(managers,} \hlkwc{scaleType} \hlstd{=} \hlstr{"same"}\hlstd{,} \hlkwc{axis.cex} \hlstd{=} \hlnum{0.5}\hlstd{,} \hlkwc{stripText.cex} \hlstd{=} \hlnum{0.5}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[width=1\textwidth]{Plots/mgrsTseries.png}
+\par\end{centering}
+\caption{Time Series of managers Data}
+
+\label{fig: mgrsTseries}
+\end{figure}
+
+The figure shows that some of the times series data begins in January
+1996, but some series begin later, and all series continue until December
+2008. It will be convenient for the calculations below to use the
+maximum time window of the managers data such that none of the time
+series have missing data. This maximum length window is easily determine
+using the \texttt{na.omit} and \texttt{range} functions as follows:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{range}\hlstd{(}\hlkwd{index}\hlstd{(}\hlkwd{na.omit}\hlstd{(managers)))}
+\end{alltt}
+\begin{verbatim}
+## [1] "2001-09-30" "2006-12-31"
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+In order to avoid using last four months fraction of the year 2001,
+we use the following code line to delete those four months and rename
+the result:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{mgrs} \hlkwb{<-} \hlstd{managers[}\hlstr{"2002/"}\hlstd{]}  \hlcom{# 5 full years from 2002 through 2006}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Use of \texttt{chart.SFM}}
+
+The function \texttt{chart.SFM} computes LS and mOpt robust alphas
+and betas, and makes a graphical display of the resulting LS and mOpt
+straight line fits, superimposed on the scatter plot of asset returns
+and factor returns. The arguments of \texttt{chart.SFM} are viewed
+with:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{args}\hlstd{(chart.SFM)}
+\end{alltt}
+\begin{verbatim}
+## function (Ra, Rb, Rf = 0, main = NULL, ylim = NULL, xlim = NULL, 
+##     family = "mopt", xlab = NULL, ylab = NULL, legend.loc = "topleft", 
+##     makePct = FALSE) 
+## NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+NOTE: With the default NULL optional arguments for the \texttt{xlim}
+and \texttt{ylim} axes limits, \texttt{chart.SFM} uses sensible data
+dependent values, as will be seen in resulting plot in the figure
+below. You can obtain more information about the arguments of \texttt{chart.SFM}
+by using the \texttt{help()} function:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{help}\hlstd{(chart.SFM)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+Figure \ref{fig: mOptLSforHAM6} shows the result of using \texttt{chart.SFM}
+for the HAM6 returns and the S\&P500 as the benchmark.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{chart.SFM}\hlstd{(mgrs}\hlopt{$}\hlstd{HAM6, mgrs}\hlopt{$}\hlstd{SP500, mgrs}\hlopt{$}\hlstd{RF, }\hlkwc{makePct} \hlstd{=} \hlnum{TRUE}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[width=0.67\textwidth]{Plots/mOptLSforHAM6.png}
+\par\end{centering}
+\caption{Robust mOpt Beta and LS Beta for HAM6}
+
+\label{fig: mOptLSforHAM6}
+\end{figure}
+
+You can use a simple \texttt{for} loop to plot the mOpt and LS fits
+for any subset of the HAM1 through HAM6 funds and LSEQ, for example
+you do so for HAM3 through HAM6 with the code line:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwa{for}\hlstd{(k} \hlkwa{in} \hlnum{3}\hlopt{:}\hlnum{6}\hlstd{)\{}
+    \hlkwd{chart.SFM}\hlstd{(mgrs[,k], mgrs}\hlopt{$}\hlstd{SP500, mgrs}\hlopt{$}\hlstd{RF, }\hlkwc{makePct} \hlstd{= T,}
+        \hlkwc{main} \hlstd{=} \hlkwd{names}\hlstd{(mgrs[,k]))}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[width=0.5\textwidth]{Plots/HAM3.png}\includegraphics[width=0.5\textwidth]{Plots/HAM4.png}
+\par\end{centering}
+\begin{centering}
+\includegraphics[width=0.5\textwidth]{Plots/HAM5.png}\includegraphics[width=0.5\textwidth]{Plots/HAM6.png}
+\par\end{centering}
+\caption{Robust mOpt Beta and LS Beta for HAM3 - HAM6}
+
+\label{fig: mOptLSforHAM3-6}
+\end{figure}
 
 
+\subsection{Use of \texttt{SFM.fit.models}}
+
+The function \texttt{SFM.fit.models} has two main capabilities. The
+first is to compute both LS and Robust alpha and beta coefficient
+estimates, along with their standard errors and t-statistics, and
+display them in easy-to-compare table form. The second is to make
+side-by-side graphical displays of Robust and LS model fitting results.
+First, we find out what the arguments of \texttt{SFM.fit.models} are
+with:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{args}\hlstd{(SFM.fit.models)}
+\end{alltt}
+\begin{verbatim}
+## function (Ra, Rb, Rf = 0, family = "mopt", which.plots = NULL, 
+##     plots = TRUE) 
+## NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+Use the first code line below to compute the Robust and LS coefficients
+with no graphics, and save the result of the fitted models object
+fitHAM6, displays. Then use the next 3 code lines to see what the
+class of fitHAM6 is, display the LS and Robust alpha and beta coefficient
+estimates, and display a complete comparative LS and Robust statistics
+summary:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{fitHAM6} \hlkwb{<-} \hlkwd{SFM.fit.models}\hlstd{(mgrs}\hlopt{$}\hlstd{HAM6, mgrs}\hlopt{$}\hlstd{SP500, }\hlkwc{Rf} \hlstd{= mgrs}\hlopt{$}\hlstd{RF, }
+    \hlkwc{plots} \hlstd{=} \hlnum{FALSE}\hlstd{)}
+\hlkwd{class}\hlstd{(fitHAM6)}
+\end{alltt}
+\begin{verbatim}
+## [1] "lmfm"       "fit.models"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{round}\hlstd{(}\hlkwd{coef}\hlstd{(fitHAM6),}\hlnum{3}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##        (Intercept)  Beta
+## LSFit        0.006 0.325
+## RobFit       0.007 0.548
+\end{verbatim}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(fitHAM6)}
+\end{alltt}
+\begin{verbatim}
+## 
+## Calls:
+##  LSFit: lm(formula = Alpha ~ Beta, data = merged, subset = subset)
+## RobFit: RobStatTM::lmrobdetMM(formula = Alpha ~ Beta, data = merged, 
+##     subset = subset, control = RobStatTM::lmrobdet.control(family = family))
+## 
+## Residual Statistics:
+##              Min       1Q   Median      3Q     Max
+##  LSFit: -0.04504 -0.01249 0.003436 0.01277 0.04062
+## RobFit: -0.06474 -0.01175 0.003893 0.01185 0.06478
+## 
+## Coefficients:
+##                      Estimate Std. Error t value Pr(>|t|)    
+## (Intercept):  LSFit: 0.006331   0.002632   2.405   0.0194 *  
+##              RobFit: 0.006753   0.002392   2.824   0.0065 ** 
+##                                                              
+##        Beta:  LSFit: 0.325048   0.073839   4.402 4.67e-05 ***
+##              RobFit: 0.547858   0.080665   6.792 6.55e-09 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual Scale Estimates:
+##  LSFit: 0.02028 on 58 degrees of freedom
+## RobFit: 0.01943 on 58 degrees of freedom
+## 
+## Multiple R-squared:
+##  LSFit: 0.2504 
+## RobFit: 0.2364
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+To make a wide variety of plots that compare Robust and LS SFM model
+fitting results use
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{SFM.fit.models}\hlstd{(mgrs}\hlopt{$}\hlstd{HAM6,mgrs}\hlopt{$}\hlstd{SP500,}\hlkwc{Rf} \hlstd{= mgrs}\hlopt{$}\hlstd{RF)}
+\end{alltt}
+}\end{kframe}
+\end{knitrout}
+
+which results in the following output in the Console:
+
+\texttt{\textcolor{blue}{Make plot selections (or 0 to exit): }}
+
+\texttt{\textcolor{blue}{1: Normal QQ Plot of Residuals}}
+
+\texttt{\textcolor{blue}{2: Kernel Density Estimate of Residuals}}
+
+\texttt{\textcolor{blue}{3: Residuals vs. Mahalanobis Distance}}
+
+\texttt{\textcolor{blue}{4: Residuals vs. Fitted Values}}
+
+\texttt{\textcolor{blue}{5: Sqrt Residuals vs. Fitted Values}}
+
+\texttt{\textcolor{blue}{6: Response vs. Fitted Values}}
+
+\texttt{\textcolor{blue}{7: Residuals vs. Index (Time)}}
+
+\texttt{\textcolor{blue}{8: Overlaid Normal QQ Plot of Residuals}}
+
+\texttt{\textcolor{blue}{9: Overlaid Kernel Density Estimate of Residuals}}
+
+\texttt{\textcolor{blue}{10: Scatter Plot with Overlaid Fit(s)}}
+
+\texttt{\textcolor{blue}{Selection:}}
+
+The first time you try this, we suggest that you enter each of the
+choices 1 through 10 after Selection, and after each selection you
+with see the corresponding plot type, then enter 0 to exit from the
+graphics display menu. If you just want a particular subset of graphical
+displays, e.g., types 2 and 7, just enter 2 to see the first plot
+and then enter 7 after Selection, followed by 0 to Exit. Alternatively,
+use of the command
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{SFM.fit.models}\hlstd{(mgrs}\hlopt{$}\hlstd{HAM6, mgrs}\hlopt{$}\hlstd{SP500, }\hlkwc{Rf} \hlstd{= mgrs}\hlopt{$}\hlstd{RF, }\hlkwc{which.plots} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{7}\hlstd{))}\end{alltt}
+\begin{verbatim}
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+results in the following in the Console:
+
+\texttt{\textcolor{blue}{Hit <Return> to see next plot:}}
+
+Then pressing Enter results in display of the type 2 plot in the top
+of Figure \ref{fig:  plotTypes 2 and 7}, and pressing Enter again
+results in display of the bottom 7 plot in Figure \ref{fig:  plotTypes 2 and 7},
+and then the above line in the Console disappears. Try it out.
+
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[width=0.6\textwidth]{Plots/kernelDensityEstimates.png}
+\par\end{centering}
+\begin{centering}
+\includegraphics[width=0.6\textwidth]{Plots/residualsVsTime.png}
+\par\end{centering}
+\caption{The Top Plot is Type 2 and the Bottom Plot is Type 7}
+
+\label{fig:  plotTypes 2 and 7}
+\end{figure}
 
 
+\subsection{Use of SFM.coefficients}
 
+The function \texttt{SFM.coefficients} was designed to support computing
+either Robust mOpt (the default) or LS multiple single factor model
+(SFM) for one or more assets and one or more benchmarks. Here are
+the arguments of \texttt{SFM.coefficients}:
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{args}\hlstd{(SFM.coefficients)}
+\end{alltt}
+\begin{verbatim}
+## function (Ra, Rb, Rf = 0, subset = TRUE, ..., method = "Robust", 
+##     family = "mopt", digits = 3, benchmarkCols = T, Model = F, 
+##     warning = T) 
+## NULL
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+Here we use the first four managers HAM1, HAM2, HAM3, HAM4 as the
+assets, and the SP500 and Bond10Yr as the benchmarks:
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{funds} \hlkwb{<-} \hlstd{mgrs[, }\hlkwd{c}\hlstd{(}\hlstr{"HAM1"}\hlstd{, }\hlstr{"HAM2"}\hlstd{, }\hlstr{"HAM3"}\hlstd{, }\hlstr{"HAM4"}\hlstd{)]}
+\hlstd{benchmarks} \hlkwb{<-} \hlstd{mgrs[, }\hlkwd{c}\hlstd{(}\hlstr{"SP500"}\hlstd{, }\hlstr{"Bond10Yr"}\hlstd{)]}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
+Now we make Robust and LS fits of the four mangers to the two benchmarks,
+and examine the class of the resulting \texttt{fit.Rob} (\texttt{fit.LS}
+has the same matrix class).
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{(fit.ROB} \hlkwb{<-} \hlkwd{SFM.coefficients}\hlstd{(funds, benchmarks,} \hlkwc{method} \hlstd{=}\hlstr{"Robust"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      Alpha : SP500 Alpha : Bond10Yr Beta : SP500 Beta : Bond10Yr
+## HAM1         0.006            0.012        0.595          -0.334
+## HAM2         0.001            0.002        0.184          -0.275
+## HAM3         0.003            0.008        0.586          -0.331
+## HAM4         0.003            0.017        1.190          -0.286
+\end{verbatim}
+\begin{alltt}
+\hlstd{(fit.LS} \hlkwb{<-} \hlkwd{SFM.coefficients}\hlstd{(funds, benchmarks,} \hlkwc{method} \hlstd{=}\hlstr{"LS"}\hlstd{))}
+\end{alltt}
+\begin{verbatim}
+##      Alpha : SP500 Alpha : Bond10Yr Beta : SP500 Beta : Bond10Yr
+## HAM1         0.006            0.011        0.599          -0.426
+## HAM2         0.002            0.004        0.216          -0.215
+## HAM3         0.002            0.007        0.555          -0.378
+## HAM4         0.008            0.015        0.923          -0.429
+\end{verbatim}
+\begin{alltt}
+\hlkwd{class}\hlstd{(fit.ROB)}
+\end{alltt}
+\begin{verbatim}
+## [1] "matrix" "array"
+\end{verbatim}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(fit.ROB)}
+\end{alltt}
+\begin{verbatim}
+##  Alpha : SP500     Alpha : Bond10Yr   Beta : SP500    Beta : Bond10Yr  
+##  Min.   :0.00100   Min.   :0.00200   Min.   :0.1840   Min.   :-0.3340  
+##  1st Qu.:0.00250   1st Qu.:0.00650   1st Qu.:0.4855   1st Qu.:-0.3317  
+##  Median :0.00300   Median :0.01000   Median :0.5905   Median :-0.3085  
+##  Mean   :0.00325   Mean   :0.00975   Mean   :0.6388   Mean   :-0.3065  
+##  3rd Qu.:0.00375   3rd Qu.:0.01325   3rd Qu.:0.7438   3rd Qu.:-0.2833  
+##  Max.   :0.00600   Max.   :0.01700   Max.   :1.1900   Max.   :-0.2750
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+We note that since \texttt{method = ``Robust''} is the default,
+that argument may be omitted in the first code line above.
 
+By default, the benchmark Alpha and Beta results are in columns, and
+those of the assets are in rows. This is because portfolio managers
+often have many assets in their portfolio and only a few benchmarks.
+Note that \texttt{fit.Rob} and \texttt{fit.LS} are R matrix objects,
+and the results are printed with the default digits = 3. You can get
+the robust fit results displayed with benchmarks in rows, and 6 significant
+digits with the code line:
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{SFM.coefficients}\hlstd{(funds, benchmarks,} \hlkwc{benchmarkCols} \hlstd{=} \hlnum{FALSE}\hlstd{,} \hlkwc{digits} \hlstd{=} \hlnum{6}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##                       HAM1      HAM2      HAM3      HAM4
+## Alpha : SP500     0.005602  0.001172  0.003275  0.002534
+## Alpha : Bond10Yr  0.011842  0.002482  0.007719  0.017016
+## Beta : SP500      0.594613  0.183761  0.586422  1.189505
+## Beta : Bond10Yr  -0.334156 -0.274526 -0.330747 -0.285967
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+You can use the function \texttt{SFM.alpha} if you only want alpha
+estimates, and use \texttt{SFM.beta} if you only want beta estimates.
+For example the following gives robust alphas
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{SFM.alpha}\hlstd{(funds, benchmarks,} \hlkwc{digits} \hlstd{=} \hlnum{4}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##      Alpha : SP500 Alpha : Bond10Yr
+## HAM1        0.0058           0.0110
+## HAM2        0.0023           0.0044
+## HAM3        0.0024           0.0071
+## HAM4        0.0078           0.0148
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+and the following gives LS betas:
 
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{SFM.alpha}\hlstd{(funds, benchmarks,} \hlkwc{method} \hlstd{=} \hlstr{"LS"}\hlstd{,} \hlkwc{digits} \hlstd{=} \hlnum{2}\hlstd{)}
+\end{alltt}
+\begin{verbatim}
+##      Alpha : SP500 Alpha : Bond10Yr
+## HAM1          0.01             0.01
+## HAM2          0.00             0.00
+## HAM3          0.00             0.01
+## HAM4          0.01             0.01
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
 
+\section{The mOpt Robust SFM Fit Mathematical Details\label{sec: mOpEstimatorDetails}}
 
+The SFM model \ref{eq: singleFactorModel} can be written in the following
+form:
 
+\begin{align*}
+r_{t} & =\mathbf{\tilde{f}}_{t}^{\prime}\boldsymbol{\theta}+s\epsilon_{t},\;t=1,2,\cdots,T
+\end{align*}
 
+where $\mathbf{\tilde{f}}_{t}^{\prime}=(1,f_{t})$, $\boldsymbol{\theta}=(\alpha,\beta)^{\prime}$,
+and $\epsilon_{t}$ is a standardized error term that is scaled by
+the scale parameter $s$. The robust estimate $\hat{\boldsymbol{\theta}}=(\hat{\alpha},\hat{\beta})$
+is a solution of the weighted least squares (WLS) estimating equation
 
+\begin{equation}
+\sum_{i=1}^{T}w_{t}\mathbf{\tilde{f}}_{t}\left(r_{t}-\mathbf{\tilde{f}}_{t}^{\prime}\hat{\boldsymbol{\theta}}\right)=0\label{eq: regMestWLSEqn}
+\end{equation}
 
+where the $w_{t}$ are the data--dependent weights
 
+\begin{equation}
+w_{t}=w_{t}(\hat{\boldsymbol{\theta}};\hat{s})=w_{mOpt}\left(\frac{r_{t}-\mathbf{\tilde{f}}_{t}^{\prime}\hat{\boldsymbol{\theta}}}{\hat{s}}\right)\label{eq: regMestWeights}
+\end{equation}
 
+and the shape of the weight function $w_{mOpt}(t)$ is shown in Figure
+\ref{fig: mOptWtFunction}.
 
+\begin{figure}[H]
+\begin{centering}
+\includegraphics[width=0.7\textwidth]{Plots/mOptWt.png}
+\par\end{centering}
+\caption{The mOpt weight function ($c=3.00$)}
 
+\label{fig: mOptWtFunction}
+\end{figure}
 
+The mOpt weight function gives a weight of 1 to all sufficiently small
+robustly scaled residuals $\hat{\epsilon}_{t}=(r_{t}-\mathbf{\tilde{f}}_{t}^{\prime}\hat{\boldsymbol{\theta}})/\hat{s}$,
+and smoothly transitions to zero weight for robustly scaled residuals
+whose absolute is greater than 3.00. All asset and factor returns
+pairs $(r_{t},\mathbf{\tilde{f}}_{t})$ whose scaled residuals have
+absolute values larger than 3.0 are are \emph{rejected} by the by
+the $\hat{\boldsymbol{\theta}}$ estimator. For normally distributed
+data and true parameter values, the probability that such a pair is
+rejected is only 0.27\%, and the estimator is essentially equivalent
+to the LS estimator.
 
+The weights $w_{t}=w_{t}(\hat{\boldsymbol{\theta}};\hat{s})$ depend
+on the values of $\hat{\boldsymbol{\theta}}$, $r_{t}$, and $\mathbf{\tilde{f}}_{t}$.
+Consequently. the WLS equation (\ref{eq: regMestWLSEqn}) is a nonlinear
+function of the data $(r_{t},f_{t}),t=1,\cdots,T$, and $\hat{\boldsymbol{\theta}}$
+must be computed with some type of iterative nonlinear algorithm.
+It is quite convenient that the estimate $\hat{\boldsymbol{\theta}}$
+may be expressed in the nonlinear weighted least squares (WLS) mathematical
+form
 
+\begin{equation}
+\hat{\boldsymbol{\theta}}=\left(\sum_{i=1}^{T}w_{t}(\hat{\boldsymbol{\theta}};\hat{s})\mathbf{\tilde{f}}_{t}\mathbf{\tilde{f}}_{t}^{\prime}\right)^{-1}\left(\sum_{i=1}^{T}w_{t}(\hat{\boldsymbol{\theta}};\hat{s})\mathbf{\tilde{f}}_{t}r_{t}\right)\label{eq: robregWLSversion-1}
+\end{equation}
 
+which lends itself to the iterated weighted least squares (IRWLS)
+algorithm:
 
+\begin{equation}
+\hat{\boldsymbol{\theta}}^{k+1}=\left(\sum_{i=1}^{T}w_{t}(\hat{\boldsymbol{\theta}}^{k};\hat{s})\mathbf{\tilde{f}}_{t}\mathbf{\tilde{f}}_{t}^{\prime}\right)^{-1}\left(\sum_{i=1}^{T}w_{t}(\hat{\boldsymbol{\theta}}^{k};\hat{s})\mathbf{\tilde{f}}_{t}r_{t}\right),\,k=0,1,2,\cdots.\label{eq: regMestIRWLS-1}
+\end{equation}
 
+The mOpt Robust estimator is computed with the above IRWLS algorithm,
+using a highly robust but inefficient initial estimate $\hat{\boldsymbol{\theta}}^{0}$.
+For further details, see \citet{MartinXiaTS2022}.
 
-
-
+\printbibliography
+\end{document}
