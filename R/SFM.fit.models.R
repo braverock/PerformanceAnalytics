@@ -68,7 +68,8 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   #              option is that program will ask you to choose a plot
   # plots: Boolean to output plots after the function. Defaults to TRUE
   # Output:
-  # Optional Graphs comparing models, and returns a fitted object
+  # Graphs comparing models, If plots = TRUE is used
+  # A fitted object, If plots = FALSE is used 
   
   # FUNCTION:
   
@@ -107,7 +108,7 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
   # Fit both the models
   fmLSrob <- fit.models::fit.models(LSFit, RobFit)
   
-  # Plot the fit.models object if asked
+  # Plot the fit.models object if asked and function will return nothing
   if (plots==TRUE){
     if(is.null(which.plots)){
       plot(fmLSrob, which.plots = "ask")  # ask = 0 to exit
@@ -117,6 +118,8 @@ SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt",
     }
   }
   
-  # Return the fitted object to the user
-  return(fmLSrob);
+  else{
+    # Return the fitted object to the user
+    return(fmLSrob);
+  }
 }
