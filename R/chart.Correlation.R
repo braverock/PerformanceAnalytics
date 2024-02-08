@@ -41,7 +41,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), pch=1
     # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
     panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method=cormeth, cex.cor, ...)
     {
-        usr <- par("usr"); on.exit(par(usr))
+        usr <- par("usr"); on.exit(par(usr=usr))
         par(usr = c(0, 1, 0, 1))
         r <- cor(x, y, use=use, method=method) # MG: remove abs here
         txt <- format(c(r, 0.123456789), digits=digits)[1]
