@@ -76,11 +76,11 @@ function (R, ci = 0.95, digits = 4)
         z = c(
             length(x), 
             x.na, min(x), 
-            as.numeric(quantile(x, prob = 0.25, na.rm = TRUE)), 
+            as.numeric(quantile(x, probs = 0.25, na.rm = TRUE)), 
             median(x), 
             mean(x), 
             exp(mean(log(1+x)))-1,
-            as.numeric(quantile(x, prob = 0.75, na.rm = TRUE)), 
+            as.numeric(quantile(x, probs = 0.75, na.rm = TRUE)), 
             max(x), 
             sqrt(var(x)/length(x)),
             cl.vals(x, ci)[1], 
