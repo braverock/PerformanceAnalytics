@@ -500,7 +500,7 @@ print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.65
 To calculate Martin ratio we divide the difference of the portfolio
 return and the risk free rate by the Ulcer index
 
-$$Martin ratio = \frac{r_P - r_F}{\sqrt{\sum^{n}_{i=1} \frac{{D'_i}^2}{n}}}$$
+$$Martin Ratio = \frac{r_P - r_F}{\sqrt{\sum^{n}_{i=1}\frac{{D'_i}^2}{n}}}$$ 
 
 where $r_P$ is the portfolio return, $r_F$ is the risk free rate, $n$ is the 
 number of observations of the entire series, $D'_i$ is the drawdown since
@@ -539,9 +539,9 @@ underperformance below a minimum target rate. The downside variance is
 the square of the downside potential.
 
 $$DownsideDeviation(R , MAR) = \delta_{MAR} = \sqrt{\sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}$$
-$$DownsideVariance(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}$$
+$$DownsideVariance(R, MAR) = \sum^{n}_{t=1} \frac{min[(R_{t} - MAR), 0]^2}{n}$$
 
-$$DownsidePotential(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]}{n}$$
+$$DownsidePotential(R, MAR) = \sum^{n}_{t=1}{\frac{min[(R_{t} - MAR), 0]}{n}}$$
 
 where $n$ is either the number of observations of the entire series or the
 number of observations in the subset of the series falling below the MAR.
@@ -690,7 +690,7 @@ Upside Potential Ratio, was a further improvement, extending the
 measurement of only upside on the numerator, and only downside of the
 denominator of the ratio equation.
 
-$$UPR=\frac{ \sum^{n}_{t=1} (R_{t} - MAR)$$
+$$UPR=\frac{ \sum^{n}_{t=1} (R_{t} - MAR) }{ \delta_{MAR} }$$
 
 where $\delta_{MAR}$ is the `DownsideDeviation`.
 
@@ -766,7 +766,7 @@ print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.034
 Prospect ratio is a ratio used to penalize loss since most people feel
 loss greater than gain
 
-$$ProspectRatio(R) = \frac{\frac{1}{n}*\sum^{n}_{i=1}(Max(r_i,0)+2.25*Min(r_i,0) - MAR)$$
+$$ProspectRatio(R) = \frac{\frac{1}{n}*\sum^{n}_{i=1}(Max(r_i,0)+2.25*Min(r_i,0) - MAR)}{\sigma_D}$$
 
 where $n$ is the number of observations of the entire series, $MAR$ is the
 minimum acceptable return and $\sigma_D$ is the downside risk
