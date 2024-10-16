@@ -24,7 +24,7 @@
 #' 
 #' We have changed the default arguments and settings for \code{method}
 #' from \code{compound} and \code{simple} to \code{discrete} and \code{log} 
-#' an \code{difference} to avoid confusion between the return type (discrete, log, difference)
+#' and \code{difference} to avoid confusion between the return type (discrete, log, difference)
 #' and the chaining method (compound or arithmetic/simple).  In most of the rest of \code{PerformanceAnalytics},
 #' compound and simple are used to refer to the \emph{return chaining} method which is used with the returns.
 #' The default for this function is to use discrete returns, because most other package 
