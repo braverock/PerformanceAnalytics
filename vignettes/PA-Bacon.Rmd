@@ -4,10 +4,10 @@ author: "Matthieu Lestel"
 date: "built `r format(Sys.time(), '%d %B %Y')`"
 output: pdf_document
 abstract: "This vignette gives a brief overview of the functions developed in Bacon(2008)
-  to eval-uate the performance and risk of portfolios that are included inPerformanceAnalyticsandhow
-  to use them.  There are some tables at the end which give a quick overview of sim-ilar
-  functions.   The page number next to each function is the location of the function
-  inBacon(2008)"
+  to evaluate the performance and risk of portfolios that are included in 
+  **PerformanceAnalytics** and how to use them. There are some tables at the end 
+  which give a quick overview of similar functions. The page number next to each 
+  function is the location of the function in Bacon (2008)"
 ---
 
 ::: article
