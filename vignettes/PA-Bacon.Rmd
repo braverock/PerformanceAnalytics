@@ -37,8 +37,10 @@ To calculate Mean absolute deviation we take the sum of the absolute
 value of the difference between the returns and the mean of the returns
 and we divide it by the number of returns.
 
-where is the number of observations of the entire series, is the return
-in month i and is the mean return
+$${MeanAbsoluteDeviation = \frac{\sum^{n}_{i=1}\mid r_i - \overline{r}\mid}{n}}$$
+
+where n is the number of observations of the entire series, $r_i$ is the 
+return in month $i$ and $\overline{r}$ is the mean return
 
 ``` {r }
 data(portfolio_bacon)
@@ -47,7 +49,7 @@ print(MeanAbsoluteDeviation(portfolio_bacon[,1])) #expected 0.0310
 
 ### Frequency (p.64)
 
-Gives the period of the return distribution (ie 12 if monthly return, 4
+Gives the period of the return distribution (i.e. 12 if monthly return, 4
 if quarterly return)
 
 ``` {r }
@@ -61,6 +63,8 @@ The Sharpe ratio is simply the return per unit of risk (represented by
 variability). In the classic case, the unit of risk is the standard
 deviation of the returns.
 
+$$\frac{\overline{(R_{a}-R_{f})}}{\sqrt{\sigma_{(R_{a}-R_{f})}}}$$
+
 ``` {r }
 data(managers)
 SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev") 
@@ -68,12 +72,14 @@ SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev")
 
 ### Risk-adjusted return: MSquared (p.67)
 
-is a risk adjusted return useful to judge the size of relative
-performance between differents portfolios. With it you can compare
+$M^2$ is a risk adjusted return useful to judge the size of relative
+performance between different portfolios. With it you can compare
 portfolios with different levels of risk.
 
-where . is the portfolio return annualized, . is the market risk and is
-the portfolio risk
+$$M^2 = r_P + SR * (\sigma_M - \sigma_P) = (r_P - r_F) * \frac{\sigma_M}{\sigma_P} + r_F$$
+
+where $r_P$ is the portfolio return annualized, $\sigma_M$ is the market risk 
+and $\sigma_P$ is the portfolio risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -85,7 +91,10 @@ print(MSquared(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.1068
 excess is the quantity above the standard M. There is a geometric excess
 return which is better for Bacon and an arithmetic excess return
 
-where . is MSquared and . is the benchmark annualised return.
+$$M^2 excess (geometric) = \frac{1 + M^2}{1 + b} - 1$$
+$$M^2 excess (arithmetic) = M^2 - b$$
+
+where $M^2$ is MSquared and $b$ is the benchmark annualized return (normally denoted as $r_a$ in most other texts).
 
 ``` {r }
 data(portfolio_bacon)
@@ -97,10 +106,11 @@ print(MSquaredExcess(portfolio_bacon[,1], portfolio_bacon[,2], Method="arithmeti
 
 ### Regression equation (p.71)
 
+$$r_P = \alpha + \beta * b + \epsilon$$
 ### Regression alpha (p.71)
 
-\"Alpha\" purports to be a measure of a manager's skill by measuring the
-portion of the managers returns that are not attributable to \"Beta\",
+"Alpha" purports to be a measure of a manager's skill by measuring the
+portion of the managers returns that are not attributable to "Beta",
 or the portion of performance attributable to a benchmark.
 
 ``` {r }
@@ -123,8 +133,10 @@ CAPM.beta(managers[, "HAM2", drop=FALSE], managers[, "SP500 TR", drop=FALSE], Rf
 The regression epsilon is an error term measuring the vertical distance
 between the return predicted by the equation and the real result.
 
-where is the regression alpha, is the regression beta, is the portfolio
-return and b is the benchmark return
+$$\epsilon_r = r_p - \alpha_r - \beta_r * b$$
+
+where is $\alpha_r$ the regression alpha, $\beta_r$ is the regression beta, $r_p$ is the portfolio
+return and $b$ is the benchmark return.
 
 ``` {r }
 data(managers)
@@ -134,11 +146,13 @@ print(CAPM.epsilon(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.013
 ### Jensen's alpha (p.72)
 
 The Jensen's alpha is the intercept of the regression equation in the
-Capital Asset Pricing Model and is in effect the exess return adjusted
+Capital Asset Pricing Model and is in effect the excess return adjusted
 for systematic risk.
 
-where . is the risk free rate, . is the regression beta, . is the
-portfolio return and b is the benchmark return
+$$\alpha = r_p - r_f - \beta_p * (b - r_f)$$
+
+where $r_f$ is the risk free rate, $\beta_r$ is the regression beta, $r_p$ is the portfolio return and $b$ is the benchmark return
+
 
 ``` {r }
 data(portfolio_bacon)
@@ -148,12 +162,13 @@ print(CAPM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.0
 ### Systematic Risk (p.75)
 
 Systematic risk as defined by Bacon(2008) is the product of beta by
-market risk. Be careful ! It's not the same definition as the one given
+market risk. *Be careful* ! It's not the same definition as the one given
 by Michael Jensen. Market risk is the standard deviation of the
 benchmark. The systematic risk is annualized
 
-where . is the systematic risk, . is the regression beta, and is the
-market risk
+$$\sigma_s = \beta * \sigma_m$$
+
+where $\sigma_s$ is the systematic risk, $\beta$ is the regression beta, and $\sigma_m$ is the market risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -177,6 +192,8 @@ the square of specific risk. Specific risk is the standard deviation of
 the error term in the regression equation. Both terms are annualized to
 calculate total risk.
 
+$$Total Risk = \sqrt{Systematic Risk^2 + Specific Risk^2}$$
+
 ``` {r }
 data(portfolio_bacon)
 print(TotalRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.0134
@@ -187,6 +204,8 @@ print(TotalRisk(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 0.0134
 The Treynor ratio is similar to the Sharpe Ratio, except it uses beta as
 the volatility measure (to divide the investment's excess return over
 the beta).
+
+$$TreynorRatio = \frac{\overline{(R_{a}-R_{f})}}{\beta_{a,b}}$$
 
 ``` {r }
 data(managers)
@@ -208,7 +227,9 @@ print(TreynorRatio(portfolio_bacon[,1], portfolio_bacon[,2], modified = TRUE)) #
 Appraisal ratio is the Jensen's alpha adjusted for specific risk. The
 numerator is divided by specific risk instead of total risk.
 
-where . is the Jensen's alpha, . is the specific risk
+$$Appraisal ratio = \frac{\alpha}{\sigma_{\epsilon}}$$
+
+where $\alpha$ is the Jensen's alpha, $\sigma_{\epsilon}$ is the specific risk.
 
 ``` {r }
 data(portfolio_bacon)
@@ -219,7 +240,10 @@ print(AppraisalRatio(portfolio_bacon[,1], portfolio_bacon[,2], method="appraisal
 
 Modified Jensen's alpha is Jensen's alpha divided by beta.
 
-where . is the Jensen's alpha
+$$Modified Jensen's alpha = \frac{\alpha}{\beta}$$
+
+where $\alpha$ is the Jensen's alpha and $\beta$ is the regression beta
+
 
 ``` {r }
 data(portfolio_bacon)
@@ -232,7 +256,9 @@ Fama beta is a beta used to calculate the loss of diversification. It is
 made so that the systematic risk is equivalent to the total portfolio
 risk.
 
-where . is the portfolio standard deviation and . is the market risk
+$$\beta_F = \frac{\sigma_P}{\sigma_M}$$
+
+where $\sigma_P$ is the portfolio standard deviation and $\sigma_M$ is the market risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -243,8 +269,10 @@ print(FamaBeta(portfolio_bacon[,1], portfolio_bacon[,2])) #expected 1.03
 
 Selectivity is the same as Jensen's alpha
 
-where . is the risk free rate, . is the regression beta, . is the
-portfolio return and b is the benchmark return
+$$Selectivity = r_p - r_f - \beta_p * (b - r_f)$$
+
+where $r_f$ is the risk free rate, $\beta_r$ is the regression beta, $r_p$ is 
+the portfolio return and $b$ is the benchmark return
 
 ``` {r }
 data(portfolio_bacon)
@@ -256,10 +284,12 @@ print(Selectivity(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.0141
 Net selectivity is the remaining selectivity after deducting the amount
 of return require to justify not being fully diversified
 
+$$Net selectivity = \alpha - d$$
+
+where $\alpha$ is the selectivity and $d$ is the diversification
+
 If net selectivity is negative the portfolio manager has not justified
 the loss of diversification
-
-where . is the selectivity and . is the diversification
 
 ``` {r }
 data(portfolio_bacon)
@@ -278,6 +308,11 @@ the squared deviations between the investment's returns and the
 benchmark's returns, then multiplying the result by the square root of
 the scale of the returns.
 
+$$TrackingError = \sqrt{\sum\frac{(R_{a}-R_{b})^{2}}{len(R_{a})\sqrt{scale}}}$$
+
+where $R_{a}$ is the investment's return, $R_{b}$ is the benchmark's return and 
+$scale$ is the number of observations of the entire series
+
 ``` {r }
 data(managers)
 TrackingError(managers[,1,drop=FALSE], managers[,8,drop=FALSE]) 
@@ -287,7 +322,8 @@ TrackingError(managers[,1,drop=FALSE], managers[,8,drop=FALSE])
 
 The Active Premium divided by the Tracking Error.
 
-InformationRatio = ActivePremium/TrackingError
+$$InformationRatio = \frac{ActivePremium}{TrackingError}$$
+
 
 This relates the degree to which an investment has beaten the benchmark
 to the consistency with which the investment has beaten the benchmark.
@@ -303,6 +339,8 @@ InformationRatio(managers[,"HAM1",drop=FALSE], managers[, "SP500 TR", drop=FALSE
 
 measures the deformation from a normal deformation
 
+$$Skewness = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^3$$
+
 where . is the number of return, . is the mean of the return
 distribution, . is its standard deviation and is its sample standard
 deviation
@@ -314,9 +352,13 @@ skewness(managers)
 
 ### Sample skewness (p.84)
 
-where . is the number of return, . is the mean of the return
-distribution, . is its standard deviation and . is its sample standard
-deviation
+$$Sample Skewness =  \frac{n}{(n-1)*(n-2)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^3 $$
+
+where $n$ is the number of returns, $\overline{r}$ is the mean of the return
+distribution, $\sigma_P$ is its standard deviation and $\sigma_P$ is its sample 
+standard deviation
+
+
 
 ``` {r }
 data(portfolio_bacon)
@@ -328,8 +370,10 @@ print(skewness(portfolio_bacon[,1], method="sample")) #expected -0.09
 Kurtosis measures the weight or returns in the tails of the distribution
 relative to standard deviation.
 
-where . is the number of return, . is the mean of the return
-distribution, . is its standard deviation and . is its sample standard
+$$Kurtosis(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4$$
+
+where $n$ is the number of returns, $\overline{r}$ is the mean of the return
+distribution, $\sigma_P$ is its standard deviation and $\sigma_P$ is its sample standard
 deviation
 
 ``` {r }
@@ -339,9 +383,11 @@ print(kurtosis(portfolio_bacon[,1], method="moment")) #expected 2.43
 
 ### Excess kurtosis (p.85)
 
-where . is the number of return, . is the mean of the return
-distribution, . is its standard deviation and . is its sample standard
-deviation
+$$Excess Kurtosis = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4 - 3$$
+
+where $n$ is the number of returns, $\overline{r}$ is the mean of the return
+distribution, $\sigma_P$ is its standard deviation and $\sigma_P$ is its sample 
+standard deviation
 
 ``` {r }
 data(portfolio_bacon)
@@ -350,9 +396,11 @@ print(kurtosis(portfolio_bacon[,1], method="excess")) #expected -0.57
 
 ### Sample kurtosis (p.85)
 
-where . is the number of return, . is the mean of the return
-distribution, . is its standard deviation and . is its sample standard
-deviation
+$$Sample kurtosis =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4$$
+
+where $n$ is the number of returns, $\overline{r}$ is the mean of the return
+distribution, $\sigma_P$ is its standard deviation and $\sigma_P$ is its sample
+standard deviation
 
 ``` {r }
 data(portfolio_bacon)
@@ -361,9 +409,12 @@ print(kurtosis(portfolio_bacon[,1], method="sample")) #expected 3.03
 
 ### Sample excess kurtosis (p.85)
 
-where . is the number of return, . is the mean of the return
-distribution, . is its standard deviation and . is its sample standard
-deviation
+$$Sample excess kurtosis =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4  - \frac{3*(n-1)^2}{(n-2)*(n-3)}$$
+
+where $n$ is the number of returns, $\overline{r}$ is the mean of the return
+distribution, $\sigma_P$ is its standard deviation and $\sigma_P$ is its sample
+standard deviation
+
 
 ``` {r }
 data(portfolio_bacon)
@@ -382,8 +433,10 @@ rather than the number of drawdowns. Visually, the pain index is the
 area of the region that is enclosed by the horizontal line at zero
 percent and the drawdown line in the Drawdown chart.
 
-where . is the number of observations of the entire series, . is the
-drawdown since previous peak in period i
+$$Pain index = \sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}$$
+
+where $n$ is the number of observations of the entire series, $D'_i$ is the
+drawdown since previous peak in period $i$
 
 ``` {r }
 data(portfolio_bacon)
@@ -416,8 +469,10 @@ To calculate Burke ratio we take the difference between the portfolio
 return and the risk free rate and we divide it by the square root of the
 sum of the square of the drawdowns.
 
-where . is number of drawdowns, is the portfolio return, . is the risk
-free rate and . the drawdown.
+$$Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}{D_t}^2}}$$
+
+where $d$ is the number of drawdowns, $r_P$ is the portfolio return, $r_F$ is 
+the risk free rate and $D_t$ the $t^{th}$ drawdown.
 
 ``` {r }
 data(portfolio_bacon)
@@ -427,11 +482,13 @@ print(BurkeRatio(portfolio_bacon[,1])) #expected 0.74
 ### Modified Burke ratio (p.91)
 
 To calculate the modified Burke ratio we just multiply the Burke ratio
-by the square root of the number of datas.
+by the square root of the number of data points.
 
-where . is the number of observations of the entire series, is number of
-drawdowns, . is the portfolio return, . is the risk free rate and . the
-. drawdown.
+$$Modified Burke Ratio = \frac{r_P - r_F}{\sqrt{\sum^{d}_{t=1}\frac{{D_t}^2}{n}}}$$
+
+where $n$ is the number of observations of the entire series, $d$ is number of 
+drawdowns, $r_P$ is the portfolio return, $r_F$ is the risk free rate and $D_t$ 
+the $t^{th}$ drawdown.
 
 ``` {r }
 data(portfolio_bacon)
@@ -443,9 +500,11 @@ print(BurkeRatio(portfolio_bacon[,1], modified = TRUE)) #expected 3.65
 To calculate Martin ratio we divide the difference of the portfolio
 return and the risk free rate by the Ulcer index
 
-where . is the annualized portfolio return, . is the risk free rate, .
-is the number of observations of the entire series, . is the drawdown
-since previous peak in period i
+$$Martin ratio = \frac{r_P - r_F}{\sqrt{\sum^{n}_{i=1} \frac{{D'_i}^2}{n}}}$$
+
+where $r_P$ is the portfolio return, $r_F$ is the risk free rate, $n$ is the 
+number of observations of the entire series, $D'_i$ is the drawdown since
+previous peak in period $i$.
 
 ``` {r }
 data(portfolio_bacon)
@@ -457,9 +516,11 @@ print(MartinRatio(portfolio_bacon[,1])) #expected 1.70
 To calculate Pain ratio we divide the difference of the portfolio return
 and the risk free rate by the Pain index
 
-where . is the annualized portfolio return, . is the risk free rate, .
-is the number of observations of the entire series, . is the drawdown
-since previous peak in period i
+$$Pain ratio = \frac{r_P - r_F}{\sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}$$
+
+where $r_P$ is the portfolio return, $r_F$ is the risk free rate, $n$ is the
+number of observations of the entire series, $D'_i$ is the drawdown since
+previous peak in period $i$.
 
 ``` {r }
 data(portfolio_bacon)
@@ -474,12 +535,16 @@ Downside deviation, similar to semi deviation, eliminates positive
 returns when calculating risk. Instead of using the mean return or zero,
 it uses the Minimum Acceptable Return as proposed by Sharpe (which may
 be the mean historical return or zero). It measures the variability of
-underperformance below a minimum targer rate. The downside variance is
+underperformance below a minimum target rate. The downside variance is
 the square of the downside potential.
 
-where . is either the number of observations of the entire series or the
-number of observations in the subset of the series falling below the
-MAR.
+$$DownsideDeviation(R , MAR) = \delta_{MAR} = \sqrt{\sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}}$$
+$$DownsideVariance(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]^2}{n}$$
+
+$$DownsidePotential(R, MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR), 0]}{n}$$
+
+where $n$ is either the number of observations of the entire series or the
+number of observations in the subset of the series falling below the MAR.
 
 ``` {r }
 data(portfolio_bacon)
@@ -490,12 +555,17 @@ DownsidePotential(portfolio_bacon[,1], MAR) #expected 0.491
 
 ### UpsideRisk (p.92)
 
-Upside Risk is the similar of semideviation taking the return above the
+Upside Risk is the similar to semideviation taking the return above the
 Minimum Acceptable Return instead of using the mean return or zero.
 
-where . is either the number of observations of the entire series or the
-number of observations in the subset of the series falling below the
-MAR.
+$$UpsideRisk(R , MAR) = \sqrt{\sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]^2}{n}}$$
+
+$$UpsideVariance(R, MAR) = \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]^2}{n}$$
+
+$$UpsidePotential(R, MAR) = \sum^{n}_{t=1}\frac{max[(R_{t} - MAR), 0]}{n}$$
+
+where $n$ is either the number of observations of the entire series or the
+number of observations in the subset of the series falling above the MAR.
 
 ``` {r }
 data(portfolio_bacon)
@@ -511,7 +581,9 @@ To calculate Downside Frequency, we take the subset of returns that are
 less than the target (or Minimum Acceptable Returns (MAR)) returns and
 divide the length of this subset by the total number of returns.
 
-where . is the number of observations of the entire series
+$$DownsideFrequency(R , MAR) = \sum^{n}_{t=1}\frac{min[(R_{t} - MAR),0]}{R_{t}*n}$$
+
+where $n$ is the number of observations of the entire series.
 
 ``` {r }
 data(portfolio_bacon)
@@ -525,7 +597,9 @@ To calculate Bernardo and Ledoit ratio we take the sum of the subset of
 returns that are above 0 and we divide it by the opposite of the sum of
 the subset of returns that are below 0
 
-where . is the number of observations of the entire series
+$$BernardoLedoitRatio(R) = \frac{\frac{1}{n}\sum^{n}_{t=1}{max(R_{t},0)}}{\frac{1}{n}\sum^{n}_{t=1}{max(-R_{t},0)}}$$
+
+where $n$ is the number of observations of the entire series
 
 ``` {r }
 data(portfolio_bacon)
@@ -534,7 +608,7 @@ print(BernardoLedoitRatio(portfolio_bacon[,1])) #expected 1.78
 
 ### d ratio (p.95)
 
-The d ratio is similar to the Bernado Ledoit ratio but inverted and
+The d ratio is similar to the Bernardo Ledoit ratio but inverted and
 taking into account the frequency of positive and negative returns.
 
 It has values between zero and infinity. It can be used to rank the
@@ -543,9 +617,11 @@ performance, a value of zero indicating there are no returns less than
 zero and a value of infinity indicating there are no returns greater
 than zero.
 
-where . is the number of observations of the entire series, . is the
-number of observations less than zero, . is the number of observations
-greater than zero
+$$DRatio(R) = \frac{n_{d}*\sum^{n}_{t=1}{max(-R_{t},0)}}{n_{u}*\sum^{n}_{t=1}{max(R_{t},0)}}$$
+
+where $n$ is the number of observations of the entire series, $n_{d}$ is the
+number of observations less than zero and $n_{u}$ is the number of
+observations greater than zero
 
 ``` {r }
 data(portfolio_bacon)
@@ -561,7 +637,9 @@ To calculate the Omega-Sharpe ration we subtract the target (or Minimum
 Acceptable Returns (MAR)) return from the portfolio return and we divide
 it by the opposite of the Downside Deviation.
 
-where . is the number of observations of the entire series
+$$OmegaSharpeRatio(R,MAR) = \frac{r_p - r_t}{\sum^n_{t=1}\frac{max(r_t - r_i, 0)}{n}}$$
+
+where $n$ is the number of observations of the entire series
 
 ``` {r }
 data(portfolio_bacon)
@@ -575,7 +653,9 @@ Sortino proposed an improvement on the Sharpe Ratio to better account
 for skill and excess performance by using only downside semivariance as
 the measure of risk.
 
-where . is the .
+$$SortinoRatio=\frac{(\overline{R_{a} - MAR})}{\delta_{MAR}}$$
+
+where $\delta_{MAR}$ is the `DownsideDeviation`.
 
 ``` {r }
 data(managers)
@@ -605,12 +685,14 @@ print(Kappa(portfolio_bacon[,1], MAR, l)) #expected 0.157
 
 Sortino proposed an improvement on the Sharpe Ratio to better account
 for skill and excess performance by using only downside semivariance as
-the measure of risk. That measure is the Sortinon ratio. This function,
+the measure of risk. That measure is the Sortino ratio. This function,
 Upside Potential Ratio, was a further improvement, extending the
 measurement of only upside on the numerator, and only downside of the
 denominator of the ratio equation.
 
-where . is the .
+$$UPR=\frac{ \sum^{n}_{t=1} (R_{t} - MAR)$$
+
+where $\delta_{MAR}$ is the `DownsideDeviation`.
 
 ``` {r }
 data(edhec)
@@ -623,7 +705,9 @@ Volatility skewness is a similar measure to omega but using the second
 partial moment. It's the ratio of the upside variance compared to the
 downside variance.
 
-where . is the Upside risk and . is the Downside Risk
+$$VolatilitySkewness(R , MAR) = \frac{\sigma_U^2}{\sigma_D^2}$$
+
+where $\sigma_U$ is the Upside risk and $\sigma_D$ is the Downside Risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -636,7 +720,9 @@ print(VolatilitySkewness(portfolio_bacon[,1], MAR, stat="volatility")) #expected
 Variability skewness is the ratio of the upside risk compared to the
 downside risk.
 
-where . is the Upside risk and . is the Downside Risk
+$$VariabilitySkewness(R , MAR) = \frac{\sigma_U}{\sigma_D}$$
+
+where $\sigma_U$ is the Upside risk and $\sigma_D$ is the Downside Risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -650,8 +736,10 @@ Adjusted Sharpe ratio was introduced by Pezier and White (2006) to
 adjusts for skewness and kurtosis by incorporating a penalty factor for
 negative skewness and excess kurtosis.
 
-where . is the sharpe ratio with data annualized, . is the skewness and
-is the kurtosis
+$$Adjusted Sharpe Ratio = SR * [1 + (\frac{S}{6}) * SR - (\frac{K - 3}{24}) * SR^2]$$
+
+where $SR$ is the Sharpe Ratio with data annualized,$S$ is the skewness and
+$K$ is the kurtosis
 
 ``` {r }
 data(portfolio_bacon)
@@ -664,7 +752,9 @@ Skewness-Kurtosis ratio is the division of Skewness by Kurtosis.' It is
 used in conjunction with the Sharpe ratio to rank portfolios. The higher
 the rate the better.
 
-where . is the skewness and . is the Kurtosis
+$$SkewnessKurtosisRatio(r,MAR) = \frac{S}{K}$$
+
+where $S$ is the skewness and $K$ is the Kurtosis
 
 ``` {r }
 data(portfolio_bacon)
@@ -673,11 +763,13 @@ print(SkewnessKurtosisRatio(portfolio_bacon[,1])) #expected -0.034
 
 ### Prospect ratio (p.100)
 
-Prospect ratio is a ratio used to penalise loss since most people feel
+Prospect ratio is a ratio used to penalize loss since most people feel
 loss greater than gain
 
-where . is the number of observations of the entire series, MAR is the
-minimum acceptable return and is the downside risk
+$$ProspectRatio(R) = \frac{\frac{1}{n}*\sum^{n}_{i=1}(Max(r_i,0)+2.25*Min(r_i,0) - MAR)$$
+
+where $n$ is the number of observations of the entire series, $MAR$ is the
+minimum acceptable return and $\sigma_D$ is the downside risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -692,9 +784,11 @@ print(ProspectRatio(portfolio_bacon[,1], MAR)) #expected -0.134
 M squared for Sortino is a calculated for Downside risk instead of Total
 Risk
 
-where . is MSquared for Sortino, . is the annualised portfolio return, .
-is the benchmark annualised downside risk and . is the portfolio
-annualised downside risk
+$$M^2_S = r_P + Sortino ratio * (\sigma_{DM} - \sigma_D)$$
+
+where $M^2_S$ is MSquared for Sortino, $r_P$ is the annualized portfolio return,
+$\sigma_DM$ is the benchmark annualized downside risk and $D$ is the portfolio
+annualized downside risk
 
 ``` {r }
 data(portfolio_bacon)
@@ -708,9 +802,11 @@ Omega excess return is another form of downside risk-adjusted return. It
 is calculated by multiplying the downside variance of the style
 benchmark by 3 times the style beta.
 
-where . is omega excess return, . is style beta, . is the portfolio
-annualised downside risk and . is the benchmark annualised downside
-risk.
+$$\omega = r_P - 3*\beta_S*\sigma_{MD}^2$$
+
+where $\omega$ is omega excess return, $\beta_S$ is style beta, $\sigma_D$ is 
+the portfolio annualized downside risk and $\sigma_MD$ is the benchmark annualized 
+downside risk.
 
 ``` {r }
 data(portfolio_bacon)
@@ -723,7 +819,7 @@ print(OmegaExcessReturn(portfolio_bacon[,1], portfolio_bacon[,2], MAR)) #expecte
 ### Variability risk
 
 Table of Mean absolute difference, Monthly standard deviation and
-annualised standard deviation
+annualized standard deviation
 
 ``` {r }
 data(managers)
@@ -741,7 +837,7 @@ table.SpecificRisk(managers[,1:8], managers[,8])
 
 ### Information risk
 
-Table of Tracking error, Annualised tracking error and Information ratio
+Table of Tracking error, Annualized tracking error and Information ratio
 
 ``` {r }
 data(managers)
@@ -751,7 +847,7 @@ table.InformationRatio(managers[,1:8], managers[,8])
 ### Distributions
 
 Table of Monthly standard deviation, Skewness, Sample standard
-deviation, Kurtosis, Excess kurtosis, Sample Skweness and Sample excess
+deviation, Kurtosis, Excess kurtosis, Sample Skewness and Sample excess
 kurtosis
 
 ``` {r }
@@ -771,7 +867,7 @@ table.DrawdownsRatio(managers[,1:8])
 
 ### Downside risk
 
-Table of Monthly downside risk, Annualised downside risk, Downside
+Table of Monthly downside risk, Annualized downside risk, Downside
 potential, Omega, Sortino ratio, Upside potential, Upside potential
 ratio and Omega-Sharpe ratio
 
