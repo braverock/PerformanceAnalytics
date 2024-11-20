@@ -46,6 +46,7 @@ function (R, MAR = 0, scale = NA, digits = 4)
     #set up frequency
     if(is.na(scale)) {
         freq = periodicity(R)
+        name <- paste0(freq$scale," downside risk")
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -55,13 +56,15 @@ function (R, MAR = 0, scale = NA, digits = 4)
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
+    } else {
+        name <- paste0("downside risk")
     }
 
     # for each column, do the following:
     for(column in 1:columns) {
         z = c(DownsideDeviation(y[,column,drop=FALSE], MAR = MAR), DownsideDeviation(y[,column,drop=FALSE], MAR = MAR)*sqrt(scale), DownsidePotential(y[,column,drop=FALSE], MAR = MAR), UpsideRisk(y[,column,drop=FALSE], MAR = MAR, stat = "potential")/DownsidePotential(y[,column,drop=FALSE], MAR = MAR), SortinoRatio(y[,column,drop=FALSE], MAR = MAR), UpsideRisk(y[,column,drop=FALSE], MAR = MAR, stat = "potential"), UpsidePotentialRatio(y[,column,drop=FALSE], MAR = MAR), OmegaSharpeRatio(y[,column,drop=FALSE], MAR = MAR))
 
-        znames = c(paste0(freq$scale," downside risk"), "Annualised downside risk", "Downside potential", "Omega", "Sortino ratio", "Upside potential", "Upside potential ratio", "Omega-sharpe ratio")
+        znames = c(name, "Annualised downside risk", "Downside potential", "Omega", "Sortino ratio", "Upside potential", "Upside potential ratio", "Omega-sharpe ratio")
         if(column == 1) {
             resultingtable = data.frame(Value = z, row.names = znames)
         }
