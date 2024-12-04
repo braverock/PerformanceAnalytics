@@ -65,7 +65,7 @@ function (R, Rf = 0)
     if(!is.null(dim(Rf))){
         Rf = checkData(Rf)
         coln.Rf=colnames(Rf)
-        if(is.null(coln.Rf)){
+        if(is.null(coln.Rf) | colnames(R) == colnames(Rf)){
           colnames(Rf) = "Rf"
           coln.Rf = colnames(Rf)
         }
