@@ -5,7 +5,7 @@
 \description{
 A xts object that contains columns of monthly returns for six hypothetical
 asset managers (HAM1 through HAM6), the EDHEC Long-Short Equity hedge
-fund index, the S\&P 500 total returns, and total return series for
+fund index, the S&P 500 total returns, and total return series for
 the US Treasury 10-year bond and 3-month bill. Monthly returns for
 all series end in December 2006 and begin at different periods starting
 from January 1996.

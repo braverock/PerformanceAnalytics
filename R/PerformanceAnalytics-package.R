@@ -30,7 +30,6 @@
 #'
 #' @name PerformanceAnalytics-package
 #' @aliases PerformanceAnalytics-package PerformanceAnalytics
-#' @docType package
 #' 
 #' @section Time Series Data:
 #'   
@@ -876,4 +875,4 @@
 #' 
 #' 
 #' @keywords package
-NULL
+"_PACKAGE"

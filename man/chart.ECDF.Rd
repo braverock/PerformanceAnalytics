@@ -28,7 +28,7 @@ asset returns}
 
 \item{ylab}{set the y-axis label, same as in \code{\link{plot}}}
 
-\item{colorset}{color palette to use, defaults to c("black", "\#005AFF"),
+\item{colorset}{color palette to use, defaults to c("black", "#005AFF"),
 where first value is used to color the step function and the second color is
 used for the fitted normal}
 

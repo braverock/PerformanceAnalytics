@@ -2,9 +2,11 @@ sandbox
 generatechangelog.sh
 ChangeLog.1.0.0
 ChangeLog
+NEWS
 ^.*\.Rproj$
 ^\.Rproj\.user$
 codeblock.txt
 ^\.travis.yml
 cran-comments.md
 ^\.github$
+PerformanceAnalytics-Ex.Rout.save

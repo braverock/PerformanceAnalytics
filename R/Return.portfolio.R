@@ -54,7 +54,7 @@
 #' xts Date subsetting via endpoints.
 #'
 #' In verbose mode, the function returns a list of data and intermediary calculations.
-#' \itemize{
+#' \describe{
 #'   \item{\code{returns}:}{ The portfolio returns.}
 #'   \item{\code{contribution}:}{ The per period contribution to portfolio 
 #'   return of each asset. Contribution is calculated as BOP weight times the 

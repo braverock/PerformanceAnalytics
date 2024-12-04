@@ -16,7 +16,7 @@
 #' @param ylab set the y-axis label, same as in \code{\link{plot}}
 #' @param xaxis if true, draws the x axis
 #' @param yaxis if true, draws the y axis
-#' @param colorset color palette to use, defaults to c("black", "\#005AFF"),
+#' @param colorset color palette to use, defaults to c("black", "#005AFF"),
 #' where first value is used to color the step function and the second color is
 #' used for the fitted normal
 #' @param lwd set the line width, same as in \code{\link{plot}}

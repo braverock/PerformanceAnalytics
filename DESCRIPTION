@@ -15,12 +15,12 @@ Authors@R: c(
   , person(given="Diethelm",family="Wuertz",role="ctb")  
   , person(given=c("Anthony","Alexander"),family="Christidis",role="ctb")  
   , person(given="R. Douglas",family="Martin",role="ctb")  
-  , person(given=c("Zeheng", "'Zenith'"),family="Zhou",role="ctb")  
+  , person(given=c("Zeheng", "Zenith"),family="Zhou",role="ctb")  
   , person(given=c("Justin", "M."),family="Shea",role="ctb")
   , person(given="Dhairya",family="Jain",role="ctb")
   )
-Version: 2.0.6
-Date: 2020-03-03
+Version: 2.0.8
+Date: 2024-12-04
 Description: Collection of econometric functions for performance and risk 
     analysis. In addition to standard risk and performance metrics, this 
     package aims to aid practitioners and researchers in utilizing the latest
@@ -63,4 +63,4 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
 Copyright: (c) 2004-2022
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

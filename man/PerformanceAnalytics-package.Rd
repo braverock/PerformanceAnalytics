@@ -888,4 +888,31 @@ CRAN task view on Empirical Finance \cr
 Grant Farnsworth's Econometrics in R \cr
 \url{https://cran.r-project.org/doc/contrib/Farnsworth-EconometricsInR.pdf}
 }
+\author{
+\strong{Maintainer}: Brian G. Peterson \email{brian@braverock.com} [copyright holder]
+
+Authors:
+\itemize{
+  \item Peter Carl \email{peter@braverock.com} [copyright holder]
+}
+
+Other contributors:
+\itemize{
+  \item Kris Boudt [contributor, copyright holder]
+  \item Ross Bennett [contributor]
+  \item Joshua Ulrich [contributor]
+  \item Eric Zivot [contributor]
+  \item Dries Cornilly [contributor]
+  \item Eric Hung [contributor]
+  \item Matthieu Lestel [contributor]
+  \item Kyle Balkissoon [contributor]
+  \item Diethelm Wuertz [contributor]
+  \item Anthony Alexander Christidis [contributor]
+  \item R. Douglas Martin [contributor]
+  \item Zeheng Zenith Zhou [contributor]
+  \item Justin M. Shea [contributor]
+  \item Dhairya Jain [contributor]
+}
+
+}
 \keyword{package}

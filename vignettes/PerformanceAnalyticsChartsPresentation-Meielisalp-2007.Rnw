@@ -65,6 +65,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 % this has to be after \begin{document} to work
 \setkeys{Gin}{width=2.5in}
 \begin{frame}

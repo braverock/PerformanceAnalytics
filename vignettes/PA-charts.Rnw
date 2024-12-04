@@ -24,6 +24,7 @@
 %%%%%%%%%%%%%%%%%%%%%% End Setup Lines 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 %\author{Peter Carl\\Guidance Capital Management \And Brian G. Peterson\\Diamond Consulting}
 % \plainauthor{Peter Carl, Brian Peterson}
@@ -897,3 +898,4 @@ fill a hole in the tools available to a financial engineer or analyst.
 If you think there's an important gap or possible improvement to be
 made, please don't hesitate to contact us.
 \end{document}
+
