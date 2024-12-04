@@ -136,7 +136,7 @@ function (R)
 {
     if (is.vector(R)) {
         R = na.omit(R)
-        return(DownsideDeviation(R, MAR=mean(R), method="subset"))
+        return(DownsideDeviation(R, MAR=mean(R), method="subset")^2)
     }
     else {
         R = checkData(R, method = "matrix")
