@@ -87,7 +87,7 @@ function (R, scale = NA, geometric = TRUE )
     }
     else {
         R = checkData(R, method = "xts")
-        result = apply(R, 2, Return.annualized, scale = scale, geometric = geometric)
+        result = apply(zoo::coredata(R), 2, Return.annualized, scale = scale, geometric = geometric)
         dim(result) = c(1,NCOL(R))
         colnames(result) = colnames(R)
         rownames(result) = "Annualized Return"
