@@ -49,7 +49,7 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
     # R = usually a set of monthly return
 
     # Code inspired by a chart on David Rupert's web page
-    # http://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt
+    # https://www.stat.tamu.edu/~ljin/Finance/chapter2/Fig2_5.txt
 
     R = checkData(R, method="vector", na.rm = TRUE)
 
@@ -73,7 +73,7 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

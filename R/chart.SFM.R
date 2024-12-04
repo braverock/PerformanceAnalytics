@@ -38,7 +38,7 @@
 #' @param makePct If Returns should be converted to percentage. Defaults to False
 #' @author Dhairya Jain, Doug Martin, Dan Xia
 #' @references Martin, R. D. and Xia, D. Z. (2021).  Robust Time Series Factor Models, 
-#' SSRN: https://ssrn.com/abstract=3905345. \emph{To appear in the Journal of Asset Management in 2022} 
+#' SSRN: https://www.ssrn.com/abstract=3905345. \emph{To appear in the Journal of Asset Management in 2022} 
 #' \cr Ruppert, David. \emph{Statistics and Finance, an
 #' Introduction}. Springer. 2004. \cr Sharpe, W.F. Capital Asset Prices: A theory of market
 #' equilibrium under conditions of risk. \emph{Journal of finance}, vol 19,

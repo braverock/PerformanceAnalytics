@@ -70,7 +70,7 @@
 #' @param yaxis if true, draws the y axis
 #' @param \dots any other passthru parameters to \code{\link{plot}}
 #' @note Code inspired by a chart on: \cr
-#' \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+#' \url{https://zoonek2.free.fr/UNIX/48_R/03.html}
 #' @author Peter Carl
 #' @seealso \code{\link[graphics]{hist}}
 ###keywords ts multivariate distribution models hplot
@@ -150,7 +150,7 @@ function(R,
     # R = usually a set of monthly return
 
     # Code inspired by a chart on:
-    # http://zoonek2.free.fr/UNIX/48_R/03.html
+    # https://zoonek2.free.fr/UNIX/48_R/03.html
 
     y = checkData(R)
     x = checkData(na.omit(y[,1]), method="vector")
@@ -215,7 +215,7 @@ function(R,
                 # This uses a Maximum Likelihood method as shown on:
                 # Wessa P., (2006), Maximum-likelihood Cauchy Distribution Fitting (v1.0.0) in
                 # Free Statistics Software (v1.1.21-r4), Office for Research Development and
-                # Education, URL http://www.wessa.net/rwasp_fitdistrcauchy.wasp/
+                # Education, URL https://www.wessa.net/rwasp_fitdistrcauchy.wasp/
                 fit = MASS::fitdistr(x, 'cauchy')
                 xlab = paste("Cauchy (location = ",round(fit$estimate[[1]],2),", scale = ",round(fit$estimate[[2]],2),")", sep="")
                 fitted.cauchy = dcauchy(s,location = fit$estimate[[1]], scale = fit$estimate[[2]], log = FALSE)
@@ -334,7 +334,7 @@ function(R,
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

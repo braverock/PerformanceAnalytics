@@ -735,7 +735,7 @@ VaR.historical.portfolio = function(R,p,w=NULL)
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson and Kris Boudt
 #

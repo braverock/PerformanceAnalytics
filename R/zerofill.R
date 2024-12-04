@@ -1,5 +1,5 @@
 ###############################################################################
-# R (http://r-project.org/) Numeric Methods for Optimization of Portfolios
+# R (https://r-project.org/) Numeric Methods for Optimization of Portfolios
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

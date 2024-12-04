@@ -518,10 +518,10 @@
 #' identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no 
 #' longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns 
 #' are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and 
-#' Martin (2019) at \url{https://ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. 
+#' Martin (2019) at \url{https://www.ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. 
 #' The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram 
 #' based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk 
-#' and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://ssrn.com/abstract=3415903}. 
+#' and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://www.ssrn.com/abstract=3415903}. 
 #' The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated 
 #' into \kbd{PerformanceAnalytics}.
 #' 
@@ -728,7 +728,7 @@
 #' We have been greatly inspired by other peoples' work, some of which is on
 #' display at addictedtor.free.fr.  Particular inspiration came from Dirk
 #' Eddelbuettel and John Bollinger for their work at
-#' http://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65. Those
+#' https://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65. Those
 #' interested in price charting in \R should also look at the \code{quantmod}
 #' package.
 #' 
@@ -773,7 +773,7 @@
 #' Data series \code{\link{edhec}} used in \kbd{PerformanceAnalytics} and
 #' related publications with the kind permission of the EDHEC Risk and Asset
 #' Management Research Center. \cr
-#' \url{http://www.edhec-risk.com/indexes/pure_style}
+#' \url{https://climateimpact.edhec.edu/indexes/pure_style}
 #' 
 #' Kris Boudt was instrumental in our research on component risk for
 #' portfolios with non-normal distributions, and is responsible for much of

@@ -18,10 +18,10 @@
 #' REFERENCES:
 #' Martin, P. and McCann, B. (1989) The investor's Guide to Fidelity Funds: 
 #' Winning Strategies for Mutual Fund Investors.  John Wiley & Sons, Inc.
-#' Peter Martin's web page on UI: http://www.tangotools.com/ui/ui.htm
+#' Peter Martin's web page on UI: https://www.tangotools.com/ui/ui.htm
 #' 
 #' ## Test against spreadsheet at: 
-#' http://www.tangotools.com/ui/UlcerIndex.xls
+#' https://www.tangotools.com/ui/UlcerIndex.xls
 #' 
 #' @param R a vector, matrix, data frame, timeSeries or zoo object of asset
 #' returns
@@ -48,7 +48,7 @@ function (R, ...) {
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

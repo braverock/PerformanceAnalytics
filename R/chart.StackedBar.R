@@ -74,7 +74,7 @@
 #' 
 #' Tufte, Edward R. (2001) The Visual Display of Quantitative Information, 2nd
 #' edition. The Graphics Press, Cheshire, Connecticut. See
-#' http://www.edwardtufte.com for this and other references.
+#' https://www.edwardtufte.com for this and other references.
 ###keywords ts multivariate hplot
 #' @examples
 #' 
@@ -291,7 +291,7 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     }
 }
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

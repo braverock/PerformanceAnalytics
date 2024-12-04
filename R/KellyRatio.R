@@ -25,8 +25,8 @@
 #' @author Brian G. Peterson
 #' @references Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in
 #' Blackjack, Sports Betting, and the Stock Market.
-#' \url{http://www.bjmath.com/bjmath/thorp/paper.htm} \cr
-#' \url{http://en.wikipedia.org/wiki/Kelly_criterion}
+#' \url{https://archive.ph/h1LuS} \cr
+#' \url{https://en.wikipedia.org/wiki/Kelly_criterion}
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
@@ -72,7 +72,7 @@ function (R, Rf = 0, method = "half")
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

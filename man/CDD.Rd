@@ -38,7 +38,7 @@ t(round(CDD(edhec),4))
 Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
 Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
 Management Tools, Risk Books, London, 2003
-http://www.ise.ufl.edu/uryasev/drawdown.pdf
+https://www.ise.ufl.edu/uryasev/drawdown.pdf
 }
 \seealso{
 \code{\link{ES}} \code{\link{maxDrawdown}}

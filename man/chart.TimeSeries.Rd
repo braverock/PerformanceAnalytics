@@ -306,7 +306,7 @@ intended to be used inside other charting functions.
 
 
 # These are start and end dates, formatted as xts ranges.
-## http://www.nber.org-cycles.html
+## https://www.nber.org-cycles.html
 cycles.dates<-c("1857-06/1858-12",
                 "1860-10/1861-06",
                 "1865-04/1867-12",

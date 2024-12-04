@@ -38,7 +38,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), pch=1
     if(missing(method)) method=method[1] #only use one
     cormeth <- method
 
-    # Published at http://addictedtor.free.fr/graphiques/sources/source_137.R
+    # Published at https://addictedtor.free.fr/graphiques/sources/source_137.R
     panel.cor <- function(x, y, digits=2, prefix="", use="pairwise.complete.obs", method=cormeth, cex.cor, ...)
     {
         usr <- par("usr"); on.exit(par(usr=usr))
@@ -89,7 +89,7 @@ function (R, histogram = TRUE, method=c("pearson", "kendall", "spearman"), pch=1
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

@@ -445,7 +445,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     grey6mono = c("#242424", "#494949", "#6D6D6D", "#929292", "#B6B6B6", "#DBDBDB")
 
     # QUALITATIVE
-    # by Paul Tol, http://www.sron.nl/~pault/colourschemes.pdf
+    # by Paul Tol, https://www.sron.nl/~pault/colourschemes.pdf
     tol1qualitative=c("#4477AA")
     tol2qualitative=c("#4477AA", "#CC6677")
     tol3qualitative=c("#4477AA", "#DDCC77", "#CC6677")
@@ -517,7 +517,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
     macro.labels = c()
 
     # Period beginning and endings, e.g., these are peak and trough dates from
-    # http://www.nber.org/cycles.html/
+    # https://www.nber.org/cycles.html/
     cycles.dates = list(
         c("10/26","11/27"),
         c("08/29","03/33"),
@@ -537,7 +537,7 @@ function (x, y = NULL, legend, fill = NULL, col = par("col"),
 # ------------------------------------------------------------------------------
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

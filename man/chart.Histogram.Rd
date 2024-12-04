@@ -135,7 +135,7 @@ which will compute the intended number of breaks as a function of \code{R}.
 }
 \note{
 Code inspired by a chart on: \cr
-\url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+\url{https://zoonek2.free.fr/UNIX/48_R/03.html}
 }
 \examples{
 

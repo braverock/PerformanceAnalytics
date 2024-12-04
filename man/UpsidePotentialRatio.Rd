@@ -76,7 +76,7 @@ Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65.
 
 Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk
 on Risk-Adjusted Performance of Mutual Funds in the Euronext Markets. July
-19, 2001. Available at SSRN: \url{http://ssrn.com/abstract=277352}
+19, 2001. Available at SSRN: \url{https://www.ssrn.com/abstract=277352}
 }
 \seealso{
 \code{\link{SharpeRatio}} \cr \code{\link{SortinoRatio}} \cr

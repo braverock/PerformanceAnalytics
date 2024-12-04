@@ -48,7 +48,7 @@
 #' the current setting of 'cex'.
 #' @param \dots any other passthru parameters to \code{plot}
 #' @note Code inspired by a chart on:
-#' \url{http://zoonek2.free.fr/UNIX/48_R/03.html}
+#' \url{https://zoonek2.free.fr/UNIX/48_R/03.html}
 #' @author Peter Carl
 ###keywords ts multivariate distribution models hplot
 #' @examples
@@ -89,7 +89,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
     # add.boxplots = adds a boxplot summary of the data on the axis.
 
     # Code inspired by a chart on:
-    # http://zoonek2.free.fr/UNIX/48_R/03.html
+    # https://zoonek2.free.fr/UNIX/48_R/03.html
 
     if (method == "calc")  x = checkData(R, method = "zoo")
     else x=R
@@ -205,7 +205,7 @@ function (R, Rf = 0, main = "Annualized Return and Risk", add.names = TRUE, xlab
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

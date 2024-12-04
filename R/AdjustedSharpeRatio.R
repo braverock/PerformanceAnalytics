@@ -22,7 +22,7 @@
 #' 
 #' Pezier, Jaques and White, Anthony. 2006. The Relative Merits of Investable 
 #' Hedge Fund Indices and of Funds of Hedge Funds in Optimal Passive Portfolios.
-#' \url{http://econpapers.repec.org/paper/rdgicmadp/icma-dp2006-10.htm}
+#' \url{https://econpapers.repec.org/paper/rdgicmadp/icma-dp2006-10.htm}
 #' 
 ###keywords ts multivariate distribution models
 #' @examples
@@ -52,7 +52,7 @@ AdjustedSharpeRatio <- function (R, Rf = 0, ...)
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

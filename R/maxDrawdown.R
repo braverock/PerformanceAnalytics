@@ -95,7 +95,7 @@ maxDrawdown <- function (R, weights=NULL, geometric = TRUE, invert=TRUE, ...)
 #' @references Chekhlov, A., Uryasev, S., and M. Zabarankin. Portfolio
 #' Optimization With Drawdown Constraints. B. Scherer (Ed.) Asset and Liability
 #' Management Tools, Risk Books, London, 2003
-#' http://www.ise.ufl.edu/uryasev/drawdown.pdf
+#' https://www.ise.ufl.edu/uryasev/drawdown.pdf
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
@@ -259,7 +259,7 @@ function (R, ...) {
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

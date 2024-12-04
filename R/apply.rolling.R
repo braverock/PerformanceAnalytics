@@ -63,7 +63,7 @@ apply.rolling <- function (R, width, trim = TRUE, gap = 12, by = 1, FUN = "mean"
 }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

@@ -177,7 +177,7 @@ chart.QQPlot(x, main = "Stable Paretian Distribution", envelope=0.95,
 \references{
 main code forked/borrowed/ported from the excellent: \cr Fox,
 John (2007) \emph{car: Companion to Applied Regression} \cr
-\url{http://socserv.socsci.mcmaster.ca/jfox/}
+\url{https://socserv.socsci.mcmaster.ca/jfox/}
 }
 \seealso{
 \code{\link[stats]{qqplot}} \cr 

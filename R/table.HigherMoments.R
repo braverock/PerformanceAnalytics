@@ -118,7 +118,7 @@ function (Ra, Rb, scale = NA, Rf = 0, digits = 4, method = "moment")
 
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

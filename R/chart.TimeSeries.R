@@ -82,7 +82,7 @@
 #' 
 #' 
 #' # These are start and end dates, formatted as xts ranges.
-#' ## http://www.nber.org-cycles.html
+#' ## https://www.nber.org-cycles.html
 #' cycles.dates<-c("1857-06/1858-12",
 #'                 "1860-10/1861-06",
 #'                 "1865-04/1867-12",
@@ -256,7 +256,7 @@ chart.TimeSeries <-
   }
 
 ###############################################################################
-# R (http://r-project.org/) Econometrics for Performance and Risk Analysis
+# R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
 # Copyright (c) 2004-2020 Peter Carl and Brian G. Peterson
 #

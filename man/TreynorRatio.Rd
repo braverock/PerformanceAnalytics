@@ -50,7 +50,7 @@ print(TreynorRatio(managers['2002',1:5], managers['2002',8], modified = TRUE))
 
 }
 \references{
-\url{http://en.wikipedia.org/wiki/Treynor_ratio}, 
+\url{https://en.wikipedia.org/wiki/Treynor_ratio}, 
 Carl Bacon, \emph{Practical portfolio performance measurement 
 and attribution}, second edition 2008 p.77
 }

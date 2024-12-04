@@ -32,10 +32,10 @@ and penalizes managers that take time to recover to previous highs.
 REFERENCES:
 Martin, P. and McCann, B. (1989) The investor's Guide to Fidelity Funds: 
 Winning Strategies for Mutual Fund Investors.  John Wiley & Sons, Inc.
-Peter Martin's web page on UI: http://www.tangotools.com/ui/ui.htm
+Peter Martin's web page on UI: https://www.tangotools.com/ui/ui.htm
 
 ## Test against spreadsheet at: 
-http://www.tangotools.com/ui/UlcerIndex.xls
+https://www.tangotools.com/ui/UlcerIndex.xls
 }
 \author{
 Matthieu Lestel
