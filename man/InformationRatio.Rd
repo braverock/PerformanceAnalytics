@@ -4,7 +4,7 @@
 \alias{InformationRatio}
 \title{InformationRatio = ActivePremium/TrackingError}
 \usage{
-InformationRatio(Ra, Rb, scale = NA)
+InformationRatio(Ra, Rb, scale = NA, ...)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -14,6 +14,9 @@ asset returns}
 
 \item{scale}{number of periods in a year (daily scale = 252, monthly scale =
 12, quarterly scale = 4)}
+
+\item{\dots}{any other passthru parameters to ActivePremium and Return.annualized
+(e.g., \code{geometric=FALSE})}
 }
 \description{
 The Active Premium divided by the Tracking Error.

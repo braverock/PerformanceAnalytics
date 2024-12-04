@@ -13,6 +13,8 @@
 #' @param Rb return vector of the benchmark asset
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
+#' @param \dots any other passthru parameters to ActivePremium and Return.annualized
+#'   (e.g., \code{geometric=FALSE})
 #' @note William Sharpe now recommends \code{InformationRatio} preferentially
 #' to the original \code{\link{SharpeRatio}}.
 #' @author Peter Carl
@@ -30,7 +32,7 @@
 #' 
 #' @export
 InformationRatio <-
-function (Ra, Rb, scale = NA)
+function (Ra, Rb, scale = NA, ...)
 { # @author Peter Carl
 
     # DESCRIPTION
@@ -60,7 +62,7 @@ function (Ra, Rb, scale = NA)
 
     ir <-function (Ra, Rb, scale)
     {
-        ap = ActivePremium(Ra, Rb, scale = scale)
+        ap = ActivePremium(Ra, Rb, scale = scale, ...)
         te = TrackingError(Ra, Rb, scale = scale)
         IR = ap/te
         return(IR)
