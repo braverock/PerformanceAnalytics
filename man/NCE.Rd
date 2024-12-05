@@ -34,6 +34,8 @@ The optional arguments include the number of factors, given by `k` and the weigh
 `W`, see the examples.
 }
 \examples{
+
+\dontrun{ # CRAN doesn't like how long this takes (>5 secs)
 data(edhec)
 
 # default estimator
@@ -54,6 +56,7 @@ est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD",
                  
 # ridge weight matrix with alpha = 0.5
 est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD", "alpha" = 0.5))
+} # end \dontrun
 
 }
 \references{

@@ -1,8 +1,7 @@
-# Compute co-moment matrices
-
-#' calculate centered Returns
+#' calculate centered moment/co-moment return matrices
 #' 
-#' the \eqn{n}-th centered moment is calculated as \deqn{ }{moment^n(R) =
+#' the \eqn{n}-th centered moment is calculated as 
+#' \deqn{ }{moment^n(R) =
 #' E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack }{moment^n(R) =
 #' E[R-E(R)^n]}
 #' 
@@ -14,9 +13,6 @@
 #' 
 #' These functions were first utilized in Boudt, Peterson, and Croux (2008),
 #' and have been subsequently used in our other research.
-#' 
-#' ~~ Additional Details will be added to documentation as soon as we have time
-#' to write them. Documentation Patches Welcome. ~~
 #' 
 #' @aliases centeredcomoment centeredmoment Return.centered
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -46,10 +42,7 @@
 #' Scott, Robert C., and Philip A. Horvath. 1980. On the Direction of
 #' Preference for Moments of Higher Order than the Variance. Journal of Finance
 #' 35(4):915-919.
-###keywords ts multivariate distribution models
 #' @examples
-#' 
-#' 
 #' data(managers)
 #' Return.centered(managers[,1:3,drop=FALSE])
 #' 

@@ -315,6 +315,8 @@ NCE_obj_ineq <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fsk
 #' factors. Journal of Econometrics, 217(2), 381-397.
 #'
 #' @examples
+#' 
+#' \dontrun{ # CRAN doesn't like how long this takes (>5 secs)
 #' data(edhec)
 #' 
 #' # default estimator
@@ -335,7 +337,8 @@ NCE_obj_ineq <- function(theta, p, k, W, m2, m3, m4, include.mom, B, epsvar, fsk
 #'                  
 #' # ridge weight matrix with alpha = 0.5
 #' est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD", "alpha" = 0.5))
-#'
+#' } # end \dontrun
+#' 
 #' @export MM.NCE
 MM.NCE <- function(R, as.mat = TRUE, ...) {
   # @author Dries Cornilly

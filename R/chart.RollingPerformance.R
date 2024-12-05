@@ -11,7 +11,7 @@
 #' \code{\link{Return.annualized}} will)
 #' @param fill a three-component vector or list (recycled otherwise) providing 
 #' filling values at the left/within/to the right of the data range. See the 
-#' fill argument of \code{\link{na.fill}} for details.
+#' fill argument of \code{\link{zoo::na.fill}} for details.
 #' @param main set the chart title, same as in \code{\link{plot}}
 #' @param ylim set the y-axis limit, same as in \code{\link{plot}}
 #' @param \dots any other passthru parameters to \code{\link{plot}} or the
