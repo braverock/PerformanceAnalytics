@@ -31,7 +31,7 @@ order of the main line and the two confidence bands.}
 
 \item{fill}{a three-component vector or list (recycled otherwise) providing 
 filling values at the left/within/to the right of the data range. See the 
-fill argument of \code{\link{zoo::na.fill}} for details.}
+fill argument of \code{\link[zoo]{na.fill}} for details.}
 }
 \description{
 A wrapper to create a rolling mean return chart with 95% confidence bands.

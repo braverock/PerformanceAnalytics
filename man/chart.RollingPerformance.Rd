@@ -33,7 +33,7 @@ function specified}
 
 \item{fill}{a three-component vector or list (recycled otherwise) providing 
 filling values at the left/within/to the right of the data range. See the 
-fill argument of \code{\link{zoo::na.fill}} for details.}
+fill argument of \code{\link[zoo]{na.fill}} for details.}
 }
 \description{
 A wrapper to create a chart of rolling performance metrics in a line chart
