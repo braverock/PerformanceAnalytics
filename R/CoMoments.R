@@ -1,7 +1,8 @@
 #' calculate centered moment/co-moment return matrices
 #' 
 #' the \eqn{n}-th centered moment is calculated as 
-#' \deqn{ }{moment^n(R) =
+#' 
+#' \deqn{.}{moment^n(R) =
 #' E[R-E(R)^n]}\deqn{ \mu^{(n)}(R) = E\lbrack(R-E(R))^n\rbrack }{moment^n(R) =
 #' E[R-E(R)^n]}
 #' 

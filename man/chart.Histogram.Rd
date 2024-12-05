@@ -134,8 +134,7 @@ and partial matching is used.  Alternatively, a function can be supplied
 which will compute the intended number of breaks as a function of \code{R}.
 }
 \note{
-Code inspired by a chart on: \cr
-\url{https://zoonek2.free.fr/UNIX/48_R/03.html}
+Code inspired by a chart on: dead website zoonek2.free.fr /UNIX/48_R/03.html
 }
 \examples{
 

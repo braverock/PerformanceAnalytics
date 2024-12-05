@@ -47,8 +47,7 @@
 #' @param cex.lab The magnification to be used for x and y labels relative to
 #' the current setting of 'cex'.
 #' @param \dots any other passthru parameters to \code{plot}
-#' @note Code inspired by a chart on:
-#' \url{https://zoonek2.free.fr/UNIX/48_R/03.html}
+#' @note Code inspired by a chart on dead website zoonek2.free.fr /UNIX/48_R/03.html
 #' @author Peter Carl
 ###keywords ts multivariate distribution models hplot
 #' @examples

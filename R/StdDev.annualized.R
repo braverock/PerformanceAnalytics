@@ -32,7 +32,7 @@
 #' @param \dots any other passthru parameters
 #' @author Brian G. Peterson
 #' @seealso \code{\link[stats]{sd}} \cr
-#' \url{https://wikipedia.org/wiki/inverse-square_law}
+#' \url{https://en.wikipedia.org/wiki/Inverse-square_law}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 27 \cr
 ###keywords ts multivariate distribution models

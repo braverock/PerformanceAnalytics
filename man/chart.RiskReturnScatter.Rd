@@ -100,8 +100,7 @@ risk (standard deviation) for comparing manager performance. Also puts a box
 plot into the margins to help identify the relative performance quartile.
 }
 \note{
-Code inspired by a chart on:
-\url{https://zoonek2.free.fr/UNIX/48_R/03.html}
+Code inspired by a chart on dead website zoonek2.free.fr /UNIX/48_R/03.html
 }
 \examples{
 

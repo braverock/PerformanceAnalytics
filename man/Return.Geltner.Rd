@@ -24,8 +24,8 @@ manual pricing effects.
 
 The Geltner autocorrelation adjusted return series may be calculated via:
 
-\deqn{ }{Geltner.returns = [R(t) - R(t-1)*acf(R(t-1))]/1-acf(R(t-1)) }\deqn{
-R_{G}=\frac{R_{t}-(R_{t-1}\cdot\rho_{1})}{1-\rho_{1}} }{Geltner.returns =
+\deqn{.}{Geltner.returns = [R(t) - R(t-1)*acf(R(t-1))]/1-acf(R(t-1)) }
+\deqn{R_{G}=\frac{R_{t}-(R_{t-1}\cdot\rho_{1})}{1-\rho_{1}} }{Geltner.returns =
 [R(t) - R(t-1)*acf(R(t-1))]/1-acf(R(t-1)) }
 
 where \eqn{\rho_{1}}{acf(R(t-1))} is the first-order autocorrelation of the

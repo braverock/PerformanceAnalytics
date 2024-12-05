@@ -787,7 +787,7 @@ package.
 Data series \code{\link{edhec}} used in \kbd{PerformanceAnalytics} and
 related publications with the kind permission of the EDHEC Risk and Asset
 Management Research Center. \cr
-\url{https://climateimpact.edhec.edu/indexes/pure_style}
+\url{https://climateimpact.edhec.edu/retirement-investing}
 
 Kris Boudt was instrumental in our research on component risk for
 portfolios with non-normal distributions, and is responsible for much of

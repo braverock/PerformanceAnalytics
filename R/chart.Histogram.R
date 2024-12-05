@@ -69,8 +69,7 @@
 #' @param xaxis if true, draws the x axis
 #' @param yaxis if true, draws the y axis
 #' @param \dots any other passthru parameters to \code{\link{plot}}
-#' @note Code inspired by a chart on: \cr
-#' \url{https://zoonek2.free.fr/UNIX/48_R/03.html}
+#' @note Code inspired by a chart on: dead website zoonek2.free.fr /UNIX/48_R/03.html
 #' @author Peter Carl
 #' @seealso \code{\link[graphics]{hist}}
 ###keywords ts multivariate distribution models hplot
