@@ -23,7 +23,7 @@
 #' @param Contributions a time series of the per period contribution to portfolio return of each asset
 #' @param period period to convert to.  See details. "weeks", "months", "quarters", "years", or "all".
 #' @author Peter Carl, with thanks to Paolo Cavatore
-#' @seealso \code{\link{Return.portfolio}} \cr \code{\link{endpoints}} \cr
+#' @seealso \code{\link{Return.portfolio}} \cr \code{\link[xts]{endpoints}} \cr
 #' @references Morningstar, \emph{Total Portfolio Performance Attribution Methodology}, p.36.
 #'   Available at
 #'   \url{https://corporate.morningstar.com/US/documents/MethodologyDocuments/MethodologyPapers/TotalPortfolioPerformanceAttributionMethodology.pdf}

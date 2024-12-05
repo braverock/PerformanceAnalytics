@@ -57,7 +57,7 @@ Morningstar, \emph{Total Portfolio Performance Attribution Methodology}, p.36.
   \url{https://corporate.morningstar.com/US/documents/MethodologyDocuments/MethodologyPapers/TotalPortfolioPerformanceAttributionMethodology.pdf}
 }
 \seealso{
-\code{\link{Return.portfolio}} \cr \code{\link{endpoints}} \cr
+\code{\link{Return.portfolio}} \cr \code{\link[xts]{endpoints}} \cr
 }
 \author{
 Peter Carl, with thanks to Paolo Cavatore
