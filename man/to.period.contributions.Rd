@@ -34,7 +34,7 @@ expressed in cumulative terms, asset contributions then sum to the returns of th
 the period.
 
 Valid period character strings for period include: "weeks", "months", "quarters", "years", or "all".
-These are calculated internally via \code{\link{endpoints}}. See that function's help page for further details.
+These are calculated internally via \code{\link[xts]{endpoints}}. See that function's help page for further details.
 
 For the special period "all", the contribution is calculated over all rows,
 giving a single contribution across all observations.
