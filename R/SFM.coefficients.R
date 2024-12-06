@@ -195,15 +195,7 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
     
     # FUNCTION:
     
-    if (!requireNamespace("RobStatTM", quietly=TRUE)){
-      c = readline(prompt = "You need to install package RobStatTM to use this function. Do you want to install it? (y|N): "); 
-      if(c=="y" || c=="Y"){
-        utils::install.packages("RobStatTM")
-      }
-      else{
-        stop("Aborted")
-      }
-    }
+    
     # subset is assumed to be a logical vector
     if(missing(subset))
       subset <-TRUE
@@ -228,6 +220,8 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
                           model= model.lm))
            },
            Robust = {
+             stopifnot("package:RobStatTM" %in% search() || requireNamespace("RobStatTM", quietly = TRUE))    
+             
              model.rob.lm = RobStatTM::lmrobdetMM(Alpha ~ Beta, data=merged, 
                                        subset=subset, 
                                        control = RobStatTM::lmrobdet.control(family=family, ...))
@@ -236,6 +230,8 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
                           model= model.rob.lm))
            },
            Both = {
+             stopifnot("package:RobStatTM" %in% search() || requireNamespace("RobStatTM", quietly = TRUE))    
+             
              model.rob.lm = RobStatTM::lmrobdetMM(Alpha ~ Beta, data=merged,
                                        subset=subset,
                                        control = RobStatTM::lmrobdet.control(family=family))

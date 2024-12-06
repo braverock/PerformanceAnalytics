@@ -25,8 +25,10 @@
 #' @author Brian G. Peterson
 #' @references Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in
 #' Blackjack, Sports Betting, and the Stock Market.
-#' \url{https://archive.ph/h1LuS} \cr
 #' \url{https://en.wikipedia.org/wiki/Kelly_criterion}
+#' 
+#' no longer online, but can be found at archive.ph /h1LuS \cr
+#
 ###keywords ts multivariate distribution models
 #' @examples
 #' 

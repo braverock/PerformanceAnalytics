@@ -10,24 +10,24 @@
 #' literature, it is an example of a simple single factor model, 
 #' comparing an asset to any arbitrary benchmark.
 #'  
-#' @aliases CAPM.alpha
+#' @aliases CAPM.alpha SFM.alpha
 #' @param Ra an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rb return vector of the benchmark asset
 #' @param Rf risk free rate, in same period as your returns
 #' @param \dots Other parameters like max.it or bb specific to lmrobdetMM regression.
-#' @param digits (Optional): Number of digits to round the results to. Defaults to 3.
-#' @param benchmarkCols (Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.
-#' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Robust" for robust. Defaults to "LS      
-#' @param family (Optional): 
+#' @param digits Number of digits to round the results to. Defaults to 3.
+#' @param benchmarkCols Boolean to show the benchmarks as columns. Defaults to TRUE.
+#' @param method string representing linear regression model, "LS" for Least Squares
+#'                    and "Robust" for robust. Defaults to "LS"      
+#' @param family 
 #'         If method == "Robust": 
 #'           This is a string specifying the name of the family of loss function
 #'           to be used (current valid options are "bisquare", "opt" and "mopt").
 #'           Incomplete entries will be matched to the current valid options. 
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
-#' @param warning (Optional): Boolean to show warnings or not. Defaults to TRUE.
+#' @param warning Boolean to show warnings or not. Defaults to TRUE.
 #' 
 #' @author Dhairya Jain, Peter Carl
 #' @seealso \code{\link{CAPM.beta}} \code{\link{CAPM.utils}}
@@ -42,15 +42,16 @@
 #'     data(managers)
 #'     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
 #'     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
-#'     SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
-#'
+#'     # SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) # other variations
+#' \dontrun{
 #'     alphas <- SFM.alpha(managers[,1:6], 
 #' 			managers[,8:10], 
 #' 			Rf=.035/12, method="Robust", 
 #' 			family="opt", bb=0.25, max.it=200, digits=4)
 #' 	     alphas["HAM1", ]
 #' 	     alphas[, "Alpha : SP500 TR"]
-#' 
+#' } # CRAN can have issues with RobStatTM 
+#'
 #' @rdname SFM.alpha
 #' @export SFM.alpha CAPM.alpha
 SFM.alpha <- CAPM.alpha <- function (Ra, Rb, Rf = 0,  ..., digits=3, benchmarkCols = T, method="LS", family="mopt", warning=T){
