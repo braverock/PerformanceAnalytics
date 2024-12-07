@@ -85,9 +85,12 @@ which can be found on CRAN.
 
     data(edhec)
     Omega(edhec)
-    Omega(edhec[,13],method="interp",output="point")
-    Omega(edhec[,13],method="interp",output="full")
-
+    
+    # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+    if(requireNamespace("Hmisc", quietly = TRUE)){
+      Omega(edhec[,13],method="interp",output="point")
+      Omega(edhec[,13],method="interp",output="full")
+    } # end  spurious CRAN check
 }
 \references{
 Keating, J. and Shadwick, W.F. The Omega Function. working

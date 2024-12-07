@@ -232,12 +232,16 @@
 #'     ES(edhec, p=.99)
 #'     # or the equivalent alpha=.01
 #'     ES(edhec, p=.01)
+#'     
+#'     # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+#'     if(requireNamespace("robustbase", quietly = TRUE)){
+#        now with outliers squished
+#'       ES(edhec, clean="boudt")
 #' 
-#'     # now with outliers squished
-#'     ES(edhec, clean="boudt")
-#' 
-#'     # add Component ES for the equal weighted portfolio
-#'     ES(edhec, clean="boudt", portfolio_method="component")
+#'       # add Component ES for the equal weighted portfolio
+#'       ES(edhec, clean="boudt", portfolio_method="component")
+#'     } # end CRAN workaround
+#'     
 #' 
 #' } # end CRAN Windows check
 #'     

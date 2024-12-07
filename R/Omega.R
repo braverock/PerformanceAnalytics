@@ -65,9 +65,12 @@
 #' 
 #'     data(edhec)
 #'     Omega(edhec)
-#'     Omega(edhec[,13],method="interp",output="point")
-#'     Omega(edhec[,13],method="interp",output="full")
-#' 
+#'     
+#'     # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+#'     if(requireNamespace("Hmisc", quietly = TRUE)){
+#'       Omega(edhec[,13],method="interp",output="point")
+#'       Omega(edhec[,13],method="interp",output="full")
+#'     } # end  spurious CRAN check
 #' @export
 Omega <-
 function(R, L = 0, method = c("simple", "interp", "binomial", "blackscholes"), 
