@@ -62,49 +62,54 @@
 #' @examples
 #' 
 #' data(managers)
-#'     SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
-#'     SFM.beta(managers[,1:3], managers[,8:10], Rf=.035/12) 
-#'     SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
-#'
-#'     betas <- SFM.beta(managers[,1:6], 
-#' 			managers[,8:10], 
-#' 			Rf=.035/12, method="Robust", 
-#' 			family="opt", bb=0.25, max.it=200, digits=4)
-#' 	     betas["HAM1", ]
-#' 	     betas[, "Beta : SP500 TR"]
-#' 	     
-#' 	   SFM.beta.bull(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"])
-#'     SFM.beta.bull(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"],
-#' 			method="Robust")
-#' 			
-#' 	   SFM.beta.bear(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"])
-#'     SFM.beta.bear(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"],
-#' 			method="Robust")
-#' 			
-#'     TimingRatio(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"])
-#' 	   TimingRatio(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"],
-#' 			method="Robust", family="mopt")
 #' 
-#'     chart.Regression(managers[, "HAM2"], 
-#' 			managers[, "SP500 TR"], 
-#' 			Rf = managers[, "US 3m TR"], 
-#' 			fit="conditional", 
-#' 			main="Conditional Beta")
-#'   		
-#'   		
-
+#' SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
+#' SFM.beta(managers[,1:3], managers[,8:10], Rf=.035/12) 
+#' SFM.beta(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
+#'
+#' SFM.beta.bull(managers[, "HAM2"], 
+#' 			         managers[, "SP500 TR"], 
+#' 			         Rf = managers[, "US 3m TR"])
+#' 			         
+#' SFM.beta.bear(managers[, "HAM2"], 
+#' 			         managers[, "SP500 TR"], 
+#' 			         Rf = managers[, "US 3m TR"])
+#' 			
+#' TimingRatio(managers[, "HAM2"], 
+#' 			       managers[, "SP500 TR"], 
+#' 			       Rf = managers[, "US 3m TR"])
+#' 			
+#' if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
+#'   betas <- SFM.beta(managers[,1:6], 
+#' 			               managers[,8:10], 
+#' 			               Rf=.035/12, method="Robust", 
+#' 			               family="opt", bb=0.25, max.it=200, digits=4)
+#' 	 betas["HAM1", ]
+#' 	 betas[, "Beta : SP500 TR"]
+#' 	     
+#'   SFM.beta.bull(managers[, "HAM2"], 
+#' 	               managers[, "SP500 TR"], 
+#' 			           Rf = managers[, "US 3m TR"],
+#' 			           method="Robust")
+#' 			
+#'   SFM.beta.bear(managers[, "HAM2"], 
+#' 			           managers[, "SP500 TR"], 
+#' 			           Rf = managers[, "US 3m TR"],
+#' 			           method="Robust")
+#' 			           
+#' 	 TimingRatio(managers[, "HAM2"], 
+#' 	         		 managers[, "SP500 TR"], 
+#' 			         Rf = managers[, "US 3m TR"],
+#' 			         method="Robust", family="mopt")
+#' 			
+#' } # CRAN can have issues with RobStatTM
+#' 			
+#' chart.Regression(managers[, "HAM2"], 
+#' 			            managers[, "SP500 TR"], 
+#' 			            Rf = managers[, "US 3m TR"], 
+#' 			            fit="conditional", 
+#' 			            main="Conditional Beta")
+#'
 #' @rdname SFM.beta
 #' @export SFM.beta CAPM.beta
 SFM.beta <- CAPM.beta <- function (Ra, Rb, Rf = 0, ..., digits=3, benchmarkCols=T, method="LS", family="mopt", warning=T)

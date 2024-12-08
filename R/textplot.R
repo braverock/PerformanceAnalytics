@@ -78,7 +78,7 @@
 #' \code{\link[utils]{capture.output}}, \cr \code{\link[gplots]{textplot}}
 ###keywords hplot
 #' @examples
-#' 
+#' \donttest{ # don't test on CRAN, since it requires Suggested packages
 #' # Also see the examples in the original gplots textplot function
 #' data(managers)
 #' textplot(table.AnnualizedReturns(managers[,1:6]))
@@ -95,7 +95,7 @@
 #' #           rep("orange",2)), mar = c(0,0,4,0)+0.1)
 #' #
 #' # title(main="Calendar Returns")
-#'
+#' }
 #' @export
 textplot <- function(object, halign="center", valign="center", cex, 
                             max.cex = 1, cmar=2, rmar=0.5,

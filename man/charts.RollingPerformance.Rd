@@ -38,9 +38,7 @@ A wrapper to create a rolling annualized returns chart, rolling annualized
 standard deviation chart, and a rolling annualized sharpe ratio chart.
 }
 \examples{
-if(!( Sys.info()[['sysname']]=="Windows") ){
-# if on Windows, cut and paste this example
-
+\donttest{
 data(managers)
 charts.RollingPerformance(managers[,1:8], 
                           Rf=managers[,10,drop=FALSE], 

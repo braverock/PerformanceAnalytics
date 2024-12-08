@@ -50,16 +50,15 @@
 #' performance measurement and attribution}. Wiley. 2004. \cr
 ###keywords ts multivariate distribution models
 #' @examples
-#' 
-#' data(managers)
-#'      SFM.coefficients(managers[,1], managers[,8]) 
-#'      SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
-#' 			SFM.coefficients(managers[,1:6], managers[,8:9], 
+#' if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
+#'   data(managers)
+#'   SFM.coefficients(managers[,1], managers[,8]) 
+#'   SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
+#' 	 SFM.coefficients(managers[,1:6], managers[,8:9], 
 #' 			     Rf=.035/12, method="Robust", 
 #' 			     family="mopt", bb=0.25, 
 #' 			     max.it=200)
-#' 			     
-#'   	  
+#' } # CRAN requires conditional execution
 #' @rdname SFM.coefficients
 #' @export SFM.coefficients
 SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust", 
@@ -105,7 +104,7 @@ SFM.coefficients <- function(Ra, Rb, Rf=0, subset=TRUE, ..., method="Robust",
   Rb.colnames <- colnames(Rb)
   
   # ret.Model == TRUE means internal usage. Hence, if not internal usage
-  if (Model==F){
+  if (Model==FALSE){
     if (warning && method=="Both"){
       warning("Using 'Both' while using SFM.Coefficients will lead to ill-formatted output");
     }

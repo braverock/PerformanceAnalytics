@@ -225,10 +225,7 @@ for details.
 }
 
 \examples{
-
-if(!( Sys.info()[['sysname']]=="Windows") ){
-# if on Windows, cut and paste this example
-
+\donttest{ 
     data(edhec)
 
     # first do normal ES calc

@@ -35,6 +35,8 @@ formatted.
 data(managers)
 t(table.CalendarReturns(managers[,c(1,7,8)]))
 
+\donttest{ # don't test on CRAN, since it requires Suggested packages
+
 # prettify with format.df in hmisc package
 require("Hmisc")
 result = t(table.CalendarReturns(managers[,c(1,8)]))
@@ -47,7 +49,7 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
          mar = c(0,0,3,0)+0.1)
          
 title(main="Calendar Returns")
-
+}
 }
 \author{
 Peter Carl

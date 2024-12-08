@@ -19,6 +19,9 @@
 #' 
 #' result=table.Correlation(managers[,1:6],managers[,8])
 #' rownames(result)=colnames(managers[,1:6])
+#' 
+#' \donttest{ # don't test on CRAN, since it requires Suggested packages
+#' 
 #' require("Hmisc")
 #' textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
 #'          cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
@@ -28,7 +31,7 @@
 #' 
 #' ctable = table.Correlation(managers[,1:6],managers[,8,drop=FALSE], conf.level=.99)
 #' dotchart(ctable[,1],labels=rownames(ctable),xlim=c(-1,1))
-#' 
+#' }
 #' @export
 table.Correlation <-
 function (Ra, Rb, ...)

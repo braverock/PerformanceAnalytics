@@ -48,7 +48,7 @@
 ###keywords ts multivariate distribution models
 #' @examples
 #' 
-#'   \dontrun{
+#'   \dontrun{ # no internet access on CRAN tests
 #'     require(quantmod)
 #'     prices = Cl(getSymbols("IBM", from = "1999-01-01", to = "2007-01-01"))
 #'   }

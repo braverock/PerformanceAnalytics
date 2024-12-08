@@ -62,13 +62,13 @@ comparing an asset to any arbitrary benchmark.
     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
     # SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) # other variations
-\dontrun{
-    alphas <- SFM.alpha(managers[,1:6], 
-			managers[,8:10], 
-			Rf=.035/12, method="Robust", 
-			family="opt", bb=0.25, max.it=200, digits=4)
-	     alphas["HAM1", ]
-	     alphas[, "Alpha : SP500 TR"]
+if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
+   alphas <- SFM.alpha(managers[,1:6], 
+		                  	managers[,8:10], 
+			                  Rf=.035/12, method="Robust", 
+			                  family="opt", bb=0.25, max.it=200, digits=4)
+	  alphas["HAM1", ]
+	  alphas[, "Alpha : SP500 TR"]
 } # CRAN can have issues with RobStatTM 
 
 }

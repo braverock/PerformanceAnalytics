@@ -82,10 +82,7 @@ to the rest of the portfolio would decrease the overall portfolio standard
 deviation.
 }
 \examples{
-
-if(!( Sys.info()[['sysname']]=="Windows") ){
-# if on Windows, cut and paste this example
-
+\donttest{
     data(edhec)
 
     # first do normal StdDev calc
@@ -99,7 +96,7 @@ if(!( Sys.info()[['sysname']]=="Windows") ){
     # add Component StdDev for the equal weighted portfolio
     StdDev(edhec, clean="boudt", portfolio_method="component")
 
-} # end CRAN Windows check
+} # end CRAN check
 
 }
 \seealso{

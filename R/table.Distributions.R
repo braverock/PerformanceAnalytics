@@ -19,6 +19,8 @@
 #' data(managers)
 #' table.Distributions(managers[,1:8])
 #' 
+#' \donttest{ # don't test on CRAN, since it requires Suggested packages
+#' 
 #' require("Hmisc")
 #' result = t(table.Distributions(managers[,1:8]))
 #' 
@@ -27,7 +29,7 @@
 #' row.valign="center", wrap.rownames=20, wrap.colnames=10,
 #' col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 #' title(main="Portfolio Distributions statistics")
-#' 
+#' }
 #' @export
 table.Distributions <-
 function (R, scale = NA, digits = 4)

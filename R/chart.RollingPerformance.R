@@ -23,8 +23,7 @@
 #' \code{\link[zoo]{rollapply}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' if(!( Sys.info()[['sysname']]=="Windows") ){
-#' # if on Windows, cut and paste this example
+#' \donttest{
 #' data(edhec)
 #' chart.RollingPerformance(edhec[, 1:3], width = 24)
 #' chart.RollingPerformance(edhec[, 1:3], 

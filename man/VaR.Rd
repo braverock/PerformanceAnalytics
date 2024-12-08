@@ -278,10 +278,7 @@ their improved Marginal Risk measures may be included here in the future.
 }
 
 \examples{
-
-if(!( Sys.info()[['sysname']]=="Windows") ){
-# if on Windows, cut and paste this example
-
+\donttest{
     data(edhec)
 
     # first do normal VaR calc
@@ -304,7 +301,7 @@ if(!( Sys.info()[['sysname']]=="Windows") ){
     # add Component VaR for the equal weighted portfolio
     VaR(edhec, clean="boudt", portfolio_method="component")
 
-} # end Windows check
+} # end CRAN check
 
 }
 \references{

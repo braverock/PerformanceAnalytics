@@ -16,7 +16,7 @@
 #' \cr \code{\link{SharpeRatio.annualized}}
 ###keywords ts multivariate distribution models
 #' @examples
-#' 
+#' \donttest{ # don't test on CRAN, since it requires Suggested packages
 #' data(managers)
 #' table.AnnualizedReturns(managers[,1:8])
 #' 
@@ -30,7 +30,7 @@
 #'          rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 #'          
 #' title(main="Annualized Performance")
-#' 
+#' }
 #' @export
 table.AnnualizedReturns <-
 function (R, scale = NA, Rf = 0, geometric = TRUE, digits = 4)

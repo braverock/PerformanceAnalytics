@@ -213,10 +213,7 @@
 #' expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
 ###keywords ts multivariate distribution models
 #' @examples
-#' 
-#' if(!( Sys.info()[['sysname']]=="Windows") ){
-#' # if on Windows, cut and paste this example
-#' 
+#' \donttest{ 
 #'     data(edhec)
 #' 
 #'     # first do normal ES calc

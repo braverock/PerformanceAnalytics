@@ -224,7 +224,7 @@ with an appropriate number of spaces.  That function was also written by
 Gregory R. Warnes and included in the 'gplots' package.
 }
 \examples{
-
+\donttest{ # don't test on CRAN, since it requires Suggested packages
 # Also see the examples in the original gplots textplot function
 data(managers)
 textplot(table.AnnualizedReturns(managers[,1:6]))
@@ -241,7 +241,7 @@ textplot(table.AnnualizedReturns(managers[,1:6]))
 #           rep("orange",2)), mar = c(0,0,4,0)+0.1)
 #
 # title(main="Calendar Returns")
-
+}
 }
 \seealso{
 \code{\link{plot}}, \cr \code{\link{text}}, \cr

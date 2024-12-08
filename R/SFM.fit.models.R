@@ -20,7 +20,7 @@
 #' @param plots Boolean to output plots after the function. Defaults to TRUE
 #' @author Dhairya Jain
 #' @examples 
-#' 
+#' \dontrun{
 #' # First we load the data
 #'     data(managers)
 #'     mgrs <- managers["2002/"]  # So that all have managers have complete history
@@ -42,7 +42,7 @@
 #' 		 
 #' 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", 
 #' 		                plots=FALSE)
-#'
+#' }
 #' @rdname SFM.fit.models
 #' @export SFM.fit.models
 SFM.fit.models <- function(Ra, Rb, Rf=0, family = "mopt", 

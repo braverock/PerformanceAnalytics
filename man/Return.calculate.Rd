@@ -56,7 +56,7 @@ Other \code{method} argument formulations also work for clarity and backwards co
 }
 \examples{
 
-  \dontrun{
+  \dontrun{ # no internet access on CRAN tests
     require(quantmod)
     prices = Cl(getSymbols("IBM", from = "1999-01-01", to = "2007-01-01"))
   }
