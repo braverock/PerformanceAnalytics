@@ -29,16 +29,17 @@ This table will show statistics pertaining to an asset against a set of
 benchmarks, or statistics for a set of assets against a benchmark.
 }
 \examples{
-
+\donttest{ # CRAN does not allow examples to load suggested packages in one of its tests
 data(managers)
 table.SFM(managers[,1:3], managers[,8], Rf = managers[,10])
 
 result = table.SFM(managers[,1:3], managers[,8], Rf = managers[,10])
+require(Hmisc)
 textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, 
          halign = "center", valign = "top", row.valign="center", 
          wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 title(main="Single Factor Model Related Statistics")
-
+}
 }
 \seealso{
 \code{\link{CAPM.alpha}} \cr \code{\link{CAPM.beta}} \cr
