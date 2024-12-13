@@ -24,8 +24,7 @@
 #' @param method method=half will use the half-Kelly, this is the default
 #' @author Brian G. Peterson
 #' @references Thorp, Edward O. (1997; revised 1998). The Kelly Criterion in
-#' Blackjack, Sports Betting, and the Stock Market.
-#' \url{https://archive.ph/h1LuS} \cr
+#' Blackjack, Sports Betting, and the Stock Market. #https://archive.ph/h1LuS
 #' \url{https://en.wikipedia.org/wiki/Kelly_criterion}
 ###keywords ts multivariate distribution models
 #' @examples
