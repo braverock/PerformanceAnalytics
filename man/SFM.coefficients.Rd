@@ -72,16 +72,15 @@ slope can be used to determine the risk premium or excess expected return
 (see Eq. 7.9 and 7.10, p. 230-231).
 }
 \examples{
-
-data(managers)
-     SFM.coefficients(managers[,1], managers[,8]) 
-     SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
-			SFM.coefficients(managers[,1:6], managers[,8:9], 
+if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
+  data(managers)
+  SFM.coefficients(managers[,1], managers[,8]) 
+  SFM.coefficients(managers[,1:6], managers[,8:9], Rf = managers[,10])
+	 SFM.coefficients(managers[,1:6], managers[,8:9], 
 			     Rf=.035/12, method="Robust", 
 			     family="mopt", bb=0.25, 
 			     max.it=200)
-			     
-  	  
+} # CRAN requires conditional execution
 }
 \references{
 Sharpe, W.F. Capital Asset Prices: A theory of market

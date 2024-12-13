@@ -88,7 +88,7 @@ Most inputs are the same as "\code{\link{plot}}" and are principally
 included so that some sensible defaults could be set.
 }
 \examples{
-
+\donttest{
 # First we load the data
 data(managers)
 chart.RollingRegression(managers[, 1, drop=FALSE], 
@@ -103,7 +103,7 @@ chart.RollingQuantileRegression(managers[, 1, drop=FALSE],
 #charts.RollingQuantileRegression(managers[, 1:6], 
 #		managers[, 8, drop=FALSE], Rf = .04/12, 
 #		colorset = rich6equal, legend.loc="topleft")
-
+}
 }
 \seealso{
 \code{\link[stats]{lm}} \cr \code{\link[quantreg]{rq}} \cr

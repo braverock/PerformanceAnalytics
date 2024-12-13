@@ -19,8 +19,8 @@ Authors@R: c(
   , person(given=c("Justin", "M."),family="Shea",role="ctb")
   , person(given="Dhairya",family="Jain",role="ctb")
   )
-Version: 2.0.8
-Date: 2024-12-04
+Version: 2.0.8-1
+Date: 2024-12-09
 Description: Collection of econometric functions for performance and risk 
     analysis. In addition to standard risk and performance metrics, this 
     package aims to aid practitioners and researchers in utilizing the latest
@@ -62,5 +62,5 @@ License: GPL-2 | GPL-3
 Encoding: UTF-8
 LazyData: true
 URL: https://github.com/braverock/PerformanceAnalytics
-Copyright: (c) 2004-2022
+Copyright: (c) 2004-2024
 RoxygenNote: 7.3.2

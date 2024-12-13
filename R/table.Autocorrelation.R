@@ -20,6 +20,7 @@
 #' Introduction and Overview. SSRN eLibrary.
 ###keywords ts multivariate distribution models
 #' @examples
+#' \donttest{ # CRAN does not allow examples to load suggested packages in one of its tests
 #' 
 #' data(managers)
 #' t(table.Autocorrelation(managers))
@@ -31,7 +32,7 @@
 #'          wrap.colnames=10, mar = c(0,0,3,0)+0.1)
 #'          
 #' title(main="Autocorrelation")
-#' 
+#' }
 #' @export
 table.Autocorrelation <-
   function (R, digits = 4, max.lag = 6)

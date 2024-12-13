@@ -19,9 +19,7 @@
 #' @seealso \code{\link{chart.RollingPerformance}}
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' if(!( Sys.info()[['sysname']]=="Windows") ){
-#' # if on Windows, cut and paste this example
-#' 
+#' \donttest{
 #' data(managers)
 #' charts.RollingPerformance(managers[,1:8], 
 #'                           Rf=managers[,10,drop=FALSE], 

@@ -71,7 +71,7 @@ to.period.contributions <- function(Contributions, period = c("years", "quarters
   # Calculate period return of portfolio from contributions
   pret = rowSums(C)
   pret = xts(pret, order.by=index(C))
-  lag.cum.ret = na.fill(lag(cumprod(1+pret),1),1)
+  lag.cum.ret = na.fill(xts::lag.xts(cumprod(1+pret),1),1)
   wgt.contrib = C * rep(lag.cum.ret, NCOL(C))
 
   # Calculate aggregation periods

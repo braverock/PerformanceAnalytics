@@ -62,10 +62,7 @@
 #' @seealso \code{\link{Return.clean}} \code{sd}
 ###keywords ts multivariate distribution models
 #' @examples
-#' 
-#' if(!( Sys.info()[['sysname']]=="Windows") ){
-#' # if on Windows, cut and paste this example
-#' 
+#' \donttest{
 #'     data(edhec)
 #' 
 #'     # first do normal StdDev calc
@@ -79,7 +76,7 @@
 #'     # add Component StdDev for the equal weighted portfolio
 #'     StdDev(edhec, clean="boudt", portfolio_method="component")
 #' 
-#' } # end CRAN Windows check
+#' } # end CRAN check
 #' 
 #' @export
 StdDev <- function (R , ..., clean=c("none","boudt","geltner", "locScaleRob"),  portfolio_method=c("single","component"), 

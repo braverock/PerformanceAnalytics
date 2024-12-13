@@ -22,6 +22,8 @@
 #' data(managers)
 #' table.DownsideRiskRatio(managers[,1:8])
 #' 
+#' \donttest{ # don't test on CRAN, since it requires Suggested packages
+#' 
 #' require("Hmisc")
 #' result = t(table.DownsideRiskRatio(managers[,1:8]))
 #' 
@@ -30,7 +32,7 @@
 #' row.valign="center", wrap.rownames=20, wrap.colnames=10,
 #' col.rownames=c("red", rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
 #' title(main="Downside risk statistics")
-#' 
+#' }
 #' @export
 table.DownsideRiskRatio <-
 function (R, MAR = 0, scale = NA, digits = 4)

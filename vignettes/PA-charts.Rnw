@@ -704,9 +704,12 @@ frontier of the market portfolio.
 \label{fig:CAPM-Table}
 
 <<tableCAPM,echo=T>>=
-table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
-managers[ trailing36.rows, 8, drop=FALSE],
-Rf = managers[ trailing36.rows, Rf.col, drop=FALSE])
+# CRAN questionably(ahem) requires these methods to not run if you don't have Suggests loaded
+if(requireNamespace("RobStatTM", quietly = TRUE)){
+  table.CAPM(managers[trailing36.rows, c(manager.col, peers.cols)],
+  managers[ trailing36.rows, 8, drop=FALSE],
+  Rf = managers[ trailing36.rows, Rf.col, drop=FALSE])
+} # end spurious and unnecessary CRAN check
 @
 \end{figure}
 

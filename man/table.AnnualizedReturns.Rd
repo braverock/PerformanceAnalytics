@@ -24,7 +24,7 @@ default TRUE}
 Table of Annualized Return, Annualized Std Dev, and Annualized Sharpe
 }
 \examples{
-
+\donttest{ # don't test on CRAN, since it requires Suggested packages
 data(managers)
 table.AnnualizedReturns(managers[,1:8])
 
@@ -38,7 +38,7 @@ textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE,
          rep("darkgray",5), rep("orange",2)), mar = c(0,0,3,0)+0.1)
          
 title(main="Annualized Performance")
-
+}
 }
 \seealso{
 \code{\link{Return.annualized}} \cr \code{\link{StdDev.annualized}}

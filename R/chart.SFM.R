@@ -45,6 +45,8 @@
 #' 1964, 425-442. \cr
 ###keywords ts multivariate distribution models
 #' @examples
+#'
+#' \donttest{ # CRAN tests if Suggested packages are loaded
 #'    data(managers)
 #'    
 #' 		mgrs <- managers["2002/"]  # So that all have managers have complete history
@@ -57,7 +59,7 @@
 #'         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = TRUE,
 #'                        main = names(mgrs[,k]))
 #'    }
-#'    
+#' }   
 #'   
 #' @importFrom stats summary.lm
 #' @rdname chart.SFM

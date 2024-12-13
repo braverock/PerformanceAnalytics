@@ -38,7 +38,7 @@
 #' @seealso \code{\link[stats]{lm}} \cr \code{\link[quantreg]{rq}} \cr
 ###keywords ts multivariate distribution models hplot
 #' @examples
-#' 
+#' \donttest{
 #' # First we load the data
 #' data(managers)
 #' chart.RollingRegression(managers[, 1, drop=FALSE], 
@@ -53,7 +53,7 @@
 #' #charts.RollingQuantileRegression(managers[, 1:6], 
 #' #		managers[, 8, drop=FALSE], Rf = .04/12, 
 #' #		colorset = rich6equal, legend.loc="topleft")
-#' 
+#' }
 #' @export
 chart.RollingRegression <-
 function (Ra, Rb, width = 12, Rf = 0, attribute = c("Beta", "Alpha", "R-Squared"), main=NULL, na.pad = TRUE, ...)

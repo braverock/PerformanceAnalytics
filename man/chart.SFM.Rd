@@ -69,6 +69,8 @@ outside that strip are defined as outliers, and as such are rejected, i.e.,
 deleted by the lmrobdetMM estimator.
 }
 \examples{
+
+\donttest{ # CRAN tests if Suggested packages are loaded
    data(managers)
    
 		mgrs <- managers["2002/"]  # So that all have managers have complete history
@@ -81,7 +83,7 @@ deleted by the lmrobdetMM estimator.
         chart.SFM(mgrs[,k],mgrs$SP500,mgrs$RF,makePct = TRUE,
                        main = names(mgrs[,k]))
    }
-   
+}   
   
 }
 \references{

@@ -213,10 +213,7 @@
 #' expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
 ###keywords ts multivariate distribution models
 #' @examples
-#' 
-#' if(!( Sys.info()[['sysname']]=="Windows") ){
-#' # if on Windows, cut and paste this example
-#' 
+#' \donttest{ 
 #'     data(edhec)
 #' 
 #'     # first do normal ES calc
@@ -232,12 +229,16 @@
 #'     ES(edhec, p=.99)
 #'     # or the equivalent alpha=.01
 #'     ES(edhec, p=.01)
+#'     
+#'     # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+#'     if(requireNamespace("robustbase", quietly = TRUE)){
+#        now with outliers squished
+#'       ES(edhec, clean="boudt")
 #' 
-#'     # now with outliers squished
-#'     ES(edhec, clean="boudt")
-#' 
-#'     # add Component ES for the equal weighted portfolio
-#'     ES(edhec, clean="boudt", portfolio_method="component")
+#'       # add Component ES for the equal weighted portfolio
+#'       ES(edhec, clean="boudt", portfolio_method="component")
+#'     } # end CRAN workaround
+#'     
 #' 
 #' } # end CRAN Windows check
 #'     

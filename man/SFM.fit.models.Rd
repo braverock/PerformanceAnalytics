@@ -40,7 +40,7 @@ SFM estimates by lm and lmrobdetMM functions, using the fit.models framework.
 This will allow for an easier comparison using charts and tables
 }
 \examples{
-
+\dontrun{
 # First we load the data
     data(managers)
     mgrs <- managers["2002/"]  # So that all have managers have complete history
@@ -62,7 +62,7 @@ This will allow for an easier comparison using charts and tables
 		 
 		 SFM.fit.models(mgrs$HAM2, mgrs$SP500, Rf = mgrs$RF, family = "opt", 
 		                plots=FALSE)
-
+}
 }
 \author{
 Dhairya Jain

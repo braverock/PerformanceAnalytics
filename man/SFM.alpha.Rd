@@ -27,22 +27,21 @@ asset returns}
 
 \item{\dots}{Other parameters like max.it or bb specific to lmrobdetMM regression.}
 
-\item{digits}{(Optional): Number of digits to round the results to. Defaults to 3.}
+\item{digits}{Number of digits to round the results to. Defaults to 3.}
 
-\item{benchmarkCols}{(Optional): Boolean to show the benchmarks as columns. Defaults to TRUE.}
+\item{benchmarkCols}{Boolean to show the benchmarks as columns. Defaults to TRUE.}
 
-\item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
-and "Robust" for robust. Defaults to "LS}
+\item{method}{string representing linear regression model, "LS" for Least Squares
+and "Robust" for robust. Defaults to "LS"}
 
-\item{family}{(Optional): 
-If method == "Robust": 
+\item{family}{If method == "Robust": 
   This is a string specifying the name of the family of loss function
   to be used (current valid options are "bisquare", "opt" and "mopt").
   Incomplete entries will be matched to the current valid options. 
   Defaults to "mopt".
 Else: the parameter is ignored}
 
-\item{warning}{(Optional): Boolean to show warnings or not. Defaults to TRUE.}
+\item{warning}{Boolean to show warnings or not. Defaults to TRUE.}
 }
 \description{
 This is a wrapper for calculating a single factor model (CAPM) alpha.
@@ -62,14 +61,15 @@ comparing an asset to any arbitrary benchmark.
     data(managers)
     SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], Rf = managers[, "US 3m TR"])
     SFM.alpha(managers[,1:3], managers[,8:10], Rf=.035/12) 
-    SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) 
-
-    alphas <- SFM.alpha(managers[,1:6], 
-			managers[,8:10], 
-			Rf=.035/12, method="Robust", 
-			family="opt", bb=0.25, max.it=200, digits=4)
-	     alphas["HAM1", ]
-	     alphas[, "Alpha : SP500 TR"]
+    # SFM.alpha(managers[,1], managers[,8:10], Rf=.035/12, benchmarkCols=FALSE) # other variations
+if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
+   alphas <- SFM.alpha(managers[,1:6], 
+		                  	managers[,8:10], 
+			                  Rf=.035/12, method="Robust", 
+			                  family="opt", bb=0.25, max.it=200, digits=4)
+	  alphas["HAM1", ]
+	  alphas[, "Alpha : SP500 TR"]
+} # CRAN can have issues with RobStatTM 
 
 }
 \references{
