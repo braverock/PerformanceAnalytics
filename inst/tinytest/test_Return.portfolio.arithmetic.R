@@ -43,8 +43,8 @@ expect_inherits(out_geo, "xts")
 # 7. Residual handling in geometric ----------------------------------------
 w_not1 <- xts(matrix(c(0.6,0.3), nrow=1), order.by=as.Date("1996-12-31"))
 colnames(w_not1) <- colnames(R_monthly)
-expect_warning(out_resid <- Return.portfolio(R_monthly, weights=w_not1, geometric=TRUE))
-expect_true("Residual" %in% colnames(out_resid))
+expect_warning(out_rets <- Return.portfolio(R_monthly, weights=w_not1, geometric=TRUE))
+expect_true("portfolio.returns" %in% colnames(out_rets))
 
 # 8. wealth.index = TRUE ---------------------------------------------------
 out_wi <- Return.portfolio(R_monthly, weights=c(0.5,0.5), geometric=TRUE, wealth.index=TRUE)
