@@ -1,5 +1,5 @@
 library(xts)
-
+library(PerformanceAnalytics)
 
 data(edhec, package = "PerformanceAnalytics")
 R_monthly <- edhec['199701/199704', 1:2]
