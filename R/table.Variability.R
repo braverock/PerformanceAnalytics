@@ -48,6 +48,7 @@ function (R, scale = NA, geometric = TRUE, digits = 4)
     #set up frequency
     if(is.na(scale)) {
         freq = periodicity(R)
+        name <- paste0(freq$scale," Std Dev")
         switch(freq$scale,
             minute = {stop("Data periodicity too high")},
             hourly = {stop("Data periodicity too high")},
@@ -57,13 +58,15 @@ function (R, scale = NA, geometric = TRUE, digits = 4)
             quarterly = {scale = 4},
             yearly = {scale = 1}
         )
+    } else {
+        name <- paste0("Std Dev")
     }
 
     # for each column, do the following:
     for(column in 1:columns) {
         z = c(MeanAbsoluteDeviation(y[,column,drop=FALSE]), StdDev.annualized(y[,column,drop=FALSE], scale = scale)/sqrt(scale), StdDev.annualized(y[,column,drop=FALSE], scale = scale))
 
-        znames = c("Mean Absolute deviation", paste0(freq$scale," Std Dev"), "Annualized Std Dev")
+        znames = c("Mean Absolute deviation", name, "Annualized Std Dev")
 
 
         if(column == 1) {
