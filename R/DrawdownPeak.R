@@ -33,13 +33,13 @@ DrawdownPeak <- function (R, ...)
         val = 1
         borne = peak+1
         for(j in (borne:i)) {
-          val = val*(1+R[j]/100)
+          val = val*(1+R[j])
         }
         if (val > 1) {
           peak = i
           drawdownpeak[i] = 0
         } else {
-          drawdownpeak[i] = (val-1)*100
+          drawdownpeak[i] = val-1
         }
       }
       result = drawdownpeak
