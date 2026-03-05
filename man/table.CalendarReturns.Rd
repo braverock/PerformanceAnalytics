@@ -9,7 +9,7 @@ table.CalendarReturns(R, digits = 1, as.perc = TRUE, geometric = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
-asset returns}
+monthly or daily asset returns}
 
 \item{digits}{number of digits to round results to for presentation}
 
@@ -24,8 +24,7 @@ and a total column in the last column.  For additional columns in \code{R},
 annual returns will be appended as columns.
 }
 \note{
-This function assumes monthly returns and does not currently have
-handling for other scales.
+This function assumes monthly returns or daily returns and does not have handling for other periodicities
 
 This function defaults to the first column as the monthly returns to be
 formatted.

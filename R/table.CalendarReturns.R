@@ -7,13 +7,12 @@
 #' 
 #' @aliases table.CalendarReturns table.Returns
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' asset returns
+#' monthly or daily asset returns
 #' @param digits number of digits to round results to for presentation
 #' @param as.perc TRUE/FALSE if TRUE, multiply simple returns by 100 to get \%
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
-#' @note This function assumes monthly returns and does not currently have
-#' handling for other scales.
+#' @note This function assumes monthly returns or daily returns and does not have handling for other periodicities
 #' 
 #' This function defaults to the first column as the monthly returns to be
 #' formatted.
@@ -81,8 +80,18 @@ function (R, digits = 1, as.perc = TRUE, geometric = TRUE)
 
     # FUNCTION:
 
-    ri = checkData(R, method = "zoo")
+    ri = checkData(R, method = "xts")
 
+    # Check periodicity of the input returns
+    freq = periodicity(ri)
+    
+    # If daily, convert to monthly; if monthly, proceed.
+    if (freq$scale == "daily") {
+      ri = apply.monthly(ri, Return.cumulative, geometric = geometric)
+    } else if (freq$scale != "monthly") {
+      warning(paste("Data periodicity is", freq$scale, "- daily or monthly expected. Proceeding with caution."))
+    }
+    
     columns = ncol(ri)
     columnnames = colnames(ri)
     rownames = rownames(ri)
