@@ -3,6 +3,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/braverock/PerformanceAnalytics/workflows/R-CMD-check/badge.svg)](https://github.com/braverock/PerformanceAnalytics/actions)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
+[![Codecov test coverage](https://codecov.io/gh/braverock/PerformanceAnalytics/graph/badge.svg)](https://app.codecov.io/gh/braverock/PerformanceAnalytics)
 <!-- badges: end -->
 
 `PerformanceAnalytics` provides an R package of econometric functions
