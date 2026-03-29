@@ -19,7 +19,8 @@ for (topic in topics) {
       if (file.exists(ex_file) && file.info(ex_file)$size > 0) {
         
         # Test the example file within expect_snapshot
-        expect_snapshot({
+        # We transform NA's to NAs to ensure cross-compatibility between R < 4.5 and R >= 4.5
+        expect_snapshot(transform = function(lines) gsub("NA's", "NAs ", lines), {
           # Suppress warnings and set graphic devices to NULL to avoid plot saving
           pdf(file=NULL)
           suppressWarnings(
