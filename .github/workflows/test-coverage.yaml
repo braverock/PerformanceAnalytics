@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+      NODE_OPTIONS: "--no-deprecation"
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
