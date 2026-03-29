@@ -86,7 +86,7 @@ MinTrackRecord<-function(R = NULL, Rf=0,refSR,p = 0.95, weights = NULL,n = NULL,
     Rf = checkData(Rf)
   }
   
-  if(exists("x")) num_of_cols = ncol(x)
+  if(exists("x", inherits=FALSE)) num_of_cols = ncol(x)
   
   #If the Reference Sharpe Ratio is greater than the Obserred Sharpe Ratio an error is displayed
   index_of_higher_tr = which(refSR>sr)
@@ -102,6 +102,7 @@ MinTrackRecord<-function(R = NULL, Rf=0,refSR,p = 0.95, weights = NULL,n = NULL,
     warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of: ",column_names[index_of_higher_tr],"\n"))
     
   }
+  num_of_cols = length(sr)
   sk = as.numeric(sk)
   kr = as.numeric(kr)
   if(ignore_skewness) sk = rep(0,num_of_cols)

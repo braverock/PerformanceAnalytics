@@ -2064,21 +2064,23 @@
       
       > data(managers)
       
-      > Return.annualized(managers[, 1, drop = FALSE])
-                            HAM1
-      Annualized Return 0.137532
+      > round(Return.annualized(managers[, 1, drop = FALSE]), 
+      +     4)
+                          HAM1
+      Annualized Return 0.1375
       
-      > Return.annualized(managers[, 1:8])
-                            HAM1      HAM2      HAM3      HAM4       HAM5      HAM6
-      Annualized Return 0.137532 0.1746569 0.1512147 0.1214798 0.03731645 0.1372755
-                        EDHEC LS EQ   SP500 TR
-      Annualized Return   0.1180134 0.09674533
+      > round(Return.annualized(managers[, 1:8]), 4)
+                          HAM1   HAM2   HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ
+      Annualized Return 0.1375 0.1747 0.1512 0.1215 0.0373 0.1373       0.118
+                        SP500 TR
+      Annualized Return   0.0967
       
-      > Return.annualized(managers[, 1:8], geometric = FALSE)
-                             HAM1      HAM2      HAM3   HAM4       HAM5      HAM6
-      Annualized Return 0.1334727 0.1697184 0.1493636 0.1322 0.04905974 0.1326563
-                        EDHEC LS EQ  SP500 TR
-      Annualized Return     0.11454 0.1039841
+      > round(Return.annualized(managers[, 1:8], geometric = FALSE), 
+      +     4)
+                          HAM1   HAM2   HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ
+      Annualized Return 0.1335 0.1697 0.1494 0.1322 0.0491 0.1327      0.1145
+                        SP500 TR
+      Annualized Return    0.104
     Code
       dev.off()
     Output
@@ -2285,13 +2287,10 @@
       > names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN", 
       +     "ED", "FIA", "GM", "LS", "MA", "RV", "SS", "FOF")
       
-      > if (requireNamespace("RobStatTM", quietly = TRUE)) {
-      +     outRob <- Return.locScaleRob(edhec$CA)
+      > if (suppressMessages(suppressWarnings(requireNamespace("RobStatTM", 
+      +     quietly = TRUE)))) {
+      +     outRob <- suppressMessages(Return.locScaleRob(edhec$CA))
       + }
-    Message
-      Registered S3 method overwritten by 'RobStatTM':
-        method          from      
-        hatvalues.lmrob robustbase
     Code
       dev.off()
     Output

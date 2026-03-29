@@ -30,8 +30,8 @@ names(edhec) = c("CA", "CTA", "DIS", "EM", "EMN",
                  "ED", "FIA", "GM", "LS", "MA",
                  "RV", "SS", "FOF")
 # Cleaning the returns time series for manager data
-if(requireNamespace("RobStatTM", quietly = TRUE)) { # CRAN requires conditional execution
-  outRob <- Return.locScaleRob(edhec$CA)
+if(suppressMessages(suppressWarnings(requireNamespace("RobStatTM", quietly = TRUE)))) { # CRAN requires conditional execution
+  outRob <- suppressMessages(Return.locScaleRob(edhec$CA))
 }
 }
 \author{
