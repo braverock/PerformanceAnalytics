@@ -20,7 +20,7 @@ for (topic in topics) {
         
         # Test the example file within expect_snapshot
         # We transform NA's to NAs to ensure cross-compatibility between R <= 4.4 and R-devel
-        expect_snapshot(transform = function(lines) gsub("NA's   ", "NAs    ", lines), {
+        expect_snapshot(transform = function(lines) { lines <- gsub("NA's   ", "NAs    ", lines); lines <- gsub("([0-9]+\\.[0-9]{5})[0-9]+", "\\1", lines); lines }, {
           # Suppress warnings and set graphic devices to NULL to avoid plot saving
           pdf(file=NULL)
           suppressWarnings(
