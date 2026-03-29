@@ -26,7 +26,7 @@
 #' @seealso \code{\link{Return.portfolio}} \cr \code{\link[xts]{endpoints}} \cr
 #' @references Morningstar, \emph{Total Portfolio Performance Attribution Methodology}, p.36.
 #'   Available at
-#'   \url{https://corporate.morningstar.com/US/documents/MethodologyDocuments/MethodologyPapers/TotalPortfolioPerformanceAttributionMethodology.pdf}
+#'   \url{https://morningstardirect.morningstar.com/clientcomm/Morningstar-Total-Portfolio-Performance-Attribution-Methodology.pdf}
 #' @aliases to.monthly.contributions to.weekly.contributions to.quarterly.contributions to.yearly.contributions
 #'
 #' @export

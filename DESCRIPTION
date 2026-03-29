@@ -11,21 +11,21 @@ Authors@R: c(
   , person(given="Dries",family="Cornilly",role="ctb")
   , person(given="Eric",family="Hung",role="ctb")
   , person(given="Matthieu",family="Lestel",role="ctb")
-  , person(given="Kyle",family="Balkissoon",role="ctb")  
-  , person(given="Diethelm",family="Wuertz",role="ctb")  
-  , person(given=c("Anthony","Alexander"),family="Christidis",role="ctb")  
-  , person(given="R. Douglas",family="Martin",role="ctb")  
-  , person(given=c("Zeheng", "Zenith"),family="Zhou",role="ctb")  
+  , person(given="Kyle",family="Balkissoon",role="ctb")
+  , person(given="Diethelm",family="Wuertz",role="ctb")
+  , person(given=c("Anthony","Alexander"),family="Christidis",role="ctb")
+  , person(given="R. Douglas",family="Martin",role="ctb")
+  , person(given=c("Zeheng", "Zenith"),family="Zhou",role="ctb")
   , person(given=c("Justin", "M."),family="Shea",role="ctb")
   , person(given="Dhairya",family="Jain",role="ctb")
   )
-Version: 2.0.8-1
-Date: 2024-12-09
-Description: Collection of econometric functions for performance and risk 
-    analysis. In addition to standard risk and performance metrics, this 
+Version: 2.0.9
+Date: 2026-03-28
+Description: Collection of econometric functions for performance and risk
+    analysis. In addition to standard risk and performance metrics, this
     package aims to aid practitioners and researchers in utilizing the latest
-    research in analysis of non-normal return streams.  In general, it is most 
-    tested on return (rather than price) data on a regular scale, but most 
+    research in analysis of non-normal return streams.  In general, it is most
+    tested on return (rather than price) data on a regular scale, but most
     functions will work with irregular return data as well, and increasing
     numbers of functions will work with P&L or price data where possible.
 Imports:
@@ -33,7 +33,7 @@ Imports:
     quadprog,
     zoo
 Depends:
-    R (>= 3.5.0),
+    R (>= 4.0.0),
     xts (>= 0.10.0)
 Suggests:
     dygraphs,

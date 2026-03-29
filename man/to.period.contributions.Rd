@@ -54,7 +54,7 @@ to.yearly.contributions(res_qtr_rebal$contribution)
 \references{
 Morningstar, \emph{Total Portfolio Performance Attribution Methodology}, p.36.
   Available at
-  \url{https://corporate.morningstar.com/US/documents/MethodologyDocuments/MethodologyPapers/TotalPortfolioPerformanceAttributionMethodology.pdf}
+  \url{https://morningstardirect.morningstar.com/clientcomm/Morningstar-Total-Portfolio-Performance-Attribution-Methodology.pdf}
 }
 \seealso{
 \code{\link{Return.portfolio}} \cr \code{\link[xts]{endpoints}} \cr

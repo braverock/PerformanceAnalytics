@@ -24,7 +24,9 @@
 #'                  "ED", "FIA", "GM", "LS", "MA",
 #'                  "RV", "SS", "FOF")
 #' # Cleaning the returns time series for manager data
-#' if(suppressMessages(suppressWarnings(requireNamespace("RobStatTM", quietly = TRUE)))) { # CRAN requires conditional execution
+#' if (suppressMessages(suppressWarnings(
+#'   requireNamespace("RobStatTM", quietly = TRUE)))) {
+#'   # CRAN requires conditional execution
 #'   outRob <- suppressMessages(Return.locScaleRob(edhec$CA))
 #' }
 # Implementation of the robust filter for the IF TS

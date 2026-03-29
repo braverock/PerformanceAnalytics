@@ -18,7 +18,7 @@ To further assist financial institutions and investors implement the latest rese
 
 }
 \format{CSV loaded into R and saved as an xts object with monthly observations. NOTE: In the era of CoVid-19, a few observations in the `Short Selling` index have not been reported. We chose to zero fill them at this time. These are observations on 2020-04-30, 2020-05-31, 2020-11-30, 2020-12-31, 2021-01-31, 2021-04-30, and 2021-05-31.}
-\source{\url{https://climateimpact.edhec.edu/}}
+\source{\url{https://climateinstitute.edhec.edu/}}
 \references{
 About EDHEC Alternative Indexes. December 16, 2003. EDHEC-Risk. \cr
 
