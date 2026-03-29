@@ -13,6 +13,7 @@ jobs:
   test-coverage:
     runs-on: ubuntu-latest
     env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
