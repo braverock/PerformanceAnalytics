@@ -1337,34 +1337,34 @@
       [1] 1583.033
       
       $IS_SR_SIGNIFICANT
-      [1] FALSE FALSE
+      [1] FALSE
       
       $num_of_extra_obs_needed
-      [1] 1291 1291
+      [1] 1291
       
       
       > MinTrackRecord(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = FALSE, ignore_kurtosis = TRUE)
       $min_TRL
-      [1] 1233.385 1233.385
+      [1] 1233.385
       
       $IS_SR_SIGNIFICANT
-      [1] FALSE FALSE
+      [1] FALSE
       
       $num_of_extra_obs_needed
-      [1] 941 941
+      [1] 941
       
       
       > MinTrackRecord(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = TRUE, ignore_kurtosis = TRUE)
       $min_TRL
-      [1] 668.2947 668.2947
+      [1] 668.2947
       
       $IS_SR_SIGNIFICANT
-      [1] FALSE FALSE
+      [1] FALSE
       
       $num_of_extra_obs_needed
-      [1] 376 376
+      [1] 376
       
       
       > MinTrackRecord(edhec[, 1:2], refSR = 0.26, weights = c(0.5, 
@@ -1898,21 +1898,21 @@
       > ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = FALSE, ignore_kurtosis = TRUE)
       $sr_prob
-      [1] 0.7883343 0.7883343
+      [1] 0.7883343
       
       $sr_confidence_interval
-        Lower Bound Sharpe Ratio Upper Bound   <NA>   <NA>
-      1      0.2109       0.2109      0.3455 0.4802 0.4802
+        Lower Bound Sharpe Ratio Upper Bound
+      1      0.2109       0.3455      0.4802
       
       
       > ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = TRUE, ignore_kurtosis = TRUE)
       $sr_prob
-      [1] 0.8617196 0.8617196
+      [1] 0.8617196
       
       $sr_confidence_interval
-        Lower Bound Sharpe Ratio Upper Bound   <NA>   <NA>
-      1      0.2465       0.2465      0.3455 0.4446 0.4446
+        Lower Bound Sharpe Ratio Upper Bound
+      1      0.2465       0.3455      0.4446
       
       
       > ProbSharpeRatio(edhec[, 1:2], refSR = 0.26, weights = c(0.5, 
