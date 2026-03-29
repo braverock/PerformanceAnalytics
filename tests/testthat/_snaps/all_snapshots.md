@@ -4692,7 +4692,7 @@
        Mean   :2001-07-15   Mean   : 0.011123   Mean   : 0.01414  
        3rd Qu.:2004-04-07   3rd Qu.: 0.024850   3rd Qu.: 0.02520  
        Max.   :2006-12-31   Max.   : 0.069200   Max.   : 0.15560  
-                                                NA's   :7         
+                                                NAs    :7         
             HAM3                HAM4               HAM5                HAM6          
        Min.   :-0.071800   Min.   :-0.17590   Min.   :-0.132000   Min.   :-0.040400  
        1st Qu.:-0.005375   1st Qu.:-0.01985   1st Qu.:-0.016400   1st Qu.:-0.001575  
@@ -4700,7 +4700,7 @@
        Mean   : 0.012447   Mean   : 0.01102   Mean   : 0.004088   Mean   : 0.011055  
        3rd Qu.: 0.031375   3rd Qu.: 0.04600   3rd Qu.: 0.030900   3rd Qu.: 0.025475  
        Max.   : 0.179600   Max.   : 0.15080   Max.   : 0.174700   Max.   : 0.058300  
-                                              NA's   :55          NA's   :68         
+                                              NAs    :55          NAs    :68         
         EDHEC LS EQ           SP500 TR           US 10Y TR            US 3m TR       
        Min.   :-0.055200   Min.   :-0.144600   Min.   :-0.070920   Min.   :0.000660  
        1st Qu.:-0.003175   1st Qu.:-0.017327   1st Qu.:-0.008515   1st Qu.:0.001570  
@@ -4708,7 +4708,7 @@
        Mean   : 0.009545   Mean   : 0.008665   Mean   : 0.004385   Mean   :0.003226  
        3rd Qu.: 0.021450   3rd Qu.: 0.038025   3rd Qu.: 0.016660   3rd Qu.:0.004395  
        Max.   : 0.074500   Max.   : 0.097800   Max.   : 0.050550   Max.   :0.006580  
-       NA's   :12                                                                    
+       NAs    :12                                                                    
       
       > tail(cumprod(1 + managers), 1)
                      HAM1 HAM2     HAM3    HAM4 HAM5 HAM6 EDHEC LS EQ SP500 TR
