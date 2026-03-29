@@ -1,6 +1,7 @@
 # PerformanceAnalytics: Econometric tools for performance and risk analysis.
 
 <!-- badges: start -->
+[![test-coverage](https://github.com/braverock/PerformanceAnalytics/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/braverock/PerformanceAnalytics/actions/workflows/test-coverage.yaml)
 [![R-CMD-check](https://github.com/braverock/PerformanceAnalytics/workflows/R-CMD-check/badge.svg)](https://github.com/braverock/PerformanceAnalytics/actions)
 [![Downloads from the RStudio CRAN mirror](https://cranlogs.r-pkg.org/badges/PerformanceAnalytics)](https://cran.r-project.org/package=PerformanceAnalytics)
 [![Codecov test coverage](https://codecov.io/gh/braverock/PerformanceAnalytics/graph/badge.svg)](https://app.codecov.io/gh/braverock/PerformanceAnalytics)
