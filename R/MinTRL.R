@@ -94,12 +94,12 @@ MinTrackRecord<-function(R = NULL, Rf=0,refSR,p = 0.95, weights = NULL,n = NULL,
     if(length(index_of_higher_tr)==num_of_cols){
       stop("The reference Sharpe Ratio greater than the Observed Sharpe ratio for all the timeseries")
     }
+    warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of: ",paste(column_names[index_of_higher_tr], collapse=", "),"\n"))
     sr = sr[-index_of_higher_tr]
     refSR = refSR[-index_of_higher_tr]
     sk = sk[-index_of_higher_tr]
     kr = kr[-index_of_higher_tr]
     column_names = column_names[-index_of_higher_tr]
-    warning(paste("The Reference Sharpe Ratio greater than the Observed Sharpe Ratio for the returns of: ",column_names[index_of_higher_tr],"\n"))
     
   }
   num_of_cols = length(sr)
