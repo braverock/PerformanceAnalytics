@@ -11,25 +11,25 @@
       
       > ActivePremium(managers[, "HAM1", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 0.04078
+      [1] 0.04078668
       
       > ActivePremium(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE])
-      [1] 0.04078
+      [1] 0.04078668
       
       > ActivePremium(managers[, 1:6], managers[, 8, drop = FALSE])
                                      HAM1       HAM2       HAM3       HAM4       HAM5
-      Active Premium: SP500 TR 0.04078 0.07759 0.05446 0.02473 0.02182
+      Active Premium: SP500 TR 0.04078668 0.07759873 0.05446935 0.02473443 0.02182245
                                      HAM6
-      Active Premium: SP500 TR 0.07585
+      Active Premium: SP500 TR 0.07585993
       
       > ActivePremium(managers[, 1:6], managers[, 8:7, drop = FALSE])
                                         HAM1       HAM2       HAM3        HAM4
-      Active Premium: SP500 TR    0.04078 0.07759 0.05446  0.02473
-      Active Premium: EDHEC LS EQ 0.01965 0.03776 0.01043 -0.00462
+      Active Premium: SP500 TR    0.04078668 0.07759873 0.05446935  0.02473443
+      Active Premium: EDHEC LS EQ 0.01965368 0.03776329 0.01043540 -0.00462594
                                          HAM5       HAM6
-      Active Premium: SP500 TR     0.02182 0.07585
-      Active Premium: EDHEC LS EQ -0.03237 0.05463
+      Active Premium: SP500 TR     0.02182245 0.07585993
+      Active Premium: EDHEC LS EQ -0.03237453 0.05463574
     Code
       dev.off()
     Output
@@ -49,15 +49,15 @@
       
       > print(AdjustedSharpeRatio(portfolio_bacon[, 1]))
                                       portfolio.monthly.return....
-      Annualized Sharpe Ratio (Rf=0%)                    0.75914
+      Annualized Sharpe Ratio (Rf=0%)                    0.7591435
       
       > data(managers)
       
       > print(AdjustedSharpeRatio(managers["1996"]))
                                                 HAM1    HAM2      HAM3     HAM4 HAM5
-      Adjusted Sharpe ratio (Risk free = 0) 2.04596 14.5593 0.93227 1.88336   NA
+      Adjusted Sharpe ratio (Risk free = 0) 2.045968 14.5593 0.9322736 1.883368   NA
                                             HAM6 EDHEC LS EQ SP500 TR   US 10Y TR
-      Adjusted Sharpe ratio (Risk free = 0)   NA          NA 1.98696 0.00631
+      Adjusted Sharpe ratio (Risk free = 0)   NA          NA 1.986962 0.006312774
                                              US 3m TR
       Adjusted Sharpe ratio (Risk free = 0) -576.9696
     Code
@@ -79,26 +79,26 @@
       
       > print(AppraisalRatio(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], method = "appraisal"))
-      [1] -0.43027
+      [1] -0.4302756
       
       > print(AppraisalRatio(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], method = "modified"))
-      [1] -0.01418
+      [1] -0.01418576
       
       > print(AppraisalRatio(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], method = "alternative"))
-      [1] -0.10669
+      [1] -0.1066928
       
       > data(managers)
       
       > print(AppraisalRatio(managers["1996", 1], managers["1996", 
       +     8]))
-      [1] 1.62302
+      [1] 1.623025
       
       > print(AppraisalRatio(managers["1996", 1:5], managers["1996", 
       +     8]))
                                           HAM1 HAM2     HAM3      HAM4 HAM5
-      Appraisal ratio (Risk free = 0) 1.62302   NA 3.52772 0.70704   NA
+      Appraisal ratio (Risk free = 0) 1.623025   NA 3.527723 0.7070483   NA
     Code
       dev.off()
     Output
@@ -117,18 +117,18 @@
       > data(portfolio_bacon)
       
       > print(BernardoLedoitRatio(portfolio_bacon[, 1]))
-      [1] 1.77978
+      [1] 1.779783
       
       > data(managers)
       
       > print(BernardoLedoitRatio(managers["1996"]))
                                     HAM1 HAM2     HAM3     HAM4 HAM5 HAM6 EDHEC LS EQ
-      Bernardo and Ledoit ratio 4.59833 2375 6.48281 3.61507  NaN  NaN         NaN
+      Bernardo and Ledoit ratio 4.598338 2375 6.482812 3.615074  NaN  NaN         NaN
                                 SP500 TR US 10Y TR US 3m TR
-      Bernardo and Ledoit ratio 4.34062  1.02827     -Inf
+      Bernardo and Ledoit ratio 4.340625  1.028277     -Inf
       
       > print(BernardoLedoitRatio(managers["1996", 1]))
-      [1] 4.59833
+      [1] 4.598338
     Code
       dev.off()
     Output
@@ -148,29 +148,29 @@
       
       > BetaCoVariance(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 0.34316
+      [1] 0.3431621
       
       > BetaCoSkewness(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 0.04542
+      [1] 0.04542927
       
       > BetaCoKurtosis(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 0.19883
+      [1] 0.1988373
       
       > BetaCoKurtosis(managers[, 1:6], managers[, 8, drop = FALSE])
                                      HAM1      HAM2     HAM3      HAM4      HAM5
-      Beta Cokurtosis: SP500 TR 0.48146 0.19883 0.50681 0.84835 0.27386
+      Beta Cokurtosis: SP500 TR 0.4814681 0.1988373 0.506819 0.8483555 0.2738611
                                      HAM6
-      Beta Cokurtosis: SP500 TR 0.15412
+      Beta Cokurtosis: SP500 TR 0.1541281
       
       > BetaCoKurtosis(managers[, 1:6], managers[, 8:7])
                                         HAM1      HAM2     HAM3      HAM4      HAM5
-      Beta Cokurtosis: SP500 TR    0.48146 0.19883 0.50681 0.84835 0.27386
-      Beta Cokurtosis: EDHEC LS EQ 0.71005 1.26760 1.42666 1.45330 1.28312
+      Beta Cokurtosis: SP500 TR    0.4814681 0.1988373 0.506819 0.8483555 0.2738611
+      Beta Cokurtosis: EDHEC LS EQ 0.7100547 1.2676023 1.426660 1.4533001 1.2831205
                                         HAM6
-      Beta Cokurtosis: SP500 TR    0.15412
-      Beta Cokurtosis: EDHEC LS EQ 0.86183
+      Beta Cokurtosis: SP500 TR    0.1541281
+      Beta Cokurtosis: EDHEC LS EQ 0.8618328
     Code
       dev.off()
     Output
@@ -189,27 +189,27 @@
       > data(portfolio_bacon)
       
       > print(BurkeRatio(portfolio_bacon[, 1]))
-      [1] 0.74473
+      [1] 0.7447309
       
       > print(BurkeRatio(portfolio_bacon[, 1], modified = TRUE))
-      [1] 3.64842
+      [1] 3.648421
       
       > data(managers)
       
       > print(BurkeRatio(managers["1996"]))
                                       HAM1 HAM2     HAM3     HAM4 HAM5 HAM6
-      Burke ratio (Risk free = 0) 4.77974  Inf 6.34048 4.04815   NA   NA
+      Burke ratio (Risk free = 0) 4.779747  Inf 6.340485 4.048153   NA   NA
                                   EDHEC LS EQ SP500 TR   US 10Y TR US 3m TR
-      Burke ratio (Risk free = 0)          NA 4.73982 0.00613      Inf
+      Burke ratio (Risk free = 0)          NA 4.739828 0.006137083      Inf
       
       > print(BurkeRatio(managers["1996", 1]))
-      [1] 4.77974
+      [1] 4.779747
       
       > print(BurkeRatio(managers["1996"], modified = TRUE))
                                                HAM1 HAM2     HAM3     HAM4 HAM5 HAM6
       Modified Burke ratio (Risk free = 0) 16.55753  Inf 21.96408 14.02321   NA   NA
                                            EDHEC LS EQ SP500 TR  US 10Y TR US 3m TR
-      Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125      Inf
+      Modified Burke ratio (Risk free = 0)          NA 16.41925 0.02125948      Inf
       
       > print(BurkeRatio(managers["1996", 1], modified = TRUE))
       [1] 16.55753
@@ -233,21 +233,21 @@
       > CAPM.CML.slope(managers[, "SP500 TR", drop = FALSE], 
       +     managers[, 10, drop = FALSE])
                                            SP500 TR
-      Capital Market Line Slope: SP500 TR 0.12558
+      Capital Market Line Slope: SP500 TR 0.1255829
       
       > CAPM.CML(managers[, "HAM1", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE], Rf = 0)
-      [1] 0.00222
+      [1] 0.002225442
       
       > CAPM.RiskPremium(managers[, "SP500 TR", drop = FALSE], 
       +     Rf = 0)
                               SP500 TR
-      Risk Premium (Rf=0%) 0.00866
+      Risk Premium (Rf=0%) 0.008665341
       
       > CAPM.RiskPremium(managers[, "HAM1", drop = FALSE], 
       +     Rf = 0)
                                  HAM1
-      Risk Premium (Rf=0%) 0.01112
+      Risk Premium (Rf=0%) 0.01112273
       
       > CAPM.SML.slope(managers[, "SP500 TR", drop = FALSE], 
       +     Rf = 0)
@@ -273,77 +273,77 @@
       > CAPM.dynamic(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE], Rf = 0.035/12, Z = managers[, 9:10])
                        Average alpha US 10Y TR alpha at t - 1 US 3m TR alpha at t - 1
-      HAM1 to SP500 TR     0.00709                -0.19635               0.16653
+      HAM1 to SP500 TR     0.0070965                -0.196351               0.1665381
                        Average beta US 10Y TR beta at t - 1 US 3m TR beta at t - 1
-      HAM1 to SP500 TR    0.32480                3.49333              -63.74814
+      HAM1 to SP500 TR    0.3248015                3.493336              -63.74814
       
       > CAPM.dynamic(managers[80:120, 1:6], managers[80:120, 
       +     7, drop = FALSE], Rf = managers[80:120, 10, drop = FALSE], 
       +     Z = managers[80:120, 9:10])
                           Average alpha US 10Y TR alpha at t - 1
-      HAM1 to EDHEC LS EQ -0.00017              -0.23890
-      HAM2 to EDHEC LS EQ -0.00276              -0.06632
-      HAM3 to EDHEC LS EQ  0.00626              -0.21733
-      HAM4 to EDHEC LS EQ -0.00332               0.16135
-      HAM5 to EDHEC LS EQ  0.00433               0.26882
-      HAM6 to EDHEC LS EQ -0.00538               0.05000
+      HAM1 to EDHEC LS EQ -0.0001741347              -0.23890464
+      HAM2 to EDHEC LS EQ -0.0027673634              -0.06632217
+      HAM3 to EDHEC LS EQ  0.0062624783              -0.21733015
+      HAM4 to EDHEC LS EQ -0.0033262023               0.16135997
+      HAM5 to EDHEC LS EQ  0.0043380559               0.26882960
+      HAM6 to EDHEC LS EQ -0.0053865004               0.05000616
                           US 3m TR alpha at t - 1 Average beta
-      HAM1 to EDHEC LS EQ              -0.43850    1.17930
-      HAM2 to EDHEC LS EQ              -4.01769    0.70673
-      HAM3 to EDHEC LS EQ               7.68048    0.42606
-      HAM4 to EDHEC LS EQ              -0.20918    1.63676
-      HAM5 to EDHEC LS EQ               3.84971    1.22245
-      HAM6 to EDHEC LS EQ              -3.06643    1.62819
+      HAM1 to EDHEC LS EQ              -0.4385012    1.1793098
+      HAM2 to EDHEC LS EQ              -4.0176982    0.7067390
+      HAM3 to EDHEC LS EQ               7.6804829    0.4260623
+      HAM4 to EDHEC LS EQ              -0.2091890    1.6367609
+      HAM5 to EDHEC LS EQ               3.8497148    1.2224547
+      HAM6 to EDHEC LS EQ              -3.0664314    1.6281908
                           US 10Y TR beta at t - 1 US 3m TR beta at t - 1
-      HAM1 to EDHEC LS EQ                3.86121              -51.01409
-      HAM2 to EDHEC LS EQ                5.68208              171.16658
-      HAM3 to EDHEC LS EQ                1.50791             -705.20354
-      HAM4 to EDHEC LS EQ               -7.62213             -565.85196
-      HAM5 to EDHEC LS EQ                7.08395               39.70358
-      HAM6 to EDHEC LS EQ              -11.03513              343.52891
+      HAM1 to EDHEC LS EQ                3.861212              -51.01409
+      HAM2 to EDHEC LS EQ                5.682080              171.16658
+      HAM3 to EDHEC LS EQ                1.507916             -705.20354
+      HAM4 to EDHEC LS EQ               -7.622136             -565.85196
+      HAM5 to EDHEC LS EQ                7.083956               39.70358
+      HAM6 to EDHEC LS EQ              -11.035136              343.52891
       
       > CAPM.dynamic(managers[80:120, 1:6], managers[80:120, 
       +     8:7], managers[80:120, 10, drop = FALSE], Z = managers[80:120, 
       +     9:10])
                           Average alpha US 10Y TR alpha at t - 1
-      HAM1 to SP500 TR     0.00363              -0.03538
-      HAM2 to SP500 TR     0.00169              -0.05484
-      HAM3 to SP500 TR     0.00726              -0.05978
-      HAM4 to SP500 TR    -0.00158               0.41314
-      HAM5 to SP500 TR     0.00833               0.35300
-      HAM6 to SP500 TR     0.00128               0.03521
-      HAM1 to EDHEC LS EQ -0.00017              -0.23890
-      HAM2 to EDHEC LS EQ -0.00276              -0.06632
-      HAM3 to EDHEC LS EQ  0.00626              -0.21733
-      HAM4 to EDHEC LS EQ -0.00332               0.16135
-      HAM5 to EDHEC LS EQ  0.00433               0.26882
-      HAM6 to EDHEC LS EQ -0.00538               0.05000
+      HAM1 to SP500 TR     0.0036316941              -0.03538369
+      HAM2 to SP500 TR     0.0016901086              -0.05484988
+      HAM3 to SP500 TR     0.0072668556              -0.05978008
+      HAM4 to SP500 TR    -0.0015875926               0.41314240
+      HAM5 to SP500 TR     0.0083363515               0.35300102
+      HAM6 to SP500 TR     0.0012839717               0.03521033
+      HAM1 to EDHEC LS EQ -0.0001741347              -0.23890464
+      HAM2 to EDHEC LS EQ -0.0027673634              -0.06632217
+      HAM3 to EDHEC LS EQ  0.0062624783              -0.21733015
+      HAM4 to EDHEC LS EQ -0.0033262023               0.16135997
+      HAM5 to EDHEC LS EQ  0.0043380559               0.26882960
+      HAM6 to EDHEC LS EQ -0.0053865004               0.05000616
                           US 3m TR alpha at t - 1 Average beta
-      HAM1 to SP500 TR                 0.08506   0.51861
-      HAM2 to SP500 TR                -2.91835   0.05157
-      HAM3 to SP500 TR                 4.10231   0.17720
-      HAM4 to SP500 TR                -6.04090   1.20562
-      HAM5 to SP500 TR                 1.56695   0.57212
-      HAM6 to SP500 TR                -1.72313   0.59611
-      HAM1 to EDHEC LS EQ             -0.43850   1.17930
-      HAM2 to EDHEC LS EQ             -4.01769   0.70673
-      HAM3 to EDHEC LS EQ              7.68048   0.42606
-      HAM4 to EDHEC LS EQ             -0.20918   1.63676
-      HAM5 to EDHEC LS EQ              3.84971   1.22245
-      HAM6 to EDHEC LS EQ             -3.06643   1.62819
+      HAM1 to SP500 TR                 0.08506313   0.51861197
+      HAM2 to SP500 TR                -2.91835013   0.05157528
+      HAM3 to SP500 TR                 4.10231175   0.17720080
+      HAM4 to SP500 TR                -6.04090381   1.20562924
+      HAM5 to SP500 TR                 1.56695525   0.57212866
+      HAM6 to SP500 TR                -1.72313785   0.59611332
+      HAM1 to EDHEC LS EQ             -0.43850123   1.17930984
+      HAM2 to EDHEC LS EQ             -4.01769818   0.70673900
+      HAM3 to EDHEC LS EQ              7.68048289   0.42606233
+      HAM4 to EDHEC LS EQ             -0.20918897   1.63676093
+      HAM5 to EDHEC LS EQ              3.84971482   1.22245465
+      HAM6 to EDHEC LS EQ             -3.06643145   1.62819081
                           US 10Y TR beta at t - 1 US 3m TR beta at t - 1
-      HAM1 to SP500 TR                  -1.18105              -65.73676
-      HAM2 to SP500 TR                   2.07553              -23.79983
-      HAM3 to SP500 TR                   1.06335             -256.19346
-      HAM4 to SP500 TR                  -1.81221              162.03456
-      HAM5 to SP500 TR                   4.27730              183.06200
-      HAM6 to SP500 TR                  -5.10631              189.51371
-      HAM1 to EDHEC LS EQ                3.86121              -51.01409
-      HAM2 to EDHEC LS EQ                5.68208              171.16658
-      HAM3 to EDHEC LS EQ                1.50791             -705.20354
-      HAM4 to EDHEC LS EQ               -7.62213             -565.85196
-      HAM5 to EDHEC LS EQ                7.08395               39.70358
-      HAM6 to EDHEC LS EQ              -11.03513              343.52891
+      HAM1 to SP500 TR                  -1.181057              -65.73676
+      HAM2 to SP500 TR                   2.075534              -23.79983
+      HAM3 to SP500 TR                   1.063350             -256.19346
+      HAM4 to SP500 TR                  -1.812210              162.03456
+      HAM5 to SP500 TR                   4.277306              183.06200
+      HAM6 to SP500 TR                  -5.106318              189.51371
+      HAM1 to EDHEC LS EQ                3.861212              -51.01409
+      HAM2 to EDHEC LS EQ                5.682080              171.16658
+      HAM3 to EDHEC LS EQ                1.507916             -705.20354
+      HAM4 to EDHEC LS EQ               -7.622136             -565.85196
+      HAM5 to EDHEC LS EQ                7.083956               39.70358
+      HAM6 to EDHEC LS EQ              -11.035136              343.52891
     Code
       dev.off()
     Output
@@ -363,18 +363,18 @@
       
       > print(SFM.epsilon(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] -0.01313
+      [1] -0.01313932
       
       > data(managers)
       
       > print(SFM.epsilon(managers["1996", 1], managers["1996", 
       +     8]))
-      [1] 0.07425
+      [1] 0.07425366
       
       > print(SFM.epsilon(managers["1996", 1:5], managers["1996", 
       +     8]))
                                                HAM1      HAM2      HAM3       HAM4
-      Regression epsilon (Risk free = 0) 0.07425 0.53991 0.20480 0.05570
+      Regression epsilon (Risk free = 0) 0.07425366 0.5399193 0.2048063 0.05570592
                                          HAM5
       Regression epsilon (Risk free = 0)   NA
     Code
@@ -396,18 +396,18 @@
       
       > print(SFM.jensenAlpha(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] -0.01416
+      [1] -0.01416944
       
       > data(managers)
       
       > print(SFM.jensenAlpha(managers["1996", 1], managers["1996", 
       +     8]))
-      [1] 0.08077
+      [1] 0.08077871
       
       > print(SFM.jensenAlpha(managers["1996", 1:5], managers["1996", 
       +     8]))
                                            HAM1 HAM2      HAM3       HAM4 HAM5
-      Jensen's Alpha (Risk free = 0) 0.08077   NA 0.21960 0.06063   NA
+      Jensen's Alpha (Risk free = 0) 0.08077871   NA 0.2196026 0.06063837   NA
     Code
       dev.off()
     Output
@@ -459,15 +459,15 @@
       
       > CDaR.alpha(edhec[, 1], edhec[, 2])
              5% 
-      0.11437 
+      0.1143761 
       
       > CDaR.alpha(edhec[, 1], edhec[, 2], type = "max")
             max 
-      0.11145 
+      0.1114534 
       
       > CDaR.alpha(edhec[, 1], edhec[, 2], type = "average")
         average 
-      0.12170 
+      0.1217059 
     Code
       dev.off()
     Output
@@ -487,15 +487,15 @@
       
       > CDaR.beta(edhec[, 1], edhec[, 2])
               5% 
-      -0.80315 
+      -0.8031502 
       
       > CDaR.beta(edhec[, 1], edhec[, 2], type = "max")
              max 
-      -0.74806 
+      -0.7480649 
       
       > CDaR.beta(edhec[, 1], edhec[, 2], type = "average")
          average 
-      -0.94129 
+      -0.9412998 
     Code
       dev.off()
     Output
@@ -515,21 +515,21 @@
       
       > CalmarRatio(managers[, 1, drop = FALSE])
                         HAM1
-      Calmar Ratio 0.90616
+      Calmar Ratio 0.9061697
       
       > CalmarRatio(managers[, 1:6])
                         HAM1     HAM2      HAM3      HAM4      HAM5     HAM6
-      Calmar Ratio 0.90616 0.72809 0.52258 0.42273 0.10959 1.74252
+      Calmar Ratio 0.9061697 0.728094 0.5225829 0.4227315 0.1095909 1.742525
       
       > SterlingRatio(managers[, 1, drop = FALSE])
                                          HAM1
-      Sterling Ratio (Excess = 10%) 0.54625
+      Sterling Ratio (Excess = 10%) 0.5462542
       
       > SterlingRatio(managers[, 1:6])
                                          HAM1      HAM2      HAM3      HAM4
-      Sterling Ratio (Excess = 10%) 0.54625 0.51387 0.38836 0.31360
+      Sterling Ratio (Excess = 10%) 0.5462542 0.5138746 0.3883671 0.3136025
                                           HAM5      HAM6
-      Sterling Ratio (Excess = 10%) 0.08471 0.76784
+      Sterling Ratio (Excess = 10%) 0.08471255 0.7678475
     Code
       dev.off()
     Output
@@ -549,15 +549,15 @@
       
       > CoVariance(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 0.00066
+      [1] 0.0006641516
       
       > CoSkewness(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] -2.10128e-06
+      [1] -2.101289e-06
       
       > CoKurtosis(managers[, "HAM2", drop = FALSE], managers[, 
       +     "SP500 TR", drop = FALSE])
-      [1] 2.57906e-06
+      [1] 2.579066e-06
     Code
       dev.off()
     Output
@@ -576,18 +576,18 @@
       > data(portfolio_bacon)
       
       > print(DRatio(portfolio_bacon[, 1]))
-      [1] 0.40133
+      [1] 0.4013329
       
       > data(managers)
       
       > print(DRatio(managers["1996"]))
                     HAM1         HAM2       HAM3      HAM4 HAM5 HAM6 EDHEC LS EQ
-      d ratio 0.07248 0.00010 0.03085 0.13830  NaN  NaN         NaN
+      d ratio 0.07248996 0.0001052632 0.03085081 0.1383098  NaN  NaN         NaN
                 SP500 TR US 10Y TR US 3m TR
-      d ratio 0.04607  1.36150        0
+      d ratio 0.04607631  1.361501        0
       
       > print(DRatio(managers["1996", 1]))
-      [1] 0.07248
+      [1] 0.07248996
     Code
       dev.off()
     Output
@@ -609,47 +609,47 @@
       
       > DownsideDeviation(portfolio_bacon[, 1], MAR)
                  [,1]
-      [1,] 0.02553
+      [1,] 0.02553674
       
       > DownsidePotential(portfolio_bacon[, 1], MAR)
                  [,1]
-      [1,] 0.01370
+      [1,] 0.01370833
       
       > data(managers)
       
       > apply(managers[, 1:6], 2, sd, na.rm = TRUE)
             HAM1       HAM2       HAM3       HAM4       HAM5       HAM6 
-      0.02562 0.03671 0.03651 0.05319 0.04573 0.02381 
+      0.02562881 0.03671623 0.03651259 0.05319796 0.04573149 0.02381247 
       
       > DownsideDeviation(managers[, 1:6])
                                           HAM1      HAM2       HAM3       HAM4
-      Downside Deviation (MAR = 0%) 0.01454 0.01157 0.01735 0.03406
+      Downside Deviation (MAR = 0%) 0.01454078 0.0115736 0.01735454 0.03406781
                                          HAM5       HAM6
-      Downside Deviation (MAR = 0%) 0.03043 0.01214
+      Downside Deviation (MAR = 0%) 0.0304305 0.01214476
       
       > DownsideDeviation(managers[, 1:6], MAR = 0.04/12)
                                          HAM1       HAM2       HAM3       HAM4
-      Downside Deviation (MAR = 0%) 0.01576 0.01341 0.01891 0.03565
+      Downside Deviation (MAR = 0%) 0.0157602 0.01341739 0.01891525 0.03565192
                                          HAM5       HAM6
-      Downside Deviation (MAR = 0%) 0.03206 0.01366
+      Downside Deviation (MAR = 0%) 0.0320608 0.01366533
       
       > SemiDeviation(managers[, 1, drop = FALSE])
                           HAM1
-      Semi-Deviation 0.01907
+      Semi-Deviation 0.0190795
       
       > SemiDeviation(managers[, 1:6])
                           HAM1       HAM2       HAM3       HAM4       HAM5       HAM6
-      Semi-Deviation 0.01907 0.02011 0.02369 0.03950 0.03244 0.01751
+      Semi-Deviation 0.0190795 0.02011968 0.02369306 0.03950215 0.03244118 0.01751678
       
       > SemiVariance(managers[, 1, drop = FALSE])
                             HAM1
-      Semi-Variance 0.00072
+      Semi-Variance 0.0007280549
       
       > SemiVariance(managers[, 1:6])
                             HAM1         HAM2        HAM3        HAM4        HAM5
-      Semi-Variance 0.00072 0.00066 0.00101 0.00332 0.00207
+      Semi-Variance 0.0007280549 0.0006657919 0.001015063 0.003322184 0.002077875
                            HAM6
-      Semi-Variance 0.00067
+      Semi-Variance 0.000677159
     Code
       dev.off()
     Output
@@ -670,15 +670,15 @@
       > MAR = 0.005
       
       > print(DownsideFrequency(portfolio_bacon[, 1], MAR))
-      [1] 0.45833
+      [1] 0.4583333
       
       > data(managers)
       
       > print(DownsideFrequency(managers["1996"]))
                                     HAM1 HAM2      HAM3      HAM4 HAM5 HAM6
-      Downside Frequency (MAR = 0%) 0.25  0.2 0.16666 0.33333  NaN  NaN
+      Downside Frequency (MAR = 0%) 0.25  0.2 0.1666667 0.3333333  NaN  NaN
                                     EDHEC LS EQ  SP500 TR US 10Y TR US 3m TR
-      Downside Frequency (MAR = 0%)         NaN 0.16666 0.58333        0
+      Downside Frequency (MAR = 0%)         NaN 0.1666667 0.5833333        0
       
       > print(DownsideFrequency(managers["1996", 1]))
       [1] 0.25
@@ -707,11 +707,11 @@
       
       > DownsideSharpeRatio(edhec)
                                    CA       CTA       DIS        EM       EMN
-      Downside Sharpe Ratio 0.30018 0.19516 0.33159 0.18664 0.47209
+      Downside Sharpe Ratio 0.3001809 0.1951633 0.3315969 0.1866442 0.4720935
                                    ED       FIA       GM        LS        MA
-      Downside Sharpe Ratio 0.30741 0.31550 0.42622 0.30552 0.44288
+      Downside Sharpe Ratio 0.3074177 0.3155078 0.426225 0.3055217 0.4428818
                                    RV          SS       FOF
-      Downside Sharpe Ratio 0.41687 -0.03014 0.26681
+      Downside Sharpe Ratio 0.4168768 -0.03014276 0.2668157
     Code
       dev.off()
     Output
@@ -731,53 +731,53 @@
       
       > ES(edhec, p = 0.95, method = "historical")
          Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      ES              -0.03878   -0.04062              -0.04132      -0.07544
+      ES              -0.03878   -0.04062              -0.04132      -0.07544667
          Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      ES              -0.01752  -0.04445            -0.02906  -0.02109
+      ES              -0.01752  -0.04445333            -0.02906667  -0.02109333
          Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      ES       -0.04481      -0.02333    -0.02712   -0.09484
+      ES       -0.04481333      -0.02333333    -0.02712667   -0.09484667
          Funds of Funds
-      ES    -0.03569
+      ES    -0.03569333
       
       > ES(edhec, p = 0.95, method = "gaussian")
          Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      ES           -0.02872 -0.04260            -0.03053      -0.06062
+      ES           -0.02872442 -0.04260771            -0.0305384      -0.06062504
          Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      ES           -0.01256  -0.03259            -0.01916  -0.02451
+      ES           -0.01256767  -0.03259857            -0.01916326  -0.02451761
          Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      ES       -0.03632      -0.01805    -0.01871   -0.09495
+      ES       -0.03632667      -0.01805389    -0.01871098   -0.09495821
          Funds of Funds
-      ES    -0.02861
+      ES    -0.02861017
       
       > ES(edhec, p = 0.95, method = "modified")
          Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      ES           -0.08941 -0.04038           -0.06732       -0.11570
+      ES           -0.08941788 -0.04038067           -0.06732969       -0.1157089
          Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      ES           -0.03670  -0.08113            -0.05308  -0.01696
+      ES           -0.03670501  -0.08113553            -0.05308245  -0.01696439
          Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      ES       -0.04857      -0.05130    -0.04751   -0.06754
+      ES       -0.04857352      -0.05130164    -0.04751282   -0.06754083
          Funds of Funds
-      ES    -0.04590
+      ES    -0.04590385
       
       > ES(edhec, p = 0.99)
          Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      ES           -0.09538 -0.05203           -0.07097       -0.12613
+      ES           -0.09538713 -0.05203246           -0.07097989       -0.1261338
          Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      ES           -0.03875  -0.08433            -0.06036  -0.02309
+      ES           -0.03875142  -0.08433448            -0.06036075  -0.02309801
          Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      ES       -0.06580      -0.05760    -0.04882    -0.19411
+      ES       -0.06580245      -0.05760895    -0.04882532    -0.1941136
          Funds of Funds
-      ES    -0.05423
+      ES    -0.05423976
       
       > ES(edhec, p = 0.01)
          Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      ES           -0.09538 -0.05203           -0.07097       -0.12613
+      ES           -0.09538713 -0.05203246           -0.07097989       -0.1261338
          Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      ES           -0.03875  -0.08433            -0.06036  -0.02309
+      ES           -0.03875142  -0.08433448            -0.06036075  -0.02309801
          Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      ES       -0.06580      -0.05760    -0.04882    -0.19411
+      ES       -0.06580245      -0.05760895    -0.04882532    -0.1941136
          Funds of Funds
-      ES    -0.05423
+      ES    -0.05423976
       
       > if (requireNamespace("robustbase", quietly = TRUE)) {
       +     ES(edhec, clean = "boudt")
@@ -787,31 +787,31 @@
       no weights passed in, assuming equal weighted portfolio
     Output
       $MES
-      [1] 0.02311
+      [1] 0.02311949
       
       $contribution
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                0.00278          -0.00147           0.00292 
+                0.0027822302          -0.0014768226           0.0029299284 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                0.00526           0.00091           0.00339 
+                0.0052670402           0.0009161824           0.0033955393 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                0.00227           0.00079           0.00303 
+                0.0022726928           0.0007904038           0.0030393739 
             Merger Arbitrage         Relative Value          Short Selling 
-                0.00152           0.00200          -0.00343 
+                0.0015214460           0.0020077593          -0.0034307248 
               Funds of Funds 
-                0.00310 
+                0.0031044438 
       
       $pct_contrib_MES
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                  0.12034            -0.06387             0.12672 
+                  0.12034132            -0.06387781             0.12672979 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                  0.22781             0.03962             0.14686 
+                  0.22781816             0.03962814             0.14686911 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                  0.09830             0.03418             0.13146 
+                  0.09830202             0.03418777             0.13146369 
             Merger Arbitrage         Relative Value          Short Selling 
-                  0.06580             0.08684            -0.14839 
+                  0.06580793             0.08684271            -0.14839101 
               Funds of Funds 
-                  0.13427 
+                  0.13427820 
       
     Code
       dev.off()
@@ -843,17 +843,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.03549
+      [1] 0.03549421
       
       $contribution
-       [1]  3.83954e-03 -2.22354e-03  6.61048e-03  6.50602e-03  8.65328e-04
-       [6]  7.27639e-03  2.32450e-03 -7.84254e-05  3.12801e-03  3.93234e-03
-      [11]  3.63082e-03 -3.90560e-03  3.58830e-03
+       [1]  3.839546e-03 -2.223544e-03  6.610487e-03  6.506026e-03  8.653283e-04
+       [6]  7.276399e-03  2.324508e-03 -7.842543e-05  3.128017e-03  3.932343e-03
+      [11]  3.630823e-03 -3.905603e-03  3.588303e-03
       
       $pct_contrib_MES
-       [1]  0.10817 -0.06264  0.18624  0.18329  0.02437
-       [6]  0.20500  0.06548 -0.00220  0.08812  0.11078
-      [11]  0.10229 -0.11003  0.10109
+       [1]  0.108173873 -0.062645258  0.186241285  0.183298238  0.024379423
+       [6]  0.205002427  0.065489790 -0.002209527  0.088127539  0.110788302
+      [11]  0.102293383 -0.110034928  0.101095454
       
       
       > sigma <- cov(edhec)
@@ -865,17 +865,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.03625
+      [1] 0.03625114
       
       $contribution
-       [1]  0.00597 -0.00280  0.00528  0.00625  0.00090
-       [6]  0.00589  0.00346  0.00013  0.00362  0.00346
-      [11]  0.00377 -0.00315  0.00343
+       [1]  0.0059762619 -0.0028081561  0.0052816918  0.0062522301  0.0009068639
+       [6]  0.0058974265  0.0034627291  0.0001339207  0.0036259163  0.0034602269
+      [11]  0.0037776798 -0.0031537633  0.0034381082
       
       $pct_contrib_MES
-       [1]  0.16485 -0.07746  0.14569  0.17246  0.02501
-       [6]  0.16268  0.09552  0.00369  0.10002  0.09545
-      [11]  0.10420 -0.08699  0.09484
+       [1]  0.164857231 -0.077463949  0.145697277  0.172469910  0.025016152
+       [6]  0.162682530  0.095520570  0.003694249  0.100022144  0.095451544
+      [11]  0.104208592 -0.086997642  0.094841391
       
     Code
       dev.off()
@@ -897,19 +897,19 @@
       > print(FamaBeta(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
                                    portfolio.monthly.return....
-      portfolio.monthly.return....                     1.03039
+      portfolio.monthly.return....                     1.030395
       
       > data(managers)
       
       > print(FamaBeta(managers["1996", 1], managers["1996", 
       +     8]))
                 HAM1
-      HAM1 0.53512
+      HAM1 0.5351217
       
       > print(FamaBeta(managers["1996", 1:5], managers["1996", 
       +     8]))
                       HAM1 HAM2     HAM3     HAM4 HAM5
-      Fama Beta  0.53512   NA 1.00708 1.03763   NA
+      Fama Beta  0.5351217   NA 1.007084 1.037632   NA
     Code
       dev.off()
     Output
@@ -954,21 +954,21 @@
       
       > InformationRatio(managers[, "HAM1", drop = FALSE], 
       +     managers[, "SP500 TR", drop = FALSE])
-      [1] 0.36041
+      [1] 0.3604125
       
       > InformationRatio(managers[, 1:6], managers[, 8, drop = FALSE])
                                        HAM1      HAM2      HAM3     HAM4      HAM5
-      Information Ratio: SP500 TR 0.36041 0.50597 0.47010 0.15491 0.12121
+      Information Ratio: SP500 TR 0.3604125 0.5059751 0.4701009 0.154914 0.1212162
                                        HAM6
-      Information Ratio: SP500 TR 0.67228
+      Information Ratio: SP500 TR 0.6722844
       
       > InformationRatio(managers[, 1:6], managers[, 8:7])
                                           HAM1      HAM2      HAM3       HAM4
-      Information Ratio: SP500 TR    0.36041 0.50597 0.47010  0.15491
-      Information Ratio: EDHEC LS EQ 0.25937 0.41627 0.12793 -0.02948
+      Information Ratio: SP500 TR    0.3604125 0.5059751 0.4701009  0.1549140
+      Information Ratio: EDHEC LS EQ 0.2593770 0.4162701 0.1279329 -0.0294821
                                            HAM5      HAM6
-      Information Ratio: SP500 TR     0.12121 0.67228
-      Information Ratio: EDHEC LS EQ -0.22774 0.96672
+      Information Ratio: SP500 TR     0.1212162 0.6722844
+      Information Ratio: EDHEC LS EQ -0.2277438 0.9667207
     Code
       dev.off()
     Output
@@ -991,7 +991,7 @@
       > MAR = 0.005
       
       > print(Kappa(portfolio_bacon[, 1], MAR, l))
-      [1] 0.15663
+      [1] 0.1566371
       
       > data(managers)
       
@@ -999,12 +999,12 @@
       
       > print(Kappa(managers["1996"], MAR, l))
                            HAM1     HAM2     HAM3    HAM4 HAM5 HAM6 EDHEC LS EQ
-      kappa (MAR = 0%) 1.49206 1061.685 2.23519 1.14188  NaN  NaN         NaN
+      kappa (MAR = 0%) 1.492063 1061.685 2.235197 1.14188  NaN  NaN         NaN
                        SP500 TR  US 10Y TR US 3m TR
-      kappa (MAR = 0%) 1.27433 0.01674      Inf
+      kappa (MAR = 0%) 1.274332 0.01674457      Inf
       
       > print(Kappa(managers["1996", 1], MAR, l))
-      [1] 1.49206
+      [1] 1.492063
     Code
       dev.off()
     Output
@@ -1024,16 +1024,16 @@
       
       > KellyRatio(managers[, 1, drop = FALSE], Rf = 0.04/12)
                       HAM1
-      Kelly Ratio 5.92948
+      Kelly Ratio 5.929483
       
       > KellyRatio(managers[, 1, drop = FALSE], Rf = managers[, 
       +     10, drop = FALSE])
                       HAM1
-      Kelly Ratio 6.01085
+      Kelly Ratio 6.010854
       
       > KellyRatio(managers[, 1:6], Rf = managers[, 10, drop = FALSE])
                       HAM1     HAM2     HAM3     HAM4      HAM5     HAM6
-      Kelly Ratio 6.01085 4.06987 3.45812 1.37635 0.38764 7.94829
+      Kelly Ratio 6.010854 4.069873 3.458124 1.376354 0.3876476 7.948295
     Code
       dev.off()
     Output
@@ -1056,7 +1056,7 @@
       > print(M2Sortino(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], MAR))
                                  portfolio.monthly.return....
-      Sortino Ratio (MAR = 0.5%)                    0.10347
+      Sortino Ratio (MAR = 0.5%)                    0.1034799
       
       > data(managers)
       
@@ -1065,12 +1065,12 @@
       > print(MSquaredExcess(managers["1996", 1], managers["1996", 
       +     8], MAR))
                  SP500 TR
-      SP500 TR 0.02027
+      SP500 TR 0.02027322
       
       > print(MSquaredExcess(managers["1996", 1:5], managers["1996", 
       +     8], MAR))
                                            HAM1 HAM2      HAM3        HAM4 HAM5
-      MSquaredExcess (Risk free = 0) 0.02027   NA 0.14095 -0.02546   NA
+      MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
     Code
       dev.off()
     Output
@@ -1137,12 +1137,12 @@
       > print(MSquared(managers["1996", 1], managers["1996", 
       +     8]))
                 SP500 TR
-      SP500 TR 0.25448
+      SP500 TR 0.2544876
       
       > print(MSquared(managers["1996", 1:5], managers["1996", 
       +     8]))
                                     HAM1 HAM2      HAM3      HAM4 HAM5
-      MSquared (Risk free = 0) 0.25448   NA 0.40287 0.19824   NA
+      MSquared (Risk free = 0) 0.2544876   NA 0.4028725 0.1982483   NA
     Code
       dev.off()
     Output
@@ -1163,24 +1163,24 @@
       > MSquaredExcess(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2])
                            benchmark.return....
-      benchmark.return....          -0.01553
+      benchmark.return....          -0.01553103
       
       > MSquaredExcess(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], Method = "arithmetic")
                            benchmark.return....
-      benchmark.return....          -0.01736
+      benchmark.return....          -0.01736344
       
       > data(managers)
       
       > MSquaredExcess(managers["1996", 1], managers["1996", 
       +     8])
                  SP500 TR
-      SP500 TR 0.02027
+      SP500 TR 0.02027322
       
       > MSquaredExcess(managers["1996", 1:5], managers["1996", 
       +     8])
                                            HAM1 HAM2      HAM3        HAM4 HAM5
-      MSquaredExcess (Risk free = 0) 0.02027   NA 0.14095 -0.02546   NA
+      MSquaredExcess (Risk free = 0) 0.02027322   NA 0.1409545 -0.02546609   NA
     Code
       dev.off()
     Output
@@ -1201,33 +1201,33 @@
       > MarketTiming(managers[, 1], managers[, 8], Rf = 0.035/12, 
       +     method = "HM")
                              Alpha      Beta     Gamma
-      HAM1 to SP500 TR 0.00827 0.32114 0.13444
+      HAM1 to SP500 TR 0.008275839 0.3211407 0.1344417
       
       > MarketTiming(managers[80:120, 1:6], managers[80:120, 
       +     7], managers[80:120, 10])
                                   Alpha      Beta     Gamma
-      HAM1 to EDHEC LS EQ -0.00057 1.31210 -0.40515
-      HAM2 to EDHEC LS EQ -0.00036 0.43709  8.52062
-      HAM3 to EDHEC LS EQ -0.00581 1.18982 11.91378
-      HAM4 to EDHEC LS EQ -0.00551 2.06165 18.79734
-      HAM5 to EDHEC LS EQ  0.00051 1.07037 -5.07788
-      HAM6 to EDHEC LS EQ  0.00035 1.27110 -7.44342
+      HAM1 to EDHEC LS EQ -0.0005755802 1.3121058 -0.405150
+      HAM2 to EDHEC LS EQ -0.0003616789 0.4370998  8.520620
+      HAM3 to EDHEC LS EQ -0.0058148518 1.1898242 11.913786
+      HAM4 to EDHEC LS EQ -0.0055113742 2.0616524 18.797340
+      HAM5 to EDHEC LS EQ  0.0005125284 1.0703704 -5.077881
+      HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.443428
       
       > MarketTiming(managers[80:120, 1:6], managers[80:120, 
       +     8:7], managers[80:120, 10], method = "TM")
                                   Alpha      Beta      Gamma
-      HAM1 to SP500 TR     0.00488 0.59701 -0.28016
-      HAM2 to SP500 TR     0.00506 0.11904 -0.50002
-      HAM3 to SP500 TR     0.00321 0.52729 -0.66456
-      HAM4 to SP500 TR     0.00946 0.87795 -0.81551
-      HAM5 to SP500 TR     0.00872 0.28699 -2.77280
-      HAM6 to SP500 TR     0.00480 0.29022  0.69108
-      HAM1 to EDHEC LS EQ -0.00057 1.31210 -0.40515
-      HAM2 to EDHEC LS EQ -0.00036 0.43709  8.52061
-      HAM3 to EDHEC LS EQ -0.00581 1.18982 11.91378
-      HAM4 to EDHEC LS EQ -0.00551 2.06165 18.79733
-      HAM5 to EDHEC LS EQ  0.00051 1.07037 -5.07788
-      HAM6 to EDHEC LS EQ  0.00035 1.27110 -7.44342
+      HAM1 to SP500 TR     0.0048833318 0.5970167 -0.2801650
+      HAM2 to SP500 TR     0.0050694247 0.1190405 -0.5000263
+      HAM3 to SP500 TR     0.0032110848 0.5272982 -0.6645684
+      HAM4 to SP500 TR     0.0094634771 0.8779523 -0.8155100
+      HAM5 to SP500 TR     0.0087234498 0.2869943 -2.7728051
+      HAM6 to SP500 TR     0.0048031173 0.2902262  0.6910898
+      HAM1 to EDHEC LS EQ -0.0005755802 1.3121058 -0.4051500
+      HAM2 to EDHEC LS EQ -0.0003616789 0.4370998  8.5206196
+      HAM3 to EDHEC LS EQ -0.0058148518 1.1898242 11.9137857
+      HAM4 to EDHEC LS EQ -0.0055113742 2.0616524 18.7973395
+      HAM5 to EDHEC LS EQ  0.0005125284 1.0703704 -5.0778814
+      HAM6 to EDHEC LS EQ  0.0003590925 1.2711094 -7.4434281
     Code
       dev.off()
     Output
@@ -1255,7 +1255,7 @@
                                 HAM1     HAM2     HAM3     HAM4 HAM5 HAM6 EDHEC LS EQ
       Martin Ratio (Rf = 0) 15.49888 16390.63 19.24429 13.67313   NA   NA          NA
                             SP500 TR  US 10Y TR US 3m TR
-      Martin Ratio (Rf = 0) 14.81878 0.01003      Inf
+      Martin Ratio (Rf = 0) 14.81878 0.01003279      Inf
       
       > print(MartinRatio(managers["1996", 1]))
                       HAM1
@@ -1278,18 +1278,18 @@
       > data(portfolio_bacon)
       
       > print(MeanAbsoluteDeviation(portfolio_bacon[, 1]))
-      [1] 0.03108
+      [1] 0.03108333
       
       > data(managers)
       
       > print(MeanAbsoluteDeviation(managers["1996"]))
                                    HAM1     HAM2       HAM3       HAM4 HAM5 HAM6
-      Mean absolute deviation 0.01253 0.03157 0.02229 0.02540  NaN  NaN
+      Mean absolute deviation 0.0125375 0.031576 0.02229444 0.02540972  NaN  NaN
                               EDHEC LS EQ SP500 TR  US 10Y TR US 3m TR
-      Mean absolute deviation         NaN  0.02225 0.01611  0.00021
+      Mean absolute deviation         NaN  0.02225 0.01611653  0.00021
       
       > print(MeanAbsoluteDeviation(managers["1996", 1]))
-      [1] 0.01253
+      [1] 0.0125375
     Code
       dev.off()
     Output
@@ -1398,23 +1398,23 @@
       
       > Modigliani(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE], Rf = 0.035/12)
-      [1] 0.01678
+      [1] 0.01678381
       
       > Modigliani(managers[, 1:6], managers[, 8, drop = FALSE], 
       +     managers[, 8, drop = FALSE])
                                                     HAM1       HAM2      HAM3
-      Modigliani-Modigliani measure: SP500 TR 0.01281 0.01505 0.01315
+      Modigliani-Modigliani measure: SP500 TR 0.01281799 0.01505458 0.0131509
                                                     HAM4       HAM5       HAM6
-      Modigliani-Modigliani measure: SP500 TR 0.01057 0.01053 0.01844
+      Modigliani-Modigliani measure: SP500 TR 0.01057959 0.01053081 0.01844616
       
       > Modigliani(managers[, 1:6], managers[, 8:7], managers[, 
       +     8, drop = FALSE])
                                                        HAM1       HAM2       HAM3
-      Modigliani-Modigliani measure: SP500 TR    0.01281 0.01505 0.01315
-      Modigliani-Modigliani measure: EDHEC LS EQ 0.01062 0.01168 0.01078
+      Modigliani-Modigliani measure: SP500 TR    0.01281799 0.01505458 0.01315090
+      Modigliani-Modigliani measure: EDHEC LS EQ 0.01062640 0.01168261 0.01078361
                                                        HAM4        HAM5       HAM6
-      Modigliani-Modigliani measure: SP500 TR    0.01057 0.01053 0.01844
-      Modigliani-Modigliani measure: EDHEC LS EQ 0.00956 0.00954 0.01328
+      Modigliani-Modigliani measure: SP500 TR    0.01057959 0.010530812 0.01844616
+      Modigliani-Modigliani measure: EDHEC LS EQ 0.00956933 0.009546295 0.01328426
     Code
       dev.off()
     Output
@@ -1447,19 +1447,19 @@
       > print(NetSelectivity(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
                                    portfolio.monthly.return....
-      portfolio.monthly.return....                   -0.01789
+      portfolio.monthly.return....                   -0.0178912
       
       > data(managers)
       
       > print(NetSelectivity(managers["1996", 1], managers["1996", 
       +     8]))
                  HAM1
-      HAM1 0.01333
+      HAM1 0.01333906
       
       > print(NetSelectivity(managers["1996", 1:5], managers["1996", 
       +     8]))
                                             HAM1 HAM2      HAM3        HAM4 HAM5
-      Net Selectivity (Risk free = 0) 0.01333   NA 0.17453 -0.03249   NA
+      Net Selectivity (Risk free = 0) 0.01333906   NA 0.1745397 -0.03249043   NA
     Code
       dev.off()
     Output
@@ -1479,238 +1479,238 @@
       
       > Omega(edhec)
                      Convertible Arbitrage CTA Global Distressed Securities
-      Omega (L = 0%)              2.84849   1.61855              2.75658
+      Omega (L = 0%)              2.848491   1.618552              2.756588
                      Emerging Markets Equity Market Neutral Event Driven
-      Omega (L = 0%)         1.75295              4.29178     2.63012
+      Omega (L = 0%)         1.752959              4.291785     2.630127
                      Fixed Income Arbitrage Global Macro Long/Short Equity
-      Omega (L = 0%)               3.36904      2.89794          2.31443
+      Omega (L = 0%)               3.369045      2.89794          2.314433
                      Merger Arbitrage Relative Value Short Selling Funds of Funds
-      Omega (L = 0%)         3.95536       3.66201     0.92479       2.18566
+      Omega (L = 0%)         3.955367       3.662014     0.9247907       2.185667
       
       > if (requireNamespace("Hmisc", quietly = TRUE)) {
       +     Omega(edhec[, 13], method = "interp", output = "point")
       +     Omega(edhec[, 13], method = "interp", output = "full")
       + }
               Funds of Funds
-      -0.0705    292.00000
-      -0.0705    292.00000
-      -0.0618    218.75000
-      -0.0616    166.42857
-      -0.06      132.18181
-      -0.0272    102.41176
-      -0.0269     81.04000
-      -0.0266     67.94117
-      -0.0264     58.93181
-      -0.0262     51.32142
-      -0.0252     45.71014
-      -0.0222     41.36144
-      -0.0205     37.86734
-      -0.0202     34.98245
-      -0.0192     32.54961
-      -0.0176     30.46308
-      -0.0163     28.64880
-      -0.0156     27.05319
-      -0.0149     25.63636
-      -0.0148     24.36796
-      -0.0142     23.22440
-      -0.0141     22.18705
-      -0.014      21.16776
-      -0.0138     20.24471
-      -0.0133     19.34722
-      -0.0132     18.53333
-      -0.0127     17.79097
-      -0.0126     17.11037
-      -0.0122     16.48353
-      -0.0119     15.90384
-      -0.0116     15.36576
-      -0.0108     14.86463
-      -0.0104     14.39649
-      -0.0099     13.95795
-      -0.0095     13.52549
-      -0.0093     13.12048
-      -0.0089     12.74017
-      -0.0083     12.38221
-      -0.0082     12.04452
-      -0.0079     11.72529
-      -0.0077     11.42295
-      -0.0074     11.13609
-      -0.0072     10.86346
-      -0.0071     10.59352
-      -0.007      10.33705
-      -0.0069     10.09300
-      -0.0068      9.83477
-      -0.0063      9.58239
-      -0.0062      9.34365
-      -0.0059      9.11740
-      -0.0054      8.90258
-      -0.0049      8.69828
-      -0.0044      8.49785
-      -0.004       8.30158
-      -0.0037      8.09937
-      -0.0036      7.90287
-      -0.0034      7.71659
-      -0.0033      7.52684
-      -0.0031      7.34717
-      -0.0028      7.17674
-      -0.0027      7.01479
-      -0.0025      6.86066
-      -0.0022      6.71052
-      -0.0021      6.56739
-      -0.0019      6.43074
-      -0.0018      6.30011
-      -0.0015      6.17507
-      -0.0012      6.05524
-      -0.001       5.94026
-      -9e-04       5.82983
-      -7e-04       5.72148
-      -6e-04       5.61731
-      -5e-04       5.51706
-      -4e-04       5.42049
-      -3e-04       5.32738
-      -2e-04       5.23753
-      1e-04        5.15076
-      4e-04        5.06689
-      6e-04        4.98422
-      8e-04        4.90428
-      9e-04        4.82690
-      0.0013       4.74922
-      0.0015       4.67405
-      0.0017       4.60127
-      0.0018       4.52952
-      0.0019       4.46002
-      0.0021       4.39149
-      0.0022       4.32177
-      0.0024       4.25428
-      0.0025       4.18788
-      0.0026       4.12257
-      0.0028       4.05930
-      0.003        3.99706
-      0.0031       3.93672
-      0.0032       3.87819
-      0.0033       3.82139
-      0.0034       3.76542
-      0.0035       3.71107
-      0.0037       3.65676
-      0.0039       3.60329
-      0.004        3.55066
-      0.0041       3.49887
-      0.0043       3.44789
-      0.0046       3.39838
-      0.005        3.35025
-      0.0051       3.30345
-      0.0052       3.25733
-      0.0053       3.21246
-      0.0057       3.16877
-      0.0058       3.12623
-      0.0059       3.08477
-      0.006        3.04436
-      0.0064       3.00495
-      0.0066       2.96604
-      0.0067       2.92807
-      0.0068       2.89012
-      0.0069       2.85266
-      0.007        2.81611
-      0.0071       2.78003
-      0.0072       2.74480
-      0.0073       2.71002
-      0.0075       2.67568
-      0.0076       2.64177
-      0.0077       2.60866
-      0.0078       2.57631
-      0.0079       2.54469
-      0.008        2.51312
-      0.0082       2.48194
-      0.0083       2.45115
-      0.0085       2.42105
-      0.0086       2.39162
-      0.0088       2.36283
-      0.0089       2.33467
-      0.009        2.30655
-      0.0091       2.27876
-      0.0092       2.25157
-      0.0093       2.22495
-      0.0094       2.19889
-      0.0095       2.17312
-      0.0096       2.14763
-      0.0097       2.12220
-      0.0099       2.09706
-      0.0104       2.07245
-      0.0106       2.04811
-      0.0108       2.02427
-      0.0109       2.00070
-      0.0111       1.97760
-      0.0113       1.95475
-      0.0114       1.93216
-      0.0119       1.91001
-      0.0121       1.88811
-      0.0125       1.86644
-      0.0126       1.84520
-      0.0127       1.82436
-      0.013        1.80391
-      0.0131       1.78384
-      0.0133       1.76415
-      0.0134       1.74448
-      0.0136       1.72518
-      0.0137       1.70622
-      0.0138       1.68761
-      0.0139       1.66932
-      0.014        1.65136
-      0.0142       1.63370
-      0.0145       1.61635
-      0.0147       1.59915
-      0.0148       1.58224
-      0.0152       1.56562
-      0.0153       1.54926
-      0.0156       1.53318
-      0.0157       1.51735
-      0.016        1.50178
-      0.0163       1.48633
-      0.0164       1.47113
-      0.0169       1.45616
-      0.0171       1.44108
-      0.0172       1.42624
-      0.0175       1.41163
-      0.0182       1.39724
-      0.0185       1.38308
-      0.0189       1.36913
-      0.0191       1.35538
-      0.0199       1.34185
-      0.0202       1.32851
-      0.0203       1.31536
-      0.0204       1.30240
-      0.0205       1.28954
-      0.0206       1.27685
-      0.0209       1.26435
-      0.0213       1.25202
-      0.0216       1.23986
-      0.0217       1.22787
-      0.0219       1.21604
-      0.022        1.20437
-      0.0222       1.19286
-      0.0223       1.18150
-      0.0225       1.17028
-      0.0233       1.15922
-      0.0244       1.14829
-      0.0256       1.13751
-      0.0267       1.12686
-      0.0274       1.11635
-      0.0275       1.10597
-      0.0282       1.09571
-      0.0286       1.08559
-      0.0303       1.07558
-      0.0311       1.06569
-      0.0312       1.05593
-      0.0313       1.04628
-      0.0317       1.03674
-      0.0334       1.02731
-      0.034        1.01799
-      0.0373       1.00878
-      0.0384       0.99968
-      0.04         0.99067
-      0.0435       0.98177
-      0.0483       0.97297
-      0.0622       0.96426
-      0.0666       0.95565
+      -0.0705    292.0000000
+      -0.0705    292.0000000
+      -0.0618    218.7500000
+      -0.0616    166.4285714
+      -0.06      132.1818182
+      -0.0272    102.4117647
+      -0.0269     81.0400000
+      -0.0266     67.9411765
+      -0.0264     58.9318182
+      -0.0262     51.3214286
+      -0.0252     45.7101449
+      -0.0222     41.3614458
+      -0.0205     37.8673469
+      -0.0202     34.9824561
+      -0.0192     32.5496183
+      -0.0176     30.4630872
+      -0.0163     28.6488095
+      -0.0156     27.0531915
+      -0.0149     25.6363636
+      -0.0148     24.3679654
+      -0.0142     23.2244094
+      -0.0141     22.1870504
+      -0.014      21.1677632
+      -0.0138     20.2447130
+      -0.0133     19.3472222
+      -0.0132     18.5333333
+      -0.0127     17.7909739
+      -0.0126     17.1103753
+      -0.0122     16.4835391
+      -0.0119     15.9038462
+      -0.0116     15.3657658
+      -0.0108     14.8646362
+      -0.0104     14.3964968
+      -0.0099     13.9579580
+      -0.0095     13.5254958
+      -0.0093     13.1204819
+      -0.0089     12.7401774
+      -0.0083     12.3822115
+      -0.0082     12.0445205
+      -0.0079     11.7252986
+      -0.0077     11.4229576
+      -0.0074     11.1360947
+      -0.0072     10.8634652
+      -0.0071     10.5935252
+      -0.007      10.3370593
+      -0.0069     10.0930041
+      -0.0068      9.8347758
+      -0.0063      9.5823928
+      -0.0062      9.3436599
+      -0.0059      9.1174033
+      -0.0054      8.9025845
+      -0.0049      8.6982813
+      -0.0044      8.4978593
+      -0.004       8.3015873
+      -0.0037      8.0993789
+      -0.0036      7.9028757
+      -0.0034      7.7165971
+      -0.0033      7.5268440
+      -0.0031      7.3471753
+      -0.0028      7.1767442
+      -0.0027      7.0147982
+      -0.0025      6.8606664
+      -0.0022      6.7105263
+      -0.0021      6.5673931
+      -0.0019      6.4307452
+      -0.0018      6.3001133
+      -0.0015      6.1750731
+      -0.0012      6.0552408
+      -0.001       5.9402678
+      -9e-04       5.8298368
+      -7e-04       5.7214863
+      -6e-04       5.6173149
+      -5e-04       5.5170628
+      -4e-04       5.4204916
+      -3e-04       5.3273827
+      -2e-04       5.2375350
+      1e-04        5.1507634
+      4e-04        5.0668967
+      6e-04        4.9842296
+      8e-04        4.9042821
+      9e-04        4.8269089
+      0.0013       4.7492223
+      0.0015       4.6740551
+      0.0017       4.6012745
+      0.0018       4.5295293
+      0.0019       4.4600217
+      0.0021       4.3914975
+      0.0022       4.3217750
+      0.0024       4.2542817
+      0.0025       4.1878812
+      0.0026       4.1225744
+      0.0028       4.0593093
+      0.003        3.9970658
+      0.0031       3.9367270
+      0.0032       3.8781984
+      0.0033       3.8213918
+      0.0034       3.7654259
+      0.0035       3.7110747
+      0.0037       3.6567667
+      0.0039       3.6032993
+      0.004        3.5506689
+      0.0041       3.4988710
+      0.0043       3.4478998
+      0.0046       3.3983834
+      0.005        3.3502545
+      0.0051       3.3034502
+      0.0052       3.2573330
+      0.0053       3.2124601
+      0.0057       3.1687769
+      0.0058       3.1262322
+      0.0059       3.0847777
+      0.006        3.0443678
+      0.0064       3.0049595
+      0.0066       2.9660413
+      0.0067       2.9280718
+      0.0068       2.8901225
+      0.0069       2.8526635
+      0.007        2.8161148
+      0.0071       2.7800304
+      0.0072       2.7448078
+      0.0073       2.7100251
+      0.0075       2.6756812
+      0.0076       2.6417745
+      0.0077       2.6086611
+      0.0078       2.5763109
+      0.0079       2.5446952
+      0.008        2.5131231
+      0.0082       2.4819423
+      0.0083       2.4511505
+      0.0085       2.4210526
+      0.0086       2.3916232
+      0.0088       2.3628380
+      0.0089       2.3346740
+      0.009        2.3065521
+      0.0091       2.2787633
+      0.0092       2.2515708
+      0.0093       2.2249538
+      0.0094       2.1988924
+      0.0095       2.1731204
+      0.0096       2.1476366
+      0.0097       2.1222037
+      0.0099       2.0970671
+      0.0104       2.0724500
+      0.0106       2.0481144
+      0.0108       2.0242739
+      0.0109       2.0007015
+      0.0111       1.9776011
+      0.0113       1.9547561
+      0.0114       1.9321647
+      0.0119       1.9100179
+      0.0121       1.8881128
+      0.0125       1.8664478
+      0.0126       1.8452018
+      0.0127       1.8243615
+      0.013        1.8039143
+      0.0131       1.7838480
+      0.0133       1.7641509
+      0.0134       1.7444866
+      0.0136       1.7251828
+      0.0137       1.7062287
+      0.0138       1.6876139
+      0.0139       1.6693285
+      0.014        1.6513629
+      0.0142       1.6337079
+      0.0145       1.6163546
+      0.0147       1.5991557
+      0.0148       1.5822471
+      0.0152       1.5656208
+      0.0153       1.5492689
+      0.0156       1.5331842
+      0.0157       1.5173592
+      0.016        1.5017871
+      0.0163       1.4863393
+      0.0164       1.4711357
+      0.0169       1.4561698
+      0.0171       1.4410888
+      0.0172       1.4262456
+      0.0175       1.4116341
+      0.0182       1.3972484
+      0.0185       1.3830826
+      0.0189       1.3691311
+      0.0191       1.3553887
+      0.0199       1.3418501
+      0.0202       1.3285103
+      0.0203       1.3153646
+      0.0204       1.3024081
+      0.0205       1.2895408
+      0.0206       1.2768569
+      0.0209       1.2643523
+      0.0213       1.2520227
+      0.0216       1.2398639
+      0.0217       1.2278722
+      0.0219       1.2160436
+      0.022        1.2043745
+      0.0222       1.1928613
+      0.0223       1.1815005
+      0.0225       1.1702888
+      0.0233       1.1592229
+      0.0244       1.1482996
+      0.0256       1.1375160
+      0.0267       1.1268689
+      0.0274       1.1163556
+      0.0275       1.1059732
+      0.0282       1.0957189
+      0.0286       1.0855903
+      0.0303       1.0755846
+      0.0311       1.0656994
+      0.0312       1.0559323
+      0.0313       1.0462808
+      0.0317       1.0367428
+      0.0334       1.0273160
+      0.034        1.0179981
+      0.0373       1.0087872
+      0.0384       0.9996811
+      0.04         0.9906778
+      0.0435       0.9817755
+      0.0483       0.9729721
+      0.0622       0.9642659
+      0.0666       0.9556551
     Code
       dev.off()
     Output
@@ -1733,7 +1733,7 @@
       > print(OmegaExcessReturn(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], MAR))
                  [,1]
-      [1,] 0.08053
+      [1,] 0.08053795
       
       > data(managers)
       
@@ -1742,12 +1742,12 @@
       > print(OmegaExcessReturn(managers["1996", 1], managers["1996", 
       +     8], MAR))
                 [,1]
-      [1,] 0.13253
+      [1,] 0.1325302
       
       > print(OmegaExcessReturn(managers["1996", 1:5], managers["1996", 
       +     8], MAR))
                                          HAM1 HAM2      HAM3      HAM4 HAM5
-      Omega Excess Return (MAR = 0) 0.13253   NA 0.39914 0.19857   NA
+      Omega Excess Return (MAR = 0) 0.1325302   NA 0.3991416 0.1985718   NA
     Code
       dev.off()
     Output
@@ -1769,7 +1769,7 @@
       
       > print(OmegaSharpeRatio(portfolio_bacon[, 1], MAR))
                 [,1]
-      [1,] 0.29179
+      [1,] 0.2917933
       
       > MAR = 0
       
@@ -1777,13 +1777,13 @@
       
       > print(OmegaSharpeRatio(managers["1996"], MAR))
                                       HAM1 HAM2     HAM3     HAM4 HAM5 HAM6
-      OmegaSharpeRatio (MAR = 0%) 3.59833 2374 5.48281 2.61507   NA   NA
+      OmegaSharpeRatio (MAR = 0%) 3.598338 2374 5.482813 2.615074   NA   NA
                                   EDHEC LS EQ SP500 TR  US 10Y TR US 3m TR
-      OmegaSharpeRatio (MAR = 0%)          NA 3.34062 0.02827      Inf
+      OmegaSharpeRatio (MAR = 0%)          NA 3.340625 0.02827709      Inf
       
       > print(OmegaSharpeRatio(managers["1996", 1], MAR))
                [,1]
-      [1,] 3.59833
+      [1,] 3.598338
     Code
       dev.off()
     Output
@@ -1803,19 +1803,19 @@
       
       > print(PainIndex(portfolio_bacon[, 1]))
                  portfolio.monthly.return....
-      Pain Index                    0.03901
+      Pain Index                    0.0390113
       
       > data(managers)
       
       > print(PainIndex(100 * managers["1996"]))
                       HAM1  HAM2      HAM3      HAM4 HAM5 HAM6 EDHEC LS EQ  SP500 TR
-      Pain Index 0.37140 0.002 0.94217 0.74216  NaN  NaN         NaN 0.73360
+      Pain Index 0.3714087 0.002 0.9421759 0.7421641  NaN  NaN         NaN 0.7336052
                  US 10Y TR US 3m TR
-      Pain Index  3.69796        0
+      Pain Index  3.697961        0
       
       > print(PainIndex(100 * managers["1996", 1]))
                       HAM1
-      Pain Index 0.37140
+      Pain Index 0.3714087
     Code
       dev.off()
     Output
@@ -1835,7 +1835,7 @@
       
       > print(PainRatio(portfolio_bacon[, 1]))
                  portfolio.monthly.return....
-      Pain Index                     2.65764
+      Pain Index                     2.657647
       
       > data(managers)
       
@@ -1843,7 +1843,7 @@
                              HAM1     HAM2     HAM3     HAM4 HAM5 HAM6 EDHEC LS EQ
       Pain Ratio (Rf = 0) 36.7226 36650.56 43.38967 28.17458   NA   NA          NA
                           SP500 TR  US 10Y TR US 3m TR
-      Pain Ratio (Rf = 0) 31.62377 0.01188      Inf
+      Pain Ratio (Rf = 0) 31.62377 0.01188003      Inf
       
       > print(PainRatio(managers["1996", 1]))
                     HAM1
@@ -1868,7 +1868,7 @@
       > ProbSharpeRatio(edhec[, 1], refSR = 0.23)
       $sr_prob
                                            Convertible Arbitrage (SR > 0.23 )
-      Probabilistic Sharpe Ratio(p= 95 %):                          0.92093
+      Probabilistic Sharpe Ratio(p= 95 %):                          0.9209357
       
       $sr_confidence_interval
                             Lower Bound Sharpe Ratio Upper Bound
@@ -1878,7 +1878,7 @@
       > ProbSharpeRatio(refSR = 1/12^0.5, Rf = 0, p = 0.95, 
       +     sr = 2/12^0.5, sk = -0.72, kr = 5.78, n = 59)
       $sr_prob
-      [1] 0.95974
+      [1] 0.9597434
       
       $sr_confidence_interval
         Lower Bound Sharpe Ratio Upper Bound
@@ -1888,7 +1888,7 @@
       > ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = FALSE, ignore_kurtosis = FALSE)
       $sr_prob
-      [1] 0.76011
+      [1] 0.7601113
       
       $sr_confidence_interval
         Lower Bound Sharpe Ratio Upper Bound
@@ -1898,7 +1898,7 @@
       > ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = FALSE, ignore_kurtosis = TRUE)
       $sr_prob
-      [1] 0.78833
+      [1] 0.7883343
       
       $sr_confidence_interval
         Lower Bound Sharpe Ratio Upper Bound
@@ -1908,7 +1908,7 @@
       > ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), 
       +     ignore_skewness = TRUE, ignore_kurtosis = TRUE)
       $sr_prob
-      [1] 0.86171
+      [1] 0.8617196
       
       $sr_confidence_interval
         Lower Bound Sharpe Ratio Upper Bound
@@ -1919,7 +1919,7 @@
       +     0.5), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
       $sr_prob
                                            portfolio.returns (SR > 0.26 )
-      Probabilistic Sharpe Ratio(p= 95 %):                      0.95522
+      Probabilistic Sharpe Ratio(p= 95 %):                      0.9552203
       
       $sr_confidence_interval
                         Lower Bound Sharpe Ratio Upper Bound
@@ -1946,7 +1946,7 @@
       
       > print(ProspectRatio(portfolio_bacon[, 1], MAR))
                  [,1]
-      [1,] -0.13470
+      [1,] -0.1347065
       
       > data(managers)
       
@@ -1954,13 +1954,13 @@
       
       > print(ProspectRatio(managers["1996"], MAR))
                                      HAM1     HAM2     HAM3      HAM4 HAM5 HAM6
-      Prospect ratio (MAR = 0%) 0.97374 442.1359 1.72560 0.59606   NA   NA
+      Prospect ratio (MAR = 0%) 0.9737463 442.1359 1.725605 0.5960639   NA   NA
                                 EDHEC LS EQ  SP500 TR  US 10Y TR US 3m TR
-      Prospect ratio (MAR = 0%)          NA 0.79750 -0.72345      Inf
+      Prospect ratio (MAR = 0%)          NA 0.7975008 -0.7234556      Inf
       
       > print(ProspectRatio(managers["1996", 1], MAR))
                 [,1]
-      [1,] 0.97374
+      [1,] 0.9737463
     Code
       dev.off()
     Output
@@ -2005,9 +2005,9 @@
       
       > RachevRatio(edhec)
                         CA      CTA      DIS        EM      EMN       ED      FIA
-      RachevRatio 1.17941 1.33800 1.13938 0.99673 1.51418 1.08917 1.13516
+      RachevRatio 1.179419 1.338008 1.139389 0.9967392 1.514187 1.089176 1.135164
                         GM       LS     MA       RV       SS      FOF
-      RachevRatio 2.01437 1.23869 1.5023 1.15946 1.13450 1.22554
+      RachevRatio 2.014378 1.238694 1.5023 1.159463 1.134508 1.225545
     Code
       dev.off()
     Output
@@ -2028,25 +2028,25 @@
       > head(Return.Geltner(managers[, 1:3]), n = 20)
                          HAM1          HAM2         HAM3
       1996-01-31           NA            NA           NA
-      1996-02-29  0.02207            NA  0.03510
-      1996-03-31  0.01461            NA  0.02573
-      1996-04-30 -0.01483            NA  0.04503
-      1996-05-31  0.01149            NA  0.03523
-      1996-06-30 -0.00658            NA -0.03076
-      1996-07-31 -0.02757            NA -0.03372
-      1996-08-31  0.05409            NA  0.04666
-      1996-09-30  0.00891  0.12487  0.06543
-      1996-10-31  0.03208  0.01746  0.03931
-      1996-11-30  0.01252  0.08351  0.06679
-      1996-12-31  0.01806  0.01899  0.02107
-      1997-01-31  0.02203  0.09160  0.07749
-      1997-02-28 -0.00222 -0.02975 -0.03821
-      1997-03-31  0.01107 -0.03150 -0.03357
-      1997-04-30  0.01334 -0.00098  0.02904
-      1997-05-31  0.05107  0.06866  0.07623
-      1997-06-30  0.01827  0.05551  0.00489
-      1997-07-31  0.01360  0.12971  0.10882
-      1997-08-31  0.02563 -0.05284 -0.00358
+      1996-02-29  0.022073985            NA  0.035101421
+      1996-03-31  0.014614190            NA  0.025733921
+      1996-04-30 -0.014834456            NA  0.045035710
+      1996-05-31  0.011492903            NA  0.035231790
+      1996-06-30 -0.006580742            NA -0.030766102
+      1996-07-31 -0.027575673            NA -0.033724158
+      1996-08-31  0.054092559            NA  0.046666996
+      1996-09-30  0.008918922  0.1248798328  0.065436420
+      1996-10-31  0.032086822  0.0174616062  0.039316685
+      1996-11-30  0.012522975  0.0835177999  0.066792551
+      1996-12-31  0.018066216  0.0189979595  0.021078844
+      1997-01-31  0.022039189  0.0916045833  0.077495761
+      1997-02-28 -0.002229051 -0.0297548689 -0.038213548
+      1997-03-31  0.011078377 -0.0315013248 -0.033573000
+      1997-04-30  0.013345946 -0.0009819489  0.029041945
+      1997-05-31  0.051072969  0.0686636088  0.076236077
+      1997-06-30  0.018274665  0.0555198782  0.004899082
+      1997-07-31  0.013605069  0.1297143968  0.108829706
+      1997-08-31  0.025634796 -0.0528443018 -0.003587969
     Code
       dev.off()
     Output
@@ -2101,7 +2101,7 @@
       > Return.annualized.excess(Rp = managers[, 1], Rb = managers[, 
       +     8])
                               HAM1
-      Annualized Return 0.03718
+      Annualized Return 0.03718883
     Code
       dev.off()
     Output
@@ -2191,17 +2191,17 @@
       
       > Return.cumulative(managers[, 1, drop = FALSE])
                             HAM1
-      Cumulative Return 3.12667
+      Cumulative Return 3.126671
       
       > Return.cumulative(managers[, 1:8])
                             HAM1     HAM2     HAM3    HAM4      HAM5      HAM6
-      Cumulative Return 3.12667 4.34859 3.70673 2.52944 0.26501 0.98586
+      Cumulative Return 3.126671 4.348599 3.706732 2.52944 0.2650197 0.9858675
                         EDHEC LS EQ SP500 TR
-      Cumulative Return    2.05119 1.76161
+      Cumulative Return    2.051197 1.761619
       
       > Return.cumulative(managers[, 1:8], geometric = FALSE)
                           HAM1   HAM2  HAM3   HAM4   HAM5   HAM6 EDHEC LS EQ SP500 TR
-      Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.14382
+      Cumulative Return 1.4682 1.7679 1.643 1.4542 0.3148 0.7075      1.1454 1.143825
     Code
       dev.off()
     Output
@@ -2231,12 +2231,12 @@
       
       > head(Return.excess(managers[, 1, drop = FALSE], 0.04/12))
                     HAM1 > Rf
-      1996-01-31  0.00406
-      1996-02-29  0.01596
-      1996-03-31  0.01216
-      1996-04-30 -0.01243
-      1996-05-31  0.00426
-      1996-06-30 -0.00723
+      1996-01-31  0.004066667
+      1996-02-29  0.015966667
+      1996-03-31  0.012166667
+      1996-04-30 -0.012433333
+      1996-05-31  0.004266667
+      1996-06-30 -0.007233333
       
       > head(Return.excess(managers[, 1:6], managers[, 10, 
       +     drop = FALSE]))
@@ -2310,175 +2310,175 @@
       
       > Return.portfolio(edhec["1997", 1:5], rebalance_on = "quarters")
                  portfolio.returns
-      1997-01-31       0.03340
-      1997-02-28       0.02376
-      1997-03-31      -0.00141
-      1997-04-30       0.00368
-      1997-05-31       0.01766
-      1997-06-30       0.02545
-      1997-07-31       0.03650
-      1997-08-31      -0.00513
-      1997-09-30       0.02204
-      1997-10-31      -0.01078
-      1997-11-30      -0.00262
-      1997-12-31       0.01298
+      1997-01-31       0.033400000
+      1997-02-28       0.023762011
+      1997-03-31      -0.001413340
+      1997-04-30       0.003680000
+      1997-05-31       0.017660872
+      1997-06-30       0.025452430
+      1997-07-31       0.036500000
+      1997-08-31      -0.005136602
+      1997-09-30       0.022049167
+      1997-10-31      -0.010780000
+      1997-11-30      -0.002621013
+      1997-12-31       0.012985944
       
       > Return.portfolio(edhec["1997", 1:5], rebalance_on = "quarters", 
       +     verbose = TRUE)
       $returns
                  portfolio.returns
-      1997-01-31       0.03340
-      1997-02-28       0.02376
-      1997-03-31      -0.00141
-      1997-04-30       0.00368
-      1997-05-31       0.01766
-      1997-06-30       0.02545
-      1997-07-31       0.03650
-      1997-08-31      -0.00513
-      1997-09-30       0.02204
-      1997-10-31      -0.01078
-      1997-11-30      -0.00262
-      1997-12-31       0.01298
+      1997-01-31       0.033400000
+      1997-02-28       0.023762011
+      1997-03-31      -0.001413340
+      1997-04-30       0.003680000
+      1997-05-31       0.017660872
+      1997-06-30       0.025452430
+      1997-07-31       0.036500000
+      1997-08-31      -0.005136602
+      1997-09-30       0.022049167
+      1997-10-31      -0.010780000
+      1997-11-30      -0.002621013
+      1997-12-31       0.012985944
       
       $contribution
                  Convertible Arbitrage    CTA Global Distressed Securities
-      1997-01-31           0.00238  0.00786          0.00356
-      1997-02-28           0.00240  0.00599          0.00240
-      1997-03-31           0.00151 -0.00042         -0.00023
-      1997-04-30           0.00172 -0.00340          0.00060
-      1997-05-31           0.00313 -0.00029          0.00465
-      1997-06-30           0.00425  0.00163          0.00436
-      1997-07-31           0.00386  0.01182          0.00468
-      1997-08-31           0.00263 -0.00966          0.00290
-      1997-09-30           0.00244  0.00387          0.00704
-      1997-10-31           0.00200 -0.00196         -0.00128
-      1997-11-30           0.00000  0.00266          0.00108
-      1997-12-31           0.00139  0.00581          0.00147
+      1997-01-31           0.002380000  0.0078600000          0.0035600000
+      1997-02-28           0.002408819  0.0059940275          0.0024031662
+      1997-03-31           0.001510442 -0.0004248891         -0.0002337074
+      1997-04-30           0.001720000 -0.0034000000          0.0006000000
+      1997-05-31           0.003135294 -0.0002938187          0.0046568428
+      1997-06-30           0.004252156  0.0016336242          0.0043610924
+      1997-07-31           0.003860000  0.0118200000          0.0046800000
+      1997-08-31           0.002635527 -0.0096662672          0.0029028423
+      1997-09-30           0.002444218  0.0038748559          0.0070493383
+      1997-10-31           0.002000000 -0.0019600000         -0.0012800000
+      1997-11-30           0.000000000  0.0026626352          0.0010847819
+      1997-12-31           0.001392218  0.0058170647          0.0014782579
                  Emerging Markets Equity Market Neutral
-      1997-01-31      0.01582          0.00378
-      1997-02-28      0.01096          0.00199
-      1997-03-31     -0.00257          0.00031
-      1997-04-30      0.00238          0.00238
-      1997-05-31      0.00635          0.00381
-      1997-06-30      0.01187          0.00333
-      1997-07-31      0.01120          0.00494
-      1997-08-31     -0.00134          0.00033
-      1997-09-30      0.00465          0.00402
-      1997-10-31     -0.01144          0.00190
-      1997-11-30     -0.00720          0.00083
-      1997-12-31      0.00294          0.00135
+      1997-01-31      0.015820000          0.0037800000
+      1997-02-28      0.010964341          0.0019916567
+      1997-03-31     -0.002576485          0.0003112995
+      1997-04-30      0.002380000          0.0023800000
+      1997-05-31      0.006351596          0.0038109577
+      1997-06-30      0.011874480          0.0033310776
+      1997-07-31      0.011200000          0.0049400000
+      1997-08-31     -0.001344834          0.0003361293
+      1997-09-30      0.004659301          0.0040214532
+      1997-10-31     -0.011440000          0.0019000000
+      1997-11-30     -0.007205240          0.0008368108
+      1997-12-31      0.002942265          0.0013561387
       
       $BOP.Weight
                  Convertible Arbitrage CTA Global Distressed Securities
-      1997-01-31             0.20000  0.20000             0.20000
-      1997-02-28             0.19583  0.20114             0.19698
-      1997-03-31             0.19364  0.20232             0.19475
-      1997-04-30             0.20000  0.20000             0.20000
-      1997-05-31             0.20098  0.19587             0.19986
-      1997-06-30             0.20057  0.19219             0.20097
-      1997-07-31             0.20000  0.20000             0.20000
-      1997-08-31             0.19668  0.20436             0.19747
-      1997-09-30             0.20034  0.19569             0.20140
-      1997-10-31             0.20000  0.20000             0.20000
-      1997-11-30             0.20420  0.20019             0.20088
-      1997-12-31             0.20473  0.20339             0.20250
+      1997-01-31             0.2000000  0.2000000             0.2000000
+      1997-02-28             0.1958390  0.2011419             0.1969808
+      1997-03-31             0.1936464  0.2023282             0.1947562
+      1997-04-30             0.2000000  0.2000000             0.2000000
+      1997-05-31             0.2009804  0.1958792             0.1998645
+      1997-06-30             0.2005734  0.1921911             0.2009720
+      1997-07-31             0.2000000  0.2000000             0.2000000
+      1997-08-31             0.1966811  0.2043608             0.1974723
+      1997-09-30             0.2003458  0.1956998             0.2014097
+      1997-10-31             0.2000000  0.2000000             0.2000000
+      1997-11-30             0.2042013  0.2001981             0.2008855
+      1997-12-31             0.2047379  0.2033939             0.2025011
                  Emerging Markets Equity Market Neutral
-      1997-01-31        0.20000             0.20000
-      1997-02-28        0.20884             0.19719
-      1997-03-31        0.21470             0.19456
-      1997-04-30        0.20000             0.20000
-      1997-05-31        0.20163             0.20163
-      1997-06-30        0.20438             0.20188
-      1997-07-31        0.20000             0.20000
-      1997-08-31        0.20376             0.19772
-      1997-09-30        0.20346             0.19908
-      1997-10-31        0.20000             0.20000
-      1997-11-30        0.19061             0.20410
-      1997-12-31        0.18389             0.20547
+      1997-01-31        0.2000000             0.2000000
+      1997-02-28        0.2088446             0.1971937
+      1997-03-31        0.2147071             0.1945622
+      1997-04-30        0.2000000             0.2000000
+      1997-05-31        0.2016380             0.2016380
+      1997-06-30        0.2043800             0.2018835
+      1997-07-31        0.2000000             0.2000000
+      1997-08-31        0.2037627             0.1977231
+      1997-09-30        0.2034629             0.1990818
+      1997-10-31        0.2000000             0.2000000
+      1997-11-30        0.1906148             0.2041002
+      1997-12-31        0.1838916             0.2054756
       
       $EOP.Weight
                  Convertible Arbitrage CTA Global Distressed Securities
-      1997-01-31             0.19583  0.20114             0.19698
-      1997-02-28             0.19364  0.20232             0.19475
-      1997-03-31             0.19543  0.20218             0.19479
-      1997-04-30             0.20098  0.19587             0.19986
-      1997-05-31             0.20057  0.19219             0.20097
-      1997-06-30             0.19974  0.18901             0.20023
-      1997-07-31             0.19668  0.20436             0.19747
-      1997-08-31             0.20034  0.19569             0.20140
-      1997-09-30             0.19841  0.19526             0.20396
-      1997-10-31             0.20420  0.20019             0.20088
-      1997-11-30             0.20473  0.20339             0.20250
-      1997-12-31             0.20348  0.20652             0.20136
+      1997-01-31             0.1958390  0.2011419             0.1969808
+      1997-02-28             0.1936464  0.2023282             0.1947562
+      1997-03-31             0.1954330  0.2021890             0.1947978
+      1997-04-30             0.2009804  0.1958792             0.1998645
+      1997-05-31             0.2005734  0.1921911             0.2009720
+      1997-06-30             0.1997416  0.1890138             0.2002366
+      1997-07-31             0.1966811  0.2043608             0.1974723
+      1997-08-31             0.2003458  0.1956998             0.2014097
+      1997-09-30             0.1984151  0.1952691             0.2039618
+      1997-10-31             0.2042013  0.2001981             0.2008855
+      1997-11-30             0.2047379  0.2033939             0.2025011
+      1997-12-31             0.2034876  0.2065290             0.2013644
                  Emerging Markets Equity Market Neutral
-      1997-01-31        0.20884             0.19719
-      1997-02-28        0.21470             0.19456
-      1997-03-31        0.21243             0.19514
-      1997-04-30        0.20163             0.20163
-      1997-05-31        0.20438             0.20188
-      1997-06-30        0.21088             0.20012
-      1997-07-31        0.20376             0.19772
-      1997-08-31        0.20346             0.19908
-      1997-09-30        0.20363             0.19872
-      1997-10-31        0.19061             0.20410
-      1997-11-30        0.18389             0.20547
-      1997-12-31        0.18443             0.20418
+      1997-01-31        0.2088446             0.1971937
+      1997-02-28        0.2147071             0.1945622
+      1997-03-31        0.2124308             0.1951493
+      1997-04-30        0.2016380             0.2016380
+      1997-05-31        0.2043800             0.2018835
+      1997-06-30        0.2108869             0.2001210
+      1997-07-31        0.2037627             0.1977231
+      1997-08-31        0.2034629             0.1990818
+      1997-09-30        0.2036323             0.1987216
+      1997-10-31        0.1906148             0.2041002
+      1997-11-30        0.1838916             0.2054756
+      1997-12-31        0.1844387             0.2041802
       
       $BOP.Value
                  Convertible Arbitrage CTA Global Distressed Securities
-      1997-01-31             0.20000  0.20000             0.20000
-      1997-02-28             0.20238  0.20786             0.20356
-      1997-03-31             0.20486  0.21405             0.20604
-      1997-04-30             0.21129  0.21129             0.21129
-      1997-05-31             0.21310  0.20770             0.21192
-      1997-06-30             0.21643  0.20738             0.21686
-      1997-07-31             0.22130  0.22130             0.22130
-      1997-08-31             0.22557  0.23438             0.22648
-      1997-09-30             0.22860  0.22330             0.22981
-      1997-10-31             0.23323  0.23323             0.23323
-      1997-11-30             0.23557  0.23095             0.23174
-      1997-12-31             0.23557  0.23402             0.23299
+      1997-01-31             0.2000000  0.2000000             0.2000000
+      1997-02-28             0.2023800  0.2078600             0.2035600
+      1997-03-31             0.2048693  0.2140542             0.2060434
+      1997-04-30             0.2112921  0.2112921             0.2112921
+      1997-05-31             0.2131092  0.2077001             0.2119260
+      1997-06-30             0.2164337  0.2073886             0.2168638
+      1997-07-31             0.2213080  0.2213080             0.2213080
+      1997-08-31             0.2255792  0.2343873             0.2264866
+      1997-09-30             0.2286020  0.2233008             0.2298159
+      1997-10-31             0.2332393  0.2332393             0.2332393
+      1997-11-30             0.2355716  0.2309535             0.2317465
+      1997-12-31             0.2355716  0.2340252             0.2329980
                  Emerging Markets Equity Market Neutral
-      1997-01-31        0.20000             0.20000
-      1997-02-28        0.21582             0.20378
-      1997-03-31        0.22715             0.20583
-      1997-04-30        0.21129             0.21129
-      1997-05-31        0.21380             0.21380
-      1997-06-30        0.22054             0.21784
-      1997-07-31        0.22130             0.22130
-      1997-08-31        0.23370             0.22677
-      1997-09-30        0.23215             0.22715
-      1997-10-31        0.23323             0.23323
-      1997-11-30        0.21989             0.23545
-      1997-12-31        0.21158             0.23642
+      1997-01-31        0.2000000             0.2000000
+      1997-02-28        0.2158200             0.2037800
+      1997-03-31        0.2271506             0.2058382
+      1997-04-30        0.2112921             0.2112921
+      1997-05-31        0.2138065             0.2138065
+      1997-06-30        0.2205414             0.2178474
+      1997-07-31        0.2213080             0.2213080
+      1997-08-31        0.2337012             0.2267743
+      1997-09-30        0.2321588             0.2271598
+      1997-10-31        0.2332393             0.2332393
+      1997-11-30        0.2198980             0.2354550
+      1997-12-31        0.2115858             0.2364204
       
       $EOP.Value
                  Convertible Arbitrage CTA Global Distressed Securities
-      1997-01-31             0.20238  0.20786             0.20356
-      1997-02-28             0.20486  0.21405             0.20604
-      1997-03-31             0.20646  0.21360             0.20579
-      1997-04-30             0.21310  0.20770             0.21192
-      1997-05-31             0.21643  0.20738             0.21686
-      1997-06-30             0.22102  0.20915             0.22156
-      1997-07-31             0.22557  0.23438             0.22648
-      1997-08-31             0.22860  0.22330             0.22981
-      1997-09-30             0.23139  0.22772             0.23785
-      1997-10-31             0.23557  0.23095             0.23174
-      1997-11-30             0.23557  0.23402             0.23299
-      1997-12-31             0.23717  0.24071             0.23469
+      1997-01-31             0.2023800  0.2078600             0.2035600
+      1997-02-28             0.2048693  0.2140542             0.2060434
+      1997-03-31             0.2064673  0.2136047             0.2057962
+      1997-04-30             0.2131092  0.2077001             0.2119260
+      1997-05-31             0.2164337  0.2073886             0.2168638
+      1997-06-30             0.2210221  0.2091514             0.2215698
+      1997-07-31             0.2255792  0.2343873             0.2264866
+      1997-08-31             0.2286020  0.2233008             0.2298159
+      1997-09-30             0.2313909  0.2277221             0.2378595
+      1997-10-31             0.2355716  0.2309535             0.2317465
+      1997-11-30             0.2355716  0.2340252             0.2329980
+      1997-12-31             0.2371735  0.2407183             0.2346988
                  Emerging Markets Equity Market Neutral
-      1997-01-31        0.21582             0.20378
-      1997-02-28        0.22715             0.20583
-      1997-03-31        0.22442             0.20616
-      1997-04-30        0.21380             0.21380
-      1997-05-31        0.22054             0.21784
-      1997-06-30        0.23335             0.22144
-      1997-07-31        0.23370             0.22677
-      1997-08-31        0.23215             0.22715
-      1997-09-30        0.23747             0.23174
-      1997-10-31        0.21989             0.23545
-      1997-11-30        0.21158             0.23642
-      1997-12-31        0.21497             0.23798
+      1997-01-31        0.2158200             0.2037800
+      1997-02-28        0.2271506             0.2058382
+      1997-03-31        0.2244247             0.2061675
+      1997-04-30        0.2138065             0.2138065
+      1997-05-31        0.2205414             0.2178474
+      1997-06-30        0.2333548             0.2214419
+      1997-07-31        0.2337012             0.2267743
+      1997-08-31        0.2321588             0.2271598
+      1997-09-30        0.2374752             0.2317484
+      1997-10-31        0.2198980             0.2354550
+      1997-11-30        0.2115858             0.2364204
+      1997-12-31        0.2149712             0.2379808
       
       
       > data(weights)
@@ -2525,26 +2525,26 @@
       > head(Return.relative(managers[, 1:3], managers[, 8, 
       +     drop = FALSE]), n = 20)
                  HAM1/SP500 TR HAM2/SP500 TR HAM3/SP500 TR
-      1996-01-31     0.97427            NA      1.00087
-      1996-02-29     0.98392            NA      1.02645
-      1996-03-31     0.98967            NA      1.04292
-      1996-04-30     0.96646            NA      1.07396
-      1996-05-31     0.94931            NA      1.08391
-      1996-06-30     0.94203            NA      1.04709
-      1996-07-31     0.96283            NA      1.05859
-      1996-08-31     0.98018     0.97923      1.08451
-      1996-09-30     0.94157     1.01993      1.09375
-      1996-10-31     0.94267     1.02608      1.10641
-      1996-11-30     0.89009     1.02427      1.09715
-      1996-12-31     0.92405     1.07610      1.14327
-      1997-01-31     0.88813     1.09322      1.15898
-      1997-02-28     0.88320     1.07586      1.10700
-      1997-03-31     0.92971     1.09179      1.11566
-      1997-04-30     0.88839     1.02400      1.08292
-      1997-05-31     0.87407     1.01724      1.09823
-      1997-06-30     0.85591     1.02737      1.05681
-      1997-07-31     0.80502     1.06106      1.08471
-      1997-08-31     0.87298     1.10186      1.14584
+      1996-01-31     0.9742747            NA      1.000870
+      1996-02-29     0.9839276            NA      1.026455
+      1996-03-31     0.9896776            NA      1.042925
+      1996-04-30     0.9664645            NA      1.073965
+      1996-05-31     0.9493173            NA      1.083912
+      1996-06-30     0.9420352            NA      1.047090
+      1996-07-31     0.9628313            NA      1.058593
+      1996-08-31     0.9801813     0.9792381      1.084511
+      1996-09-30     0.9415791     1.0199354      1.093751
+      1996-10-31     0.9426786     1.0260891      1.106417
+      1996-11-30     0.8900934     1.0242766      1.097159
+      1996-12-31     0.9240553     1.0761069      1.143275
+      1997-01-31     0.8881367     1.0932234      1.158985
+      1997-02-28     0.8832017     1.0758672      1.107005
+      1997-03-31     0.9297150     1.0917993      1.115663
+      1997-04-30     0.8883924     1.0240062      1.082921
+      1997-05-31     0.8740730     1.0172496      1.098232
+      1997-06-30     0.8559189     1.0273754      1.056817
+      1997-07-31     0.8050204     1.0610629      1.084716
+      1997-08-31     0.8729867     1.1018644      1.145846
     Code
       dev.off()
     Output
@@ -2564,7 +2564,7 @@
       
       > SFM.alpha(managers[, "HAM1"], managers[, "SP500 TR"], 
       +     Rf = managers[, "US 3m TR"])
-      [1] 0.00577
+      [1] 0.005774729
       
       > SFM.alpha(managers[, 1:3], managers[, 8:10], Rf = 0.035/12)
            Alpha : SP500 TR Alpha : US 10Y TR Alpha : US 3m TR
@@ -2600,7 +2600,7 @@
       
       > SFM.beta(managers[, "HAM1"], managers[, "SP500 TR"], 
       +     Rf = managers[, "US 3m TR"])
-      [1] 0.39007
+      [1] 0.3900712
       
       > SFM.beta(managers[, 1:3], managers[, 8:10], Rf = 0.035/12)
            Beta : SP500 TR Beta : US 10Y TR Beta : US 3m TR
@@ -2617,15 +2617,15 @@
       
       > SFM.beta.bull(managers[, "HAM2"], managers[, "SP500 TR"], 
       +     Rf = managers[, "US 3m TR"])
-      [1] 0.52265
+      [1] 0.5226596
       
       > SFM.beta.bear(managers[, "HAM2"], managers[, "SP500 TR"], 
       +     Rf = managers[, "US 3m TR"])
-      [1] 0.06982
+      [1] 0.0698255
       
       > TimingRatio(managers[, "HAM2"], managers[, "SP500 TR"], 
       +     Rf = managers[, "US 3m TR"])
-      [1] 7.48522
+      [1] 7.485224
       
       > if (requireNamespace("RobStatTM", quietly = TRUE)) {
       +     betas <- SFM.beta(managers[, 1:6], managers[, 8:10], Rf = 0.035/12, 
@@ -2693,20 +2693,20 @@
       
       > print(Selectivity(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] -0.01416
+      [1] -0.01416944
       
       > data(managers)
       
       > print(Selectivity(managers["2002", 1], managers["2002", 
       +     8]))
-      [1] 0.03780
+      [1] 0.03780793
       
       > print(Selectivity(managers["2002", 1:5], managers["2002", 
       +     8]))
                                            HAM1       HAM2        HAM3       HAM4
-      Jensen's Alpha (Risk free = 0) 0.03780 -0.10158 -0.09419 0.09430
+      Jensen's Alpha (Risk free = 0) 0.03780793 -0.1015863 -0.09419238 0.09430126
                                             HAM5
-      Jensen's Alpha (Risk free = 0) -0.08667
+      Jensen's Alpha (Risk free = 0) -0.08667631
     Code
       dev.off()
     Output
@@ -2727,94 +2727,94 @@
       > SharpeRatio(managers[, 1, drop = FALSE], Rf = 0.035/12, 
       +     FUN = "StdDev")
                                            HAM1
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.32018
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.3201889
       
       > SharpeRatio(managers[, 1, drop = FALSE], Rf = managers[, 
       +     10, drop = FALSE], FUN = "StdDev")
                                           HAM1
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.30810
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.308102
       
       > SharpeRatio(managers[, 1:6], Rf = 0.035/12, FUN = "StdDev")
                                            HAM1      HAM2      HAM3      HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.32018 0.30576 0.26101 0.15226
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.3201889 0.3057649 0.2610141 0.1522615
                                             HAM5      HAM6
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.02562 0.34175
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.02562009 0.3417545
       
       > SharpeRatio(managers[, 1:6], Rf = managers[, 10, drop = FALSE], 
       +     FUN = "StdDev")
                                           HAM1      HAM2      HAM3      HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.30810 0.29886 0.25253 0.14643
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.308102 0.2988608 0.2525301 0.1464385
                                            HAM5      HAM6
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.03545 0.37853
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.0354554 0.3785371
       
       > data(edhec)
       
       > SharpeRatio(edhec[, 6, drop = FALSE], FUN = "VaR")
                                  Event Driven
-      VaR Sharpe (Rf=0%, p=95%):    0.22540
+      VaR Sharpe (Rf=0%, p=95%):    0.2254086
       
       > SharpeRatio(edhec[, 6, drop = FALSE], Rf = 0.04/12, 
       +     FUN = "VaR")
                                    Event Driven
-      VaR Sharpe (Rf=0.3%, p=95%):    0.11282
+      VaR Sharpe (Rf=0.3%, p=95%):    0.1128292
       
       > SharpeRatio(edhec[, 6, drop = FALSE], Rf = 0.04/12, 
       +     FUN = "VaR", method = "gaussian")
                                    Event Driven
-      VaR Sharpe (Rf=0.3%, p=95%):     0.13556
+      VaR Sharpe (Rf=0.3%, p=95%):     0.135566
       
       > SharpeRatio(edhec[, 6, drop = FALSE], FUN = "ES")
                                 Event Driven
-      ES Sharpe (Rf=0%, p=95%):   0.08225
+      ES Sharpe (Rf=0%, p=95%):   0.08225819
       
       > SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE])
                                            HAM1      HAM2      HAM3       HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.30810 0.29886 0.25253 0.14643
-      VaR Sharpe (Rf=0.3%, p=95%):    0.23068 0.39706 0.25049 0.09553
-      ES Sharpe (Rf=0.3%, p=95%):     0.12950 0.17882 0.20933 0.06625
-      SemiSD Sharpe (Rf=0.3%, p=95%): 0.29393        NA 0.27566 0.13937
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.3081020 0.2988608 0.2525301 0.14643845
+      VaR Sharpe (Rf=0.3%, p=95%):    0.2306863 0.3970699 0.2504936 0.09553906
+      ES Sharpe (Rf=0.3%, p=95%):     0.1295014 0.1788256 0.2093343 0.06625013
+      SemiSD Sharpe (Rf=0.3%, p=95%): 0.2939322        NA 0.2756616 0.13937238
                                             HAM5      HAM6 EDHEC LS EQ   SP500 TR
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.03545 0.37853   0.31426 0.12558
-      VaR Sharpe (Rf=0.3%, p=95%):    0.02399 0.30229   0.27376 0.07957
-      ES Sharpe (Rf=0.3%, p=95%):     0.01664 0.23084   0.18558 0.05760
-      SemiSD Sharpe (Rf=0.3%, p=95%):         NA        NA          NA 0.11811
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.03545540 0.3785371   0.3142695 0.12558293
+      VaR Sharpe (Rf=0.3%, p=95%):    0.02399862 0.3022965   0.2737607 0.07957460
+      ES Sharpe (Rf=0.3%, p=95%):     0.01664487 0.2308450   0.1855867 0.05760917
+      SemiSD Sharpe (Rf=0.3%, p=95%):         NA        NA          NA 0.11811218
                                        US 10Y TR
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.05684
-      VaR Sharpe (Rf=0.3%, p=95%):    0.03741
-      ES Sharpe (Rf=0.3%, p=95%):     0.02610
-      SemiSD Sharpe (Rf=0.3%, p=95%): 0.05544
+      StdDev Sharpe (Rf=0.3%, p=95%): 0.05684359
+      VaR Sharpe (Rf=0.3%, p=95%):    0.03741555
+      ES Sharpe (Rf=0.3%, p=95%):     0.02610548
+      SemiSD Sharpe (Rf=0.3%, p=95%): 0.05544425
       
       > SharpeRatio(edhec, Rf = 0.04/12)
                                       Convertible Arbitrage CTA Global
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.14668 0.04318
-      VaR Sharpe (Rf=0.3%, p=95%):               0.09573 0.03071
-      ES Sharpe (Rf=0.3%, p=95%):                0.02749 0.02436
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.12742 0.04448
+      StdDev Sharpe (Rf=0.3%, p=95%):            0.14668811 0.04318355
+      VaR Sharpe (Rf=0.3%, p=95%):               0.09573383 0.03071283
+      ES Sharpe (Rf=0.3%, p=95%):                0.02749804 0.02436990
+      SemiSD Sharpe (Rf=0.3%, p=95%):            0.12742933 0.04448386
                                       Distressed Securities Emerging Markets
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.19243       0.10385
-      VaR Sharpe (Rf=0.3%, p=95%):               0.12468       0.06357
-      ES Sharpe (Rf=0.3%, p=95%):                0.05185       0.02935
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.16964       0.09420
+      StdDev Sharpe (Rf=0.3%, p=95%):            0.19243015       0.10385437
+      VaR Sharpe (Rf=0.3%, p=95%):               0.12468723       0.06357551
+      ES Sharpe (Rf=0.3%, p=95%):                0.05185797       0.02935853
+      SemiSD Sharpe (Rf=0.3%, p=95%):            0.16964280       0.09420548
                                       Equity Market Neutral Event Driven
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.12208   0.17516
-      VaR Sharpe (Rf=0.3%, p=95%):               0.09119   0.11282
-      ES Sharpe (Rf=0.3%, p=95%):                0.02730   0.04117
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.10912   0.15387
+      StdDev Sharpe (Rf=0.3%, p=95%):            0.12208608   0.17516507
+      VaR Sharpe (Rf=0.3%, p=95%):               0.09119925   0.11282916
+      ES Sharpe (Rf=0.3%, p=95%):                0.02730312   0.04117466
+      SemiSD Sharpe (Rf=0.3%, p=95%):            0.10912571   0.15387917
                                       Fixed Income Arbitrage Global Macro
-      StdDev Sharpe (Rf=0.3%, p=95%):             0.09571    0.15484
-      VaR Sharpe (Rf=0.3%, p=95%):                0.06182    0.16400
-      ES Sharpe (Rf=0.3%, p=95%):                 0.02066    0.13349
-      SemiSD Sharpe (Rf=0.3%, p=95%):             0.07810    0.17242
+      StdDev Sharpe (Rf=0.3%, p=95%):             0.09571851    0.1548462
+      VaR Sharpe (Rf=0.3%, p=95%):                0.06182798    0.1640095
+      ES Sharpe (Rf=0.3%, p=95%):                 0.02066033    0.1334925
+      SemiSD Sharpe (Rf=0.3%, p=95%):             0.07810721    0.1724268
                                       Long/Short Equity Merger Arbitrage
-      StdDev Sharpe (Rf=0.3%, p=95%):        0.16187       0.19589
-      VaR Sharpe (Rf=0.3%, p=95%):           0.11467       0.14961
-      ES Sharpe (Rf=0.3%, p=95%):            0.06966       0.04383
-      SemiSD Sharpe (Rf=0.3%, p=95%):        0.15390       0.17840
+      StdDev Sharpe (Rf=0.3%, p=95%):        0.16187593       0.19589976
+      VaR Sharpe (Rf=0.3%, p=95%):           0.11467174       0.14961866
+      ES Sharpe (Rf=0.3%, p=95%):            0.06966206       0.04383052
+      SemiSD Sharpe (Rf=0.3%, p=95%):        0.15390702       0.17840739
                                       Relative Value Short Selling Funds of Funds
-      StdDev Sharpe (Rf=0.3%, p=95%):     0.20179   -0.10095     0.07325
-      VaR Sharpe (Rf=0.3%, p=95%):        0.13789   -0.07391     0.05102
-      ES Sharpe (Rf=0.3%, p=95%):         0.05040   -0.06801     0.02566
-      SemiSD Sharpe (Rf=0.3%, p=95%):     0.17429   -0.10985     0.06968
+      StdDev Sharpe (Rf=0.3%, p=95%):     0.20179571   -0.10095636     0.07325342
+      VaR Sharpe (Rf=0.3%, p=95%):        0.13789129   -0.07391375     0.05102233
+      ES Sharpe (Rf=0.3%, p=95%):         0.05040732   -0.06801430     0.02566824
+      SemiSD Sharpe (Rf=0.3%, p=95%):     0.17429478   -0.10985959     0.06968278
     Code
       dev.off()
     Output
@@ -2835,32 +2835,32 @@
       > SharpeRatio.annualized(managers[, 1, drop = FALSE], 
       +     Rf = 0.035/12)
                                             HAM1
-      Annualized Sharpe Ratio (Rf=3.5%) 1.11229
+      Annualized Sharpe Ratio (Rf=3.5%) 1.112293
       
       > SharpeRatio.annualized(managers[, 1, drop = FALSE], 
       +     Rf = managers[, 10, drop = FALSE])
                                             HAM1
-      Annualized Sharpe Ratio (Rf=3.9%) 1.06679
+      Annualized Sharpe Ratio (Rf=3.9%) 1.066795
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = 0.035/12)
                                             HAM1     HAM2      HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.5%) 1.11229 1.05908 0.88543 0.45125
+      Annualized Sharpe Ratio (Rf=3.5%) 1.112293 1.059085 0.8854393 0.4512555
                                               HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.5%) 0.01046 1.19414
+      Annualized Sharpe Ratio (Rf=3.5%) 0.01046591 1.194146
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = managers[, 
       +     10, drop = FALSE])
                                             HAM1     HAM2      HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.9%) 1.06679 1.03301 0.85397 0.42921
+      Annualized Sharpe Ratio (Rf=3.9%) 1.066795 1.033019 0.8539722 0.4292173
                                               HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.9%) 0.04441 1.33386
+      Annualized Sharpe Ratio (Rf=3.9%) 0.04441162 1.333868
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = managers[, 
       +     10, drop = FALSE], geometric = FALSE)
                                             HAM1     HAM2      HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.9%) 1.06729 1.03528 0.87479 0.50727
+      Annualized Sharpe Ratio (Rf=3.9%) 1.067297 1.035284 0.8747901 0.5072777
                                              HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.9%) 0.12282 1.31129
+      Annualized Sharpe Ratio (Rf=3.9%) 0.1228211 1.311291
     Code
       dev.off()
     Output
@@ -2895,17 +2895,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.03609
+      [1] 0.03609444
       
       $contribution
-       [1]  0.00473 -0.00045  0.00453  0.00658  0.00112
-       [6]  0.00498  0.00285  0.00119  0.00378  0.00266
-      [11]  0.00315 -0.00245  0.00340
+       [1]  0.0047334086 -0.0004571893  0.0045351937  0.0065860529  0.0011205219
+       [6]  0.0049801251  0.0028500976  0.0011928528  0.0037860411  0.0026631912
+      [11]  0.0031519341 -0.0024524364  0.0034046495
       
       $pct_contrib_MES
-       [1]  0.13113 -0.01266  0.12564  0.18246  0.03104  0.13797
-       [7]  0.07896  0.03304  0.10489  0.07378  0.08732 -0.06794
-      [13]  0.09432
+       [1]  0.13113954 -0.01266647  0.12564798  0.18246723  0.03104417  0.13797484
+       [7]  0.07896223  0.03304810  0.10489263  0.07378397  0.08732464 -0.06794499
+      [13]  0.09432614
       
       
       > sigma <- cov(edhec)
@@ -2917,17 +2917,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.03625
+      [1] 0.03625114
       
       $contribution
-       [1]  0.00597 -0.00280  0.00528  0.00625  0.00090
-       [6]  0.00589  0.00346  0.00013  0.00362  0.00346
-      [11]  0.00377 -0.00315  0.00343
+       [1]  0.0059762619 -0.0028081561  0.0052816918  0.0062522301  0.0009068639
+       [6]  0.0058974265  0.0034627291  0.0001339207  0.0036259163  0.0034602269
+      [11]  0.0037776798 -0.0031537633  0.0034381082
       
       $pct_contrib_MES
-       [1]  0.16485 -0.07746  0.14569  0.17246  0.02501
-       [6]  0.16268  0.09552  0.00369  0.10002  0.09545
-      [11]  0.10420 -0.08699  0.09484
+       [1]  0.164857231 -0.077463949  0.145697277  0.172469910  0.025016152
+       [6]  0.162682530  0.095520570  0.003694249  0.100022144  0.095451544
+      [11]  0.104208592 -0.086997642  0.094841391
       
     Code
       dev.off()
@@ -2947,18 +2947,18 @@
       > data(portfolio_bacon)
       
       > print(SkewnessKurtosisRatio(portfolio_bacon[, 1]))
-      [1] -0.03394
+      [1] -0.03394204
       
       > data(managers)
       
       > print(SkewnessKurtosisRatio(managers["1996"]))
                                   HAM1      HAM2       HAM3       HAM4 HAM5 HAM6
-      SkewnessKurtosisRatio -0.13641 0.12790 -0.33226 -0.02646   NA   NA
+      SkewnessKurtosisRatio -0.1364114 0.1279073 -0.3322627 -0.0264609   NA   NA
                             EDHEC LS EQ    SP500 TR   US 10Y TR   US 3m TR
-      SkewnessKurtosisRatio          NA -0.03981 -0.01634 -0.26267
+      SkewnessKurtosisRatio          NA -0.03981589 -0.01634447 -0.2626715
       
       > print(SkewnessKurtosisRatio(managers["1996", 1]))
-      [1] -0.13641
+      [1] -0.1364114
     Code
       dev.off()
     Output
@@ -2980,23 +2980,23 @@
       
       > SmoothingIndex(managers[, 1, drop = FALSE])
           HAM1 
-      0.62110 
+      0.621107 
       
       > SmoothingIndex(managers[, 1:8])
                           HAM1      HAM2      HAM3      HAM4 HAM5      HAM6
-      Smoothing Index 0.62110 0.49203 0.66298 0.67105    1 0.49292
+      Smoothing Index 0.621107 0.4920349 0.6629845 0.6710542    1 0.4929217
                       EDHEC LS EQ  SP500 TR
-      Smoothing Index   0.53789 0.95284
+      Smoothing Index   0.5378922 0.9528486
       
       > SmoothingIndex(edhec)
                       Convertible Arbitrage CTA Global Distressed Securities
-      Smoothing Index             0.42930  0.94935             0.45124
+      Smoothing Index             0.4293031  0.9493503             0.4512464
                       Emerging Markets Equity Market Neutral Event Driven
-      Smoothing Index        0.56260             0.47561    0.53629
+      Smoothing Index        0.5626008             0.4756124    0.5362955
                       Fixed Income Arbitrage Global Macro Long/Short Equity
-      Smoothing Index              0.43120    0.66319         0.59350
+      Smoothing Index              0.4312082    0.6631918         0.5935058
                       Merger Arbitrage Relative Value Short Selling Funds of Funds
-      Smoothing Index        0.52454      0.46320     0.75356      0.54741
+      Smoothing Index        0.5245479      0.4632014     0.7535638      0.5474126
     Code
       dev.off()
     Output
@@ -3042,18 +3042,18 @@
       
       > print(SpecificRisk(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] 0.03293
+      [1] 0.03293109
       
       > data(managers)
       
       > print(SpecificRisk(managers["1996", 1], managers["1996", 
       +     8]))
-      [1] 0.04977
+      [1] 0.04977046
       
       > print(SpecificRisk(managers["1996", 1:5], managers["1996", 
       +     8]))
                              HAM1 HAM2       HAM3      HAM4 HAM5
-      Specific Risk =  0.04977   NA 0.06225 0.08576   NA
+      Specific Risk =  0.04977046   NA 0.06225051 0.0857627   NA
     Code
       dev.off()
     Output
@@ -3073,64 +3073,64 @@
       
       > StdDev(edhec)
              Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      StdDev            0.01676 0.02278            0.01814       0.03270
+      StdDev            0.01676221 0.02278814            0.01814467       0.03270967
              Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      StdDev           0.00820   0.01907             0.01145   0.01462
+      StdDev           0.008208647   0.01907188             0.01145756   0.01462496
              Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      StdDev        0.02090       0.01147     0.01186    0.04550
+      StdDev        0.02090324       0.01147821     0.01186841    0.04550226
              Funds of Funds
-      StdDev     0.01608
+      StdDev     0.01608486
       
       > StdDev(edhec, portfolio_method = "single")
              Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      StdDev            0.01676 0.02278            0.01814       0.03270
+      StdDev            0.01676221 0.02278814            0.01814467       0.03270967
              Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      StdDev           0.00820   0.01907             0.01145   0.01462
+      StdDev           0.008208647   0.01907188             0.01145756   0.01462496
              Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      StdDev        0.02090       0.01147     0.01186    0.04550
+      StdDev        0.02090324       0.01147821     0.01186841    0.04550226
              Funds of Funds
-      StdDev     0.01608
+      StdDev     0.01608486
       
       > StdDev(edhec, clean = "boudt")
              Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      StdDev            0.01399 0.02278            0.01649       0.03081
+      StdDev            0.01399677 0.02278814            0.01649289       0.03081375
              Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      StdDev           0.00739   0.01751            0.00951   0.01431
+      StdDev           0.007394652   0.01751999            0.009510082   0.01431055
              Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      StdDev         0.02052       0.01037     0.01059     0.04352
+      StdDev         0.0205263       0.01037732     0.01059619     0.0435232
              Funds of Funds
-      StdDev     0.01589
+      StdDev     0.01589405
       
       > StdDev(edhec, clean = "boudt", portfolio_method = "component")
     Message
       no weights passed in, assuming equal weighted portfolio
     Output
       $StdDev
-      [1] 0.01016
+      [1] 0.01016549
       
       $contribution
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                0.00081           0.00064           0.00104 
+                0.0008134515           0.0006489133           0.0010437732 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                0.00192           0.00042           0.00117 
+                0.0019206079           0.0004275764           0.0011767665 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                0.00053           0.00090           0.00129 
+                0.0005332522           0.0009011841           0.0012966454 
             Merger Arbitrage         Relative Value          Short Selling 
-                0.00057           0.00070          -0.00096 
+                0.0005773683           0.0007041049          -0.0009687674 
               Funds of Funds 
-                0.00109 
+                0.0010906127 
       
       $pct_contrib_StdDev
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                  0.08002             0.06383             0.10267 
+                  0.08002089             0.06383493             0.10267811 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                  0.18893             0.04206             0.11576 
+                  0.18893414             0.04206157             0.11576093 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                  0.05245             0.08865             0.12755 
+                  0.05245712             0.08865133             0.12755366 
             Merger Arbitrage         Relative Value          Short Selling 
-                  0.05679             0.06926            -0.09529 
+                  0.05679691             0.06926425            -0.09529964 
               Funds of Funds 
-                  0.10728 
+                  0.10728581 
       
     Code
       dev.off()
@@ -3151,25 +3151,25 @@
       
       > sd.annualized(edhec)
                                     Convertible Arbitrage CTA Global
-      Annualized Standard Deviation              0.05806 0.07894
+      Annualized Standard Deviation              0.058066 0.07894044
                                     Distressed Securities Emerging Markets
-      Annualized Standard Deviation            0.06285        0.11330
+      Annualized Standard Deviation            0.06285498        0.1133096
                                     Equity Market Neutral Event Driven
-      Annualized Standard Deviation            0.02843   0.06606
+      Annualized Standard Deviation            0.02843559   0.06606695
                                     Fixed Income Arbitrage Global Macro
-      Annualized Standard Deviation             0.03969   0.05066
+      Annualized Standard Deviation             0.03969016   0.05066234
                                     Long/Short Equity Merger Arbitrage Relative Value
-      Annualized Standard Deviation        0.07241       0.03976     0.04111
+      Annualized Standard Deviation        0.07241095       0.03976167     0.04111338
                                     Short Selling Funds of Funds
-      Annualized Standard Deviation     0.15762     0.05571
+      Annualized Standard Deviation     0.1576245     0.05571958
       
       > sd.annualized(edhec[, 6, drop = FALSE])
                                     Event Driven
-      Annualized Standard Deviation   0.06606
+      Annualized Standard Deviation   0.06606695
       
       > sd.multiperiod(edhec[, 6, drop = FALSE], scale = 3)
                                     Event Driven
-      Annualized Standard Deviation   0.03303
+      Annualized Standard Deviation   0.03303347
     Code
       dev.off()
     Output
@@ -3200,17 +3200,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.00666
+      [1] 0.00666102
       
       $contribution
-       [1] -2.83800e-04  1.07218e-03 -5.28465e-06  2.06902e-03 -4.84545e-04
-       [6]  2.44437e-05 -5.79406e-04 -1.63968e-05  5.29764e-04 -4.91059e-04
-      [11] -4.30305e-04  5.15166e-03  1.04734e-04
+       [1] -2.838003e-04  1.072186e-03 -5.284652e-06  2.069026e-03 -4.845456e-04
+       [6]  2.444378e-05 -5.794060e-04 -1.639684e-05  5.297645e-04 -4.910597e-04
+      [11] -4.303054e-04  5.151664e-03  1.047346e-04
       
       $pct_contrib_MES
-       [1] -0.04260  0.16096 -0.00079  0.31061 -0.07274
-       [6]  0.00366 -0.08698 -0.00246  0.07953 -0.07372
-      [11] -0.06460  0.77340  0.01572
+       [1] -0.0426061378  0.1609642208 -0.0007933698  0.3106170025 -0.0727434504
+       [6]  0.0036696757 -0.0869845869 -0.0024616107  0.0795320410 -0.0737213987
+      [11] -0.0646005356  0.7734046409  0.0157235091
       
       
       > sigma <- cov(edhec)
@@ -3222,17 +3222,17 @@
       > ES(p = 0.95, portfolio_method = "component", weights = rep(1/p, 
       +     p), mu = mu, sigma = sigma, m3 = m3, m4 = m4)
       $MES
-      [1] 0.03625
+      [1] 0.03625114
       
       $contribution
-       [1]  0.00597 -0.00280  0.00528  0.00625  0.00090
-       [6]  0.00589  0.00346  0.00013  0.00362  0.00346
-      [11]  0.00377 -0.00315  0.00343
+       [1]  0.0059762619 -0.0028081561  0.0052816918  0.0062522301  0.0009068639
+       [6]  0.0058974265  0.0034627291  0.0001339207  0.0036259163  0.0034602269
+      [11]  0.0037776798 -0.0031537633  0.0034381082
       
       $pct_contrib_MES
-       [1]  0.16485 -0.07746  0.14569  0.17246  0.02501
-       [6]  0.16268  0.09552  0.00369  0.10002  0.09545
-      [11]  0.10420 -0.08699  0.09484
+       [1]  0.164857231 -0.077463949  0.145697277  0.172469910  0.025016152
+       [6]  0.162682530  0.095520570  0.003694249  0.100022144  0.095451544
+      [11]  0.104208592 -0.086997642  0.094841391
       
     Code
       dev.off()
@@ -3253,20 +3253,20 @@
       
       > print(SystematicRisk(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] 0.13280
+      [1] 0.132806
       
       > data(managers)
       
       > print(SystematicRisk(managers["2002", 1], managers["2002", 
       +     8]))
-      [1] 0.11036
+      [1] 0.1103665
       
       > print(SystematicRisk(managers["2002", 1:5], managers["2002", 
       +     8]))
                                                 HAM1       HAM2       HAM3      HAM4
-      Systematic Risk to SP500 TR (Rf = 0) 0.11036 0.02041 0.08939 0.16512
+      Systematic Risk to SP500 TR (Rf = 0) 0.1103665 0.02041913 0.08939036 0.1651298
                                                  HAM5
-      Systematic Risk to SP500 TR (Rf = 0) 0.02013
+      Systematic Risk to SP500 TR (Rf = 0) 0.02013523
     Code
       dev.off()
     Output
@@ -3286,18 +3286,18 @@
       
       > print(TotalRisk(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2]))
-      [1] 0.13682
+      [1] 0.136828
       
       > data(managers)
       
       > print(TotalRisk(managers["1996", 1], managers["1996", 
       +     8]))
-      [1] 0.05627
+      [1] 0.05627721
       
       > print(TotalRisk(managers["1996", 1:5], managers["1996", 
       +     8]))
                           HAM1 HAM2      HAM3      HAM4 HAM5
-      Total Risk =  0.05627   NA 0.10799 0.10993   NA
+      Total Risk =  0.05627721   NA 0.1079938 0.1099375   NA
     Code
       dev.off()
     Output
@@ -3317,21 +3317,21 @@
       
       > TrackingError(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE])
-      [1] 0.11316
+      [1] 0.1131667
       
       > TrackingError(managers[, 1:6], managers[, 8, drop = FALSE])
                                     HAM1      HAM2      HAM3      HAM4      HAM5
-      Tracking Error: SP500 TR 0.11316 0.15336 0.11586 0.15966 0.18002
+      Tracking Error: SP500 TR 0.1131667 0.1533647 0.1158673 0.1596656 0.1800291
                                    HAM6
-      Tracking Error: SP500 TR 0.11283
+      Tracking Error: SP500 TR 0.112839
       
       > TrackingError(managers[, 1:6], managers[, 8:7, drop = FALSE])
                                         HAM1       HAM2       HAM3      HAM4
-      Tracking Error: SP500 TR    0.11316 0.15336 0.11586 0.15966
-      Tracking Error: EDHEC LS EQ 0.07577 0.09071 0.08156 0.15690
+      Tracking Error: SP500 TR    0.11316666 0.15336472 0.11586735 0.1596656
+      Tracking Error: EDHEC LS EQ 0.07577263 0.09071824 0.08156934 0.1569067
                                        HAM5       HAM6
-      Tracking Error: SP500 TR    0.18002 0.11283
-      Tracking Error: EDHEC LS EQ 0.14215 0.05651
+      Tracking Error: SP500 TR    0.1800291 0.11283904
+      Tracking Error: EDHEC LS EQ 0.1421533 0.05651657
     Code
       dev.off()
     Output
@@ -3383,16 +3383,16 @@
       
       > print(TreynorRatio(portfolio_bacon[, 1], portfolio_bacon[, 
       +     2], modified = TRUE))
-      [1] 0.78067
+      [1] 0.7806747
       
       > print(TreynorRatio(managers["2002", 1], managers["2002", 
       +     8], modified = TRUE))
-      [1] -0.72754
+      [1] -0.727545
       
       > print(TreynorRatio(managers["2002", 1:5], managers["2002", 
       +     8], modified = TRUE))
                                    HAM1      HAM2      HAM3       HAM4     HAM5
-      Treynor Ratio: SP500 TR -0.72754 -6.04516 -2.12383 -0.49903 -5.37482
+      Treynor Ratio: SP500 TR -0.727545 -6.045167 -2.123832 -0.4990387 -5.37482
     Code
       dev.off()
     Output
@@ -3413,43 +3413,43 @@
       > UpDownRatios(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE])
                                  HAM1
-      SP500 TR Up Capture   0.63466
-      SP500 TR Down Capture 0.20763
-      SP500 TR Up Number    0.89411
-      SP500 TR Down Number  0.51063
-      SP500 TR Up Percent   0.29411
-      SP500 TR Down Percent 0.80851
+      SP500 TR Up Capture   0.6346612
+      SP500 TR Down Capture 0.2076304
+      SP500 TR Up Number    0.8941176
+      SP500 TR Down Number  0.5106383
+      SP500 TR Up Percent   0.2941176
+      SP500 TR Down Percent 0.8085106
       
       > UpDownRatios(managers[, 1:6, drop = FALSE], managers[, 
       +     8, drop = FALSE])
                                  HAM1       HAM2      HAM3      HAM4      HAM5
-      SP500 TR Up Capture   0.63466 0.66155 0.79139 0.92723 0.55296
-      SP500 TR Down Capture 0.20763 0.04392 0.36693 0.70078 0.35203
-      SP500 TR Up Number    0.89411 0.68354 0.87058 0.76470 0.70833
-      SP500 TR Down Number  0.51063 0.69565 0.76595 0.65957 0.72413
-      SP500 TR Up Percent   0.29411 0.36708 0.42352 0.45882 0.39583
-      SP500 TR Down Percent 0.80851 0.86956 0.80851 0.53191 0.82758
+      SP500 TR Up Capture   0.6346612 0.66155321 0.7913921 0.9272348 0.5529663
+      SP500 TR Down Capture 0.2076304 0.04392011 0.3669345 0.7007885 0.3520355
+      SP500 TR Up Number    0.8941176 0.68354430 0.8705882 0.7647059 0.7083333
+      SP500 TR Down Number  0.5106383 0.69565217 0.7659574 0.6595745 0.7241379
+      SP500 TR Up Percent   0.2941176 0.36708861 0.4235294 0.4588235 0.3958333
+      SP500 TR Down Percent 0.8085106 0.86956522 0.8085106 0.5319149 0.8275862
                                  HAM6
-      SP500 TR Up Capture   0.80684
-      SP500 TR Down Capture 0.23977
-      SP500 TR Up Number    0.83720
-      SP500 TR Down Number  0.52380
-      SP500 TR Up Percent   0.53488
-      SP500 TR Down Percent 0.71428
+      SP500 TR Up Capture   0.8068482
+      SP500 TR Down Capture 0.2397750
+      SP500 TR Up Number    0.8372093
+      SP500 TR Down Number  0.5238095
+      SP500 TR Up Percent   0.5348837
+      SP500 TR Down Percent 0.7142857
       
       > UpDownRatios(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE], method = "Capture")
                                  HAM1
-      SP500 TR Up Capture   0.63466
-      SP500 TR Down Capture 0.20763
+      SP500 TR Up Capture   0.6346612
+      SP500 TR Down Capture 0.2076304
       
       > UpDownRatios(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE], side = "Up", method = "Capture")
-      [1] 0.63466
+      [1] 0.6346612
       
       > UpDownRatios(managers[, 1, drop = FALSE], managers[, 
       +     8, drop = FALSE], side = "Down", method = "Capture")
-      [1] 0.20763
+      [1] 0.2076304
     Code
       dev.off()
     Output
@@ -3470,15 +3470,15 @@
       > MAR = 0.005
       
       > print(UpsideFrequency(portfolio_bacon[, 1], MAR))
-      [1] 0.54166
+      [1] 0.5416667
       
       > data(managers)
       
       > print(UpsideFrequency(managers["1996"]))
                                   HAM1 HAM2      HAM3      HAM4 HAM5 HAM6 EDHEC LS EQ
-      Upside Frequency (MAR = 0%) 0.75  0.8 0.83333 0.66666  NaN  NaN         NaN
+      Upside Frequency (MAR = 0%) 0.75  0.8 0.8333333 0.6666667  NaN  NaN         NaN
                                    SP500 TR US 10Y TR US 3m TR
-      Upside Frequency (MAR = 0%) 0.83333 0.41666        1
+      Upside Frequency (MAR = 0%) 0.8333333 0.4166667        1
       
       > print(UpsideFrequency(managers["1996", 1]))
       [1] 0.75
@@ -3501,15 +3501,15 @@
       
       > UpsidePotentialRatio(edhec[, 6], MAR = 0.05/12)
                                     Event Driven
-      Upside Potential (MAR = 0.4%)    0.54484
+      Upside Potential (MAR = 0.4%)    0.5448414
       
       > UpsidePotentialRatio(edhec[, 1:6], MAR = 0)
                                   Convertible Arbitrage CTA Global
-      Upside Potential (MAR = 0%)             0.49885   1.05520
+      Upside Potential (MAR = 0%)             0.4988543   1.055208
                                   Distressed Securities Emerging Markets
-      Upside Potential (MAR = 0%)             0.69864        0.60747
+      Upside Potential (MAR = 0%)             0.6986485        0.6074726
                                   Equity Market Neutral Event Driven
-      Upside Potential (MAR = 0%)             0.60772    0.59382
+      Upside Potential (MAR = 0%)             0.6077271    0.5938243
     Code
       dev.off()
     Output
@@ -3530,13 +3530,13 @@
       > MAR = 0.005
       
       > print(UpsideRisk(portfolio_bacon[, 1], MAR, stat = "risk"))
-      [1] 0.02937
+      [1] 0.02937332
       
       > print(UpsideRisk(portfolio_bacon[, 1], MAR, stat = "variance"))
-      [1] 0.00086
+      [1] 0.0008627917
       
       > print(UpsideRisk(portfolio_bacon[, 1], MAR, stat = "potential"))
-      [1] 0.01770
+      [1] 0.01770833
       
       > MAR = 0
       
@@ -3544,12 +3544,12 @@
       
       > print(UpsideRisk(managers["1996"], MAR, stat = "risk"))
                                    HAM1       HAM2       HAM3      HAM4 HAM5 HAM6
-      Upside Risk (MAR = 0%) 0.01799 0.05916 0.04002 0.03217    0    0
+      Upside Risk (MAR = 0%) 0.01799111 0.05916453 0.04002169 0.0321782    0    0
                              EDHEC LS EQ   SP500 TR  US 10Y TR    US 3m TR
-      Upside Risk (MAR = 0%)           0 0.03204 0.01397 0.00432
+      Upside Risk (MAR = 0%)           0 0.03204533 0.01397565 0.004324785
       
       > print(UpsideRisk(managers["1996", 1], MAR, stat = "risk"))
-      [1] 0.01799
+      [1] 0.01799111
     Code
       dev.off()
     Output
@@ -3579,84 +3579,84 @@
       
       > VaR(edhec, p = 0.95, method = "gaussian")
           Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      VaR           -0.02173 -0.03310           -0.02296      -0.04698
+      VaR           -0.02173214 -0.03310173           -0.02296944      -0.04698035
           Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      VaR          -0.00914  -0.02464            -0.01438  -0.01841
+      VaR          -0.009143467  -0.02464282            -0.01438379  -0.01841688
           Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      VaR       -0.02760      -0.01326    -0.01376   -0.07597
+      VaR       -0.02760698      -0.01326581    -0.01376013   -0.07597714
           Funds of Funds
-      VaR    -0.02190
+      VaR    -0.02190044
       
       > VaR(edhec, p = 0.95, method = "modified")
           Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      VaR           -0.02568 -0.03204           -0.02800      -0.05343
+      VaR           -0.02568389 -0.0320411           -0.02800272      -0.05343318
           Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      VaR            -0.01098  -0.02960            -0.01773  -0.01380
+      VaR            -0.0109887  -0.02960873            -0.01773794  -0.01380785
           Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      VaR       -0.02950      -0.01502    -0.01736   -0.06215
+      VaR       -0.02950798      -0.01502873    -0.01736871   -0.06215004
           Funds of Funds
-      VaR    -0.02309
+      VaR    -0.02309324
       
       > VaR(edhec, p = 0.99)
           Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      VaR           -0.09538 -0.04561           -0.07097       -0.12613
+      VaR           -0.09538713 -0.04561466           -0.07097989       -0.1261338
           Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      VaR           -0.03875  -0.08433            -0.06036  -0.02309
+      VaR           -0.03875142  -0.08433448            -0.06036075  -0.02309801
           Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      VaR       -0.05658      -0.05760    -0.04882    -0.10938
+      VaR       -0.05658921      -0.05760895    -0.04882532    -0.1093869
           Funds of Funds
-      VaR    -0.05423
+      VaR    -0.05423976
       
       > VaR(edhec, p = 0.01)
           Convertible Arbitrage  CTA Global Distressed Securities Emerging Markets
-      VaR           -0.09538 -0.04561           -0.07097       -0.12613
+      VaR           -0.09538713 -0.04561466           -0.07097989       -0.1261338
           Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      VaR           -0.03875  -0.08433            -0.06036  -0.02309
+      VaR           -0.03875142  -0.08433448            -0.06036075  -0.02309801
           Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      VaR       -0.05658      -0.05760    -0.04882    -0.10938
+      VaR       -0.05658921      -0.05760895    -0.04882532    -0.1093869
           Funds of Funds
-      VaR    -0.05423
+      VaR    -0.05423976
       
       > VaR(edhec, clean = "boudt")
           Convertible Arbitrage CTA Global Distressed Securities Emerging Markets
-      VaR           -0.01713 -0.03204            -0.02272      -0.04687
+      VaR           -0.01713444 -0.0320411            -0.0227273      -0.04687401
           Equity Market Neutral Event Driven Fixed Income Arbitrage Global Macro
-      VaR          -0.00847  -0.02485            -0.01355   -0.01463
+      VaR          -0.008476936  -0.02485092            -0.01355527   -0.0146318
           Long/Short Equity Merger Arbitrage Relative Value Short Selling
-      VaR       -0.02811      -0.01116    -0.01348   -0.06821
+      VaR       -0.02811176      -0.01116024    -0.01348449   -0.06821057
           Funds of Funds
-      VaR    -0.02236
+      VaR    -0.02236299
       
       > VaR(edhec, clean = "boudt", portfolio_method = "component")
     Message
       no weights passed in, assuming equal weighted portfolio
     Output
       $MVaR
-      [1] 0.01241
+      [1] 0.01241465
       
       $contribution
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                0.00110           0.00039           0.00145 
+                0.0011098370           0.0003987871           0.0014558713 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                0.00286           0.00044           0.00166 
+                0.0028661906           0.0004461122           0.0016651346 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                0.00077           0.00089           0.00174 
+                0.0007723257           0.0008972835           0.0017417050 
             Merger Arbitrage         Relative Value          Short Selling 
-                0.00059           0.00092          -0.00207 
+                0.0005907568           0.0009219361          -0.0020761974 
               Funds of Funds 
-                0.00162 
+                0.0016249056 
       
       $pct_contrib_MVaR
        Convertible Arbitrage             CTA Global  Distressed Securities 
-                  0.08939             0.03212             0.11727 
+                  0.08939738             0.03212230             0.11727045 
             Emerging Markets  Equity Market Neutral           Event Driven 
-                  0.23087             0.03593             0.13412 
+                  0.23087168             0.03593434             0.13412660 
       Fixed Income Arbitrage           Global Macro      Long/Short Equity 
-                  0.06221             0.07227             0.14029 
+                  0.06221084             0.07227619             0.14029435 
             Merger Arbitrage         Relative Value          Short Selling 
-                  0.04758             0.07426            -0.16723 
+                  0.04758547             0.07426196            -0.16723772 
               Funds of Funds 
-                  0.13088 
+                  0.13088616 
       
     Code
       dev.off()
@@ -3680,12 +3680,12 @@
       > print(VolatilitySkewness(portfolio_bacon[, 1], MAR, 
       +     stat = "volatility"))
                [,1]
-      [1,] 1.32304
+      [1,] 1.323046
       
       > print(VolatilitySkewness(portfolio_bacon[, 1], MAR, 
       +     stat = "variability"))
                [,1]
-      [1,] 1.15023
+      [1,] 1.150238
       
       > MAR = 0
       
@@ -3694,7 +3694,7 @@
       > print(VolatilitySkewness(managers["1996", 1], MAR, 
       +     stat = "volatility"))
                [,1]
-      [1,] 6.14942
+      [1,] 6.149423
     Code
       dev.off()
     Output
@@ -3715,49 +3715,49 @@
       > apply.fromstart(managers[, 1, drop = FALSE], FUN = "mean", 
       +     width = 36)
        1996-01-31  1996-02-29  1996-03-31  1996-04-30  1996-05-31  1996-06-30 
-      0.00740 0.01335 0.01406 0.00827 0.00814 0.00613 
+      0.007400000 0.013350000 0.014066667 0.008275000 0.008140000 0.006133333 
        1996-07-31  1996-08-31  1996-09-30  1996-10-31  1996-11-30  1996-12-31 
-      0.00195 0.00665 0.00754 0.00967 0.01020 0.01082 
+      0.001957143 0.006650000 0.007544444 0.009670000 0.010209091 0.010825000 
        1997-01-31  1997-02-28  1997-03-31  1997-04-30  1997-05-31  1997-06-30 
-      0.01162 0.01095 0.01084 0.01095 0.01288 0.01345 
+      0.011623077 0.010950000 0.010846667 0.010956250 0.012888235 0.013455556 
        1997-07-31  1997-08-31  1997-09-30  1997-10-31  1997-11-30  1997-12-31 
-      0.01355 0.01406 0.01443 0.01284 0.01336 0.01327 
+      0.013557895 0.014065000 0.014438095 0.012840909 0.013369565 0.013270833 
        1998-01-31  1998-02-28  1998-03-31  1998-04-30  1998-05-31  1998-06-30 
-      0.01296 0.01411 0.01493 0.01467 0.01337 0.01333 
+      0.012964000 0.014115385 0.014933333 0.014678571 0.013375862 0.013333333 
        1998-07-31  1998-08-31  1998-09-30  1998-10-31  1998-11-30  1998-12-31 
-      0.01220 0.00887 0.00936 0.01072 0.01078 0.01075 
+      0.012209677 0.008878125 0.009360606 0.010726471 0.010780000 0.010750000 
        1999-01-31  1999-02-28  1999-03-31  1999-04-30  1999-05-31  1999-06-30 
-      0.01020 0.01018 0.01111 0.01210 0.01220 0.01269 
+      0.010208108 0.010186842 0.011110256 0.012107500 0.012207317 0.012692857 
        1999-07-31  1999-08-31  1999-09-30  1999-10-31  1999-11-30  1999-12-31 
-      0.01262 0.01196 0.01159 0.01133 0.01116 0.01123 
+      0.012625581 0.011963636 0.011597778 0.011332609 0.011165957 0.011239583 
        2000-01-31  2000-02-29  2000-03-31  2000-04-30  2000-05-31  2000-06-30 
-      0.01080 0.01083 0.01174 0.01190 0.01232 0.01232 
+      0.010802041 0.010832000 0.011747059 0.011909615 0.012324528 0.012324074 
        2000-07-31  2000-08-31  2000-09-30  2000-10-31  2000-11-30  2000-12-31 
-      0.01218 0.01266 0.01246 0.01211 0.01208 0.01177 
+      0.012189091 0.012662500 0.012463158 0.012115517 0.012086441 0.011771667 
        2001-01-31  2001-02-28  2001-03-31  2001-04-30  2001-05-31  2001-06-30 
-      0.01170 0.01165 0.01130 0.01166 0.01237 0.01221 
+      0.011708197 0.011651613 0.011300000 0.011662500 0.012373846 0.012218182 
        2001-07-31  2001-08-31  2001-09-30  2001-10-31  2001-11-30  2001-12-31 
-      0.01234 0.01240 0.01176 0.01161 0.01193 0.01270 
+      0.012344776 0.012400000 0.011768116 0.011615714 0.011930986 0.012704167 
        2002-01-31  2002-02-28  2002-03-31  2002-04-30  2002-05-31  2002-06-30 
-      0.01271 0.01237 0.01229 0.01219 0.01201 0.01155 
+      0.012715068 0.012375676 0.012294667 0.012193421 0.012015584 0.011552564 
        2002-07-31  2002-08-31  2002-09-30  2002-10-31  2002-11-30  2002-12-31 
-      0.01045 0.01041 0.00957 0.00982 0.01050 0.00999 
+      0.010450633 0.010416250 0.009577778 0.009823171 0.010501205 0.009991667 
        2003-01-31  2003-02-28  2003-03-31  2003-04-30  2003-05-31  2003-06-30 
-      0.00938 0.00898 0.00930 0.00993 0.01020 0.01043 
+      0.009389412 0.008988372 0.009303448 0.009937500 0.010204494 0.010433333 
        2003-07-31  2003-08-31  2003-09-30  2003-10-31  2003-11-30  2003-12-31 
-      0.01051 0.01040 0.01038 0.01078 0.01085 0.01102 
+      0.010512088 0.010401087 0.010386022 0.010787234 0.010851579 0.011025000 
        2004-01-31  2004-02-29  2004-03-31  2004-04-30  2004-05-31  2004-06-30 
-      0.01096 0.01085 0.01083 0.01068 0.01065 0.01080 
+      0.010965979 0.010853061 0.010831313 0.010680000 0.010655446 0.010804902 
        2004-07-31  2004-08-31  2004-09-30  2004-10-31  2004-11-30  2004-12-31 
-      0.01070 0.01065 0.01063 0.01052 0.01079 0.01110 
+      0.010700000 0.010650000 0.010632381 0.010526415 0.010796262 0.011103704 
        2005-01-31  2005-02-28  2005-03-31  2005-04-30  2005-05-31  2005-06-30 
-      0.01100 0.01109 0.01081 0.01052 0.01047 0.01052 
+      0.011002752 0.011098182 0.010811712 0.010528571 0.010473451 0.010522807 
        2005-07-31  2005-08-31  2005-09-30  2005-10-31  2005-11-30  2005-12-31 
-      0.01051 0.01051 0.01065 0.01040 0.01050 0.01063 
+      0.010510435 0.010517241 0.010650427 0.010401695 0.010508403 0.010638333 
        2006-01-31  2006-02-28  2006-03-31  2006-04-30  2006-05-31  2006-06-30 
-      0.01112 0.01115 0.01138 0.01128 0.01097 0.01106 
+      0.011122314 0.011150000 0.011382114 0.011281452 0.010977600 0.011061905 
        2006-07-31  2006-08-31  2006-09-30  2006-10-31  2006-11-30  2006-12-31 
-      0.01086 0.01090 0.01087 0.01111 0.01111 0.01112 
+      0.010861417 0.010902344 0.010870543 0.011115385 0.011119847 0.011122727 
     Code
       dev.off()
     Output
@@ -3789,16 +3789,16 @@
       1996-09-30         NA
       1996-10-31         NA
              ...           
-      2006-03-31 0.01640
-      2006-04-30 0.01456
-      2006-05-31 0.01288
-      2006-06-30 0.01263
-      2006-07-31 0.01174
-      2006-08-31 0.01218
-      2006-09-30 0.01212
-      2006-10-31 0.01197
-      2006-11-30 0.01182
-      2006-12-31 0.01138
+      2006-03-31 0.01640556
+      2006-04-30 0.01456667
+      2006-05-31 0.01288889
+      2006-06-30 0.01263333
+      2006-07-31 0.01174444
+      2006-08-31 0.01218333
+      2006-09-30 0.01212222
+      2006-10-31 0.01197222
+      2006-11-30 0.01182778
+      2006-12-31 0.01138333
     Code
       dev.off()
     Output
@@ -3818,138 +3818,138 @@
       
       > Return.centered(managers[, 1:3, drop = FALSE])
                           HAM1       HAM2          HAM3
-      1996-01-31 -0.00372         NA  0.02245
-      1996-02-29  0.00817         NA  0.02265
-      1996-03-31  0.00437         NA  0.01335
-      1996-04-30 -0.02022         NA  0.03245
-      1996-05-31 -0.00352         NA  0.02285
-      1996-06-30 -0.01502         NA -0.04274
-      1996-07-31 -0.03422         NA -0.04614
-      1996-08-31  0.02837 -0.01424  0.03365
-      1996-09-30  0.00357  0.08605  0.05285
-      1996-10-31  0.01767  0.01965  0.02705
-      1996-11-30  0.00447  0.05955  0.05415
-      1996-12-31  0.00647  0.01565  0.00895
-      1997-01-31  0.01007  0.06525  0.06465
-      1997-02-28 -0.00892 -0.02234 -0.04984
-      1997-03-31 -0.00172 -0.04104 -0.04604
-      1997-04-30  0.00147 -0.02024  0.01615
-      1997-05-31  0.03267  0.03975  0.06345
-      1997-06-30  0.01197  0.04105 -0.00704
-      1997-07-31  0.00427  0.10085  0.09565
-      1997-08-31  0.01257 -0.03384 -0.01524
-      1997-09-30  0.01077  0.04345  0.04245
-      1997-10-31 -0.03182 -0.03634 -0.04784
-      1997-11-30  0.01387 -0.01924  0.00515
-      1997-12-31 -0.00012  0.00505 -0.01274
-      1998-01-31 -0.00552 -0.02534  0.03665
-      1998-02-28  0.03177  0.08655  0.03415
-      1998-03-31  0.02507  0.04835  0.00835
-      1998-04-30 -0.00332 -0.01514  0.01095
-      1998-05-31 -0.03422 -0.02484 -0.02604
-      1998-06-30  0.00097  0.02505  0.02705
-      1998-07-31 -0.03262 -0.04134 -0.01194
-      1998-08-31 -0.10552 -0.01414 -0.08424
-      1998-09-30  0.01367 -0.01874  0.05405
-      1998-10-31  0.04467  0.02075 -0.01754
-      1998-11-30  0.00147  0.05575  0.04305
-      1998-12-31 -0.00142  0.07715  0.03395
-      1999-01-31 -0.02042  0.06455  0.01445
-      1999-02-28 -0.00172 -0.03714 -0.06544
-      1999-03-31  0.03507  0.09405  0.00625
-      1999-04-30  0.03987  0.00245  0.02925
-      1999-05-31  0.00507 -0.01434 -0.00454
-      1999-06-30  0.02147  0.05085  0.04225
-      1999-07-31 -0.00132  0.01375 -0.00824
-      1999-08-31 -0.02762  0.01435 -0.00024
-      1999-09-30 -0.01562  0.01905 -0.00564
-      1999-10-31 -0.01172  0.02805  0.06225
-      1999-11-30 -0.00762  0.05555  0.09495
-      1999-12-31  0.00357  0.13075  0.04555
-      2000-01-31 -0.02132  0.02365 -0.01744
-      2000-02-29  0.00117  0.14145  0.16715
-      2000-03-31  0.04637 -0.05044 -0.00964
-      2000-04-30  0.00907 -0.02394 -0.02514
-      2000-05-31  0.02277 -0.02584 -0.03524
-      2000-06-30  0.00117 -0.00364  0.02825
-      2000-07-31 -0.00622  0.00465 -0.06494
-      2000-08-31  0.02757  0.02055  0.06705
-      2000-09-30 -0.00982 -0.04384 -0.06974
-      2000-10-31 -0.01882 -0.04294  0.00375
-      2000-11-30 -0.00072 -0.03614 -0.04924
-      2000-12-31 -0.01792  0.00485  0.00445
-      2001-01-31 -0.00322 -0.04664  0.01375
-      2001-02-28 -0.00292 -0.03344 -0.04794
-      2001-03-31 -0.02162 -0.01734 -0.02344
-      2001-04-30  0.02337 -0.01604  0.00075
-      2001-05-31  0.04677 -0.00664 -0.01774
-      2001-06-30 -0.00902 -0.03484 -0.03614
-      2001-07-31  0.00957 -0.01654 -0.01464
-      2001-08-31  0.00497 -0.00584 -0.03704
-      2001-09-30 -0.04232  0.01915 -0.01924
-      2001-10-31 -0.01002 -0.03614 -0.03294
-      2001-11-30  0.02287 -0.00594  0.01235
-      2001-12-31  0.05647 -0.01444 -0.01064
-      2002-01-31  0.00237 -0.03294 -0.02694
-      2002-02-28 -0.02352 -0.05124 -0.05384
-      2002-03-31 -0.00482  0.00795  0.00825
-      2002-04-30 -0.00652 -0.02574 -0.03774
-      2002-05-31 -0.01262 -0.04364 -0.01484
-      2002-06-30 -0.03522 -0.04794 -0.05754
-      2002-07-31 -0.08662 -0.02654 -0.04644
-      2002-08-31 -0.00342 -0.01454 -0.01004
-      2002-09-30 -0.06862 -0.01584 -0.05634
-      2002-10-31  0.01857 -0.00984 -0.00224
-      2002-11-30  0.05497 -0.02244  0.02255
-      2002-12-31 -0.04342 -0.01634 -0.07764
-      2003-01-31 -0.05232 -0.01444 -0.01394
-      2003-02-28 -0.03622 -0.02904 -0.01034
-      2003-03-31  0.02527 -0.01974 -0.00134
-      2003-04-30  0.05397 -0.02604  0.04005
-      2003-05-31  0.02257  0.03735  0.02985
-      2003-06-30  0.01967  0.00935 -0.00154
-      2003-07-31  0.00647  0.00925 -0.00384
-      2003-08-31 -0.01082 -0.02254  0.01775
-      2003-09-30 -0.00212 -0.01944 -0.01494
-      2003-10-31  0.03697 -0.00074  0.04805
-      2003-11-30  0.00577 -0.00274 -0.00064
-      2003-12-31  0.01637  0.01475 -0.00294
-      2004-01-31 -0.00582  0.00495 -0.00704
-      2004-02-29 -0.01122 -0.00544  0.00185
-      2004-03-31 -0.00242 -0.00134 -0.01624
-      2004-04-30 -0.01542 -0.00594 -0.03244
-      2004-05-31 -0.00292 -0.00664 -0.01914
-      2004-06-30  0.01477 -0.00034 -0.01144
-      2004-07-31 -0.01112 -0.00994 -0.04714
-      2004-08-31 -0.00562 -0.02064 -0.01804
-      2004-09-30 -0.00232 -0.00414 -0.01564
-      2004-10-31 -0.01172  0.00055 -0.01354
-      2004-11-30  0.02827  0.01105  0.04295
-      2004-12-31  0.03287 -0.00584  0.00565
-      2005-01-31 -0.01102 -0.01954 -0.00514
-      2005-02-28  0.01037  0.00685  0.02925
-      2005-03-31 -0.03182 -0.02104 -0.00314
-      2005-04-30 -0.03202 -0.01804 -0.01434
-      2005-05-31 -0.00682 -0.02804  0.01085
-      2005-06-30  0.00497  0.00525 -0.00894
-      2005-07-31 -0.00202  0.00575  0.00785
-      2005-08-31  0.00017 -0.00184 -0.01444
-      2005-09-30  0.01497  0.00385  0.00725
-      2005-10-31 -0.02982 -0.03274 -0.02354
-      2005-11-30  0.01197 -0.00474  0.00375
-      2005-12-31  0.01497 -0.00564  0.00565
-      2006-01-31  0.05807  0.06705  0.02265
-      2006-02-28  0.00337 -0.04674  0.01415
-      2006-03-31  0.02857  0.00095 -0.00054
-      2006-04-30 -0.01222  0.00305 -0.00934
-      2006-05-31 -0.03782 -0.01934 -0.03364
-      2006-06-30  0.01047 -0.02574 -0.03134
-      2006-07-31 -0.02552 -0.02724 -0.00224
-      2006-08-31  0.00497 -0.02544  0.01285
-      2006-09-30 -0.00432 -0.03724 -0.00524
-      2006-10-31  0.03157  0.00255  0.00585
-      2006-11-30  0.00057  0.00645  0.01445
-      2006-12-31  0.00037 -0.02034 -0.00144
+      1996-01-31 -0.0037227273         NA  0.0224530303
+      1996-02-29  0.0081772727         NA  0.0226530303
+      1996-03-31  0.0043772727         NA  0.0133530303
+      1996-04-30 -0.0202227273         NA  0.0324530303
+      1996-05-31 -0.0035227273         NA  0.0228530303
+      1996-06-30 -0.0150227273         NA -0.0427469697
+      1996-07-31 -0.0342227273         NA -0.0461469697
+      1996-08-31  0.0283772727 -0.0142432  0.0336530303
+      1996-09-30  0.0035772727  0.0860568  0.0528530303
+      1996-10-31  0.0176772727  0.0196568  0.0270530303
+      1996-11-30  0.0044772727  0.0595568  0.0541530303
+      1996-12-31  0.0064772727  0.0156568  0.0089530303
+      1997-01-31  0.0100772727  0.0652568  0.0646530303
+      1997-02-28 -0.0089227273 -0.0223432 -0.0498469697
+      1997-03-31 -0.0017227273 -0.0410432 -0.0460469697
+      1997-04-30  0.0014772727 -0.0202432  0.0161530303
+      1997-05-31  0.0326772727  0.0397568  0.0634530303
+      1997-06-30  0.0119772727  0.0410568 -0.0070469697
+      1997-07-31  0.0042772727  0.1008568  0.0956530303
+      1997-08-31  0.0125772727 -0.0338432 -0.0152469697
+      1997-09-30  0.0107772727  0.0434568  0.0424530303
+      1997-10-31 -0.0318227273 -0.0363432 -0.0478469697
+      1997-11-30  0.0138772727 -0.0192432  0.0051530303
+      1997-12-31 -0.0001227273  0.0050568 -0.0127469697
+      1998-01-31 -0.0055227273 -0.0253432  0.0366530303
+      1998-02-28  0.0317772727  0.0865568  0.0341530303
+      1998-03-31  0.0250772727  0.0483568  0.0083530303
+      1998-04-30 -0.0033227273 -0.0151432  0.0109530303
+      1998-05-31 -0.0342227273 -0.0248432 -0.0260469697
+      1998-06-30  0.0009772727  0.0250568  0.0270530303
+      1998-07-31 -0.0326227273 -0.0413432 -0.0119469697
+      1998-08-31 -0.1055227273 -0.0141432 -0.0842469697
+      1998-09-30  0.0136772727 -0.0187432  0.0540530303
+      1998-10-31  0.0446772727  0.0207568 -0.0175469697
+      1998-11-30  0.0014772727  0.0557568  0.0430530303
+      1998-12-31 -0.0014227273  0.0771568  0.0339530303
+      1999-01-31 -0.0204227273  0.0645568  0.0144530303
+      1999-02-28 -0.0017227273 -0.0371432 -0.0654469697
+      1999-03-31  0.0350772727  0.0940568  0.0062530303
+      1999-04-30  0.0398772727  0.0024568  0.0292530303
+      1999-05-31  0.0050772727 -0.0143432 -0.0045469697
+      1999-06-30  0.0214772727  0.0508568  0.0422530303
+      1999-07-31 -0.0013227273  0.0137568 -0.0082469697
+      1999-08-31 -0.0276227273  0.0143568 -0.0002469697
+      1999-09-30 -0.0156227273  0.0190568 -0.0056469697
+      1999-10-31 -0.0117227273  0.0280568  0.0622530303
+      1999-11-30 -0.0076227273  0.0555568  0.0949530303
+      1999-12-31  0.0035772727  0.1307568  0.0455530303
+      2000-01-31 -0.0213227273  0.0236568 -0.0174469697
+      2000-02-29  0.0011772727  0.1414568  0.1671530303
+      2000-03-31  0.0463772727 -0.0504432 -0.0096469697
+      2000-04-30  0.0090772727 -0.0239432 -0.0251469697
+      2000-05-31  0.0227772727 -0.0258432 -0.0352469697
+      2000-06-30  0.0011772727 -0.0036432  0.0282530303
+      2000-07-31 -0.0062227273  0.0046568 -0.0649469697
+      2000-08-31  0.0275772727  0.0205568  0.0670530303
+      2000-09-30 -0.0098227273 -0.0438432 -0.0697469697
+      2000-10-31 -0.0188227273 -0.0429432  0.0037530303
+      2000-11-30 -0.0007227273 -0.0361432 -0.0492469697
+      2000-12-31 -0.0179227273  0.0048568  0.0044530303
+      2001-01-31 -0.0032227273 -0.0466432  0.0137530303
+      2001-02-28 -0.0029227273 -0.0334432 -0.0479469697
+      2001-03-31 -0.0216227273 -0.0173432 -0.0234469697
+      2001-04-30  0.0233772727 -0.0160432  0.0007530303
+      2001-05-31  0.0467772727 -0.0066432 -0.0177469697
+      2001-06-30 -0.0090227273 -0.0348432 -0.0361469697
+      2001-07-31  0.0095772727 -0.0165432 -0.0146469697
+      2001-08-31  0.0049772727 -0.0058432 -0.0370469697
+      2001-09-30 -0.0423227273  0.0191568 -0.0192469697
+      2001-10-31 -0.0100227273 -0.0361432 -0.0329469697
+      2001-11-30  0.0228772727 -0.0059432  0.0123530303
+      2001-12-31  0.0564772727 -0.0144432 -0.0106469697
+      2002-01-31  0.0023772727 -0.0329432 -0.0269469697
+      2002-02-28 -0.0235227273 -0.0512432 -0.0538469697
+      2002-03-31 -0.0048227273  0.0079568  0.0082530303
+      2002-04-30 -0.0065227273 -0.0257432 -0.0377469697
+      2002-05-31 -0.0126227273 -0.0436432 -0.0148469697
+      2002-06-30 -0.0352227273 -0.0479432 -0.0575469697
+      2002-07-31 -0.0866227273 -0.0265432 -0.0464469697
+      2002-08-31 -0.0034227273 -0.0145432 -0.0100469697
+      2002-09-30 -0.0686227273 -0.0158432 -0.0563469697
+      2002-10-31  0.0185772727 -0.0098432 -0.0022469697
+      2002-11-30  0.0549772727 -0.0224432  0.0225530303
+      2002-12-31 -0.0434227273 -0.0163432 -0.0776469697
+      2003-01-31 -0.0523227273 -0.0144432 -0.0139469697
+      2003-02-28 -0.0362227273 -0.0290432 -0.0103469697
+      2003-03-31  0.0252772727 -0.0197432 -0.0013469697
+      2003-04-30  0.0539772727 -0.0260432  0.0400530303
+      2003-05-31  0.0225772727  0.0373568  0.0298530303
+      2003-06-30  0.0196772727  0.0093568 -0.0015469697
+      2003-07-31  0.0064772727  0.0092568 -0.0038469697
+      2003-08-31 -0.0108227273 -0.0225432  0.0177530303
+      2003-09-30 -0.0021227273 -0.0194432 -0.0149469697
+      2003-10-31  0.0369772727 -0.0007432  0.0480530303
+      2003-11-30  0.0057772727 -0.0027432 -0.0006469697
+      2003-12-31  0.0163772727  0.0147568 -0.0029469697
+      2004-01-31 -0.0058227273  0.0049568 -0.0070469697
+      2004-02-29 -0.0112227273 -0.0054432  0.0018530303
+      2004-03-31 -0.0024227273 -0.0013432 -0.0162469697
+      2004-04-30 -0.0154227273 -0.0059432 -0.0324469697
+      2004-05-31 -0.0029227273 -0.0066432 -0.0191469697
+      2004-06-30  0.0147772727 -0.0003432 -0.0114469697
+      2004-07-31 -0.0111227273 -0.0099432 -0.0471469697
+      2004-08-31 -0.0056227273 -0.0206432 -0.0180469697
+      2004-09-30 -0.0023227273 -0.0041432 -0.0156469697
+      2004-10-31 -0.0117227273  0.0005568 -0.0135469697
+      2004-11-30  0.0282772727  0.0110568  0.0429530303
+      2004-12-31  0.0328772727 -0.0058432  0.0056530303
+      2005-01-31 -0.0110227273 -0.0195432 -0.0051469697
+      2005-02-28  0.0103772727  0.0068568  0.0292530303
+      2005-03-31 -0.0318227273 -0.0210432 -0.0031469697
+      2005-04-30 -0.0320227273 -0.0180432 -0.0143469697
+      2005-05-31 -0.0068227273 -0.0280432  0.0108530303
+      2005-06-30  0.0049772727  0.0052568 -0.0089469697
+      2005-07-31 -0.0020227273  0.0057568  0.0078530303
+      2005-08-31  0.0001772727 -0.0018432 -0.0144469697
+      2005-09-30  0.0149772727  0.0038568  0.0072530303
+      2005-10-31 -0.0298227273 -0.0327432 -0.0235469697
+      2005-11-30  0.0119772727 -0.0047432  0.0037530303
+      2005-12-31  0.0149772727 -0.0056432  0.0056530303
+      2006-01-31  0.0580772727  0.0670568  0.0226530303
+      2006-02-28  0.0033772727 -0.0467432  0.0141530303
+      2006-03-31  0.0285772727  0.0009568 -0.0005469697
+      2006-04-30 -0.0122227273  0.0030568 -0.0093469697
+      2006-05-31 -0.0378227273 -0.0193432 -0.0336469697
+      2006-06-30  0.0104772727 -0.0257432 -0.0313469697
+      2006-07-31 -0.0255227273 -0.0272432 -0.0022469697
+      2006-08-31  0.0049772727 -0.0254432  0.0128530303
+      2006-09-30 -0.0043227273 -0.0372432 -0.0052469697
+      2006-10-31  0.0315772727  0.0025568  0.0058530303
+      2006-11-30  0.0005772727  0.0064568  0.0144530303
+      2006-12-31  0.0003772727 -0.0203432 -0.0014469697
     Code
       dev.off()
     Output
@@ -4387,33 +4387,33 @@
       
       > head(weights)
                  Convertible Arbitrage CTA Global Distressed Securities
-      2000-01-01            0.02500 0.14601             0.02500
-      2001-01-01            0.15785 0.19577             0.02500
-      2002-01-01            0.24431 0.02500             0.02500
-      2003-01-01            0.21955 0.06590             0.02500
-      2004-01-01            0.09780 0.02552             0.10507
-      2005-01-01            0.02500 0.02500             0.24457
+      2000-01-01            0.02500000 0.14601749             0.0250000
+      2001-01-01            0.15785710 0.19577551             0.0250000
+      2002-01-01            0.24431295 0.02500000             0.0250000
+      2003-01-01            0.21955470 0.06590151             0.0250000
+      2004-01-01            0.09780634 0.02552822             0.1050766
+      2005-01-01            0.02500000 0.02500000             0.2445763
                  Emerging Markets Equity Market Neutral Event Driven
-      2000-01-01            0.025             0.35000        0.025
-      2001-01-01            0.025             0.35000        0.025
-      2002-01-01            0.025             0.35000        0.025
-      2003-01-01            0.025             0.28179        0.025
-      2004-01-01            0.025             0.35000        0.025
-      2005-01-01            0.025             0.20542        0.025
+      2000-01-01            0.025             0.3500000        0.025
+      2001-01-01            0.025             0.3500000        0.025
+      2002-01-01            0.025             0.3500000        0.025
+      2003-01-01            0.025             0.2817930        0.025
+      2004-01-01            0.025             0.3500000        0.025
+      2005-01-01            0.025             0.2054237        0.025
                  Fixed Income Arbitrage Global Macro Long/Short Equity
-      2000-01-01              0.02500        0.025             0.025
-      2001-01-01              0.02500        0.025             0.025
-      2002-01-01              0.20568        0.025             0.025
-      2003-01-01              0.25775        0.025             0.025
-      2004-01-01              0.27158        0.025             0.025
-      2005-01-01              0.35000        0.025             0.025
+      2000-01-01              0.0250000        0.025             0.025
+      2001-01-01              0.0250000        0.025             0.025
+      2002-01-01              0.2056871        0.025             0.025
+      2003-01-01              0.2577508        0.025             0.025
+      2004-01-01              0.2715888        0.025             0.025
+      2005-01-01              0.3500000        0.025             0.025
                  Merger Arbitrage Relative Value
-      2000-01-01       0.07146      0.25752
-      2001-01-01       0.12136      0.02500
-      2002-01-01       0.02500      0.02500
-      2003-01-01       0.02500      0.02500
-      2004-01-01       0.02500      0.02500
-      2005-01-01       0.02500      0.02500
+      2000-01-01       0.07146246      0.2575201
+      2001-01-01       0.12136740      0.0250000
+      2002-01-01       0.02500000      0.0250000
+      2003-01-01       0.02500000      0.0250000
+      2004-01-01       0.02500000      0.0250000
+      2005-01-01       0.02500000      0.0250000
       
       > chart.StackedBar(weights, date.format = "%Y", cex.legend = 0.7, 
       +     colorset = rainbow12equal)
@@ -4512,50 +4512,50 @@
       
       > summary(edhec)
            Index            Convertible Arbitrage   CTA Global       
-       Min.   :1997-01-31   Min.   :-0.12370     Min.   :-0.05680  
-       1st Qu.:2003-02-28   1st Qu.: 0.00020     1st Qu.:-0.01140  
-       Median :2009-03-31   Median : 0.00650     Median : 0.00200  
-       Mean   :2009-03-31   Mean   : 0.00579     Mean   : 0.00431  
-       3rd Qu.:2015-04-30   3rd Qu.: 0.01370     3rd Qu.: 0.01990  
-       Max.   :2021-05-31   Max.   : 0.06110     Max.   : 0.06910  
+       Min.   :1997-01-31   Min.   :-0.123700     Min.   :-0.056800  
+       1st Qu.:2003-02-28   1st Qu.: 0.000200     1st Qu.:-0.011400  
+       Median :2009-03-31   Median : 0.006500     Median : 0.002000  
+       Mean   :2009-03-31   Mean   : 0.005792     Mean   : 0.004317  
+       3rd Qu.:2015-04-30   3rd Qu.: 0.013700     3rd Qu.: 0.019900  
+       Max.   :2021-05-31   Max.   : 0.061100     Max.   : 0.069100  
        Distressed Securities Emerging Markets   Equity Market Neutral
-       Min.   :-0.10610     Min.   :-0.19220   Min.   :-0.05870    
-       1st Qu.:-0.00210     1st Qu.:-0.00920   1st Qu.: 0.00090    
-       Median : 0.00880     Median : 0.01000   Median : 0.00470    
-       Mean   : 0.00682     Mean   : 0.00673   Mean   : 0.00433    
-       3rd Qu.: 0.01790     3rd Qu.: 0.02570   3rd Qu.: 0.00830    
-       Max.   : 0.05040     Max.   : 0.12300   Max.   : 0.02530    
+       Min.   :-0.106100     Min.   :-0.19220   Min.   :-0.058700    
+       1st Qu.:-0.002100     1st Qu.:-0.00920   1st Qu.: 0.000900    
+       Median : 0.008800     Median : 0.01000   Median : 0.004700    
+       Mean   : 0.006825     Mean   : 0.00673   Mean   : 0.004335    
+       3rd Qu.: 0.017900     3rd Qu.: 0.02570   3rd Qu.: 0.008300    
+       Max.   : 0.050400     Max.   : 0.12300   Max.   : 0.025300    
         Event Driven       Fixed Income Arbitrage  Global Macro      
-       Min.   :-0.12690   Min.   :-0.08670       Min.   :-0.03130  
-       1st Qu.:-0.00120   1st Qu.: 0.00180       1st Qu.:-0.00390  
-       Median : 0.00880   Median : 0.00550       Median : 0.00470  
-       Mean   : 0.00667   Mean   : 0.00443       Mean   : 0.00559  
-       3rd Qu.: 0.01680   3rd Qu.: 0.00930       3rd Qu.: 0.01280  
-       Max.   : 0.06660   Max.   : 0.03650       Max.   : 0.07380  
+       Min.   :-0.126900   Min.   :-0.08670       Min.   :-0.031300  
+       1st Qu.:-0.001200   1st Qu.: 0.00180       1st Qu.:-0.003900  
+       Median : 0.008800   Median : 0.00550       Median : 0.004700  
+       Mean   : 0.006674   Mean   : 0.00443       Mean   : 0.005598  
+       3rd Qu.: 0.016800   3rd Qu.: 0.00930       3rd Qu.: 0.012800  
+       Max.   : 0.066600   Max.   : 0.03650       Max.   : 0.073800  
        Long/Short Equity   Merger Arbitrage    Relative Value      Short Selling     
-       Min.   :-0.08130   Min.   :-0.07900   Min.   :-0.06920   Min.   :-0.13400  
-       1st Qu.:-0.00470   1st Qu.: 0.00070   1st Qu.: 0.00110   1st Qu.:-0.02510  
-       Median : 0.00820   Median : 0.00590   Median : 0.00670   Median :-0.00320  
-       Mean   : 0.00671   Mean   : 0.00558   Mean   : 0.00572   Mean   :-0.00126  
-       3rd Qu.: 0.01950   3rd Qu.: 0.01110   3rd Qu.: 0.01300   3rd Qu.: 0.01810  
-       Max.   : 0.07450   Max.   : 0.04720   Max.   : 0.03920   Max.   : 0.24630  
+       Min.   :-0.081300   Min.   :-0.079000   Min.   :-0.069200   Min.   :-0.13400  
+       1st Qu.:-0.004700   1st Qu.: 0.000700   1st Qu.: 0.001100   1st Qu.:-0.02510  
+       Median : 0.008200   Median : 0.005900   Median : 0.006700   Median :-0.00320  
+       Mean   : 0.006717   Mean   : 0.005582   Mean   : 0.005728   Mean   :-0.00126  
+       3rd Qu.: 0.019500   3rd Qu.: 0.011100   3rd Qu.: 0.013000   3rd Qu.: 0.01810  
+       Max.   : 0.074500   Max.   : 0.047200   Max.   : 0.039200   Max.   : 0.24630  
        Funds of Funds     
-       Min.   :-0.07050  
-       1st Qu.:-0.00330  
-       Median : 0.00520  
-       Mean   : 0.00451  
-       3rd Qu.: 0.01270  
-       Max.   : 0.06660  
+       Min.   :-0.070500  
+       1st Qu.:-0.003300  
+       Median : 0.005200  
+       Mean   : 0.004512  
+       3rd Qu.: 0.012700  
+       Max.   : 0.066600  
       
       > tail(cumprod(1 + edhec), 1)
                  Convertible Arbitrage CTA Global Distressed Securities
-      2021-05-31              5.20881   3.27801              6.98955
+      2021-05-31              5.208815   3.278012              6.989556
                  Emerging Markets Equity Market Neutral Event Driven
-      2021-05-31         6.08835              3.51730     6.65401
+      2021-05-31         6.088353              3.517302     6.654019
                  Fixed Income Arbitrage Global Macro Long/Short Equity
-      2021-05-31               3.58067     4.97781          6.67318
+      2021-05-31               3.580675     4.977817          6.673183
                  Merger Arbitrage Relative Value Short Selling Funds of Funds
-      2021-05-31         5.01119       5.22224     0.51305       3.60102
+      2021-05-31         5.011198       5.222248     0.5130537       3.601022
     Code
       dev.off()
     Output
@@ -4575,14 +4575,14 @@
       
       > findDrawdowns(edhec[, "Funds of Funds", drop = FALSE])
       $return
-       [1]  0.00000 -0.00770  0.00000 -0.01326  0.00000 -0.07069
-       [7]  0.00000 -0.03877  0.00000 -0.03737  0.00000 -0.01627
-      [13]  0.00000 -0.00150  0.00000 -0.02601  0.00000 -0.00040
-      [19]  0.00000 -0.01742  0.00000 -0.01843  0.00000 -0.01490
-      [25]  0.00000 -0.01655  0.00000 -0.02220  0.00000 -0.20591
-      [31]  0.00000 -0.00400  0.00000 -0.00739  0.00000 -0.07837
-      [37]  0.00000 -0.00070  0.00000 -0.05932  0.00000 -0.08276
-      [43]  0.00000 -0.00190  0.00000 -0.00950  0.00000
+       [1]  0.00000000 -0.00770000  0.00000000 -0.01326634  0.00000000 -0.07069135
+       [7]  0.00000000 -0.03877182  0.00000000 -0.03737506  0.00000000 -0.01627767
+      [13]  0.00000000 -0.00150000  0.00000000 -0.02601701  0.00000000 -0.00040000
+      [19]  0.00000000 -0.01742180  0.00000000 -0.01843796  0.00000000 -0.01490000
+      [25]  0.00000000 -0.01655473  0.00000000 -0.02220000  0.00000000 -0.20591447
+      [31]  0.00000000 -0.00400000  0.00000000 -0.00739256  0.00000000 -0.07837768
+      [37]  0.00000000 -0.00070000  0.00000000 -0.05932734  0.00000000 -0.08276940
+      [43]  0.00000000 -0.00190000  0.00000000 -0.00950000  0.00000000
       
       $from
        [1]   1   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76
@@ -4615,14 +4615,14 @@
       > sortDrawdowns(findDrawdowns(edhec[, "Funds of Funds", 
       +     drop = FALSE]))
       $return
-       [1] -0.20591 -0.08276 -0.07837 -0.07069 -0.05932 -0.03877
-       [7] -0.03737 -0.02601 -0.02220 -0.01843 -0.01742 -0.01655
-      [13] -0.01627 -0.01490 -0.01326 -0.00950 -0.00770 -0.00739
-      [19] -0.00400 -0.00190 -0.00150 -0.00070 -0.00040  0.00000
-      [25]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [31]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [37]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [43]  0.00000  0.00000  0.00000  0.00000  0.00000
+       [1] -0.20591447 -0.08276940 -0.07837768 -0.07069135 -0.05932734 -0.03877182
+       [7] -0.03737506 -0.02601701 -0.02220000 -0.01843796 -0.01742180 -0.01655473
+      [13] -0.01627767 -0.01490000 -0.01326634 -0.00950000 -0.00770000 -0.00739256
+      [19] -0.00400000 -0.00190000 -0.00150000 -0.00070000 -0.00040000  0.00000000
+      [25]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [31]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [37]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [43]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
       
       $from
        [1] 131 278 222  17 254  40  45  66 128  99  88 113  55 106  10 289   3 213 211
@@ -4684,37 +4684,11 @@
       1996-05-31  -0.00543  0.00443
       1996-06-30   0.01507  0.00412
       
-      > summary(managers)
-           Index                 HAM1                HAM2         
-       Min.   :1996-01-31   Min.   :-0.09440   Min.   :-0.03710  
-       1st Qu.:1998-10-23   1st Qu.:-0.00002   1st Qu.:-0.00980  
-       Median :2001-07-15   Median : 0.01115   Median : 0.00820  
-       Mean   :2001-07-15   Mean   : 0.01112   Mean   : 0.01414  
-       3rd Qu.:2004-04-07   3rd Qu.: 0.02485   3rd Qu.: 0.02520  
-       Max.   :2006-12-31   Max.   : 0.06920   Max.   : 0.15560  
-                                                NAs    :7         
-            HAM3                HAM4               HAM5                HAM6          
-       Min.   :-0.07180   Min.   :-0.17590   Min.   :-0.13200   Min.   :-0.04040  
-       1st Qu.:-0.00537   1st Qu.:-0.01985   1st Qu.:-0.01640   1st Qu.:-0.00157  
-       Median : 0.01020   Median : 0.01375   Median : 0.00380   Median : 0.01285  
-       Mean   : 0.01244   Mean   : 0.01102   Mean   : 0.00408   Mean   : 0.01105  
-       3rd Qu.: 0.03137   3rd Qu.: 0.04600   3rd Qu.: 0.03090   3rd Qu.: 0.02547  
-       Max.   : 0.17960   Max.   : 0.15080   Max.   : 0.17470   Max.   : 0.05830  
-                                              NAs    :55          NAs    :68         
-        EDHEC LS EQ           SP500 TR           US 10Y TR            US 3m TR       
-       Min.   :-0.05520   Min.   :-0.14460   Min.   :-0.07092   Min.   :0.00066  
-       1st Qu.:-0.00317   1st Qu.:-0.01732   1st Qu.:-0.00851   1st Qu.:0.00157  
-       Median : 0.01100   Median : 0.01095   Median : 0.00442   Median :0.00384  
-       Mean   : 0.00954   Mean   : 0.00866   Mean   : 0.00438   Mean   :0.00322  
-       3rd Qu.: 0.02145   3rd Qu.: 0.03802   3rd Qu.: 0.01666   3rd Qu.:0.00439  
-       Max.   : 0.07450   Max.   : 0.09780   Max.   : 0.05055   Max.   :0.00658  
-       NAs    :12                                                                    
-      
       > tail(cumprod(1 + managers), 1)
                      HAM1 HAM2     HAM3    HAM4 HAM5 HAM6 EDHEC LS EQ SP500 TR
-      2006-12-31 4.12667   NA 4.70673 3.52944   NA   NA          NA 2.76161
+      2006-12-31 4.126671   NA 4.706732 3.52944   NA   NA          NA 2.761619
                  US 10Y TR US 3m TR
-      2006-12-31  1.73403 1.52968
+      2006-12-31  1.734037 1.529681
     Code
       dev.off()
     Output
@@ -4769,19 +4743,19 @@
       
       > mean.geometric(edhec[, "Funds of Funds"])
                      Funds of Funds
-      Geometric Mean    0.00438
+      Geometric Mean    0.004382331
       
       > mean.stderr(edhec[, "Funds of Funds"])
                      Funds of Funds
-      Standard Error   0.00093
+      Standard Error   0.0009396873
       
       > mean.UCL(edhec[, "Funds of Funds"])
                              Funds of Funds
-      Upper Confidence Level    0.00636
+      Upper Confidence Level    0.006361023
       
       > mean.LCL(edhec[, "Funds of Funds"])
                              Funds of Funds
-      Lower Confidence Level    0.00266
+      Lower Confidence Level    0.002662185
     Code
       dev.off()
     Output
@@ -4857,7 +4831,7 @@
       
       > tail(cumprod(1 + portfolio_bacon), 1)
                  portfolio.monthly.return.... benchmark.return....
-      2001-12-30                     1.21810             1.24988
+      2001-12-30                     1.218106             1.249887
     Code
       dev.off()
     Output
@@ -4902,14 +4876,14 @@
       
       > findDrawdowns(edhec[, "Funds of Funds", drop = FALSE])
       $return
-       [1]  0.00000 -0.00770  0.00000 -0.01326  0.00000 -0.07069
-       [7]  0.00000 -0.03877  0.00000 -0.03737  0.00000 -0.01627
-      [13]  0.00000 -0.00150  0.00000 -0.02601  0.00000 -0.00040
-      [19]  0.00000 -0.01742  0.00000 -0.01843  0.00000 -0.01490
-      [25]  0.00000 -0.01655  0.00000 -0.02220  0.00000 -0.20591
-      [31]  0.00000 -0.00400  0.00000 -0.00739  0.00000 -0.07837
-      [37]  0.00000 -0.00070  0.00000 -0.05932  0.00000 -0.08276
-      [43]  0.00000 -0.00190  0.00000 -0.00950  0.00000
+       [1]  0.00000000 -0.00770000  0.00000000 -0.01326634  0.00000000 -0.07069135
+       [7]  0.00000000 -0.03877182  0.00000000 -0.03737506  0.00000000 -0.01627767
+      [13]  0.00000000 -0.00150000  0.00000000 -0.02601701  0.00000000 -0.00040000
+      [19]  0.00000000 -0.01742180  0.00000000 -0.01843796  0.00000000 -0.01490000
+      [25]  0.00000000 -0.01655473  0.00000000 -0.02220000  0.00000000 -0.20591447
+      [31]  0.00000000 -0.00400000  0.00000000 -0.00739256  0.00000000 -0.07837768
+      [37]  0.00000000 -0.00070000  0.00000000 -0.05932734  0.00000000 -0.08276940
+      [43]  0.00000000 -0.00190000  0.00000000 -0.00950000  0.00000000
       
       $from
        [1]   1   3   5  10  14  17  27  40  44  45  54  55  60  62  63  66  74  75  76
@@ -4942,14 +4916,14 @@
       > sortDrawdowns(findDrawdowns(edhec[, "Funds of Funds", 
       +     drop = FALSE]))
       $return
-       [1] -0.20591 -0.08276 -0.07837 -0.07069 -0.05932 -0.03877
-       [7] -0.03737 -0.02601 -0.02220 -0.01843 -0.01742 -0.01655
-      [13] -0.01627 -0.01490 -0.01326 -0.00950 -0.00770 -0.00739
-      [19] -0.00400 -0.00190 -0.00150 -0.00070 -0.00040  0.00000
-      [25]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [31]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [37]  0.00000  0.00000  0.00000  0.00000  0.00000  0.00000
-      [43]  0.00000  0.00000  0.00000  0.00000  0.00000
+       [1] -0.20591447 -0.08276940 -0.07837768 -0.07069135 -0.05932734 -0.03877182
+       [7] -0.03737506 -0.02601701 -0.02220000 -0.01843796 -0.01742180 -0.01655473
+      [13] -0.01627767 -0.01490000 -0.01326634 -0.00950000 -0.00770000 -0.00739256
+      [19] -0.00400000 -0.00190000 -0.00150000 -0.00070000 -0.00040000  0.00000000
+      [25]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [31]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [37]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
+      [43]  0.00000000  0.00000000  0.00000000  0.00000000  0.00000000
       
       $from
        [1] 131 278 222  17 254  40  45  66 128  99  88 113  55 106  10 289   3 213 211
@@ -5052,23 +5026,23 @@
       > table.Arbitrary(edhec, metrics = c("VaR", "ES"), metricsNames = c("Modified VaR", 
       +     "Modified Expected Shortfall"))
                                   Convertible Arbitrage  CTA Global
-      Modified VaR                          -0.02568 -0.03204
-      Modified Expected Shortfall           -0.08941 -0.04038
+      Modified VaR                          -0.02568389 -0.03204110
+      Modified Expected Shortfall           -0.08941788 -0.04038067
                                   Distressed Securities Emerging Markets
-      Modified VaR                          -0.02800      -0.05343
-      Modified Expected Shortfall           -0.06732      -0.11570
+      Modified VaR                          -0.02800272      -0.05343318
+      Modified Expected Shortfall           -0.06732969      -0.11570887
                                   Equity Market Neutral Event Driven
-      Modified VaR                          -0.01098  -0.02960
-      Modified Expected Shortfall           -0.03670  -0.08113
+      Modified VaR                          -0.01098870  -0.02960873
+      Modified Expected Shortfall           -0.03670501  -0.08113553
                                   Fixed Income Arbitrage Global Macro
-      Modified VaR                           -0.01773  -0.01380
-      Modified Expected Shortfall            -0.05308  -0.01696
+      Modified VaR                           -0.01773794  -0.01380785
+      Modified Expected Shortfall            -0.05308245  -0.01696439
                                   Long/Short Equity Merger Arbitrage Relative Value
-      Modified VaR                      -0.02950      -0.01502    -0.01736
-      Modified Expected Shortfall       -0.04857      -0.05130    -0.04751
+      Modified VaR                      -0.02950798      -0.01502873    -0.01736871
+      Modified Expected Shortfall       -0.04857352      -0.05130164    -0.04751282
                                   Short Selling Funds of Funds
-      Modified VaR                  -0.06215    -0.02309
-      Modified Expected Shortfall   -0.06754    -0.04590
+      Modified VaR                  -0.06215004    -0.02309324
+      Modified Expected Shortfall   -0.06754083    -0.04590385
     Code
       dev.off()
     Output
@@ -5276,18 +5250,18 @@
       
       > table.Correlation(managers[, 1:6], managers[, 7:8])
                           Correlation      p-value   Lower CI  Upper CI
-      HAM1 to EDHEC LS EQ   0.58967 1.37859e-12 0.45894 0.69541
-      HAM1 to SP500 TR      0.66006 7.39784e-18 0.55138 0.74671
-      HAM2 to EDHEC LS EQ   0.70158 4.46836e-19 0.59747 0.78243
-      HAM2 to SP500 TR      0.41282 1.71535e-06 0.25576 0.54866
-      HAM3 to EDHEC LS EQ   0.80535 1.44389e-28 0.73174 0.86039
-      HAM3 to SP500 TR      0.66086 6.54540e-18 0.55236 0.74734
-      HAM4 to EDHEC LS EQ   0.61487 7.97041e-14 0.48958 0.71528
-      HAM4 to SP500 TR      0.56018 2.87010e-12 0.43052 0.66719
-      HAM5 to EDHEC LS EQ   0.44623 4.74963e-05 0.24694 0.60931
-      HAM5 to SP500 TR      0.28444 1.21683e-02 0.06458 0.47797
-      HAM6 to EDHEC LS EQ   0.72854 8.87981e-12 0.58804 0.82636
-      HAM6 to SP500 TR      0.50915 1.73596e-05 0.30101 0.67098
+      HAM1 to EDHEC LS EQ   0.5896798 1.378595e-12 0.45894685 0.6954188
+      HAM1 to SP500 TR      0.6600671 7.397842e-18 0.55138376 0.7467191
+      HAM2 to EDHEC LS EQ   0.7015847 4.468363e-19 0.59747795 0.7824328
+      HAM2 to SP500 TR      0.4128282 1.715350e-06 0.25576240 0.5486602
+      HAM3 to EDHEC LS EQ   0.8053564 1.443898e-28 0.73174468 0.8603967
+      HAM3 to SP500 TR      0.6608633 6.545409e-18 0.55236590 0.7473433
+      HAM4 to EDHEC LS EQ   0.6148700 7.970417e-14 0.48958597 0.7152802
+      HAM4 to SP500 TR      0.5601846 2.870109e-12 0.43052170 0.6671932
+      HAM5 to EDHEC LS EQ   0.4462382 4.749637e-05 0.24694054 0.6093171
+      HAM5 to SP500 TR      0.2844487 1.216830e-02 0.06458459 0.4779755
+      HAM6 to EDHEC LS EQ   0.7285463 8.879813e-12 0.58804644 0.8263670
+      HAM6 to SP500 TR      0.5091542 1.735968e-05 0.30101889 0.6709863
       
       > result = table.Correlation(managers[, 1:6], managers[, 
       +     8])
@@ -5803,13 +5777,13 @@
       6             18                   179         97           276
       7             36                   159         99           258
         prob_Convertible Arbitrage_outperformance prob_CTA Global_outperformance
-      1                                 0.55290                      0.44709
-      2                                 0.62886                      0.37113
-      3                                 0.63541                      0.36458
-      4                                 0.64912                      0.35087
-      5                                 0.62765                      0.37234
-      6                                 0.64855                      0.35144
-      7                                 0.61627                      0.38372
+      1                                 0.5529010                      0.4470990
+      2                                 0.6288660                      0.3711340
+      3                                 0.6354167                      0.3645833
+      4                                 0.6491228                      0.3508772
+      5                                 0.6276596                      0.3723404
+      6                                 0.6485507                      0.3514493
+      7                                 0.6162791                      0.3837209
       
       > title(main = "Table of Convertible Arbitrage vs Benchmark")
     Code
@@ -5957,31 +5931,31 @@
       > to.period.contributions(res_qtr_rebal$contribution, 
       +     period = "years")
                          HAM1         HAM2         HAM3        HAM4        HAM5
-      2002-12-31 -0.00404 -0.01280 -0.06003 -0.02103 -0.01650
-      2003-12-31  0.01249  0.01194  0.07907  0.22039  0.03175
-      2004-12-31  0.00718  0.01286  0.00578  0.05651  0.01053
-      2005-12-31  0.00403  0.00616  0.04450  0.04027  0.01033
-      2006-12-31  0.00998  0.00458  0.04255  0.05289  0.02315
+      2002-12-31 -0.004045348 -0.012800051 -0.060038137 -0.02103051 -0.01650314
+      2003-12-31  0.012493183  0.011940516  0.079079298  0.22039789  0.03175587
+      2004-12-31  0.007188399  0.012866800  0.005786203  0.05651752  0.01053252
+      2005-12-31  0.004033565  0.006166386  0.044503812  0.04027608  0.01033577
+      2006-12-31  0.009985784  0.004586611  0.042558683  0.05289248  0.02315896
                  Portfolio Return
-      2002-12-31      -0.11441
-      2003-12-31       0.35566
-      2004-12-31       0.09289
-      2005-12-31       0.10531
-      2006-12-31       0.13318
+      2002-12-31      -0.11441719
+      2003-12-31       0.35566675
+      2004-12-31       0.09289143
+      2005-12-31       0.10531560
+      2006-12-31       0.13318252
       
       > to.yearly.contributions(res_qtr_rebal$contribution)
                          HAM1         HAM2         HAM3        HAM4        HAM5
-      2002-12-31 -0.00404 -0.01280 -0.06003 -0.02103 -0.01650
-      2003-12-31  0.01249  0.01194  0.07907  0.22039  0.03175
-      2004-12-31  0.00718  0.01286  0.00578  0.05651  0.01053
-      2005-12-31  0.00403  0.00616  0.04450  0.04027  0.01033
-      2006-12-31  0.00998  0.00458  0.04255  0.05289  0.02315
+      2002-12-31 -0.004045348 -0.012800051 -0.060038137 -0.02103051 -0.01650314
+      2003-12-31  0.012493183  0.011940516  0.079079298  0.22039789  0.03175587
+      2004-12-31  0.007188399  0.012866800  0.005786203  0.05651752  0.01053252
+      2005-12-31  0.004033565  0.006166386  0.044503812  0.04027608  0.01033577
+      2006-12-31  0.009985784  0.004586611  0.042558683  0.05289248  0.02315896
                  Portfolio Return
-      2002-12-31      -0.11441
-      2003-12-31       0.35566
-      2004-12-31       0.09289
-      2005-12-31       0.10531
-      2006-12-31       0.13318
+      2002-12-31      -0.11441719
+      2003-12-31       0.35566675
+      2004-12-31       0.09289143
+      2005-12-31       0.10531560
+      2006-12-31       0.13318252
     Code
       dev.off()
     Output
@@ -6034,33 +6008,33 @@
       
       > head(weights)
                  Convertible Arbitrage CTA Global Distressed Securities
-      2000-01-01            0.02500 0.14601             0.02500
-      2001-01-01            0.15785 0.19577             0.02500
-      2002-01-01            0.24431 0.02500             0.02500
-      2003-01-01            0.21955 0.06590             0.02500
-      2004-01-01            0.09780 0.02552             0.10507
-      2005-01-01            0.02500 0.02500             0.24457
+      2000-01-01            0.02500000 0.14601749             0.0250000
+      2001-01-01            0.15785710 0.19577551             0.0250000
+      2002-01-01            0.24431295 0.02500000             0.0250000
+      2003-01-01            0.21955470 0.06590151             0.0250000
+      2004-01-01            0.09780634 0.02552822             0.1050766
+      2005-01-01            0.02500000 0.02500000             0.2445763
                  Emerging Markets Equity Market Neutral Event Driven
-      2000-01-01            0.025             0.35000        0.025
-      2001-01-01            0.025             0.35000        0.025
-      2002-01-01            0.025             0.35000        0.025
-      2003-01-01            0.025             0.28179        0.025
-      2004-01-01            0.025             0.35000        0.025
-      2005-01-01            0.025             0.20542        0.025
+      2000-01-01            0.025             0.3500000        0.025
+      2001-01-01            0.025             0.3500000        0.025
+      2002-01-01            0.025             0.3500000        0.025
+      2003-01-01            0.025             0.2817930        0.025
+      2004-01-01            0.025             0.3500000        0.025
+      2005-01-01            0.025             0.2054237        0.025
                  Fixed Income Arbitrage Global Macro Long/Short Equity
-      2000-01-01              0.02500        0.025             0.025
-      2001-01-01              0.02500        0.025             0.025
-      2002-01-01              0.20568        0.025             0.025
-      2003-01-01              0.25775        0.025             0.025
-      2004-01-01              0.27158        0.025             0.025
-      2005-01-01              0.35000        0.025             0.025
+      2000-01-01              0.0250000        0.025             0.025
+      2001-01-01              0.0250000        0.025             0.025
+      2002-01-01              0.2056871        0.025             0.025
+      2003-01-01              0.2577508        0.025             0.025
+      2004-01-01              0.2715888        0.025             0.025
+      2005-01-01              0.3500000        0.025             0.025
                  Merger Arbitrage Relative Value
-      2000-01-01       0.07146      0.25752
-      2001-01-01       0.12136      0.02500
-      2002-01-01       0.02500      0.02500
-      2003-01-01       0.02500      0.02500
-      2004-01-01       0.02500      0.02500
-      2005-01-01       0.02500      0.02500
+      2000-01-01       0.07146246      0.2575201
+      2001-01-01       0.12136740      0.0250000
+      2002-01-01       0.02500000      0.0250000
+      2003-01-01       0.02500000      0.0250000
+      2004-01-01       0.02500000      0.0250000
+      2005-01-01       0.02500000      0.0250000
     Code
       dev.off()
     Output

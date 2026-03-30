@@ -9,7 +9,6 @@ fund index, the S&P 500 total returns, and total return series for
 the US Treasury 10-year bond and 3-month bill. Monthly returns for
 all series end in December 2006 and begin at different periods starting
 from January 1996.
-
 Note that all the EDHEC indices are available in \code{\link{edhec}}.
 }
 \usage{managers}
@@ -19,13 +18,8 @@ Note that all the EDHEC indices are available in \code{\link{edhec}}.
 \format{CSV conformed into an xts object with monthly observations}
 \examples{
 data(managers)
-
 #preview the data
 head(managers)
-
-#summary period statistics
-summary(managers)
-
 #cumulative returns
 tail(cumprod(1+managers),1)
 }
