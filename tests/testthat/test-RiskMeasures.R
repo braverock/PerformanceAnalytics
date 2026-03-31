@@ -82,3 +82,15 @@ test_that("lpm works", {
   expect_true(is.data.frame(res1))
   expect_true(is.data.frame(res2))
 })
+
+test_that("DownsideDeviation and SortinoRatio handle vector MAR correctly (#191)", {
+  set.seed(123)
+  Rand_EQ <- rnorm(100)
+  Rand_RF <- rnorm(100, mean = 0.01)
+
+  res1 <- DownsideDeviation(Rand_EQ, MAR = Rand_RF)
+  expect_true(is.numeric(res1))
+  
+  res2 <- SortinoRatio(Rand_EQ, MAR = Rand_RF)
+  expect_true(is.numeric(res2))
+})

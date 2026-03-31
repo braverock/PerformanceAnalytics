@@ -38,3 +38,7 @@ vignettes/*.pdf
 
 *.o
 *.so
+
+# platform integration files
+.gemini/
+.github/

@@ -1,22 +1,22 @@
 #' calculate an annualized return for comparing instruments with different
 #' length history
-#' 
+#'
 #' An average annualized return is convenient for comparing returns.
-#' 
+#'
 #' Annualized returns are useful for comparing two assets.  To do so, you must
 #' scale your observations to an annual scale by raising the compound return to
 #' the number of periods in a year, and taking the root to the number of total
 #' observations:
 #' \deqn{prod(1+R_{a})^{\frac{scale}{n}}-1=\sqrt[n]{prod(1+R_{a})^{scale}}-1}{prod(1
 #' + Ra)^(scale/n) - 1}
-#' 
+#'
 #' where scale is the number of periods in a year, and n is the total number of
 #' periods for which you have observations.
-#' 
+#'
 #' For simple returns (geometric=FALSE), the formula is:
-#' 
+#'
 #' \deqn{\overline{R_{a}} \cdot scale}{mean(R)*scale}
-#' 
+#'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
@@ -27,18 +27,17 @@
 #' @seealso \code{\link{Return.cumulative}},
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 #' and Attribution}. Wiley. 2004. p. 6
-###keywords ts multivariate distribution models
+### keywords ts multivariate distribution models
 #' @examples
-#' 
+#'
 #' data(managers)
-#' round(Return.annualized(managers[,1,drop=FALSE]),4)
-#' round(Return.annualized(managers[,1:8]),4)
-#' round(Return.annualized(managers[,1:8],geometric=FALSE),4)
-#' 
+#' round(Return.annualized(managers[, 1, drop = FALSE]), 4)
+#' round(Return.annualized(managers[, 1:8]), 4)
+#' round(Return.annualized(managers[, 1:8], geometric = FALSE), 4)
+#'
 #' @export
 Return.annualized <-
-function (R, scale = NA, geometric = TRUE )
-{ # @author Peter Carl
+  function(R, scale = NA, geometric = TRUE) { # @author Peter Carl
 
     # Description:
 
@@ -55,45 +54,59 @@ function (R, scale = NA, geometric = TRUE )
 
     # @todo: don't calculate for returns less than 1 year
 
-    if(!xtsible(R) & is.na(scale))
-        stop("'R' needs to be timeBased or xtsible, or scale must be specified." )
-    if(is.na(scale)) {
-        freq = periodicity(R)
-        switch(freq$scale,
-               minute = {stop("Data periodicity too high")},
-               hourly = {stop("Data periodicity too high")},
-               daily = {scale = 252},
-               weekly = {scale = 52},
-               monthly = {scale = 12},
-               quarterly = {scale = 4},
-               yearly = {scale = 1}
-        )
+    if (!xtsible(R) && is.na(scale)) {
+      stop("'R' needs to be timeBased or xtsible, or scale must be specified.")
     }
-    
+    if (is.na(scale)) {
+      freq <- periodicity(R)
+      switch(freq$scale,
+        minute = {
+          stop("Data periodicity too high")
+        },
+        hourly = {
+          stop("Data periodicity too high")
+        },
+        daily = {
+          scale <- 252
+        },
+        weekly = {
+          scale <- 52
+        },
+        monthly = {
+          scale <- 12
+        },
+        quarterly = {
+          scale <- 4
+        },
+        yearly = {
+          scale <- 1
+        }
+      )
+    }
+
     # FUNCTION:
     if (is.vector(R)) {
-        R = checkData (R)
-        R = na.omit(R)
-        n = length(R)
-        #do the correct thing for geometric or simple returns
-        if (geometric) {
-            # geometric returns
-            result = prod(1 + R)^(scale/n) - 1
-        } else {
-            # simple returns
-            result = mean(R) * scale
-        }
-        result
+      R <- checkData(R)
+      R <- na.omit(R)
+      n <- length(R)
+      # do the correct thing for geometric or simple returns
+      if (geometric) {
+        # geometric returns
+        result <- prod(1 + R)^(scale / n) - 1
+      } else {
+        # simple returns
+        result <- mean(R) * scale
+      }
+      result
+    } else {
+      R <- checkData(R, method = "xts")
+      result <- apply(zoo::coredata(R), 2, Return.annualized, scale = scale, geometric = geometric)
+      dim(result) <- c(1, NCOL(R))
+      colnames(result) <- colnames(R)
+      rownames(result) <- "Annualized Return"
+      return(result)
     }
-    else {
-        R = checkData(R, method = "xts")
-        result = apply(zoo::coredata(R), 2, Return.annualized, scale = scale, geometric = geometric)
-        dim(result) = c(1,NCOL(R))
-        colnames(result) = colnames(R)
-        rownames(result) = "Annualized Return"
-        return(result)
-    }
-}
+  }
 
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis
