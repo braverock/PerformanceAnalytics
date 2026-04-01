@@ -46,6 +46,7 @@ Suggests:
     quantreg,
     tinytest,
     ggplot2,
+    vdiffr,
     RColorBrewer,
     googleVis,
     plotly,

@@ -98,3 +98,26 @@ test_that("textplot.character works", {
   expect_error(textplot(c("Multi", "Line", "String")), NA)
   dev.off()
 })
+
+
+test_that("chart.Drawdown with plot.engine='ggplot2' works without warnings", {
+  skip_on_cran()
+  skip_if_not_installed("vdiffr")
+  
+  data(edhec)
+  R <- edhec[1:50, 1]
+  
+  # (a) tidy data
+  p1 <- chart.Drawdown(R, plot.engine = "ggplot2")
+  expect_warning(print(p1), NA)
+  
+  vdiffr::expect_doppelganger("chart-Drawdown-ggplot-tidy", p1)
+  
+  # (b) data containing an initial NA
+  R_na <- R
+  R_na[1:3, 1] <- NA
+  p2 <- chart.Drawdown(R_na, plot.engine = "ggplot2")
+  expect_warning(print(p2), NA)
+  
+  vdiffr::expect_doppelganger("chart-Drawdown-ggplot-na", p2)
+})

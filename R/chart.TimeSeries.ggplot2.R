@@ -51,13 +51,16 @@ chart.TimeSeries.ggplot2 <-
 
     colnames(R) <- col_names
 
-    returns <- R[, "returns"]
-    date <- R[, "date"]
-    security <- R[, "security"]
-
-    # adjust of yaxis if in percentage
+    # adjust y-axis units if requested
     if (yaxis.pct) {
-      returns <- returns * 100
+      R[["returns"]] <- R[["returns"]] * 100
+    }
+
+    # drop missing observations to avoid geom_line warnings
+    R <- stats::na.omit(R)
+
+    if (nrow(R) == 0) {
+      stop("No observations available for plotting after removing missing values.")
     }
     # Plotting
     p <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns, color = security)) +
