@@ -43,7 +43,7 @@ DrawdownPeak <- function(R, ...) {
       }
       result <- drawdownpeak
     }
-    reclass(result, R0)
+    result <- reclass(result, R0)
     return(result)
   } else {
     R <- checkData(R)
