@@ -64,6 +64,9 @@ Level.calculate <-
 
 
     # Begin ERROR CHECKING
+    if (!is.xts(R)) {
+      stop("Must pass an xts object")
+    }
     if (is.null(attributes(R)$coredata_content)) {
       warning("object is missing coredata_content attribute. Defaulting to 'discreteReturn'.")
       attributes(R)$coredata_content <- "discreteReturn"
