@@ -76,10 +76,10 @@ Gaussian Expected Shortfall, and modified Expected Shortfall. See
 to \code{\link{VaR}} and \code{\link{ES}} via \dots{} The most important is
 probably the 'method' argument/
 
-Most recently, we have added Downside Sharpe Ratio (DSR) (see \code{\link{DownsideSharpeRatio}}), a short name for what Ziemba (2005) 
-called the "Symmetric Downside Risk Sharpe Ratio" and is defined as the ratio of the mean return 
+Most recently, we have added Downside Sharpe Ratio (DSR) (see \code{\link{DownsideSharpeRatio}}), a short name for what Ziemba (2005)
+called the "Symmetric Downside Risk Sharpe Ratio" and is defined as the ratio of the mean return
 to the square root of lower semivariance:
- 
+
  \deqn{\frac{\overline{(R_{a}-R_{f})}}{\sqrt{2}SemiSD(R_a)}}.
 
 This function returns a traditional or modified Sharpe ratio for the same
@@ -88,22 +88,22 @@ periodicity of the data being input (e.g., monthly data -> monthly SR)
 \examples{
 
 data(managers)
-SharpeRatio(managers[,1,drop=FALSE], Rf=.035/12, FUN="StdDev") 
-SharpeRatio(managers[,1,drop=FALSE], Rf = managers[,10,drop=FALSE], FUN="StdDev")
-SharpeRatio(managers[,1:6], Rf=.035/12, FUN="StdDev") 
-SharpeRatio(managers[,1:6], Rf = managers[,10,drop=FALSE], FUN="StdDev")
+SharpeRatio(managers[, 1, drop = FALSE], Rf = .035 / 12, FUN = "StdDev")
+SharpeRatio(managers[, 1, drop = FALSE], Rf = managers[, 10, drop = FALSE], FUN = "StdDev")
+SharpeRatio(managers[, 1:6], Rf = .035 / 12, FUN = "StdDev")
+SharpeRatio(managers[, 1:6], Rf = managers[, 10, drop = FALSE], FUN = "StdDev")
 
 
 
 data(edhec)
-SharpeRatio(edhec[, 6, drop = FALSE], FUN="VaR")
-SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR")
-SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04/12, FUN="VaR" , method="gaussian")
-SharpeRatio(edhec[, 6, drop = FALSE], FUN="ES")
+SharpeRatio(edhec[, 6, drop = FALSE], FUN = "VaR")
+SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04 / 12, FUN = "VaR")
+SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04 / 12, FUN = "VaR", method = "gaussian")
+SharpeRatio(edhec[, 6, drop = FALSE], FUN = "ES")
 
 # and all the methods
-SharpeRatio(managers[,1:9], Rf = managers[,10,drop=FALSE])
-SharpeRatio(edhec,Rf = .04/12)
+SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE])
+SharpeRatio(edhec, Rf = .04 / 12)
 
 }
 \references{
@@ -114,7 +114,7 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 v 5.
 
-Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of 
+Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of
 Portfolio Management, 32(1), 108-122.
 }
 \seealso{

@@ -43,9 +43,9 @@ preferable.
 \examples{
 
 data(edhec)
-t(round(maxDrawdown(edhec[,"Funds of Funds"]),4))
+t(round(maxDrawdown(edhec[, "Funds of Funds"]), 4))
 data(managers)
-t(round(maxDrawdown(managers),4))
+t(round(maxDrawdown(managers), 4))
 
 }
 \references{

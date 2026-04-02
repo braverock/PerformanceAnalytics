@@ -5,7 +5,15 @@
 \alias{SFM.jensenAlpha}
 \title{Jensen's alpha of the return distribution}
 \usage{
-CAPM.jensenAlpha(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt")
+CAPM.jensenAlpha(
+  Ra,
+  Rb,
+  Rf = 0,
+  ...,
+  method = "LS",
+  family = "mopt",
+  series = FALSE
+)
 }
 \arguments{
 \item{Ra}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -20,13 +28,15 @@ asset returns}
 \item{method}{(Optional): string representing linear regression model, "LS" for Least Squares
 and "Rob" for robust}
 
-\item{family}{(Optional): 
-If method == "Rob": 
+\item{family}{(Optional):
+If method == "Rob":
   This is a string specifying the name of the family of loss function
   to be used (current valid options are "bisquare", "opt" and "mopt").
-  Incomplete entries will be matched to the current valid options. 
+  Incomplete entries will be matched to the current valid options.
   Defaults to "mopt".
 Else: the parameter is ignored}
+
+\item{series}{(Optional): Boolean to return a time series of Jensen's Alpha instead of a single value. Defaults to FALSE.}
 }
 \description{
 The Jensen's alpha is the intercept of the regression equation in the Capital
@@ -41,15 +51,15 @@ where \eqn{r_f} is the risk free rate, \eqn{\beta_r} is the regression beta,
 \examples{
 
 data(portfolio_bacon)
-print(SFM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
+print(SFM.jensenAlpha(portfolio_bacon[, 1], portfolio_bacon[, 2])) # expected -0.014
 
 data(managers)
-print(SFM.jensenAlpha(managers['1996',1], managers['1996',8]))
-print(SFM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+print(SFM.jensenAlpha(managers["1996", 1], managers["1996", 8]))
+print(SFM.jensenAlpha(managers["1996", 1:5], managers["1996", 8]))
 
 }
 \references{
-Carl Bacon, \emph{Practical portfolio performance measurement 
+Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.72
 }
 \author{

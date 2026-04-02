@@ -40,7 +40,7 @@ except for the addition of \code{\link{checkData}} and additional labeling.
 \deqn{Kurtosis(moment) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4}{kurtosis(moment) = sum((x-mean(x))^4/var(x)^2)/length(x)}
 \deqn{Kurtosis(excess) = \frac{1}{n}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_P})^4 - 3}{kurtosis(excess) = sum((x-mean(x))^4/var(x)^2)/length(x) - 3}
 \deqn{Kurtosis(sample) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4 }{kurtosis(sample) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3))}
-\deqn{Kurtosis(fisher) = \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}\frac{(r_i)^4}{n}}{(\sum^{n}_{i=1}(\frac{(r_i)^2}{n})^2} - \frac{3*(n-1)}{n+1})}{kurtosis (fisher) = ((n+1)*(n-1)*((sum(x^4)/n)/(sum(x^2)/n)^2 - (3*(n-1))/(n+1)))/((n-2)*(n-3))}
+\deqn{Kurtosis(fisher) = \frac{(n+1)*(n-1)}{(n-2)*(n-3)}*(\frac{\sum^{n}_{i=1}(r_i - \overline{r})^4/n}{(\sum^{n}_{i=1}(r_i - \overline{r})^2/n)^2} - \frac{3*(n-1)}{n+1})}{kurtosis (fisher) = ((n+1)*(n-1)*((sum(y^4)/n)/(sum(y^2)/n)^2 - (3*(n-1))/(n+1)))/((n-2)*(n-3))}
 \deqn{Kurtosis(sample excess) =  \frac{n*(n+1)}{(n-1)*(n-2)*(n-3)}*\sum^{n}_{i=1}(\frac{r_i - \overline{r}}{\sigma_{S_P}})^4  - \frac{3*(n-1)^2}{(n-2)*(n-3)}}{kurtosis(sample excess) = sum(((x-mean(x))/var(x))^4)*n*(n+1)/((n-1)*(n-2)*(n-3)) - 3*(n-1)^2/((n-2)*(n-3))}
 
 
@@ -52,26 +52,26 @@ sample standard deviation
 
 ## mean -
 ## var -
-   # Mean, Variance:
-   r = rnorm(100)
-   mean(r)
-   var(r)
+# Mean, Variance:
+r <- rnorm(100)
+mean(r)
+var(r)
 
 ## kurtosis -
-   kurtosis(r)
+kurtosis(r)
 
 data(managers)
-kurtosis(managers[,1:8])
+kurtosis(managers[, 1:8])
 
 data(portfolio_bacon)
-print(kurtosis(portfolio_bacon[,1], method="sample")) #expected 3.03
-print(kurtosis(portfolio_bacon[,1], method="sample_excess")) #expected -0.41
-print(kurtosis(managers['1996'], method="sample"))
-print(kurtosis(managers['1996',1], method="sample"))
+print(kurtosis(portfolio_bacon[, 1], method = "sample")) # expected 3.03
+print(kurtosis(portfolio_bacon[, 1], method = "sample_excess")) # expected -0.41
+print(kurtosis(managers["1996"], method = "sample"))
+print(kurtosis(managers["1996", 1], method = "sample"))
 
 }
 \references{
-Carl Bacon, \emph{Practical portfolio performance measurement 
+Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.84-85
 }
 \seealso{

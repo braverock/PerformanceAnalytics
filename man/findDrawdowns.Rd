@@ -28,18 +28,18 @@ Often used with \code{\link{sortDrawdowns}} to get the largest drawdowns.
 \code{Drawdowns} will calculate the drawdown levels as percentages, for use
 in \code{\link{chart.Drawdown}}.
 
-Returns an unordered list: \cr 
-\itemize{ 
+Returns an unordered list: \cr
+\itemize{
   \item return depth of drawdown
-  \item from starting period 
-  \item to ending period \item length length in periods 
+  \item from starting period
+  \item to ending period \item length length in periods
 }
 }
 \examples{
 
 data(edhec)
-findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
-sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
+findDrawdowns(edhec[, "Funds of Funds", drop = FALSE])
+sortDrawdowns(findDrawdowns(edhec[, "Funds of Funds", drop = FALSE]))
 
 }
 \references{
@@ -47,11 +47,11 @@ Bacon, C. \emph{Practical Portfolio Performance Measurement and
 Attribution}. Wiley. 2004. p. 88 \cr
 }
 \seealso{
-\code{\link{sortDrawdowns}} \cr 
+\code{\link{sortDrawdowns}} \cr
 \code{\link{maxDrawdown}} \cr
-\code{\link{sortDrawdowns}} \cr 
+\code{\link{sortDrawdowns}} \cr
 \code{\link{table.Drawdowns}} \cr
-\code{\link{table.DownsideRisk}} \cr 
+\code{\link{table.DownsideRisk}} \cr
 \code{\link{chart.Drawdown}} \cr
 }
 \author{

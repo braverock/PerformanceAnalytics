@@ -31,7 +31,7 @@ of the worst \eqn{p\%} drawdowns.
 \examples{
 
 data(edhec)
-t(round(CDD(edhec),4))
+t(round(CDD(edhec), 4))
 
 }
 \references{
