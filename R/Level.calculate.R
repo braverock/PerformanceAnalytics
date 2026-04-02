@@ -72,7 +72,7 @@ Level.calculate <-
 
     # clean up NAs
     # append estimated last date if first value not NA
-    if (!is.na(R[1])) {
+    if (!is.na(R[1, 1])) {
       warning("Estimated start date/time based on periodicity of time series")
       estimatedPreviousDateStamp <- calculateImpliedDate(R)
       tempName <- colnames(R)
