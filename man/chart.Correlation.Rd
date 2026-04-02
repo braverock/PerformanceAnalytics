@@ -28,7 +28,10 @@ chart.Correlation(
 \description{
 Visualization of a Correlation Matrix. On top the (absolute) value of the
 correlation plus the result of the cor.test as stars. On bottom, the
-bivariate scatterplots, with a fitted line
+bivariate scatterplots, with a fitted line. When the \code{method} parameter
+is set to "spearman" or "kendall", the lower panel scatterplots are automatically
+transformed to plot the monotonically ranked data rather than the raw values,
+providing visual alignment with the evaluated correlation method.
 }
 \note{
 based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
@@ -36,7 +39,7 @@ based on plot at originally found at addictedtor.free.fr/graphiques/sources/sour
 \examples{
 
 data(managers)
-chart.Correlation(managers[,1:8], histogram=TRUE, pch="+")
+chart.Correlation(managers[, 1:8], histogram = TRUE, pch = "+")
 
 }
 \seealso{
