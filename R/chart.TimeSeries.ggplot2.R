@@ -74,6 +74,13 @@ chart.TimeSeries.ggplot2 <-
 
     p <- p + ggplot2::ggtitle(main)
 
+    if (!is.null(date.format)) {
+      if (inherits(date, "POSIXt")) {
+        p <- p + ggplot2::scale_x_datetime(date_labels = date.format)
+      } else {
+        p <- p + ggplot2::scale_x_date(date_labels = date.format)
+      }
+    }
 
     if (mode(colorset) == "character") {
       p <- p + ggplot2::scale_color_brewer(palette = colorset)

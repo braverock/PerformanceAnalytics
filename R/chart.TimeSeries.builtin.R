@@ -123,6 +123,7 @@ chart.TimeSeries.builtin <-
       grid.col = grid.color,
       legend.loc = NULL,
       type = type,
+      format.labels = date.format,
       ...
     )
 
