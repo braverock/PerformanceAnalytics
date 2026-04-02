@@ -38,18 +38,24 @@ chart.Correlation <-
     if (missing(method)) method <- method[1] # only use one
     cormeth <- method
 
+    dotargs <- list(...)
+    c_cex <- if ("cex.cor" %in% names(dotargs)) dotargs$cex.cor else NULL
+
     # Published at https://addictedtor.free.fr/graphiques/sources/source_137.R
-    panel.cor <- function(x, y, digits = 2, prefix = "", use = "pairwise.complete.obs", method = cormeth, cex.cor, ...) {
+    panel.cor <- function(x, y, digits = 2, prefix = "", use = "pairwise.complete.obs", method = cormeth, ...) {
       usr <- par("usr")
       on.exit(par(usr = usr))
       par(usr = c(0, 1, 0, 1))
       r <- cor(x, y, use = use, method = method) # MG: remove abs here
       txt <- format(c(r, 0.123456789), digits = digits)[1]
       txt <- paste(prefix, txt, sep = "")
-      if (missing(cex.cor)) cex <- 0.8 / strwidth(txt)
+      if (is.null(c_cex)) {
+        cex <- 0.8 / strwidth(txt)
+      } else {
+        cex <- c_cex
+      }
 
-      test <- cor.test(as.numeric(x), as.numeric(y), method = method)
-      # borrowed from printCoefmat
+      test <- cor.test(as.numeric(x), as.numeric(y), method = method) # borrowed from printCoefmat
       Signif <- symnum(test$p.value,
         corr = FALSE, na = FALSE,
         cutpoints = c(0, 0.001, 0.01, 0.05, 0.1, 1),
@@ -89,10 +95,10 @@ chart.Correlation <-
       }
     }
 
-    # remove method from dotargs
+    # remove parameters that shouldn't leak to pairs()
     dotargs <- list(...)
     dotargs$method <- NULL
-    rm(method)
+    dotargs$cex.cor <- NULL
 
     hist.panel <- function(x, ... = NULL) {
       par(new = TRUE)
@@ -113,21 +119,12 @@ chart.Correlation <-
     # Draw the chart
     title_str <- paste(toupper(substr(cormeth, 1, 1)), substring(cormeth, 2), "Correlation")
 
-    if (!hasArg("main")) {
-      if (histogram) {
-        pairs(x, gap = 0, lower.panel = panel.smooth.custom, upper.panel = panel.cor, diag.panel = hist.panel, pch = pch, main = title_str, ...)
-      } else {
-        pairs(x, gap = 0, lower.panel = panel.smooth.custom, upper.panel = panel.cor, pch = pch, main = title_str, ...)
-      }
-    } else {
-      if (histogram) {
-        pairs(x, gap = 0, lower.panel = panel.smooth.custom, upper.panel = panel.cor, diag.panel = hist.panel, pch = pch, ...)
-      } else {
-        pairs(x, gap = 0, lower.panel = panel.smooth.custom, upper.panel = panel.cor, pch = pch, ...)
-      }
-    }
-  }
+    pairs_args <- c(list(x = x, gap = 0, lower.panel = panel.smooth.custom, upper.panel = panel.cor, pch = pch), dotargs)
+    if (histogram) pairs_args$diag.panel <- hist.panel
+    if (!hasArg("main")) pairs_args$main <- title_str
 
+    do.call(pairs, pairs_args)
+  }
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis
 #
