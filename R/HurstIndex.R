@@ -1,70 +1,79 @@
 #' calculate the Hurst Index
 #' The Hurst index can be used to measure whether returns are mean reverting,
-#' totally random, or persistent.  
-#' 
-#' Hurst obtained a dimensionless statistical exponent by dividing the range 
-#' by the standard deviation of the observations, 
-#' so this approach is commonly referred to as rescaled range (R/S) analysis. 
-#' 
-#' \deqn{H = log(m)/log(n)} 
-#' 
+#' totally random, or persistent.
+#'
+#' Hurst obtained a dimensionless statistical exponent by dividing the range
+#' of the cumulative sum of deviations from the mean by the standard deviation
+#' of the observations, so this approach is commonly referred to as rescaled range (R/S) analysis.
+#'
+#' \deqn{H = log(m)/log(n)}
+#'
 #' where
-#' \eqn{m = [max(r_i) - min(r_i)]/sigma_p} and
-#' \eqn{n = number of observations}
-# 
+#' \eqn{m = [max(z_i) - min(z_i)]/\sigma_r},
+#' \eqn{z_i = \sum_{i=1}^n (r_i - \bar{r})},
+#' and \eqn{n = number of observations}
+#
 #' A Hurst index between 0.5 and 1 suggests that the returns are persistent.
 #' At 0.5, the index suggests returns are totally random.  Between 0 and 0.5
 #' it suggests that the returns are mean reverting.
-#' 
+#'
 #' H.E. Hurst originally developed the Hurst index to help establish optimal
 #' water storage along the Nile.  Nile floods are extremely persistent,
-#' measuring a Hurst index of 0.9.  Peters (1991) notes that Equity markets 
+#' measuring a Hurst index of 0.9.  Peters (1991) notes that Equity markets
 #' have a Hurst index in excess of 0.5, with typical values of around 0.7.
-#' That appears to be anomalous in the context of the mainstream 'rational 
+#' That appears to be anomalous in the context of the mainstream 'rational
 #' behaviour' theories of economics, and suggests existence of a powerful
 #' 'long-term memory' causal dependence.  Clarkson (2001) suggests that an
 #' 'over-reaction bias' could be expected to generate a powerful 'long-term
 #' memory' effect in share prices.
-#' 
+#'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of asset returns
 #' @param \dots any other passthru parameters
+#' @seealso \code{\link[pracma]{hurstexp}} for more robust estimators of the Hurst exponent (e.g., corrected R/S, empirical, and theoretical).
 #' @references
 #' Clarkson, R. (2001) FARM: a financial actuarial risk model.  In Chapter
-#' 12 of Managing Downside Risk in Financial Markets, ed. Sortino, F.  
+#' 12 of Managing Downside Risk in Financial Markets, ed. Sortino, F.
 #' and Satchel, S.  Woburn MA. Butterworth-Heinemann Finance.
-#' 
+#'
 #' Peters, E.E (1991) Chaos and Order in Capital Markets, New York: Wiley.
-#' 
-#' Bacon, Carl. (2008) Practical Portfolio Performance Measurement and Attribution, 2nd Edition. London: John Wiley & Sons. 
-#' 
+#'
+#' Bacon, Carl. (2008) Practical Portfolio Performance Measurement and Attribution, 2nd Edition. London: John Wiley & Sons.
+#'
 #' @export
 HurstIndex <-
-function (R, ...) {
-    
-
-
-
-    R = checkData(R)
+  function(R, ...) {
+    R <- checkData(R)
 
     rs <- function(R) {
-        R = na.omit(R)
-        m = (max(R) - min(R))/sd.xts(R)
-        n = length(R)
-        result = log(m)/log(n)
-        return(result)
+      R <- na.omit(coredata(R))
+      n <- length(R)
+
+      # Demean the returns
+      R_demean <- R - mean(R)
+
+      # Compute cumulative sum of demeaned returns
+      Z <- cumsum(R_demean)
+
+      # The range is the difference between the maximum and minimum cumulative sum
+      R_range <- max(Z) - min(Z)
+
+      # Calculate Rescaled Range (m) and the Hurst exponent
+      m <- R_range / sd(R)
+      result <- log(m) / log(n)
+      return(result)
     }
 
-    result = apply(R, MARGIN = 2, rs)
-    dim(result) = c(1,NCOL(R))
-    colnames(result) = colnames(R)
-    rownames(result) = "Hurst Index"
-    return (result)
-}
+    result <- apply(R, MARGIN = 2, rs)
+    dim(result) <- c(1, NCOL(R))
+    colnames(result) <- colnames(R)
+    rownames(result) <- "Hurst Index"
+    return(result)
+  }
 
-RescaledRange <- 
-function (R, ...) {
+RescaledRange <-
+  function(R, ...) {
     HurstIndex(R, ...)
-}
+  }
 
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis
