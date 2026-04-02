@@ -63,9 +63,16 @@ chart.TimeSeries.ggplot2 <-
       stop("No observations available for plotting after removing missing values.")
     }
     # Plotting
-    p <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns, color = security)) +
-      ggplot2::geom_line(linewidth = lwd) +
-      ggplot2::ggtitle(main)
+    p <- ggplot2::ggplot(R, ggplot2::aes(x = date, y = returns, color = security))
+
+    if (type == "h" || type == "bar") {
+      # Use stat="identity" to plot the literal return values as bars, mapped to fill rather than color
+      p <- p + ggplot2::geom_bar(stat = "identity", position = "dodge", ggplot2::aes(fill = security))
+    } else {
+      p <- p + ggplot2::geom_line(linewidth = lwd)
+    }
+
+    p <- p + ggplot2::ggtitle(main)
 
 
     if (mode(colorset) == "character") {

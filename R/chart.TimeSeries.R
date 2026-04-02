@@ -1,12 +1,12 @@
 #' Creates a time series chart with some extensions.
-#' 
+#'
 #' Draws a line chart and labels the x-axis with the appropriate dates.  This
 #' is really a "primitive", since it extends the base \code{\link{plot}} and
 #' standardizes the elements of a chart.  Adds attributes for shading areas of
 #' the timeline or aligning vertical lines along the timeline. This function is
 #' intended to be used inside other charting functions.
-#' 
-#' 
+#'
+#'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param auto.grid if true, draws a grid aligned with the points on the x and
@@ -71,188 +71,198 @@
 #' @param space default 0
 #' @param plot.engine choose the plot engine you wish to use:
 #' ggplot2, plotly,dygraph,googlevis and default
-#' 
+#'
 #' @param yaxis.pct if TRUE, scales the y axis labels by 100
 #' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{plot}}, \code{\link{par}},
 #' \code{\link[xts]{axTicksByTime}}
-###keywords ts multivariate distribution models hplot
+### keywords ts multivariate distribution models hplot
 #' @examples
-#' 
-#' 
+#'
+#'
 #' # These are start and end dates, formatted as xts ranges.
 #' ## https://www.nber.org-cycles.html
-#' cycles.dates<-c("1857-06/1858-12",
-#'                 "1860-10/1861-06",
-#'                 "1865-04/1867-12",
-#'                 "1869-06/1870-12",
-#'                 "1873-10/1879-03",
-#'                 "1882-03/1885-05",
-#'                 "1887-03/1888-04",
-#'                 "1890-07/1891-05",
-#'                 "1893-01/1894-06",
-#'                 "1895-12/1897-06",
-#'                 "1899-06/1900-12",
-#'                 "1902-09/1904-08",
-#'                 "1907-05/1908-06",
-#'                 "1910-01/1912-01",
-#'                 "1913-01/1914-12",
-#'                 "1918-08/1919-03",
-#'                 "1920-01/1921-07",
-#'                 "1923-05/1924-07",
-#'                 "1926-10/1927-11",
-#'                 "1929-08/1933-03",
-#'                 "1937-05/1938-06",
-#'                 "1945-02/1945-10",
-#'                 "1948-11/1949-10",
-#'                 "1953-07/1954-05",
-#'                 "1957-08/1958-04",
-#'                 "1960-04/1961-02",
-#'                 "1969-12/1970-11",
-#'                 "1973-11/1975-03",
-#'                 "1980-01/1980-07",
-#'                 "1981-07/1982-11",
-#'                 "1990-07/1991-03",
-#'                 "2001-03/2001-11",
-#'                 "2007-12/2009-06"
-#'                 )
+#' cycles.dates <- c(
+#'   "1857-06/1858-12",
+#'   "1860-10/1861-06",
+#'   "1865-04/1867-12",
+#'   "1869-06/1870-12",
+#'   "1873-10/1879-03",
+#'   "1882-03/1885-05",
+#'   "1887-03/1888-04",
+#'   "1890-07/1891-05",
+#'   "1893-01/1894-06",
+#'   "1895-12/1897-06",
+#'   "1899-06/1900-12",
+#'   "1902-09/1904-08",
+#'   "1907-05/1908-06",
+#'   "1910-01/1912-01",
+#'   "1913-01/1914-12",
+#'   "1918-08/1919-03",
+#'   "1920-01/1921-07",
+#'   "1923-05/1924-07",
+#'   "1926-10/1927-11",
+#'   "1929-08/1933-03",
+#'   "1937-05/1938-06",
+#'   "1945-02/1945-10",
+#'   "1948-11/1949-10",
+#'   "1953-07/1954-05",
+#'   "1957-08/1958-04",
+#'   "1960-04/1961-02",
+#'   "1969-12/1970-11",
+#'   "1973-11/1975-03",
+#'   "1980-01/1980-07",
+#'   "1981-07/1982-11",
+#'   "1990-07/1991-03",
+#'   "2001-03/2001-11",
+#'   "2007-12/2009-06"
+#' )
 #' # Event lists - FOR BEST RESULTS, KEEP THESE DATES IN ORDER
-#' risk.dates = c(
-#'     "Oct 87",
-#'     "Feb 94",
-#'     "Jul 97",
-#'     "Aug 98",
-#'     "Oct 98",
-#'     "Jul 00",
-#'     "Sep 01")
-#' risk.labels = c(
-#'     "Black Monday",
-#'     "Bond Crash",
-#'     "Asian Crisis",
-#'     "Russian Crisis",
-#'     "LTCM",
-#'     "Tech Bubble",
-#'     "Sept 11")
+#' risk.dates <- c(
+#'   "Oct 87",
+#'   "Feb 94",
+#'   "Jul 97",
+#'   "Aug 98",
+#'   "Oct 98",
+#'   "Jul 00",
+#'   "Sep 01"
+#' )
+#' risk.labels <- c(
+#'   "Black Monday",
+#'   "Bond Crash",
+#'   "Asian Crisis",
+#'   "Russian Crisis",
+#'   "LTCM",
+#'   "Tech Bubble",
+#'   "Sept 11"
+#' )
 #' data(edhec)
-#' 
-#' R=edhec[,"Funds of Funds",drop=FALSE]
-#' Return.cumulative = cumprod(1+R) - 1
+#'
+#' R <- edhec[, "Funds of Funds", drop = FALSE]
+#' Return.cumulative <- cumprod(1 + R) - 1
 #' chart.TimeSeries(Return.cumulative)
-#' chart.TimeSeries(Return.cumulative, colorset = "darkblue", 
-#'                  legend.loc = "bottomright", 
-#'                  period.areas = cycles.dates, 
-#'                  period.color = rgb(204/255, 204/255, 204/255, alpha=0.25), 
-#'                  event.lines = risk.dates, 
-#'                  event.labels = risk.labels, 
-#'                  event.color = "red", lwd = 2)
-#' 
+#' chart.TimeSeries(Return.cumulative,
+#'   colorset = "darkblue",
+#'   legend.loc = "bottomright",
+#'   period.areas = cycles.dates,
+#'   period.color = rgb(204 / 255, 204 / 255, 204 / 255, alpha = 0.25),
+#'   event.lines = risk.dates,
+#'   event.labels = risk.labels,
+#'   event.color = "red", lwd = 2
+#' )
+#'
 #' @export
-#' 
+#'
 
 
 # New Function with multi-engine option
 chart.TimeSeries <-
-  function (R, 
-            ... , 
-            auto.grid=TRUE, 
-            xaxis = TRUE, 
-            yaxis = TRUE, 
-            yaxis.right = FALSE, 
-            type = "l", 
-            lty = 1, 
-            lwd = 1, 
-            las = par("las"),
-            main = "", 
-            ylab="", 
-            xlab="", 
-            date.format.in="%Y-%m-%d", 
-            date.format = NULL, 
-            xlim = NULL, 
-            ylim = NULL, 
-            element.color="darkgray", 
-            event.lines = NULL, 
-            event.labels = NULL, 
-            period.areas = NULL, 
-            event.color = "darkgray", 
-            period.color = "aliceblue", 
-            colorset = (1:12), 
-            pch = (1:12), 
-            legend.loc = NULL, 
-            ylog = FALSE, 
-            cex.axis=0.8, 
-            cex.legend = 0.8, 
-            cex.lab = 1, 
-            cex.labels = 0.8, 
-            cex.main = 1, 
-            major.ticks='auto', 
-            minor.ticks=TRUE, 
-            grid.color="lightgray", 
-            grid.lty="dotted", 
-            xaxis.labels = NULL,
-            plot.engine = "default",
-            yaxis.pct=FALSE)
-{
-    #Check Arguments for dygraphPlot
+  function(R,
+           ...,
+           auto.grid = TRUE,
+           xaxis = TRUE,
+           yaxis = TRUE,
+           yaxis.right = FALSE,
+           type = "l",
+           lty = 1,
+           lwd = 1,
+           las = par("las"),
+           main = "",
+           ylab = "",
+           xlab = "",
+           date.format.in = "%Y-%m-%d",
+           date.format = NULL,
+           xlim = NULL,
+           ylim = NULL,
+           element.color = "darkgray",
+           event.lines = NULL,
+           event.labels = NULL,
+           period.areas = NULL,
+           event.color = "darkgray",
+           period.color = "aliceblue",
+           colorset = (1:12),
+           pch = (1:12),
+           legend.loc = NULL,
+           ylog = FALSE,
+           cex.axis = 0.8,
+           cex.legend = 0.8,
+           cex.lab = 1,
+           cex.labels = 0.8,
+           cex.main = 1,
+           major.ticks = "auto",
+           minor.ticks = TRUE,
+           grid.color = "lightgray",
+           grid.lty = "dotted",
+           xaxis.labels = NULL,
+           plot.engine = "default",
+           yaxis.pct = FALSE) {
+    # Check Arguments for dygraphPlot
     # if(hasArg(dygraphPlot)){
-    #   warning('dygraphPlot argument to chart.TimeSeries has been deprecated, 
+    #   warning('dygraphPlot argument to chart.TimeSeries has been deprecated,
     #           please use plot.engine="dygraph" instead.')
     #   plot.engine = "dygraph"
     # }
-    
-    if(plot.engine != "default"&&
-       plot.engine != "dygraph"&&
-       plot.engine != "ggplot2"&&
-       plot.engine != "plotly"&&
-       plot.engine != "googlevis"){
+
+    if (plot.engine != "default" &&
+      plot.engine != "dygraph" &&
+      plot.engine != "ggplot2" &&
+      plot.engine != "plotly" &&
+      plot.engine != "googlevis") {
       warning('Please use correct arguments:
               "default","dygraph","ggplot2","plotly","googlevis".
-              
+
               Ploting chart using built-in engine now.')
-      
-      plot.engine = "default"
+
+      plot.engine <- "default"
     }
 
-    
-    
-    return(chart.TimeSeries.base(R,
-                                 auto.grid,
-                                 xaxis, yaxis,
-                                 yaxis.right,
-                                 type,
-                                 lty,
-                                 lwd,
-                                 las,
-                                 main,
-                                 ylab,
-                                 xlab,
-                                 date.format.in,
-                                 date.format,
-                                 xlim,
-                                 ylim,
-                                 element.color,
-                                 event.lines,
-                                 event.labels,
-                                 period.areas,
-                                 event.color,
-                                 period.color,
-                                 colorset,
-                                 pch,
-                                 legend.loc,
-                                 ylog,
-                                 cex.axis,
-                                 cex.legend,
-                                 cex.lab,
-                                 cex.labels,
-                                 cex.main,
-                                 major.ticks,
-                                 minor.ticks,
-                                 grid.color,
-                                 grid.lty,
-                                 xaxis.labels,
-                                 plot.engine,
-                                 yaxis.pct,
-                                 ...))
+
+    # If type="bar" is requested, convert it to "h" for compatibility with plot.xts and base plot functions
+    if (type == "bar") {
+      type <- "h"
+    }
+
+    return(chart.TimeSeries.base(
+      R,
+      auto.grid,
+      xaxis, yaxis,
+      yaxis.right,
+      type,
+      lty,
+      lwd,
+      las,
+      main,
+      ylab,
+      xlab,
+      date.format.in,
+      date.format,
+      xlim,
+      ylim,
+      element.color,
+      event.lines,
+      event.labels,
+      period.areas,
+      event.color,
+      period.color,
+      colorset,
+      pch,
+      legend.loc,
+      ylog,
+      cex.axis,
+      cex.legend,
+      cex.lab,
+      cex.labels,
+      cex.main,
+      major.ticks,
+      minor.ticks,
+      grid.color,
+      grid.lty,
+      xaxis.labels,
+      plot.engine,
+      yaxis.pct,
+      ...
+    ))
   }
 
 ###############################################################################

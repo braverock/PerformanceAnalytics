@@ -121,3 +121,27 @@ test_that("chart.Drawdown with plot.engine='ggplot2' works without warnings", {
   
   vdiffr::expect_doppelganger("chart-Drawdown-ggplot-na", p2)
 })
+
+test_that("Basic charts render accurately via vdiffr", {
+  skip_on_cran()
+  skip_if_not_installed("vdiffr")
+  
+  data(edhec)
+  R_uni <- edhec[1:50, 1, drop=FALSE]
+  R_multi <- edhec[1:50, 1:2]
+  
+  # chart.Bar
+  vdiffr::expect_doppelganger("chart-Bar-univariate", function() {
+      chart.Bar(R_uni)
+  })
+  
+  # chart.CumReturns
+  vdiffr::expect_doppelganger("chart-CumReturns-multi", function() {
+      chart.CumReturns(R_multi, legend.loc="topleft")
+  })
+  
+  # charts.PerformanceSummary
+  vdiffr::expect_doppelganger("charts-PerformanceSummary-multi", function() {
+      charts.PerformanceSummary(R_multi)
+  })
+})
