@@ -8,20 +8,20 @@ PainIndex(R, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
-asset returns}
+asset returns (Note: expects decimal returns, e.g. 0.05 for 5\%, not percentage units).}
 
 \item{\dots}{any other passthru parameters}
 }
 \description{
-The pain index is the mean value of the drawdowns over the entire 
-analysis period. The measure is similar to the Ulcer index except that 
+The pain index is the mean value of the drawdowns over the entire
+analysis period. The measure is similar to the Ulcer index except that
 the drawdowns are not squared.  Also, it's different than the average
-drawdown, in that the numerator is the total number of observations 
+drawdown, in that the numerator is the total number of observations
 rather than the number of drawdowns.
 }
 \details{
-Visually, the pain index is the area of the region that is enclosed by 
-the horizontal line at zero percent and the drawdown line in the 
+Visually, the pain index is the area of the region that is enclosed by
+the horizontal line at zero percent and the drawdown line in the
 Drawdown chart.
 
 \deqn{Pain index = \sum^{n}_{i=1} \frac{\mid D'_i \mid}{n}}{Pain index = sum(|D'i|/n)}
@@ -31,15 +31,15 @@ the drawdown since previous peak in period i
 }
 \examples{
 data(portfolio_bacon)
-print(PainIndex(portfolio_bacon[,1])) #expected 0.04
+print(PainIndex(portfolio_bacon[, 1])) # expected 0.04
 
 data(managers)
-print(PainIndex(100*managers['1996']))
-print(PainIndex(100*managers['1996',1])) 
+print(PainIndex(100 * managers["1996"]))
+print(PainIndex(100 * managers["1996", 1]))
 
 }
 \references{
-Carl Bacon, \emph{Practical portfolio performance measurement 
+Carl Bacon, \emph{Practical portfolio performance measurement
 and attribution}, second edition 2008 p.89, Becker, Thomas (2006) Zephyr Associates
 }
 \author{

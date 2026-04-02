@@ -8,7 +8,7 @@ DrawdownPeak(R, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
-asset returns}
+asset returns (Note: expects decimal returns, e.g. 0.05 for 5\%, not percentage units).}
 
 \item{\dots}{any other passthru parameters}
 }

@@ -4,7 +4,7 @@
 #'
 #' @aliases DrawdownPeak
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
-#' asset returns
+#' asset returns (Note: expects decimal returns, e.g. 0.05 for 5\%, not percentage units).
 #' @param \dots any other passthru parameters
 #' @author Matthieu Lestel
 #'
