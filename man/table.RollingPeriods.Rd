@@ -46,21 +46,48 @@ index, benchmark, portfolio, or secondary asset returns to compare against}
 \description{
 A table of estimates of rolling period return measures
 }
+\details{
+\code{table.RollingPeriods} and \code{table.TrailingPeriods} (which are aliases) calculate
+statistics over rolling windows for individual assets. They apply the \code{FUNCS} directly
+to each column of \code{R} independently.
+
+\code{table.TrailingPeriodsRel} calculates statistics over rolling windows \emph{relative}
+to a benchmark. It applies the \code{FUNCS} to each column of \code{R} and the corresponding
+column of \code{Rb} simultaneously. This is ideal for relative metrics like \code{CAPM.beta},
+\code{cor}, or tracking error. If you need to calculate metrics requiring a benchmark,
+use \code{table.TrailingPeriodsRel}.
+}
 \examples{
 
 data(edhec)
-table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
 
-result=table.TrailingPeriods(edhec[,10:13], periods=c(12,24,36))
+# Example 1: Univariate Rolling Statistics
+table.TrailingPeriods(edhec[, 10:13], periods = c(12, 24, 36))
 
-\donttest{ # don't test on CRAN, since it requires Suggested packages
+# Example 2: Relative Rolling Statistics against a Benchmark
+table.TrailingPeriodsRel(edhec[, 10:12],
+  Rb = edhec[, 13],
+  periods = c(12, 24, 36),
+  FUNCS = c("cor", "CAPM.beta"),
+  funcs.names = c("Correlation", "Beta")
+)
+
+result <- table.TrailingPeriods(edhec[, 10:13], periods = c(12, 24, 36))
+
+\donttest{
+# don't test on CRAN, since it requires Suggested packages
 
 require("Hmisc")
-textplot(format.df(result, na.blank=TRUE, numeric.dollar=FALSE, 
-                   cdec=rep(3,dim(result)[2])), rmar = 0.8, cmar = 1.5,  
-                   max.cex=.9, halign = "center", valign = "top", row.valign="center", 
-                   wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-title(main="Trailing Period Statistics")
+textplot(
+  format.df(result,
+    na.blank = TRUE, numeric.dollar = FALSE,
+    cdec = rep(3, dim(result)[2])
+  ),
+  rmar = 0.8, cmar = 1.5,
+  max.cex = .9, halign = "center", valign = "top", row.valign = "center",
+  wrap.rownames = 15, wrap.colnames = 10, mar = c(0, 0, 3, 0) + 0.1
+)
+title(main = "Trailing Period Statistics")
 }
 }
 \seealso{
