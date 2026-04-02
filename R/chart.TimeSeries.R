@@ -217,6 +217,9 @@ chart.TimeSeries <-
       plot.engine <- "default"
     }
 
+    if (ylog && any(R <= 0, na.rm = TRUE)) {
+      warning("Logarithmic y-axis (ylog=TRUE) requested, but the data contains zero or negative values. These values cannot be plotted on a log scale and may be omitted or cause rendering errors.")
+    }
 
     # If type="bar" is requested, convert it to "h" for compatibility with plot.xts and base plot functions
     if (type == "bar") {
