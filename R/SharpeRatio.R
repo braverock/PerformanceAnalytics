@@ -235,14 +235,15 @@ SharpeRatio <-
       if (FUNCT == "SemiSD") {
         result[i, ] <- DownsideSharpeRatio(R, rf = Rf, ...)
       } else {
+        xR <- Return.excess(R, Rf)
         if (is.null(weights)) {
           if (annualize) {
             result[i, ] <- sapply(R, FUN = sra, Rf = Rf, p = p, FUNC = FUNCT, ...)
           } else {
             result[i, ] <- sapply(R, FUN = srm, Rf = Rf, p = p, FUNC = FUNCT, ...)
           }
-        } else { # TODO FIX this calculation, currently broken
-          result[i, ] <- mean(R %*% weights, na.rm = TRUE) / match.fun(FUNCT)(R, Rf = Rf, p = p, weights = weights, portfolio_method = "single", ... = ...)
+        } else {
+          result[i, ] <- mean(xR %*% weights, na.rm = TRUE) / match.fun(FUNCT)(xR, Rf = Rf, p = p, weights = weights, portfolio_method = "single", ... = ...)
         }
       }
       tmprownames <- c(tmprownames, paste(if (annualize) "Annualized ", FUNCT, " Sharpe", " (Rf=", round(scale * mean(Rf) * 100, 1), "%, p=", round(p * 100, 1), "%):", sep = ""))
