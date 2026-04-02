@@ -124,8 +124,8 @@ SemiVariance (managers[,1:6]) #calculated using method="subset"
 }
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside
-Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr 
-Carl Bacon, \emph{Practical portfolio performance measurement and attribution}, 
+Risk Framework. \emph{Journal of Investing}. Fall 1994, 59-65. \cr
+Carl Bacon, \emph{Practical portfolio performance measurement and attribution},
 second edition 2008
 
 Plantinga, A., van der Meer, R. and Sortino, F. The Impact of Downside Risk

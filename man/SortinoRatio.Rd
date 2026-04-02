@@ -48,8 +48,8 @@ customized to the objective of the investor.
 \examples{
 
 data(managers)
-round(SortinoRatio(managers[, 1]),4)
-round(SortinoRatio(managers[, 1:8]),4)
+round(SortinoRatio(managers[, 1]), 4)
+round(SortinoRatio(managers[, 1:8]), 4)
 
 }
 \references{

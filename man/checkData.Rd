@@ -30,28 +30,28 @@ noticed, default TRUE}
 This function was created to make the different kinds of data classes at
 least \emph{seem} more fungible.  It allows the user to pass in a data
 object without being concerned that the function requires a matrix,
-data.frame, vector, xts, or timeSeries object.  By using \code{checkData}, 
+data.frame, vector, xts, or timeSeries object.  By using \code{checkData},
 the function "knows" what data format it has to work with.
 }
 \examples{
 
 data(edhec)
-x = checkData(edhec)
+x <- checkData(edhec)
 class(x)
 head(x)
 tail(x)
 # Note that passing in a single column loses the row and column names
-x = checkData(edhec[,1])
+x <- checkData(edhec[, 1])
 class(x)
 head(x)
 # Include the "drop" attribute to keep row and column names
-x = checkData(edhec[,1,drop=FALSE])
+x <- checkData(edhec[, 1, drop = FALSE])
 class(x)
 head(x)
-x = checkData(edhec, method = "matrix")
+x <- checkData(edhec, method = "matrix")
 class(x)
 head(x)
-x = checkData(edhec[,1], method = "vector")
+x <- checkData(edhec[, 1], method = "vector")
 class(x)
 head(x)
 

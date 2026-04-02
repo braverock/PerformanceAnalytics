@@ -38,9 +38,9 @@ For simple returns (geometric=FALSE), the formula is:
 \examples{
 
 data(managers)
-round(Return.annualized(managers[,1,drop=FALSE]),4)
-round(Return.annualized(managers[,1:8]),4)
-round(Return.annualized(managers[,1:8],geometric=FALSE),4)
+round(Return.annualized(managers[, 1, drop = FALSE]), 4)
+round(Return.annualized(managers[, 1:8]), 4)
+round(Return.annualized(managers[, 1:8], geometric = FALSE), 4)
 
 }
 \references{

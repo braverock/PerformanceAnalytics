@@ -67,8 +67,8 @@ have used the full series, and this is provided as an option by the
 \examples{
 
 data(edhec)
-UpsidePotentialRatio(edhec[, 6], MAR=.05/12) #5 percent/yr MAR
-UpsidePotentialRatio(edhec[, 1:6], MAR=0)
+UpsidePotentialRatio(edhec[, 6], MAR = .05 / 12) # 5 percent/yr MAR
+UpsidePotentialRatio(edhec[, 1:6], MAR = 0)
 }
 \references{
 Sortino, F. and Price, L. Performance Measurement in a Downside

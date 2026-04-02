@@ -13,26 +13,63 @@ Level.calculate(R, seedValue = NULL, initial = TRUE)
 
 \item{initial}{(default TRUE) a TRUE/FALSE flag associated with 'seedValue', indicating if this value is at the begginning of the series (TRUE) or at the end of the series (FALSE)}
 }
+\value{
+An xts object containing the calculated price level or cumulative return series.
+}
 \description{
-This function calculates the time varying index level over 
-the entire period of available data.  It will work with arithmetic or log returns, using attribute information from an xts object.
-If the first value in the left-most column is NA, it will be populated with the seedValue.  
-However, if the first value in the left-most column is not NA, the previous date will be estimated
-based on the periodicity of the time series, and be populated with the seedValue.
-This is so that information is not lost in case levels are converted back to returns 
-(where the first value would result in an NA).  Note: previous date does not consider weekdays or
-holidays, it will simply calculate the previous calendar day.  
-If the user has a preference, they should ensure that the first row has the appropriate time index with an NA value.  
-If users run Return.calculate() from this package, this will be a non-issue.
+This function calculates the time varying index level over the entire period
+of available data. It works with arithmetic, log, and difference returns,
+natively reading the \code{coredata_content} attribute of the \code{xts} object to
+determine the correct calculation logic.
 }
 \details{
-Product of all the individual period returns
+The function relies on the \code{coredata_content} attribute, which is automatically
+set by \code{\link{Return.calculate}}. If this attribute is missing, it gracefully
+defaults to \code{"discreteReturn"}.
 
-For arithmetic returns:
+If the first value in the left-most column is \code{NA}, it will be populated with
+the \code{seedValue} (which defaults to \code{1}). However, if the first value is
+not \code{NA}, the previous date will be estimated based on the periodicity of the
+time series and populated with the \code{seedValue}.
+
+This is designed so that information is not lost if levels are converted back to returns
+(where the first value results in an \code{NA}). Note: the estimated previous date does
+not consider weekdays or holidays; it simply calculates the previous calendar day.
+If users run \code{Return.calculate()} from this package, this will be a non-issue as it
+prepends the \code{NA} row automatically.
+
+For arithmetic (\code{discreteReturn}) returns:
 \deqn{(1+r_{1})(1+r_{2})(1+r_{3})\ldots(1+r_{n})=cumprod(1+R)}{cumprod(1+R)}
 
-For log returns:
+For \code{logReturn} returns:
 \deqn{exp(r_{1}+r_{2}+r_{3} + \ldots + r_{n})=exp(cumsum(R))}{exp(cumsum(R))}
+
+For \code{difference} returns:
+\deqn{r_{1}+r_{2}+r_{3} + \ldots + r_{n}=cumsum(R)}{cumsum(R)}#'
+}
+\examples{
+
+# Using a price series
+data(prices)
+
+# Calculate discrete returns
+ret <- Return.calculate(as.xts(prices), method = "discrete")
+
+# Recover the price level
+# The first row of returns is NA, which will be populated with seedValue (1 by default)
+prices_recovered <- Level.calculate(ret, seedValue = 100)
+head(prices_recovered)
+
+# Compare to Return.cumulative
+data(managers)
+mgr_eq <- managers[, 1:6] # equities only
+xtsAttributes(mgr_eq) <- list(coredata_content = "discreteReturn")
+mgr_level <- Level.calculate(mgr_eq)
+
+# Here they are equal
+Return.cumulative(mgr_eq)
+tail(mgr_level - 1, 1)
+
 }
 \seealso{
 \code{\link{Return.calculate}}
