@@ -15,66 +15,90 @@
 #' @param Rf risk free rate, in same period as your returns
 #' @param \dots any other pass thru parameters
 #' @param method (Optional): string representing linear regression model, "LS" for Least Squares
-#'                    and "Rob" for robust      
-#' @param family (Optional): 
-#'         If method == "Rob": 
+#'                    and "Rob" for robust
+#' @param family (Optional):
+#'         If method == "Rob":
 #'           This is a string specifying the name of the family of loss function
 #'           to be used (current valid options are "bisquare", "opt" and "mopt").
-#'           Incomplete entries will be matched to the current valid options. 
+#'           Incomplete entries will be matched to the current valid options.
 #'           Defaults to "mopt".
 #'         Else: the parameter is ignored
+#' @param series (Optional): Boolean to return a time series of Jensen's Alpha instead of a single value. Defaults to FALSE.
 #' @author Matthieu Lestel, Dhairya Jain
-#' @references Carl Bacon, \emph{Practical portfolio performance measurement 
+#' @references Carl Bacon, \emph{Practical portfolio performance measurement
 #' and attribution}, second edition 2008 p.72
-#' 
-###keywords ts multivariate distribution models
+#'
+### keywords ts multivariate distribution models
 #' @examples
 #'
 #' data(portfolio_bacon)
-#' print(SFM.jensenAlpha(portfolio_bacon[,1], portfolio_bacon[,2])) #expected -0.014
+#' print(SFM.jensenAlpha(portfolio_bacon[, 1], portfolio_bacon[, 2])) # expected -0.014
 #'
 #' data(managers)
-#' print(SFM.jensenAlpha(managers['1996',1], managers['1996',8]))
-#' print(SFM.jensenAlpha(managers['1996',1:5], managers['1996',8]))
+#' print(SFM.jensenAlpha(managers["1996", 1], managers["1996", 8]))
+#' print(SFM.jensenAlpha(managers["1996", 1:5], managers["1996", 8]))
 #'
 #' @rdname CAPM.jensenAlpha
 #' @export CAPM.jensenAlpha SFM.jensenAlpha
 
 CAPM.jensenAlpha <- SFM.jensenAlpha <-
-function (Ra, Rb, Rf = 0, ..., method="LS", family="mopt")
-{
-    calcul = FALSE
-    Ra = checkData(Ra, method="matrix")
-    Rb = checkData(Rb, method="matrix")
-
-    if (ncol(Ra)==1 || is.null(Ra) || is.vector(Ra)) {
-        period = Frequency(Ra)
-        Rp = (prod(1 + Ra))^(period / length(Ra)) - 1
-        Rpb = (prod(1 + Rb))^(period / length(Rb)) - 1
-        for (i in (1:length(Ra))){
-            if (!is.na(Ra[i])) {
-                calcul = TRUE
-            }
-        } 
-    
-        if (calcul) {
-            result = Rp - Rf - CAPM.beta(Ra,Rb,Rf,...,method=method,family=family) * (Rpb - Rf) 
-        }    
-        else {
-            result = NA
+  function(Ra, Rb, Rf = 0, ..., method = "LS", family = "mopt", series = FALSE) {
+    calcul <- FALSE
+    Ra <- checkData(Ra)
+    Rb <- checkData(Rb)
+    if (ncol(Ra) == 1 || is.null(Ra) || is.vector(Ra)) {
+      for (i in (1:length(Ra))) {
+        if (!is.na(Ra[i])) {
+          calcul <- TRUE
+          break
         }
-        return(result)
+      }
+
+      if (calcul) {
+        beta <- CAPM.beta(Ra, Rb, Rf, ..., method = method, family = family)
+        if (series) {
+          # Return time series of alpha
+          xRa <- Return.excess(Ra, Rf)
+          xRb <- Return.excess(Rb, Rf)
+          result <- xRa - beta * xRb
+          colnames(result) <- paste0(colnames(Ra), ".Alpha")
+        } else {
+          period <- Frequency(Ra)
+          # Annualize returns
+          Rp <- (prod(1 + Ra, na.rm = TRUE))^(period / sum(!is.na(Ra))) - 1
+          Rpb <- (prod(1 + Rb, na.rm = TRUE))^(period / sum(!is.na(Rb))) - 1
+
+          # Annualize Rf to matching periodicity
+          if (length(Rf) > 1) {
+            Rpf <- (prod(1 + Rf, na.rm = TRUE))^(period / sum(!is.na(Rf))) - 1
+          } else {
+            Rpf <- (1 + Rf)^period - 1
+          }
+
+          result <- Rp - Rpf - beta * (Rpb - Rpf)
+        }
+      } else {
+        result <- NA
+      }
+      return(result)
+    } else {
+      Ra <- checkData(Ra)
+      result <- sapply(1:ncol(Ra), function(i) {
+        CAPM.jensenAlpha(Ra[, i, drop = FALSE],
+          Rb = Rb, Rf = Rf,
+          method = method, family = family, series = series, ...
+        )
+      })
+      if (series) {
+        result <- do.call(merge, result)
+      } else {
+        result <- matrix(result, nrow = 1)
+        colnames(result) <- colnames(Ra)
+        rownames(result) <- paste("Jensen's Alpha (Risk free = ", round(mean(Rf) * 12 * 100, 2), "%)", sep = "")
+      }
+      return(result)
     }
-    else {
-        Ra = checkData(Ra)
-        result = apply(Ra, MARGIN = 2, CAPM.jensenAlpha, Rb = Rb, Rf = Rf,
-                       method = method, family = family, ...)
-        result<-t(result)
-        colnames(result) = colnames(Ra)
-        rownames(result) = paste("Jensen's Alpha (Risk free = ",Rf,")", sep="")
-        return(result)
-    }
-}
+  }
 
 
 ###############################################################################
