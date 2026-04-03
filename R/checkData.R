@@ -24,7 +24,9 @@
 #' class(x)
 #' head(x)
 #' tail(x)
-#' # Note that passing in a single column loses the row and column names
+#' # Note that for some data types (like data.frame or matrix), passing 
+#' # in a single column without drop=FALSE loses the row and column names
+#' # although xts objects (like edhec) preserve them by default.
 #' x <- checkData(edhec[, 1])
 #' class(x)
 #' head(x)
