@@ -400,7 +400,7 @@ In some cases, it is important to keep data pairs straight.  For example, in fun
 
 ## Create good tests
 
-Please write tests using the [`tinytest`](https://cran.r-project.org/web/packages/tinytest/index.html) package, which is a lightweight, no-dependency, full-featured package for unit testing.  More tests are always welcome!
+Please write tests using the [`testthat`](https://testthat.r-lib.org/) package, which is a lightweight, no-dependency, full-featured framework for unit testing.  More tests are always welcome!
 
     <!-- Can we contribute unit tests? -->
     <!-- Are unit tests required? -->

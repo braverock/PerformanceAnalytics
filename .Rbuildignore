@@ -12,3 +12,5 @@ cran-comments.md
 PerformanceAnalytics-Ex.Rout.save
 textplotPresentation-CRUG-2011.Rnw
 ^codecov\.yml$
+^\.gemini$
+^tests/testthat/_snaps$
