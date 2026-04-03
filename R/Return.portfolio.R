@@ -322,7 +322,7 @@ Return.portfolio.arithmetic <- function(R,
   # eop = end of period
   # Initialize objects
   # portfolio returns are only accounted for after the first rebalancing date
-  R.idx <- index(R[paste0(as.Date(index(weights[1, ])) + 1, "/")])
+  R.idx <- index(R)
   bop_weights <- matrix(0, NROW(R.idx), NCOL(R))
   colnames(bop_weights) <- colnames(R)
   eop_weights <- period_contrib <- bop_weights
@@ -412,7 +412,7 @@ Return.portfolio.geometric <- function(R,
   # eop = end of period
   # Initialize objects
   # portfolio returns are only accounted for after the first rebalancing date
-  R.idx <- index(R[paste0(as.Date(index(weights[1, ])) + 1, "/")])
+  R.idx <- index(R)
   bop_value <- matrix(0, NROW(R.idx), NCOL(R))
   colnames(bop_value) <- colnames(R)
   eop_value <- bop_value

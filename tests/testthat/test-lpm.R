@@ -40,5 +40,18 @@ test_that("lpm gracefully handles severe edge cases and bounds (fixes #60)", {
   expect_error(lpm(R, n = NA, threshold = 0.0), "n must be a valid numeric value.")
 
   # 3. Invalid threshold (e.g. NA)
-  expect_error(lpm(R, threshold = NA), "threshold must be a valid numeric value.")
+  expect_error(lpm(R, threshold=NA), "threshold must be a valid numeric value.")
+  })
+
+  test_that("lpm SE computation works", {
+  skip_on_cran()
+  if (!requireNamespace("RPESE", quietly = TRUE)) skip("RPESE not installed")
+  
+  data(edhec)
+  R <- edhec[1:50, 1, drop=FALSE]
+  
+  # Standard errors computation
+  expect_error(res <- lpm(R, threshold=0.0, SE=TRUE), NA)
+  expect_equal(nrow(res), 3) # LPM + IFiid + IFcor
+  expect_true("IFiid" %in% rownames(res))
 })
