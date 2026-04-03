@@ -17,7 +17,7 @@
 #' bottomright, bottom, bottomleft, left, topleft, top, topright, right, or
 #' center
 #' @param colorset color palette to use, set by default to rational choices
-#' @param cex.legend sets the legend text size, such as in
+#' @param cex.legend (deprecated) sets the legend text size, such as in
 #' \code{\link{chart.TimeSeries}}
 #' @param cex.main sets the title text size, such as in
 #' \code{\link{chart.TimeSeries}}

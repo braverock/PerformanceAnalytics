@@ -55,7 +55,7 @@
 #' object, defaults to "\%Y-\%m-\%d"
 #' @param cex.axis The magnification to be used for axis annotation relative to
 #' the current setting of 'cex', same as in \code{\link{plot}}.
-#' @param cex.legend The magnification to be used for sizing the legend
+#' @param cex.legend (deprecated) The magnification to be used for sizing the legend
 #' relative to the current setting of 'cex'.
 #' @param cex.labels The magnification to be used for event line labels
 #' relative to the current setting of 'cex'.
@@ -68,7 +68,7 @@
 #' @param minor.ticks Should minor tickmarks be drawn, default TRUE
 #' @param xaxis.labels Allows for non-date labeling of date axes, default is
 #' NULL
-#' @param space default 0
+#' @param space (deprecated) default 0
 #' @param plot.engine choose the plot engine you wish to use:
 #' ggplot2, plotly,dygraph,googlevis and default
 #'
