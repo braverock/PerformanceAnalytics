@@ -6,7 +6,15 @@
 \title{Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
 measure}
 \usage{
-CDD(R, weights = NULL, geometric = TRUE, invert = TRUE, p = 0.95, ...)
+CDD(
+  R,
+  weights = NULL,
+  geometric = TRUE,
+  invert = TRUE,
+  p = 0.95,
+  method = c("discrete", "average", "quantile"),
+  ...
+)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -22,11 +30,21 @@ Details.}
 
 \item{p}{confidence level for calculation, default p=0.95}
 
+\item{method}{one of "discrete", "average", or "quantile". See Details.}
+
 \item{\dots}{any other passthru parameters}
 }
 \description{
-For some confidence level \eqn{p}, the conditional drawdown is the the mean
+For some confidence level \eqn{p}, the conditional drawdown is the mean
 of the worst \eqn{p\%} drawdowns.
+}
+\details{
+The \code{method} parameter allows for three mathematical variations of CDD/CDaR:
+\itemize{
+  \item{\code{discrete}}{ (Default) Computes the Expected Shortfall of the discrete, isolated peak-to-trough drawdown sequences. This isolates major discrete events without penalizing the prolonged duration of shallow drawdowns.}
+  \item{\code{average}}{ Computes the mean of the continuous sample path of drawdowns that exceed the threshold. This strictly adheres to the Chekhlov (2003) continuous definition but can be heavily autocorrelated, mathematically overweighting long, shallow drawdowns over sharp, brief crashes.}
+  \item{\code{quantile}}{ (Deprecated) A legacy implementation that merely computed the VaR (quantile) of the discrete drawdowns, rather than the Expected Shortfall (mean).}
+}
 }
 \examples{
 

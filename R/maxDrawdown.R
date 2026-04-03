@@ -71,9 +71,16 @@ maxDrawdown <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, ...)
 #' Calculate Uryasev's proposed Conditional Drawdown at Risk (CDD or CDaR)
 #' measure
 #'
-#' For some confidence level \eqn{p}, the conditional drawdown is the the mean
+#' For some confidence level \eqn{p}, the conditional drawdown is the mean
 #' of the worst \eqn{p\%} drawdowns.
 #'
+#' @details
+#' The \code{method} parameter allows for three mathematical variations of CDD/CDaR:
+#' \itemize{
+#'   \item{\code{discrete}}{ (Default) Computes the Expected Shortfall of the discrete, isolated peak-to-trough drawdown sequences. This isolates major discrete events without penalizing the prolonged duration of shallow drawdowns.}
+#'   \item{\code{average}}{ Computes the mean of the continuous sample path of drawdowns that exceed the threshold. This strictly adheres to the Chekhlov (2003) continuous definition but can be heavily autocorrelated, mathematically overweighting long, shallow drawdowns over sharp, brief crashes.}
+#'   \item{\code{quantile}}{ (Deprecated) A legacy implementation that merely computed the VaR (quantile) of the discrete drawdowns, rather than the Expected Shortfall (mean).}
+#' }
 #'
 #' @aliases CDD CDaR
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -84,6 +91,7 @@ maxDrawdown <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, ...)
 #' @param invert TRUE/FALSE whether to invert the drawdown measure.  see
 #' Details.
 #' @param p confidence level for calculation, default p=0.95
+#' @param method one of "discrete", "average", or "quantile". See Details.
 #' @param \dots any other passthru parameters
 #' @author Brian G. Peterson
 #' @seealso \code{\link{ES}} \code{\link{maxDrawdown}}
@@ -98,12 +106,29 @@ maxDrawdown <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, ...)
 #' t(round(CDD(edhec), 4))
 #'
 #' @export
-CDD <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, p = .95, ...) {
-  p <- .setalphaprob(p)
+CDD <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, p = .95, method = c("discrete", "average", "quantile"), ...) {
+  method <- match.arg(method)
+  if (method == "quantile") {
+    warning("The 'quantile' method for CDD has been deprecated. Please use 'discrete' or 'average' for a more accurate Conditional Drawdown at Risk.")
+  }
+
+  p_val <- .setalphaprob(p)
   if (is.vector(R) || ncol(R) == 1) {
     R <- na.omit(R)
-    drawdowns <- sortDrawdowns(findDrawdowns(R))
-    result <- quantile(drawdowns$return, p)
+
+    if (method == "quantile") {
+      drawdowns <- sortDrawdowns(findDrawdowns(R))
+      result <- quantile(drawdowns$return, p_val, na.rm = TRUE)
+    } else if (method == "discrete") {
+      drawdowns <- sortDrawdowns(findDrawdowns(R))
+      q_val <- quantile(drawdowns$return, p_val, na.rm = TRUE)
+      result <- mean(drawdowns$return[drawdowns$return <= q_val], na.rm = TRUE)
+    } else if (method == "average") {
+      dd <- coredata(Drawdowns(R, geometric = geometric))
+      q_val <- quantile(dd, p_val, type = 8, na.rm = TRUE)
+      result <- mean(dd[dd <= q_val], na.rm = TRUE)
+    }
+
     if (invert) result <- -result
     return(result)
   } else {
@@ -111,7 +136,7 @@ CDD <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, p = .95, ...
     if (is.null(weights)) {
       result <- matrix(nrow = 1, ncol = ncol(R))
       for (i in 1:ncol(R)) {
-        result[i] <- CDD(R[, i, drop = FALSE], p = p, geometric = geometric, invert = invert, ... = ...)
+        result[i] <- CDD(R[, i, drop = FALSE], p = p, geometric = geometric, invert = invert, method = method, ... = ...)
       }
       dim(result) <- c(1, NCOL(R))
       colnames(result) <- colnames(R)
@@ -119,7 +144,7 @@ CDD <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, p = .95, ...
     } else {
       # we have weights, do the portfolio calc
       portret <- Return.portfolio(R, weights = weights, geometric = geometric)
-      result <- CDD(portret, p = p, geometric = geometric, invert = invert, ... = ...)
+      result <- CDD(portret, p = p, geometric = geometric, invert = invert, method = method, ... = ...)
     }
     return(result)
   }
