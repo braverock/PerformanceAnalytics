@@ -8,7 +8,8 @@ UpDownRatios(
   Ra,
   Rb,
   method = c("Capture", "Number", "Percent"),
-  side = c("Up", "Down")
+  side = c("Up", "Down"),
+  geometric = TRUE
 )
 }
 \arguments{
@@ -46,13 +47,13 @@ the prior two metrics, in both cases a higher value is better.
 \examples{
 
 data(managers)
-UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE])
-UpDownRatios(managers[,1:6, drop=FALSE], managers[,8, drop=FALSE])
-UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], method="Capture")
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE])
+UpDownRatios(managers[, 1:6, drop = FALSE], managers[, 8, drop = FALSE])
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], method = "Capture")
 # Up Capture:
-UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Up", method="Capture")
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], side = "Up", method = "Capture")
 # Down Capture:
-UpDownRatios(managers[,1, drop=FALSE], managers[,8, drop=FALSE], side="Down", method="Capture")
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], side = "Down", method = "Capture")
 
 }
 \references{

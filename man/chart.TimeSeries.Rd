@@ -264,7 +264,7 @@ center.}
 \item{cex.axis}{The magnification to be used for axis annotation relative to
 the current setting of 'cex', same as in \code{\link{plot}}.}
 
-\item{cex.legend}{The magnification to be used for sizing the legend
+\item{cex.legend}{(deprecated) The magnification to be used for sizing the legend
 relative to the current setting of 'cex'.}
 
 \item{cex.lab}{The magnification to be used for x- and y-axis labels
@@ -293,7 +293,7 @@ ggplot2, plotly,dygraph,googlevis and default}
 
 \item{yaxis.pct}{if TRUE, scales the y axis labels by 100}
 
-\item{space}{default 0}
+\item{space}{(deprecated) default 0}
 }
 \description{
 Draws a line chart and labels the x-axis with the appropriate dates.  This

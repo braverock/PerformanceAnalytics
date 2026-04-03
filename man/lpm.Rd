@@ -33,13 +33,13 @@ lpm(
 Caclulate a Lower Partial Moment around the mean or a specified threshold.
 }
 \details{
-Lower partial moments capture negative deviation from a reference point.  
+Lower partial moments capture negative deviation from a reference point.
 That reference point may be the mean, or some specified threshold that
 has other meaning for the investor.
 }
 \references{
-Huffman S.P. & Moll C.R., 
-"The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures", 
+Huffman S.P. & Moll C.R.,
+"The impact of Asymmetry on Expected Stock Returns: An Investigation of Alternative Risk Measures",
 Algorithmic Finance 1, 2011 p. 79-93
 }
 \author{

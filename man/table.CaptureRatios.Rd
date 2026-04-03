@@ -5,9 +5,9 @@
 \alias{table.UpDownRatios}
 \title{Calculate and display a table of capture ratio and related statistics}
 \usage{
-table.CaptureRatios(Ra, Rb, digits = 4)
+table.CaptureRatios(Ra, Rb, digits = 4, geometric = TRUE)
 
-table.UpDownRatios(Ra, Rb, digits = 4)
+table.UpDownRatios(Ra, Rb, digits = 4, geometric = TRUE)
 }
 \arguments{
 \item{Ra}{a vector of returns to test, e.g., the asset to be examined}
@@ -16,6 +16,9 @@ table.UpDownRatios(Ra, Rb, digits = 4)
 asset against.}
 
 \item{digits}{number of digits to round results to for presentation}
+
+\item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
+default TRUE}
 }
 \description{
 Creates a table of capture ratios and similar metrics for a set of returns
@@ -31,16 +34,18 @@ and the percentage ratio.
 \examples{
 
 data(managers)
-table.CaptureRatios(managers[,1:6], managers[,7,drop=FALSE])
-table.UpDownRatios(managers[,1:6], managers[,7,drop=FALSE])
+table.CaptureRatios(managers[, 1:6], managers[, 7, drop = FALSE])
+table.UpDownRatios(managers[, 1:6], managers[, 7, drop = FALSE])
 
-result = t(table.UpDownRatios(managers[,1:6], managers[,7,drop=FALSE])) 
-colnames(result)=colnames(managers[,1:6])
-textplot(result, rmar = 0.8, cmar = 1.5,  max.cex=.9, 
-         halign = "center", valign = "top", row.valign="center", 
-         wrap.rownames=15, wrap.colnames=10, mar = c(0,0,3,0)+0.1)
-         
-title(main="Capture Ratios for EDHEC LS EQ")
+result <- t(table.UpDownRatios(managers[, 1:6], managers[, 7, drop = FALSE]))
+colnames(result) <- colnames(managers[, 1:6])
+textplot(result,
+  rmar = 0.8, cmar = 1.5, max.cex = .9,
+  halign = "center", valign = "top", row.valign = "center",
+  wrap.rownames = 15, wrap.colnames = 10, mar = c(0, 0, 3, 0) + 0.1
+)
+
+title(main = "Capture Ratios for EDHEC LS EQ")
 
 }
 \seealso{

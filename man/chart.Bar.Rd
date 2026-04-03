@@ -23,7 +23,7 @@ center}
 
 \item{main}{sets the title text, such as in \code{\link{chart.TimeSeries}}}
 
-\item{cex.legend}{sets the legend text size, such as in
+\item{cex.legend}{(deprecated) sets the legend text size, such as in
 \code{\link{chart.TimeSeries}}}
 
 \item{cex.main}{sets the title text size, such as in
