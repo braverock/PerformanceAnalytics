@@ -278,10 +278,14 @@ Return.portfolio <- Return.rebalancing <- function(R,
     stop(paste("last date in series", as.Date(last(index(R))), "occurs before beginning of first rebalancing period", as.Date(first(index(weights))) + 1))
   }
 
-  # Subset the R object if the first rebalance date is after the first date
-  # in the return series
+  # If the first rebalance date is after the first date in the return series,
+  # prepend an equal-weight vector stamped at start_date to evaluate the full series natively
+  # rather than silently dropping the preceding returns.
   if (as.Date(index(weights[1, ])) > as.Date(first(index(R)))) {
-    R <- R[paste0(as.Date(index(weights[1, ])) + 1, "/")]
+    warning("First weights period is after the start of the data series. Setting weights for the preceding periods to equal weight.")
+    eq_weights <- xts(matrix(rep(1 / NCOL(R), NCOL(R)), nrow = 1), order.by = as.Date(start_date))
+    colnames(eq_weights) <- colnames(R)
+    weights <- rbind(eq_weights, weights)
   }
 
 
