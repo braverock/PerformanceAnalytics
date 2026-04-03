@@ -77,20 +77,27 @@ binomial pricing model from fOptions.  The second and third methods are not
 implemented here.
 
 The fourth method, "interp", creates a linear interpolation of the cdf of
-returns, calculates Omega as a vector, and finally interpolates a function
-for Omega as a function of L.  This method requires library \code{Hmisc},
-which can be found on CRAN.
+returns using \code{\link[Hmisc]{Ecdf}}, and evaluates Omega via mathematically
+rigorous trapezoidal integration over the area of that empirical CDF. The "interp"
+method effectively assumes the continuous CDF is linearly interpolated between
+empirical data points, returning a highly accurate continuous curve, whereas the
+"simple" method evaluates the exact empirical discrete Expected Values (which acts
+as a rectangle integration over the step-function CDF).
+
+For both "simple" and "interp" methods, if the threshold \eqn{L} is strictly outside the
+observed domain of returns (e.g. all returns are strictly above or below \eqn{L}),
+the ratio will mathematically evaluate to \code{Inf} or \code{0} respectively.
 }
 \examples{
 
-    data(edhec)
-    Omega(edhec)
-    
-    # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
-    if(requireNamespace("Hmisc", quietly = TRUE)){
-      Omega(edhec[,13],method="interp",output="point")
-      Omega(edhec[,13],method="interp",output="full")
-    } # end  spurious CRAN check
+data(edhec)
+Omega(edhec)
+
+# CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+if (requireNamespace("Hmisc", quietly = TRUE)) {
+  Omega(edhec[, 13], method = "interp", output = "point")
+  Omega(edhec[, 13], method = "interp", output = "full")
+} # end  spurious CRAN check
 }
 \references{
 Keating, J. and Shadwick, W.F. The Omega Function. working
