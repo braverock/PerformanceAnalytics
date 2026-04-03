@@ -5,7 +5,8 @@ chart.TimeSeries.googlevis <-
   function(R,
            xlab, ylab,
            main,
-           type = "l") {
+           type = "l",
+           ylog = FALSE) {
     y <- data.frame(date = index(R), coredata(R))
 
     options_list <- list(
@@ -14,6 +15,10 @@ chart.TimeSeries.googlevis <-
       yvar = ylab,
       title = main
     )
+
+    if (ylog) {
+      options_list$vAxis <- "{logScale:true}"
+    }
 
     if (type == "h" || type == "bar") {
       plot <- googleVis::gvisColumnChart(y, options = options_list)

@@ -139,7 +139,7 @@ chart.TimeSeries.builtin(
   ...
 )
 
-chart.TimeSeries.dygraph(R, type = "l")
+chart.TimeSeries.dygraph(R, type = "l", ylog = FALSE)
 
 chart.TimeSeries.ggplot2(
   R,
@@ -182,9 +182,9 @@ chart.TimeSeries.ggplot2(
   yaxis.pct
 )
 
-chart.TimeSeries.googlevis(R, xlab, ylab, main, type = "l")
+chart.TimeSeries.googlevis(R, xlab, ylab, main, type = "l", ylog = FALSE)
 
-chart.TimeSeries.plotly(R, main, type = "l", ...)
+chart.TimeSeries.plotly(R, main, type = "l", ylog = FALSE, ...)
 
 charts.TimeSeries(R, space = 0, main = "Returns", ...)
 }

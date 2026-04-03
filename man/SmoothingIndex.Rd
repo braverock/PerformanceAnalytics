@@ -47,8 +47,9 @@ standard moving-average time series models, using:
 include.mean=FALSE)}
 
 \code{include.mean}: Getmansky, et al. (2004) p 555 "By applying the above
-procedure to observed de-meaned returns...", so we set that parameter to
-'FALSE'.
+procedure to observed de-meaned returns...". To comply with this, we explicitly
+subtract the mean from the returns prior to the \code{arima} fit and set
+\code{include.mean=FALSE} to avoid intercept absorption into the MA terms.
 
 \code{transform.pars}: ibid, "we impose the additional restriction that the
 estimated MA(k) process be invertible," so we set the parameter to 'TRUE'.
@@ -98,8 +99,8 @@ input.
 
 data(managers)
 data(edhec)
-SmoothingIndex(managers[,1,drop=FALSE])
-SmoothingIndex(managers[,1:8])
+SmoothingIndex(managers[, 1, drop = FALSE])
+SmoothingIndex(managers[, 1:8])
 SmoothingIndex(edhec)
 
 }

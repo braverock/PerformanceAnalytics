@@ -26,6 +26,7 @@ chart.RiskReturnScatter(
   cex.axis = 0.8,
   cex.main = 1,
   cex.lab = 1,
+  na.fill = FALSE,
   ...
 )
 }
@@ -105,8 +106,8 @@ Code inspired by a chart on dead website zoonek2.free.fr /UNIX/48_R/03.html
 \examples{
 
 data(edhec)
-chart.RiskReturnScatter(edhec, Rf = .04/12)
-chart.RiskReturnScatter(edhec, Rf = .04/12, add.boxplots = TRUE)
+chart.RiskReturnScatter(edhec, Rf = .04 / 12)
+chart.RiskReturnScatter(edhec, Rf = .04 / 12, add.boxplots = TRUE)
 
 }
 \author{

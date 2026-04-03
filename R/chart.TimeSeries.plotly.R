@@ -5,6 +5,7 @@ chart.TimeSeries.plotly <-
   function(R,
            main,
            type = "l",
+           ylog = FALSE,
            ...) {
     R <- checkData(R, method = "xts")
     columns <- ncol(R)
@@ -19,6 +20,10 @@ chart.TimeSeries.plotly <-
     pl_type <- if (type == "h" || type == "bar") "bar" else "scatter"
 
     plot <- plotly::layout(plotly::plot_ly(R, type = pl_type, mode = pl_mode), title = main)
+
+    if (ylog) {
+      plot <- plotly::layout(plot, yaxis = list(type = "log"))
+    }
 
 
     for (i in 1:columns) {

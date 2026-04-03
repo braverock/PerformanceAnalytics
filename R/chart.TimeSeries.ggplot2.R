@@ -74,6 +74,10 @@ chart.TimeSeries.ggplot2 <-
 
     p <- p + ggplot2::ggtitle(main)
 
+    if (ylog) {
+      p <- p + ggplot2::scale_y_continuous(trans = "log10")
+    }
+
     if (!is.null(date.format)) {
       if (inherits(date, "POSIXt")) {
         p <- p + ggplot2::scale_x_datetime(date_labels = date.format)

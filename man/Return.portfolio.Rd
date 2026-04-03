@@ -23,7 +23,8 @@ Return.portfolio(
 asset returns}
 
 \item{weights}{A time series or single-row matrix/vector containing asset
-weights, as decimal percentages, treated as beginning of period weights.
+weights, as decimal percentages. When passed as a time series, weights are
+treated as end-of-period targets that take effect at the start of the subsequent period.
 See Details below.}
 
 \item{wealth.index}{TRUE/FALSE whether to return a wealth index. Default FALSE}
@@ -41,12 +42,12 @@ that specifies the rebalancing dates.}
 
 \item{value}{The beginning of period total portfolio value. This is used for calculating position value.}
 
-\item{verbose}{If verbose is TRUE, return a list of intermediary calculations.}
+\item{verbose}{If verbose is TRUE, return a list of intermediary calculations.
+See Details below.}
 
 \item{\dots}{any other passthru parameters. Not currently used.}
 
-\item{full_investment}{if full_investment is TRUE, forces a rebalance when security returns become unavailable (NA), excluding such securities and proportionately reallocating their weights to the remaining assets. Default FALSE
-See Details below.}
+\item{full_investment}{if full_investment is TRUE, forces a target weight rebalance when security returns become unavailable (NA), excluding such securities and proportionately reallocating their weights to the remaining assets on the boundary day before the return is NA. Default FALSE}
 }
 \value{
 returns a time series of returns weighted by the \code{weights}

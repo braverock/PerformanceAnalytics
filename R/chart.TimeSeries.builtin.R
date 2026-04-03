@@ -83,12 +83,6 @@ chart.TimeSeries.builtin <-
     rownames <- as.Date(time(y))
     rownames <- format(strptime(rownames, format = date.format.in), date.format)
 
-    # If the Y-axis is ln
-    logaxis <- ""
-    if (ylog) {
-      logaxis <- "y"
-    }
-
     if (yaxis.pct) {
       y <- y * 100
     }
@@ -124,6 +118,7 @@ chart.TimeSeries.builtin <-
       legend.loc = NULL,
       type = type,
       format.labels = date.format,
+      log = ylog,
       ...
     )
 
