@@ -1,12 +1,15 @@
+even <- function(x) x %% 2 == 0
 
-even <- function (x) x%%2==0
-
-odd  <- function (x) x%%2==1
+odd <- function(x) x %% 2 == 1
 
 sd.xts <- xts:::sd.xts
 
+if (getRversion() >= "2.15.1") {
+  utils::globalVariables(c("returns", "security"))
+}
+
 #' @importFrom methods hasArg
-#' @importFrom utils head packageDescription tail
+#' @importFrom utils globalVariables head packageDescription tail
 #' @importFrom stats Box.test acf approxfun arima coef coefficients cor cor.test
 #'             cov dcauchy density dlnorm dnorm fitted frequency lag lm loess.smooth
 #'             median na.omit pacf pchisq pnorm ppoints predict qchisq qnorm

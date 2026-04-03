@@ -22,6 +22,9 @@ asset returns}
 return}
 
 \item{side}{"Up" or "Down" market statistics}
+
+\item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
+default TRUE}
 }
 \description{
 Calculate metrics on how the asset in R performed in up and down markets,
@@ -51,9 +54,13 @@ UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE])
 UpDownRatios(managers[, 1:6, drop = FALSE], managers[, 8, drop = FALSE])
 UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], method = "Capture")
 # Up Capture:
-UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], side = "Up", method = "Capture")
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE],
+  side = "Up", method = "Capture"
+)
 # Down Capture:
-UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE], side = "Down", method = "Capture")
+UpDownRatios(managers[, 1, drop = FALSE], managers[, 8, drop = FALSE],
+  side = "Down", method = "Capture"
+)
 
 }
 \references{

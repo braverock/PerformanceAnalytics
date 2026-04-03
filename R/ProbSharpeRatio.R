@@ -32,12 +32,24 @@
 #'
 #' data(edhec)
 #' ProbSharpeRatio(edhec[, 1], refSR = 0.23)
-#' ProbSharpeRatio(refSR = 1 / 12^0.5, Rf = 0, p = 0.95, sr = 2 / 12^0.5, sk = -0.72, kr = 5.78, n = 59)
+#' ProbSharpeRatio(
+#'   refSR = 1 / 12^0.5, Rf = 0, p = 0.95, sr = 2 / 12^0.5,
+#'   sk = -0.72, kr = 5.78, n = 59
+#' )
 #'
 #' ### Higher moments are data intensive, kurtosis shouldn't be used for short timeseries
-#' ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE, ignore_kurtosis = FALSE)
-#' ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = FALSE, ignore_kurtosis = TRUE)
-#' ProbSharpeRatio(edhec[, 1:2], refSR = c(0.28, 0.24), ignore_skewness = TRUE, ignore_kurtosis = TRUE)
+#' ProbSharpeRatio(edhec[, 1:2],
+#'   refSR = c(0.28, 0.24),
+#'   ignore_skewness = FALSE, ignore_kurtosis = FALSE
+#' )
+#' ProbSharpeRatio(edhec[, 1:2],
+#'   refSR = c(0.28, 0.24),
+#'   ignore_skewness = FALSE, ignore_kurtosis = TRUE
+#' )
+#' ProbSharpeRatio(edhec[, 1:2],
+#'   refSR = c(0.28, 0.24),
+#'   ignore_skewness = TRUE, ignore_kurtosis = TRUE
+#' )
 #'
 #' ProbSharpeRatio(edhec[, 1:2],
 #'   refSR = 0.26, weights = c(0.5, 0.5),

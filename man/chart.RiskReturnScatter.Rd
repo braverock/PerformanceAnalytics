@@ -93,6 +93,8 @@ to the current setting of 'cex'.}
 \item{cex.lab}{The magnification to be used for x and y labels relative to
 the current setting of 'cex'.}
 
+\item{na.fill}{optional numeric value to replace NAs, e.g. 0.}
+
 \item{\dots}{any other passthru parameters to \code{plot}}
 }
 \description{

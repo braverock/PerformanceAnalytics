@@ -43,3 +43,5 @@ vignettes/*.pdf
 .gemini/
 .github/
 Rplots.pdf
+Rplots1.pdf
+*gemini*

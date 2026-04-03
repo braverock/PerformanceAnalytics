@@ -46,6 +46,7 @@
 #' to the current setting of 'cex'.
 #' @param cex.lab The magnification to be used for x and y labels relative to
 #' the current setting of 'cex'.
+#' @param na.fill optional numeric value to replace NAs, e.g. 0.
 #' @param \dots any other passthru parameters to \code{plot}
 #' @note Code inspired by a chart on dead website zoonek2.free.fr /UNIX/48_R/03.html
 #' @author Peter Carl
