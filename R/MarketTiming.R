@@ -68,10 +68,10 @@ MarketTiming <- function (Ra, Rb, Rf = 0, method = c("TM", "HM"), ...)
     mt <- function (xRa, xRb)
     {
       switch(method,
-             "HM" = { S = -xRb > 0 },
-             "TM" = { S = xRb }
+             "HM" = { reg2 = pmax(0, -xRb) },
+             "TM" = { reg2 = xRb^2 }
       )
-      R = merge(xRa, xRb, xRb*S)
+      R = merge(xRa, xRb, reg2)
       R.df = as.data.frame(R)
       model = lm(R.df[, 1] ~ 1 + ., data = R.df[, -1])
       return(coef(model))
