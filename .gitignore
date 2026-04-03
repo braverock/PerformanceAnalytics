@@ -42,6 +42,5 @@ vignettes/*.pdf
 # platform integration files
 .gemini/
 .github/
-Rplots.pdf
-Rplots1.pdf
+Rplots*.pdf
 *gemini*
