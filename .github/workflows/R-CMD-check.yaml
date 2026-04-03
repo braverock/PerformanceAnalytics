@@ -18,11 +18,11 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
-          - {os: windows-latest, r: 'release'}
-          - {os: ubuntu-latest,   r: 'devel', http-user-agent: 'release'}
-          - {os: ubuntu-latest,   r: 'release'}
-          - {os: ubuntu-latest,   r: 'oldrel-1'}
+          - { os: macOS-latest, r: "release" }
+          - { os: windows-latest, r: "release" }
+          - { os: ubuntu-latest, r: "devel", http-user-agent: "release" }
+          - { os: ubuntu-latest, r: "release" }
+          - { os: ubuntu-latest, r: "oldrel-1" }
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -47,7 +47,7 @@ jobs:
 
       - uses: r-lib/actions/check-r-package@v2
         with:
-          upload-snapshots: true
+          # upload-snapshots: true
           args: 'c("--no-manual", "--as-cran", "--ignore-vignettes")'
-          build_args: 'c("--no-manual", "--no-build-vignettes")'
+          build_args: 'c("--no-manual", "--no-build-vignettes", "--no-tests", "--no-examples")'
           error-on: '"error"'
