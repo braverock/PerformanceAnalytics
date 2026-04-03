@@ -43,7 +43,9 @@
 #' @export
 maxDrawdown <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, ...) { # @author Peter Carl
 
-  if (is.vector(R) || ncol(R) == 1) {
+  R <- checkData(R)
+
+  if (ncol(R) == 1) {
     R <- na.omit(R)
     drawdown <- Drawdowns(R, geometric = geometric)
     result <- min(drawdown)
@@ -51,9 +53,8 @@ maxDrawdown <- function(R, weights = NULL, geometric = TRUE, invert = TRUE, ...)
     return(result)
   } else {
     if (is.null(weights)) {
-      R <- checkData(R, method = "matrix")
-      result <- apply(R, 2, maxDrawdown, geometric = geometric, invert = invert, ... = ...)
-      dim(result) <- c(1, NCOL(R))
+      result <- sapply(1:ncol(R), function(i) maxDrawdown(R[, i, drop = FALSE], geometric = geometric, invert = invert, ... = ...))
+      dim(result) <- c(1, ncol(R))
       colnames(result) <- colnames(R)
       rownames(result) <- "Worst Drawdown"
       return(result)

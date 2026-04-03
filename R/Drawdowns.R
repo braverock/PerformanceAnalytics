@@ -1,42 +1,43 @@
 #' @export
 #' @rdname findDrawdowns
 Drawdowns <-
-function (R, geometric = TRUE, ...)
-{ # @author Peter Carl
+  function(R, geometric = TRUE, ...) { # @author Peter Carl
 
     # DESCRIPTION:
     # Calculate the drawdown levels in a timeseries
 
     # FUNCTION:
 
-    x = checkData(R)
+    x <- checkData(R)
 
     # Get dimensions and labels
-    columns = ncol(x)
-    columnnames = colnames(x)
+    columns <- ncol(x)
+    columnnames <- colnames(x)
 
     colDrawdown <- function(x, geometric) {
-        if(geometric)
-            Return.cumulative = cumprod(1+x)
-        else
-            Return.cumulative = 1+cumsum(x)
-        maxCumulativeReturn = cummax(c(1,Return.cumulative))[-1]
-        column.drawdown = Return.cumulative/maxCumulativeReturn - 1
+      if (geometric) {
+        Return.cumulative <- cumprod(1 + x)
+      } else {
+        Return.cumulative <- 1 + cumsum(x)
+      }
+      maxCumulativeReturn <- cummax(c(1, Return.cumulative))[-1]
+      column.drawdown <- Return.cumulative / maxCumulativeReturn - 1
     }
 
-    for(column in 1:columns) {
-	column.drawdown <- na.skip(x[,column],FUN=colDrawdown, geometric = geometric)
+    for (column in 1:columns) {
+      column.drawdown <- suppressWarnings(na.skip(x[, column], FUN = colDrawdown, geometric = geometric))
 
-        if(column == 1)
-            drawdown = column.drawdown
-        else
-            drawdown = merge(drawdown,column.drawdown)
+      if (column == 1) {
+        drawdown <- column.drawdown
+      } else {
+        drawdown <- merge(drawdown, column.drawdown)
+      }
     }
 
-    colnames(drawdown) = columnnames
-    drawdown = reclass(drawdown, x)
+    colnames(drawdown) <- columnnames
+    drawdown <- reclass(drawdown, x)
     return(drawdown)
-}
+  }
 
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis
