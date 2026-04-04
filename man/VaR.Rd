@@ -72,6 +72,21 @@ return series, default NULL, see Details}
 
 \item{nsim}{for \code{method="montecarlo"}, number of simulations, default 10000}
 }
+\value{
+VaR measures are evaluated and returned based on the \code{portfolio_method} and \code{SE} arguments:
+
+\itemize{
+  \item \strong{\code{portfolio_method = "single"}:} Returns a scalar or matrix (depending on the number of asset columns) of VaR estimates.
+  \item \strong{\code{portfolio_method = "component"}:} Returns a list with three components: the univariate portfolio VaR, the scalar contribution of each component to the portfolio VaR, and a percentage risk contribution.
+  \item \strong{\code{portfolio_method = "marginal"}:} Returns a matrix of marginal VaR calculations.
+}
+
+If \code{SE = TRUE}, the output will also include standard errors or confidence intervals:
+\itemize{
+  \item \strong{Standard Methods (\code{"modified"}, \code{"gaussian"}, \code{"historical"}):} Leverages the \code{RPESE} package to return standard error estimates, appending rows such as \code{se} or \code{IFiid} to the VaR matrix.
+  \item \strong{Extreme Value Theory (\code{method = "gpd"}):} Uses Profile Log-Likelihood ratio tests to calculate asymmetric confidence bounds, appending rows for the Lower Confidence Limit (\code{LCL}) and Upper Confidence Limit (\code{UCL}).
+}
+}
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
 using a variety of analytical methods.

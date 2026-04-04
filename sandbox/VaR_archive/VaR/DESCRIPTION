@@ -1,0 +1,9 @@
+Package: VaR
+Version: 0.2
+Title: Value at Risk estimation
+Author: Talgat Daniyarov <tdaniyar@kip.uni-heidelberg.de>
+Maintainer: Talgat Daniyarov <tdaniyar@kip.uni-heidelberg.de>
+Depends: R (>= 1.4.1)
+Description: A set of methods for calculation of Value at Risk (VaR)
+License: GPL (version 2 or higher)
+Packaged: Fri Feb 13 22:40:39 2004; hornik

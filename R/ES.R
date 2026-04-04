@@ -196,6 +196,20 @@
 #' reduce distortion caused by autocorrelation, see \code{\link{Return.Geltner}}
 #' for details.
 #'
+#' @return
+#' ES measures are evaluated and returned based on the \code{portfolio_method} and \code{SE} arguments:
+#'
+#' \itemize{
+#'   \item \strong{\code{portfolio_method = "single"}:} Returns a scalar or matrix (depending on the number of asset columns) of ES estimates.
+#'   \item \strong{\code{portfolio_method = "component"}:} Returns a list with three components: the univariate portfolio ES, the scalar contribution of each component to the portfolio ES, and a percentage risk contribution.
+#' }
+#'
+#' If \code{SE = TRUE}, the output will also include standard errors or confidence intervals:
+#' \itemize{
+#'   \item \strong{Standard Methods (\code{"modified"}, \code{"gaussian"}, \code{"historical"}):} Leverages the \code{RPESE} package to return standard error estimates, appending rows such as \code{se} or \code{IFiid} to the ES matrix.
+#'   \item \strong{Extreme Value Theory (\code{method = "gpd"}):} Uses Profile Log-Likelihood ratio tests to calculate asymmetric confidence bounds, appending rows for the Lower Confidence Limit (\code{LCL}) and Upper Confidence Limit (\code{UCL}).
+#' }
+#'
 #' @author Brian G. Peterson and Kris Boudt, Talgat Daniyarov
 #' @seealso \code{\link{VaR}} \cr \code{\link{SharpeRatio}} \cr
 #' \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
@@ -298,12 +312,7 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
       )
       SE.check <- FALSE
     }
-    if (!(method %in% c("historical"))) {
-      warning("To return SEs, \"method\" must be \"historical\".",
-        call. = FALSE
-      )
-      SE.check <- FALSE
-    }
+
     if (invert) {
       warning("To return SEs, \"invert\" must be FALSE.",
         call. = FALSE
@@ -355,7 +364,7 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
   }
 
   # SE Computation
-  if (SE) {
+  if (SE && !(method %in% c("gpd", "lognormal"))) {
     # Setting the control parameters
     if (is.null(SE.control)) {
       SE.control <- RPESE.control(estimator = "ES")
@@ -407,7 +416,7 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
             rES <- ES.historical(R = R, p = p)
           },
           gpd = {
-            rES <- ES.gpd(R = R, p = p, p.tr = p.tr, init = init, ...)
+            rES <- -ES.gpd(R = R, p = p, p.tr = p.tr, init = init, SE = SE, ...)
           },
           lognormal = {
             rES <- ES.lognormal(R = R, p = p)
@@ -433,7 +442,8 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
             rES <- as.matrix(ES.historical(R = R, p = p)) %*% weights
           }, # note that this is not tested for weighting the univariate calc by the weights,
           gpd = {
-            rES <- as.matrix(ES.gpd(R = R, p = p, p.tr = p.tr, init = init, ...)) %*% weights
+            rES <- -as.matrix(ES.gpd(R = R, p = p, p.tr = p.tr, init = init, SE = SE, ...))
+            rES <- sweep(rES, 2, weights, "*")
           },
           lognormal = {
             rES <- as.matrix(ES.lognormal(R = R, p = p)) %*% weights
@@ -446,25 +456,27 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
       # check for unreasonable results
       columns <- ncol(rES)
       for (column in 1:columns) {
-        tmp <- rES[, column]
+        tmp <- rES[1, column]
         if (!is.finite(tmp)) {
-          message(c("ES calculation returned non-finite result for column: ", column, " : ", rES[, column]))
+          message(c("ES calculation returned non-finite result for column: ", column, " : ", rES[1, column]))
           # set ES to NA, since risk is unreasonable
           rES[, column] <- NA
         } else if (eval(0 > tmp)) { # eval added previously to get around Sweave bitching
-          message(c("ES calculation produces unreliable result (inverse risk) for column: ", column, " : ", rES[, column]))
+          message(c("ES calculation produces unreliable result (inverse risk) for column: ", column, " : ", rES[1, column]))
           # set ES to NA, since inverse risk is unreasonable
           rES[, column] <- NA
         } else if (eval(1 < tmp)) { # eval added previously to get around Sweave bitching
-          message(c("ES calculation produces unreliable result (risk over 100%) for column: ", column, " : ", rES[, column]))
+          message(c("ES calculation produces unreliable result (risk over 100%) for column: ", column, " : ", rES[1, column]))
           # set ES to 1, since greater than 100% is unreasonable
           rES[, column] <- 1
         }
       } # end reasonableness checks
       if (invert) rES <- -rES
-      rownames(rES) <- "ES"
+      if (nrow(rES) == 1) {
+        rownames(rES) <- "ES"
+      }
 
-      if (SE) { # Check if SE computation
+      if (SE && !(method %in% c("gpd", "lognormal"))) { # Check if SE computation
         return(rbind(rES, ses))
       } else {
         return(rES)

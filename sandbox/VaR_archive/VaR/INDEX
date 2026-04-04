@@ -1,0 +1,13 @@
+DJIA                    Daily Closing Prices of Stocks in The Dow
+                        Jones 30 Industrial Index
+VaR.backtest            Backtest of VaR Estimation
+VaR.gpd                 Value at Risk Calculation from Log-Likelihood
+                        Fit of General Pareto Distribution (GPD)
+VaR.gpd.plots           Diagnostic Plots for VaR Calculation from GPD
+                        Approximation
+VaR.norm                Value at Risk Calculation in Lognormal
+                        Approximation
+VaR.norm.plots          Diagnostic Plots for VaR Calculation in
+                        Lognormal Approximation
+exchange.rates          EUR/USD, USD/JPY, USD/CHF and GPD/USD Exchange
+                        Rates

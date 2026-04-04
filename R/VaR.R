@@ -241,6 +241,20 @@
 #' their working paper titled \dQuote{Generalized Marginal Risk}. Hopefully
 #' their improved Marginal Risk measures may be included here in the future.
 #'
+#' @return
+#' VaR measures are evaluated and returned based on the \code{portfolio_method} and \code{SE} arguments:
+#'
+#' \itemize{
+#'   \item \strong{\code{portfolio_method = "single"}:} Returns a scalar or matrix (depending on the number of asset columns) of VaR estimates.
+#'   \item \strong{\code{portfolio_method = "component"}:} Returns a list with three components: the univariate portfolio VaR, the scalar contribution of each component to the portfolio VaR, and a percentage risk contribution.
+#'   \item \strong{\code{portfolio_method = "marginal"}:} Returns a matrix of marginal VaR calculations.
+#' }
+#'
+#' If \code{SE = TRUE}, the output will also include standard errors or confidence intervals:
+#' \itemize{
+#'   \item \strong{Standard Methods (\code{"modified"}, \code{"gaussian"}, \code{"historical"}):} Leverages the \code{RPESE} package to return standard error estimates, appending rows such as \code{se} or \code{IFiid} to the VaR matrix.
+#'   \item \strong{Extreme Value Theory (\code{method = "gpd"}):} Uses Profile Log-Likelihood ratio tests to calculate asymmetric confidence bounds, appending rows for the Lower Confidence Limit (\code{LCL}) and Upper Confidence Limit (\code{UCL}).
+#' }
 #'
 #' @author Brian G. Peterson and Kris Boudt, Talgat Daniyarov
 #' @seealso \code{\link{SharpeRatio}} \cr
@@ -367,12 +381,7 @@ VaR <-
         )
         SE.check <- FALSE
       }
-      if (!(method %in% c("historical"))) {
-        warning("To return SEs, \"method\" must be \"historical\".",
-          call. = FALSE
-        )
-        SE.check <- FALSE
-      }
+
       if (invert) {
         warning("To return SEs, \"invert\" must be FALSE.",
           call. = FALSE
@@ -382,7 +391,7 @@ VaR <-
     }
 
     # SE Computation
-    if (SE) {
+    if (SE && !(method %in% c("gpd", "lognormal"))) {
       # Setting the control parameters
       if (is.null(SE.control)) {
         SE.control <- RPESE.control(estimator = "VaR")
@@ -476,7 +485,7 @@ VaR <-
               stop("no kernel method defined for non-component VaR")
             },
             gpd = {
-              rVaR <- VaR.gpd(R = R, p = p, p.tr = p.tr, init = init, ...)
+              rVaR <- -VaR.gpd(R = R, p = p, p.tr = p.tr, init = init, SE = SE, ...)
             },
             lognormal = {
               rVaR <- VaR.lognormal(R = R, p = p)
@@ -501,7 +510,8 @@ VaR <-
               rVaR <- as.matrix(VaR.historical(R = R, p = p)) * weights
             }, # note that this is weighting the univariate calc by the weights
             gpd = {
-              rVaR <- as.matrix(VaR.gpd(R = R, p = p, p.tr = p.tr, init = init, ...)) * weights
+              rVaR <- -as.matrix(VaR.gpd(R = R, p = p, p.tr = p.tr, init = init, SE = SE, ...))
+              rVaR <- sweep(rVaR, 2, weights, "*")
             },
             lognormal = {
               rVaR <- as.matrix(VaR.lognormal(R = R, p = p)) * weights
@@ -513,24 +523,26 @@ VaR <-
         }
         columns <- ncol(rVaR)
         for (column in 1:columns) {
-          tmp <- rVaR[, column]
+          tmp <- rVaR[1, column]
           if (!is.finite(tmp)) { # skip reasonableness check if tmp is NA, NaN, +/-Inf, etc
             next()
           }
           if (eval(tmp < 0)) { # eval added previously to get around Sweave bitching
-            message(c("VaR calculation produces unreliable result (inverse risk) for column: ", column, " : ", rVaR[, column]))
+            message(c("VaR calculation produces unreliable result (inverse risk) for column: ", column, " : ", rVaR[1, column]))
             # set VaR to NA, since inverse risk is unreasonable
             rVaR[, column] <- NA
           } else if (eval(1 < tmp)) { # eval added previously to get around Sweave bitching
-            message(c("VaR calculation produces unreliable result (risk over 100%) for column: ", column, " : ", rVaR[, column]))
+            message(c("VaR calculation produces unreliable result (risk over 100%) for column: ", column, " : ", rVaR[1, column]))
             # set VaR to 1, since greater than 100% is unreasonable
             rVaR[, column] <- 1
           }
         } # end reasonableness checks
         if (invert) rVaR <- -rVaR
-        rownames(rVaR) <- "VaR"
+        if (nrow(rVaR) == 1) {
+          rownames(rVaR) <- "VaR"
+        }
 
-        if (SE) { # Check if SE computation
+        if (SE && !(method %in% c("gpd", "lognormal"))) { # Check if SE computation
           return(rbind(rVaR, ses))
         } else {
           return(rVaR)

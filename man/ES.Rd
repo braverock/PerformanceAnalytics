@@ -76,6 +76,20 @@ return series, default NULL, see Details}
 
 \item{nsim}{the number of simulations used for \code{method="montecarlo"}, default 10000}
 }
+\value{
+ES measures are evaluated and returned based on the \code{portfolio_method} and \code{SE} arguments:
+
+\itemize{
+  \item \strong{\code{portfolio_method = "single"}:} Returns a scalar or matrix (depending on the number of asset columns) of ES estimates.
+  \item \strong{\code{portfolio_method = "component"}:} Returns a list with three components: the univariate portfolio ES, the scalar contribution of each component to the portfolio ES, and a percentage risk contribution.
+}
+
+If \code{SE = TRUE}, the output will also include standard errors or confidence intervals:
+\itemize{
+  \item \strong{Standard Methods (\code{"modified"}, \code{"gaussian"}, \code{"historical"}):} Leverages the \code{RPESE} package to return standard error estimates, appending rows such as \code{se} or \code{IFiid} to the ES matrix.
+  \item \strong{Extreme Value Theory (\code{method = "gpd"}):} Uses Profile Log-Likelihood ratio tests to calculate asymmetric confidence bounds, appending rows for the Lower Confidence Limit (\code{LCL}) and Upper Confidence Limit (\code{UCL}).
+}
+}
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at
 Risk(CVaR) or Expected Tail Loss (ETL) for univariate, component,
