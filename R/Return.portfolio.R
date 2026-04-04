@@ -116,6 +116,7 @@
 #' @param verbose If verbose is TRUE, return a list of intermediary calculations.
 #' See Details below.
 #' @param \dots any other passthru parameters. Not currently used.
+#' @param rebal_cost proportional transaction cost applied to the change in weights when rebalancing. Default 0.
 #' @param full_investment if full_investment is TRUE, forces a target weight rebalance when security returns become unavailable (NA), excluding such securities and proportionately reallocating their weights to the remaining assets on the boundary day before the return is NA. Default FALSE
 #' @return returns a time series of returns weighted by the \code{weights}
 #' parameter, or a list that includes intermediate calculations
@@ -137,6 +138,15 @@
 #' chart.StackedBar(x$BOP.Weight)
 #' chart.StackedBar(x$BOP.Value)
 #'
+#' # with a rebalancing cost
+#' Return.portfolio(edhec["1997", 1:5], rebalance_on = "quarters", rebal_cost = 0.002) # 20 bps
+#'
+#' # add a transaction cost to the rebalancing
+#' x_cost <- Return.portfolio(edhec["2000::", 1:11], weights = weights, verbose = TRUE, rebal_cost = 0.01)
+#' chart.CumReturns(x_cost$returns)
+#' chart.StackedBar(x_cost$BOP.Weight)
+#' chart.StackedBar(x_cost$BOP.Value)
+#'
 #' @rdname Return.portfolio
 #' @export Return.portfolio
 #' @export Return.rebalancing
@@ -149,8 +159,13 @@ Return.portfolio <- Return.rebalancing <- function(R,
                                                    value = 1,
                                                    verbose = FALSE,
                                                    ...,
+                                                   rebal_cost = 0,
                                                    full_investment = FALSE) {
   R <- checkData(R, method = "xts")
+
+  if (length(rebal_cost) != 1 && length(rebal_cost) != ncol(R)) {
+    stop("rebal_cost must be a scalar or a vector of the same length as the number of assets in R")
+  }
 
   if (full_investment) {
     R_isna <- is.na(R)
@@ -297,6 +312,7 @@ Return.portfolio <- Return.rebalancing <- function(R,
       contribution = contribution,
       value = value,
       verbose = verbose,
+      rebal_cost = rebal_cost,
       ... = ...
     )
   } else {
@@ -306,6 +322,7 @@ Return.portfolio <- Return.rebalancing <- function(R,
       wealth.index = wealth.index,
       contribution = contribution,
       verbose = verbose,
+      rebal_cost = rebal_cost,
       ... = ...
     )
   }
@@ -317,6 +334,7 @@ Return.portfolio.arithmetic <- function(R,
                                         wealth.index = FALSE,
                                         contribution = FALSE,
                                         verbose = FALSE,
+                                        rebal_cost = 0,
                                         ...) {
   # bop = beginning of period
   # eop = end of period
@@ -393,6 +411,7 @@ Return.portfolio.geometric <- function(R,
                                        contribution = FALSE,
                                        value = 1,
                                        verbose = FALSE,
+                                       rebal_cost = 0,
                                        ...) {
   if (!isTRUE(all.equal(rowSums(weights), rep(1, NROW(weights))))) {
     warning("The weights for one or more periods do not sum up to 1: assuming a return of 0 for the residual weights")
@@ -446,11 +465,31 @@ Return.portfolio.geometric <- function(R,
       # inner loop counter
       jj <- 1
       for (j in 1:nrow(returns)) {
+        # Track the prior period's total value before any transaction costs
+        # are subtracted, so that the geometric return evaluation natively
+        # captures the negative drag.
+        prior_end_value <- end_value
+        cost_allocation <- rep(0, NCOL(R))
+
         # We need to know when we are at the start of this inner loop so we can
         # set the correct beginning of period value. We start a new inner loop
         # at each rebalance date.
         # Compute beginning of period values
         if (jj == 1) {
+          # Apply transaction cost
+          if (any(rebal_cost != 0) && k > 1) {
+            # Find the drifted weights entering the rebalance period
+            drifted_weights <- eop_value[k - 1, ] / end_value
+            # Fractional turnover per asset
+            asset_turnover <- as.numeric(abs(weights[i, ] - drifted_weights))
+            # Transaction cost drag applied to total portfolio value
+            drag <- sum(asset_turnover * as.numeric(rebal_cost))
+            if (drag > 0) {
+              cost_allocation <- as.numeric(end_value * (asset_turnover * as.numeric(rebal_cost)))
+            }
+            end_value <- end_value * (1 - drag)
+          }
+
           bop_value[k, ] <- end_value * weights[i, ]
         } else {
           bop_value[k, ] <- eop_value[k - 1, ]
@@ -463,7 +502,7 @@ Return.portfolio.geometric <- function(R,
 
         if (contribution | verbose) {
           # Compute period contribution
-          period_contrib[k, ] <- returns[j, ] * bop_value[k, ] / bop_value_total[k]
+          period_contrib[k, ] <- (coredata(returns[j, ]) * bop_value[k, ] - cost_allocation) / prior_end_value
           if (verbose) {
             # Compute bop and eop weights
             bop_weights[k, ] <- bop_value[k, ] / bop_value_total[k]
@@ -474,7 +513,8 @@ Return.portfolio.geometric <- function(R,
         # Compute portfolio returns
         # Could also compute this by summing contribution, but this way we
         # don't have to compute contribution if verbose=FALSE
-        ret[k] <- eop_value_total[k] / end_value - 1
+        # Evaluate against the un-dragged prior end value so the cost affects the return
+        ret[k] <- eop_value_total[k] / prior_end_value - 1
 
         # Update end_value
         end_value <- eop_value_total[k]

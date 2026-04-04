@@ -15,6 +15,7 @@ Return.portfolio(
   value = 1,
   verbose = FALSE,
   ...,
+  rebal_cost = 0,
   full_investment = FALSE
 )
 }
@@ -46,6 +47,8 @@ that specifies the rebalancing dates.}
 See Details below.}
 
 \item{\dots}{any other passthru parameters. Not currently used.}
+
+\item{rebal_cost}{proportional transaction cost applied to the change in weights when rebalancing. Default 0.}
 
 \item{full_investment}{if full_investment is TRUE, forces a target weight rebalance when security returns become unavailable (NA), excluding such securities and proportionately reallocating their weights to the remaining assets on the boundary day before the return is NA. Default FALSE}
 }

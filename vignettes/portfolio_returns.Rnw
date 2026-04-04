@@ -65,7 +65,7 @@ prices
 @
 
 
-We wish to form an equal weight portfolio, that is, form a portfolio where 
+We wish to form an equal weight portfolio, that is, form a portfolio where
 \begin{equation*}
 w_i = \frac{1}{N} \text{ for } i \in 1, \hdots, N.
 \end{equation*}
@@ -262,10 +262,16 @@ Return.portfolio(R)
 # Equally weighted, rebalanced quarterly portfolio returns
 Return.portfolio(R, rebalance_on="quarters")
 
-# Equally weighted, rebalanced quarterly portfolio returns. 
-# Use verbose=TRUE to return additional information 
+# Equally weighted, rebalanced quarterly portfolio returns.
+# Use verbose=TRUE to return additional information
 # including asset values and weights
 Return.portfolio(R, rebalance_on="quarters", verbose=TRUE)
 @
+
+\section{Transaction Costs}
+
+The \verb"Return.portfolio" function supports the application of transaction costs during rebalancing events. This is specified via the \verb"rebal_cost" parameter. It allows the user to define a proportional transaction cost applied to the fractional change in weights.
+
+When \verb"rebal_cost" is non-zero, the absolute change in weights (the turnover) is calculated for each asset at the rebalance date. The total turnover is multiplied by the \verb"rebal_cost" to calculate the transaction cost drag, which is then subtracted from the total portfolio value at the beginning of the new period. This effectively reduces the portfolio return by the amount of the transaction costs incurred during rebalancing. The cost is also proportionally allocated to the individual asset contributions, so that the sum of the contributions still correctly equals the portfolio return.
 
 \end{document}
