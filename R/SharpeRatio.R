@@ -96,9 +96,13 @@
 #' @export
 #' @rdname SharpeRatio
 SharpeRatio <-
-  function(R, Rf = 0, p = 0.95, FUN = "StdDev", weights = NULL, annualize = FALSE,
+  function(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", "SemiSD"), weights = NULL, annualize = FALSE,
            geometric = FALSE, SE = FALSE, SE.control = NULL,
            ...) { # @author Brian G. Peterson
+
+    if (missing(FUN)) {
+      FUN <- "StdDev"
+    }
 
     # DESCRIPTION:
     # The Sharpe ratio is simply the return per unit of risk (represented by

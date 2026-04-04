@@ -15,6 +15,7 @@ StdDev(
   sigma = NULL,
   use = "everything",
   method = c("pearson", "kendall", "spearman"),
+  sample_method = c("unbiased", "ML"),
   SE = FALSE,
   SE.control = NULL
 )
@@ -50,6 +51,11 @@ abbreviation of) one of the strings \code{"everything"}, \code{"all.obs"},
 (or covariance) is to be computed.  One of \code{"pearson"} (default),
 \code{"kendall"}, or \code{"spearman"}, can be abbreviated.}
 
+\item{sample_method}{character string, one of \code{"unbiased"} (default) or
+\code{"ML"} (maximum likelihood). \code{"unbiased"} uses \eqn{n-1} in the
+denominator, while \code{"ML"} uses \eqn{n}. This matches the behavior of
+\code{\link[stats]{cov.wt}}.}
+
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 
 \item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
@@ -83,20 +89,21 @@ deviation.
 }
 \examples{
 \donttest{
-    data(edhec)
+data(edhec)
 
-    # first do normal StdDev calc
-    StdDev(edhec)
-    # or the equivalent
-    StdDev(edhec, portfolio_method="single")
+# first do normal StdDev calc
+StdDev(edhec)
+# or the equivalent
+StdDev(edhec, portfolio_method = "single")
 
-    # now with outliers squished
-    StdDev(edhec, clean="boudt")
+# now with outliers squished
+StdDev(edhec, clean = "boudt")
 
-    # add Component StdDev for the equal weighted portfolio
-    StdDev(edhec, clean="boudt", portfolio_method="component")
+# add Component StdDev for the equal weighted portfolio
+StdDev(edhec, clean = "boudt", portfolio_method = "component")
 
-} # end CRAN check
+# end CRAN check
+}
 
 }
 \seealso{

@@ -6,7 +6,7 @@
 \alias{sd.annualized}
 \title{calculate a multiperiod or annualized Standard Deviation}
 \usage{
-StdDev.annualized(x, scale = NA, ...)
+StdDev.annualized(x, scale = NA, ..., sample_method = c("unbiased", "ML"))
 }
 \arguments{
 \item{x}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -16,6 +16,11 @@ asset returns}
 12, quarterly scale = 4)}
 
 \item{\dots}{any other passthru parameters}
+
+\item{sample_method}{character string, one of \code{"unbiased"} (default) or
+\code{"ML"} (maximum likelihood). \code{"unbiased"} uses \eqn{n-1} in the
+denominator, while \code{"ML"} uses \eqn{n}. This matches the behavior of
+\code{\link[stats]{cov.wt}}.}
 }
 \description{
 Standard Deviation of a set of observations \eqn{R_{a}} is given by:
@@ -44,11 +49,11 @@ suspicion if the number of observations is small.
 }
 \examples{
 
-    data(edhec)
-    sd.annualized(edhec)
-    sd.annualized(edhec[,6,drop=FALSE])
-    # now for three periods:
-    sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
+data(edhec)
+sd.annualized(edhec)
+sd.annualized(edhec[, 6, drop = FALSE])
+# now for three periods:
+sd.multiperiod(edhec[, 6, drop = FALSE], scale = 3)
 
 }
 \references{

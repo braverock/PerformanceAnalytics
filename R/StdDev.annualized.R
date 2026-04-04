@@ -1,9 +1,9 @@
 #' calculate a multiperiod or annualized Standard Deviation
-#' 
+#'
 #' Standard Deviation of a set of observations \eqn{R_{a}} is given by:
-#' 
+#'
 #' \deqn{\sigma = variance(R_{a}) , std=\sqrt{\sigma} }{std = sqrt(var(R))}
-#' 
+#'
 #' It should follow that the variance is not a linear function of the number of
 #' observations.  To determine possible variance over multiple periods, it
 #' wouldn't make sense to multiply the single-period variance by the total
@@ -17,71 +17,96 @@
 #' multiple periods, we multiply by the square root of the number of periods we
 #' wish to calculate over. To annualize standard deviation, we multiply by the
 #' square root of the number of periods per year.
-#' 
+#'
 #' \deqn{\sqrt{\sigma}\cdot\sqrt{periods}}
-#' 
+#'
 #' Note that any multiperiod or annualized number should be viewed with
 #' suspicion if the number of observations is small.
-#' 
-#' 
+#'
+#'
 #' @aliases sd.multiperiod sd.annualized StdDev.annualized
 #' @param x an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param scale number of periods in a year (daily scale = 252, monthly scale =
 #' 12, quarterly scale = 4)
 #' @param \dots any other passthru parameters
+#' @param sample_method character string, one of \code{"unbiased"} (default) or
+#' \code{"ML"} (maximum likelihood). \code{"unbiased"} uses \eqn{n-1} in the
+#' denominator, while \code{"ML"} uses \eqn{n}. This matches the behavior of
+#' \code{\link[stats]{cov.wt}}.
 #' @author Brian G. Peterson
 #' @seealso \code{\link[stats]{sd}} \cr
 #' \url{https://en.wikipedia.org/wiki/Inverse-square_law}
 #' @references Bacon, C. \emph{Practical Portfolio Performance Measurement and
 #' Attribution}. Wiley. 2004. p. 27 \cr
-###keywords ts multivariate distribution models
+### keywords ts multivariate distribution models
 #' @examples
-#' 
-#'     data(edhec)
-#'     sd.annualized(edhec)
-#'     sd.annualized(edhec[,6,drop=FALSE])
-#'     # now for three periods:
-#'     sd.multiperiod(edhec[,6,drop=FALSE],scale=3)
-#' 
+#'
+#' data(edhec)
+#' sd.annualized(edhec)
+#' sd.annualized(edhec[, 6, drop = FALSE])
+#' # now for three periods:
+#' sd.multiperiod(edhec[, 6, drop = FALSE], scale = 3)
+#'
 #' @export StdDev.annualized sd.annualized sd.multiperiod
 #' @aliases StdDev.annualized sd.annualized sd.multiperiod
 #' @rdname StdDev.annualized
 StdDev.annualized <- sd.annualized <- sd.multiperiod <-
-function (x, scale = NA, ...)
-{
-    if(is.na(scale) && !xtsible(x))
-        stop("'x' needs to be timeBased or xtsible, or scale must be specified." )
-    
-    if(is.na(scale)) {
-        freq = periodicity(x)
-        switch(freq$scale,
-                minute = {stop("Data periodicity too high")},
-                hourly = {stop("Data periodicity too high")},
-                daily = {scale = 252},
-                weekly = {scale = 52},
-                monthly = {scale = 12},
-                quarterly = {scale = 4},
-                yearly = {scale = 1}
-        )
+  function(x, scale = NA, ..., sample_method = c("unbiased", "ML")) {
+    sample_method <- sample_method[1]
+    if (is.na(scale) && !xtsible(x)) {
+      stop("'x' needs to be timeBased or xtsible, or scale must be specified.")
     }
-    
+
+    if (is.na(scale)) {
+      freq <- periodicity(x)
+      switch(freq$scale,
+        minute = {
+          stop("Data periodicity too high")
+        },
+        hourly = {
+          stop("Data periodicity too high")
+        },
+        daily = {
+          scale <- 252
+        },
+        weekly = {
+          scale <- 52
+        },
+        monthly = {
+          scale <- 12
+        },
+        quarterly = {
+          scale <- 4
+        },
+        yearly = {
+          scale <- 1
+        }
+      )
+    }
+
     if (is.vector(x)) {
-        #scale standard deviation by multiplying by the square root of the number of periods to scale by
-        sqrt(scale)*sd(x, na.rm=TRUE)
-    } else { 
-        if(!xtsible(x) & is.na(scale))
-            stop("'x' needs to be timeBased or xtsible, or scale must be specified." )
-        x = checkData (x)
-                
-        result = apply(x, 2, sd.multiperiod, scale=scale)
-        
-        dim(result) = c(1,NCOL(x))
-        colnames(result) = colnames(x)
-        rownames(result) = "Annualized Standard Deviation"
-        return(result)
+      # scale standard deviation by multiplying by the square root of the number of periods to scale by
+      result <- sqrt(scale) * sd(x, na.rm = TRUE)
+      if (sample_method == "ML") {
+        n <- sum(!is.na(x))
+        if (n > 1) result <- result * sqrt((n - 1) / n)
+      }
+      result
+    } else {
+      if (!xtsible(x) & is.na(scale)) {
+        stop("'x' needs to be timeBased or xtsible, or scale must be specified.")
+      }
+      x <- checkData(x)
+
+      result <- apply(x, 2, sd.multiperiod, scale = scale, sample_method = sample_method)
+
+      dim(result) <- c(1, NCOL(x))
+      colnames(result) <- colnames(x)
+      rownames(result) <- "Annualized Standard Deviation"
+      return(result)
     }
-}
+  }
 
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis
