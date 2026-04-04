@@ -21,18 +21,26 @@ time, say a calendar year.  Can produce simple or geometric return.
 product of all the individual period returns
 
 \deqn{(1+r_{1})(1+r_{2})(1+r_{3})\ldots(1+r_{n})-1=prod(1+R)-1}{prod(1+R)-1}
+
+Note that this function calculates the total return over the entire period as a
+single scalar value. If you need the time series of cumulative wealth (i.e. a
+wealth index), you should use \code{cumprod(1+R)} or \code{cumprod(1+R)-1}.
 }
 \examples{
 
 data(managers)
-Return.cumulative(managers[,1,drop=FALSE])
-Return.cumulative(managers[,1:8])
-Return.cumulative(managers[,1:8],geometric=FALSE)
+Return.cumulative(managers[, 1, drop = FALSE])
+Return.cumulative(managers[, 1:8])
+Return.cumulative(managers[, 1:8], geometric = FALSE)
 
 }
 \references{
 Bacon, Carl. \emph{Practical Portfolio Performance Measurement
 and Attribution}. Wiley. 2004. p. 6
+
+For time series of cumulative wealth, see:
+\code{\link[base]{cumprod}}
+\code{\link{chart.CumReturns}}
 }
 \seealso{
 \code{\link{Return.annualized}}
