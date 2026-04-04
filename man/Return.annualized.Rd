@@ -5,7 +5,7 @@
 \title{calculate an annualized return for comparing instruments with different
 length history}
 \usage{
-Return.annualized(R, scale = NA, geometric = TRUE)
+Return.annualized(R, scale = NA, geometric = TRUE, na.rm = TRUE)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -16,6 +16,8 @@ asset returns}
 
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 default TRUE}
+
+\item{na.rm}{TRUE/FALSE whether to remove NA values before calculation, default TRUE}
 }
 \description{
 An average annualized return is convenient for comparing returns.

@@ -23,6 +23,7 @@
 #' 12, quarterly scale = 4)
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default TRUE
+#' @param na.rm TRUE/FALSE whether to remove NA values before calculation, default TRUE
 #' @author Peter Carl
 #' @seealso \code{\link{Return.cumulative}},
 #' @references Bacon, Carl. \emph{Practical Portfolio Performance Measurement
@@ -37,7 +38,7 @@
 #'
 #' @export
 Return.annualized <-
-  function(R, scale = NA, geometric = TRUE) { # @author Peter Carl
+  function(R, scale = NA, geometric = TRUE, na.rm = TRUE) { # @author Peter Carl
 
     # Description:
 
@@ -87,7 +88,9 @@ Return.annualized <-
     # FUNCTION:
     if (is.vector(R)) {
       R <- checkData(R)
-      R <- na.omit(R)
+      if (na.rm) {
+        R <- na.omit(R)
+      }
       n <- length(R)
       # do the correct thing for geometric or simple returns
       if (geometric) {
@@ -100,7 +103,7 @@ Return.annualized <-
       result
     } else {
       R <- checkData(R, method = "xts")
-      result <- apply(zoo::coredata(R), 2, Return.annualized, scale = scale, geometric = geometric)
+      result <- apply(zoo::coredata(R), 2, Return.annualized, scale = scale, geometric = geometric, na.rm = na.rm)
       dim(result) <- c(1, NCOL(R))
       colnames(result) <- colnames(R)
       rownames(result) <- "Annualized Return"
