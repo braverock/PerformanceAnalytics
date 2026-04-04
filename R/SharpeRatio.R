@@ -16,6 +16,9 @@
 #' As noted, the traditional Sharpe Ratio is a risk-adjusted measure of return
 #' that uses standard deviation to represent risk.
 #'
+#' The Sharpe Ratio can be used to measure both 'excess return' (over a risk-free
+#' rate) and 'differential return' (excess return over a benchmark).
+#'
 #' A number of papers now recommend using a "modified Sharpe" ratio using a
 #' Modified Cornish-Fisher VaR or CVaR/Expected Shortfall as the measure of
 #' Risk.
@@ -46,6 +49,8 @@
 #' @param weights portfolio weighting vector, default NULL, see Details in
 #' \code{\link{VaR}}
 #' @param annualize if TRUE, annualize the measure, default FALSE
+#' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
+#' default FALSE
 #' @param SE TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.
 #' @param SE.control Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.
 #' @param \dots any other passthru parameters to the VaR or ES functions
@@ -63,6 +68,9 @@
 #'
 #' Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of
 #' Portfolio Management, 32(1), 108-122.
+#'
+#' Jacquier, E., Kane, A., Marcus, A. [2003]. Geometric Mean or Arithmetic Mean:
+#' A Reconsideration. Financial Analysts Journal, November/December 2003, p. 46-53.
 #'
 ### keywords ts multivariate distribution models
 #' @examples
@@ -82,14 +90,14 @@
 #' SharpeRatio(edhec[, 6, drop = FALSE], FUN = "ES")
 #'
 #' # and all the methods
-#' SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE])
-#' SharpeRatio(edhec, Rf = .04 / 12)
+#' SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE], FUN = c("StdDev", "VaR", "ES"))
+#' SharpeRatio(edhec, Rf = .04 / 12, FUN = c("StdDev", "VaR", "ES"))
 #'
 #' @export
 #' @rdname SharpeRatio
 SharpeRatio <-
-  function(R, Rf = 0, p = 0.95, FUN = c("StdDev", "VaR", "ES", "SemiSD"), weights = NULL, annualize = FALSE,
-           SE = FALSE, SE.control = NULL,
+  function(R, Rf = 0, p = 0.95, FUN = "StdDev", weights = NULL, annualize = FALSE,
+           geometric = FALSE, SE = FALSE, SE.control = NULL,
            ...) { # @author Brian G. Peterson
 
     # DESCRIPTION:
@@ -125,7 +133,10 @@ SharpeRatio <-
       Rf <- checkData(Rf)
     }
 
-    if (annualize) { # scale the Rf to the periodicity of the calculation
+    dots <- list(...)
+    if ("scale" %in% names(dots)) {
+      scale <- dots$scale
+    } else if (annualize) { # scale the Rf to the periodicity of the calculation
       freq <- periodicity(R)
       switch(freq$scale,
         minute = {
@@ -154,21 +165,30 @@ SharpeRatio <-
       scale <- 1 # won't scale the Rf, will leave it at the same periodicity
     }
     # TODO: Consolidate annualized and regular SR calcs
-    srm <- function(R, ..., Rf, p, FUNC) {
+    srm <- function(R, ..., Rf, p, FUNC, geometric) {
       FUNCT <- match.fun(FUNC)
       xR <- Return.excess(R, Rf)
-      SRM <- mean(xR, na.rm = TRUE) / FUNCT(R = xR, p = p, ... = ..., invert = FALSE)
+      if (geometric) {
+        ret <- prod(1 + na.omit(xR))^(1 / length(na.omit(xR))) - 1
+      } else {
+        ret <- mean(xR, na.rm = TRUE)
+      }
+      dots <- list(...)
+      dots$scale <- NULL
+      SRM <- ret / do.call(FUNCT, c(list(R = xR, p = p, invert = FALSE), dots))
       SRM
     }
-    sra <- function(R, ..., Rf, p, FUNC) {
+    sra <- function(R, ..., Rf, p, FUNC, geometric) {
       xR <- Return.excess(R, Rf)
+      dots <- list(...)
+      dots$scale <- NULL
       if (FUNC == "StdDev") {
-        risk <- StdDev.annualized(x = xR, ...)
+        risk <- do.call(StdDev.annualized, c(list(x = xR, scale = scale), dots))
       } else {
         FUNCT <- match.fun(FUNC)
-        risk <- FUNCT(R = xR, p = p, ... = ..., invert = FALSE)
+        risk <- do.call(FUNCT, c(list(R = xR, p = p, invert = FALSE), dots))
       }
-      SRA <- Return.annualized(xR) / risk
+      SRA <- Return.annualized(xR, scale = scale, geometric = geometric) / risk
       SRA
     }
 
@@ -233,20 +253,38 @@ SharpeRatio <-
       }
 
       if (FUNCT == "SemiSD") {
-        result[i, ] <- DownsideSharpeRatio(R, rf = Rf, ...)
+        dots <- list(...)
+        dots$scale <- NULL
+        result[i, ] <- do.call(DownsideSharpeRatio, c(list(R = R, rf = Rf), dots))
       } else {
         xR <- Return.excess(R, Rf)
         if (is.null(weights)) {
           if (annualize) {
-            result[i, ] <- sapply(R, FUN = sra, Rf = Rf, p = p, FUNC = FUNCT, ...)
+            result[i, ] <- sapply(R, FUN = sra, Rf = Rf, p = p, FUNC = FUNCT, geometric = geometric, ...)
           } else {
-            result[i, ] <- sapply(R, FUN = srm, Rf = Rf, p = p, FUNC = FUNCT, ...)
+            result[i, ] <- sapply(R, FUN = srm, Rf = Rf, p = p, FUNC = FUNCT, geometric = geometric, ...)
           }
         } else {
-          result[i, ] <- mean(xR %*% weights, na.rm = TRUE) / match.fun(FUNCT)(xR, Rf = Rf, p = p, weights = weights, portfolio_method = "single", ... = ...)
+          weighted_xR <- xR %*% weights
+          if (geometric) {
+            ret <- prod(1 + na.omit(weighted_xR))^(1 / length(na.omit(weighted_xR))) - 1
+            if (annualize) {
+              ret <- (1 + ret)^scale - 1
+            }
+          } else {
+            ret <- mean(weighted_xR, na.rm = TRUE)
+            if (annualize) {
+              ret <- ret * scale
+            }
+          }
+          dots <- list(...)
+          dots$scale <- NULL
+          result[i, ] <- ret / do.call(match.fun(FUNCT), c(list(R = xR, Rf = Rf, p = p, weights = weights, portfolio_method = "single"), dots))
         }
       }
-      tmprownames <- c(tmprownames, paste(if (annualize) "Annualized ", FUNCT, " Sharpe", " (Rf=", round(scale * mean(Rf) * 100, 1), "%, p=", round(p * 100, 1), "%):", sep = ""))
+      base_label <- if (geometric) "Geometric Sharpe Ratio" else "Sharpe Ratio"
+      label_FUN <- if (FUNCT == "StdDev") "" else paste0(FUNCT, " ")
+      tmprownames <- c(tmprownames, paste(if (annualize) "Annualized ", label_FUN, base_label, " (Rf=", round(scale * mean(Rf) * 100, 1), "%, p=", round(p * 100, 1), "%):", sep = ""))
 
       i <- i + 1 # increment counter
     }

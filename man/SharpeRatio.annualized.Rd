@@ -4,7 +4,7 @@
 \alias{SharpeRatio.annualized}
 \title{calculate annualized Sharpe Ratio}
 \usage{
-SharpeRatio.annualized(R, Rf = 0, scale = NA, geometric = TRUE)
+SharpeRatio.annualized(R, Rf = 0, scale = NA, geometric = FALSE, ...)
 }
 \arguments{
 \item{R}{an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -16,7 +16,7 @@ asset returns}
 12, quarterly scale = 4)}
 
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
-default TRUE}
+default FALSE}
 }
 \description{
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard

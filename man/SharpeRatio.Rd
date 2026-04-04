@@ -13,6 +13,7 @@ SharpeRatio(
   FUN = c("StdDev", "VaR", "ES", "SemiSD"),
   weights = NULL,
   annualize = FALSE,
+  geometric = FALSE,
   SE = FALSE,
   SE.control = NULL,
   ...
@@ -42,6 +43,9 @@ asset returns}
 
 \item{annualize}{if TRUE, annualize the measure, default FALSE}
 
+\item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
+default FALSE}
+
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 
 \item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
@@ -64,6 +68,9 @@ and return.
 
 As noted, the traditional Sharpe Ratio is a risk-adjusted measure of return
 that uses standard deviation to represent risk.
+
+The Sharpe Ratio can be used to measure both 'excess return' (over a risk-free
+rate) and 'differential return' (excess return over a benchmark).
 
 A number of papers now recommend using a "modified Sharpe" ratio using a
 Modified Cornish-Fisher VaR or CVaR/Expected Shortfall as the measure of
@@ -102,8 +109,8 @@ SharpeRatio(edhec[, 6, drop = FALSE], Rf = .04 / 12, FUN = "VaR", method = "gaus
 SharpeRatio(edhec[, 6, drop = FALSE], FUN = "ES")
 
 # and all the methods
-SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE])
-SharpeRatio(edhec, Rf = .04 / 12)
+SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE], FUN = c("StdDev", "VaR", "ES"))
+SharpeRatio(edhec, Rf = .04 / 12, FUN = c("StdDev", "VaR", "ES"))
 
 }
 \references{
@@ -116,6 +123,9 @@ v 5.
 
 Ziemba, W. T. (2005). The symmetric downside-risk Sharpe ratio. The Journal of
 Portfolio Management, 32(1), 108-122.
+
+Jacquier, E., Kane, A., Marcus, A. [2003]. Geometric Mean or Arithmetic Mean:
+A Reconsideration. Financial Analysts Journal, November/December 2003, p. 46-53.
 }
 \seealso{
 \code{\link{SharpeRatio.annualized}} \cr
