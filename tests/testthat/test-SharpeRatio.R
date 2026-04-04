@@ -16,7 +16,7 @@ test_that("SharpeRatio uses excess-return standard deviation (fixes #142)", {
   expect_equal(as.numeric(old_sr_scalar), as.numeric(new_sr_scalar))
 
   # Function output matches new correct formula exactly
-  out_sr_scalar <- suppressWarnings(SharpeRatio.annualized(R, Rf = Rf_scalar))
+  out_sr_scalar <- suppressWarnings(SharpeRatio.annualized(R, Rf = Rf_scalar, geometric = FALSE))
   expect_equal(as.numeric(out_sr_scalar), as.numeric(new_sr_scalar))
 
   # 2. Test vector Rf (Time-varying Rf causes R and xR to have different standard deviations!)
@@ -27,7 +27,7 @@ test_that("SharpeRatio uses excess-return standard deviation (fixes #142)", {
   expect_false(isTRUE(all.equal(as.numeric(old_sr_vec), as.numeric(new_sr_vec))))
 
   # Function output MUST match new correct formula exactly, not the old broken one
-  out_sr_vec <- suppressWarnings(SharpeRatio.annualized(R, Rf = Rf_vec))
+  out_sr_vec <- suppressWarnings(SharpeRatio.annualized(R, Rf = Rf_vec, geometric = FALSE))
   expect_equal(as.numeric(out_sr_vec), as.numeric(new_sr_vec))
 
   # Also test standard non-annualized SharpeRatio function

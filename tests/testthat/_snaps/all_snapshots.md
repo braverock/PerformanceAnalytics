@@ -48,18 +48,18 @@
       > data(portfolio_bacon)
       
       > print(AdjustedSharpeRatio(portfolio_bacon[, 1]))
-                                      portfolio.monthly.return....
-      Annualized Sharpe Ratio (Rf=0%)                    0.7591
+                                              portfolio.monthly.return....
+      Annualized Sharpe Ratio (Rf=0%, p=95%):                    0.7913
       
       > data(managers)
       
       > print(AdjustedSharpeRatio(managers["1996"]))
-                                                HAM1    HAM2      HAM3     HAM4 HAM5
-      Adjusted Sharpe ratio (Risk free = 0) 2.0459 14.5593 0.9322 1.8833   NA
-                                            HAM6 EDHEC LS EQ SP500 TR   US 10Y TR
-      Adjusted Sharpe ratio (Risk free = 0)   NA          NA 1.9869 0.0063
+                                                HAM1     HAM2   HAM3     HAM4 HAM5
+      Adjusted Sharpe ratio (Risk free = 0) 1.9617 8.6297 1.1666 1.7707   NA
+                                            HAM6 EDHEC LS EQ SP500 TR  US 10Y TR
+      Adjusted Sharpe ratio (Risk free = 0)   NA          NA 1.8602 0.0384
                                              US 3m TR
-      Adjusted Sharpe ratio (Risk free = 0) -576.9696
+      Adjusted Sharpe ratio (Risk free = 0) -543.8279
     Code
       dev.off()
     Output
@@ -2773,95 +2773,88 @@
       
       > SharpeRatio(managers[, 1, drop = FALSE], Rf = 0.035/12, 
       +     FUN = "StdDev")
-                                           HAM1
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.3201
+                                          HAM1
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.3201
       
       > SharpeRatio(managers[, 1, drop = FALSE], Rf = managers[, 
       +     10, drop = FALSE], FUN = "StdDev")
-                                           HAM1
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.3083
+                                          HAM1
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.3083
       
       > SharpeRatio(managers[, 1:6], Rf = 0.035/12, FUN = "StdDev")
-                                           HAM1      HAM2      HAM3      HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.3201 0.3057 0.2610 0.1522
-                                            HAM5      HAM6
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.0256 0.3417
+                                          HAM1      HAM2      HAM3      HAM4
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.3201 0.3057 0.2610 0.1522
+                                           HAM5      HAM6
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.0256 0.3417
       
       > SharpeRatio(managers[, 1:6], Rf = managers[, 10, drop = FALSE], 
       +     FUN = "StdDev")
-                                           HAM1      HAM2      HAM3      HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.3083 0.3007 0.2543 0.1461
-                                            HAM5      HAM6
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.0354 0.3790
+                                          HAM1      HAM2      HAM3      HAM4
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.3083 0.3007 0.2543 0.1461
+                                           HAM5      HAM6
+      Sharpe Ratio (Rf=0.3%, p=95%): 0.0354 0.3790
       
       > data(edhec)
       
       > SharpeRatio(edhec[, 6, drop = FALSE], FUN = "VaR")
-                                 Event Driven
-      VaR Sharpe (Rf=0%, p=95%):    0.2254
+                                       Event Driven
+      VaR Sharpe Ratio (Rf=0%, p=95%):    0.2254
       
       > SharpeRatio(edhec[, 6, drop = FALSE], Rf = 0.04/12, 
       +     FUN = "VaR")
-                                   Event Driven
-      VaR Sharpe (Rf=0.3%, p=95%):    0.1014
+                                         Event Driven
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):    0.1014
       
       > SharpeRatio(edhec[, 6, drop = FALSE], Rf = 0.04/12, 
       +     FUN = "VaR", method = "gaussian")
-                                   Event Driven
-      VaR Sharpe (Rf=0.3%, p=95%):    0.1194
+                                         Event Driven
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):    0.1194
       
       > SharpeRatio(edhec[, 6, drop = FALSE], FUN = "ES")
-                                Event Driven
-      ES Sharpe (Rf=0%, p=95%):   0.0822
+                                      Event Driven
+      ES Sharpe Ratio (Rf=0%, p=95%):   0.0822
       
-      > SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE])
-                                           HAM1      HAM2      HAM3       HAM4
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.3083 0.3007 0.2543 0.1461
-      VaR Sharpe (Rf=0.3%, p=95%):    0.2121 0.3534 0.2306 0.0918
-      ES Sharpe (Rf=0.3%, p=95%):     0.1231 0.1780 0.1949 0.0643
-      SemiSD Sharpe (Rf=0.3%, p=95%): 0.2939        NA 0.2756 0.1393
-                                            HAM5      HAM6 EDHEC LS EQ   SP500 TR
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.0354 0.3790   0.3159 0.1257
-      VaR Sharpe (Rf=0.3%, p=95%):    0.0228 0.2842   0.2397 0.0758
-      ES Sharpe (Rf=0.3%, p=95%):     0.0158 0.2188   0.1670 0.0554
-      SemiSD Sharpe (Rf=0.3%, p=95%):         NA        NA          NA 0.1181
-                                       US 10Y TR
-      StdDev Sharpe (Rf=0.3%, p=95%): 0.0570
-      VaR Sharpe (Rf=0.3%, p=95%):    0.0344
-      ES Sharpe (Rf=0.3%, p=95%):     0.0251
-      SemiSD Sharpe (Rf=0.3%, p=95%): 0.0554
+      > SharpeRatio(managers[, 1:9], Rf = managers[, 10, drop = FALSE], 
+      +     FUN = c("StdDev", "VaR", "ES"))
+                                              HAM1      HAM2      HAM3       HAM4
+      Sharpe Ratio (Rf=0.3%, p=95%):     0.3083 0.3007 0.2543 0.1461
+      VaR Sharpe Ratio (Rf=0.3%, p=95%): 0.2121 0.3534 0.2306 0.0918
+      ES Sharpe Ratio (Rf=0.3%, p=95%):  0.1231 0.1780 0.1949 0.0643
+                                               HAM5      HAM6 EDHEC LS EQ   SP500 TR
+      Sharpe Ratio (Rf=0.3%, p=95%):     0.0354 0.3790   0.3159 0.1257
+      VaR Sharpe Ratio (Rf=0.3%, p=95%): 0.0228 0.2842   0.2397 0.0758
+      ES Sharpe Ratio (Rf=0.3%, p=95%):  0.0158 0.2188   0.1670 0.0554
+                                          US 10Y TR
+      Sharpe Ratio (Rf=0.3%, p=95%):     0.0570
+      VaR Sharpe Ratio (Rf=0.3%, p=95%): 0.0344
+      ES Sharpe Ratio (Rf=0.3%, p=95%):  0.0251
       
-      > SharpeRatio(edhec, Rf = 0.04/12)
-                                      Convertible Arbitrage CTA Global
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.1466 0.0431
-      VaR Sharpe (Rf=0.3%, p=95%):               0.0847 0.0278
-      ES Sharpe (Rf=0.3%, p=95%):                0.0265 0.0225
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.1274 0.0444
-                                      Distressed Securities Emerging Markets
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.1924       0.1038
-      VaR Sharpe (Rf=0.3%, p=95%):               0.1114       0.0598
-      ES Sharpe (Rf=0.3%, p=95%):                0.0494       0.0285
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.1696       0.0942
-                                      Equity Market Neutral Event Driven
-      StdDev Sharpe (Rf=0.3%, p=95%):            0.1220   0.1751
-      VaR Sharpe (Rf=0.3%, p=95%):               0.0699   0.1014
-      ES Sharpe (Rf=0.3%, p=95%):                0.0250   0.0395
-      SemiSD Sharpe (Rf=0.3%, p=95%):            0.1091   0.1538
-                                      Fixed Income Arbitrage Global Macro
-      StdDev Sharpe (Rf=0.3%, p=95%):             0.0957    0.1548
-      VaR Sharpe (Rf=0.3%, p=95%):                0.0520    0.1321
-      ES Sharpe (Rf=0.3%, p=95%):                 0.0194    0.1115
-      SemiSD Sharpe (Rf=0.3%, p=95%):             0.0781    0.1724
-                                      Long/Short Equity Merger Arbitrage
-      StdDev Sharpe (Rf=0.3%, p=95%):        0.1618       0.1958
-      VaR Sharpe (Rf=0.3%, p=95%):           0.1030       0.1224
-      ES Sharpe (Rf=0.3%, p=95%):            0.0651       0.0411
-      SemiSD Sharpe (Rf=0.3%, p=95%):        0.1539       0.1784
-                                      Relative Value Short Selling Funds of Funds
-      StdDev Sharpe (Rf=0.3%, p=95%):     0.2017   -0.1009     0.0732
-      VaR Sharpe (Rf=0.3%, p=95%):        0.1156   -0.0701     0.0445
-      ES Sharpe (Rf=0.3%, p=95%):         0.0471   -0.0648     0.0239
-      SemiSD Sharpe (Rf=0.3%, p=95%):     0.1742   -0.1098     0.0696
+      > SharpeRatio(edhec, Rf = 0.04/12, FUN = c("StdDev", 
+      +     "VaR", "ES"))
+                                         Convertible Arbitrage CTA Global
+      Sharpe Ratio (Rf=0.3%, p=95%):                0.1466 0.0431
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):            0.0847 0.0278
+      ES Sharpe Ratio (Rf=0.3%, p=95%):             0.0265 0.0225
+                                         Distressed Securities Emerging Markets
+      Sharpe Ratio (Rf=0.3%, p=95%):                0.1924       0.1038
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):            0.1114       0.0598
+      ES Sharpe Ratio (Rf=0.3%, p=95%):             0.0494       0.0285
+                                         Equity Market Neutral Event Driven
+      Sharpe Ratio (Rf=0.3%, p=95%):                0.1220   0.1751
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):            0.0699   0.1014
+      ES Sharpe Ratio (Rf=0.3%, p=95%):             0.0250   0.0395
+                                         Fixed Income Arbitrage Global Macro
+      Sharpe Ratio (Rf=0.3%, p=95%):                 0.0957    0.1548
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):             0.0520    0.1321
+      ES Sharpe Ratio (Rf=0.3%, p=95%):              0.0194    0.1115
+                                         Long/Short Equity Merger Arbitrage
+      Sharpe Ratio (Rf=0.3%, p=95%):            0.1618       0.1958
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):        0.1030       0.1224
+      ES Sharpe Ratio (Rf=0.3%, p=95%):         0.0651       0.0411
+                                         Relative Value Short Selling Funds of Funds
+      Sharpe Ratio (Rf=0.3%, p=95%):         0.2017   -0.1009     0.0732
+      VaR Sharpe Ratio (Rf=0.3%, p=95%):     0.1156   -0.0701     0.0445
+      ES Sharpe Ratio (Rf=0.3%, p=95%):      0.0471   -0.0648     0.0239
     Code
       dev.off()
     Output
@@ -2881,33 +2874,33 @@
       
       > SharpeRatio.annualized(managers[, 1, drop = FALSE], 
       +     Rf = 0.035/12)
-                                            HAM1
-      Annualized Sharpe Ratio (Rf=3.5%) 1.1122
+                                                    HAM1
+      Annualized Sharpe Ratio (Rf=3.5%, p=95%): 1.1091
       
       > SharpeRatio.annualized(managers[, 1, drop = FALSE], 
       +     Rf = managers[, 10, drop = FALSE])
-                                            HAM1
-      Annualized Sharpe Ratio (Rf=3.9%) 1.0674
+                                                    HAM1
+      Annualized Sharpe Ratio (Rf=3.9%, p=95%): 1.0679
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = 0.035/12)
-                                            HAM1     HAM2      HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.5%) 1.1122 1.0590 0.8854 0.4512
-                                              HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.5%) 0.0104 1.1941
+                                                    HAM1     HAM2      HAM3      HAM4
+      Annualized Sharpe Ratio (Rf=3.5%, p=95%): 1.1091 1.0592 0.9041 0.5274
+                                                     HAM5     HAM6
+      Annualized Sharpe Ratio (Rf=3.5%, p=95%): 0.0887 1.1838
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = managers[, 
       +     10, drop = FALSE])
-                                            HAM1     HAM2     HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.9%) 1.0674 1.0394 0.8600 0.4284
-                                              HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.9%) 0.0443 1.3358
+                                                    HAM1     HAM2      HAM3      HAM4
+      Annualized Sharpe Ratio (Rf=3.9%, p=95%): 1.0679 1.0417 0.8809 0.5063
+                                                     HAM5     HAM6
+      Annualized Sharpe Ratio (Rf=3.9%, p=95%): 0.1226 1.3132
       
       > SharpeRatio.annualized(managers[, 1:6], Rf = managers[, 
       +     10, drop = FALSE], geometric = FALSE)
-                                            HAM1     HAM2      HAM3      HAM4
-      Annualized Sharpe Ratio (Rf=3.9%) 1.0679 1.0417 0.8809 0.5063
-                                             HAM5     HAM6
-      Annualized Sharpe Ratio (Rf=3.9%) 0.1226 1.3132
+                                                    HAM1     HAM2      HAM3      HAM4
+      Annualized Sharpe Ratio (Rf=3.9%, p=95%): 1.0679 1.0417 0.8809 0.5063
+                                                     HAM5     HAM6
+      Annualized Sharpe Ratio (Rf=3.9%, p=95%): 0.1226 1.3132
     Code
       dev.off()
     Output
