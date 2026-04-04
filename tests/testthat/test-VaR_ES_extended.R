@@ -29,6 +29,18 @@ test_that("Extended VaR and ES methods function correctly (fixes #139)", {
   # Ensure they evaluate differently with different tail thresholds
   expect_false(isTRUE(all.equal(as.numeric(res_gpd_var), as.numeric(res_gpd_var_args))))
 
+  # Test GPD specific SE bounds
+  expect_error(res_gpd_se_var <- suppressWarnings(VaR(R[, 1], method = "gpd", SE = TRUE)), NA)
+  expect_equal(dim(res_gpd_se_var), c(3, 1)) # Should be VaR, LCL, UCL bounds
+
+  # VaR should be above LCL when valid, but could fail and return NA under test simulation
+  if (!is.na(res_gpd_se_var[1, 1]) && !is.na(res_gpd_se_var[2, 1])) {
+    expect_true(res_gpd_se_var[1, 1] >= res_gpd_se_var[2, 1])
+  }
+
+  expect_error(res_gpd_se_es <- suppressWarnings(ES(R[, 1], method = "gpd", SE = TRUE)), NA)
+  expect_equal(dim(res_gpd_se_es), c(3, 1))
+
   # Monte Carlo method tests
   set.seed(42)
   expect_error(res_mc_var <- VaR(R, method = "montecarlo", nsim = 100), NA)

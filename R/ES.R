@@ -312,6 +312,12 @@ ETL <- CVaR <- ES <- function(R = NULL, p = 0.95, ...,
       )
       SE.check <- FALSE
     }
+    if (!(method %in% c("historical", "gpd"))) {
+      warning("To return SEs, \"method\" must be \"historical\".",
+        call. = FALSE
+      )
+      SE.check <- FALSE
+    }
 
     if (invert) {
       warning("To return SEs, \"invert\" must be FALSE.",

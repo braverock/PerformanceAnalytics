@@ -381,7 +381,12 @@ VaR <-
         )
         SE.check <- FALSE
       }
-
+      if (!(method %in% c("historical", "gpd"))) {
+        warning("To return SEs, \"method\" must be \"historical\".",
+          call. = FALSE
+        )
+        SE.check <- FALSE
+      }
       if (invert) {
         warning("To return SEs, \"invert\" must be FALSE.",
           call. = FALSE
