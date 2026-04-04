@@ -22,7 +22,10 @@ ETL(
   invert = TRUE,
   operational = TRUE,
   SE = FALSE,
-  SE.control = NULL
+  SE.control = NULL,
+  p.tr = 0.97,
+  init = c(1, 0.3),
+  nsim = 10000
 )
 }
 \arguments{
@@ -33,7 +36,7 @@ returns}
 
 \item{\dots}{any other passthru parameters}
 
-\item{method}{one of "modified","gaussian","historical", see
+\item{method}{one of "modified","gaussian","historical", "kernel", "gpd", "lognormal", "montecarlo", see
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
@@ -52,11 +55,11 @@ sigma is the covariance matrix of the return series, default NULL, see
 Details}
 
 \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is
-the coskewness matrix (or vector with unique coskewness values) of the 
+the coskewness matrix (or vector with unique coskewness values) of the
 returns series, default NULL, see Details}
 
 \item{m4}{If univariate, m4 is the excess kurtosis of the series. Otherwise
-m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
+m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the
 return series, default NULL, see Details}
 
 \item{invert}{TRUE/FALSE whether to invert the VaR measure, see Details.}
@@ -66,10 +69,16 @@ return series, default NULL, see Details}
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 
 \item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
+
+\item{p.tr}{probability threshold for \code{method="gpd"}, default 0.97}
+
+\item{init}{initial parameter estimate for \code{method="gpd"}, default \code{c(1.00, 0.3)}}
+
+\item{nsim}{the number of simulations used for \code{method="montecarlo"}, default 10000}
 }
 \description{
 Calculates Expected Shortfall(ES) (also known as) Conditional Value at
-Risk(CVaR) or Expected Tail Loss (ETL) for univariate, component, 
+Risk(CVaR) or Expected Tail Loss (ETL) for univariate, component,
 and marginal cases using a variety of analytical methods.
 }
 \note{
@@ -84,7 +93,7 @@ consistent with prior versions of PerformanceAnalytics, but make no value
 judgement on which approach is preferable.
 }
 \section{Background}{
- 
+
 
 This function provides several estimation methods for
 the Expected Shortfall (ES) (also called Expected Tail Loss (ETL)
@@ -140,6 +149,14 @@ distribution. Represented in \R by \code{qnorm(c)}, and may be accessed with
 \code{method="gaussian"}. The function \eqn{\phi}{dnorm} is the Gaussian
 density function.
 
+Other forms of parametric estimation utilize a different distribution for the
+distribution of losses to better account for the possible fat-tailed nature of
+downside risk. The now-archived package \code{VaR} by Talgat Daniyarov
+contained methods for simulating and estimating lognormal and generalized
+Pareto distributions. You may access the lognormal estimate using
+\code{method="lognormal"}. A Generalized Pareto Distribution estimate is
+available using \code{method="gpd"}. A Monte Carlo simulation estimate is
+available using \code{method="montecarlo"}.
 
 The limitations of Gaussian ES are well covered in the literature, since most
 financial return series are non-normal. Boudt, Peterson and Croux (2008)
@@ -204,7 +221,7 @@ The \eqn{N \times N^3} co-kurtosis matrix is
 
 \deqn{ m_{4} =
     E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
-\right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']} 
+\right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']}
 
 where \eqn{\otimes}{\%x\%} stands for the Kronecker product. The matrices can
 be estimated through the functions \code{skewness.MM} and \code{kurtosis.MM}.
@@ -225,36 +242,41 @@ for details.
 }
 
 \examples{
-\donttest{ 
-    data(edhec)
+\donttest{
+data(edhec)
 
-    # first do normal ES calc
-    ES(edhec, p=.95, method="historical")
+# first do normal ES calc
+ES(edhec, p = .95, method = "historical")
 
-    # now use Gaussian
-    ES(edhec, p=.95, method="gaussian")
+# now use Gaussian
+ES(edhec, p = .95, method = "gaussian")
 
-    # now use modified Cornish Fisher calc to take non-normal distribution into account
-    ES(edhec, p=.95, method="modified")
+# now use modified Cornish Fisher calc to take non-normal distribution into account
+ES(edhec, p = .95, method = "modified")
 
-    # now use p=.99
-    ES(edhec, p=.99)
-    # or the equivalent alpha=.01
-    ES(edhec, p=.01)
-    
-    # CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
-    if(requireNamespace("robustbase", quietly = TRUE)){
-      ES(edhec, clean="boudt")
+# now use p=.99
+ES(edhec, p = .99)
+# or the equivalent alpha=.01
+ES(edhec, p = .01)
 
-      # add Component ES for the equal weighted portfolio
-      ES(edhec, clean="boudt", portfolio_method="component")
-    } # end CRAN workaround
-    
+# CRAN (questionably(ahem) requires these methods to not run if you don't have Suggests loaded)
+if (requireNamespace("robustbase", quietly = TRUE)) {
+  #        now with outliers squished
+  ES(edhec, clean = "boudt")
 
-} # end CRAN Windows check
-    
+  # add Component ES for the equal weighted portfolio
+  ES(edhec, clean = "boudt", portfolio_method = "component")
+} # end CRAN workaround
+
+
+# end CRAN Windows check
+}
+
 }
 \references{
+Daniyarov, T. \emph{VaR: Value at Risk estimation}. CRAN Archive. 2004.
+\url{https://cran.r-project.org/src/contrib/Archive/VaR/}
+
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
 Estimation and decomposition of downside risk for portfolios with non-normal
 returns. 2008. The Journal of Risk, vol. 11, 79-103.
@@ -267,8 +289,8 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 v 5.
 
-Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
-comoments and implications for portfolio selection. Review of Financial 
+Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order
+comoments and implications for portfolio selection. Review of Financial
 Studies, 23(4):1467-1502.
 
 Pflug, G. Ch.  Some remarks on the value-at-risk and the conditional
@@ -279,9 +301,9 @@ Scaillet, Olivier. Nonparametric estimation and sensitivity analysis of
 expected shortfall. Mathematical Finance, 2002, vol. 14, 74-86.
 }
 \seealso{
-\code{\link{VaR}} \cr \code{\link{SharpeRatio.modified}} \cr
+\code{\link{VaR}} \cr \code{\link{SharpeRatio}} \cr
 \code{\link{chart.VaRSensitivity}} \cr \code{\link{Return.clean}}
 }
 \author{
-Brian G. Peterson and Kris Boudt
+Brian G. Peterson and Kris Boudt, Talgat Daniyarov
 }

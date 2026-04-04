@@ -3704,6 +3704,35 @@
       pdf 
         2 
 
+# Snapshot for VaR.backtest
+
+    Code
+      pdf(file = NULL)
+      suppressWarnings(try({
+        source(ex_file, echo = TRUE, max.deparse.length = Inf)
+      }, silent = TRUE))
+    Output
+      
+      > data(edhec)
+      
+      > v <- as.numeric(VaR(edhec[, 1], p = 0.95, method = "historical"))
+      
+      > VaR.backtest(edhec[, 1], v, p = 0.95)
+      $expected_exceedances
+      [1] 14.65
+      
+      $actual_exceedances
+      [1] 15
+      
+      $p.value
+      [1] 1
+      
+    Code
+      dev.off()
+    Output
+      pdf 
+        2 
+
 # Snapshot for VolatilitySkewness
 
     Code

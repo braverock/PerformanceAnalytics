@@ -9,7 +9,8 @@ VaR(
   R = NULL,
   p = 0.95,
   ...,
-  method = c("modified", "gaussian", "historical", "kernel"),
+  method = c("modified", "gaussian", "historical", "kernel", "gpd", "lognormal",
+    "montecarlo"),
   clean = c("none", "boudt", "geltner", "locScaleRob"),
   portfolio_method = c("single", "component", "marginal"),
   weights = NULL,
@@ -19,7 +20,10 @@ VaR(
   m4 = NULL,
   invert = TRUE,
   SE = FALSE,
-  SE.control = NULL
+  SE.control = NULL,
+  p.tr = 0.97,
+  init = c(1, 0.3),
+  nsim = 10000
 )
 }
 \arguments{
@@ -30,7 +34,7 @@ asset returns}
 
 \item{\dots}{any other passthru parameters}
 
-\item{method}{one of "modified","gaussian","historical", "kernel", see
+\item{method}{one of "modified","gaussian","historical", "kernel", "gpd", "lognormal", "montecarlo", see
 Details.}
 
 \item{clean}{method for data cleaning through \code{\link{Return.clean}}.
@@ -49,11 +53,11 @@ sigma is the covariance matrix of the return series, default NULL, see
 Details}
 
 \item{m3}{If univariate, m3 is the skewness of the series. Otherwise m3 is
-the coskewness matrix (or vector with unique coskewness values) of the 
+the coskewness matrix (or vector with unique coskewness values) of the
 returns series, default NULL, see Details}
 
 \item{m4}{If univariate, m4 is the excess kurtosis of the series. Otherwise
-m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the 
+m4 is the cokurtosis matrix (or vector with unique cokurtosis values) of the
 return series, default NULL, see Details}
 
 \item{invert}{TRUE/FALSE whether to invert the VaR measure.  see Details.}
@@ -61,6 +65,12 @@ return series, default NULL, see Details}
 \item{SE}{TRUE/FALSE whether to ouput the standard errors of the estimates of the risk measures, default FALSE.}
 
 \item{SE.control}{Control parameters for the computation of standard errors. Should be done using the \code{\link{RPESE.control}} function.}
+
+\item{p.tr}{for \code{method="gpd"}, the threshold probability for GPD fit, default 0.97}
+
+\item{init}{for \code{method="gpd"}, initial values for the Nelder-Mead optimization, default \code{c(1.00, 0.3)}}
+
+\item{nsim}{for \code{method="montecarlo"}, number of simulations, default 10000}
 }
 \description{
 Calculates Value-at-Risk(VaR) for univariate, component, and marginal cases
@@ -110,7 +120,7 @@ the negative returns, or equivalently, is the negative value of the
 \eqn{c=1-p} quantile of the returns. In a set of returns for which
 sufficently long history exists, the per-period Value at Risk is simply the
 quantile of the period negative returns :
-  
+
   \deqn{VaR=q_{.99}}{VaR=quantile(-R,p)}
 
 where  \eqn{q_{.99}} is the 99\% empirical quantile of the negative return series.
@@ -147,14 +157,15 @@ and may be accessed with \code{method="gaussian"}.
 Other forms of parametric mean-VaR estimation utilize a different
 distribution for the distribution of losses to better account for the
 possible fat-tailed nature of downside risk. The now-archived package
-\code{VaR} contained methods for simulating and estimating lognormal and
+\code{VaR} by Talgat Daniyarov contained methods for simulating and estimating lognormal and
 generalized Pareto distributions to overcome some of the problems with
 nonparametric or parametric mean-VaR calculations on a limited sample size or
-on potentially fat-tailed distributions. There was also a
-VaR.backtest function to apply simulation methods to create a more robust
-estimate of the potential distribution of losses. Less commonly a covariance
-matrix of multiple risk factors may be applied. This functionality should 
-probably be 
+on potentially fat-tailed distributions. You may access the lognormal
+estimate using \code{method="lognormal"}. A Generalized Pareto Distribution
+estimate is available using \code{method="gpd"}. A Monte Carlo simulation
+estimate is available using \code{method="montecarlo"}. The \code{\link{VaR.backtest}}
+function may be used to apply a binomial proportion of failures test to any
+of these VaR estimates to evaluate their ex-post accuracy.
 
 The limitations of mean Value-at-Risk are well covered in the literature.
 The limitations of traditional mean-VaR are all related to the use of a
@@ -169,7 +180,7 @@ stream follows a standard distribution. This measure is now widely cited and
 used in the literature, and is usually referred to as \dQuote{Modified VaR}
 or \dQuote{Modified Cornish-Fisher VaR}. They arrive at their modified VaR
 calculation in the following manner:
-  
+
 \deqn{z_{cf}=z_{c}+\frac{(z_{c}^{2}-1)S}{6}+\frac{(z_{c}^{3}-3z_{c})K}{24}-\frac{(2z_{c}^{3}-5z_{c})S^{2}}{36}}{
     z_cf=z_c+[(z_c^2-1)S]/6+[(z_c^3-3z_c)K]/24-[(2z_c^3-5z_c)S^2]/36}
 
@@ -188,7 +199,7 @@ resampling or Monte-Carlo simulation.  This is the default method for the
 
 Favre and Galeano also utilize modified VaR in a modified Sharpe Ratio as the
 return/risk measure for their portfolio optimization analysis, see
-\code{\link{SharpeRatio.modified}} for more information.
+\code{\link{SharpeRatio}} for more information.
 }
 
 \section{Component VaR }{
@@ -209,7 +220,7 @@ position weight will reduce overall portoflio VaR.
 If a weighting vector is not passed in via \code{weights}, the function will
 assume an equal weighted (neutral) portfolio.
 
-Multiple risk decomposition approaches have been suggested in the literature. 
+Multiple risk decomposition approaches have been suggested in the literature.
 A naive approach is to set the risk contribution equal to the stand-alone risk.
 This approach is overly simplistic and neglects important diversification
 effects of the units being exposed differently to the underlying risk
@@ -237,7 +248,7 @@ the coskewness and cokurtosis matrices are needed. If \eqn{r} denotes the
 \deqn{ m_{4} =
   E\left[ (r - \mu)(r - \mu)' \otimes (r - \mu)'\otimes (r - \mu)'
   \right] }{E[ (r - \mu)(r - \mu)' \%x\% (r - \mu)'\%x\% (r - \mu)']}
-  
+
 where \eqn{\otimes}{\%x\%} stands for the Kronecker product. The matrices can
 be estimated through the functions \code{skewness.MM} and \code{kurtosis.MM}.
 More efficient estimators have been proposed by Martellini and Ziemann (2007)
@@ -255,8 +266,8 @@ for highly illiquid assets, then \code{clean="geltner"} may be more
 appropriate to reduce distortion caused by autocorrelation, see
 \code{\link{Return.Geltner}} for details.
 
-Epperlein and Smillie (2006) introduced a non-parametric kernel estimator for 
-component risk contributions, which is available via \code{method="kernel"} 
+Epperlein and Smillie (2006) introduced a non-parametric kernel estimator for
+component risk contributions, which is available via \code{method="kernel"}
 and \code{portfolio_method="component"}.
 }
 
@@ -273,38 +284,42 @@ time.
 
 Simon Keel and David Ardia (2009) attempt to reconcile some of the
 definitional issues and address some of the shortcomings of this measure in
-their working paper titled \dQuote{Generalized Marginal Risk}. Hopefully 
+their working paper titled \dQuote{Generalized Marginal Risk}. Hopefully
 their improved Marginal Risk measures may be included here in the future.
 }
 
 \examples{
 \donttest{
-    data(edhec)
+data(edhec)
 
-    # first do normal VaR calc
-    VaR(edhec, p=.95, method="historical")
+# first do normal VaR calc
+VaR(edhec, p = .95, method = "historical")
 
-    # now use Gaussian
-    VaR(edhec, p=.95, method="gaussian")
+# now use Gaussian
+VaR(edhec, p = .95, method = "gaussian")
 
-    # now use modified Cornish Fisher calc to take non-normal distribution into account
-    VaR(edhec, p=.95, method="modified")
+# now use modified Cornish Fisher calc to take non-normal distribution into account
+VaR(edhec, p = .95, method = "modified")
 
-    # now use p=.99
-    VaR(edhec, p=.99)
-    # or the equivalent alpha=.01
-    VaR(edhec, p=.01)
+# now use p=.99
+VaR(edhec, p = .99)
+# or the equivalent alpha=.01
+VaR(edhec, p = .01)
 
-    # now with outliers squished
-    VaR(edhec, clean="boudt")
+# now with outliers squished
+VaR(edhec, clean = "boudt")
 
-    # add Component VaR for the equal weighted portfolio
-    VaR(edhec, clean="boudt", portfolio_method="component")
+# add Component VaR for the equal weighted portfolio
+VaR(edhec, clean = "boudt", portfolio_method = "component")
 
-} # end CRAN check
+# end CRAN check
+}
 
 }
 \references{
+Daniyarov, T. \emph{VaR: Value at Risk estimation}. CRAN Archive. 2004.
+\url{https://cran.r-project.org/src/contrib/Archive/VaR/}
+
 Boudt, Kris, Peterson, Brian, and Christophe Croux. 2008.
 Estimation and decomposition of downside risk for portfolios with non-normal
 returns. 2008. The Journal of Risk, vol. 11, 79-103.
@@ -330,8 +345,8 @@ Laurent Favre and Jose-Antonio Galeano. Mean-Modified Value-at-Risk
 Optimization with Hedge Funds. Journal of Alternative Investment, Fall 2002,
 v 5.
 
-Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order 
-comoments and implications for portfolio selection. Review of Financial 
+Martellini, L. and Ziemann, V., 2010. Improved estimates of higher-order
+comoments and implications for portfolio selection. Review of Financial
 Studies, 23(4):1467-1502.
 
 Return to RiskMetrics: Evolution of a Standard
@@ -351,15 +366,15 @@ Jorian, Phillippe. Value at Risk, the new benchmark for managing financial risk.
 Hallerback, John. "Decomposing Portfolio Value-at-Risk: A General Analysis",
 2003. The Journal of Risk vol 5/2.
 
-Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and 
+Yamai and Yoshiba (2002). "Comparative Analyses of Expected Shortfall and
    Value-at-Risk: Their Estimation Error, Decomposition, and Optimization",
    Bank of Japan.
 }
 \seealso{
-\code{\link{SharpeRatio.modified}} \cr
+\code{\link{SharpeRatio}} \cr
 \code{\link{chart.VaRSensitivity}} \cr
 \code{\link{Return.clean}}
 }
 \author{
-Brian G. Peterson and Kris Boudt
+Brian G. Peterson and Kris Boudt, Talgat Daniyarov
 }
