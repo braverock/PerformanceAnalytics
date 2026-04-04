@@ -2540,6 +2540,31 @@
       > chart.StackedBar(x$BOP.Weight)
       
       > chart.StackedBar(x$BOP.Value)
+      
+      > Return.portfolio(edhec["1997", 1:5], rebalance_on = "quarters", 
+      +     rebal_cost = 0.002)
+                 portfolio.returns
+      1997-01-31       0.0334
+      1997-02-28       0.0237
+      1997-03-31      -0.0014
+      1997-04-30       0.0036
+      1997-05-31       0.0176
+      1997-06-30       0.0254
+      1997-07-31       0.0364
+      1997-08-31      -0.0051
+      1997-09-30       0.0220
+      1997-10-31      -0.0108
+      1997-11-30      -0.0026
+      1997-12-31       0.0129
+      
+      > x_cost <- Return.portfolio(edhec["2000::", 1:11], 
+      +     weights = weights, verbose = TRUE, rebal_cost = 0.01)
+      
+      > chart.CumReturns(x_cost$returns)
+      
+      > chart.StackedBar(x_cost$BOP.Weight)
+      
+      > chart.StackedBar(x_cost$BOP.Value)
     Code
       dev.off()
     Output
