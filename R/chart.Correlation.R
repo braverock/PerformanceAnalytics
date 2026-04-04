@@ -15,7 +15,7 @@
 #'           (default), "kendall", or "spearman", can be abbreviated.
 #' @param pch See \code{\link{par}}
 #' @param \dots any other passthru parameters into \code{\link{pairs}}
-#' @note based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
+#' @note based on plot at originally found at gallery.r-enthusiasts.com/graph/137
 #' @author Peter Carl
 #' @seealso \code{\link{table.Correlation}} \code{\link{par}}
 #'
@@ -41,7 +41,7 @@ chart.Correlation <-
     dotargs <- list(...)
     c_cex <- if ("cex.cor" %in% names(dotargs)) dotargs$cex.cor else NULL
 
-    # Published at https://addictedtor.free.fr/graphiques/sources/source_137.R
+    # Published at http://gallery.r-enthusiasts.com/graph/137
     panel.cor <- function(x, y, digits = 2, prefix = "", use = "pairwise.complete.obs", method = cormeth, ...) {
       usr <- par("usr")
       on.exit(par(usr = usr))

@@ -34,7 +34,7 @@ transformed to plot the monotonically ranked data rather than the raw values,
 providing visual alignment with the evaluated correlation method.
 }
 \note{
-based on plot at originally found at addictedtor.free.fr/graphiques/sources/source_137.R
+based on plot at originally found at gallery.r-enthusiasts.com/graph/137
 }
 \examples{
 

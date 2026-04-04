@@ -36,8 +36,8 @@ in the tools available to a financial engineer or analyst.
 }
 \section{Time Series Data}{
 
-  
-  
+
+
 Not all, but many of the measures in this package
 require time series data.  \kbd{PerformanceAnalytics} uses the
 \code{\link[xts]{xts}} package for managing time series data for several
@@ -195,8 +195,8 @@ alternative asset without several years of historical return data available.
 
 \section{Value at Risk (VaR) and Expected Shortfall (ES, ETL, CVaR)}{
 
-  
-  
+
+
 \emph{Traditional mean-VaR}:
   In the early 90's, academic literature started referring to \dQuote{value at
 risk}, typically written as VaR. Take care to capitalize VaR in the commonly
@@ -225,7 +225,7 @@ parametric mean-VaR calculations on a limited sample size.  There is also a
 \kbd{VaR.backtest} function to apply simulation methods to create a more
 robust estimate of the potential distribution of losses.  The VaR package
 also provides plots for its functions.  We will attempt to incorporate this
-orphaned functionality in PerformanceAnalytics in an upcoming release, and 
+orphaned functionality in PerformanceAnalytics in an upcoming release, and
 would welcome patches or pull requests in this direction.
 
 \emph{Modified Cornish-Fisher VaR}:
@@ -251,7 +251,7 @@ Note that estimates for Cornish Fisher modified VaR and ES may be unstable
 with small sample sizes.  See Martin and Arora (2017) for more details.
 
 \emph{Conditional VaR and Expected Shortfall}:
-  We have implemented Conditional Value at Risk, also called Expected Tail Loss 
+  We have implemented Conditional Value at Risk, also called Expected Tail Loss
 or Expected Shortfall
 (not to be confused with shortfall probability, which is much less useful),
 in function \code{\link{ES}}.  Expected Shortfall attempts to measure the
@@ -309,15 +309,15 @@ we agree with \cite{Bali and Gokcan(2004)} who conclude that \dQuote{the VaR
   Cornish-Fisher approximation perform best}.
 
 Most risk professionals are moving from using VaR to using Expected Shortfall
-preferentially.  This preference has been endorsed by the Bank of International 
+preferentially.  This preference has been endorsed by the Bank of International
 Settlements (BIS) and the Basel accord risk committee.  In most cases, an ES
-measure with an appropriate probability target for your asset horizin will be 
+measure with an appropriate probability target for your asset horizin will be
 more appropriate than a VaR measure.
 }
 
 \section{Performance Analysis}{
 
-  
+
 The literature around the subject of performance analysis seems to have
 exploded with the popularity of alternative assets such as hedge funds,
 managed futures, commodities, and structured products. Simpler tools that
@@ -460,8 +460,8 @@ assess whether the manager has shown evidence that of timing skill.
 
 \emph{Performance/Risk Ratios:}
 
-In many cases, an analyst will be looking to find a measure or performance 
-relative to the risk of the asset under study.  PerformanceAnalytics has many 
+In many cases, an analyst will be looking to find a measure or performance
+relative to the risk of the asset under study.  PerformanceAnalytics has many
 functions of this type.
 
 One of the most commonly used and cited measures of the risk/reward tradeoff
@@ -480,9 +480,9 @@ using the ratio of expected excess return over the Cornish-Fisher
 \code{\link{VaR}} to produce \code{\link{SharpeRatio.modified}}.
 \code{\link{TreynorRatio}} is also similar to the Sharpe Ratio, except it
 uses \code{\link{CAPM.beta}} in place of the volatility measure to produce
-the ratio of the investment's excess return over the beta. Use of the downside 
-semivariance as the denominator creates the .  Use of the upside expected tail 
-return over the ETL creates the \code{\link{RachevRatio}}.  Utilizing the 
+the ratio of the investment's excess return over the beta. Use of the downside
+semivariance as the denominator creates the .  Use of the upside expected tail
+return over the ETL creates the \code{\link{RachevRatio}}.  Utilizing the
 downside semivariance as the denominator produces the Downside Sharpe Ratio.
 
 The performance premium provided by an investment over a passive strategy
@@ -521,16 +521,16 @@ positive or negative investment decision.
 
 
 
-While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators, 
-until now there has been no convenient way to accurately compute standard errors of the estimates for independent and 
-identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no 
-longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns 
-are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and 
-Martin (2019) at \url{https://www.ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk. 
-The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram 
-based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk 
-and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://www.ssrn.com/abstract=3415903}. 
-The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated 
+While \kbd{PerformanceAnalytics} contains many functions for computing returns based risk and performance estimators,
+until now there has been no convenient way to accurately compute standard errors of the estimates for independent and
+identically distributed (i.i.d.) returns, and no way at all to do so for returns that are serially correlated. This is no
+longer the case due to the existence of a new frequency domain method of accurately computing standard errors when returns
+are serially dependent as well as when returns are independent and identically distributed. Details are provided in Xin and
+Martin (2019) at \url{https://www.ssrn.com/abstract=3085672}, and to appear in December 2020 issue of Journal of Risk.
+The new method makes novel use of statistical influence functions borrowed from robust statistics, combined with periodogram
+based regularized generalized linear polynomial model (GLM) fitting for exponential distributions. Influence function for risk
+and performance estimators are described in Zhang, Martin and Christidis (2020) available at SSRN \url{https://www.ssrn.com/abstract=3415903}.
+The new method has been implemented in the \kbd{RPESE} package available at CRAN. The \kbd{RPESE} package has been integrated
 into \kbd{PerformanceAnalytics}.
 
 Standard errors can be easily computed using the \kbd{PerformanceAnalytics} risk estimator functions
@@ -542,7 +542,7 @@ Standard errors can be easily computed using the \kbd{PerformanceAnalytics} risk
 \code{\link{ES}} \tab Expected shortfall with tail probability \eqn{\alpha} \cr
 \code{\link{VaR}} \tab Value-at-risk with tail probability \eqn{\alpha} \cr
 }
-and performance estimator functions 
+and performance estimator functions
 \cr
 \tabular{ll}{
 \code{\link{mean.arithmetic}}  \tab  Sample mean \cr
@@ -616,7 +616,7 @@ large majority of the return data. The increased robustness and
 stability of the estimated moments using cleaned data should be
 used for portfolio construction. If an investor wishes to
 have a more conservative risk estimate, cleaning may not be
-indicated for risk monitoring. 
+indicated for risk monitoring.
 
 In actual practice, it is probably best to back-test the out-of-sample results of
 both cleaned and uncleaned series to see what works best when forecasting risk with the
@@ -737,17 +737,17 @@ used for showing portfolio 'weights' through time, although the function will
 plot any values by category.
 
 We have been greatly inspired by other peoples' work, some of which is on
-display at addictedtor.free.fr.  Particular inspiration came from Dirk
+display at gallery.r-enthusiasts.com.  Particular inspiration came from Dirk
 Eddelbuettel and John Bollinger for their work at
-https://addictedtor.free.fr/graphiques/RGraphGallery.php?graph=65. Those
+http://gallery.r-enthusiasts.com/graph/65. Those
 interested in price charting in \R should also look at the \code{quantmod}
 package.
 }
 
 \section{Wrapper and Utility Functions}{
 
-  
-  
+
+
 \R is a very powerful environment for manipulating data.  It can also be
 quite confusing to a user more accustomed to Excel or even MatLAB.  As such,
 we have written some wrapper functions that may aid you in coercing data into
@@ -768,7 +768,7 @@ easier.
 
 \section{Further Work}{
 
-  
+
 
 We have attempted to standardize function parameters and variable names, but
 more work exists to be done here.
@@ -791,7 +791,7 @@ Management Research Center. \cr
 
 Kris Boudt was instrumental in our research on component risk for
 portfolios with non-normal distributions, and is responsible for much of
-the code for multivariate moments and co-moments. This works was later extended 
+the code for multivariate moments and co-moments. This works was later extended
 and made faster and more robust by Dries Cornilly
 
 Jeff Ryan and Joshua Ulrich are active participants in the R finance
@@ -805,7 +805,7 @@ provided prototypes of modified VaR and skewness and kurtosis functions
 (and was of course the maintainer of the RMetrics suite of pricing and
 optimization functions).  Diethelm also contributed prototypes for many
 other functions from Bacon's book that were incorporated into
-PerformanceAnalytics by Matthieu Lestel.  
+PerformanceAnalytics by Matthieu Lestel.
 
 Thanks to Joe Wayne Byers and Dirk Eddelbuettel for comments on early
 versions of these functions, and to Khanh Nguyen, Tobias Verbeke, H. Felix
@@ -830,7 +830,7 @@ Any errors are, of course, our own.
 Amenc, N. and Le Sourd, V. \emph{Portfolio Theory and
   Performance Analysis}. Wiley. 2003. \cr
 
-Pfaff, B. \emph{Financial Risk Modeling and Portfolio Optimization with R, 
+Pfaff, B. \emph{Financial Risk Modeling and Portfolio Optimization with R,
   Second Edition}. Wiley. 2016. \cr
 
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
@@ -859,7 +859,7 @@ Ranaldo, A., and Laurent Favre Sr. \emph{How to Price Hedge Funds: From
 
 Murrel, P. \emph{R Graphics}. Chapman and Hall. 2006.  \cr
 
-Ruppert, D., and Matteson, D \emph{Statistics and Data Analysis for 
+Ruppert, D., and Matteson, D \emph{Statistics and Data Analysis for
   Financial Engineering, with R Examples. Second Edition}. Springer. 2015. \cr
 
 Scherer, B. and Martin, D. \emph{Modern Portfolio Optimization}. Springer.
