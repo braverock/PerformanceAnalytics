@@ -14,23 +14,23 @@ sortDrawdowns(findDrawdowns(R)) Gives the drawdowns in order of worst to
 best
 }
 \details{
-Returns a sorted list: \itemize{ 
- \item return depth of drawdown 
- \item from starting period 
- \item to ending period 
- \item length length in periods 
+Returns a sorted list: \itemize{
+ \item return depth of drawdown
+ \item from starting period
+ \item to ending period
+ \item length length in periods
 }
 }
 \examples{
 
 data(edhec)
-findDrawdowns(edhec[,"Funds of Funds", drop=FALSE])
-sortDrawdowns(findDrawdowns(edhec[,"Funds of Funds", drop=FALSE]))
+findDrawdowns(edhec[, "Funds of Funds", drop = FALSE])
+sortDrawdowns(findDrawdowns(edhec[, "Funds of Funds", drop = FALSE]))
 
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
-Attribution}. Wiley. 2004. p. 88 \cr
+Attribution}. Wiley. 3rd Edition. 2023. p. 194-196 \cr
 }
 \seealso{
 \code{\link{DownsideDeviation}} \cr \code{\link{maxDrawdown}} \cr

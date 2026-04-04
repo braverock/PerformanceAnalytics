@@ -44,7 +44,7 @@ sortDrawdowns(findDrawdowns(edhec[, "Funds of Funds", drop = FALSE]))
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
-Attribution}. Wiley. 2004. p. 88 \cr
+Attribution}. Wiley. 3rd Edition. 2023. p. 194-196 \cr
 }
 \seealso{
 \code{\link{sortDrawdowns}} \cr

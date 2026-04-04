@@ -50,7 +50,7 @@ t(round(maxDrawdown(managers), 4))
 }
 \references{
 Bacon, C. \emph{Practical Portfolio Performance Measurement and
-Attribution}. Wiley. 2004. p. 88 \cr
+Attribution}. Wiley. 3rd Edition. 2023. p. 194-196 \cr
 }
 \seealso{
 \code{\link{findDrawdowns}} \cr \code{\link{sortDrawdowns}} \cr
