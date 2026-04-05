@@ -220,6 +220,9 @@ chart.RiskReturnScatter <-
       par(original.layout)
     }
     #     par(op)
+
+    p <- recordPlot()
+    return(invisible(p))
   }
 
 ###############################################################################

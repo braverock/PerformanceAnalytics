@@ -228,6 +228,9 @@ chart.SnailTrail <-
 
     # title(sub='From Inception', line=1)
     box(col = element.color)
+
+    p <- recordPlot()
+    return(invisible(p))
   }
 
 ###############################################################################

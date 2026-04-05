@@ -61,6 +61,8 @@ chart.ACFplus <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, 
     abline(h=c(0,L,U), lty=c(1,2,2), col=c(1,4,4))
 
     par(op)
+    p <- recordPlot()
+    return(invisible(p))
 #    return(cbind(ACF, PACF)) 
 }
 

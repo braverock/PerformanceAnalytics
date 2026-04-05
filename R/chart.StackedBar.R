@@ -102,6 +102,8 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
     else
         chart.StackedBar.matrix(w, colorset = colorset, space = space, cex.axis=cex.axis, cex.legend = cex.legend, cex.lab = cex.lab, cex.labels = cex.labels, cex.main = cex.main, xaxis=xaxis, legend.loc=legend.loc,  element.color = element.color, unstacked = unstacked, xlab=xlab, ylab=ylab, ylim=ylim, date.format = date.format, major.ticks=major.ticks, minor.ticks=minor.ticks, las = las, xaxis.labels = xaxis.labels, ... )
 #     par(op)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 chart.StackedBar.xts <- 
@@ -193,9 +195,13 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
                 ncol = 4
             legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol, box.col=element.color, border.col = element.color)
             par(op)
+    p <- recordPlot()
+    return(invisible(p))
         } # if legend.loc is null, then do nothing
     }
 #     par(op)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ### NOT A TIME SERIES OBJECT
@@ -285,9 +291,13 @@ function (w, colorset = NULL, space = 0.2, cex.axis=0.8, cex.legend = 0.8, cex.l
                 legend("center", legend=colnames(w), cex = cex.legend, fill=colorset, ncol=ncol,
  box.col=element.color, border.col = element.color)
                 par(op)
+    p <- recordPlot()
+    return(invisible(p))
             } # if legend.loc is null, then do nothing
         }
 #     par(op)
+    p <- recordPlot()
+    return(invisible(p))
     }
 }
 ###############################################################################

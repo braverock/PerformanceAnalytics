@@ -75,6 +75,8 @@ chart.ACF <- function(R, maxlag = NULL, elementcolor = "gray", main = NULL, ...)
     axis(1, col = elementcolor, cex.axis = 0.8)
     abline(h=c(0,L,U), lty=c(1,2,2), col=c(1,4,4))
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

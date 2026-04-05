@@ -71,6 +71,8 @@ charts.RollingRegression = function (Ra, Rb, width = 12, Rf = 0, main = NULL, le
     print(plot_object)
     title(main, outer = TRUE)
     par(op)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

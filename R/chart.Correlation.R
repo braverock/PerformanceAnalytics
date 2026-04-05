@@ -124,6 +124,9 @@ chart.Correlation <-
     if (!hasArg("main")) pairs_args$main <- title_str
 
     do.call(pairs, pairs_args)
+
+    p <- recordPlot()
+    return(invisible(p))
   }
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis

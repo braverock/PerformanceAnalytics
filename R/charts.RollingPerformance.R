@@ -96,6 +96,8 @@ function (R, width = 12, Rf = 0, main = NULL, event.labels = NULL, legend.loc=NU
     suppressWarnings(print(plot_object))
     title(main, outer = TRUE)
     par(op)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

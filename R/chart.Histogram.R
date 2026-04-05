@@ -330,6 +330,8 @@ function(R,
 #                 abline(v = b, col = "darkgray", lty=2)
 #                 text(b, h, b.labels, offset = .2, pos = 2, cex = 0.8, srt=90)
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

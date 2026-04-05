@@ -74,6 +74,8 @@ function (R, main = "Returns", cex.legend = 0.8, colorset=1:12, ylim=NA, ..., pe
 	endcol = min(endcol+perpanel, columns)
     } # Loop for panels
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

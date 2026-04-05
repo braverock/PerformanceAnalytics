@@ -189,6 +189,8 @@ function (R, names = TRUE, as.Tufte = FALSE, plot.engine = "default",sort.by = c
       
       return(p)
     }
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

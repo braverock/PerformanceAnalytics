@@ -70,6 +70,8 @@ function(R, main = "Empirical CDF", xlab="x", ylab="F(x)", colorset = c("black",
 
     box(col=element.color)
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

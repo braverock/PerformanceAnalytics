@@ -225,6 +225,8 @@ chart.QQPlot <-
 	if (yaxis) 
 		axis(2, cex.axis = cex.axis, col = element.color)
 	box(col = element.color)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

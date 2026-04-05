@@ -1,9 +1,9 @@
 #' Create combined wealth index, period performance, and drawdown chart
-#' 
+#'
 #' For a set of returns, create a wealth index chart, bars for per-period
 #' performance, and underwater chart for drawdown.
-#' 
-#' 
+#'
+#'
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
 #' asset returns
 #' @param Rf risk free rate, in same period as your returns
@@ -44,29 +44,28 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.CumReturns}} \cr \code{\link{chart.BarVaR}} \cr
 #' \code{\link{chart.Drawdown}}
-###keywords ts multivariate distribution models hplot
+### keywords ts multivariate distribution models hplot
 #' @examples
-#' 
+#'
 #' data(edhec)
-#' charts.PerformanceSummary(edhec[,c(1,13)])
-#' 
+#' charts.PerformanceSummary(edhec[, c(1, 13)])
+#'
 #' @export
 charts.PerformanceSummary <-
-function (R, Rf = 0, 
-          main = NULL, 
-          geometric=TRUE, 
-          methods = "none", 
-          width = 0, 
-          event.labels = NULL, 
-          ylog = FALSE, 
-          wealth.index = FALSE, 
-          gap = 12, 
-          begin=c("first","axis"), 
-          legend.loc="topleft", 
-          p=0.95,
-          plot.engine="default",
-          ...)
-{ # @author Peter Carl
+  function(R, Rf = 0,
+           main = NULL,
+           geometric = TRUE,
+           methods = "none",
+           width = 0,
+           event.labels = NULL,
+           ylog = FALSE,
+           wealth.index = FALSE,
+           gap = 12,
+           begin = c("first", "axis"),
+           legend.loc = "topleft",
+           p = 0.95,
+           plot.engine = "default",
+           ...) { # @author Peter Carl
 
     # DESCRIPTION:
     # A wrapper to create a wealth index chart, bars for monthly peRformance,
@@ -89,50 +88,53 @@ function (R, Rf = 0,
     # A stack of three related timeseries line charts
 
     # FUNCTION:
-    begin = begin[1]
-    x = checkData(R)
-    colnames = colnames(x)
-    ncols = ncol(x)
-    
-    #Argument Check
-    if(plot.engine != "default"&&
-       plot.engine != "ggplot2"&&
-       plot.engine != "plotly"){
-        warning('Please use correct arguments:
+    begin <- begin[1]
+    x <- checkData(R)
+    colnames <- colnames(x)
+    ncols <- ncol(x)
+
+    # Argument Check
+    if (plot.engine != "default" &&
+      plot.engine != "ggplot2" &&
+      plot.engine != "plotly") {
+      warning('Please use correct arguments:
               "default","ggplot2","plotly".
-              
+
               Ploting chart using built-in engine now.')
-        
-        plot.engine = "default"
+
+      plot.engine <- "default"
     }
-    
 
-# This repeats a bit of code from chart.CumReturns, but it's intended
-# to align the start dates of all three charts.  Basically, it assumes
-# that the first column in the list is the column of interest, and 
-# starts everything from that start date
 
-    length.column.one = length(x[,1])
-# find the row number of the last NA in the first column
-    start.row = 1
-    start.index = 0
-    while(is.na(x[start.row,1])){
-        start.row = start.row + 1
+    # This repeats a bit of code from chart.CumReturns, but it's intended
+    # to align the start dates of all three charts.  Basically, it assumes
+    # that the first column in the list is the column of interest, and
+    # starts everything from that start date
+
+    length.column.one <- length(x[, 1])
+    # find the row number of the last NA in the first column
+    start.row <- 1
+    start.index <- 0
+    while (is.na(x[start.row, 1])) {
+      start.row <- start.row + 1
     }
-    x = x[start.row:length.column.one,]
+    x <- x[start.row:length.column.one, ]
 
-    if(ncols > 1)
-        legend.loc = legend.loc
-    else
-        legend.loc = NULL
+    if (ncols > 1) {
+      legend.loc <- legend.loc
+    } else {
+      legend.loc <- NULL
+    }
 
-    if(is.null(main))
-        main = paste(colnames[1],"Performance", sep=" ")
+    if (is.null(main)) {
+      main <- paste(colnames[1], "Performance", sep = " ")
+    }
 
-    if(ylog)
-        wealth.index = TRUE
+    if (ylog) {
+      wealth.index <- TRUE
+    }
 
-    op <- par(no.readonly=TRUE)
+    op <- par(no.readonly = TRUE)
 
     # First, we lay out the graphic as a three row, one column format
     # plot.new()
@@ -144,170 +146,192 @@ function (R, Rf = 0,
     # of the plot. The default is c(5, 4, 4, 2) + 0.1
 
     # The first row is the cumulative returns line plot
-    par(oma = c(2, 0, 4, 0), mar=c(1,4,4,2))
-    
-    # The second row is the monthly returns bar plot
-    par(mar=c(1,4,0,2))
+    par(oma = c(2, 0, 4, 0), mar = c(1, 4, 4, 2))
 
-    freq = periodicity(x)
+    # The second row is the monthly returns bar plot
+    par(mar = c(1, 4, 0, 2))
+
+    freq <- periodicity(x)
 
     switch(freq$scale,
-  	  seconds = { date.label = "Second"},
-  	  minute = { date.label = "Minute"},
-  	  hourly = {date.label = "Hourly"},
-  	  daily = {date.label = "Daily"},
-  	  weekly = {date.label = "Weekly"},
-  	  monthly = {date.label = "Monthly"},
-  	  quarterly = {date.label = "Quarterly"},
-  	  yearly = {date.label = "Annual"}
+      seconds = {
+        date.label <- "Second"
+      },
+      minute = {
+        date.label <- "Minute"
+      },
+      hourly = {
+        date.label <- "Hourly"
+      },
+      daily = {
+        date.label <- "Daily"
+      },
+      weekly = {
+        date.label <- "Weekly"
+      },
+      monthly = {
+        date.label <- "Monthly"
+      },
+      quarterly = {
+        date.label <- "Quarterly"
+      },
+      yearly = {
+        date.label <- "Annual"
+      }
     )
 
-    
+
     # The third row is the underwater plot
-    par(mar=c(5,4,0,2))
-    
-    
+    par(mar = c(5, 4, 0, 2))
+
+
     # Plot the above processed charts
-    
+
     switch(plot.engine,
-           
-           default=
-            {# Plot the cumulative returns
-            plot_object <- chart.CumReturns(x, 
-                                            main = "Cumulative Return", 
-                                            xaxis = FALSE, 
-                                            legend.loc = legend.loc, 
-                                            event.labels = event.labels, 
-                                            ylog = ylog, 
-                                            wealth.index = wealth.index, 
-                                            begin = begin, 
-                                            geometric = geometric, 
-                                            ylab="Cumulative Return",
-                                            plot.engine = "default",
-                                            ...)
-            
-            # Plot the BarVar diagrams
-            plot_object <- chart.BarVaR(x, 
-                                        main = paste(date.label,"Return"), 
-                                        xaxis = FALSE, 
-                                        width = width, 
-                                        ylab = paste(date.label,"Return"), 
-                                        methods = methods, 
-                                        event.labels = NULL, 
-                                        ylog=FALSE, 
-                                        gap = gap, p=p, 
-                                        add = TRUE,
-                                        plot.engine = "default",
-                                        ...)
-            
-            # Plot the Underwater plot
-            plot_object <- chart.Drawdown(x, 
-                                          geometric = geometric, 
-                                          main = "Drawdown", 
-                                          ylab = "Drawdown", 
-                                          event.labels = NULL, 
-                                          ylog=FALSE, 
-                                          add = TRUE, 
-                                          plot.engine = "default",
-                                          ...)
-            
-            # If we wanted to add a fourth row with the table of monthly returns
-            #par(mar=c(0,0,0,0))
-            #textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
-            print(plot_object)
-            title(main, outer = TRUE)
-            par(op)},
-          
-          ggplot2 = 
-            {
-            plot_object_CumReturn <- chart.CumReturns(x, 
-                                        main = "Cumulative Return", 
-                                        xaxis = FALSE, 
-                                        legend.loc = legend.loc, 
-                                        event.labels = event.labels, 
-                                        ylog = ylog, 
-                                        wealth.index = wealth.index, 
-                                        begin = begin, 
-                                        geometric = geometric, 
-                                        ylab="Cumulative Return",
-                                        plot.engine = "ggplot2",
-                                        ...)
+      default = { # Plot the cumulative returns
+        plot_object <- chart.CumReturns(x,
+          main = "Cumulative Return",
+          xaxis = FALSE,
+          legend.loc = legend.loc,
+          event.labels = event.labels,
+          ylog = ylog,
+          wealth.index = wealth.index,
+          begin = begin,
+          geometric = geometric,
+          ylab = "Cumulative Return",
+          plot.engine = "default",
+          ...
+        )
 
-            # plot_object_BarVar <- chart.BarVaR(x, 
-            #                             main = paste(date.label,"Return"), 
-            #                             xaxis = FALSE, 
-            #                             width = width, 
-            #                             ylab = paste(date.label,"Return"), 
-            #                             methods = methods, 
-            #                             event.labels = NULL, 
-            #                             ylog=FALSE, 
-            #                             gap = gap, p=p, 
-            #                             add = TRUE,
-            #                             plot.engine = "ggplot2",
-            #                             ...)
-            
-            plot_object_Drawdown <- chart.Drawdown(x, 
-                                        geometric = geometric, 
-                                        main = "Drawdown", 
-                                        ylab = "Drawdown", 
-                                        event.labels = NULL, 
-                                        ylog=FALSE, 
-                                        add = TRUE, 
-                                        plot.engine = "ggplot2",
-                                        ...)
-            
-            plot_object <- gridExtra::grid.arrange(plot_object_CumReturn,
-                                                   plot_object_Drawdown,
-                                                   nrow = 2)
+        # Plot the BarVar diagrams
+        plot_object <- chart.BarVaR(x,
+          main = paste(date.label, "Return"),
+          xaxis = FALSE,
+          width = width,
+          ylab = paste(date.label, "Return"),
+          methods = methods,
+          event.labels = NULL,
+          ylog = FALSE,
+          gap = gap, p = p,
+          add = TRUE,
+          plot.engine = "default",
+          ...
+        )
 
-            return(plot_object)
-            },
-          
-          plotly = 
-            {
-            plot_object_CumReturn <- chart.CumReturns(x, 
-                                        xaxis = FALSE,
-                                        legend.loc = legend.loc,
-                                        event.labels = event.labels,
-                                        ylog = ylog,
-                                        wealth.index = wealth.index,
-                                        begin = begin,
-                                        geometric = geometric,
-                                        ylab="Cumulative Return",
-                                        plot.engine = "plotly",
-                                        ...)
-            
-            # Legacy code of BarVar
-            # plot_object_BarVar <- chart.BarVaR(x, 
-            #                              main = paste(date.label,"Return"), 
-            #                              xaxis = FALSE, 
-            #                              width = width, 
-            #                              ylab = paste(date.label,"Return"), 
-            #                              methods = methods, 
-            #                              event.labels = NULL, 
-            #                              ylog=FALSE, 
-            #                              gap = gap, p=p, 
-            #                              add = TRUE,
-            #                              plot.engine = "plotly",
-            #                              ...)
-            
-            plot_object_Drawdown <- chart.Drawdown(x, 
-                                         geometric = geometric,
-                                         ylab = "Drawdown",
-                                         event.labels = NULL,
-                                         ylog=FALSE,
-                                         add = TRUE,
-                                         plot.engine = "plotly",
-                                         ...)
-            
-            plot_object = plotly::subplot(plot_object_CumReturn, 
-                                          plot_object_Drawdown,
-                                          nrows = 2)
-            
-            return(plot_object)
-            }
+        # Plot the Underwater plot
+        plot_object <- chart.Drawdown(x,
+          geometric = geometric,
+          main = "Drawdown",
+          ylab = "Drawdown",
+          event.labels = NULL,
+          ylog = FALSE,
+          add = TRUE,
+          plot.engine = "default",
+          ...
+        )
+
+        # If we wanted to add a fourth row with the table of monthly returns
+        # par(mar=c(0,0,0,0))
+        # textplot(table.Returns(as.matrix(R)),cex=.7,cmar=1.5,rmar=0.5,halign="center", valign="center")
+        print(plot_object)
+        title(main, outer = TRUE)
+        par(op)
+        p <- recordPlot()
+        return(invisible(p))
+      },
+      ggplot2 = {
+        plot_object_CumReturn <- chart.CumReturns(x,
+          main = "Cumulative Return",
+          xaxis = FALSE,
+          legend.loc = legend.loc,
+          event.labels = event.labels,
+          ylog = ylog,
+          wealth.index = wealth.index,
+          begin = begin,
+          geometric = geometric,
+          ylab = "Cumulative Return",
+          plot.engine = "ggplot2",
+          ...
+        )
+
+        # plot_object_BarVar <- chart.BarVaR(x,
+        #                             main = paste(date.label,"Return"),
+        #                             xaxis = FALSE,
+        #                             width = width,
+        #                             ylab = paste(date.label,"Return"),
+        #                             methods = methods,
+        #                             event.labels = NULL,
+        #                             ylog=FALSE,
+        #                             gap = gap, p=p,
+        #                             add = TRUE,
+        #                             plot.engine = "ggplot2",
+        #                             ...)
+
+        plot_object_Drawdown <- chart.Drawdown(x,
+          geometric = geometric,
+          main = "Drawdown",
+          ylab = "Drawdown",
+          event.labels = NULL,
+          ylog = FALSE,
+          add = TRUE,
+          plot.engine = "ggplot2",
+          ...
+        )
+
+        plot_object <- gridExtra::grid.arrange(plot_object_CumReturn,
+          plot_object_Drawdown,
+          nrow = 2
+        )
+
+        return(plot_object)
+      },
+      plotly = {
+        plot_object_CumReturn <- chart.CumReturns(x,
+          xaxis = FALSE,
+          legend.loc = legend.loc,
+          event.labels = event.labels,
+          ylog = ylog,
+          wealth.index = wealth.index,
+          begin = begin,
+          geometric = geometric,
+          ylab = "Cumulative Return",
+          plot.engine = "plotly",
+          ...
+        )
+
+        # Legacy code of BarVar
+        # plot_object_BarVar <- chart.BarVaR(x,
+        #                              main = paste(date.label,"Return"),
+        #                              xaxis = FALSE,
+        #                              width = width,
+        #                              ylab = paste(date.label,"Return"),
+        #                              methods = methods,
+        #                              event.labels = NULL,
+        #                              ylog=FALSE,
+        #                              gap = gap, p=p,
+        #                              add = TRUE,
+        #                              plot.engine = "plotly",
+        #                              ...)
+
+        plot_object_Drawdown <- chart.Drawdown(x,
+          geometric = geometric,
+          ylab = "Drawdown",
+          event.labels = NULL,
+          ylog = FALSE,
+          add = TRUE,
+          plot.engine = "plotly",
+          ...
+        )
+
+        plot_object <- plotly::subplot(plot_object_CumReturn,
+          plot_object_Drawdown,
+          nrows = 2
+        )
+
+        return(plot_object)
+      }
     )
-}
+  }
 
 ###############################################################################
 # R (https://r-project.org/) Econometrics for Performance and Risk Analysis

@@ -84,6 +84,8 @@ function (x, y, reference.grid = TRUE, main = "Title", ylab=NULL, xlab=NULL, xli
 
     box(col = element.color)
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

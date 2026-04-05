@@ -115,6 +115,8 @@ function (Ra, Rb, main = "Capture Ratio", add.names = TRUE, xlab = "Downside Cap
 
     box(col = element.color)
 
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################

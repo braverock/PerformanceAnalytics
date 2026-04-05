@@ -146,6 +146,8 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
         main=columnnames[1]
     title(ylab = ylab)
     title(main = main)
+    p <- recordPlot()
+    return(invisible(p))
 }
 
 ###############################################################################
