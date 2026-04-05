@@ -19,8 +19,8 @@ Authors@R: c(
   , person(given=c("Justin", "M."),family="Shea",role="ctb")
   , person(given="Dhairya",family="Jain",role="ctb")
   )
-Version: 2.0.9
-Date: 2026-04-02
+Version: 2.1.0
+Date: 2026-04-05
 Description: Collection of econometric functions for performance and risk
     analysis. In addition to standard risk and performance metrics, this
     package aims to aid practitioners and researchers in utilizing the latest
