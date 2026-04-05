@@ -26,8 +26,8 @@ The annualized alpha (input data are assumed to be of monthly frequency)
 }
 \description{
 The difference between the actual rate of return and the rate of
-return of the instrument estimated via the conditional drawdown beta 
-is called \eqn{CDaR.alpha} and it is the equivalent of the typical CAPM 
+return of the instrument estimated via the conditional drawdown beta
+is called \eqn{CDaR.alpha} and it is the equivalent of the typical CAPM
 alpha but focusing on market drawdowns.
 
 Positive \eqn{CDaR.alpha} implies that the instrument performed better than it was
@@ -36,16 +36,16 @@ measure to rank instrument who overperform under market drawdowns.
 }
 \examples{
 data(edhec)
-CDaR.alpha(edhec[,1],edhec[,2])
+CDaR.alpha(edhec[, 1], edhec[, 2])
 
-CDaR.alpha(edhec[,1],edhec[,2],type="max")
+CDaR.alpha(edhec[, 1], edhec[, 2], type = "max")
 
-CDaR.alpha(edhec[,1],edhec[,2],type="average") 
+CDaR.alpha(edhec[, 1], edhec[, 2], type = "average")
 
 }
 \references{
-Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model 
-(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University 
+Zabarankin, M., Pavlikov, K., and S. Uryasev. Capital Asset Pricing Model
+(CAPM) with Drawdown Measure.Research Report 2012-9, ISE Dept., University
 of Florida,September 2012.
 }
 \seealso{

@@ -87,7 +87,7 @@ comparing several series to sort them in order of ascending or descending
 
 data(edhec)
 chart.Boxplot(edhec)
-chart.Boxplot(edhec,as.Tufte=TRUE)
+chart.Boxplot(edhec, as.Tufte = TRUE)
 
 }
 \references{

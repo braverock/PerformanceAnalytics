@@ -84,7 +84,7 @@ included so that some sensible defaults could be set.
 \examples{
 
 data(edhec)
-charts.PerformanceSummary(edhec[,c(1,13)])
+charts.PerformanceSummary(edhec[, c(1, 13)])
 
 }
 \seealso{

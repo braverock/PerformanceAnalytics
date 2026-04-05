@@ -21,21 +21,21 @@ TRUE}
 calculates NCE covariance, coskewness and cokurtosis matrices
 }
 \details{
-The coskewness and cokurtosis matrices are defined as the matrices of dimension 
+The coskewness and cokurtosis matrices are defined as the matrices of dimension
 p x p^2 and p x p^3 containing the third and fourth order central moments. They
-are useful for measuring nonlinear dependence between different assets of the 
+are useful for measuring nonlinear dependence between different assets of the
 portfolio and computing modified VaR and modified ES of a portfolio.
 
 The nearest comoment estimator is a way to estimate the covariance, coskewness and
-cokurtosis matrix by means of a latent multi-factor model. The method is proposed in 
+cokurtosis matrix by means of a latent multi-factor model. The method is proposed in
 Boudt, Cornilly and Verdonck (2018).
 
 The optional arguments include the number of factors, given by `k` and the weight matrix
 `W`, see the examples.
 }
 \examples{
-
-\dontrun{ # CRAN doesn't like how long this takes (>5 secs)
+\dontrun{
+# CRAN doesn't like how long this takes (>5 secs)
 data(edhec)
 
 # default estimator
@@ -44,19 +44,24 @@ est_nc <- MM.NCE(edhec[, 1:3] * 100)
 # scree plot to determine number of factors
 obj <- rep(NA, 5)
 for (ii in 1:5) {
-    est_nc <- MM.NCE(edhec[, 1:5] * 100, k = ii - 1)
-    obj[ii] <- est_nc$optim.sol$objective * nrow(edhec[, 1:5])
+  est_nc <- MM.NCE(edhec[, 1:5] * 100, k = ii - 1)
+  obj[ii] <- est_nc$optim.sol$objective * nrow(edhec[, 1:5])
 }
-plot(0:4, obj, type = 'b', xlab = "number of factors", 
-     ylab = "objective value", las = 1)
-     
+plot(0:4, obj,
+  type = "b", xlab = "number of factors",
+  ylab = "objective value", las = 1
+)
+
 # bootstrapped estimator
-est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD",
-                 "alpha" = NULL, "nb" = 250, "alphavec" = seq(0.2, 1, by = 0.2)))
-                 
+est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list(
+  "Wid" = "RidgeD",
+  "alpha" = NULL, "nb" = 250, "alphavec" = seq(0.2, 1, by = 0.2)
+))
+
 # ridge weight matrix with alpha = 0.5
 est_nc <- MM.NCE(edhec[, 1:2] * 100, W = list("Wid" = "RidgeD", "alpha" = 0.5))
-} # end \dontrun
+# end
+}
 
 }
 \references{
@@ -64,7 +69,7 @@ Boudt, Kris, Dries Cornilly and Tim Verdonck. 2020. Nearest comoment estimation 
 factors. Journal of Econometrics, 217(2), 381-397.
 }
 \seealso{
-\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}  
+\code{\link{CoMoments}} \cr \code{\link{ShrinkageMoments}} \cr \code{\link{StructuredMoments}}
 \cr \code{\link{EWMAMoments}} \cr \code{\link{MCA}}
 }
 \author{

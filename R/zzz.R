@@ -12,13 +12,14 @@ if (getRversion() >= "2.15.1") {
 #' @importFrom utils globalVariables head packageDescription tail
 #' @importFrom stats Box.test acf approxfun arima coef coefficients cor cor.test
 #'             cov dcauchy density dlnorm dnorm fitted frequency lag lm loess.smooth
-#'             median na.omit pacf pchisq pnorm ppoints predict qchisq qnorm
-#'             qqline qqnorm qt quantile sd start symnum time var window runif
+#'             median na.omit pacf pchisq pnorm ppoints predict prop.test qchisq qnorm
+#'             qqline qqnorm qt quantile rnorm sd start symnum time uniroot var window runif
+#' @importFrom grDevices recordPlot colorRamp rgb xy.coords
 #' @importFrom graphics abline axis barplot box boxplot curve grid hist identify
 #'             layout lines mtext pairs panel.smooth par plot plot.new
 #'             plot.window plot.xy points rect rug segments strheight strwidth
 #'             text title xinch yinch
-#' @importFrom grDevices colorRamp rgb xy.coords
+
 #' @importFrom quadprog solve.QP
 #' @import xts
 #' @import zoo

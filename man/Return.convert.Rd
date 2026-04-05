@@ -21,8 +21,8 @@ Return.convert(
 \item{initial}{(default TRUE) a TRUE/FALSE flag associated with 'seedValue', indicating if this value is at the begginning of the series (TRUE) or at the end of the series (FALSE)}
 }
 \description{
-This function takes an xts object, and using its attribute information, will convert 
-information in the object into the desired output, selected by the user.  For example, all 
+This function takes an xts object, and using its attribute information, will convert
+information in the object into the desired output, selected by the user.  For example, all
 combinations of moving from one of 'discrete', 'log', 'difference' and 'level', to another different
 data type (from the same list) are permissible.
 }

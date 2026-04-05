@@ -171,7 +171,8 @@ chart.StackedBar(x$BOP.Value)
 Return.portfolio(edhec["1997", 1:5], rebalance_on = "quarters", rebal_cost = 0.002) # 20 bps
 
 # add a transaction cost to the rebalancing
-x_cost <- Return.portfolio(edhec["2000::", 1:11], weights = weights, verbose = TRUE, rebal_cost = 0.01)
+x_cost <- Return.portfolio(edhec["2000::", 1:11], weights = weights, verbose = TRUE, 
+                           rebal_cost = 0.01)
 chart.CumReturns(x_cost$returns)
 chart.StackedBar(x_cost$BOP.Weight)
 chart.StackedBar(x_cost$BOP.Value)

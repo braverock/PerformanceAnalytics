@@ -17,6 +17,8 @@ asset returns}
 
 \item{geometric}{utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 default FALSE}
+
+\item{\dots}{any other passthru parameters}
 }
 \description{
 The Sharpe Ratio is a risk-adjusted measure of return that uses standard

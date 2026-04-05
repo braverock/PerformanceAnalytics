@@ -26,6 +26,7 @@
 #' 12, quarterly scale = 4)
 #' @param geometric utilize geometric chaining (TRUE) or simple/arithmetic chaining (FALSE) to aggregate returns,
 #' default FALSE
+#' @param \dots any other passthru parameters
 #' @author Peter Carl
 #' @seealso \code{\link{SharpeRatio}} \cr \code{\link{InformationRatio}} \cr
 #' \code{\link{TrackingError}} \cr \code{\link{ActivePremium}} \cr
