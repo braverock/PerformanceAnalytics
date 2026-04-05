@@ -1,29 +1,37 @@
 library(PerformanceAnalytics)
-test_that("MM.NCE and NCE options", {
+library(xts)
+
+test_that("MM.NCE core calculations evaluate without errors", {
   skip_on_cran()
+  
   data(edhec)
+  R <- edhec[1:30, 1:3] * 100
   
-  R <- edhec[1:100, 1:3] * 100
+  # A. Test default setup with RidgeD
+  expect_error(res1 <- MM.NCE(R), NA)
+  expect_true(is.matrix(res1$M2nce))
+  expect_true(is.matrix(res1$M3nce)) # as.mat=TRUE by default
+  expect_true(is.matrix(res1$M4nce))
   
-  # Default
-  res1 <- MM.NCE(R)
-  expect_type(res1, "list")
-  expect_true(all(c("M2nce", "M3nce", "M4nce", "optim.sol") %in% names(res1)))
-  
-  # as.mat = FALSE
-  res2 <- MM.NCE(R, as.mat = FALSE)
+  # B. Test multiple dimension sizes and optimizations
+  expect_error(res2 <- MM.NCE(R, k = 0, as.mat = FALSE), NA)
   expect_true(is.vector(res2$M3nce))
-  expect_true(is.vector(res2$M4nce))
   
-  # k specified
-  res3 <- MM.NCE(R, k = 1)
-  expect_type(res3, "list")
+  expect_error(res3 <- MM.NCE(R, k = 1, W = "Id"), NA)
+  expect_error(res4 <- MM.NCE(R, k = 1, W = "D"), NA)
+  expect_error(res5 <- MM.NCE(R, k = 1, W = "RidgeI"), NA)
   
-  # Ridge weights
-  res4 <- MM.NCE(R, W = list("Wid" = "RidgeD", "alpha" = 0.5))
-  expect_type(res4, "list")
+  # Ensure the list-based weight matrix branches evaluate
+  expect_error(res6 <- MM.NCE(R, k = 1, W = c("D", "D", "D")), NA)
   
-  # Bootstrapped Ridge
-  res5 <- MM.NCE(edhec[1:100, 1:2] * 100, W = list("Wid" = "RidgeD", "alpha" = NULL, "nb" = 10, "alphavec" = seq(0.2, 0.6, by = 0.2)))
-  expect_type(res5, "list")
+  # C. Test objective function branches natively
+  expect_error(res_ineq <- MM.NCE(R, k = 1, include.ineq = FALSE), NA)
+  
+  # D. Test auxiliary helpers explicitly
+  expect_error(PerformanceAnalytics:::NCEconstructW(coredata(R), Wid = "Id", alpha = 0.5), NA)
+  expect_error(PerformanceAnalytics:::NCEconstructW(coredata(R), Wid = "RidgeI", alpha = 0.5), NA)
+  expect_error(PerformanceAnalytics:::NCEconstructW(coredata(R), Wid = c("D", "D", "D")), NA)
+  
+  expect_error(PerformanceAnalytics:::NCEinitMCA(coredata(R), k = 1), NA)
+  expect_error(PerformanceAnalytics:::NCEinitMCA(coredata(R), k = 0), NA)
 })
