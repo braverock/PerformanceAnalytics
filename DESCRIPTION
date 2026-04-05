@@ -18,6 +18,7 @@ Authors@R: c(
   , person(given=c("Zeheng", "Zenith"),family="Zhou",role="ctb")
   , person(given=c("Justin", "M."),family="Shea",role="ctb")
   , person(given="Dhairya",family="Jain",role="ctb")
+  , person(given="Talgat",family="Daniyarov",role="ctb")
   )
 Version: 2.1.0
 Date: 2026-04-05
