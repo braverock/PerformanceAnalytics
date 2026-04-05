@@ -63,7 +63,7 @@ Return.excess <-
     # and convert it to an xts object.
     if (!is.null(dim(Rf))) {
       Rf <- checkData(Rf)
-      if (length(colnames(R)) == 1 && colnames(R) == colnames(Rf)) {
+      if (length(colnames(R)) == 1 && length(colnames(Rf)) == 1 && !is.null(colnames(R)) && !is.null(colnames(Rf)) && colnames(R) == colnames(Rf)) {
         colnames(Rf) <- "Rf"
       }
       if (is.null(colnames(Rf))) {
