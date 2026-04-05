@@ -6,7 +6,7 @@ coverage expansions.
 
 This release adds Generalized Pareto Distribution (`gpd`), Lognormal
 (`lognormal`), and Monte Carlo (`montecarlo`) estimation methods to `VaR` and `ES`,
-incorporating functionality from the archived VaR package by Talgat Daniyarov.
+incorporating functionality from the archived [`VaR`](https://cran.r-project.org/src/contrib/Archive/VaR/) package by Talgat Daniyarov.
 Additionally, `VaR.backtest` has been added for evaluating VaR estimates using
 the Kupiec Proportion of Failures test.
 
