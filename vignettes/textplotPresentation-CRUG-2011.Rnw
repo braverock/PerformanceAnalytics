@@ -18,7 +18,7 @@
 % - Talk length is about 60min.
 
 % Beamer Presentation Template Copyright 2004 by Till Tantau <tantau@users.sourceforge.net>.
-% Contents Copyright 2007 Peter Carl and Brian G. Peterson
+% Contents Copyright 2007-2026 Peter Carl and Brian G. Peterson
 %
 % This file can be redistributed and/or modified under
 % the terms of the GNU Public License, version 2.
