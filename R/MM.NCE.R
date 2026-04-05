@@ -429,11 +429,28 @@ MM.NCE <- function(R, as.mat = TRUE, ...) {
           add_bootstrap_info <- TRUE
           alpha <- bootstrap_info$alpha_opt
         }
-        W <- NCEconstructW(x, Wid = Wid, alpha = alpha, include.mom = include.mom)$W
-        W2 <- W3 <- W4 <- NULL
+        W_res <- NCEconstructW(x, Wid = Wid, alpha = alpha, include.mom = include.mom)$W
+        if (is.list(W_res)) {
+          W2 <- W_res$W2
+          W3 <- W_res$W3
+          W4 <- W_res$W4
+          W <- NULL
+        } else {
+          W <- W_res
+          W2 <- W3 <- W4 <- NULL
+        }
       }
     } else {
-      W2 <- W3 <- W4 <- NULL
+      W_res <- NCEconstructW(x, Wid = W, include.mom = include.mom)$W
+      if (is.list(W_res)) {
+        W2 <- W_res$W2
+        W3 <- W_res$W3
+        W4 <- W_res$W4
+        W <- NULL
+      } else {
+        W <- W_res
+        W2 <- W3 <- W4 <- NULL
+      }
     }
   } else {
     W <- NCEconstructW(x, Wid = "D", include.mom = include.mom)$W
@@ -910,4 +927,3 @@ NCEinitMCA <- function(X, k, include.mom = rep(TRUE, 3)) {
 # $Id$
 #
 ###############################################################################
-
