@@ -60,3 +60,20 @@ test_that("charts.PerformanceSummary parses frequency paths", {
   R_y <- xts(rnorm(6, 0, 0.01), y_idx)
   expect_error(charts.PerformanceSummary(R_y), NA)
 })
+
+test_that("charts.PerformanceSummary passes explicit moments down to BarVaR safely", {
+  skip_on_cran()
+  data(edhec)
+  R <- edhec[1:50, 1, drop=FALSE]
+  
+  pdf(file = NULL)
+  dev.control(displaylist = "enable")
+  on.exit(dev.off())
+  
+  # Ensure no error when passing explicit moments
+  expect_error(
+    charts.PerformanceSummary(R, methods=c("ModifiedVaR", "ModifiedES"), 
+                 mu=0.05, sigma=0.10, m3=-1.5, m4=8.0, 
+                 invert=FALSE, lwd=2), 
+    NA)
+})

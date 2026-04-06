@@ -186,6 +186,13 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         risk.line=FALSE
     }
 
+    dots <- list(...)
+    var_args <- names(formals(VaR))
+    es_args <- names(formals(ES))
+    valid_dots_var <- dots[names(dots) %in% var_args]
+    valid_dots_es <- dots[names(dots) %in% es_args]
+    plot_dots <- dots[!(names(dots) %in% unique(c(var_args, es_args)))]
+
     colors = colorRamp(c(colorset[1],"white"))
     if(length(methods)>1){
         columns = 1 # if there's more than one method specified, then we'll ignore columns other than the first
@@ -230,12 +237,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     GaussianVaR = {
                         symmetric = c(symmetric, TRUE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="gaussian", clean=clean)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="gaussian", clean=clean), valid_dots_var))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="gaussian", clean=clean)
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="gaussian", clean=clean), valid_dots_var))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -243,12 +250,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     ModifiedVaR = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="modified", clean=clean)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="modified", clean=clean), valid_dots_var))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="modified", clean=clean)
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="modified", clean=clean), valid_dots_var))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -256,12 +263,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     HistoricalVaR = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="historical") #hVaR = quantile(x,probs=.01)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="historical"), valid_dots_var)) #hVaR = quantile(x,probs=.01)
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="historical")
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="historical"), valid_dots_var))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -269,12 +276,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     GaussianES = {
                         symmetric = c(symmetric, TRUE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="gaussian", clean=clean)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="gaussian", clean=clean), valid_dots_es))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="gaussian", clean=clean)
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="gaussian", clean=clean), valid_dots_es))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -282,12 +289,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     ModifiedES = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="modified", clean=clean)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="modified", clean=clean), valid_dots_es))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="modified", clean=clean)
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="modified", clean=clean), valid_dots_es))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -295,12 +302,12 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
                     HistoricalES = {
                         symmetric = c(symmetric, FALSE)
                         if(width > 0) {
-                            column.risk = apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="historical") #hES = quantile(x,probs=.01)
+                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="historical"), valid_dots_es)) #hES = quantile(x,probs=.01)
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
                         else {
-                            column.risk = apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="historical")
+                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="historical"), valid_dots_es))
                             if(column==1)
                                 legend.txt = c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
                         }
@@ -320,19 +327,19 @@ chart.BarVaR <- function (R, width = 0, gap = 12,
         ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
     }
     if(hasArg("add")) {
-        plotargs <- list(...)
+        plotargs <- plot_dots
         plotargs$add <- NULL
 
         if(show.greenredbars) {
-            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+            p <- do.call(addSeries, c(list(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plotargs))
         } else {
             p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
         }
     } else {
         if(show.greenredbars) {
-            p <- chart.TimeSeries(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+            p <- do.call(chart.TimeSeries, c(list(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plot_dots))
         } else {
-            p <- chart.TimeSeries(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt", ...)
+            p <- do.call(chart.TimeSeries, c(list(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plot_dots))
         }
     }
 

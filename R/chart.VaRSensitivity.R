@@ -53,8 +53,16 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
 
     R = checkData(R)
     columnnames = colnames(R)
+    columns = ncol(R)
     clean = clean[1]
     legend.txt = NULL
+    
+    dots <- list(...)
+    var_args <- names(formals(VaR))
+    es_args <- names(formals(ES))
+    valid_dots_var <- dots[names(dots) %in% var_args]
+    valid_dots_es <- dots[names(dots) %in% es_args]
+
     if(length(methods) > 1){
         columns=1
     }
@@ -66,35 +74,35 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
             for(i in 1:length(p)){
                 switch(methods[j],
                     GaussianVaR = {
-                        risk[i, j] =  as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
+                        risk[i, j] =  as.numeric(do.call(VaR, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean), valid_dots_var)))
                         if(i==1)
                             legend.txt = c(legend.txt, "Gaussian VaR")
 
                     },
                     ModifiedVaR = {
-                        risk[i, j] =  as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
+                        risk[i, j] =  as.numeric(do.call(VaR, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean), valid_dots_var)))
                         if(i==1)
                             legend.txt = c(legend.txt, "Modified VaR")
                     },
                     HistoricalVaR = {
-                        risk[i,j] =   as.numeric(VaR(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) #hVaR = quantile(x,probs=.01)
+                        risk[i,j] =   as.numeric(do.call(VaR, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean), valid_dots_var))) #hVaR = quantile(x,probs=.01)
                         if(i==1)
                             legend.txt = c(legend.txt, "Historical VaR")
 
                     },
                     GaussianES = {
-                        risk[i, j] =  as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean))
+                        risk[i, j] =  as.numeric(do.call(ES, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="gaussian", clean=clean), valid_dots_es)))
                         if(i==1)
                             legend.txt = c(legend.txt, "Gaussian ES")
 
                     },
                     ModifiedES = {
-                        risk[i, j] =  as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean))
+                        risk[i, j] =  as.numeric(do.call(ES, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="modified", clean=clean), valid_dots_es)))
                         if(i==1)
                             legend.txt = c(legend.txt, "Modified ES")
                     },
                     HistoricalES = {
-                        risk[i,j] =   as.numeric(ES(na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean)) 
+                        risk[i,j] =   as.numeric(do.call(ES, c(list(R = na.omit(R[,column,drop=FALSE]), p = p[i], method="historical", clean=clean), valid_dots_es))) 
                         if(i==1)
                             legend.txt = c(legend.txt, "Historical ES")
 
@@ -123,8 +131,11 @@ function (R, methods = c("GaussianVaR", "ModifiedVaR", "HistoricalVaR","Gaussian
     if (reference.grid) {
         grid(col = elementcolor)
     }
+    
+    plot_dots <- dots[!(names(dots) %in% unique(c(var_args, es_args)))]
+
     for(risk.column in risk.columns:1) {
-        lines(p,risk[,risk.column], col = colorset[risk.column], lwd = lwd[risk.column], pch = pch[risk.column], lty = lty[risk.column], type = type, ...)
+        do.call(lines, c(list(x = p, y = risk[,risk.column], col = colorset[risk.column], lwd = lwd[risk.column], pch = pch[risk.column], lty = lty[risk.column], type = type), plot_dots))
     }
 
     # draw x-axis
