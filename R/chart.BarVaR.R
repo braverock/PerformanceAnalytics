@@ -1,19 +1,19 @@
 #' Periodic returns in a bar chart with risk metric overlay
-#' 
+#'
 #' Plots the periodic returns as a bar chart overlayed with a risk metric
 #' calculation.
-#' 
+#'
 #' Note that \code{StdDev} and \code{VaR} are symmetric calculations, so a high
 #' and low measure will be plotted.  \code{ModifiedVaR}, on the other hand, is
 #' assymetric and only a lower bound will be drawn.
-#' 
+#'
 #' Creates a plot of time on the x-axis and vertical lines for each period to
 #' indicate value on the y-axis.  Overlays a line to indicate the value of a
 #' risk metric calculated at that time period.
-#' 
-#' \code{charts.BarVaR} places multile bar charts in a single 
-#' graphic, with associated risk measures 
-#' 
+#'
+#' \code{charts.BarVaR} places multile bar charts in a single
+#' graphic, with associated risk measures
+#'
 #' @name chart.BarVaR
 #' @aliases chart.BarVaR charts.BarVaR
 #' @param R an xts, vector, matrix, data frame, timeSeries or zoo object of
@@ -71,316 +71,348 @@
 #' @author Peter Carl
 #' @seealso \code{\link{chart.TimeSeries}} \cr \code{\link{plot}} \cr
 #' \code{\link{ES}} \cr \code{\link{VaR}} \cr \code{\link{Return.clean}}
-###keywords ts multivariate distribution models hplot
+### keywords ts multivariate distribution models hplot
 #' @examples
-#' \dontrun{ # not run on CRAN because of example time
+#' \dontrun{
+#' # not run on CRAN because of example time
 #' data(managers)
 #' # plain
-#' chart.BarVaR(managers[,1,drop=FALSE], main="Monthly Returns")
-#' 
+#' chart.BarVaR(managers[, 1, drop = FALSE], main = "Monthly Returns")
+#'
 #' # with risk line
-#' chart.BarVaR(managers[,1,drop=FALSE], 
-#' 		methods="HistoricalVaR", 
-#' 		main="... with Empirical VaR from Inception")
-#' 		
+#' chart.BarVaR(managers[, 1, drop = FALSE],
+#'   methods = "HistoricalVaR",
+#'   main = "... with Empirical VaR from Inception"
+#' )
+#'
 #' # with lines for all managers in the sample
-#' chart.BarVaR(managers[,1:6], 
-#' 		methods="GaussianVaR", 
-#' 		all=TRUE, lty=1, lwd=2, 
-#' 		colorset= c("red", rep("gray", 5)), 
-#' 		main="... with Gaussian VaR and Estimates for Peers")
-#' 
+#' chart.BarVaR(managers[, 1:6],
+#'   methods = "GaussianVaR",
+#'   all = TRUE, lty = 1, lwd = 2,
+#'   colorset = c("red", rep("gray", 5)),
+#'   main = "... with Gaussian VaR and Estimates for Peers"
+#' )
+#'
 #' # with multiple methods
-#' chart.BarVaR(managers[,1,drop=FALSE],
-#' 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), 
-#' 		main="... with Multiple Methods")
-#' 
+#' chart.BarVaR(managers[, 1, drop = FALSE],
+#'   methods = c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+#'   main = "... with Multiple Methods"
+#' )
+#'
 #' # cleaned up a bit
-#' chart.BarVaR(managers[,1,drop=FALSE],
-#' 		methods=c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"), 
-#' 		lwd=2, ypad=.01, 
-#' 		main="... with Padding for Bottom Legend")
-#' 
+#' chart.BarVaR(managers[, 1, drop = FALSE],
+#'   methods = c("HistoricalVaR", "ModifiedVaR", "GaussianVaR"),
+#'   lwd = 2, ypad = .01,
+#'   main = "... with Padding for Bottom Legend"
+#' )
+#'
 #' # with 'cleaned' data for VaR estimates
-#' chart.BarVaR(managers[,1,drop=FALSE],
-#' 		methods=c("HistoricalVaR", "ModifiedVaR"), 
-#' 		lwd=2, ypad=.01, clean="boudt", 
-#' 		main="... with Robust ModVaR Estimate")
-#' 
-#' # Cornish Fisher VaR estimated with cleaned data, 
+#' chart.BarVaR(managers[, 1, drop = FALSE],
+#'   methods = c("HistoricalVaR", "ModifiedVaR"),
+#'   lwd = 2, ypad = .01, clean = "boudt",
+#'   main = "... with Robust ModVaR Estimate"
+#' )
+#'
+#' # Cornish Fisher VaR estimated with cleaned data,
 #' # with horizontal line to show exceptions
-#' chart.BarVaR(managers[,1,drop=FALSE],
-#' 		methods="ModifiedVaR", 
-#' 		lwd=2, ypad=.01, clean="boudt", 
-#' 		show.horizontal=TRUE, lty=2, 
-#' 		main="... with Robust ModVaR and Line for Identifying Exceptions")
+#' chart.BarVaR(managers[, 1, drop = FALSE],
+#'   methods = "ModifiedVaR",
+#'   lwd = 2, ypad = .01, clean = "boudt",
+#'   show.horizontal = TRUE, lty = 2,
+#'   main = "... with Robust ModVaR and Line for Identifying Exceptions"
+#' )
 #' }
-#' 
+#'
 #' @rdname chart.BarVaR
 #' @export
-chart.BarVaR <- function (R, width = 0, gap = 12, 
-                            methods = c("none", "ModifiedVaR", "GaussianVaR", 
-										"HistoricalVaR", "StdDev", "ModifiedES", 
-										"GaussianES", "HistoricalES"), 
-                            p=0.95, 
-                            clean = c("none", "boudt","geltner"), 
-                            all = FALSE, 
-                            ..., 
-                            show.clean = FALSE, 
-                            show.horizontal = FALSE, 
-                            show.symmetric = FALSE, 
-                            show.endvalue = FALSE, 
-                            show.greenredbars = FALSE, 
-                            legend.loc="bottomleft", 
-                            ylim = NA, 
-                            lwd = 2, 
-                            colorset = 1:12, 
-                            lty = c(1,2,4,5,6),
-                            ypad=0, 
-                            legend.cex = 0.8,
-										        plot.engine = "default")
-{ # @author Peter Carl
+chart.BarVaR <- function(R, width = 0, gap = 12,
+                         methods = c(
+                           "none", "ModifiedVaR", "GaussianVaR",
+                           "HistoricalVaR", "StdDev", "ModifiedES",
+                           "GaussianES", "HistoricalES"
+                         ),
+                         p = 0.95,
+                         clean = c("none", "boudt", "geltner"),
+                         all = FALSE,
+                         ...,
+                         show.clean = FALSE,
+                         show.horizontal = FALSE,
+                         show.symmetric = FALSE,
+                         show.endvalue = FALSE,
+                         show.greenredbars = FALSE,
+                         legend.loc = "bottomleft",
+                         ylim = NA,
+                         lwd = 2,
+                         colorset = 1:12,
+                         lty = c(1, 2, 4, 5, 6),
+                         ypad = 0,
+                         legend.cex = 0.8,
+                         plot.engine = "default") { # @author Peter Carl
 
-    # DESCRIPTION:
-    # A wrapper to create a chart of monthly returns in a bar chart.  This is
-    # a difficult enough graph to read that it doesn't get much use.  Still,
-    # it is useful for viewing a single set of data.
+  # DESCRIPTION:
+  # A wrapper to create a chart of monthly returns in a bar chart.  This is
+  # a difficult enough graph to read that it doesn't get much use.  Still,
+  # it is useful for viewing a single set of data.
 
-    # Inputs:
-    # R: a matrix, data frame, or timeSeries of returns
-    # width: periods specified for rolling-period calculations
+  # Inputs:
+  # R: a matrix, data frame, or timeSeries of returns
+  # width: periods specified for rolling-period calculations
 
-    # Outputs:
-    # A timeseries bar chart of the data series
-    # Metrics with width=0 are calculated from the start of the timeseries
+  # Outputs:
+  # A timeseries bar chart of the data series
+  # Metrics with width=0 are calculated from the start of the timeseries
 
-    # FUNCTION:
+  # FUNCTION:
 
-    # Transform input data to a timeseries object
-    x = checkData(R)
+  # Transform input data to a timeseries object
+  x <- checkData(R)
 
-    # Set up dimensions and labels
-    columns = ncol(x)
-    rows = nrow(x)
-    columnnames = colnames(x)
-    rownames = time(x)
-    legend.txt = NULL
-    symmetric = NULL
-    risk.line=TRUE
+  # Set up dimensions and labels
+  columns <- ncol(x)
+  rows <- nrow(x)
+  columnnames <- colnames(x)
+  rownames <- time(x)
+  legend.txt <- NULL
+  symmetric <- NULL
+  risk.line <- TRUE
 
-    freq = periodicity(x)
+  freq <- periodicity(x)
 
-    switch(freq$scale,
-        minute = {freq.lab = "minute"},
-        hourly = {freq.lab = "hour"},
-        daily = {freq.lab = "day"},
-        weekly = {freq.lab = "week"},
-        monthly = {freq.lab = "month"},
-        quarterly = {freq.lab = "quarter"},
-        yearly = {freq.lab = "year"}
-    )
-
-    # time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
-    if(methods[1]=="none"){
-        methods=NULL
-        risk.line=FALSE
+  switch(freq$scale,
+    minute = {
+      freq.lab <- "minute"
+    },
+    hourly = {
+      freq.lab <- "hour"
+    },
+    daily = {
+      freq.lab <- "day"
+    },
+    weekly = {
+      freq.lab <- "week"
+    },
+    monthly = {
+      freq.lab <- "month"
+    },
+    quarterly = {
+      freq.lab <- "quarter"
+    },
+    yearly = {
+      freq.lab <- "year"
     }
+  )
 
-    dots <- list(...)
-    var_args <- names(formals(VaR))
-    es_args <- names(formals(ES))
-    valid_dots_var <- dots[names(dots) %in% var_args]
-    valid_dots_es <- dots[names(dots) %in% es_args]
-    plot_dots <- dots[!(names(dots) %in% unique(c(var_args, es_args)))]
+  # time(x) = as.Date(time(x)) # this is here because merge.zoo is not behaving as expected when date formats are not consistent
+  if (methods[1] == "none") {
+    methods <- NULL
+    risk.line <- FALSE
+  }
 
-    colors = colorRamp(c(colorset[1],"white"))
-    if(length(methods)>1){
-        columns = 1 # if there's more than one method specified, then we'll ignore columns other than the first
-        colorset = c(colorset[1], rgb(colors(.25),maxColorValue=255), rgb(colors(.5),maxColorValue=255), rgb(colors(.75),maxColorValue=255))
-    }
-    clean = clean[1]
+  dots <- list(...)
+  var_args <- names(formals(VaR))
+  es_args <- names(formals(ES))
+  valid_dots_var <- dots[names(dots) %in% var_args]
+  valid_dots_es <- dots[names(dots) %in% es_args]
+  plot_dots <- dots[!(names(dots) %in% unique(c(var_args, es_args)))]
 
-    risk = xts(rep(NA,length(time(x))),order.by=time(x))
-    column.risk = xts(rep(0,length(time(x))),order.by=time(x))
+  colors <- colorRamp(c(colorset[1], "white"))
+  if (length(methods) > 1) {
+    columns <- 1 # if there's more than one method specified, then we'll ignore columns other than the first
+    colorset <- c(colorset[1], rgb(colors(.25), maxColorValue = 255), rgb(colors(.5), maxColorValue = 255), rgb(colors(.75), maxColorValue = 255))
+  }
+  clean <- clean[1]
 
-    if (!all)
-        columns = 1
+  risk <- xts(rep(NA, length(time(x))), order.by = time(x))
+  column.risk <- xts(rep(0, length(time(x))), order.by = time(x))
 
-    bar.color = colorset[1]
-    if (show.clean){
-        bar.color = rgb(colors(.75),maxColorValue=255)
-    }
+  if (!all) {
+    columns <- 1
+  }
 
-    x.orig = x
+  bar.color <- colorset[1]
+  if (show.clean) {
+    bar.color <- rgb(colors(.75), maxColorValue = 255)
+  }
 
-    if(show.clean){
-        x = na.skip(x, Return.clean, method=clean) 
-    }
+  x.orig <- x
 
-    if(risk.line){
-        for(column in 1:columns) {
-            for(method in methods) {
-                switch(method,
-                    StdDev = {
-                        symmetric = c(symmetric, TRUE)
-                        if(width > 0){
-                            column.risk = -1 * apply.rolling(na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "sd")
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-",freq.lab," Std Dev",sep=""))
-                        }
-                        else {
-                            column.risk = -1 * apply.fromstart(na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "sd")
-                            if(column==1)
-                                legend.txt = c(legend.txt, "Std Dev")
-                        }
-                    },
-                    GaussianVaR = {
-                        symmetric = c(symmetric, TRUE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="gaussian", clean=clean), valid_dots_var))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="gaussian", clean=clean), valid_dots_var))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Gaussian VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    },
-                    ModifiedVaR = {
-                        symmetric = c(symmetric, FALSE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="modified", clean=clean), valid_dots_var))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="modified", clean=clean), valid_dots_var))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Modified VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    },
-                    HistoricalVaR = {
-                        symmetric = c(symmetric, FALSE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "VaR", p = p, method="historical"), valid_dots_var)) #hVaR = quantile(x,probs=.01)
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "VaR", p = p, method="historical"), valid_dots_var))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    },
-                    GaussianES = {
-                        symmetric = c(symmetric, TRUE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="gaussian", clean=clean), valid_dots_es))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="gaussian", clean=clean), valid_dots_es))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Gaussian ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    },
-                    ModifiedES = {
-                        symmetric = c(symmetric, FALSE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="modified", clean=clean), valid_dots_es))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab, " Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="modified", clean=clean), valid_dots_es))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Modified ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    },
-                    HistoricalES = {
-                        symmetric = c(symmetric, FALSE)
-                        if(width > 0) {
-                            column.risk = do.call(apply.rolling, c(list(R = na.omit(x.orig[,column,drop=FALSE]), width = width, FUN = "ES", p = p, method="historical"), valid_dots_es)) #hES = quantile(x,probs=.01)
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Rolling ",width,"-", freq.lab," Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                        else {
-                            column.risk = do.call(apply.fromstart, c(list(R = na.omit(x.orig[,column,drop=FALSE]), gap = gap, FUN = "ES", p = p, method="historical"), valid_dots_es))
-                            if(column==1)
-                                legend.txt = c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ",base::round(p,4)*100,"%)",sep=""))
-                        }
-                    }
-                ) # end switch
+  if (show.clean) {
+    x <- na.skip(x, Return.clean, method = clean)
+  }
 
-                risk = merge(risk,column.risk)
-            } # end method loop
-        } # end column loop
-    }
-    else {
-        risk = 0
-        legend.txt = ""
-    }
-    if(is.na(ylim[1])){
-        ylim = range(c(na.omit(as.vector(x.orig[,1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
-        ylim = c(ylim[1]-ypad,ylim[2]) # pad the bottom of the chart for the legend
-    }
-    if(hasArg("add")) {
-        plotargs <- plot_dots
-        plotargs$add <- NULL
+  if (risk.line) {
+    for (column in 1:columns) {
+      for (method in methods) {
+        switch(method,
+          StdDev = {
+            symmetric <- c(symmetric, TRUE)
+            if (width > 0) {
+              column.risk <- -1 * apply.rolling(na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "sd")
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Std Dev", sep = ""))
+              }
+            } else {
+              column.risk <- -1 * apply.fromstart(na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "sd")
+              if (column == 1) {
+                legend.txt <- c(legend.txt, "Std Dev")
+              }
+            }
+          },
+          GaussianVaR = {
+            symmetric <- c(symmetric, TRUE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "VaR", p = p, method = "gaussian", clean = clean), valid_dots_var))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Gaussian VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "VaR", p = p, method = "gaussian", clean = clean), valid_dots_var))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Gaussian VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          },
+          ModifiedVaR = {
+            symmetric <- c(symmetric, FALSE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "VaR", p = p, method = "modified", clean = clean), valid_dots_var))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Modified VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "VaR", p = p, method = "modified", clean = clean), valid_dots_var))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Modified VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          },
+          HistoricalVaR = {
+            symmetric <- c(symmetric, FALSE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "VaR", p = p, method = "historical"), valid_dots_var)) # hVaR = quantile(x,probs=.01)
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Historical VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "VaR", p = p, method = "historical"), valid_dots_var))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Historical VaR (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          },
+          GaussianES = {
+            symmetric <- c(symmetric, TRUE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "ES", p = p, method = "gaussian", clean = clean), valid_dots_es))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Gaussian ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "ES", p = p, method = "gaussian", clean = clean), valid_dots_es))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Gaussian ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          },
+          ModifiedES = {
+            symmetric <- c(symmetric, FALSE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "ES", p = p, method = "modified", clean = clean), valid_dots_es))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Modified ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "ES", p = p, method = "modified", clean = clean), valid_dots_es))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Modified ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          },
+          HistoricalES = {
+            symmetric <- c(symmetric, FALSE)
+            if (width > 0) {
+              column.risk <- do.call(apply.rolling, c(list(R = na.omit(x.orig[, column, drop = FALSE]), width = width, FUN = "ES", p = p, method = "historical"), valid_dots_es)) # hES = quantile(x,probs=.01)
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Rolling ", width, "-", freq.lab, " Historical ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            } else {
+              column.risk <- do.call(apply.fromstart, c(list(R = na.omit(x.orig[, column, drop = FALSE]), gap = gap, FUN = "ES", p = p, method = "historical"), valid_dots_es))
+              if (column == 1) {
+                legend.txt <- c(legend.txt, paste("Historical ES (1 ", freq.lab, ", ", base::round(p, 4) * 100, "%)", sep = ""))
+              }
+            }
+          }
+        ) # end switch
 
-        if(show.greenredbars) {
-            p <- do.call(addSeries, c(list(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plotargs))
-        } else {
-            p <- addSeries(x.orig[,1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt")
-        }
+        risk <- merge(risk, column.risk)
+      } # end method loop
+    } # end column loop
+  } else {
+    risk <- 0
+    legend.txt <- ""
+  }
+  if (is.na(ylim[1])) {
+    ylim <- range(c(na.omit(as.vector(x.orig[, 1])), na.omit(as.vector(risk)), -na.omit(as.vector(risk))))
+    ylim <- c(ylim[1] - ypad, ylim[2]) # pad the bottom of the chart for the legend
+  }
+  if (hasArg("add")) {
+    plotargs <- plot_dots
+    plotargs$add <- NULL
+
+    if (show.greenredbars) {
+      p <- do.call(addSeries, c(list(x.orig[, 1, drop = FALSE], main = plotargs$main, type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend = "butt"), plotargs))
     } else {
-        if(show.greenredbars) {
-            p <- do.call(chart.TimeSeries, c(list(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plot_dots))
-        } else {
-            p <- do.call(chart.TimeSeries, c(list(x.orig[,1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend="butt"), plot_dots))
-        }
+      p <- addSeries(x.orig[, 1, drop = FALSE], main = plotargs$main, type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend = "butt")
     }
-
-    on = p$Env$frame/2
-    if(show.clean) {
-      p <- addSeries(xts(x[,1, drop=FALSE], time(x)), type="h", col=colorset[1], lwd = lwd, lend="butt", on = on)
+  } else {
+    if (show.greenredbars) {
+      p <- do.call(chart.TimeSeries, c(list(x.orig[, 1, drop = FALSE], type = "h", legend.loc = NULL, ylim = ylim, lwd = lwd, lend = "butt"), plot_dots))
+    } else {
+      p <- do.call(chart.TimeSeries, c(list(x.orig[, 1, drop = FALSE], type = "h", up.col = bar.color, dn.col = bar.color, legend.loc = NULL, ylim = ylim, lwd = lwd, lend = "butt"), plot_dots))
     }
+  }
 
-#     symmetric = symmetric[-1]
-# add risk.columns here, since we'll want multiple lines when we have multiple methods
-# if we have multiple methods, we'll want multiple lty's
+  on <- p$Env$frame / 2
+  if (show.clean) {
+    p <- addSeries(xts(x[, 1, drop = FALSE], time(x)), type = "h", col = colorset[1], lwd = lwd, lend = "butt", on = on)
+  }
 
-    if(risk.line){
-        risk.columns = ncol(risk)
-        if(length(lty)==1)
-            lty = rep(lty, risk.columns)
-        p$Env$lty = lty
-        p$Env$colorset = colorset
-        for(column in (risk.columns):2) {
-          p$Env$column = column
-          col = colorset[column-1]
-          p$Env$col = col
-              if (show.symmetric && symmetric[column-1])
-                p <- addSeries(xts(-risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
-              
-              p <- addSeries(xts(risk[,column], time(risk)), col = col, lwd = 1, type = "l", lty=lty[column-1], on = on)
-            if(show.horizontal)
-              p <- addSeries(xts(rep(tail(risk[,2],1),rows), time(risk)), col = colorset[1], lwd=1, type="l", lty=1, on = on)
-	    if(show.endvalue){
-	      p <- points(last(risk), col = colorset[1], pch=20, cex=.7, on = on)
-	      mtext(paste(round(100*tail(risk[,2],1),2),"%", sep=""), line=.5, side = 4, at=tail(risk[,2],1), adj=0, las=2, cex = 0.7, col = colorset[1])
-	    }
-        }
+  #     symmetric = symmetric[-1]
+  # add risk.columns here, since we'll want multiple lines when we have multiple methods
+  # if we have multiple methods, we'll want multiple lty's
+
+  if (risk.line) {
+    risk.columns <- ncol(risk)
+    if (length(lty) == 1) {
+      lty <- rep(lty, risk.columns)
     }
+    p$Env$lty <- lty
+    p$Env$colorset <- colorset
+    for (column in (risk.columns):2) {
+      p$Env$column <- column
+      col <- colorset[column - 1]
+      p$Env$col <- col
+      if (show.symmetric && symmetric[column - 1]) {
+        p <- addSeries(xts(-risk[, column], time(risk)), col = col, lwd = 1, type = "l", lty = lty[column - 1], on = on)
+      }
 
-    p$Env$legend.cex = legend.cex
-    p$Env$legend.txt = legend.txt
-    if(legend.txt[1] != "" & !is.null(legend.loc))
-      p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty=lty, horiz=TRUE)
-    return(p)
+      p <- addSeries(xts(risk[, column], time(risk)), col = col, lwd = 1, type = "l", lty = lty[column - 1], on = on)
+      if (show.horizontal) {
+        p <- addSeries(xts(rep(tail(risk[, 2], 1), rows), time(risk)), col = colorset[1], lwd = 1, type = "l", lty = 1, on = on)
+      }
+      if (show.endvalue) {
+        p <- points(last(risk), col = colorset[1], pch = 20, cex = .7, on = on)
+        mtext(paste(round(100 * tail(risk[, 2], 1), 2), "%", sep = ""), line = .5, side = 4, at = tail(risk[, 2], 1), adj = 0, las = 2, cex = 0.7, col = colorset[1])
+      }
+    }
+  }
 
+  p$Env$legend.cex <- legend.cex
+  p$Env$legend.txt <- legend.txt
+  if (legend.txt[1] != "" && !is.null(legend.loc)) {
+    p <- addLegend(legend.loc, legend.txt, inset = 0.02, text.col = colorset, col = colorset, cex = legend.cex, lwd = 1, lty = lty, horiz = TRUE)
+  }
+  return(p)
 }
 
 ###############################################################################
