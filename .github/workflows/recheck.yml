@@ -1,0 +1,22 @@
+on:
+  workflow_dispatch:
+    inputs:
+      which:
+        type: choice
+        description: Which dependents to check
+        options:
+          - strong
+          - most
+        default: most
+  schedule:
+    - cron: "0 4 * * 0" # Weekly on Sunday at 4:00 AM
+
+name: Reverse dependency check
+
+jobs:
+  revdep_check:
+    name: Reverse check ${{ inputs.which || 'most' }} dependents
+    uses: r-devel/recheck/.github/workflows/recheck.yml@v1
+    with:
+      which: ${{ inputs.which || 'most' }}
+      subdirectory: "" # Package is at the root of the repository
